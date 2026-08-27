@@ -9,7 +9,7 @@ sources: ["[[S-2023-Demmel-分裂法Krylov与预条件]]", "[[S-1994-Barrett-线
 exercises: ["[[习题 - Krylov 子空间与预条件]]"]
 solutions: ["[[解答 - Krylov 子空间与预条件]]"]
 created: 2026-08-15
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # Krylov 子空间与预条件
@@ -50,6 +50,221 @@ updated: 2026-08-23
 > 5. PCG 为什么要求 $A$ 与预条件器保持 SPD 结构？
 > 6. 条件数或谱聚簇改善为何不保证总时间必然下降？
 > 7. 一份预条件求解报告为何必须包含原问题 true residual、setup/apply、matvec、通信与内存？
+
+> [!note] 课程位置
+> NUM-15 用固定 $B^k$ 解释定常迭代；本章允许每一步在不断扩张的 Krylov 空间中重新选择多项式，并让预条件器改变这个多项式所见的谱与几何。这里先建立 FOM/GMRES/CG 的共同语言，NUM-17—18 再分别落实 SPD 能量最优和一般/不定残差最小化算法。
+
+> [!tip] 建议两遍阅读
+> 第一遍只沿统一矩阵的 $H=A^TA$：写出残差多项式，比较未预条件谱与 Jacobi 对称预条件谱，并手算条件数变化；第二遍再进入 Petrov–Galerkin、left/right/split 语义、预条件器家族、可变预条件和总成本。先能回答“我们改变了方程、坐标还是算法内部尺度”，再谈某个预条件器是否强。
+
+## 本章的推导问题链
+
+1. 从 $x_k\in x_0+\mathcal K_k(A,r_0)$ 怎样推出 $r_k=p_k(A)r_0$ 且 $p_k(0)=1$？
+2. 定常迭代预先固定的多项式，与 Krylov 每步选择的多项式有何区别？
+3. 为什么 SPD Gram 算子 $H=A^TA$ 可以只通过 $v\mapsto A^T(Av)$ 作用？
+4. Jacobi 预条件怎样从 $H$ 构造对称算子 $D^{-1/2}HD^{-1/2}$？
+5. 条件数从约 $52.46$ 降到约 $17.94$ 是怎样精确算出的？
+6. 为什么只给多项式在谱端点放根，反而可能把中间模态放大四倍？
+7. 迭代数、true residual、setup/apply、通信、内存和复用次数怎样组成最终验收？
+
+## 贯穿算例：从 Gram/Hessian 算子到预条件残差多项式
+
+沿用第四波的
+
+$$
+A=
+\begin{bmatrix}
+1&2&0\\
+0&1&0\\
+0&0&3
+\end{bmatrix},
+\qquad
+x_\star=(1,-1,1)^T,
+\qquad
+b=Ax_\star=(-1,-1,3)^T.
+$$
+
+考虑 SPD 系统
+
+$$
+Hx=g,
+\qquad
+H=A^TA,
+\qquad
+g=A^Tb=(-1,-3,9)^T.
+$$
+
+它的真解仍是 $x_\star$。在 AI 中，$H$ 可代表 Gram、Gauss–Newton、Fisher 或 Hessian 型算子；实现只需 $Hv=A^T(Av)$，不必存储或显式形成 $A^TA$。把它写成 normal equation 只是为了让本章与统一模型精确闭合，不是在推翻 NUM-09 的稳定性警告。
+
+### 符号与对象账本
+
+| 对象 | 定义 | 本例中的值/作用 |
+|---|---|---|
+| $H$ | $A^TA$ | SPD 原算子，只需组合 $A/A^T$ matvec |
+| $g$ | $A^Tb$ | 线性系统右端 $(-1,-3,9)^T$ |
+| $r_0$ | $g-Hx_0$ | 取 $x_0=0$ 时等于 $g$ |
+| $\mathcal K_k(H,r_0)$ | $\operatorname{span}\{r_0,Hr_0,\ldots\}$ | 第 $k$ 步搜索信息 |
+| $p_k$ | $p_k(0)=1$ 的残差多项式 | 满足 $r_k=p_k(H)r_0$ |
+| $D$ | $\operatorname{diag}(H)$ | Jacobi 预条件器 $\operatorname{diag}(1,5,9)$ |
+| $S$ | $D^{-1/2}HD^{-1/2}$ | 保持 SPD 的对称预条件算子 |
+| $r_k^{\rm true}$ | $g-Hx_k$ | 最终必须重算的原问题 residual |
+
+### 第一步：Krylov 不是保存幂，而是选择多项式
+
+若
+
+$$
+x_k=x_0+q_{k-1}(H)r_0,
+$$
+
+则
+
+$$
+\begin{aligned}
+r_k
+&=g-Hx_k\\
+&=r_0-Hq_{k-1}(H)r_0\\
+&=p_k(H)r_0,
+\end{aligned}
+$$
+
+其中
+
+$$
+\boxed{
+p_k(t)=1-tq_{k-1}(t),
+\qquad p_k(0)=1.}
+$$
+
+定常 Richardson 的 $p_k(t)=(1-\omega t)^k$ 一开始就固定；Krylov 方法则在同一个次数预算内，根据投影或最小化条件选择更合适的 $p_k$。实际存储的是 Arnoldi/Lanczos 正交基，而不是越来越病态的 $r_0,Hr_0,H^2r_0$ 幂基。
+
+### 第二步：未预条件 Gram 谱为何困难
+
+本例
+
+$$
+H=
+\begin{bmatrix}
+1&2&0\\
+2&5&0\\
+0&0&9
+\end{bmatrix}
+$$
+
+的 eigenvalues 为
+
+$$
+3-2\sqrt2,
+\qquad
+3+2\sqrt2,
+\qquad
+9.
+$$
+
+所以
+
+$$
+\kappa_2(H)
+=\frac9{3-2\sqrt2}
+=9(3+2\sqrt2)
+=27+18\sqrt2
+\approx52.46.
+$$
+
+这也等于 $\kappa_2(A)^2$。再次强调：分析 $H$ 的谱不要求显式形成它；矩阵自由算法每次只调用 $A$ 和 $A^T$。
+
+### 第三步：Jacobi 预条件其实是一次坐标缩放
+
+取
+
+$$
+D=\operatorname{diag}(H)=\operatorname{diag}(1,5,9).
+$$
+
+为保持欧氏内积下的对称正定性，研究
+
+$$
+S=D^{-1/2}HD^{-1/2}
+=\begin{bmatrix}
+1&2/\sqrt5&0\\
+2/\sqrt5&1&0\\
+0&0&1
+\end{bmatrix}.
+$$
+
+它的 eigenvalues 可直接读出：
+
+$$
+\lambda_-=1-\frac2{\sqrt5},
+\qquad
+\lambda_0=1,
+\qquad
+\lambda_+=1+\frac2{\sqrt5}.
+$$
+
+于是
+
+$$
+\kappa_2(S)
+=\frac{1+2/\sqrt5}{1-2/\sqrt5}
+=9+4\sqrt5
+\approx17.94.
+$$
+
+对角缩放把条件数改善了约三倍，却远未得到单位矩阵。它只修复坐标尺度，无法消除左上 block 的强耦合。
+
+### 第四步：谱端点变好，不等于任意低次多项式都好
+
+因为 $S$ 只有三个不同 eigenvalues，精确算术中存在三次多项式
+
+$$
+p_3(t)=
+(1-t)
+\left(1-\frac{t}{\lambda_-}\right)
+\left(1-\frac{t}{\lambda_+}\right)
+$$
+
+使 $p_3(S)=0$；因此合适的 Krylov 方法至多三步可在这个三维模型上闭合。但若只把二次多项式的根机械放在两个端点，
+
+$$
+p_2(t)=
+\left(1-\frac{t}{\lambda_-}\right)
+\left(1-\frac{t}{\lambda_+}\right),
+$$
+
+则中间模态反而满足
+
+$$
+p_2(1)=-4.
+$$
+
+这不是说 CG/GMRES 会盲目选该多项式，而是说明：只画谱区间、只杀端点或只报 condition number 仍不足以预测每个初始 residual 的短期行为。实际算法的正交/最小化条件和 $r_0$ 的谱权重同样重要。
+
+### 第五步：预条件后的内部量不能替代原问题证书
+
+左预条件自然产生 $D^{-1}(g-Hx_k)$，对称预条件在变换坐标中监控 residual，右预条件又有另一种更新语义。无论内部量怎样缩放，交付时都应回到
+
+$$
+r_k^{\rm true}=g-Hx_k
+$$
+
+并报告相对/后向误差尺度。同时记录构造 $D$ 或更强 $M$ 的 setup、每次 solve/apply、$H$-matvec、正交化、全局归约、内存以及预条件器可复用多少个右端。
+
+### 核心公式七问：$r_k=p_k(H)r_0$，$p_k(0)=1$
+
+1. **从哪来？** $x_k-x_0$ 是 $r_0,Hr_0,\ldots,H^{k-1}r_0$ 的线性组合，左乘 $H$ 后自然得到常数项为一的 residual 多项式。
+2. **$p_k(0)=1$ 有何意义？** 它保证 residual 表达确实来自某个 $k-1$ 次解修正多项式，而不是任意函数拟合。
+3. **不同 Krylov 方法差在哪？** 搜索空间相近，FOM/CG/GMRES 用不同测试空间、内积或最小化准则选择系数。
+4. **预条件改变什么？** 它把 $H$ 换成 left/right/symmetric 变换后的算子，同时改变坐标、内积、谱和内部 residual 尺度。
+5. **为什么 SPD 要保护结构？** 普通 CG 的短递推与能量最优依赖自伴正定；任意 left preconditioning 可能破坏欧氏对称性。
+6. **条件数下降就一定更快吗？** 不一定；聚簇、非正规性、起始 residual 权重和单步成本都可能主导，且 setup 可能超过节省的迭代工作。
+7. **AI 中怎样验收？** Hessian-free、自然梯度和隐式微分应同时报告 true residual、下游梯度/下降误差、matvec/预条件调用及 fallback，而不是只报迭代次数。
+
+> [!warning] 教学模型边界
+> 三维 SPD 模型会在至多三步耗尽 Krylov 空间，无法代表大规模有限精度中的 restart、loss of orthogonality 与通信瓶颈；Jacobi 也不是通用强预条件器。工程结论必须以原问题 residual 和 time-to-solution 实测，而不是从本例的条件数比例直接外推。
+
+> [!success] 第一遍停靠线
+> 应能推出 $r_k=p_k(H)r_0$，算出 $\kappa_2(H)=27+18\sqrt2$、$S=D^{-1/2}HD^{-1/2}$ 与 $\kappa_2(S)=9+4\sqrt5$，并验证端点二次多项式满足 $p_2(1)=-4$。还要能解释为何对称预条件保护 CG 结构、为何最终必须重算 $g-Hx_k$。
 
 ## 二、黑盒线性代数：只给 $v\mapsto Av$
 

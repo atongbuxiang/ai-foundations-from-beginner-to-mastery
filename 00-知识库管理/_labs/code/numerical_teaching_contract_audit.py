@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit NUM-01--12 teaching contracts and their shared exact models."""
+"""Audit NUM-01--16 teaching contracts and their shared exact models."""
 
 from __future__ import annotations
 
@@ -23,6 +23,7 @@ FIGURE_SCRIPTS = (
     LABS / "code" / "plot_numerical_error_foundations_v2.py",
     LABS / "code" / "plot_numerical_direct_methods_v2.py",
     LABS / "code" / "plot_numerical_spectral_methods_v2.py",
+    LABS / "code" / "plot_numerical_iterative_methods_v2.py",
 )
 FIGURE_DIR = ROOT / "00-知识库管理" / "_assets" / "figures" / "numerical-analysis"
 
@@ -39,6 +40,10 @@ CONCEPTS = (
     "幂法、反幂法与 Rayleigh 商迭代.md",
     "Hessenberg 化与 QR 特征值算法.md",
     "Lanczos 方法.md",
+    "Arnoldi 方法.md",
+    "SVD 算法与谱范数估计.md",
+    "定常迭代法与谱半径.md",
+    "Krylov 子空间与预条件.md",
 )
 
 CONTRACT_MARKERS = (
@@ -75,6 +80,14 @@ FIGURE_HASHES = {
         "7293cca54668a0fc602850b3cc14d3c82d75cd844bba06f3a7c0cf0278a847ed",
     "fig-lanczos-ritz-orthogonality-v2.svg":
         "e9acfc1589089c3247f741fd8e4ac03d228bd0e8cd569ba7041f662e571f8aa1",
+    "fig-arnoldi-restart-nonnormal-v2.svg":
+        "91450824d66739919426790c4e49b7243d5e717446e8ea4222f27618f47325ee",
+    "fig-svd-algorithms-certificates-v2.svg":
+        "15a3f7673e074e185c22b6cb36dc543e5a8f0a5861d024edc4122b5165e9cc25",
+    "fig-stationary-spectral-radius-v2.svg":
+        "d6367268a954abbe1fd6e5826b81b3c9c8604a1832c7b370d056034ed0e27e60",
+    "fig-krylov-preconditioning-v2.svg":
+        "5be8d00a01ffafbe66554d11139e85d5eec644e00ee03f9fd2a5f1c87bacf025",
 }
 
 EXPECTED_FIGURE_BY_CONCEPT = {
@@ -90,6 +103,10 @@ EXPECTED_FIGURE_BY_CONCEPT = {
     CONCEPTS[9]: "fig-power-inverse-rqi-v2.svg",
     CONCEPTS[10]: "fig-hessenberg-qr-v2.svg",
     CONCEPTS[11]: "fig-lanczos-ritz-orthogonality-v2.svg",
+    CONCEPTS[12]: "fig-arnoldi-restart-nonnormal-v2.svg",
+    CONCEPTS[13]: "fig-svd-algorithms-certificates-v2.svg",
+    CONCEPTS[14]: "fig-stationary-spectral-radius-v2.svg",
+    CONCEPTS[15]: "fig-krylov-preconditioning-v2.svg",
 }
 
 KNOWN_EXTENSIONS = {".md", ".py", ".svg", ".png", ".jpg", ".jpeg", ".webp", ".pdf"}
@@ -152,6 +169,9 @@ def audit_route() -> None:
         "第三波的单一模型链",
         "如何学习第三波，而不是把谱算法混成一类",
         "第三波材料证书",
+        "第四波的单一模型链",
+        "如何学习第四波，而不是把所有迭代都叫“幂法”",
+        "第四波材料证书",
         "numerical_teaching_contract_audit.py",
         "`regression-passed`",
         "`draft / not-attempted`",
@@ -165,8 +185,12 @@ def audit_route() -> None:
         re.search(r"\| C \| NUM-09—12 .*`regression-passed`", text) is not None,
         "MOC third-wave material status is not regression-passed",
     )
+    require(
+        re.search(r"\| D \| NUM-13—16 .*`regression-passed`", text) is not None,
+        "MOC fourth-wave material status is not regression-passed",
+    )
     require("Gram-Schmidt 的数值稳定性" not in text, "MOC retains missing placeholder link")
-    print("PASS NUM route: five waves, three migrated model chains, three-pass learning contracts")
+    print("PASS NUM route: five waves, four migrated model chains, three-pass learning contracts")
 
 
 def audit_exact_scalar_model() -> None:
@@ -547,6 +571,149 @@ def audit_exact_spectral_model() -> None:
     )
 
 
+def audit_exact_iterative_model() -> None:
+    """Check the shared nonnormal A -> SVD -> stationary -> preconditioned SPD chain."""
+
+    def dot(first, second):
+        return sum(first[index] * second[index] for index in range(len(first)))
+
+    def close(first, second, *, atol=2e-14):
+        return math.isclose(float(first), float(second), rel_tol=0.0, abs_tol=atol)
+
+    a_exact = (
+        (Fraction(1), Fraction(2), Fraction(0)),
+        (Fraction(0), Fraction(1), Fraction(0)),
+        (Fraction(0), Fraction(0), Fraction(3)),
+    )
+    a = tuple(tuple(float(value) for value in row) for row in a_exact)
+    gram_exact = matmul(transpose(a_exact), a_exact)
+    expected_gram = (
+        (Fraction(1), Fraction(2), Fraction(0)),
+        (Fraction(2), Fraction(5), Fraction(0)),
+        (Fraction(0), Fraction(0), Fraction(9)),
+    )
+    require(gram_exact == expected_gram, "iterative-wave Gram matrix changed")
+
+    # NUM-13: two Arnoldi steps from q1=(1,1,1)/sqrt(3).
+    q1 = tuple(1 / math.sqrt(3) for _ in range(3))
+    aq1 = matvec(a, q1)
+    h11 = dot(q1, aq1)
+    w1 = tuple(aq1[index] - h11 * q1[index] for index in range(3))
+    h21 = vector_norm(w1)
+    q2 = tuple(value / h21 for value in w1)
+    expected_q2 = (1 / math.sqrt(6), -2 / math.sqrt(6), 1 / math.sqrt(6))
+    require(close(h11, Fraction(7, 3)), "Arnoldi h11 changed")
+    require(close(h21, 2 * math.sqrt(2) / 3), "Arnoldi h21 changed")
+    require(all(close(q2[index], expected_q2[index]) for index in range(3)), "Arnoldi q2 changed")
+
+    aq2 = matvec(a, q2)
+    h12 = dot(q1, aq2)
+    after_q1 = tuple(aq2[index] - h12 * q1[index] for index in range(3))
+    h22 = dot(q2, after_q1)
+    w2 = tuple(after_q1[index] - h22 * q2[index] for index in range(3))
+    h32 = vector_norm(w2)
+    q3 = tuple(value / h32 for value in w2)
+    expected_q3 = (-1 / math.sqrt(2), 0.0, 1 / math.sqrt(2))
+    require(close(h12, -math.sqrt(2) / 3), "Arnoldi h12 changed")
+    require(close(h22, Fraction(2, 3)), "Arnoldi h22 changed")
+    require(close(h32, math.sqrt(3)), "Arnoldi h32 changed")
+    require(all(close(q3[index], expected_q3[index]) for index in range(3)), "Arnoldi q3 changed")
+
+    trace_h2 = h11 + h22
+    determinant_h2 = h11 * h22 - h12 * h21
+    require(close(trace_h2, 3), "Arnoldi H2 trace changed")
+    require(close(determinant_h2, 2), "Arnoldi H2 determinant changed")
+    require(close(h32 * (2 * math.sqrt(2) / 3), 2 * math.sqrt(6) / 3), "Ritz residual at theta=1 changed")
+    require(close(h32 / math.sqrt(3), 1), "Ritz residual at theta=2 changed")
+
+    q_matrix = tuple(tuple(column[row] for column in (q1, q2, q3)) for row in range(3))
+    identity = matmul(transpose(q_matrix), q_matrix)
+    require(
+        all(close(identity[row][column], 1 if row == column else 0) for row in range(3) for column in range(3)),
+        "Arnoldi Q3 lost orthogonality",
+    )
+    projected = matmul(matmul(transpose(q_matrix), a), q_matrix)
+    expected_projected = (
+        (7 / 3, -math.sqrt(2) / 3, math.sqrt(6) / 3),
+        (2 * math.sqrt(2) / 3, 2 / 3, math.sqrt(3) / 3),
+        (0.0, math.sqrt(3), 2.0),
+    )
+    require(
+        all(close(projected[row][column], expected_projected[row][column]) for row in range(3) for column in range(3)),
+        "full Arnoldi Hessenberg projection changed",
+    )
+
+    # NUM-14: exact singular triplets and alternating-power filter ratios.
+    root_two = math.sqrt(2)
+    singular_values = (3.0, 1 + root_two, root_two - 1)
+    sine = math.sqrt(2 - root_two) / 2
+    cosine = math.sqrt(2 + root_two) / 2
+    right_vectors = ((0.0, 0.0, 1.0), (sine, cosine, 0.0), (-cosine, sine, 0.0))
+    left_vectors = ((0.0, 0.0, 1.0), (cosine, sine, 0.0), (-sine, cosine, 0.0))
+    for sigma, right, left in zip(singular_values, right_vectors, left_vectors):
+        right_residual = tuple(matvec(a, right)[index] - sigma * left[index] for index in range(3))
+        left_residual = tuple(matvec(transpose(a), left)[index] - sigma * right[index] for index in range(3))
+        require(vector_norm(right_residual) < 2e-15, "right singular residual changed")
+        require(vector_norm(left_residual) < 2e-15, "left singular residual changed")
+    kappa_a = singular_values[0] / singular_values[-1]
+    require(close(kappa_a, 3 * (1 + root_two)), "nonnormal A condition number changed")
+    power_ratio = singular_values[1] ** 2 / singular_values[0] ** 2
+    weak_ratio = singular_values[2] ** 2 / singular_values[0] ** 2
+    require(close(power_ratio, (3 + 2 * root_two) / 9), "alternating-power second-mode ratio changed")
+    require(close(weak_ratio, (3 - 2 * root_two) / 9), "alternating-power weak-mode ratio changed")
+
+    # NUM-15: rho(B)=1/2, while a Jordan-coupled initial error grows twice.
+    half = Fraction(1, 2)
+    b_iteration = tuple(
+        tuple((Fraction(1) if row == column else Fraction(0)) - half * a_exact[row][column] for column in range(3))
+        for row in range(3)
+    )
+    error = (Fraction(0), Fraction(1), Fraction(0))
+    expected_errors = (
+        (Fraction(-1), Fraction(1, 2), Fraction(0)),
+        (Fraction(-1), Fraction(1, 4), Fraction(0)),
+        (Fraction(-3, 4), Fraction(1, 8), Fraction(0)),
+    )
+    norms = []
+    for expected_error in expected_errors:
+        error = matvec(b_iteration, error)
+        require(error == expected_error, "stationary transient sequence changed")
+        norms.append(vector_norm(error))
+    require(norms[0] > 1 and norms[1] > 1 and norms[2] < 1, "stationary transient-growth boundary changed")
+    require(close((1 + root_two) / 2, math.sqrt((3 + 2 * root_two) / 4)), "stationary operator norm identity changed")
+
+    x_star = (Fraction(1), Fraction(-1), Fraction(1))
+    rhs = matvec(a_exact, x_star)
+    normal_rhs = matvec(transpose(a_exact), rhs)
+    require(rhs == (Fraction(-1), Fraction(-1), Fraction(3)), "shared linear-system rhs changed")
+    require(normal_rhs == (Fraction(-1), Fraction(-3), Fraction(9)), "shared normal rhs changed")
+    require(matvec(gram_exact, x_star) == normal_rhs, "shared SPD solve no longer closes")
+
+    # NUM-16: symmetric Jacobi scaling and residual-polynomial edge case.
+    kappa_gram = 27 + 18 * root_two
+    require(close(kappa_gram, kappa_a**2, atol=5e-14), "Gram condition-square identity changed")
+    root_five = math.sqrt(5)
+    lambda_minus = 1 - 2 / root_five
+    lambda_middle = 1.0
+    lambda_plus = 1 + 2 / root_five
+    kappa_scaled = lambda_plus / lambda_minus
+    require(close(kappa_scaled, 9 + 4 * root_five), "Jacobi-scaled condition number changed")
+    endpoint_polynomial_at_middle = (1 - lambda_middle / lambda_minus) * (1 - lambda_middle / lambda_plus)
+    require(close(endpoint_polynomial_at_middle, -4), "endpoint-root polynomial no longer amplifies the middle mode by four")
+    for eigenvalue in (lambda_minus, lambda_middle, lambda_plus):
+        annihilator = (
+            (1 - eigenvalue)
+            * (1 - eigenvalue / lambda_minus)
+            * (1 - eigenvalue / lambda_plus)
+        )
+        require(close(annihilator, 0), "three-root Krylov annihilator changed")
+
+    print(
+        "PASS iterative model: exact Arnoldi H2/H3, singular triplets, rho=1/2 transient, "
+        "kappa 52.46 -> 17.94 and degree-three annihilation"
+    )
+
+
 def audit_markdown_integrity() -> None:
     all_files = [path for path in ROOT.rglob("*") if path.is_file()]
     file_index: dict[str, list[Path]] = {}
@@ -637,9 +804,10 @@ def main() -> None:
     audit_exact_refinement_model()
     audit_exact_qr_model()
     audit_exact_spectral_model()
+    audit_exact_iterative_model()
     audit_markdown_integrity()
     audit_figures(args.run_figures)
-    print("NUM-01—12 material regression: PASS; learning state: draft/not-attempted")
+    print("NUM-01—16 material regression: PASS; learning state: draft/not-attempted")
 
 
 if __name__ == "__main__":

@@ -9,7 +9,7 @@ sources: ["[[S-2023-Demmel-Krylov-Arnoldi-Lanczos]]", "[[S-2000-Netlib-Krylov-Ei
 exercises: ["[[习题 - Arnoldi 方法]]"]
 solutions: ["[[解答 - Arnoldi 方法]]"]
 created: 2026-08-15
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # Arnoldi 方法
@@ -49,6 +49,198 @@ updated: 2026-08-23
 > 5. MGS 重正交与 $\|Q_k^*Q_k-I\|$ 监测怎样配合？
 > 6. Restart 为什么可能擦除已经形成的谱过滤信息？
 > 7. Wanted Schur/Ritz vectors、locking 与 true residual 如何组成可靠重启契约？
+
+> [!note] 课程位置
+> NUM-12 的 Lanczos 依靠对称性把正交化压缩为三项递推；本章删除 $A=A^T$ 这一条假设，观察“只与最近两个向量打交道”为何立刻失效。这里形成的一般 Arnoldi 基既服务非对称特征问题，也会在 NUM-16 中成为 FOM/GMRES 的投影骨架。
+
+> [!tip] 建议两遍阅读
+> 第一遍只跟随下面的 $3\times3$ 非正规矩阵，手算两次 matvec、$\bar H_2$、两个 Ritz residual 和第三步 breakdown；第二遍再进入伪谱、左右特征向量、harmonic Ritz、重正交与 restart。第一遍的目标不是背伪代码，而是亲眼看见“大矩阵作用—全历史正交化—小 Hessenberg—高维 residual”怎样闭环。
+
+## 本章的推导问题链
+
+1. 从 $q_1,Aq_1,A^2q_1,\ldots$ 出发，为什么必须把新向量对全部旧基正交化？
+2. 第 $j$ 次 matvec 为什么只可能在 $H$ 的第 $j+1$ 行产生一个新非零元？
+3. 两步 Arnoldi 怎样把三维非正规矩阵压缩为 $2\times2$ Hessenberg？
+4. 小矩阵 eigenpair 怎样提升成原空间中的 Ritz pair？
+5. 为什么一个 Ritz value 恰好等于真特征值，仍可能配着很大的 Ritz residual？
+6. 第三步 residual 为零为什么表示 Krylov 空间已经不变，而不是算法失败？
+7. 精确关系进入浮点后，正交性、非正规性和 restart 分别会破坏哪一层承诺？
+
+## 贯穿算例：一个矩阵同时暴露非正规谱与长递推
+
+第四波固定
+
+$$
+A=
+\begin{bmatrix}
+1&2&0\\
+0&1&0\\
+0&0&3
+\end{bmatrix},
+\qquad
+q_1=\frac1{\sqrt3}(1,1,1)^T.
+$$
+
+$A$ 的特征值为 $1,1,3$，但左上 $2\times2$ 块是非平凡 Jordan block，所以 $A$ 非正规且不可对角化。后续 NUM-14 会计算同一 $A$ 的奇异值，NUM-15 会用它构造收敛但暂态放大的 Richardson 迭代，NUM-16 则研究 $H=A^TA$ 的预条件 Krylov 求解。
+
+### 符号与对象账本
+
+| 对象 | 定义 | 本例中的作用 |
+|---|---|---|
+| $\mathcal K_k(A,q_1)$ | $\operatorname{span}\{q_1,Aq_1,\ldots,A^{k-1}q_1\}$ | 只靠 matvec 逐步扩张的空间 |
+| $Q_k$ | $[q_1,\ldots,q_k]$ | Krylov 空间的标准正交基 |
+| $h_{ij}$ | $q_i^TAq_j$ | 第 $j$ 次正交化的投影系数 |
+| $\bar H_k$ | $(k+1)\times k$ 上 Hessenberg 矩阵 | 记录 $AQ_k=Q_{k+1}\bar H_k$ |
+| $H_k$ | $Q_k^TAQ_k$ | $k\times k$ Rayleigh–Ritz 投影 |
+| $(\theta,y)$ | $H_ky=\theta y$ | 小空间 eigenpair |
+| $u=Q_ky$ | Ritz vector | 提升回原空间的候选方向 |
+| $r=Au-\theta u$ | Ritz residual | 候选 eigenpair 的后验证书 |
+
+### 第一步：一个 matvec 生成第一列 Hessenberg 系数
+
+先算
+
+$$
+Aq_1=\frac1{\sqrt3}(3,1,3)^T,
+\qquad
+h_{11}=q_1^TAq_1=\frac73.
+$$
+
+减去已有方向：
+
+$$
+w_1=Aq_1-h_{11}q_1
+=\frac1{3\sqrt3}(2,-4,2)^T.
+$$
+
+因此
+
+$$
+h_{21}=\|w_1\|_2=\frac{2\sqrt2}{3},
+\qquad
+q_2=\frac{w_1}{h_{21}}
+=\frac1{\sqrt6}(1,-2,1)^T.
+$$
+
+这里已经可以检查 $q_1^Tq_2=0$。第一列关系为
+
+$$
+Aq_1=\frac73q_1+\frac{2\sqrt2}{3}q_2.
+$$
+
+### 第二步：一般矩阵必须重新投影到所有旧方向
+
+第二次 matvec 为
+
+$$
+Aq_2=\frac1{\sqrt6}(-3,-2,3)^T.
+$$
+
+依次减去 $q_1,q_2$ 分量：
+
+$$
+h_{12}=q_1^TAq_2=-\frac{\sqrt2}{3},
+\qquad
+h_{22}=q_2^TAq_2=\frac23.
+$$
+
+剩余量恰为
+
+$$
+w_2=Aq_2-h_{12}q_1-h_{22}q_2
+=\frac1{\sqrt6}(-3,0,3)^T.
+$$
+
+所以
+
+$$
+h_{32}=\sqrt3,
+\qquad
+q_3=\frac1{\sqrt2}(-1,0,1)^T.
+$$
+
+两步 Arnoldi 关系现在完全可见：
+
+$$
+AQ_2=Q_3\bar H_2,
+\qquad
+\bar H_2=
+\begin{bmatrix}
+7/3&-\sqrt2/3\\
+2\sqrt2/3&2/3\\
+0&\sqrt3
+\end{bmatrix},
+$$
+
+而 Rayleigh–Ritz 使用前两行
+
+$$
+H_2=
+\begin{bmatrix}
+7/3&-\sqrt2/3\\
+2\sqrt2/3&2/3
+\end{bmatrix}.
+$$
+
+上 Hessenberg 的含义只是 $h_{ij}=0$ 当 $i>j+1$；它既不要求 $H_2$ 对称，也不保证 Ritz values 落在实谱区间内。
+
+### 第三步：Ritz value 必须与 Ritz residual 一起读
+
+$H_2$ 的 trace 为 $3$、determinant 为 $2$，所以 Ritz values 恰为
+
+$$
+\theta_1=1,
+\qquad
+\theta_2=2.
+$$
+
+对 $\theta_1=1$，可取单位小 eigenvector
+
+$$
+y_1=\frac13(1,2\sqrt2)^T.
+$$
+
+Arnoldi residual 公式给出
+
+$$
+\|Au_1-\theta_1u_1\|_2
+=h_{32}|e_2^Ty_1|
+=\sqrt3\frac{2\sqrt2}{3}
+=\frac{2\sqrt6}{3}.
+$$
+
+注意：$\theta_1=1$ 虽然恰好是真特征值，提升向量 $u_1=Q_2y_1$ 却远不是合格 eigenvector。对 $\theta_2=2$，取 $y_2=(\sqrt2,1)^T/\sqrt3$，residual 仍为 $1$。这正是“只看 Ritz value 的小数位”会失败的最小反例。
+
+### 第四步：全空间闭合产生精确 breakdown
+
+加入 $q_3$ 后，$Q_3=[q_1,q_2,q_3]$ 已是 $\mathbb R^3$ 的正交基，并有
+
+$$
+H_3=Q_3^TAQ_3=
+\begin{bmatrix}
+7/3&-\sqrt2/3&\sqrt6/3\\
+2\sqrt2/3&2/3&\sqrt3/3\\
+0&\sqrt3&2
+\end{bmatrix}.
+$$
+
+$H_3$ 与 $A$ 正交相似，故特征值精确为 $1,1,3$；下一正交 residual 为零，即 $h_{4,3}=0$。有限维模型中的这次 breakdown 表示 Krylov 空间已成为不变子空间。
+
+### 核心公式七问：$\|Au-\theta u\|_2=|h_{k+1,k}e_k^Ty|$
+
+1. **公式从哪来？** 把 $u=Q_ky$ 和 $H_ky=\theta y$ 代入 Arnoldi 分解，$Q_kH_ky-\theta Q_ky$ 完全抵消。
+2. **为什么只剩一个方向？** $AQ_k$ 超出 $\operatorname{range}(Q_k)$ 的部分只在最后一列，方向是 $q_{k+1}$。
+3. **为什么计算便宜？** $h_{k+1,k}$ 已由正交化得到，$e_k^Ty$ 只是小 eigenvector 的末分量。
+4. **Residual 小保证什么？** 它给出候选特征对的后向误差；非正规矩阵的特征值/向量前向误差还取决于左右几何与伪谱。
+5. **为何要直接 residual 抽查？** 浮点正交缺陷、restart 变换和递推舍入会使廉价等式逐渐偏离真实 $Au-\theta u$。
+6. **Breakdown 怎样分类？** 真正的 $h_{k+1,k}=0$ 表示不变子空间闭合；接近零时必须用相对尺度判断，并区分 lucky、数值和不稳定除法。
+7. **AI 中如何用？** 只提供 JVP 的 Jacobian、状态空间更新与 Koopman 算子都可用 Arnoldi，但最大实部、最大模和最大奇异值是三种不同目标。
+
+> [!warning] 教学模型边界
+> 三维例子能精确暴露非正规投影与 residual 语义，却无法展示长时间正交性损失和多次 restart。它还含 defective eigenvalue，故不能套用基于良态特征向量矩阵的普通误差界；实际任务应同时报告 true residual、正交缺陷、matvec 数和目标谱选择规则。
+
+> [!success] 第一遍停靠线
+> 应能从 $q_1$ 独立算出 $q_2,q_3$ 与 $\bar H_2$，由 trace/determinant 得到 Ritz values $1,2$，再算出 residual $2\sqrt6/3$ 与 $1$。还要能解释：Ritz value 命中真谱不等于 Ritz vector 已准确，$h_{4,3}=0$ 则表示整个三维不变空间已经闭合。
 
 ## 二、从 Lanczos 到 Arnoldi：删去哪条假设
 
@@ -307,7 +499,7 @@ $$
 - 左残差 $A^*z-\bar\theta z$；
 - 左右夹角 $|z^*x|$，它控制简单特征值条件数。
 
-当 $z^*x$ 很小时，特征值高度敏感。此时还应观察[[非正规矩阵]]中的伪谱与 Schur 子空间，而不是只输出更多小数位。
+当 $z^*x$ 很小时，特征值高度敏感。此时还应观察[[非正规矩阵、预解式与伪谱]]中的伪谱与 Schur 子空间，而不是只输出更多小数位。
 
 ## 八、Ritz、Schur 与 harmonic Ritz
 
@@ -515,7 +707,7 @@ exceptions: breakdown、stagnation、unconverged、duplicate/unstable modes
 - 独立解答：[[解答 - Arnoldi 方法]]；
 - 实验：[[实验 - Arnoldi 非正规性、重正交与重启]]；
 - 奇异值算法：[[SVD 算法与谱范数估计]]；
-- 非正规理论：[[非正规矩阵]]、[[矩阵扰动]]；
+- 非正规理论：[[非正规矩阵、预解式与伪谱]]、[[矩阵扰动]]；
 - 矩阵函数：[[矩阵函数与矩阵指数]]。
 
 ## 来源与证据边界

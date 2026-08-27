@@ -50,6 +50,199 @@ updated: 2026-08-27
 > 6. Randomized range finder 中 $p$、$q$ 与 data pass 各控制什么？
 > 7. 为什么候选奇异三元组必须同时检查左右 residual、正交性与 rank tolerance？
 
+> [!note] 课程位置
+> NUM-13 用 Arnoldi 研究同一个一般方阵的特征结构；本章改问奇异结构，因为非正规矩阵的 eigenvalue magnitude 并不等于最大输入—输出放大。这里得到的 $H=A^TA$ 将在 NUM-16 中作为 SPD Gram/Hessian 型算子出现，但算法始终通过 $v\mapsto Av$ 与 $u\mapsto A^Tu$ 作用，不要求显式形成 $H$。
+
+> [!tip] 建议两遍阅读
+> 第一遍只对第四波统一矩阵写出 $A^TA$、三个奇异值和一对左右奇异向量，并跟踪交替幂迭代中三个方向的衰减比例；第二遍再学习双对角化、Golub–Kahan、随机值域、数值秩与可微边界。先分清 eigenvalue、singular value、左向量和右向量，后面的算法分流才不会只剩名称。
+
+## 本章的推导问题链
+
+1. 为什么 $A$ 的特征值为 $1,1,3$，最大放大却不能只由 $3$ 解释？
+2. $A^TA$ 怎样把右奇异方向变成对称特征问题，而 $AA^T$ 怎样产生左方向？
+3. 如何从一个 $2\times2$ Gram block 精确读出 $\sqrt2\pm1$ 两个奇异值？
+4. 为什么左右奇异向量不同，且必须分别验证 $Av=\sigma u$ 与 $A^Tu=\sigma v$？
+5. 交替幂迭代怎样在不形成 $A^TA$ 的情况下实现同一谱过滤？
+6. 谱隙为何决定 top singular direction 的收敛，而不能只看迭代次数？
+7. 完整 SVD、top-$k$、谱范数估计与低秩值域为何需要不同算法和证书？
+
+## 贯穿算例：非正规特征值与奇异值不是同一张地图
+
+继续使用
+
+$$
+A=
+\begin{bmatrix}
+1&2&0\\
+0&1&0\\
+0&0&3
+\end{bmatrix}.
+$$
+
+它的特征值模最大值是 $3$；但左上 Jordan block 可能产生与特征向量完全不同的最大伸缩方向。本章先把这个差异精确算出来。
+
+### 符号与对象账本
+
+| 对象 | 定义 | 本例中的值/作用 |
+|---|---|---|
+| $A$ | 一般线性算子 | 同时提供 $Av$ 与 $A^Tu$ |
+| $H=A^TA$ | 右 Gram 算子 | 右奇异向量的特征问题 |
+| $K=AA^T$ | 左 Gram 算子 | 左奇异向量的特征问题 |
+| $\sigma_i$ | $\sqrt{\lambda_i(H)}$ | 输入—输出放大因子 |
+| $v_i$ | $Hv_i=\sigma_i^2v_i$ | 输入空间中的右奇异方向 |
+| $u_i$ | $Kv_i$ 的左侧对应方向 | 满足 $Av_i=\sigma_i u_i$ |
+| $r_R$ | $Av-\sigma u$ | 右奇异方程 residual |
+| $r_L$ | $A^Tu-\sigma v$ | 左奇异方程 residual |
+
+### 第一步：先算 Gram 矩阵，但不把它当作实现建议
+
+直接乘法给出
+
+$$
+H=A^TA=
+\begin{bmatrix}
+1&2&0\\
+2&5&0\\
+0&0&9
+\end{bmatrix}.
+$$
+
+左上 $2\times2$ block 的特征多项式是
+
+$$
+\det
+\begin{bmatrix}
+1-\lambda&2\\
+2&5-\lambda
+\end{bmatrix}
+=\lambda^2-6\lambda+1,
+$$
+
+所以
+
+$$
+\lambda_\pm=3\pm2\sqrt2=(\sqrt2\pm1)^2.
+$$
+
+加上第三个 eigenvalue $9$，按从大到小排列的奇异值为
+
+$$
+\boxed{
+\sigma_1=3,
+\qquad
+\sigma_2=1+\sqrt2,
+\qquad
+\sigma_3=\sqrt2-1.}
+$$
+
+于是
+
+$$
+\kappa_2(A)
+=\frac{3}{\sqrt2-1}
+=3(1+\sqrt2),
+$$
+
+而不是由 eigenvalue ratio $3/1=3$ 决定。这是非正规矩阵上“谱半径”和“谱范数/条件数”不能互换的最小例子。
+
+### 第二步：左右奇异向量是两套空间坐标
+
+记
+
+$$
+s=\sin\frac\pi8=\frac{\sqrt{2-\sqrt2}}2,
+\qquad
+c=\cos\frac\pi8=\frac{\sqrt{2+\sqrt2}}2.
+$$
+
+三组单位奇异向量可以取为
+
+$$
+\begin{array}{c|c|c}
+\sigma&v&u\\ \hline
+3&e_3&e_3\\
+1+\sqrt2&(s,c,0)^T&(c,s,0)^T\\
+\sqrt2-1&(-c,s,0)^T&(-s,c,0)^T
+\end{array}
+$$
+
+以中间一组为例，直接作用原矩阵：
+
+$$
+A(s,c,0)^T=(s+2c,c,0)^T
+=(1+\sqrt2)(c,s,0)^T.
+$$
+
+反向再算一次：
+
+$$
+A^T(c,s,0)^T=(c,2c+s,0)^T
+=(1+\sqrt2)(s,c,0)^T.
+$$
+
+两条式子分别生活在输出空间和输入空间。只检查第一条，无法排除 $u$ 或 $v$ 中某些会被另一侧放大的错误；可靠奇异三元组必须检查双侧 residual。
+
+### 第三步：交替幂迭代就是不显式形成 Gram 的过滤
+
+设初始右向量在三条右奇异方向上分量相同：
+
+$$
+v^{(0)}=\frac1{\sqrt3}(v_1+v_2+v_3).
+$$
+
+一次交替作用
+
+$$
+v\xrightarrow{A}u\xrightarrow{A^T}\widetilde v
+$$
+
+代数上等价于 $\widetilde v=A^TAv$。做 $k$ 轮但暂不归一化，有
+
+$$
+(A^TA)^kv^{(0)}
+=\frac1{\sqrt3}
+\left[
+9^kv_1+(3+2\sqrt2)^kv_2+(3-2\sqrt2)^kv_3
+\right].
+$$
+
+相对主方向，第二方向按
+
+$$
+\left(\frac{3+2\sqrt2}{9}\right)^k
+\approx0.6476^k
+$$
+
+衰减，最弱方向则按约 $0.0191^k$ 衰减。归一化防止数值上溢/下溢，却不改变方向比例；当 $\sigma_1$ 与 $\sigma_2$ 接近时，这个过滤会显著变慢。
+
+### 第四步：计算路线和最终证书必须分开
+
+手算借助 $H=A^TA$ 揭示结构，实际算法却可交替调用 $A,A^T$，或先用双侧 Householder 约化到双对角。无论走哪条路径，候选 $(\widehat\sigma,\widehat u,\widehat v)$ 都应回到原算子检查
+
+$$
+r_R=A\widehat v-\widehat\sigma\widehat u,
+\qquad
+r_L=A^T\widehat u-\widehat\sigma\widehat v.
+$$
+
+本例三组精确三元组的 $r_R=r_L=0$；浮点报告还应把它们除以 $\|A\|+|\widehat\sigma|$ 一类尺度，并补充向量正交缺陷与重构误差。
+
+### 核心公式七问：$Av=\sigma u$ 与 $A^Tu=\sigma v$
+
+1. **为什么必须两条？** 第一条把输入方向送到输出方向，第二条保证该输出方向确实拉回同一个输入方向。
+2. **怎样得到 Gram 特征问题？** 对第一条左乘 $A^T$ 得 $A^TAv=\sigma^2v$；对第二条左乘 $A$ 得 $AA^Tu=\sigma^2u$。
+3. **为何不推荐显式 Gram？** 它平方条件数、可能填充，并让弱奇异方向在形成矩阵时先丢失精度。
+4. **为何算法仍可用 Gram 过滤？** 依次计算 $Av$ 与 $A^Tu$ 实现相同线性作用，但保留原算子接口和中间缩放机会。
+5. **一个 residual 小够不够？** 不够；当 $\sigma$ 很小或近重时，另一侧方程和正交性可能暴露不同缺陷。
+6. **向量准确性由什么控制？** 双侧 residual 之外还需与相邻奇异值的 gap；重奇异值应认证子空间而非单个向量。
+7. **AI 中怎样选产品？** 谱归一化通常只需 $\sigma_1$，PCA/LoRA 需要 top-$k$ 子空间，压缩部署可能需要重构，三者不能共用一份模糊的“SVD 已收敛”声明。
+
+> [!warning] 教学模型边界
+> 本例是方阵且只有三个奇异方向，无法替代长瘦、宽矩阵、聚簇谱和大规模数据 pass 分析。手算 $A^TA$ 仅用于证明与建立坐标；工程实现不应由此退回显式正规矩阵。随机 SVD 还需概率失败预算和独立后验验证。
+
+> [!success] 第一遍停靠线
+> 应能从 $A^TA$ 得到 $3,1+\sqrt2,\sqrt2-1$，验证至少一组左右奇异方程，并写出交替幂迭代的三个系数。还要能解释：$\rho(A)=3$ 与 $\|A\|_2=3$ 在本例数值上碰巧相同，但 $\kappa_2(A)=3(1+\sqrt2)$ 已证明 eigenvalue ratio 不能描述非正规伸缩几何。
+
 ## 二、先区分四个任务
 
 给定 $A\in\mathbb R^{m\times n}$，SVD 为

@@ -27,7 +27,7 @@ updated: 2026-08-27
 | A | NUM-01—04 | 浮点网格 → 误差对象 → 算法稳定性 → 条件感知停止 | $\tau=10^{-4}$；$\mathbb F_{10,4}$ 与 $A_\tau=\operatorname{diag}(1,\tau)$ | `regression-passed` | `draft / not-attempted` |
 | B | NUM-05—08 | reduction 内核 → pivoted solve → mixed-precision refinement → 稳定正交变换 | $\varepsilon=10^{-8}$；$A_\varepsilon$、近似逆 $B$ 与 $PA_\varepsilon$ 的 QR | `regression-passed` | `draft / not-attempted` |
 | C | NUM-09—12 | 最小二乘 → 极端特征对 → 稠密 QR 流水线 → 对称 Krylov | $A=[\Sigma Q^\mathsf T;0]$、$G=A^\mathsf TA$ 与共享三对角 $T$ | `regression-passed` | `draft / not-attempted` |
-| D | NUM-13—16 | 一般 Krylov → SVD → 定常迭代 → 预条件 | Arnoldi 正交性、双侧残差、谱半径/暂态、广义谱重塑 | `pending` | `draft / not-attempted` |
+| D | NUM-13—16 | 一般 Krylov → SVD → 定常迭代 → 预条件 | 非正规 $A$、$H=A^TA$、$B=I-A/2$ 与 $S=D^{-1/2}HD^{-1/2}$ | `regression-passed` | `draft / not-attempted` |
 | E | NUM-17—20 | CG → GMRES/MINRES → 稀疏系统 → 随机低秩 | 能量误差、重启、fill/负载、概率证书 | `pending` | `draft / not-attempted` |
 | CUM | NUM-CUM | 卷级口试—闭卷—实验—延迟重做 | 20 节随机回链与三实验组合门 | `composed` | `not-attempted` |
 
@@ -133,6 +133,40 @@ $$
 2. **第二遍（约 300 分钟）：**回到 QR/SVD 的舍入稳定性、谱隙、移位选择、隐式 QR、Krylov 投影和 Ritz residual，把每个定理的条件补齐；
 3. **第三遍（约 180 分钟）：**改变奇异值比例、起始向量或移位，先预测收敛方向与速度，再运行实验验证；尤其要构造“起始向量与目标特征向量正交”“移位碰到特征值”“Lanczos 丢失正交性”三个失败边界；
 4. **验收：**依次复现[[实验 - 正规方程、QR 与截断 SVD 的稳定性]]、[[实验 - 谱间隙、移位与 Rayleigh 商迭代收敛]]、[[实验 - Hessenberg 约化、移位与 QR deflation]]与[[实验 - Lanczos Ritz 收敛、残差与正交性]]；最后在不看正文时，从统一模型独立重建四篇的中心公式。
+
+### 第四波的单一模型链
+
+第四波固定一个带 Jordan 耦合的非正规矩阵：
+
+$$
+A=
+\begin{bmatrix}
+1&2&0\\
+0&1&0\\
+0&0&3
+\end{bmatrix},
+\qquad
+x_\star=(1,-1,1)^T,
+\qquad
+b=Ax_\star=(-1,-1,3)^T.
+$$
+
+同一个 $A$ 依次被看成非对称 eigen-operator、input–output map、固定点系统和 Gram/Hessian operator：
+
+1. **NUM-13：一般 Krylov 投影。** 从 $q_1=(1,1,1)^T/\sqrt3$ 出发，两步 Arnoldi 得到 $h_{11}=7/3$、$h_{21}=2\sqrt2/3$、$h_{12}=-\sqrt2/3$、$h_{22}=2/3$、$h_{32}=\sqrt3$。$H_2$ 的 Ritz values 恰为 $1,2$，但对应 residual 分别为 $2\sqrt6/3$ 与 $1$；“数值命中真 eigenvalue”不等于 Ritz vector 已合格；
+2. **NUM-14：奇异值才描述最大放大。** $A^TA$ 的谱为 $9,3+2\sqrt2,3-2\sqrt2$，所以奇异值为 $3,1+\sqrt2,\sqrt2-1$，$\kappa_2(A)=3(1+\sqrt2)$。左右奇异向量不同，交替幂迭代的次主方向比例为 $[(3+2\sqrt2)/9]^k$；
+3. **NUM-15：渐近收敛不等于单调收敛。** 对 Richardson 步长 $1/2$，$B=I-A/2$ 满足 $\rho(B)=1/2$，但从第二标准基方向出发，$B^k\mathbf e_2=(-k/2^{k-1},2^{-k},0)^T$，前两步误差范数反而超过初值；
+4. **NUM-16：预条件重塑的是坐标、谱与成本。** 对 $H=A^TA$ 取 $D=\operatorname{diag}(1,5,9)$，对称预条件算子 $S=D^{-1/2}HD^{-1/2}$ 的条件数从 $27+18\sqrt2\approx52.46$ 降到 $9+4\sqrt5\approx17.94$。三次残差多项式可湮灭三条谱线，但机械在两端放根会让中间模态变成 $p_2(1)=-4$。
+
+> [!success] 第四波材料证书
+> [[numerical_teaching_contract_audit.py]]已扩展到 NUM-01—16：16/16 教学合同、480 条作用域内 Wiki 链接、16 个完整图文单元、四波精确数值断言和 16 幅正式 SVG 哈希全部通过。第四波的 `regression-passed` 仍只认证材料；Arnoldi/SVD/迭代求解的独立推导、实验与延迟重做尚未完成，因此学习状态保持 `draft / not-attempted`。
+
+### 如何学习第四波，而不是把所有迭代都叫“幂法”
+
+1. **第一遍（约 180 分钟）：**只手算 $A\to H_2$、$A\to\Sigma$、$A\to B$ 与 $H\to S$ 四次变焦，每一步都先写任务输出，再写 residual；
+2. **第二遍（约 360 分钟）：**进入非正规伪谱、双对角化/Golub–Kahan、Jordan 收敛证明、Petrov–Galerkin 与 left/right/symmetric preconditioning，补齐每个结论的结构条件；
+3. **第三遍（约 210 分钟）：**改变 Jordan 耦合、Richardson 步长、初始向量与预条件强度，先预测 Ritz residual、奇异方向比例、暂态峰值和总成本，再运行实验；
+4. **验收：**依次复现[[实验 - Arnoldi 非正规性、重正交与重启]]、[[实验 - SVD 双对角化、谱范数与随机子空间]]、[[实验 - 定常迭代的频率阻尼、谱半径与暂态]]与[[实验 - 预条件的谱重塑、PCG 收敛与成本权衡]]；最后在不看正文时解释 eigenvalue、singular value、iteration eigenvalue 与 generalized eigenvalue 为何不能混用。
 
 ## 核心区别
 
