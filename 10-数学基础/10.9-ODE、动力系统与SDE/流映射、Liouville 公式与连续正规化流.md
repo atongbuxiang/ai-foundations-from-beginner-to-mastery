@@ -7,7 +7,7 @@ prerequisites: ["[[常微分方程、初值问题与解的存在唯一性]]", "[
 related: ["[[ODE、动力系统与 SDE MOC]]", "[[连续性方程与守恒律]]", "[[刚性系统、绝对稳定域与隐式方法]]", "[[逆矩阵、线性求解与隐式微分]]", "[[实验 - 流映射、Liouville 与随机迹审计]]"]
 sources: ["Teschl-ODE-Dynamical-Systems", "Chen-et-al-2018-Neural-ODE", "Grathwohl-et-al-2019-FFJORD", "Hutchinson-1989-Trace-Estimator", "Dupont-et-al-2019-Augmented-Neural-ODE", "Rezende-Mohamed-2015-Normalizing-Flows", "Su-5776-NICE", "Su-9280-Diffusion-ODE", "Su-10958-Instant-Average-Velocity"]
 created: 2026-08-19
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # 流映射、Liouville 公式与连续正规化流
@@ -37,6 +37,250 @@ updated: 2026-08-23
 **怎样读图。** A 先把“一个数组轨迹”升级为“共同时间区间上的映射族”，uniqueness 给局部 no-crossing，但全空间 inverse 还要 backward completeness；B 再对初值求导，沿变分方程追踪 infinitesimal shape，用 trace 只压缩 volume change；C 最后把 state 与 log-density 组成 augmented ODE，明确 trace estimator 的 probe、JVP/VJP、reuse/stop-gradient 和 ODE tolerance。
 
 **适用边界（图没有证明什么）。** Injectivity 不自动给整个 $\mathbb R^d$ 上 surjectivity；$\det J>0$ 也不等于无 shape distortion 或轨迹稳定。CNF 公式针对 exact differentiable flow，有限步 map 可能不保 exact inverse/likelihood。Hutchinson estimator 无偏不代表单样本低方差，support/topology 与同维 no-crossing 表达限制仍存在。
+
+> [!note] 课程位置
+> DYN-01—06 都以一条或有限条数值轨迹为中心。本章把视角提升为“所有初值同时怎样移动”：唯一性先把轨迹组织成 flow map，可微初值依赖再产生 Jacobian，Jacobi formula 把矩阵变化压成体积变化，概率换元最后把体积变化翻成 log-density。DYN-08 将从控制体与弱形式重新推导同一密度演化，检查 Lagrangian 与 Eulerian 两种语言是否闭合。
+
+> [!tip] 建议两遍阅读
+> **第一遍**只计算一个二维仿射流：先求 $\phi_t$、$D\phi_t$ 和 $\det D\phi_t$，再推前标准 Gaussian，最后核对 $d\log p_t(X_t)/dt=-\nabla\cdot f$。**第二遍**再进入非自治两参数流、共同存在域、反向完备性、一般变分方程、Hutchinson、离散可逆性、CNF support/topology 与梯度误差。第一遍要掌握的是“轨迹—切向量—体积—密度”四层对象，而不是只背 instantaneous change-of-variables 公式。
+
+## 本章的推导问题链
+
+1. 为什么“每个初值都有唯一解”还不等于已经得到全空间上的 global diffeomorphism？
+2. Flow map $\phi_{s,t}$ 的输入输出是什么，composition law 为什么来自 uniqueness？
+3. 对初值求导为什么得到变分方程 $\dot J=(D_xf)J$，而不是参数敏感度方程？
+4. Jacobi determinant formula 怎样把矩阵 ODE 压缩成 $d\log\det J/dt=\operatorname{tr}(D_xf)$？
+5. 为什么 divergence 只控制 infinitesimal volume，不控制所有 singular values、shape distortion 或稳定性？
+6. 概率质量守恒怎样迫使沿轨迹的 log-density 与 log-volume 一增一减？
+7. Hutchinson、ODE solver、likelihood 与 gradient 为什么是四个需要独立审计的误差层？
+
+## 贯穿算例：仿射流怎样把圆形 Gaussian 压成移动椭圆
+
+令
+
+$$
+\dot x=Ax+b,
+\qquad
+A=\begin{bmatrix}1&0\\0&-2\end{bmatrix},
+\qquad
+b=\begin{bmatrix}1\\0\end{bmatrix},
+\qquad x(0)=a.
+$$
+
+第一个坐标向右平移并指数扩张，第二个坐标指数收缩；总体积由两个方向的净效应决定。
+
+### 符号与对象账本
+
+| 对象 | 类型 | 本例中的值/作用 | 不可直接称为 |
+|---|---|---|---|
+| $a$ | initial state/material label | $a\in\mathbb R^2$ | 时间 $t$ 的随机状态 |
+| $\phi_t(a)$ | autonomous flow map | 从时刻 $0$ 把所有初值搬到 $t$ | 单条数组轨迹 |
+| $J_t(a)$ | initial-state Jacobian | $D_a\phi_t(a)\in\mathbb R^{2\times2}$ | vector-field Jacobian $D_xf=A$ |
+| $\det J_t$ | oriented volume factor | $e^{-t}$ | 每个方向都收缩的证明 |
+| $p_0,p_t$ | initial/pushed densities | $p_t=(\phi_t)_\#p_0$ | 单条 trajectory probability |
+| $\ell_t$ | pathwise log-density | $\ell_t=\log p_t(X_t)$ | 固定 $x$ 处的 $\partial_t\log p_t(x)$ |
+| $\varepsilon^TA\varepsilon$ | stochastic trace estimate | probe 相关 | determinant 或 divergence 的自动精确值 |
+
+### 第一步：解出整张 flow map，而不只是一条轨迹
+
+两个坐标分别满足
+
+$$
+\dot x_1=x_1+1,
+\qquad
+\dot x_2=-2x_2.
+$$
+
+因此
+
+$$
+\boxed{
+\phi_t(a)
+=
+\begin{bmatrix}
+e^t(a_1+1)-1\\
+e^{-2t}a_2
+\end{bmatrix}.
+}
+$$
+
+这里 $a$ 仍是变量，所以公式描述所有初值。直接代入可检查
+
+$$
+\phi_0=I,
+\qquad
+\phi_t\circ\phi_s=\phi_{t+s},
+\qquad
+\phi_t^{-1}=\phi_{-t}.
+$$
+
+本例在正负时间都全局存在，故确实是 $\mathbb R^2$ 上的 global diffeomorphism；一般 ODE 不能从局部 uniqueness 直接跳到这个结论。
+
+### 第二步：变分方程追踪切向量与体积
+
+对 $a$ 求导：
+
+$$
+J_t=D_a\phi_t(a)
+=
+\begin{bmatrix}
+e^t&0\\
+0&e^{-2t}
+\end{bmatrix}.
+$$
+
+它满足
+
+$$
+\dot J_t=AJ_t,
+\qquad J_0=I.
+$$
+
+两个 principal direction 的伸缩因子是 $e^t$ 与 $e^{-2t}$，所以
+
+$$
+\boxed{
+\det J_t=e^t e^{-2t}=e^{-t}.
+}
+$$
+
+另一方面
+
+$$
+\nabla\cdot f=\operatorname{tr}A=1-2=-1,
+$$
+
+Liouville 公式给
+
+$$
+\det J_t
+=\exp\left(\int_0^t-1\,ds\right)
+=e^{-t},
+$$
+
+与直接计算完全一致。总体积收缩不妨碍第一个方向扩张；trace/determinant 丢失了 anisotropic shape 信息。
+
+### 第三步：推前标准 Gaussian
+
+令随机初值
+
+$$
+X_0\sim\mathcal N(0,I_2),
+\qquad X_t=\phi_t(X_0).
+$$
+
+仿射变换保持 Gaussian，因此
+
+$$
+X_t\sim\mathcal N(m_t,\Sigma_t),
+$$
+
+其中
+
+$$
+m_t=
+\begin{bmatrix}e^t-1\\0\end{bmatrix},
+\qquad
+\Sigma_t=
+\begin{bmatrix}e^{2t}&0\\0&e^{-4t}\end{bmatrix}.
+$$
+
+显式 density 为
+
+$$
+\boxed{
+p_t(x)
+=\frac{e^t}{2\pi}
+\exp\left\{-\frac12\left[
+e^{-2t}\bigl(x_1-(e^t-1)\bigr)^2
++e^{4t}x_2^2
+\right]\right\}.
+}
+$$
+
+因为 $\det\Sigma_t=e^{-2t}$，Gaussian normalization 的 $\det(\Sigma_t)^{-1/2}$ 正好贡献 $e^t$；这就是 flow volume $e^{-t}$ 的倒数。
+
+### 第四步：沿轨迹核对 instantaneous change of variables
+
+有限时间换元给
+
+$$
+p_t(\phi_t(a))\det J_t=p_0(a).
+$$
+
+代入 $\det J_t=e^{-t}$：
+
+$$
+\log p_t(\phi_t(a))
+=\log p_0(a)+t.
+$$
+
+因此
+
+$$
+\boxed{
+\frac d{dt}\log p_t(X_t)
+=1
+=-\nabla\cdot f(X_t).
+}
+$$
+
+CNF 在这个例子中只需同时积分
+
+$$
+\dot X_t=AX_t+b,
+\qquad
+\dot\ell_t=1.
+$$
+
+注意 $\dot\ell_t$ 是沿 moving sample 的全导数，不是固定坐标点上的 $\partial_t\log p_t(x)$。
+
+### 第五步：同一 trace 的两种 Hutchinson probe
+
+对任意满足 $\mathbb E[\varepsilon\varepsilon^T]=I$ 的 probe，
+
+$$
+\mathbb E[\varepsilon^TA\varepsilon]=\operatorname{tr}A=-1.
+$$
+
+本例若 $\varepsilon_i$ 为独立 Rademacher，则 $\varepsilon_i^2=1$，所以
+
+$$
+\varepsilon^TA\varepsilon
+=\varepsilon_1^2-2\varepsilon_2^2
+=-1
+$$
+
+对每次抽样都精确，方差为零。若改用标准 Gaussian probe，估计量为 $\varepsilon_1^2-2\varepsilon_2^2$，仍无偏，但
+
+$$
+\operatorname{Var}(\varepsilon^TA\varepsilon)
+=2\|A\|_F^2
+=2(1+4)=10.
+$$
+
+这不是说 Rademacher 对所有网络 Jacobian 都零方差；这里只因 $A$ 恰好 diagonal。它准确展示了“相同均值合同，不同 estimator variance”。
+
+## 核心公式七问：Liouville 公式怎样连接 Jacobian 与 divergence
+
+$$
+\boxed{
+\frac d{dt}\log\det D_a\phi_t(a)
+=\operatorname{tr}D_xf(t,\phi_t(a))
+=\nabla\cdot f(t,\phi_t(a)).
+}
+$$
+
+1. **解决什么问题？** 不必跟踪 Jacobian 的每个元素，就能得到 infinitesimal volume 的累计变化。
+2. **对象与形状？** $D_a\phi_t,J_t,D_xf\in\mathbb R^{d\times d}$；determinant、trace 与 divergence 为标量。
+3. **从哪里来？** 先由初值微分得 $\dot J=(D_xf)J$，再用 Jacobi formula $d\log\det J/dt=\operatorname{tr}(J^{-1}\dot J)$ 和 trace cyclicity。
+4. **需要什么条件？** 共同存在的唯一 $C^1$ flow、对初值可微以及讨论区间上可逆的 $J$；global onto 还需反向 completeness。
+5. **怎样检查？** 同时比较直接 determinant、divergence 时间积分与 finite change-of-variables；本例三者都是 $e^{-t}$。
+6. **怎样误读？** $\det J>0$ 不保证各方向都收缩、不保证轨迹稳定，也不保证有限步 solver 精确保可逆。
+7. **AI 中怎样调用？** CNF 用它更新 log-density；高维实现还需声明 exact/stochastic trace、probe policy、solver tolerance、support 与 gradient contract。
+
+> [!success] 第一遍停靠线
+> 合上正文后，应能从 $A,b$ 独立求出 $\phi_t,J_t,\det J_t$，解释为什么一个方向扩张但总体积仍以 $e^{-t}$ 收缩；随后写出推前 Gaussian 的 $m_t,\Sigma_t,p_t$，并核对沿轨迹 log-density 以速率 $1$ 增长。若把 $\operatorname{tr}A=-1$ 误读为“每个方向都收缩”，请回到 $J_t$ 的两个对角元素。
 
 ## 学习目标
 

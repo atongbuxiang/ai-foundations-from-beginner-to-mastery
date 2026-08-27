@@ -23,7 +23,7 @@ updated: 2026-08-27
 |---|---|---|---|---|---|
 | A | DYN-01—04 | 适定性 → 线性传播 → 局部相图 → Lyapunov 证书 | 欠阻尼振子 $q''+q'+q=0$；$e^{tA}$、spiral sink、LaSalle 与 $A^TP+PA=-I$ | `regression-passed` | `draft / not-attempted` |
 | B | DYN-05—06 | consistency/order → absolute stability → stiffness/implicit solve | $y'=-y$ 的三种传播多项式；$\operatorname{diag}(-1,-100)$ 的快慢系统 | `regression-passed` | `draft / not-attempted` |
-| C | DYN-07—08 | unique flow → Jacobian/volume → density transport/conservation | 待迁移：同一 affine velocity 与 Gaussian density | `deep-draft / queued` | `draft / not-attempted` |
+| C | DYN-07—08 | unique flow → Jacobian/volume → density transport/conservation | $\operatorname{diag}(1,-2)x+(1,0)^T$ 与推前 Gaussian | `regression-passed` | `draft / not-attempted` |
 | D | DYN-09—12 | Brownian variation → Itô/SDE → Fokker–Planck/PF-ODE → reverse score | 待迁移：同一 variance-preserving diffusion | `deep-draft / queued` | `draft / not-attempted` |
 | CUM | DYN-CUM | 口试—闭卷—三轨实验—延迟重做 | 12 节随机回链与累计计算门 | `composed` | `not-attempted` |
 
@@ -110,6 +110,51 @@ $$
 2. **第二遍（约 300 分钟）：**完成一般 local-to-global 证明、RK 阶条件、adaptive estimator/controller、$\theta$-method A-stability、Dahlquist 屏障和 implicit Newton–Krylov 误差账；
 3. **第三遍（约 120 分钟）：**把 fast eigenvalue 改成 $-10,-100,-1000$，在运行前预测 FE 稳定步长、BE/TR 极限行为、工作量和需要解析的 transient；
 4. **验收：**完成[[实验 - ODE 阶数、自适应步长与离散梯度审计]]与[[实验 - 刚性稳定域、隐式追踪与梯度审计]]；无提示说明“convergent as $h\to0$”为什么不等于“当前 $h$ 稳定且准确”。
+
+### 第三波的流—密度守恒模型链
+
+第三波固定二维仿射速度场和标准 Gaussian 初值：
+
+$$
+\dot X_t=AX_t+b,
+\qquad
+A=\begin{bmatrix}1&0\\0&-2\end{bmatrix},
+\qquad
+b=\begin{bmatrix}1\\0\end{bmatrix},
+\qquad
+X_0\sim\mathcal N(0,I_2).
+$$
+
+它故意同时包含平移、单方向扩张、更强的正交收缩与净体积压缩，使 flow、density 与守恒账本都能手算：
+
+1. **DYN-07：从初值标签到 flow 与 density。** 闭式流和 Jacobian 为
+   $$
+   \phi_t(a)=\bigl(e^t(a_1+1)-1,e^{-2t}a_2\bigr)^T,
+   \qquad
+   D\phi_t=\operatorname{diag}(e^t,e^{-2t}).
+   $$
+   因此 $\det D\phi_t=e^{-t}$ 与 $\exp\int_0^t\operatorname{tr}A\,ds$ 一致；推前分布是
+   $$
+   \mathcal N\!\left((e^t-1,0)^T,\operatorname{diag}(e^{2t},e^{-4t})\right),
+   $$
+   沿轨迹 $d\log p_t(X_t)/dt=1$。Rademacher trace probe 在本 diagonal 例上零方差，Gaussian probe 仍无偏但方差为 $10$；
+2. **DYN-08：从固定空间到 continuity equation。** 对同一显式 $p_t$，逐点验证
+   $$
+   \partial_t\log p_t+v\cdot\nabla\log p_t=1=-\nabla\cdot v,
+   $$
+   再用测试函数 $1,x,xx^T$ 得到质量守恒、$\dot m=Am+b$ 与 $\dot\Sigma=A\Sigma+\Sigma A^T$；Gaussian differential entropy 为 $\log(2\pi e)-t$，其速率 $-1$ 与平均 divergence 一致；
+3. **两种坐标语言必须相遇。** Lagrangian 语言固定 material label 并跟随 $X_t$；Eulerian 语言固定空间点 $x$ 并观察 $p_t(x)$ 与 flux $p_tv$。前者的 finite change of variables、后者的 continuity PDE 和 test-function weak form在光滑条件下给同一密度路径；
+4. **公式闭合不等于生成系统闭合。** CNF/Flow Matching 仍要另验 support、velocity nonuniqueness、finite-step ODE error、trace variance、边界通量与 learned regression error。
+
+> [!success] 第三波材料证书
+> [[dynamics_teaching_contract_audit.py]]检查 DYN-01—08 的教学标记，并对第三波的 affine composition、Jacobian/Liouville、Gaussian mean/covariance/density、pathwise log-density、Hutchinson variance、pointwise PDE residual、moment ODE 与 entropy rate做确定性断言；同时回归八个图文单元和正式 SVG 哈希。`regression-passed` 仍只表示教材材料可复现，所有学习证据继续记为 `not-attempted`。
+
+### 如何学习第三波，而不是把粒子图和密度图分开看
+
+1. **第一遍（约 120 分钟）：**从 $A,b$ 手算 $\phi_t,J_t,\det J_t,m_t,\Sigma_t,p_t$，再用同一页纸核对 pathwise log-density 与 Eulerian continuity residual；
+2. **第二遍（约 300 分钟）：**学习一般两参数流、变分方程、Liouville/CNF、trace estimator、控制体/弱形式、边界、finite volume、Flow Matching 与 OT 接口；
+3. **第三遍（约 120 分钟）：**把 $A$ 改成 $\operatorname{diag}(2,-1)$、skew rotation 和非正规上三角矩阵，运行前预测 determinant、shape、density height、entropy 与 trace-estimator variance；
+4. **验收：**完成[[实验 - 流映射、Liouville 与随机迹审计]]与[[实验 - 守恒通量、压缩密度与边缘速度审计]]；无提示解释 injectivity、local diffeomorphism、global onto、mass conservation 和 likelihood accuracy 为何不能互相替代。
 
 ## 一、范围与边界
 
@@ -256,7 +301,7 @@ flowchart LR
 
 ## 八、当前进度
 
-DYN-01—12 已全部进入成稿闭环；10.9 当前为 **12/12 正文覆盖、180 道节点题，并已建立 DYN-CUM-01 卷末验收**。在最新初学者教学迁移中，第一、二波 DYN-01—06 已达到 `regression-passed`，其余六篇仍是深层正文待迁移。[[阶段测验 - ODE、动力系统与 SDE（10.9）]]以 240 分钟、100 分和 A—E 分区覆盖全卷，[[阶段测验解答 - ODE、动力系统与 SDE（10.9）]]逐项给出条件、推导、评分断点与回链。[[实验 - ODE、动力系统与 SDE 累计复现门]]用三轨串联 continuous/discrete stability、FPE–PF–CNF density ledger 与 Brownian/Itô/reverse-score coefficient。全卷所有节点仍为 `draft`，个人学习只记 `not-attempted`；下一教学迁移批次为 DYN-07—08 的流映射、Liouville 与连续性方程。
+DYN-01—12 已全部进入成稿闭环；10.9 当前为 **12/12 正文覆盖、180 道节点题，并已建立 DYN-CUM-01 卷末验收**。在最新初学者教学迁移中，前三波 DYN-01—08 已达到 `regression-passed`，其余四篇仍是深层正文待迁移。[[阶段测验 - ODE、动力系统与 SDE（10.9）]]以 240 分钟、100 分和 A—E 分区覆盖全卷，[[阶段测验解答 - ODE、动力系统与 SDE（10.9）]]逐项给出条件、推导、评分断点与回链。[[实验 - ODE、动力系统与 SDE 累计复现门]]用三轨串联 continuous/discrete stability、FPE–PF–CNF density ledger 与 Brownian/Itô/reverse-score coefficient。全卷所有节点仍为 `draft`，个人学习只记 `not-attempted`；下一教学迁移批次为 DYN-09—12 的 Brownian、Itô、Fokker–Planck 与反向 score 动力学。
 
 ## 九、2026-08-23 图像标准化结果
 

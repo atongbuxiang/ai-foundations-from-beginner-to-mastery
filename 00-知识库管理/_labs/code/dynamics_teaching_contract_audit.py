@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit the migrated teaching contracts and exact models for DYN-01--06."""
+"""Audit the migrated teaching contracts and exact models for DYN-01--08."""
 
 from __future__ import annotations
 
@@ -31,6 +31,8 @@ CONCEPTS = (
     "Lyapunov 稳定性与能量函数.md",
     "Euler、Runge-Kutta 与离散化误差.md",
     "刚性系统、绝对稳定域与隐式方法.md",
+    "流映射、Liouville 公式与连续正规化流.md",
+    "连续性方程与守恒律.md",
 )
 
 CONTRACT_MARKERS = (
@@ -49,6 +51,8 @@ EXPECTED_FIGURE_BY_CONCEPT = {
     CONCEPTS[3]: "fig-lyapunov-energy-certificate-v2.svg",
     CONCEPTS[4]: "fig-runge-kutta-error-adaptivity-v2.svg",
     CONCEPTS[5]: "fig-stiffness-stability-implicit-solve-v2.svg",
+    CONCEPTS[6]: "fig-flow-liouville-cnf-v2.svg",
+    CONCEPTS[7]: "fig-continuity-conservation-flow-matching-v2.svg",
 }
 
 FIGURE_HASHES = {
@@ -64,6 +68,10 @@ FIGURE_HASHES = {
         "5d8f10777f4410787fc7f693c69025cec22bf70a9d47a84d6ee54a00d88bfa69",
     "fig-stiffness-stability-implicit-solve-v2.svg":
         "decfc0de6e38cabf8b4e0204c1283660bbe097cec9e0b9c21fb2cf67a866063e",
+    "fig-flow-liouville-cnf-v2.svg":
+        "2a4aa49b8eea774fbbd0cc00aa94ad4dbcfb13b849320fa77fecba590e087062",
+    "fig-continuity-conservation-flow-matching-v2.svg":
+        "abeab675e68f9f35dd663e4415ecf762981e93d5efb9bb0ba19035a41c4a2329",
 }
 
 KNOWN_EXTENSIONS = {".md", ".py", ".svg", ".png", ".jpg", ".jpeg", ".webp", ".pdf"}
@@ -153,6 +161,10 @@ def audit_route() -> None:
         "第二波的离散化—稳定性模型链",
         "如何学习第二波，而不是把 solver 排成排行榜",
         "第二波材料证书",
+        "| C | DYN-07—08",
+        "第三波的流—密度守恒模型链",
+        "如何学习第三波，而不是把粒子图和密度图分开看",
+        "第三波材料证书",
         "dynamics_teaching_contract_audit.py",
         "`regression-passed`",
         "`draft / not-attempted`",
@@ -166,8 +178,12 @@ def audit_route() -> None:
         re.search(r"\| B \| DYN-05—06 .*`regression-passed`", content) is not None,
         "MOC second-wave material status is not regression-passed",
     )
-    require("下一教学迁移批次为 DYN-07—08" in content, "MOC next migration target is stale")
-    print("PASS DYN route: four-wave map, two migrated model chains and three-pass learning contracts")
+    require(
+        re.search(r"\| C \| DYN-07—08 .*`regression-passed`", content) is not None,
+        "MOC third-wave material status is not regression-passed",
+    )
+    require("下一教学迁移批次为 DYN-09—12" in content, "MOC next migration target is stale")
+    print("PASS DYN route: four-wave map, three migrated model chains and three-pass learning contracts")
 
 
 def audit_exact_first_wave_model() -> None:
@@ -336,6 +352,118 @@ def audit_exact_second_wave_model() -> None:
     )
 
 
+def audit_exact_third_wave_model() -> None:
+    def flow(time: float, state: tuple[float, float]) -> tuple[float, float]:
+        return (
+            math.exp(time) * (state[0] + 1) - 1,
+            math.exp(-2 * time) * state[1],
+        )
+
+    def density_log(time: float, state: tuple[float, float]) -> float:
+        mean_first = math.exp(time) - 1
+        centered_first = state[0] - mean_first
+        return (
+            -math.log(2 * math.pi)
+            + time
+            - 0.5 * (
+                math.exp(-2 * time) * centered_first ** 2
+                + math.exp(4 * time) * state[1] ** 2
+            )
+        )
+
+    divergence = -1.0
+    trace = 1.0 - 2.0
+    require(trace == divergence, "affine divergence changed")
+
+    # Flow composition, inverse, Jacobian determinant and Gaussian change of variables.
+    for state in ((0.0, 0.0), (1.0, -2.0), (-0.5, 0.75)):
+        for first_time, second_time in ((0.25, 0.75), (1.0, 0.5), (-0.25, 0.75)):
+            composed = flow(second_time, flow(first_time, state))
+            direct = flow(first_time + second_time, state)
+            require(
+                all(math.isclose(composed[index], direct[index], rel_tol=0.0, abs_tol=2e-14) for index in range(2)),
+                "affine flow composition changed",
+            )
+        for time in (0.0, 0.25, 1.0, 2.0):
+            recovered = flow(-time, flow(time, state))
+            require(
+                all(math.isclose(recovered[index], state[index], rel_tol=0.0, abs_tol=2e-14) for index in range(2)),
+                "affine flow inverse changed",
+            )
+            jacobian_det = math.exp(time) * math.exp(-2 * time)
+            require(
+                math.isclose(jacobian_det, math.exp(divergence * time), rel_tol=0.0, abs_tol=2e-16),
+                "Liouville determinant changed",
+            )
+            initial_log_density = -math.log(2 * math.pi) - 0.5 * (state[0] ** 2 + state[1] ** 2)
+            pushed_log_density = density_log(time, flow(time, state))
+            require(
+                math.isclose(pushed_log_density, initial_log_density + time, rel_tol=0.0, abs_tol=3e-14),
+                "pathwise Gaussian log-density change changed",
+            )
+
+    # Gaussian mean/covariance, entropy and moment ODEs.
+    for time in (0.0, 0.25, 1.0, 2.0):
+        exp_time = math.exp(time)
+        mean = (exp_time - 1, 0.0)
+        mean_derivative = (exp_time, 0.0)
+        affine_mean_rhs = (mean[0] + 1, -2 * mean[1])
+        require(mean_derivative == affine_mean_rhs, "Gaussian mean ODE changed")
+
+        covariance = (math.exp(2 * time), math.exp(-4 * time))
+        covariance_derivative = (2 * covariance[0], -4 * covariance[1])
+        lyapunov_rhs = (2 * covariance[0], -4 * covariance[1])
+        require(covariance_derivative == lyapunov_rhs, "Gaussian covariance ODE changed")
+        require(
+            math.isclose(covariance[0] * covariance[1], math.exp(-2 * time), rel_tol=0.0, abs_tol=2e-16),
+            "Gaussian covariance determinant changed",
+        )
+        entropy = math.log(2 * math.pi * math.e) - time
+        require(
+            math.isclose(entropy - math.log(2 * math.pi * math.e), divergence * time, rel_tol=0.0, abs_tol=2e-16),
+            "Gaussian entropy rate changed",
+        )
+
+    # Pointwise continuity residual in log-density form.
+    for time in (0.0, 0.3, 1.0):
+        mean_first = math.exp(time) - 1
+        for state in ((0.0, 0.0), (1.25, -0.5), (-2.0, 0.75)):
+            centered = state[0] - mean_first
+            dt_log_density = (
+                1
+                + math.exp(-2 * time) * centered ** 2
+                + math.exp(-time) * centered
+                - 2 * math.exp(4 * time) * state[1] ** 2
+            )
+            gradient_log_density = (
+                -math.exp(-2 * time) * centered,
+                -math.exp(4 * time) * state[1],
+            )
+            velocity = (state[0] + 1, -2 * state[1])
+            material_log_derivative = dt_log_density + sum(
+                velocity[index] * gradient_log_density[index] for index in range(2)
+            )
+            require(
+                math.isclose(material_log_derivative, -divergence, rel_tol=0.0, abs_tol=2e-13),
+                "pointwise continuity log-residual changed",
+            )
+            require(
+                math.isclose(material_log_derivative + divergence, 0.0, rel_tol=0.0, abs_tol=2e-13),
+                "pointwise continuity residual is nonzero",
+            )
+
+    # Hutchinson calibration: Rademacher is exact for this diagonal A; Gaussian remains noisy.
+    rademacher_estimates = [first * first - 2 * second * second for first in (-1, 1) for second in (-1, 1)]
+    require(rademacher_estimates == [-1, -1, -1, -1], "Rademacher trace calibration changed")
+    gaussian_variance = 2 * (1 ** 2 + (-2) ** 2)
+    require(gaussian_variance == 10, "Gaussian Hutchinson variance changed")
+
+    print(
+        "PASS third-wave exact model: affine flow/composition/inverse; Liouville and Gaussian pushforward; "
+        "continuity residual, moments, entropy and Hutchinson variance"
+    )
+
+
 def audit_markdown_integrity() -> None:
     scoped = [DYN / filename for filename in CONCEPTS] + [MOC]
     all_files = [path for path in ROOT.rglob("*") if path.is_file()]
@@ -422,9 +550,10 @@ def main() -> None:
     audit_route()
     audit_exact_first_wave_model()
     audit_exact_second_wave_model()
+    audit_exact_third_wave_model()
     audit_markdown_integrity()
     audit_figures(args.run_figures)
-    print("DYN-01—06 material regression: PASS; learning state: draft/not-attempted")
+    print("DYN-01—08 material regression: PASS; learning state: draft/not-attempted")
 
 
 if __name__ == "__main__":
