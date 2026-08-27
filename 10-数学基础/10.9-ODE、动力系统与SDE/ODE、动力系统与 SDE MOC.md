@@ -7,13 +7,66 @@ prerequisites: ["[[多元微积分、矩阵微分与自动微分 MOC]]", "[[概�
 related: ["[[数学基础 MOC]]", "[[数学基础完整课程地图与掌握标准]]", "[[练习与测验 MOC]]", "[[推导与实验 MOC]]"]
 sources: ["MIT-18.100B-2025-Picard-Lindelof", "MIT-18.330-2012-ODE-Numerics", "MIT-18.03SC-Matrix-Exponentials", "MIT-18.03SC-Phase-Portraits", "MIT-18.03SC-Linearization-Critical-Points", "MIT-18.306-2009-Conservation-Laws", "MIT-18.152-2011-Transport-Characteristics", "MIT-18.175-2016-Brownian-Motion", "MIT-15.070J-2013-Quadratic-Variation", "MIT-15.070J-2013-Ito-Integral", "MIT-18.S096-2013-Ito-Calculus", "MIT-18.642-2024-Stochastic-Processes-II", "MIT-8.592J-2011-Kolmogorov-Equations", "MIT-Underactuated-Lyapunov", "Stanford-EE263-Linear-Dynamical-Systems", "Hirsch-Smale-Devaney-Dynamical-Systems", "Teschl-ODE-Dynamical-Systems", "Teschl-PDE", "Pavliotis-Stochastic-Processes-Applications", "Risken-Fokker-Planck", "Durrett-PTE5-Brownian-Donsker", "Morters-Peres-Brownian-Motion", "DiPerna-Lions-1989-Transport", "Benamou-Brenier-2000-Dynamic-OT", "Hairer-Norsett-Wanner-Solving-ODE-I", "Hairer-Wanner-Solving-ODE-II", "Kloeden-Platen-Numerical-SDE", "SciPy-solve_ivp", "SUNDIALS-CVODES-Mathematics", "Oksendal-Stochastic-Differential-Equations", "Karatzas-Shreve-Brownian-Motion", "Anderson-1982-Reverse-Time-Diffusion", "Hyvarinen-2005-Score-Matching", "Vincent-2011-Denoising-Score", "Sohl-Dickstein-et-al-2015-Diffusion", "Ho-et-al-2020-DDPM", "Song-Meng-Ermon-2021-DDIM", "Nichol-Dhariwal-2021-Improved-DDPM", "Karras-et-al-2022-EDM", "Chen-et-al-2018-Neural-ODE", "Grathwohl-et-al-2019-FFJORD", "Hutchinson-1989-Trace-Estimator", "Rezende-Mohamed-2015-Normalizing-Flows", "Kim-et-al-2021-Stiff-Neural-ODE", "Zhuang-et-al-2020-Adaptive-Checkpoint-Adjoint", "Li-et-al-2020-Scalable-SDE-Gradients", "Kidger-et-al-2021-Neural-SDE-GAN", "Dupont-et-al-2019-Augmented-Neural-ODE", "Chang-et-al-2019-Neural-Lyapunov-Control", "Yang-et-al-2024-Lyapunov-Stable-Neural-Control", "Bai-et-al-2019-DEQ", "Gu-et-al-2020-HiPPO", "Gu-et-al-2022-S4", "Song-et-al-2021-Score-SDE", "Lipman-et-al-2023-Flow-Matching", "Albergo-et-al-2024-Stochastic-Interpolants", "Su-3750-Random-Walk", "Su-3762-Stochastic-Differential-Equation", "Su-9209-Diffusion-SDE", "Su-5655-Optimization-Dynamics", "Su-6261-Optimization-Dynamics-Global", "Su-6316-Energy-GAN", "Su-10114-SSM-Linear-HiPPO", "Su-9228-Probability-Flow-ODE", "Su-9262-Unified-Diffusion-Theory", "Su-9280-Diffusion-ODE", "Su-10958-Instant-Average-Velocity"]
 created: 2026-08-19
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # ODE、动力系统与 SDE MOC
 
 > [!abstract] 本卷的核心任务
 > 建立一条从确定性轨迹到随机生成过程的完整连续时间语言：先判断初值问题是否存在唯一、能否延拓；再研究线性系统、平衡点、Lyapunov 稳定与离散求解；随后把单条轨迹提升为流和密度演化；最后引入 Brownian motion、Itô calculus、Fokker–Planck、反向时间与 score-based generation。AI 中写出 $\dot x=f_\theta(t,x)$ 只是建模开始，不自动提供唯一流、数值准确性、可逆性、密度变换或训练可靠性。
+
+## 全卷教学迁移路线
+
+10.9 的十二篇正文、习题、解答、实验和正式图已经齐备；当前迁移不扩张范围，而是把深层材料重排成初学者可调用的四波模型链。每波都补齐课程位置、两遍路线、推导问题链、统一算例、对象账本、核心公式七问和第一遍停靠线；材料通过与个人学习通过继续分离。
+
+| 波次 | 节点 | 主线 | 统一模型/证书 | 材料状态 | 学习状态 |
+|---|---|---|---|---|---|
+| A | DYN-01—04 | 适定性 → 线性传播 → 局部相图 → Lyapunov 证书 | 欠阻尼振子 $q''+q'+q=0$；$e^{tA}$、spiral sink、LaSalle 与 $A^TP+PA=-I$ | `regression-passed` | `draft / not-attempted` |
+| B | DYN-05—06 | consistency/order → absolute stability → stiffness/implicit solve | 待迁移：同一 test equation 与快慢线性系统 | `deep-draft / queued` | `draft / not-attempted` |
+| C | DYN-07—08 | unique flow → Jacobian/volume → density transport/conservation | 待迁移：同一 affine velocity 与 Gaussian density | `deep-draft / queued` | `draft / not-attempted` |
+| D | DYN-09—12 | Brownian variation → Itô/SDE → Fokker–Planck/PF-ODE → reverse score | 待迁移：同一 variance-preserving diffusion | `deep-draft / queued` | `draft / not-attempted` |
+| CUM | DYN-CUM | 口试—闭卷—三轨实验—延迟重做 | 12 节随机回链与累计计算门 | `composed` | `not-attempted` |
+
+### 第一波的单一模型链
+
+第一波固定
+
+$$
+z=(q,p)^T,
+\qquad
+\dot z=Az,
+\qquad
+A=\begin{bmatrix}0&1\\-1&-1\end{bmatrix},
+\qquad
+z_0=(1,0)^T.
+$$
+
+它等价于欠阻尼振子 $q''+q'+q=0$。四篇不是四个互不相关的专题，而是同一连续时间对象的四层证书：
+
+1. **DYN-01：轨迹先要定义良好。** $\|A\|_2=(1+\sqrt5)/2$ 给 global Lipschitz 与 linear growth；积分方程和 Gronwall 给 existence/uniqueness、global continuation 与初值连续依赖，但 $e^{Lt}$ 只是松上界；
+2. **DYN-02：传播子给精确时间结构。** Cayley–Hamilton 得 $A^2+A+I=0$，令 $B=A+I/2$ 后 $B^2=-3I/4$，从而
+   $$
+   e^{tA}=e^{-t/2}\left[I\cos\frac{\sqrt3t}{2}+\frac2{\sqrt3}B\sin\frac{\sqrt3t}{2}\right];
+   $$
+   状态包络、振荡频率与面积缩放分别为 $e^{-t/2}$、$\sqrt3/2$ 与 $\det e^{tA}=e^{-t}$；
+3. **DYN-03：相图把一条解提升为局部轨道组织。** Nullclines 为 $p=0$ 与 $p=-q$；$(T,D,\Delta)=(-1,1,-3)$，特征值 $-1/2\pm i\sqrt3/2$，结合 $z_0$ 处向下箭头得到顺时针 spiral sink；
+4. **DYN-04：标量证书避免逐条求解。** 自然能量 $E=(q^2+p^2)/2$ 满足 $\dot E=-p^2$，LaSalle 用 $p=0$ 中最大不变子集只有原点推出吸引；另取
+   $$
+   P=\begin{bmatrix}3/2&1/2\\1/2&1\end{bmatrix}
+   $$
+   满足 $A^TP+PA=-I$，得到 strict quadratic decay 与显式 exponential envelope。
+
+这条链故意保留两个看似矛盾、实则互补的事实：DYN-01 的通用 Gronwall 上界允许 $e^{Lt}$ 增长，DYN-02—04 的专门结构却证明真实系统衰减。前者保证可靠，后者利用额外结构变紧；不能用“界很松”否定定理，也不能用这个特例替代一般条件。
+
+> [!success] 第一波材料证书
+> [[dynamics_teaching_contract_audit.py]]检查 DYN-01—04 的教学标记、统一振子精确关系、作用域 Wiki 链接、公式闭合、四个图文单元与正式 SVG 哈希。`regression-passed` 只表示材料自洽可复现；四篇仍为 `draft`，尚无学习者口试、手算、实验或延迟重做证据。
+
+### 如何学习第一波，而不是把定理和图景分开背
+
+1. **第一遍（约 180 分钟）：**只手算四篇新增统一算例；在一张纸上从 $A$ 依次推出 $L$、$e^{tA}$、$(T,D,\Delta)$、$\dot E$ 与 Lyapunov equation；
+2. **第二遍（约 360 分钟）：**进入 continuity/Lipschitz/continuation、Peano–Baker/forcing、hyperbolic/nonhyperbolic、LaSalle/converse theorem，并为每条定理写出删条件反例；
+3. **第三遍（约 180 分钟）：**把阻尼系数改成 $c\in\{0,1,3\}$，运行前预测 eigenvalue 类型、energy derivative、稳定性与离散 Euler 限制；
+4. **验收：**完成四套节点习题和对应实验；无提示说明“存在唯一”“显式传播”“局部稳定”“Lyapunov 证书”为何是四个不能互相替代的结论。
 
 ## 一、范围与边界
 
@@ -160,7 +213,7 @@ flowchart LR
 
 ## 八、当前进度
 
-DYN-01—12 已全部进入成稿闭环；10.9 当前为 **12/12 正文覆盖、180 道节点题，并已建立 DYN-CUM-01 卷末验收**。[[阶段测验 - ODE、动力系统与 SDE（10.9）]]以 240 分钟、100 分和 A—E 分区覆盖全卷，[[阶段测验解答 - ODE、动力系统与 SDE（10.9）]]逐项给出条件、推导、评分断点与回链。[[实验 - ODE、动力系统与 SDE 累计复现门]]用三轨串联 continuous/discrete stability、FPE–PF–CNF density ledger 与 Brownian/Itô/reverse-score coefficient；canonical SVG 双跑一致、XML 与实际 PNG 渲染已通过。全卷所有节点仍为 `draft`，累计验收只记 `composed / not-attempted`；下一施工卷进入 10.10，首节点为 GEO-01 [[度量空间、拓扑与连续映射]]。
+DYN-01—12 已全部进入成稿闭环；10.9 当前为 **12/12 正文覆盖、180 道节点题，并已建立 DYN-CUM-01 卷末验收**。在最新初学者教学迁移中，第一波 DYN-01—04 已达到 `regression-passed`，其余八篇仍是深层正文待迁移。[[阶段测验 - ODE、动力系统与 SDE（10.9）]]以 240 分钟、100 分和 A—E 分区覆盖全卷，[[阶段测验解答 - ODE、动力系统与 SDE（10.9）]]逐项给出条件、推导、评分断点与回链。[[实验 - ODE、动力系统与 SDE 累计复现门]]用三轨串联 continuous/discrete stability、FPE–PF–CNF density ledger 与 Brownian/Itô/reverse-score coefficient。全卷所有节点仍为 `draft`，个人学习只记 `not-attempted`；下一教学迁移批次为 DYN-05—06 的数值求解与刚性。
 
 ## 九、2026-08-23 图像标准化结果
 

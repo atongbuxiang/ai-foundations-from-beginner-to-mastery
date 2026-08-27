@@ -7,7 +7,7 @@ prerequisites: ["[[常微分方程、初值问题与解的存在唯一性]]", "[
 related: ["[[ODE、动力系统与 SDE MOC]]", "[[非正规矩阵、预解式与伪谱]]", "[[相图、平衡点与局部稳定性]]", "[[Euler、Runge-Kutta 与离散化误差]]", "[[流映射、Liouville 公式与连续正规化流]]", "[[实验 - 稳定非正规系统的矩阵指数瞬态]]"]
 sources: ["MIT-18.03SC-Matrix-Exponentials", "Stanford-EE263-Linear-Dynamical-Systems", "Higham-Lin-2013-Matrix-Functions", "Gu-et-al-2020-HiPPO", "Gu-et-al-2022-S4", "Gu-et-al-2023-How-to-Train-HiPPO", "Su-10114-SSM-Linear-HiPPO"]
 created: 2026-08-19
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # 线性 ODE 与矩阵指数
@@ -69,6 +69,152 @@ updated: 2026-08-23
 **怎样读图。** A 先把传播算子当作比单个解公式更基本的对象，composition 负责分段时间演化，variation of constants 把各时刻输入经 Green kernel 累加；B 再分清三个谱层次，不能只看 eigenvalue 实部解释短时间响应；C 最后在“输入每个采样间隔保持常数”的假设下推导 exact discrete matrices，再把状态递推展开为因果卷积。
 
 **适用边界（图没有证明什么）。** 图主要针对有限维线性系统；时变 $A(t)$ 一般不能把 $\Phi$ 写成 $e^{\int A}$，除非相应矩阵可交换。ZOH 的“精确”只相对于 hold input model，不代表观测、参数或 exponential 计算无误，也不保证采样后可唯一恢复连续频率。非正规 transient 需要 norm、numerical abscissa 或 resolvent 的定量分析。
+
+> [!note] 课程位置
+> DYN-01 已证明在合适 regularity 与 growth 条件下，初值会选出唯一全局轨迹；本章把一般 $f$ 专门化为线性算子 $A$，第一次获得可计算的完整传播子 $\Phi(t,s)$。下一章不再只问“某个初值怎样走”，而要从 spectrum、trace/determinant 和 phase portrait 判断平衡点周围的全部轨道；DYN-04 再把显式传播压缩成无需解轨迹的标量证书。
+
+> [!tip] 建议两遍阅读
+> **第一遍**只对第一波统一振子完成 $A^2+A+I=0$、$e^{tA}$、一条初值轨迹和特征值四项手算。**第二遍**再进入一般 fundamental matrix、Peano–Baker、time ordering、variation of constants、ZOH、aliasing、非正规 transient 与 SSM。先看懂一个传播算子怎样同时编码解、旋转和衰减，再扩展到所有线性系统类型。
+
+## 本章的推导问题链
+
+1. 为什么线性系统不能只保存一条解，而要保存能传播任意初值的 fundamental matrix？
+2. 归一化条件 $\Phi(s,s)=I$ 怎样消除 fundamental matrix 的右乘自由度？
+3. 常矩阵 $A$ 时，幂级数为什么同时满足微分方程、初值和 semigroup composition？
+4. Cayley–Hamilton 怎样把无限矩阵幂压缩到低维基底，从而手算 $e^{tA}$？
+5. Eigenvalue 的实部/虚部、Jordan factor 与 nonnormal eigenbasis 分别控制哪种时间行为？
+6. 输入项为什么要在每个过去时刻先注入、再由 $\Phi(t,s)$ 传播，形成 variation of constants？
+7. ZOH 的 exact discretization 精确相对于什么假设，为什么仍有 exponential 计算、aliasing 和统计误差？
+
+## 贯穿算例：同一振子的传播子、时间模态与体积收缩
+
+沿用 DYN-01：
+
+$$
+\dot z=Az,
+\qquad
+A=
+\begin{bmatrix}0&1\\-1&-1\end{bmatrix},
+\qquad
+z_0=(1,0)^T.
+$$
+
+### 符号与对象账本
+
+| 对象 | 定义 | 本例中的值/作用 | 不可直接称为 |
+|---|---|---|---|
+| $A$ | infinitesimal generator | $\left[\begin{smallmatrix}0&1\\-1&-1\end{smallmatrix}\right]$ | 一步离散转移矩阵 |
+| $e^{tA}$ | normalized propagator | 从 $0$ 传播到 $t$ | 逐元素 exponential |
+| $\Phi(t,s)$ | state-transition matrix | $e^{(t-s)A}$ | 只属于某个初值的 trajectory |
+| $\lambda_\pm$ | $A$ 的 eigenvalues | $-1/2\pm i\sqrt3/2$ | singular values |
+| $\omega$ | oscillation frequency | $\sqrt3/2$ | spectral abscissa |
+| $z(t)$ | propagated state | $e^{tA}z_0$ | phase portrait 全体 |
+| $\det e^{tA}$ | oriented area scale | $e^{t\operatorname{tr}A}=e^{-t}$ | 单条轨迹的 norm |
+
+### 第一步：Cayley–Hamilton 把所有高次幂折回 $I,A$
+
+特征多项式是
+
+$$
+p(\lambda)=\lambda^2+\lambda+1,
+$$
+
+所以
+
+$$
+\boxed{A^2+A+I=0.}
+$$
+
+因此任何 $A^k$ 都能写成 $I$ 与 $A$ 的线性组合。与其逐项求无穷级数，不如先平移
+
+$$
+B=A+\frac12I,
+\qquad
+B^2=-\frac34I.
+$$
+
+$B$ 的平方像标量纯虚数一样闭合，这正是旋转三角函数出现的原因。
+
+### 第二步：从标量指数模式得到矩阵指数
+
+令
+
+$$
+\omega=\frac{\sqrt3}{2}.
+$$
+
+因为 $A=-\frac12I+B$ 且 $I,B$ 可交换，
+
+$$
+\boxed{
+e^{tA}
+=e^{-t/2}
+\left[
+I\cos(\omega t)
++\frac{2}{\sqrt3}B\sin(\omega t)
+\right].
+}
+$$
+
+展开为
+
+$$
+e^{tA}
+=e^{-t/2}
+\begin{bmatrix}
+\cos(\omega t)+\frac1{\sqrt3}\sin(\omega t)
+&\frac2{\sqrt3}\sin(\omega t)\\
+-\frac2{\sqrt3}\sin(\omega t)
+&\cos(\omega t)-\frac1{\sqrt3}\sin(\omega t)
+\end{bmatrix}.
+$$
+
+两个检查缺一不可：$e^{0A}=I$；对上式求导后应等于 $Ae^{tA}$。
+
+### 第三步：传播统一初值
+
+乘以 $z_0=(1,0)^T$：
+
+$$
+\boxed{
+z(t)=e^{-t/2}
+\begin{bmatrix}
+\cos(\omega t)+\frac1{\sqrt3}\sin(\omega t)\\[2mm]
+-\frac2{\sqrt3}\sin(\omega t)
+\end{bmatrix}.
+}
+$$
+
+这条公式同时显示：振幅包络按 $e^{-t/2}$ 衰减，phase 按 $\omega$ 旋转。但“包络衰减”不能替代对每个 norm 的严格单调性判断；DYN-04 会用 Lyapunov derivative 做证书。
+
+### 第四步：谱与体积各回答一件事
+
+$$
+\lambda_\pm=-\frac12\pm i\frac{\sqrt3}{2}
+$$
+
+给出衰减率与振荡频率。另一方面，Liouville determinant identity 给出
+
+$$
+\boxed{
+\det e^{tA}=e^{t\operatorname{tr}A}=e^{-t}.
+}
+$$
+
+它说明整个相平面的小面积按 $e^{-t}$ 收缩，而不是说每个向量长度都精确按 $e^{-t}$ 缩放。DYN-07 会把这条体积账接到 density evolution。
+
+## 核心公式七问：$z(t)=e^{tA}z_0$ 究竟承诺了什么
+
+1. **解决什么问题？** 给常系数 homogeneous IVP 的任意初值提供 exact state propagation。
+2. **对象与形状？** $A\in\mathbb R^{d\times d}$，$e^{tA}\in\mathbb R^{d\times d}$，$z_0,z(t)\in\mathbb R^d$。
+3. **从哪里来？** 矩阵幂级数满足 $\frac d{dt}e^{tA}=Ae^{tA}$ 与 $e^{0A}=I$；唯一性锁定它就是 flow。
+4. **需要什么条件？** 这里 $A$ 为常矩阵；时变 $A(t)$ 一般需要 time-ordered propagator，不能随手写 $e^{\int A}$。
+5. **怎样检查？** 检查初值、微分方程、semigroup $e^{(t+s)A}=e^{tA}e^{sA}$，并用 determinant/spectrum 做独立不变量核对。
+6. **容易怎样误读？** 稳定 eigenvalues 不保证任意 norm 单调；公式精确也不表示数值计算 $e^{tA}v$ 无误。
+7. **AI 中怎样调用？** 线性 SSM、局部 Neural ODE、ZOH discretization 与 convolution kernel 都调用传播作用；部署还必须记 sampling、input hold、matrix-function algorithm 与 parameter uncertainty。
+
+> [!success] 第一遍停靠线
+> 合上正文后，独立从 $A^2+A+I=0$ 推到 $B^2=-3I/4$，再写出 $e^{tA}$ 和 $z(t)$；能解释 $e^{-t/2}$、$\sqrt3/2$ 与 $e^{-t}$ 分别是 state mode 包络、角频率和面积缩放。若只能背最终矩阵，先不要进入 Peano–Baker 与 ZOH。
 
 ## 零、先把六类线性系统分开
 

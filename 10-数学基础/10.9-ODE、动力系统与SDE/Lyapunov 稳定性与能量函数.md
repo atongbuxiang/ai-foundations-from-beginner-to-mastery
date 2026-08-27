@@ -7,7 +7,7 @@ prerequisites: ["[[相图、平衡点与局部稳定性]]", "[[全微分与 Fré
 related: ["[[ODE、动力系统与 SDE MOC]]", "[[一阶最优性条件与梯度下降]]", "[[光滑性、强凸性与条件数]]", "[[非凸优化、鞍点与深度网络损失地形]]", "[[Euler、Runge-Kutta 与离散化误差]]", "[[实验 - Lyapunov 度量、LaSalle 与离散能量边界]]"]
 sources: ["Teschl-ODE-Dynamical-Systems", "MIT-Underactuated-Lyapunov", "Chang-et-al-2019-Neural-Lyapunov-Control", "Yang-et-al-2024-Lyapunov-Stable-Neural-Control", "Su-6261-Optimization-Dynamics-Global", "Su-6316-Energy-GAN"]
 created: 2026-08-19
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # Lyapunov 稳定性与能量函数
@@ -70,6 +70,168 @@ updated: 2026-08-23
 **怎样读图。** A 先用 $V$ 的正定性把“离目标多远”编码为高度，再用导数符号证明轨道不能逃向更高子水平集；B 按不等式强度逐级读结论，若只有 semidefinite decay，必须继续分析零导数集合的 invariant dynamics；C 最后确认验证对象，ODE 的 Lie derivative、数值步进器的一步能量差和神经证书在给定 domain 上的全量不等式是三件事。
 
 **适用边界（图没有证明什么）。** 图不提供候选 $V$ 的构造算法，也不证明 sampling-based training 覆盖连续 domain。Properness、compactness、forward completeness 和不变性不是装饰条件；缺失它们时不能把 local/regional 结论夸大为 global。Continuous-time decay 不保证任意离散步长下仍下降，SDE 还要把 $L_f$ 换为含二阶项的 Itô generator。
+
+> [!note] 课程位置
+> DYN-03 用 Jacobian spectrum 判定 hyperbolic equilibrium，但这条路线依赖局部线性化，且通常不直接给 basin、不变区域或非线性全局证书。本章换一个问题：能否找到标量 $V$，使所有轨迹都被同一组 sublevel sets 和导数不等式控制？第一波在此完成“适定性—传播—相图—能量”闭环；DYN-05 随后会检查连续能量下降经过离散 solver 后是否仍成立。
+
+> [!tip] 建议两遍阅读
+> **第一遍**只对统一阻尼振子计算机械能 $E$ 的半负定导数，用 LaSalle 找最大不变子集，再验证一个严格 quadratic $V=z^TPz$。**第二遍**再进入 class-$\mathcal K$ bounds、sublevel/basin、一般 LaSalle、Lyapunov equation、converse theorem、gradient/momentum flow 与 learned certificate。第一遍要掌握的是“候选—几何—沿流导数—结论”的证明顺序。
+
+## 本章的推导问题链
+
+1. 为什么一个标量 $V$ 不需要恢复 trajectory，也能约束所有初值的未来行为？
+2. Positive definite、proper/coercive 与 radially unbounded 分别控制局部高度、compact sublevel 和 global 逃逸？
+3. 沿流导数 $L_fV=\nabla V^Tf$ 为什么必须在声明 domain 上逐点成立？
+4. $V>0,\dot V\le0$ 为什么先给 stability，而不自动给 attraction？
+5. Semidefinite decay 时，LaSalle 为什么检查 $\{\dot V=0\}$ 中的 largest invariant subset，而不是整个零集合？
+6. 线性 Hurwitz 系统怎样由 $A^TP+PA=-Q$ 构造 strict quadratic certificate 并读出 exponential rate？
+7. Continuous $L_fV$、discrete $V(x_{k+1})-V(x_k)$、stochastic generator 与 learned sampled penalty 为什么不能互换？
+
+## 贯穿算例：同一 spiral sink 的两张能量证书
+
+继续使用
+
+$$
+\dot z=Az,
+\qquad
+A=\begin{bmatrix}0&1\\-1&-1\end{bmatrix},
+\qquad
+z=(q,p)^T.
+$$
+
+DYN-02 已经显式求解，DYN-03 已用 spectrum 判定 spiral sink。现在故意不使用解公式，只计算标量函数沿轨迹的变化。
+
+### 符号与对象账本
+
+| 对象 | 类型 | 本例中的值/作用 | 不可直接称为 |
+|---|---|---|---|
+| $E(z)$ | mechanical-energy candidate | $\frac12(q^2+p^2)$ | 自动 strict Lyapunov function |
+| $L_fE$ | continuous Lie derivative | $-p^2$ | discrete one-step difference |
+| $\mathcal Z$ | zero-derivative set | $\{p=0\}$ | 全部 limit points |
+| $P$ | SPD metric matrix | $\left[\begin{smallmatrix}3/2&1/2\\1/2&1\end{smallmatrix}\right]$ | covariance matrix 的自动解释 |
+| $V(z)$ | strict quadratic certificate | $z^TPz$ | physical energy 的唯一形式 |
+| $Q$ | Lyapunov-equation decay matrix | $I$ | process-noise covariance |
+| $\Omega_c$ | sublevel set | $\{z:V(z)\le c\}$ | 自动等于真实 basin |
+
+### 第一步：自然机械能只给半负定导数
+
+取
+
+$$
+E(q,p)=\frac12(q^2+p^2).
+$$
+
+沿系统 $\dot q=p,\dot p=-q-p$：
+
+$$
+\boxed{
+\dot E
+=q\dot q+p\dot p
+=qp+p(-q-p)
+=-p^2\le0.
+}
+$$
+
+所以 $E$ 的圆形 sublevel sets forward invariant，并立即给原点 Lyapunov stable。但 $\dot E$ 在整条直线 $p=0$ 上为零，不能仅凭符号写“严格下降，因此吸引”。
+
+### 第二步：LaSalle 检查零集合中的动力学
+
+零导数集合是
+
+$$
+\mathcal Z=\{(q,p):p=0\}.
+$$
+
+要让一条轨迹永远留在 $\mathcal Z$，除了 $p=0$，还必须有
+
+$$
+\dot p=-q-p=-q=0.
+$$
+
+因此 $\mathcal Z$ 中 largest invariant subset 只有原点。结合有界 forward-invariant energy sublevel，LaSalle 推出每条轨迹趋于原点。本例由任意能量圆盘都可执行，故得到 global asymptotic stability。
+
+### 第三步：Lyapunov equation 构造严格二次证书
+
+为得到 pointwise strict decay，令 $Q=I$，求
+
+$$
+A^TP+PA=-I.
+$$
+
+取
+
+$$
+\boxed{
+P=
+\begin{bmatrix}
+3/2&1/2\\
+1/2&1
+\end{bmatrix}\succ0.
+}
+$$
+
+直接相乘可验证方程。于是
+
+$$
+V(z)=z^TPz,
+\qquad
+\boxed{
+\dot V=z^T(A^TP+PA)z=-\|z\|_2^2<0\quad(z\ne0).
+}
+$$
+
+这里 $E$ 与 $V$ 都是合法证书，却承担不同教学任务：$E$ 自然、几何简单，需要 LaSalle；$V$ 是 tailored metric，导数严格，适合定量 rate。
+
+### 第四步：从矩阵 eigenvalue bounds 读出 state rate
+
+$P$ 的特征值为
+
+$$
+\lambda_{\min}(P)=\frac{5-\sqrt5}{4},
+\qquad
+\lambda_{\max}(P)=\frac{5+\sqrt5}{4}.
+$$
+
+因此
+
+$$
+\lambda_{\min}(P)\|z\|_2^2
+\le V(z)
+\le\lambda_{\max}(P)\|z\|_2^2.
+$$
+
+由 $\dot V=-\|z\|^2\le-V/\lambda_{\max}(P)$，
+
+$$
+V(t)\le e^{-t/\lambda_{\max}(P)}V(0),
+$$
+
+进而
+
+$$
+\boxed{
+\|z(t)\|_2
+\le
+\sqrt{\frac{\lambda_{\max}(P)}{\lambda_{\min}(P)}}
+e^{-t/[2\lambda_{\max}(P)]}
+\|z(0)\|_2.
+}
+$$
+
+这是一个有证明的 exponential envelope，不一定等于 DYN-02 显式解的最紧包络。证书的任务是可靠上界，不是声称常数最优。
+
+## 核心公式七问：$A^TP+PA=-Q$ 为什么是线性稳定的能量接口
+
+1. **解决什么问题？** 把 Hurwitz spectrum 转成一个对所有 state 同时成立的 quadratic decay certificate。
+2. **对象与形状？** $A,P,Q\in\mathbb R^{d\times d}$，通常 $P=P^T\succ0,Q=Q^T\succ0$；$V(z)=z^TPz$ 为标量。
+3. **从哪里来？** 对 $V$ 求沿流导数得到 $z^T(A^TP+PA)z$，再指定希望的 decay matrix $-Q$。
+4. **需要什么条件？** 给定任意 $Q\succ0$ 存在唯一 $P\succ0$ 当且仅当 $A$ Hurwitz；数值求解还要考虑 separation/conditioning。
+5. **怎样检查？** 验证 $P=P^T\succ0$、矩阵 residual $A^TP+PA+Q=0$，再核对 $\dot V$ 与 state bounds。
+6. **怎样误读？** $P$ 不唯一于缩放/$Q$ 选择，Euclidean norm 可与 tailored $P$-norm 有不同瞬态；continuous certificate 也不自动传给 Euler。
+7. **AI 中怎样调用？** Linearized Neural ODE、stable latent dynamics、control 与 optimizer ODE 可用它构造 metric；learned $V_\theta$ 还需 domain-wide verification，sampled penalty 小不等于定理成立。
+
+> [!success] 第一遍停靠线
+> 合上正文后应能先算 $\dot E=-p^2$，再解释为什么还要检查 $p=0$ 中的 invariant motion；随后独立验证给定 $P$ 满足 $A^TP+PA=-I$，并从 $P$ 的上下 eigenvalue bounds 写出一个 exponential state envelope。若把“$\dot E\le0$”直接说成“严格吸引”，请回到 LaSalle 步骤重做。
 
 ## 零、为什么一个标量可能控制整个向量系统
 
