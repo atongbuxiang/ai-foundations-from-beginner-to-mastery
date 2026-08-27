@@ -7,7 +7,7 @@ prerequisites: ["[[Lagrange 乘子与 KKT 条件]]", "[[次梯度、共轭函数
 related: ["[[优化与凸分析 MOC]]", "[[近端算子、复合优化与稀疏正则]]", "[[最大熵原理与指数族]]", "[[率失真、信息瓶颈与最小描述长度]]"]
 sources: ["Boyd-Vandenberghe-2004-Convex-Optimization", "Stanford-EE364A-Duality", "MIT-6.253-Duality", "Rockafellar-1970-Convex-Analysis", "Bertsekas-2009-Convex-Optimization-Theory", "Wainwright-Jordan-2008-Exponential-Families", "Su-3552-Maximum-Entropy"]
 created: 2026-08-19
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # 弱对偶、强对偶与 Slater 条件
@@ -49,6 +49,192 @@ updated: 2026-08-23
 - [[Lagrange 乘子与 KKT 条件]]已完成 normal-cone 推导、四组 KKT、CQ 和二阶条件；
 - [[次梯度、共轭函数与 Fenchel 对偶]]已定义 conjugate/Fenchel–Young，并给 formal Fenchel template；
 - 本章新增的是：**dual 为什么给 bound、何时 tight、是否 attained、怎样形成可计算 certificate**。
+
+> [!note] 课程位置
+> OPT-12 已经在一个候选点上验证 KKT；本章把同一组 multiplier 解释成一条对所有 primal 点都成立的 lower bound。学习顺序必须是“固定 multiplier → 对全部 primal domain 取 infimum → 得到 dual function → 最大化 lower bound”，而不是先背 dual 形式再猜符号。OPT-14 会把不可微结构交给 prox，OPT-15 再改变 movement geometry。
+
+> [!tip] 建议两遍阅读
+> **第一遍**只推导下方二维 quadratic 的 dual function，核对 $\lambda^*=(1/2,0,0)^T$ 为什么把 lower bound 推到 $-9/8$。**第二遍**再学习 relative-interior Slater、perturbation value、Fenchel/Lasso dual、positive gap 与 nonattainment。每次使用 dual certificate，都要先核对 primal feasibility、dual feasibility 和求内层 infimum 的误差。
+
+## 本章的推导问题链
+
+1. 为什么固定一个 $\lambda\ge0$ 后，$L(x,\lambda)$ 在每个 feasible $x$ 上都不超过原 objective？
+2. 为什么还要对整个 primal domain 取 infimum，而不能只在当前 iterate 上评价 Lagrangian？
+3. dual function 为什么必为 concave，哪怕 primal problem 非凸？
+4. weak duality 只用了什么；strong duality 又额外需要什么？
+5. zero gap、primal attainment、dual attainment 与 multiplier existence 为什么是四个命题？
+6. 数值上怎样把 objective gap、constraint residual、dual residual 与 inner-solve error 分开报告？
+
+## 贯穿算例：KKT multiplier 怎样变成全局下界
+
+继续使用第三波的 constrained quadratic：
+
+$$
+\begin{aligned}
+\min_x\quad
+&f(x)=\frac12x^THx-b^Tx,\\
+\text{s.t.}\quad
+&g_0(x)=x_1+x_2-1\le0,\\
+&g_1(x)=-x_1\le0,\qquad g_2(x)=-x_2\le0,
+\end{aligned}
+$$
+
+其中
+
+$$
+H=\operatorname{diag}(1,4),
+\qquad
+b=(1,5/2)^T.
+$$
+
+已知 primal optimum 与 KKT multiplier 为
+
+$$
+x^*=(1/2,1/2)^T,
+\qquad
+\lambda^*=(1/2,0,0)^T,
+\qquad
+p^*=f(x^*)=-9/8.
+$$
+
+### 符号与对象账本
+
+| 对象 | 类型 | 本例中的值或作用 | 不能与什么混淆 |
+|---|---|---|---|
+| $x$ | primal variable | 在 $\mathbb R^2$ 中被内层最小化 | 当前 solver iterate |
+| $\lambda\ge0$ | dual variable | 给三个 inequalities 定价 | primal penalty 超参数 |
+| $L(x,\lambda)$ | 二元函数 | objective 加带符号 constraint residual | dual function |
+| $g_D(\lambda)$ | dual function | $\inf_xL(x,\lambda)$ | 只评价某个 $x$ 的 Lagrangian |
+| $p^*,d^*$ | 两侧最优值 | 本例均为 $-9/8$ | 两侧 optimizer 本身 |
+| primal–dual gap | certificate | feasible upper bound 减 dual lower bound | 单独的 KKT residual |
+
+### 第一步：把三条 constraints 放进 Lagrangian
+
+$$
+L(x,\lambda)
+=\frac12x^THx-b^Tx
++\lambda_0(x_1+x_2-1)
+-\lambda_1x_1-\lambda_2x_2.
+$$
+
+定义
+
+$$
+c(\lambda)
+=b-\lambda_0(1,1)^T+\lambda_1e_1+\lambda_2e_2.
+$$
+
+于是
+
+$$
+L(x,\lambda)=\frac12x^THx-c(\lambda)^Tx-\lambda_0.
+$$
+
+由于 $H\succ0$，固定 $\lambda$ 后的内层问题有唯一解
+
+$$
+x(\lambda)=H^{-1}c(\lambda).
+$$
+
+代回得到 dual function：
+
+$$
+\boxed{
+g_D(\lambda)
+=-\frac12c(\lambda)^TH^{-1}c(\lambda)-\lambda_0,
+\qquad
+\lambda\ge0.
+}
+$$
+
+这里的负二次型说明 $g_D$ 是 concave；更一般地，dual function 的 concavity 来自 affine functions 的逐点下确界。
+
+### 第二步：代入 multiplier，闭合零 gap
+
+在
+
+$$
+\lambda^*=(1/2,0,0)^T
+$$
+
+处，
+
+$$
+c(\lambda^*)=(1/2,2)^T,
+\qquad
+H^{-1}c(\lambda^*)=(1/2,1/2)^T=x^*.
+$$
+
+因此
+
+$$
+\begin{aligned}
+g_D(\lambda^*)
+&=-\frac12\left[
+\left(\frac12\right)^2+\frac{2^2}{4}
+\right]-\frac12\\
+&=-\frac58-\frac12\\
+&=-\frac98
+=p^*.
+\end{aligned}
+$$
+
+这不是先假设 strong duality 再得到的等式：$x^*$ primal feasible、$\lambda^*$ dual feasible，而两侧数值相同；weak duality 的夹逼已经足以证明两者分别最优。
+
+作为对照，若取合法但较差的 $\lambda=0$，
+
+$$
+g_D(0)=-\frac{41}{32},
+$$
+
+于是 $x^*$ 与该 lower bound 组成的 gap 为
+
+$$
+-\frac98-\left(-\frac{41}{32}\right)=\frac5{32}.
+$$
+
+它仍是正确 certificate，只是没有最优 multiplier 给出的零 gap 紧。
+
+### 第三步：Slater 在本例中检查什么
+
+取
+
+$$
+\bar x=(1/4,1/4)^T.
+$$
+
+三条 inequality 的值为
+
+$$
+\left(-\frac12,-\frac14,-\frac14\right),
+$$
+
+全部严格小于零。objective 与 constraints 均 convex，domain 为全空间，故 Slater 成立；本例因此满足 strong duality，并存在最优 multiplier。注意 Slater 是便于验证的充分条件，而上面的零 gap 数值证书本身已经直接证明这一个实例。
+
+### 核心公式七问：dual function
+
+对
+
+$$
+g_D(\lambda)=\inf_xL(x,\lambda),
+\qquad \lambda\ge0,
+$$
+
+逐项回答：
+
+1. **目的：**把每个 dual-feasible multiplier 变成 primal optimum 的可验证 lower bound；
+2. **对象：**$\lambda$ 是 dual variable，取 infimum 的 $x$ 仍是 primal variable；
+3. **来路：**feasible $x$ 上有 $L(x,\lambda)\le f(x)$，再对全部 $x$ 取 infimum；
+4. **步骤：**先固定 $\lambda$，精确或带证书地解内层问题，再最大化所得 concave function；
+5. **读法：**dual optimization 在所有合法 lower bounds 中寻找最紧的一条；
+6. **检查：**必须验证 multiplier sign、内层 infimum、primal feasibility 与 gap 单位；仅写 formal dual 不够；
+7. **去路：**OPT-14 的 Lasso/composite dual、maximum entropy、约束训练和 verification 都依赖这种 lower-bound 语言。
+
+> [!warning] 数值证书边界
+> 若内层 infimum 只近似求解，把 $L(\tilde x,\lambda)$ 当成 $g_D(\lambda)$ 通常不合法，因为前者是 dual function 的上界而非所需下界。若 primal point 不可行，objective 与 dual value 的差也不能直接当作 suboptimality certificate。应同时报告可行性残差、dual feasibility、inner-solve lower bound 与 absolute/relative gap。
+
+> [!success] 第一遍停靠线
+> 合上笔记后，能从三条 inequalities 重建 $L(x,\lambda)$ 和 $c(\lambda)$；无提示推出 $g_D(\lambda)$；分别算出 $g_D(0)=-41/32$、$g_D(\lambda^*)=-9/8$ 与 gap $5/32,0$；并能解释为什么“值相等”“两侧取得最优解”“Slater 成立”是相关但不同的判断。
 
 ## 零、统一 primal problem 与扩展值约定
 

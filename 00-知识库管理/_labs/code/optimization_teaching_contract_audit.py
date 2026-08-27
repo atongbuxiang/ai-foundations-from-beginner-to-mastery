@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import math
 import re
 import subprocess
 import sys
@@ -20,6 +21,7 @@ FIGURE_SCRIPTS = (
     LABS / "code" / "plot_convex_foundations_v2.py",
     LABS / "code" / "plot_first_order_optimization_v2.py",
     LABS / "code" / "plot_metric_constrained_optimization_v2.py",
+    LABS / "code" / "plot_advanced_optimization_v2.py",
 )
 
 CONCEPTS = (
@@ -35,6 +37,10 @@ CONCEPTS = (
     "Newton 法、Gauss-Newton 与拟 Newton 法.md",
     "投影、约束与可行方向.md",
     "Lagrange 乘子与 KKT 条件.md",
+    "弱对偶、强对偶与 Slater 条件.md",
+    "近端算子、复合优化与稀疏正则.md",
+    "镜像下降、Bregman 几何与自然梯度.md",
+    "非凸优化、鞍点与深度网络损失地形.md",
 )
 
 CONTRACT_MARKERS = (
@@ -71,6 +77,14 @@ FIGURE_HASHES = {
         "2f2f162a489999c94667905f7fe5ccbdb1449d286ce8bf078f7826b5d92482d6",
     "fig-lagrange-kkt-v2.svg":
         "044f9e3ed47598775205cb36d022db9408f0abd0d58983f4c894516d0b777aca",
+    "fig-duality-slater-certificate-v2.svg":
+        "e477bfa1fbd1202839831c7aa9bff67b8beb5bdde3a75c2928504c38ad20acc7",
+    "fig-proximal-composite-sparsity-v2.svg":
+        "236e24d66a09937763ebe33b7cc9347463f794c03c22b5e73d681413c82f1345",
+    "fig-mirror-natural-geometry-v2.svg":
+        "11f4b47a4b6990998257d5e521b2a3e992b5cece1e7538dc0e9bff04243f76da",
+    "fig-nonconvex-saddles-landscape-v2.svg":
+        "9d05a92021f95131b233ebbddc951f091db813f9b5e2cca7324a0fdd779c5f6f",
 }
 
 FIGURE_DIR = ROOT / "00-知识库管理" / "_assets" / "figures" / "optimization"
@@ -353,6 +367,131 @@ def audit_exact_constrained_model() -> None:
     )
 
 
+def audit_exact_advanced_model() -> None:
+    hessian = (Fraction(1), Fraction(4))
+    linear = (Fraction(1), Fraction(5, 2))
+    optimizer = (Fraction(1, 2), Fraction(1, 2))
+
+    def smooth_objective(point: tuple[Fraction, Fraction]) -> Fraction:
+        return Fraction(1, 2) * (
+            hessian[0] * point[0] ** 2 + hessian[1] * point[1] ** 2
+        ) - dot(linear, point)
+
+    def gradient(point: tuple[Fraction, Fraction]) -> tuple[Fraction, Fraction]:
+        return hessian[0] * point[0] - linear[0], hessian[1] * point[1] - linear[1]
+
+    def dual_value(multipliers: tuple[Fraction, Fraction, Fraction]) -> Fraction:
+        budget, nonnegative_1, nonnegative_2 = multipliers
+        coefficient = (
+            linear[0] - budget + nonnegative_1,
+            linear[1] - budget + nonnegative_2,
+        )
+        quadratic_conjugate = Fraction(1, 2) * (
+            coefficient[0] ** 2 / hessian[0]
+            + coefficient[1] ** 2 / hessian[1]
+        )
+        return -quadratic_conjugate - budget
+
+    zero_multipliers = (Fraction(0), Fraction(0), Fraction(0))
+    optimal_multipliers = (Fraction(1, 2), Fraction(0), Fraction(0))
+    primal_value = smooth_objective(optimizer)
+    require(primal_value == Fraction(-9, 8), "advanced primal value changed")
+    require(dual_value(zero_multipliers) == Fraction(-41, 32), "baseline dual bound changed")
+    require(dual_value(optimal_multipliers) == primal_value, "strong-duality certificate changed")
+    require(
+        primal_value - dual_value(zero_multipliers) == Fraction(5, 32),
+        "nonoptimal primal-dual gap changed",
+    )
+    slater_values = (Fraction(-1, 2), Fraction(-1, 4), Fraction(-1, 4))
+    require(all(value < 0 for value in slater_values), "advanced Slater point changed")
+
+    regularization = Fraction(1, 2)
+    step = Fraction(1, 4)
+
+    def composite(point: tuple[Fraction, Fraction]) -> Fraction:
+        return smooth_objective(point) + regularization * (
+            abs(point[0]) + abs(point[1])
+        )
+
+    def soft_threshold(value: Fraction, threshold: Fraction) -> Fraction:
+        if value > threshold:
+            return value - threshold
+        if value < -threshold:
+            return value + threshold
+        return Fraction(0)
+
+    forward = scale(step, linear)
+    threshold = step * regularization
+    first_prox = tuple(soft_threshold(value, threshold) for value in forward)
+    require(forward == (Fraction(1, 4), Fraction(5, 8)), "prox forward point changed")
+    require(threshold == Fraction(1, 8), "soft threshold changed")
+    require(first_prox == (Fraction(1, 8), Fraction(1, 2)), "first prox iterate changed")
+    require(composite(optimizer) == Fraction(-5, 8), "composite optimum changed")
+    require(composite(first_prox) == Fraction(-71, 128), "first prox objective changed")
+    require(
+        composite(first_prox) - composite(optimizer) == Fraction(9, 128),
+        "first prox gap changed",
+    )
+    mapping_at_zero = scale(Fraction(-1, 1) / step, first_prox)
+    require(mapping_at_zero == (Fraction(-1, 2), Fraction(-2)), "prox mapping changed")
+    fixed_input = sub(optimizer, scale(step, gradient(optimizer)))
+    fixed_output = tuple(soft_threshold(value, threshold) for value in fixed_input)
+    require(fixed_input == (Fraction(5, 8), Fraction(5, 8)), "prox fixed input changed")
+    require(fixed_output == optimizer, "prox fixed point changed")
+
+    simplex_start = (Fraction(1, 4), Fraction(3, 4))
+    simplex_gradient = gradient(simplex_start)
+    require(
+        simplex_gradient == (Fraction(-3, 4), Fraction(1, 2)),
+        "simplex gradient changed",
+    )
+    restricted_gradient = simplex_gradient[0] - simplex_gradient[1]
+    require(restricted_gradient == Fraction(-5, 4), "restricted gradient changed")
+    mirror_step = Fraction(4, 5) * math.log(3)
+    mirror_ratio = (
+        float(simplex_start[0] / simplex_start[1])
+        * math.exp(-float(mirror_step * restricted_gradient))
+    )
+    require(math.isclose(mirror_ratio, 1.0, rel_tol=0, abs_tol=1e-12), "entropy ratio changed")
+    kl_movement = Fraction(1, 2) * math.log(2) + Fraction(1, 2) * math.log(Fraction(2, 3))
+    require(
+        math.isclose(float(kl_movement), 0.5 * math.log(4 / 3), rel_tol=0, abs_tol=1e-12),
+        "entropy Bregman movement changed",
+    )
+    fisher = Fraction(1, 1) / (simplex_start[0] * simplex_start[1])
+    natural_direction = -(Fraction(1, 1) / fisher) * restricted_gradient
+    require(fisher == Fraction(16, 3), "Bernoulli Fisher changed")
+    require(natural_direction == Fraction(15, 64), "natural-gradient direction changed")
+    require(
+        optimizer[0] - simplex_start[0] == Fraction(16, 64),
+        "finite mirror displacement changed",
+    )
+
+    factor_step = Fraction(1, 4)
+    origin_hessian_eigenvalues = (Fraction(1), Fraction(-1))
+    iteration_factors = tuple(
+        Fraction(1) - factor_step * eigenvalue
+        for eigenvalue in origin_hessian_eigenvalues
+    )
+    require(iteration_factors == (Fraction(3, 4), Fraction(5, 4)), "saddle factors changed")
+    balanced_minimum = (Fraction(1), Fraction(1))
+    scaled_minimum = (Fraction(2), Fraction(1, 2))
+    require(
+        balanced_minimum[0] * balanced_minimum[1] == 1
+        and scaled_minimum[0] * scaled_minimum[1] == 1,
+        "factorization predictors changed",
+    )
+    balanced_curvature = squared_norm(balanced_minimum)
+    scaled_curvature = squared_norm(scaled_minimum)
+    require(balanced_curvature == 2, "balanced factor curvature changed")
+    require(scaled_curvature == Fraction(17, 4), "scaled factor curvature changed")
+
+    print(
+        "PASS exact advanced model: dual gap 5/32->0, prox gap=9/128, "
+        "entropy ratio=1, Fisher direction=15/64, saddle factors=(3/4,5/4)"
+    )
+
+
 def audit_markdown_integrity() -> None:
     scoped = [OPT / filename for filename in CONCEPTS]
     all_files = [path for path in ROOT.rglob("*") if path.is_file()]
@@ -457,6 +596,7 @@ def main() -> None:
     audit_exact_model()
     audit_exact_spectral_model()
     audit_exact_constrained_model()
+    audit_exact_advanced_model()
     audit_markdown_integrity()
     if args.run_figures:
         audit_figures()

@@ -7,7 +7,7 @@ prerequisites: ["[[梯度、方向导数与最陡方向]]", "[[投影、约束�
 related: ["[[优化与凸分析 MOC]]", "[[近端算子、复合优化与稀疏正则]]", "[[自适应优化方法]]", "[[Hessian、二阶微分与曲率]]"]
 sources: ["Stanford-EE364B-Mirror-Descent", "MIT-6.253-Entropy-Prox", "Beck-Teboulle-2003-Mirror", "Amari-1998-Natural-Gradient", "Martens-2020-Natural-Gradient", "Su-10592-Muon", "Su-11215-Manifold-Steepest"]
 created: 2026-08-19
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # 镜像下降、Bregman 几何与自然梯度
@@ -49,6 +49,206 @@ updated: 2026-08-23
 - [[梯度、方向导数与最陡方向]]说明了 Euclidean gradient 依赖 inner product；
 - [[梯度、方向导数与最陡方向]]还说明 metric tensor 如何把 differential 变成 gradient vector；
 - 本章关注怎样把这种几何落实成可执行 update、proof 与 AI 审计。
+
+> [!note] 课程位置
+> OPT-09 已经说明 inverse metric 把 differential 转成 displacement；OPT-11 的 Euclidean projection 又说明 movement geometry 会改变约束解。本章把固定 quadratic metric 推广为 Bregman divergence，并在 probability simplex 上得到 entropy mirror descent；随后只在 infinitesimal/local 层面，把 KL 二阶展开连接到 Fisher natural gradient。
+
+> [!tip] 建议两遍阅读
+> **第一遍**只学习二元 simplex 上的一次 entropy mirror step：写出乘法权重、正规化，并核对它怎样从 $(1/4,3/4)$ 到达 $(1/2,1/2)$。**第二遍**再证明 three-point identity、regret bound、natural-gradient invariance，并区分 exact Fisher、empirical Fisher、GGN、K-FAC 与 damping。有限 mirror step 和 local Fisher step 绝不能在第一遍就混成同一个公式。
+
+## 本章的推导问题链
+
+1. 为什么 gradient 是一个线性 functional，而“走多远”还需要 geometry？
+2. Bregman divergence 从 tangent gap 怎样产生，为什么非负却通常不是 metric？
+3. mirror subproblem 的一阶条件为什么在 $\nabla\psi$ coordinates 中变成加法更新？
+4. negative entropy 怎样把 additive dual step 变成 primal multiplicative weights？
+5. KL 的二阶项怎样定义 Fisher；这个 local quadratic approximation漏掉了什么？
+6. exact Fisher、empirical Fisher、GGN 和 optimizer 的 gradient-square state 分别对什么分布、残差和参数化取期望？
+
+## 贯穿算例：同一个 quadratic，换成 probability-simplex geometry
+
+把第四波的 quadratic 限制在二元 probability simplex：
+
+$$
+x=(p,1-p)^T,
+\qquad
+0<p<1,
+$$
+
+$$
+f(x)=\frac12x^THx-b^Tx,
+\qquad
+H=\operatorname{diag}(1,4),
+\qquad
+b=(1,5/2)^T.
+$$
+
+代入得到一维函数
+
+$$
+\phi(p)
+=f(p,1-p)
+=\frac52p^2-\frac52p-\frac12.
+$$
+
+因此
+
+$$
+\phi'(p)=5p-\frac52,
+\qquad
+p^*=\frac12,
+\qquad
+x^*=(1/2,1/2)^T.
+$$
+
+这与前两章共享同一 $x^*$，但本章问的是：从一个严格正的 probability vector 出发，Euclidean、entropy 与 Fisher geometry 分别怎样解释“一步”。
+
+### 符号与对象账本
+
+| 对象 | 类型 | 本例/算法角色 | 不可直接称为 |
+|---|---|---|---|
+| $\psi(x)=\sum_i x_i\log x_i$ | mirror potential | 产生 entropy geometry | objective loss |
+| $D_\psi(x,y)$ | Bregman divergence | 本例为 $D_{\mathrm{KL}}(x\|y)$ | symmetric distance |
+| $g_0=\nabla f(x_0)$ | primal differential | 进入 dual-coordinate update | Fisher matrix |
+| $\eta$ | mirror step scale | 控制 linear term 与 movement 的平衡 | KL radius 本身 |
+| $F(p)$ | exact Bernoulli Fisher | $1/[p(1-p)]$ | empirical gradient outer product |
+| $d_{\mathrm{nat}}$ | local direction | $-F^{-1}\phi'(p)$ | 有限 mirror iterate |
+
+### 第一步：在起点计算真正进入更新的 gradient difference
+
+取
+
+$$
+x_0=(1/4,3/4)^T.
+$$
+
+原二维 gradient 为
+
+$$
+g_0=Hx_0-b
+=\left(-\frac34,\frac12\right)^T.
+$$
+
+在 simplex tangent direction $(1,-1)$ 上，真正决定 $p$ 变化的是
+
+$$
+g_{0,1}-g_{0,2}
+=-\frac54
+=\phi'(1/4).
+$$
+
+给 gradient 两个坐标同时加同一个常数不会改变 entropy update，因为 normalization 会把共同因子消掉；这正对应 simplex normal direction 的不可辨识性。
+
+### 第二步：entropy mirror step 精确到达 $x^*$
+
+negative-entropy mirror descent 给
+
+$$
+x_{+,i}
+=\frac{x_{0,i}e^{-\eta g_{0,i}}}
+{\sum_jx_{0,j}e^{-\eta g_{0,j}}}.
+$$
+
+先看两个分量的 ratio：
+
+$$
+\frac{x_{+,1}}{x_{+,2}}
+=\frac{1/4}{3/4}
+\exp\left[-\eta(g_{0,1}-g_{0,2})\right]
+=\frac13\exp\left(\frac54\eta\right).
+$$
+
+选择
+
+$$
+\eta=\frac45\log3,
+$$
+
+则 ratio 恰好为 $1$；再用两分量和为 $1$，得到
+
+$$
+\boxed{
+x_+=(1/2,1/2)^T=x^*.
+}
+$$
+
+这一步的 Bregman movement 是
+
+$$
+\begin{aligned}
+D_{\mathrm{KL}}(x^*\|x_0)
+&=\frac12\log\frac{1/2}{1/4}
++\frac12\log\frac{1/2}{3/4}\\
+&=\frac12\log\frac43.
+\end{aligned}
+$$
+
+注意方向：mirror subproblem 使用的是 $D_\psi(x,x_0)$，这里因而是 $D_{\mathrm{KL}}(x^*\|x_0)$，反向 KL 数值不同。
+
+### 第三步：Fisher 只给这一几何的局部二次方向
+
+对 Bernoulli mean parameter $p$，
+
+$$
+F(p)
+=\mathbb E\left[
+\left(\frac{\partial}{\partial p}\log P_p(Z)\right)^2
+\right]
+=\frac1{p(1-p)}.
+$$
+
+在 $p_0=1/4$，
+
+$$
+F(p_0)=\frac{16}{3}.
+$$
+
+把 KL 只保留到二阶，并把 $\phi$ 只线性化，unit-scale natural direction 为
+
+$$
+\boxed{
+d_{\mathrm{nat}}
+=-F(p_0)^{-1}\phi'(p_0)
+=-\frac3{16}\left(-\frac54\right)
+=\frac{15}{64}.
+}
+$$
+
+它指向 $p^*=1/2$，但不是上面有限 entropy step 的位移
+
+$$
+p^*-p_0=\frac14=\frac{16}{64}.
+$$
+
+两者相近来自 local geometry 一致；两者不等来自 finite-step KL 的高阶项、step scaling 与 normalization。Natural gradient 是局部方向，除非另有 line search/trust-region solve，不能把 $p_0+d_{\mathrm{nat}}$ 宣称为 exact mirror iterate。
+
+### 核心公式七问：mirror-descent 子问题
+
+对
+
+$$
+x_{t+1}
+=\arg\min_{x\in\mathcal X}
+\left\{
+\eta\langle g_t,x\rangle+D_\psi(x,x_t)
+\right\},
+$$
+
+逐项回答：
+
+1. **目的：**在 linearized loss 与符合变量结构的 movement geometry 之间取平衡；
+2. **对象：**$g_t$ 是 differential，$\psi$ 选择 geometry，$x$ 才是子问题变量；
+3. **来路：**用 convex tangent gap 替换 Euclidean squared distance；
+4. **步骤：**写 optimality，进入 $\nabla\psi$ dual coordinates 做 additive step，再经 conjugate/normalization 返回；
+5. **读法：**同一个 differential 经不同 geometry 会变成不同 displacement；
+6. **检查：**核对 divergence 方向、domain interior、strong-convexity norm、dual norm和 boundary support；
+7. **去路：**entropy/multiplicative weights、variational inference、policy trust region 与 Fisher natural gradient。
+
+> [!warning] Fisher 与实现边界
+> Exact Fisher 必须声明 model distribution、输入分布和 parameterization；empirical Fisher 是 observed gradients 的 outer product，GGN 从 loss curvature 与 Jacobian 组合，K-FAC 又是结构近似。Damping 把 $F^{-1}$ 改成 $(F+\lambda I)^{-1}$，pseudoinverse 还依赖 range 与 cutoff。它们可能工程上相关，却不是同一个 theorem object。
+
+> [!success] 第一遍停靠线
+> 合上笔记后，能把 quadratic 限制成 $\phi(p)=\frac52p^2-\frac52p-\frac12$；从 $x_0=(1/4,3/4)$ 算出 $g_0=(-3/4,1/2)$；由 ratio 公式和 $\eta=\frac45\log3$ 得到 $x_+=(1/2,1/2)$；再算出 Bernoulli Fisher $16/3$ 与 local natural direction $15/64$，并解释为什么它不是有限 mirror 位移 $16/64$。
 
 先用下图回答一个视觉问题：**选择不同 movement geometry 后，一步更新怎样在 mirror coordinates、simplex 熵几何和 Fisher–KL 局部几何中改变？**
 

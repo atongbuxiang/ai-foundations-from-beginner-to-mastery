@@ -25,7 +25,7 @@ updated: 2026-08-27
 | A | OPT-01—04 | 问题契约 → 凸集/投影/分离 → 凸函数/Jensen → 次梯度/共轭/Fenchel | `regression-passed` |
 | B | OPT-05—08 | 曲率上下界 → 梯度下降 → 加速/动量 → 随机梯度 | `regression-passed` |
 | C | OPT-09—12 | 自适应度量 → 二阶模型 → 投影方向 → KKT | `regression-passed` |
-| D | OPT-13—16 | 强对偶 → proximal → mirror/Fisher → 非凸地形 | `pending` |
+| D | OPT-13—16 | 强对偶 → proximal → mirror/Fisher → 非凸地形 | `regression-passed` |
 | CUM | OPT-CUM | 卷级路线—口试—题解—实验—回归 | `pending` |
 
 第一波统一使用“把越界目标投回三角形”的问题：
@@ -175,6 +175,65 @@ $$
 
 > [!success] 第三波停靠线
 > 不看正文，能解释 movement metric、objective Hessian 与 gradient-square state 的区别；从任意点重建 Newton one-step；分别算出 $I$-metric 与 $H$-metric projection；写出 tangent/normal、gradient mapping 和 $\lambda^*=(1/2,0,0)$ 的四组 KKT。还必须能说明 inner solve residual、projection residual、KKT residual 与 deployment constraint violation 不是一个量。
+
+第四波先把第三波的 KKT multiplier 变成 global lower bound。对三条 inequalities 定义
+
+$$
+c(\lambda)
+=b-\lambda_0(1,1)^T+\lambda_1e_1+\lambda_2e_2,
+$$
+
+则 quadratic dual function 为
+
+$$
+g_D(\lambda)
+=-\frac12c(\lambda)^TH^{-1}c(\lambda)-\lambda_0.
+$$
+
+OPT-13 验证合法但非最优的 $\lambda=0$ 给 $g_D(0)=-41/32$，与 primal optimum 的 gap 为 $5/32$；代入 $\lambda^*=(1/2,0,0)^T$ 后得到 $g_D(\lambda^*)=-9/8=p^*$，再由 $\bar x=(1/4,1/4)^T$ 检查严格 Slater。这样把 weak lower bound、zero gap、attainment 与 CQ 分成不同层。
+
+OPT-14 保留同一 smooth quadratic，但将 hard constraint 改成
+
+$$
+F(x)=f(x)+\frac12\|x\|_1.
+$$
+
+unique optimizer 仍为 $x^*=(1/2,1/2)^T$，此时却由
+
+$$
+\nabla f(x^*)+\frac12(1,1)^T=0
+$$
+
+闭合 composite stationarity。取 $x_0=0,\eta=1/4$，forward point、threshold 与第一步分别为
+
+$$
+v_0=(1/4,5/8)^T,
+\qquad
+\eta\tau=1/8,
+\qquad
+x_1=(1/8,1/2)^T,
+$$
+
+且 $F(x_1)-F(x^*)=9/128$；在 $x^*$，proximal-gradient mapping 为零而原始 smooth gradient 非零。
+
+OPT-15 再把 $x=(p,1-p)$ 限制到 binary simplex，使
+
+$$
+\phi(p)=\frac52p^2-\frac52p-\frac12.
+$$
+
+从 $x_0=(1/4,3/4)^T$ 出发，gradient difference 为 $-5/4$；negative-entropy mirror step 取 $\eta=\frac45\log3$ 时，multiplicative ratio 精确变为 $1$，故一步到达 $x^*$。在 Bernoulli mean coordinate 中，Fisher information $\mathcal I(p_0)=16/3$，local natural direction 是 $15/64$，与 finite mirror displacement $16/64$ 不同；这明确分开 exact KL step 与 Fisher 二阶近似。
+
+OPT-16 最后用
+
+$$
+\Phi(a,b)=\frac12(ab-1)^2
+$$
+
+说明 predictor $w=ab$ 中的 convex quadratic 经 factorization 后可在 parameter space 非凸。原点 Hessian eigenvalues 为 $\pm1$；$\eta=1/4$ 的 GD 线性化 factors 是 $3/4,5/4$。在 global-minimum manifold $ab=1$ 上，Hessian eigenvalues 为 $0,a^2+b^2$；同一 predictor 在 $(1,1)$ 和 $(2,1/2)$ 的 raw sharpness 分别为 $2$ 与 $17/4$，从最小模型暴露 symmetry、saddle escape 与 parameterization boundary。
+
+> [!success] 第四波停靠线
+> 不看正文，能从 Lagrangian 重建 dual function 并算出 gap $5/32\to0$；从 scalar subgradient 推出 soft threshold 并手算第一步；从 entropy ratio 得到 $x^*$，再区分 Fisher direction $15/64$ 与 finite displacement $16/64$；最后分类 factorization 的 saddle/minimum manifold 并重建 GD factors。还必须能说明 dual gap、prox mapping、natural direction、Hessian eigenvalue 与 generalization 不是同一种证据。
 
 ## 一、范围与边界
 
@@ -358,7 +417,7 @@ OPT-01—16 已形成完整教学卷：16 篇正文、16 幅机制图、240 道 
 | 独立详解 | 定义、手算、证明、反例和研究合同逐项评分 | 正式作答前不得打开；错题必须回链节点 |
 | 计算门 | strict-saddle escape、nonconvex PL、scale-sharpness 三轨 | canonical hash、随机手算轨、参数干预与 48 小时重建均通过 |
 
-截至 2026-08-27，OPT-01—12 已按当前初学者教学合同完成前三波静态迁移并通过精确计算与图像回归；正文学习状态保持 `draft`。下一施工点为 OPT-13—16：从当前 KKT 证书进入 dual function/Slater，再用 composite prox、mirror/Fisher geometry 与非凸地形完成正文迁移收束。
+截至 2026-08-27，OPT-01—16 已按当前初学者教学合同完成四波静态迁移并通过精确计算与图像回归；正文学习状态保持 `draft`。下一施工点为 OPT-CUM：把四波统一模型账本、三遍学习路线、无提示口试、独立题解与累计计算实验闭合为卷级学习证书。
 
 ### 2026-08-23 图像标准化进度
 
