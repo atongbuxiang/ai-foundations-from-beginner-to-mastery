@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 520" role="img" aria-labelledby="title desc">
+  <title id="title">A linear map turns the unit square into a parallelogram of area equal to the absolute determinant</title>
+  <desc id="desc">The left panel shows the unit square with basis vectors e1 and e2. The right panel shows the image under the matrix with columns (2,1) and (1,3), producing a parallelogram of area five.</desc>
+  <rect width="1040" height="520" fill="#ffffff"/>
+  <style>
+    text{font-family:Inter,Arial,sans-serif;fill:#172033}
+    .title{font-size:22px;font-weight:650}
+    .subtitle{font-size:14px;fill:#536176}
+    .panel{font-size:17px;font-weight:600}
+    .axis{stroke:#64748b;stroke-width:1.5}
+    .grid{stroke:#e5eaf0;stroke-width:1}
+    .label{font-size:14px}
+    .small{font-size:12px;fill:#536176}
+  </style>
+  <text class="title" x="520" y="34" text-anchor="middle">Determinant is oriented volume scaling</text>
+  <text class="subtitle" x="520" y="58" text-anchor="middle">A = [[2, 1], [1, 3]],  det(A) = 5</text>
+  <text class="panel" x="255" y="92" text-anchor="middle">Unit square: area = 1</text>
+  <text class="panel" x="785" y="92" text-anchor="middle">Image parallelogram: area = |det A| = 5</text>
+
+  <g>
+    <line class="grid" x1="75" y1="150" x2="435" y2="150"/>
+    <line class="grid" x1="75" y1="230" x2="435" y2="230"/>
+    <line class="grid" x1="75" y1="310" x2="435" y2="310"/>
+    <line class="grid" x1="75" y1="390" x2="435" y2="390"/>
+    <line class="grid" x1="95" y1="120" x2="95" y2="430"/>
+    <line class="grid" x1="175" y1="120" x2="175" y2="430"/>
+    <line class="grid" x1="255" y1="120" x2="255" y2="430"/>
+    <line class="grid" x1="335" y1="120" x2="335" y2="430"/>
+    <line class="axis" x1="75" y1="390" x2="435" y2="390"/>
+    <line class="axis" x1="95" y1="430" x2="95" y2="120"/>
+    <polygon points="95,390 175,390 175,310 95,310" fill="#bfdbfe" fill-opacity="0.75" stroke="#2563eb" stroke-width="2.5"/>
+    <line x1="95" y1="390" x2="175" y2="390" stroke="#dc2626" stroke-width="3"/>
+    <polygon points="175,390 164,384 164,396" fill="#dc2626"/>
+    <line x1="95" y1="390" x2="95" y2="310" stroke="#059669" stroke-width="3"/>
+    <polygon points="95,310 89,321 101,321" fill="#059669"/>
+    <text class="label" x="183" y="384" fill="#9f1239">e₁</text>
+    <text class="label" x="104" y="305" fill="#047857">e₂</text>
+  </g>
+
+  <g>
+    <line class="grid" x1="570" y1="150" x2="1000" y2="150"/>
+    <line class="grid" x1="570" y1="230" x2="1000" y2="230"/>
+    <line class="grid" x1="570" y1="310" x2="1000" y2="310"/>
+    <line class="grid" x1="570" y1="390" x2="1000" y2="390"/>
+    <line class="grid" x1="600" y1="120" x2="600" y2="430"/>
+    <line class="grid" x1="680" y1="120" x2="680" y2="430"/>
+    <line class="grid" x1="760" y1="120" x2="760" y2="430"/>
+    <line class="grid" x1="840" y1="120" x2="840" y2="430"/>
+    <line class="grid" x1="920" y1="120" x2="920" y2="430"/>
+    <line class="axis" x1="570" y1="400" x2="1000" y2="400"/>
+    <line class="axis" x1="610" y1="430" x2="610" y2="120"/>
+    <polygon points="610,400 740,335 805,140 675,205" fill="#c4b5fd" fill-opacity="0.62" stroke="#7c3aed" stroke-width="2.8"/>
+    <line x1="610" y1="400" x2="740" y2="335" stroke="#dc2626" stroke-width="3.2"/>
+    <polygon points="740,335 726,334 732,346" fill="#dc2626"/>
+    <line x1="610" y1="400" x2="675" y2="205" stroke="#059669" stroke-width="3.2"/>
+    <polygon points="675,205 664,214 676,220" fill="#059669"/>
+    <text class="label" x="746" y="329" fill="#9f1239">a₁ = (2,1)</text>
+    <text class="label" x="681" y="199" fill="#047857">a₂ = (1,3)</text>
+  </g>
+
+  <line x1="455" y1="275" x2="555" y2="275" stroke="#f59e0b" stroke-width="3"/>
+  <polygon points="555,275 541,268 541,282" fill="#f59e0b"/>
+  <text class="label" x="505" y="258" text-anchor="middle">x ↦ Ax</text>
+  <text class="small" x="520" y="486" text-anchor="middle">Columns of A are the images of the standard basis; their parallelogram carries the volume information.</text>
+</svg>

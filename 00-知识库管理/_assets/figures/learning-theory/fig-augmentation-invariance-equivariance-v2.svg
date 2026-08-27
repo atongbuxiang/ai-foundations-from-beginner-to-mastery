@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">数据增强：随机核、不变性、等变性与任务充分性</title>
+<desc id="desc">augmentation定义条件随机核与two-view joint。先确定source unit和任务，再决定变化应被删除、在feature space中搬运，还是保留；错误不变性会不可逆地删除label information。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Source Unit 与 View Law</text>
+<rect x="55" y="92" width="120" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="115.0" y="127.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">source U</text>
+<line x1="180" y1="121" x2="222" y2="121" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="228" y="92" width="125" height="58" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="290.5" y="127.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">clean X</text>
+<line x1="290" y1="155" x2="155" y2="215" stroke="#1F2937" stroke-width="2"/>
+<line x1="290" y1="155" x2="320" y2="215" stroke="#1F2937" stroke-width="2"/>
+<rect x="75" y="225" width="135" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="142.5" y="260.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">view X^(1)</text>
+<rect x="245" y="225" width="135" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="312.5" y="260.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">view X^(2)</text>
+<text x="45" y="340" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937">A(dx&#x27; | x) defines the positive joint</text>
+<text x="45" y="382" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">views share one source; they are not iid units</text>
+<text x="45" y="424" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">order, probability and shared RNG matter</text>
+<text x="45" y="468" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">split source identities before generating views</text>
+<text x="45" y="510" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">a transform list is not a sampling contract。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">删除变化，还是搬运变化</text>
+<rect x="445" y="92" width="310" height="62" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600.0" y="129.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">invariant: h(gx) = h(x)</text>
+<line x1="600" y1="159" x2="600" y2="192" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="445" y="202" width="310" height="62" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="600.0" y="239.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">equivariant: h(gx) = rho(g) h(x)</text>
+<line x1="600" y1="269" x2="600" y2="302" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="445" y="312" width="310" height="62" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="600.0" y="349.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">invariant readout after equivariant features</text>
+<text x="430" y="420" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937">classification may discard pose</text>
+<text x="430" y="460" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">control and localization often need pose</text>
+<text x="430" y="510" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">hard-wiring != random augmentation。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Task Validity 是最终闸门</text>
+<rect x="845" y="92" width="285" height="62" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="987.5" y="129.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">preserve P(Y | X): valid nuisance</text>
+<rect x="845" y="180" width="285" height="62" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="987.5" y="217.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">change P(Y | X): erase task signal</text>
+<rect x="845" y="268" width="285" height="62" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="987.5" y="305.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">unknown task family: audit conflict</text>
+<text x="830" y="382" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937">too weak: shortcut remains</text>
+<text x="830" y="420" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">too strong: conditional entropy rises</text>
+<text x="830" y="458" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">report strength curves and alternative tasks</text>
+<text x="830" y="495" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">cluster uncertainty by source unit</text>
+<text x="830" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">agreement != sufficiency。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">增强先定义joint law，再声明symmetry；只有保留任务条件分布的变化才能安全地被商掉。</text>
+</svg>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">一个命题的五轴审计：真、知、据、引、推出</title><desc id="desc">factuality、grounding、citation correctness 与 attribution 的事件晶格。</desc>
+<rect width="1200" height="700" fill="#FBF8F1"/>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#667784"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#183044" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<line x1="48" y1="70" x2="1152" y2="70" stroke="#4F7B45" stroke-width="4"/>
+<text x="52" y="49" font-size="24" font-weight="700" fill="#183044">一个命题的五轴审计：真、知、据、引、推出</text>
+<rect x="55" y="105" width="290" height="118" rx="10" fill="#EEF4FC" stroke="#245AA8" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="70" y="133" text-anchor="start" font-size="15" font-weight="700" fill="#245AA8">回答中的 atomic claim</text>
+<text x="70" y="158" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">c：药物 X 在 2024 年获批用于 Y</text>
+<text x="70" y="178" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">时间切片：as-of t</text>
+<text x="70" y="198" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">断言边界：X / 获批 / Y</text>
+<rect x="420" y="105" width="285" height="105" rx="10" fill="#FFFDF8" stroke="#4F7B45" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="435" y="133" text-anchor="start" font-size="15" font-weight="700" fill="#4F7B45">Truth</text>
+<text x="435" y="158" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">世界在 t 时刻是否使 c 为真？</text>
+<rect x="730" y="105" width="285" height="105" rx="10" fill="#FFFDF8" stroke="#17766E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="745" y="133" text-anchor="start" font-size="15" font-weight="700" fill="#17766E">Task knowledge</text>
+<text x="745" y="158" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">reference 是否把 c 设为目标事实？</text>
+<rect x="420" y="250" width="285" height="105" rx="10" fill="#FFFDF8" stroke="#245AA8" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="435" y="278" text-anchor="start" font-size="15" font-weight="700" fill="#245AA8">Grounding</text>
+<text x="435" y="303" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">提供的 context 是否支持 c？</text>
+<rect x="730" y="250" width="285" height="105" rx="10" fill="#FFFDF8" stroke="#7054A3" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="745" y="278" text-anchor="start" font-size="15" font-weight="700" fill="#7054A3">Citation correctness</text>
+<text x="745" y="303" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">被引片段真的 entail c？</text>
+<rect x="575" y="395" width="285" height="105" rx="10" fill="#FFFDF8" stroke="#C87922" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="590" y="423" text-anchor="start" font-size="15" font-weight="700" fill="#C87922">Attribution completeness</text>
+<text x="590" y="448" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">需要证据的 claims 有多少被支持？</text>
+<line x1="345" y1="164" x2="410" y2="164" stroke="#667784" stroke-width="2.1" marker-end="url(#arrow)"/>
+<line x1="345" y1="164" x2="410" y2="300" stroke="#667784" stroke-width="2.1" marker-end="url(#arrow)"/>
+<line x1="345" y1="164" x2="720" y2="164" stroke="#667784" stroke-width="2.1" marker-end="url(#arrow)" stroke-dasharray="6 5"/>
+<line x1="345" y1="164" x2="720" y2="300" stroke="#667784" stroke-width="2.1" marker-end="url(#arrow)" stroke-dasharray="6 5"/>
+<line x1="562" y1="355" x2="655" y2="392" stroke="#C87922" stroke-width="2.1" marker-end="url(#arrow)"/>
+<line x1="872" y1="355" x2="755" y2="392" stroke="#C87922" stroke-width="2.1" marker-end="url(#arrow)"/>
+<rect x="55" y="270" width="290" height="202" rx="10" fill="#FFF0ED" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="70" y="298" text-anchor="start" font-size="15" font-weight="700" fill="#B7443E">四个反例足以拆开概念</text>
+<text x="70" y="323" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">① true but uncited</text>
+<text x="70" y="343" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">② false but supported by a bad source</text>
+<text x="70" y="363" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">③ citation relevant but does not entail</text>
+<text x="70" y="383" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">④ all citations correct, yet many claims uncited</text>
+<text x="70" y="403" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784"></text>
+<text x="70" y="423" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">所以“有引用”不是事实性证明。</text>
+<text x="55" y="525" text-anchor="start" font-size="15" font-weight="700" fill="#183044">两个常被混淆的分母</text>
+<rect x="55" y="545" width="505" height="78" rx="10" fill="#F3EFFA" stroke="#7054A3" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="70" y="573" text-anchor="start" font-size="15" font-weight="700" fill="#7054A3">Citation precision</text>
+<text x="70" y="598" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">被检查的 citations 中，有多少真正支持对应 claim？</text>
+<rect x="590" y="545" width="545" height="78" rx="10" fill="#FFF5E7" stroke="#C87922" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="605" y="573" text-anchor="start" font-size="15" font-weight="700" fill="#C87922">Claim coverage / completeness</text>
+<text x="605" y="598" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">所有需支持 claims 中，有多少至少有一条充分证据？</text>
+<line x1="48" y1="650" x2="1152" y2="650" stroke="#D9D5CB"/>
+<text x="52" y="674" font-size="13" fill="#667784">自动 factuality 评估本身也是检索—切分—蕴含判断管线；要保存命题、检索结果、证据 span、判决与不确定性。</text>
+</svg>

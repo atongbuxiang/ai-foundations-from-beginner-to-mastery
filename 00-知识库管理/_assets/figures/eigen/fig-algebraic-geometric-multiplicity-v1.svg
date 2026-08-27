@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">代数重数与几何重数：相同特征多项式，不同特征方向</title>
+  <desc id="desc">比较二倍单位矩阵与二阶 Jordan 块。两者特征多项式都是 t 减 2 的平方，代数重数都是 2；单位矩阵的特征空间是整个平面，几何重数为 2，而 Jordan 块只有水平方向的特征向量，几何重数为 1。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8fbff"/>
+      <stop offset="1" stop-color="#eef3fb"/>
+    </linearGradient>
+    <linearGradient id="leftCard" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f1fbf8"/>
+      <stop offset="1" stop-color="#ffffff"/>
+    </linearGradient>
+    <linearGradient id="rightCard" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff6f3"/>
+      <stop offset="1" stop-color="#ffffff"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="125%">
+      <feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#26364d" flood-opacity="0.14"/>
+    </filter>
+    <marker id="axisArrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#56657a"/>
+    </marker>
+    <marker id="tealArrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#188c7a"/>
+    </marker>
+    <marker id="coralArrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#d65b4a"/>
+    </marker>
+    <style>
+      .sans { font-family: Inter, "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif; }
+      .math { font-family: "STIX Two Text", "Times New Roman", serif; }
+      .title { font-size: 31px; font-weight: 700; fill: #17263b; }
+      .subtitle { font-size: 17px; fill: #4c5c72; }
+      .card-title { font-size: 24px; font-weight: 700; fill: #1b2a3e; }
+      .formula { font-size: 22px; fill: #22344d; }
+      .label { font-size: 17px; fill: #34465d; }
+      .small { font-size: 15px; fill: #58697f; }
+      .good { fill: #147a69; }
+      .bad { fill: #bc4d3f; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="720" fill="url(#bg)"/>
+
+  <text x="600" y="50" text-anchor="middle" class="sans title">相同的代数位置，不同的几何方向</text>
+  <text x="600" y="82" text-anchor="middle" class="sans subtitle">特征多项式记录根出现几次；特征空间记录能找到多少个独立特征向量</text>
+
+  <g filter="url(#shadow)">
+    <rect x="300" y="104" width="600" height="68" rx="18" fill="#253a59"/>
+  </g>
+  <text x="600" y="135" text-anchor="middle" class="math" font-size="24" fill="#ffffff">p(t) = (t - 2)²</text>
+  <text x="600" y="158" text-anchor="middle" class="sans" font-size="15" fill="#dce7f7">两者唯一特征值均为 λ = 2，代数重数 a₂ = 2</text>
+
+  <g filter="url(#shadow)">
+    <rect x="55" y="198" width="520" height="388" rx="24" fill="url(#leftCard)" stroke="#b8ded5" stroke-width="2"/>
+    <rect x="625" y="198" width="520" height="388" rx="24" fill="url(#rightCard)" stroke="#efc9c1" stroke-width="2"/>
+  </g>
+
+  <text x="315" y="238" text-anchor="middle" class="sans card-title">D = 2I：整个平面都是特征空间</text>
+  <text x="885" y="238" text-anchor="middle" class="sans card-title">J：只有一条特征方向</text>
+
+  <text x="315" y="274" text-anchor="middle" class="math formula">D = [ 2  0 ; 0  2 ]</text>
+  <text x="885" y="274" text-anchor="middle" class="math formula">J = [ 2  1 ; 0  2 ]</text>
+
+  <!-- Left coordinate plane -->
+  <line x1="150" y1="418" x2="480" y2="418" stroke="#56657a" stroke-width="1.8" marker-end="url(#axisArrow)"/>
+  <line x1="315" y1="520" x2="315" y2="308" stroke="#56657a" stroke-width="1.8" marker-end="url(#axisArrow)"/>
+  <text x="488" y="424" class="math small">x</text>
+  <text x="321" y="306" class="math small">y</text>
+
+  <g stroke="#188c7a" stroke-width="3" marker-end="url(#tealArrow)" opacity="0.9">
+    <line x1="315" y1="418" x2="442" y2="350"/>
+    <line x1="315" y1="418" x2="405" y2="322"/>
+    <line x1="315" y1="418" x2="350" y2="310"/>
+    <line x1="315" y1="418" x2="188" y2="350"/>
+    <line x1="315" y1="418" x2="225" y2="322"/>
+    <line x1="315" y1="418" x2="180" y2="455"/>
+    <line x1="315" y1="418" x2="438" y2="472"/>
+    <line x1="315" y1="418" x2="345" y2="510"/>
+  </g>
+  <circle cx="315" cy="418" r="5" fill="#17263b"/>
+  <text x="315" y="552" text-anchor="middle" class="sans label good">E₂(D) = ℝ²，g₂ = 2</text>
+  <text x="315" y="574" text-anchor="middle" class="sans small">任取 v ≠ 0，都有 Dv = 2v</text>
+
+  <!-- Right coordinate plane -->
+  <line x1="720" y1="418" x2="1050" y2="418" stroke="#56657a" stroke-width="1.8" marker-end="url(#axisArrow)"/>
+  <line x1="885" y1="520" x2="885" y2="308" stroke="#56657a" stroke-width="1.8" marker-end="url(#axisArrow)"/>
+  <text x="1058" y="424" class="math small">x</text>
+  <text x="891" y="306" class="math small">y</text>
+
+  <line x1="738" y1="418" x2="1033" y2="418" stroke="#d65b4a" stroke-width="5" opacity="0.92"/>
+  <line x1="885" y1="418" x2="1008" y2="418" stroke="#d65b4a" stroke-width="3.5" marker-end="url(#coralArrow)"/>
+  <text x="1007" y="404" text-anchor="end" class="sans small bad">唯一特征方向 span(e₁)</text>
+
+  <line x1="885" y1="418" x2="885" y2="330" stroke="#8b98aa" stroke-width="2.5" stroke-dasharray="7 6" marker-end="url(#axisArrow)"/>
+  <text x="868" y="340" text-anchor="end" class="math small">e₂</text>
+  <line x1="885" y1="418" x2="954" y2="330" stroke="#8d62b5" stroke-width="3" marker-end="url(#axisArrow)"/>
+  <text x="966" y="326" class="math small" fill="#77509f">Je₂ = (1, 2)ᵀ</text>
+  <path d="M886 342 Q920 352 946 337" fill="none" stroke="#8d62b5" stroke-width="1.8" stroke-dasharray="4 4"/>
+  <circle cx="885" cy="418" r="5" fill="#17263b"/>
+  <text x="885" y="552" text-anchor="middle" class="sans label bad">E₂(J) = span(e₁)，g₂ = 1</text>
+  <text x="885" y="574" text-anchor="middle" class="sans small">e₂ 被剪切，不再保持原方向</text>
+
+  <!-- Bottom summary -->
+  <rect x="95" y="615" width="1010" height="70" rx="18" fill="#ffffff" stroke="#cad5e4" stroke-width="1.5"/>
+  <text x="135" y="645" class="sans label">代数槽位</text>
+  <circle cx="252" cy="640" r="15" fill="#395b86"/>
+  <circle cx="290" cy="640" r="15" fill="#395b86"/>
+  <text x="271" y="669" text-anchor="middle" class="sans small">两者都是 2 个</text>
+
+  <line x1="390" y1="650" x2="470" y2="650" stroke="#95a4b7" stroke-width="2" marker-end="url(#axisArrow)"/>
+  <text x="500" y="645" class="sans label">几何方向</text>
+  <circle cx="625" cy="640" r="15" fill="#188c7a"/>
+  <circle cx="663" cy="640" r="15" fill="#188c7a"/>
+  <text x="644" y="669" text-anchor="middle" class="sans small good">D 提供 2 个</text>
+
+  <text x="735" y="647" class="sans" font-size="22" fill="#7e8da1">vs.</text>
+  <circle cx="820" cy="640" r="15" fill="#d65b4a"/>
+  <circle cx="858" cy="640" r="15" fill="none" stroke="#d65b4a" stroke-width="2.5" stroke-dasharray="5 4"/>
+  <text x="839" y="669" text-anchor="middle" class="sans small bad">J 只有 1 个，缺陷 d₂ = 1</text>
+  <text x="1080" y="647" text-anchor="end" class="sans label bad">g₂ &lt; a₂ ⇒ 不可对角化</text>
+</svg>

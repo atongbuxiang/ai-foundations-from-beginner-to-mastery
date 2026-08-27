@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">多跳检索：状态—动作—观察—验证—停止</title><desc id="desc">带预算、循环检测与 provenance 的序贯决策。</desc>
+<rect width="1200" height="700" fill="#FBF8F1"/>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#667784"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#183044" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<line x1="48" y1="70" x2="1152" y2="70" stroke="#7054A3" stroke-width="4"/>
+<text x="52" y="49" font-size="24" font-weight="700" fill="#183044">多跳检索：状态—动作—观察—验证—停止</text>
+<circle cx="190" cy="175" r="58" fill="#FFFDF8" stroke="#245AA8" stroke-width="3" filter="url(#shadow)"/>
+<text x="190" y="167" text-anchor="middle" font-size="17" font-weight="700" fill="#245AA8">S₀</text>
+<text x="190" y="190" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">question</text>
+<text x="190" y="207" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">budget 3</text>
+<circle cx="480" cy="130" r="58" fill="#FFFDF8" stroke="#7054A3" stroke-width="3" filter="url(#shadow)"/>
+<text x="480" y="122" text-anchor="middle" font-size="17" font-weight="700" fill="#7054A3">A₀</text>
+<text x="480" y="145" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">retrieve</text>
+<text x="480" y="162" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">Lost Gravity</text>
+<circle cx="770" cy="175" r="58" fill="#FFFDF8" stroke="#4F7B45" stroke-width="3" filter="url(#shadow)"/>
+<text x="770" y="167" text-anchor="middle" font-size="17" font-weight="700" fill="#4F7B45">O₁</text>
+<text x="770" y="190" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">Mack Rides</text>
+<text x="770" y="207" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">source span</text>
+<circle cx="850" cy="405" r="58" fill="#FFFDF8" stroke="#245AA8" stroke-width="3" filter="url(#shadow)"/>
+<text x="850" y="397" text-anchor="middle" font-size="17" font-weight="700" fill="#245AA8">S₁</text>
+<text x="850" y="420" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">new entity</text>
+<text x="850" y="437" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">budget 2</text>
+<circle cx="575" cy="535" r="58" fill="#FFFDF8" stroke="#7054A3" stroke-width="3" filter="url(#shadow)"/>
+<text x="575" y="527" text-anchor="middle" font-size="17" font-weight="700" fill="#7054A3">A₁</text>
+<text x="575" y="550" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">retrieve</text>
+<text x="575" y="567" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">Mack Rides country</text>
+<circle cx="285" cy="470" r="58" fill="#FFFDF8" stroke="#4F7B45" stroke-width="3" filter="url(#shadow)"/>
+<text x="285" y="462" text-anchor="middle" font-size="17" font-weight="700" fill="#4F7B45">O₂</text>
+<text x="285" y="485" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">Germany</text>
+<text x="285" y="502" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">source span</text>
+<path d="M248 160 C320 110,390 105,422 125" fill="none" stroke="#7054A3" stroke-width="3" marker-end="url(#arrow)"/>
+<path d="M538 135 C620 115,695 130,714 158" fill="none" stroke="#4F7B45" stroke-width="3" marker-end="url(#arrow)"/>
+<path d="M805 225 C860 270,880 320,865 347" fill="none" stroke="#245AA8" stroke-width="3" marker-end="url(#arrow)"/>
+<path d="M800 443 C730 505,660 530,633 533" fill="none" stroke="#7054A3" stroke-width="3" marker-end="url(#arrow)"/>
+<path d="M517 537 C430 545,350 520,329 505" fill="none" stroke="#4F7B45" stroke-width="3" marker-end="url(#arrow)"/>
+<path d="M255 420 C190 360,160 270,177 232" fill="none" stroke="#C87922" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="470" y="275" width="265" height="135" rx="10" fill="#FFF0ED" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="485" y="303" font-size="15" font-weight="700" fill="#B7443E">Verifier / stop</text>
+<text x="485" y="327" font-size="12.5" fill="#667784">both supporting spans found?</text>
+<text x="485" y="347" font-size="12.5" fill="#667784">contradiction checked?</text>
+<text x="485" y="367" font-size="12.5" fill="#667784">budget left?</text>
+<text x="485" y="387" font-size="12.5" fill="#667784">→ answer / retrieve / abstain</text>
+<line x1="735" y1="335" x2="790" y2="365" stroke="#B7443E" stroke-width="2.2" marker-end="url(#arrow)"/>
+<path d="M470 335 C390 335,350 320,300 260" fill="none" stroke="#B7443E" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+<text x="338" y="315" text-anchor="middle" font-size="11" font-weight="400" fill="#B7443E">duplicate/query drift → rollback</text>
+<rect x="885" y="525" width="255" height="95" rx="10" fill="#EAF7F4" stroke="#17766E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="900" y="553" font-size="15" font-weight="700" fill="#17766E">Call ledger</text>
+<text x="900" y="577" font-size="12.5" fill="#667784">query · filters · IDs · scores</text>
+<text x="900" y="597" font-size="12.5" fill="#667784">latency · state before/after</text>
+<line x1="48" y1="650" x2="1152" y2="650" stroke="#D9D5CB" stroke-width="1"/>
+<text x="52" y="674" font-size="13" fill="#667784">可见 reasoning 可生成下一查询，但不能替代 evidence graph；每次工具调用都必须有状态与来源日志。</text>
+</svg>

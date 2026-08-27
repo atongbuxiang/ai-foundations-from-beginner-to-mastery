@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">线性求解与隐式微分</title>
+<desc id="desc">隐式方程先线性化，再通过切向或伴随线性求解得到导数；可信度同时受存在唯一、残差、条件数与反向残差控制。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">由方程定义输出</text>
+<rect x="60" y="105" width="280" height="58" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="200.0" y="140.0" font-size="17" font-weight="650" text-anchor="middle" fill="#0F766E">F(z(theta), theta)=0</text>
+<line x1="200" y1="168" x2="200" y2="205" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="48" y="218" width="304" height="76" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="200.0" y="262.0" font-size="16" font-weight="650" text-anchor="middle" fill="#2563EB">DzF zdot + DthetaF thetadot = 0</text>
+<line x1="200" y1="298" x2="200" y2="335" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="48" y="348" width="304" height="70" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="200.0" y="389.0" font-size="16" font-weight="650" text-anchor="middle" fill="#0F766E">solve DzF zdot = -DthetaF thetadot</text>
+<text x="48" y="460" font-size="16" font-weight="400" text-anchor="start" fill="#64748B">可逆性保证局部唯一分支，也控制敏感性。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Ax=b 的三次求解</text>
+<rect x="438" y="108" width="324" height="68" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="600.0" y="148.0" font-size="16" font-weight="650" text-anchor="middle" fill="#0F766E">forward: solve A x = b</text>
+<rect x="438" y="225" width="324" height="68" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600.0" y="265.0" font-size="16" font-weight="650" text-anchor="middle" fill="#2563EB">JVP: solve A xdot = bdot - Adot x</text>
+<rect x="438" y="342" width="324" height="68" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="600.0" y="382.0" font-size="16" font-weight="650" text-anchor="middle" fill="#C24135">VJP: solve A^T lambda = xbar</text>
+<line x1="600" y1="180" x2="600" y2="218" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<line x1="600" y1="297" x2="600" y2="335" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<text x="438" y="454" font-size="16" font-weight="400" text-anchor="start" fill="#64748B">返回 bbar=lambda, Abar=-lambda x^T；不形成 inverse。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">梯度可信度是一条链</text>
+<rect x="840" y="105" width="300" height="55" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="990.0" y="138.5" font-size="16" font-weight="650" text-anchor="middle" fill="#0F766E">1  局部解存在且唯一</text>
+<line x1="990" y1="163" x2="990" y2="190" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="840" y="197" width="300" height="55" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="990.0" y="230.5" font-size="16" font-weight="650" text-anchor="middle" fill="#2563EB">2  前向残差足够小</text>
+<line x1="990" y1="255" x2="990" y2="282" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="840" y="289" width="300" height="55" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="990.0" y="322.5" font-size="16" font-weight="650" text-anchor="middle" fill="#C24135">3  Jacobian 条件性可接受</text>
+<line x1="990" y1="347" x2="990" y2="374" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="840" y="381" width="300" height="55" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="990.0" y="414.5" font-size="16" font-weight="650" text-anchor="middle" fill="#0F766E">4  伴随残差进入误差预算</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">隐式梯度不是一个公式开关：前向问题、线性化与伴随求解必须一起验收。</text>
+</svg>

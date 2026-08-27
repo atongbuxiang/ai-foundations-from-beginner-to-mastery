@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">自信息、熵与前缀码长度</title>
+<desc id="desc">小概率结果有更大负对数惊讶度；entropy 是按真实概率加权的平均自信息；Kraft 条件把概率长度与可译码二进制前缀码连接起来。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">结果越罕见，自信息越大</text>
+<line x1="55" y1="390" x2="355" y2="390" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="70" y1="420" x2="70" y2="95" stroke="#D7DEE8" stroke-width="2"/>
+<path d="M77.7 110.0L80.0 110.0L82.2 110.0L84.5 110.0L86.7 110.0L89.0 110.0L91.2 112.8L93.5 123.7L95.7 133.6L98.0 142.6L100.2 151.0L102.5 158.8L104.7 166.0L106.9 172.8L109.2 179.2L111.4 185.2L113.7 190.9L115.9 196.3L118.2 201.5L120.4 206.4L122.7 211.2L124.9 215.7L127.2 220.0L129.4 224.2L131.6 228.2L133.9 232.1L136.1 235.8L138.4 239.4L140.6 242.9L142.9 246.3L145.1 249.6L147.4 252.8L149.6 255.9L151.9 258.9L154.1 261.8L156.3 264.7L158.6 267.4L160.8 270.1L163.1 272.8L165.3 275.4L167.6 277.9L169.8 280.4L172.1 282.8L174.3 285.1L176.6 287.4L178.8 289.7L181.1 291.9L183.3 294.1L185.5 296.2L187.8 298.3L190.0 300.3L192.3 302.3L194.5 304.3L196.8 306.2L199.0 308.1L201.3 310.0L203.5 311.8L205.8 313.6L208.0 315.4L210.2 317.1L212.5 318.9L214.7 320.6L217.0 322.2L219.2 323.9L221.5 325.5L223.7 327.1L226.0 328.6L228.2 330.2L230.5 331.7L232.7 333.2L235.0 334.7L237.2 336.2L239.4 337.6L241.7 339.0L243.9 340.4L246.2 341.8L248.4 343.2L250.7 344.5L252.9 345.9L255.2 347.2L257.4 348.5L259.7 349.8L261.9 351.1L264.1 352.3L266.4 353.6L268.6 354.8L270.9 356.0L273.1 357.2L275.4 358.4L277.6 359.6L279.9 360.8L282.1 361.9L284.4 363.0L286.6 364.2L288.9 365.3L291.1 366.4L293.3 367.5L295.6 368.6L297.8 369.6L300.1 370.7L302.3 371.8L304.6 372.8L306.8 373.8L309.1 374.8L311.3 375.9L313.6 376.9L315.8 377.9L318.1 378.8L320.3 379.8L322.5 380.8L324.8 381.7L327.0 382.7L329.3 383.6L331.5 384.6L333.8 385.5L336.0 386.4L338.3 387.3L340.5 388.2L342.8 389.1L345.0 390.0" fill="none" stroke="#2563EB" stroke-width="3"/>
+<text x="205" y="125" font-size="17" font-weight="700" text-anchor="middle" fill="#1F2937" class="math">i(x) = -log_2 p(x)</text>
+<text x="335" y="420" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">p</text>
+<text x="52" y="112" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">bits</text>
+<circle cx="97" cy="245" r="6" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<circle cx="318" cy="378" r="6" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<text x="45" y="455" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">同一结果的 surprise 取决于所用模型。</text>
+<text x="45" y="488" font-size="15" font-weight="400" text-anchor="start" fill="#C24135">独立概率相乘 -&gt; 信息相加。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">熵是分布上的加权平均</text>
+<rect x="455" y="140.0" width="42" height="210.0" rx="2" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="476" y="380" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">x1</text>
+<circle cx="476" cy="167.0" r="5" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<rect x="527" y="245.0" width="42" height="105.0" rx="2" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="548" y="380" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">x2</text>
+<circle cx="548" cy="209.0" r="5" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<rect x="599" y="297.5" width="42" height="52.5" rx="2" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="620" y="380" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">x3</text>
+<circle cx="620" cy="251.0" r="5" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<rect x="671" y="297.5" width="42" height="52.5" rx="2" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="692" y="380" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">x4</text>
+<circle cx="692" cy="251.0" r="5" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<text x="430" y="105" font-size="15" font-weight="650" text-anchor="start" fill="#2563EB">点：-log p_i</text>
+<text x="430" y="420" font-size="17" font-weight="650" text-anchor="start" fill="#1F2937" class="math">H(X) = sum_i p_i[-log p_i]</text>
+<text x="430" y="460" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">realization 有不同 surprise；entropy 只有一个平均值。</text>
+<text x="430" y="493" font-size="15" font-weight="400" text-anchor="start" fill="#C24135">均匀分布在固定有限 support 上达到最大熵。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">前缀树把码长变成可译码约束</text>
+<circle cx="900" cy="120" r="10" fill="#1F2937" stroke="#1F2937" stroke-width="2"/>
+<line x1="895" y1="130" x2="850" y2="215" stroke="#2563EB" stroke-width="2.5"/>
+<line x1="905" y1="130" x2="1020" y2="215" stroke="#2563EB" stroke-width="2.5"/>
+<line x1="1015" y1="235" x2="970" y2="325" stroke="#0F766E" stroke-width="2.5"/>
+<line x1="1025" y1="235" x2="1080" y2="325" stroke="#0F766E" stroke-width="2.5"/>
+<circle cx="850" cy="225" r="9" fill="#FFFEFB" stroke="#C24135" stroke-width="2.5"/>
+<circle cx="1020" cy="225" r="9" fill="#1F2937" stroke="#1F2937" stroke-width="2.5"/>
+<circle cx="970" cy="335" r="9" fill="#FFFEFB" stroke="#0F766E" stroke-width="2.5"/>
+<circle cx="1080" cy="335" r="9" fill="#FFFEFB" stroke="#0F766E" stroke-width="2.5"/>
+<text x="872" y="170" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">0</text>
+<text x="960" y="170" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">1</text>
+<text x="980" y="282" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">0</text>
+<text x="1058" y="282" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">1</text>
+<text x="850" y="255" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">x1: 0</text>
+<text x="970" y="367" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">x2: 10</text>
+<text x="1080" y="367" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">x3: 11</text>
+<text x="830" y="400" font-size="17" font-weight="650" text-anchor="start" fill="#1F2937" class="math">Kraft: sum_i 2^(-l_i) &lt;= 1</text>
+<text x="830" y="440" font-size="17" font-weight="650" text-anchor="start" fill="#1F2937" class="math">H_2(X) &lt;= L &lt; H_2(X)+1</text>
+<text x="830" y="480" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">ideal length 可为实数；单符号码长必须为整数。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">负对数连接概率乘法与长度加法；entropy 是平均理想长度，前缀码再加入可译码约束。</text>
+</svg>

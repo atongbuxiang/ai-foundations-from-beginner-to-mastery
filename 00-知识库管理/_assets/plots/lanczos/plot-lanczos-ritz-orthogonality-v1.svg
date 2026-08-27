@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="610" viewBox="0 0 1440 610" role="img" aria-labelledby="title desc">
+<title id="title">Lanczos Ritz convergence, residual identity and orthogonality</title>
+<desc id="desc">Three panels show convergence of extremal Ritz values, agreement of direct and cheap residuals, and finite-precision loss of orthogonality with and without reorthogonalization.</desc>
+<style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:13px;fill:#172033}.title{font-size:23px;font-weight:600}.panel{font-size:16px;font-weight:600}.axis{font-size:14px}.frame{fill:#fbfcfe;stroke:#7b879a}.grid{stroke:#dbe1e8}.note{font-size:12px;fill:#445067}.legend{font-size:12px}</style>
+<rect width="1440" height="610" fill="#ffffff"/>
+<text x="720" y="34" text-anchor="middle" class="title">Lanczos：小型三对角投影暴露极端谱，也暴露有限精度代价</text>
+<text x="75" y="67" class="panel">A  极端 Ritz 值先收敛</text>
+<text x="555" y="67" class="panel">B  残差无需形成高维 Ritz 向量</text>
+<text x="1035" y="67" class="panel">C  三项递推不保证浮点全局正交</text>
+<rect x="75" y="88" width="330" height="330" class="frame"/>
+<line x1="75.00" y1="88" x2="75.00" y2="418" class="grid"/>
+<text x="75.00" y="438" text-anchor="middle">2</text>
+<line x1="157.50" y1="88" x2="157.50" y2="418" class="grid"/>
+<text x="157.50" y="438" text-anchor="middle">9</text>
+<line x1="240.00" y1="88" x2="240.00" y2="418" class="grid"/>
+<text x="240.00" y="438" text-anchor="middle">16</text>
+<line x1="322.50" y1="88" x2="322.50" y2="418" class="grid"/>
+<text x="322.50" y="438" text-anchor="middle">23</text>
+<line x1="405.00" y1="88" x2="405.00" y2="418" class="grid"/>
+<text x="405.00" y="438" text-anchor="middle">30</text>
+<line x1="75" y1="418.00" x2="405" y2="418.00" class="grid"/>
+<text x="66" y="422.00" text-anchor="end">10⁻¹⁶</text>
+<line x1="75" y1="335.50" x2="405" y2="335.50" class="grid"/>
+<text x="66" y="339.50" text-anchor="end">10⁻¹²</text>
+<line x1="75" y1="253.00" x2="405" y2="253.00" class="grid"/>
+<text x="66" y="257.00" text-anchor="end">10⁻⁸</text>
+<line x1="75" y1="170.50" x2="405" y2="170.50" class="grid"/>
+<text x="66" y="174.50" text-anchor="end">10⁻⁴</text>
+<line x1="75" y1="88.00" x2="405" y2="88.00" class="grid"/>
+<text x="66" y="92.00" text-anchor="end">1</text>
+<text x="240.0" y="463" text-anchor="middle" class="axis">Lanczos 步数 k</text>
+<text x="20" y="253.0" text-anchor="middle" class="axis" transform="rotate(-90 20 253.0)">Ritz 值绝对误差</text>
+<polyline points="75.00,88.00 86.79,91.11 98.57,109.34 110.36,130.50 122.14,154.76 133.93,181.22 145.71,207.35 157.50,233.66 169.29,261.80 181.07,292.58 192.86,322.06 204.64,348.29 216.43,376.18 228.21,392.23 240.00,386.02 251.79,379.81 263.57,418.00 275.36,392.23 287.14,392.23 298.93,392.23 310.71,392.23 322.50,386.02 334.29,418.00 346.07,382.39 357.86,386.02 369.64,392.23 381.43,418.00 393.21,377.81 405.00,418.00" fill="none" stroke="#2f6fbd" stroke-width="2.5"/>
+<circle cx="75.00" cy="88.00" r="3.2" fill="#2f6fbd"/>
+<circle cx="122.14" cy="154.76" r="3.2" fill="#2f6fbd"/>
+<circle cx="169.29" cy="261.80" r="3.2" fill="#2f6fbd"/>
+<circle cx="216.43" cy="376.18" r="3.2" fill="#2f6fbd"/>
+<circle cx="263.57" cy="418.00" r="3.2" fill="#2f6fbd"/>
+<circle cx="310.71" cy="392.23" r="3.2" fill="#2f6fbd"/>
+<circle cx="357.86" cy="386.02" r="3.2" fill="#2f6fbd"/>
+<circle cx="405.00" cy="418.00" r="3.2" fill="#2f6fbd"/>
+<polyline points="75.00,88.00 86.79,88.43 98.57,93.29 110.36,96.81 122.14,98.78 133.93,100.09 145.71,101.01 157.50,101.91 169.29,103.07 181.07,104.17 192.86,104.74 204.64,105.21 216.43,105.83 228.21,106.58 240.00,108.02 251.79,110.95 263.57,116.91 275.36,126.62 287.14,138.07 298.93,148.89 310.71,159.72 322.50,171.91 334.29,184.07 346.07,194.19 357.86,203.51 369.64,212.34 381.43,223.88 393.21,236.97 405.00,251.97" fill="none" stroke="#c36a14" stroke-width="2.5"/>
+<rect x="72.00" y="85.00" width="6" height="6" fill="#c36a14"/>
+<rect x="119.14" y="95.78" width="6" height="6" fill="#c36a14"/>
+<rect x="166.29" y="100.07" width="6" height="6" fill="#c36a14"/>
+<rect x="213.43" y="102.83" width="6" height="6" fill="#c36a14"/>
+<rect x="260.57" y="113.91" width="6" height="6" fill="#c36a14"/>
+<rect x="307.71" y="156.72" width="6" height="6" fill="#c36a14"/>
+<rect x="354.86" y="200.51" width="6" height="6" fill="#c36a14"/>
+<rect x="402.00" y="248.97" width="6" height="6" fill="#c36a14"/>
+<text x="90" y="112" class="note">对称投影 + 交错定理使边界 Ritz 值有结构化趋近</text>
+<rect x="555" y="88" width="330" height="330" class="frame"/>
+<line x1="555.00" y1="88" x2="555.00" y2="418" class="grid"/>
+<text x="555.00" y="438" text-anchor="middle">2</text>
+<line x1="637.50" y1="88" x2="637.50" y2="418" class="grid"/>
+<text x="637.50" y="438" text-anchor="middle">9</text>
+<line x1="720.00" y1="88" x2="720.00" y2="418" class="grid"/>
+<text x="720.00" y="438" text-anchor="middle">16</text>
+<line x1="802.50" y1="88" x2="802.50" y2="418" class="grid"/>
+<text x="802.50" y="438" text-anchor="middle">23</text>
+<line x1="885.00" y1="88" x2="885.00" y2="418" class="grid"/>
+<text x="885.00" y="438" text-anchor="middle">30</text>
+<line x1="555" y1="418.00" x2="885" y2="418.00" class="grid"/>
+<text x="546" y="422.00" text-anchor="end">10⁻¹⁶</text>
+<line x1="555" y1="335.50" x2="885" y2="335.50" class="grid"/>
+<text x="546" y="339.50" text-anchor="end">10⁻¹²</text>
+<line x1="555" y1="253.00" x2="885" y2="253.00" class="grid"/>
+<text x="546" y="257.00" text-anchor="end">10⁻⁸</text>
+<line x1="555" y1="170.50" x2="885" y2="170.50" class="grid"/>
+<text x="546" y="174.50" text-anchor="end">10⁻⁴</text>
+<line x1="555" y1="88.00" x2="885" y2="88.00" class="grid"/>
+<text x="546" y="92.00" text-anchor="end">1</text>
+<text x="720.0" y="463" text-anchor="middle" class="axis">Lanczos 步数 k</text>
+<text x="500" y="253.0" text-anchor="middle" class="axis" transform="rotate(-90 500 253.0)">主 Ritz 对残差范数</text>
+<polyline points="555.00,88.00 566.79,88.00 578.57,92.10 590.36,101.77 602.14,113.58 613.93,126.61 625.71,139.67 637.50,152.75 649.29,166.79 661.07,181.99 672.86,196.62 684.64,210.38 696.43,224.33 708.21,238.78 720.00,252.07 731.79,265.81 743.57,280.07 755.36,295.25 767.14,310.59 778.93,325.27 790.71,339.87 802.50,355.11 814.29,370.39 826.07,377.22 837.86,374.88 849.64,381.51 861.43,369.07 873.21,352.48 885.00,334.90" fill="none" stroke="#248a57" stroke-width="2.5"/>
+<path d="M555.00,84.00 L559.00,88.00 L555.00,92.00 L551.00,88.00Z" fill="#248a57"/>
+<path d="M602.14,109.58 L606.14,113.58 L602.14,117.58 L598.14,113.58Z" fill="#248a57"/>
+<path d="M649.29,162.79 L653.29,166.79 L649.29,170.79 L645.29,166.79Z" fill="#248a57"/>
+<path d="M696.43,220.33 L700.43,224.33 L696.43,228.33 L692.43,224.33Z" fill="#248a57"/>
+<path d="M743.57,276.07 L747.57,280.07 L743.57,284.07 L739.57,280.07Z" fill="#248a57"/>
+<path d="M790.71,335.87 L794.71,339.87 L790.71,343.87 L786.71,339.87Z" fill="#248a57"/>
+<path d="M837.86,370.88 L841.86,374.88 L837.86,378.88 L833.86,374.88Z" fill="#248a57"/>
+<path d="M885.00,330.90 L889.00,334.90 L885.00,338.90 L881.00,334.90Z" fill="#248a57"/>
+<polyline points="555.00,88.00 566.79,88.00 578.57,92.10 590.36,101.77 602.14,113.58 613.93,126.61 625.71,139.67 637.50,152.75 649.29,166.79 661.07,181.99 672.86,196.62 684.64,210.38 696.43,224.33 708.21,238.78 720.00,252.07 731.79,265.81 743.57,280.07 755.36,295.25 767.14,310.59 778.93,325.27 790.71,339.87 802.50,355.14 814.29,370.53 826.07,383.71 837.86,411.06 849.64,384.68 861.43,369.33 873.21,352.53 885.00,334.91" fill="none" stroke="#8a4fb8" stroke-width="2.5" stroke-dasharray="6 4"/>
+<rect x="552.00" y="85.00" width="6" height="6" fill="#8a4fb8"/>
+<rect x="599.14" y="110.58" width="6" height="6" fill="#8a4fb8"/>
+<rect x="646.29" y="163.79" width="6" height="6" fill="#8a4fb8"/>
+<rect x="693.43" y="221.33" width="6" height="6" fill="#8a4fb8"/>
+<rect x="740.57" y="277.07" width="6" height="6" fill="#8a4fb8"/>
+<rect x="787.71" y="336.87" width="6" height="6" fill="#8a4fb8"/>
+<rect x="834.86" y="408.06" width="6" height="6" fill="#8a4fb8"/>
+<rect x="882.00" y="331.91" width="6" height="6" fill="#8a4fb8"/>
+<text x="570" y="112" class="note">直接 ‖Ax−θx‖ 与 |βₖ eₖᵀy| 重合</text>
+<rect x="1035" y="88" width="330" height="330" class="frame"/>
+<line x1="1035.00" y1="88" x2="1035.00" y2="418" class="grid"/>
+<text x="1035.00" y="438" text-anchor="middle">2</text>
+<line x1="1119.42" y1="88" x2="1119.42" y2="418" class="grid"/>
+<text x="1119.42" y="438" text-anchor="middle">13</text>
+<line x1="1203.84" y1="88" x2="1203.84" y2="418" class="grid"/>
+<text x="1203.84" y="438" text-anchor="middle">24</text>
+<line x1="1288.26" y1="88" x2="1288.26" y2="418" class="grid"/>
+<text x="1288.26" y="438" text-anchor="middle">35</text>
+<line x1="1365.00" y1="88" x2="1365.00" y2="418" class="grid"/>
+<text x="1365.00" y="438" text-anchor="middle">45</text>
+<line x1="1035" y1="418.00" x2="1365" y2="418.00" class="grid"/>
+<text x="1026" y="422.00" text-anchor="end">10⁻¹⁶</text>
+<line x1="1035" y1="335.50" x2="1365" y2="335.50" class="grid"/>
+<text x="1026" y="339.50" text-anchor="end">10⁻¹²</text>
+<line x1="1035" y1="253.00" x2="1365" y2="253.00" class="grid"/>
+<text x="1026" y="257.00" text-anchor="end">10⁻⁸</text>
+<line x1="1035" y1="170.50" x2="1365" y2="170.50" class="grid"/>
+<text x="1026" y="174.50" text-anchor="end">10⁻⁴</text>
+<line x1="1035" y1="88.00" x2="1365" y2="88.00" class="grid"/>
+<text x="1026" y="92.00" text-anchor="end">1</text>
+<text x="1200.0" y="463" text-anchor="middle" class="axis">Lanczos 步数 k</text>
+<text x="980" y="253.0" text-anchor="middle" class="axis" transform="rotate(-90 980 253.0)">max |qᵢᵀqⱼ−δᵢⱼ|</text>
+<polyline points="1035.00,300.94 1042.67,288.48 1050.35,263.42 1058.02,239.49 1065.70,221.97 1073.37,221.97 1081.05,221.97 1088.72,221.97 1096.40,211.00 1104.07,211.00 1111.74,211.00 1119.42,211.00 1127.09,203.14 1134.77,177.12 1142.44,152.01 1150.12,126.56 1157.79,99.59 1165.47,91.68 1173.14,91.68 1180.81,91.68 1188.49,91.68 1196.16,91.68 1203.84,91.68 1211.51,91.68 1219.19,91.68 1226.86,91.68 1234.53,91.68 1242.21,91.68 1249.88,91.68 1257.56,91.68 1265.23,91.68 1272.91,91.68 1280.58,91.68 1288.26,91.68 1295.93,90.91 1303.60,90.91 1311.28,90.91 1318.95,90.91 1326.63,90.91 1334.30,90.91 1341.98,90.91 1349.65,90.91 1357.33,90.91 1365.00,89.44" fill="none" stroke="#c43d3d" stroke-width="2.5"/>
+<rect x="1032.00" y="297.94" width="6" height="6" fill="#c43d3d"/>
+<rect x="1078.05" y="218.97" width="6" height="6" fill="#c43d3d"/>
+<rect x="1124.09" y="200.14" width="6" height="6" fill="#c43d3d"/>
+<rect x="1170.14" y="88.68" width="6" height="6" fill="#c43d3d"/>
+<rect x="1216.19" y="88.68" width="6" height="6" fill="#c43d3d"/>
+<rect x="1262.23" y="88.68" width="6" height="6" fill="#c43d3d"/>
+<rect x="1308.28" y="87.91" width="6" height="6" fill="#c43d3d"/>
+<rect x="1354.33" y="87.91" width="6" height="6" fill="#c43d3d"/>
+<polyline points="1035.00,300.94 1042.67,285.25 1050.35,272.40 1058.02,270.59 1065.70,270.59 1073.37,270.59 1081.05,266.79 1088.72,266.79 1096.40,266.79 1104.07,266.79 1111.74,266.79 1119.42,266.79 1127.09,266.79 1134.77,266.79 1142.44,266.79 1150.12,266.79 1157.79,266.33 1165.47,266.33 1173.14,265.24 1180.81,265.24 1188.49,264.42 1196.16,264.42 1203.84,264.42 1211.51,264.42 1219.19,264.42 1226.86,264.42 1234.53,264.42 1242.21,264.42 1249.88,264.42 1257.56,264.42 1265.23,264.42 1272.91,264.42 1280.58,264.42 1288.26,264.42 1295.93,264.42 1303.60,264.42 1311.28,264.42 1318.95,264.42 1326.63,264.42 1334.30,264.04 1341.98,264.04 1349.65,262.06 1357.33,262.06 1365.00,262.06" fill="none" stroke="#248a57" stroke-width="2.5"/>
+<path d="M1035.00,296.94 L1039.00,300.94 L1035.00,304.94 L1031.00,300.94Z" fill="#248a57"/>
+<path d="M1081.05,262.79 L1085.05,266.79 L1081.05,270.79 L1077.05,266.79Z" fill="#248a57"/>
+<path d="M1127.09,262.79 L1131.09,266.79 L1127.09,270.79 L1123.09,266.79Z" fill="#248a57"/>
+<path d="M1173.14,261.24 L1177.14,265.24 L1173.14,269.24 L1169.14,265.24Z" fill="#248a57"/>
+<path d="M1219.19,260.42 L1223.19,264.42 L1219.19,268.42 L1215.19,264.42Z" fill="#248a57"/>
+<path d="M1265.23,260.42 L1269.23,264.42 L1265.23,268.42 L1261.23,264.42Z" fill="#248a57"/>
+<path d="M1311.28,260.42 L1315.28,264.42 L1311.28,268.42 L1307.28,264.42Z" fill="#248a57"/>
+<path d="M1357.33,258.06 L1361.33,262.06 L1357.33,266.06 L1353.33,262.06Z" fill="#248a57"/>
+<text x="1050" y="112" class="note">模拟 9 位运算；聚簇极端谱放大正交性回流</text>
+<circle cx="95.00" cy="500.00" r="3.2" fill="#2f6fbd"/>
+<text x="105" y="504" class="legend">最大 Ritz 值误差</text>
+<rect x="242.00" y="497.00" width="6" height="6" fill="#c36a14"/>
+<text x="255" y="504" class="legend">最小 Ritz 值误差</text>
+<path d="M575.00,496.00 L579.00,500.00 L575.00,504.00 L571.00,500.00Z" fill="#248a57"/>
+<text x="585" y="504" class="legend">直接残差</text>
+<rect x="717.00" y="497.00" width="6" height="6" fill="#8a4fb8"/>
+<text x="730" y="504" class="legend">廉价残差公式</text>
+<rect x="1052.00" y="497.00" width="6" height="6" fill="#c43d3d"/>
+<text x="1065" y="504" class="legend">仅三项递推</text>
+<path d="M1205.00,496.00 L1209.00,500.00 L1205.00,504.00 L1201.00,500.00Z" fill="#248a57"/>
+<text x="1215" y="504" class="legend">全重正交化</text>
+<text x="720" y="555" text-anchor="middle" class="note">A 为 40 阶对角谱；B 验证 Ritz 残差恒等式；C 用显式降精度隔离有限精度正交性丢失，不代表特定硬件格式。</text>
+<text x="720" y="580" text-anchor="middle" class="note">生成：plot_lanczos_ritz_orthogonality.py · Python 标准库 · 无随机性</text>
+</svg>

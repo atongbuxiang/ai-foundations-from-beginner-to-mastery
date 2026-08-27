@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+<title id="title">Reduction 与 tokenizer denominator 反例</title><desc id="desc">左侧比较全局 token mean 和设备等权 mean；右侧固定字符串概率展示 token PPL 分叉而 BPB 相同。</desc>
+<rect width="1200" height="650" fill="#FFFEFB"/>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<text x="55" y="55" font-size="25" font-weight="700" fill="#2563EB">相同 numerator 语义，错误 denominator 就是另一个 estimand</text>
+<line x1="600" y1="105" x2="600" y2="565" stroke="#D7DEE8" stroke-width="2"/>
+<text x="75" y="115" font-size="20" font-weight="700" fill="#17324D">分布式 reduction</text>
+<text x="95" y="175" font-size="17">A: 80 tokens × 1.2 = 96 nats</text>
+<text x="95" y="215" font-size="17">B: 20 tokens × 2.0 = 40 nats</text>
+<rect x="95" y="270" width="370" height="70" rx="10" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="280" y="312" text-anchor="middle" font-size="23" font-weight="700" fill="#0F766E">global token mean = 1.36</text>
+<rect x="95" y="380" width="370" height="70" rx="10" fill="#FEE2E2" stroke="#C24135" stroke-width="2"/>
+<text x="280" y="422" text-anchor="middle" font-size="23" font-weight="700" fill="#C24135">equal-device mean = 1.60</text>
+<text x="75" y="515" font-size="15" fill="#64748B">先 all-reduce numerator 与 denominator，再相除</text>
+<text x="645" y="115" font-size="20" font-weight="700" fill="#17324D">跨 tokenizer：同一字符串概率 10⁻⁶</text>
+<text x="660" y="190" font-size="17" font-weight="700">A · 2 tokens</text>
+<rect x="660" y="210" width="390.0" height="46" rx="7" fill="#C24135"/>
+<text x="1065.0" y="241" font-size="18" font-weight="700" fill="#C24135">PPL=1000</text>
+<text x="660" y="320" font-size="17" font-weight="700">B · 6 tokens</text>
+<rect x="660" y="340" width="129.99999999999997" height="46" rx="7" fill="#2563EB"/>
+<text x="805.0" y="371" font-size="18" font-weight="700" fill="#2563EB">PPL=10</text>
+<rect x="660" y="465" width="440" height="72" rx="10" fill="#FFF7E8" stroke="#E5B94E" stroke-width="2"/>
+<text x="880" y="495" text-anchor="middle" font-size="17">共同 raw denominator = 12 UTF-8 bytes</text>
+<text x="880" y="523" text-anchor="middle" font-size="21" font-weight="700" fill="#6B4E16">两者 BPB = 1.6610</text>
+<text x="645" y="585" font-size="15" fill="#64748B">共同 BPB 仍要求两模型对同一 raw byte string 定义概率。</text>
+</svg>

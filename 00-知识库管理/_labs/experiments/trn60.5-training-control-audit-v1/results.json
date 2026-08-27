@@ -1,0 +1,153 @@
+{
+  "artifacts": {
+    "csv": [
+      "learning_rate_scale.csv",
+      "warmup_quadratic.csv",
+      "schedule_audit.csv",
+      "horizon_rewrite.csv",
+      "clipping_bias.csv",
+      "clipping_scope.csv",
+      "weight_rms.csv",
+      "averaging.csv",
+      "factorial.csv",
+      "budget_ledger.csv"
+    ],
+    "plots": [
+      "plot-training-control-schedule-horizon-v1.svg",
+      "plot-training-control-clipping-weight-rms-v1.svg",
+      "plot-training-control-averaging-factorial-v1.svg"
+    ]
+  },
+  "check_count": 27,
+  "checks": [
+    {
+      "id": "lr_rescale_same_displacement",
+      "passed": true
+    },
+    {
+      "id": "quadratic_eta_0_2_descends",
+      "passed": true
+    },
+    {
+      "id": "warmup_first_three_strictly_stable",
+      "passed": true
+    },
+    {
+      "id": "warmup_peak_is_unstable",
+      "passed": true
+    },
+    {
+      "id": "attempt_and_success_clock_diverge",
+      "passed": true
+    },
+    {
+      "id": "linear_endpoints_exact",
+      "passed": true
+    },
+    {
+      "id": "cosine_endpoints_exact",
+      "passed": true
+    },
+    {
+      "id": "wsd_endpoint_exact",
+      "passed": true
+    },
+    {
+      "id": "linear_and_cosine_areas_near_equal",
+      "passed": true
+    },
+    {
+      "id": "cosine_squared_area_exceeds_linear",
+      "passed": true
+    },
+    {
+      "id": "inverse_sqrt_tail_not_zero",
+      "passed": true
+    },
+    {
+      "id": "horizon_rewrites_interior_history",
+      "passed": true
+    },
+    {
+      "id": "horizon_origin_matches",
+      "passed": true
+    },
+    {
+      "id": "clipping_bias_reverses_expectation",
+      "passed": true
+    },
+    {
+      "id": "clip_and_average_do_not_commute",
+      "passed": true
+    },
+    {
+      "id": "global_clipping_preserves_layer_ratio",
+      "passed": true
+    },
+    {
+      "id": "layerwise_clipping_changes_layer_ratio",
+      "passed": true
+    },
+    {
+      "id": "agc_threshold_tracks_weight_norm",
+      "passed": true
+    },
+    {
+      "id": "weight_rms_recursion_exact",
+      "passed": true
+    },
+    {
+      "id": "weight_rms_lags_after_lr_drop",
+      "passed": true
+    },
+    {
+      "id": "lower_lr_equilibrium_is_lower",
+      "passed": true
+    },
+    {
+      "id": "ema_three_step_value",
+      "passed": true
+    },
+    {
+      "id": "parameter_and_prediction_average_differ",
+      "passed": true
+    },
+    {
+      "id": "factorial_interaction_nonzero",
+      "passed": true
+    },
+    {
+      "id": "paired_variance_below_unpaired_sum",
+      "passed": true
+    },
+    {
+      "id": "lineage_dedup_saves_compute",
+      "passed": true
+    },
+    {
+      "id": "four_budget_accounts_present",
+      "passed": true
+    }
+  ],
+  "evidence_boundaries": [
+    "Deterministic scalar/vector controls test definitions and counterexamples, not LLM quality.",
+    "Schedule area and Weight-RMS equilibrium are diagnostics, not sufficient performance statistics.",
+    "Factorial effects are scoped to the declared cells and budget ledger."
+  ],
+  "experiment_id": "EXP-TRN-605-V1",
+  "passed_count": 27,
+  "seed": 20260826,
+  "standard_library_only": true,
+  "tracks": [
+    "learning_rate_scale",
+    "warmup_quadratic",
+    "schedule_audit",
+    "horizon_rewrite",
+    "clipping_bias",
+    "clipping_scope",
+    "weight_rms",
+    "averaging",
+    "factorial",
+    "budget_ledger"
+  ]
+}

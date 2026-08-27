@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#26364a"/></marker><style>.t{font-family:Inter,'Noto Sans SC',sans-serif;fill:#172033}.h{font-size:26px;font-weight:700}.s{font-size:18px}.m{font-family:'IBM Plex Mono',monospace;font-size:16px;fill:#233a59}.mut{font-size:15px;fill:#647184}.box{fill:#fffdf7;stroke:#26364a;stroke-width:2}.arr{stroke:#26364a;stroke-width:2.2;fill:none;marker-end:url(#a)}</style></defs>
+  <rect width="1200" height="620" fill="#f4f0e6"/><text x="54" y="52" class="t h">逆问题：观测在 x0，采样却运行在 x_t</text><line x1="54" y1="72" x2="1146" y2="72" stroke="#c7bda9"/>
+  <rect x="54" y="105" width="520" height="260" rx="12" class="box"/>
+  <text x="78" y="142" class="t h" font-size="21">概率图：真正的 noisy-time likelihood</text>
+  <circle cx="170" cy="240" r="45" fill="#e4f0e2" stroke="#608459" stroke-width="2"/><text x="151" y="247" class="t s">x0</text>
+  <circle cx="455" cy="240" r="45" fill="#e7eef8" stroke="#56769a" stroke-width="2"/><text x="435" y="247" class="t s">x_t</text>
+  <circle cx="170" cy="330" r="32" fill="#f8e6df" stroke="#b7654c" stroke-width="2"/><text x="162" y="337" class="t s">y</text>
+  <path d="M216 240 H398" class="arr"/><text x="276" y="221" class="t mut">forward noise</text>
+  <path d="M170 286 V293" class="arr"/><text x="210" y="320" class="t mut">measurement A</text>
+  <text x="263" y="329" class="m">p(y|x_t) = ∫ p(y|x0)p(x0|x_t) dx0</text>
+  <rect x="602" y="105" width="544" height="260" rx="12" class="box"/>
+  <text x="626" y="142" class="t h" font-size="21">算法替代：积分难算时做什么</text>
+  <rect x="630" y="174" width="150" height="65" rx="8" fill="#e7eef8" stroke="#56769a"/><text x="650" y="200" class="t s">denoise</text><text x="648" y="225" class="m">x0_hat(x_t)</text>
+  <path d="M782 207 H837" class="arr"/>
+  <rect x="842" y="174" width="270" height="65" rx="8" fill="#f8e6df" stroke="#b7654c"/><text x="861" y="200" class="t s">likelihood gradient</text><text x="860" y="225" class="m">J^T A^T(y-A x0_hat)</text>
+  <g class="t s"><text x="632" y="282">A  likelihood guidance：软 Bayes 修正</text><text x="632" y="315">B  projection：硬约束，易过拟合噪声</text><text x="632" y="348">C  prox / PnP：fixed point 不自动等于 posterior</text></g>
+  <rect x="54" y="395" width="1092" height="115" rx="12" class="box"/>
+  <text x="78" y="432" class="t h" font-size="21">一维 Gaussian 校准项</text>
+  <text x="80" y="470" class="m">exact gradient denominator = sigma_y^2 + a^2 Var(x0 | x_t)</text>
+  <text x="680" y="470" class="m" fill="#b65334">plug-in denominator = sigma_y^2</text>
+  <text x="80" y="498" class="t mut">高噪声时忽略 posterior uncertainty，会把 measurement correction 放大。</text>
+  <rect x="54" y="535" width="1092" height="49" rx="8" fill="#fff8de" stroke="#c7a84d"/><text x="77" y="566" class="t s">报告：operator/adjoint、noise law、x0_hat、detach/Jacobian、correction schedule、calibration 与多样本覆盖。</text>
+</svg>

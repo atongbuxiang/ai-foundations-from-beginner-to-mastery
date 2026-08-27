@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Transformer 三大家族：Mask、训练目标与任务出口</title>
+<desc id="desc">Encoder-only、encoder–decoder 与 decoder-only 的核心差异先由可见关系和目标定义，再谈规模与应用。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Encoder-only</text>
+<rect x="57" y="105" width="300" height="62" rx="8" fill="#F8FAFC" stroke="#0F766E" stroke-width="2"/>
+<text x="207.0" y="142.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">all↔all</text>
+<text x="57" y="220" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">training objective</text>
+<text x="57" y="252" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">MLM / supervised</text>
+<text x="57" y="320" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">task outlet</text>
+<text x="57" y="352" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">token/pool</text>
+<text x="57" y="425" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">家族 ≠ 单一预训练目标</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Encoder–Decoder</text>
+<rect x="445" y="105" width="300" height="62" rx="8" fill="#F8FAFC" stroke="#2563EB" stroke-width="2"/>
+<text x="595.0" y="142.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">src↔src; tgt←past+src</text>
+<text x="445" y="220" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">training objective</text>
+<text x="445" y="252" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">denoise / seq2seq</text>
+<text x="445" y="320" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">task outlet</text>
+<text x="445" y="352" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">target sequence</text>
+<text x="445" y="425" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">家族 ≠ 单一预训练目标</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Decoder-only</text>
+<rect x="845" y="105" width="300" height="62" rx="8" fill="#F8FAFC" stroke="#C24135" stroke-width="2"/>
+<text x="995.0" y="142.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">prefix causal</text>
+<text x="845" y="220" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">training objective</text>
+<text x="845" y="252" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">LM / prompted tasks</text>
+<text x="845" y="320" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">task outlet</text>
+<text x="845" y="352" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">next token</text>
+<text x="845" y="425" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">prefix-LM 可改变 mask；</text>
+<text x="845" y="452" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">仍需精确定义 loss 区域。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">架构家族由信息流合同决定；BERT、T5、GPT 是代表实例，不是所有实现的唯一模板。</text>
+</svg>

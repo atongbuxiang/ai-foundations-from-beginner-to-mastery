@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Conditional law、loss 与 Bayes action</title>
+<desc id="desc">Bayes predictor 在每个 x 上最小化 conditional risk；不同 loss 从同一条件分布读取不同最优 action。Bayes risk 依赖 observation、action space 和 loss，不是脱离任务的永恒噪声下界。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">先条件化，再逐点决策</text>
+<rect x="55" y="90" width="290" height="56" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="200.0" y="124.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">joint law P(X,Y)</text>
+<line x1="200" y1="149" x2="200" y2="184" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="55" y="196" width="290" height="60" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="200.0" y="232.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">conditional law P(Y|X=x)</text>
+<line x1="200" y1="259" x2="200" y2="294" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="55" y="306" width="290" height="64" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="200.0" y="344.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">r(a|x)=E[ell(a,Y)|X=x]</text>
+<line x1="200" y1="373" x2="200" y2="408" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="55" y="420" width="290" height="62" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="200.0" y="457.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">h*(x) in argmin_a r(a|x)</text>
+<text x="45" y="514" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">measurability / existence need conditions。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">同一条件律，不同 loss</text>
+<text x="430" y="102" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">0-1 / cost</text>
+<line x1="540" y1="97" x2="585" y2="97" stroke="#D7DEE8" stroke-width="2" marker-end="url(#a3)"/>
+<text x="600" y="102" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">mode / shifted threshold</text>
+<text x="430" y="194" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">square</text>
+<line x1="540" y1="189" x2="585" y2="189" stroke="#D7DEE8" stroke-width="2" marker-end="url(#a3)"/>
+<text x="600" y="194" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">conditional mean</text>
+<text x="430" y="286" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">absolute</text>
+<line x1="540" y1="281" x2="585" y2="281" stroke="#D7DEE8" stroke-width="2" marker-end="url(#a3)"/>
+<text x="600" y="286" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">conditional median</text>
+<text x="430" y="378" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">log loss</text>
+<line x1="540" y1="373" x2="585" y2="373" stroke="#D7DEE8" stroke-width="2" marker-end="url(#a3)"/>
+<text x="600" y="378" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">full conditional distribution</text>
+<text x="430" y="475" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">posterior estimation and decision are separate</text>
+<text x="430" y="510" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">calibration matters through downstream loss。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Bayes risk 是任务相对下界</text>
+<rect x="840" y="90" width="300" height="62" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="990.0" y="127.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">R* = inf_h R_P(h)</text>
+<text x="830" y="215" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">change observation X -&gt; change information</text>
+<text x="830" y="255" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">change action A -&gt; change feasible decisions</text>
+<text x="830" y="295" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">change loss ell -&gt; change what counts as error</text>
+<text x="830" y="345" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">label ambiguity != irreducible causal uncertainty</text>
+<text x="830" y="390" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">Bayes predictor != Bayesian parameter prior</text>
+<text x="830" y="435" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">oracle rule still requires unknown P</text>
+<text x="830" y="505" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">estimated Bayes risk is not automatically exact。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">Bayes 决策是已知 P 时的 oracle；真正决定最优动作的是条件分布与损失的组合。</text>
+</svg>

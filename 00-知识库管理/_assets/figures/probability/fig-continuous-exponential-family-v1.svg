@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">常用连续分布与指数族</title>
+  <desc id="desc">三面板展示连续密度的支持集差异、Gamma与Beta形状，以及指数族中充分统计量、自然参数、配分函数和矩的关系。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFFBEB"/><stop offset="1" stop-color="#F5F3FF"/></linearGradient>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#7C3AED"/></marker>
+    <style>.title{font:700 21px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#0F172A}.head{font:700 17px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#92400E}.txt{font:14px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#334155}.small{font:12px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#64748B}.math{font:15px Georgia,"Times New Roman",serif;fill:#0F172A}.card{fill:#fff;stroke:#CBD5E1;stroke-width:1.3}.blue{fill:#DBEAFE;stroke:#60A5FA}.green{fill:#D1FAE5;stroke:#34D399}.amber{fill:#FEF3C7;stroke:#FBBF24}.violet{fill:#EDE9FE;stroke:#A78BFA}.line{stroke:#7C3AED;stroke-width:2;fill:none;marker-end:url(#arr)}</style>
+  </defs>
+  <rect width="1200" height="430" rx="22" fill="url(#bg)"/>
+  <text x="40" y="38" class="title">连续模型先匹配支持集与尾部；指数族再统一归一化、矩与训练曲率</text>
+  <rect x="28" y="58" width="368" height="342" rx="17" class="card"/><rect x="416" y="58" width="368" height="342" rx="17" class="card"/><rect x="804" y="58" width="368" height="342" rx="17" class="card"/>
+
+  <text x="50" y="88" class="head">A　density 的高度不是点概率</text>
+  <line x1="65" y1="178" x2="365" y2="178" stroke="#64748B"/>
+  <path d="M92 178L92 129L180 129L180 178" fill="#DBEAFE" stroke="#3B82F6" stroke-width="2"/>
+  <text x="103" y="118" class="small">Uniform [a,b]</text>
+  <path d="M205 178C213 100 250 111 283 178" fill="none" stroke="#7C3AED" stroke-width="3"/>
+  <text x="204" y="118" class="small">Gaussian: ℝ</text>
+  <path d="M303 111C314 129 326 153 359 176" fill="none" stroke="#059669" stroke-width="3"/>
+  <text x="294" y="199" class="small">Exp: x≥0</text>
+  <text x="67" y="219" class="math">P(a&lt;X≤b)=∫ₐᵇ f(x)dx</text>
+  <rect x="63" y="244" width="297" height="66" rx="12" class="amber"/>
+  <text x="86" y="270" class="txt">先问：数据能否为负、超过 1、等于 0？</text>
+  <text x="101" y="295" class="txt">再问：偏度、尾部、hazard 与尺度</text>
+  <text x="65" y="349" class="small">窄区间 density 可高于 1；面积仍必须等于 1</text>
+  <text x="65" y="377" class="small">support mismatch 是模型错误，不是优化小瑕疵</text>
+
+  <text x="438" y="88" class="head">B　正值与比例需要不同形状族</text>
+  <line x1="456" y1="246" x2="752" y2="246" stroke="#64748B"/>
+  <path d="M467 245C482 109 540 116 610 241" fill="none" stroke="#F59E0B" stroke-width="3"/>
+  <path d="M468 108C510 159 579 225 736 244" fill="none" stroke="#EF4444" stroke-width="3"/>
+  <text x="473" y="105" class="small">Gamma α&gt;1：内部单峰</text>
+  <text x="588" y="132" class="small">shape&lt;1 可在 0 附近尖锐</text>
+  <rect x="458" y="277" width="292" height="72" rx="12" class="green"/>
+  <text x="483" y="302" class="txt">Beta: x∈(0,1)，可左偏、右偏、U 形</text>
+  <text x="492" y="329" class="math">E[X]=α/(α+β)</text>
+  <text x="457" y="381" class="small">端点 density 发散仍不等于端点有正概率质量</text>
+
+  <text x="826" y="88" class="head">C　指数族：配分函数编码矩</text>
+  <rect x="840" y="111" width="135" height="58" rx="11" class="blue"/><text x="859" y="136" class="math">T(x), h(x)</text><text x="852" y="157" class="small">统计量与基准测度</text>
+  <rect x="1031" y="111" width="110" height="58" rx="11" class="green"/><text x="1051" y="136" class="math">η ∈ H</text><text x="1041" y="157" class="small">自然参数</text>
+  <path d="M982 140L1022 140" class="line"/>
+  <rect x="849" y="204" width="284" height="60" rx="12" class="violet"/>
+  <text x="873" y="232" class="math">pη(x)=h(x) exp(ηᵀT(x)−A(η))</text>
+  <text x="925" y="253" class="small">A 使总质量归一</text>
+  <path d="M991 272L991 300" class="line"/>
+  <rect x="851" y="307" width="280" height="60" rx="12" class="amber"/>
+  <text x="877" y="332" class="math">∇A(η)=Eη[T(X)]</text>
+  <text x="863" y="356" class="math">∇²A(η)=Covη(T(X)) ⪰ 0</text>
+  <text x="842" y="391" class="small">微分移入积分需要共同支持与局部可积控制条件</text>
+</svg>

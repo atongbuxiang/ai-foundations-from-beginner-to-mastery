@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">VC 一致收敛证明中的幽灵样本与随机交换</title>
+  <desc id="desc">证明先用独立幽灵样本替代未知总体风险，再在每对样本内部随机交换，最后条件化为有限个标签模式上的概率估计。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
+    <style>
+      .ink{fill:#1f2937}.muted{fill:#64748b}.line{stroke:#cbd5e1;stroke-width:1.5}.arrow{stroke:#64748b;stroke-width:2.2;fill:none;marker-end:url(#arrow)}.soft{fill:#f8fafc}.blue{fill:#2563eb}.blue-soft{fill:#eff6ff}.amber{fill:#b45309}.amber-soft{fill:#fffbeb}
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.h{font-size:18px;font-weight:600}.body{font-size:17px}.small{font-size:15px}.token{font-size:19px;font-weight:600}.result{font-size:20px;font-weight:600}
+    </style>
+  </defs>
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <rect x="40" y="44" width="328" height="428" rx="12" class="soft" stroke="#cbd5e1"/>
+  <rect x="436" y="44" width="328" height="428" rx="12" class="blue-soft" stroke="#93c5fd"/>
+  <rect x="832" y="44" width="328" height="428" rx="12" class="amber-soft" stroke="#fcd34d"/>
+  <g class="sans h ink">
+    <text x="68" y="82">1　引入独立副本</text><text x="464" y="82">2　对内随机交换</text><text x="860" y="82">3　条件化后计数</text>
+  </g>
+  <g class="sans small muted">
+    <text x="68" y="112">把未知期望变成两个经验均值之差</text>
+    <text x="464" y="112">每一对由独立符号 σᵢ 决定是否交换</text>
+    <text x="860" y="112">固定合并样本，只剩有限个限制模式</text>
+  </g>
+  <g class="sans token" text-anchor="middle">
+    <text x="132" y="163" class="blue">S</text><text x="278" y="163" class="amber">S′</text>
+  </g>
+  <g class="math body ink" text-anchor="middle">
+    <text x="132" y="211">Z₁</text><text x="278" y="211">Z′₁</text>
+    <text x="132" y="267">Z₂</text><text x="278" y="267">Z′₂</text>
+    <text x="132" y="323">⋮</text><text x="278" y="323">⋮</text>
+    <text x="132" y="379">Z_m</text><text x="278" y="379">Z′_m</text>
+  </g>
+  <g class="line"><line x1="158" y1="205" x2="252" y2="205"/><line x1="158" y1="261" x2="252" y2="261"/><line x1="158" y1="373" x2="252" y2="373"/></g>
+  <text x="204" y="430" class="math body ink" text-anchor="middle">R(h;S) − R(h;S′)</text>
+
+  <g class="math body ink" text-anchor="middle">
+    <text x="516" y="207">Zᵢ</text><text x="684" y="207">Z′ᵢ</text>
+    <text x="516" y="337">Z′ᵢ</text><text x="684" y="337">Zᵢ</text>
+  </g>
+  <path d="M546 217 C568 253 632 253 654 289" class="arrow"/>
+  <path d="M654 217 C632 253 568 253 546 289" class="arrow"/>
+  <text x="600" y="178" class="math token blue" text-anchor="middle">σᵢ = +1</text>
+  <text x="600" y="394" class="math token blue" text-anchor="middle">σᵢ = −1</text>
+  <text x="600" y="431" class="sans small muted" text-anchor="middle">交换不改变每对的联合分布</text>
+
+  <g class="sans body ink">
+    <text x="862" y="176">固定 2m 个观测</text>
+    <text x="862" y="231">→ 每个 h 产生一个标签向量</text>
+    <text x="862" y="286">→ 不同向量至多 tau_H(2m) 个</text>
+    <text x="862" y="341">→ 对每个向量应用尾界</text>
+    <text x="862" y="396">→ 再对有限模式作并合界</text>
+  </g>
+  <path d="M368 258 L426 258" class="arrow"/><path d="M764 258 L822 258" class="arrow"/>
+  <rect x="94" y="514" width="1012" height="66" rx="11" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="600" y="542" class="sans small muted" text-anchor="middle">三次改写分别消除：未知总体量、难处理的样本差、无限假设族</text>
+  <text x="600" y="568" class="sans result ink" text-anchor="middle">总体偏差　→　双样本偏差　→　随机符号和　→　至多 tau_H(2m) 个事件</text>
+</svg>

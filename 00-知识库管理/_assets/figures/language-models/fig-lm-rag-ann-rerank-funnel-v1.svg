@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">两阶段检索是一条不可逆漏斗</title><desc id="desc">exact oracle、ANN、candidate set、reranker 与 context 的保真和延迟。</desc>
+<rect width="1200" height="700" fill="#FBF8F1"/>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#667784"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#183044" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<line x1="48" y1="70" x2="1152" y2="70" stroke="#17766E" stroke-width="4"/>
+<text x="52" y="49" font-size="24" font-weight="700" fill="#183044">两阶段检索是一条不可逆漏斗</text>
+<path d="M85,115 L1055,115 L1017,197 L123,197 Z" fill="#FFFDF8" stroke="#245AA8" stroke-width="2" filter="url(#shadow)"/>
+<text x="570.0" y="146" text-anchor="middle" font-size="15" font-weight="700" fill="#245AA8">Exact vector ranking · N = 1,000,000</text>
+<text x="570.0" y="172" text-anchor="middle" font-size="12.5" font-weight="400" fill="#667784">gold rank = 37</text>
+<path d="M155,220 L985,220 L947,302 L193,302 Z" fill="#FFFDF8" stroke="#17766E" stroke-width="2" filter="url(#shadow)"/>
+<text x="570.0" y="251" text-anchor="middle" font-size="15" font-weight="700" fill="#17766E">ANN candidates · K₁ = 200</text>
+<text x="570.0" y="277" text-anchor="middle" font-size="12.5" font-weight="400" fill="#667784">ANN recall@200 = .96 · gold kept</text>
+<path d="M245,325 L895,325 L857,407 L283,407 Z" fill="#FFFDF8" stroke="#7054A3" stroke-width="2" filter="url(#shadow)"/>
+<text x="570.0" y="356" text-anchor="middle" font-size="15" font-weight="700" fill="#7054A3">Cross / late-interaction rerank · K₂ = 20</text>
+<text x="570.0" y="382" text-anchor="middle" font-size="12.5" font-weight="400" fill="#667784">gold rank → 4</text>
+<path d="M355,430 L785,430 L747,512 L393,512 Z" fill="#FFFDF8" stroke="#C87922" stroke-width="2" filter="url(#shadow)"/>
+<text x="570.0" y="461" text-anchor="middle" font-size="15" font-weight="700" fill="#C87922">Context selection · 6 passages</text>
+<text x="570.0" y="487" text-anchor="middle" font-size="12.5" font-weight="400" fill="#667784">gold retained</text>
+<text x="1085" y="138" text-anchor="middle" font-size="14" font-weight="700" fill="#B7443E">不可恢复点</text>
+<path d="M1080 160 L1080 485" stroke="#B7443E" stroke-width="2" stroke-dasharray="5 5"/>
+<text x="1085" y="520" text-anchor="middle" font-size="12" font-weight="400" fill="#B7443E">一旦 gold 被丢弃，
+重排器无法创造证据</text>
+<text x="85" y="570" text-anchor="start" font-size="14" font-weight="700" fill="#183044">端到端 p95 延迟分解</text>
+<rect x="85" y="588" width="135.0" height="34" fill="#245AA8"/>
+<text x="152.5" y="611" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">encode</text>
+<rect x="220.0" y="588" width="180.0" height="34" fill="#17766E"/>
+<text x="310.0" y="611" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">ANN</text>
+<rect x="400.0" y="588" width="90.0" height="34" fill="#4F7B45"/>
+<text x="445.0" y="611" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">fetch</text>
+<rect x="490.0" y="588" width="288.0" height="34" fill="#7054A3"/>
+<text x="634.0" y="611" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">rerank</text>
+<rect x="778.0" y="588" width="207.0" height="34" fill="#C87922"/>
+<text x="881.5" y="611" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">generate</text>
+<line x1="48" y1="650" x2="1152" y2="650" stroke="#D9D5CB" stroke-width="1"/>
+<text x="52" y="674" font-size="13" fill="#667784">分开报告 ANN 对 exact top-K 的保真、任务 evidence recall、rerank 增益与 p50/p95/p99。</text>
+</svg>

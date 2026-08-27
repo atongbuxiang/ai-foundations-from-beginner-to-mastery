@@ -1,0 +1,6 @@
+object,numerator_or_probability,denominator,result
+global_token_mean,136,100,1.36
+equal_device_mean,1.2+2.0,2,1.6
+tokenizer_A_ppl,1e-06,2,1000.0
+tokenizer_B_ppl,1e-06,6,9.999999999999998
+common_bpb,13.815510557964274,12,1.6609640474436813

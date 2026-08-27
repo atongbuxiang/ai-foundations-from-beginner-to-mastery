@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430">
+  <rect width="1200" height="430" fill="#f8fafc"/>
+  <style>
+    .panel{fill:#fff;stroke:#cbd5e1;stroke-width:1.5}.title{font:700 18px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#0f172a}.sub{font:13px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#475569}.body{font:14px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#334155}.small{font:12px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#64748b}.box{stroke-width:1.5}.arrow{stroke:#64748b;stroke-width:1.5;fill:none;marker-end:url(#arrow)}
+  </style>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#64748b"/></marker></defs>
+  <rect class="panel" x="20" y="20" width="370" height="390" rx="14"/>
+  <rect class="panel" x="415" y="20" width="370" height="390" rx="14"/>
+  <rect class="panel" x="810" y="20" width="370" height="390" rx="14"/>
+
+  <text class="title" x="40" y="53">A · 优化问题先写成完整 contract</text>
+  <text class="sub" x="40" y="78">变量、定义域、约束与证书缺一不可</text>
+  <rect class="box" x="55" y="103" width="135" height="54" rx="10" fill="#dbeafe" stroke="#2563eb"/>
+  <text class="body" x="122" y="125" text-anchor="middle">decision variable</text><text class="small" x="122" y="144" text-anchor="middle">shape / space</text>
+  <rect class="box" x="220" y="103" width="135" height="54" rx="10" fill="#ede9fe" stroke="#7c3aed"/>
+  <text class="body" x="287" y="125" text-anchor="middle">objective</text><text class="small" x="287" y="144" text-anchor="middle">base / reduction</text>
+  <path class="arrow" d="M190 130 L220 130"/>
+  <rect class="box" x="55" y="185" width="135" height="54" rx="10" fill="#dcfce7" stroke="#059669"/>
+  <text class="body" x="122" y="207" text-anchor="middle">domain</text><text class="small" x="122" y="226" text-anchor="middle">defined where?</text>
+  <rect class="box" x="220" y="185" width="135" height="54" rx="10" fill="#fef3c7" stroke="#d97706"/>
+  <text class="body" x="287" y="207" text-anchor="middle">constraints</text><text class="small" x="287" y="226" text-anchor="middle">feasible set</text>
+  <path class="arrow" d="M190 212 L220 212"/>
+  <rect class="box" x="98" y="272" width="215" height="61" rx="11" fill="#fee2e2" stroke="#dc2626"/>
+  <text class="body" x="205" y="296" text-anchor="middle">solution concept + residual</text>
+  <text class="small" x="205" y="317" text-anchor="middle">global / local / KKT / approximate</text>
+  <path class="arrow" d="M122 239 L165 272"/><path class="arrow" d="M287 239 L247 272"/>
+  <text class="small" x="40" y="378">“optimizer=Adam” 不是 problem definition</text>
+
+  <text class="title" x="435" y="53">B · 三种相似却不同的状态</text>
+  <text class="sub" x="435" y="78">bounded below 不保证 minimum 被取得</text>
+  <line x1="448" y1="333" x2="760" y2="333" stroke="#64748b" stroke-width="1.3"/>
+  <line x1="470" y1="105" x2="470" y2="349" stroke="#64748b" stroke-width="1.3"/>
+  <path d="M482 309 C525 245 560 180 603 118" fill="none" stroke="#2563eb" stroke-width="4"/>
+  <circle cx="482" cy="309" r="6" fill="#fff" stroke="#2563eb" stroke-width="3"/>
+  <text class="small" x="492" y="317">infimum 0，x&gt;0 不取得</text>
+  <path d="M630 150 Q684 330 738 150" fill="none" stroke="#059669" stroke-width="4"/>
+  <circle cx="684" cy="240" r="6" fill="#059669"/>
+  <text class="small" x="646" y="266">minimum attained</text>
+  <path d="M505 126 L584 307" fill="none" stroke="#dc2626" stroke-width="3" stroke-dasharray="6 5"/>
+  <text class="small" x="515" y="113">unbounded direction</text>
+  <rect x="445" y="357" width="318" height="32" rx="8" fill="#f1f5f9"/>
+  <text class="small" x="604" y="378" text-anchor="middle">infeasible ≠ unattained ≠ unbounded</text>
+
+  <text class="title" x="830" y="53">C · 一个 run 有三层 gap</text>
+  <text class="sub" x="830" y="78">训练收敛不能替代统计与部署验证</text>
+  <rect class="box" x="850" y="108" width="290" height="66" rx="11" fill="#dbeafe" stroke="#2563eb"/>
+  <text class="body" x="995" y="133" text-anchor="middle">optimization evidence</text>
+  <text class="small" x="995" y="154" text-anchor="middle">objective / stationarity / feasibility</text>
+  <path class="arrow" d="M995 174 L995 204"/>
+  <rect class="box" x="850" y="204" width="290" height="66" rx="11" fill="#ede9fe" stroke="#7c3aed"/>
+  <text class="body" x="995" y="229" text-anchor="middle">statistical evidence</text>
+  <text class="small" x="995" y="250" text-anchor="middle">population / uncertainty / selection</text>
+  <path class="arrow" d="M995 270 L995 300"/>
+  <rect class="box" x="850" y="300" width="290" height="66" rx="11" fill="#dcfce7" stroke="#059669"/>
+  <text class="body" x="995" y="325" text-anchor="middle">deployment evidence</text>
+  <text class="small" x="995" y="346" text-anchor="middle">shift / safety / latency / decision cost</text>
+  <text class="small" x="830" y="390">每一层都要自己的随机对象、指标与边界</text>
+</svg>

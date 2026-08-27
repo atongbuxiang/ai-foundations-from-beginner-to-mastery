@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Broken scaling and emergent-ability diagnosis</title>
+  <desc id="desc">The figure maps a smooth latent success probability through an exact-match metric to a sharp observed curve, compares local slopes, and lists six competing causal explanations.</desc>
+  <rect width="1200" height="800" fill="#FFFEFB"/>
+  <text x="60" y="60" font-family="Arial,sans-serif" font-size="28" font-weight="700" fill="#172033">A kink is an observation; the mechanism comes from interventions</text>
+  <text x="60" y="94" font-family="Arial,sans-serif" font-size="17" fill="#52606D">Smooth latent progress, metric thresholds, optimizer mismatch and real regime changes can produce similar plots.</text>
+  <rect x="50" y="125" width="360" height="585" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+  <rect x="440" y="125" width="300" height="585" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+  <rect x="770" y="125" width="380" height="585" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+  <text x="75" y="165" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172033">A  Metric transformation</text>
+  <line x1="95" y1="620" x2="370" y2="620" stroke="#52606D" stroke-width="2"/>
+  <line x1="95" y1="620" x2="95" y2="205" stroke="#52606D" stroke-width="2"/>
+  <path d="M110 570 C170 555, 220 480, 270 370 C315 270, 345 235, 365 225" fill="none" stroke="#2563EB" stroke-width="5"/>
+  <path d="M110 615 C220 610, 270 590, 305 470 C330 365, 350 260, 365 215" fill="none" stroke="#C0392B" stroke-width="5"/>
+  <text x="125" y="530" font-family="Arial,sans-serif" font-size="16" fill="#2563EB">smooth p(x)</text>
+  <text x="255" y="565" font-family="Arial,sans-serif" font-size="16" fill="#C0392B">exact match p(x)^m</text>
+  <line x1="305" y1="205" x2="305" y2="620" stroke="#B76E00" stroke-width="2" stroke-dasharray="8 7"/>
+  <text x="305" y="650" font-family="Arial,sans-serif" font-size="15" text-anchor="middle" fill="#B76E00">apparent threshold</text>
+  <text x="230" y="682" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" fill="#52606D">log scale</text>
+  <text x="465" y="165" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172033">B  Local slope audit</text>
+  <line x1="485" y1="620" x2="710" y2="620" stroke="#52606D" stroke-width="2"/>
+  <line x1="485" y1="620" x2="485" y2="205" stroke="#52606D" stroke-width="2"/>
+  <line x1="500" y1="400" x2="695" y2="400" stroke="#0F766E" stroke-width="5"/>
+  <polyline points="500,500 555,500 590,440 625,310 695,310" fill="none" stroke="#C0392B" stroke-width="5"/>
+  <text x="510" y="380" font-family="Arial,sans-serif" font-size="16" fill="#0F766E">single law: constant slope</text>
+  <text x="535" y="535" font-family="Arial,sans-serif" font-size="16" fill="#C0392B">broken law: slope changes</text>
+  <rect x="495" y="225" width="200" height="65" rx="10" fill="#FFF4DE" stroke="#B76E00" stroke-width="2"/>
+  <text x="595" y="250" font-family="Arial,sans-serif" font-size="15" text-anchor="middle" font-weight="700" fill="#B76E00">Better interpolation?</text>
+  <text x="595" y="272" font-family="Arial,sans-serif" font-size="15" text-anchor="middle" fill="#52606D">Still test held-out scales.</text>
+  <text x="795" y="165" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172033">C  Six competing explanations</text>
+  <rect x="805" y="205" width="150" height="70" rx="12" fill="#EAF1FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="880" y="235" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" font-weight="700" fill="#2563EB">Optimization</text>
+  <text x="880" y="258" font-family="Arial,sans-serif" font-size="15" text-anchor="middle" fill="#52606D">retune / train longer</text>
+  <rect x="975" y="205" width="150" height="70" rx="12" fill="#E9F7F4" stroke="#0F766E" stroke-width="2"/>
+  <text x="1050" y="235" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" font-weight="700" fill="#0F766E">Architecture</text>
+  <text x="1050" y="258" font-family="Arial,sans-serif" font-size="15" text-anchor="middle" fill="#52606D">fixed width/depth path</text>
+  <rect x="805" y="305" width="150" height="70" rx="12" fill="#FFF4DE" stroke="#B76E00" stroke-width="2"/>
+  <text x="880" y="335" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" font-weight="700" fill="#B76E00">Data</text>
+  <text x="880" y="358" font-family="Arial,sans-serif" font-size="15" text-anchor="middle" fill="#52606D">snapshot / mixture</text>
+  <rect x="975" y="305" width="150" height="70" rx="12" fill="#FBECEC" stroke="#C0392B" stroke-width="2"/>
+  <text x="1050" y="335" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" font-weight="700" fill="#C0392B">Metric</text>
+  <text x="1050" y="358" font-family="Arial,sans-serif" font-size="15" text-anchor="middle" fill="#52606D">continuous alternative</text>
+  <rect x="805" y="405" width="150" height="70" rx="12" fill="#FFFFFF" stroke="#52606D" stroke-width="2"/>
+  <text x="880" y="435" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" font-weight="700" fill="#172033">Sampling</text>
+  <text x="880" y="458" font-family="Arial,sans-serif" font-size="15" text-anchor="middle" fill="#52606D">larger eval + seeds</text>
+  <rect x="975" y="405" width="150" height="70" rx="12" fill="#FFFFFF" stroke="#52606D" stroke-width="2"/>
+  <text x="1050" y="435" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" font-weight="700" fill="#172033">Mechanism</text>
+  <text x="1050" y="458" font-family="Arial,sans-serif" font-size="15" text-anchor="middle" fill="#52606D">representation mediator</text>
+  <rect x="825" y="525" width="280" height="105" rx="14" fill="#FFFFFF" stroke="#C0392B" stroke-width="3"/>
+  <text x="965" y="555" font-family="Arial,sans-serif" font-size="17" text-anchor="middle" font-weight="700" fill="#C0392B">Claim gate</text>
+  <text x="965" y="583" font-family="Arial,sans-serif" font-size="15" text-anchor="middle" fill="#52606D">A stable held-out kink after competing</text>
+  <text x="965" y="607" font-family="Arial,sans-serif" font-size="15" text-anchor="middle" fill="#52606D">interventions strengthens mechanism evidence.</text>
+  <text x="600" y="758" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" fill="#52606D">Textbook diagnostic map — no single curve shape identifies its own cause.</text>
+</svg>

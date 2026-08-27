@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="620" viewBox="0 0 1100 620" role="img" aria-labelledby="title desc">
+<title id="title">实验图 2｜从 chunk 到 claim 的可归因漏斗</title><desc id="desc">语料覆盖、候选保真、上下文和 citation 的分层账。</desc>
+<rect width="1100" height="620" fill="#FBF8F1"/>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}</style>
+<text x="50" y="48" font-size="23" font-weight="700" fill="#183044">实验图 2｜从 chunk 到 claim 的可归因漏斗</text>
+<line x1="48" y1="65" x2="1052" y2="65" stroke="#245AA8" stroke-width="3"/>
+<rect x="65" y="125" width="180" height="115" rx="10" fill="#FFFDF8" stroke="#4F7B45" stroke-width="2"/>
+<text x="79" y="152" font-size="14" font-weight="700" fill="#4F7B45">Chunk</text>
+<text x="79" y="177" font-size="12" fill="#667784">5 windows</text>
+<text x="79" y="196" font-size="12" fill="#667784">oracle coverage = 1</text>
+<rect x="285" y="125" width="180" height="115" rx="10" fill="#FFFDF8" stroke="#17766E" stroke-width="2"/>
+<text x="299" y="152" font-size="14" font-weight="700" fill="#17766E">ANN</text>
+<text x="299" y="177" font-size="12" fill="#667784">exact overlap = 3/5</text>
+<text x="299" y="196" font-size="12" fill="#667784">recall = 0.6</text>
+<rect x="505" y="125" width="180" height="115" rx="10" fill="#FFFDF8" stroke="#7054A3" stroke-width="2"/>
+<text x="519" y="152" font-size="14" font-weight="700" fill="#7054A3">Rerank</text>
+<text x="519" y="177" font-size="12" fill="#667784">candidate has gold</text>
+<text x="519" y="196" font-size="12" fill="#667784">final top-3 loses gold</text>
+<rect x="725" y="125" width="180" height="115" rx="10" fill="#FFFDF8" stroke="#245AA8" stroke-width="2"/>
+<text x="739" y="152" font-size="14" font-weight="700" fill="#245AA8">Claims</text>
+<text x="739" y="177" font-size="12" fill="#667784">3 need support</text>
+<text x="739" y="196" font-size="12" fill="#667784">2 supported</text>
+<rect x="945" y="125" width="120" height="115" rx="10" fill="#FFFDF8" stroke="#C87922" stroke-width="2"/>
+<text x="959" y="152" font-size="14" font-weight="700" fill="#C87922">Cites</text>
+<text x="959" y="177" font-size="12" fill="#667784">3/4</text>
+<text x="959" y="196" font-size="12" fill="#667784">correct</text>
+<line x1="245" y1="182" x2="285" y2="182" stroke="#667784" stroke-width="2"/>
+<line x1="465" y1="182" x2="505" y2="182" stroke="#667784" stroke-width="2"/>
+<line x1="685" y1="182" x2="725" y2="182" stroke="#667784" stroke-width="2"/>
+<line x1="905" y1="182" x2="945" y2="182" stroke="#667784" stroke-width="2"/>
+<text x="65" y="315" font-size="15" font-weight="700" fill="#183044">Separate events</text>
+<text x="70" y="366" font-size="12" fill="#667784">corpus/chunk</text>
+<rect x="285" y="350" width="650" height="24" rx="4" fill="#E7E2D9"/>
+<rect x="285" y="350" width="650.0" height="24" rx="4" fill="#4F7B45"/>
+<text x="950" y="367" font-size="12" fill="#183044">1.000</text>
+<text x="70" y="412" font-size="12" fill="#667784">ANN exact preservation</text>
+<rect x="285" y="396" width="650" height="24" rx="4" fill="#E7E2D9"/>
+<rect x="285" y="396" width="390.0" height="24" rx="4" fill="#17766E"/>
+<text x="950" y="413" font-size="12" fill="#183044">0.600</text>
+<text x="70" y="458" font-size="12" fill="#667784">citation completeness</text>
+<rect x="285" y="442" width="650" height="24" rx="4" fill="#E7E2D9"/>
+<rect x="285" y="442" width="433.3333333333333" height="24" rx="4" fill="#245AA8"/>
+<text x="950" y="459" font-size="12" fill="#183044">0.667</text>
+<text x="70" y="504" font-size="12" fill="#667784">citation correctness</text>
+<rect x="285" y="488" width="650" height="24" rx="4" fill="#E7E2D9"/>
+<rect x="285" y="488" width="487.5" height="24" rx="4" fill="#C87922"/>
+<text x="950" y="505" font-size="12" fill="#183044">0.750</text>
+<line x1="48" y1="575" x2="1052" y2="575" stroke="#D9D5CB"/>
+<text x="50" y="598" font-size="12" fill="#667784">A high early-stage score does not imply downstream success; keep stage-level IDs and denominators.</text>
+</svg>

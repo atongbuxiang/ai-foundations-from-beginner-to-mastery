@@ -1,0 +1,9 @@
+record_type,name,value,status,note
+bundle,baseline_hash,8fadf839ba0607915e071071eb99e015fe297dee4172509b36aa3a1126e59df9,stable,canonical JSON sha256
+bundle,changed_hash,2af82e86d4244a11f9448688915c6771dc64f07c4d49ef51ab12f4536c242483,changed,template c1→c2
+drift,tv,0.09999999999999998,signal,input marginal
+drift,psi,0.04054651081081643,signal,binned marginal
+feedback,observed_accuracy,0.9,biased,answered subset
+feedback,target_accuracy,0.78,audit,random audit
+release_gate,latency,27,fail,upper bound > 20 ms
+evidence,valid_completeness,0.7,incomplete,2 broken links

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">LoRA：低秩的是权重增量，初始化决定首步梯度流</title><desc id="desc">展示 W0 加缩放 BA、矩阵形状、两种常见初始化的首步梯度，以及训练后 merge 等价。</desc>
+<rect width="1200" height="700" fill="#FFFEFB"/>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#64748B"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#17324D" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<text x="55" y="55" font-size="25" font-weight="700" fill="#2563EB">LoRA：低秩的是权重增量，初始化决定首步梯度流</text>
+<rect x="55" y="115" width="270" height="150" rx="12" fill="#EFF6FF" stroke="#2563EB" stroke-width="2" filter="url(#shadow)"/>
+<text x="71" y="144" font-size="16" font-weight="700" fill="#2563EB">Frozen base</text>
+<text x="71" y="171" font-size="13" fill="#64748B">W₀ ∈ Rᵐˣⁿ</text>
+<text x="71" y="193" font-size="13" fill="#64748B">xW₀ remains fixed</text>
+<text x="71" y="215" font-size="13" fill="#64748B">no optimizer state for W₀</text>
+<text x="350" y="195" font-size="30" font-weight="700" fill="#17324D">+</text>
+<rect x="405" y="115" width="350" height="150" rx="12" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2" filter="url(#shadow)"/>
+<text x="421" y="144" font-size="16" font-weight="700" fill="#7C3AED">Trainable update</text>
+<text x="421" y="171" font-size="13" fill="#64748B">A ∈ Rʳˣⁿ,  B ∈ Rᵐˣʳ</text>
+<text x="421" y="193" font-size="13" fill="#64748B">ΔW = sBA, rank(ΔW) ≤ r</text>
+<text x="421" y="215" font-size="13" fill="#64748B">parameters = r(m+n)</text>
+<line x1="770" y1="190" x2="835" y2="190" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="850" y="115" width="295" height="150" rx="12" fill="#ECFDF5" stroke="#0F766E" stroke-width="2" filter="url(#shadow)"/>
+<text x="866" y="144" font-size="16" font-weight="700" fill="#0F766E">Forward</text>
+<text x="866" y="171" font-size="13" fill="#64748B">y = x(W₀+sBA)ᵀ</text>
+<text x="866" y="193" font-size="13" fill="#64748B">unmerged: two small matmuls</text>
+<text x="866" y="215" font-size="13" fill="#64748B">merged: W* = W₀+sBA</text>
+<text x="55" y="325" font-size="18" font-weight="700" fill="#17324D">首步梯度流：零初始化哪一个因子很重要</text>
+<rect x="85" y="355" width="230" height="45" fill="#EEF2F7" stroke="#D7DEE8"/>
+<text x="200.0" y="383" text-anchor="middle" font-size="13" font-weight="700" fill="#17324D">initialization</text>
+<rect x="315" y="355" width="220" height="45" fill="#EEF2F7" stroke="#D7DEE8"/>
+<text x="425.0" y="383" text-anchor="middle" font-size="13" font-weight="700" fill="#17324D">ΔW at step 0</text>
+<rect x="535" y="355" width="220" height="45" fill="#EEF2F7" stroke="#D7DEE8"/>
+<text x="645.0" y="383" text-anchor="middle" font-size="13" font-weight="700" fill="#17324D">gradient to A</text>
+<rect x="755" y="355" width="220" height="45" fill="#EEF2F7" stroke="#D7DEE8"/>
+<text x="865.0" y="383" text-anchor="middle" font-size="13" font-weight="700" fill="#17324D">gradient to B</text>
+<rect x="85" y="400" width="230" height="50" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="200.0" y="431" text-anchor="middle" font-size="13" fill="#2563EB">A random, B=0</text>
+<rect x="315" y="400" width="220" height="50" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="425.0" y="431" text-anchor="middle" font-size="13" fill="#17324D">0</text>
+<rect x="535" y="400" width="220" height="50" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="645.0" y="431" text-anchor="middle" font-size="13" fill="#17324D">0 at first step</text>
+<rect x="755" y="400" width="220" height="50" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="865.0" y="431" text-anchor="middle" font-size="13" fill="#17324D">nonzero</text>
+<rect x="85" y="455" width="230" height="50" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="200.0" y="486" text-anchor="middle" font-size="13" fill="#D97706">A=0, B random</text>
+<rect x="315" y="455" width="220" height="50" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="425.0" y="486" text-anchor="middle" font-size="13" fill="#17324D">0</text>
+<rect x="535" y="455" width="220" height="50" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="645.0" y="486" text-anchor="middle" font-size="13" fill="#17324D">nonzero</text>
+<rect x="755" y="455" width="220" height="50" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="865.0" y="486" text-anchor="middle" font-size="13" fill="#17324D">0 at first step</text>
+<rect x="85" y="510" width="230" height="50" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="200.0" y="541" text-anchor="middle" font-size="13" fill="#C24135">A=0, B=0</text>
+<rect x="315" y="510" width="220" height="50" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="425.0" y="541" text-anchor="middle" font-size="13" fill="#17324D">0</text>
+<rect x="535" y="510" width="220" height="50" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="645.0" y="541" text-anchor="middle" font-size="13" fill="#17324D">0</text>
+<rect x="755" y="510" width="220" height="50" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="865.0" y="541" text-anchor="middle" font-size="13" fill="#17324D">0 · stuck</text>
+<rect x="85" y="585" width="890" height="42" rx="8" fill="#ECFDF5" stroke="#0F766E"/>
+<text x="105" y="611" font-size="14" fill="#0F766E">Merge oracle: for every x, xW₀ᵀ + s(xAᵀ)Bᵀ = x(W₀+sBA)ᵀ within floating-point tolerance.</text>
+<text x="55" y="670" font-size="14" fill="#64748B">Trainable-parameter ratio 不是总内存或速度比；target modules、rank、scale、dropout、dtype 与 merge status 都要版本化。</text>
+</svg>

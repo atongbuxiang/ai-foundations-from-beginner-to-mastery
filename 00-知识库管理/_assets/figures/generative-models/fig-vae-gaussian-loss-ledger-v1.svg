@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">Gaussian VAE 的 KL 与解码似然尺度账本</title>
+  <desc id="desc">左侧逐维展示高斯后验到标准正态的KL，右侧展示从观测分布选择、方差和维度归约到重构负对数似然的尺度链。</desc>
+  <rect width="1200" height="620" fill="#FFFEFB"/>
+  <style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}</style>
+  <g font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif">
+    <text x="54" y="55" font-size="23" font-weight="700" fill="#1F2937">MSE / BCE 不是昵称：每一项都来自一个概率与尺度合同</text>
+    <rect x="54" y="96" width="462" height="420" rx="9" fill="#F8FAFC" stroke="#64748B" stroke-width="2.5"/>
+    <text x="82" y="136" font-size="20" font-weight="700" fill="#2563EB">A　diagonal Gaussian KL</text>
+    <text x="82" y="178" font-size="18" fill="#334155">每一维 j：</text>
+    <rect x="82" y="200" width="118" height="82" rx="7" fill="#EEF3FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="141" y="232" text-anchor="middle" font-size="15" fill="#64748B">位置代价</text>
+    <text x="141" y="262" text-anchor="middle" font-size="21" font-weight="700" fill="#2563EB">μj²</text>
+    <text x="219" y="251" font-size="26" fill="#334155">+</text>
+    <rect x="250" y="200" width="202" height="82" rx="7" fill="#FFF7E6" stroke="#B7791F" stroke-width="2"/>
+    <text x="351" y="232" text-anchor="middle" font-size="15" fill="#64748B">尺度偏离代价</text>
+    <text x="351" y="262" text-anchor="middle" font-size="20" font-weight="700" fill="#B7791F">σj² − log σj² − 1</text>
+    <line x1="82" y1="314" x2="452" y2="314" stroke="#D7DEE8" stroke-width="2"/>
+    <text x="267" y="356" text-anchor="middle" font-size="20" fill="#334155">KL = ½ Σj ( μj² + σj² − log σj² − 1 )</text>
+    <text x="82" y="401" font-size="16" fill="#0F766E">等号：μ=0 且 σ²=1</text>
+    <text x="82" y="438" font-size="16" fill="#64748B">logvar ℓ：σ²=e^ℓ，采样 z=μ+e^(ℓ/2)⊙ε</text>
+    <text x="82" y="478" font-size="16" fill="#C24135">clip / reduction / units 均须报告</text>
+    <rect x="550" y="96" width="596" height="420" rx="9" fill="#FFFEFB" stroke="#64748B" stroke-width="2.5"/>
+    <text x="578" y="136" font-size="20" font-weight="700" fill="#0F766E">B　重构项的四道合同</text>
+    <g font-size="16">
+      <rect x="578" y="177" width="124" height="64" rx="7" fill="#EEF3FF" stroke="#2563EB" stroke-width="2"/>
+      <text x="640" y="204" text-anchor="middle" fill="#64748B">数据对象</text><text x="640" y="228" text-anchor="middle" fill="#1F2937">binary / uint8 / real</text>
+      <text x="718" y="215" font-size="24" fill="#334155">→</text>
+      <rect x="750" y="177" width="126" height="64" rx="7" fill="#E8F5F1" stroke="#0F766E" stroke-width="2"/>
+      <text x="813" y="204" text-anchor="middle" fill="#64748B">likelihood</text><text x="813" y="228" text-anchor="middle" fill="#1F2937">Bern / Gauss / Cat</text>
+      <text x="892" y="215" font-size="24" fill="#334155">→</text>
+      <rect x="924" y="177" width="190" height="64" rx="7" fill="#FFF7E6" stroke="#B7791F" stroke-width="2"/>
+      <text x="1019" y="204" text-anchor="middle" fill="#64748B">参数 / 单位</text><text x="1019" y="228" text-anchor="middle" fill="#1F2937">τ², bin, token scale</text>
+    </g>
+    <rect x="578" y="281" width="536" height="92" rx="7" fill="#F8FAFC" stroke="#D7DEE8" stroke-width="2"/>
+    <text x="846" y="315" text-anchor="middle" font-size="18" fill="#334155">Gaussian NLL = D/2 log(2πτ²) + ||x−m(z)||²/(2τ²)</text>
+    <text x="846" y="350" text-anchor="middle" font-size="16" fill="#64748B">若 MSE 用 mean，则平方项系数是 D/(2τ²)</text>
+    <rect x="578" y="400" width="235" height="76" rx="7" fill="#FFF0EE" stroke="#C24135" stroke-width="2"/>
+    <text x="696" y="430" text-anchor="middle" font-size="16" fill="#64748B">implementation</text>
+    <text x="696" y="458" text-anchor="middle" font-size="18" font-weight="700" fill="#C24135">sum / mean / batch</text>
+    <text x="837" y="447" font-size="28" fill="#334155">+</text>
+    <rect x="879" y="400" width="235" height="76" rx="7" fill="#EEF3FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="997" y="430" text-anchor="middle" font-size="16" fill="#64748B">effective trade-off</text>
+    <text x="997" y="458" text-anchor="middle" font-size="18" font-weight="700" fill="#2563EB">β × KL</text>
+    <text x="54" y="566" font-size="17" fill="#1F2937">同样写“MSE + KL”，改变 D、τ² 或 reduction 就会改变有效 β；跨实现比较必须先统一账本。</text>
+  </g>
+</svg>

@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+<title id="title">Hyperparameter transfer curves</title>
+<desc id="desc">Two panels compare aligned muP proxy curves with drifting standard-parameterization curves across widths.</desc>
+<rect width="1200" height="800" fill="#FFFEFB"/>
+<text x="60.0" y="58.0" font-family="Inter, Arial, sans-serif" font-size="28" fill="#172033" text-anchor="start" font-weight="700">Transfer audit: compare curves and regret, not only one selected loss</text>
+<text x="60.0" y="91.0" font-family="Inter, Arial, sans-serif" font-size="17" fill="#52606D" text-anchor="start" font-weight="400">All widths share the same candidate grid; the vertical marker is the base-width choice.</text>
+<rect x="55" y="125" width="530" height="590" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+<text x="79.0" y="163.0" font-family="Inter, Arial, sans-serif" font-size="20" fill="#172033" text-anchor="start" font-weight="700">A  muP synthetic family</text>
+<rect x="615" y="125" width="530" height="590" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+<text x="639.0" y="163.0" font-family="Inter, Arial, sans-serif" font-size="20" fill="#172033" text-anchor="start" font-weight="700">B  Drifting standard family</text>
+<line x1="135" y1="620.0" x2="510" y2="620.0" stroke="#D9E0E7" stroke-width="1"/>
+<text x="123.0" y="625.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">1.5</text>
+<line x1="135" y1="515.7" x2="510" y2="515.7" stroke="#D9E0E7" stroke-width="1"/>
+<text x="123.0" y="520.7" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">4.5</text>
+<line x1="135" y1="376.5" x2="510" y2="376.5" stroke="#D9E0E7" stroke-width="1"/>
+<text x="123.0" y="381.5" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">8.5</text>
+<line x1="135" y1="237.4" x2="510" y2="237.4" stroke="#D9E0E7" stroke-width="1"/>
+<text x="123.0" y="242.4" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">12.5</text>
+<line x1="135" y1="185" x2="135" y2="620" stroke="#D9E0E7" stroke-width="1"/>
+<text x="135.0" y="650.0" font-family="Inter, Arial, sans-serif" font-size="16" fill="#52606D" text-anchor="middle" font-weight="400">0.5</text>
+<line x1="260" y1="185" x2="260" y2="620" stroke="#D9E0E7" stroke-width="1"/>
+<text x="260.0" y="650.0" font-family="Inter, Arial, sans-serif" font-size="16" fill="#52606D" text-anchor="middle" font-weight="400">1.0</text>
+<line x1="385" y1="185" x2="385" y2="620" stroke="#D9E0E7" stroke-width="1"/>
+<text x="385.0" y="650.0" font-family="Inter, Arial, sans-serif" font-size="16" fill="#52606D" text-anchor="middle" font-weight="400">2.0</text>
+<line x1="510" y1="185" x2="510" y2="620" stroke="#D9E0E7" stroke-width="1"/>
+<text x="510.0" y="650.0" font-family="Inter, Arial, sans-serif" font-size="16" fill="#52606D" text-anchor="middle" font-weight="400">4.0</text>
+<line x1="385" y1="185" x2="385" y2="620" stroke="#52606D" stroke-width="2" stroke-dasharray="8 7"/>
+<text x="385.0" y="680.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="middle" font-weight="400">base choice</text>
+<polyline points="135.0,480.9 260.0,585.2 385.0,620.0 510.0,585.2" fill="none" stroke="#2563EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="135.0" cy="480.9" r="5" fill="#2563EB"/>
+<circle cx="260.0" cy="585.2" r="5" fill="#2563EB"/>
+<circle cx="385.0" cy="620.0" r="5" fill="#2563EB"/>
+<circle cx="510.0" cy="585.2" r="5" fill="#2563EB"/>
+<polyline points="135.0,476.7 260.0,583.1 385.0,620.0 510.0,587.3" fill="none" stroke="#0F766E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="135.0" cy="476.7" r="5" fill="#0F766E"/>
+<circle cx="260.0" cy="583.1" r="5" fill="#0F766E"/>
+<circle cx="385.0" cy="620.0" r="5" fill="#0F766E"/>
+<circle cx="510.0" cy="587.3" r="5" fill="#0F766E"/>
+<polyline points="135.0,472.4 260.0,580.9 385.0,619.9 510.0,589.3" fill="none" stroke="#B76E00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="135.0" cy="472.4" r="5" fill="#B76E00"/>
+<circle cx="260.0" cy="580.9" r="5" fill="#B76E00"/>
+<circle cx="385.0" cy="619.9" r="5" fill="#B76E00"/>
+<circle cx="510.0" cy="589.3" r="5" fill="#B76E00"/>
+<polyline points="135.0,468.1 260.0,578.7 385.0,619.7 510.0,591.2" fill="none" stroke="#C0392B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="135.0" cy="468.1" r="5" fill="#C0392B"/>
+<circle cx="260.0" cy="578.7" r="5" fill="#C0392B"/>
+<circle cx="385.0" cy="619.7" r="5" fill="#C0392B"/>
+<circle cx="510.0" cy="591.2" r="5" fill="#C0392B"/>
+<text x="320.0" y="704.0" font-family="Inter, Arial, sans-serif" font-size="17" fill="#52606D" text-anchor="middle" font-weight="400">learning rate</text>
+<line x1="695" y1="620.0" x2="1070" y2="620.0" stroke="#D9E0E7" stroke-width="1"/>
+<text x="683.0" y="625.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">1.5</text>
+<line x1="695" y1="515.7" x2="1070" y2="515.7" stroke="#D9E0E7" stroke-width="1"/>
+<text x="683.0" y="520.7" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">4.5</text>
+<line x1="695" y1="376.5" x2="1070" y2="376.5" stroke="#D9E0E7" stroke-width="1"/>
+<text x="683.0" y="381.5" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">8.5</text>
+<line x1="695" y1="237.4" x2="1070" y2="237.4" stroke="#D9E0E7" stroke-width="1"/>
+<text x="683.0" y="242.4" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">12.5</text>
+<line x1="695" y1="185" x2="695" y2="620" stroke="#D9E0E7" stroke-width="1"/>
+<text x="695.0" y="650.0" font-family="Inter, Arial, sans-serif" font-size="16" fill="#52606D" text-anchor="middle" font-weight="400">0.5</text>
+<line x1="820" y1="185" x2="820" y2="620" stroke="#D9E0E7" stroke-width="1"/>
+<text x="820.0" y="650.0" font-family="Inter, Arial, sans-serif" font-size="16" fill="#52606D" text-anchor="middle" font-weight="400">1.0</text>
+<line x1="945" y1="185" x2="945" y2="620" stroke="#D9E0E7" stroke-width="1"/>
+<text x="945.0" y="650.0" font-family="Inter, Arial, sans-serif" font-size="16" fill="#52606D" text-anchor="middle" font-weight="400">2.0</text>
+<line x1="1070" y1="185" x2="1070" y2="620" stroke="#D9E0E7" stroke-width="1"/>
+<text x="1070.0" y="650.0" font-family="Inter, Arial, sans-serif" font-size="16" fill="#52606D" text-anchor="middle" font-weight="400">4.0</text>
+<line x1="945" y1="185" x2="945" y2="620" stroke="#52606D" stroke-width="2" stroke-dasharray="8 7"/>
+<text x="945.0" y="680.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="middle" font-weight="400">base choice</text>
+<polyline points="695.0,480.9 820.0,585.2 945.0,620.0 1070.0,585.2" fill="none" stroke="#2563EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="695.0" cy="480.9" r="5" fill="#2563EB"/>
+<circle cx="820.0" cy="585.2" r="5" fill="#2563EB"/>
+<circle cx="945.0" cy="620.0" r="5" fill="#2563EB"/>
+<circle cx="1070.0" cy="585.2" r="5" fill="#2563EB"/>
+<polyline points="695.0,411.2 820.0,546.9 945.0,613.0 1070.0,609.5" fill="none" stroke="#0F766E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="695.0" cy="411.2" r="5" fill="#0F766E"/>
+<circle cx="820.0" cy="546.9" r="5" fill="#0F766E"/>
+<circle cx="945.0" cy="613.0" r="5" fill="#0F766E"/>
+<circle cx="1070.0" cy="609.5" r="5" fill="#0F766E"/>
+<polyline points="695.0,327.5 820.0,494.4 945.0,591.8 1070.0,619.7" fill="none" stroke="#B76E00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="695.0" cy="327.5" r="5" fill="#B76E00"/>
+<circle cx="820.0" cy="494.4" r="5" fill="#B76E00"/>
+<circle cx="945.0" cy="591.8" r="5" fill="#B76E00"/>
+<circle cx="1070.0" cy="619.7" r="5" fill="#B76E00"/>
+<polyline points="695.0,229.7 820.0,427.9 945.0,556.6 1070.0,615.7" fill="none" stroke="#C0392B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="695.0" cy="229.7" r="5" fill="#C0392B"/>
+<circle cx="820.0" cy="427.9" r="5" fill="#C0392B"/>
+<circle cx="945.0" cy="556.6" r="5" fill="#C0392B"/>
+<circle cx="1070.0" cy="615.7" r="5" fill="#C0392B"/>
+<text x="880.0" y="704.0" font-family="Inter, Arial, sans-serif" font-size="17" fill="#52606D" text-anchor="middle" font-weight="400">learning rate</text>
+<line x1="350" y1="110" x2="378" y2="110" stroke="#2563EB" stroke-width="4"/>
+<text x="386.0" y="116.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="start" font-weight="400">n=128</text>
+<line x1="480" y1="110" x2="508" y2="110" stroke="#0F766E" stroke-width="4"/>
+<text x="516.0" y="116.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="start" font-weight="400">n=256</text>
+<line x1="610" y1="110" x2="638" y2="110" stroke="#B76E00" stroke-width="4"/>
+<text x="646.0" y="116.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="start" font-weight="400">n=512</text>
+<line x1="740" y1="110" x2="768" y2="110" stroke="#C0392B" stroke-width="4"/>
+<text x="776.0" y="116.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="start" font-weight="400">n=1024</text>
+<text x="600.0" y="756.0" font-family="Inter, Arial, sans-serif" font-size="16" fill="#52606D" text-anchor="middle" font-weight="400">Evidence boundary: deterministic curve construction validates metrics; it does not establish empirical muTransfer.</text>
+</svg>

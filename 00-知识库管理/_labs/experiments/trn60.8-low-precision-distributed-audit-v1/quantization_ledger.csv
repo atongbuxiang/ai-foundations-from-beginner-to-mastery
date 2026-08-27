@@ -1,0 +1,5 @@
+value,clipped_value,quantized_code,dequantized_value,absolute_error,scale,zero_point,adam_baseline_bytes_per_parameter,adam_8bit_state_bytes_per_parameter,state_byte_saving_fraction,fp32_bucket_mb,int8_bucket_plus_scales_mb,payload_compression_ratio
+-1.0,-1.0,0,-1.0,0.0,1.0,1,16.0,10.0,0.375,100.0,25.390628,3.9384610731172147
+0.0,0.0,1,0.0,0.0,1.0,1,16.0,10.0,0.375,100.0,25.390628,3.9384610731172147
+0.6,0.6,2,1.0,0.4,1.0,1,16.0,10.0,0.375,100.0,25.390628,3.9384610731172147
+2.4,2.0,3,2.0,0.3999999999999999,1.0,1,16.0,10.0,0.375,100.0,25.390628,3.9384610731172147

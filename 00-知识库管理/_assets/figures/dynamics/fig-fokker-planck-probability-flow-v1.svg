@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">从 SDE generator 到 Fokker–Planck 与概率流 ODE</title>
+  <desc id="desc">三面板依次展示测试函数上的 generator 与 Dynkin 公式、把导数转移到密度得到 Fokker–Planck 守恒通量，以及用 score 将二阶扩散通量改写为一阶概率流速度；二者共享单时刻密度但不共享路径律。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M0,0 L9,4.5 L0,9 Z" fill="#475569"/>
+    </marker>
+    <linearGradient id="bluewash" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eff6ff"/><stop offset="1" stop-color="#dbeafe"/>
+    </linearGradient>
+    <linearGradient id="greenwash" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ecfdf5"/><stop offset="1" stop-color="#d1fae5"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="430" fill="#ffffff"/>
+  <text x="20" y="32" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="20" font-weight="700" fill="#0f172a">DYN-11　随机路径的 law 如何变成可计算的密度流</text>
+
+  <rect x="20" y="55" width="370" height="355" rx="18" fill="url(#bluewash)" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="42" y="88" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="18.5" font-weight="700" fill="#0f172a">A　先在测试函数上看无穷小变化</text>
+  <rect x="52" y="115" width="306" height="58" rx="11" fill="#ffffff" stroke="#bfdbfe"/>
+  <text x="205" y="140" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="14" font-weight="600" fill="#1d4ed8">dX = f dt + B dW,　D = B Bᵀ</text>
+  <text x="205" y="161" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="13" fill="#475569">L φ = f · grad φ + ½ tr(D Hess φ)</text>
+  <line x1="205" y1="183" x2="205" y2="218" stroke="#475569" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <rect x="52" y="228" width="306" height="68" rx="11" fill="#ffffff" stroke="#bfdbfe"/>
+  <text x="205" y="253" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="14" font-weight="600" fill="#1d4ed8">d E[φ(X_t)] / dt = E[L φ(X_t)]</text>
+  <text x="205" y="277" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="12.7" fill="#475569">Dynkin：随机积分的期望为 0</text>
+  <text x="54" y="329" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="13.2" fill="#0f172a">L 作用在 observable/test function 上。</text>
+  <text x="54" y="356" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="12.7" fill="#b91c1c">它还不是 density PDE；需要 adjoint。</text>
+  <text x="54" y="382" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="12.4" fill="#475569">边界项是否消失必须单独说明。</text>
+
+  <rect x="410" y="55" width="370" height="355" rx="18" fill="#fff7ed" stroke="#fdba74" stroke-width="1.5"/>
+  <text x="432" y="88" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="18.5" font-weight="700" fill="#0f172a">B　两次分部积分把 L 转给密度</text>
+  <rect x="442" y="113" width="306" height="61" rx="11" fill="#ffffff" stroke="#fed7aa"/>
+  <text x="595" y="137" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="13.5" font-weight="600" fill="#9a3412">∫ (L φ) p dx = ∫ φ (L* p) dx</text>
+  <text x="595" y="159" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="12.5" fill="#475569">drift 一次、diffusion 两次 integration by parts</text>
+  <line x1="595" y1="184" x2="595" y2="216" stroke="#475569" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <rect x="442" y="226" width="306" height="69" rx="11" fill="#ffffff" stroke="#fed7aa"/>
+  <text x="595" y="250" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="13.4" font-weight="600" fill="#9a3412">∂_t p = −div(f p) + ½ ∂_i∂_j(D_ij p)</text>
+  <text x="595" y="274" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="13.2" fill="#9a3412">= −div J</text>
+  <g font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="12.7">
+    <rect x="450" y="317" width="89" height="42" rx="9" fill="#ffedd5"/><text x="494" y="342" text-anchor="middle" fill="#9a3412">mass</text>
+    <rect x="550" y="317" width="89" height="42" rx="9" fill="#ffedd5"/><text x="594" y="342" text-anchor="middle" fill="#9a3412">flux</text>
+    <rect x="650" y="317" width="89" height="42" rx="9" fill="#ffedd5"/><text x="694" y="342" text-anchor="middle" fill="#9a3412">boundary</text>
+  </g>
+  <text x="595" y="389" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="12.5" fill="#475569">守恒、正性与归一化是 PDE/数值合同</text>
+
+  <rect x="800" y="55" width="380" height="355" rx="18" fill="url(#greenwash)" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="822" y="88" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="18.5" font-weight="700" fill="#0f172a">C　二阶扩散通量 → 概率流速度</text>
+  <rect x="834" y="112" width="312" height="61" rx="11" fill="#ffffff" stroke="#a7f3d0"/>
+  <text x="990" y="137" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="13.3" font-weight="600" fill="#047857">v = f − [div(D p)] / (2p)</text>
+  <text x="990" y="159" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="12.8" fill="#475569">D = g(t)² I:　v = f − ½ g² grad log p</text>
+  <line x1="990" y1="184" x2="990" y2="216" stroke="#475569" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <rect x="834" y="226" width="312" height="59" rx="11" fill="#ffffff" stroke="#a7f3d0"/>
+  <text x="990" y="250" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="13.6" font-weight="600" fill="#047857">dZ_t / dt = v(t, Z_t)</text>
+  <text x="990" y="272" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="12.7" fill="#475569">∂_t p = −div(v p)</text>
+  <g font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif">
+    <text x="843" y="320" font-size="13" font-weight="700" fill="#047857">共享：</text><text x="897" y="320" font-size="12.8" fill="#0f172a">每个时刻的 p_t</text>
+    <text x="843" y="347" font-size="13" font-weight="700" fill="#b91c1c">不同：</text><text x="897" y="347" font-size="12.8" fill="#0f172a">transition / FDD / QV / hitting time</text>
+    <text x="843" y="375" font-size="12.6" fill="#475569">score、连续流、有限步 solver 是三层对象</text>
+  </g>
+  <text x="843" y="397" font-family="Georgia,'Times New Roman',serif" font-size="12.4" fill="#047857">same marginals ≠ same stochastic process</text>
+</svg>

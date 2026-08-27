@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">参数化决定无限宽训练 Regime</title>
+  <desc id="desc">同一双层网络在不同聚合尺度、参数坐标和学习率时标下，产生 lazy kernel、mean-field feature learning 或 maximal-update 路径。</desc>
+  <rect width="1200" height="800" fill="#FFFEFB"/>
+  <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}.h{font-size:27px;font-weight:700}.sh{font-size:18px;font-weight:700}.b{font-size:15px}.s{font-size:15px;fill:#64748B}.blue{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.teal{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.amber{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.red{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}.arrb{stroke:#2563EB;stroke-width:3;fill:none}.arrt{stroke:#0F766E;stroke-width:3;fill:none}.arra{stroke:#B76E00;stroke-width:3;fill:none}</style>
+  <defs>
+    <marker id="ab" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#2563EB"/></marker>
+    <marker id="at" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#0F766E"/></marker>
+    <marker id="aa" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#B76E00"/></marker>
+  </defs>
+  <text x="48" y="48" class="h" fill="#2563EB">同一网络公式，三种“和”的尺度，三种训练对象</text>
+  <rect x="300" y="78" width="600" height="84" rx="14" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="330" y="112" class="sh">f_n(x) = c_n sum_i a_i φ(w_i^T x)</text>
+  <text x="330" y="142" class="b">参数化 = stored coordinates + init + forward multiplier + group LR</text>
+
+  <path d="M500 162 C390 190 260 198 210 232" class="arrb" marker-end="url(#ab)"/>
+  <path d="M600 162 L600 232" class="arrt" marker-end="url(#at)"/>
+  <path d="M700 162 C810 190 940 198 990 232" class="arra" marker-end="url(#aa)"/>
+
+  <rect x="48" y="238" width="340" height="184" rx="14" class="blue"/>
+  <text x="72" y="274" class="sh">NTK-style fluctuation</text>
+  <text x="72" y="306" class="b">c_n = 1/√n，参数坐标 O(1)</text>
+  <text x="72" y="336" class="b">单元 Delta w_i = O(1/√n) → 0</text>
+  <text x="72" y="366" class="b">n 个相干贡献使 Δf = O(1)</text>
+  <text x="72" y="396" class="s">固定有限步：feature freeze，kernel 可冻结</text>
+
+  <rect x="430" y="238" width="340" height="184" rx="14" class="teal"/>
+  <text x="454" y="274" class="sh">Mean-field empirical measure</text>
+  <text x="454" y="306" class="b">c_n = 1/n，rho_n = (1/n) sum_i delta_theta_i</text>
+  <text x="454" y="336" class="b">梯度 O(1/n)，时间 / LR 重标</text>
+  <text x="454" y="366" class="b">粒子 Delta theta_i = O(1)，rho_t 演化</text>
+  <text x="454" y="396" class="s">feature learning 保留为分布动力学</text>
+
+  <rect x="812" y="238" width="340" height="184" rx="14" class="amber"/>
+  <text x="836" y="274" class="sh">μP maximal update</text>
+  <text x="836" y="306" class="b">input / hidden / output 分角色</text>
+  <text x="836" y="336" class="b">init、multiplier、LR 联合定标</text>
+  <text x="836" y="366" class="b">最大非发散 feature update</text>
+  <text x="836" y="396" class="s">目标：跨 width 的非退化训练合同</text>
+
+  <text x="48" y="474" class="h" fill="#0F766E">不要用 loss 一项判断 Regime：同时看三张曲线</text>
+  <rect x="48" y="506" width="340" height="156" rx="14" fill="#F8FAFC" stroke="#2563EB" stroke-width="2"/>
+  <text x="72" y="542" class="sh">Feature motion</text>
+  <path d="M88 628 L88 566 L348 566" stroke="#CBD5E1" stroke-width="2" fill="none"/>
+  <path d="M100 584 C170 602 250 618 336 624" stroke="#2563EB" stroke-width="3" fill="none"/>
+  <path d="M100 596 C180 586 260 582 336 580" stroke="#0F766E" stroke-width="3" fill="none"/>
+  <text x="206" y="554" class="s">R_h(n)</text>
+
+  <rect x="430" y="506" width="340" height="156" rx="14" fill="#F8FAFC" stroke="#0F766E" stroke-width="2"/>
+  <text x="454" y="542" class="sh">Kernel drift</text>
+  <path d="M470 628 L470 566 L730 566" stroke="#CBD5E1" stroke-width="2" fill="none"/>
+  <path d="M482 584 C552 602 632 618 718 624" stroke="#2563EB" stroke-width="3" fill="none"/>
+  <path d="M482 604 C562 592 642 584 718 582" stroke="#0F766E" stroke-width="3" fill="none"/>
+  <text x="584" y="554" class="s">R_K(n)</text>
+
+  <rect x="812" y="506" width="340" height="156" rx="14" fill="#F8FAFC" stroke="#B76E00" stroke-width="2"/>
+  <text x="836" y="542" class="sh">Output update</text>
+  <path d="M852 628 L852 566 L1112 566" stroke="#CBD5E1" stroke-width="2" fill="none"/>
+  <path d="M864 584 C944 580 1024 582 1100 580" stroke="#2563EB" stroke-width="3" fill="none"/>
+  <path d="M864 604 C944 590 1024 584 1100 584" stroke="#0F766E" stroke-width="3" fill="none"/>
+  <path d="M864 592 C944 604 1024 620 1100 632" stroke="#C0392B" stroke-width="3" fill="none"/>
+  <text x="972" y="554" class="s">Delta f(n)</text>
+
+  <rect x="48" y="690" width="1104" height="72" rx="12" class="red"/>
+  <text x="72" y="720" class="sh">同样的初始函数 ≠ 同样的训练</text>
+  <text x="72" y="748" class="b">把宽度因子吸收入参数后，Euclidean gradient 和 raw LR 的语义随之改变；必须比较实际 feature update。</text>
+  <text x="48" y="788" class="s">边界：曲线是判别模板；具体斜率取决于网络、优化器、时域、相关性与极限路径。</text>
+</svg>

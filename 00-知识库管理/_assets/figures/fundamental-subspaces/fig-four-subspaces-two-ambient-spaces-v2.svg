@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">矩阵的四个基本子空间与两个环境空间</title>
+  <desc id="desc">输入空间分为行空间和零空间，输出空间分为列空间和左零空间；矩阵把行空间一一映到列空间，并把零空间压到零。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
+    <style>
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}.blue{fill:#2563eb}.green{fill:#0f766e}.amber{fill:#b7791f}.h{font-size:19px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}.arrow{stroke:#64748b;stroke-width:2.2;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <text x="600" y="43" class="sans h ink" text-anchor="middle">A∈Fᵐˣⁿ 同时管理输入侧的信息损失与输出侧的可达范围</text>
+  <rect x="58" y="78" width="402" height="386" rx="14" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+  <text x="259" y="117" class="math h ink" text-anchor="middle">输入空间 Fⁿ</text>
+  <rect x="88" y="145" width="342" height="132" rx="10" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="259" y="186" class="math h blue" text-anchor="middle">行空间 R(A*)</text><text x="259" y="220" class="sans body ink" text-anchor="middle">A 能感知的输入方向</text><text x="259" y="252" class="math body blue" text-anchor="middle">dim = r</text>
+  <text x="259" y="303" class="math formula muted" text-anchor="middle">⊥</text>
+  <rect x="88" y="326" width="342" height="106" rx="10" fill="#fffbeb" stroke="#fcd34d"/>
+  <text x="259" y="366" class="math h amber" text-anchor="middle">零空间 N(A)</text><text x="259" y="399" class="sans body ink" text-anchor="middle">完全不可见，dim=n−r</text>
+
+  <rect x="740" y="78" width="402" height="386" rx="14" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+  <text x="941" y="117" class="math h ink" text-anchor="middle">输出空间 Fᵐ</text>
+  <rect x="770" y="145" width="342" height="132" rx="10" fill="#ecfdf5" stroke="#6ee7b7"/>
+  <text x="941" y="186" class="math h green" text-anchor="middle">列空间 R(A)</text><text x="941" y="220" class="sans body ink" text-anchor="middle">实际能够到达的输出</text><text x="941" y="252" class="math body green" text-anchor="middle">dim = r</text>
+  <text x="941" y="303" class="math formula muted" text-anchor="middle">⊥</text>
+  <rect x="770" y="326" width="342" height="106" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="941" y="366" class="math h amber" text-anchor="middle">左零空间 N(A*)</text><text x="941" y="399" class="sans body ink" text-anchor="middle">不可拟合残差，dim=m−r</text>
+
+  <path d="M460 211C555 175 644 175 740 211" class="arrow"/><text x="600" y="171" class="math h blue" text-anchor="middle">A|R(A*)：双射</text>
+  <path d="M460 378C555 378 641 378 710 378" class="arrow"/><circle cx="725" cy="378" r="18" fill="#fffbeb" stroke="#fcd34d"/><text x="725" y="385" class="math body amber" text-anchor="middle">0</text><text x="600" y="353" class="math body amber" text-anchor="middle">A 抹掉核方向</text>
+  <rect x="92" y="500" width="1016" height="72" rx="12" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="600" y="530" class="math formula ink" text-anchor="middle">Fⁿ = R(A*) ⊕ N(A)　　Fᵐ = R(A) ⊕ N(A*)</text>
+  <text x="600" y="558" class="sans small muted" text-anchor="middle">两边的 r 相同；但环境维数分别是 n 与 m，四个空间不能混画在同一坐标平面。</text>
+  <text x="600" y="606" class="sans result ink" text-anchor="middle">输入侧问“什么被看见”，输出侧问“什么能到达”；秩把两侧的可见自由度连接起来。</text>
+</svg>

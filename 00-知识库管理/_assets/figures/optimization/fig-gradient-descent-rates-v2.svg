@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">梯度下降的有限步证书、病态轨迹与收敛终点</title>
+<desc id="desc">负梯度只给无穷小方向，descent lemma 给有限步下降；病态二次型中统一步长产生之字轨迹；非凸、凸和强凸假设导向不同的误差对象与速率。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">L 把下降方向升级为有限步</text>
+<line x1="50" y1="405" x2="370" y2="405" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="78" y1="430" x2="78" y2="95" stroke="#D7DEE8" stroke-width="2"/>
+<path d="M80.0 70.3L82.3 79.9L84.7 89.3L87.0 98.5L89.4 107.6L91.8 116.4L94.1 125.1L96.5 133.6L98.8 141.9L101.2 150.1L103.5 158.0L105.8 165.8L108.2 173.4L110.5 180.8L112.9 188.1L115.2 195.2L117.6 202.1L120.0 208.8L122.3 215.4L124.7 221.7L127.0 228.0L129.3 234.0L131.7 239.9L134.1 245.6L136.4 251.2L138.8 256.6L141.1 261.8L143.4 266.9L145.8 271.8L148.2 276.5L150.5 281.1L152.9 285.6L155.2 289.8L157.6 294.0L159.9 297.9L162.2 301.7L164.6 305.4L166.9 308.9L169.3 312.3L171.7 315.5L174.0 318.5L176.4 321.4L178.7 324.2L181.1 326.8L183.4 329.3L185.8 331.6L188.1 333.8L190.4 335.8L192.8 337.7L195.2 339.5L197.5 341.1L199.9 342.5L202.2 343.9L204.6 345.1L206.9 346.2L209.2 347.1L211.6 347.9L214.0 348.6L216.3 349.1L218.7 349.5L221.0 349.8L223.3 350.0L225.7 350.0L228.1 349.9L230.4 349.7L232.8 349.3L235.1 348.8L237.5 348.2L239.8 347.5L242.2 346.7L244.5 345.7L246.8 344.7L249.2 343.5L251.6 342.2L253.9 340.7L256.2 339.2L258.6 337.5L261.0 335.8L263.3 333.9L265.6 331.9L268.0 329.8L270.4 327.6L272.7 325.3L275.1 322.9L277.4 320.4L279.8 317.7L282.1 315.0L284.5 312.2L286.8 309.2L289.1 306.2L291.5 303.1L293.9 299.8L296.2 296.5L298.6 293.1L300.9 289.6L303.2 285.9L305.6 282.2L308.0 278.4L310.3 274.5L312.6 270.5L315.0 266.5L317.4 262.3L319.7 258.1L322.1 253.7L324.4 249.3L326.8 244.8L329.1 240.2L331.5 235.5L333.8 230.8L336.2 225.9L338.5 221.0L340.9 216.0L343.2 210.9L345.6 205.8L347.9 200.6L350.2 195.3L352.6 189.9L354.9 184.4L357.3 178.9L359.7 173.3L362.0 167.7" fill="none" stroke="#2563EB" stroke-width="3.5"/>
+<path d="M80.0 95.5L82.3 100.8L84.7 106.0L87.0 111.1L89.4 116.2L91.8 121.1L94.1 126.0L96.5 130.8L98.8 135.4L101.2 140.0L103.5 144.5L105.8 148.9L108.2 153.2L110.5 157.4L112.9 161.6L115.2 165.6L117.6 169.5L120.0 173.4L122.3 177.1L124.7 180.8L127.0 184.4L129.3 187.9L131.7 191.2L134.1 194.5L136.4 197.7L138.8 200.8L141.1 203.9L143.4 206.8L145.8 209.6L148.2 212.4L150.5 215.0L152.9 217.6L155.2 220.0L157.6 222.4L159.9 224.7L162.2 226.9L164.6 229.0L166.9 231.0L169.3 232.9L171.7 234.7L174.0 236.5L176.4 238.1L178.7 239.7L181.1 241.1L183.4 242.5L185.8 243.7L188.1 244.9L190.4 246.0L192.8 247.0L195.2 247.9L197.5 248.7L199.9 249.4L202.2 250.0L204.6 250.6L206.9 251.0L209.2 251.4L211.6 251.6L214.0 251.8L216.3 251.9L218.7 251.9L221.0 251.7L223.3 251.5L225.7 251.2L228.1 250.9L230.4 250.4L232.8 249.8L235.1 249.1L237.5 248.4L239.8 247.5L242.2 246.6L244.5 245.6L246.8 244.4L249.2 243.2L251.6 241.9L253.9 240.5L256.2 239.0L258.6 237.5L261.0 235.8L263.3 234.0L265.6 232.2L268.0 230.2L270.4 228.2L272.7 226.0L275.1 223.8L277.4 221.5L279.8 219.1L282.1 216.6L284.5 214.0L286.8 211.3L289.1 208.5L291.5 205.6L293.9 202.7L296.2 199.6L298.6 196.5L300.9 193.2L303.2 189.9L305.6 186.5L308.0 182.9L310.3 179.3L312.6 175.6L315.0 171.8L317.4 168.0L319.7 164.0L322.1 159.9L324.4 155.8L326.8 151.5L329.1 147.2L331.5 142.7L333.8 138.2L336.2 133.6L338.5 128.9L340.9 124.1L343.2 119.2L345.6 114.2L347.9 109.1L350.2 103.9L352.6 98.6L354.9 93.3L357.3 87.8L359.7 82.3L362.0 76.7" fill="none" stroke="#C24135" stroke-width="2.4" stroke-dasharray="7 5"/>
+<circle cx="142" cy="205" r="6" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<circle cx="232" cy="349.4429085648148" r="6" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<line x1="142" y1="420" x2="232" y2="420" stroke="#0F766E" stroke-width="3" marker-end="url(#a1)"/>
+<text x="142" y="187" font-size="16" font-weight="700" text-anchor="middle" fill="#C24135">x_k</text>
+<text x="232" y="377.4429085648148" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">x_k - eta grad f</text>
+<text x="275" y="145" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">quadratic upper model</text>
+<text x="45" y="468" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">Delta f &lt;= -eta(1-L eta/2)||grad f||^2</text>
+<text x="45" y="499" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">0 &lt; eta &lt; 2/L gives descent；eta=1/L 便于证明。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">病态二次型产生 zig-zag</text>
+<ellipse cx="605" cy="270" rx="145" ry="92" fill="none" stroke="#2563EB" stroke-width="2"/>
+<ellipse cx="605" cy="270" rx="107" ry="66" fill="none" stroke="#2563EB" stroke-width="2"/>
+<ellipse cx="605" cy="270" rx="70" ry="41" fill="none" stroke="#2563EB" stroke-width="2"/>
+<ellipse cx="605" cy="270" rx="36" ry="20" fill="none" stroke="#2563EB" stroke-width="2"/>
+<path d="M470.0 172.0L500.0 366.0L528.0 190.0L552.0 342.0L570.0 212.0L586.0 318.0L596.0 239.0L605.0 286.0L605.0 270.0" fill="none" stroke="#C24135" stroke-width="3"/>
+<circle cx="470" cy="172" r="6" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<circle cx="605" cy="270" r="6" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<text x="460" y="152" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">x_0</text>
+<text x="615" y="265" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">x*</text>
+<text x="430" y="405" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">stable step controlled by L</text>
+<text x="430" y="438" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">progress along slow axis controlled by mu</text>
+<text x="430" y="477" font-size="15" font-weight="400" text-anchor="start" fill="#64748B" class="math">eta*=2/(L+mu), rho*=(kappa-1)/(kappa+1)</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">假设改变，终点也改变</text>
+<circle cx="850" cy="122" r="7" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<line x1="860" y1="122" x2="895" y2="122" stroke="#C24135" stroke-width="2.5"/>
+<text x="905" y="114" font-size="16" font-weight="700" text-anchor="start" fill="#C24135">smooth + lower bounded</text>
+<text x="905" y="147" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">min ||grad f||^2 = O(1/T)</text>
+<line x1="850" y1="136" x2="850" y2="231" stroke="#D7DEE8" stroke-width="2" stroke-dasharray="5 5"/>
+<circle cx="850" cy="245" r="7" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<line x1="860" y1="245" x2="895" y2="245" stroke="#2563EB" stroke-width="2.5"/>
+<text x="905" y="237" font-size="16" font-weight="700" text-anchor="start" fill="#2563EB">+ convex</text>
+<text x="905" y="270" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">function gap = O(1/T)</text>
+<line x1="850" y1="259" x2="850" y2="354" stroke="#D7DEE8" stroke-width="2" stroke-dasharray="5 5"/>
+<circle cx="850" cy="368" r="7" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<line x1="860" y1="368" x2="895" y2="368" stroke="#0F766E" stroke-width="2.5"/>
+<text x="905" y="360" font-size="16" font-weight="700" text-anchor="start" fill="#0F766E">+ mu-strongly convex</text>
+<text x="905" y="393" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">gap shrinks geometrically</text>
+<text x="825" y="468" font-size="15" font-weight="650" text-anchor="start" fill="#64748B">stationarity != global optimum != generalization</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">先用 L 证明有限步安全，再按函数类读取相应误差对象；收敛率不能跨假设改写。</text>
+</svg>

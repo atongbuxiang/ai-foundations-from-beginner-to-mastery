@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">局部 Rademacher 复杂度、固定点与快率</title>
+<desc id="desc">全局复杂度查看整个损失类；局部复杂度只查看二阶矩或 excess risk 较小的切片。sub-root envelope 与对角线的固定点给出自洽误差尺度，但快率仍需要 Bernstein 或曲率条件。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">全局类与局部切片</text>
+<circle cx="200" cy="275" r="150" fill="#EFF6FF" stroke="#2563EB" stroke-width="2.5"/>
+<circle cx="200" cy="275" r="72" fill="#ECFDF5" stroke="#0F766E" stroke-width="2.5"/>
+<circle cx="200" cy="275" r="8" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<text x="212" y="268" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">f*</text>
+<text x="70" y="120" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">global class</text>
+<text x="220" y="210" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">G(r)</text>
+<text x="45" y="445" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">far-away bad functions need not set the rate</text>
+<text x="45" y="485" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">localize loss geometry, not just parameters</text>
+<text x="45" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">identifiability and curvature matter。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Sub-root fixed point</text>
+<line x1="465" y1="390" x2="755" y2="390" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="465" y1="100" x2="465" y2="390" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="465" y1="390" x2="745" y2="110" stroke="#2563EB" stroke-width="2.5"/>
+<path d="M465 335C530 270 610 225 745 185" fill="none" stroke="#0F766E" stroke-width="3"/>
+<circle cx="620" cy="235" r="7" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<line x1="620" y1="235" x2="620" y2="390" stroke="#D7DEE8" stroke-width="1.5" stroke-dasharray="5 5"/>
+<text x="635" y="230" font-size="16" font-weight="700" text-anchor="start" fill="#C24135">r*</text>
+<text x="700" y="140" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">r</text>
+<text x="680" y="200" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">psi(r)</text>
+<text x="430" y="440" font-size="16" font-weight="700" text-anchor="start" fill="#C24135" class="math">psi(r*) = r*</text>
+<text x="430" y="480" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">psi(r)/sqrt(r) is nonincreasing</text>
+<text x="430" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">the fixed point is a complexity scale。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">什么时候可能出现快率</text>
+<line x1="855" y1="390" x2="1125" y2="390" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="855" y1="105" x2="855" y2="390" stroke="#D7DEE8" stroke-width="2"/>
+<path d="M865 125C930 180 1000 270 1115 350" fill="none" stroke="#2563EB" stroke-width="3"/>
+<path d="M865 145C930 235 1010 325 1115 375" fill="none" stroke="#0F766E" stroke-width="3"/>
+<text x="885" y="155" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">m^-1/2</text>
+<text x="1015" y="315" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">m^-1</text>
+<text x="830" y="430" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">localization + Bernstein / curvature</text>
+<text x="830" y="470" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">peeling makes the statement uniform</text>
+<text x="830" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">localization alone does not promise m^-1。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">固定点把“当前半径内的复杂度”与“可证明的误差半径”闭合；快率还要由噪声或曲率提供。</text>
+</svg>

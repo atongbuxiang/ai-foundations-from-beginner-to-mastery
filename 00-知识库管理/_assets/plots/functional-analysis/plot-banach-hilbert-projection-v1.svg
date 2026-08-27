@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img">
+<style>
+    .bg{fill:#f8fafc}.panel{fill:#fff;stroke:#cbd5e1;stroke-width:1.4}.title{font:700 16px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#0f172a}.sub{font:500 11px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#475569}.axis{fill:none;stroke:#334155;stroke-width:1.3}.grid{stroke:#e2e8f0;stroke-width:1}.tick{font:500 10px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#64748b}.label{font:600 11px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#334155}.head{font:700 22px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#0f172a}.foot{font:500 11px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#334155}
+    </style>
+<rect width="1200" height="520" class="bg"/>
+<text x="30" y="34" class="head">完备化、最佳逼近与条件期望投影审计</text>
+<text x="1170" y="32" text-anchor="end" class="sub">deterministic · Python standard library · 2026-08-19</text>
+<rect x="20" y="52" width="370" height="400" rx="14" class="panel"/>
+<text x="38" y="80" class="title">A  Same sequence, different norms</text>
+<text x="38" y="100" class="sub">c₀₀ truncations are Cauchy in ℓ² but not in ℓ¹</text>
+<path d="M78,124 V394 H372" class="axis"/>
+<path d="M78,124.00 H372" class="grid"/>
+<text x="70" y="128.00" text-anchor="end" class="tick">1e0</text>
+<path d="M78,213.10 H372" class="grid"/>
+<text x="70" y="217.10" text-anchor="end" class="tick">1e-1</text>
+<path d="M78,304.90 H372" class="grid"/>
+<text x="70" y="308.90" text-anchor="end" class="tick">1e-2</text>
+<path d="M78,394.00 H372" class="grid"/>
+<text x="70" y="398.00" text-anchor="end" class="tick">1e-3</text>
+<polyline points="78.00,178.79 127.00,192.04 176.00,205.43 225.00,218.90 274.00,232.41 323.00,245.94 372.00,259.47" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+<circle cx="78.00" cy="178.79" r="3.5" fill="#2563eb"/><circle cx="127.00" cy="192.04" r="3.5" fill="#2563eb"/><circle cx="176.00" cy="205.43" r="3.5" fill="#2563eb"/><circle cx="225.00" cy="218.90" r="3.5" fill="#2563eb"/><circle cx="274.00" cy="232.41" r="3.5" fill="#2563eb"/><circle cx="323.00" cy="245.94" r="3.5" fill="#2563eb"/><circle cx="372.00" cy="259.47" r="3.5" fill="#2563eb"/>
+<polyline points="78.00,139.20 127.00,138.77 176.00,138.55 225.00,138.44 274.00,138.38 323.00,138.35 372.00,138.34" fill="none" stroke="#e11d48" stroke-width="2.5"/>
+<circle cx="78.00" cy="139.20" r="3.5" fill="#e11d48"/><circle cx="127.00" cy="138.77" r="3.5" fill="#e11d48"/><circle cx="176.00" cy="138.55" r="3.5" fill="#e11d48"/><circle cx="225.00" cy="138.44" r="3.5" fill="#e11d48"/><circle cx="274.00" cy="138.38" r="3.5" fill="#e11d48"/><circle cx="323.00" cy="138.35" r="3.5" fill="#e11d48"/><circle cx="372.00" cy="138.34" r="3.5" fill="#e11d48"/>
+<text x="86" y="142" class="label" fill="#2563eb">ℓ² tail: N^(-0.499179)</text>
+<text x="86" y="161" class="label" fill="#e11d48">ℓ¹ block → 0.692903 ≈ log 2</text>
+<text x="86" y="416" class="label">N: 16 → 1024</text>
+<rect x="415" y="52" width="370" height="400" rx="14" class="panel"/>
+<text x="433" y="80" class="title">B  Hilbert uniqueness vs ℓ¹ plateau</text>
+<text x="433" y="100" class="sub">distance from (1,0) to t(1,1)</text>
+<path d="M473,124 V394 H767" class="axis"/>
+<path d="M473,124.00 H767" class="grid"/>
+<text x="465" y="128.00" text-anchor="end" class="tick">2.0</text>
+<path d="M473,213.10 H767" class="grid"/>
+<text x="465" y="217.10" text-anchor="end" class="tick">1.5</text>
+<path d="M473,304.90 H767" class="grid"/>
+<text x="465" y="308.90" text-anchor="end" class="tick">1.0</text>
+<path d="M473,394.00 H767" class="grid"/>
+<text x="465" y="398.00" text-anchor="end" class="tick">0.5</text>
+<polyline points="473.00,124.00 476.68,133.00 480.35,142.00 484.02,151.00 487.70,160.00 491.38,169.00 495.05,178.00 498.73,187.00 502.40,196.00 506.07,205.00 509.75,214.00 513.42,223.00 517.10,232.00 520.77,241.00 524.45,250.00 528.12,259.00 531.80,268.00 535.48,277.00 539.15,286.00 542.83,295.00 546.50,304.00 550.17,304.00 553.85,304.00 557.52,304.00 561.20,304.00 564.88,304.00 568.55,304.00 572.23,304.00 575.90,304.00 579.58,304.00 583.25,304.00 586.92,304.00 590.60,304.00 594.27,304.00 597.95,304.00 601.62,304.00 605.30,304.00 608.98,304.00 612.65,304.00 616.33,304.00 620.00,304.00 623.67,304.00 627.35,304.00 631.02,304.00 634.70,304.00 638.38,304.00 642.05,304.00 645.73,304.00 649.40,304.00 653.08,304.00 656.75,304.00 660.42,304.00 664.10,304.00 667.77,304.00 671.45,304.00 675.12,304.00 678.80,304.00 682.48,304.00 686.15,304.00 689.83,304.00 693.50,304.00 697.17,295.00 700.85,286.00 704.52,277.00 708.20,268.00 711.88,259.00 715.55,250.00 719.23,241.00 722.90,232.00 726.58,223.00 730.25,214.00 733.92,205.00 737.60,196.00 741.27,187.00 744.95,178.00 748.62,169.00 752.30,160.00 755.98,151.00 759.65,142.00 763.33,133.00 767.00,124.00" fill="none" stroke="#e11d48" stroke-width="2.5"/>
+<polyline points="473.00,199.40 476.68,205.07 480.35,210.72 484.02,216.34 487.70,221.92 491.38,227.46 495.05,232.97 498.73,238.43 502.40,243.85 506.07,249.22 509.75,254.54 513.42,259.81 517.10,265.02 520.77,270.17 524.45,275.25 528.12,280.25 531.80,285.18 535.48,290.03 539.15,294.79 542.83,299.45 546.50,304.00 550.17,308.44 553.85,312.76 557.52,316.95 561.20,321.00 564.88,324.90 568.55,328.64 572.23,332.20 575.90,335.57 579.58,338.74 583.25,341.70 586.92,344.43 590.60,346.92 594.27,349.15 597.95,351.12 601.62,352.80 605.30,354.20 608.98,355.30 612.65,356.09 616.33,356.56 620.00,356.72 623.67,356.56 627.35,356.09 631.02,355.30 634.70,354.20 638.38,352.80 642.05,351.12 645.73,349.15 649.40,346.92 653.08,344.43 656.75,341.70 660.42,338.74 664.10,335.57 667.77,332.20 671.45,328.64 675.12,324.90 678.80,321.00 682.48,316.95 686.15,312.76 689.83,308.44 693.50,304.00 697.17,299.45 700.85,294.79 704.52,290.03 708.20,285.18 711.88,280.25 715.55,275.25 719.23,270.17 722.90,265.02 726.58,259.81 730.25,254.54 733.92,249.22 737.60,243.85 741.27,238.43 744.95,232.97 748.62,227.46 752.30,221.92 755.98,216.34 759.65,210.72 763.33,205.07 767.00,199.40" fill="none" stroke="#0f766e" stroke-width="2.5"/>
+<text x="481" y="142" class="label" fill="#e11d48">ℓ¹: every t∈[0,1] minimizes</text>
+<text x="481" y="161" class="label" fill="#0f766e">ℓ²: unique t=0.5, d=0.707107</text>
+<text x="481" y="416" class="label">parameter t: −0.5 → 1.5</text>
+<rect x="810" y="52" width="370" height="400" rx="14" class="panel"/>
+<text x="828" y="80" class="title">C  L² piecewise-constant projection</text>
+<text x="828" y="100" class="sub">cell mean is conditional expectation and beats left sampling</text>
+<path d="M868,124 V394 H1162" class="axis"/>
+<path d="M868,124.00 H1162" class="grid"/>
+<text x="860" y="128.00" text-anchor="end" class="tick">1e-1</text>
+<path d="M868,213.10 H1162" class="grid"/>
+<text x="860" y="217.10" text-anchor="end" class="tick">1e-2</text>
+<path d="M868,304.90 H1162" class="grid"/>
+<text x="860" y="308.90" text-anchor="end" class="tick">1e-3</text>
+<path d="M868,394.00 H1162" class="grid"/>
+<text x="860" y="398.00" text-anchor="end" class="tick">1e-4</text>
+<polyline points="868.00,131.37 917.00,158.28 966.00,185.33 1015.00,212.41 1064.00,239.50 1113.00,266.59 1162.00,293.68" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+<circle cx="868.00" cy="131.37" r="3.5" fill="#2563eb"/><circle cx="917.00" cy="158.28" r="3.5" fill="#2563eb"/><circle cx="966.00" cy="185.33" r="3.5" fill="#2563eb"/><circle cx="1015.00" cy="212.41" r="3.5" fill="#2563eb"/><circle cx="1064.00" cy="239.50" r="3.5" fill="#2563eb"/><circle cx="1113.00" cy="266.59" r="3.5" fill="#2563eb"/><circle cx="1162.00" cy="293.68" r="3.5" fill="#2563eb"/>
+<polyline points="868.00,106.19 917.00,132.12 966.00,158.70 1015.00,185.55 1064.00,212.52 1113.00,239.55 1162.00,266.62" fill="none" stroke="#d97706" stroke-width="2.5"/>
+<circle cx="868.00" cy="106.19" r="3.5" fill="#d97706"/><circle cx="917.00" cy="132.12" r="3.5" fill="#d97706"/><circle cx="966.00" cy="158.70" r="3.5" fill="#d97706"/><circle cx="1015.00" cy="185.55" r="3.5" fill="#d97706"/><circle cx="1064.00" cy="212.52" r="3.5" fill="#d97706"/><circle cx="1113.00" cy="239.55" r="3.5" fill="#d97706"/><circle cx="1162.00" cy="266.62" r="3.5" fill="#d97706"/>
+<text x="876" y="142" class="label" fill="#2563eb">cell mean: p=0.999954</text>
+<text x="876" y="161" class="label" fill="#d97706">left sample: p=0.997477</text>
+<text x="876" y="180" class="tick">fine-grid error ratio=1.998535; orth=0.0e+00</text>
+<text x="876" y="416" class="label">number of bins: 4 → 256</text>
+<text x="30" y="486" class="foot">Assertions: ℓ² tail order 1/2 · ℓ¹ block does not vanish · ℓ² projection unique · ℓ¹ minimizer nonunique · conditional cell means are orthogonal residuals</text>
+<text x="30" y="505" class="foot">Claim boundary: analytic sequence/function examples; no claim about arbitrary Banach projections, learned estimators, or neural-operator generalization.</text>
+</svg>

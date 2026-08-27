@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+  <title id="title">Sauer–Shelah 证明中的纤维分解</title>
+  <desc id="desc">六个三位模式按最后一位投影为四个前缀，其中两个前缀可用零和一双重延拓，给出六等于四加二的精确计数。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
+    <style>
+      .ink{fill:#1f2937}.muted{fill:#64748b}.line{stroke:#cbd5e1;stroke-width:1.5}.arrow{stroke:#64748b;stroke-width:2.2;fill:none;marker-end:url(#arrow)}.soft{fill:#f8fafc}.blue{fill:#2563eb}.blue-soft{fill:#eff6ff}.amber{fill:#b45309}.amber-soft{fill:#fffbeb}
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.h{font-size:19px;font-weight:600}.body{font-size:17px}.small{font-size:15px}.token{font-size:22px;font-weight:600}.result{font-size:27px;font-weight:600}
+    </style>
+  </defs>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <g>
+    <rect x="48" y="52" width="282" height="402" rx="12" class="soft" stroke="#cbd5e1"/>
+    <rect x="454" y="52" width="282" height="402" rx="12" class="blue-soft" stroke="#93c5fd"/>
+    <rect x="860" y="52" width="292" height="402" rx="12" class="amber-soft" stroke="#fcd34d"/>
+    <text x="78" y="91" class="sans h ink">原模式族 F</text>
+    <text x="484" y="91" class="sans h blue">投影 F₀</text>
+    <text x="890" y="91" class="sans h amber">双重延拓 F₁</text>
+    <text x="78" y="120" class="sans small muted">保留最后一位以观察纤维</text>
+    <text x="484" y="120" class="sans small muted">删除最后一位，重复前缀只计一次</text>
+    <text x="890" y="120" class="sans small muted">前缀同时接 0 和 1</text>
+  </g>
+  <g class="math token ink">
+    <text x="98" y="174">00│0</text><text x="205" y="174">00│1</text>
+    <text x="98" y="244">10│0</text><text x="205" y="244">10│1</text>
+    <text x="98" y="314">01│0</text><text x="205" y="314">11│0</text>
+  </g>
+  <g class="math token blue" text-anchor="middle">
+    <text x="540" y="187">00</text><text x="650" y="187">10</text><text x="540" y="288">01</text><text x="650" y="288">11</text>
+  </g>
+  <g class="math token amber" text-anchor="middle">
+    <text x="945" y="187">00</text><text x="1067" y="187">10</text>
+  </g>
+  <g class="sans small muted" text-anchor="middle">
+    <text x="540" y="220">两条纤维</text><text x="650" y="220">两条纤维</text>
+    <text x="540" y="321">一条纤维</text><text x="650" y="321">一条纤维</text>
+    <text x="945" y="220">可接 0、1</text><text x="1067" y="220">可接 0、1</text>
+  </g>
+  <path d="M330 214 C382 214 400 214 454 214" class="arrow"/>
+  <path d="M736 214 C785 214 810 214 860 214" class="arrow"/>
+  <text x="392" y="194" class="sans small muted" text-anchor="middle">删除末位</text>
+  <text x="798" y="194" class="sans small muted" text-anchor="middle">检查两种后缀</text>
+  <g class="sans body ink">
+    <text x="484" y="389">|F₀| = 4</text><text x="890" y="389">|F₁| = 2</text>
+  </g>
+  <rect x="252" y="480" width="696" height="54" rx="10" class="soft" stroke="#94a3b8"/>
+  <text x="600" y="516" class="math result ink" text-anchor="middle">|F| = |F₀| + |F₁| = 4 + 2 = 6</text>
+</svg>

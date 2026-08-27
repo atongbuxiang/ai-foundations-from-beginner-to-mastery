@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Fat-Shattering：带数值间隔的实值打散</title>
+<desc id="desc">每个样本点有自己的阈值；函数类若能在阈值上下至少 gamma 的位置实现所有正负模式，就在该尺度 fat-shatter 这些点。尺度容量再通过 covering 和 Rademacher 进入回归风险。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">阈值上下必须留出间隔</text>
+<line x1="70" y1="235" x2="110" y2="235" stroke="#D7DEE8" stroke-width="2"/>
+<circle cx="90" cy="180" r="7" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<line x1="90" y1="200" x2="90" y2="270" stroke="#0F766E" stroke-width="2" stroke-dasharray="4 4"/>
+<text x="90" y="245" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">r1</text>
+<line x1="150" y1="190" x2="190" y2="190" stroke="#D7DEE8" stroke-width="2"/>
+<circle cx="170" cy="245" r="7" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<line x1="170" y1="155" x2="170" y2="225" stroke="#0F766E" stroke-width="2" stroke-dasharray="4 4"/>
+<text x="170" y="200" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">r2</text>
+<line x1="230" y1="270" x2="270" y2="270" stroke="#D7DEE8" stroke-width="2"/>
+<circle cx="250" cy="215" r="7" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<line x1="250" y1="235" x2="250" y2="305" stroke="#0F766E" stroke-width="2" stroke-dasharray="4 4"/>
+<text x="250" y="280" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">r3</text>
+<line x1="310" y1="215" x2="350" y2="215" stroke="#D7DEE8" stroke-width="2"/>
+<circle cx="330" cy="270" r="7" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<line x1="330" y1="180" x2="330" y2="250" stroke="#0F766E" stroke-width="2" stroke-dasharray="4 4"/>
+<text x="330" y="225" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">r4</text>
+<text x="45" y="380" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB" class="math">s_i ( f_s(x_i) - r_i ) &gt;= gamma</text>
+<text x="45" y="425" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">one function may be chosen for each sign pattern</text>
+<text x="45" y="470" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">thresholds are fixed before the pattern</text>
+<text x="45" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">our convention uses margin gamma。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">容量随分辨率变粗而下降</text>
+<line x1="465" y1="390" x2="755" y2="390" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="465" y1="105" x2="465" y2="390" stroke="#D7DEE8" stroke-width="2"/>
+<path d="M475 130H535V185H600V245H665V310H735V365" fill="none" stroke="#0F766E" stroke-width="3"/>
+<text x="490" y="115" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">fat_gamma(F)</text>
+<text x="705" y="420" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">gamma</text>
+<text x="430" y="455" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">gamma_1 &lt; gamma_2</text>
+<text x="430" y="485" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB" class="math">fat_gamma1 &gt;= fat_gamma2</text>
+<text x="430" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">pseudo-dimension forgets this scale profile。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">从尺度容量到回归风险</text>
+<rect x="840" y="95" width="300" height="82" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="990" y="126" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">fat dimension</text>
+<text x="990" y="157" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">sign patterns with margin</text>
+<rect x="840" y="225" width="300" height="82" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="990" y="256" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">covering / entropy</text>
+<text x="990" y="287" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">how many representatives</text>
+<rect x="840" y="355" width="300" height="82" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="990" y="386" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">Lipschitz risk</text>
+<text x="990" y="417" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">complexity + confidence</text>
+<line x1="990" y1="180" x2="990" y2="218" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<line x1="990" y1="310" x2="990" y2="348" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<text x="830" y="480" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">squared loss needs bounded range or tails</text>
+<text x="830" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">gamma is resolution, not risk itself。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">Fat-shattering 保留函数值的分辨率；只有接上度量熵、损失合同与采样条件，才成为风险证书。</text>
+</svg>

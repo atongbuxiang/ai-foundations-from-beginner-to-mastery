@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">安全评估不是一个总分：覆盖 × 判定 × 后果</title><desc id="desc">红队覆盖矩阵、拒答混淆矩阵与系统严重度。</desc>
+<rect width="1200" height="700" fill="#FBF8F1"/>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#667784"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#183044" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<line x1="48" y1="70" x2="1152" y2="70" stroke="#17766E" stroke-width="4"/>
+<text x="52" y="49" font-size="24" font-weight="700" fill="#183044">安全评估不是一个总分：覆盖 × 判定 × 后果</text>
+<text x="55" y="105" text-anchor="start" font-size="13" font-weight="700" fill="#17766E">A · 红队覆盖矩阵</text>
+<text x="170" y="142" text-anchor="middle" font-size="10" font-weight="700" fill="#667784">direct</text>
+<text x="253" y="142" text-anchor="middle" font-size="10" font-weight="700" fill="#667784">obfuscated</text>
+<text x="336" y="142" text-anchor="middle" font-size="10" font-weight="700" fill="#667784">multi-turn</text>
+<text x="419" y="142" text-anchor="middle" font-size="10" font-weight="700" fill="#667784">indirect</text>
+<text x="502" y="142" text-anchor="middle" font-size="10" font-weight="700" fill="#667784">tool</text>
+<text x="55" y="184" text-anchor="start" font-size="11" font-weight="700" fill="#183044">privacy</text>
+<rect x="139" y="160" width="62" height="40" rx="5" fill="#17766E" opacity="0.85"/>
+<text x="170" y="185" text-anchor="middle" font-size="9" font-weight="700" fill="#FFFFFF">tested</text>
+<rect x="222" y="160" width="62" height="40" rx="5" fill="#17766E" opacity="0.85"/>
+<text x="253" y="185" text-anchor="middle" font-size="9" font-weight="700" fill="#FFFFFF">tested</text>
+<rect x="305" y="160" width="62" height="40" rx="5" fill="#D9D5CB" opacity="0.55"/>
+<text x="336" y="185" text-anchor="middle" font-size="9" font-weight="700" fill="#667784">gap</text>
+<rect x="388" y="160" width="62" height="40" rx="5" fill="#17766E" opacity="0.85"/>
+<text x="419" y="185" text-anchor="middle" font-size="9" font-weight="700" fill="#FFFFFF">tested</text>
+<rect x="471" y="160" width="62" height="40" rx="5" fill="#D9D5CB" opacity="0.55"/>
+<text x="502" y="185" text-anchor="middle" font-size="9" font-weight="700" fill="#667784">gap</text>
+<text x="55" y="239" text-anchor="start" font-size="11" font-weight="700" fill="#183044">fraud</text>
+<rect x="139" y="215" width="62" height="40" rx="5" fill="#17766E" opacity="0.85"/>
+<text x="170" y="240" text-anchor="middle" font-size="9" font-weight="700" fill="#FFFFFF">tested</text>
+<rect x="222" y="215" width="62" height="40" rx="5" fill="#17766E" opacity="0.85"/>
+<text x="253" y="240" text-anchor="middle" font-size="9" font-weight="700" fill="#FFFFFF">tested</text>
+<rect x="305" y="215" width="62" height="40" rx="5" fill="#17766E" opacity="0.85"/>
+<text x="336" y="240" text-anchor="middle" font-size="9" font-weight="700" fill="#FFFFFF">tested</text>
+<rect x="388" y="215" width="62" height="40" rx="5" fill="#D9D5CB" opacity="0.55"/>
+<text x="419" y="240" text-anchor="middle" font-size="9" font-weight="700" fill="#667784">gap</text>
+<rect x="471" y="215" width="62" height="40" rx="5" fill="#17766E" opacity="0.85"/>
+<text x="502" y="240" text-anchor="middle" font-size="9" font-weight="700" fill="#FFFFFF">tested</text>
+<text x="55" y="294" text-anchor="start" font-size="11" font-weight="700" fill="#183044">toxicity</text>
+<rect x="139" y="270" width="62" height="40" rx="5" fill="#17766E" opacity="0.85"/>
+<text x="170" y="295" text-anchor="middle" font-size="9" font-weight="700" fill="#FFFFFF">tested</text>
+<rect x="222" y="270" width="62" height="40" rx="5" fill="#17766E" opacity="0.85"/>
+<text x="253" y="295" text-anchor="middle" font-size="9" font-weight="700" fill="#FFFFFF">tested</text>
+<rect x="305" y="270" width="62" height="40" rx="5" fill="#17766E" opacity="0.85"/>
+<text x="336" y="295" text-anchor="middle" font-size="9" font-weight="700" fill="#FFFFFF">tested</text>
+<rect x="388" y="270" width="62" height="40" rx="5" fill="#D9D5CB" opacity="0.55"/>
+<text x="419" y="295" text-anchor="middle" font-size="9" font-weight="700" fill="#667784">gap</text>
+<rect x="471" y="270" width="62" height="40" rx="5" fill="#D9D5CB" opacity="0.55"/>
+<text x="502" y="295" text-anchor="middle" font-size="9" font-weight="700" fill="#667784">gap</text>
+<text x="55" y="349" text-anchor="start" font-size="11" font-weight="700" fill="#183044">bias</text>
+<rect x="139" y="325" width="62" height="40" rx="5" fill="#17766E" opacity="0.85"/>
+<text x="170" y="350" text-anchor="middle" font-size="9" font-weight="700" fill="#FFFFFF">tested</text>
+<rect x="222" y="325" width="62" height="40" rx="5" fill="#D9D5CB" opacity="0.55"/>
+<text x="253" y="350" text-anchor="middle" font-size="9" font-weight="700" fill="#667784">gap</text>
+<rect x="305" y="325" width="62" height="40" rx="5" fill="#17766E" opacity="0.85"/>
+<text x="336" y="350" text-anchor="middle" font-size="9" font-weight="700" fill="#FFFFFF">tested</text>
+<rect x="388" y="325" width="62" height="40" rx="5" fill="#D9D5CB" opacity="0.55"/>
+<text x="419" y="350" text-anchor="middle" font-size="9" font-weight="700" fill="#667784">gap</text>
+<rect x="471" y="325" width="62" height="40" rx="5" fill="#D9D5CB" opacity="0.55"/>
+<text x="502" y="350" text-anchor="middle" font-size="9" font-weight="700" fill="#667784">gap</text>
+<text x="55" y="404" text-anchor="start" font-size="11" font-weight="700" fill="#183044">safety</text>
+<rect x="139" y="380" width="62" height="40" rx="5" fill="#17766E" opacity="0.85"/>
+<text x="170" y="405" text-anchor="middle" font-size="9" font-weight="700" fill="#FFFFFF">tested</text>
+<rect x="222" y="380" width="62" height="40" rx="5" fill="#17766E" opacity="0.85"/>
+<text x="253" y="405" text-anchor="middle" font-size="9" font-weight="700" fill="#FFFFFF">tested</text>
+<rect x="305" y="380" width="62" height="40" rx="5" fill="#17766E" opacity="0.85"/>
+<text x="336" y="405" text-anchor="middle" font-size="9" font-weight="700" fill="#FFFFFF">tested</text>
+<rect x="388" y="380" width="62" height="40" rx="5" fill="#17766E" opacity="0.85"/>
+<text x="419" y="405" text-anchor="middle" font-size="9" font-weight="700" fill="#FFFFFF">tested</text>
+<rect x="471" y="380" width="62" height="40" rx="5" fill="#17766E" opacity="0.85"/>
+<text x="502" y="405" text-anchor="middle" font-size="9" font-weight="700" fill="#FFFFFF">tested</text>
+<rect x="55" y="465" width="500" height="135" rx="10" fill="#FFF0ED" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="70" y="493" text-anchor="start" font-size="15" font-weight="700" fill="#B7443E">覆盖格 ≠ 风险归零</text>
+<text x="70" y="517" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">每格还要写模型/模板/policy、攻击者知识、查询与人工预算、judge/人评、prompt-family cluster、正常效用。</text>
+<text x="70" y="536" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">固定集合通过只支持该版本和该攻击分布。</text>
+<text x="635" y="105" text-anchor="start" font-size="13" font-weight="700" fill="#7054A3">B · Harmful / Benign 两个分母</text>
+<rect x="670" y="180" width="190" height="88" rx="9" fill="#4F7B45" opacity=".84"/>
+<text x="765" y="213" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">harmful + refuse</text>
+<text x="765" y="241" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">安全命中</text>
+<rect x="885" y="180" width="190" height="88" rx="9" fill="#B7443E" opacity=".84"/>
+<text x="980" y="213" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">harmful + answer</text>
+<text x="980" y="241" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">漏放</text>
+<rect x="670" y="300" width="190" height="88" rx="9" fill="#C87922" opacity=".84"/>
+<text x="765" y="333" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">benign + refuse</text>
+<text x="765" y="361" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">过度拒答</text>
+<rect x="885" y="300" width="190" height="88" rx="9" fill="#245AA8" opacity=".84"/>
+<text x="980" y="333" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">benign + answer</text>
+<text x="980" y="361" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">正常完成</text>
+<rect x="635" y="445" width="440" height="155" rx="10" fill="#F3EFFA" stroke="#7054A3" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="650" y="473" text-anchor="start" font-size="15" font-weight="700" fill="#7054A3">再接到系统后果</text>
+<text x="650" y="497" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">content property → policy decision → tool/action → impact</text>
+<text x="650" y="516" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784"></text>
+<text x="650" y="535" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">毒性低不等于无害；关键词出现不等于攻击成功；模型文字拒答也不保证工具尚未执行。</text>
+<text x="650" y="554" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">同时报告 severity、群体切片和残余风险。</text>
+<line x1="48" y1="650" x2="1152" y2="650" stroke="#D9D5CB"/>
+<text x="52" y="674" font-size="13" fill="#667784">Jailbreak 是攻击过程，toxicity/bias 是行为属性，harm 是情境化后果；测量对象、分母和判定器必须分开。</text>
+</svg>

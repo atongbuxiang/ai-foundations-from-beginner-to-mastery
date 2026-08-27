@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+<title id="title">SDE 与 probability-flow ODE 共享边缘但路径律不同</title>
+<desc id="desc">三个时间截面具有相同的 Gaussian 点云轮廓，上半部分以抖动随机路径连接，下半部分以确定性放缩路径连接，右侧用条件分布和二次变差区分路径律。</desc>
+<rect width="1200" height="620" fill="#FFFEFB"/>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.ink{fill:#1F2937}.muted{fill:#64748B}.blue{fill:#2563EB}.green{fill:#0F766E}.red{fill:#C24135}.line{fill:none;stroke-linecap:round;stroke-linejoin:round}</style>
+<text x="58" y="47" font-size="20" font-weight="700" class="ink">A　同一组 density snapshots，可以剪出两部不同的路径电影</text>
+<g stroke="#D7DEE8" stroke-width="1.5" fill="#FFFFFF"><ellipse cx="170" cy="180" rx="62" ry="88"/><ellipse cx="430" cy="180" rx="85" ry="108"/><ellipse cx="700" cy="180" rx="108" ry="128"/></g>
+<g fill="#2563EB" opacity=".65"><circle cx="151" cy="154" r="4"/><circle cx="184" cy="190" r="4"/><circle cx="168" cy="222" r="4"/><circle cx="401" cy="126" r="4"/><circle cx="443" cy="177" r="4"/><circle cx="414" cy="230" r="4"/><circle cx="681" cy="105" r="4"/><circle cx="733" cy="178" r="4"/><circle cx="662" cy="251" r="4"/></g>
+<text x="170" y="322" text-anchor="middle" font-size="16" class="muted">t = 0</text><text x="430" y="322" text-anchor="middle" font-size="16" class="muted">t = 0.5</text><text x="700" y="322" text-anchor="middle" font-size="16" class="muted">t = 1</text>
+<text x="58" y="92" font-size="18" font-weight="700" class="blue">SDE path bundle</text>
+<path d="M152 154 C245 95 308 242 401 126 S575 45 681 105" class="line" stroke="#2563EB" stroke-width="3"/>
+<path d="M184 190 C260 270 344 110 443 177 S595 288 733 178" class="line" stroke="#2563EB" stroke-width="3" opacity=".8"/>
+<path d="M168 222 C250 162 328 285 414 230 S575 180 662 251" class="line" stroke="#2563EB" stroke-width="3" opacity=".65"/>
+<text x="58" y="348" font-size="18" font-weight="700" class="green">PF ODE deterministic coupling</text>
+<g transform="translate(0 230)"><path d="M152 154 C260 142 330 134 401 126 S570 112 681 105" class="line" stroke="#0F766E" stroke-width="3"/><path d="M184 190 C280 186 350 181 443 177 S610 179 733 178" class="line" stroke="#0F766E" stroke-width="3"/><path d="M168 222 C260 225 335 228 414 230 S560 241 662 251" class="line" stroke="#0F766E" stroke-width="3"/></g>
+<g transform="translate(0 230)" stroke="#D7DEE8" stroke-width="1.5" fill="none"><ellipse cx="170" cy="180" rx="62" ry="88"/><ellipse cx="430" cy="180" rx="85" ry="108"/><ellipse cx="700" cy="180" rx="108" ry="128"/></g>
+<rect x="840" y="92" width="302" height="420" fill="#FFFFFF" stroke="#D7DEE8" stroke-width="2"/>
+<text x="865" y="128" font-size="19" font-weight="700" class="ink">B　路径律审计</text>
+<text x="865" y="173" font-size="17" class="blue">SDE</text><text x="925" y="173" font-size="16" class="ink">X(t)|X(0) 有噪声</text><text x="865" y="205" font-size="16" class="ink">quadratic variation &gt; 0</text>
+<line x1="865" y1="231" x2="1116" y2="231" stroke="#D7DEE8" stroke-width="1.5"/>
+<text x="865" y="271" font-size="17" class="green">ODE</text><text x="925" y="271" font-size="16" class="ink">X(t)|X(0) 为确定值</text><text x="865" y="303" font-size="16" class="ink">quadratic variation = 0</text>
+<line x1="865" y1="329" x2="1116" y2="329" stroke="#D7DEE8" stroke-width="1.5"/>
+<text x="865" y="370" font-size="17" class="ink">共享：</text><text x="925" y="370" font-size="16" class="green">每个 p(t)</text><text x="865" y="408" font-size="17" class="ink">不共享：</text><text x="945" y="408" font-size="16" class="red">transition / path law</text><text x="865" y="454" font-size="15" class="muted">Gaussian 例：</text><text x="865" y="479" font-size="15" class="muted">SDE adds noise</text><text x="865" y="501" font-size="15" class="muted">ODE rescales initial sample</text>
+<text x="58" y="594" font-size="15" class="muted">截面直方图只验收 one-time marginals；要判断随机过程，还必须观察 conditional law、coupling 或路径泛函。</text>
+</svg>

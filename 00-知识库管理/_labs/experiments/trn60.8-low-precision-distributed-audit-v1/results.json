@@ -1,0 +1,136 @@
+{
+  "artifacts": [
+    {
+      "bytes": 446,
+      "name": "dtype_contract.csv",
+      "sha256": "e1198a904d3a8061ed7d6308d7e0826bb5703e20f52991fc1030883c59fa1a10"
+    },
+    {
+      "bytes": 364,
+      "name": "loss_scaling_clocks.csv",
+      "sha256": "e6e530a73a89c6817b80f4d59173a18b3894e7bffac135168a2b4b63a9a7a735"
+    },
+    {
+      "bytes": 466,
+      "name": "stochastic_rounding.csv",
+      "sha256": "c5c67e1e6b0b25398d860d0d3a238cf27378d4bc3934952f658b99b1f5bcc95e"
+    },
+    {
+      "bytes": 568,
+      "name": "quantization_ledger.csv",
+      "sha256": "34c8deffa857a61b1c6600d09f2fcacd2a3ae3f6bfcf5bc5b12e686e4d504d26"
+    },
+    {
+      "bytes": 324,
+      "name": "global_batch.csv",
+      "sha256": "2d8fd25873535b2cfad4b43aedd46e2959a7abb59ca2dd5a35f2a1c0ba7846d3"
+    },
+    {
+      "bytes": 326,
+      "name": "ring_allreduce.csv",
+      "sha256": "1c06e35d511e978e8517cf8dba0cfceb8910f4e19358c77e61997ae1ec0abefe"
+    },
+    {
+      "bytes": 375,
+      "name": "parallelism_shapes.csv",
+      "sha256": "78076af42ff478abb210e47a6d449c38908682688be25d00988b27a5fd6fc04c"
+    },
+    {
+      "bytes": 359,
+      "name": "zero_memory.csv",
+      "sha256": "b442712f948b4fd4d103f45c4afec00c9d63bc3e44560534c17c1d10fa97128b"
+    },
+    {
+      "bytes": 364,
+      "name": "offload_roofline.csv",
+      "sha256": "0d45a23421ab2be4fc58a1881ee3b7531f783bcca7b63d96d844a755d67bf801"
+    },
+    {
+      "bytes": 670,
+      "name": "reproducibility_evidence.csv",
+      "sha256": "c53641b7ce634e863157b534128da440f54a06e228e18c766682d326b1f391db"
+    },
+    {
+      "bytes": 4624,
+      "name": "plot-low-precision-state-estimators-audit-v1.svg",
+      "sha256": "194fc8c53bfee52efec2502c1279b2683abeb56031398aec5e8d929afaf0d61c"
+    },
+    {
+      "bytes": 6094,
+      "name": "plot-distributed-batch-memory-audit-v1.svg",
+      "sha256": "c0e1027a3ede30dccb9984f29a85c3f433bd4307e7ded520c9348faa004bc1b0"
+    },
+    {
+      "bytes": 4952,
+      "name": "plot-roofline-reproducibility-audit-v1.svg",
+      "sha256": "61d016cdca30f28c3ffe664a3238ceba2cf42ee5ef62f44f7d13ec239c8f6475"
+    }
+  ],
+  "boundaries": [
+    "Format fields and analytic proxies do not identify an accelerator kernel.",
+    "Synthetic collectives do not measure topology, contention, overlap, or failures.",
+    "One-step stochastic-rounding unbiasedness does not prove trajectory or decision unbiasedness.",
+    "Throughput and profiler evidence do not replace matched quality and causal controls."
+  ],
+  "check_count": 38,
+  "checks": {
+    "batch_counts_sum_to_nine": true,
+    "batch_equal_rank_mean_is_four": true,
+    "batch_unequal_counts_create_bias": true,
+    "batch_weighted_mean_equals_33_over_9": true,
+    "dtype_bf16_matches_fp32_exponent_bits": true,
+    "dtype_bf16_ulp_coarser_than_fp16": true,
+    "dtype_fp32_has_finest_ulp_in_table": true,
+    "dtype_tf32_multiply_matches_fp16_precision_bits": true,
+    "loss_attempt_count_five": true,
+    "loss_overflow_does_not_advance_optimizer": true,
+    "loss_safe_scale_interval_nonempty": true,
+    "loss_scale_trajectory_matches_contract": true,
+    "loss_successful_update_count_four": true,
+    "parallel_column_output_is_sharded": true,
+    "parallel_pipeline_efficiency_is_32_over_39": true,
+    "parallel_row_output_requires_sum": true,
+    "quant_affine_codes_match_oracle": true,
+    "quant_affine_dequant_values_match_oracle": true,
+    "quant_bucket_ratio_is_less_than_four_due_to_scales": true,
+    "quant_state_ledger_saves_six_bytes_per_parameter": true,
+    "repro_causal_support_reserved_for_E5": true,
+    "repro_floating_addition_is_nonassociative": true,
+    "repro_quality_first_tested_at_E3": true,
+    "repro_strong_scaling_efficiency_is_69_percent": true,
+    "ring_eight_rank_volume_is_1_75_gib": true,
+    "ring_has_two_p_minus_one_phases": true,
+    "ring_volume_tends_to_two_messages": true,
+    "roofline_high_intensity_hits_compute_ceiling": true,
+    "roofline_low_intensity_is_bandwidth_bound": true,
+    "roofline_ridge_is_100_flop_per_byte": true,
+    "sr_expected_five_step_update_preserved": true,
+    "sr_one_step_conditionally_unbiased": true,
+    "sr_probabilities_sum_to_one": true,
+    "sr_variance_below_quarter_grid_bound": true,
+    "zero_ddp_is_16_bytes_per_parameter": true,
+    "zero_live_peak_exceeds_steady_shard": true,
+    "zero_stage1_is_5_5_bytes_per_parameter": true,
+    "zero_stage3_is_2_bytes_per_parameter": true
+  },
+  "evidence_level": "deterministic analytic and synthetic audit; not a real distributed training run",
+  "experiment_id": "EXP-TRN-608-V1",
+  "key_results": {
+    "correct_global_mean": 3.6666666666666665,
+    "floating_left_association": 3.14,
+    "floating_right_association": 0.0,
+    "illustrative_live_peak_gb": 15.4,
+    "incorrect_rank_mean": 4.0,
+    "ring_8_rank_volume_gib": 1.75,
+    "roofline_ridge": 100.0,
+    "safe_loss_scale_proxy": [
+      64.0,
+      128.0
+    ],
+    "sr_error_variance": 0.015,
+    "zero3_steady_gb": 2.0
+  },
+  "passed_check_count": 38,
+  "seed": 20260826,
+  "track_count": 10
+}

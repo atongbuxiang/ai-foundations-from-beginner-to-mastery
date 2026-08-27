@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="780" viewBox="0 0 1200 780" role="img" aria-labelledby="title desc">
+  <title id="title">学习率到函数扰动的四层翻译账本</title>
+  <desc id="desc">从批量梯度和优化器状态，经学习率与参数组缩放，得到参数位移、相对更新、角更新和表示变化。</desc>
+  <rect width="1200" height="780" fill="#FFFEFB"/>
+  <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}.h{font-size:27px;font-weight:700}.sh{font-size:18px;font-weight:700}.b{font-size:15px}.s{font-size:13px;fill:#64748B}.bb{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.bg{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.ba{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.br{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}.line{stroke:#CBD5E1;stroke-width:2}.arr{stroke:#2563EB;stroke-width:3;fill:none}</style>
+  <defs><marker id="ab" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#2563EB"/></marker></defs>
+  <text x="48" y="48" class="h" fill="#2563EB">raw learning rate 只是控制链中的一个标量</text>
+  <rect x="48" y="84" width="194" height="126" rx="13" class="bb"/>
+  <text x="70" y="119" class="sh">① batch / reduction</text>
+  <text x="70" y="151" class="b">ĝₜ = mean / sum</text>
+  <text x="70" y="178" class="s">batch · token · accumulation</text>
+  <line x1="242" y1="147" x2="282" y2="147" class="arr" marker-end="url(#ab)"/>
+  <rect x="292" y="84" width="194" height="126" rx="13" class="bg"/>
+  <text x="314" y="119" class="sh">② optimizer 方向</text>
+  <text x="314" y="151" class="b">uₜ = U(ĝₜ,sₜ,θₜ)</text>
+  <text x="314" y="178" class="s">SGD · Adam · Muon</text>
+  <line x1="486" y1="147" x2="526" y2="147" class="arr" marker-end="url(#ab)"/>
+  <rect x="536" y="84" width="194" height="126" rx="13" class="ba"/>
+  <text x="558" y="119" class="sh">③ 标量控制</text>
+  <text x="558" y="151" class="b">ηₜ × group × shape</text>
+  <text x="558" y="178" class="s">schedule · trust ratio</text>
+  <line x1="730" y1="147" x2="770" y2="147" class="arr" marker-end="url(#ab)"/>
+  <rect x="780" y="84" width="194" height="126" rx="13" class="bb"/>
+  <text x="802" y="119" class="sh">④ 参数位移</text>
+  <text x="802" y="151" class="b">Δθₜ = −ηₜuₜ</text>
+  <text x="802" y="178" class="s">absolute · relative · angle</text>
+  <line x1="974" y1="147" x2="1014" y2="147" class="arr" marker-end="url(#ab)"/>
+  <rect x="1024" y="84" width="128" height="126" rx="13" class="br"/>
+  <text x="1044" y="119" class="sh">⑤ 函数</text>
+  <text x="1044" y="151" class="b">Δh≈JΔθ</text>
+  <text x="1044" y="178" class="s">probe dependent</text>
+
+  <line x1="48" y1="246" x2="1152" y2="246" class="line"/>
+  <text x="48" y="286" class="h" fill="#0F766E">四层遥测回答四个不同问题</text>
+  <rect x="48" y="322" width="252" height="158" rx="13" class="bb"/>
+  <text x="72" y="358" class="sh">绝对 step</text>
+  <text x="72" y="393" class="b">RMS(Δθℓ)</text>
+  <text x="72" y="424" class="s">检测异常大位移</text>
+  <text x="72" y="451" class="s">不跨参数化比较</text>
+  <rect x="332" y="322" width="252" height="158" rx="13" class="bg"/>
+  <text x="356" y="358" class="sh">相对 step</text>
+  <text x="356" y="393" class="b">RMS(Δθℓ)/RMS(θℓ)</text>
+  <text x="356" y="424" class="s">参数更新占当前尺度多少</text>
+  <text x="356" y="451" class="s">零初始化/尺度对称需警惕</text>
+  <rect x="616" y="322" width="252" height="158" rx="13" class="ba"/>
+  <text x="640" y="358" class="sh">角更新</text>
+  <text x="640" y="393" class="b">||Δθ⊥|| / ||θ||</text>
+  <text x="640" y="424" class="s">方向旋转而非径向伸缩</text>
+  <text x="640" y="451" class="s">适合尺度不变层</text>
+  <rect x="900" y="322" width="252" height="158" rx="13" class="br"/>
+  <text x="924" y="358" class="sh">功能 step</text>
+  <text x="924" y="393" class="b">RMS(JΔθ)/RMS(h)</text>
+  <text x="924" y="424" class="s">更接近表示变化</text>
+  <text x="924" y="451" class="s">依赖 probe 与线性化</text>
+
+  <text x="48" y="536" class="h" fill="#2563EB">局部损失变化把方向、尺度与曲率同时纳入</text>
+  <rect x="48" y="572" width="1104" height="106" rx="13" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="78" y="610" class="sh">ΔL ≈ −η⟨g,u⟩ + (η²/2)uᵀHu</text>
+  <text x="78" y="642" class="b">对齐项决定一阶下降；方向范数与局部曲率共同限制可容忍 LR。</text>
+  <text x="760" y="610" class="sh" fill="#C0392B">不可只报 η</text>
+  <text x="760" y="642" class="b">还要报 optimizer、group、scale、clock、clip。</text>
+  <rect x="48" y="714" width="1104" height="42" rx="9" fill="#FFF6E5" stroke="#D6A64F"/>
+  <text x="72" y="741" class="s">边界：relative/feature telemetry 是诊断量，不是最终泛化的充分统计量。</text>
+</svg>

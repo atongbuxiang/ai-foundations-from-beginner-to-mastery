@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">中心极限定理的标准化极限与Delta方法的切线传播</title>
+  <desc id="desc">三面板展示偏斜单项分布经独立求和与标准化趋向钟形，有限样本CDF与正态CDF存在误差，以及非线性函数在真参数附近用切线传播渐近误差。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFF7ED"/><stop offset="1" stop-color="#EFF6FF"/></linearGradient>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#7C3AED"/></marker>
+    <style>.title{font:700 21px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#0F172A}.head{font:700 17px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#7C3AED}.small{font:12px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#64748B}.math{font:15px Georgia,"Times New Roman",serif;fill:#0F172A}.card{fill:#fff;stroke:#CBD5E1;stroke-width:1.3}.axis{stroke:#64748B;stroke-width:1.2}.arrow{stroke:#7C3AED;stroke-width:2.2;fill:none;marker-end:url(#arr)}.dash{stroke:#EF4444;stroke-width:1.6;stroke-dasharray:6 5;fill:none}</style>
+  </defs>
+  <rect width="1200" height="430" rx="22" fill="url(#bg)"/>
+  <text x="40" y="38" class="title">CLT 描述 √n 放大的平均误差；Delta 方法用局部导数传播这一渐近分布</text>
+  <rect x="28" y="58" width="368" height="342" rx="17" class="card"/><rect x="416" y="58" width="368" height="342" rx="17" class="card"/><rect x="804" y="58" width="368" height="342" rx="17" class="card"/>
+
+  <text x="50" y="88" class="head">A　求和 + 中心化 + √n 标准化</text>
+  <line x1="63" y1="242" x2="163" y2="242" class="axis"/><line x1="67" y1="246" x2="67" y2="120" class="axis"/>
+  <path d="M68 240C75 220 79 171 96 139C111 112 119 134 124 162C131 199 144 227 159 239" fill="#FED7AA" stroke="#F97316" stroke-width="2.4"/>
+  <text x="84" y="266" class="small">单项：偏斜</text>
+  <path d="M169 183L226 183" class="arrow"/><text x="175" y="164" class="math">Σ / √n</text>
+  <line x1="234" y1="242" x2="363" y2="242" class="axis"/><line x1="238" y1="246" x2="238" y2="120" class="axis"/>
+  <path d="M240 240C264 238 274 221 286 183C296 149 304 128 312 128C320 128 328 149 338 183C350 221 360 238 362 240" fill="#DBEAFE" stroke="#2563EB" stroke-width="2.5"/>
+  <text x="263" y="266" class="small">标准化和：趋向钟形</text>
+  <text x="61" y="315" class="math">Z_n=(Σ_i X_i−nμ)/(σ√n)</text>
+  <text x="61" y="346" class="math">Z_n →d N(0,1)</text>
+  <text x="61" y="377" class="small">原始 X_i 不会因此“变成正态”</text>
+
+  <text x="438" y="88" class="head">B　有限 n：近似不是等号</text>
+  <line x1="451" y1="269" x2="754" y2="269" class="axis"/><line x1="455" y1="273" x2="455" y2="117" class="axis"/>
+  <path d="M458 265C485 263 508 248 527 220C553 181 577 146 604 139C635 131 658 168 679 202C701 237 724 258 751 265" fill="none" stroke="#2563EB" stroke-width="2.8"/>
+  <path d="M458 265C480 263 506 254 527 225C550 194 568 150 600 146C629 142 651 179 674 207C698 235 724 260 751 265" class="dash"/>
+  <text x="657" y="138" class="small" fill="#2563EB">Φ(x)</text><text x="657" y="164" class="small" fill="#DC2626">F_n(x)</text>
+  <line x1="620" y1="143" x2="620" y2="151" stroke="#111827" stroke-width="3"/>
+  <text x="447" y="313" class="math">sup_x |F_n(x)−Φ(x)|</text>
+  <text x="447" y="342" class="math">≤ C · ρ/(σ³√n)</text>
+  <text x="447" y="376" class="small">CDF 绝对误差 ≠ 极端尾概率的相对误差</text>
+
+  <text x="826" y="88" class="head">C　Delta：非线性在 θ 附近由切线主导</text>
+  <line x1="835" y1="280" x2="1140" y2="280" class="axis"/><line x1="858" y1="301" x2="858" y2="111" class="axis"/>
+  <path d="M861 263C915 251 950 232 987 199C1024 166 1063 128 1125 119" fill="none" stroke="#7C3AED" stroke-width="3"/>
+  <line x1="907" y1="268" x2="1117" y2="127" stroke="#10B981" stroke-width="2.5"/>
+  <line x1="992" y1="280" x2="992" y2="196" stroke="#94A3B8" stroke-dasharray="5 4"/>
+  <circle cx="992" cy="196" r="6" fill="#7C3AED"/>
+  <line x1="1024" y1="280" x2="1024" y2="167" stroke="#F59E0B" stroke-dasharray="5 4"/>
+  <circle cx="1024" cy="167" r="5" fill="#F59E0B"/>
+  <text x="984" y="299" class="math">θ</text><text x="1010" y="318" class="math">T_n</text>
+  <text x="1026" y="147" class="small">g(T_n)</text><text x="1082" y="151" class="small" fill="#059669">切线</text>
+  <text x="835" y="341" class="math">√n[g(T_n)−g(θ)] →d g′(θ) Z</text>
+  <text x="835" y="376" class="small">若 g′(θ)=0，需二阶展开；尺度与极限形状都会改变</text>
+</svg>

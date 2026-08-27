@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="760" viewBox="0 0 1440 760" role="img" aria-labelledby="title desc">
+  <title id="title">集合、元素、集合运算与 AI 对象合同</title>
+  <desc id="desc">三面板展示元素与子集层级、集合运算的成员逻辑，以及数据集、张量索引与数据切分中的集合对象。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#071527"/><stop offset="1" stop-color="#10263e"/></linearGradient>
+    <linearGradient id="p1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#173754"/><stop offset="1" stop-color="#102a43"/></linearGradient>
+    <linearGradient id="p2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#173d3b"/><stop offset="1" stop-color="#102f31"/></linearGradient>
+    <linearGradient id="p3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#372d58"/><stop offset="1" stop-color="#282442"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="6" stdDeviation="9" flood-color="#000" flood-opacity=".28"/></filter>
+    <marker id="ab" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#66c7ff"/></marker>
+    <marker id="ag" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#70e0bf"/></marker>
+    <style>
+      .title{font:700 30px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#f5f9ff}.sub{font:400 15px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#a9bfd4}.head{font:700 22px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#f8fbff}.body{font:500 16px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#dceaf7}.small{font:400 14px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#b8cada}.math{font:500 17px Georgia,"Times New Roman",serif;fill:#f6fbff}.tag{font:700 13px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:.7px}.mono{font:600 14px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#dceaf7}
+    </style>
+  </defs>
+  <rect width="1440" height="760" fill="url(#bg)"/>
+  <circle cx="1290" cy="60" r="250" fill="#547ec7" opacity=".08"/><circle cx="120" cy="730" r="280" fill="#27a98b" opacity=".07"/>
+  <text x="70" y="59" class="title">先辨认对象层级，再进行集合运算</text>
+  <text x="70" y="88" class="sub">element、subset、power set、product 与 partition 分别保留不同信息；AI 对象必须先选对容器</text>
+
+  <g filter="url(#shadow)"><rect x="55" y="125" width="410" height="535" rx="24" fill="url(#p1)" stroke="#427ca6"/><rect x="515" y="125" width="410" height="535" rx="24" fill="url(#p2)" stroke="#438b7c"/><rect x="975" y="125" width="410" height="535" rx="24" fill="url(#p3)" stroke="#7b6cad"/></g>
+
+  <rect x="80" y="148" width="100" height="27" rx="13" fill="#13324d" stroke="#66c7ff"/><text x="130" y="166" text-anchor="middle" class="tag" fill="#7bd2ff">LEVELS</text>
+  <text x="80" y="207" class="head">① 元素与集合不是同一层</text>
+  <text x="80" y="240" class="body">每上升一层，成员的类型就发生改变</text>
+
+  <rect x="96" y="276" width="120" height="58" rx="14" fill="#0d263d" stroke="#4e91ba"/><text x="156" y="311" text-anchor="middle" class="math">x</text>
+  <path d="M221 305 L263 305" stroke="#66c7ff" stroke-width="2.5" marker-end="url(#ab)"/><text x="242" y="292" text-anchor="middle" class="math">∈</text>
+  <rect x="270" y="264" width="158" height="82" rx="14" fill="#0d263d" stroke="#4e91ba"/><text x="349" y="297" text-anchor="middle" class="math">A = {x, y}</text><text x="349" y="323" text-anchor="middle" class="small">集合的元素是 x, y</text>
+
+  <path d="M349 353 L349 385" stroke="#66c7ff" stroke-width="2.5" marker-end="url(#ab)"/><text x="371" y="374" class="math">∈</text>
+  <rect x="96" y="394" width="332" height="76" rx="14" fill="#0c2338" stroke="#4e91ba"/><text x="262" y="425" text-anchor="middle" class="math">𝒫(U) = { B : B ⊆ U }</text><text x="262" y="451" text-anchor="middle" class="small">power set 的元素本身是 subsets</text>
+
+  <line x1="95" y1="497" x2="428" y2="497" stroke="#355a75"/>
+  <text x="95" y="531" class="body">x ∈ A　⇔　{x} ⊆ A</text>
+  <text x="95" y="562" class="body">A ∈ 𝒫(U)　⇔　A ⊆ U</text>
+  <text x="95" y="593" class="body">∅ ≠ {∅}　但　∅ ⊆ A</text>
+  <rect x="94" y="610" width="335" height="32" rx="9" fill="#0a2033"/><text x="262" y="631" text-anchor="middle" class="small" fill="#7bd2ff">∈ 连接 element→set；⊆ 比较两个 sets</text>
+
+  <rect x="540" y="148" width="112" height="27" rx="13" fill="#123630" stroke="#70e0bf"/><text x="596" y="166" text-anchor="middle" class="tag" fill="#82e9cb">LOGIC</text>
+  <text x="540" y="207" class="head">② 运算就是成员条件</text>
+  <text x="540" y="240" class="body">固定任意 x，把 set identity 还原成布尔逻辑</text>
+
+  <circle cx="659" cy="340" r="91" fill="#1e74a3" opacity=".42" stroke="#65c8ff" stroke-width="2"/><circle cx="784" cy="340" r="91" fill="#27a684" opacity=".42" stroke="#70e0bf" stroke-width="2"/>
+  <text x="616" y="289" class="math">A</text><text x="824" y="289" class="math">B</text>
+  <text x="722" y="327" text-anchor="middle" class="small">A ∩ B</text><text x="722" y="350" text-anchor="middle" class="small">P ∧ Q</text>
+  <text x="590" y="435" class="small">A ∪ B：P ∨ Q</text><text x="746" y="435" class="small">A △ B：P ⊕ Q</text>
+
+  <rect x="548" y="467" width="344" height="101" rx="14" fill="#0b2929" stroke="#53ad98"/>
+  <text x="720" y="497" text-anchor="middle" class="math">x ∈ (A ∪ B)ᶜ</text>
+  <text x="720" y="524" text-anchor="middle" class="math">⇔ ¬(x∈A ∨ x∈B)</text>
+  <text x="720" y="551" text-anchor="middle" class="math">⇔ x ∈ Aᶜ ∩ Bᶜ</text>
+  <rect x="548" y="590" width="344" height="52" rx="11" fill="#102f31"/><text x="720" y="614" text-anchor="middle" class="body">证明 A = B：双向包含</text><text x="720" y="635" text-anchor="middle" class="small">或对任意 x 证明 membership iff</text>
+
+  <rect x="1000" y="148" width="112" height="27" rx="13" fill="#2c2645" stroke="#b29cff"/><text x="1056" y="166" text-anchor="middle" class="tag" fill="#c5b2ff">AI OBJECT</text>
+  <text x="1000" y="207" class="head">③ 选错容器就会丢信息</text>
+  <text x="1000" y="240" class="body">Dataset、tensor 与 split 各有不同的 ambient set</text>
+
+  <rect x="1002" y="270" width="356" height="82" rx="14" fill="#24213c" stroke="#8a78c2"/>
+  <text x="1021" y="298" class="mono">sequence: [a, b, a]</text><text x="1021" y="323" class="mono">set:      {a, b}</text><text x="1021" y="344" class="small">转成 set 后，顺序与重复次数消失</text>
+
+  <rect x="1002" y="375" width="356" height="88" rx="14" fill="#24213c" stroke="#8a78c2"/>
+  <text x="1180" y="405" text-anchor="middle" class="math">X : I_B × I_T × I_D → ℝ</text>
+  <text x="1180" y="433" text-anchor="middle" class="small">tensor entry 的索引是 ordered tuple (b,t,d)</text>
+  <text x="1180" y="454" text-anchor="middle" class="small">axis role 不能用 unordered set 表示</text>
+
+  <rect x="1002" y="486" width="356" height="124" rx="14" fill="#211e38" stroke="#8a78c2"/>
+  <text x="1180" y="514" text-anchor="middle" class="body">Data split 的两层检查</text>
+  <text x="1022" y="544" class="small">✓ rows: R_train ∩ R_test = ∅</text>
+  <text x="1022" y="570" class="small">? entities: g(R_train) ∩ g(R_test)</text>
+  <text x="1022" y="596" class="small">还要审计 time / source / preprocessing leakage</text>
+  <rect x="1002" y="620" width="356" height="22" rx="8" fill="#2c2547"/><text x="1180" y="636" text-anchor="middle" class="small" fill="#c5b2ff">row-disjoint 不是 no-leakage theorem</text>
+
+  <path d="M472 392 L504 392" stroke="#66c7ff" stroke-width="3" marker-end="url(#ab)"/><path d="M932 392 L964 392" stroke="#70e0bf" stroke-width="3" marker-end="url(#ag)"/>
+  <rect x="235" y="689" width="970" height="42" rx="21" fill="#0b1d30" stroke="#385b76"/><text x="720" y="716" text-anchor="middle" class="body">集合图不是证明：正式结论必须回到“任意元素 x 的 membership 条件”与完整 ambient universe。</text>
+</svg>

@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+  <title id="title">矩阵函数 Fréchet 导数的线性算子、块矩阵接口与伴随反向传播</title>
+  <desc id="desc">扰动 E 经线性算子 L_f(A) 产生一阶响应，增广块矩阵的右上块直接给出该响应，前向 JVP 与反向 VJP 通过 Frobenius 内积下的伴随相连；除差公式处理谱坐标与重复特征值。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
+    <style>
+      .sans{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}.blue{fill:#2563eb}.green{fill:#0f766e}.amber{fill:#b7791f}.head{font-size:23px;font-weight:600}.body{font-size:18px}.small{font-size:15px}.formula{font-size:20px}.box{fill:none;stroke:#d7dee8;stroke-width:1.7}.arrow{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="650" fill="#fffefb"/>
+  <path d="M400 50V540M800 50V540" stroke="#d7dee8" stroke-width="1.5"/>
+
+  <text x="55" y="62" class="sans head blue">A　导数是矩阵空间上的算子</text>
+  <rect x="75" y="150" width="112" height="74" class="box"/>
+  <text x="131" y="181" class="math formula ink" text-anchor="middle">A+hE</text>
+  <text x="131" y="207" class="sans small muted" text-anchor="middle">输入方向</text>
+  <path d="M188 187H260" class="arrow"/>
+  <rect x="260" y="150" width="112" height="74" class="box"/>
+  <text x="316" y="181" class="math formula ink" text-anchor="middle">f(A+hE)</text>
+  <text x="316" y="207" class="sans small muted" text-anchor="middle">函数响应</text>
+  <text x="55" y="286" class="math formula ink">f(A+hE)=f(A)+hL<tspan baseline-shift="sub" font-size="15">f</tspan>(A,E)+o(h)</text>
+  <path d="M72 332H372" stroke="#2563eb" stroke-width="3"/>
+  <text x="55" y="376" class="sans body ink">E ↦ Lf(A,E) 对 E 线性；</text>
+  <text x="55" y="406" class="sans body ink">它不是通常的 n×n“导数矩阵”。</text>
+  <text x="55" y="465" class="math body amber">L<tspan baseline-shift="sub" font-size="15">z²</tspan>(A,E)=AE+EA</text>
+  <text x="55" y="499" class="sans small muted">只有可交换等特例才可简写成 f′(A)E。</text>
+
+  <text x="430" y="62" class="sans head green">B　增广块矩阵读取同一导数</text>
+  <rect x="455" y="128" width="290" height="150" class="box"/>
+  <path d="M600 128V278M455 203H745" stroke="#d7dee8" stroke-width="1.5"/>
+  <text x="527" y="177" class="math formula ink" text-anchor="middle">A</text><text x="672" y="177" class="math formula blue" text-anchor="middle">E</text>
+  <text x="527" y="248" class="math formula muted" text-anchor="middle">0</text><text x="672" y="248" class="math formula ink" text-anchor="middle">A</text>
+  <path d="M600 300V346" class="arrow"/>
+  <text x="616" y="328" class="math body green">作用 f</text>
+  <rect x="455" y="346" width="290" height="150" class="box"/>
+  <path d="M600 346V496M455 421H745" stroke="#d7dee8" stroke-width="1.5"/>
+  <text x="527" y="395" class="math body ink" text-anchor="middle">f(A)</text><text x="672" y="395" class="math body blue" text-anchor="middle">Lf(A,E)</text>
+  <text x="527" y="468" class="math formula muted" text-anchor="middle">0</text><text x="672" y="468" class="math body ink" text-anchor="middle">f(A)</text>
+  <text x="430" y="528" class="sans small muted">右上块提供理论证明与小规模实现验收。</text>
+
+  <text x="830" y="62" class="sans head amber">C　JVP、VJP 与谱坐标</text>
+  <text x="830" y="119" class="sans body blue">前向 JVP</text><text x="830" y="153" class="math formula ink">E ↦ Lf(A,E)</text>
+  <path d="M830 181H1134" stroke="#d7dee8" stroke-width="1.5"/>
+  <text x="830" y="224" class="sans body green">反向 VJP</text><text x="830" y="258" class="math formula ink">G ↦ Lf(A)*(G)</text>
+  <text x="830" y="297" class="math body muted">⟨G,L(E)⟩F=⟨L*(G),E⟩F</text>
+  <path d="M830 326H1134" stroke="#d7dee8" stroke-width="1.5"/>
+  <text x="830" y="369" class="sans body amber">Hermitian 谱坐标</text>
+  <text x="830" y="405" class="math body ink">L=Q(F ⊙ Q*EQ)Q*</text>
+  <text x="830" y="440" class="math body ink">Fᵢⱼ=(f(λᵢ)−f(λⱼ))/(λᵢ−λⱼ)</text>
+  <text x="830" y="476" class="math body green">λᵢ=λⱼ 时取 f′(λᵢ)</text>
+  <text x="830" y="520" class="sans small muted">重复谱不是“除以零”；非正规基仍可能放大算子范数。</text>
+
+  <path d="M70 572H1130" stroke="#d7dee8" stroke-width="1.5"/>
+  <text x="600" y="610" class="sans body ink" text-anchor="middle">完整 Jacobian 只是算子的坐标矩阵；大规模计算优先使用 action、JVP 或伴随 VJP。</text>
+</svg>

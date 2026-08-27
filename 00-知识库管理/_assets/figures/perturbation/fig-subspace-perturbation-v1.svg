@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">特征向量与子空间扰动</title>
+  <desc id="desc">三面板展示扰动除以谱间隙的旋转规律、主角度与投影距离、以及重谱下子空间稳定而基不唯一。</desc>
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#334155"/></marker>
+    <style>
+      .p{fill:#f8fafc;stroke:#cbd5e1;stroke-width:2}.h{font:700 19px system-ui,sans-serif;fill:#0f172a}.t{font:15px system-ui,sans-serif;fill:#334155}.s{font:13px system-ui,sans-serif;fill:#475569}.m{font:italic 16px Georgia,serif;fill:#0f172a}.axis{stroke:#94a3b8;stroke-width:1.5;stroke-dasharray:5 5}.blue{stroke:#2563eb;stroke-width:4;fill:none}.red{stroke:#dc2626;stroke-width:4;fill:none}.green{stroke:#059669;stroke-width:4;fill:none}
+    </style>
+  </defs>
+  <rect width="1200" height="430" fill="white"/>
+  <rect class="p" x="18" y="18" width="372" height="394" rx="14"/><rect class="p" x="414" y="18" width="372" height="394" rx="14"/><rect class="p" x="810" y="18" width="372" height="394" rx="14"/>
+
+  <text class="h" x="38" y="52">A. 扰动 / gap 决定旋转</text>
+  <line class="axis" x1="66" y1="301" x2="350" y2="301"/><line class="axis" x1="126" y1="86" x2="126" y2="352"/>
+  <line class="blue" x1="126" y1="301" x2="126" y2="112" marker-end="url(#arr)"/>
+  <line class="red" x1="126" y1="301" x2="235" y2="147" marker-end="url(#arr)"/>
+  <path d="M126 214 A87 87 0 0 1 176 230" fill="none" stroke="#7c3aed" stroke-width="3"/>
+  <text class="s" x="137" y="211">θ</text><text class="s" x="84" y="103">u</text><text class="s" x="238" y="142">û</text>
+  <rect x="259" y="106" width="83" height="24" rx="5" fill="#dbeafe"/><text class="s" x="268" y="123">gap = γ</text>
+  <rect x="259" y="142" width="83" height="24" rx="5" fill="#fee2e2"/><text class="s" x="270" y="159">noise = ε</text>
+  <text class="m" x="68" y="383">sin θ ≲ ε / γ</text><text class="s" x="67" y="405">γ 小：谱值可稳，方向仍可大转</text>
+
+  <text class="h" x="434" y="52">B. 子空间：主角度与投影</text>
+  <polygon points="460,302 665,124 735,174 526,348" fill="#dbeafe" fill-opacity=".75" stroke="#2563eb" stroke-width="3"/>
+  <polygon points="470,332 615,111 746,263 588,365" fill="#dcfce7" fill-opacity=".58" stroke="#059669" stroke-width="3"/>
+  <line class="blue" x1="512" y1="319" x2="653" y2="174" marker-end="url(#arr)"/><line class="green" x1="512" y1="319" x2="616" y2="155" marker-end="url(#arr)"/>
+  <path d="M594 235 A58 58 0 0 0 613 244" fill="none" stroke="#7c3aed" stroke-width="3"/>
+  <text class="s" x="620" y="238">θₘₐₓ</text><text class="s" x="678" y="139">𝒰</text><text class="s" x="714" y="280">Û</text>
+  <text class="m" x="445" y="383">cos θᵢ = σᵢ(U*Û)</text><text class="s" x="445" y="405">‖UU*−ÛÛ*‖₂ = ‖sin Θ‖₂</text>
+
+  <text class="h" x="830" y="52">C. 重谱：基可转，簇可稳</text>
+  <ellipse cx="946" cy="217" rx="93" ry="93" fill="#dbeafe" fill-opacity=".65" stroke="#2563eb" stroke-width="3"/>
+  <line class="blue" x1="946" y1="217" x2="1013" y2="150" marker-end="url(#arr)"/><line class="blue" x1="946" y1="217" x2="879" y2="150" marker-end="url(#arr)"/>
+  <line class="red" x1="946" y1="217" x2="1033" y2="191" marker-end="url(#arr)"/><line class="red" x1="946" y1="217" x2="920" y2="130" marker-end="url(#arr)"/>
+  <text class="s" x="844" y="330">同一二维空间内两组不同基</text>
+  <line x1="1071" y1="119" x2="1071" y2="319" stroke="#64748b" stroke-width="2"/>
+  <rect x="1091" y="130" width="30" height="189" fill="#2563eb"/><rect x="1128" y="130" width="30" height="189" fill="#2563eb"/>
+  <line x1="1082" y1="276" x2="1168" y2="276" stroke="#dc2626" stroke-width="3" stroke-dasharray="5 4"/>
+  <text class="s" x="1080" y="343">簇外 gap</text>
+  <text class="m" x="837" y="383">compare P = UU*, not columns</text><text class="s" x="837" y="405">PCA / Hessian / LoRA 都先识别谱簇</text>
+</svg>

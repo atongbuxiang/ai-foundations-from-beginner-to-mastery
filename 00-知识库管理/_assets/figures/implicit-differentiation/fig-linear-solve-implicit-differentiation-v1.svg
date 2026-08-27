@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">线性求解与隐式微分</title>
+  <desc id="desc">三个面板展示一般隐式切向方程、线性求解的前向和伴随、以及梯度可信度链条。</desc>
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F0FDFA"/><stop offset="1" stop-color="#EFF6FF"/></linearGradient>
+    <marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#475569"/></marker>
+    <style>.title{font:700 22px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#0F172A}.head{font:700 17px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#115E59}.txt{font:14px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#334155}.math{font:15px Georgia,"Times New Roman",serif;fill:#0F172A}.small{font:12px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#64748B}.card{fill:#fff;stroke:#CBD5E1;stroke-width:1.3}.teal{fill:#ECFDF5;stroke:#6EE7B7}.blue{fill:#EFF6FF;stroke:#93C5FD}.amber{fill:#FFFBEB;stroke:#FCD34D}.red{fill:#FEF2F2;stroke:#FCA5A5}.line{stroke:#475569;stroke-width:1.6;fill:none;marker-end:url(#a2)}</style>
+  </defs>
+  <rect width="1200" height="430" rx="22" fill="url(#bg2)"/>
+  <text x="40" y="38" class="title">隐式微分：不求显式逆，而是求解切向与伴随方程</text>
+  <rect x="28" y="58" width="368" height="342" rx="17" class="card"/><rect x="416" y="58" width="368" height="342" rx="17" class="card"/><rect x="804" y="58" width="368" height="342" rx="17" class="card"/>
+  <text x="50" y="88" class="head">A　由方程定义输出</text>
+  <rect x="60" y="112" width="302" height="48" rx="11" class="teal"/><text x="126" y="142" class="math">F(z(θ), θ)=0</text>
+  <path d="M211 162L211 195" class="line"/><text x="226" y="184" class="small">沿参数方向微分</text>
+  <rect x="51" y="199" width="320" height="66" rx="11" class="blue"/><text x="69" y="225" class="math">DzF[ż] + DθF[θ̇] = 0</text><text x="69" y="249" class="small">局部扰动必须继续满足方程</text>
+  <path d="M211 267L211 297" class="line"/>
+  <rect x="51" y="301" width="320" height="52" rx="11" class="teal"/><text x="69" y="332" class="math">解　DzF[ż] = −DθF[θ̇]</text>
+  <text x="60" y="380" class="small">前提：选定局部分支，DzF 可逆且条件可接受</text>
+  <text x="438" y="88" class="head">B　Ax=b 的三次求解</text>
+  <rect x="446" y="108" width="308" height="55" rx="11" class="teal"/><text x="468" y="132" class="txt">前向</text><text x="535" y="141" class="math">A x = b</text>
+  <rect x="446" y="184" width="308" height="66" rx="11" class="blue"/><text x="468" y="208" class="txt">JVP</text><text x="528" y="211" class="math">A ẋ = ḃ − Ȧx</text><text x="468" y="237" class="small">复用 A 的分解 / 预条件结构</text>
+  <rect x="446" y="272" width="308" height="78" rx="11" class="amber"/><text x="468" y="296" class="txt">VJP</text><text x="528" y="299" class="math">Aᵀλ = x̄</text><text x="468" y="330" class="math">b̄=λ,　Ā=−λxᵀ</text>
+  <text x="455" y="380" class="small">公式写 A⁻¹；算法调用 solve，不形成 inverse</text>
+  <text x="826" y="88" class="head">C　梯度可信度不是单一开关</text>
+  <rect x="846" y="109" width="282" height="45" rx="10" class="teal"/><text x="879" y="137" class="txt">① 局部解存在且唯一</text>
+  <path d="M987 156L987 179" class="line"/>
+  <rect x="846" y="182" width="282" height="45" rx="10" class="blue"/><text x="873" y="210" class="txt">② 前向方程残差足够小</text>
+  <path d="M987 229L987 252" class="line"/>
+  <rect x="846" y="255" width="282" height="45" rx="10" class="amber"/><text x="865" y="283" class="txt">③ Jacobian 条件性可接受</text>
+  <path d="M987 302L987 325" class="line"/>
+  <rect x="846" y="328" width="282" height="45" rx="10" class="red"/><text x="871" y="356" class="txt">④ 伴随残差与误差受控</text>
+  <text x="843" y="392" class="small">有限迭代展开梯度 ≠ 收敛方程的隐式梯度</text>
+</svg>

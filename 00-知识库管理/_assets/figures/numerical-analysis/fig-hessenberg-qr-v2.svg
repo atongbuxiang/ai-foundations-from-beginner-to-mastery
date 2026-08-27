@@ -1,0 +1,166 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Hessenberg 约化、隐式移位 QR 与 deflation</title>
+<desc id="desc">一般稠密矩阵先经双侧 Householder 正交相似约化为上 Hessenberg，再用隐式移位和 bulge chasing 保持带宽，以尺度感知 deflation 收缩活跃块并得到 Schur 形式；后向稳定不消除非正规特征值敏感性。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">一次 O(n^3) 约化保留相似性</text>
+<rect x="50" y="115" width="30" height="30" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.5"/>
+<rect x="86" y="115" width="30" height="30" rx="0" fill="#2563EB" stroke="#D7DEE8" stroke-width="1.5"/>
+<rect x="122" y="115" width="30" height="30" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.5"/>
+<rect x="158" y="115" width="30" height="30" rx="0" fill="#2563EB" stroke="#D7DEE8" stroke-width="1.5"/>
+<rect x="194" y="115" width="30" height="30" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.5"/>
+<rect x="50" y="151" width="30" height="30" rx="0" fill="#2563EB" stroke="#D7DEE8" stroke-width="1.5"/>
+<rect x="86" y="151" width="30" height="30" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.5"/>
+<rect x="122" y="151" width="30" height="30" rx="0" fill="#2563EB" stroke="#D7DEE8" stroke-width="1.5"/>
+<rect x="158" y="151" width="30" height="30" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.5"/>
+<rect x="194" y="151" width="30" height="30" rx="0" fill="#2563EB" stroke="#D7DEE8" stroke-width="1.5"/>
+<rect x="50" y="187" width="30" height="30" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.5"/>
+<rect x="86" y="187" width="30" height="30" rx="0" fill="#2563EB" stroke="#D7DEE8" stroke-width="1.5"/>
+<rect x="122" y="187" width="30" height="30" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.5"/>
+<rect x="158" y="187" width="30" height="30" rx="0" fill="#2563EB" stroke="#D7DEE8" stroke-width="1.5"/>
+<rect x="194" y="187" width="30" height="30" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.5"/>
+<rect x="50" y="223" width="30" height="30" rx="0" fill="#2563EB" stroke="#D7DEE8" stroke-width="1.5"/>
+<rect x="86" y="223" width="30" height="30" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.5"/>
+<rect x="122" y="223" width="30" height="30" rx="0" fill="#2563EB" stroke="#D7DEE8" stroke-width="1.5"/>
+<rect x="158" y="223" width="30" height="30" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.5"/>
+<rect x="194" y="223" width="30" height="30" rx="0" fill="#2563EB" stroke="#D7DEE8" stroke-width="1.5"/>
+<rect x="50" y="259" width="30" height="30" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.5"/>
+<rect x="86" y="259" width="30" height="30" rx="0" fill="#2563EB" stroke="#D7DEE8" stroke-width="1.5"/>
+<rect x="122" y="259" width="30" height="30" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.5"/>
+<rect x="158" y="259" width="30" height="30" rx="0" fill="#2563EB" stroke="#D7DEE8" stroke-width="1.5"/>
+<rect x="194" y="259" width="30" height="30" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.5"/>
+<line x1="240" y1="205" x2="280" y2="205" stroke="#C24135" stroke-width="3" marker-end="url(#a2)"/>
+<rect x="290" y="135" width="16" height="30" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="308" y="135" width="16" height="30" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="326" y="135" width="16" height="30" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="344" y="135" width="16" height="30" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="362" y="135" width="16" height="30" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="290" y="171" width="16" height="30" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="308" y="171" width="16" height="30" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="326" y="171" width="16" height="30" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="344" y="171" width="16" height="30" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="362" y="171" width="16" height="30" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="290" y="207" width="16" height="30" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="308" y="207" width="16" height="30" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="326" y="207" width="16" height="30" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="344" y="207" width="16" height="30" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="362" y="207" width="16" height="30" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="290" y="243" width="16" height="30" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="308" y="243" width="16" height="30" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="326" y="243" width="16" height="30" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="344" y="243" width="16" height="30" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="362" y="243" width="16" height="30" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="290" y="279" width="16" height="30" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="308" y="279" width="16" height="30" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="326" y="279" width="16" height="30" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="344" y="279" width="16" height="30" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="362" y="279" width="16" height="30" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<text x="45" y="335" font-size="18" font-weight="700" text-anchor="start" fill="#1F2937" class="math">Q0^T A Q0 = H</text>
+<text x="45" y="375" font-size="16" font-weight="650" text-anchor="start" fill="#0F766E">H is upper Hessenberg</text>
+<text x="45" y="414" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">trace, spectrum and 2-norm</text>
+<text x="45" y="437" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">are preserved</text>
+<text x="45" y="482" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">later QR steps cost O(n^2)。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">隐式 shift 产生并追逐 bulge</text>
+<rect x="440" y="150" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="453" y="150" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="466" y="150" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="479" y="150" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="492" y="150" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="440" y="185" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="453" y="185" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="466" y="185" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="479" y="185" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="492" y="185" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="440" y="220" width="11" height="28" rx="0" fill="#C24135" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="453" y="220" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="466" y="220" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="479" y="220" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="492" y="220" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="440" y="255" width="11" height="28" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="453" y="255" width="11" height="28" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="466" y="255" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="479" y="255" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="492" y="255" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="440" y="290" width="11" height="28" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="453" y="290" width="11" height="28" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="466" y="290" width="11" height="28" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="479" y="290" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="492" y="290" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<line x1="512" y1="220" x2="542" y2="220" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="555" y="150" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="568" y="150" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="581" y="150" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="594" y="150" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="607" y="150" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="555" y="185" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="568" y="185" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="581" y="185" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="594" y="185" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="607" y="185" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="555" y="220" width="11" height="28" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="568" y="220" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="581" y="220" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="594" y="220" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="607" y="220" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="555" y="255" width="11" height="28" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="568" y="255" width="11" height="28" rx="0" fill="#C24135" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="581" y="255" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="594" y="255" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="607" y="255" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="555" y="290" width="11" height="28" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="568" y="290" width="11" height="28" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="581" y="290" width="11" height="28" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="594" y="290" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="607" y="290" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<line x1="627" y1="220" x2="657" y2="220" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="670" y="150" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="683" y="150" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="696" y="150" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="709" y="150" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="722" y="150" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="670" y="185" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="683" y="185" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="696" y="185" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="709" y="185" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="722" y="185" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="670" y="220" width="11" height="28" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="683" y="220" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="696" y="220" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="709" y="220" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="722" y="220" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="670" y="255" width="11" height="28" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="683" y="255" width="11" height="28" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="696" y="255" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="709" y="255" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="722" y="255" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="670" y="290" width="11" height="28" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="683" y="290" width="11" height="28" rx="0" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="696" y="290" width="11" height="28" rx="0" fill="#C24135" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="709" y="290" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<rect x="722" y="290" width="11" height="28" rx="0" fill="#0F766E" stroke="#D7DEE8" stroke-width="1"/>
+<text x="430" y="365" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">Francis step: form first column</text>
+<text x="430" y="388" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">without explicit QR factors</text>
+<text x="430" y="423" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">chase the bulge back to band</text>
+<text x="430" y="458" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">implicit Q theorem fixes the step</text>
+<text x="430" y="493" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">shift: speed；orthogonality: stability。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">deflation 收缩到 Schur blocks</text>
+<rect x="840" y="100" width="300" height="55" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="990.0" y="133.5" font-size="17" font-weight="650" text-anchor="middle" fill="#2563EB">active Hessenberg block</text>
+<line x1="990" y1="158" x2="990" y2="198" stroke="#1F2937" stroke-width="2.4" marker-end="url(#a3)"/>
+<rect x="840" y="210" width="300" height="68" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="990.0" y="250.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">test |h_(i+1,i)| against local scale</text>
+<line x1="990" y1="281" x2="990" y2="321" stroke="#1F2937" stroke-width="2.4" marker-end="url(#a3)"/>
+<rect x="840" y="333" width="300" height="68" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="990.0" y="373.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">split -&gt; 1x1 / real 2x2 Schur blocks</text>
+<text x="830" y="441" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">verify ||A Q-Q T|| and Q^T Q-I</text>
+<text x="830" y="472" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">stable Schur form != accurate</text>
+<text x="830" y="495" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">eigenvectors for nonnormal A</text>
+<text x="830" y="518" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">report conditioning context。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">稠密 QR 特征值算法依靠 Hessenberg 结构、隐式移位和 deflation 达到 O(n^3) 总成本。</text>
+</svg>

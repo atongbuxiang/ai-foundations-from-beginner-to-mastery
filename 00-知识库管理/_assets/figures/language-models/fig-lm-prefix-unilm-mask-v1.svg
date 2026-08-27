@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Prefix LM / UniLM：同一序列的分块可见性</title>
+<desc id="desc">Prefix 内双向，suffix 读取全部 prefix 与过去 suffix；可见性矩阵、segment IDs 和 loss region 联合定义 seq2seq 目标。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Sequence blocks</text>
+<rect x="55" y="120" width="200" height="55" rx="6" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="155" y="154" font-size="16" font-weight="750" text-anchor="middle" fill="#2563EB">prefix / source</text>
+<rect x="265" y="120" width="95" height="55" rx="6" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="312" y="154" font-size="15" font-weight="750" text-anchor="middle" fill="#0F766E">suffix</text>
+<text x="55" y="230" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">[source tokens | target tokens]</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Relation matrix</text>
+<rect x="465" y="100" width="43" height="43" rx="2" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.2"/>
+<text x="486" y="127" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">✓</text>
+<rect x="517" y="100" width="43" height="43" rx="2" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.2"/>
+<text x="538" y="127" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">✓</text>
+<rect x="569" y="100" width="43" height="43" rx="2" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.2"/>
+<text x="590" y="127" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">✓</text>
+<rect x="621" y="100" width="43" height="43" rx="2" fill="#F1F5F9" stroke="#D7DEE8" stroke-width="1.2"/>
+<text x="642" y="127" font-size="15" font-weight="700" text-anchor="middle" fill="#64748B">×</text>
+<rect x="673" y="100" width="43" height="43" rx="2" fill="#F1F5F9" stroke="#D7DEE8" stroke-width="1.2"/>
+<text x="694" y="127" font-size="15" font-weight="700" text-anchor="middle" fill="#64748B">×</text>
+<rect x="725" y="100" width="43" height="43" rx="2" fill="#F1F5F9" stroke="#D7DEE8" stroke-width="1.2"/>
+<text x="746" y="127" font-size="15" font-weight="700" text-anchor="middle" fill="#64748B">×</text>
+<rect x="465" y="152" width="43" height="43" rx="2" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.2"/>
+<text x="486" y="179" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">✓</text>
+<rect x="517" y="152" width="43" height="43" rx="2" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.2"/>
+<text x="538" y="179" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">✓</text>
+<rect x="569" y="152" width="43" height="43" rx="2" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.2"/>
+<text x="590" y="179" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">✓</text>
+<rect x="621" y="152" width="43" height="43" rx="2" fill="#F1F5F9" stroke="#D7DEE8" stroke-width="1.2"/>
+<text x="642" y="179" font-size="15" font-weight="700" text-anchor="middle" fill="#64748B">×</text>
+<rect x="673" y="152" width="43" height="43" rx="2" fill="#F1F5F9" stroke="#D7DEE8" stroke-width="1.2"/>
+<text x="694" y="179" font-size="15" font-weight="700" text-anchor="middle" fill="#64748B">×</text>
+<rect x="725" y="152" width="43" height="43" rx="2" fill="#F1F5F9" stroke="#D7DEE8" stroke-width="1.2"/>
+<text x="746" y="179" font-size="15" font-weight="700" text-anchor="middle" fill="#64748B">×</text>
+<rect x="465" y="204" width="43" height="43" rx="2" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.2"/>
+<text x="486" y="231" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">✓</text>
+<rect x="517" y="204" width="43" height="43" rx="2" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.2"/>
+<text x="538" y="231" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">✓</text>
+<rect x="569" y="204" width="43" height="43" rx="2" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.2"/>
+<text x="590" y="231" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">✓</text>
+<rect x="621" y="204" width="43" height="43" rx="2" fill="#F1F5F9" stroke="#D7DEE8" stroke-width="1.2"/>
+<text x="642" y="231" font-size="15" font-weight="700" text-anchor="middle" fill="#64748B">×</text>
+<rect x="673" y="204" width="43" height="43" rx="2" fill="#F1F5F9" stroke="#D7DEE8" stroke-width="1.2"/>
+<text x="694" y="231" font-size="15" font-weight="700" text-anchor="middle" fill="#64748B">×</text>
+<rect x="725" y="204" width="43" height="43" rx="2" fill="#F1F5F9" stroke="#D7DEE8" stroke-width="1.2"/>
+<text x="746" y="231" font-size="15" font-weight="700" text-anchor="middle" fill="#64748B">×</text>
+<rect x="465" y="256" width="43" height="43" rx="2" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.2"/>
+<text x="486" y="283" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="517" y="256" width="43" height="43" rx="2" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.2"/>
+<text x="538" y="283" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="569" y="256" width="43" height="43" rx="2" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.2"/>
+<text x="590" y="283" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="621" y="256" width="43" height="43" rx="2" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.2"/>
+<text x="642" y="283" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="673" y="256" width="43" height="43" rx="2" fill="#F1F5F9" stroke="#D7DEE8" stroke-width="1.2"/>
+<text x="694" y="283" font-size="15" font-weight="700" text-anchor="middle" fill="#64748B">×</text>
+<rect x="725" y="256" width="43" height="43" rx="2" fill="#F1F5F9" stroke="#D7DEE8" stroke-width="1.2"/>
+<text x="746" y="283" font-size="15" font-weight="700" text-anchor="middle" fill="#64748B">×</text>
+<rect x="465" y="308" width="43" height="43" rx="2" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.2"/>
+<text x="486" y="335" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="517" y="308" width="43" height="43" rx="2" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.2"/>
+<text x="538" y="335" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="569" y="308" width="43" height="43" rx="2" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.2"/>
+<text x="590" y="335" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="621" y="308" width="43" height="43" rx="2" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.2"/>
+<text x="642" y="335" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="673" y="308" width="43" height="43" rx="2" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.2"/>
+<text x="694" y="335" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="725" y="308" width="43" height="43" rx="2" fill="#F1F5F9" stroke="#D7DEE8" stroke-width="1.2"/>
+<text x="746" y="335" font-size="15" font-weight="700" text-anchor="middle" fill="#64748B">×</text>
+<rect x="465" y="360" width="43" height="43" rx="2" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.2"/>
+<text x="486" y="387" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="517" y="360" width="43" height="43" rx="2" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.2"/>
+<text x="538" y="387" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="569" y="360" width="43" height="43" rx="2" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.2"/>
+<text x="590" y="387" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="621" y="360" width="43" height="43" rx="2" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.2"/>
+<text x="642" y="387" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="673" y="360" width="43" height="43" rx="2" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.2"/>
+<text x="694" y="387" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="725" y="360" width="43" height="43" rx="2" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.2"/>
+<text x="746" y="387" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Loss region remains separate</text>
+<text x="845" y="110" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937">prefix targets</text>
+<rect x="1010" y="86" width="75" height="36" rx="5" fill="#F8FAFC" stroke="#2563EB" stroke-width="2"/>
+<text x="1047" y="110" font-size="15" font-weight="800" text-anchor="middle" fill="#2563EB">0</text>
+<text x="845" y="200" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937">suffix targets</text>
+<rect x="1010" y="176" width="75" height="36" rx="5" fill="#F8FAFC" stroke="#0F766E" stroke-width="2"/>
+<text x="1047" y="200" font-size="15" font-weight="800" text-anchor="middle" fill="#0F766E">1</text>
+<text x="845" y="290" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937">padding</text>
+<rect x="1010" y="266" width="75" height="36" rx="5" fill="#F8FAFC" stroke="#C24135" stroke-width="2"/>
+<text x="1047" y="290" font-size="15" font-weight="800" text-anchor="middle" fill="#C24135">0</text>
+<text x="845" y="395" font-size="15" font-weight="800" text-anchor="start" fill="#C24135">same stack ≠ same objective</text>
+<text x="845" y="430" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">mask relation and labels are independent</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">Prefix/UniLM 通过 relation 改变条件集；是否预测 prefix、suffix 或 masked positions 仍由独立 loss mask 决定。</text>
+</svg>

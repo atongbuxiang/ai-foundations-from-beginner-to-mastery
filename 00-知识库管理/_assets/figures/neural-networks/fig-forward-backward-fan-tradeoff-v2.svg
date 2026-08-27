@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Forward / Backward Fan Tradeoff：标量增益、深度乘积与谱边界</title>
+<desc id="desc">同一层的 forward multiplier 使用 fan-in 与 activation moment，backward multiplier 使用 fan-out 与 derivative moment；小偏差沿深度相乘。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">W 与 W^T 交换求和宽度</text>
+<rect x="55" y="105" width="85" height="52" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="97.5" y="137.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">h: n_in</text>
+<rect x="265" y="105" width="85" height="52" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="307.5" y="137.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">z: n_out</text>
+<rect x="160" y="198" width="82" height="55" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="201.0" y="231.5" font-size="20" font-weight="650" text-anchor="middle" fill="#C24135">W</text>
+<line x1="143" y1="132" x2="174" y2="194" stroke="#2563EB" stroke-width="2.5" marker-end="url(#a0)"/>
+<line x1="228" y1="194" x2="262" y2="132" stroke="#0F766E" stroke-width="2.5" marker-end="url(#a1)"/>
+<path d="M265 294C225 330 180 330 140 294" fill="none" stroke="#0F766E" stroke-width="2.8" stroke-dasharray="7 5" marker-end="url(#a1)"/>
+<text x="205" y="282" font-size="16" font-weight="700" text-anchor="middle" fill="#0F766E">reverse uses W^T</text>
+<rect x="55" y="356" width="292" height="55" rx="6" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="201" y="389" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB" class="math">chi_f = n_in Var(W) c(q)</text>
+<rect x="55" y="430" width="292" height="55" rx="6" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="201" y="463" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E" class="math">chi_b = n_out Var(W) d(q)</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Depth 把小偏差变成乘积</text>
+<line x1="450" y1="340" x2="750" y2="340" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="450" y1="112" x2="450" y2="340" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="450" y1="228" x2="750" y2="228" stroke="#D7DEE8" stroke-width="1.5" stroke-dasharray="5 5"/>
+<polyline points="450.00,230.81 453.00,229.65 456.00,228.49 459.00,227.34 462.00,226.18 465.00,225.02 468.00,223.87 471.00,222.71 474.00,221.55 477.00,220.40 480.00,219.24 483.00,218.08 486.00,216.92 489.00,215.77 492.00,214.61 495.00,213.45 498.00,212.30 501.00,211.14 504.00,209.98 507.00,208.83 510.00,207.67 513.00,206.51 516.00,205.36 519.00,204.20 522.00,203.04 525.00,201.89 528.00,200.73 531.00,199.57 534.00,198.41 537.00,197.26 540.00,196.10 543.00,194.94 546.00,193.79 549.00,192.63 552.00,191.47 555.00,190.32 558.00,189.16 561.00,188.00 564.00,186.85 567.00,185.69 570.00,184.53 573.00,183.38 576.00,182.22 579.00,181.06 582.00,179.91 585.00,178.75 588.00,177.59 591.00,176.43 594.00,175.28 597.00,174.12 600.00,172.96 603.00,171.81 606.00,170.65 609.00,169.49 612.00,168.34 615.00,167.18 618.00,166.02 621.00,164.87 624.00,163.71 627.00,162.55 630.00,161.40 633.00,160.24 636.00,159.08 639.00,157.92 642.00,156.77 645.00,155.61 648.00,154.45 651.00,153.30 654.00,152.14 657.00,150.98 660.00,149.83 663.00,148.67 666.00,147.51 669.00,146.36 672.00,145.20 675.00,144.04 678.00,142.89 681.00,141.73 684.00,140.57 687.00,139.41 690.00,138.26 693.00,137.10 696.00,135.94 699.00,134.79 702.00,133.63 705.00,132.47 708.00,131.32 711.00,130.16 714.00,129.00 717.00,127.85 720.00,126.69 723.00,125.53 726.00,124.38 729.00,123.22 732.00,122.06 735.00,120.91 738.00,119.75 741.00,118.59 744.00,117.43 747.00,116.28 750.00,115.12" fill="none" stroke="#C24135" stroke-width="3"/>
+<polyline points="450.00,230.81 453.00,232.02 456.00,233.24 459.00,234.46 462.00,235.67 465.00,236.89 468.00,238.10 471.00,239.32 474.00,240.54 477.00,241.75 480.00,242.97 483.00,244.19 486.00,245.40 489.00,246.62 492.00,247.83 495.00,249.05 498.00,250.27 501.00,251.48 504.00,252.70 507.00,253.92 510.00,255.13 513.00,256.35 516.00,257.56 519.00,258.78 522.00,260.00 525.00,261.21 528.00,262.43 531.00,263.64 534.00,264.86 537.00,266.08 540.00,267.29 543.00,268.51 546.00,269.73 549.00,270.94 552.00,272.16 555.00,273.37 558.00,274.59 561.00,275.81 564.00,277.02 567.00,278.24 570.00,279.46 573.00,280.67 576.00,281.89 579.00,283.10 582.00,284.32 585.00,285.54 588.00,286.75 591.00,287.97 594.00,289.19 597.00,290.40 600.00,291.62 603.00,292.83 606.00,294.05 609.00,295.27 612.00,296.48 615.00,297.70 618.00,298.91 621.00,300.13 624.00,301.35 627.00,302.56 630.00,303.78 633.00,305.00 636.00,306.21 639.00,307.43 642.00,308.64 645.00,309.86 648.00,311.08 651.00,312.29 654.00,313.51 657.00,314.73 660.00,315.94 663.00,317.16 666.00,318.37 669.00,319.59 672.00,320.81 675.00,322.02 678.00,323.24 681.00,324.46 684.00,325.67 687.00,326.89 690.00,328.10 693.00,329.32 696.00,330.54 699.00,331.75 702.00,332.97 705.00,334.19 708.00,335.40 711.00,336.62 714.00,337.83 717.00,339.05 720.00,340.00 723.00,340.00 726.00,340.00 729.00,340.00 732.00,340.00 735.00,340.00 738.00,340.00 741.00,340.00 744.00,340.00 747.00,340.00 750.00,340.00" fill="none" stroke="#2563EB" stroke-width="3"/>
+<text x="465" y="137" font-size="16" font-weight="700" text-anchor="start" fill="#C24135">1.05^L</text>
+<text x="465" y="317" font-size="16" font-weight="700" text-anchor="start" fill="#2563EB">0.95^L</text>
+<text x="750" y="367" font-size="15" font-weight="600" text-anchor="end" fill="#64748B">depth L</text>
+<rect x="450" y="394" width="300" height="92" rx="7" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="600" y="422" font-size="16" font-weight="700" text-anchor="middle" fill="#0F766E">bottleneck example</text>
+<text x="600" y="448" font-size="15" font-weight="500" text-anchor="middle" fill="#64748B">512 -&gt; 128: chi_b = 1/4</text>
+<text x="600" y="471" font-size="15" font-weight="500" text-anchor="middle" fill="#64748B">128 -&gt; 512: chi_b = 4</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">证据阶梯：平均矩不是终点</text>
+<rect x="845" y="105" width="285" height="45" rx="6" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="987" y="133" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">1  scalar second moments</text>
+<line x1="987" y1="152" x2="987" y2="169" stroke="#1F2937" stroke-width="1.8" marker-end="url(#a3)"/>
+<rect x="845" y="172" width="285" height="45" rx="6" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="987" y="200" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">2  random-direction JVP / VJP</text>
+<line x1="987" y1="219" x2="987" y2="236" stroke="#1F2937" stroke-width="1.8" marker-end="url(#a3)"/>
+<rect x="845" y="239" width="285" height="45" rx="6" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="987" y="267" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">3  extreme singular estimates</text>
+<line x1="987" y1="286" x2="987" y2="303" stroke="#1F2937" stroke-width="1.8" marker-end="url(#a3)"/>
+<rect x="845" y="306" width="285" height="45" rx="6" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="987" y="334" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">4  residual / norm full block</text>
+<line x1="987" y1="353" x2="987" y2="370" stroke="#1F2937" stroke-width="1.8" marker-end="url(#a3)"/>
+<rect x="845" y="373" width="285" height="45" rx="6" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="987" y="401" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">5  loss + AMP + distributed scale</text>
+<rect x="845" y="447" width="285" height="52" rx="7" fill="#FFF5F2" stroke="#C24135" stroke-width="2"/>
+<text x="987" y="470" font-size="16" font-weight="700" text-anchor="middle" fill="#C24135">bounded conclusion</text>
+<text x="987" y="491" font-size="15" font-weight="500" text-anchor="middle" fill="#64748B">initialization neighborhood only</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">先校准 forward/backward 标量增益，再检查深度乘积、方向谱与完整训练系统；每一级支持不同强度的结论。</text>
+</svg>

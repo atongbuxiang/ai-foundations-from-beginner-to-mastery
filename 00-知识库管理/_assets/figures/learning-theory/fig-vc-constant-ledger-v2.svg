@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+  <title id="title">VC 一致收敛证明的常数账本</title>
+  <desc id="desc">表格逐步记录对称化、随机交换、尾界和有限模式并合带来的系数与指数损失，得到最终概率上界。</desc>
+  <defs>
+    <style>
+      .ink{fill:#1f2937}.muted{fill:#64748b}.line{stroke:#cbd5e1;stroke-width:1.5}.rule{stroke:#334155;stroke-width:2}.soft{fill:#f8fafc}.blue{fill:#2563eb}.blue-soft{fill:#eff6ff}.green{fill:#047857}.green-soft{fill:#ecfdf5}
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.h{font-size:17px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:23px;font-weight:600}
+    </style>
+  </defs>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <rect x="42" y="38" width="1116" height="386" rx="12" class="soft" stroke="#cbd5e1"/>
+  <g class="sans h ink">
+    <text x="72" y="78">步骤</text><text x="282" y="78">证明操作</text><text x="636" y="78">本步代价</text><text x="910" y="78">累计形态</text>
+  </g>
+  <line x1="62" y1="96" x2="1138" y2="96" class="rule"/>
+  <g class="line">
+    <line x1="236" y1="54" x2="236" y2="404"/><line x1="588" y1="54" x2="588" y2="404"/><line x1="866" y1="54" x2="866" y2="404"/>
+    <line x1="62" y1="174" x2="1138" y2="174"/><line x1="62" y1="252" x2="1138" y2="252"/><line x1="62" y1="330" x2="1138" y2="330"/>
+  </g>
+  <g class="sans body ink">
+    <text x="72" y="143">对称化</text><text x="282" y="143">引入幽灵样本 S′</text>
+    <text x="72" y="221">交换化</text><text x="282" y="221">每对样本乘随机符号</text>
+    <text x="72" y="299">尾界</text><text x="282" y="299">固定一种限制模式</text>
+    <text x="72" y="377">并合界</text><text x="282" y="377">枚举所有不同限制模式</text>
+  </g>
+  <g class="math formula blue" text-anchor="middle">
+    <text x="727" y="143">× 2</text><text x="727" y="221">不增系数</text><text x="727" y="299">× 2，指数 1⁄8</text><text x="727" y="377">× tau_H(2m)</text>
+  </g>
+  <g class="math body ink">
+    <text x="910" y="143">2 · Pr(双样本事件)</text>
+    <text x="910" y="221">2 · Pr(符号事件)</text>
+    <text x="910" y="299">4 · exp(−mε²⁄8)</text>
+    <text x="910" y="377">4 tau_H(2m) exp(−mε²⁄8)</text>
+  </g>
+  <rect x="42" y="458" width="1116" height="72" rx="11" class="green-soft" stroke="#6ee7b7"/>
+  <text x="70" y="487" class="sans small green">在独立同分布样本与 0–1 损失的设定下</text>
+  <text x="70" y="515" class="math result green">Pr{sup over h |R(h;P) − R(h;S)| &gt; ε} ≤ 4 tau_H(2m) exp(−mε²⁄8)</text>
+</svg>

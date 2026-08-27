@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#26364a"/></marker>
+    <style>.t{font-family:Inter,'Noto Sans SC',sans-serif;fill:#172033}.h{font-weight:700;font-size:26px}.s{font-size:18px}.m{font-family:'IBM Plex Mono',monospace;font-size:17px;fill:#233a59}.mut{font-size:15px;fill:#647184}.box{fill:#fffdf7;stroke:#26364a;stroke-width:2}.arr{stroke:#26364a;stroke-width:2.2;fill:none;marker-end:url(#a)}</style>
+  </defs>
+  <rect width="1200" height="620" fill="#f4f0e6"/>
+  <text x="54" y="52" class="t h">Classifier Guidance：Bayes 把两股 score 合成条件场</text>
+  <line x1="54" y1="72" x2="1146" y2="72" stroke="#c7bda9"/>
+  <rect x="54" y="104" width="370" height="392" rx="12" class="box"/>
+  <text x="78" y="142" class="t h" font-size="21">1  向量场相加</text>
+  <circle cx="233" cy="310" r="70" fill="#fff8e9" stroke="#c6a95b" stroke-width="2"/>
+  <path d="M120 265 L185 292" stroke="#426f9e" stroke-width="4" marker-end="url(#a)"/>
+  <text x="86" y="246" class="t s" fill="#426f9e">s_u：prior</text>
+  <path d="M230 405 L244 337" stroke="#d46b45" stroke-width="4" marker-end="url(#a)"/>
+  <text x="250" y="413" class="t s" fill="#b65334">g_y：evidence</text>
+  <path d="M118 406 L202 337" stroke="#4f8051" stroke-width="5" marker-end="url(#a)"/>
+  <text x="82" y="443" class="t s" fill="#426c43">s_cond = s_u + g_y</text>
+  <text x="78" y="475" class="t mut">等式精确；两个网络估计与 finite sampler 近似</text>
+  <rect x="450" y="104" width="330" height="392" rx="12" class="box"/>
+  <text x="474" y="142" class="t h" font-size="21">2  scale 改变分布</text>
+  <path d="M488 400 C535 395,550 180,610 180 C670 180,685 395,742 400" stroke="#426f9e" stroke-width="3" fill="none"/>
+  <path d="M520 400 C575 395,587 230,635 230 C683 230,692 395,748 400" stroke="#d46b45" stroke-width="3" fill="none"/>
+  <line x1="486" y1="400" x2="748" y2="400" stroke="#26364a"/>
+  <text x="492" y="190" class="t s" fill="#426f9e">w = 1</text>
+  <text x="650" y="245" class="t s" fill="#b65334">w &gt; 1</text>
+  <text x="478" y="445" class="m">p_w(x) ∝ p(x) p(y|x)^w</text>
+  <text x="478" y="476" class="t mut">更集中可能提高 fidelity，也会降低 coverage</text>
+  <rect x="806" y="104" width="340" height="392" rx="12" class="box"/>
+  <text x="830" y="142" class="t h" font-size="21">3  sampler 系数不能丢</text>
+  <rect x="835" y="182" width="280" height="68" rx="8" fill="#e7eef8" stroke="#56769a"/>
+  <text x="854" y="211" class="t s">Reverse SDE drift</text><text x="854" y="236" class="m">- g(t)^2 · w g_y</text>
+  <rect x="835" y="274" width="280" height="68" rx="8" fill="#e4f0e2" stroke="#608459"/>
+  <text x="854" y="303" class="t s">PF-ODE drift</text><text x="854" y="328" class="m">- 0.5 g(t)^2 · w g_y</text>
+  <rect x="835" y="366" width="280" height="68" rx="8" fill="#f8e6df" stroke="#b7654c"/>
+  <text x="854" y="395" class="t s">Gaussian reverse mean</text><text x="854" y="420" class="m">mu + Sigma · w g_y</text>
+  <path d="M424 300 H438" class="arr"/><path d="M780 300 H794" class="arr"/>
+  <rect x="54" y="528" width="1092" height="56" rx="8" fill="#fff8de" stroke="#c7a84d"/>
+  <text x="76" y="562" class="t s">检查顺序：noisy classifier → conditional score → 参数化换算 → sampler 系数 → scale/coverage sweep。</text>
+</svg>

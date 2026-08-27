@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+<title id="title">Conditional score 投影成 marginal score</title>
+<desc id="desc">左侧从多个可能的干净来源画向同一个 noisy point 的条件 score 箭头，中间显示它们的条件均值，右侧以正交三角形和公式说明 conditional loss 等于 marginal loss加不可约方差。</desc>
+<rect width="1200" height="620" fill="#FFFEFB"/>
+<defs><marker id="ab" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="ag" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.ink{fill:#1F2937}.muted{fill:#64748B}.blue{fill:#2563EB}.green{fill:#0F766E}.amber{fill:#B7791F}</style>
+<text x="58" y="48" font-size="20" font-weight="700" class="ink">A　同一个 noisy x，可能对应多条 conditional denoising target</text>
+<circle cx="160" cy="150" r="11" fill="#FFFFFF" stroke="#64748B" stroke-width="2"/><circle cx="160" cy="300" r="11" fill="#FFFFFF" stroke="#64748B" stroke-width="2"/><circle cx="160" cy="450" r="11" fill="#FFFFFF" stroke="#64748B" stroke-width="2"/>
+<text x="74" y="154" font-size="15" class="muted">clean A</text><text x="74" y="304" font-size="15" class="muted">clean B</text><text x="74" y="476" font-size="15" class="muted">clean C</text>
+<circle cx="465" cy="300" r="15" fill="#2563EB"/><text x="448" y="337" font-size="16" class="blue">x(t)</text>
+<g stroke="#2563EB" stroke-width="3" opacity=".55" marker-end="url(#ab)"><path d="M450 290L155 162"/><path d="M450 300L160 300"/><path d="M450 312L190 440"/></g>
+<path d="M450 300L245 332" stroke="#0F766E" stroke-width="5" marker-end="url(#ag)"/><text x="292" y="368" font-size="17" class="green">E[conditional target | x(t)]</text>
+<line x1="570" y1="80" x2="570" y2="540" stroke="#D7DEE8" stroke-width="2"/>
+<text x="610" y="112" font-size="20" font-weight="700" class="ink">B　L2 正交分解</text>
+<circle cx="680" cy="350" r="8" fill="#64748B"/><circle cx="875" cy="350" r="8" fill="#0F766E"/><circle cx="875" cy="205" r="8" fill="#2563EB"/>
+<path d="M680 350H875V205Z" fill="none" stroke="#1F2937" stroke-width="3"/><rect x="853" y="328" width="22" height="22" fill="none" stroke="#64748B" stroke-width="2"/>
+<text x="645" y="378" font-size="15" class="muted">model s</text><text x="852" y="380" font-size="15" class="green">marginal m</text><text x="890" y="210" font-size="15" class="blue">conditional U</text>
+<text x="715" y="335" font-size="15" class="green">model error</text><text x="890" y="285" font-size="15" class="amber">irreducible variance</text><text x="712" y="258" font-size="15" class="blue">conditional error</text>
+<rect x="610" y="425" width="530" height="105" fill="#FFFFFF" stroke="#D7DEE8" stroke-width="2"/>
+<text x="635" y="463" font-size="18" class="ink">E ||U - s||^2 = E ||m - s||^2 + E ||U - m||^2</text><text x="635" y="500" font-size="16" class="muted">同 population gradient / minimizer；不同 sample loss / estimator variance</text>
+<text x="58" y="588" font-size="15" class="muted">“conditional score = marginal score”应读作条件期望投影与目标等价，不应读作每个训练样本的两支箭头相同。</text>
+</svg>

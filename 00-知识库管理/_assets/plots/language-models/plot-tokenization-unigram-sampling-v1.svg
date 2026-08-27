@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+<title id="title">Unigram 路径目标概率与抽样频率</title><desc id="desc">对字符串 ab 的两条路径，在 alpha 0.5 下比较精确温度化概率与固定 seed 经验频率。</desc>
+<rect width="1200" height="620" fill="#FFFEFB"/>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<text x="55" y="55" font-size="24" font-weight="700" fill="#2563EB">Unigram sampling oracle：exact target vs empirical frequency</text>
+<text x="310" y="125" text-anchor="middle" font-size="20" font-weight="700">a + b</text>
+<rect x="190" y="216.28041248258955" width="95" height="283.71958751741045" fill="#0F766E"/><text x="237" y="530" text-anchor="middle" font-size="14">target</text>
+<rect x="335" y="216.89249999999998" width="95" height="283.1075" fill="#2563EB"/><text x="382" y="530" text-anchor="middle" font-size="14">empirical</text>
+<text x="310" y="565" text-anchor="middle" font-size="14" fill="#64748B">abs err=0.0009</text>
+<text x="740" y="125" text-anchor="middle" font-size="20" font-weight="700">ab</text>
+<rect x="620" y="133.71958751741056" width="95" height="366.28041248258944" fill="#0F766E"/><text x="667" y="530" text-anchor="middle" font-size="14">target</text>
+<rect x="765" y="133.10750000000002" width="95" height="366.8925" fill="#2563EB"/><text x="812" y="530" text-anchor="middle" font-size="14">empirical</text>
+<text x="740" y="565" text-anchor="middle" font-size="14" fill="#64748B">abs err=0.0009</text>
+<text x="55" y="595" font-size="15" fill="#64748B">alpha=0.5, draws=20000, seed=20260826；先枚举归一化，再检查采样器。</text>
+</svg>

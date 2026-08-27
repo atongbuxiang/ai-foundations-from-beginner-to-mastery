@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">InfoNCE：候选分类、密度比与互信息下界</title>
+<desc id="desc">InfoNCE把一个positive与若干marginal negatives组成候选分类问题。最优score编码conditional-to-marginal density ratio；MI下界、finite-batch estimate与downstream utility是三个不同对象。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">先区分 NCE 与 InfoNCE</text>
+<rect x="55" y="92" width="300" height="64" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="205.0" y="130.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">NCE: data vs known noise</text>
+<text x="85" y="180" font-size="15" font-weight="650" text-anchor="start" fill="#2563EB">unnormalized density estimation</text>
+<rect x="55" y="205" width="300" height="64" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="205.0" y="243.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">InfoNCE: find the joint candidate</text>
+<text x="85" y="293" font-size="15" font-weight="650" text-anchor="start" fill="#0F766E">representation / ratio surrogate</text>
+<text x="45" y="345" font-size="16" font-weight="700" text-anchor="start" fill="#C24135">similar name != same estimand</text>
+<text x="45" y="395" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">sampling law is part of either theorem</text>
+<text x="45" y="445" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">critic score is not itself a probability</text>
+<text x="45" y="510" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">define the candidate experiment before loss。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">最优 Score 是 Density Ratio</text>
+<rect x="445" y="92" width="310" height="60" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600.0" y="128.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">one y+ from p(y|x)</text>
+<line x1="600" y1="157" x2="600" y2="190" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="445" y="200" width="310" height="62" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="600.0" y="237.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">K-1 negatives from p(y)</text>
+<line x1="600" y1="267" x2="600" y2="300" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="445" y="310" width="310" height="62" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="600.0" y="347.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">softmax candidate-index likelihood</text>
+<text x="430" y="420" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937" class="math">s*(x,y) = log p(y|x) / p(y) + c(x)</text>
+<text x="430" y="468" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E" class="math">I(X;Y) &gt;= log K - L_InfoNCE</text>
+<text x="430" y="510" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">ratio identification needs the population experiment。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">下界不等于测得 MI</text>
+<rect x="845" y="92" width="285" height="62" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="987.5" y="129.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">ceiling: lower bound &lt;= log K</text>
+<rect x="845" y="180" width="285" height="62" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="987.5" y="217.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">critic / optimization / sampling gaps</text>
+<rect x="845" y="268" width="285" height="62" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="987.5" y="305.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">finite-batch reuse and dependence</text>
+<text x="830" y="382" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">large true MI can saturate the bound</text>
+<text x="830" y="420" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">invertible codes can preserve MI but entangle</text>
+<text x="830" y="458" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">alignment + uniformity is another geometry view</text>
+<text x="830" y="495" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">downstream sufficiency still needs task evidence</text>
+<text x="830" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">a low loss is not a numerical MI certificate。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">InfoNCE首先是声明sampling law下的候选分类风险；密度比、MI下界和下游表示价值必须逐层说明。</text>
+</svg>

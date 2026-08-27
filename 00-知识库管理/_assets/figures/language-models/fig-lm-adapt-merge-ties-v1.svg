@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">参数合并：Soup、Task Arithmetic 与 TIES 使用相同坐标，却有不同假设</title><desc id="desc">上方显示共同 base 与 task vectors；下方逐坐标演示 trim、elect sign、merge。</desc>
+<rect width="1200" height="700" fill="#FFFEFB"/>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#64748B"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#17324D" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<text x="55" y="55" font-size="25" font-weight="700" fill="#2563EB">参数合并：Soup、Task Arithmetic 与 TIES 使用相同坐标，却有不同假设</text>
+<rect x="55" y="110" width="220" height="95" rx="12" fill="#EFF6FF" stroke="#2563EB" stroke-width="2" filter="url(#shadow)"/>
+<text x="71" y="139" font-size="16" font-weight="700" fill="#2563EB">Common base θ₀</text>
+<text x="71" y="166" font-size="13" fill="#64748B">same architecture</text>
+<text x="71" y="188" font-size="13" fill="#64748B">same parameter names</text>
+<text x="71" y="210" font-size="13" fill="#64748B">same tokenizer</text>
+<rect x="370" y="110" width="210" height="95" rx="12" fill="#FFFFFF" stroke="#7C3AED" stroke-width="2" filter="url(#shadow)"/>
+<text x="386" y="139" font-size="16" font-weight="700" fill="#7C3AED">θ₁=θ₀+τ₁</text>
+<text x="386" y="166" font-size="13" fill="#64748B">fine-tuned checkpoint</text>
+<line x1="275" y1="158" x2="355" y2="158" stroke="#7C3AED" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="630" y="110" width="210" height="95" rx="12" fill="#FFFFFF" stroke="#D97706" stroke-width="2" filter="url(#shadow)"/>
+<text x="646" y="139" font-size="16" font-weight="700" fill="#D97706">θ₂=θ₀+τ₂</text>
+<text x="646" y="166" font-size="13" fill="#64748B">fine-tuned checkpoint</text>
+<line x1="275" y1="158" x2="615" y2="158" stroke="#D97706" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="890" y="110" width="210" height="95" rx="12" fill="#FFFFFF" stroke="#0F766E" stroke-width="2" filter="url(#shadow)"/>
+<text x="906" y="139" font-size="16" font-weight="700" fill="#0F766E">θ₃=θ₀+τ₃</text>
+<text x="906" y="166" font-size="13" fill="#64748B">fine-tuned checkpoint</text>
+<line x1="275" y1="158" x2="875" y2="158" stroke="#0F766E" stroke-width="2.5" marker-end="url(#arrow)"/>
+<text x="55" y="265" font-size="16" font-weight="700" fill="#17324D">Soup: Σᵢwᵢθᵢ　　Task arithmetic: θ₀+Σᵢαᵢτᵢ　　TIES: trim → elect sign → aligned merge</text>
+<text x="55" y="315" font-size="18" font-weight="700" fill="#17324D">TIES coordinate toy example</text>
+<rect x="70" y="350" width="120" height="44" fill="#EEF2F7" stroke="#D7DEE8"/>
+<text x="130.0" y="377" text-anchor="middle" font-size="12" font-weight="700" fill="#17324D">coordinate</text>
+<rect x="190" y="350" width="100" height="44" fill="#EEF2F7" stroke="#D7DEE8"/>
+<text x="240.0" y="377" text-anchor="middle" font-size="12" font-weight="700" fill="#17324D">τ₁</text>
+<rect x="290" y="350" width="100" height="44" fill="#EEF2F7" stroke="#D7DEE8"/>
+<text x="340.0" y="377" text-anchor="middle" font-size="12" font-weight="700" fill="#17324D">τ₂</text>
+<rect x="390" y="350" width="100" height="44" fill="#EEF2F7" stroke="#D7DEE8"/>
+<text x="440.0" y="377" text-anchor="middle" font-size="12" font-weight="700" fill="#17324D">τ₃</text>
+<rect x="490" y="350" width="180" height="44" fill="#EEF2F7" stroke="#D7DEE8"/>
+<text x="580.0" y="377" text-anchor="middle" font-size="12" font-weight="700" fill="#17324D">after trim</text>
+<rect x="670" y="350" width="160" height="44" fill="#EEF2F7" stroke="#D7DEE8"/>
+<text x="750.0" y="377" text-anchor="middle" font-size="12" font-weight="700" fill="#17324D">elected sign</text>
+<rect x="830" y="350" width="150" height="44" fill="#EEF2F7" stroke="#D7DEE8"/>
+<text x="905.0" y="377" text-anchor="middle" font-size="12" font-weight="700" fill="#17324D">merged</text>
+<rect x="70" y="394" width="120" height="54" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="130.0" y="427" text-anchor="middle" font-size="13" fill="#17324D">j=1</text>
+<rect x="190" y="394" width="100" height="54" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="240.0" y="427" text-anchor="middle" font-size="13" fill="#17324D">+.8</text>
+<rect x="290" y="394" width="100" height="54" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="340.0" y="427" text-anchor="middle" font-size="13" fill="#17324D">+.6</text>
+<rect x="390" y="394" width="100" height="54" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="440.0" y="427" text-anchor="middle" font-size="13" fill="#17324D">-.1</text>
+<rect x="490" y="394" width="180" height="54" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="580.0" y="427" text-anchor="middle" font-size="13" fill="#17324D">+.8,+.6,0</text>
+<rect x="670" y="394" width="160" height="54" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="750.0" y="427" text-anchor="middle" font-size="13" fill="#17324D">+</text>
+<rect x="830" y="394" width="150" height="54" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="905.0" y="427" text-anchor="middle" font-size="13" fill="#0F766E">+.7</text>
+<rect x="70" y="452" width="120" height="54" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="130.0" y="485" text-anchor="middle" font-size="13" fill="#17324D">j=2</text>
+<rect x="190" y="452" width="100" height="54" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="240.0" y="485" text-anchor="middle" font-size="13" fill="#17324D">-.7</text>
+<rect x="290" y="452" width="100" height="54" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="340.0" y="485" text-anchor="middle" font-size="13" fill="#17324D">+.5</text>
+<rect x="390" y="452" width="100" height="54" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="440.0" y="485" text-anchor="middle" font-size="13" fill="#17324D">-.6</text>
+<rect x="490" y="452" width="180" height="54" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="580.0" y="485" text-anchor="middle" font-size="13" fill="#17324D">-.7,+.5,-.6</text>
+<rect x="670" y="452" width="160" height="54" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="750.0" y="485" text-anchor="middle" font-size="13" fill="#C24135">-</text>
+<rect x="830" y="452" width="150" height="54" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="905.0" y="485" text-anchor="middle" font-size="13" fill="#0F766E">-.65</text>
+<rect x="70" y="510" width="120" height="54" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="130.0" y="543" text-anchor="middle" font-size="13" fill="#17324D">j=3</text>
+<rect x="190" y="510" width="100" height="54" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="240.0" y="543" text-anchor="middle" font-size="13" fill="#17324D">+.02</text>
+<rect x="290" y="510" width="100" height="54" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="340.0" y="543" text-anchor="middle" font-size="13" fill="#17324D">-.01</text>
+<rect x="390" y="510" width="100" height="54" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="440.0" y="543" text-anchor="middle" font-size="13" fill="#17324D">+.03</text>
+<rect x="490" y="510" width="180" height="54" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="580.0" y="543" text-anchor="middle" font-size="13" fill="#17324D">0,0,0</text>
+<rect x="670" y="510" width="160" height="54" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="750.0" y="543" text-anchor="middle" font-size="13" fill="#17324D">none</text>
+<rect x="830" y="510" width="150" height="54" fill="#FFFFFF" stroke="#D7DEE8"/>
+<text x="905.0" y="543" text-anchor="middle" font-size="13" fill="#0F766E">0</text>
+<rect x="70" y="585" width="1060" height="48" rx="9" fill="#FEE2E2" stroke="#C24135"/>
+<text x="90" y="614" font-size="14" fill="#C24135">Parameter arithmetic is not function arithmetic: validate interpolation barriers, per-task metrics, conflicts, calibration and safety.</text>
+<text x="55" y="670" font-size="14" fill="#64748B">合并报告必须绑定共同 base hash、task-vector construction、density/sign/scale、validation selection 和全部任务切片。</text>
+</svg>

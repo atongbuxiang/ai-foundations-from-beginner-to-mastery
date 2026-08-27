@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="640" viewBox="0 0 1440 640" role="img" aria-labelledby="title desc">
+  <title id="title">正定核、RKHS 与表示定理的三层机制图</title>
+  <desc id="desc">从有限 Gram 正定性，经 canonical kernel sections 和再生性质，到表示定理及 KRR、GP、MMD、HSIC 和随机特征的联系。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8fafc"/>
+      <stop offset="1" stop-color="#eef2ff"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#dbeafe"/>
+      <stop offset="1" stop-color="#bfdbfe"/>
+    </linearGradient>
+    <linearGradient id="violet" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ede9fe"/>
+      <stop offset="1" stop-color="#ddd6fe"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#dcfce7"/>
+      <stop offset="1" stop-color="#bbf7d0"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#475569"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#64748b" flood-opacity="0.16"/>
+    </filter>
+    <style>
+      .h1{font:700 27px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#0f172a}
+      .h2{font:700 20px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#0f172a}
+      .body{font:16px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#334155}
+      .small{font:14px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#475569}
+      .math{font:17px Georgia,"Times New Roman",serif;fill:#0f172a}
+      .tag{font:700 14px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#fff}
+      .arrow{stroke:#475569;stroke-width:2.5;fill:none;marker-end:url(#arrow)}
+      .dash{stroke:#64748b;stroke-width:2;stroke-dasharray:7 6;fill:none}
+    </style>
+  </defs>
+
+  <rect width="1440" height="640" rx="28" fill="url(#bg)"/>
+  <text x="720" y="45" text-anchor="middle" class="h1">正定核 → RKHS → 有限表示：三次“看不见空间”的可计算化</text>
+
+  <g filter="url(#shadow)">
+    <rect x="38" y="80" width="420" height="470" rx="24" fill="white" stroke="#93c5fd" stroke-width="2"/>
+    <rect x="510" y="80" width="420" height="470" rx="24" fill="white" stroke="#c4b5fd" stroke-width="2"/>
+    <rect x="982" y="80" width="420" height="470" rx="24" fill="white" stroke="#86efac" stroke-width="2"/>
+  </g>
+
+  <rect x="62" y="101" width="42" height="25" rx="12" fill="#2563eb"/><text x="83" y="119" text-anchor="middle" class="tag">1</text>
+  <text x="118" y="121" class="h2">有限 Gram 正定性</text>
+  <text x="62" y="154" class="body">对任意样本与任意系数都必须成立</text>
+  <rect x="76" y="184" width="166" height="150" rx="16" fill="url(#blue)" stroke="#60a5fa"/>
+  <g class="math" text-anchor="middle">
+    <text x="118" y="222">k₁₁</text><text x="163" y="222">k₁₂</text><text x="208" y="222">k₁₃</text>
+    <text x="118" y="263">k₂₁</text><text x="163" y="263">k₂₂</text><text x="208" y="263">k₂₃</text>
+    <text x="118" y="304">k₃₁</text><text x="163" y="304">k₃₂</text><text x="208" y="304">k₃₃</text>
+  </g>
+  <path d="M95 200 h-9 v119 h9 M224 200 h9 v119 h-9" stroke="#1d4ed8" stroke-width="2" fill="none"/>
+  <text x="333" y="225" text-anchor="middle" class="math">cᵀKc ≥ 0</text>
+  <text x="333" y="255" text-anchor="middle" class="small">∀ n, x₁…xₙ, c</text>
+  <path d="M260 274 H397" class="dash"/>
+  <text x="329" y="303" text-anchor="middle" class="small">不是“对角非负”</text>
+  <text x="329" y="327" text-anchor="middle" class="small">也不是“一组数据通过”</text>
+  <rect x="65" y="370" width="365" height="70" rx="14" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="247" y="397" text-anchor="middle" class="math">k(x,z)=〈φ(x),φ(z)〉</text>
+  <text x="247" y="423" text-anchor="middle" class="small">feature inner product ⇒ Gram PSD</text>
+  <text x="62" y="480" class="small">审计：symmetry · PSD · strictness · domain</text>
+  <text x="62" y="511" class="small">闭包：非负和 · 乘积 · pullback · limit</text>
+
+  <rect x="534" y="101" width="42" height="25" rx="12" fill="#7c3aed"/><text x="555" y="119" text-anchor="middle" class="tag">2</text>
+  <text x="590" y="121" class="h2">Canonical RKHS</text>
+  <text x="534" y="154" class="body">点 x 被提升成函数 kₓ = k(x, ·)</text>
+  <circle cx="589" cy="229" r="28" fill="#ddd6fe" stroke="#8b5cf6" stroke-width="2"/>
+  <circle cx="589" cy="318" r="28" fill="#ddd6fe" stroke="#8b5cf6" stroke-width="2"/>
+  <circle cx="589" cy="407" r="28" fill="#ddd6fe" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="589" y="235" text-anchor="middle" class="math">x₁</text>
+  <text x="589" y="324" text-anchor="middle" class="math">x₂</text>
+  <text x="589" y="413" text-anchor="middle" class="math">x₃</text>
+  <path d="M622 229 C675 185 729 184 781 226" stroke="#7c3aed" stroke-width="3" fill="none"/>
+  <path d="M622 318 C683 275 739 280 808 316" stroke="#7c3aed" stroke-width="3" fill="none"/>
+  <path d="M622 407 C683 372 743 371 820 405" stroke="#7c3aed" stroke-width="3" fill="none"/>
+  <text x="825" y="231" class="math">kₓ₁(·)</text>
+  <text x="825" y="321" class="math">kₓ₂(·)</text>
+  <text x="825" y="410" class="math">kₓ₃(·)</text>
+  <rect x="546" y="453" width="347" height="67" rx="14" fill="url(#violet)" stroke="#c4b5fd"/>
+  <text x="720" y="480" text-anchor="middle" class="math">f(x)=〈f,kₓ〉  ·  ‖kₓ‖²=k(x,x)</text>
+  <text x="720" y="505" text-anchor="middle" class="small">span → quotient null directions → completion</text>
+
+  <rect x="1006" y="101" width="42" height="25" rx="12" fill="#16a34a"/><text x="1027" y="119" text-anchor="middle" class="tag">3</text>
+  <text x="1062" y="121" class="h2">表示定理与 AI 接口</text>
+  <text x="1006" y="154" class="body">经验损失只看 n 个 evaluation</text>
+  <rect x="1013" y="181" width="360" height="75" rx="15" fill="url(#green)" stroke="#86efac"/>
+  <text x="1193" y="210" text-anchor="middle" class="math">f = f∥ + f⊥</text>
+  <text x="1193" y="237" text-anchor="middle" class="small">相同训练点值；删 f⊥ 严格降 norm</text>
+  <path d="M1193 262 V302" class="arrow"/>
+  <rect x="1046" y="309" width="294" height="57" rx="14" fill="#f0fdf4" stroke="#4ade80" stroke-width="2"/>
+  <text x="1193" y="344" text-anchor="middle" class="math">f*(·)=Σᵢ αᵢ k(xᵢ,·)</text>
+  <path d="M1193 372 V400" class="arrow"/>
+  <g class="small" text-anchor="middle">
+    <rect x="1003" y="411" width="115" height="49" rx="12" fill="#ecfdf5" stroke="#86efac"/><text x="1060" y="441">KRR / SVM</text>
+    <rect x="1132" y="411" width="115" height="49" rx="12" fill="#ecfdf5" stroke="#86efac"/><text x="1189" y="441">GP mean</text>
+    <rect x="1261" y="411" width="115" height="49" rx="12" fill="#ecfdf5" stroke="#86efac"/><text x="1318" y="441">MMD / HSIC</text>
+    <rect x="1036" y="476" width="142" height="49" rx="12" fill="#f7fee7" stroke="#bef264"/><text x="1107" y="506">Nyström / RFF</text>
+    <rect x="1200" y="476" width="142" height="49" rx="12" fill="#f7fee7" stroke="#bef264"/><text x="1271" y="506">NTK / Attention</text>
+  </g>
+
+  <path d="M461 314 H499" class="arrow"/>
+  <path d="M933 314 H971" class="arrow"/>
+  <text x="480" y="294" text-anchor="middle" class="small">Moore–</text>
+  <text x="480" y="347" text-anchor="middle" class="small">Aronszajn</text>
+  <text x="952" y="294" text-anchor="middle" class="small">Hilbert</text>
+  <text x="952" y="347" text-anchor="middle" class="small">projection</text>
+
+  <rect x="168" y="578" width="1104" height="39" rx="19" fill="#0f172a" opacity="0.93"/>
+  <text x="720" y="603" text-anchor="middle" class="tag">边界：Mercer 另需 topology + measure + compact operator；有限近似另记 sampling / approximation / solver error</text>
+</svg>

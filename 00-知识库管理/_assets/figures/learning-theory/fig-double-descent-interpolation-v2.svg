@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Double Descent：Interpolation Threshold 与风险分账</title>
+<desc id="desc">测试风险曲线属于容量路径与选解算法；阈值峰对应 inverse-Gram 的小奇异值放大。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">经典 U 型接上第二次下降</text>
+<line x1="65" y1="410" x2="360" y2="410" stroke="#D7DEE8" stroke-width="1.5"/>
+<line x1="80" y1="435" x2="80" y2="100" stroke="#D7DEE8" stroke-width="1.5"/>
+<path d="M90 145C125 195 160 315 205 305C225 300 225 125 238 115C255 125 270 300 350 320" fill="none" stroke="#2563EB" stroke-width="4"/>
+<line x1="238" y1="105" x2="238" y2="410" stroke="#C24135" stroke-width="2" stroke-dasharray="7 5"/>
+<text x="110" y="115" font-size="15" font-weight="650" text-anchor="start" fill="#2563EB">classical regime</text>
+<text x="238" y="88" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">interpolation</text>
+<text x="305" y="115" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">2nd descent</text>
+<text x="55" y="454" font-size="15" font-weight="400" text-anchor="start" fill="#1F2937">capacity / p</text>
+<text x="42" y="135" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">risk</text>
+<text x="55" y="490" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">peak is regime-dependent, not universal</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Gaussian Linear Risk Ledger</text>
+<rect x="445" y="102" width="310" height="62" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600.0" y="139.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">p&lt;n: noise = sigma^2 p/(n-p-1)</text>
+<line x1="600" y1="169" x2="600" y2="202" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="445" y="214" width="310" height="62" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="600.0" y="251.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">p&gt;n: signal bias + noise variance</text>
+<line x1="600" y1="281" x2="600" y2="314" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="430" y="326" width="340" height="72" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="600.0" y="368.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">(1-n/p)||beta||^2 + sigma^2 n/(p-n-1)</text>
+<text x="445" y="442" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">small singular value -&gt; noise amplification</text>
+<text x="445" y="478" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">ridge smooths the inverse filter</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">三条 Path，不是一个定律</text>
+<rect x="840" y="105" width="145" height="50" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="912.5" y="136.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">model-wise</text>
+<line x1="990" y1="130" x2="1020" y2="130" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<text x="1032" y="136" font-size="15" font-weight="400" text-anchor="start" fill="#1F2937">width / depth</text>
+<rect x="840" y="197" width="145" height="50" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="912.5" y="228.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">sample-wise</text>
+<line x1="990" y1="222" x2="1020" y2="222" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<text x="1032" y="228" font-size="15" font-weight="400" text-anchor="start" fill="#1F2937">number of examples</text>
+<rect x="840" y="289" width="145" height="50" rx="8" fill="#FFFEFB" stroke="#B7791F" stroke-width="2"/>
+<text x="912.5" y="320.0" font-size="15" font-weight="650" text-anchor="middle" fill="#B7791F">epoch-wise</text>
+<line x1="990" y1="314" x2="1020" y2="314" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<text x="1032" y="320" font-size="15" font-weight="400" text-anchor="start" fill="#1F2937">training time</text>
+<rect x="840" y="400" width="300" height="55" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="990.0" y="433.5" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">lock optimizer, regularization, compute</text>
+<text x="840" y="492" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">parameter count != effective complexity</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">双下降不取消 bias–variance；它要求把 estimator、spectrum 与容量路径写进同一对象合同。</text>
+</svg>

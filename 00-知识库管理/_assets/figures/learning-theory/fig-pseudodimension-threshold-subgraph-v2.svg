@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">伪维：用逐点阈值把实值函数变成二分模式</title>
+<desc id="desc">实值函数类在点 x_i 上配备各自阈值 r_i；若能实现全部高于或低于阈值的模式，则该点集被 pseudo-shatter。等价地，伪维是 subgraph indicator class 在扩展空间 X 乘 R 上的 VC 维。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">每个点有自己的阈值</text>
+<line x1="90" y1="105" x2="90" y2="390" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="58" y1="230" x2="122" y2="230" stroke="#C24135" stroke-width="3"/>
+<text x="90" y="420" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">x1</text>
+<text x="128" y="236" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">r1</text>
+<circle cx="90" cy="165" r="8" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<line x1="195" y1="105" x2="195" y2="390" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="163" y1="175" x2="227" y2="175" stroke="#C24135" stroke-width="3"/>
+<text x="195" y="420" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">x2</text>
+<text x="233" y="181" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">r2</text>
+<circle cx="195" cy="250" r="8" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<line x1="300" y1="105" x2="300" y2="390" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="268" y1="275" x2="332" y2="275" stroke="#C24135" stroke-width="3"/>
+<text x="300" y="420" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">x3</text>
+<text x="338" y="281" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">r3</text>
+<circle cx="300" cy="210" r="8" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<text x="45" y="470" font-size="16" font-weight="700" text-anchor="start" fill="#2563EB" class="math">bit_i = 1{f(x_i) &gt; r_i}</text>
+<text x="45" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">one shared threshold is weaker。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">等价的 subgraph 分类类</text>
+<line x1="465" y1="405" x2="745" y2="405" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="465" y1="90" x2="465" y2="405" stroke="#D7DEE8" stroke-width="2"/>
+<path d="M470 350C520 315 555 330 600 255C645 180 690 205 745 125" fill="none" stroke="#2563EB" stroke-width="3"/>
+<path d="M470 405L470 350C520 315 555 330 600 255C645 180 690 205 745 125L745 405Z" fill="#EFF6FF" stroke="none" stroke-width="0"/>
+<circle cx="500" cy="335" r="7" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<circle cx="550" cy="280" r="7" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<circle cx="620" cy="305" r="7" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<circle cx="700" cy="160" r="7" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<text x="430" y="455" font-size="16" font-weight="700" text-anchor="start" fill="#0F766E" class="math">G_f(x,r)=1{r &lt; f(x)}</text>
+<text x="430" y="490" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">Pdim(F)=VCdim({G_f:f in F})</text>
+<text x="430" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">domain expands to X times R。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">从容量到风险还需损失合同</text>
+<rect x="840" y="92" width="300" height="70" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="990" y="122" font-size="16" font-weight="700" text-anchor="middle" fill="#2563EB">finite Pdim(F)</text>
+<text x="990" y="150" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">controls threshold patterns</text>
+<line x1="990" y1="166" x2="990" y2="202" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="840" y="214" width="300" height="78" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="990" y="244" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">bounded range / bounded loss</text>
+<text x="990" y="273" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">+ concentration or covering</text>
+<line x1="990" y1="296" x2="990" y2="332" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="840" y="344" width="300" height="72" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="990" y="374" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">uniform risk guarantee</text>
+<text x="990" y="403" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">with an explicit scale</text>
+<text x="830" y="462" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">unbounded squared or log loss needs tails</text>
+<text x="830" y="490" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">fat-shattering keeps the accuracy scale</text>
+<text x="830" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">finite Pdim is not a tail bound。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">伪维只把实值自由度转成组合容量；要控制真实损失，还必须说明范围、尾部、尺度与复合步骤。</text>
+</svg>

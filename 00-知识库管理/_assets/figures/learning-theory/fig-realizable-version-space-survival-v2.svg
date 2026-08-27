@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">可实现情形：坏假设在版本空间中的生存概率</title>
+<desc id="desc">若存在零风险真规则且学习器返回零训练误差假设，风险大于 eps 的固定坏假设必须连续 m 次避开自身错误区域；其生存概率至多 exp(-m eps)，故得到 1/eps 率。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">版本空间随样本逐步收缩</text>
+<rect x="55" y="95" width="300" height="310" rx="10" fill="none" stroke="#2563EB" stroke-width="2.5"/>
+<rect x="90" y="135" width="235" height="235" rx="10" fill="none" stroke="#0F766E" stroke-width="2.5"/>
+<rect x="130" y="175" width="155" height="155" rx="10" fill="none" stroke="#C24135" stroke-width="2.5"/>
+<circle cx="205" cy="245" r="9" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<text x="222" y="251" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">h* remains</text>
+<text x="45" y="445" font-size="16" font-weight="700" text-anchor="start" fill="#0F766E">V(S)={h: R_S(h)=0}</text>
+<text x="45" y="485" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">realizability guarantees V(S) is nonempty</text>
+<text x="45" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">any consistent learner outputs inside V(S)。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">一个坏 h 怎样幸存</text>
+<rect x="445" y="95" width="310" height="82" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="600" y="127" font-size="16" font-weight="700" text-anchor="middle" fill="#C24135">error region E_h</text>
+<text x="600" y="158" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">P_X(E_h)=R_P(h) &gt; eps</text>
+<circle cx="465" cy="255" r="9" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<text x="465" y="290" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">Z1</text>
+<circle cx="520" cy="255" r="9" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<text x="520" y="290" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">Z2</text>
+<circle cx="575" cy="255" r="9" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<text x="575" y="290" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">Z3</text>
+<circle cx="630" cy="255" r="9" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<text x="630" y="290" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">Z4</text>
+<circle cx="685" cy="255" r="9" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<text x="685" y="290" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">Z5</text>
+<circle cx="740" cy="255" r="9" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<text x="740" y="290" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">Z6</text>
+<path d="M450 315C505 355 700 355 755 315" fill="none" stroke="#2563EB" stroke-width="2.5"/>
+<text x="600" y="382" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">all m draws miss E_h</text>
+<text x="430" y="430" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">Pr(h survives)=(1-R_P(h))^m</text>
+<text x="430" y="468" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E" class="math">&lt;= (1-eps)^m &lt;= exp(-m eps)</text>
+<text x="430" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">one-sided survival event—not mean estimation。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">对所有坏假设求并集</text>
+<rect x="840" y="95" width="300" height="76" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="990" y="128" font-size="16" font-weight="700" text-anchor="middle" fill="#C24135">Pr(R_P(h_S)&gt;eps)</text>
+<text x="990" y="157" font-size="16" font-weight="700" text-anchor="middle" fill="#C24135">&lt;= M exp(-m eps)</text>
+<line x1="990" y1="175" x2="990" y2="210" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="840" y="222" width="300" height="72" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="990" y="251" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">m &gt;= (log M + log(1/delta))/eps</text>
+<text x="990" y="278" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">is sufficient</text>
+<text x="830" y="350" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">1/eps comes from excluding error regions</text>
+<text x="830" y="393" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">not from a sharper Hoeffding constant</text>
+<text x="830" y="440" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">label noise breaks exact consistency</text>
+<text x="830" y="480" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">M=infinity cannot enter this union bound</text>
+<text x="830" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">interpolation alone does not prove realizability。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">可实现快率来自零错生存这一特殊事件；一旦有噪声或近似拟合，就必须重新建立比较桥。</text>
+</svg>

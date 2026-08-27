@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Kernel Linear Attention：结合律、归一化与 Causal State</title>
+<desc id="desc">当 sim(q,k)=φ(q)ᵀφ(k) 时，可先聚合 feature–value state；这可能是新 kernel，也可能是近似。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#B7791F"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#B7791F">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Dense Left Association</text>
+<rect x="55" y="105" width="90" height="50" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="100.0" y="136.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">Φ(Q): n×r</text>
+<rect x="185" y="105" width="90" height="50" rx="8" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="230.0" y="136.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">Φ(K)ᵀ: r×n</text>
+<rect x="55" y="235" width="220" height="58" rx="8" fill="#FEF2F2" stroke="#C24135" stroke-width="2"/>
+<text x="165.0" y="270.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">A = Φ(Q)Φ(K)ᵀ : n×n</text>
+<rect x="125" y="370" width="90" height="50" rx="8" fill="#FFF7ED" stroke="#B7791F" stroke-width="2"/>
+<text x="170.0" y="401.0" font-size="15" font-weight="650" text-anchor="middle" fill="#B7791F">V: n×d_v</text>
+<line x1="145" y1="160" x2="165" y2="225" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<line x1="230" y1="160" x2="205" y2="225" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<line x1="165" y1="298" x2="165" y2="362" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<text x="55" y="468" font-size="15" font-weight="800" text-anchor="start" fill="#C24135">work/storage includes n²</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Right Association + Denominator</text>
+<rect x="455" y="105" width="125" height="52" rx="8" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="517.5" y="137.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">S=Φ(K)ᵀV: r×d_v</text>
+<rect x="620" y="105" width="120" height="52" rx="8" fill="#FFF7ED" stroke="#B7791F" stroke-width="2"/>
+<text x="680.0" y="137.0" font-size="15" font-weight="650" text-anchor="middle" fill="#B7791F">z=Φ(K)ᵀ1: r</text>
+<rect x="475" y="245" width="245" height="75" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="597.5" y="288.5" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">o_i = φ(q_i)ᵀS / φ(q_i)ᵀz</text>
+<line x1="520" y1="160" x2="570" y2="235" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<line x1="680" y1="160" x2="625" y2="235" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<text x="455" y="375" font-size="15" font-weight="800" text-anchor="start" fill="#0F766E">work ≈ O(n r d_v)</text>
+<text x="455" y="415" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">denominator sign / near-zero is part of semantics。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Causal = Recurrent State</text>
+<rect x="845" y="105" width="275" height="58" rx="8" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="982.5" y="140.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">S_t=S_{t-1}+φ(k_t)v_tᵀ</text>
+<rect x="845" y="210" width="275" height="58" rx="8" fill="#FFF7ED" stroke="#B7791F" stroke-width="2"/>
+<text x="982.5" y="245.0" font-size="15" font-weight="650" text-anchor="middle" fill="#B7791F">z_t=z_{t-1}+φ(k_t)</text>
+<rect x="845" y="315" width="275" height="65" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="982.5" y="353.5" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">o_t=φ(q_t)ᵀS_t / φ(q_t)ᵀz_t</text>
+<text x="845" y="425" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">固定 state 压缩历史：快，但存在容量/遗忘边界。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">结合律只对可分解 kernel 生效；是否等于 Softmax、是否稳定、是否保留远程信息必须分别回答。</text>
+</svg>

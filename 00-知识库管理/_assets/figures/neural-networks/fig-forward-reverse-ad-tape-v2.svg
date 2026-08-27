@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Forward/Reverse AD：两种线性信息流与一份执行记录</title>
+<desc id="desc">forward mode 让每个 primal 携带 tangent；reverse mode 先记录 tape，再从输出 seed 逆序回拉 cotangent；模式选择取决于输入与输出方向数。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Forward：双轨前推</text>
+<rect x="60" y="120" width="92" height="50" rx="7" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="106" y="151" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">x</text>
+<rect x="60" y="245" width="92" height="55" rx="7" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="106" y="278" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E" class="math">xdot</text>
+<line x1="154" y1="145" x2="165" y2="145" stroke="#2563EB" stroke-width="2.7" marker-end="url(#a0)"/>
+<line x1="154" y1="272" x2="165" y2="272" stroke="#0F766E" stroke-width="2.7" marker-end="url(#a1)"/>
+<rect x="170" y="120" width="100" height="50" rx="7" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="220" y="151" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">u=f(x)</text>
+<rect x="170" y="245" width="100" height="55" rx="7" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="220" y="278" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E" class="math">J_f xdot</text>
+<line x1="272" y1="145" x2="285" y2="145" stroke="#2563EB" stroke-width="2.7" marker-end="url(#a0)"/>
+<line x1="272" y1="272" x2="285" y2="272" stroke="#0F766E" stroke-width="2.7" marker-end="url(#a1)"/>
+<rect x="290" y="120" width="100" height="50" rx="7" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="340" y="151" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">y=g(u)</text>
+<rect x="290" y="245" width="100" height="55" rx="7" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="340" y="278" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E" class="math">J_g J_f xdot</text>
+<rect x="62" y="370" width="285" height="92" rx="7" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="204" y="401" font-size="17" font-weight="700" text-anchor="middle" fill="#2563EB">one input seed -&gt; one Jv</text>
+<text x="204" y="431" font-size="15" font-weight="500" text-anchor="middle" fill="#64748B">no reverse tape required</text>
+<text x="204" y="454" font-size="15" font-weight="500" text-anchor="middle" fill="#64748B">best when input directions are few</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Reverse：tape 逆序回拉</text>
+<text x="445" y="105" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">forward tape</text>
+<rect x="445" y="125" width="78" height="50" rx="7" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="484.0" y="156" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">x</text>
+<line x1="527" y1="150" x2="530" y2="150" stroke="#2563EB" stroke-width="2.5" marker-end="url(#a0)"/>
+<rect x="535" y="125" width="100" height="50" rx="7" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="585.0" y="156" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">u, cache</text>
+<line x1="639" y1="150" x2="645" y2="150" stroke="#2563EB" stroke-width="2.5" marker-end="url(#a0)"/>
+<rect x="650" y="125" width="78" height="50" rx="7" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="689.0" y="156" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">L</text>
+<text x="445" y="235" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">reverse cotangents</text>
+<rect x="650" y="255" width="78" height="52" rx="7" fill="#FFF5F2" stroke="#C24135" stroke-width="2"/>
+<text x="689.0" y="287" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135" class="math">Lbar=1</text>
+<line x1="645" y1="281" x2="640" y2="281" stroke="#C24135" stroke-width="2.7" marker-end="url(#a2)"/>
+<rect x="535" y="255" width="100" height="52" rx="7" fill="#FFF5F2" stroke="#C24135" stroke-width="2"/>
+<text x="585.0" y="287" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135" class="math">ubar</text>
+<line x1="530" y1="281" x2="528" y2="281" stroke="#C24135" stroke-width="2.7" marker-end="url(#a2)"/>
+<rect x="445" y="255" width="78" height="52" rx="7" fill="#FFF5F2" stroke="#C24135" stroke-width="2"/>
+<text x="484.0" y="287" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135" class="math">xbar</text>
+<rect x="445" y="370" width="310" height="92" rx="7" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="600" y="401" font-size="17" font-weight="700" text-anchor="middle" fill="#0F766E">one output seed -&gt; one u^T J</text>
+<text x="600" y="431" font-size="15" font-weight="500" text-anchor="middle" fill="#64748B">stores or recomputes residuals</text>
+<text x="600" y="454" font-size="15" font-weight="500" text-anchor="middle" fill="#64748B">best when output directions are few</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">模式选择看方向数</text>
+<text x="845" y="105" font-size="16" font-weight="700" text-anchor="start" fill="#1F2937">full Jacobian  J:[m,n]</text>
+<rect x="845" y="130" width="285" height="174" rx="4" fill="#F8FAFC" stroke="#D7DEE8" stroke-width="1.5"/>
+<line x1="987" y1="130" x2="987" y2="304" stroke="#D7DEE8" stroke-width="1.5"/>
+<line x1="845" y1="190" x2="1130" y2="190" stroke="#D7DEE8" stroke-width="1.5"/>
+<line x1="845" y1="248" x2="1130" y2="248" stroke="#D7DEE8" stroke-width="1.5"/>
+<text x="916" y="168" font-size="15" font-weight="700" text-anchor="middle" fill="#64748B">method</text>
+<text x="1058" y="168" font-size="15" font-weight="700" text-anchor="middle" fill="#64748B">sweeps</text>
+<text x="916" y="227" font-size="16" font-weight="700" text-anchor="middle" fill="#2563EB">forward</text>
+<text x="1058" y="227" font-size="16" font-weight="700" text-anchor="middle" fill="#2563EB">n seeds</text>
+<text x="916" y="285" font-size="16" font-weight="700" text-anchor="middle" fill="#0F766E">reverse</text>
+<text x="1058" y="285" font-size="16" font-weight="700" text-anchor="middle" fill="#0F766E">m seeds</text>
+<rect x="845" y="330" width="285" height="60" rx="8" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="987.5" y="366.0" font-size="16" font-weight="650" text-anchor="middle" fill="#0F766E">scalar loss: m=1 -&gt; reverse</text>
+<rect x="845" y="415" width="285" height="60" rx="8" fill="#FFF5F2" stroke="#C24135" stroke-width="2"/>
+<text x="987.5" y="451.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">few directions: use JVP/VJP actions</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">AD 精确传播程序 primitive 的导数规则；它既不是符号展开，也不是有限差分。</text>
+</svg>

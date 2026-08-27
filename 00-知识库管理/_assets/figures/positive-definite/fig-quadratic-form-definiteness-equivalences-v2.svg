@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">二次型的正定、半正定与不定几何及等价判据</title>
+  <desc id="desc">三个等高线图分别展示正定椭圆碗、半正定平坦方向与不定鞍面，底部连接方向能量、特征值、主子式和 Cholesky 判据。</desc>
+  <defs>
+    <style>
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}.blue{fill:#2563eb}.green{fill:#0f766e}.amber{fill:#b7791f}.h{font-size:19px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}.axis{stroke:#cbd5e1;stroke-width:1.4}
+    </style>
+  </defs>
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <text x="600" y="42" class="sans h ink" text-anchor="middle">qA(x)=x*Ax：沿每个方向读取能量或曲率，符号结构决定几何类型</text>
+  <rect x="42" y="74" width="350" height="333" rx="12" fill="#ecfdf5" stroke="#6ee7b7"/>
+  <text x="68" y="111" class="sans h green">正定 A≻0：每个非零方向为正</text><path d="M84 267H350M217 376V145" class="axis"/><ellipse cx="217" cy="267" rx="112" ry="62" transform="rotate(-22 217 267)" fill="none" stroke="#0f766e" stroke-width="2"/><ellipse cx="217" cy="267" rx="76" ry="42" transform="rotate(-22 217 267)" fill="none" stroke="#0f766e" stroke-width="2"/><ellipse cx="217" cy="267" rx="40" ry="22" transform="rotate(-22 217 267)" fill="none" stroke="#0f766e" stroke-width="2"/><text x="217" y="388" class="math body green" text-anchor="middle">λmin&gt;0：严格椭圆碗</text>
+  <rect x="425" y="74" width="350" height="333" rx="12" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="451" y="111" class="sans h blue">半正定 A⪰0：允许平坦方向</text><path d="M467 267H733M600 376V145" class="axis"/><path d="M488 207H712M488 237H712M488 297H712M488 327H712" stroke="#2563eb" stroke-width="2"/><path d="M600 151V372" stroke="#b7791f" stroke-width="3" stroke-dasharray="7 5"/><text x="600" y="388" class="math body blue" text-anchor="middle">λmin=0：非零 x 可有 qA(x)=0</text>
+  <rect x="808" y="74" width="350" height="333" rx="12" fill="#fffbeb" stroke="#fcd34d"/>
+  <text x="834" y="111" class="sans h amber">不定：不同方向符号相反</text><path d="M850 267H1116M983 376V145" class="axis"/><path d="M868 214C912 214 937 240 983 267C1029 294 1054 320 1098 320M868 320C912 320 937 294 983 267C1029 240 1054 214 1098 214" fill="none" stroke="#b7791f" stroke-width="2.5"/><path d="M983 267L1068 218" stroke="#0f766e" stroke-width="3"/><path d="M983 267L1068 316" stroke="#b7791f" stroke-width="3"/><text x="983" y="388" class="math body amber" text-anchor="middle">既有正特征值，也有负特征值</text>
+  <rect x="70" y="445" width="1060" height="109" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="97" y="479" class="sans h green">Hermitian 正定的等价入口</text><text x="97" y="519" class="math body ink">x*Ax&gt;0 ∀x≠0</text><text x="348" y="519" class="math body blue">全部 λᵢ&gt;0</text><text x="561" y="519" class="math body green">全部顺序主子式&gt;0</text><text x="865" y="519" class="math body amber">存在唯一正对角 A=LL*</text><text x="600" y="546" class="sans small muted" text-anchor="middle">非 Hermitian 矩阵的二次型只看 Hermitian 部分；谈正定前应先声明对称/自伴结构。</text>
+  <text x="600" y="608" class="sans result ink" text-anchor="middle">正定意味着全方向有严格曲率，半正定允许平坦核，不定则存在下降和上升方向。</text>
+</svg>

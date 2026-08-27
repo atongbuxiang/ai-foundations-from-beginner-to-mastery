@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+  <title id="title">Mini-batch 梯度的 reduction、covariance 与有效样本数</title>
+  <desc id="desc">三栏分别展示 batch mean 保持总体梯度中心、batch sum 改变更新尺度，以及相关或不均等权重让名义批量不同于有效样本数。</desc>
+  <rect width="1200" height="650" fill="#FFFEFB"/>
+  <style>.sans{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}.ink{fill:#1F2937}.muted{fill:#64748B}.blue{fill:#2563EB}.green{fill:#0F766E}.amber{fill:#B7791F}.red{fill:#C24135}</style>
+  <line x1="400" y1="50" x2="400" y2="586" stroke="#D7DEE8" stroke-width="2"/><line x1="800" y1="50" x2="800" y2="586" stroke="#D7DEE8" stroke-width="2"/>
+  <text x="48" y="58" class="sans blue" font-size="23" font-weight="700">A｜Mean：中心不变</text>
+  <text x="48" y="91" class="sans muted" font-size="17">iid with replacement</text>
+  <g fill="#FFFEFB" stroke="#B7791F" stroke-width="2.5"><circle cx="112" cy="226" r="9"/><circle cx="160" cy="180" r="9"/><circle cx="202" cy="244" r="9"/><circle cx="245" cy="166" r="9"/><circle cx="296" cy="222" r="9"/><circle cx="330" cy="267" r="9"/></g>
+  <circle cx="220" cy="218" r="12" fill="#2563EB"/><line x1="220" y1="134" x2="220" y2="302" stroke="#2563EB" stroke-width="2" stroke-dasharray="7 6"/><line x1="88" y1="218" x2="350" y2="218" stroke="#2563EB" stroke-width="2" stroke-dasharray="7 6"/>
+  <text x="220" y="336" class="mono blue" font-size="18" text-anchor="middle">E[Ĝ_B] = G</text>
+  <text x="220" y="374" class="mono amber" font-size="18" text-anchor="middle">Cov(Ĝ_B) = C / B</text>
+  <text x="48" y="442" class="sans ink" font-size="17">variance：1/B</text><text x="48" y="475" class="sans ink" font-size="17">standard deviation：1/√B</text>
+
+  <text x="448" y="58" class="sans red" font-size="23" font-weight="700">B｜Sum：尺度改变</text>
+  <text x="448" y="91" class="sans muted" font-size="17">同一批样本，不同 reduction</text>
+  <line x1="476" y1="276" x2="708" y2="276" stroke="#1F2937" stroke-width="2"/>
+  <path d="M510 276 L604 188" stroke="#2563EB" stroke-width="4"/><path d="M604 188 L591 195 L600 207 Z" fill="#2563EB"/>
+  <path d="M510 276 L746 112" stroke="#C24135" stroke-width="4"/><path d="M746 112 L728 116 L740 132 Z" fill="#C24135"/>
+  <text x="620" y="218" class="sans blue" font-size="17">mean gradient</text>
+  <text x="626" y="126" class="sans red" font-size="17">sum = B × mean</text>
+  <text x="600" y="350" class="mono ink" font-size="18" text-anchor="middle">η_sum = η_mean / B</text>
+  <rect x="465" y="395" width="300" height="103" fill="#FFF6E5" stroke="#B7791F" stroke-width="2"/>
+  <text x="485" y="428" class="sans amber" font-size="17" font-weight="700">只在无非线性 transform 时</text>
+  <text x="485" y="461" class="sans ink" font-size="16">clip、epsilon、变 batch 会断开翻译</text>
+
+  <text x="848" y="58" class="sans green" font-size="23" font-weight="700">C｜名义 B ≠ 有效 B</text>
+  <text x="848" y="91" class="sans muted" font-size="17">权重集中或样本相关</text>
+  <g stroke="#1F2937" stroke-width="2"><line x1="894" y1="288" x2="894" y2="152"/><line x1="894" y1="288" x2="1118" y2="288"/></g>
+  <rect x="926" y="176" width="38" height="112" fill="#2563EB"/><rect x="986" y="254" width="38" height="34" fill="#94A3B8"/><rect x="1046" y="266" width="38" height="22" fill="#94A3B8"/>
+  <text x="945" y="316" class="mono ink" font-size="16" text-anchor="middle">0.8</text><text x="1005" y="316" class="mono ink" font-size="16" text-anchor="middle">0.1</text><text x="1065" y="316" class="mono ink" font-size="16" text-anchor="middle">0.1</text>
+  <text x="1006" y="360" class="mono green" font-size="18" text-anchor="middle">B_eff = 1 / Σaᵢ²</text>
+  <path d="M884 418 C936 382 989 453 1042 418 S1120 421 1142 400" fill="none" stroke="#B7791F" stroke-width="3" stroke-dasharray="8 7"/>
+  <text x="1000" y="477" class="sans amber" font-size="17" text-anchor="middle">相关性需要时间/方向 covariance</text>
+  <line x1="48" y1="550" x2="1152" y2="550" stroke="#0F766E" stroke-width="3"/>
+  <text x="48" y="596" class="sans green" font-size="18" font-weight="700">读图顺序｜先定目标与 reduction → 再定 sampling → 最后乘 learning rate 得到 update</text>
+</svg>
+

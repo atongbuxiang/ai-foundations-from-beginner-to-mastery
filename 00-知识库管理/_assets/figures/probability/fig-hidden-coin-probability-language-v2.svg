@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">隐藏硬币模型：从概率空间到联合依赖</title>
+<desc id="desc">八原子概率空间经条件化得到来源后验，经随机变量推前得到正面数分布，经边缘化得到条件独立但边缘相关的两次抛掷。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">八原子概率合同</text>
+<rect x="50" y="100" width="125" height="56" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="112.5" y="134.0" font-size="16" font-weight="650" text-anchor="middle" fill="#2563EB">Z=F: 2/3</text>
+<rect x="225" y="100" width="125" height="56" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="287.5" y="134.0" font-size="16" font-weight="650" text-anchor="middle" fill="#C24135">Z=B: 1/3</text>
+<text x="50" y="210" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">F row: 1/6, 1/6, 1/6, 1/6</text>
+<text x="50" y="255" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">B row: 1/48, 1/16, 1/16, 3/16</text>
+<line x1="50" y1="290" x2="350" y2="290" stroke="#D7DEE8" stroke-width="2"/>
+<text x="200" y="335" font-size="18" font-weight="700" text-anchor="middle" fill="#1F2937">8 atoms; total mass = 1</text>
+<text x="50" y="395" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">Omega={F,B} x {0,1} x {0,1}</text>
+<text x="50" y="440" font-size="16" font-weight="400" text-anchor="start" fill="#64748B">outcome 是元素；event 是元素集合。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">条件更新与推前分布</text>
+<rect x="445" y="98" width="310" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600.0" y="133.0" font-size="17" font-weight="650" text-anchor="middle" fill="#2563EB">P(X1=1) = 7/12</text>
+<rect x="445" y="205" width="145" height="62" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="517.5" y="242.0" font-size="16" font-weight="650" text-anchor="middle" fill="#0F766E">P(B|H) = 3/7</text>
+<rect x="610" y="205" width="145" height="62" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="682.5" y="242.0" font-size="16" font-weight="650" text-anchor="middle" fill="#0F766E">P(B|HH) = 9/17</text>
+<line x1="600" y1="160" x2="600" y2="198" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="445" y="330" width="310" height="70" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600.0" y="371.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">S=X1+X2: 3/16, 11/24, 17/48</text>
+<text x="600" y="445" font-size="17" font-weight="650" text-anchor="middle" fill="#1F2937">Q(0.5)=1; Q(0.9)=2</text>
+<text x="430" y="482" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">条件化重加权；随机变量合并原子。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">条件独立不等于边缘独立</text>
+<rect x="842" y="98" width="292" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="988.0" y="133.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">P(X1=1)=P(X2=1)=7/12</text>
+<rect x="842" y="205" width="292" height="64" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="988.0" y="243.0" font-size="17" font-weight="650" text-anchor="middle" fill="#0F766E">P(1,1)=17/48</text>
+<rect x="842" y="320" width="292" height="68" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="988.0" y="360.0" font-size="17" font-weight="650" text-anchor="middle" fill="#C24135">17/48 != (7/12)^2</text>
+<line x1="988" y1="160" x2="988" y2="198" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<line x1="988" y1="273" x2="988" y2="313" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<text x="842" y="445" font-size="16" font-weight="700" text-anchor="start" fill="#0F766E">X1 independent X2 | Z</text>
+<text x="842" y="480" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">潜变量混合后产生边缘依赖。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">同一份联合模型依次支持事件概率、Bayes 更新、推前分布与独立性审计。</text>
+</svg>

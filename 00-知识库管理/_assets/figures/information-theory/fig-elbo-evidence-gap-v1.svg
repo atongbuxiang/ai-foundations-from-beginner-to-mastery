@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430">
+  <rect width="1200" height="430" fill="#f8fafc"/>
+  <style>
+    .panel{fill:#fff;stroke:#cbd5e1;stroke-width:1.5}.title{font:700 19px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#0f172a}.sub{font:14px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#475569}.body{font:15px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#334155}.math{font:italic 16px Georgia,"Times New Roman",serif;fill:#0f172a}.small{font:12px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#64748b}.blue{fill:#dbeafe;stroke:#2563eb;stroke-width:1.5}.green{fill:#dcfce7;stroke:#059669;stroke-width:1.5}.amber{fill:#fef3c7;stroke:#d97706;stroke-width:1.5}.red{fill:#fee2e2;stroke:#dc2626;stroke-width:1.5}.purple{fill:#ede9fe;stroke:#7c3aed;stroke-width:1.5}.arrow{stroke:#334155;stroke-width:2;fill:none;marker-end:url(#a)}
+  </style>
+  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#334155"/></marker></defs>
+  <rect class="panel" x="20" y="20" width="370" height="390" rx="14"/><rect class="panel" x="415" y="20" width="370" height="390" rx="14"/><rect class="panel" x="810" y="20" width="370" height="390" rx="14"/>
+  <text class="title" x="40" y="53">A · evidence 是 bound 加精确 gap</text>
+  <text class="sub" x="40" y="78">不是“近似等号”，而是恒等分解</text>
+  <rect class="blue" x="52" y="105" width="305" height="58" rx="10"/>
+  <text class="math" x="77" y="140">log pθ(x)</text>
+  <path class="arrow" d="M205 169V201"/>
+  <rect class="green" x="52" y="208" width="192" height="76" rx="10"/>
+  <text class="math" x="72" y="237">ELBO(q)</text>
+  <text class="small" x="72" y="261">可优化 lower bound</text>
+  <text class="math" x="254" y="251">+</text>
+  <rect class="red" x="278" y="208" width="79" height="76" rx="10"/>
+  <text class="math" x="290" y="237">KL</text><text class="small" x="289" y="259">gap ≥ 0</text>
+  <rect class="amber" x="52" y="316" width="305" height="58" rx="10"/>
+  <text class="small" x="68" y="341">gap=0 ⇔ q(z)=pθ(z|x)</text>
+  <text class="small" x="68" y="361">support 不合法时 ELBO 可为 −∞</text>
+  <text class="title" x="435" y="53">B · VAE 是 amortized VI 实例</text>
+  <rect class="purple" x="458" y="98" width="95" height="55" rx="10"/><text class="body" x="487" y="131">x</text>
+  <path class="arrow" d="M558 126H606"/>
+  <rect class="blue" x="612" y="98" width="120" height="55" rx="10"/><text class="body" x="631" y="123">qφ(z|x)</text><text class="small" x="635" y="143">encoder</text>
+  <path class="arrow" d="M672 159V203"/>
+  <rect class="green" x="612" y="209" width="120" height="55" rx="10"/><text class="body" x="663" y="242">z</text>
+  <path class="arrow" d="M607 237H559"/>
+  <rect class="purple" x="458" y="209" width="95" height="55" rx="10"/><text class="body" x="473" y="232">pθ(x|z)</text><text class="small" x="479" y="252">decoder</text>
+  <rect class="green" x="447" y="306" width="310" height="68" rx="10"/>
+  <text class="math" x="462" y="333">mean under q: log pθ(x|z) − KL(qφ || p)</text>
+  <text class="small" x="462" y="357">likelihood 决定 MSE/BCE/CE，不可随意替换</text>
+  <text class="title" x="830" y="53">C · “推断误差”至少分三层</text>
+  <text class="small" x="840" y="83">log evidence</text>
+  <rect x="840" y="96" width="300" height="43" rx="7" fill="#e2e8f0"/>
+  <rect x="840" y="96" width="190" height="43" rx="7" fill="#86efac"/>
+  <rect x="1030" y="96" width="63" height="43" fill="#fde68a"/>
+  <rect x="1093" y="96" width="47" height="43" rx="7" fill="#fecaca"/>
+  <text class="small" x="851" y="122">amortized ELBO</text><text class="small" x="1039" y="122">amort.</text><text class="small" x="1102" y="122">family</text>
+  <text class="body" x="840" y="184">① family approximation gap</text>
+  <text class="body" x="840" y="218">② amortization / optimization gap</text>
+  <text class="body" x="840" y="252">③ Monte Carlo / evaluation error</text>
+  <rect class="red" x="840" y="291" width="300" height="76" rx="10"/>
+  <text class="body" x="857" y="320">KL≈0 可能是 posterior collapse</text>
+  <text class="small" x="857" y="344">bound 好 ≠ latent 有用 ≠ posterior calibrated</text>
+  <text class="small" x="840" y="393">必须分别报告 train objective 与 held-out evidence estimate。</text>
+</svg>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">Beam Search：保留的是前缀，不是未来</title><desc id="desc">局部累计分、剪枝、完成队列与长度规则。</desc>
+<rect width="1200" height="700" fill="#FBF8F1"/>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#667784"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#183044" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<line x1="48" y1="70" x2="1152" y2="70" stroke="#7054A3" stroke-width="4"/>
+<text x="52" y="49" font-size="24" font-weight="700" fill="#183044">Beam Search：保留的是前缀，不是未来</text>
+<circle cx="590.0" cy="120" r="36" fill="#FFFDF8" stroke="#245AA8" stroke-width="3" filter="url(#shadow)"/>
+<text x="590.0" y="117" text-anchor="middle" font-size="12.5" font-weight="700" fill="#245AA8">〈BOS〉</text>
+<text x="590.0" y="137" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">0.00</text>
+<circle cx="130.0" cy="290" r="36" fill="#FFFDF8" stroke="#4F7B45" stroke-width="3" filter="url(#shadow)"/>
+<text x="130.0" y="287" text-anchor="middle" font-size="12.5" font-weight="700" fill="#4F7B45">A</text>
+<text x="130.0" y="307" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">-0.36</text>
+<circle cx="600.0" cy="290" r="36" fill="#FFFDF8" stroke="#17766E" stroke-width="3" filter="url(#shadow)"/>
+<text x="600.0" y="287" text-anchor="middle" font-size="12.5" font-weight="700" fill="#17766E">B</text>
+<text x="600.0" y="307" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">-0.51</text>
+<circle cx="1070.0" cy="290" r="36" fill="#FFFDF8" stroke="#667784" stroke-width="3" filter="url(#shadow)"/>
+<text x="1070.0" y="287" text-anchor="middle" font-size="12.5" font-weight="700" fill="#667784">C</text>
+<text x="1070.0" y="307" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">-1.61</text>
+<circle cx="130.0" cy="480" r="36" fill="#FFFDF8" stroke="#4F7B45" stroke-width="3" filter="url(#shadow)"/>
+<text x="130.0" y="477" text-anchor="middle" font-size="12.5" font-weight="700" fill="#4F7B45">A·x</text>
+<text x="130.0" y="497" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">-0.87</text>
+<circle cx="443.3333333333333" cy="480" r="36" fill="#FFFDF8" stroke="#C87922" stroke-width="3" filter="url(#shadow)"/>
+<text x="443.3333333333333" y="477" text-anchor="middle" font-size="12.5" font-weight="700" fill="#C87922">A·y</text>
+<text x="443.3333333333333" y="497" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">-1.05</text>
+<circle cx="756.6666666666666" cy="480" r="36" fill="#FFFDF8" stroke="#17766E" stroke-width="3" filter="url(#shadow)"/>
+<text x="756.6666666666666" y="477" text-anchor="middle" font-size="12.5" font-weight="700" fill="#17766E">B·z</text>
+<text x="756.6666666666666" y="497" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">-0.92</text>
+<circle cx="1070.0" cy="480" r="36" fill="#FFFDF8" stroke="#B7443E" stroke-width="3" filter="url(#shadow)"/>
+<text x="1070.0" y="477" text-anchor="middle" font-size="12.5" font-weight="700" fill="#B7443E">B·x</text>
+<text x="1070.0" y="497" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">-1.43</text>
+<line x1="590.0" y1="157" x2="130.0" y2="251" stroke="#4F7B45" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="590.0" y1="157" x2="600.0" y2="251" stroke="#4F7B45" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="590.0" y1="157" x2="1070.0" y2="251" stroke="#667784" stroke-width="2" marker-end="url(#arrow)" stroke-dasharray="6 5"/>
+<line x1="130.0" y1="327" x2="130.0" y2="441" stroke="#4F7B45" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="130.0" y1="327" x2="443.3333333333333" y2="441" stroke="#667784" stroke-width="2" marker-end="url(#arrow)" stroke-dasharray="6 5"/>
+<line x1="600.0" y1="327" x2="756.6666666666666" y2="441" stroke="#4F7B45" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="600.0" y1="327" x2="1070.0" y2="441" stroke="#667784" stroke-width="2" marker-end="url(#arrow)" stroke-dasharray="6 5"/>
+<text x="75" y="90" text-anchor="start" font-size="15" font-weight="700" fill="#7054A3">beam width B = 2</text>
+<text x="1070.0" y="350" text-anchor="middle" font-size="12" font-weight="700" fill="#B7443E">step 1 剪枝</text>
+<text x="443.3333333333333" y="545" text-anchor="middle" font-size="12" font-weight="700" fill="#B7443E">step 2 剪枝</text>
+<text x="1070.0" y="545" text-anchor="middle" font-size="12" font-weight="700" fill="#B7443E">step 2 剪枝</text>
+<rect x="70" y="565" width="500" height="65" rx="10" fill="#FFF0ED" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="85" y="593" text-anchor="start" font-size="15" font-weight="700" fill="#B7443E">搜索账</text>
+<text x="85" y="618" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">active beams ≠ completed hypotheses；剪掉的未来不可恢复</text>
+<rect x="620" y="565" width="510" height="65" rx="10" fill="#EEF4FC" stroke="#245AA8" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="635" y="593" text-anchor="start" font-size="15" font-weight="700" fill="#245AA8">评分账</text>
+<text x="635" y="618" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">raw Σ log p 偏短；length normalization 会重新定义排序目标</text>
+<line x1="48" y1="650" x2="1152" y2="650" stroke="#D9D5CB"/>
+<text x="52" y="674" font-size="13" fill="#667784">扩大 beam 改善搜索近似不保证任务质量单调；early-stop 必须有可证的完成上界或明确启发式。</text>
+</svg>

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">从先验和似然到后验预测</title>
+  <desc id="desc">三面板展示先验经似然更新为后验、参数不确定性积分形成后验预测、以及先验预测和后验预测检查与外部评价的边界。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F5F3FF"/><stop offset=".5" stop-color="#F8FAFC"/><stop offset="1" stop-color="#ECFDF5"/></linearGradient>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#4F46E5"/></marker>
+    <style>.title{font:700 21px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#0F172A}.head{font:700 17px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#4F46E5}.small{font:12px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#64748B}.label{font:13px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#334155}.math{font:15px Georgia,"Times New Roman",serif;fill:#0F172A}.card{fill:#fff;stroke:#CBD5E1;stroke-width:1.3}.axis{stroke:#64748B;stroke-width:1.2}.arrow{stroke:#4F46E5;stroke-width:2.2;fill:none;marker-end:url(#arr)}</style>
+  </defs>
+  <rect width="1200" height="430" rx="22" fill="url(#bg)"/>
+  <text x="40" y="38" class="title">Bayesian 条件化链：prior × likelihood → posterior → predictive 与模型检查</text>
+  <rect x="28" y="58" width="368" height="342" rx="17" class="card"/><rect x="416" y="58" width="368" height="342" rx="17" class="card"/><rect x="804" y="58" width="368" height="342" rx="17" class="card"/>
+
+  <text x="50" y="88" class="head">A　更新：联合模型决定后验</text>
+  <line x1="61" y1="272" x2="362" y2="272" class="axis"/>
+  <path d="M65 270C100 269 126 253 151 217C177 178 200 142 224 150C250 160 263 215 289 249C307 268 333 271 360 272" fill="none" stroke="#A78BFA" stroke-width="2.5" stroke-dasharray="6 4"/>
+  <path d="M65 270C126 270 161 260 194 225C221 196 243 181 266 191C293 203 309 248 335 266C344 270 352 271 360 272" fill="none" stroke="#F59E0B" stroke-width="2.5"/>
+  <path d="M65 270C133 270 173 266 202 240C226 218 239 174 258 151C279 126 299 158 312 211C323 254 338 269 360 272" fill="#DCFCE7" fill-opacity=".65" stroke="#16A34A" stroke-width="2.8"/>
+  <text x="75" y="124" class="small" fill="#7C3AED">prior</text><text x="130" y="124" class="small" fill="#D97706">likelihood</text><text x="218" y="124" class="small" fill="#15803D">posterior</text>
+  <text x="72" y="310" class="math">p(theta|y) = p(y|theta)p(theta) / p(y)</text>
+  <text x="72" y="342" class="small">posterior 是给定 joint model 与数据的条件分布</text>
+  <text x="72" y="372" class="small">improper prior、不可辨识与错设必须单独检查</text>
+
+  <text x="438" y="88" class="head">B　预测：积分参数，而不是只代 MAP</text>
+  <circle cx="475" cy="151" r="9" fill="#818CF8"/><circle cx="475" cy="208" r="9" fill="#34D399"/><circle cx="475" cy="265" r="9" fill="#F59E0B"/>
+  <text x="493" y="156" class="math">theta^(1)</text><text x="493" y="213" class="math">theta^(2)</text><text x="493" y="270" class="math">theta^(S)</text>
+  <path d="M551 151L631 205" class="arrow"/><path d="M551 208L631 208" class="arrow"/><path d="M551 265L631 211" class="arrow"/>
+  <path d="M637 279C657 238 677 152 700 145C724 137 741 229 761 279" fill="#DBEAFE" stroke="#2563EB" stroke-width="2.8"/>
+  <line x1="626" y1="280" x2="767" y2="280" class="axis"/>
+  <text x="464" y="310" class="math">p(y*|y) = E_post p(y*|theta)</text>
+  <rect x="447" y="333" width="307" height="43" rx="9" fill="#EEF2FF" stroke="#818CF8"/>
+  <text x="464" y="353" class="math">predictive Var = aleatoric + parameter</text>
+  <text x="464" y="370" class="small">分解依赖所声明的模型层级</text>
+
+  <text x="826" y="88" class="head">C　检查：生成、批评、外部预测分开</text>
+  <rect x="833" y="112" width="142" height="61" rx="10" fill="#EDE9FE" stroke="#A78BFA"/><text x="849" y="137" class="label">prior predictive</text><text x="849" y="158" class="small">拟合前检查尺度</text>
+  <rect x="1001" y="112" width="142" height="61" rx="10" fill="#DCFCE7" stroke="#4ADE80"/><text x="1017" y="137" class="label">posterior predictive</text><text x="1017" y="158" class="small">定向模型批评</text>
+  <path d="M978 142L997 142" class="arrow"/>
+  <rect x="884" y="209" width="207" height="61" rx="10" fill="#DBEAFE" stroke="#60A5FA"/><text x="906" y="234" class="label">held-out predictive score</text><text x="906" y="255" class="small">未见数据上的比较</text>
+  <path d="M1072 178L1036 205" class="arrow"/>
+  <rect x="834" y="302" width="309" height="62" rx="10" fill="#FEF2F2" stroke="#FCA5A5"/>
+  <text x="851" y="326" class="math">narrow posterior != correct model</text>
+  <text x="851" y="348" class="small">另报 prior sensitivity、推断误差与 deployment shift</text>
+  <text x="835" y="386" class="small">PPC 未发现问题，不等于模型被证明为真</text>
+</svg>

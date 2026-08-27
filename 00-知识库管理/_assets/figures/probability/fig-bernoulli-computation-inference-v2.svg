@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">同一个 Bernoulli 平均：有限样本、概率计算与参数推断</title>
+<desc id="desc">共同成功指标 Y 的样本平均可被浓缩界控制；已知目标分布时可设计 importance proposal；未知参数时则用 sampling risk、likelihood 与 posterior 评价。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#B7791F"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">有限样本：失败概率合同</text>
+<rect x="52" y="98" width="300" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="202.0" y="133.0" font-size="17" font-weight="650" text-anchor="middle" fill="#2563EB">Y_i ~ Bernoulli(3/10)</text>
+<line x1="202" y1="158" x2="202" y2="198" stroke="#1F2937" stroke-width="2.3" marker-end="url(#a3)"/>
+<rect x="52" y="208" width="300" height="60" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="202.0" y="244.0" font-size="17" font-weight="650" text-anchor="middle" fill="#0F766E">q_hat = (1/n) sum Y_i</text>
+<text x="45" y="325" font-size="16" font-weight="700" text-anchor="start" fill="#1F2937">n=50, epsilon=1/5</text>
+<text x="45" y="366" font-size="16" font-weight="650" text-anchor="start" fill="#C24135" class="math">Chebyshev: 21/200 = 0.105</text>
+<text x="45" y="405" font-size="16" font-weight="650" text-anchor="start" fill="#0F766E" class="math">Hoeffding: 2 exp(-4) = 0.0366</text>
+<text x="45" y="447" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">delta=0.05  -&gt;  n &gt;= 47 is sufficient</text>
+<text x="45" y="484" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">上界不是精确尾概率，也不是渐近正态近似。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">概率计算：proposal 决定方差</text>
+<rect x="440" y="105" width="315" height="64" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="597.5" y="143.0" font-size="16" font-weight="650" text-anchor="middle" fill="#2563EB">direct p: r=3/10</text>
+<text x="598" y="197" font-size="16" font-weight="700" text-anchor="middle" fill="#2563EB" class="math">variance 21/100</text>
+<rect x="440" y="220" width="315" height="64" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="597.5" y="258.0" font-size="16" font-weight="650" text-anchor="middle" fill="#0F766E">good proposal: r=3/4</text>
+<text x="598" y="312" font-size="16" font-weight="700" text-anchor="middle" fill="#0F766E" class="math">variance 3/100</text>
+<rect x="440" y="335" width="315" height="64" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="597.5" y="373.0" font-size="16" font-weight="650" text-anchor="middle" fill="#C24135">bad proposal: r=1/20</text>
+<text x="598" y="427" font-size="16" font-weight="700" text-anchor="middle" fill="#C24135" class="math">variance 171/100</text>
+<text x="440" y="475" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">good weights: w(1)=2/5; w(0)=14/5</text>
+<text x="440" y="505" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">support first; ESS alone cannot certify f-specific error</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#B7791F">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">参数推断：likelihood 与 risk</text>
+<rect x="840" y="96" width="300" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="990.0" y="131.0" font-size="17" font-weight="650" text-anchor="middle" fill="#2563EB">observed n=10, K=3</text>
+<line x1="990" y1="156" x2="990" y2="196" stroke="#1F2937" stroke-width="2.3" marker-end="url(#a3)"/>
+<rect x="840" y="206" width="140" height="62" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="910.0" y="243.0" font-size="17" font-weight="650" text-anchor="middle" fill="#0F766E">MLE = 3/10</text>
+<rect x="1000" y="206" width="140" height="62" rx="8" fill="#FFFEFB" stroke="#B7791F" stroke-width="2"/>
+<text x="1070.0" y="243.0" font-size="15" font-weight="650" text-anchor="middle" fill="#B7791F">prior Beta(2,2)</text>
+<line x1="1070" y1="270" x2="1070" y2="310" stroke="#1F2937" stroke-width="2.3" marker-end="url(#a3)"/>
+<rect x="840" y="320" width="300" height="66" rx="8" fill="#FFFEFB" stroke="#B7791F" stroke-width="2"/>
+<text x="990.0" y="359.0" font-size="17" font-weight="650" text-anchor="middle" fill="#B7791F">posterior Beta(5,9)</text>
+<text x="840" y="430" font-size="16" font-weight="700" text-anchor="start" fill="#1F2937" class="math">MAP=1/3; posterior mean=5/14</text>
+<text x="840" y="468" font-size="15" font-weight="650" text-anchor="start" fill="#0F766E">at q=3/10: shrinkage MSE &lt; MLE MSE</text>
+<text x="840" y="502" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">积分难算与参数未知不是同一种未知。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">先声明概率合同：界控制随机偏差，Monte Carlo 设计采样，统计推断则在未知参数下评价数据程序。</text>
+</svg>

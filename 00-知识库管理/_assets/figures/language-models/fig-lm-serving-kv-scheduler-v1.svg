@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">LLM Serving：时间轴由调度，显存板由 KV 生命周期</title><desc id="desc">prefill/decode continuous batching 与 paged KV block table。</desc>
+<rect width="1200" height="700" fill="#FBF8F1"/>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#667784"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#183044" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<line x1="48" y1="70" x2="1152" y2="70" stroke="#17766E" stroke-width="4"/>
+<text x="52" y="49" font-size="24" font-weight="700" fill="#183044">LLM Serving：时间轴由调度，显存板由 KV 生命周期</text>
+<text x="65" y="105" text-anchor="start" font-size="11" font-weight="700" fill="#667784">ITERATION SCHEDULER</text>
+<text x="190" y="105" text-anchor="middle" font-size="10.5" font-weight="400" fill="#667784">iter 0</text>
+<line x1="190" y1="115" x2="190" y2="345" stroke="#D9D5CB" stroke-dasharray="3 5"/>
+<text x="330" y="105" text-anchor="middle" font-size="10.5" font-weight="400" fill="#667784">iter 1</text>
+<line x1="330" y1="115" x2="330" y2="345" stroke="#D9D5CB" stroke-dasharray="3 5"/>
+<text x="470" y="105" text-anchor="middle" font-size="10.5" font-weight="400" fill="#667784">iter 2</text>
+<line x1="470" y1="115" x2="470" y2="345" stroke="#D9D5CB" stroke-dasharray="3 5"/>
+<text x="610" y="105" text-anchor="middle" font-size="10.5" font-weight="400" fill="#667784">iter 3</text>
+<line x1="610" y1="115" x2="610" y2="345" stroke="#D9D5CB" stroke-dasharray="3 5"/>
+<text x="750" y="105" text-anchor="middle" font-size="10.5" font-weight="400" fill="#667784">iter 4</text>
+<line x1="750" y1="115" x2="750" y2="345" stroke="#D9D5CB" stroke-dasharray="3 5"/>
+<text x="890" y="105" text-anchor="middle" font-size="10.5" font-weight="400" fill="#667784">iter 5</text>
+<line x1="890" y1="115" x2="890" y2="345" stroke="#D9D5CB" stroke-dasharray="3 5"/>
+<text x="1030" y="105" text-anchor="middle" font-size="10.5" font-weight="400" fill="#667784">iter 6</text>
+<line x1="1030" y1="115" x2="1030" y2="345" stroke="#D9D5CB" stroke-dasharray="3 5"/>
+<text x="65" y="169" text-anchor="start" font-size="12.5" font-weight="700" fill="#245AA8">request A</text>
+<text x="65" y="239" text-anchor="start" font-size="12.5" font-weight="700" fill="#17766E">request B</text>
+<text x="65" y="309" text-anchor="start" font-size="12.5" font-weight="700" fill="#C87922">request C</text>
+<rect x="190" y="145" width="270" height="42" rx="6" fill="#245AA8" opacity=".88"/>
+<text x="325.0" y="171" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">prefill · 512</text>
+<rect x="470" y="145" width="105" height="42" rx="6" fill="#245AA8" opacity=".88"/>
+<text x="522.5" y="171" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">d1</text>
+<rect x="610" y="145" width="105" height="42" rx="6" fill="#245AA8" opacity=".88"/>
+<text x="662.5" y="171" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">d2</text>
+<rect x="750" y="145" width="105" height="42" rx="6" fill="#245AA8" opacity=".88"/>
+<text x="802.5" y="171" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">d3</text>
+<rect x="330" y="215" width="130" height="42" rx="6" fill="#17766E" opacity=".88"/>
+<text x="395.0" y="241" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">prefill · 64</text>
+<rect x="470" y="215" width="105" height="42" rx="6" fill="#17766E" opacity=".88"/>
+<text x="522.5" y="241" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">d1</text>
+<rect x="610" y="215" width="105" height="42" rx="6" fill="#17766E" opacity=".88"/>
+<text x="662.5" y="241" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">d2</text>
+<rect x="750" y="215" width="105" height="42" rx="6" fill="#17766E" opacity=".88"/>
+<text x="802.5" y="241" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">EOS</text>
+<rect x="610" y="285" width="270" height="42" rx="6" fill="#C87922" opacity=".88"/>
+<text x="745.0" y="311" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">prefill · 768</text>
+<rect x="890" y="285" width="105" height="42" rx="6" fill="#C87922" opacity=".88"/>
+<text x="942.5" y="311" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">d1</text>
+<rect x="1030" y="285" width="105" height="42" rx="6" fill="#C87922" opacity=".88"/>
+<text x="1082.5" y="311" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">d2</text>
+<text x="65" y="382" text-anchor="start" font-size="11" font-weight="700" fill="#667784">PAGED KV MEMORY</text>
+<rect x="65" y="420" width="70" height="74" rx="5" fill="#245AA8" opacity=".88"/>
+<text x="100" y="447" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">P0</text>
+<text x="100" y="475" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">A·L0</text>
+<rect x="152" y="420" width="70" height="74" rx="5" fill="#17766E" opacity=".88"/>
+<text x="187" y="447" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">P1</text>
+<text x="187" y="475" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">B·L0</text>
+<rect x="413" y="420" width="70" height="74" rx="5" fill="#C87922" opacity=".88"/>
+<text x="448" y="447" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">P4</text>
+<text x="448" y="475" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">C·L0</text>
+<rect x="674" y="420" width="70" height="74" rx="5" fill="#245AA8" opacity=".88"/>
+<text x="709" y="447" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">P7</text>
+<text x="709" y="475" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">A·L1</text>
+<rect x="239" y="420" width="70" height="74" rx="5" fill="#17766E" opacity=".88"/>
+<text x="274" y="447" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">P2</text>
+<text x="274" y="475" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">B·L1</text>
+<rect x="587" y="420" width="70" height="74" rx="5" fill="#C87922" opacity=".88"/>
+<text x="622" y="447" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">P6</text>
+<text x="622" y="475" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">C·L1</text>
+<rect x="326" y="420" width="70" height="74" rx="5" fill="#245AA8" opacity=".88"/>
+<text x="361" y="447" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">P3</text>
+<text x="361" y="475" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">A·L2</text>
+<rect x="848" y="420" width="70" height="74" rx="5" fill="#17766E" opacity=".88"/>
+<text x="883" y="447" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">P9</text>
+<text x="883" y="475" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">B·L2</text>
+<rect x="935" y="420" width="70" height="74" rx="5" fill="#C87922" opacity=".88"/>
+<text x="970" y="447" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">P10</text>
+<text x="970" y="475" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">C·L2</text>
+<rect x="500" y="420" width="70" height="74" rx="5" fill="#245AA8" opacity=".88"/>
+<text x="535" y="447" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">P5</text>
+<text x="535" y="475" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">A·L3</text>
+<rect x="761" y="420" width="70" height="74" rx="5" fill="#17766E" opacity=".88"/>
+<text x="796" y="447" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">P8</text>
+<text x="796" y="475" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">B·L3</text>
+<rect x="1022" y="420" width="70" height="74" rx="5" fill="#C87922" opacity=".88"/>
+<text x="1057" y="447" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">P11</text>
+<text x="1057" y="475" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">C·L3</text>
+<rect x="65" y="530" width="320" height="90" rx="10" fill="#EEF4FC" stroke="#245AA8" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="80" y="558" text-anchor="start" font-size="15" font-weight="700" fill="#245AA8">KV / token</text>
+<text x="80" y="583" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">L × 2 × nKV × dhead × bytes</text>
+<rect x="420" y="530" width="320" height="90" rx="10" fill="#EAF7F4" stroke="#17766E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="435" y="558" text-anchor="start" font-size="15" font-weight="700" fill="#17766E">分页缓解</text>
+<text x="435" y="583" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">max-length 预留与外部碎片</text>
+<rect x="775" y="530" width="360" height="90" rx="10" fill="#FFF0ED" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="790" y="558" text-anchor="start" font-size="15" font-weight="700" fill="#B7443E">调度权衡</text>
+<text x="790" y="583" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">TTFT ↔ TBT ↔ throughput ↔ KV pressure</text>
+<line x1="48" y1="650" x2="1152" y2="650" stroke="#D9D5CB"/>
+<text x="52" y="674" font-size="13" fill="#667784">FlashAttention 的 attention IO 优化与 persistent KV 容量是两本账；性能数字必须绑定负载与硬件。</text>
+</svg>

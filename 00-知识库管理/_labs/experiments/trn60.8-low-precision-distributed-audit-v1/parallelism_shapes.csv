@@ -1,0 +1,5 @@
+case,local_weight_rows,local_weight_cols,local_output_rows,local_output_cols,collective,pipeline_efficiency_proxy,expert_capacity
+column_parallel_linear,4096,2048,8,2048,optional_all_gather,,
+row_parallel_linear,1024,8192,8,8192,all_reduce_sum,,
+pipeline_8_stages_32_microbatches,,,,,point_to_point,0.8205128205128205,
+expert_4096_tokens_8_experts_cf1.25,,,,,all_to_all,,640

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Generator–adjoint、概率通量与同边缘概率流</title>
+<desc id="desc">Itô generator 作用在 test functions 上，分部积分把其导数转移到 density 得到 Fokker–Planck；将二阶扩散项写进 probability current 可构造 deterministic probability-flow velocity；同一时刻 marginals 相同不代表 path law 相同。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">从 test functions 转到 density</text>
+<rect x="45" y="92" width="315" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="202.5" y="127.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">Ito formula -&gt; generator L_t</text>
+<line x1="202" y1="153" x2="202" y2="190" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="45" y="202" width="315" height="70" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="202.5" y="243.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">d/dt E phi(X_t)=E[L_t phi(X_t)]</text>
+<line x1="202" y1="275" x2="202" y2="312" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="45" y="324" width="315" height="72" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="202.5" y="366.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">partial_t p=L_t^* p</text>
+<text x="45" y="432" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">L phi=a dot grad phi+1/2 D:Hess phi</text>
+<text x="45" y="462" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">L* p=-div(ap)+1/2 partial_ij(D_ij p)</text>
+<text x="45" y="495" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">boundary terms define the PDE contract。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">扩散通量可改写为确定性速度</text>
+<rect x="445" y="92" width="310" height="62" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600.0" y="129.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">partial_t p=-div J</text>
+<line x1="600" y1="157" x2="600" y2="194" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="445" y="206" width="310" height="75" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="600.0" y="249.5" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">J=a p-1/2 div(D p)</text>
+<line x1="600" y1="284" x2="600" y2="321" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="445" y="333" width="310" height="72" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="600.0" y="375.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">v=J/p=a-[div(Dp)]/(2p)</text>
+<text x="430" y="445" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">if D=g(t)^2 I: v=a-1/2 g^2 score</text>
+<text x="430" y="478" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">state-dependent D needs div D correction</text>
+<text x="430" y="507" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">velocity is defined where p&gt;0。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">同 marginal，不同路径律</text>
+<text x="830" y="100" font-size="16" font-weight="700" text-anchor="start" fill="#2563EB">SDE particles</text>
+<path d="M835 145 C900 90 920 235 985 170 C1040 110 1085 245 1140 150" fill="none" stroke="#2563EB" stroke-width="2.5"/>
+<text x="830" y="210" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">nonzero quadratic variation</text>
+<line x1="830" y1="240" x2="1145" y2="240" stroke="#D7DEE8" stroke-width="2"/>
+<text x="830" y="278" font-size="16" font-weight="700" text-anchor="start" fill="#0F766E">probability-flow ODE</text>
+<path d="M835 330 C920 295 1030 305 1140 345" fill="none" stroke="#0F766E" stroke-width="2.5"/>
+<text x="830" y="378" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">deterministic given x0；zero QV</text>
+<text x="830" y="430" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">same p_t under exact score/regularity</text>
+<text x="830" y="461" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">different transitions, coupling and paths</text>
+<text x="830" y="491" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">separate density, score and solver errors</text>
+<text x="830" y="517" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">boundary/current conditions still matter。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">Fokker–Planck 由 generator 的 adjoint 得到；概率流复现 one-time marginals，却不复现随机路径 law。</text>
+</svg>

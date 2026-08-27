@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Tokenizer = 码本 + 分段器 + 可逆接口</title>
+<desc id="desc">同一字符串可有多条合法分段路径；词表改变 token 数、概率因子和计算成本，但不自动保证下游质量。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#B7791F"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">分段是路径选择</text>
+<circle cx="65" cy="210" r="21" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="65" y="216" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">0</text>
+<circle cx="155" cy="125" r="21" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="155" y="131" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">a</text>
+<circle cx="155" cy="295" r="21" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="155" y="301" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">ab</text>
+<circle cx="255" cy="125" r="21" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="255" y="131" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">b</text>
+<circle cx="255" cy="295" r="21" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="255" y="301" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">c</text>
+<circle cx="345" cy="210" r="21" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="345" y="216" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">c</text>
+<line x1="86" y1="205" x2="134" y2="139" stroke="#2563EB" stroke-width="2" marker-end="url(#a0)"/>
+<text x="110.0" y="164.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">a</text>
+<line x1="86" y1="220" x2="134" y2="284" stroke="#2563EB" stroke-width="2" marker-end="url(#a0)"/>
+<text x="110.0" y="244.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">ab</text>
+<line x1="176" y1="125" x2="234" y2="125" stroke="#2563EB" stroke-width="2" marker-end="url(#a0)"/>
+<text x="205.0" y="117.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">b</text>
+<line x1="176" y1="295" x2="234" y2="295" stroke="#2563EB" stroke-width="2" marker-end="url(#a0)"/>
+<text x="205.0" y="287.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">c</text>
+<line x1="276" y1="125" x2="326" y2="198" stroke="#2563EB" stroke-width="2" marker-end="url(#a0)"/>
+<text x="301.0" y="153.5" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">c</text>
+<line x1="276" y1="295" x2="326" y2="222" stroke="#2563EB" stroke-width="2" marker-end="url(#a0)"/>
+<text x="301.0" y="250.5" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">c</text>
+<text x="55" y="390" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">encode(x) = 选一条覆盖全串的 token 路径</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">三项合同</text>
+<rect x="445" y="100" width="300" height="55" rx="8" fill="#F8FAFC" stroke="#2563EB" stroke-width="2"/>
+<text x="595.0" y="133.5" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">Vocabulary</text>
+<text x="445" y="182" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">token ↔ id; versioned</text>
+<rect x="445" y="220" width="300" height="55" rx="8" fill="#F8FAFC" stroke="#0F766E" stroke-width="2"/>
+<text x="595.0" y="253.5" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">Segmentation</text>
+<text x="445" y="302" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">deterministic or sampled</text>
+<rect x="445" y="340" width="300" height="55" rx="8" fill="#F8FAFC" stroke="#B7791F" stroke-width="2"/>
+<text x="595.0" y="373.5" font-size="15" font-weight="650" text-anchor="middle" fill="#B7791F">Decoder</text>
+<text x="445" y="422" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">ids → bytes/text; total?</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#B7791F">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">码本粒度的三角权衡</text>
+<path d="M985 100L850 410L1120 410Z" fill="#FFF7ED" stroke="#B7791F" stroke-width="3"/>
+<text x="985" y="85" font-size="15" font-weight="800" text-anchor="middle" fill="#B7791F">短序列</text>
+<text x="835" y="440" font-size="15" font-weight="800" text-anchor="start" fill="#0F766E">小词表 / 覆盖</text>
+<text x="1130" y="440" font-size="15" font-weight="800" text-anchor="end" fill="#2563EB">参数 / 稀疏性</text>
+<circle cx="980" cy="290" r="10" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<text x="1000" y="295" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">任务相关 Pareto 点</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">Tokenizer 不是无损预处理的同义词，而是模型概率空间和资源预算的一部分。</text>
+</svg>

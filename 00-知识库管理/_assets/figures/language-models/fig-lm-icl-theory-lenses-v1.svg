@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">三种 ICL 解释是带假设的模型，不是互斥口号</title><desc id="desc">Bayesian latent concept、线性回归 estimator 与 forward-pass optimizer 由不同假设到达 query prediction。</desc>
+<rect width="1200" height="700" fill="#FFFEFB"/>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#64748B"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#17324D" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<text x="55" y="55" font-size="25" font-weight="700" fill="#2563EB">三种 ICL 解释是带假设的模型，不是互斥口号</text>
+<rect x="55" y="105" width="285" height="130" rx="12" fill="#FFFFFF" stroke="#7C3AED" stroke-width="2" filter="url(#shadow)"/>
+<text x="71" y="134" font-size="16" font-weight="700" fill="#7C3AED">Bayesian lens</text>
+<text x="71" y="161" font-size="13" fill="#64748B">latent task z</text>
+<text x="71" y="183" font-size="13" fill="#64748B">posterior p(z | D)</text>
+<text x="71" y="205" font-size="13" fill="#64748B">posterior predictive</text>
+<line x1="350" y1="170" x2="455" y2="350" stroke="#7C3AED" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="55" y="285" width="285" height="130" rx="12" fill="#FFFFFF" stroke="#2563EB" stroke-width="2" filter="url(#shadow)"/>
+<text x="71" y="314" font-size="16" font-weight="700" fill="#2563EB">Estimator lens</text>
+<text x="71" y="341" font-size="13" fill="#64748B">y = xᵀw + ε</text>
+<text x="71" y="363" font-size="13" fill="#64748B">least squares / ridge</text>
+<text x="71" y="385" font-size="13" fill="#64748B">compare risk curve</text>
+<line x1="350" y1="350" x2="455" y2="350" stroke="#2563EB" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="55" y="465" width="285" height="130" rx="12" fill="#FFFFFF" stroke="#0F766E" stroke-width="2" filter="url(#shadow)"/>
+<text x="71" y="494" font-size="16" font-weight="700" fill="#0F766E">Optimizer lens</text>
+<text x="71" y="521" font-size="13" fill="#64748B">w₁ = w₀ − η∇L_D</text>
+<text x="71" y="543" font-size="13" fill="#64748B">layer ≈ update step</text>
+<text x="71" y="565" font-size="13" fill="#64748B">mechanistic construction</text>
+<line x1="350" y1="530" x2="455" y2="350" stroke="#0F766E" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="475" y="255" width="265" height="190" rx="12" fill="#FFF7E8" stroke="#D97706" stroke-width="2" filter="url(#shadow)"/>
+<text x="491" y="284" font-size="16" font-weight="700" fill="#D97706">Prompt D + query x*</text>
+<text x="491" y="311" font-size="13" fill="#64748B">D={(xᵢ,yᵢ)}</text>
+<text x="491" y="333" font-size="13" fill="#64748B">no deployment weight update</text>
+<text x="491" y="355" font-size="13" fill="#64748B">produce ŷ* or p(y* | D,x*)</text>
+<line x1="750" y1="350" x2="835" y2="350" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="850" y="255" width="295" height="190" rx="12" fill="#FEE2E2" stroke="#C24135" stroke-width="2" filter="url(#shadow)"/>
+<text x="866" y="284" font-size="16" font-weight="700" fill="#C24135">Discriminating tests</text>
+<text x="866" y="311" font-size="13" fill="#64748B">prior shift</text>
+<text x="866" y="333" font-size="13" fill="#64748B">noise / condition number</text>
+<text x="866" y="355" font-size="13" fill="#64748B">OOD coefficients</text>
+<text x="866" y="377" font-size="13" fill="#64748B">layerwise state probe</text>
+<text x="866" y="399" font-size="13" fill="#64748B">algorithmic precision</text>
+<text x="405" y="595" font-size="14" fill="#64748B">同一输入—输出行为可有多个解释；要用干预与失败域区分，而非只拟合一条平均曲线。</text>
+<text x="55" y="670" font-size="14" fill="#64748B">Toy theorem 的量词必须保留：模型族、训练分布、任务类、prompt 格式、深度和误差度量缺一不可。</text>
+</svg>

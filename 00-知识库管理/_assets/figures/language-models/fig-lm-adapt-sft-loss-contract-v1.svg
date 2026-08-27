@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">SFT 的四张量：输入、shift 后标签、relation 与 loss mask</title><desc id="desc">同一对话展示 full-sequence loss 与 response-only loss 的差别，并标出 teacher forcing 与自由生成的条件分布差异。</desc>
+<rect width="1200" height="700" fill="#FFFEFB"/>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#64748B"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#17324D" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<text x="55" y="55" font-size="25" font-weight="700" fill="#2563EB">SFT 的四张量：输入、shift 后标签、relation 与 loss mask</text>
+<text x="55" y="102" font-size="17" font-weight="700" fill="#17324D">serialized tokens</text>
+<rect x="55" y="125" width="105" height="48" rx="7" fill="#7C3AED"/>
+<text x="107" y="155" text-anchor="middle" font-size="14" fill="#FFFFFF">&lt;sys&gt;</text>
+<text x="107" y="202" text-anchor="middle" font-size="12" fill="#64748B">t=0</text>
+<rect x="173" y="125" width="105" height="48" rx="7" fill="#7C3AED"/>
+<text x="225" y="155" text-anchor="middle" font-size="14" fill="#FFFFFF">rules</text>
+<text x="225" y="202" text-anchor="middle" font-size="12" fill="#64748B">t=1</text>
+<rect x="291" y="125" width="105" height="48" rx="7" fill="#2563EB"/>
+<text x="343" y="155" text-anchor="middle" font-size="14" fill="#FFFFFF">&lt;user&gt;</text>
+<text x="343" y="202" text-anchor="middle" font-size="12" fill="#64748B">t=2</text>
+<rect x="409" y="125" width="105" height="48" rx="7" fill="#2563EB"/>
+<text x="461" y="155" text-anchor="middle" font-size="14" fill="#FFFFFF">Q</text>
+<text x="461" y="202" text-anchor="middle" font-size="12" fill="#64748B">t=3</text>
+<rect x="527" y="125" width="105" height="48" rx="7" fill="#0F766E"/>
+<text x="579" y="155" text-anchor="middle" font-size="14" fill="#FFFFFF">&lt;asst&gt;</text>
+<text x="579" y="202" text-anchor="middle" font-size="12" fill="#64748B">t=4</text>
+<rect x="645" y="125" width="105" height="48" rx="7" fill="#0F766E"/>
+<text x="697" y="155" text-anchor="middle" font-size="14" fill="#FFFFFF">A1</text>
+<text x="697" y="202" text-anchor="middle" font-size="12" fill="#64748B">t=5</text>
+<rect x="763" y="125" width="105" height="48" rx="7" fill="#0F766E"/>
+<text x="815" y="155" text-anchor="middle" font-size="14" fill="#FFFFFF">A2</text>
+<text x="815" y="202" text-anchor="middle" font-size="12" fill="#64748B">t=6</text>
+<rect x="881" y="125" width="105" height="48" rx="7" fill="#0F766E"/>
+<text x="933" y="155" text-anchor="middle" font-size="14" fill="#FFFFFF">EOS</text>
+<text x="933" y="202" text-anchor="middle" font-size="12" fill="#64748B">t=7</text>
+<text x="55" y="275" font-size="14" font-weight="700" fill="#D97706">labels after one shift</text>
+<rect x="260" y="245" width="88" height="42" rx="6" fill="#EEF2F7"/>
+<text x="304" y="272" text-anchor="middle" font-size="13" fill="#17324D">rules</text>
+<rect x="362" y="245" width="88" height="42" rx="6" fill="#EEF2F7"/>
+<text x="406" y="272" text-anchor="middle" font-size="13" fill="#17324D">&lt;user&gt;</text>
+<rect x="464" y="245" width="88" height="42" rx="6" fill="#EEF2F7"/>
+<text x="508" y="272" text-anchor="middle" font-size="13" fill="#17324D">Q</text>
+<rect x="566" y="245" width="88" height="42" rx="6" fill="#EEF2F7"/>
+<text x="610" y="272" text-anchor="middle" font-size="13" fill="#17324D">&lt;asst&gt;</text>
+<rect x="668" y="245" width="88" height="42" rx="6" fill="#EEF2F7"/>
+<text x="712" y="272" text-anchor="middle" font-size="13" fill="#17324D">A1</text>
+<rect x="770" y="245" width="88" height="42" rx="6" fill="#EEF2F7"/>
+<text x="814" y="272" text-anchor="middle" font-size="13" fill="#17324D">A2</text>
+<rect x="872" y="245" width="88" height="42" rx="6" fill="#EEF2F7"/>
+<text x="916" y="272" text-anchor="middle" font-size="13" fill="#17324D">EOS</text>
+<rect x="974" y="245" width="88" height="42" rx="6" fill="#EEF2F7"/>
+<text x="1018" y="272" text-anchor="middle" font-size="13" fill="#17324D">—</text>
+<text x="55" y="351" font-size="14" font-weight="700" fill="#C24135">full-sequence mask</text>
+<rect x="260" y="321" width="88" height="42" rx="6" fill="#C24135"/>
+<text x="304" y="348" text-anchor="middle" font-size="13" fill="#FFFFFF">1</text>
+<rect x="362" y="321" width="88" height="42" rx="6" fill="#C24135"/>
+<text x="406" y="348" text-anchor="middle" font-size="13" fill="#FFFFFF">1</text>
+<rect x="464" y="321" width="88" height="42" rx="6" fill="#C24135"/>
+<text x="508" y="348" text-anchor="middle" font-size="13" fill="#FFFFFF">1</text>
+<rect x="566" y="321" width="88" height="42" rx="6" fill="#C24135"/>
+<text x="610" y="348" text-anchor="middle" font-size="13" fill="#FFFFFF">1</text>
+<rect x="668" y="321" width="88" height="42" rx="6" fill="#C24135"/>
+<text x="712" y="348" text-anchor="middle" font-size="13" fill="#FFFFFF">1</text>
+<rect x="770" y="321" width="88" height="42" rx="6" fill="#C24135"/>
+<text x="814" y="348" text-anchor="middle" font-size="13" fill="#FFFFFF">1</text>
+<rect x="872" y="321" width="88" height="42" rx="6" fill="#C24135"/>
+<text x="916" y="348" text-anchor="middle" font-size="13" fill="#FFFFFF">1</text>
+<rect x="974" y="321" width="88" height="42" rx="6" fill="#EEF2F7"/>
+<text x="1018" y="348" text-anchor="middle" font-size="13" fill="#17324D">0</text>
+<text x="55" y="427" font-size="14" font-weight="700" fill="#0F766E">response-only mask</text>
+<rect x="260" y="397" width="88" height="42" rx="6" fill="#EEF2F7"/>
+<text x="304" y="424" text-anchor="middle" font-size="13" fill="#17324D">0</text>
+<rect x="362" y="397" width="88" height="42" rx="6" fill="#EEF2F7"/>
+<text x="406" y="424" text-anchor="middle" font-size="13" fill="#17324D">0</text>
+<rect x="464" y="397" width="88" height="42" rx="6" fill="#EEF2F7"/>
+<text x="508" y="424" text-anchor="middle" font-size="13" fill="#17324D">0</text>
+<rect x="566" y="397" width="88" height="42" rx="6" fill="#EEF2F7"/>
+<text x="610" y="424" text-anchor="middle" font-size="13" fill="#17324D">0</text>
+<rect x="668" y="397" width="88" height="42" rx="6" fill="#0F766E"/>
+<text x="712" y="424" text-anchor="middle" font-size="13" fill="#FFFFFF">1</text>
+<rect x="770" y="397" width="88" height="42" rx="6" fill="#0F766E"/>
+<text x="814" y="424" text-anchor="middle" font-size="13" fill="#FFFFFF">1</text>
+<rect x="872" y="397" width="88" height="42" rx="6" fill="#0F766E"/>
+<text x="916" y="424" text-anchor="middle" font-size="13" fill="#FFFFFF">1</text>
+<rect x="974" y="397" width="88" height="42" rx="6" fill="#EEF2F7"/>
+<text x="1018" y="424" text-anchor="middle" font-size="13" fill="#17324D">0</text>
+<rect x="55" y="500" width="500" height="115" rx="12" fill="#ECFDF5" stroke="#0F766E" stroke-width="2" filter="url(#shadow)"/>
+<text x="71" y="529" font-size="16" font-weight="700" fill="#0F766E">Teacher forcing · training</text>
+<text x="71" y="556" font-size="13" fill="#64748B">predict A2 conditioned on gold A1</text>
+<text x="71" y="578" font-size="13" fill="#64748B">parallel shifted targets; exact NLL on chosen mask</text>
+<rect x="645" y="500" width="500" height="115" rx="12" fill="#FEE2E2" stroke="#C24135" stroke-width="2" filter="url(#shadow)"/>
+<text x="661" y="529" font-size="16" font-weight="700" fill="#C24135">Free running · inference</text>
+<text x="661" y="556" font-size="13" fill="#64748B">predict A2 conditioned on sampled Â1</text>
+<text x="661" y="578" font-size="13" fill="#64748B">errors alter future history; sampler/stop now matter</text>
+<line x1="555" y1="558" x2="635" y2="558" stroke="#C24135" stroke-width="2.5" marker-end="url(#arrow)" stroke-dasharray="7 5"/>
+<text x="55" y="670" font-size="14" fill="#64748B">Response-only 不是自动正确：mask 边界、assistant marker、multi-turn weighting 与 global denominator 都属于目标定义。</text>
+</svg>

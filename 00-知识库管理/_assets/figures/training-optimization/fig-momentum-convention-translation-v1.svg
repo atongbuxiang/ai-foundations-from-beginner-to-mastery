@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">Momentum 的 gradient buffer、velocity 与 EMA 尺度字典</title>
+  <desc id="desc">三栏展示未归一化梯度缓冲区、含学习率的参数速度和梯度指数移动平均，并标明常学习率下的尺度映射以及变化学习率、偏差修正和阻尼的断点。</desc>
+  <rect width="1200" height="680" fill="#FFFEFB"/>
+  <style>.sans{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}.ink{fill:#1F2937}.muted{fill:#64748B}.blue{fill:#2563EB}.green{fill:#0F766E}.amber{fill:#B7791F}.red{fill:#C24135}.box{fill:#F8FAFC;stroke:#94A3B8;stroke-width:2.2}</style>
+  <line x1="400" y1="48" x2="400" y2="486" stroke="#D7DEE8" stroke-width="2"/><line x1="800" y1="48" x2="800" y2="486" stroke="#D7DEE8" stroke-width="2"/>
+  <text x="52" y="58" class="sans blue" font-size="23" font-weight="700">A｜Gradient buffer</text><text x="52" y="90" class="sans muted" font-size="17">state 单位：gradient</text>
+  <rect x="55" y="132" width="290" height="116" rx="6" class="box"/><text x="200" y="177" class="mono ink" font-size="20" text-anchor="middle">b_t = μ b_(t-1) + g_t</text><text x="200" y="216" class="mono blue" font-size="19" text-anchor="middle">Δtheta_t = −η b_t</text>
+  <g opacity="0.95"><rect x="78" y="300" width="42" height="102" fill="#94A3B8"/><rect x="133" y="281" width="42" height="121" fill="#94A3B8"/><rect x="188" y="255" width="42" height="147" fill="#94A3B8"/><rect x="243" y="220" width="42" height="182" fill="#2563EB"/></g>
+  <text x="200" y="438" class="sans ink" font-size="17" text-anchor="middle">历史权重：1, μ, μ², …</text>
+
+  <text x="452" y="58" class="sans green" font-size="23" font-weight="700">B｜Parameter velocity</text><text x="452" y="90" class="sans muted" font-size="17">state 单位：parameter displacement</text>
+  <rect x="455" y="132" width="290" height="116" rx="6" class="box"/><text x="600" y="177" class="mono ink" font-size="20" text-anchor="middle">v_t = μ v_(t-1) − η g_t</text><text x="600" y="216" class="mono green" font-size="19" text-anchor="middle">Δtheta_t = v_t</text>
+  <path d="M492 355 C535 285 583 424 628 338 S700 306 725 348" fill="none" stroke="#0F766E" stroke-width="4"/>
+  <line x1="484" y1="355" x2="730" y2="355" stroke="#94A3B8" stroke-width="2"/>
+  <text x="600" y="438" class="mono green" font-size="18" text-anchor="middle">v_t = −η b_t</text>
+
+  <text x="852" y="58" class="sans amber" font-size="23" font-weight="700">C｜Gradient EMA</text><text x="852" y="90" class="sans muted" font-size="17">state 单位：gradient，权重和早期小于 1</text>
+  <rect x="855" y="132" width="290" height="116" rx="6" class="box"/><text x="1000" y="177" class="mono ink" font-size="19" text-anchor="middle">m_t = μ m_(t-1) +(1−μ) g_t</text><text x="1000" y="216" class="mono amber" font-size="19" text-anchor="middle">Δtheta_t = −α m_t</text>
+  <path d="M884 380 C920 360 955 300 998 283 S1082 244 1120 232" fill="none" stroke="#B7791F" stroke-width="4"/>
+  <line x1="884" y1="232" x2="1120" y2="232" stroke="#94A3B8" stroke-width="2" stroke-dasharray="7 6"/>
+  <text x="1000" y="438" class="mono amber" font-size="18" text-anchor="middle">m_t = (1−μ) b_t</text>
+
+  <line x1="52" y1="510" x2="1148" y2="510" stroke="#0F766E" stroke-width="3"/>
+  <text x="52" y="550" class="sans green" font-size="18" font-weight="700">常 η、同初始化时的字典</text>
+  <text x="322" y="550" class="mono ink" font-size="18">v = −ηb</text><text x="512" y="550" class="mono ink" font-size="18">m = (1−μ)b</text><text x="766" y="550" class="mono ink" font-size="18">α = η/(1−μ)</text>
+  <text x="52" y="606" class="sans red" font-size="18" font-weight="700">断点</text>
+  <text x="142" y="606" class="sans ink" font-size="17">变化 LR　｜　bias correction　｜　dampening　｜　首步 buffer 初始化　｜　restart</text>
+  <text x="52" y="646" class="sans muted" font-size="16">状态单位不明时，不要直接复制 checkpoint 中的 momentum tensor。</text>
+</svg>

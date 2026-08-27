@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="690" viewBox="0 0 1200 690" role="img" aria-labelledby="title desc">
+  <title id="title">大批量与梯度累积的等价门和反例分支</title>
+  <desc id="desc">上方两条路径在总梯度处合流，只有同参数、可加目标、正确归一化和单次优化器更新时等价；下方展示批归一化、逐微批裁剪和提前推进状态的失败分支。</desc>
+  <rect width="1200" height="690" fill="#FFFEFB"/>
+  <style>.sans{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}.ink{fill:#1F2937}.muted{fill:#64748B}.blue{fill:#2563EB}.green{fill:#0F766E}.red{fill:#C24135}.amber{fill:#B7791F}.b{fill:#EEF3FF;stroke:#2563EB;stroke-width:2.5}.ok{fill:#E8F5F1;stroke:#0F766E;stroke-width:2.5}.bad{fill:#FFF1EE;stroke:#C24135;stroke-width:2.5}</style>
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#2563EB"/></marker><marker id="g" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#0F766E"/></marker><marker id="r" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#C24135"/></marker></defs>
+  <text x="54" y="54" class="sans blue" font-size="23" font-weight="700">A｜等价路径：先线性相加，再做一次非线性处理</text>
+  <text x="54" y="91" class="sans ink" font-size="18">一次大 batch</text>
+  <rect x="190" y="65" width="196" height="62" rx="6" class="b"/><text x="288" y="102" class="sans ink" font-size="17" text-anchor="middle">同一 θ 上求 mean</text>
+  <text x="54" y="185" class="sans ink" font-size="18">K 个 micro-batch</text>
+  <rect x="190" y="154" width="196" height="62" rx="6" class="b"/><text x="288" y="191" class="sans ink" font-size="17" text-anchor="middle">同一 θ，不推进 state</text>
+  <rect x="458" y="105" width="208" height="82" rx="6" class="ok"/><text x="562" y="139" class="sans green" font-size="18" font-weight="700" text-anchor="middle">总梯度</text><text x="562" y="166" class="mono ink" font-size="16" text-anchor="middle">sum_k (b_k/B) g_k</text>
+  <rect x="748" y="105" width="174" height="82" rx="6" class="ok"/><text x="835" y="139" class="sans ink" font-size="17" text-anchor="middle">unscale / clip</text><text x="835" y="166" class="sans muted" font-size="16" text-anchor="middle">只执行一次</text>
+  <rect x="1002" y="105" width="150" height="82" rx="6" class="ok"/><text x="1077" y="139" class="sans ink" font-size="17" text-anchor="middle">optimizer</text><text x="1077" y="166" class="sans muted" font-size="16" text-anchor="middle">一步</text>
+  <g fill="none" stroke="#2563EB" stroke-width="3" marker-end="url(#a)"><path d="M386 96 C420 96 420 126 454 137"/><path d="M386 185 C420 185 420 165 454 154"/></g>
+  <g fill="none" stroke="#0F766E" stroke-width="3" marker-end="url(#g)"><line x1="666" y1="146" x2="744" y2="146"/><line x1="922" y1="146" x2="998" y2="146"/></g>
+  <text x="54" y="277" class="sans green" font-size="19" font-weight="700">六道门</text>
+  <g class="sans ink" font-size="16"><text x="178" y="277">同参数</text><text x="306" y="277">可加目标</text><text x="451" y="277">同随机样本</text><text x="620" y="277">真实计数归一</text><text x="806" y="277">延后非线性</text><text x="1000" y="277">单次 state update</text></g>
+  <line x1="54" y1="315" x2="1146" y2="315" stroke="#D7DEE8" stroke-width="2"/>
+  <text x="54" y="359" class="sans red" font-size="23" font-weight="700">B｜失败分支：合流前已经改变了对象</text>
+  <g class="sans ink" font-size="17" text-anchor="middle">
+    <rect x="66" y="406" width="282" height="102" rx="7" class="bad"/><text x="207" y="440" font-weight="700">micro-batch BatchNorm</text><text x="207" y="472" class="muted">activation 与 running stats 不同</text>
+    <rect x="459" y="406" width="282" height="102" rx="7" class="bad"/><text x="600" y="440" font-weight="700">逐 micro-batch clipping</text><text x="600" y="472" class="mono muted">clip(g1)+clip(g2) ≠ clip(g1+g2)</text>
+    <rect x="852" y="406" width="282" height="102" rx="7" class="bad"/><text x="993" y="440" font-weight="700">提前推进 optimizer state</text><text x="993" y="472" class="muted">momentum / bias correction / LR 分叉</text>
+  </g>
+  <g stroke="#C24135" stroke-width="3" fill="none" marker-end="url(#r)"><line x1="207" y1="402" x2="207" y2="382"/><line x1="600" y1="402" x2="600" y2="382"/><line x1="993" y1="402" x2="993" y2="382"/></g>
+  <rect x="66" y="554" width="1068" height="80" fill="#F8FAFC" stroke="#94A3B8" stroke-width="2"/>
+  <text x="92" y="586" class="sans amber" font-size="18" font-weight="700">数值边界</text>
+  <text x="224" y="586" class="sans ink" font-size="17">精确算术相等 ≠ 浮点 bitwise 相同；规约树与 RNG 消耗顺序仍需容差测试。</text>
+  <text x="92" y="615" class="sans muted" font-size="16">不完整 accumulation window 必须按真实有效 sample/token 重新归一化。</text>
+</svg>

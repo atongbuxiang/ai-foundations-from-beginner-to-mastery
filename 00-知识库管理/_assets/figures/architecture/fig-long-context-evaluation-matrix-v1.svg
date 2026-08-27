@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">长上下文评测：可接受长度、可利用长度与任务证据</title>
+<desc id="desc">支持 N tokens 只说明接口上限；真正评测要同时扫描长度、证据位置、依赖跨度、干扰和任务类型。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">四级 Context 能力</text>
+<rect x="55" y="95" width="290" height="50" rx="8" fill="#F8FAFC" stroke="#2563EB" stroke-width="2"/>
+<text x="200.0" y="126.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">1  accepts input</text>
+<rect x="55" y="180" width="290" height="50" rx="8" fill="#F8FAFC" stroke="#0F766E" stroke-width="2"/>
+<text x="200.0" y="211.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">2  numerically stable</text>
+<rect x="55" y="265" width="290" height="50" rx="8" fill="#F8FAFC" stroke="#B7791F" stroke-width="2"/>
+<text x="200.0" y="296.0" font-size="15" font-weight="650" text-anchor="middle" fill="#B7791F">3  retrieves / tracks</text>
+<rect x="55" y="350" width="290" height="50" rx="8" fill="#F8FAFC" stroke="#C24135" stroke-width="2"/>
+<text x="200.0" y="381.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">4  reasons / improves</text>
+<text x="55" y="440" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">前一级不是后一级的充分条件。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">评测矩阵而非单点</text>
+<text x="482" y="95" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">4K</text>
+<text x="550" y="95" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">8K</text>
+<text x="618" y="95" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">16K</text>
+<text x="686" y="95" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">32K</text>
+<text x="448" y="144" font-size="15" font-weight="650" text-anchor="end" fill="#1F2937">start</text>
+<rect x="455" y="110" width="54" height="44" rx="4" fill="#F8FAFC" stroke="#B7791F" stroke-width="1.5"/>
+<rect x="523" y="110" width="54" height="44" rx="4" fill="#F8FAFC" stroke="#0F766E" stroke-width="1.5"/>
+<rect x="591" y="110" width="54" height="44" rx="4" fill="#F8FAFC" stroke="#0F766E" stroke-width="1.5"/>
+<rect x="659" y="110" width="54" height="44" rx="4" fill="#F8FAFC" stroke="#B7791F" stroke-width="1.5"/>
+<text x="448" y="202" font-size="15" font-weight="650" text-anchor="end" fill="#1F2937">middle</text>
+<rect x="455" y="168" width="54" height="44" rx="4" fill="#F8FAFC" stroke="#0F766E" stroke-width="1.5"/>
+<rect x="523" y="168" width="54" height="44" rx="4" fill="#F8FAFC" stroke="#0F766E" stroke-width="1.5"/>
+<rect x="591" y="168" width="54" height="44" rx="4" fill="#F8FAFC" stroke="#B7791F" stroke-width="1.5"/>
+<rect x="659" y="168" width="54" height="44" rx="4" fill="#F8FAFC" stroke="#0F766E" stroke-width="1.5"/>
+<text x="448" y="260" font-size="15" font-weight="650" text-anchor="end" fill="#1F2937">end</text>
+<rect x="455" y="226" width="54" height="44" rx="4" fill="#F8FAFC" stroke="#0F766E" stroke-width="1.5"/>
+<rect x="523" y="226" width="54" height="44" rx="4" fill="#F8FAFC" stroke="#B7791F" stroke-width="1.5"/>
+<rect x="591" y="226" width="54" height="44" rx="4" fill="#F8FAFC" stroke="#0F766E" stroke-width="1.5"/>
+<rect x="659" y="226" width="54" height="44" rx="4" fill="#F8FAFC" stroke="#0F766E" stroke-width="1.5"/>
+<text x="448" y="318" font-size="15" font-weight="650" text-anchor="end" fill="#1F2937">multi-hop</text>
+<rect x="455" y="284" width="54" height="44" rx="4" fill="#F8FAFC" stroke="#B7791F" stroke-width="1.5"/>
+<rect x="523" y="284" width="54" height="44" rx="4" fill="#F8FAFC" stroke="#0F766E" stroke-width="1.5"/>
+<rect x="591" y="284" width="54" height="44" rx="4" fill="#F8FAFC" stroke="#0F766E" stroke-width="1.5"/>
+<rect x="659" y="284" width="54" height="44" rx="4" fill="#F8FAFC" stroke="#B7791F" stroke-width="1.5"/>
+<text x="455" y="385" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">再扫描 distractors、needle 数、</text>
+<text x="455" y="410" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">dependency span、language 与 seed。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">指标各自会漏什么</text>
+<text x="845" y="100" font-size="15" font-weight="800" text-anchor="start" fill="#2563EB">PPL</text>
+<text x="930" y="100" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">局部 token 可掩盖远程失效</text>
+<text x="845" y="185" font-size="15" font-weight="800" text-anchor="start" fill="#2563EB">needle</text>
+<text x="930" y="185" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">单事实检索不等于推理</text>
+<text x="845" y="270" font-size="15" font-weight="800" text-anchor="start" fill="#2563EB">LongBench</text>
+<text x="930" y="270" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">任务平均掩盖长度/位置</text>
+<text x="845" y="355" font-size="15" font-weight="800" text-anchor="start" fill="#2563EB">RULER</text>
+<text x="930" y="355" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">synthetic 成功不等于真实文档</text>
+<text x="845" y="440" font-size="15" font-weight="800" text-anchor="start" fill="#2563EB">latency</text>
+<text x="930" y="440" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">可用但成本可能不可部署</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">有效上下文不是模型卡上的单一数字，而是任务、位置、依赖跨度、质量阈值和系统预算共同定义的曲线。</text>
+</svg>

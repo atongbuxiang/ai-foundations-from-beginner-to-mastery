@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">一次回答的版本 DAG：模型名远远不够</title><desc id="desc">消息序列化、运行 bundle、内容指纹与四级复现。</desc>
+<rect width="1200" height="700" fill="#FBF8F1"/>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#667784"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#183044" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<line x1="48" y1="70" x2="1152" y2="70" stroke="#245AA8" stroke-width="4"/>
+<text x="52" y="49" font-size="24" font-weight="700" fill="#183044">一次回答的版本 DAG：模型名远远不够</text>
+<rect x="55" y="120" width="180" height="105" rx="10" fill="#FFFDF8" stroke="#245AA8" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="70" y="148" text-anchor="start" font-size="15" font-weight="700" fill="#245AA8">messages</text>
+<text x="70" y="172" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">role/content</text>
+<text x="70" y="191" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">raw bytes</text>
+<rect x="270" y="120" width="180" height="105" rx="10" fill="#FFFDF8" stroke="#7054A3" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="285" y="148" text-anchor="start" font-size="15" font-weight="700" fill="#7054A3">template</text>
+<text x="285" y="172" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">Jinja + params</text>
+<text x="285" y="191" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">rendered text</text>
+<rect x="485" y="120" width="180" height="105" rx="10" fill="#FFFDF8" stroke="#17766E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="500" y="148" text-anchor="start" font-size="15" font-weight="700" fill="#17766E">tokenizer</text>
+<text x="500" y="172" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">vocab + normalizer</text>
+<text x="500" y="191" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">token IDs</text>
+<rect x="700" y="120" width="180" height="105" rx="10" fill="#FFFDF8" stroke="#C87922" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="715" y="148" text-anchor="start" font-size="15" font-weight="700" fill="#C87922">model + sampler</text>
+<text x="715" y="172" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">weights/adapter/quant</text>
+<text x="715" y="191" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">decoder + seed</text>
+<rect x="915" y="120" width="220" height="105" rx="10" fill="#FFFDF8" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="930" y="148" text-anchor="start" font-size="15" font-weight="700" fill="#B7443E">system bundle</text>
+<text x="930" y="172" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">retriever/tools/policy</text>
+<text x="930" y="191" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">API/time/region</text>
+<line x1="235" y1="172" x2="260" y2="172" stroke="#667784" stroke-width="2.1" marker-end="url(#arrow)"/>
+<line x1="450" y1="172" x2="475" y2="172" stroke="#667784" stroke-width="2.1" marker-end="url(#arrow)"/>
+<line x1="665" y1="172" x2="690" y2="172" stroke="#667784" stroke-width="2.1" marker-end="url(#arrow)"/>
+<line x1="880" y1="172" x2="905" y2="172" stroke="#667784" stroke-width="2.1" marker-end="url(#arrow)"/>
+<text x="55" y="280" text-anchor="start" font-size="15" font-weight="700" fill="#183044">每一层保存实体、版本与输出</text>
+<circle cx="105" cy="340" r="34" fill="#FFFDF8" stroke="#245AA8" stroke-width="2"/>
+<text x="105" y="336" text-anchor="middle" font-size="13" font-weight="700" fill="#245AA8">hP</text>
+<text x="105" y="355" text-anchor="middle" font-size="9" font-weight="400" fill="#667784">prompt bytes</text>
+<circle cx="265" cy="340" r="34" fill="#FFFDF8" stroke="#245AA8" stroke-width="2"/>
+<text x="265" y="336" text-anchor="middle" font-size="13" font-weight="700" fill="#245AA8">hC</text>
+<text x="265" y="355" text-anchor="middle" font-size="9" font-weight="400" fill="#667784">template</text>
+<circle cx="425" cy="340" r="34" fill="#FFFDF8" stroke="#245AA8" stroke-width="2"/>
+<text x="425" y="336" text-anchor="middle" font-size="13" font-weight="700" fill="#245AA8">hT</text>
+<text x="425" y="355" text-anchor="middle" font-size="9" font-weight="400" fill="#667784">token IDs</text>
+<circle cx="585" cy="340" r="34" fill="#FFFDF8" stroke="#245AA8" stroke-width="2"/>
+<text x="585" y="336" text-anchor="middle" font-size="13" font-weight="700" fill="#245AA8">hW</text>
+<text x="585" y="355" text-anchor="middle" font-size="9" font-weight="400" fill="#667784">weights</text>
+<circle cx="745" cy="340" r="34" fill="#FFFDF8" stroke="#245AA8" stroke-width="2"/>
+<text x="745" y="336" text-anchor="middle" font-size="13" font-weight="700" fill="#245AA8">hD</text>
+<text x="745" y="355" text-anchor="middle" font-size="9" font-weight="400" fill="#667784">decoder</text>
+<circle cx="905" cy="340" r="34" fill="#FFFDF8" stroke="#245AA8" stroke-width="2"/>
+<text x="905" y="336" text-anchor="middle" font-size="13" font-weight="700" fill="#245AA8">hG</text>
+<text x="905" y="355" text-anchor="middle" font-size="9" font-weight="400" fill="#667784">tools/policy</text>
+<line x1="960" y1="340" x2="1060" y2="340" stroke="#245AA8" stroke-width="2.1" marker-end="url(#arrow)"/>
+<rect x="1055" y="292" width="80" height="95" rx="10" fill="#EEF4FC" stroke="#245AA8" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="1070" y="320" text-anchor="start" font-size="15" font-weight="700" fill="#245AA8">h_run</text>
+<text x="1070" y="344" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">bundle</text>
+<text x="1070" y="363" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">fingerprint</text>
+<text x="55" y="430" text-anchor="start" font-size="15" font-weight="700" fill="#183044">四级复现阶梯</text>
+<rect x="55" y="470" width="230" height="105" rx="10" fill="#FFFDF8" stroke="#4F7B45" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="70" y="498" text-anchor="start" font-size="15" font-weight="700" fill="#4F7B45">R0 · 工件复算</text>
+<text x="70" y="522" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">raw outputs → metrics</text>
+<rect x="335" y="470" width="230" height="105" rx="10" fill="#FFFDF8" stroke="#17766E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="350" y="498" text-anchor="start" font-size="15" font-weight="700" fill="#17766E">R1 · 同栈重放</text>
+<text x="350" y="522" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">same bundle + tolerance</text>
+<rect x="615" y="470" width="230" height="105" rx="10" fill="#FFFDF8" stroke="#7054A3" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="630" y="498" text-anchor="start" font-size="15" font-weight="700" fill="#7054A3">R2 · 独立重实现</text>
+<text x="630" y="522" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">same protocol, new code</text>
+<rect x="895" y="470" width="240" height="105" rx="10" fill="#FFFDF8" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="910" y="498" text-anchor="start" font-size="15" font-weight="700" fill="#B7443E">R3 · 外部复验</text>
+<text x="910" y="522" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">new environment/time</text>
+<line x1="285" y1="523" x2="325" y2="523" stroke="#667784" stroke-width="2.1" marker-end="url(#arrow)"/>
+<line x1="565" y1="523" x2="605" y2="523" stroke="#667784" stroke-width="2.1" marker-end="url(#arrow)"/>
+<line x1="845" y1="523" x2="885" y2="523" stroke="#667784" stroke-width="2.1" marker-end="url(#arrow)"/>
+<line x1="48" y1="650" x2="1152" y2="650" stroke="#D9D5CB"/>
+<text x="52" y="674" font-size="13" fill="#667784">哈希证明字节身份，不证明正确或安全；API 无法冻结时，记录可观察合同、时间窗口和重复 probe 的分布。</text>
+</svg>

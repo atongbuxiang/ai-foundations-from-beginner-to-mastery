@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Newton、damping、trust region 与 actual-predicted ratio</title>
+  <desc id="desc">从局部二次模型分出 Newton、阻尼线性系统和信赖域子问题，展示 eigenvalue filter 与真实下降比反馈。</desc>
+  <rect width="1200" height="720" fill="#FFFEFB"/>
+  <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}.h{font-size:27px;font-weight:700}.sh{font-size:19px;font-weight:700}.b{font-size:16px}.s{font-size:15px;fill:#64748B}.boxb{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.boxg{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.boxa{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.boxr{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}.line{stroke:#CBD5E1;stroke-width:2}.arrb{stroke:#2563EB;stroke-width:3;fill:none}.arrg{stroke:#0F766E;stroke-width:3;fill:none}</style>
+  <defs><marker id="ab" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#2563EB"/></marker><marker id="ag" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#0F766E"/></marker></defs>
+  <text x="48" y="50" class="h" fill="#2563EB">A｜同一个 quadratic model，三种 step contract</text>
+  <rect x="48" y="82" width="310" height="94" rx="12" class="boxb"/><text x="72" y="117" class="sh">m(p) = g^T p + 1/2 p^T B p</text><text x="72" y="150" class="s">local model；先问 B 是否 PSD</text>
+  <path d="M358 129 C410 129 402 112 446 112" class="arrb" marker-end="url(#ab)"/><path d="M358 129 C410 129 402 218 446 218" class="arrb" marker-end="url(#ab)"/>
+  <rect x="456" y="74" width="290" height="78" rx="12" class="boxr"/><text x="480" y="108" class="sh">Newton: Bp = -g</text><text x="480" y="136" class="s">unconstrained stationary point</text>
+  <rect x="456" y="174" width="290" height="88" rx="12" class="boxa"/><text x="480" y="208" class="sh">Damped: (B + λI)p = -g</text><text x="480" y="239" class="s">regularized quadratic model</text>
+  <rect x="782" y="98" width="370" height="132" rx="12" class="boxg"/><text x="806" y="133" class="sh">Trust region</text><text x="806" y="166" class="b">min m(p),  ||p|| ≤ Delta</text><text x="806" y="198" class="s">KKT: (B+λI)p=-g；λ dual to radius</text>
+
+  <line x1="48" y1="292" x2="1152" y2="292" class="line"/>
+  <text x="48" y="334" class="h" fill="#0F766E">B｜Damping 是 eigenvalue filter</text>
+  <rect x="48" y="366" width="526" height="142" rx="12" class="boxb"/>
+  <text x="72" y="401" class="sh">eigenmode i</text><text x="72" y="438" class="b">p_i = - g_i / (mu_i + lambda)</text><text x="72" y="472" class="s">small / negative mu_i 对 λ 最敏感</text><text x="72" y="496" class="s">λ &gt; -mu_min 才能让 regularized model PSD</text>
+  <rect x="610" y="366" width="542" height="142" rx="12" class="boxr"/>
+  <text x="634" y="401" class="sh" fill="#C0392B">不要混同</text><text x="634" y="438" class="b">curvature damping　≠　L2 objective penalty</text><text x="634" y="472" class="b">curvature damping　≠　AdamW parameter decay</text><text x="634" y="496" class="s">相似符号不代表相同 state transition</text>
+
+  <text x="48" y="560" class="h" fill="#2563EB">C｜用真实下降检验模型，而非迷信二阶标签</text>
+  <rect x="48" y="590" width="296" height="92" rx="12" class="boxb"/><text x="72" y="626" class="sh">rho = ared / pred</text><text x="72" y="658" class="s">pred 必须为正且可辨</text>
+  <line x1="344" y1="636" x2="396" y2="636" class="arrb" marker-end="url(#ab)"/>
+  <rect x="406" y="590" width="216" height="92" rx="12" class="boxr"/><text x="430" y="626" class="sh" fill="#C0392B">rho &lt; 0</text><text x="430" y="658" class="s">reject；shrink radius</text>
+  <rect x="646" y="590" width="234" height="92" rx="12" class="boxa"/><text x="670" y="626" class="sh">0 &lt; rho &lt;&lt; 1</text><text x="670" y="658" class="s">model too optimistic</text>
+  <rect x="904" y="590" width="248" height="92" rx="12" class="boxg"/><text x="928" y="626" class="sh">rho ≈ 1</text><text x="928" y="658" class="s">accept；may enlarge radius</text>
+</svg>

@@ -1,0 +1,165 @@
+{
+  "artifacts": {
+    "csv": [
+      "accumulation_scaling.csv",
+      "parameterization_regimes.csv",
+      "mup_exponent_ledger.csv",
+      "infshape_classification.csv",
+      "coordinate_checks.csv",
+      "spectral_geometry.csv",
+      "attention_scaling.csv",
+      "transfer_curves.csv",
+      "width_depth.csv",
+      "evidence_ledger.csv"
+    ],
+    "json": "results.json",
+    "svg": [
+      "plot-mup-coordinate-regime-audit-v1.svg",
+      "plot-mup-spectral-width-depth-audit-v1.svg",
+      "plot-mutransfer-curve-evidence-audit-v1.svg"
+    ]
+  },
+  "check_summary": {
+    "passed": 29,
+    "total": 29
+  },
+  "checks": [
+    {
+      "check": "H1_independent_sum_is_constant",
+      "passed": true
+    },
+    {
+      "check": "H1_coherent_sum_grows_sqrt_width",
+      "passed": true
+    },
+    {
+      "check": "H1_mean_field_coherent_sum_is_constant",
+      "passed": true
+    },
+    {
+      "check": "H2_ntk_feature_change_vanishes",
+      "passed": true
+    },
+    {
+      "check": "H2_mean_field_feature_change_is_constant",
+      "passed": true
+    },
+    {
+      "check": "H2_functional_output_change_matched",
+      "passed": true
+    },
+    {
+      "check": "H3_all_feature_exponents_zero",
+      "passed": true
+    },
+    {
+      "check": "H3_hidden_aligned_sum_uses_n_terms",
+      "passed": true
+    },
+    {
+      "check": "H4_embedding_has_finite_vocab_axis",
+      "passed": true
+    },
+    {
+      "check": "H4_readout_has_finite_output_axis",
+      "passed": true
+    },
+    {
+      "check": "H4_norm_is_coordinate_affine",
+      "passed": true
+    },
+    {
+      "check": "H5_stable_coordinate_slope_zero",
+      "passed": true
+    },
+    {
+      "check": "H5_faulty_coordinate_slope_half",
+      "passed": true
+    },
+    {
+      "check": "H5_readout_transient_resolves",
+      "passed": true
+    },
+    {
+      "check": "H6_equal_entry_rms_with_spectral_gap",
+      "passed": true
+    },
+    {
+      "check": "H6_power_iteration_matches_structured_exact",
+      "passed": true
+    },
+    {
+      "check": "H6_rank_and_hadamard_effective_rank_differ",
+      "passed": true
+    },
+    {
+      "check": "H7_sqrt_attention_preserves_initial_rms",
+      "passed": true
+    },
+    {
+      "check": "H7_linear_attention_preserves_aligned_score",
+      "passed": true
+    },
+    {
+      "check": "H7_one_multiplier_does_not_preserve_both_stages",
+      "passed": true
+    },
+    {
+      "check": "H8_mup_base_choice_regret_small",
+      "passed": true
+    },
+    {
+      "check": "H8_standard_base_choice_regret_large",
+      "passed": true
+    },
+    {
+      "check": "H8_mup_grid_optimum_stays_at_base_choice",
+      "passed": true
+    },
+    {
+      "check": "H9_aligned_inverse_depth_is_constant",
+      "passed": true
+    },
+    {
+      "check": "H9_orthogonal_inverse_sqrt_is_constant",
+      "passed": true
+    },
+    {
+      "check": "H9_aligned_inverse_sqrt_still_grows",
+      "passed": true
+    },
+    {
+      "check": "H10_spectral_failure_blocks_target",
+      "passed": true
+    },
+    {
+      "check": "H10_reserved_confirm_budget_is_visible",
+      "passed": true
+    },
+    {
+      "check": "H10_budget_total_is_110_gpu_hours",
+      "passed": true
+    }
+  ],
+  "evidence_boundaries": [
+    "Analytic and deterministic constructions validate definitions, scaling identities, metrics, and counterexamples.",
+    "They do not establish empirical hyperparameter transfer in a trained Transformer.",
+    "Structured spectral examples do not estimate the spectrum of a real optimizer trajectory.",
+    "Target confirmation remains blocked in the evidence ledger after the synthetic spectral gate fails."
+  ],
+  "experiment_id": "EXP-TRN-606-V1",
+  "runtime": "Python standard library",
+  "seed": 20260826,
+  "tracks": [
+    "accumulation_scaling",
+    "parameterization_regimes",
+    "mup_exponent_ledger",
+    "infshape_classification",
+    "coordinate_checks",
+    "spectral_geometry",
+    "attention_scaling",
+    "transfer_curves",
+    "width_depth",
+    "evidence_ledger"
+  ]
+}

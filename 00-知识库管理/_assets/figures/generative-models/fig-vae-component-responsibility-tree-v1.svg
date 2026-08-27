@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">VAE 组件责任树</title>
+  <desc id="desc">从生成联合分布和近似推断两个根分支展开先验、似然、层次结构和后验flow，并标出各自改变的量与成本。</desc>
+  <rect width="1200" height="620" fill="#FFFEFB"/>
+  <style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}</style>
+  <g font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif">
+    <text x="54" y="55" font-size="23" font-weight="700" fill="#1F2937">看到“更强 VAE”，先问它改了 joint，还是只改了 inference</text>
+    <rect x="465" y="88" width="270" height="72" rx="8" fill="#F8FAFC" stroke="#334155" stroke-width="3"/>
+    <text x="600" y="118" text-anchor="middle" font-size="16" fill="#64748B">基础合同</text>
+    <text x="600" y="145" text-anchor="middle" font-size="19" font-weight="700" fill="#1F2937">pθ(x,z)　与　qφ(z|x)</text>
+    <path d="M530 160 C505 200 330 201 276 235" fill="none" stroke="#2563EB" stroke-width="3"/>
+    <path d="M670 160 C695 200 870 201 924 235" fill="none" stroke="#C24135" stroke-width="3"/>
+    <text x="334" y="203" font-size="18" font-weight="700" fill="#2563EB">生成 joint</text>
+    <text x="834" y="203" font-size="18" font-weight="700" fill="#C24135">推断工具</text>
+    <rect x="52" y="236" width="220" height="118" rx="8" fill="#EEF3FF" stroke="#2563EB" stroke-width="2.5"/>
+    <text x="162" y="270" text-anchor="middle" font-size="18" font-weight="700" fill="#2563EB">Prior</text>
+    <text x="162" y="299" text-anchor="middle" font-size="15" fill="#334155">mixture / learned / sphere</text>
+    <text x="162" y="329" text-anchor="middle" font-size="14" fill="#64748B">改采样与 aggregate mismatch</text>
+    <rect x="300" y="236" width="220" height="118" rx="8" fill="#E8F5F1" stroke="#0F766E" stroke-width="2.5"/>
+    <text x="410" y="270" text-anchor="middle" font-size="18" font-weight="700" fill="#0F766E">Likelihood / decoder</text>
+    <text x="410" y="299" text-anchor="middle" font-size="15" fill="#334155">Gaussian / Cat / AR</text>
+    <text x="410" y="329" text-anchor="middle" font-size="14" fill="#64748B">改 distortion 与输出分布</text>
+    <rect x="680" y="236" width="220" height="118" rx="8" fill="#FFF7E6" stroke="#B7791F" stroke-width="2.5"/>
+    <text x="790" y="270" text-anchor="middle" font-size="18" font-weight="700" fill="#B7791F">Hierarchy</text>
+    <text x="790" y="299" text-anchor="middle" font-size="15" fill="#334155">zL → … → z1 → x</text>
+    <text x="790" y="329" text-anchor="middle" font-size="14" fill="#64748B">改 joint 与祖先采样顺序</text>
+    <rect x="928" y="236" width="220" height="118" rx="8" fill="#FFF0EE" stroke="#C24135" stroke-width="2.5"/>
+    <text x="1038" y="270" text-anchor="middle" font-size="18" font-weight="700" fill="#C24135">Posterior family</text>
+    <text x="1038" y="299" text-anchor="middle" font-size="15" fill="#334155">full-cov / mixture / flow</text>
+    <text x="1038" y="329" text-anchor="middle" font-size="14" fill="#64748B">改 family gap 与梯度成本</text>
+    <path d="M162 354 V398" stroke="#64748B" stroke-width="2"/>
+    <path d="M410 354 V398" stroke="#64748B" stroke-width="2"/>
+    <path d="M790 354 V398" stroke="#64748B" stroke-width="2"/>
+    <path d="M1038 354 V398" stroke="#64748B" stroke-width="2"/>
+    <g font-size="15">
+      <rect x="52" y="398" width="220" height="91" rx="7" fill="#F8FAFC" stroke="#D7DEE8" stroke-width="2"/>
+      <text x="162" y="429" text-anchor="middle" fill="#1F2937">检查：log pλ(z)、采样成本</text><text x="162" y="458" text-anchor="middle" fill="#64748B">MI 是否真的增加？</text>
+      <rect x="300" y="398" width="220" height="91" rx="7" fill="#F8FAFC" stroke="#D7DEE8" stroke-width="2"/>
+      <text x="410" y="429" text-anchor="middle" fill="#1F2937">检查：单位、方差、reduction</text><text x="410" y="458" text-anchor="middle" fill="#64748B">画质提升来自何组件？</text>
+      <rect x="680" y="398" width="220" height="91" rx="7" fill="#F8FAFC" stroke="#D7DEE8" stroke-width="2"/>
+      <text x="790" y="429" text-anchor="middle" fill="#1F2937">检查：条件 KL 与 group usage</text><text x="790" y="458" text-anchor="middle" fill="#64748B">每层是否实际被使用？</text>
+      <rect x="928" y="398" width="220" height="91" rx="7" fill="#F8FAFC" stroke="#D7DEE8" stroke-width="2"/>
+      <text x="1038" y="429" text-anchor="middle" fill="#1F2937">检查：Jacobian 与方向</text><text x="1038" y="458" text-anchor="middle" fill="#64748B">只改 bound，还是改生成？</text>
+    </g>
+    <line x1="54" y1="527" x2="1146" y2="527" stroke="#D7DEE8" stroke-width="2"/>
+    <text x="54" y="564" font-size="16" fill="#1F2937">NVAE 同时改多个分支：它反驳“VAE 必然模糊”，却不能单凭总结果归因于某一个组件。</text>
+    <text x="54" y="592" font-size="15" fill="#64748B">球面上固定正 KL 也不等于正互信息；若 μ(x) 不变，编码依旧无信息。</text>
+  </g>
+</svg>

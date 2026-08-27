@@ -1,0 +1,6 @@
+ranks,message_gib,reduce_scatter_rounds,all_gather_rounds,chunk_gib,per_rank_volume_gib,parameter_server_worker_volume_gib,ring_to_parameter_server_worker_ratio
+2,1.0,1,1,0.5,1.0,2.0,0.5
+4,1.0,3,3,0.25,1.5,2.0,0.75
+8,1.0,7,7,0.125,1.75,2.0,0.875
+16,1.0,15,15,0.0625,1.875,2.0,0.9375
+64,1.0,63,63,0.015625,1.96875,2.0,0.984375

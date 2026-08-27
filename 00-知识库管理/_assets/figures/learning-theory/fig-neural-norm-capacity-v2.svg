@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Norm-Based Capacity：层增益、有效方向与 Margin</title>
+<desc id="desc">谱范数乘积控制跨层放大，stable-rank 和式记录有效方向，二者经经验 margin 接到风险证书。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">层增益与扰动望远镜</text>
+<rect x="55" y="110" width="60" height="48" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="85.0" y="140.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">x</text>
+<line x1="116" y1="134" x2="143" y2="134" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="150" y="110" width="68" height="48" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="184.0" y="140.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">W1</text>
+<line x1="219" y1="134" x2="238" y2="134" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="245" y="110" width="68" height="48" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="279.0" y="140.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">W2</text>
+<line x1="314" y1="134" x2="333" y2="134" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="340" y="110" width="68" height="48" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="374.0" y="140.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">WL</text>
+<text x="55" y="210" font-size="17" font-weight="700" text-anchor="start" fill="#1F2937" class="math">Lip(f) &lt;= product_l ||W_l||_2</text>
+<path d="M65 282C135 242 245 326 350 265" fill="none" stroke="#0F766E" stroke-width="3"/>
+<path d="M65 322C145 286 250 364 350 304" fill="none" stroke="#2563EB" stroke-width="2.5" stroke-dasharray="7 5"/>
+<text x="55" y="374" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">one layer perturbed -&gt; propagated by all others</text>
+<text x="55" y="414" font-size="16" font-weight="700" text-anchor="start" fill="#0F766E">relative changes add; gains multiply</text>
+<text x="55" y="476" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">input scale B is part of the bound</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Spectral Complexity 的两账</text>
+<rect x="445" y="105" width="310" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600.0" y="140.0" font-size="16" font-weight="650" text-anchor="middle" fill="#2563EB">gain = B product ||W_l||_2</text>
+<line x1="600" y1="168" x2="600" y2="201" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="445" y="214" width="310" height="66" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="600.0" y="253.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">directions = sqrt(sum stable-rank_l)</text>
+<line x1="600" y1="285" x2="600" y2="318" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="445" y="331" width="310" height="58" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="600.0" y="366.0" font-size="16" font-weight="650" text-anchor="middle" fill="#C24135">C(W) = gain x directions</text>
+<text x="445" y="432" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">stable-rank = ||W||_F^2 / ||W||_2^2</text>
+<text x="445" y="470" font-size="15" font-weight="400" text-anchor="start" fill="#0F766E">layer c, next 1/c -&gt; C(W) unchanged</text>
+<text x="445" y="504" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">logs / reference matrices depend on theorem</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">从 Margin 到证书</text>
+<rect x="840" y="102" width="135" height="48" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="907.5" y="132.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">small-margin</text>
+<text x="995" y="133" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">R_hat_gamma</text>
+<rect x="840" y="192" width="135" height="48" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="907.5" y="222.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">complexity</text>
+<text x="995" y="223" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">C/(gamma sqrt n)</text>
+<rect x="840" y="282" width="135" height="48" rx="8" fill="#FFFEFB" stroke="#B7791F" stroke-width="2"/>
+<text x="907.5" y="312.0" font-size="15" font-weight="650" text-anchor="middle" fill="#B7791F">confidence</text>
+<text x="995" y="313" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">sqrt(log 1/delta / n)</text>
+<line x1="990" y1="367" x2="990" y2="400" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="840" y="412" width="300" height="52" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="990.0" y="444.0" font-size="16" font-weight="650" text-anchor="middle" fill="#C24135">bound &lt; trivial risk?</text>
+<text x="840" y="500" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">theorem -&gt; estimate -&gt; nonvacuity</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">参数量描述最坏表达力；norm、margin 与输入尺度描述训练后函数的可控局部容量。</text>
+</svg>

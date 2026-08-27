@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="920" viewBox="0 0 1200 920" role="img" aria-labelledby="title desc">
+  <title id="title">经典矩阵符号函数的谱分割、算法和应用</title>
+  <desc id="desc">输入方阵的谱必须避开虚轴。矩阵符号函数将右半平面映到正一，左半平面映到负一，由此构造两个谱投影和不变子空间；图中进一步区分 Newton 与 Schur 算法、条件性、AI 动力系统接口以及 polar 和逐元素 sign 的边界。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,4 L0,8 Z" fill="#334155"/>
+    </marker>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.13"/>
+    </filter>
+    <style>
+      .title { font: 700 29px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+      .subtitle { font: 500 16px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #475569; }
+      .section { font: 700 19px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #1e293b; }
+      .body { font: 650 16px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #1e293b; }
+      .small { font: 500 14px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #475569; }
+      .tiny { font: 500 12.5px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #475569; }
+      .math { font: 600 20px Georgia, "Times New Roman", serif; fill: #0f172a; }
+      .mathLarge { font: 700 25px Georgia, "Times New Roman", serif; fill: #0f172a; }
+      .chip { font: 700 13px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #1e293b; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="920" rx="24" fill="#f8fafc"/>
+  <text x="52" y="49" class="title">矩阵符号函数：把谱变成两个不变子空间</text>
+  <text x="52" y="78" class="subtitle">经典 sign 按特征值实部分类；它的核心产物是谱投影，而不是逐元素符号或 SVD 型极因子</text>
+
+  <rect x="42" y="105" width="1116" height="278" rx="18" fill="#ffffff" stroke="#cbd5e1" stroke-width="2" filter="url(#shadow)"/>
+  <text x="66" y="141" class="section">1　从复平面的谱分割到矩阵对合</text>
+
+  <rect x="72" y="169" width="270" height="155" rx="17" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+  <text x="207" y="200" text-anchor="middle" class="body">定义域</text>
+  <line x1="207" y1="216" x2="207" y2="293" stroke="#64748b" stroke-width="2"/>
+  <circle cx="162" cy="245" r="8" fill="#10b981"/>
+  <circle cx="244" cy="267" r="8" fill="#ef4444"/>
+  <text x="134" y="249" text-anchor="end" class="small">Re λ &gt; 0</text>
+  <text x="272" y="271" class="small">Re λ &lt; 0</text>
+  <text x="207" y="310" text-anchor="middle" class="tiny">虚轴上不得有特征值</text>
+
+  <line x1="353" y1="246" x2="413" y2="246" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="426" y="159" width="290" height="175" rx="18" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="571" y="193" text-anchor="middle" class="body">经典矩阵 sign</text>
+  <text x="571" y="231" text-anchor="middle" class="mathLarge">S = A(A²)⁻¹ᐟ²</text>
+  <text x="571" y="266" text-anchor="middle" class="math">S² = I　·　AS = SA</text>
+  <text x="571" y="299" text-anchor="middle" class="small">右半平面 → +I；左半平面 → −I</text>
+
+  <line x1="727" y1="246" x2="785" y2="246" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="798" y="159" width="330" height="175" rx="18" fill="#ecfdf5" stroke="#10b981" stroke-width="2.5"/>
+  <text x="963" y="193" text-anchor="middle" class="body">两个互补谱投影</text>
+  <text x="963" y="230" text-anchor="middle" class="mathLarge">P± = ½(I ± S)</text>
+  <text x="963" y="265" text-anchor="middle" class="math">P±² = P±　·　P+P− = 0</text>
+  <text x="963" y="299" text-anchor="middle" class="small">像空间 = 左右半平面广义特征空间</text>
+
+  <rect x="42" y="411" width="1116" height="196" rx="18" fill="#ffffff" stroke="#cbd5e1" stroke-width="2" filter="url(#shadow)"/>
+  <text x="66" y="447" class="section">2　算法与敏感性：同一个谱分割问题的三种视角</text>
+
+  <rect x="72" y="478" width="315" height="96" rx="17" fill="#eef2ff" stroke="#6366f1" stroke-width="2"/>
+  <text x="229" y="508" text-anchor="middle" class="body">Newton / rational iteration</text>
+  <text x="229" y="539" text-anchor="middle" class="math">X(k+1) = ½[X(k) + X(k)⁻¹]</text>
+  <text x="229" y="561" text-anchor="middle" class="tiny">Cayley 误差每步平方；近虚轴时前期慢</text>
+
+  <rect x="421" y="478" width="315" height="96" rx="17" fill="#fff7ed" stroke="#f59e0b" stroke-width="2"/>
+  <text x="578" y="508" text-anchor="middle" class="body">Schur / Sylvester</text>
+  <text x="578" y="539" text-anchor="middle" class="math">T+Z − ZT− = 2T+−</text>
+  <text x="578" y="561" text-anchor="middle" class="tiny">稳健稠密基线；可直接重排不变子空间</text>
+
+  <rect x="770" y="478" width="358" height="96" rx="17" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/>
+  <text x="949" y="508" text-anchor="middle" class="body">条件性 / 非正规性</text>
+  <text x="949" y="539" text-anchor="middle" class="math">NL + LN = E − SES</text>
+  <text x="949" y="561" text-anchor="middle" class="tiny">跨侧 sep、斜投影和虚轴 resolvent 共同控制</text>
+
+  <rect x="42" y="635" width="1116" height="218" rx="18" fill="#ffffff" stroke="#cbd5e1" stroke-width="2" filter="url(#shadow)"/>
+  <text x="66" y="671" class="section">3　四条调用路线与一条不可越过的边界</text>
+
+  <rect x="70" y="703" width="245" height="111" rx="17" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="192" y="734" text-anchor="middle" class="body">谱分治</text>
+  <text x="192" y="764" text-anchor="middle" class="math">A → P± → Q±</text>
+  <text x="192" y="791" text-anchor="middle" class="small">递归特征值 / 不变子空间</text>
+
+  <rect x="338" y="703" width="245" height="111" rx="17" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+  <text x="460" y="734" text-anchor="middle" class="body">连续动力系统</text>
+  <text x="460" y="764" text-anchor="middle" class="math">h = P−h + P+h</text>
+  <text x="460" y="791" text-anchor="middle" class="small">衰减 / 增长模态审计</text>
+
+  <rect x="606" y="703" width="245" height="111" rx="17" fill="#fff7ed" stroke="#f59e0b" stroke-width="2"/>
+  <text x="728" y="734" text-anchor="middle" class="body">块矩阵函数</text>
+  <text x="728" y="764" text-anchor="middle" class="math">sign([0 A; I 0])</text>
+  <text x="728" y="791" text-anchor="middle" class="small">平方根 · polar · Riccati</text>
+
+  <rect x="874" y="703" width="254" height="111" rx="17" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="1001" y="734" text-anchor="middle" class="body">AI / 大规模 action</text>
+  <text x="1001" y="764" text-anchor="middle" class="math">P±b 或 sign(A)b</text>
+  <text x="1001" y="791" text-anchor="middle" class="small">SSM · Neural ODE · implicit layer</text>
+
+  <text x="52" y="888" class="subtitle">边界：polar/msign 使用 A*A 与奇异值；经典 sign 使用 A² 与特征值。矩形或秩亏 block 需要明确的零值扩展。</text>
+</svg>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720">
+  <rect width="1200" height="720" fill="#ffffff"/>
+  <style>.s{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.m{font-family:"SFMono-Regular",Menlo,monospace}.ink{fill:#182235}.muted{fill:#64748b}.b{fill:#2457d6}.g{fill:#147d64}.r{fill:#c83d32}</style>
+  <text x="62" y="61" class="s ink" font-size="31" font-weight="750">Ghost sample 与随机交换：证明里究竟新增了哪些随机对象</text>
+  <text x="62" y="98" class="s muted" font-size="17">S′ 是独立副本；σᵢ 只决定每一对是否交换。二者都属于证明装置，不是训练算法可使用的数据。</text>
+  <line x1="62" y1="126" x2="1138" y2="126" stroke="#d7dee8" stroke-width="2"/>
+
+  <text x="66" y="169" class="s b" font-size="20" font-weight="750">① 把未知总体均值换成两个经验均值</text>
+  <text x="66" y="211" class="m ink" font-size="18">S</text><text x="105" y="211" class="s muted" font-size="15">训练样本</text>
+  <text x="66" y="281" class="m ink" font-size="18">S′</text><text x="105" y="281" class="s muted" font-size="15">独立同分布副本</text>
+  <g class="m" font-size="16" text-anchor="middle">
+    <g fill="#eaf0ff" stroke="#2457d6" stroke-width="2"><circle cx="330" cy="206" r="25"/><circle cx="470" cy="206" r="25"/><circle cx="610" cy="206" r="25"/><circle cx="750" cy="206" r="25"/></g>
+    <g fill="#e8f7f2" stroke="#147d64" stroke-width="2"><circle cx="330" cy="276" r="25"/><circle cx="470" cy="276" r="25"/><circle cx="610" cy="276" r="25"/><circle cx="750" cy="276" r="25"/></g>
+    <g class="ink"><text x="330" y="212">Z₁</text><text x="470" y="212">Z₂</text><text x="610" y="212">Z₃</text><text x="750" y="212">Z₄</text><text x="330" y="282">Z′₁</text><text x="470" y="282">Z′₂</text><text x="610" y="282">Z′₃</text><text x="750" y="282">Z′₄</text></g>
+  </g>
+  <text x="840" y="218" class="m r" font-size="18">|P_m f − P′_m f| &gt; ε/2</text>
+  <text x="840" y="251" class="s muted" font-size="15">若 S 很坏而 S′ 接近 Pf，</text><text x="840" y="274" class="s muted" font-size="15">两个经验均值必然彼此分离。</text>
+
+  <line x1="62" y1="324" x2="1138" y2="324" stroke="#d7dee8" stroke-width="2"/>
+  <text x="66" y="369" class="s b" font-size="20" font-weight="750">② 对每一对抛一枚独立硬币</text>
+  <g class="m" font-size="16" text-anchor="middle">
+    <text x="330" y="409" class="g">σ₁=+1</text><text x="470" y="409" class="r">σ₂=−1</text><text x="610" y="409" class="g">σ₃=+1</text><text x="750" y="409" class="r">σ₄=−1</text>
+  </g>
+  <g fill="none" stroke-width="3"><path d="M330 425 V505" stroke="#147d64"/><path d="M470 425 C470 455 500 470 500 505 M470 425 C470 455 440 470 440 505" stroke="#c83d32"/><path d="M610 425 V505" stroke="#147d64"/><path d="M750 425 C750 455 780 470 780 505 M750 425 C750 455 720 470 720 505" stroke="#c83d32"/></g>
+  <g class="s" font-size="14" text-anchor="middle"><text x="330" y="532" class="g">不交换</text><text x="470" y="532" class="r">交换</text><text x="610" y="532" class="g">不交换</text><text x="750" y="532" class="r">交换</text></g>
+  <path d="M842 395 H1130 V527 H842 Z" fill="#fbf7ed" stroke="#c99c43" stroke-width="2"/>
+  <text x="862" y="429" class="s ink" font-size="16" font-weight="700">条件于 pooled data 后</text>
+  <text x="862" y="463" class="m ink" font-size="17">aᵢ(f)=f(Zᵢ)−f(Z′ᵢ)</text>
+  <text x="862" y="495" class="m b" font-size="17">m⁻¹ Σ σᵢ aᵢ(f)</text>
+
+  <line x1="62" y1="571" x2="1138" y2="571" stroke="#d7dee8" stroke-width="2"/>
+  <text x="66" y="615" class="s b" font-size="20" font-weight="750">③ 无限 class 在这 2m 个点上只留下有限 patterns</text>
+  <text x="66" y="654" class="s ink" font-size="17">固定 pooled sample 后，相同 error pattern 的 hypotheses 产生相同的全部 aᵢ，只需 Union Bound 一次。</text>
+  <text x="66" y="690" class="m g" font-size="20" font-weight="700">distinct events ≤ τ_H(2m)</text>
+  <text x="530" y="690" class="s r" font-size="16">这正是增长函数必须在 2m 而不是 m 上出现的原因。</text>
+</svg>

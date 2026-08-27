@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">条件数的薄椭球几何、到奇异集合距离与误差链</title>
+  <desc id="desc">左侧展示单位圆被矩阵变为长短轴差异大的椭圆，逆问题沿短轴放大误差；右侧区分问题条件性与算法稳定性，并给出残差、后向误差和前向误差的关系。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
+    <style>
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}.blue{fill:#2563eb}.green{fill:#0f766e}.amber{fill:#b7791f}.h{font-size:19px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}.axis{stroke:#cbd5e1;stroke-width:1.5}.arrow{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <rect x="42" y="43" width="640" height="412" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="68" y="81" class="sans h blue">几何：短轴决定逆问题敏感性</text><path d="M76 303H250M163 390V130" class="axis"/><circle cx="163" cy="303" r="74" fill="none" stroke="#93c5fd" stroke-width="2.5"/><text x="163" y="407" class="sans small muted" text-anchor="middle">单位输入圆</text><path d="M258 260H337" class="arrow"/><text x="298" y="240" class="math h ink" text-anchor="middle">A</text><path d="M364 303H650M507 390V130" class="axis"/><ellipse cx="507" cy="303" rx="129" ry="31" transform="rotate(-18 507 303)" fill="none" stroke="#2563eb" stroke-width="3"/><path d="M507 303L629 263" stroke="#2563eb" stroke-width="3"/><path d="M507 303L497 273" stroke="#b7791f" stroke-width="4"/><text x="611" y="247" class="math body blue">σmax</text><text x="457" y="260" class="math body amber">σmin</text>
+  <circle cx="497" cy="273" r="6" fill="#b7791f"/><circle cx="501" cy="269" r="6" fill="#0f766e"/><text x="380" y="373" class="sans body ink">输出侧很小的短轴扰动，</text><text x="380" y="402" class="sans body ink">经 A⁻¹ 可变成较大输入变化。</text><text x="380" y="432" class="math body amber">κ₂(A)=σmax/σmin</text>
+
+  <rect x="720" y="43" width="438" height="412" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="746" y="81" class="sans h green">误差链：两个轴不能混为一个</text>
+  <rect x="754" y="116" width="170" height="70" rx="10" fill="#fffbeb" stroke="#fcd34d"/><text x="839" y="145" class="sans body amber" text-anchor="middle">问题条件性</text><text x="839" y="171" class="sans small muted" text-anchor="middle">真解对数据有多敏感</text>
+  <rect x="954" y="116" width="170" height="70" rx="10" fill="#eff6ff" stroke="#93c5fd"/><text x="1039" y="145" class="sans body blue" text-anchor="middle">算法稳定性</text><text x="1039" y="171" class="sans small muted" text-anchor="middle">是否解了邻近问题</text>
+  <path d="M839 186V231" class="arrow"/><path d="M1039 186V231" class="arrow"/>
+  <rect x="754" y="231" width="370" height="64" rx="10" fill="#f8fafc" stroke="#cbd5e1"/><text x="939" y="258" class="sans body ink" text-anchor="middle">后向误差/残差 × 条件数</text><text x="939" y="282" class="sans small muted" text-anchor="middle">共同控制可保证的前向误差</text>
+  <path d="M939 295V333" class="arrow"/><rect x="818" y="333" width="242" height="62" rx="10" fill="#ecfdf5" stroke="#6ee7b7"/><text x="939" y="371" class="sans body green" text-anchor="middle">前向误差：x̂ 离真解多远</text>
+  <text x="746" y="426" class="math small amber">dist₂(A, singular)/‖A‖₂ = 1/κ₂(A)</text>
+  <rect x="92" y="494" width="1016" height="78" rx="12" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="600" y="525" class="sans body ink" text-anchor="middle">预条件改变表示或求解几何；正则化改变问题本身；二者都不能被一句“降低条件数”含混替代。</text><text x="600" y="555" class="sans small muted" text-anchor="middle">正规方程把 κ₂(A) 平方；大规模问题通常估计极端奇异值，而不显式形成 A⁻¹。</text>
+  <text x="600" y="610" class="sans result ink" text-anchor="middle">小残差不保证小前向误差；只有结合条件数与后向稳定性，误差判断才闭合。</text>
+</svg>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">Claim 不是卡片上的一句话：它是一张可追溯证据图</title><desc id="desc">Model–Data–System Cards、PROV 血缘与治理闭环。</desc>
+<rect width="1200" height="700" fill="#FBF8F1"/>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#667784"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#183044" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<line x1="48" y1="70" x2="1152" y2="70" stroke="#17766E" stroke-width="4"/>
+<text x="52" y="49" font-size="24" font-weight="700" fill="#183044">Claim 不是卡片上的一句话：它是一张可追溯证据图</text>
+<circle cx="600" cy="330" r="90" fill="#EEF4FC" stroke="#245AA8" stroke-width="3"/>
+<text x="600" y="312" text-anchor="middle" font-size="18" font-weight="700" fill="#245AA8">CLAIM</text>
+<text x="600" y="338" text-anchor="middle" font-size="11" font-weight="700" fill="#183044">对象 · 总体 · 比较</text>
+<text x="600" y="355" text-anchor="middle" font-size="11" font-weight="700" fill="#183044">效应/阈值 · CI · 版本</text>
+<rect x="80" y="115" width="260" height="115" rx="10" fill="#FFFDF8" stroke="#245AA8" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="95" y="143" text-anchor="start" font-size="15" font-weight="700" fill="#245AA8">MODEL CARD</text>
+<text x="95" y="167" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">weights/tokenizer/template</text>
+<text x="95" y="186" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">intended use · slices · limits</text>
+<line x1="210.0" y1="230" x2="600" y2="248" stroke="#245AA8" stroke-width="2.1" marker-end="url(#arrow)"/>
+<rect x="470" y="95" width="260" height="115" rx="10" fill="#FFFDF8" stroke="#4F7B45" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="485" y="123" text-anchor="start" font-size="15" font-weight="700" fill="#4F7B45">DATA CARD</text>
+<text x="485" y="147" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">source/license/subjects</text>
+<text x="485" y="166" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">filters/dedup/delete/lineage</text>
+<line x1="600.0" y1="210" x2="600" y2="248" stroke="#4F7B45" stroke-width="2.1" marker-end="url(#arrow)"/>
+<rect x="860" y="115" width="260" height="115" rx="10" fill="#FFFDF8" stroke="#7054A3" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="875" y="143" text-anchor="start" font-size="15" font-weight="700" fill="#7054A3">SYSTEM CARD</text>
+<text x="875" y="167" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">RAG/tools/permissions/policy</text>
+<text x="875" y="186" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">SLO/threat/incident</text>
+<line x1="990.0" y1="230" x2="600" y2="248" stroke="#7054A3" stroke-width="2.1" marker-end="url(#arrow)"/>
+<rect x="70" y="470" width="220" height="100" rx="10" fill="#FFFDF8" stroke="#17766E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="85" y="498" text-anchor="start" font-size="15" font-weight="700" fill="#17766E">raw traces</text>
+<text x="85" y="522" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">per request / token / tool</text>
+<line x1="180.0" y1="470" x2="600" y2="412" stroke="#17766E" stroke-width="2.1" marker-end="url(#arrow)" stroke-dasharray="7 5"/>
+<rect x="345" y="500" width="220" height="100" rx="10" fill="#FFFDF8" stroke="#C87922" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="360" y="528" text-anchor="start" font-size="15" font-weight="700" fill="#C87922">scores + CI</text>
+<text x="360" y="552" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">parser/judge/version/failures</text>
+<line x1="455.0" y1="500" x2="600" y2="412" stroke="#C87922" stroke-width="2.1" marker-end="url(#arrow)" stroke-dasharray="7 5"/>
+<rect x="635" y="500" width="220" height="100" rx="10" fill="#FFFDF8" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="650" y="528" text-anchor="start" font-size="15" font-weight="700" fill="#B7443E">owner + decision</text>
+<text x="650" y="552" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">gate/review/expiry</text>
+<line x1="745.0" y1="500" x2="600" y2="412" stroke="#B7443E" stroke-width="2.1" marker-end="url(#arrow)" stroke-dasharray="7 5"/>
+<rect x="910" y="470" width="220" height="100" rx="10" fill="#FFFDF8" stroke="#7054A3" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="925" y="498" text-anchor="start" font-size="15" font-weight="700" fill="#7054A3">online evidence</text>
+<text x="925" y="522" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">SLO/drift/incident/rollback</text>
+<line x1="1020.0" y1="470" x2="600" y2="412" stroke="#7054A3" stroke-width="2.1" marker-end="url(#arrow)" stroke-dasharray="7 5"/>
+<text x="600" y="455" text-anchor="middle" font-size="13" font-weight="700" fill="#183044">PROV: Entity ← Activity ← Agent</text>
+<path d="M1030,465 C1160,365 1120,250 1030,230" fill="none" stroke="#B7443E" stroke-width="3" stroke-dasharray="7 5" marker-end="url(#arrow)"/>
+<text x="1110" y="350" text-anchor="middle" font-size="10" font-weight="700" fill="#B7443E">incident 使旧 claim 失效
+并触发下一版协议</text>
+<line x1="48" y1="650" x2="1152" y2="650" stroke="#D9D5CB"/>
+<text x="52" y="674" font-size="13" fill="#667784">Card 是描述、证据索引与治理接口，不是安全认证；每个主张都应回链原始工件、适用域、版本、负责人和失效条件。</text>
+</svg>

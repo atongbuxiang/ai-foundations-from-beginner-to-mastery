@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+  <title id="title">秩零化度定理的维数账本</title>
+  <desc id="desc">定义域被核与一个补空间分解，核方向映到零，补空间与像一一对应；输入维数因此等于零化度与秩之和。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
+    <style>
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}.blue{fill:#2563eb}.green{fill:#0f766e}.amber{fill:#b7791f}.h{font-size:19px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}.arrow{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="600" fill="#ffffff"/>
+  <text x="600" y="45" class="sans h ink" text-anchor="middle">线性映射不会凭空创造输入自由度：它只会保留或抹掉</text>
+  <rect x="70" y="86" width="385" height="340" rx="14" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+  <text x="262" y="122" class="math h ink" text-anchor="middle">定义域 V，dim V=n</text>
+  <rect x="100" y="155" width="325" height="98" rx="10" fill="#fffbeb" stroke="#fcd34d"/>
+  <text x="262" y="193" class="math h amber" text-anchor="middle">ker T</text><text x="262" y="226" class="sans body ink" text-anchor="middle">被映到 0 的不可见方向</text>
+  <rect x="100" y="280" width="325" height="112" rx="10" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="262" y="321" class="math h blue" text-anchor="middle">补空间 C</text><text x="262" y="353" class="sans body ink" text-anchor="middle">每个可见自由度取一个代表</text><text x="262" y="378" class="math small muted" text-anchor="middle">V=ker T ⊕ C</text>
+
+  <path d="M455 204C545 204 551 171 637 171" class="arrow"/><text x="538" y="175" class="math body amber" text-anchor="middle">T</text>
+  <path d="M455 336C545 336 551 325 637 325" class="arrow"/><text x="538" y="314" class="math body blue" text-anchor="middle">T 一一对应</text>
+  <rect x="652" y="119" width="188" height="104" rx="52" fill="#fffbeb" stroke="#fcd34d"/>
+  <text x="746" y="163" class="math formula amber" text-anchor="middle">0</text><text x="746" y="195" class="sans small muted" text-anchor="middle">所有核方向合并</text>
+  <rect x="652" y="266" width="260" height="130" rx="12" fill="#ecfdf5" stroke="#6ee7b7"/>
+  <text x="782" y="307" class="math h green" text-anchor="middle">im T</text><text x="782" y="342" class="sans body ink" text-anchor="middle">实际可达输出</text><text x="782" y="371" class="math body green" text-anchor="middle">dim im T = rank T</text>
+  <rect x="962" y="119" width="180" height="277" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="1052" y="158" class="math h ink" text-anchor="middle">陪域 W</text><text x="1052" y="205" class="sans body green" text-anchor="middle">像内方向</text><path d="M1005 234H1099" stroke="#0f766e" stroke-width="6"/><text x="1052" y="285" class="sans body amber" text-anchor="middle">像外方向</text><path d="M1005 314H1099" stroke="#b7791f" stroke-width="2" stroke-dasharray="7 6"/><text x="1052" y="360" class="sans small muted" text-anchor="middle">不计入 rank T</text>
+  <rect x="92" y="464" width="1016" height="76" rx="12" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="600" y="497" class="math formula ink" text-anchor="middle">n = dim ker T + dim C = nullity(T) + rank(T)</text>
+  <text x="600" y="526" class="sans small muted" text-anchor="middle">补空间 C 不唯一，但它的维数固定，并与像同维。</text>
+  <text x="600" y="578" class="sans result ink" text-anchor="middle">秩记录被保留的自由度；零化度记录被完全抹掉的自由度。</text>
+</svg>

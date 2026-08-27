@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">经典矩阵符号函数的半平面谱分割、谱投影与对象边界</title>
+  <desc id="desc">复平面中左半平面特征值映为负一、右半平面特征值映为正一，虚轴是定义域边界；谱投影提取两个不变子空间，并与极因子及逐元素符号比较。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
+    <style>
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}.blue{fill:#2563eb}.green{fill:#0f766e}.amber{fill:#b7791f}.h{font-size:19px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}.axis{stroke:#94a3b8;stroke-width:1.6}.arrow{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="700" fill="#ffffff"/>
+  <text x="600" y="42" class="sans h ink" text-anchor="middle">经典 sign(A) 是谱分割器：按特征值实部把不变子空间压缩成 ±1 两类</text>
+
+  <rect x="42" y="75" width="690" height="390" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="68" y="111" class="sans h blue">复平面上的定义域与映射</text>
+  <rect x="82" y="140" width="286" height="250" fill="#fffaf0"/>
+  <rect x="368" y="140" width="286" height="250" fill="#ecfdf5"/>
+  <path d="M92 265H644M368 150V380" class="axis"/>
+  <text x="638" y="286" class="math body muted">Re z</text><text x="380" y="164" class="math body muted">Im z</text>
+  <text x="190" y="177" class="sans h amber">左半平面 → −1</text><text x="458" y="177" class="sans h green">右半平面 → +1</text>
+  <circle cx="178" cy="220" r="8" fill="#b7791f"/><circle cx="265" cy="318" r="8" fill="#b7791f"/><circle cx="520" cy="213" r="8" fill="#0f766e"/><circle cx="575" cy="320" r="8" fill="#0f766e"/>
+  <path d="M178 220C220 230 230 245 315 258" fill="none" stroke="#b7791f" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M575 320C540 295 500 277 421 267" fill="none" stroke="#0f766e" stroke-width="2" marker-end="url(#arrow)"/>
+  <circle cx="318" cy="265" r="11" fill="#b7791f"/><text x="294" y="300" class="math body amber">−1</text>
+  <circle cx="418" cy="265" r="11" fill="#0f766e"/><text x="410" y="300" class="math body green">+1</text>
+  <path d="M368 140V390" stroke="#2563eb" stroke-width="3" stroke-dasharray="7 6"/>
+  <text x="368" y="418" class="sans body blue" text-anchor="middle">虚轴：标准定义排除</text>
+  <text x="68" y="448" class="math body ink">sign(A)=A(A²)⁻¹ᐟ²，要求 σ(A)∩iR=∅</text>
+
+  <rect x="770" y="75" width="388" height="185" rx="12" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="796" y="111" class="sans h blue">谱投影提取不变子空间</text>
+  <text x="796" y="153" class="math formula ink">P₊=(I+S)/2　P₋=(I−S)/2</text>
+  <text x="796" y="190" class="sans body green">R(P₊)：右半平面模态</text>
+  <text x="796" y="222" class="sans body amber">R(P₋)：左半平面模态</text>
+  <text x="1125" y="245" class="sans small muted" text-anchor="end">非正规时通常是斜投影</text>
+
+  <rect x="770" y="292" width="388" height="173" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="796" y="328" class="sans h ink">核心结构检查</text>
+  <text x="796" y="370" class="math formula blue">S²=I　　AS=SA</text>
+  <text x="796" y="409" class="sans body ink">相似变换只换坐标，不改变谱分割</text>
+  <text x="796" y="440" class="sans small muted">S 的特征值虽只有 ±1，‖S‖ 仍可因斜投影很大。</text>
+
+  <rect x="70" y="500" width="1060" height="122" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="97" y="535" class="sans h blue">三个 sign 的对象纪律</text>
+  <text x="97" y="565" class="sans body blue">经典 matrix sign</text>
+  <text x="97" y="590" class="sans small ink">方阵 · 特征值半平面 · 不变子空间</text>
+  <text x="445" y="565" class="sans body green">polar / msign</text>
+  <text x="445" y="590" class="sans small ink">矩形可用 · 奇异值 · 最近半酉因子</text>
+  <text x="800" y="565" class="sans body amber">逐元素 sign</text>
+  <text x="800" y="590" class="sans small ink">数组逐项 · 无相似不变性</text>
+  <text x="600" y="614" class="sans small muted" text-anchor="middle">靠近虚轴或高度非正规都会使分割敏感；Schur–Parlett、Newton 与 Krylov 路线必须同时检查定义域和残差。</text>
+  <text x="600" y="680" class="sans result ink" text-anchor="middle">matrix sign 把连续谱问题变成两个投影；真正的数值难点是可靠分开两侧不变子空间。</text>
+</svg>

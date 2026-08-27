@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 720" role="img" aria-labelledby="title desc">
+<title id="title">Floating-point summation order and catastrophic cancellation</title>
+<desc id="desc">The left panel compares binary32 summation orders and algorithms for one plus repeated half-ulp increments. The right panel compares direct and rationalized evaluation of square root of x plus one minus square root of x.</desc>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<style>text{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#172033}.title{font-size:22px;font-weight:700}.subtitle{font-size:14px;fill:#536176}.panel{font-size:16px;font-weight:650}.axis{font-size:13px}.tick{font-size:12px;fill:#596579}.legend{font-size:12.5px}.callout{font-size:12.5px;font-weight:600}</style>
+<text class="title" x="620.0" y="34" text-anchor="middle">Small local roundings, large structural differences</text>
+<text class="subtitle" x="620.0" y="58" text-anchor="middle">Left: IEEE binary32 emulation after every operation · Right: binary64 versus a 90-digit Decimal reference</text>
+<text class="panel" x="328.0" y="94" text-anchor="middle">A. Summation order and absorption</text>
+<text class="panel" x="922.0" y="94" text-anchor="middle">B. Catastrophic cancellation and reformulation</text>
+<line x1="88" y1="612.00" x2="568" y2="612.00" stroke="#e5eaf0"/>
+<text class="tick" x="76" y="616.00" text-anchor="end">10^-12</text>
+<line x1="88" y1="523.64" x2="568" y2="523.64" stroke="#e5eaf0"/>
+<text class="tick" x="76" y="527.64" text-anchor="end">10^-10</text>
+<line x1="88" y1="435.27" x2="568" y2="435.27" stroke="#e5eaf0"/>
+<text class="tick" x="76" y="439.27" text-anchor="end">10^-8</text>
+<line x1="88" y1="346.91" x2="568" y2="346.91" stroke="#e5eaf0"/>
+<text class="tick" x="76" y="350.91" text-anchor="end">10^-6</text>
+<line x1="88" y1="258.55" x2="568" y2="258.55" stroke="#e5eaf0"/>
+<text class="tick" x="76" y="262.55" text-anchor="end">10^-4</text>
+<line x1="88" y1="170.18" x2="568" y2="170.18" stroke="#e5eaf0"/>
+<text class="tick" x="76" y="174.18" text-anchor="end">10^-2</text>
+<line x1="682" y1="612.00" x2="1162" y2="612.00" stroke="#e5eaf0"/>
+<text class="tick" x="670" y="616.00" text-anchor="end">10^-18</text>
+<line x1="682" y1="531.00" x2="1162" y2="531.00" stroke="#e5eaf0"/>
+<text class="tick" x="670" y="535.00" text-anchor="end">10^-15</text>
+<line x1="682" y1="450.00" x2="1162" y2="450.00" stroke="#e5eaf0"/>
+<text class="tick" x="670" y="454.00" text-anchor="end">10^-12</text>
+<line x1="682" y1="369.00" x2="1162" y2="369.00" stroke="#e5eaf0"/>
+<text class="tick" x="670" y="373.00" text-anchor="end">10^-9</text>
+<line x1="682" y1="288.00" x2="1162" y2="288.00" stroke="#e5eaf0"/>
+<text class="tick" x="670" y="292.00" text-anchor="end">10^-6</text>
+<line x1="682" y1="207.00" x2="1162" y2="207.00" stroke="#e5eaf0"/>
+<text class="tick" x="670" y="211.00" text-anchor="end">10^-3</text>
+<line x1="682" y1="126.00" x2="1162" y2="126.00" stroke="#e5eaf0"/>
+<text class="tick" x="670" y="130.00" text-anchor="end">10^0</text>
+<line x1="88.00" y1="126" x2="88.00" y2="612" stroke="#f0f3f6"/>
+<line x1="682.00" y1="126" x2="682.00" y2="612" stroke="#f0f3f6"/>
+<text class="tick" x="88.00" y="636" text-anchor="middle">0</text>
+<text class="tick" x="682.00" y="636" text-anchor="middle">0</text>
+<line x1="168.00" y1="126" x2="168.00" y2="612" stroke="#f0f3f6"/>
+<line x1="762.00" y1="126" x2="762.00" y2="612" stroke="#f0f3f6"/>
+<text class="tick" x="168.00" y="636" text-anchor="middle">3</text>
+<text class="tick" x="762.00" y="636" text-anchor="middle">3</text>
+<line x1="248.00" y1="126" x2="248.00" y2="612" stroke="#f0f3f6"/>
+<line x1="842.00" y1="126" x2="842.00" y2="612" stroke="#f0f3f6"/>
+<text class="tick" x="248.00" y="636" text-anchor="middle">6</text>
+<text class="tick" x="842.00" y="636" text-anchor="middle">6</text>
+<line x1="328.00" y1="126" x2="328.00" y2="612" stroke="#f0f3f6"/>
+<line x1="922.00" y1="126" x2="922.00" y2="612" stroke="#f0f3f6"/>
+<text class="tick" x="328.00" y="636" text-anchor="middle">9</text>
+<text class="tick" x="922.00" y="636" text-anchor="middle">9</text>
+<line x1="408.00" y1="126" x2="408.00" y2="612" stroke="#f0f3f6"/>
+<line x1="1002.00" y1="126" x2="1002.00" y2="612" stroke="#f0f3f6"/>
+<text class="tick" x="408.00" y="636" text-anchor="middle">12</text>
+<text class="tick" x="1002.00" y="636" text-anchor="middle">12</text>
+<line x1="488.00" y1="126" x2="488.00" y2="612" stroke="#f0f3f6"/>
+<line x1="1082.00" y1="126" x2="1082.00" y2="612" stroke="#f0f3f6"/>
+<text class="tick" x="488.00" y="636" text-anchor="middle">15</text>
+<text class="tick" x="1082.00" y="636" text-anchor="middle">15</text>
+<line x1="568.00" y1="126" x2="568.00" y2="612" stroke="#f0f3f6"/>
+<line x1="1162.00" y1="126" x2="1162.00" y2="612" stroke="#f0f3f6"/>
+<text class="tick" x="568.00" y="636" text-anchor="middle">18</text>
+<text class="tick" x="1162.00" y="636" text-anchor="middle">18</text>
+<line x1="88" y1="612" x2="568" y2="612" stroke="#334155" stroke-width="1.5"/>
+<line x1="88" y1="126" x2="88" y2="612" stroke="#334155" stroke-width="1.5"/>
+<line x1="682" y1="612" x2="1162" y2="612" stroke="#334155" stroke-width="1.5"/>
+<line x1="682" y1="126" x2="682" y2="612" stroke="#334155" stroke-width="1.5"/>
+<text class="axis" x="328.0" y="668" text-anchor="middle">k in N = 2ᵏ</text>
+<text class="axis" x="922.0" y="668" text-anchor="middle">k in x = 10ᵏ</text>
+<text class="axis" x="26" y="369.0" text-anchor="middle" transform="rotate(-90 26 369.0)">absolute summation error</text>
+<text class="axis" x="620" y="369.0" text-anchor="middle" transform="rotate(-90 620 369.0)">relative evaluation error</text>
+<path d="M 88.00,401.02 L 114.67,387.72 L 141.33,374.42 L 168.00,361.12 L 194.67,347.82 L 221.33,334.52 L 248.00,321.22 L 274.67,307.92 L 301.33,294.62 L 328.00,281.32 L 354.67,268.02 L 381.33,254.72 L 408.00,241.42 L 434.67,228.12 L 461.33,214.82 L 488.00,201.52 L 514.67,188.22 L 541.33,174.92 L 568.00,161.62" fill="none" stroke="#dc2626" stroke-width="3.1"/>
+<path d="M 88.00,401.02 L 114.67,612.00 L 141.33,612.00 L 168.00,612.00 L 194.67,612.00 L 221.33,612.00 L 248.00,612.00 L 274.67,612.00 L 301.33,612.00 L 328.00,612.00 L 354.67,612.00 L 381.33,612.00 L 408.00,612.00 L 434.67,612.00 L 461.33,612.00 L 488.00,612.00 L 514.67,612.00 L 541.33,612.00 L 568.00,612.00" fill="none" stroke="#2563eb" stroke-width="2.7"/>
+<path d="M 88.00,401.02 L 114.67,387.72 L 141.33,612.00 L 168.00,612.00 L 194.67,612.00 L 221.33,612.00 L 248.00,612.00 L 274.67,612.00 L 301.33,612.00 L 328.00,612.00 L 354.67,612.00 L 381.33,612.00 L 408.00,612.00 L 434.67,612.00 L 461.33,612.00 L 488.00,612.00 L 514.67,612.00 L 541.33,612.00 L 568.00,612.00" fill="none" stroke="#7c3aed" stroke-width="2.7" stroke-dasharray="8 5"/>
+<path d="M 88.00,401.02 L 114.67,612.00 L 141.33,612.00 L 168.00,612.00 L 194.67,612.00 L 221.33,612.00 L 248.00,612.00 L 274.67,612.00 L 301.33,612.00 L 328.00,612.00 L 354.67,612.00 L 381.33,612.00 L 408.00,612.00 L 434.67,612.00 L 461.33,612.00 L 488.00,612.00 L 514.67,612.00 L 541.33,612.00 L 568.00,612.00" fill="none" stroke="#059669" stroke-width="2.7" stroke-dasharray="3 4"/>
+<path d="M 682.00,546.44 L 708.67,526.74 L 735.33,508.98 L 762.00,475.45 L 788.67,468.13 L 815.33,455.19 L 842.00,396.91 L 868.67,388.01 L 895.33,338.38 L 922.00,309.77 L 948.67,286.71 L 975.33,262.37 L 1002.00,264.20 L 1028.67,201.41 L 1055.33,186.33 L 1082.00,146.24 L 1108.67,126.00 L 1135.33,126.00 L 1162.00,126.00" fill="none" stroke="#dc2626" stroke-width="3.1"/>
+<path d="M 682.00,554.57 L 708.67,612.00 L 735.33,612.00 L 762.00,612.00 L 788.67,612.00 L 815.33,554.30 L 842.00,612.00 L 868.67,612.00 L 895.33,554.44 L 922.00,612.00 L 948.67,612.00 L 975.33,612.00 L 1002.00,549.20 L 1028.67,551.96 L 1055.33,612.00 L 1082.00,612.00 L 1108.67,612.00 L 1135.33,554.85 L 1162.00,612.00" fill="none" stroke="#059669" stroke-width="3.1"/>
+<circle cx="88.00" cy="401.02" r="2.8" fill="#dc2626"/>
+<circle cx="114.67" cy="387.72" r="2.8" fill="#dc2626"/>
+<circle cx="141.33" cy="374.42" r="2.8" fill="#dc2626"/>
+<circle cx="168.00" cy="361.12" r="2.8" fill="#dc2626"/>
+<circle cx="194.67" cy="347.82" r="2.8" fill="#dc2626"/>
+<circle cx="221.33" cy="334.52" r="2.8" fill="#dc2626"/>
+<circle cx="248.00" cy="321.22" r="2.8" fill="#dc2626"/>
+<circle cx="274.67" cy="307.92" r="2.8" fill="#dc2626"/>
+<circle cx="301.33" cy="294.62" r="2.8" fill="#dc2626"/>
+<circle cx="328.00" cy="281.32" r="2.8" fill="#dc2626"/>
+<circle cx="354.67" cy="268.02" r="2.8" fill="#dc2626"/>
+<circle cx="381.33" cy="254.72" r="2.8" fill="#dc2626"/>
+<circle cx="408.00" cy="241.42" r="2.8" fill="#dc2626"/>
+<circle cx="434.67" cy="228.12" r="2.8" fill="#dc2626"/>
+<circle cx="461.33" cy="214.82" r="2.8" fill="#dc2626"/>
+<circle cx="488.00" cy="201.52" r="2.8" fill="#dc2626"/>
+<circle cx="514.67" cy="188.22" r="2.8" fill="#dc2626"/>
+<circle cx="541.33" cy="174.92" r="2.8" fill="#dc2626"/>
+<circle cx="568.00" cy="161.62" r="2.8" fill="#dc2626"/>
+<circle cx="682.00" cy="546.44" r="2.8" fill="#dc2626"/>
+<circle cx="682.00" cy="554.57" r="2.8" fill="#059669"/>
+<circle cx="708.67" cy="526.74" r="2.8" fill="#dc2626"/>
+<circle cx="708.67" cy="612.00" r="2.8" fill="#059669"/>
+<circle cx="735.33" cy="508.98" r="2.8" fill="#dc2626"/>
+<circle cx="735.33" cy="612.00" r="2.8" fill="#059669"/>
+<circle cx="762.00" cy="475.45" r="2.8" fill="#dc2626"/>
+<circle cx="762.00" cy="612.00" r="2.8" fill="#059669"/>
+<circle cx="788.67" cy="468.13" r="2.8" fill="#dc2626"/>
+<circle cx="788.67" cy="612.00" r="2.8" fill="#059669"/>
+<circle cx="815.33" cy="455.19" r="2.8" fill="#dc2626"/>
+<circle cx="815.33" cy="554.30" r="2.8" fill="#059669"/>
+<circle cx="842.00" cy="396.91" r="2.8" fill="#dc2626"/>
+<circle cx="842.00" cy="612.00" r="2.8" fill="#059669"/>
+<circle cx="868.67" cy="388.01" r="2.8" fill="#dc2626"/>
+<circle cx="868.67" cy="612.00" r="2.8" fill="#059669"/>
+<circle cx="895.33" cy="338.38" r="2.8" fill="#dc2626"/>
+<circle cx="895.33" cy="554.44" r="2.8" fill="#059669"/>
+<circle cx="922.00" cy="309.77" r="2.8" fill="#dc2626"/>
+<circle cx="922.00" cy="612.00" r="2.8" fill="#059669"/>
+<circle cx="948.67" cy="286.71" r="2.8" fill="#dc2626"/>
+<circle cx="948.67" cy="612.00" r="2.8" fill="#059669"/>
+<circle cx="975.33" cy="262.37" r="2.8" fill="#dc2626"/>
+<circle cx="975.33" cy="612.00" r="2.8" fill="#059669"/>
+<circle cx="1002.00" cy="264.20" r="2.8" fill="#dc2626"/>
+<circle cx="1002.00" cy="549.20" r="2.8" fill="#059669"/>
+<circle cx="1028.67" cy="201.41" r="2.8" fill="#dc2626"/>
+<circle cx="1028.67" cy="551.96" r="2.8" fill="#059669"/>
+<circle cx="1055.33" cy="186.33" r="2.8" fill="#dc2626"/>
+<circle cx="1055.33" cy="612.00" r="2.8" fill="#059669"/>
+<circle cx="1082.00" cy="146.24" r="2.8" fill="#dc2626"/>
+<circle cx="1082.00" cy="612.00" r="2.8" fill="#059669"/>
+<circle cx="1108.67" cy="126.00" r="2.8" fill="#dc2626"/>
+<circle cx="1108.67" cy="612.00" r="2.8" fill="#059669"/>
+<circle cx="1135.33" cy="126.00" r="2.8" fill="#dc2626"/>
+<circle cx="1135.33" cy="554.85" r="2.8" fill="#059669"/>
+<circle cx="1162.00" cy="126.00" r="2.8" fill="#dc2626"/>
+<circle cx="1162.00" cy="612.00" r="2.8" fill="#059669"/>
+<rect x="104" y="141" width="245" height="104" rx="8" fill="#ffffff" fill-opacity="0.94" stroke="#cbd5e1"/>
+<line x1="118" y1="162" x2="150" y2="162" stroke="#dc2626" stroke-width="3"/>
+<text class="legend" x="160" y="167">naive: 1 first</text>
+<line x1="118" y1="184" x2="150" y2="184" stroke="#2563eb" stroke-width="3"/>
+<text class="legend" x="160" y="189">naive: small terms first</text>
+<line x1="118" y1="206" x2="150" y2="206" stroke="#7c3aed" stroke-width="3" stroke-dasharray="8 5"/>
+<text class="legend" x="160" y="211">pairwise</text>
+<line x1="118" y1="228" x2="150" y2="228" stroke="#059669" stroke-width="3" stroke-dasharray="3 4"/>
+<text class="legend" x="160" y="233">Kahan compensation</text>
+<rect x="698" y="141" width="237" height="61" rx="8" fill="#ffffff" fill-opacity="0.94" stroke="#cbd5e1"/>
+<line x1="712" y1="162" x2="744" y2="162" stroke="#dc2626" stroke-width="3"/>
+<text class="legend" x="754" y="167">sqrt(x+1) − sqrt(x)</text>
+<line x1="712" y1="184" x2="744" y2="184" stroke="#059669" stroke-width="3"/>
+<text class="legend" x="754" y="189">1 / (sqrt(x+1) + sqrt(x))</text>
+<rect x="362" y="142" width="190" height="75" rx="8" fill="#fff7ed" stroke="#f59e0b"/>
+<text class="callout" x="457" y="166" text-anchor="middle">increment = 2⁻²⁴</text>
+<text class="tick" x="457" y="187" text-anchor="middle">half an ulp at 1 in FP32</text>
+<text class="tick" x="457" y="206" text-anchor="middle">ties-to-even repeatedly absorbs it</text>
+<rect x="958" y="142" width="188" height="75" rx="8" fill="#ecfdf5" stroke="#10b981"/>
+<text class="callout" x="1052" y="166" text-anchor="middle">same mathematical f(x)</text>
+<text class="tick" x="1052" y="187" text-anchor="middle">different intermediate scale</text>
+<text class="tick" x="1052" y="206" text-anchor="middle">reformulation preserves digits</text>
+<text class="subtitle" x="620.0" y="698" text-anchor="middle">Zero errors are drawn at the panel floor for visibility; inspect the printed CSV for exact zeros.</text>
+</svg>

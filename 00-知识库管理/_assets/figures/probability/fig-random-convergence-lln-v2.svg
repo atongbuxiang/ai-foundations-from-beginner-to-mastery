@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">随机变量收敛模式与大数定律</title>
+<desc id="desc">Lp 与几乎处处收敛都推出依概率收敛，依概率推出依分布；WLLN 用方差缩减和 Chebyshev 建立平均的一致性。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">四种收敛不是同义词</text>
+<rect x="55" y="105" width="130" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="120.0" y="140.0" font-size="17" font-weight="650" text-anchor="middle" fill="#2563EB">L^p</text>
+<rect x="220" y="105" width="130" height="58" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="285.0" y="140.0" font-size="17" font-weight="650" text-anchor="middle" fill="#0F766E">a.s.</text>
+<rect x="135" y="235" width="140" height="62" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="205.0" y="272.0" font-size="17" font-weight="650" text-anchor="middle" fill="#2563EB">in probability</text>
+<rect x="135" y="365" width="140" height="62" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="205.0" y="402.0" font-size="17" font-weight="650" text-anchor="middle" fill="#0F766E">in distribution</text>
+<line x1="120" y1="166" x2="175" y2="228" stroke="#2563EB" stroke-width="2.5" marker-end="url(#a0)"/>
+<line x1="285" y1="166" x2="235" y2="228" stroke="#0F766E" stroke-width="2.5" marker-end="url(#a1)"/>
+<line x1="205" y1="300" x2="205" y2="358" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<text x="45" y="475" font-size="16" font-weight="400" text-anchor="start" fill="#C24135">逆箭头一般失败；需要反例或额外条件。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">有限方差 WLLN 的证明链</text>
+<rect x="438" y="92" width="325" height="55" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600.5" y="125.5" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">Xbar_n=(1/n) sum Xi</text>
+<line x1="600" y1="150" x2="600" y2="180" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="438" y="187" width="325" height="55" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="600.5" y="220.5" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">E[Xbar_n]=mu</text>
+<line x1="600" y1="245" x2="600" y2="275" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="438" y="282" width="325" height="55" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600.5" y="315.5" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">Var(Xbar_n)=sigma^2/n</text>
+<line x1="600" y1="340" x2="600" y2="370" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="438" y="377" width="325" height="55" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="600.5" y="410.5" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">P(|Xbar_n-mu|&gt;=eps) &lt;= sigma^2/(n eps^2)</text>
+<text x="600" y="482" font-size="19" font-weight="700" text-anchor="middle" fill="#0F766E">Xbar_n -&gt;P mu</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">LLN 给一致性，不给全部保证</text>
+<text x="840" y="125" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">• finite n speed needs concentration</text>
+<text x="840" y="207" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">• Gaussian shape needs CLT</text>
+<text x="840" y="289" font-size="16" font-weight="650" text-anchor="start" fill="#C24135">• dependence changes effective sample size</text>
+<text x="840" y="371" font-size="16" font-weight="650" text-anchor="start" fill="#C24135">• nonstationarity changes the target</text>
+<text x="840" y="465" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">强大数定律还需要明确可积性与依赖条件。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">先声明收敛模式与共同概率空间；大数定律只在明确假设下保证样本平均稳定。</text>
+</svg>

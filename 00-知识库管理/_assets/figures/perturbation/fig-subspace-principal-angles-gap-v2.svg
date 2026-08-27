@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+  <title id="title">主角度、投影距离与谱簇间隙控制的子空间扰动</title>
+  <desc id="desc">左侧展示两个子空间的主角度及投影距离，右侧展示目标谱簇与外部谱之间的间隙如何进入 Davis–Kahan 和 Wedin 型扰动界；重复谱时基可旋转而整体子空间仍稳定。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
+    <style>
+      .sans{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}.blue{fill:#2563eb}.green{fill:#0f766e}.amber{fill:#b7791f}.head{font-size:23px;font-weight:600}.body{font-size:18px}.small{font-size:15px}.formula{font-size:20px}.guide{stroke:#d7dee8;stroke-width:1.5}.arrow{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="600" fill="#fffefb"/>
+  <path d="M600 50V528" stroke="#d7dee8" stroke-width="1.5"/>
+
+  <text x="60" y="62" class="sans head blue">A　比较子空间，不逐列比较基</text>
+  <polygon points="90,375 333,145 520,236 276,468" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5"/>
+  <polygon points="105,430 270,120 525,333 350,507" fill="#ecfdf5" fill-opacity="0.8" stroke="#0f766e" stroke-width="2.5"/>
+  <path d="M225 388L363 245" stroke="#2563eb" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M225 388L335 218" stroke="#0f766e" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M322 286A53 53 0 0 0 342 298" fill="none" stroke="#b7791f" stroke-width="3"/>
+  <text x="350" y="292" class="math body amber">θmax</text>
+  <text x="460" y="218" class="math body blue">U</text><text x="468" y="355" class="math body green">Û</text>
+  <text x="60" y="515" class="math formula ink">cos θᵢ = σᵢ(U*Û)</text>
+  <text x="60" y="550" class="math body ink">‖UU*−ÛÛ*‖₂ = ‖sin Θ‖₂</text>
+
+  <text x="640" y="62" class="sans head green">B　只隔离谱簇；簇内允许换基</text>
+  <path d="M665 295H1140" stroke="#64748b" stroke-width="1.7"/>
+  <circle cx="720" cy="295" r="9" fill="#2563eb"/><circle cx="768" cy="295" r="9" fill="#2563eb"/><circle cx="816" cy="295" r="9" fill="#2563eb"/>
+  <circle cx="1005" cy="295" r="9" fill="#64748b"/><circle cx="1070" cy="295" r="9" fill="#64748b"/>
+  <path d="M701 250V222H835V250" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="768" y="207" class="sans body blue" text-anchor="middle">目标谱簇</text>
+  <path d="M826 337H996" stroke="#b7791f" stroke-width="3" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text x="911" y="371" class="math body amber" text-anchor="middle">簇外间隙 δ</text>
+  <path d="M720 276L744 260M768 276L791 258M816 276L835 263" stroke="#0f766e" stroke-width="2.5"/>
+  <text x="640" y="423" class="math formula ink">‖sin Θ‖ ≤ ‖E‖ / δ</text>
+  <text x="640" y="458" class="sans body ink">Davis–Kahan：Hermitian 不变子空间</text>
+  <text x="640" y="489" class="sans body ink">Wedin：左、右奇异子空间</text>
+  <text x="640" y="526" class="sans small muted">δ 必须隔开目标簇与补谱；不要求簇内特征值互异。</text>
+
+  <text x="600" y="582" class="sans body ink" text-anchor="middle">当 gap 消失时，定理不是“变松了一点”，而是稳定对象必须重新选择。</text>
+</svg>

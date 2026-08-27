@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="740" viewBox="0 0 1200 740" role="img" aria-labelledby="title desc">
+  <title id="title">二维半空间与轴对齐矩形的 VC 维上下界图景</title>
+  <desc id="desc">两列分别展示半空间和轴对齐矩形；上排给出可打散配置的下界见证，下排给出更大点集上的通用阻碍。</desc>
+  <defs>
+    <style>
+      .ink{fill:#1f2937}.muted{fill:#64748b}.line{stroke:#cbd5e1;stroke-width:1.5}.axis{stroke:#94a3b8;stroke-width:1.6}.soft{fill:#f8fafc}.blue{fill:#2563eb}.blue-soft{fill:#eff6ff}.green{fill:#047857}.green-soft{fill:#ecfdf5}.red{fill:#b91c1c}.red-soft{fill:#fef2f2}
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.h{font-size:19px;font-weight:600}.subh{font-size:17px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}
+    </style>
+  </defs>
+  <rect width="1200" height="740" fill="#ffffff"/>
+  <text x="76" y="46" class="sans h ink">仿射半空间（二维切片）</text>
+  <text x="642" y="46" class="sans h ink">轴对齐矩形（二维切片）</text>
+  <line x1="600" y1="24" x2="600" y2="665" class="line"/>
+  <line x1="42" y1="346" x2="1158" y2="346" class="line"/>
+
+  <rect x="42" y="64" width="516" height="254" rx="12" class="blue-soft" stroke="#bfdbfe"/>
+  <text x="68" y="96" class="sans subh blue">下界见证：3 个仿射无关点</text>
+  <polygon points="138,250 282,125 442,258" fill="#ffffff" stroke="#93c5fd" stroke-width="2"/>
+  <g class="blue" stroke="#1d4ed8" stroke-width="2"><circle cx="138" cy="250" r="11"/><circle cx="282" cy="125" r="11"/><circle cx="442" cy="258" r="11"/></g>
+  <g class="math body ink"><text x="105" y="279">s₁</text><text x="247" y="119">s₂</text><text x="429" y="287">s₃</text></g>
+  <rect x="204" y="207" width="170" height="52" rx="9" fill="#ffffff" stroke="#93c5fd"/>
+  <text x="289" y="239" class="math formula blue" text-anchor="middle">X̃w̃ = s</text>
+  <text x="300" y="300" class="sans small muted" text-anchor="middle">s∈{−1,+1}³；X̃ 可逆 ⇒ 每个 s 都有解</text>
+
+  <rect x="642" y="64" width="516" height="254" rx="12" class="green-soft" stroke="#a7f3d0"/>
+  <text x="668" y="96" class="sans subh green">下界见证：±e₁、±e₂ 四点</text>
+  <line x1="710" y1="225" x2="1090" y2="225" class="axis"/><line x1="900" y1="116" x2="900" y2="302" class="axis"/>
+  <rect x="882" y="130" width="176" height="112" fill="#ffffff" fill-opacity="0.65" stroke="#047857" stroke-width="3"/>
+  <g class="blue" stroke="#1d4ed8" stroke-width="2"><circle cx="1058" cy="225" r="11"/><circle cx="900" cy="130" r="11"/></g>
+  <g fill="#ffffff" stroke="#64748b" stroke-width="2.5"><circle cx="742" cy="225" r="11"/><circle cx="900" cy="286" r="11"/></g>
+  <g class="sans small muted"><text x="1068" y="214">+e₁</text><text x="910" y="123">+e₂</text><text x="697" y="214">−e₁</text><text x="910" y="306">−e₂</text></g>
+  <text x="900" y="270" class="sans small green" text-anchor="middle">四条边可独立越过四个极值见证</text>
+
+  <rect x="42" y="374" width="516" height="278" rx="12" class="red-soft" stroke="#fecaca"/>
+  <text x="68" y="407" class="sans subh red">上界阻碍：4 点由 Radon 分割</text>
+  <polygon points="129,526 282,438 460,526 304,617" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="129" y1="526" x2="460" y2="526" stroke="#2563eb" stroke-width="4"/>
+  <line x1="282" y1="438" x2="304" y2="617" stroke="#b91c1c" stroke-width="4"/>
+  <g class="blue"><circle cx="129" cy="526" r="11"/><circle cx="460" cy="526" r="11"/></g>
+  <g class="red"><circle cx="282" cy="438" r="11"/><circle cx="304" cy="617" r="11"/></g>
+  <circle cx="293" cy="526" r="6" class="ink"/>
+  <text x="293" y="553" class="math body ink" text-anchor="middle">conv(P⁺) ∩ conv(P⁻) ≠ ∅</text>
+  <text x="300" y="636" class="sans small muted" text-anchor="middle">两类凸包相交，任何仿射分离都会矛盾</text>
+
+  <rect x="642" y="374" width="516" height="278" rx="12" class="red-soft" stroke="#fecaca"/>
+  <text x="668" y="407" class="sans subh red">上界阻碍：5 点中的非极值点</text>
+  <rect x="724" y="450" width="354" height="150" fill="#ffffff" stroke="#2563eb" stroke-width="3"/>
+  <g class="blue"><circle cx="724" cy="520" r="10"/><circle cx="1078" cy="520" r="10"/><circle cx="879" cy="450" r="10"/><circle cx="936" cy="600" r="10"/></g>
+  <circle cx="894" cy="526" r="13" fill="#ffffff" stroke="#b91c1c" stroke-width="3.5"/>
+  <text x="894" y="531" class="math body red" text-anchor="middle">0</text>
+  <text x="879" y="474" class="sans small blue" text-anchor="middle">坐标极值见证标 1</text>
+  <text x="894" y="630" class="sans small muted" text-anchor="middle">包含全部极值见证的矩形必包含内部点 x₀</text>
+
+  <rect x="92" y="682" width="1016" height="42" rx="10" class="soft" stroke="#cbd5e1"/>
+  <text x="600" y="709" class="sans result ink" text-anchor="middle">下界：存在一个可打散配置　　上界：任意更大配置都有一个不可实现 labeling</text>
+</svg>

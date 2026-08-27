@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Tensor Program 到有限宽 Coordinate Check</title>
+  <desc id="desc">从程序假设和极限路径得到坐标协方差规律，再通过手推、统计模拟、有限宽坐标检查与训练迁移四层验证。</desc>
+  <rect width="1200" height="800" fill="#FFFEFB"/>
+  <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}.h{font-size:27px;font-weight:700}.sh{font-size:18px;font-weight:700}.b{font-size:15px}.s{font-size:15px;fill:#64748B}.blue{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.teal{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.amber{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.red{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}.arr{stroke:#2563EB;stroke-width:3;fill:none}.dash{stroke:#94A3B8;stroke-width:2;stroke-dasharray:7 6;fill:none}</style>
+  <defs><marker id="ab" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#2563EB"/></marker></defs>
+  <text x="48" y="48" class="h" fill="#2563EB">渐近理论先约束程序；有限宽检查再约束实现</text>
+
+  <rect x="48" y="84" width="300" height="250" rx="14" class="blue"/>
+  <text x="72" y="120" class="sh">① Program / limit contract</text>
+  <text x="72" y="156" class="b">矩阵乘与 transpose reuse</text>
+  <text x="72" y="186" class="b">逐坐标函数与经验平均</text>
+  <text x="72" y="216" class="b">fixed depth / fixed ratios</text>
+  <text x="72" y="246" class="b">finite probe / finite steps</text>
+  <text x="72" y="276" class="b">GIA / dependence check</text>
+  <text x="72" y="312" class="s">代码不匹配假设，就不能调用定理</text>
+  <path d="M348 208 L402 208" class="arr" marker-end="url(#ab)"/>
+
+  <rect x="414" y="84" width="338" height="250" rx="14" class="teal"/>
+  <text x="438" y="120" class="sh">② Coordinate / covariance law</text>
+  <text x="438" y="158" class="b">Q⁺(x,x′) = E[φ(u)φ(v)]</text>
+  <text x="438" y="192" class="b">empirical moments → Gaussian expectation</text>
+  <text x="438" y="226" class="b">activation · gradient · NTK</text>
+  <text x="438" y="260" class="b">convergence mode + time quantifier</text>
+  <text x="438" y="300" class="s">渐近对象不是有限宽误差界</text>
+  <path d="M752 208 L806 208" class="arr" marker-end="url(#ab)"/>
+
+  <rect x="818" y="84" width="334" height="250" rx="14" class="amber"/>
+  <text x="842" y="120" class="sh">③ Finite-width coord curves</text>
+  <path d="M858 282 L858 162 L1116 162" stroke="#CBD5E1" stroke-width="2" fill="none"/>
+  <path d="M870 204 C940 194 1010 196 1100 194" stroke="#0F766E" stroke-width="3" fill="none"/>
+  <path d="M870 190 C950 208 1020 232 1100 258" stroke="#C0392B" stroke-width="3" fill="none"/>
+  <path d="M870 236 C950 220 1020 188 1100 172" stroke="#2563EB" stroke-width="3" fill="none"/>
+  <text x="870" y="310" class="s">horizontal · explode · vanish</text>
+
+  <text x="48" y="386" class="h" fill="#0F766E">四道证据门：每一层回答不同问题</text>
+  <rect x="48" y="422" width="250" height="154" rx="14" class="blue"/>
+  <text x="72" y="458" class="sh">T1 手推</text>
+  <text x="72" y="490" class="b">init / grad / direction</text>
+  <text x="72" y="520" class="b">LR / ΔW / Δh exponent</text>
+  <text x="72" y="552" class="s">回答：规则是否自洽？</text>
+  <path d="M298 500 L332 500" class="arr" marker-end="url(#ab)"/>
+
+  <rect x="344" y="422" width="250" height="154" rx="14" class="teal"/>
+  <text x="368" y="458" class="sh">T2 统计模拟</text>
+  <text x="368" y="490" class="b">covariance · moments</text>
+  <text x="368" y="520" class="b">one-step toy Monte Carlo</text>
+  <text x="368" y="552" class="s">回答：有限样本趋势符合吗？</text>
+  <path d="M594 500 L628 500" class="arr" marker-end="url(#ab)"/>
+
+  <rect x="640" y="422" width="250" height="154" rx="14" class="amber"/>
+  <text x="664" y="458" class="sh">T3 Coord check</text>
+  <text x="664" y="490" class="b">multi-width · multi-step</text>
+  <text x="664" y="520" class="b">layerwise m₁ / m₂ / m₄</text>
+  <text x="664" y="552" class="s">回答：真实实现有 drift 吗？</text>
+  <path d="M890 500 L924 500" class="arr" marker-end="url(#ab)"/>
+
+  <rect x="936" y="422" width="216" height="154" rx="14" class="red"/>
+  <text x="960" y="458" class="sh">T4 训练迁移</text>
+  <text x="960" y="490" class="b">HP optimum drift</text>
+  <text x="960" y="520" class="b">loss · failure · compute</text>
+  <text x="960" y="552" class="s">回答：迁移是否成功？</text>
+
+  <path d="M174 598 L174 634 L1044 634 L1044 598" class="dash"/>
+  <rect x="48" y="654" width="1104" height="86" rx="14" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="72" y="688" class="sh">Coordinate check 通过的准确措辞</text>
+  <text x="72" y="718" class="b">“在当前宽度、step、probe、seed 和统计量窗口内，未观察到显著坐标尺度漂移。”</text>
+  <rect x="48" y="758" width="1104" height="34" rx="8" class="red"/>
+  <text x="72" y="781" class="s">边界：它不证明长期、全输入、全矩、深度迁移、最优超参数或最终性能。</text>
+</svg>

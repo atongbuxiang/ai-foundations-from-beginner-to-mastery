@@ -1,0 +1,184 @@
+{
+  "experiment_id": "lm70.8-evaluation-v1",
+  "status": "passed",
+  "checks_passed": 9,
+  "checks_total": 9,
+  "checks": [
+    {
+      "name": "estimand_macro_micro",
+      "passed": true,
+      "observed": {
+        "task_macro": 0.5,
+        "example_micro": 0.575,
+        "user_average": 0.375,
+        "request_average": 0.6
+      },
+      "expected": {
+        "task_macro": 0.5,
+        "example_micro": 0.575,
+        "user_average": 0.375,
+        "request_average": 0.6
+      },
+      "note": "LM57"
+    },
+    {
+      "name": "exact_f1_bleu_rouge",
+      "passed": true,
+      "observed": {
+        "exact_match": 0.0,
+        "token_f1": 0.5,
+        "bleu_bp": 0.7165313105737893,
+        "rouge_l_f1": 0.6666666666666666
+      },
+      "expected": {
+        "exact_match": 0.0,
+        "token_f1": 0.5,
+        "bleu_bp": 0.7165313105737893,
+        "rouge_l_f1": 0.6666666666666666
+      },
+      "note": "LM58"
+    },
+    {
+      "name": "pass_at_k",
+      "passed": true,
+      "observed": {
+        "iid": {
+          "1": 0.19999999999999996,
+          "3": 0.4879999999999999,
+          "5": 0.6723199999999999
+        },
+        "comb_n10_c3_k2": 0.5333333333333333
+      },
+      "expected": {
+        "iid_k3": 0.488,
+        "iid_k5": 0.67232,
+        "comb": 0.5333333333333333
+      },
+      "note": "LM59"
+    },
+    {
+      "name": "brier_ece_risk_coverage",
+      "passed": true,
+      "observed": {
+        "brier": 0.19000000000000003,
+        "ece": 0.11,
+        "risks": {
+          ".4": 0.0,
+          ".6": 0.3333333333333333,
+          "1.0": 0.4
+        }
+      },
+      "expected": {
+        "brier": 0.19,
+        "ece": 0.11,
+        "risks": {
+          ".4": 0,
+          ".6": 0.3333333333333333,
+          "1.0": 0.4
+        }
+      },
+      "note": "LM60"
+    },
+    {
+      "name": "factuality_citation",
+      "passed": true,
+      "observed": {
+        "atomic_precision": 0.75,
+        "citation_precision": 0.8,
+        "claim_coverage": 0.6,
+        "weighted_precision": 0.5
+      },
+      "expected": {
+        "atomic_precision": 0.75,
+        "citation_precision": 0.8,
+        "claim_coverage": 0.6,
+        "weighted_precision": 0.5
+      },
+      "note": "LM61"
+    },
+    {
+      "name": "judge_swap_winrate",
+      "passed": true,
+      "observed": {
+        "content_consistency": 0.7,
+        "position_flip": 0.2,
+        "tie_pair": 0.1,
+        "win_tie_half": 0.55,
+        "win_no_ties": 0.5625,
+        "agreement": 0.75,
+        "chance": 0.5
+      },
+      "expected": {
+        "consistency": 0.7,
+        "flip": 0.2,
+        "win_tie_half": 0.55,
+        "win_no_ties": 0.5625,
+        "agreement": 0.75
+      },
+      "note": "LM62"
+    },
+    {
+      "name": "contamination_permutation",
+      "passed": true,
+      "observed": {
+        "canonical": 0.8,
+        "permuted": 0.62,
+        "drop": 0.18000000000000005
+      },
+      "expected": {
+        "canonical": 0.8,
+        "permuted": 0.62,
+        "drop": 0.18,
+        "interpretation": "diagnostic_not_proof"
+      },
+      "note": "LM63"
+    },
+    {
+      "name": "prompt_variance_bootstrap",
+      "passed": true,
+      "observed": {
+        "mean": 0.6,
+        "population_sd": 0.16329931618554522,
+        "range": 0.4,
+        "worst": 0.4,
+        "exact_bootstrap_draws": 27,
+        "bootstrap_mean_center": 0.6
+      },
+      "expected": {
+        "mean": 0.6,
+        "population_sd": 0.16329931618554522,
+        "range": 0.4,
+        "worst": 0.4,
+        "exact_bootstrap_draws": 27,
+        "bootstrap_mean_center": 0.6
+      },
+      "note": "LM63"
+    },
+    {
+      "name": "evidence_oracle_decision",
+      "passed": true,
+      "observed": {
+        "oracle_gaps": [
+          0.2,
+          0.12
+        ],
+        "quality_gate": true,
+        "latency_gate": false,
+        "all_gates": false,
+        "micro_failure": 0.088
+      },
+      "expected": {
+        "oracle_gaps": [
+          0.2,
+          0.12
+        ],
+        "quality_gate": true,
+        "latency_gate": false,
+        "all_gates": false,
+        "micro_failure": 0.088
+      },
+      "note": "LM64"
+    }
+  ],
+  "determinism": "No model/API/GPU dependency; standard-library arithmetic, exact enumeration, CSV and SVG only."
+}

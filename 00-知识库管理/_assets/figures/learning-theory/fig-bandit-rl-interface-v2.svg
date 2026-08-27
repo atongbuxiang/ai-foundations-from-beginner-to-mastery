@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Bandit Feedback 与 RL：可见性、估计和状态</title>
+<desc id="desc">未选 action 的 loss 缺失导致探索和 inverse propensity；state transition 则把问题推进到 RL。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Feedback Ladder</text>
+<rect x="55" y="105" width="130" height="52" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="120.0" y="137.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">experts</text>
+<line x1="190" y1="131" x2="220" y2="131" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<text x="232" y="137" font-size="15" font-weight="400" text-anchor="start" fill="#1F2937">all action losses</text>
+<rect x="55" y="210" width="130" height="52" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="120.0" y="242.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">bandit</text>
+<line x1="190" y1="236" x2="220" y2="236" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<text x="232" y="242" font-size="15" font-weight="400" text-anchor="start" fill="#1F2937">chosen loss only</text>
+<rect x="55" y="315" width="130" height="52" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="120.0" y="347.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">contextual</text>
+<line x1="190" y1="341" x2="220" y2="341" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<text x="232" y="347" font-size="15" font-weight="400" text-anchor="start" fill="#1F2937">context + chosen loss</text>
+<text x="55" y="447" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">less feedback -&gt; active exploration</text>
+<text x="55" y="483" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">unselected outcomes are counterfactual</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">IPS：无偏与方差同源</text>
+<rect x="445" y="105" width="310" height="55" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600.0" y="138.5" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">sample I(t) from p(t)</text>
+<line x1="600" y1="165" x2="600" y2="198" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="445" y="210" width="310" height="65" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="600.0" y="248.5" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">loss_hat(i)=1{I=i} loss(i) / p(i)</text>
+<line x1="600" y1="280" x2="600" y2="313" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="445" y="325" width="310" height="55" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600.0" y="358.5" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">E loss_hat(i) = loss(i)</text>
+<text x="445" y="423" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">second moment = loss(i)^2 / p(i)</text>
+<text x="445" y="459" font-size="15" font-weight="400" text-anchor="start" fill="#C24135">small p: large variance</text>
+<text x="445" y="493" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">p=0: no identification</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Horizon 1 到 Stateful RL</text>
+<rect x="840" y="95" width="300" height="48" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="990.0" y="125.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">bandit: action -&gt; immediate reward</text>
+<line x1="990" y1="148" x2="990" y2="183" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="840" y="195" width="300" height="58" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="990.0" y="230.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">MDP: state, action, reward, next state</text>
+<line x1="990" y1="258" x2="990" y2="293" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="840" y="305" width="300" height="58" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="990.0" y="340.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">return + credit + occupancy</text>
+<text x="840" y="408" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">offline: propensity + overlap</text>
+<text x="840" y="444" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">deployment: safety constraints</text>
+<text x="840" y="483" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">low regret ≠ safe exploration</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">先按反馈可见性选择 estimator，再按 action 是否改变未来 state 决定 bandit 还是 RL。</text>
+</svg>

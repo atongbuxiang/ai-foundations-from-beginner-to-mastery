@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">最小二乘的输出几何、参数解集与算法选择</title>
+  <desc id="desc">三面板教学图：标签投到矩阵列空间并产生正交残差；参数沿零空间形成仿射解集，伪逆选最小范数点；正规方程、QR 和 SVD 有不同数值性质。</desc>
+  <defs>
+    <marker id="a" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#334155"/></marker>
+    <style>.t{font:700 22px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;fill:#0f172a}.pt{font:700 17px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;fill:#0f172a}.b{font:14px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;fill:#334155}.s{font:12px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;fill:#475569}.m{font:italic 15px Georgia,serif;fill:#0f172a}</style>
+  </defs>
+  <rect width="1200" height="430" rx="18" fill="#f8fafc"/>
+  <text x="42" y="38" class="t">最小二乘：输出最近点唯一，参数表示可能不唯一</text>
+  <g transform="translate(30 58)">
+    <rect width="360" height="340" rx="16" fill="white" stroke="#cbd5e1"/>
+    <text x="20" y="31" class="pt">A  输出空间：投影决定预测</text>
+    <path d="M35 270 C110 220 240 185 330 150" fill="none" stroke="#3b82f6" stroke-width="5"/>
+    <text x="247" y="133" class="s">R(A) ⊂ Fᵐ</text>
+    <circle cx="238" cy="82" r="6" fill="#ef4444"/><text x="249" y="84" class="m">b</text>
+    <circle cx="205" cy="196" r="6" fill="#2563eb"/><text x="216" y="215" class="m">ŷ = Ax̂</text>
+    <line x1="238" y1="82" x2="205" y2="196" stroke="#ef4444" stroke-width="3" marker-end="url(#a)"/>
+    <text x="247" y="145" class="m">r</text>
+    <polyline points="197,178 213,173 219,188" fill="none" stroke="#334155" stroke-width="2"/>
+    <rect x="20" y="287" width="320" height="35" rx="9" fill="#eff6ff"/>
+    <text x="32" y="309" class="s">Aᵀr = 0 ⇔ AᵀAx̂ = Aᵀb；预测与残差都唯一</text>
+  </g>
+  <g transform="translate(420 58)">
+    <rect width="360" height="340" rx="16" fill="white" stroke="#cbd5e1"/>
+    <text x="20" y="31" class="pt">B  参数空间：零空间产生多解</text>
+    <line x1="45" y1="260" x2="315" y2="105" stroke="#a78bfa" stroke-width="5"/>
+    <text x="232" y="90" class="s">x† + N(A)</text>
+    <circle cx="180" cy="183" r="8" fill="#22c55e"/><text x="192" y="180" class="m">x† = A†b</text>
+    <line x1="45" y1="300" x2="180" y2="183" stroke="#22c55e" stroke-width="3" marker-end="url(#a)"/>
+    <text x="55" y="286" class="s">R(A*) 方向</text>
+    <polyline points="166,178 174,166 186,173" fill="none" stroke="#334155" stroke-width="2"/>
+    <circle cx="259" cy="138" r="6" fill="#8b5cf6"/><text x="266" y="157" class="m">x†+z</text>
+    <rect x="20" y="287" width="320" height="35" rx="9" fill="#f5f3ff"/>
+    <text x="30" y="309" class="s">x† ⟂ N(A)：勾股分解证明它是唯一最小范数解</text>
+  </g>
+  <g transform="translate(810 58)">
+    <rect width="360" height="340" rx="16" fill="white" stroke="#cbd5e1"/>
+    <text x="20" y="31" class="pt">C  同一目标，三条计算路线</text>
+    <rect x="20" y="62" width="318" height="58" rx="10" fill="#fee2e2" stroke="#f87171"/>
+    <text x="34" y="85" class="b">正规方程 / Cholesky</text>
+    <text x="34" y="106" class="s">快，但 κ(A*A)=κ(A)²；近秩亏时危险</text>
+    <rect x="20" y="141" width="318" height="58" rx="10" fill="#dbeafe" stroke="#60a5fa"/>
+    <text x="34" y="164" class="b">Householder QR</text>
+    <text x="34" y="185" class="s">满列秩默认主力：正交变换 + 三角求解</text>
+    <rect x="20" y="220" width="318" height="58" rx="10" fill="#dcfce7" stroke="#22c55e"/>
+    <text x="34" y="243" class="b">SVD / 截断 SVD</text>
+    <text x="34" y="264" class="s">秩亏、近秩亏、最小范数与阈值最透明</text>
+    <line x1="179" y1="121" x2="179" y2="138" stroke="#334155" marker-end="url(#a)"/>
+    <line x1="179" y1="200" x2="179" y2="217" stroke="#334155" marker-end="url(#a)"/>
+    <text x="20" y="307" class="s">大规模稀疏：LSQR / LSMR + 预条件</text>
+    <text x="20" y="326" class="s">选择取决于秩、条件性、规模与所需精度</text>
+  </g>
+</svg>

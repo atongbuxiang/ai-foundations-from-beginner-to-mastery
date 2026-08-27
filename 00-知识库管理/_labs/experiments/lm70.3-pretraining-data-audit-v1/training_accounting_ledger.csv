@@ -1,0 +1,12 @@
+object,measure,value,unit
+domain_A,document_share,0.5,fraction
+domain_A,token_share,0.2,fraction
+domain_A,target_share,0.3333333333333333,fraction
+domain_B,document_share,0.5,fraction
+domain_B,token_share,0.8,fraction
+domain_B,target_share,0.6666666666666666,fraction
+packing,utilization,1.0,fraction
+curriculum,AB_final,-0.12000000000000002,theta
+curriculum,BA_final,-0.08000000000000002,theta
+provenance,effective_targets,4,targets
+provenance,mean_nll,1.5,nats_per_target

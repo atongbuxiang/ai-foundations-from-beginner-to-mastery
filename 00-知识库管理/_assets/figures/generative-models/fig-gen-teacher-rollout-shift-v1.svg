@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">Teacher Forcing、模型rollout与Scheduled Sampling的分布账</title>
+  <desc id="desc">三栏时间线分别表示真实前缀训练、模型自由生成和模型前缀与真实目标拼接的scheduled sampling，突出每个变量的来源。</desc>
+  <rect width="1200" height="620" fill="#FFFEFB"/>
+  <style>.sans{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}.ink{fill:#1F2937}.muted{fill:#64748B}.blue{fill:#2563EB}.green{fill:#0F766E}.amber{fill:#B7791F}.red{fill:#C24135}</style>
+  <text x="52" y="64" class="sans blue" font-size="23" font-weight="700">A｜Teacher Forcing：pair 全来自 P*</text>
+  <line x1="78" y1="178" x2="1118" y2="178" stroke="#D7DEE8" stroke-width="3"/>
+  <g><circle cx="180" cy="178" r="30" fill="#2563EB"/><circle cx="410" cy="178" r="30" fill="#2563EB"/><circle cx="640" cy="178" r="30" fill="#2563EB"/><circle cx="870" cy="178" r="30" fill="#2563EB"/></g>
+  <g class="mono" font-size="19" fill="#FFFEFB" text-anchor="middle"><text x="180" y="185">x₁*</text><text x="410" y="185">x₂*</text><text x="640" y="185">x₃*</text><text x="870" y="185">x₄*</text></g>
+  <g class="sans muted" font-size="16" text-anchor="middle"><text x="180" y="228">真实前缀</text><text x="410" y="228">真实前缀</text><text x="640" y="228">真实前缀</text><text x="870" y="228">真实 target</text></g>
+  <text x="995" y="184" class="mono blue" font-size="18">R_TF</text>
+  <text x="52" y="294" class="sans red" font-size="23" font-weight="700">B｜Rollout：一次选择会改变后续前缀分布</text>
+  <line x1="78" y1="410" x2="1118" y2="410" stroke="#D7DEE8" stroke-width="3"/>
+  <circle cx="180" cy="410" r="30" fill="#0F766E"/><text x="180" y="417" class="mono" font-size="19" fill="#FFFEFB" text-anchor="middle">x̂₁</text>
+  <circle cx="410" cy="410" r="30" fill="#0F766E"/><text x="410" y="417" class="mono" font-size="19" fill="#FFFEFB" text-anchor="middle">x̂₂</text>
+  <path d="M440 410 C514 410 520 343 590 343" fill="none" stroke="#C24135" stroke-width="4"/>
+  <circle cx="640" cy="343" r="30" fill="#FFF0EE" stroke="#C24135" stroke-width="3"/><text x="640" y="350" class="mono red" font-size="19" text-anchor="middle">x̂₃≠x₃*</text>
+  <path d="M670 343 C744 343 750 410 820 410" fill="none" stroke="#C24135" stroke-width="4"/>
+  <circle cx="870" cy="410" r="30" fill="#FFF0EE" stroke="#C24135" stroke-width="3"/><text x="870" y="417" class="mono red" font-size="19" text-anchor="middle">x̂₄</text>
+  <text x="995" y="416" class="mono green" font-size="18">Qθ,φ</text>
+  <text x="52" y="500" class="sans amber" font-size="19" font-weight="700">Scheduled Sampling 的审计点</text>
+  <rect x="52" y="521" width="1096" height="62" fill="#FFF7E6" stroke="#B7791F" stroke-width="2.5"/>
+  <text x="76" y="558" class="sans ink" font-size="17">模型前缀 x̂₁ ~ Qθ 与真实 target x₂* ~ P* 拼接后，pair 未必来自真实 joint P*(x₁,x₂)。</text>
+</svg>
+

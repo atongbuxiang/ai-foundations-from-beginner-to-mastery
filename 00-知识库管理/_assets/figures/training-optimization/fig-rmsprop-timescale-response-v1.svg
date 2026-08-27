@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">RMSProp 的指数核、尺度阶跃响应与实现分叉</title>
+  <desc id="desc">比较 AdaGrad 永久累计和 RMSProp 指数遗忘，展示快慢遗忘因子的阶跃响应，并列出 centered、epsilon 与 momentum 的实现分歧。</desc>
+  <rect width="1200" height="720" fill="#FFFEFB"/>
+  <style>
+    text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}
+    .h{font-size:27px;font-weight:700}.sh{font-size:19px;font-weight:700}.b{font-size:16px}.s{font-size:15px;fill:#64748B}
+    .blue{stroke:#2563EB;fill:none;stroke-width:4}.green{stroke:#0F766E;fill:none;stroke-width:4}.amber{stroke:#B76E00;fill:none;stroke-width:4}.red{stroke:#C0392B;fill:none;stroke-width:3}.axis{stroke:#0F172A;stroke-width:2}
+    .box{fill:#F8FAFC;stroke:#94A3B8;stroke-width:2}.boxb{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.boxg{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.boxa{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}
+  </style>
+  <text x="48" y="50" class="h" fill="#2563EB">A｜历史核：永久总账 vs 指数遗忘</text>
+  <text x="70" y="91" class="sh">AdaGrad</text>
+  <g fill="#B76E00" opacity="0.82">
+    <rect x="70" y="116" width="42" height="100"/><rect x="120" y="116" width="42" height="100"/><rect x="170" y="116" width="42" height="100"/><rect x="220" y="116" width="42" height="100"/><rect x="270" y="116" width="42" height="100"/><rect x="320" y="116" width="42" height="100"/>
+  </g>
+  <text x="70" y="240" class="s">每个 g_s^2 永久留在 G_t</text>
+  <text x="430" y="91" class="sh">RMSProp</text>
+  <g fill="#2563EB" opacity="0.84">
+    <rect x="430" y="184" width="42" height="32"/><rect x="480" y="171" width="42" height="45"/><rect x="530" y="154" width="42" height="62"/><rect x="580" y="132" width="42" height="84"/><rect x="630" y="105" width="42" height="111"/><rect x="680" y="72" width="42" height="144"/>
+  </g>
+  <text x="430" y="240" class="s">权重 (1-rho) rho^(t-s)</text>
+  <rect x="788" y="78" width="358" height="160" rx="14" class="boxa"/>
+  <text x="816" y="116" class="sh" fill="#B76E00">同一个 rho，有三种时标</text>
+  <text x="816" y="151" class="b">e-fold:  -1 / log(rho)</text>
+  <text x="816" y="183" class="b">half-life: log(1/2) / log(rho)</text>
+  <text x="816" y="215" class="b">i.i.d. N_eff: (1+rho)/(1-rho)</text>
+
+  <line x1="48" y1="278" x2="1150" y2="278" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="48" y="322" class="h" fill="#0F766E">B｜尺度跳升：慢估计更平滑，也更滞后</text>
+  <line x1="92" y1="570" x2="680" y2="570" class="axis"/>
+  <line x1="92" y1="570" x2="92" y2="350" class="axis"/>
+  <line x1="92" y1="522" x2="326" y2="522" stroke="#64748B" stroke-width="3"/>
+  <line x1="326" y1="392" x2="680" y2="392" stroke="#64748B" stroke-width="3" stroke-dasharray="9 7"/>
+  <line x1="326" y1="570" x2="326" y2="350" stroke="#C0392B" stroke-width="2" stroke-dasharray="6 6"/>
+  <path d="M92 522 L326 522 C360 522 382 432 435 406 S560 393 680 392" class="blue"/>
+  <path d="M92 522 L326 522 C400 522 458 490 520 450 S622 404 680 396" class="green"/>
+  <text x="442" y="421" class="b" fill="#2563EB">fast rho</text>
+  <text x="551" y="477" class="b" fill="#0F766E">slow rho</text>
+  <text x="339" y="372" class="s" fill="#C0392B">scale shock</text>
+  <text x="98" y="594" class="s">optimizer steps</text><text x="42" y="455" class="s" transform="rotate(-90 42 455)">v_t</text>
+  <text x="92" y="628" class="b" fill="#C0392B">denominator 落后时，normalized update 会短暂过冲或欠步。</text>
+
+  <text x="742" y="322" class="h" fill="#2563EB">C｜“RMSProp”不是唯一公式</text>
+  <rect x="742" y="350" width="188" height="82" rx="12" class="boxb"/>
+  <text x="764" y="380" class="sh">uncentered</text><text x="764" y="410" class="s">v = EMA(g^2)</text>
+  <rect x="958" y="350" width="188" height="82" rx="12" class="boxg"/>
+  <text x="980" y="380" class="sh">centered</text><text x="980" y="410" class="s">v - EMA(g)^2</text>
+  <rect x="742" y="456" width="188" height="82" rx="12" class="box"/>
+  <text x="764" y="486" class="sh">eps outside</text><text x="764" y="516" class="s">sqrt(v) + eps</text>
+  <rect x="958" y="456" width="188" height="82" rx="12" class="boxa"/>
+  <text x="980" y="486" class="sh">eps inside</text><text x="980" y="516" class="s">sqrt(v + eps)</text>
+  <rect x="742" y="562" width="404" height="66" rx="12" fill="#FFF1F0" stroke="#C0392B" stroke-width="2"/>
+  <text x="764" y="590" class="b" fill="#C0392B">momentum after normalize  ≠  normalize after momentum</text>
+  <text x="764" y="616" class="s">division is nonlinear; update order belongs to the contract</text>
+  <line x1="48" y1="674" x2="1150" y2="674" stroke="#0F766E" stroke-width="3"/>
+  <text x="48" y="661" class="b" fill="#0F766E">遗忘因子同时控制 estimator variance 与 nonstationary lag；没有脱离任务的最佳窗口。</text>
+</svg>

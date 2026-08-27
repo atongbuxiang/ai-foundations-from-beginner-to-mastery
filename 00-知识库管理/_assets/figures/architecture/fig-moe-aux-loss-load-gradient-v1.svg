@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">负载均衡辅助损失：离散使用率与连续概率如何耦合</title>
+<desc id="desc">典型 proxy 将专家被选频率 f_i 与平均路由概率 p_i 相乘；它鼓励均衡但同时改写主任务目标。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">两种统计量</text>
+<text x="55" y="108" font-size="16" font-weight="700" text-anchor="start" fill="#1F2937">fᵢ = selected tokens / T</text>
+<text x="55" y="153" font-size="16" font-weight="700" text-anchor="start" fill="#1F2937">pᵢ = mean soft score</text>
+<rect x="60" y="229.0" width="42" height="66.0" rx="3" fill="#F8FAFC" stroke="#C24135" stroke-width="2"/>
+<rect x="128" y="265.0" width="42" height="30.0" rx="3" fill="#F8FAFC" stroke="#C24135" stroke-width="2"/>
+<rect x="196" y="280.6" width="42" height="14.399999999999999" rx="3" fill="#F8FAFC" stroke="#C24135" stroke-width="2"/>
+<rect x="264" y="285.4" width="42" height="9.6" rx="3" fill="#F8FAFC" stroke="#C24135" stroke-width="2"/>
+<text x="55" y="325" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">hard f</text>
+<rect x="60" y="369.6" width="42" height="50.4" rx="3" fill="#F8FAFC" stroke="#2563EB" stroke-width="2"/>
+<rect x="128" y="385.2" width="42" height="34.8" rx="3" fill="#F8FAFC" stroke="#2563EB" stroke-width="2"/>
+<rect x="196" y="398.4" width="42" height="21.599999999999998" rx="3" fill="#F8FAFC" stroke="#2563EB" stroke-width="2"/>
+<rect x="264" y="406.8" width="42" height="13.2" rx="3" fill="#F8FAFC" stroke="#2563EB" stroke-width="2"/>
+<text x="55" y="450" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">soft p</text>
+<text x="55" y="476" font-size="17" font-weight="800" text-anchor="start" fill="#0F766E">L_aux = λE Σᵢ fᵢpᵢ</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">梯度从哪里来</text>
+<rect x="455" y="102" width="285" height="54" rx="8" fill="#FEF2F2" stroke="#C24135" stroke-width="2"/>
+<text x="597.5" y="135.0" font-size="16" font-weight="650" text-anchor="middle" fill="#C24135">L = L_task + L_aux</text>
+<rect x="455" y="220" width="125" height="58" rx="8" fill="#FFF7ED" stroke="#B7791F" stroke-width="2"/>
+<text x="517.5" y="255.0" font-size="15" font-weight="650" text-anchor="middle" fill="#B7791F">hard fᵢ</text>
+<rect x="615" y="220" width="125" height="58" rx="8" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="677.5" y="255.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">soft pᵢ</text>
+<line x1="598" y1="160" x2="518" y2="212" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<line x1="598" y1="160" x2="678" y2="212" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<text x="455" y="337" font-size="15" font-weight="700" text-anchor="start" fill="#B7791F">f 常 stop-grad / proxy；</text>
+<text x="455" y="375" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">p 提供连续梯度。</text>
+<text x="455" y="430" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">λ 控制系统均衡与任务适配的张力。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">均衡粒度改变问题</text>
+<rect x="845" y="105" width="110" height="45" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="900.0" y="133.5" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">token</text>
+<text x="975" y="132" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">局部快速</text>
+<rect x="845" y="195" width="110" height="45" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="900.0" y="223.5" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">microbatch</text>
+<text x="975" y="222" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">统计噪声</text>
+<rect x="845" y="285" width="110" height="45" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="900.0" y="313.5" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">sequence</text>
+<text x="975" y="312" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">可能过度约束</text>
+<rect x="845" y="375" width="110" height="45" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="900.0" y="403.5" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">global</text>
+<text x="975" y="402" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">通信/延迟</text>
+<text x="845" y="460" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">均匀负载是资源目标，不是任务定理。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">辅助损失是可优化的均衡代理；统计尺度、停止梯度和 λ 都属于模型定义与实验协议。</text>
+</svg>

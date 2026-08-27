@@ -1,0 +1,185 @@
+{
+  "artifacts": {
+    "csv": [
+      "offset_slopes.csv",
+      "extrapolation_families.csv",
+      "joint_identifiability.csv",
+      "compute_optimal_allocation.csv",
+      "compute_system_ledger.csv",
+      "repeated_tokens.csv",
+      "mixture_transfer.csv",
+      "inference_break_even.csv",
+      "broken_emergence.csv",
+      "heldout_evidence.csv"
+    ],
+    "json": "results.json",
+    "svg": [
+      "plot-scaling-offset-extrapolation-audit-v1.svg",
+      "plot-scaling-compute-data-allocation-audit-v1.svg",
+      "plot-scaling-broken-heldout-evidence-audit-v1.svg"
+    ]
+  },
+  "check_summary": {
+    "passed": 34,
+    "total": 34
+  },
+  "checks": [
+    {
+      "check": "H1_excess_slope_equals_minus_half",
+      "passed": true
+    },
+    {
+      "check": "H1_raw_slope_flattens",
+      "passed": true
+    },
+    {
+      "check": "H1_raw_slope_matches_offset_identity",
+      "passed": true
+    },
+    {
+      "check": "H2_zero_offset_interpolates_calibration",
+      "passed": true
+    },
+    {
+      "check": "H2_zero_offset_far_extrapolation_fails",
+      "passed": true
+    },
+    {
+      "check": "H2_offset_family_recovers_truth",
+      "passed": true
+    },
+    {
+      "check": "H3_diagonal_terms_have_same_path_exponent",
+      "passed": true
+    },
+    {
+      "check": "H3_crossed_grid_has_nine_cells",
+      "passed": true
+    },
+    {
+      "check": "H3_crossed_grid_exposes_both_bottlenecks",
+      "passed": true
+    },
+    {
+      "check": "H4_allocation_respects_compute_constraint",
+      "passed": true
+    },
+    {
+      "check": "H4_analytic_multiplier_minimizes_each_budget",
+      "passed": true
+    },
+    {
+      "check": "H4_weighted_margins_balance",
+      "passed": true
+    },
+    {
+      "check": "H4_allocation_exponents_sum_to_one",
+      "passed": true
+    },
+    {
+      "check": "H5_same_model_flops_across_systems",
+      "passed": true
+    },
+    {
+      "check": "H5_wall_time_depends_on_system",
+      "passed": true
+    },
+    {
+      "check": "H5_hfu_equals_execution_multiplier_times_mfu",
+      "passed": true
+    },
+    {
+      "check": "H5_carbon_uses_energy_and_grid_intensity",
+      "passed": true
+    },
+    {
+      "check": "H6_effective_tokens_increase",
+      "passed": true
+    },
+    {
+      "check": "H6_marginal_repeat_value_decreases",
+      "passed": true
+    },
+    {
+      "check": "H6_effective_tokens_stay_below_limit",
+      "passed": true
+    },
+    {
+      "check": "H7_mixture_weights_stay_on_simplex",
+      "passed": true
+    },
+    {
+      "check": "H7_domain_tradeoff_is_visible",
+      "passed": true
+    },
+    {
+      "check": "H7_target_changes_optimal_mixture",
+      "passed": true
+    },
+    {
+      "check": "H8_break_even_ties_A_and_B",
+      "passed": true
+    },
+    {
+      "check": "H8_A_wins_before_break_even",
+      "passed": true
+    },
+    {
+      "check": "H8_B_wins_after_break_even",
+      "passed": true
+    },
+    {
+      "check": "H8_C_is_dominated_by_B",
+      "passed": true
+    },
+    {
+      "check": "H9_exact_match_amplifies_smooth_skill",
+      "passed": true
+    },
+    {
+      "check": "H9_zero_success_probability_decreases",
+      "passed": true
+    },
+    {
+      "check": "H9_broken_exponent_transitions",
+      "passed": true
+    },
+    {
+      "check": "H10_scale_splits_are_strictly_ordered",
+      "passed": true
+    },
+    {
+      "check": "H10_failures_remain_in_denominator",
+      "passed": true
+    },
+    {
+      "check": "H10_locked_intervals_cover_observations",
+      "passed": true
+    },
+    {
+      "check": "H10_heldout_rows_are_E3",
+      "passed": true
+    }
+  ],
+  "evidence_boundaries": [
+    "Analytic and deterministic constructions validate definitions, accounting identities, metrics, and counterexamples.",
+    "A synthetic E3 split does not establish a neural scaling law or external replication.",
+    "The effective-token decay and loss surfaces are declared proxies, not fitted empirical constants.",
+    "Lifecycle decisions remain conditional on the request horizon, system ledger, quality constraints, and candidate set."
+  ],
+  "experiment_id": "EXP-TRN-607-V1",
+  "runtime": "Python standard library",
+  "seed": 20260826,
+  "tracks": [
+    "offset_slopes",
+    "extrapolation_families",
+    "joint_identifiability",
+    "compute_optimal_allocation",
+    "compute_system_ledger",
+    "repeated_tokens",
+    "mixture_transfer",
+    "inference_break_even",
+    "broken_emergence",
+    "heldout_evidence"
+  ]
+}

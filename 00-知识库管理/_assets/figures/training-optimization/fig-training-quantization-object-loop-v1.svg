@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Training quantization objects and QAT loop</title>
+  <desc id="desc">Three panels separate five quantization objects, the fake-quantization forward and surrogate-gradient backward loop, and a mixed-precision Adam byte ledger.</desc>
+  <rect width="1200" height="800" fill="#FFFEFB"/>
+  <text x="60" y="58" font-family="Arial,sans-serif" font-size="28" font-weight="700" fill="#172033">“8 bit training” hides five different estimators</text>
+  <text x="60" y="91" font-family="Arial,sans-serif" font-size="17" fill="#52606D">Name the object, granularity, clipping, rounding, surrogate gradient, master copy and real hardware kernel.</text>
+  <rect x="45" y="125" width="340" height="590" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+  <rect x="410" y="125" width="360" height="590" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+  <rect x="795" y="125" width="360" height="590" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+  <text x="68" y="166" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172033">A  Quantized object</text>
+  <g font-family="Arial,sans-serif" font-size="17" font-weight="700">
+    <rect x="80" y="205" width="270" height="58" rx="12" fill="#EAF2FF"/><text x="215" y="241" text-anchor="middle" fill="#2563EB">forward weights</text>
+    <rect x="80" y="280" width="270" height="58" rx="12" fill="#E8F6F3"/><text x="215" y="316" text-anchor="middle" fill="#0F766E">activations</text>
+    <rect x="80" y="355" width="270" height="58" rx="12" fill="#FFF3D6"/><text x="215" y="391" text-anchor="middle" fill="#B76E00">backward gradients</text>
+    <rect x="80" y="430" width="270" height="58" rx="12" fill="#FFF7F4"/><text x="215" y="466" text-anchor="middle" fill="#C0392B">optimizer states</text>
+    <rect x="80" y="505" width="270" height="58" rx="12" fill="#F1F3F5"/><text x="215" y="541" text-anchor="middle" fill="#172033">collective payload</text>
+  </g>
+  <text x="215" y="610" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" fill="#52606D">Each needs its own scale, error</text><text x="215" y="635" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" fill="#52606D">and time-to-quality evidence.</text>
+  <text x="433" y="166" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172033">B  QAT: forward ≠ backward</text>
+  <defs><marker id="q" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#52606D"/></marker></defs>
+  <g font-family="Arial,sans-serif">
+    <rect x="465" y="215" width="250" height="70" rx="14" fill="#EAF2FF" stroke="#2563EB" stroke-width="2"/><text x="590" y="245" text-anchor="middle" font-size="18" font-weight="700" fill="#2563EB">FP master x</text><text x="590" y="270" text-anchor="middle" font-size="15" fill="#52606D">optimizer state lives here</text>
+    <rect x="465" y="340" width="250" height="90" rx="14" fill="#FFF3D6" stroke="#B76E00" stroke-width="2"/><text x="590" y="372" text-anchor="middle" font-size="18" font-weight="700" fill="#B76E00">Fake quant forward</text><text x="590" y="398" text-anchor="middle" font-size="15" fill="#52606D">clip → round → dequant</text>
+    <rect x="465" y="500" width="250" height="90" rx="14" fill="#E8F6F3" stroke="#0F766E" stroke-width="2"/><text x="590" y="532" text-anchor="middle" font-size="18" font-weight="700" fill="#0F766E">Surrogate backward</text><text x="590" y="558" text-anchor="middle" font-size="15" fill="#52606D">STE ≈ identity in range</text>
+    <path d="M590 285 V340" stroke="#52606D" stroke-width="2" marker-end="url(#q)"/><path d="M590 430 V500" stroke="#52606D" stroke-width="2" marker-end="url(#q)"/><path d="M465 545 H435 V250 H465" fill="none" stroke="#52606D" stroke-width="2" marker-end="url(#q)"/>
+  </g>
+  <rect x="455" y="625" width="270" height="50" rx="10" fill="#FFF7F4"/>
+  <text x="590" y="657" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" fill="#C0392B">STE is chosen optimization—not d(round)/dx.</text>
+  <text x="818" y="166" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172033">C  Persistent bytes / parameter</text>
+  <g font-family="Arial,sans-serif" font-size="16">
+    <rect x="855" y="555" width="240" height="70" fill="#EAF2FF"/><text x="975" y="595" text-anchor="middle" fill="#2563EB" font-weight="700">weight + gradient: 4 B</text>
+    <rect x="855" y="415" width="240" height="140" fill="#FFF3D6"/><text x="975" y="475" text-anchor="middle" fill="#B76E00" font-weight="700">FP32 master: 4 B</text><text x="975" y="505" text-anchor="middle" fill="#52606D">small updates accumulate</text>
+    <rect x="855" y="205" width="240" height="210" fill="#FFF7F4"/><text x="975" y="280" text-anchor="middle" fill="#C0392B" font-weight="700">Adam m + v: 8 B</text><text x="975" y="312" text-anchor="middle" fill="#52606D">largest persistent target</text><text x="975" y="345" text-anchor="middle" fill="#52606D">8-bit states ≠ all-int8 math</text>
+  </g>
+  <line x1="835" y1="625" x2="1115" y2="625" stroke="#52606D" stroke-width="2"/>
+  <text x="975" y="662" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#52606D">Idealized 16 B baseline.</text>
+  <text x="975" y="686" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#52606D">Add scales, temporary buffers and allocator.</text>
+  <text x="600" y="758" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" fill="#52606D">Textbook ledger — bit-width alone predicts neither peak memory nor hardware speed.</text>
+</svg>

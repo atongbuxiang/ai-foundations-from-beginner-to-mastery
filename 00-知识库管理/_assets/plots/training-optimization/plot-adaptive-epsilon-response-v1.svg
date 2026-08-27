@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" role="img" aria-labelledby="title desc">
+<title id="title">Adam epsilon 位置与工作区间</title>
+<desc id="desc">横轴为二阶矩平方根的十进对数，比较 root-out、零点尺度匹配的 root-in 与同字面 epsilon 的 root-in 响应。</desc>
+<rect width="1200" height="640" fill="#FFFEFB"/>
+<style>
+.sans{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}
+.ink{fill:#1F2937}.muted{fill:#64748B}.blue{fill:#2563EB}.green{fill:#0F766E}.amber{fill:#B7791F}.red{fill:#C24135}
+</style>
+<text x="58" y="56" class="sans blue" font-size="23" font-weight="700">Epsilon response：m = sqrt(v)</text>
+<line x1="105.0" y1="505.0" x2="1085.0" y2="505.0" stroke="#1F2937" stroke-width="2"/>
+<line x1="105.0" y1="505.0" x2="105.0" y2="145.0" stroke="#1F2937" stroke-width="2"/>
+<polyline points="105.00,505.00 166.25,505.00 227.50,504.96 288.75,504.64 350.00,501.44 411.25,472.27 472.50,325.00 533.75,177.73 595.00,148.56 656.25,145.36 717.50,145.04 778.75,145.00 840.00,145.00 901.25,145.00 962.50,145.00 1023.75,145.00 1085.00,145.00" fill="none" stroke="#2563EB" stroke-width="4"/>
+<polyline points="105.00,505.00 166.25,505.00 227.50,504.96 288.75,504.64 350.00,501.40 411.25,469.18 472.50,250.44 533.75,146.79 595.00,145.02 656.25,145.00 717.50,145.00 778.75,145.00 840.00,145.00 901.25,145.00 962.50,145.00 1023.75,145.00 1085.00,145.00" fill="none" stroke="#0F766E" stroke-width="4"/>
+<polyline points="105.00,505.00 166.25,505.00 227.50,505.00 288.75,505.00 350.00,505.00 411.25,505.00 472.50,504.96 533.75,504.64 595.00,501.40 656.25,469.18 717.50,250.44 778.75,146.79 840.00,145.02 901.25,145.00 962.50,145.00 1023.75,145.00 1085.00,145.00" fill="none" stroke="#C24135" stroke-width="4"/>
+<line x1="472.50" y1="505.0" x2="472.50" y2="145.0" stroke="#B7791F" stroke-width="2" stroke-dasharray="7 6"/>
+<line x1="670" y1="82" x2="712" y2="82" stroke="#2563EB" stroke-width="4"/><text x="722" y="88" class="sans ink" font-size="16">root-out eps=1e-8</text>
+<line x1="670" y1="112" x2="712" y2="112" stroke="#0F766E" stroke-width="4"/><text x="722" y="118" class="sans ink" font-size="16">root-in eps=1e-16</text>
+<line x1="940" y1="82" x2="982" y2="82" stroke="#C24135" stroke-width="4"/><text x="992" y="88" class="sans ink" font-size="16">root-in eps=1e-8</text>
+<text x="595" y="556" class="sans ink" font-size="17" text-anchor="middle">log10 sqrt(v)</text>
+<text x="34" y="325" class="sans ink" font-size="17" text-anchor="middle" transform="rotate(-90 34 325)">normalized direction</text>
+<text x="58" y="607" class="sans muted" font-size="16">绿线只匹配 v→0 的 denominator 尺度；它与蓝线在中间区仍不是同一函数。</text>
+</svg>

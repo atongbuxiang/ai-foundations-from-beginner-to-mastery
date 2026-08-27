@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430">
+  <rect width="1200" height="430" fill="#f8fafc"/>
+  <style>
+    .panel{fill:#fff;stroke:#cbd5e1;stroke-width:1.5}.title{font:700 18px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#0f172a}.sub{font:13px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#475569}.body{font:14px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#334155}.small{font:12px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#64748b}.math{font:13px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#334155}
+  </style>
+  <defs>
+    <marker id="blue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#2563eb"/></marker>
+    <marker id="orange" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#d97706"/></marker>
+  </defs>
+  <rect class="panel" x="20" y="20" width="370" height="390" rx="14"/><rect class="panel" x="415" y="20" width="370" height="390" rx="14"/><rect class="panel" x="810" y="20" width="370" height="390" rx="14"/>
+
+  <text class="title" x="40" y="53">A · 同叫“动量”，取梯度的位置不同</text><text class="sub" x="40" y="78">HB 看当前位置；NAG 先外推，再看前方</text>
+  <ellipse cx="205" cy="232" rx="138" ry="91" fill="#dbeafe" opacity=".4" stroke="#93c5fd" stroke-width="2"/>
+  <ellipse cx="205" cy="232" rx="92" ry="58" fill="none" stroke="#93c5fd" stroke-width="2"/><ellipse cx="205" cy="232" rx="42" ry="25" fill="none" stroke="#93c5fd" stroke-width="2"/>
+  <circle cx="96" cy="148" r="6" fill="#64748b"/><circle cx="142" cy="286" r="6" fill="#2563eb"/><circle cx="205" cy="232" r="6" fill="#059669"/>
+  <line x1="96" y1="148" x2="142" y2="286" stroke="#64748b" stroke-width="2" marker-end="url(#blue)"/>
+  <line x1="142" y1="286" x2="188" y2="327" stroke="#d97706" stroke-width="2.5" stroke-dasharray="6 4" marker-end="url(#orange)"/>
+  <line x1="142" y1="286" x2="219" y2="238" stroke="#2563eb" stroke-width="3" marker-end="url(#blue)"/>
+  <line x1="188" y1="327" x2="232" y2="244" stroke="#d97706" stroke-width="3" marker-end="url(#orange)"/>
+  <text class="small" x="81" y="135">x_(k-1)</text><text class="small" x="126" y="306">x_k</text><text class="small" x="193" y="349">y_k</text><text class="small" x="214" y="222">x*</text>
+  <rect x="50" y="352" width="310" height="38" rx="8" fill="#fff7ed"/><text class="small" x="205" y="376" text-anchor="middle">HB: grad f(x_k)  ·  NAG: grad f(y_k)</text>
+
+  <text class="title" x="435" y="53">B · 二次问题化为每个特征模态</text><text class="sub" x="435" y="78">稳定性由两个 characteristic roots 决定</text>
+  <rect x="455" y="96" width="290" height="72" rx="10" fill="#ede9fe" stroke="#7c3aed"/><text class="math" x="600" y="121" text-anchor="middle">z_next = a(lambda) z_k - beta z_prev</text><text class="small" x="600" y="143" text-anchor="middle">a(lambda) = 1 + beta - eta lambda</text><text class="small" x="600" y="159" text-anchor="middle">one eigenvalue → one scalar recurrence</text>
+  <line x1="472" y1="270" x2="754" y2="270" stroke="#94a3b8"/><line x1="613" y1="184" x2="613" y2="334" stroke="#94a3b8"/>
+  <circle cx="613" cy="270" r="70" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="5 5"/>
+  <circle cx="657" cy="226" r="6" fill="#059669"/><circle cx="569" cy="314" r="6" fill="#059669"/><circle cx="723" cy="241" r="6" fill="#dc2626"/>
+  <text class="small" x="651" y="212">|r| &lt; 1</text><text class="small" x="680" y="232">|r| &gt; 1</text>
+  <text class="math" x="600" y="366" text-anchor="middle">r^2 - (1+beta-eta lambda)r + beta = 0</text><text class="small" x="600" y="389" text-anchor="middle">0 ≤ beta &lt; 1:  0 &lt; eta lambda &lt; 2(1+beta)</text>
+
+  <text class="title" x="830" y="53">C · 加速达到一阶 oracle 最优阶</text><text class="sub" x="830" y="78">upper bound 与 lower bound 必须属于同一函数类</text>
+  <line x1="858" y1="326" x2="1148" y2="326" stroke="#64748b"/><line x1="873" y1="110" x2="873" y2="342" stroke="#64748b"/>
+  <path d="M884 132 C934 174 1002 233 1136 295" fill="none" stroke="#d97706" stroke-width="4"/>
+  <path d="M884 132 C942 236 1020 290 1136 317" fill="none" stroke="#2563eb" stroke-width="4"/>
+  <path d="M884 139 C943 244 1019 297 1136 322" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="6 4"/>
+  <rect x="972" y="102" width="178" height="82" rx="8" fill="#ffffff" fill-opacity=".94" stroke="#cbd5e1"/>
+  <line x1="987" y1="124" x2="1012" y2="124" stroke="#d97706" stroke-width="3"/><text class="small" x="1020" y="128">GD: O(1/k)</text>
+  <line x1="987" y1="146" x2="1012" y2="146" stroke="#2563eb" stroke-width="3"/><text class="small" x="1020" y="150">NAG: O(1/k^2)</text>
+  <line x1="987" y1="168" x2="1012" y2="168" stroke="#7c3aed" stroke-width="2" stroke-dasharray="5 3"/><text class="small" x="1020" y="172">lower: same order</text>
+  <rect x="845" y="350" width="319" height="41" rx="9" fill="#dcfce7" stroke="#059669"/><text class="small" x="1004" y="367" text-anchor="middle">函数类 + oracle + 维度 + error criterion</text><text class="small" x="1004" y="383" text-anchor="middle">不等于每个模型、每个实现、每种 wall-clock</text>
+</svg>

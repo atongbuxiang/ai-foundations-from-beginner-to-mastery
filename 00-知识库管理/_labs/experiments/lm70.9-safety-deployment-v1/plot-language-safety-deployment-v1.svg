@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">实验 LM70.9-C：版本、Drift、Incident 与证据卡</title><desc id="desc">Bundle 指纹、分布漂移、发布门和 artifact 完整性。</desc>
+<rect width="1200" height="700" fill="#FBF8F1"/>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}</style>
+<line x1="50" y1="70" x2="1150" y2="70" stroke="#17766E" stroke-width="4"/>
+<text x="52" y="48" font-size="24" font-weight="700" fill="#183044">实验 LM70.9-C：版本、Drift、Incident 与证据卡</text>
+<text x="60" y="108" text-anchor="start" font-size="15" font-weight="700" fill="#183044">BUNDLE FINGERPRINT</text>
+<rect x="60" y="145" width="480" height="50" rx="8" fill="#EEF4FC" stroke="#245AA8" stroke-width="2"/>
+<text x="80" y="166" text-anchor="start" font-size="11" font-weight="700" fill="#245AA8">baseline</text>
+<text x="80" y="185" text-anchor="start" font-size="10" font-weight="400" fill="#667784">8fadf839ba0607915e071071…</text>
+<rect x="60" y="215" width="480" height="50" rx="8" fill="#F3EFFA" stroke="#7054A3" stroke-width="2"/>
+<text x="80" y="236" text-anchor="start" font-size="11" font-weight="700" fill="#7054A3">template_changed</text>
+<text x="80" y="255" text-anchor="start" font-size="10" font-weight="400" fill="#667784">2af82e86d4244a11f9448688…</text>
+<text x="60" y="300" text-anchor="start" font-size="11" font-weight="400" fill="#667784">同 bundle 序列化稳定；template 一字节变化使 hash 改变。</text>
+<text x="60" y="355" text-anchor="start" font-size="15" font-weight="700" fill="#183044">DRIFT</text>
+<text x="60" y="407" text-anchor="start" font-size="10" font-weight="700" fill="#245AA8">TV</text>
+<rect x="190" y="390" width="29.999999999999993" height="27" rx="4" fill="#245AA8" opacity=".84"/>
+<text x="510" y="408" text-anchor="end" font-size="10" font-weight="700" fill="#245AA8">0.100</text>
+<text x="60" y="455" text-anchor="start" font-size="10" font-weight="700" fill="#C87922">PSI</text>
+<rect x="190" y="438" width="12.16395324324493" height="27" rx="4" fill="#C87922" opacity=".84"/>
+<text x="510" y="456" text-anchor="end" font-size="10" font-weight="700" fill="#C87922">0.041</text>
+<text x="60" y="503" text-anchor="start" font-size="10" font-weight="700" fill="#4F7B45">observed feedback</text>
+<rect x="190" y="486" width="270.0" height="27" rx="4" fill="#4F7B45" opacity=".84"/>
+<text x="510" y="504" text-anchor="end" font-size="10" font-weight="700" fill="#4F7B45">0.900</text>
+<text x="60" y="551" text-anchor="start" font-size="10" font-weight="700" fill="#B7443E">target accuracy</text>
+<rect x="190" y="534" width="234.0" height="27" rx="4" fill="#B7443E" opacity=".84"/>
+<text x="510" y="552" text-anchor="end" font-size="10" font-weight="700" fill="#B7443E">0.780</text>
+<text x="620" y="108" text-anchor="start" font-size="15" font-weight="700" fill="#183044">RELEASE / INCIDENT GATES</text>
+<rect x="650" y="145" width="430" height="52" rx="8" fill="#EEF7EA" stroke="#4F7B45" stroke-width="2"/>
+<text x="675" y="177" text-anchor="start" font-size="11" font-weight="700" fill="#4F7B45">PASS</text>
+<text x="770" y="177" text-anchor="start" font-size="11" font-weight="700" fill="#183044">quality non-inferiority</text>
+<rect x="650" y="218" width="430" height="52" rx="8" fill="#EEF7EA" stroke="#4F7B45" stroke-width="2"/>
+<text x="675" y="250" text-anchor="start" font-size="11" font-weight="700" fill="#4F7B45">PASS</text>
+<text x="770" y="250" text-anchor="start" font-size="11" font-weight="700" fill="#183044">unauthorized action = 0</text>
+<rect x="650" y="291" width="430" height="52" rx="8" fill="#FFF0ED" stroke="#B7443E" stroke-width="2"/>
+<text x="675" y="323" text-anchor="start" font-size="11" font-weight="700" fill="#B7443E">FAIL</text>
+<text x="770" y="323" text-anchor="start" font-size="11" font-weight="700" fill="#183044">p99 latency SLO</text>
+<rect x="650" y="364" width="430" height="52" rx="8" fill="#FFF0ED" stroke="#B7443E" stroke-width="2"/>
+<text x="675" y="396" text-anchor="start" font-size="11" font-weight="700" fill="#B7443E">FAIL</text>
+<text x="770" y="396" text-anchor="start" font-size="11" font-weight="700" fill="#183044">all hard gates</text>
+<text x="620" y="465" text-anchor="start" font-size="15" font-weight="700" fill="#183044">EVIDENCE CARD</text>
+<rect x="650" y="500" width="430" height="100" rx="8" fill="#EAF7F4" stroke="#17766E" stroke-width="2"/>
+<text x="675" y="535" text-anchor="start" font-size="13" font-weight="700" fill="#17766E">surface completeness=80%</text>
+<text x="675" y="565" text-anchor="start" font-size="13" font-weight="700" fill="#B7443E">valid artifact completeness=70%</text>
+<text x="675" y="590" text-anchor="start" font-size="11" font-weight="400" fill="#667784">关键 hard-gate 链接失效时，比例再高也不可发布。</text>
+<line x1="50" y1="650" x2="1150" y2="650" stroke="#D9D5CB"/>
+<text x="52" y="675" font-size="13" fill="#667784">Drift 是线索，版本 hash 是身份，Card 是证据索引；三者都不能单独证明因果、安全或发布就绪。</text>
+</svg>

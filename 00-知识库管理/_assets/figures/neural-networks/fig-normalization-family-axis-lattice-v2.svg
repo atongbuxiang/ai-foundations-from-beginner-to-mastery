@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Normalization Family：统计轴与参数对象</title>
+<desc id="desc">InstanceNorm 与 GroupNorm 在卷积张量上改变统计集合；GroupNorm 的两个极端只保证统计核心对应；WeightNorm 则作用于权重方向而非 activation。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">N C H W 上的统计组</text>
+<text x="52" y="136" font-size="20" font-weight="700" text-anchor="start" fill="#2563EB">BN</text>
+<rect x="98" y="105" width="92" height="48" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="144" y="135" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">fix C</text>
+<line x1="196" y1="129" x2="224" y2="129" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="230" y="105" width="138" height="48" rx="5" fill="#F8FAFC" stroke="#2563EB" stroke-width="2"/>
+<text x="299" y="135" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">reduce N,H,W</text>
+<text x="52" y="248" font-size="20" font-weight="700" text-anchor="start" fill="#0F766E">IN</text>
+<rect x="98" y="217" width="92" height="48" rx="5" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="144" y="247" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">fix N,C</text>
+<line x1="196" y1="241" x2="224" y2="241" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="230" y="217" width="138" height="48" rx="5" fill="#F8FAFC" stroke="#0F766E" stroke-width="2"/>
+<text x="299" y="247" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">reduce H,W</text>
+<text x="52" y="360" font-size="20" font-weight="700" text-anchor="start" fill="#C24135">GN</text>
+<rect x="98" y="329" width="92" height="48" rx="5" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="144" y="359" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">fix N,G</text>
+<line x1="196" y1="353" x2="224" y2="353" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="230" y="329" width="138" height="48" rx="5" fill="#F8FAFC" stroke="#C24135" stroke-width="2"/>
+<text x="299" y="359" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">reduce C/G,H,W</text>
+<text x="52" y="455" font-size="15" font-weight="650" text-anchor="start" fill="#64748B">same formula shell</text>
+<text x="52" y="482" font-size="16" font-weight="700" text-anchor="start" fill="#C24135">different dependency graph</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">GN 极端：统计同，合同未必同</text>
+<rect x="445" y="115" width="90" height="62" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="490.0" y="152.0" font-size="17" font-weight="650" text-anchor="middle" fill="#0F766E">G = 1</text>
+<rect x="575" y="115" width="90" height="62" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="620.0" y="152.0" font-size="17" font-weight="650" text-anchor="middle" fill="#2563EB">...</text>
+<rect x="705" y="115" width="70" height="62" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="740.0" y="152.0" font-size="17" font-weight="650" text-anchor="middle" fill="#C24135">G = C</text>
+<line x1="539" y1="146" x2="570" y2="146" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<line x1="669" y1="146" x2="700" y2="146" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<text x="490" y="223" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">stats like LN(C,H,W)</text>
+<text x="738" y="223" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">stats like IN</text>
+<text x="445" y="292" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">GN affine</text>
+<text x="765" y="292" font-size="15" font-weight="600" text-anchor="end" fill="#64748B">per channel</text>
+<line x1="442" y1="302" x2="770" y2="302" stroke="#D7DEE8" stroke-width="1"/>
+<text x="445" y="340" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">LN affine</text>
+<text x="765" y="340" font-size="15" font-weight="600" text-anchor="end" fill="#64748B">per element</text>
+<line x1="442" y1="350" x2="770" y2="350" stroke="#D7DEE8" stroke-width="1"/>
+<text x="445" y="388" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">IN state</text>
+<text x="765" y="388" font-size="15" font-weight="600" text-anchor="end" fill="#64748B">optional</text>
+<line x1="442" y1="398" x2="770" y2="398" stroke="#D7DEE8" stroke-width="1"/>
+<text x="445" y="436" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">GN state</text>
+<text x="765" y="436" font-size="15" font-weight="600" text-anchor="end" fill="#64748B">none</text>
+<line x1="442" y1="446" x2="770" y2="446" stroke="#D7DEE8" stroke-width="1"/>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">WeightNorm：对象换成参数</text>
+<circle cx="990" cy="265" r="118" fill="none" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="990" y1="265" x2="1065" y2="180" stroke="#2563EB" stroke-width="3" marker-end="url(#a0)"/>
+<circle cx="1065" cy="180" r="7" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<text x="1080" y="174" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">v direction</text>
+<line x1="990" y1="265" x2="1115" y2="123" stroke="#0F766E" stroke-width="3" marker-end="url(#a1)"/>
+<text x="1122" y="118" font-size="15" font-weight="700" text-anchor="end" fill="#0F766E">w = g v / ||v||</text>
+<rect x="845" y="405" width="285" height="72" rx="5" fill="#FFF5F2" stroke="#C24135" stroke-width="2"/>
+<text x="987" y="433" font-size="16" font-weight="700" text-anchor="middle" fill="#C24135">no activation statistics</text>
+<text x="987" y="459" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">no minibatch companions</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">先问被归一的是 activation group 还是 weight direction；名称相近不代表对象相同。</text>
+</svg>

@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">KRR 与 Gaussian Process：同一均值公式，不同统计对象</title>
+<desc id="desc">KRR 把 RKHS norm 作为 deterministic regularizer；Gaussian process 把 kernel 作为 prior covariance。Gaussian noise 下两者可共享 Gram inverse 的 posterior/estimator mean，但 GP 还定义 posterior covariance 与 joint predictive law。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">KRR 是谱滤波</text>
+<line x1="65" y1="390" x2="350" y2="390" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="65" y1="105" x2="65" y2="390" stroke="#D7DEE8" stroke-width="2"/>
+<rect x="95" y="135" width="24" height="255" rx="3" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<rect x="122" y="196" width="18" height="194" rx="3" fill="#0F766E" stroke="#0F766E" stroke-width="1"/>
+<rect x="145" y="175" width="24" height="215" rx="3" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<rect x="172" y="234" width="18" height="156" rx="3" fill="#0F766E" stroke="#0F766E" stroke-width="1"/>
+<rect x="195" y="220" width="24" height="170" rx="3" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<rect x="222" y="275" width="18" height="115" rx="3" fill="#0F766E" stroke="#0F766E" stroke-width="1"/>
+<rect x="245" y="265" width="24" height="125" rx="3" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<rect x="272" y="314" width="18" height="76" rx="3" fill="#0F766E" stroke="#0F766E" stroke-width="1"/>
+<rect x="295" y="305" width="24" height="85" rx="3" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<rect x="322" y="347" width="18" height="43" rx="3" fill="#0F766E" stroke="#0F766E" stroke-width="1"/>
+<rect x="335" y="335" width="24" height="55" rx="3" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<rect x="362" y="368" width="18" height="22" rx="3" fill="#0F766E" stroke="#0F766E" stroke-width="1"/>
+<text x="75" y="95" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">kernel eigenvalues</text>
+<text x="80" y="430" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">blue: mu_j   teal: mu_j/(mu_j+n lambda)</text>
+<text x="45" y="475" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">small directions are suppressed first</text>
+<text x="45" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">effective dimension = trace of the smoother。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">共享的 Mean Formula</text>
+<rect x="445" y="95" width="310" height="72" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600.0" y="137.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">KRR: min mean SSE + lambda ||f||_H^2</text>
+<line x1="600" y1="172" x2="600" y2="205" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="445" y="215" width="310" height="78" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="600.0" y="260.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">fhat(x) = k_x^T (K+n lambda I)^-1 y</text>
+<line x1="600" y1="298" x2="600" y2="330" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="445" y="340" width="310" height="72" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="600.0" y="382.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">GP match: n lambda = sigma^2 / tau^2</text>
+<text x="430" y="455" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">same algebra after a declared scale convention</text>
+<text x="430" y="490" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">representer theorem makes the solution finite</text>
+<text x="430" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">same mean is not the same probability model。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">GP 多出的对象与风险</text>
+<rect x="845" y="95" width="285" height="65" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="987.5" y="133.5" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">posterior covariance at x,x&#x27;</text>
+<rect x="845" y="190" width="285" height="65" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="987.5" y="228.5" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">marginal likelihood: fit + log-det</text>
+<rect x="845" y="285" width="285" height="65" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="987.5" y="323.5" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">joint samples and decision uncertainty</text>
+<text x="830" y="400" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">wrong prior / noise -&gt; wrong uncertainty</text>
+<text x="830" y="440" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">Cholesky: O(n^3) time, O(n^2) memory</text>
+<text x="830" y="478" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">jitter stabilizes algebra; noise is statistical</text>
+<text x="830" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">low-rank approximation adds a new error layer。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">先匹配 normalization，再区分 estimator、prior、uncertainty、hyperparameter selection 与 computation。</text>
+</svg>

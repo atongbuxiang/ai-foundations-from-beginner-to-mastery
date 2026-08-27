@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">LM70.5 实验一：序列差异与顺序敏感性</title><desc id="desc">两种 prompt 的 byte IDs 与 24 个 demonstration 排列的 recency score。</desc>
+<rect width="1200" height="700" fill="#FFFEFB"/>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}</style>
+<text x="55" y="55" font-size="25" font-weight="700" fill="#2563EB">LM70.5 实验一：序列差异与顺序敏感性</text>
+<rect x="55" y="95" width="1090" height="120" rx="12" fill="#EFF6FF" stroke="#2563EB"/>
+<text x="75" y="130" font-size="16" font-weight="700" fill="#17324D">语义近似的两个 prompt</text>
+<text x="75" y="165" font-size="14" fill="#0F766E">A IDs: [82, 101, 118, 105, 101, 119, 58, 32, 103, 111, 111, 100, 10, 83, 101, 110, 116, 105, 109, 101, 110, 116, 58]</text>
+<text x="75" y="195" font-size="14" fill="#7C3AED">B IDs: [82, 101, 118, 105, 101, 119, 58, 32, 103, 111, 111, 100, 10, 83, 101, 110, 116, 105, 109, 101, 110, 116, 58, 32]</text>
+<text x="55" y="265" font-size="17" font-weight="700" fill="#17324D">24 个排列的 recency-weighted label score</text>
+<rect x="55" y="295" width="110" height="58" rx="7" fill="#F8FAFC" stroke="#D7DEE8"/>
+<rect x="60" y="329" width="73.9" height="12" rx="4" fill="#C24135"/>
+<text x="110" y="319" text-anchor="middle" font-size="13" fill="#17324D">π1: -5</text>
+<rect x="187" y="295" width="110" height="58" rx="7" fill="#F8FAFC" stroke="#D7DEE8"/>
+<rect x="192" y="329" width="58.3" height="12" rx="4" fill="#0F766E"/>
+<text x="242" y="319" text-anchor="middle" font-size="13" fill="#17324D">π2: +3</text>
+<rect x="319" y="295" width="110" height="58" rx="7" fill="#F8FAFC" stroke="#D7DEE8"/>
+<rect x="324" y="329" width="105.0" height="12" rx="4" fill="#C24135"/>
+<text x="374" y="319" text-anchor="middle" font-size="13" fill="#17324D">π3: -9</text>
+<rect x="451" y="295" width="110" height="58" rx="7" fill="#F8FAFC" stroke="#D7DEE8"/>
+<rect x="456" y="329" width="105.0" height="12" rx="4" fill="#C24135"/>
+<text x="506" y="319" text-anchor="middle" font-size="13" fill="#17324D">π4: -9</text>
+<rect x="583" y="295" width="110" height="58" rx="7" fill="#F8FAFC" stroke="#D7DEE8"/>
+<rect x="588" y="329" width="58.3" height="12" rx="4" fill="#0F766E"/>
+<text x="638" y="319" text-anchor="middle" font-size="13" fill="#17324D">π5: +3</text>
+<rect x="715" y="295" width="110" height="58" rx="7" fill="#F8FAFC" stroke="#D7DEE8"/>
+<rect x="720" y="329" width="73.9" height="12" rx="4" fill="#C24135"/>
+<text x="770" y="319" text-anchor="middle" font-size="13" fill="#17324D">π6: -5</text>
+<rect x="847" y="295" width="110" height="58" rx="7" fill="#F8FAFC" stroke="#D7DEE8"/>
+<rect x="852" y="329" width="58.3" height="12" rx="4" fill="#C24135"/>
+<text x="902" y="319" text-anchor="middle" font-size="13" fill="#17324D">π7: -3</text>
+<rect x="979" y="295" width="110" height="58" rx="7" fill="#F8FAFC" stroke="#D7DEE8"/>
+<rect x="984" y="329" width="73.9" height="12" rx="4" fill="#0F766E"/>
+<text x="1034" y="319" text-anchor="middle" font-size="13" fill="#17324D">π8: +5</text>
+<rect x="55" y="387" width="110" height="58" rx="7" fill="#F8FAFC" stroke="#D7DEE8"/>
+<rect x="60" y="421" width="58.3" height="12" rx="4" fill="#C24135"/>
+<text x="110" y="411" text-anchor="middle" font-size="13" fill="#17324D">π9: -3</text>
+<rect x="187" y="387" width="110" height="58" rx="7" fill="#F8FAFC" stroke="#D7DEE8"/>
+<rect x="192" y="421" width="73.9" height="12" rx="4" fill="#0F766E"/>
+<text x="242" y="411" text-anchor="middle" font-size="13" fill="#17324D">π10: +5</text>
+<rect x="319" y="387" width="110" height="58" rx="7" fill="#F8FAFC" stroke="#D7DEE8"/>
+<rect x="324" y="421" width="105.0" height="12" rx="4" fill="#0F766E"/>
+<text x="374" y="411" text-anchor="middle" font-size="13" fill="#17324D">π11: +9</text>
+<rect x="451" y="387" width="110" height="58" rx="7" fill="#F8FAFC" stroke="#D7DEE8"/>
+<rect x="456" y="421" width="105.0" height="12" rx="4" fill="#0F766E"/>
+<text x="506" y="411" text-anchor="middle" font-size="13" fill="#17324D">π12: +9</text>
+<rect x="583" y="387" width="110" height="58" rx="7" fill="#F8FAFC" stroke="#D7DEE8"/>
+<rect x="588" y="421" width="105.0" height="12" rx="4" fill="#C24135"/>
+<text x="638" y="411" text-anchor="middle" font-size="13" fill="#17324D">π13: -9</text>
+<rect x="715" y="387" width="110" height="58" rx="7" fill="#F8FAFC" stroke="#D7DEE8"/>
+<rect x="720" y="421" width="105.0" height="12" rx="4" fill="#C24135"/>
+<text x="770" y="411" text-anchor="middle" font-size="13" fill="#17324D">π14: -9</text>
+<rect x="847" y="387" width="110" height="58" rx="7" fill="#F8FAFC" stroke="#D7DEE8"/>
+<rect x="852" y="421" width="73.9" height="12" rx="4" fill="#C24135"/>
+<text x="902" y="411" text-anchor="middle" font-size="13" fill="#17324D">π15: -5</text>
+<rect x="979" y="387" width="110" height="58" rx="7" fill="#F8FAFC" stroke="#D7DEE8"/>
+<rect x="984" y="421" width="58.3" height="12" rx="4" fill="#0F766E"/>
+<text x="1034" y="411" text-anchor="middle" font-size="13" fill="#17324D">π16: +3</text>
+<rect x="55" y="479" width="110" height="58" rx="7" fill="#F8FAFC" stroke="#D7DEE8"/>
+<rect x="60" y="513" width="73.9" height="12" rx="4" fill="#C24135"/>
+<text x="110" y="503" text-anchor="middle" font-size="13" fill="#17324D">π17: -5</text>
+<rect x="187" y="479" width="110" height="58" rx="7" fill="#F8FAFC" stroke="#D7DEE8"/>
+<rect x="192" y="513" width="58.3" height="12" rx="4" fill="#0F766E"/>
+<text x="242" y="503" text-anchor="middle" font-size="13" fill="#17324D">π18: +3</text>
+<rect x="319" y="479" width="110" height="58" rx="7" fill="#F8FAFC" stroke="#D7DEE8"/>
+<rect x="324" y="513" width="73.9" height="12" rx="4" fill="#0F766E"/>
+<text x="374" y="503" text-anchor="middle" font-size="13" fill="#17324D">π19: +5</text>
+<rect x="451" y="479" width="110" height="58" rx="7" fill="#F8FAFC" stroke="#D7DEE8"/>
+<rect x="456" y="513" width="58.3" height="12" rx="4" fill="#C24135"/>
+<text x="506" y="503" text-anchor="middle" font-size="13" fill="#17324D">π20: -3</text>
+<rect x="583" y="479" width="110" height="58" rx="7" fill="#F8FAFC" stroke="#D7DEE8"/>
+<rect x="588" y="513" width="105.0" height="12" rx="4" fill="#0F766E"/>
+<text x="638" y="503" text-anchor="middle" font-size="13" fill="#17324D">π21: +9</text>
+<rect x="715" y="479" width="110" height="58" rx="7" fill="#F8FAFC" stroke="#D7DEE8"/>
+<rect x="720" y="513" width="105.0" height="12" rx="4" fill="#0F766E"/>
+<text x="770" y="503" text-anchor="middle" font-size="13" fill="#17324D">π22: +9</text>
+<rect x="847" y="479" width="110" height="58" rx="7" fill="#F8FAFC" stroke="#D7DEE8"/>
+<rect x="852" y="513" width="58.3" height="12" rx="4" fill="#C24135"/>
+<text x="902" y="503" text-anchor="middle" font-size="13" fill="#17324D">π23: -3</text>
+<rect x="979" y="479" width="110" height="58" rx="7" fill="#F8FAFC" stroke="#D7DEE8"/>
+<rect x="984" y="513" width="73.9" height="12" rx="4" fill="#0F766E"/>
+<text x="1034" y="503" text-anchor="middle" font-size="13" fill="#17324D">π24: +5</text>
+<text x="55" y="610" font-size="14" fill="#64748B">range = -9 … 9; same demonstrations, different causal sequence</text>
+<text x="55" y="670" font-size="14" fill="#64748B">Toy recency rule is a counterexample to permutation invariance, not a model accuracy claim.</text>
+</svg>

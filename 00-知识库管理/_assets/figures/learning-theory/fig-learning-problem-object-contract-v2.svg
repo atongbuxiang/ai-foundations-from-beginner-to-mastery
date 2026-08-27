@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">统计学习问题的七对象合同</title>
+<desc id="desc">观测空间、未知分布、采样机制、假设空间、学习算法、损失和目标风险组成可检验的学习问题；计算张量和经验指标不能替代其中任何一层。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">世界与观测先于模型</text>
+<rect x="55" y="95" width="290" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="200.0" y="130.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">population law P on Z=X×Y</text>
+<line x1="200" y1="156" x2="200" y2="194" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="55" y="205" width="290" height="66" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="200.0" y="244.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">sampling protocol -&gt; S=(Z1,...,Zm)</text>
+<line x1="200" y1="274" x2="200" y2="312" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="55" y="324" width="290" height="62" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="200.0" y="361.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">observed dataset s</text>
+<text x="45" y="440" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">random sample S != realized dataset s</text>
+<text x="45" y="475" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">raw object -&gt; observation -&gt; encoding</text>
+<text x="45" y="505" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">each arrow can discard task-relevant information。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">算法从样本选择预测器</text>
+<rect x="445" y="95" width="140" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="515.0" y="130.0" font-size="17" font-weight="650" text-anchor="middle" fill="#2563EB">sample S</text>
+<rect x="650" y="95" width="115" height="58" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="707.5" y="130.0" font-size="17" font-weight="650" text-anchor="middle" fill="#0F766E">h_S in H</text>
+<line x1="588" y1="124" x2="645" y2="124" stroke="#1F2937" stroke-width="2.3" marker-end="url(#a3)"/>
+<text x="616" y="109" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">learner A</text>
+<line x1="705" y1="156" x2="705" y2="203" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="445" y="216" width="320" height="62" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="605.0" y="253.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">prediction action h_S(x) in A</text>
+<text x="430" y="340" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">parameter theta is a representation</text>
+<text x="430" y="375" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">hypothesis class H is a function set</text>
+<text x="430" y="410" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">algorithm A includes randomness / stopping</text>
+<text x="430" y="472" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">same H, different A -&gt; different output law</text>
+<text x="430" y="505" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">proper / improper must be stated。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">损失定义目标，风险定义验收</text>
+<rect x="840" y="90" width="300" height="58" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="990.0" y="125.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">loss ell(action, outcome)</text>
+<line x1="990" y1="151" x2="990" y2="188" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="840" y="200" width="300" height="66" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="990.0" y="239.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">R_P(h)=E_P ell(h(X),Y)</text>
+<line x1="990" y1="269" x2="990" y2="306" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="840" y="318" width="300" height="66" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="990.0" y="357.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">claim: excess / gap / utility</text>
+<text x="830" y="438" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">target population and loss fix what &#x27;best&#x27; means</text>
+<text x="830" y="473" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">confidence probability needs its random source</text>
+<text x="830" y="505" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">training success is not a complete claim。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">先固定对象、随机性与目标，再讨论模型和算法；合同不完整时，所谓泛化保证没有统一语义。</text>
+</svg>

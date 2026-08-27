@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">KL 局部几何、Fisher metric 与坐标不变性</title>
+  <desc id="desc">从 KL 二阶展开推导自然梯度，用 Bernoulli 的 logit 和 probability 坐标展示切向量 pushforward，并列出有限步与近似断点。</desc>
+  <rect width="1200" height="720" fill="#FFFEFB"/>
+  <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}.h{font-size:27px;font-weight:700}.sh{font-size:19px;font-weight:700}.b{font-size:16px}.s{font-size:15px;fill:#64748B}.boxb{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.boxg{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.boxa{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.boxr{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}.line{stroke:#CBD5E1;stroke-width:2}.arr{stroke:#2563EB;stroke-width:3;fill:none}</style>
+  <defs><marker id="ab" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#2563EB"/></marker></defs>
+  <text x="48" y="50" class="h" fill="#2563EB">A｜由 distribution trust region 推导 direction</text>
+  <rect x="48" y="82" width="310" height="104" rx="12" class="boxb"/><text x="72" y="118" class="sh">KL local expansion</text><text x="72" y="151" class="b">KL ≈ 1/2 p^T F p</text><text x="72" y="176" class="s">score mean removes first order</text>
+  <line x1="358" y1="134" x2="410" y2="134" class="arr" marker-end="url(#ab)"/>
+  <rect x="420" y="82" width="310" height="104" rx="12" class="boxg"/><text x="444" y="118" class="sh">metric constrained descent</text><text x="444" y="151" class="b">min g^T p,  p^T F p ≤ 2 eps</text><text x="444" y="176" class="s">Fisher ellipsoid, not Euclidean ball</text>
+  <line x1="730" y1="134" x2="782" y2="134" class="arr" marker-end="url(#ab)"/>
+  <rect x="792" y="82" width="360" height="104" rx="12" class="boxa"/><text x="816" y="118" class="sh">natural direction</text><text x="816" y="151" class="b">- F^(-1) g</text><text x="816" y="176" class="s">length set by KL radius / learning rate</text>
+
+  <line x1="48" y1="220" x2="1152" y2="220" class="line"/>
+  <text x="48" y="262" class="h" fill="#0F766E">B｜Bernoulli：数字不同，distribution tangent 相同</text>
+  <rect x="48" y="294" width="344" height="160" rx="12" class="boxb"/><text x="72" y="330" class="sh">logit coordinate theta</text><text x="72" y="365" class="b">p=0.8；g=-0.2；F=0.16</text><text x="72" y="398" class="b">natural descent = 1.25</text><text x="72" y="430" class="s">dp/dtheta = 0.16</text>
+  <path d="M392 374 C470 374 470 374 548 374" class="arr" marker-end="url(#ab)"/><text x="470" y="354" class="s" text-anchor="middle">pushforward</text><text x="470" y="398" class="s" text-anchor="middle">0.16 × 1.25</text>
+  <rect x="558" y="294" width="344" height="160" rx="12" class="boxg"/><text x="582" y="330" class="sh">probability coordinate p</text><text x="582" y="365" class="b">g=-1.25；F=6.25</text><text x="582" y="398" class="b">natural descent = 0.2</text><text x="582" y="430" class="s">same infinitesimal distribution move</text>
+  <rect x="934" y="294" width="218" height="160" rx="12" class="boxa"/><text x="958" y="330" class="sh">Invariant claim</text><text x="958" y="365" class="s">smooth invertible map</text><text x="958" y="394" class="s">exact metric + solve</text><text x="958" y="423" class="s">infinitesimal step</text>
+
+  <text x="48" y="516" class="h" fill="#C0392B">C｜三个断点</text>
+  <rect x="48" y="548" width="326" height="116" rx="12" class="boxr"/><text x="72" y="584" class="sh" fill="#C0392B">Finite Euler step</text><text x="72" y="617" class="b">phi(xi + delta) ≠ phi(xi)+J delta</text><text x="72" y="645" class="s">higher-order coordinate error</text>
+  <rect x="406" y="548" width="326" height="116" rx="12" class="boxa"/><text x="430" y="584" class="sh">Euclidean damping</text><text x="430" y="617" class="b">F + lambda I picks coordinates</text><text x="430" y="645" class="s">stability vs invariance tradeoff</text>
+  <rect x="764" y="548" width="388" height="116" rx="12" class="boxb"/><text x="788" y="584" class="sh">Approximation machinery</text><text x="788" y="617" class="b">diagonal / K-FAC / finite CG / clipping</text><text x="788" y="645" class="s">only scoped approximate invariance remains</text>
+</svg>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+  <title id="title">矩阵函数的定义路径、计算任务与算法选择</title>
+  <desc id="desc">上方区分矩阵函数和逐元素函数，中间把 Jordan 导数、Hermite 插值和 Cauchy 积分汇聚到同一主矩阵函数，下方区分完整矩阵、作用量与 Frechet 导数任务并对应不同算法。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
+    <style>
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}.blue{fill:#2563eb}.green{fill:#0f766e}.amber{fill:#b7791f}.h{font-size:19px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}.arrow{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="650" fill="#ffffff"/>
+  <rect x="42" y="39" width="1116" height="92" rx="12" fill="#fffbeb" stroke="#fcd34d"/>
+  <text x="68" y="75" class="sans h amber">第一道边界：f(A) 不是把 f 逐元素套到 A</text><text x="68" y="108" class="math body ink">矩阵指数 eᴬ=ΣₖAᵏ/k! 保持相似结构并解 x′=Ax；elementwise exp 只是数组逐项变换。</text><text x="1128" y="91" class="sans small muted" text-anchor="end">形状相同，数学对象不同</text>
+  <text x="600" y="167" class="sans h blue" text-anchor="middle">三条等价的定义/证明路线</text>
+  <rect x="54" y="190" width="286" height="88" rx="10" fill="#eff6ff" stroke="#93c5fd"/><text x="197" y="222" class="sans body blue" text-anchor="middle">Jordan 块上的导数数据</text><text x="197" y="251" class="math small muted" text-anchor="middle">f(λ),…,f⁽ˢ⁻¹⁾(λ)</text>
+  <rect x="457" y="190" width="286" height="88" rx="10" fill="#f8fafc" stroke="#cbd5e1"/><text x="600" y="222" class="sans body ink" text-anchor="middle">最小多项式上的 Hermite 插值</text><text x="600" y="251" class="math small muted" text-anchor="middle">f(A)=p(A)，deg p&lt;deg mA</text>
+  <rect x="860" y="190" width="286" height="88" rx="10" fill="#ecfdf5" stroke="#6ee7b7"/><text x="1003" y="222" class="sans body green" text-anchor="middle">解析函数的 Cauchy 积分</text><text x="1003" y="251" class="math small muted" text-anchor="middle">f(A)=(2πi)⁻¹∮f(z)(zI−A)⁻¹dz</text>
+  <path d="M197 278C197 324 420 324 536 343" class="arrow"/><path d="M600 278V329" class="arrow"/><path d="M1003 278C1003 324 780 324 664 343" class="arrow"/>
+  <rect x="486" y="329" width="228" height="58" rx="12" fill="#ffffff" stroke="#93c5fd" stroke-width="2"/><text x="600" y="365" class="math formula blue" text-anchor="middle">同一个主函数 f(A)</text>
+  <line x1="52" y1="418" x2="1148" y2="418" stroke="#cbd5e1"/>
+  <text x="68" y="455" class="sans h green">第二道边界：先确定要计算什么</text>
+  <rect x="54" y="478" width="324" height="86" rx="10" fill="#eff6ff" stroke="#93c5fd"/><text x="216" y="509" class="math body blue" text-anchor="middle">完整稠密 f(A)</text><text x="216" y="539" class="sans small muted" text-anchor="middle">Schur–Parlett；exp 用 scaling–squaring + Padé</text>
+  <rect x="438" y="478" width="324" height="86" rx="10" fill="#ecfdf5" stroke="#6ee7b7"/><text x="600" y="509" class="math body green" text-anchor="middle">作用量 f(A)b 或 f(A)B</text><text x="600" y="539" class="sans small muted" text-anchor="middle">Krylov / expm-multiply，避免形成稠密 f(A)</text>
+  <rect x="822" y="478" width="324" height="86" rx="10" fill="#fffbeb" stroke="#fcd34d"/><text x="984" y="509" class="math body amber" text-anchor="middle">方向导数 Lf(A,E)</text><text x="984" y="539" class="sans small muted" text-anchor="middle">分块恒等式或专用 Fréchet 算法</text>
+  <text x="600" y="604" class="sans small muted" text-anchor="middle">Jordan 与无穷级数适合定义和手算，不是一般浮点稠密问题的默认算法。</text>
+  <text x="600" y="638" class="sans result ink" text-anchor="middle">先分清对象，再选定义；先分清任务，再选算法。矩阵结构和乘法不可交换性贯穿全过程。</text>
+</svg>

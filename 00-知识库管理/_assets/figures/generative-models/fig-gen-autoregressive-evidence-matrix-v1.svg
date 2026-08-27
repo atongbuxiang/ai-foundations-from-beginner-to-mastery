@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">自回归模型的能力成本失效与证据矩阵</title>
+  <desc id="desc">矩阵以分布、训练、采样、系统和评价为行，以优势、代价、故障和必要证据为列，用于对重复、慢速或低覆盖等现象做竞争解释。</desc>
+  <rect width="1200" height="620" fill="#FFFEFB"/>
+  <style>.sans{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.ink{fill:#1F2937}.muted{fill:#64748B}.blue{fill:#2563EB}.green{fill:#0F766E}.amber{fill:#B7791F}.red{fill:#C24135}</style>
+  <rect x="38" y="48" width="1124" height="496" fill="#FFFEFB" stroke="#1F2937" stroke-width="2.5"/>
+  <rect x="38" y="48" width="1124" height="62" fill="#EEF3FF"/>
+  <line x1="190" y1="48" x2="190" y2="544" stroke="#1F2937" stroke-width="2"/><line x1="428" y1="48" x2="428" y2="544" stroke="#1F2937" stroke-width="2"/><line x1="666" y1="48" x2="666" y2="544" stroke="#1F2937" stroke-width="2"/><line x1="904" y1="48" x2="904" y2="544" stroke="#1F2937" stroke-width="2"/>
+  <g stroke="#D7DEE8" stroke-width="2"><line x1="38" y1="110" x2="1162" y2="110"/><line x1="38" y1="197" x2="1162" y2="197"/><line x1="38" y1="284" x2="1162" y2="284"/><line x1="38" y1="371" x2="1162" y2="371"/><line x1="38" y1="458" x2="1162" y2="458"/></g>
+  <g class="sans ink" font-size="18" font-weight="700" text-anchor="middle"><text x="114" y="87">账本</text><text x="309" y="87">优势</text><text x="547" y="87">代价</text><text x="785" y="87">常见故障</text><text x="1033" y="87">区分证据</text></g>
+  <g class="sans" font-size="18" font-weight="700"><text x="70" y="161" class="blue">分布</text><text x="70" y="248" class="amber">训练</text><text x="70" y="335" class="green">采样</text><text x="70" y="422" class="red">系统</text><text x="70" y="509" class="ink">评价</text></g>
+  <g class="sans ink" font-size="16"><text x="215" y="145">归一化 conditionals</text><text x="215" y="174">joint likelihood 可求</text><text x="453" y="145">顺序与条件族</text><text x="453" y="174">support 设计</text><text x="691" y="145">漏稀有模式</text><text x="691" y="174">连续输出平均</text><text x="929" y="145">held-out NLL</text><text x="929" y="174">coverage / calibration</text>
+  <text x="215" y="232">真实前缀目标清楚</text><text x="215" y="261">masked 可并行</text><text x="453" y="232">分布外前缀少</text><text x="453" y="261">有限优化误差</text><text x="691" y="232">恢复行为差</text><text x="691" y="261">rare-token loss</text><text x="929" y="232">prefix probes</text><text x="929" y="261">rollout interventions</text>
+  <text x="215" y="319">祖先采样定义简单</text><text x="215" y="348">条件控制自然</text><text x="453" y="319">T 个串行决定</text><text x="453" y="348">decoder 改 joint</text><text x="691" y="319">重复 / 过长</text><text x="691" y="348">多样性下降</text><text x="929" y="319">temperature sweep</text><text x="929" y="348">EOS / truncation log</text>
+  <text x="215" y="406">KV cache 可复用</text><text x="215" y="435">增量服务</text><text x="453" y="406">memory / reorder</text><text x="453" y="435">position contract</text><text x="691" y="406">cache 泄漏</text><text x="691" y="435">mask 错位</text><text x="929" y="406">full-vs-cache</text><text x="929" y="435">reset / packing tests</text>
+  <text x="215" y="493">proper log score</text><text x="215" y="522">可对齐压缩率</text><text x="453" y="493">不含全部语义</text><text x="453" y="522">协议依赖</text><text x="691" y="493">单指标裁决</text><text x="691" y="522">样本挑选偏差</text><text x="929" y="493">质量＋覆盖＋成本</text><text x="929" y="522">置信区间 / 人评</text></g>
+  <text x="38" y="590" class="sans red" font-size="17">读法｜从观测故障横向寻找竞争解释，再用最右列证据区分；不要从一张样本直接跳到模型家族结论。</text>
+</svg>
+

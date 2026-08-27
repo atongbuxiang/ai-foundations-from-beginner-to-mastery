@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">相同特征多项式下的代数重数、几何重数与可对角化差异</title>
+  <desc id="desc">比较二阶对角矩阵与 Jordan 块，它们都有二重特征值二，但前者特征空间二维而后者只有一维；底部总结重数不等式和可对角化判据。</desc>
+  <defs>
+    <style>
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}.blue{fill:#2563eb}.green{fill:#0f766e}.amber{fill:#b7791f}.h{font-size:19px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}.cell{fill:#ffffff;stroke:#cbd5e1}.axis{stroke:#cbd5e1;stroke-width:1.5}
+    </style>
+  </defs>
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <rect x="92" y="38" width="1016" height="64" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="600" y="67" class="math formula ink" text-anchor="middle">p(t)=det(tI−A)=(t−2)²　⇒　λ=2 的代数重数 a₂=2</text><text x="600" y="91" class="sans small muted" text-anchor="middle">特征多项式只记录根及其代数重数；它不单独决定有多少独立特征向量。</text>
+  <rect x="42" y="132" width="530" height="329" rx="12" fill="#ecfdf5" stroke="#6ee7b7"/>
+  <text x="68" y="170" class="sans h green">D：根的重数全部兑现为方向</text>
+  <text x="82" y="223" class="math formula ink">D =</text><g class="math formula ink" text-anchor="middle"><rect x="139" y="190" width="58" height="50" class="cell"/><rect x="197" y="190" width="58" height="50" class="cell"/><rect x="139" y="240" width="58" height="50" class="cell"/><rect x="197" y="240" width="58" height="50" class="cell"/><text x="168" y="222">2</text><text x="226" y="222">0</text><text x="168" y="273">0</text><text x="226" y="273">2</text></g>
+  <path d="M316 387H525M420 430V207" class="axis"/><path d="M420 387L510 387M420 387L420 258" stroke="#0f766e" stroke-width="4"/><text x="420" y="236" class="sans small green" text-anchor="middle">每个非零方向都是特征方向</text>
+  <text x="82" y="333" class="math body green">E₂(D)=R²</text><text x="82" y="373" class="math body ink">g₂=dim E₂(D)=2</text><text x="82" y="413" class="sans body green">g₂=a₂：可对角化</text>
+
+  <rect x="628" y="132" width="530" height="329" rx="12" fill="#fffbeb" stroke="#fcd34d"/>
+  <text x="654" y="170" class="sans h amber">J：同样的根，却缺少一个方向</text>
+  <text x="668" y="223" class="math formula ink">J =</text><g class="math formula ink" text-anchor="middle"><rect x="725" y="190" width="58" height="50" class="cell"/><rect x="783" y="190" width="58" height="50" class="cell"/><rect x="725" y="240" width="58" height="50" class="cell"/><rect x="783" y="240" width="58" height="50" class="cell"/><text x="754" y="222">2</text><text x="812" y="222" class="amber">1</text><text x="754" y="273">0</text><text x="812" y="273">2</text></g>
+  <path d="M902 387H1111M1006 430V207" class="axis"/><path d="M902 387H1111" stroke="#b7791f" stroke-width="4"/><text x="1006" y="354" class="sans small amber" text-anchor="middle">只有一条特征方向</text>
+  <text x="668" y="333" class="math body amber">E₂(J)=span(e₁)</text><text x="668" y="373" class="math body ink">g₂=dim E₂(J)=1</text><text x="668" y="413" class="sans body amber">g₂&lt;a₂：不可对角化</text>
+  <rect x="70" y="493" width="1060" height="83" rx="12" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="600" y="524" class="math formula ink" text-anchor="middle">1 ≤ gλ ≤ aλ　　Σλ aλ=n（多项式在当前域上分裂时）</text><text x="600" y="554" class="sans body blue" text-anchor="middle">可对角化 ⇔ 每个特征值都满足 gλ=aλ ⇔ 能找到 n 个线性无关特征向量</text>
+  <text x="600" y="610" class="sans result ink" text-anchor="middle">代数重数数“根出现几次”，几何重数数“独立特征方向有几条”；缺口由 Jordan 链补上。</text>
+</svg>

@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="610" viewBox="0 0 1440 610" role="img" aria-labelledby="title desc">
+<title id="title">Stable summation, cancellation, and mixed precision accumulation</title>
+<desc id="desc">Three panels compare sequential, pairwise, and compensated summation; nonassociative cancellation orders; and FP16 versus FP32 accumulation of FP16 products.</desc>
+<style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif;font-size:13px;fill:#172033}.title{font-size:23px;font-weight:600}.panel{font-size:16px;font-weight:600}.axis{font-size:14px}.frame{fill:#fbfcfe;stroke:#7b879a}.grid{stroke:#dbe1e8}.note{font-size:12px;fill:#445067}.legend{font-size:12px}</style>
+<rect width="1440" height="610" fill="#ffffff"/>
+<text x="720" y="34" text-anchor="middle" class="title">稳定求和、点积与矩阵乘法：乘加顺序和累加精度属于算法</text>
+<text x="75" y="67" class="panel">A  1 后累加半 ulp：顺序、树归约与补偿</text>
+<text x="555" y="67" class="panel">B  同一三项点积：浮点加法不结合</text>
+<text x="1035" y="67" class="panel">C  FP16 输入：累加精度控制 GEMM 内核误差</text>
+<rect x="75" y="88" width="330" height="330" class="frame"/>
+<line x1="75.00" y1="88" x2="75.00" y2="418" class="grid"/>
+<text x="75.00" y="438" text-anchor="middle">1</text>
+<line x1="157.50" y1="88" x2="157.50" y2="418" class="grid"/>
+<text x="157.50" y="438" text-anchor="middle">16</text>
+<line x1="240.00" y1="88" x2="240.00" y2="418" class="grid"/>
+<text x="240.00" y="438" text-anchor="middle">256</text>
+<line x1="322.50" y1="88" x2="322.50" y2="418" class="grid"/>
+<text x="322.50" y="438" text-anchor="middle">4k</text>
+<line x1="405.00" y1="88" x2="405.00" y2="418" class="grid"/>
+<text x="405.00" y="438" text-anchor="middle">65k</text>
+<line x1="75" y1="418.00" x2="405" y2="418.00" class="grid"/>
+<text x="66" y="422.00" text-anchor="end">1e−10</text>
+<line x1="75" y1="352.00" x2="405" y2="352.00" class="grid"/>
+<text x="66" y="356.00" text-anchor="end">1e−8</text>
+<line x1="75" y1="286.00" x2="405" y2="286.00" class="grid"/>
+<text x="66" y="290.00" text-anchor="end">1e−6</text>
+<line x1="75" y1="220.00" x2="405" y2="220.00" class="grid"/>
+<text x="66" y="224.00" text-anchor="end">1e−4</text>
+<line x1="75" y1="154.00" x2="405" y2="154.00" class="grid"/>
+<text x="66" y="158.00" text-anchor="end">1e−2</text>
+<line x1="75" y1="88.00" x2="405" y2="88.00" class="grid"/>
+<text x="66" y="92.00" text-anchor="end">1</text>
+<text x="240.0" y="463" text-anchor="middle" class="axis">小项个数 n</text>
+<text x="17" y="253.0" text-anchor="middle" class="axis" transform="rotate(-90 17 253.0)">relative error</text>
+<polyline points="75.00,326.42 95.62,316.48 116.25,306.55 136.88,296.61 157.50,286.68 178.12,276.75 198.75,266.81 219.38,256.88 240.00,246.94 260.62,237.01 281.25,227.08 301.88,217.14 322.50,207.21 343.12,197.28 363.75,187.35 384.38,177.43 405.00,167.53" fill="none" stroke="#c43d3d" stroke-width="2.6"/>
+<circle cx="75.00" cy="326.42" r="3.5" fill="#c43d3d"/>
+<circle cx="157.50" cy="286.68" r="3.5" fill="#c43d3d"/>
+<circle cx="240.00" cy="246.94" r="3.5" fill="#c43d3d"/>
+<circle cx="322.50" cy="207.21" r="3.5" fill="#c43d3d"/>
+<circle cx="405.00" cy="167.53" r="3.5" fill="#c43d3d"/>
+<polyline points="75.00,326.42 95.62,316.48 116.25,418.00 136.88,418.00 157.50,418.00 178.12,418.00 198.75,418.00 219.38,418.00 240.00,418.00 260.62,418.00 281.25,418.00 301.88,418.00 322.50,418.00 343.12,418.00 363.75,418.00 384.38,418.00 405.00,418.00" fill="none" stroke="#2f6fbd" stroke-width="2.6" stroke-dasharray="6 4"/>
+<rect x="71.50" y="322.92" width="7.0" height="7.0" fill="#2f6fbd"/>
+<rect x="154.00" y="414.50" width="7.0" height="7.0" fill="#2f6fbd"/>
+<rect x="236.50" y="414.50" width="7.0" height="7.0" fill="#2f6fbd"/>
+<rect x="319.00" y="414.50" width="7.0" height="7.0" fill="#2f6fbd"/>
+<rect x="401.50" y="414.50" width="7.0" height="7.0" fill="#2f6fbd"/>
+<polyline points="75.00,326.42 95.62,418.00 116.25,418.00 136.88,418.00 157.50,418.00 178.12,418.00 198.75,418.00 219.38,418.00 240.00,418.00 260.62,418.00 281.25,418.00 301.88,418.00 322.50,418.00 343.12,418.00 363.75,418.00 384.38,418.00 405.00,418.00" fill="none" stroke="#248a57" stroke-width="2.6"/>
+<path d="M75.00,321.92 L79.50,326.42 L75.00,330.92 L70.50,326.42Z" fill="#248a57"/>
+<path d="M157.50,413.50 L162.00,418.00 L157.50,422.50 L153.00,418.00Z" fill="#248a57"/>
+<path d="M240.00,413.50 L244.50,418.00 L240.00,422.50 L235.50,418.00Z" fill="#248a57"/>
+<path d="M322.50,413.50 L327.00,418.00 L322.50,422.50 L318.00,418.00Z" fill="#248a57"/>
+<path d="M405.00,413.50 L409.50,418.00 L405.00,422.50 L400.50,418.00Z" fill="#248a57"/>
+<text x="93" y="113" class="note">精确值：1+n·2⁻²⁴；逐项加法不断吸收小项</text>
+<text x="87" y="496" class="legend" fill="#c43d3d">● sequential FP32</text>
+<text x="205" y="496" class="legend" fill="#2f6fbd">■ pairwise FP32</text>
+<text x="315" y="496" class="legend" fill="#248a57">◆ Kahan FP32</text>
+<rect x="555" y="88" width="330" height="330" class="frame"/>
+<line x1="555.00" y1="88" x2="555.00" y2="418" class="grid"/>
+<text x="555.00" y="438" text-anchor="middle">1</text>
+<line x1="637.50" y1="88" x2="637.50" y2="418" class="grid"/>
+<text x="637.50" y="438" text-anchor="middle">2⁸</text>
+<line x1="720.00" y1="88" x2="720.00" y2="418" class="grid"/>
+<text x="720.00" y="438" text-anchor="middle">2¹⁶</text>
+<line x1="802.50" y1="88" x2="802.50" y2="418" class="grid"/>
+<text x="802.50" y="438" text-anchor="middle">2²⁴</text>
+<line x1="885.00" y1="88" x2="885.00" y2="418" class="grid"/>
+<text x="885.00" y="438" text-anchor="middle">2³²</text>
+<line x1="555" y1="418.00" x2="885" y2="418.00" class="grid"/>
+<text x="546" y="422.00" text-anchor="end">1e−10</text>
+<line x1="555" y1="352.00" x2="885" y2="352.00" class="grid"/>
+<text x="546" y="356.00" text-anchor="end">1e−8</text>
+<line x1="555" y1="286.00" x2="885" y2="286.00" class="grid"/>
+<text x="546" y="290.00" text-anchor="end">1e−6</text>
+<line x1="555" y1="220.00" x2="885" y2="220.00" class="grid"/>
+<text x="546" y="224.00" text-anchor="end">1e−4</text>
+<line x1="555" y1="154.00" x2="885" y2="154.00" class="grid"/>
+<text x="546" y="158.00" text-anchor="end">1e−2</text>
+<line x1="555" y1="88.00" x2="885" y2="88.00" class="grid"/>
+<text x="546" y="92.00" text-anchor="end">1</text>
+<text x="720.0" y="463" text-anchor="middle" class="axis">消去尺度 a</text>
+<text x="497" y="253.0" text-anchor="middle" class="axis" transform="rotate(-90 497 253.0)">|computed−1|</text>
+<polyline points="555.00,418.00 575.62,418.00 596.25,418.00 616.88,418.00 637.50,418.00 658.12,418.00 678.75,418.00 699.38,418.00 720.00,418.00 740.62,418.00 761.25,418.00 781.88,418.00 802.50,88.00 823.12,88.00 843.75,88.00 864.38,88.00 885.00,88.00" fill="none" stroke="#c43d3d" stroke-width="2.6"/>
+<circle cx="555.00" cy="418.00" r="3.5" fill="#c43d3d"/>
+<circle cx="637.50" cy="418.00" r="3.5" fill="#c43d3d"/>
+<circle cx="720.00" cy="418.00" r="3.5" fill="#c43d3d"/>
+<circle cx="802.50" cy="88.00" r="3.5" fill="#c43d3d"/>
+<circle cx="885.00" cy="88.00" r="3.5" fill="#c43d3d"/>
+<polyline points="555.00,418.00 575.62,418.00 596.25,418.00 616.88,418.00 637.50,418.00 658.12,418.00 678.75,418.00 699.38,418.00 720.00,418.00 740.62,418.00 761.25,418.00 781.88,418.00 802.50,418.00 823.12,418.00 843.75,418.00 864.38,418.00 885.00,418.00" fill="none" stroke="#2f6fbd" stroke-width="2.6" stroke-dasharray="6 4"/>
+<rect x="551.50" y="414.50" width="7.0" height="7.0" fill="#2f6fbd"/>
+<rect x="634.00" y="414.50" width="7.0" height="7.0" fill="#2f6fbd"/>
+<rect x="716.50" y="414.50" width="7.0" height="7.0" fill="#2f6fbd"/>
+<rect x="799.00" y="414.50" width="7.0" height="7.0" fill="#2f6fbd"/>
+<rect x="881.50" y="414.50" width="7.0" height="7.0" fill="#2f6fbd"/>
+<polyline points="555.00,418.00 575.62,418.00 596.25,418.00 616.88,418.00 637.50,418.00 658.12,418.00 678.75,418.00 699.38,418.00 720.00,418.00 740.62,418.00 761.25,418.00 781.88,418.00 802.50,418.00 823.12,418.00 843.75,418.00 864.38,418.00 885.00,418.00" fill="none" stroke="#248a57" stroke-width="2.6"/>
+<path d="M555.00,413.50 L559.50,418.00 L555.00,422.50 L550.50,418.00Z" fill="#248a57"/>
+<path d="M637.50,413.50 L642.00,418.00 L637.50,422.50 L633.00,418.00Z" fill="#248a57"/>
+<path d="M720.00,413.50 L724.50,418.00 L720.00,422.50 L715.50,418.00Z" fill="#248a57"/>
+<path d="M802.50,413.50 L807.00,418.00 L802.50,422.50 L798.00,418.00Z" fill="#248a57"/>
+<path d="M885.00,413.50 L889.50,418.00 L885.00,422.50 L880.50,418.00Z" fill="#248a57"/>
+<text x="573" y="113" class="note">数学上 (a+1)−a = (a−a)+1 = 1；FP32 并非如此</text>
+<text x="563" y="496" class="legend" fill="#c43d3d">● (a+1)−a</text>
+<text x="670" y="496" class="legend" fill="#2f6fbd">■ (a−a)+1</text>
+<text x="775" y="496" class="legend" fill="#248a57">◆ Neumaier</text>
+<rect x="1035" y="88" width="330" height="330" class="frame"/>
+<line x1="1035.00" y1="88" x2="1035.00" y2="418" class="grid"/>
+<text x="1035.00" y="438" text-anchor="middle">16</text>
+<line x1="1108.33" y1="88" x2="1108.33" y2="418" class="grid"/>
+<text x="1108.33" y="438" text-anchor="middle">64</text>
+<line x1="1181.67" y1="88" x2="1181.67" y2="418" class="grid"/>
+<text x="1181.67" y="438" text-anchor="middle">256</text>
+<line x1="1255.00" y1="88" x2="1255.00" y2="418" class="grid"/>
+<text x="1255.00" y="438" text-anchor="middle">1k</text>
+<line x1="1365.00" y1="88" x2="1365.00" y2="418" class="grid"/>
+<text x="1365.00" y="438" text-anchor="middle">8k</text>
+<line x1="1035" y1="418.00" x2="1365" y2="418.00" class="grid"/>
+<text x="1026" y="422.00" text-anchor="end">1e−10</text>
+<line x1="1035" y1="335.50" x2="1365" y2="335.50" class="grid"/>
+<text x="1026" y="339.50" text-anchor="end">1e−8</text>
+<line x1="1035" y1="253.00" x2="1365" y2="253.00" class="grid"/>
+<text x="1026" y="257.00" text-anchor="end">1e−6</text>
+<line x1="1035" y1="170.50" x2="1365" y2="170.50" class="grid"/>
+<text x="1026" y="174.50" text-anchor="end">1e−4</text>
+<line x1="1035" y1="88.00" x2="1365" y2="88.00" class="grid"/>
+<text x="1026" y="92.00" text-anchor="end">1e−2</text>
+<text x="1200.0" y="463" text-anchor="middle" class="axis">inner dimension k</text>
+<text x="977" y="253.0" text-anchor="middle" class="axis" transform="rotate(-90 977 253.0)">|error| / Σ|aᵢbᵢ|</text>
+<polyline points="1035.00,153.07 1071.67,162.57 1108.33,149.48 1145.00,187.80 1181.67,156.56 1218.33,150.69 1255.00,155.06 1291.67,152.46 1328.33,155.52 1365.00,162.84" fill="none" stroke="#c36a14" stroke-width="2.6"/>
+<circle cx="1035.00" cy="153.07" r="3.5" fill="#c36a14"/>
+<circle cx="1108.33" cy="149.48" r="3.5" fill="#c36a14"/>
+<circle cx="1181.67" cy="156.56" r="3.5" fill="#c36a14"/>
+<circle cx="1255.00" cy="155.06" r="3.5" fill="#c36a14"/>
+<circle cx="1365.00" cy="162.84" r="3.5" fill="#c36a14"/>
+<polyline points="1035.00,303.80 1071.67,309.11 1108.33,283.50 1145.00,299.95 1181.67,359.85 1218.33,330.50 1255.00,317.40 1291.67,313.02 1328.33,325.49 1365.00,382.16" fill="none" stroke="#2f6fbd" stroke-width="2.6"/>
+<rect x="1031.50" y="300.30" width="7.0" height="7.0" fill="#2f6fbd"/>
+<rect x="1104.83" y="280.00" width="7.0" height="7.0" fill="#2f6fbd"/>
+<rect x="1178.17" y="356.35" width="7.0" height="7.0" fill="#2f6fbd"/>
+<rect x="1251.50" y="313.90" width="7.0" height="7.0" fill="#2f6fbd"/>
+<rect x="1361.50" y="378.66" width="7.0" height="7.0" fill="#2f6fbd"/>
+<polyline points="1035.00,303.80 1071.67,328.79 1108.33,332.02 1145.00,325.35 1181.67,359.85 1218.33,322.16 1255.00,330.64 1291.67,337.25 1328.33,340.17 1365.00,382.16" fill="none" stroke="#8a4fb8" stroke-width="2.6" stroke-dasharray="6 4"/>
+<path d="M1035.00,299.30 L1039.50,303.80 L1035.00,308.30 L1030.50,303.80Z" fill="#8a4fb8"/>
+<path d="M1108.33,327.52 L1112.83,332.02 L1108.33,336.52 L1103.83,332.02Z" fill="#8a4fb8"/>
+<path d="M1181.67,355.35 L1186.17,359.85 L1181.67,364.35 L1177.17,359.85Z" fill="#8a4fb8"/>
+<path d="M1255.00,326.14 L1259.50,330.64 L1255.00,335.14 L1250.50,330.64Z" fill="#8a4fb8"/>
+<path d="M1365.00,377.66 L1369.50,382.16 L1365.00,386.66 L1360.50,382.16Z" fill="#8a4fb8"/>
+<text x="1053" y="113" class="note">输入均先量化为 binary16；参考值对量化后乘积做 math.fsum</text>
+<text x="1040" y="496" class="legend" fill="#c36a14">● FP16 accum</text>
+<text x="1147" y="496" class="legend" fill="#2f6fbd">■ FP32 accum</text>
+<text x="1253" y="496" class="legend" fill="#8a4fb8">◆ pairwise FP32</text>
+<text x="720" y="568" text-anchor="middle" class="note">A：树归约把线性误差深度降为对数；B：消去条件性决定顺序敏感；C：storage、multiply 与 accumulate precision 必须分开报告。</text>
+<text x="720" y="590" text-anchor="middle" class="note">生成：plot_stable_reductions_matmul.py · Python 标准库 · binary16/binary32 软件舍入</text>
+</svg>

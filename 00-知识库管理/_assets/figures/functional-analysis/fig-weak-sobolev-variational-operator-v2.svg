@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Weak derivative、Sobolev spaces 与 neural operators</title>
+<desc id="desc">Weak derivative 通过对所有测试函数的分部积分定义；Sobolev norm 同时控制函数和弱导数，embedding、trace 与 compactness 需要域和指数条件；弱 PDE 经变分适定性和离散误差后才连接函数到函数的 neural operator。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">弱导数：把微分移给测试函数</text>
+<line x1="55" y1="285" x2="350" y2="285" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="200" y1="100" x2="200" y2="355" stroke="#D7DEE8" stroke-width="2"/>
+<path d="M70 180L200 285L335 175" fill="none" stroke="#2563EB" stroke-width="3"/>
+<text x="75" y="150" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">u(x)=|x|</text>
+<path d="M75 380L195 380L205 330L335 330" fill="none" stroke="#C24135" stroke-width="3"/>
+<text x="75" y="420" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">weak u&#x27; = sign(x) a.e.</text>
+<text x="45" y="465" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">integral u D phi = - integral v phi</text>
+<text x="45" y="500" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">identity holds for every compactly supported test。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Sobolev：正则、边界与紧性合同</text>
+<rect x="445" y="90" width="310" height="58" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="600.0" y="125.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">W^{k,p}: u and weak derivatives in Lp</text>
+<line x1="600" y1="151" x2="600" y2="182" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="445" y="195" width="310" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600.0" y="230.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">embedding: W^{k,p} -&gt; Lq / C^alpha</text>
+<line x1="600" y1="256" x2="600" y2="287" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="445" y="300" width="310" height="58" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="600.0" y="335.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">trace / compactness / Poincare</text>
+<text x="430" y="410" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">dimension + exponent + domain regularity matter</text>
+<text x="430" y="445" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">H_0^1 closure encodes boundary values weakly</text>
+<text x="430" y="480" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">weak compactness != strong compactness</text>
+<text x="430" y="510" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">embeddings require dimension/domain hypotheses。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">从弱 PDE 到 neural operator</text>
+<rect x="840" y="82" width="300" height="54" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="990.0" y="115.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">input coefficient a in X</text>
+<line x1="990" y1="139" x2="990" y2="165" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="840" y="172" width="300" height="54" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="990.0" y="205.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">weak problem: find u in V</text>
+<line x1="990" y1="229" x2="990" y2="255" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="840" y="262" width="300" height="54" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="990.0" y="295.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">well-posed solution map G:X-&gt;Y</text>
+<line x1="990" y1="319" x2="990" y2="345" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="840" y="352" width="300" height="54" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="990.0" y="385.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">discretize / learn / test in norms</text>
+<text x="830" y="458" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">low training residual != operator approximation</text>
+<text x="830" y="487" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">mesh sharing != resolution convergence</text>
+<text x="830" y="516" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">report data, discretization, model and solver errors。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">弱形式扩大可解对象；Sobolev 合同控制正则与边界，neural operator 还须跨输入函数族和离散层验收。</text>
+</svg>

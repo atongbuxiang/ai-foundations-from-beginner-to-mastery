@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Split Conformal：交换秩、集合形状与 Coverage 量词</title>
+<desc id="desc">proper training固定score，untouched calibration提供order statistic，future score凭exchangeability获得有限样本marginal coverage；集合效率和条件覆盖是额外目标。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">保证来自 m+1 个交换位置</text>
+<rect x="55" y="92" width="300" height="54" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="205.0" y="125.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">proper train -&gt; fixed score s(x,y)</text>
+<line x1="205" y1="151" x2="205" y2="180" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="55" y="190" width="300" height="54" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="205.0" y="223.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">m untouched calibration scores</text>
+<text x="45" y="285" font-size="16" font-weight="700" text-anchor="start" fill="#1F2937">k = ceil((m+1)(1-alpha))</text>
+<line x1="65" y1="465" x2="65" y2="437" stroke="#2563EB" stroke-width="8"/>
+<line x1="100" y1="465" x2="100" y2="423" stroke="#2563EB" stroke-width="8"/>
+<line x1="135" y1="465" x2="135" y2="423" stroke="#2563EB" stroke-width="8"/>
+<line x1="170" y1="465" x2="170" y2="405" stroke="#2563EB" stroke-width="8"/>
+<line x1="205" y1="465" x2="205" y2="390" stroke="#2563EB" stroke-width="8"/>
+<line x1="240" y1="465" x2="240" y2="369" stroke="#2563EB" stroke-width="8"/>
+<line x1="275" y1="465" x2="275" y2="353" stroke="#2563EB" stroke-width="8"/>
+<line x1="310" y1="465" x2="310" y2="320" stroke="#C24135" stroke-width="8"/>
+<text x="45" y="495" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">future rank uniform without ties</text>
+<text x="45" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">ties enter conservatively with &lt;=。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">同一 Rank，多个集合形状</text>
+<rect x="445" y="92" width="310" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600.0" y="127.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">residual: f(x) +/- q_hat</text>
+<rect x="445" y="176" width="310" height="58" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="600.0" y="211.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">normalized: local scale x q_hat</text>
+<rect x="445" y="260" width="310" height="58" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="600.0" y="295.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">CQR: [q_lo-q_hat, q_hi+q_hat]</text>
+<rect x="445" y="344" width="310" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600.0" y="379.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">classification: score-threshold label set</text>
+<text x="430" y="452" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937">base model quality mainly changes efficiency</text>
+<text x="430" y="490" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">report length, set size, empty/full rates</text>
+<text x="430" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">coverage alone admits the full label space。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Coverage Claim 的四道门</text>
+<rect x="845" y="92" width="285" height="56" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="987.5" y="126.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">marginal != pointwise conditional</text>
+<rect x="845" y="174" width="285" height="56" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="987.5" y="208.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">exchangeable unit: patient / session</text>
+<rect x="845" y="256" width="285" height="56" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="987.5" y="290.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">no adaptive calibration reuse</text>
+<rect x="845" y="338" width="285" height="56" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="987.5" y="372.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">shift breaks rank symmetry</text>
+<text x="830" y="438" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937">group and simultaneous events are stronger</text>
+<text x="830" y="478" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">weighted/online variants need new assumptions</text>
+<text x="830" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">distribution-free does not mean shift-free。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">Conformal的有限样本力量来自交换秩而非基础模型正确；量词、数据复用、依赖与效率决定最终结论能走多远。</text>
+</svg>

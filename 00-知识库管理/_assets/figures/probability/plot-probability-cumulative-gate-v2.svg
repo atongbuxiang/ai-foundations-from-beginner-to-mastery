@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+<title id="title">概率统计累计复现门</title>
+<desc id="desc">三面板展示置信区间重复抽样覆盖、重要性采样尾概率与权重退化、以及双峰目标中多链初始化导致的 R-hat 盲区。</desc>
+<defs><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",Arial,sans-serif}.title{font-size:24px;font-weight:700;fill:#1F2937}.head{font-size:22px;font-weight:700;fill:#334155}.small{font-size:15px;fill:#64748B}.label{font-size:17px;fill:#334155}.math{font-family:Georgia,"Times New Roman",serif;font-size:17px;fill:#1F2937}.card{fill:#FFFEFB;stroke:#D7DEE8;stroke-width:1.3}.axis{stroke:#64748B;stroke-width:1.1}.grid{stroke:#D7DEE8;stroke-width:1;stroke-dasharray:4 4}</style></defs>
+<rect width="1200" height="430" fill="#FFFFFF"/>
+<text x="40" y="38" class="title">PROB-CUM-01 计算门：coverage、importance weights 与多链诊断</text>
+<rect x="28" y="58" width="368" height="342" class="card"/><rect x="416" y="58" width="368" height="342" class="card"/><rect x="804" y="58" width="368" height="342" class="card"/>
+<text x="50" y="88" class="head">A　Wald CI 覆盖率</text>
+<text x="438" y="88" class="head">B　rare-event IS 与 ESS</text>
+<text x="826" y="88" class="head">C　双链 MCMC 与 R-hat</text>
+<line x1="70.0" y1="280.0" x2="350.0" y2="280.0" class="axis"/>
+<line x1="70.0" y1="125.0" x2="70.0" y2="280.0" class="axis"/>
+<line x1="70.0" y1="156.0" x2="350.0" y2="156.0" stroke="#16A34A" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="346.0" y="151.0" class="small" text-anchor="end">nominal 0.95</text>
+<circle cx="70.0" cy="160.6" r="5" fill="#2563EB"/>
+<text x="70.0" y="300.0" class="small" text-anchor="middle">n=20</text>
+<text x="70.0" y="150.6" class="label" text-anchor="middle">0.943</text>
+<circle cx="163.3" cy="158.6" r="5" fill="#2563EB"/>
+<text x="163.3" y="300.0" class="small" text-anchor="middle">n=50</text>
+<text x="163.3" y="148.6" class="label" text-anchor="middle">0.946</text>
+<circle cx="256.7" cy="155.8" r="5" fill="#2563EB"/>
+<text x="256.7" y="300.0" class="small" text-anchor="middle">n=100</text>
+<text x="256.7" y="145.8" class="label" text-anchor="middle">0.950</text>
+<circle cx="350.0" cy="153.8" r="5" fill="#2563EB"/>
+<text x="350.0" y="300.0" class="small" text-anchor="middle">n=500</text>
+<text x="350.0" y="143.8" class="label" text-anchor="middle">0.954</text>
+<polyline points="70.0,160.6 163.3,158.6 256.7,155.8 350.0,153.8" fill="none" stroke="#2563EB" stroke-width="2.5"/>
+<text x="70.0" y="323.0" class="small" text-anchor="start">p=0.30；每个 n 重复 4000 次；Wald 区间</text>
+<text x="70.0" y="348.0" class="label" text-anchor="start">coverage 偏离 0.95 不等于 posterior 概率改变</text>
+<text x="70.0" y="375.0" class="small" text-anchor="start">小样本/边界概率需换更可靠 interval</text>
+<line x1="460.0" y1="275.0" x2="740.0" y2="275.0" class="axis"/>
+<rect x="485.0" y="160.0" width="48" height="115.0" rx="5" fill="#DC2626" fill-opacity=".82"/>
+<text x="509.0" y="295.0" class="small" text-anchor="middle">σq=0.7</text>
+<text x="509.0" y="152.0" class="label" text-anchor="middle">1.21×</text>
+<text x="509.0" y="318.0" class="small" text-anchor="middle">ESS/N=0.53</text>
+<rect x="577.0" y="253.8" width="48" height="21.2" rx="5" fill="#F59E0B" fill-opacity=".82"/>
+<text x="601.0" y="295.0" class="small" text-anchor="middle">σq=1.0</text>
+<text x="601.0" y="245.8" class="label" text-anchor="middle">0.22×</text>
+<text x="601.0" y="318.0" class="small" text-anchor="middle">ESS/N=1.00</text>
+<rect x="669.0" y="271.3" width="48" height="3.7" rx="5" fill="#16A34A" fill-opacity=".82"/>
+<text x="693.0" y="295.0" class="small" text-anchor="middle">σq=2.0</text>
+<text x="693.0" y="263.3" class="label" text-anchor="middle">0.04×</text>
+<text x="693.0" y="318.0" class="small" text-anchor="middle">ESS/N=0.66</text>
+<text x="438.0" y="112.0" class="small" text-anchor="start">truth P(Z&gt;3)=0.001350; bar=relative RMSE</text>
+<text x="438.0" y="347.0" class="label" text-anchor="start">σq=0.7 有 support，却有无限 weight 二阶矩</text>
+<text x="438.0" y="374.0" class="small" text-anchor="start">ESS 只诊断已见 weights；不能证明未漏 mode</text>
+<line x1="850.0" y1="290.0" x2="1120.0" y2="290.0" class="axis"/>
+<line x1="850.0" y1="207.5" x2="1120.0" y2="207.5" stroke="#16A34A" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="1120.0" y="202.5" class="small" text-anchor="end">true mean = 0</text>
+<circle cx="884.0" cy="269.0" r="6" fill="#7C3AED"/>
+<circle cx="898.0" cy="269.2" r="6" fill="#DB2777"/>
+<circle cx="912.0" cy="269.5" r="6" fill="#2563EB"/>
+<circle cx="926.0" cy="269.4" r="6" fill="#EA580C"/>
+<text x="905.0" y="310.0" class="label" text-anchor="middle">同为左峰</text>
+<text x="905.0" y="326.0" class="label" text-anchor="middle">R-hat=1.000</text>
+<text x="905.0" y="346.0" class="small" text-anchor="middle">mean=-5.99</text>
+<circle cx="1044.0" cy="269.4" r="6" fill="#7C3AED"/>
+<circle cx="1058.0" cy="269.1" r="6" fill="#DB2777"/>
+<circle cx="1072.0" cy="145.3" r="6" fill="#2563EB"/>
+<circle cx="1086.0" cy="145.3" r="6" fill="#EA580C"/>
+<text x="1065.0" y="310.0" class="label" text-anchor="middle">分散两峰</text>
+<text x="1065.0" y="326.0" class="label" text-anchor="middle">R-hat=6.601</text>
+<text x="1065.0" y="346.0" class="small" text-anchor="middle">mean=0.02</text>
+<text x="826.0" y="374.0" class="small" text-anchor="start">低 R-hat 是必要预警工具，不是全局探索证书</text>
+</svg>

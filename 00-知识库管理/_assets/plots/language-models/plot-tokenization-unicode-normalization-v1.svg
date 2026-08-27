@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+<title id="title">Unicode normalization 改变码点与字节长度</title><desc id="desc">比较分解 e acute 与圈号一在 identity、NFC、NFD、NFKC、NFKD 下的码点和 UTF-8 字节数。</desc>
+<rect width="1200" height="620" fill="#FFFEFB"/>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<text x="55" y="55" font-size="24" font-weight="700" fill="#2563EB">Unicode normalization：同一视觉与不同信息合同</text>
+<text x="70" y="105" font-size="20" font-weight="700" fill="#0F766E">decomposed_e_acute</text>
+<text x="70" y="155" font-size="16" font-weight="700">identity</text>
+<rect x="165" y="135" width="140" height="22" fill="#2563EB"/><text x="315" y="152" font-size="14">2 cp</text>
+<rect x="165" y="165" width="135" height="22" fill="#B7791F"/><text x="310" y="182" font-size="14">3 bytes</text>
+<text x="380" y="157" font-size="13" fill="#64748B">U+0065 U+0301</text>
+<text x="70" y="230" font-size="16" font-weight="700">NFC</text>
+<rect x="165" y="210" width="70" height="22" fill="#2563EB"/><text x="245" y="227" font-size="14">1 cp</text>
+<rect x="165" y="240" width="90" height="22" fill="#B7791F"/><text x="265" y="257" font-size="14">2 bytes</text>
+<text x="380" y="232" font-size="13" fill="#64748B">U+00E9</text>
+<text x="70" y="305" font-size="16" font-weight="700">NFD</text>
+<rect x="165" y="285" width="140" height="22" fill="#2563EB"/><text x="315" y="302" font-size="14">2 cp</text>
+<rect x="165" y="315" width="135" height="22" fill="#B7791F"/><text x="310" y="332" font-size="14">3 bytes</text>
+<text x="380" y="307" font-size="13" fill="#64748B">U+0065 U+0301</text>
+<text x="70" y="380" font-size="16" font-weight="700">NFKC</text>
+<rect x="165" y="360" width="70" height="22" fill="#2563EB"/><text x="245" y="377" font-size="14">1 cp</text>
+<rect x="165" y="390" width="90" height="22" fill="#B7791F"/><text x="265" y="407" font-size="14">2 bytes</text>
+<text x="380" y="382" font-size="13" fill="#64748B">U+00E9</text>
+<text x="70" y="455" font-size="16" font-weight="700">NFKD</text>
+<rect x="165" y="435" width="140" height="22" fill="#2563EB"/><text x="315" y="452" font-size="14">2 cp</text>
+<rect x="165" y="465" width="135" height="22" fill="#B7791F"/><text x="310" y="482" font-size="14">3 bytes</text>
+<text x="380" y="457" font-size="13" fill="#64748B">U+0065 U+0301</text>
+<text x="640" y="105" font-size="20" font-weight="700" fill="#C24135">circled_one</text>
+<text x="640" y="155" font-size="16" font-weight="700">identity</text>
+<rect x="735" y="135" width="70" height="22" fill="#2563EB"/><text x="815" y="152" font-size="14">1 cp</text>
+<rect x="735" y="165" width="135" height="22" fill="#B7791F"/><text x="880" y="182" font-size="14">3 bytes</text>
+<text x="950" y="157" font-size="13" fill="#64748B">U+2460</text>
+<text x="640" y="230" font-size="16" font-weight="700">NFC</text>
+<rect x="735" y="210" width="70" height="22" fill="#2563EB"/><text x="815" y="227" font-size="14">1 cp</text>
+<rect x="735" y="240" width="135" height="22" fill="#B7791F"/><text x="880" y="257" font-size="14">3 bytes</text>
+<text x="950" y="232" font-size="13" fill="#64748B">U+2460</text>
+<text x="640" y="305" font-size="16" font-weight="700">NFD</text>
+<rect x="735" y="285" width="70" height="22" fill="#2563EB"/><text x="815" y="302" font-size="14">1 cp</text>
+<rect x="735" y="315" width="135" height="22" fill="#B7791F"/><text x="880" y="332" font-size="14">3 bytes</text>
+<text x="950" y="307" font-size="13" fill="#64748B">U+2460</text>
+<text x="640" y="380" font-size="16" font-weight="700">NFKC</text>
+<rect x="735" y="360" width="70" height="22" fill="#2563EB"/><text x="815" y="377" font-size="14">1 cp</text>
+<rect x="735" y="390" width="45" height="22" fill="#B7791F"/><text x="790" y="407" font-size="14">1 bytes</text>
+<text x="950" y="382" font-size="13" fill="#64748B">U+0031</text>
+<text x="640" y="455" font-size="16" font-weight="700">NFKD</text>
+<rect x="735" y="435" width="70" height="22" fill="#2563EB"/><text x="815" y="452" font-size="14">1 cp</text>
+<rect x="735" y="465" width="45" height="22" fill="#B7791F"/><text x="790" y="482" font-size="14">1 bytes</text>
+<text x="950" y="457" font-size="13" fill="#64748B">U+0031</text>
+<text x="55" y="585" font-size="15" fill="#64748B">蓝条=码点数，琥珀条=UTF-8 bytes；Python unicodedata 版本写入 results.json，不代替 Unicode 官方 conformance tests。</text>
+</svg>

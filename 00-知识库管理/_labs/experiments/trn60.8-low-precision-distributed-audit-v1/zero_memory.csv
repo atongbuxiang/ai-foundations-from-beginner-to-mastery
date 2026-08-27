@@ -1,0 +1,5 @@
+scheme,ranks,bytes_per_parameter_steady,steady_model_state_gb_decimal,persistent_shard_gb,transient_layer_gather_gb,live_activation_gb,workspace_gb,other_buffer_gb,illustrative_live_peak_gb
+DDP,8,16.0,16.0,2.0,3.0,8.0,1.5,0.9,15.4
+ZeRO-1,8,5.5,5.5,2.0,3.0,8.0,1.5,0.9,15.4
+ZeRO-2,8,3.75,3.75,2.0,3.0,8.0,1.5,0.9,15.4
+ZeRO-3,8,2.0,2.0,2.0,3.0,8.0,1.5,0.9,15.4

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">解析与过滤是选择机制：保留集和拒绝集必须同时可见</title><desc id="desc">展示网页到文本的漏斗、过滤器串联、拒绝原因以及两个群体不同的保留率。</desc>
+<rect width="1200" height="700" fill="#FFFEFB"/>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#64748B"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#17324D" flood-opacity="0.12"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<text x="55" y="55" font-size="25" font-weight="700" fill="#2563EB">解析与过滤是选择机制：保留集和拒绝集必须同时可见</text>
+<polygon points="105.0,125 525.0,125 500.0,177 130.0,177" fill="#2563EB" opacity="0.88"/>
+<text x="315" y="157" text-anchor="middle" font-size="17" font-weight="700" fill="#FFFFFF">HTML</text>
+<line x1="315" y1="180" x2="315" y2="201" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+<polygon points="150.0,207 480.0,207 455.0,259 175.0,259" fill="#0F766E" opacity="0.88"/>
+<text x="315" y="239" text-anchor="middle" font-size="17" font-weight="700" fill="#FFFFFF">主文本</text>
+<line x1="315" y1="262" x2="315" y2="283" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+<polygon points="182.5,289 447.5,289 422.5,341 207.5,341" fill="#7C3AED" opacity="0.88"/>
+<text x="315" y="321" text-anchor="middle" font-size="17" font-weight="700" fill="#FFFFFF">语言=zh</text>
+<line x1="315" y1="344" x2="315" y2="365" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+<polygon points="217.5,371 412.5,371 387.5,423 242.5,423" fill="#B7791F" opacity="0.88"/>
+<text x="315" y="403" text-anchor="middle" font-size="17" font-weight="700" fill="#FFFFFF">质量规则</text>
+<line x1="315" y1="426" x2="315" y2="447" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+<polygon points="242.5,453 387.5,453 362.5,505 267.5,505" fill="#C24135" opacity="0.88"/>
+<text x="315" y="485" text-anchor="middle" font-size="17" font-weight="700" fill="#FFFFFF">最终文档</text>
+<text x="55" y="110" font-size="18" font-weight="700" fill="#17324D">retained path</text>
+<text x="565" y="110" font-size="18" font-weight="700" fill="#17324D">rejected ledger</text>
+<rect x="565" y="145" width="360" height="58" rx="9" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+<text x="585" y="169" font-size="16" font-weight="700" fill="#2563EB">parser empty</text>
+<text x="585" y="191" font-size="13" fill="#64748B">layout / JS / boilerplate</text>
+<text x="895" y="181" text-anchor="end" font-size="19" font-weight="700" fill="#2563EB">18%</text>
+<rect x="565" y="227" width="360" height="58" rx="9" fill="#FFFFFF" stroke="#7C3AED" stroke-width="2"/>
+<text x="585" y="251" font-size="16" font-weight="700" fill="#7C3AED">LID reject</text>
+<text x="585" y="273" font-size="13" fill="#64748B">code-switch / short text</text>
+<text x="895" y="263" text-anchor="end" font-size="19" font-weight="700" fill="#7C3AED">12%</text>
+<rect x="565" y="309" width="360" height="58" rx="9" fill="#FFFFFF" stroke="#B7791F" stroke-width="2"/>
+<text x="585" y="333" font-size="16" font-weight="700" fill="#B7791F">quality reject</text>
+<text x="585" y="355" font-size="13" fill="#64748B">blocklist / score / length</text>
+<text x="895" y="345" text-anchor="end" font-size="19" font-weight="700" fill="#B7791F">26%</text>
+<rect x="565" y="391" width="360" height="58" rx="9" fill="#FFFFFF" stroke="#C24135" stroke-width="2"/>
+<text x="585" y="415" font-size="16" font-weight="700" fill="#C24135">duplicate</text>
+<text x="585" y="437" font-size="13" fill="#64748B">exact / near / cluster policy</text>
+<text x="895" y="427" text-anchor="end" font-size="19" font-weight="700" fill="#C24135">15%</text>
+<text x="565" y="510" font-size="18" font-weight="700" fill="#17324D">slice retention ≠ overall retention</text>
+<text x="570" y="567" font-size="15" fill="#17324D">Group A</text>
+<rect x="665" y="545" width="288.6" height="30" rx="5" fill="#0F766E"/><text x="968.6" y="566" font-size="14" fill="#0F766E">74%</text>
+<text x="570" y="615" font-size="15" fill="#17324D">Group B</text>
+<rect x="665" y="593" width="159.89999999999998" height="30" rx="5" fill="#C24135"/><text x="839.9" y="614" font-size="14" fill="#C24135">41%</text>
+<rect x="960" y="145" width="175" height="360" rx="12" fill="#F2F5F8"/>
+<text x="1047" y="180" text-anchor="middle" font-size="16" font-weight="700" fill="#17324D">每步必须保存</text>
+<text x="985" y="220" font-size="14" fill="#64748B">• input hash</text>
+<text x="985" y="262" font-size="14" fill="#64748B">• rule + version</text>
+<text x="985" y="304" font-size="14" fill="#64748B">• score / threshold</text>
+<text x="985" y="346" font-size="14" fill="#64748B">• reason code</text>
+<text x="985" y="388" font-size="14" fill="#64748B">• group slices</text>
+<text x="985" y="430" font-size="14" fill="#64748B">• counterfactual sample</text>
+<text x="55" y="670" font-size="14" fill="#64748B">“质量”不是无方向的清洁度；过滤器定义谁被看见、谁被重复、谁被排除。</text>
+</svg>

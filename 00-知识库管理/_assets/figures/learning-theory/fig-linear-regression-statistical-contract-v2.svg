@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">线性回归：总体投影、有限样本估计与新点风险</title>
+<desc id="desc">总体最优线性预测器是 L2 投影；固定设计 OLS 的 sampling covariance 由 X^T X 控制；Random-X risk 还要用新输入协方差度量参数误差。异方差与小奇异值分别破坏 naive inference 和数值稳定。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">总体目标是 L2 投影</text>
+<path d="M65 365C120 120 250 115 340 320" fill="none" stroke="#D7DEE8" stroke-width="3"/>
+<line x1="80" y1="340" x2="335" y2="170" stroke="#2563EB" stroke-width="3"/>
+<circle cx="235" cy="235" r="7" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<line x1="235" y1="235" x2="285" y2="285" stroke="#C24135" stroke-width="2.5" stroke-dasharray="6 5"/>
+<text x="95" y="125" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">all measurable regression functions</text>
+<text x="245" y="220" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">f_H*</text>
+<text x="290" y="305" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">residual orthogonal to X</text>
+<text x="45" y="430" font-size="16" font-weight="700" text-anchor="start" fill="#1F2937" class="math">E[X(Y-X^T beta*)] = 0</text>
+<text x="45" y="475" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">this does not require E[residual|X]=0</text>
+<text x="45" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">projection target and true mechanism can differ。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Fixed-X：无偏与 covariance</text>
+<rect x="445" y="100" width="310" height="64" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600.0" y="138.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">betahat = (X^T X)^-1 X^T y</text>
+<line x1="600" y1="170" x2="600" y2="205" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="445" y="215" width="310" height="80" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="600.0" y="261.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">Cov(betahat|X) = sigma^2 (X^T X)^-1</text>
+<line x1="600" y1="300" x2="600" y2="335" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="445" y="345" width="310" height="72" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="600.0" y="387.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">new mean: x0^T Cov x0</text>
+<text x="430" y="460" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">new response adds irreducible sigma^2</text>
+<text x="430" y="495" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">normality is not needed for Gauss-Markov BLUE</text>
+<text x="430" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">biased estimators are outside BLUE。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">谱、异方差与 Random-X</text>
+<rect x="840" y="105" width="290" height="65" rx="7" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="855" y="132" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">large s_j</text>
+<text x="855" y="157" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">OLS 1/s_j ; ridge stable</text>
+<rect x="840" y="205" width="290" height="65" rx="7" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="855" y="232" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">small s_j</text>
+<text x="855" y="257" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">OLS amplifies noise</text>
+<rect x="840" y="305" width="290" height="65" rx="7" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="855" y="332" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">s_j = 0</text>
+<text x="855" y="357" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">nonidentifiable direction</text>
+<text x="830" y="405" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">heteroskedastic Cov: inverse X^T Omega X inverse</text>
+<text x="830" y="450" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E" class="math">Random-X excess = ||betahat-beta*||_Sigma^2</text>
+<text x="830" y="490" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">QR/SVD protects computation, not model validity</text>
+<text x="830" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">d &gt;= n requires a new implicit-bias contract。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">线性回归必须同时报告总体投影、设计条件性、噪声结构、推断公式与新输入风险。</text>
+</svg>

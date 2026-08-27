@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720">
+  <rect width="1200" height="720" fill="#fffefb"/>
+  <style>
+    .sans{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.serif{font-family:"STIX Two Text","Times New Roman",serif}
+    .ink{fill:#172033}.muted{fill:#64748b}.blue{fill:#2457d6}.red{fill:#c83d32}.green{fill:#147d64}
+  </style>
+  <text x="70" y="64" class="sans ink" font-size="32" font-weight="750">打散不是“拟合过一次”：阈值与区间的最小例子</text>
+  <text x="70" y="101" class="sans muted" font-size="18">同一个点集必须逐一实现全部标签；只缺一种，也不能称为 shattered。</text>
+  <line x1="70" y1="126" x2="1130" y2="126" stroke="#d6dde8" stroke-width="2"/>
+
+  <text x="72" y="174" class="sans blue" font-size="22" font-weight="750">A　右阈值：一个点可打散，两个点不能</text>
+  <text x="72" y="207" class="sans muted" font-size="16">h_t(x)=1[x ≥ t]；实心点表示标签 1，空心点表示标签 0。</text>
+
+  <line x1="105" y1="280" x2="425" y2="280" stroke="#334155" stroke-width="2"/>
+  <line x1="198" y1="242" x2="198" y2="313" stroke="#2457d6" stroke-width="3" stroke-dasharray="7 6"/>
+  <circle cx="260" cy="280" r="13" fill="#fffefb" stroke="#2457d6" stroke-width="4"/>
+  <text x="260" y="322" class="serif ink" font-size="17" text-anchor="middle">x₁</text>
+  <text x="105" y="348" class="sans muted" font-size="15">t &gt; x₁ → 标签 0</text>
+
+  <line x1="105" y1="415" x2="425" y2="415" stroke="#334155" stroke-width="2"/>
+  <line x1="326" y1="377" x2="326" y2="448" stroke="#2457d6" stroke-width="3" stroke-dasharray="7 6"/>
+  <circle cx="260" cy="415" r="13" fill="#2457d6" stroke="#2457d6" stroke-width="4"/>
+  <text x="260" y="457" class="serif ink" font-size="17" text-anchor="middle">x₁</text>
+  <text x="105" y="484" class="sans muted" font-size="15">t ≤ x₁ → 标签 1</text>
+  <path d="M452 245 L452 457" stroke="#d6dde8" stroke-width="2"/>
+
+  <text x="492" y="241" class="sans ink" font-size="17" font-weight="700">固定 x₁ &lt; x₂，四种标签：</text>
+  <line x1="505" y1="294" x2="890" y2="294" stroke="#334155" stroke-width="2"/>
+  <circle cx="610" cy="294" r="11" fill="#fffefb" stroke="#2457d6" stroke-width="3"/><circle cx="770" cy="294" r="11" fill="#fffefb" stroke="#2457d6" stroke-width="3"/>
+  <text x="920" y="301" class="serif green" font-size="20">(0,0)　✓</text>
+  <line x1="505" y1="359" x2="890" y2="359" stroke="#334155" stroke-width="2"/>
+  <circle cx="610" cy="359" r="11" fill="#fffefb" stroke="#2457d6" stroke-width="3"/><circle cx="770" cy="359" r="11" fill="#2457d6"/>
+  <text x="920" y="366" class="serif green" font-size="20">(0,1)　✓</text>
+  <line x1="505" y1="424" x2="890" y2="424" stroke="#334155" stroke-width="2"/>
+  <circle cx="610" cy="424" r="11" fill="#2457d6"/><circle cx="770" cy="424" r="11" fill="#2457d6"/>
+  <text x="920" y="431" class="serif green" font-size="20">(1,1)　✓</text>
+  <line x1="505" y1="489" x2="890" y2="489" stroke="#334155" stroke-width="2"/>
+  <circle cx="610" cy="489" r="11" fill="#2457d6"/><circle cx="770" cy="489" r="11" fill="#fffefb" stroke="#c83d32" stroke-width="3"/>
+  <text x="920" y="496" class="serif red" font-size="20">(1,0)　✗</text>
+  <text x="505" y="535" class="sans red" font-size="15">若 x₁ 已在阈值右侧，较大的 x₂ 必然也在右侧。</text>
+
+  <line x1="70" y1="570" x2="1130" y2="570" stroke="#d6dde8" stroke-width="2"/>
+  <text x="72" y="613" class="sans blue" font-size="22" font-weight="750">B　区间：三点上的 1–0–1 是最小阻碍</text>
+  <line x1="420" y1="655" x2="1030" y2="655" stroke="#334155" stroke-width="2"/>
+  <circle cx="520" cy="655" r="12" fill="#2457d6"/><circle cx="725" cy="655" r="12" fill="#fffefb" stroke="#c83d32" stroke-width="4"/><circle cx="930" cy="655" r="12" fill="#2457d6"/>
+  <path d="M505 634 L505 615 L945 615 L945 634" fill="none" stroke="#147d64" stroke-width="4"/>
+  <text x="725" y="604" class="sans green" font-size="15" text-anchor="middle">任何同时包含两端点的区间，也包含中点</text>
+  <text x="72" y="661" class="sans ink" font-size="17">两点：00、10、01、11 都能实现</text>
+  <text x="72" y="691" class="sans red" font-size="17" font-weight="700">三点：101 无法实现 → VCdim(intervals)=2</text>
+</svg>

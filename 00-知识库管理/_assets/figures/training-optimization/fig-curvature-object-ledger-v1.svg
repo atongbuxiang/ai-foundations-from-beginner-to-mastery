@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Hessian、GGN、Fisher 与 empirical Fisher 的对象生成路径</title>
+  <desc id="desc">从共同计算图沿 objective 二阶导、output curvature pullback、model-sampled score 和 data-label gradient outer product 四条路径生成不同矩阵，并列出 PSD 与相等条件。</desc>
+  <rect width="1200" height="720" fill="#FFFEFB"/>
+  <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}.h{font-size:27px;font-weight:700}.sh{font-size:19px;font-weight:700}.b{font-size:16px}.s{font-size:15px;fill:#64748B}.boxb{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.boxg{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.boxa{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.boxr{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}.line{stroke:#CBD5E1;stroke-width:2}.arr{stroke:#2563EB;stroke-width:3;fill:none}</style>
+  <defs><marker id="ab" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#2563EB"/></marker></defs>
+  <text x="48" y="50" class="h" fill="#2563EB">A｜共同计算图：shape 相同不等于对象相同</text>
+  <rect x="48" y="82" width="250" height="86" rx="12" class="boxb"/><text x="75" y="117" class="sh">z = f_theta(x)</text><text x="75" y="148" class="s">J = dz / dtheta</text>
+  <line x1="298" y1="125" x2="350" y2="125" class="arr" marker-end="url(#ab)"/>
+  <rect x="360" y="82" width="252" height="86" rx="12" class="boxa"/><text x="388" y="117" class="sh">loss l(z, y)</text><text x="388" y="148" class="s">data label y or model sample y?</text>
+  <line x1="612" y1="125" x2="664" y2="125" class="arr" marker-end="url(#ab)"/>
+  <rect x="674" y="82" width="478" height="86" rx="12" class="boxr"/><text x="702" y="116" class="sh" fill="#C0392B">先锁定 expectation measure</text><text x="702" y="148" class="b">q_data(x,y)　vs　q(x) p_theta(y|x)</text>
+
+  <line x1="48" y1="202" x2="1152" y2="202" class="line"/>
+  <text x="48" y="244" class="h" fill="#0F766E">B｜四条生成路径</text>
+  <rect x="48" y="276" width="254" height="140" rx="12" class="boxr"/>
+  <text x="72" y="310" class="sh">Hessian H</text><text x="72" y="343" class="b">d² objective / dtheta²</text><text x="72" y="373" class="s">含模型二阶项</text><text x="72" y="399" class="s" fill="#C0392B">symmetric；可不定</text>
+  <rect x="328" y="276" width="254" height="140" rx="12" class="boxg"/>
+  <text x="352" y="310" class="sh">GGN G</text><text x="352" y="343" class="b">J^T H_z(l) J</text><text x="352" y="373" class="s">删除模型二阶项</text><text x="352" y="399" class="s">output loss convex ⇒ PSD</text>
+  <rect x="608" y="276" width="254" height="140" rx="12" class="boxb"/>
+  <text x="632" y="310" class="sh">True Fisher F</text><text x="632" y="343" class="b">E_model[score score^T]</text><text x="632" y="373" class="s">y sampled from p_theta</text><text x="632" y="399" class="s">PSD；distribution metric</text>
+  <rect x="888" y="276" width="264" height="140" rx="12" class="boxa"/>
+  <text x="912" y="310" class="sh">Empirical Fisher</text><text x="912" y="343" class="b">mean_n g_n g_n^T</text><text x="912" y="373" class="s">observed data labels</text><text x="912" y="399" class="s" fill="#B76E00">PSD ≠ curvature certificate</text>
+
+  <text x="48" y="466" class="h" fill="#2563EB">C｜等号必须逐门通过</text>
+  <rect x="48" y="500" width="250" height="112" rx="12" class="boxg"/><text x="72" y="534" class="sh">F = GGN</text><text x="72" y="565" class="s">exponential family</text><text x="72" y="591" class="s">natural-output coordinates</text>
+  <rect x="328" y="500" width="250" height="112" rx="12" class="boxb"/><text x="352" y="534" class="sh">H = F</text><text x="352" y="565" class="s">well-specified population</text><text x="352" y="591" class="s">at appropriate optimum</text>
+  <rect x="608" y="500" width="250" height="112" rx="12" class="boxa"/><text x="632" y="534" class="sh">F_emp ≈ F</text><text x="632" y="565" class="s">label laws align + enough data</text><text x="632" y="591" class="s">not merely “large batch”</text>
+  <rect x="888" y="500" width="264" height="112" rx="12" class="boxr"/><text x="912" y="534" class="sh" fill="#C0392B">Never by name alone</text><text x="912" y="565" class="s">same shape / PSD / outer product</text><text x="912" y="591" class="s">are insufficient</text>
+  <rect x="48" y="650" width="1104" height="50" rx="10" fill="#F8FAFC" stroke="#CBD5E1"/><text x="72" y="682" class="b">最小检查：derivative object → label source → expectation → PSD/rank → equality assumptions → estimator。</text>
+</svg>

@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Large-Vocabulary Output：四类计算合同不能混称</title>
+<desc id="desc">Full softmax 保留 flat model 的精确归一化；sampling 近似训练目标或梯度；hierarchy/adaptive 改写概率分解。标量决策数、矩阵维度与 GPU wall time必须分账。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">每个 target 触碰多少候选？</text>
+<text x="58" y="112" font-size="16" font-weight="700" text-anchor="start" fill="#2563EB">full</text>
+<rect x="58" y="134" width="286" height="34" rx="3" fill="#2563EB" stroke="#2563EB" stroke-width="1"/>
+<text x="352" y="159" font-size="15" font-weight="700" text-anchor="end" fill="#1F2937">10000</text>
+<text x="58" y="216" font-size="16" font-weight="700" text-anchor="start" fill="#B7791F">sample K=1000</text>
+<rect x="58" y="238" width="132" height="34" rx="3" fill="#B7791F" stroke="#B7791F" stroke-width="1"/>
+<text x="352" y="263" font-size="15" font-weight="700" text-anchor="end" fill="#1F2937">1001</text>
+<text x="58" y="320" font-size="16" font-weight="700" text-anchor="start" fill="#0F766E">balanced tree</text>
+<rect x="58" y="342" width="58" height="34" rx="3" fill="#0F766E" stroke="#0F766E" stroke-width="1"/>
+<text x="352" y="367" font-size="15" font-weight="700" text-anchor="end" fill="#1F2937">14</text>
+<rect x="52" y="428" width="310" height="58" rx="5" fill="#FFF5F2" stroke="#C24135" stroke-width="2"/>
+<text x="207" y="453" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">counts are not comparable FLOPs</text>
+<text x="207" y="478" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">tree branching can underuse GPU</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">hierarchical probability is exact</text>
+<line x1="602" y1="130" x2="515" y2="198" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="602" y1="130" x2="689" y2="198" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="515" y1="236" x2="470" y2="326" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="515" y1="236" x2="560" y2="326" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="689" y1="236" x2="650" y2="326" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="689" y1="236" x2="740" y2="326" stroke="#D7DEE8" stroke-width="2"/>
+<circle cx="602" cy="112" r="24" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="602" y="118" font-size="16" font-weight="700" text-anchor="middle" fill="#0F766E">σ</text>
+<circle cx="515" cy="218" r="24" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="515" y="224" font-size="16" font-weight="700" text-anchor="middle" fill="#0F766E">σ</text>
+<circle cx="689" cy="218" r="24" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="689" y="224" font-size="16" font-weight="700" text-anchor="middle" fill="#0F766E">σ</text>
+<rect x="442" y="326" width="56" height="40" rx="4" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.7"/>
+<text x="470" y="352" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">w1</text>
+<rect x="532" y="326" width="56" height="40" rx="4" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.7"/>
+<text x="560" y="352" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">w2</text>
+<rect x="622" y="326" width="56" height="40" rx="4" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.7"/>
+<text x="650" y="352" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">w3</text>
+<rect x="712" y="326" width="56" height="40" rx="4" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.7"/>
+<text x="740" y="352" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">w4</text>
+<rect x="445" y="414" width="315" height="72" rx="5" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="602" y="443" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">P(w3|h) = P(right|h)</text>
+<text x="602" y="470" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">x P(left at child|h)</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">adaptive expected-cost ledger</text>
+<rect x="845" y="94" width="285" height="78" rx="5" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="987" y="122" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">head: 1000 words + 3 clusters</text>
+<text x="987" y="151" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">always evaluated = 1003</text>
+<rect x="845" y="214" width="285" height="54" rx="4" fill="#FFFEFB" stroke="#0F766E" stroke-width="1.8"/>
+<text x="862" y="247" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">tail A</text>
+<text x="1112" y="247" font-size="15" font-weight="650" text-anchor="end" fill="#64748B">mass .08</text>
+<rect x="845" y="292" width="285" height="54" rx="4" fill="#FFFEFB" stroke="#B7791F" stroke-width="1.8"/>
+<text x="862" y="325" font-size="15" font-weight="700" text-anchor="start" fill="#B7791F">tail B</text>
+<text x="1112" y="325" font-size="15" font-weight="650" text-anchor="end" fill="#64748B">mass .02</text>
+<rect x="845" y="386" width="285" height="96" rx="5" fill="#FFF5F2" stroke="#C24135" stroke-width="2"/>
+<text x="987" y="416" font-size="16" font-weight="700" text-anchor="middle" fill="#C24135">toy expected labels</text>
+<text x="987" y="446" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">1003 + .10 x 3000 = 1303</text>
+<text x="987" y="470" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">tail dimensions may also shrink</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">问清楚：近似的是原 flat model、训练 estimator，还是概率模型本身？训练速度、精确 NLL 与部署 top-k 必须分别验收。</text>
+</svg>

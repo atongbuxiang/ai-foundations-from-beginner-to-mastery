@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">RAG：把文档写成潜变量，再逐层审计近似</title><desc id="desc">语料、检索分布、top-K 截断与条件生成器的概率图。</desc>
+<rect width="1200" height="700" fill="#FBF8F1"/>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#667784"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#183044" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<line x1="48" y1="70" x2="1152" y2="70" stroke="#7054A3" stroke-width="4"/>
+<text x="52" y="49" font-size="24" font-weight="700" fill="#183044">RAG：把文档写成潜变量，再逐层审计近似</text>
+<rect x="55" y="120" width="205" height="92" rx="10" fill="#EEF4FC" stroke="#245AA8" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="70" y="148" font-size="15" font-weight="700" fill="#245AA8">输入 x</text>
+<text x="70" y="172" font-size="12.5" fill="#667784">question + time</text>
+<text x="70" y="192" font-size="12.5" fill="#667784">+ permissions</text>
+<rect x="55" y="286" width="205" height="105" rx="10" fill="#EFF6EA" stroke="#4F7B45" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="70" y="314" font-size="15" font-weight="700" fill="#4F7B45">语料快照 C</text>
+<text x="70" y="338" font-size="12.5" fill="#667784">documents + versions</text>
+<text x="70" y="358" font-size="12.5" fill="#667784">+ ACL + valid time</text>
+<rect x="355" y="170" width="250" height="180" rx="10" fill="#F3EFFA" stroke="#7054A3" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="370" y="198" font-size="15" font-weight="700" fill="#7054A3">检索分布 pη(z|x,C)</text>
+<text x="370" y="222" font-size="12.5" fill="#667784">z₁  0.48</text>
+<text x="370" y="242" font-size="12.5" fill="#667784">z₂  0.31</text>
+<text x="370" y="262" font-size="12.5" fill="#667784">z₃  0.14</text>
+<text x="370" y="282" font-size="12.5" fill="#667784">other  0.07</text>
+<line x1="260" y1="166" x2="355" y2="215" stroke="#245AA8" stroke-width="2.2" marker-end="url(#arrow)"/>
+<line x1="260" y1="338" x2="355" y2="300" stroke="#4F7B45" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="700" y="110" width="190" height="88" rx="10" fill="#FFFDF8" stroke="#17766E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="715" y="138" font-size="15" font-weight="700" fill="#17766E">z₁ · 0.48</text>
+<text x="715" y="162" font-size="12.5" fill="#667784">policy page · v7</text>
+<rect x="700" y="235" width="190" height="88" rx="10" fill="#FFFDF8" stroke="#C87922" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="715" y="263" font-size="15" font-weight="700" fill="#C87922">z₂ · 0.31</text>
+<text x="715" y="287" font-size="12.5" fill="#667784">release note · v3</text>
+<rect x="700" y="360" width="190" height="88" rx="10" fill="#FFFDF8" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="715" y="388" font-size="15" font-weight="700" fill="#B7443E">z₃ · 0.14</text>
+<text x="715" y="412" font-size="12.5" fill="#667784">FAQ · old</text>
+<line x1="605" y1="220" x2="700" y2="154" stroke="#7054A3" stroke-width="2.2" marker-end="url(#arrow)"/>
+<line x1="605" y1="255" x2="700" y2="279" stroke="#7054A3" stroke-width="2.2" marker-end="url(#arrow)"/>
+<line x1="605" y1="290" x2="700" y2="404" stroke="#7054A3" stroke-width="2.2" marker-end="url(#arrow)"/>
+<path d="M610 325 C650 500,760 510,890 485" fill="none" stroke="#B7443E" stroke-width="2" stroke-dasharray="7 5"/>
+<text x="655" y="505" text-anchor="start" font-size="12" font-weight="400" fill="#B7443E">top-K 截断：other 被丢弃并重新归一化</text>
+<rect x="965" y="200" width="180" height="170" rx="10" fill="#EAF7F4" stroke="#17766E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="980" y="228" font-size="15" font-weight="700" fill="#17766E">生成器 pθ(y|x,z)</text>
+<text x="980" y="252" font-size="12.5" fill="#667784">evidence-conditioned</text>
+<text x="980" y="272" font-size="12.5" fill="#667784">+ parametric prior</text>
+<text x="980" y="292" font-size="12.5" fill="#667784">→ answer y</text>
+<line x1="890" y1="154" x2="965" y2="260" stroke="#667784" stroke-width="2.2" marker-end="url(#arrow)"/>
+<line x1="890" y1="279" x2="965" y2="260" stroke="#667784" stroke-width="2.2" marker-end="url(#arrow)"/>
+<line x1="890" y1="404" x2="965" y2="260" stroke="#667784" stroke-width="2.2" marker-end="url(#arrow)"/>
+<path d="M160 120 C380 75,820 65,1040 190" fill="none" stroke="#C87922" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#arrow)"/>
+<text x="590" y="95" text-anchor="middle" font-size="13" font-weight="600" fill="#C87922">虚线：参数记忆可绕过当前证据 → 答对不证明检索正确</text>
+<rect x="85" y="515" width="1030" height="96" rx="10" fill="#FFF0ED" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="100" y="543" font-size="15" font-weight="700" fill="#B7443E">四个条件事件</text>
+<text x="100" y="567" font-size="12.5" fill="#667784">corpus answerable  →  retrieved  →  retained in context  →  generated + attributed correctly</text>
+<line x1="48" y1="650" x2="1152" y2="650" stroke="#D9D5CB" stroke-width="1"/>
+<text x="52" y="674" font-size="13" fill="#667784">候选内 softmax 只是截断近似；retriever score 未经校准时不能称为真实相关概率。</text>
+</svg>

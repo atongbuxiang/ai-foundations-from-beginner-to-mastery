@@ -1,0 +1,238 @@
+{
+  "seed": 20260826,
+  "repeats": 30000,
+  "reduction_and_accumulation": {
+    "mean_sum": {
+      "theta_mean": 0.7,
+      "theta_sum_matched": 0.7,
+      "theta_sum_unmatched": 0.3999999999999999,
+      "matched_abs_error": 0.0
+    },
+    "accumulation": {
+      "batch_grad": -2.0,
+      "accumulated_grad": -2.0,
+      "gradient_abs_error": 0.0,
+      "theta_one_batch_step": 0.2,
+      "theta_two_sequential_steps": 0.39
+    },
+    "clipping_counterexample": {
+      "sum_of_micro_clips": 0.0,
+      "clip_after_sum": 1.0
+    }
+  },
+  "momentum": {
+    "constant_lr_translation": [
+      {
+        "step": 0,
+        "gradient": 2.0,
+        "buffer": 2.0,
+        "velocity": -0.2,
+        "translation_error": 0.0
+      },
+      {
+        "step": 1,
+        "gradient": -1.0,
+        "buffer": 0.8,
+        "velocity": -0.08000000000000002,
+        "translation_error": 0.0
+      },
+      {
+        "step": 2,
+        "gradient": 0.5,
+        "buffer": 1.2200000000000002,
+        "velocity": -0.12200000000000003,
+        "translation_error": 0.0
+      }
+    ],
+    "max_translation_error": 0.0,
+    "variable_lr_counterexample": [
+      {
+        "step": 0,
+        "lr": 0.1,
+        "buffer_parameter_update": -0.1,
+        "naive_velocity_update": -0.1
+      },
+      {
+        "step": 1,
+        "lr": 0.01,
+        "buffer_parameter_update": -0.019,
+        "naive_velocity_update": -0.1
+      }
+    ],
+    "pytorch_dampening_first_step": [
+      {
+        "step": 0,
+        "gradient": 1.0,
+        "buffer": 1.0
+      },
+      {
+        "step": 1,
+        "gradient": 2.0,
+        "buffer": 2.7
+      },
+      {
+        "step": 2,
+        "gradient": 3.0,
+        "buffer": 5.130000000000001
+      }
+    ]
+  },
+  "heavy_ball": {
+    "mu": 0.9,
+    "boundaries": {
+      "positive_to_complex": 0.002633403898972404,
+      "complex_to_negative": 3.7973665961010274,
+      "stability_upper": 3.8
+    }
+  },
+  "covariance": {
+    "population": [
+      -1.0,
+      1.0,
+      3.0,
+      5.0
+    ],
+    "population_mean": 2.0,
+    "covariance_denominator_n": 5.0,
+    "with_replacement": [
+      {
+        "batch_size": 1,
+        "empirical_variance": 5.054968498949477,
+        "theory_variance": 5.0,
+        "relative_error": 0.010993699789895395
+      },
+      {
+        "batch_size": 2,
+        "empirical_variance": 2.4793650943917873,
+        "theory_variance": 2.5,
+        "relative_error": 0.008253962243285073
+      },
+      {
+        "batch_size": 4,
+        "empirical_variance": 1.2379306307433289,
+        "theory_variance": 1.25,
+        "relative_error": 0.0096554954053369
+      },
+      {
+        "batch_size": 8,
+        "empirical_variance": 0.6207621154038455,
+        "theory_variance": 0.625,
+        "relative_error": 0.006780615353847175
+      },
+      {
+        "batch_size": 16,
+        "empirical_variance": 0.3086963744451606,
+        "theory_variance": 0.3125,
+        "relative_error": 0.012171601775485996
+      },
+      {
+        "batch_size": 32,
+        "empirical_variance": 0.15733014209848872,
+        "theory_variance": 0.15625,
+        "relative_error": 0.006912909430327829
+      },
+      {
+        "batch_size": 64,
+        "empirical_variance": 0.07769607502432717,
+        "theory_variance": 0.078125,
+        "relative_error": 0.005490239688612242
+      }
+    ],
+    "without_replacement": [
+      {
+        "batch_size": 1,
+        "empirical_variance": 5.0273118259499965,
+        "theory_variance": 5.0,
+        "absolute_error": 0.027311825949996482
+      },
+      {
+        "batch_size": 2,
+        "empirical_variance": 1.6629018289501747,
+        "theory_variance": 1.6666666666666667,
+        "absolute_error": 0.0037648377164920532
+      },
+      {
+        "batch_size": 3,
+        "empirical_variance": 0.5549203027754733,
+        "theory_variance": 0.5555555555555556,
+        "absolute_error": 0.0006352527800822516
+      },
+      {
+        "batch_size": 4,
+        "empirical_variance": 0.0,
+        "theory_variance": 0.0,
+        "absolute_error": 0.0
+      }
+    ]
+  },
+  "critical_batch": {
+    "noise_batch": 256.0,
+    "rows": [
+      {
+        "batch_size": 1,
+        "steps_over_min": 257.0,
+        "examples_over_min": 1.00390625
+      },
+      {
+        "batch_size": 2,
+        "steps_over_min": 129.0,
+        "examples_over_min": 1.0078125
+      },
+      {
+        "batch_size": 4,
+        "steps_over_min": 65.0,
+        "examples_over_min": 1.015625
+      },
+      {
+        "batch_size": 8,
+        "steps_over_min": 33.0,
+        "examples_over_min": 1.03125
+      },
+      {
+        "batch_size": 16,
+        "steps_over_min": 17.0,
+        "examples_over_min": 1.0625
+      },
+      {
+        "batch_size": 32,
+        "steps_over_min": 9.0,
+        "examples_over_min": 1.125
+      },
+      {
+        "batch_size": 64,
+        "steps_over_min": 5.0,
+        "examples_over_min": 1.25
+      },
+      {
+        "batch_size": 128,
+        "steps_over_min": 3.0,
+        "examples_over_min": 1.5
+      },
+      {
+        "batch_size": 256,
+        "steps_over_min": 2.0,
+        "examples_over_min": 2.0
+      },
+      {
+        "batch_size": 512,
+        "steps_over_min": 1.5,
+        "examples_over_min": 3.0
+      },
+      {
+        "batch_size": 1024,
+        "steps_over_min": 1.25,
+        "examples_over_min": 5.0
+      },
+      {
+        "batch_size": 2048,
+        "steps_over_min": 1.125,
+        "examples_over_min": 9.0
+      },
+      {
+        "batch_size": 4096,
+        "steps_over_min": 1.0625,
+        "examples_over_min": 17.0
+      }
+    ]
+  }
+}

@@ -1,0 +1,5 @@
+mode,exact_denominator,factored_denominator,exact_step,factored_step
+1,37.0,50.0,-0.02702702702702703,-0.02
+2,5.0,10.0,-0.2,-0.1
+3,10.0,20.0,-0.1,-0.05
+4,2.0,4.0,-0.5,-0.25

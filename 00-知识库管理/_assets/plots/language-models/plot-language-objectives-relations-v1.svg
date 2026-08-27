@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+<title id="title">Causal 与 Prefix LM 可见性关系</title><desc id="desc">并排显示 causal 下三角和 prefix 四块 relation，行是 query、列是 key。</desc>
+<rect width="1200" height="650" fill="#FFFEFB"/>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<text x="55" y="55" font-size="25" font-weight="700" fill="#2563EB">可见性不是模型名称：逐格审计 query → key</text>
+<text x="55" y="88" font-size="15" fill="#64748B">蓝色=可读，灰色=屏蔽；两张图均以 query 为行、key 为列</text>
+<text x="155" y="156" font-size="19" font-weight="700" fill="#17324D">Causal LM：L=3</text>
+<rect x="155" y="180" width="69" height="69" rx="4" fill="#2563EB" stroke="#D7DEE8"/>
+<rect x="227" y="180" width="69" height="69" rx="4" fill="#F2F5F8" stroke="#D7DEE8"/>
+<rect x="299" y="180" width="69" height="69" rx="4" fill="#F2F5F8" stroke="#D7DEE8"/>
+<rect x="155" y="252" width="69" height="69" rx="4" fill="#2563EB" stroke="#D7DEE8"/>
+<rect x="227" y="252" width="69" height="69" rx="4" fill="#2563EB" stroke="#D7DEE8"/>
+<rect x="299" y="252" width="69" height="69" rx="4" fill="#F2F5F8" stroke="#D7DEE8"/>
+<rect x="155" y="324" width="69" height="69" rx="4" fill="#2563EB" stroke="#D7DEE8"/>
+<rect x="227" y="324" width="69" height="69" rx="4" fill="#2563EB" stroke="#D7DEE8"/>
+<rect x="299" y="324" width="69" height="69" rx="4" fill="#2563EB" stroke="#D7DEE8"/>
+<text x="675" y="121" font-size="19" font-weight="700" fill="#17324D">Prefix LM：P=2, S=3</text>
+<rect x="675" y="145" width="69" height="69" rx="4" fill="#2563EB" stroke="#D7DEE8"/>
+<rect x="747" y="145" width="69" height="69" rx="4" fill="#2563EB" stroke="#D7DEE8"/>
+<rect x="819" y="145" width="69" height="69" rx="4" fill="#F2F5F8" stroke="#D7DEE8"/>
+<rect x="891" y="145" width="69" height="69" rx="4" fill="#F2F5F8" stroke="#D7DEE8"/>
+<rect x="963" y="145" width="69" height="69" rx="4" fill="#F2F5F8" stroke="#D7DEE8"/>
+<rect x="675" y="217" width="69" height="69" rx="4" fill="#2563EB" stroke="#D7DEE8"/>
+<rect x="747" y="217" width="69" height="69" rx="4" fill="#2563EB" stroke="#D7DEE8"/>
+<rect x="819" y="217" width="69" height="69" rx="4" fill="#F2F5F8" stroke="#D7DEE8"/>
+<rect x="891" y="217" width="69" height="69" rx="4" fill="#F2F5F8" stroke="#D7DEE8"/>
+<rect x="963" y="217" width="69" height="69" rx="4" fill="#F2F5F8" stroke="#D7DEE8"/>
+<rect x="675" y="289" width="69" height="69" rx="4" fill="#2563EB" stroke="#D7DEE8"/>
+<rect x="747" y="289" width="69" height="69" rx="4" fill="#2563EB" stroke="#D7DEE8"/>
+<rect x="819" y="289" width="69" height="69" rx="4" fill="#2563EB" stroke="#D7DEE8"/>
+<rect x="891" y="289" width="69" height="69" rx="4" fill="#F2F5F8" stroke="#D7DEE8"/>
+<rect x="963" y="289" width="69" height="69" rx="4" fill="#F2F5F8" stroke="#D7DEE8"/>
+<rect x="675" y="361" width="69" height="69" rx="4" fill="#2563EB" stroke="#D7DEE8"/>
+<rect x="747" y="361" width="69" height="69" rx="4" fill="#2563EB" stroke="#D7DEE8"/>
+<rect x="819" y="361" width="69" height="69" rx="4" fill="#2563EB" stroke="#D7DEE8"/>
+<rect x="891" y="361" width="69" height="69" rx="4" fill="#2563EB" stroke="#D7DEE8"/>
+<rect x="963" y="361" width="69" height="69" rx="4" fill="#F2F5F8" stroke="#D7DEE8"/>
+<rect x="675" y="433" width="69" height="69" rx="4" fill="#2563EB" stroke="#D7DEE8"/>
+<rect x="747" y="433" width="69" height="69" rx="4" fill="#2563EB" stroke="#D7DEE8"/>
+<rect x="819" y="433" width="69" height="69" rx="4" fill="#2563EB" stroke="#D7DEE8"/>
+<rect x="891" y="433" width="69" height="69" rx="4" fill="#2563EB" stroke="#D7DEE8"/>
+<rect x="963" y="433" width="69" height="69" rx="4" fill="#2563EB" stroke="#D7DEE8"/>
+<line x1="817" y1="138" x2="817" y2="505" stroke="#C24135" stroke-width="3" stroke-dasharray="7 5"/>
+<line x1="668" y1="287" x2="1035" y2="287" stroke="#C24135" stroke-width="3" stroke-dasharray="7 5"/>
+<text x="155" y="450" font-size="16" fill="#17324D">每个位置只读自己与过去</text>
+<text x="675" y="540" font-size="16" fill="#17324D">左上双向；右上禁泄漏；左下读 source；右下因果</text>
+<rect x="55" y="575" width="1090" height="48" rx="9" fill="#FFF7E8" stroke="#E5B94E"/>
+<text x="75" y="605" font-size="15" fill="#6B4E16">relation 只回答“谁能看谁”；target shift、loss mask 与 denominator 必须另画。</text>
+</svg>

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Occam 界：用先验权重分配失败预算</title>
+<desc id="desc">可数假设类中给 h 预先分配权重 pi(h)，再令其坏事件预算为 delta pi(h)；prefix-free 编码经 Kraft 不等式给出 pi(h)=2^{-L(h)}，短描述因占用更少 simultaneous-testing 预算而获得较小 penalty。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">非均匀地切分总失败预算</text>
+<text x="45" y="121" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937">h1</text>
+<text x="82" y="122" font-size="15" font-weight="650" text-anchor="start" fill="#2563EB">delta*pi(h)</text>
+<rect x="180" y="95" width="165.6" height="42" rx="5" fill="#F8FAFC" stroke="#2563EB" stroke-width="2"/>
+<text x="45" y="203" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937">h2</text>
+<text x="82" y="204" font-size="15" font-weight="650" text-anchor="start" fill="#0F766E">delta*pi(h)</text>
+<rect x="180" y="177" width="108.0" height="42" rx="5" fill="#F8FAFC" stroke="#0F766E" stroke-width="2"/>
+<text x="45" y="285" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937">h3</text>
+<text x="82" y="286" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">delta*pi(h)</text>
+<rect x="180" y="259" width="68.39999999999999" height="42" rx="5" fill="#F8FAFC" stroke="#C24135" stroke-width="2"/>
+<text x="45" y="367" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937">h4</text>
+<text x="82" y="368" font-size="15" font-weight="650" text-anchor="start" fill="#2563EB">delta*pi(h)</text>
+<rect x="180" y="341" width="43.199999999999996" height="42" rx="5" fill="#F8FAFC" stroke="#2563EB" stroke-width="2"/>
+<text x="45" y="455" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB" class="math">sum_h delta*pi(h) &lt;= delta</text>
+<text x="45" y="490" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">weights must be fixed before evaluation</text>
+<text x="45" y="520" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">pi is a budget—not posterior truth。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">编码长度变成复杂度罚项</text>
+<rect x="445" y="95" width="88" height="44" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="489" y="124" font-size="16" font-weight="700" text-anchor="middle" fill="#2563EB">0</text>
+<text x="555" y="124" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">h1: L=1</text>
+<text x="690" y="124" font-size="15" font-weight="650" text-anchor="start" fill="#0F766E">pi=2^-1</text>
+<rect x="445" y="173" width="88" height="44" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="489" y="202" font-size="16" font-weight="700" text-anchor="middle" fill="#2563EB">10</text>
+<text x="555" y="202" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">h2: L=2</text>
+<text x="690" y="202" font-size="15" font-weight="650" text-anchor="start" fill="#0F766E">pi=2^-2</text>
+<rect x="445" y="251" width="88" height="44" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="489" y="280" font-size="16" font-weight="700" text-anchor="middle" fill="#2563EB">110</text>
+<text x="555" y="280" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">h3: L=3</text>
+<text x="690" y="280" font-size="15" font-weight="650" text-anchor="start" fill="#0F766E">pi=2^-3</text>
+<rect x="445" y="329" width="88" height="44" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="489" y="358" font-size="16" font-weight="700" text-anchor="middle" fill="#2563EB">111</text>
+<text x="555" y="358" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">h4: L=3</text>
+<text x="690" y="358" font-size="15" font-weight="650" text-anchor="start" fill="#0F766E">pi=2^-3</text>
+<text x="430" y="430" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E" class="math">prefix-free -&gt; sum_h 2^{-L(h)} &lt;= 1</text>
+<text x="430" y="475" font-size="15" font-weight="650" text-anchor="start" fill="#C24135" class="math">penalty ~ sqrt((L(h) ln2 + ln(1/delta))/m)</text>
+<text x="430" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">shorter code receives a tighter certificate。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">正确解释与常见越界</text>
+<text x="830" y="105" font-size="16" font-weight="700" text-anchor="start" fill="#0F766E">valid</text>
+<text x="850" y="145" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">predeclared code / prior</text>
+<text x="850" y="182" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">countable hypotheses</text>
+<text x="850" y="219" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">weighted union of bad events</text>
+<line x1="830" y1="250" x2="1140" y2="250" stroke="#D7DEE8" stroke-width="2"/>
+<text x="830" y="295" font-size="16" font-weight="700" text-anchor="start" fill="#C24135">invalid shortcut</text>
+<text x="850" y="335" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">design code after seeing test errors</text>
+<text x="850" y="372" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">equate compression with causality</text>
+<text x="850" y="409" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">ignore decoder / metadata / precision</text>
+<text x="830" y="465" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">MDL, Bayes and PAC-Bayes are related</text>
+<text x="830" y="495" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">but they are not the same theorem</text>
+<text x="830" y="520" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">the coding language is part of the contract。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">Occam 界奖励的是预先固定语言中的短描述；它是概率预算定理，不是“简单模型必然真实”的哲学捷径。</text>
+</svg>

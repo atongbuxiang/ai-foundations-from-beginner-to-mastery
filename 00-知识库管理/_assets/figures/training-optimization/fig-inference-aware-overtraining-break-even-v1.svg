@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Inference-aware break-even and multi-objective model choice</title>
+  <desc id="desc">Three panels distinguish meanings of overtraining, show lifecycle cost lines crossing at an inference-demand threshold, and display a Pareto model-selection view.</desc>
+  <rect width="1200" height="800" fill="#FFFEFB"/>
+  <text x="60" y="60" font-family="Arial,sans-serif" font-size="28" font-weight="700" fill="#172033">Training-optimal and deployment-optimal solve different problems</text>
+  <text x="60" y="94" font-family="Arial,sans-serif" font-size="17" fill="#52606D">A smaller model can cost more to train yet win after enough requests because inference cost is paid repeatedly.</text>
+  <rect x="50" y="125" width="300" height="585" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+  <rect x="380" y="125" width="440" height="585" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+  <rect x="850" y="125" width="300" height="585" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+  <text x="75" y="165" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172033">A  “Overtraining” is ambiguous</text>
+  <rect x="78" y="215" width="245" height="92" rx="12" fill="#EAF1FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="200" y="245" font-family="Arial,sans-serif" font-size="17" text-anchor="middle" font-weight="700" fill="#2563EB">Allocation-relative</text>
+  <text x="200" y="270" font-family="Arial,sans-serif" font-size="15" text-anchor="middle" fill="#52606D">smaller N, more D than</text>
+  <text x="200" y="291" font-family="Arial,sans-serif" font-size="15" text-anchor="middle" fill="#52606D">training-only optimum</text>
+  <rect x="78" y="340" width="245" height="92" rx="12" fill="#FFF4DE" stroke="#B76E00" stroke-width="2"/>
+  <text x="200" y="370" font-family="Arial,sans-serif" font-size="17" text-anchor="middle" font-weight="700" fill="#B76E00">Repetition-relative</text>
+  <text x="200" y="395" font-family="Arial,sans-serif" font-size="15" text-anchor="middle" fill="#52606D">late repeated tokens have</text>
+  <text x="200" y="416" font-family="Arial,sans-serif" font-size="15" text-anchor="middle" fill="#52606D">low marginal value</text>
+  <rect x="78" y="465" width="245" height="92" rx="12" fill="#FBECEC" stroke="#C0392B" stroke-width="2"/>
+  <text x="200" y="495" font-family="Arial,sans-serif" font-size="17" text-anchor="middle" font-weight="700" fill="#C0392B">Statistical overfit</text>
+  <text x="200" y="520" font-family="Arial,sans-serif" font-size="15" text-anchor="middle" fill="#52606D">train risk down while</text>
+  <text x="200" y="541" font-family="Arial,sans-serif" font-size="15" text-anchor="middle" fill="#52606D">target risk increases</text>
+  <text x="200" y="620" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" fill="#172033">Never report only the word</text>
+  <text x="200" y="646" font-family="Arial,sans-serif" font-size="17" text-anchor="middle" font-weight="700" fill="#C0392B">“overtrained”.</text>
+  <text x="405" y="165" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172033">B  Lifecycle break-even</text>
+  <line x1="435" y1="625" x2="785" y2="625" stroke="#52606D" stroke-width="2"/>
+  <line x1="435" y1="625" x2="435" y2="205" stroke="#52606D" stroke-width="2"/>
+  <line x1="450" y1="525" x2="765" y2="265" stroke="#2563EB" stroke-width="5"/>
+  <line x1="450" y1="450" x2="765" y2="340" stroke="#0F766E" stroke-width="5"/>
+  <circle cx="596" cy="404" r="10" fill="#C0392B"/>
+  <line x1="596" y1="404" x2="596" y2="625" stroke="#C0392B" stroke-width="2" stroke-dasharray="8 7"/>
+  <text x="596" y="650" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" font-weight="700" fill="#C0392B">Q*</text>
+  <text x="660" y="250" font-family="Arial,sans-serif" font-size="16" fill="#2563EB">large model: low train cost, steep inference</text>
+  <text x="520" y="435" font-family="Arial,sans-serif" font-size="16" fill="#0F766E">small model: more training, shallow inference</text>
+  <text x="610" y="680" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" fill="#52606D">expected requests Q</text>
+  <text x="392" y="420" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" transform="rotate(-90 392 420)" fill="#52606D">train + Q × inference cost</text>
+  <text x="875" y="165" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172033">C  Pareto decision</text>
+  <line x1="900" y1="625" x2="1120" y2="625" stroke="#52606D" stroke-width="2"/>
+  <line x1="900" y1="625" x2="900" y2="215" stroke="#52606D" stroke-width="2"/>
+  <circle cx="940" cy="300" r="9" fill="#C0392B"/><text x="955" y="295" font-family="Arial,sans-serif" font-size="15" fill="#C0392B">A</text>
+  <circle cx="980" cy="385" r="9" fill="#2563EB"/><text x="995" y="380" font-family="Arial,sans-serif" font-size="15" fill="#2563EB">B</text>
+  <circle cx="1035" cy="470" r="9" fill="#0F766E"/><text x="1050" y="465" font-family="Arial,sans-serif" font-size="15" fill="#0F766E">C</text>
+  <circle cx="1060" cy="350" r="9" fill="#B76E00"/><text x="1075" y="345" font-family="Arial,sans-serif" font-size="15" fill="#B76E00">dominated</text>
+  <polyline points="940,300 980,385 1035,470" fill="none" stroke="#52606D" stroke-width="3" stroke-dasharray="7 6"/>
+  <text x="1010" y="675" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" fill="#52606D">lower latency / cost →</text>
+  <text x="865" y="420" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" transform="rotate(-90 865 420)" fill="#52606D">better quality →</text>
+  <text x="1008" y="555" font-family="Arial,sans-serif" font-size="15" text-anchor="middle" fill="#172033">Hard memory/latency constraints</text>
+  <text x="1008" y="578" font-family="Arial,sans-serif" font-size="15" text-anchor="middle" fill="#172033">select among non-dominated points.</text>
+  <text x="600" y="758" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" fill="#52606D">Textbook schematic — Q*, serving slope and the Pareto frontier must be measured for the deployment system.</text>
+</svg>

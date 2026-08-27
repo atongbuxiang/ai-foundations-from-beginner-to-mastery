@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">迹与行列式的加法型、乘法型不变量及体积意义</title>
+  <desc id="desc">左侧展示矩阵把单位正方形变成面积由行列式决定的平行四边形，右侧用同一二维矩阵区分迹的对角和与行列式的体积缩放，底部总结相似不变、循环性、乘法性与稳定计算。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
+    <style>
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}.blue{fill:#2563eb}.green{fill:#0f766e}.amber{fill:#b7791f}.h{font-size:19px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}.axis{stroke:#cbd5e1;stroke-width:1.5}.arrow{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#arrow)}.cell{fill:#ffffff;stroke:#cbd5e1}
+    </style>
+  </defs>
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <rect x="42" y="43" width="630" height="390" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="68" y="81" class="sans h blue">det：整个空间的有向体积缩放</text>
+  <path d="M82 371H622M134 405V112" class="axis"/>
+  <polygon points="134,371 244,371 244,261 134,261" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/><text x="189" y="322" class="sans body blue" text-anchor="middle">单位面积 1</text>
+  <path d="M278 316H357" class="arrow"/><text x="318" y="298" class="math body ink" text-anchor="middle">A</text>
+  <polygon points="395,371 545,316 620,151 470,206" fill="#ecfdf5" stroke="#0f766e" stroke-width="2.5"/><path d="M395 371L545 316" stroke="#2563eb" stroke-width="4"/><path d="M395 371L470 206" stroke="#0f766e" stroke-width="4"/><text x="527" y="265" class="sans body green" text-anchor="middle">面积 |det A|=5</text><text x="502" y="402" class="sans small muted" text-anchor="middle">符号还记录 orientation 是否翻转</text>
+
+  <rect x="712" y="43" width="446" height="390" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="738" y="81" class="sans h green">同一个数值 5，两种完全不同的含义</text>
+  <text x="748" y="127" class="math formula ink">A =</text>
+  <g class="math formula ink" text-anchor="middle"><rect x="805" y="95" width="62" height="52" class="cell" fill="#eff6ff"/><rect x="867" y="95" width="62" height="52" class="cell"/><rect x="805" y="147" width="62" height="52" class="cell"/><rect x="867" y="147" width="62" height="52" class="cell" fill="#eff6ff"/><text x="836" y="129" class="blue">2</text><text x="898" y="129">1</text><text x="836" y="181">1</text><text x="898" y="181" class="blue">3</text></g>
+  <text x="967" y="126" class="math formula blue">tr A=2+3=5</text><text x="967" y="157" class="sans small muted">对角作用的加法型总量</text><text x="967" y="202" class="math formula green">det A=6−1=5</text><text x="967" y="233" class="sans small muted">全维体积的乘法型总量</text>
+  <line x1="738" y1="267" x2="1132" y2="267" stroke="#cbd5e1"/>
+  <text x="738" y="307" class="math body ink">tr(P⁻¹AP)=tr A</text><text x="967" y="307" class="math body ink">det(P⁻¹AP)=det A</text>
+  <text x="738" y="350" class="math body blue">tr(AB)=tr(BA)</text><text x="967" y="350" class="math body green">det(AB)=det A det B</text>
+  <text x="738" y="393" class="sans small amber">det A=0 ⇔ 降维；trace 为零并不意味着奇异。</text>
+  <rect x="70" y="466" width="1060" height="83" rx="12" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="97" y="499" class="sans h ink">稳定计算接口</text><text x="97" y="530" class="sans body blue">LU：符号 + Σ log|uᵢᵢ|</text><text x="448" y="530" class="sans body green">Cholesky：2Σ log lᵢᵢ</text><text x="795" y="530" class="sans body amber">大规模 trace：Hutchinson 随机估计</text>
+  <text x="600" y="606" class="sans result ink" text-anchor="middle">迹偏向加法与一阶变化，行列式偏向乘法、可逆性和体积；二者都不应靠显式特征分解计算。</text>
+</svg>

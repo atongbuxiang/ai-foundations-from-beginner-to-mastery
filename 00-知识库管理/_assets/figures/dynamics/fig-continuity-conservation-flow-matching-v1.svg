@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">连续性方程、守恒律与 Flow Matching</title>
+  <desc id="desc">三面板展示固定控制体的通量收支、拉格朗日流与欧拉密度及弱形式的对应，以及条件概率路径汇总成边缘概率流。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f8fbff"/><stop offset="1" stop-color="#eef2ff"/></linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#334155"/></marker>
+    <style>
+      .panel{fill:url(#bg);stroke:#cbd5e1;stroke-width:1.5}.title{font:700 20px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#0f172a}.label{font:500 14px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#334155}.small{font:500 12.5px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#475569}.math{font:600 14px Georgia,"Times New Roman",serif;fill:#1e293b}.arrow{stroke:#334155;stroke-width:2;fill:none;marker-end:url(#arrow)}.flux{stroke:#ea580c;stroke-width:2.4;fill:none;marker-end:url(#arrow)}.blue{fill:#dbeafe;stroke:#2563eb;stroke-width:1.8}.green{fill:#d1fae5;stroke:#059669;stroke-width:1.6}.violet{fill:#ede9fe;stroke:#7c3aed;stroke-width:1.6}.orange{fill:#ffedd5;stroke:#ea580c;stroke-width:1.6}.dash{stroke:#7c3aed;stroke-width:1.5;stroke-dasharray:5 4;fill:none}.dot0{fill:#2563eb}.dot1{fill:#7c3aed}
+    </style>
+  </defs>
+  <rect width="1200" height="430" fill="#fff"/>
+  <rect class="panel" x="20" y="20" width="370" height="390" rx="18"/>
+  <text class="title" x="42" y="54">A　控制体：变化 = 流入 − 流出 + 源</text>
+  <rect class="blue" x="115" y="112" width="180" height="130" rx="10"/>
+  <text class="label" x="169" y="179">固定区域 K</text>
+  <text class="math" x="153" y="207">mass = int_K rho dx</text>
+  <path class="flux" d="M50 150 L105 150"/><path class="flux" d="M305 150 L360 150"/>
+  <path class="flux" d="M205 92 L205 111"/><path class="flux" d="M205 243 L205 279"/>
+  <text class="small" x="47" y="137">inflow</text><text class="small" x="320" y="137">outflow</text>
+  <rect class="orange" x="48" y="300" width="314" height="72" rx="12"/>
+  <text class="math" x="63" y="329">d/dt int_K rho = - int_boundary K j dot n</text>
+  <text class="math" x="63" y="352">local form:  rho_t + div j = source</text>
+
+  <rect class="panel" x="415" y="20" width="370" height="390" rx="18"/>
+  <text class="title" x="437" y="54">B　同一输运的三种语言</text>
+  <rect class="blue" x="447" y="91" width="126" height="75" rx="12"/>
+  <text class="label" x="470" y="120">粒子 / 流</text><text class="math" x="466" y="146">x' = v(t,x)</text>
+  <rect class="green" x="625" y="91" width="128" height="75" rx="12"/>
+  <text class="label" x="647" y="120">密度 / PDE</text><text class="math" x="636" y="146">rho_t+div(rho v)=0</text>
+  <path class="arrow" d="M578 128 L618 128"/><path class="arrow" d="M620 150 L579 150"/>
+  <rect class="violet" x="475" y="207" width="250" height="92" rx="12"/>
+  <text class="label" x="573" y="235">弱形式</text>
+  <text class="math" x="511" y="263">d/dt ∫ ψ dμ_t =</text>
+  <text class="math" x="527" y="285">∫ ∇ψ · v dμ_t</text>
+  <path class="arrow" d="M506 175 L552 210"/><path class="arrow" d="M692 175 L650 210"/>
+  <text class="small" x="449" y="326">smooth density：沿特征线 d log rho/dt = - div v</text>
+  <text class="small" x="449" y="351">measure solution：允许 Dirac；不要求先有普通 density</text>
+  <text class="small" x="449" y="376">rough velocity：uniqueness 需 renormalization 等额外理论</text>
+
+  <rect class="panel" x="810" y="20" width="370" height="390" rx="18"/>
+  <text class="title" x="832" y="54">C　条件路径汇成边缘概率流</text>
+  <g transform="translate(845 88)">
+    <circle class="dot0" cx="12" cy="25" r="5"/><circle class="dot0" cx="12" cy="70" r="5"/><circle class="dot0" cx="12" cy="115" r="5"/>
+    <path class="dash" d="M20 25 C80 10 115 30 170 65"/><path class="dash" d="M20 70 C85 55 120 85 170 95"/><path class="dash" d="M20 115 C70 130 120 120 170 105"/>
+    <circle class="dot1" cx="178" cy="65" r="5"/><circle class="dot1" cx="178" cy="95" r="5"/><circle class="dot1" cx="178" cy="105" r="5"/>
+    <path class="arrow" d="M198 85 L245 85"/>
+    <ellipse class="green" cx="280" cy="85" rx="40" ry="65"/>
+    <text class="small" x="252" y="89">p_t(x)</text>
+  </g>
+  <text class="math" x="837" y="244">J_t(x) = E[ p_t(x|Z) u_t(x|Z) ]</text>
+  <text class="math" x="837" y="271">v_t(x) = J_t(x)/p_t(x) = E[ U_t | X_t=x ]</text>
+  <rect class="green" x="838" y="298" width="314" height="76" rx="12"/>
+  <text class="label" x="854" y="324">每条条件路径守恒 + 可交换积分与微分</text>
+  <text class="math" x="854" y="348">implies  p_t derivative + div(p_t v_t) = 0</text>
+  <text class="small" x="854" y="366">simulation-free regression；sampling 仍需求解 ODE</text>
+</svg>

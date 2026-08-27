@@ -1,0 +1,9 @@
+rows_A,columns_B,ns_steps,ns_gemm_flops_proxy,fp32_momentum_bytes,fp32_small_gram_bytes,fp32_two_matrix_temporaries_bytes,proxy_boundary
+4096,1024,3,77309411328,16777216,4194304,33554432,algorithmic GEMM/state proxy; not measured wall-clock or peak
+4096,1024,5,128849018880,16777216,4194304,33554432,algorithmic GEMM/state proxy; not measured wall-clock or peak
+1024,4096,3,77309411328,16777216,4194304,33554432,algorithmic GEMM/state proxy; not measured wall-clock or peak
+1024,4096,5,128849018880,16777216,4194304,33554432,algorithmic GEMM/state proxy; not measured wall-clock or peak
+4096,4096,3,1236950581248,67108864,67108864,134217728,algorithmic GEMM/state proxy; not measured wall-clock or peak
+4096,4096,5,2061584302080,67108864,67108864,134217728,algorithmic GEMM/state proxy; not measured wall-clock or peak
+8192,1024,3,154618822656,33554432,4194304,67108864,algorithmic GEMM/state proxy; not measured wall-clock or peak
+8192,1024,5,257698037760,33554432,4194304,67108864,algorithmic GEMM/state proxy; not measured wall-clock or peak

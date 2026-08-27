@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Noise Location：相同边际方差，不同联合结构</title>
+<desc id="desc">Activation dropout、DropConnect 与 additive weight/activation noise 把随机变量放在不同计算对象上。即使单个输出方差匹配，输出协方差、梯度共享与 kernel 成本仍可不同。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">随机变量放在哪里？</text>
+<rect x="52" y="92" width="310" height="72" rx="5" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="207" y="122" font-size="17" font-weight="700" text-anchor="middle" fill="#2563EB">activation noise</text>
+<text x="207" y="151" font-size="16" font-weight="650" text-anchor="middle" fill="#1F2937">z = W [(m/q) ⊙ x]</text>
+<rect x="52" y="202" width="310" height="72" rx="5" fill="#FFF5F2" stroke="#C24135" stroke-width="2"/>
+<text x="207" y="232" font-size="17" font-weight="700" text-anchor="middle" fill="#C24135">DropConnect</text>
+<text x="207" y="261" font-size="16" font-weight="650" text-anchor="middle" fill="#1F2937">z = [(M/q) ⊙ W] x</text>
+<rect x="52" y="312" width="310" height="72" rx="5" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="207" y="342" font-size="17" font-weight="700" text-anchor="middle" fill="#0F766E">additive noise</text>
+<text x="207" y="371" font-size="16" font-weight="650" text-anchor="middle" fill="#1F2937">W+σE  or  x+σε</text>
+<rect x="52" y="424" width="310" height="60" rx="5" fill="#FFFBEB" stroke="#B7791F" stroke-width="2"/>
+<text x="207" y="451" font-size="15" font-weight="700" text-anchor="middle" fill="#B7791F">mask axes define the joint law</text>
+<text x="207" y="477" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">not just a scalar noise rate</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">toy output covariance</text>
+<text x="602" y="102" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">W = [[1,2],[-1,1]],  x = [2,1]</text>
+<text x="602" y="132" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">q = .5; both give E[z] = [4,-1]</text>
+<rect x="445" y="182" width="315" height="112" rx="5" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="602" y="212" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">activation mask shared by outputs</text>
+<text x="602" y="250" font-size="17" font-weight="700" text-anchor="middle" fill="#1F2937">Cov(z|x) = [[8, -2],</text>
+<text x="602" y="278" font-size="17" font-weight="700" text-anchor="middle" fill="#1F2937">             [-2, 5]]</text>
+<rect x="445" y="338" width="315" height="112" rx="5" fill="#FFF5F2" stroke="#C24135" stroke-width="2"/>
+<text x="602" y="368" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">independent DropConnect entries</text>
+<text x="602" y="406" font-size="17" font-weight="700" text-anchor="middle" fill="#1F2937">Cov(z|x) = [[8, 0],</text>
+<text x="602" y="434" font-size="17" font-weight="700" text-anchor="middle" fill="#1F2937">             [0, 5]]</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">目标、估计器与系统分账</text>
+<rect x="846" y="96" width="284" height="82" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="988" y="127" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">expected noisy loss</text>
+<text x="988" y="157" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">which objective?</text>
+<rect x="846" y="208" width="284" height="82" rx="5" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="988" y="239" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">local reparameterization</text>
+<text x="988" y="269" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">which estimator?</text>
+<rect x="846" y="320" width="284" height="82" rx="5" fill="#FFFEFB" stroke="#B7791F" stroke-width="2"/>
+<text x="988" y="351" font-size="15" font-weight="700" text-anchor="middle" fill="#B7791F">mask / dequant kernel</text>
+<text x="988" y="381" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">which runtime?</text>
+<rect x="846" y="438" width="284" height="48" rx="4" fill="#FFF5F2" stroke="#C24135" stroke-width="2"/>
+<text x="988" y="468" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">gradient masking is another contract</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">比较噪声方法时至少固定：随机对象、共享轴、缩放、expected objective、gradient estimator 与实际 kernel。</text>
+</svg>

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title description">
+<title id="title">Newton--Schulz orthogonality defect for increasingly ill-conditioned matrices</title>
+<desc id="description">The spectral orthogonality defect falls rapidly after the smallest singular value enters the local convergence region, but fixed-step accuracy deteriorates as the condition number grows. A rank-deficient matrix remains rank deficient.</desc>
+<rect width="100%" height="100%" fill="#fffefb"/>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",Arial,sans-serif;fill:#1f2937}.title{font-size:27px;font-weight:650}.subtitle{font-size:15px;fill:#64748b}.axis{font-size:16px;font-weight:600}.tick{font-size:15px;fill:#64748b}.legend{font-size:15px;font-weight:600}.note{font-size:15px;fill:#64748b}</style>
+<text class="title" x="600.0" y="35" text-anchor="middle">Newton–Schulz 极分解：条件数推迟局部快速收敛</text>
+<text class="subtitle" x="600.0" y="66" text-anchor="middle">Aκ=diag(1,1/κ)/||diag(1,1/κ)||F；误差为 ||X*X−I||₂</text>
+<rect x="100" y="104" width="1050" height="496" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="100" y1="104.00" x2="1150" y2="104.00" stroke="#e2e8f0"/>
+<text class="tick" x="88" y="108.00" text-anchor="end">1</text>
+<line x1="100" y1="228.00" x2="1150" y2="228.00" stroke="#e2e8f0"/>
+<text class="tick" x="88" y="232.00" text-anchor="end">10^-4</text>
+<line x1="100" y1="352.00" x2="1150" y2="352.00" stroke="#e2e8f0"/>
+<text class="tick" x="88" y="356.00" text-anchor="end">10^-8</text>
+<line x1="100" y1="476.00" x2="1150" y2="476.00" stroke="#e2e8f0"/>
+<text class="tick" x="88" y="480.00" text-anchor="end">10^-12</text>
+<line x1="100" y1="600.00" x2="1150" y2="600.00" stroke="#e2e8f0"/>
+<text class="tick" x="88" y="604.00" text-anchor="end">10^-16</text>
+<line x1="100.00" y1="104" x2="100.00" y2="600" stroke="#f1f5f9"/>
+<text class="tick" x="100.00" y="625" text-anchor="middle">0</text>
+<line x1="287.50" y1="104" x2="287.50" y2="600" stroke="#f1f5f9"/>
+<text class="tick" x="287.50" y="625" text-anchor="middle">5</text>
+<line x1="475.00" y1="104" x2="475.00" y2="600" stroke="#f1f5f9"/>
+<text class="tick" x="475.00" y="625" text-anchor="middle">10</text>
+<line x1="662.50" y1="104" x2="662.50" y2="600" stroke="#f1f5f9"/>
+<text class="tick" x="662.50" y="625" text-anchor="middle">15</text>
+<line x1="850.00" y1="104" x2="850.00" y2="600" stroke="#f1f5f9"/>
+<text class="tick" x="850.00" y="625" text-anchor="middle">20</text>
+<line x1="1037.50" y1="104" x2="1037.50" y2="600" stroke="#f1f5f9"/>
+<text class="tick" x="1037.50" y="625" text-anchor="middle">25</text>
+<line x1="1150.00" y1="104" x2="1150.00" y2="600" stroke="#f1f5f9"/>
+<text class="tick" x="1150.00" y="625" text-anchor="middle">28</text>
+<line x1="100" y1="352.00" x2="1150" y2="352.00" stroke="#64748b" stroke-width="1.8" stroke-dasharray="7 6"/>
+<text class="note" x="110" y="344.00">验收线：10⁻⁸</text>
+<text class="axis" x="625.0" y="665" text-anchor="middle">迭代步 k</text>
+<text class="axis" x="28" y="352.0" text-anchor="middle" transform="rotate(-90 28 352.0)">谱范数正交性缺陷（对数刻度）</text>
+<path d="M 100.00,113.33 L 137.50,124.46 L 175.00,147.85 L 212.50,195.40 L 250.00,290.67 L 287.50,481.20 L 325.00,589.26 L 362.50,589.26 L 400.00,589.26 L 437.50,589.26 L 475.00,589.26 L 512.50,589.26 L 550.00,589.26 L 587.50,589.26 L 625.00,589.26 L 662.50,589.26 L 700.00,589.26 L 737.50,589.26 L 775.00,589.26 L 812.50,589.26 L 850.00,589.26 L 887.50,589.26 L 925.00,589.26 L 962.50,589.26 L 1000.00,589.26 L 1037.50,589.26 L 1075.00,589.26 L 1112.50,589.26 L 1150.00,589.26" fill="none" stroke="#2563eb" stroke-width="3.2" stroke-linejoin="round"/>
+<path d="M 100.00,104.13 L 137.50,104.30 L 175.00,104.68 L 212.50,105.52 L 250.00,107.41 L 287.50,111.59 L 325.00,120.71 L 362.50,140.04 L 400.00,179.66 L 437.50,259.17 L 475.00,418.22 L 512.50,600.00 L 550.00,600.00 L 587.50,600.00 L 625.00,600.00 L 662.50,600.00 L 700.00,600.00 L 737.50,600.00 L 775.00,600.00 L 812.50,600.00 L 850.00,600.00 L 887.50,600.00 L 925.00,600.00 L 962.50,600.00 L 1000.00,600.00 L 1037.50,600.00 L 1075.00,600.00 L 1112.50,600.00 L 1150.00,600.00" fill="none" stroke="#64748b" stroke-width="3.2" stroke-linejoin="round"/>
+<path d="M 100.00,104.00 L 137.50,104.00 L 175.00,104.01 L 212.50,104.02 L 250.00,104.03 L 287.50,104.08 L 325.00,104.17 L 362.50,104.39 L 400.00,104.88 L 437.50,105.98 L 475.00,108.43 L 512.50,113.83 L 550.00,125.54 L 587.50,150.07 L 625.00,199.87 L 662.50,299.61 L 700.00,499.11 L 737.50,589.26 L 775.00,589.26 L 812.50,589.26 L 850.00,589.26 L 887.50,589.26 L 925.00,589.26 L 962.50,589.26 L 1000.00,589.26 L 1037.50,589.26 L 1075.00,589.26 L 1112.50,589.26 L 1150.00,589.26" fill="none" stroke="#b7791f" stroke-width="3.2" stroke-linejoin="round"/>
+<path d="M 100.00,104.00 L 137.50,104.00 L 175.00,104.00 L 212.50,104.00 L 250.00,104.00 L 287.50,104.00 L 325.00,104.00 L 362.50,104.00 L 400.00,104.01 L 437.50,104.02 L 475.00,104.04 L 512.50,104.10 L 550.00,104.23 L 587.50,104.51 L 625.00,105.14 L 662.50,106.57 L 700.00,109.73 L 737.50,116.68 L 775.00,131.58 L 812.50,162.46 L 850.00,224.74 L 887.50,349.35 L 925.00,600.00 L 962.50,600.00 L 1000.00,600.00 L 1037.50,600.00 L 1075.00,600.00 L 1112.50,600.00 L 1150.00,600.00" fill="none" stroke="#c24135" stroke-width="3.2" stroke-linejoin="round"/>
+<path d="M 100.00,104.00 L 137.50,104.00 L 175.00,104.00 L 212.50,104.00 L 250.00,104.00 L 287.50,104.00 L 325.00,104.00 L 362.50,104.00 L 400.00,104.00 L 437.50,104.00 L 475.00,104.00 L 512.50,104.00 L 550.00,104.00 L 587.50,104.00 L 625.00,104.00 L 662.50,104.00 L 700.00,104.00 L 737.50,104.00 L 775.00,104.00 L 812.50,104.00 L 850.00,104.00 L 887.50,104.00 L 925.00,104.00 L 962.50,104.00 L 1000.00,104.00 L 1037.50,104.00 L 1075.00,104.00 L 1112.50,104.00 L 1150.00,104.00" fill="none" stroke="#64748b" stroke-width="2.4" stroke-dasharray="8 6"/>
+<rect x="116" y="114" width="286" height="142" fill="#ffffff" fill-opacity="0.94" stroke="#cbd5e1"/>
+<line x1="134" y1="138" x2="166" y2="138" stroke="#2563eb" stroke-width="3.2"/>
+<text class="legend" x="177" y="142">κ = 1；达到 10⁻⁸：5 步</text>
+<line x1="134" y1="163" x2="166" y2="163" stroke="#64748b" stroke-width="3.2"/>
+<text class="legend" x="177" y="167">κ = 10；达到 10⁻⁸：10 步</text>
+<line x1="134" y1="188" x2="166" y2="188" stroke="#b7791f" stroke-width="3.2"/>
+<text class="legend" x="177" y="192">κ = 100；达到 10⁻⁸：16 步</text>
+<line x1="134" y1="213" x2="166" y2="213" stroke="#c24135" stroke-width="3.2"/>
+<text class="legend" x="177" y="217">κ = 1000；达到 10⁻⁸：22 步</text>
+<line x1="134" y1="238" x2="166" y2="238" stroke="#64748b" stroke-width="2.4" stroke-dasharray="8 6"/>
+<text class="legend" x="177" y="242">秩亏：缺陷恒为 1</text>
+</svg>

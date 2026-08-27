@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+  <title id="title">实验图占位</title>
+  <desc id="desc">实验笔记模板中的占位资产。复制模板后应以回答研究问题的可复现实验图替换。</desc>
+  <style>
+    text { font-family: Inter, "PingFang SC", "Noto Sans CJK SC", sans-serif; }
+  </style>
+  <rect width="1200" height="420" fill="#FFFEFB"/>
+  <rect x="64" y="58" width="1072" height="304" rx="8" fill="none" stroke="#94A3B8" stroke-width="2.5" stroke-dasharray="12 10"/>
+  <path d="M350 252 L470 188 L565 226 L680 135 L850 237" fill="none" stroke="#2563EB" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.42"/>
+  <line x1="330" y1="272" x2="870" y2="272" stroke="#64748B" stroke-width="2" opacity="0.55"/>
+  <line x1="330" y1="272" x2="330" y2="118" stroke="#64748B" stroke-width="2" opacity="0.55"/>
+  <text x="600" y="315" text-anchor="middle" fill="#1F2937" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="26" font-weight="600">实验图占位</text>
+  <text x="600" y="344" text-anchor="middle" fill="#64748B" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="18">复制模板后，以回答研究问题的可复现实验图替换</text>
+</svg>

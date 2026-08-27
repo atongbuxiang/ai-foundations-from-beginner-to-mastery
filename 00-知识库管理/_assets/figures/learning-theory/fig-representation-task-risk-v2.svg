@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">表示学习：任务族、共享表示与下游风险</title>
+<desc id="desc">表示不是脱离任务的压缩向量。训练分布、共享encoder、允许的head class、task family、label budget与部署损失共同定义表示质量；pretext loss只是一种构造信号。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">先写 Representation Contract</text>
+<rect x="55" y="105" width="105" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="107.5" y="140.0" font-size="16" font-weight="650" text-anchor="middle" fill="#2563EB">raw X</text>
+<line x1="165" y1="134" x2="225" y2="134" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="230" y="95" width="125" height="78" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="292.5" y="140.0" font-size="16" font-weight="650" text-anchor="middle" fill="#0F766E">H = h(X)</text>
+<line x1="292" y1="178" x2="205" y2="205" stroke="#1F2937" stroke-width="2"/>
+<line x1="205" y1="205" x2="205" y2="422" stroke="#1F2937" stroke-width="2"/>
+<line x1="205" y1="252" x2="225" y2="252" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="230" y="225" width="125" height="55" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="292.5" y="258.5" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">head g_1</text>
+<line x1="205" y1="337" x2="225" y2="337" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="230" y="310" width="125" height="55" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="292.5" y="343.5" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">head g_2</text>
+<line x1="205" y1="422" x2="225" y2="422" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="230" y="395" width="125" height="55" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="292.5" y="428.5" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">head g_T</text>
+<text x="45" y="470" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">task t: law P_t, loss ell_t, head class G</text>
+<text x="45" y="510" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">no universal representation without a task family。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">下游误差要分账</text>
+<rect x="445" y="92" width="310" height="62" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600.0" y="129.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">oracle risk inside G o h</text>
+<line x1="600" y1="159" x2="600" y2="192" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="445" y="202" width="310" height="62" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="600.0" y="239.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">representation approximation gap</text>
+<line x1="600" y1="269" x2="600" y2="302" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="445" y="312" width="310" height="62" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="600.0" y="349.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">finite-label head estimation</text>
+<line x1="600" y1="379" x2="600" y2="412" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="445" y="422" width="310" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600.0" y="457.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">selection + deployment shift</text>
+<text x="430" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">pretext optimization is a separate error account。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">保留与丢弃都依赖任务</text>
+<rect x="845" y="92" width="285" height="62" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="987.5" y="129.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">invariance: discard nuisance</text>
+<rect x="845" y="180" width="285" height="62" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="987.5" y="217.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">sufficiency: retain task signal</text>
+<rect x="845" y="268" width="285" height="62" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="987.5" y="305.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">compression: limit head/sample cost</text>
+<text x="830" y="382" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">too invariant can erase labels</text>
+<text x="830" y="420" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">too rich can retain shortcut or identity</text>
+<text x="830" y="458" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">task diversity is not just task count</text>
+<text x="830" y="495" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">evaluate frozen, adapted, grouped and shifted</text>
+<text x="830" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">coordinate meaning is not representation identity。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">好表示不是形容词：它是相对于任务族、head限制、样本预算与部署损失的可比较风险声明。</text>
+</svg>

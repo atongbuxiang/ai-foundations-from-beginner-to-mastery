@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Label Smoothing：目标混合、有限 Margin 与估计偏置</title>
+<desc id="desc">Uniform label smoothing 把 one-hot target 与 label prior 混合；交叉熵因此分解为 hard fit 与 prior fit，并把 population target 从真实条件分布推向 prior。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">one-hot → smoothed target</text>
+<text x="54" y="139" font-size="16" font-weight="700" text-anchor="start" fill="#2563EB">hard y</text>
+<rect x="140" y="112" width="62" height="48" rx="4" fill="#FFFEFB" stroke="#2563EB" stroke-width="1.8"/>
+<text x="171" y="142" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">1</text>
+<text x="171" y="186" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">c1</text>
+<rect x="218" y="112" width="62" height="48" rx="4" fill="#FFFEFB" stroke="#2563EB" stroke-width="1.8"/>
+<text x="249" y="142" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">0</text>
+<text x="249" y="186" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">c2</text>
+<rect x="296" y="112" width="62" height="48" rx="4" fill="#FFFEFB" stroke="#2563EB" stroke-width="1.8"/>
+<text x="327" y="142" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">0</text>
+<text x="327" y="186" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">c3</text>
+<text x="54" y="271" font-size="16" font-weight="700" text-anchor="start" fill="#0F766E">eps=.1</text>
+<rect x="140" y="244" width="62" height="48" rx="4" fill="#FFFEFB" stroke="#0F766E" stroke-width="1.8"/>
+<text x="171" y="274" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">0.933</text>
+<text x="171" y="318" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">c1</text>
+<rect x="218" y="244" width="62" height="48" rx="4" fill="#FFFEFB" stroke="#0F766E" stroke-width="1.8"/>
+<text x="249" y="274" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">0.033</text>
+<text x="249" y="318" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">c2</text>
+<rect x="296" y="244" width="62" height="48" rx="4" fill="#FFFEFB" stroke="#0F766E" stroke-width="1.8"/>
+<text x="327" y="274" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">0.033</text>
+<text x="327" y="318" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">c3</text>
+<rect x="52" y="395" width="310" height="76" rx="5" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="207" y="424" font-size="16" font-weight="700" text-anchor="middle" fill="#0F766E">y_eps = (1-eps)y + eps u</text>
+<text x="207" y="454" font-size="15" font-weight="600" text-anchor="middle" fill="#1F2937">u = (1/K,...,1/K)</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">loss 与 logit margin</text>
+<rect x="445" y="100" width="310" height="78" rx="5" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="600" y="130" font-size="18" font-weight="700" text-anchor="middle" fill="#2563EB">CE(y_eps,p)</text>
+<text x="600" y="158" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">= (1-eps) CE(y,p) + eps CE(u,p)</text>
+<line x1="600" y1="181" x2="600" y2="220" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="445" y="232" width="310" height="104" rx="5" fill="#FFFBEB" stroke="#B7791F" stroke-width="2"/>
+<text x="600" y="263" font-size="16" font-weight="700" text-anchor="middle" fill="#B7791F">K=3, eps=.1</text>
+<text x="600" y="293" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">p* = (.9333,.0333,.0333)</text>
+<text x="600" y="321" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">optimal margin = log 28 = 3.332</text>
+<rect x="445" y="385" width="310" height="86" rx="5" fill="#FFF5F2" stroke="#C24135" stroke-width="2"/>
+<text x="600" y="416" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">CE(u,p) = log K + KL(u || p)</text>
+<text x="600" y="448" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">not KL(p || u), not entropy itself</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">低置信度不是 uncertainty</text>
+<rect x="845" y="92" width="286" height="68" rx="4" fill="#FFFEFB" stroke="#0F766E" stroke-width="1.8"/>
+<text x="988" y="119" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">target bias</text>
+<text x="988" y="145" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">r = (1-eps) eta + eps u</text>
+<rect x="845" y="185" width="286" height="68" rx="4" fill="#FFFEFB" stroke="#2563EB" stroke-width="1.8"/>
+<text x="988" y="212" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">calibration</text>
+<text x="988" y="238" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">must be measured on held-out data</text>
+<rect x="845" y="278" width="286" height="68" rx="4" fill="#FFFEFB" stroke="#B7791F" stroke-width="1.8"/>
+<text x="988" y="305" font-size="15" font-weight="700" text-anchor="middle" fill="#B7791F">label noise</text>
+<text x="988" y="331" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">transition model must be declared</text>
+<rect x="845" y="371" width="286" height="68" rx="4" fill="#FFFEFB" stroke="#C24135" stroke-width="1.8"/>
+<text x="988" y="398" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">distillation</text>
+<text x="988" y="424" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">teacher information can change</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">Label Smoothing 精确改变监督目标；置信度、校准、抗噪与蒸馏效果必须分开验收。</text>
+</svg>

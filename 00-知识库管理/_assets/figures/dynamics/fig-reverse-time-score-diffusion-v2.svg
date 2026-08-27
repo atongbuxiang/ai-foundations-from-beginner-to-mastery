@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Forward noising、反向 score 漂移与生成误差链</title>
+<desc id="desc">前向扩散把数据分布搬向简单先验；时间反演使用各时刻 score 修正反向漂移，reverse SDE 与 probability-flow ODE 的 score 系数不同；精确理论、网络 score、终端先验和有限步求解器是四个误差层。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">先定义已知 forward noising</text>
+<circle cx="85" cy="260" r="32" fill="#FFFEFB" stroke="#2563EB" stroke-width="2.5"/>
+<circle cx="200" cy="230" r="48" fill="#FFFEFB" stroke="#0F766E" stroke-width="2.5"/>
+<circle cx="330" cy="260" r="72" fill="#FFFEFB" stroke="#C24135" stroke-width="2.5"/>
+<line x1="120" y1="260" x2="155" y2="245" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<line x1="250" y1="242" x2="275" y2="252" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<text x="55" y="345" font-size="16" font-weight="700" text-anchor="start" fill="#2563EB">p0=data</text>
+<text x="160" y="345" font-size="16" font-weight="700" text-anchor="start" fill="#0F766E">p_t</text>
+<text x="295" y="345" font-size="16" font-weight="700" text-anchor="start" fill="#C24135">p_T ~= prior</text>
+<text x="45" y="405" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">dX=f(t,X)dt+g(t)dW</text>
+<text x="45" y="443" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">forward conditional law is designed</text>
+<text x="45" y="478" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">terminal approximation is an error source</text>
+<text x="45" y="507" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">time index and units must stay explicit。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">score 决定反向 drift correction</text>
+<rect x="445" y="92" width="310" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600.0" y="127.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">score s_t(x)=grad log p_t(x)</text>
+<line x1="600" y1="153" x2="600" y2="190" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="445" y="202" width="310" height="78" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="600.0" y="247.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">reverse SDE: -f + g^2 s_t</text>
+<line x1="600" y1="283" x2="600" y2="320" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="445" y="332" width="310" height="72" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="600.0" y="374.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">PF ODE reverse clock: -f + 1/2 g^2 s_t</text>
+<text x="430" y="444" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">general D also needs div D</text>
+<text x="430" y="475" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">reverse filtration is not &#x27;set dt&lt;0&#x27;</text>
+<text x="430" y="505" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">positivity/regularity support the theorem。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">理论到样本有五道误差门</text>
+<rect x="840" y="82" width="300" height="45" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="990.0" y="110.5" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">terminal prior</text>
+<line x1="990" y1="130" x2="990" y2="149" stroke="#1F2937" stroke-width="1.9" marker-end="url(#a3)"/>
+<rect x="840" y="155" width="300" height="45" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="990.0" y="183.5" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">score model</text>
+<line x1="990" y1="203" x2="990" y2="222" stroke="#1F2937" stroke-width="1.9" marker-end="url(#a3)"/>
+<rect x="840" y="228" width="300" height="45" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="990.0" y="256.5" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">guidance / parameterization</text>
+<line x1="990" y1="276" x2="990" y2="295" stroke="#1F2937" stroke-width="1.9" marker-end="url(#a3)"/>
+<rect x="840" y="301" width="300" height="45" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="990.0" y="329.5" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">finite-step sampler</text>
+<line x1="990" y1="349" x2="990" y2="368" stroke="#1F2937" stroke-width="1.9" marker-end="url(#a3)"/>
+<rect x="840" y="374" width="300" height="45" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="990.0" y="402.5" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">Monte Carlo + evaluation</text>
+<text x="830" y="469" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">exact reverse dynamics assumes exact score</text>
+<text x="830" y="497" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">smaller step cannot remove score bias</text>
+<text x="830" y="520" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">sample quality is not likelihood proof。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">扩散生成不是把时间符号反过来；score 修正、反向时钟与多层误差合同共同决定最终样本。</text>
+</svg>

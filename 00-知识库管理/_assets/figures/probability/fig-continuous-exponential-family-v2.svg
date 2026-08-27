@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">常用连续分布与指数族</title>
+<desc id="desc">连续密度先匹配支持集和尾部；指数族以配分函数统一归一化、矩与曲率。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#B7791F"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">density 高度不是点概率</text>
+<line x1="55" y1="385" x2="355" y2="385" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="70" y1="410" x2="70" y2="100" stroke="#D7DEE8" stroke-width="2"/>
+<path d="M70.0 382.7L72.2 382.3L74.5 381.9L76.8 381.4L79.0 380.8L81.2 380.2L83.5 379.5L85.8 378.7L88.0 377.9L90.2 376.9L92.5 375.8L94.8 374.6L97.0 373.2L99.2 371.7L101.5 370.1L103.8 368.3L106.0 366.3L108.2 364.2L110.5 361.8L112.8 359.3L115.0 356.6L117.2 353.6L119.5 350.5L121.8 347.1L124.0 343.4L126.2 339.6L128.5 335.5L130.8 331.2L133.0 326.6L135.2 321.8L137.5 316.8L139.8 311.6L142.0 306.2L144.2 300.6L146.5 294.8L148.8 288.9L151.0 282.8L153.2 276.6L155.5 270.3L157.8 264.0L160.0 257.6L162.2 251.3L164.5 244.9L166.8 238.7L169.0 232.5L171.2 226.5L173.5 220.6L175.8 215.0L178.0 209.6L180.2 204.5L182.5 199.7L184.8 195.2L187.0 191.1L189.2 187.5L191.5 184.2L193.8 181.5L196.0 179.2L198.2 177.3L200.5 176.0L202.8 175.3L205.0 175.0L207.2 175.3L209.5 176.0L211.8 177.3L214.0 179.2L216.2 181.5L218.5 184.2L220.8 187.5L223.0 191.1L225.2 195.2L227.5 199.7L229.8 204.5L232.0 209.6L234.2 215.0L236.5 220.6L238.8 226.5L241.0 232.5L243.2 238.7L245.5 244.9L247.8 251.3L250.0 257.6L252.2 264.0L254.5 270.3L256.8 276.6L259.0 282.8L261.2 288.9L263.5 294.8L265.8 300.6L268.0 306.2L270.2 311.6L272.5 316.8L274.8 321.8L277.0 326.6L279.2 331.2L281.5 335.5L283.8 339.6L286.0 343.4L288.2 347.1L290.5 350.5L292.8 353.6L295.0 356.6L297.2 359.3L299.5 361.8L301.8 364.2L304.0 366.3L306.2 368.3L308.5 370.1L310.8 371.7L313.0 373.2L315.2 374.6L317.5 375.8L319.8 376.9L322.0 377.9L324.2 378.7L326.5 379.5L328.8 380.2L331.0 380.8L333.2 381.4L335.5 381.9L337.8 382.3L340.0 382.7" fill="none" stroke="#2563EB" stroke-width="3"/>
+<line x1="95" y1="315" x2="160" y2="315" stroke="#0F766E" stroke-width="8"/>
+<path d="M220 385C225 245 265 215 345 360" fill="none" stroke="#B7791F" stroke-width="3"/>
+<text x="105" y="300" font-size="15" font-weight="650" text-anchor="start" fill="#0F766E">Uniform</text>
+<text x="200" y="180" font-size="16" font-weight="650" text-anchor="start" fill="#2563EB">Gaussian</text>
+<text x="285" y="245" font-size="16" font-weight="650" text-anchor="start" fill="#B7791F">Exp</text>
+<text x="45" y="455" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">probability = area; point probability is usually 0</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">支持集先于形状参数</text>
+<text x="445" y="125" font-size="18" font-weight="700" text-anchor="start" fill="#B7791F">Gamma: x&gt;0</text>
+<text x="445" y="170" font-size="16" font-weight="400" text-anchor="start" fill="#64748B">shape controls zero-boundary and skew</text>
+<text x="445" y="245" font-size="18" font-weight="700" text-anchor="start" fill="#0F766E">Beta: 0&lt;x&lt;1</text>
+<text x="445" y="290" font-size="16" font-weight="400" text-anchor="start" fill="#64748B">can be left/right skewed or U-shaped</text>
+<rect x="445" y="350" width="310" height="64" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600.0" y="388.0" font-size="16" font-weight="650" text-anchor="middle" fill="#2563EB">support mismatch = model error</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#B7791F">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">指数族：A(eta) 编码矩</text>
+<rect x="835" y="105" width="310" height="72" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="990.0" y="147.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">p_eta(x)=h(x) exp(eta^T T(x)-A(eta))</text>
+<line x1="990" y1="182" x2="990" y2="220" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="835" y="230" width="310" height="58" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="990.0" y="265.0" font-size="16" font-weight="650" text-anchor="middle" fill="#0F766E">grad A = E_eta[T(X)]</text>
+<line x1="990" y1="292" x2="990" y2="330" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="835" y="340" width="310" height="58" rx="8" fill="#FFFEFB" stroke="#B7791F" stroke-width="2"/>
+<text x="990.0" y="375.0" font-size="16" font-weight="650" text-anchor="middle" fill="#B7791F">Hess A = Cov_eta(T) &gt;= 0</text>
+<text x="835" y="455" font-size="16" font-weight="400" text-anchor="start" fill="#64748B">微分移入积分需要共同支持与可积控制。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">连续模型先审计支持集、尾部和面积；指数族公式的导数仍需交换微分与积分的条件。</text>
+</svg>

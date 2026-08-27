@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Training compute ledger from model operations to carbon</title>
+  <desc id="desc">Six connected layers show why model FLOPs, executed hardware FLOPs, device time, wall time, energy, monetary cost, and carbon are distinct quantities.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L9,3 L0,6 Z" fill="#52606D"/></marker>
+  </defs>
+  <rect width="1200" height="800" fill="#FFFEFB"/>
+  <text x="60" y="60" font-family="Arial,sans-serif" font-size="28" font-weight="700" fill="#172033">“Same compute” is not one budget until the conversion ledger is fixed</text>
+  <text x="60" y="94" font-family="Arial,sans-serif" font-size="17" fill="#52606D">Every downward conversion needs a new measured quantity; missing it makes the next budget non-identifiable.</text>
+  <rect x="55" y="130" width="1090" height="570" rx="20" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+  <rect x="95" y="180" width="250" height="115" rx="14" fill="#EAF1FF" stroke="#2563EB" stroke-width="3"/>
+  <text x="220" y="215" font-family="Arial,sans-serif" font-size="19" text-anchor="middle" font-weight="700" fill="#2563EB">1  Model FLOPs</text>
+  <text x="220" y="245" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" fill="#172033">blocks + attention + vocab</text>
+  <text x="220" y="272" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" fill="#52606D">dense rough rule: 6 N D</text>
+  <rect x="475" y="180" width="250" height="115" rx="14" fill="#E9F7F4" stroke="#0F766E" stroke-width="3"/>
+  <text x="600" y="215" font-family="Arial,sans-serif" font-size="19" text-anchor="middle" font-weight="700" fill="#0F766E">2  Executed FLOPs</text>
+  <text x="600" y="245" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" fill="#172033">recompute + padding + retries</text>
+  <text x="600" y="272" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" fill="#52606D">C_hw ≥ C_model</text>
+  <rect x="855" y="180" width="250" height="115" rx="14" fill="#FFF4DE" stroke="#B76E00" stroke-width="3"/>
+  <text x="980" y="215" font-family="Arial,sans-serif" font-size="19" text-anchor="middle" font-weight="700" fill="#B76E00">3  Device capacity</text>
+  <text x="980" y="245" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" fill="#172033">G devices × peak FLOP/s</text>
+  <text x="980" y="272" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" fill="#52606D">precision + tensor cores</text>
+  <line x1="345" y1="238" x2="465" y2="238" stroke="#52606D" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="405" y="225" font-family="Arial,sans-serif" font-size="15" text-anchor="middle" fill="#C0392B">recompute rule</text>
+  <line x1="725" y1="238" x2="845" y2="238" stroke="#52606D" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="785" y="225" font-family="Arial,sans-serif" font-size="15" text-anchor="middle" fill="#C0392B">kernel mapping</text>
+  <rect x="95" y="390" width="250" height="115" rx="14" fill="#FFF4DE" stroke="#B76E00" stroke-width="3"/>
+  <text x="220" y="425" font-family="Arial,sans-serif" font-size="19" text-anchor="middle" font-weight="700" fill="#B76E00">4  Wall time</text>
+  <text x="220" y="455" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" fill="#172033">throughput + communication</text>
+  <text x="220" y="482" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" fill="#52606D">MFU / HFU / failures</text>
+  <rect x="475" y="390" width="250" height="115" rx="14" fill="#FBECEC" stroke="#C0392B" stroke-width="3"/>
+  <text x="600" y="425" font-family="Arial,sans-serif" font-size="19" text-anchor="middle" font-weight="700" fill="#C0392B">5  Energy and money</text>
+  <text x="600" y="455" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" fill="#172033">power integral × PUE</text>
+  <text x="600" y="482" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" fill="#52606D">device-hour price + network</text>
+  <rect x="855" y="390" width="250" height="115" rx="14" fill="#EAF1FF" stroke="#2563EB" stroke-width="3"/>
+  <text x="980" y="425" font-family="Arial,sans-serif" font-size="19" text-anchor="middle" font-weight="700" fill="#2563EB">6  CO2e / lifecycle</text>
+  <text x="980" y="455" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" fill="#172033">kWh × carbon intensity</text>
+  <text x="980" y="482" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" fill="#52606D">location + time + scope</text>
+  <path d="M980 295 L980 335 L220 335 L220 380" fill="none" stroke="#52606D" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="600" y="325" font-family="Arial,sans-serif" font-size="15" text-anchor="middle" fill="#C0392B">divide by effective throughput; do not divide by peak alone</text>
+  <line x1="345" y1="448" x2="465" y2="448" stroke="#52606D" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="405" y="435" font-family="Arial,sans-serif" font-size="15" text-anchor="middle" fill="#C0392B">power / tariff</text>
+  <line x1="725" y1="448" x2="845" y2="448" stroke="#52606D" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="785" y="435" font-family="Arial,sans-serif" font-size="15" text-anchor="middle" fill="#C0392B">grid intensity</text>
+  <rect x="135" y="560" width="930" height="90" rx="14" fill="#FFFFFF" stroke="#52606D" stroke-width="2" stroke-dasharray="8 6"/>
+  <text x="600" y="592" font-family="Arial,sans-serif" font-size="17" text-anchor="middle" font-weight="700" fill="#172033">Choose the matching experiment name</text>
+  <text x="600" y="625" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" fill="#52606D">IsoModelFLOP · IsoExecutedFLOP · IsoDeviceHour · IsoWallTime · IsoEnergy · IsoDollar</text>
+  <text x="600" y="758" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" fill="#52606D">Textbook ledger — equal values in one row do not imply equal values in the next.</text>
+</svg>

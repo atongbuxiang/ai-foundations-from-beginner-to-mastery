@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="460" viewBox="0 0 1200 460" role="img" aria-labelledby="title desc">
+  <title id="title">有界算子、紧算子与无限维谱的结构关系</title>
+  <desc id="desc">左侧表示有界算子控制单位球的放大，中间表示紧算子把有界序列映成具有收敛子列的序列，右侧比较有限矩阵、紧自伴算子与一般自伴算子的谱。</desc>
+  <defs>
+    <style>
+      .bg{fill:#f8fafc}.panel{fill:#fff;stroke:#cbd5e1;stroke-width:1.5}.ttl{font:700 18px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#0f172a}.sub{font:500 12px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#475569}.txt{font:600 13px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#1e293b}.small{font:500 11px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#475569}.math{font:italic 14px Georgia,serif;fill:#0f172a}.blue{fill:#dbeafe;stroke:#2563eb;stroke-width:2}.teal{fill:#ccfbf1;stroke:#0f766e;stroke-width:2}.amber{fill:#fef3c7;stroke:#d97706;stroke-width:2}.rose{fill:#ffe4e6;stroke:#e11d48;stroke-width:2}.violet{fill:#ede9fe;stroke:#7c3aed;stroke-width:2}.line{fill:none;stroke:#334155;stroke-width:1.8}.dash{fill:none;stroke:#64748b;stroke-width:1.4;stroke-dasharray:5 5}.axis{stroke:#64748b;stroke-width:1.3}.dotb{fill:#2563eb}.dott{fill:#0f766e}.dotr{fill:#e11d48}.ghost{fill:#f1f5f9;stroke:#94a3b8;stroke-width:1.4}
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#334155"/></marker>
+  </defs>
+  <rect class="bg" width="1200" height="460"/>
+
+  <rect class="panel" x="20" y="20" width="365" height="420" rx="16"/>
+  <text class="ttl" x="40" y="52">A  Bounded = uniform amplification</text>
+  <text class="sub" x="40" y="74">固定 domain、codomain 与 norms 后才有稳定性</text>
+  <circle class="blue" cx="125" cy="206" r="70"/>
+  <text class="math" x="125" y="211" text-anchor="middle">B_X</text>
+  <ellipse class="amber" cx="286" cy="206" rx="52" ry="108"/>
+  <text class="math" x="286" y="211" text-anchor="middle">T(B_X)</text>
+  <path class="line" d="M198 206 L225 206" marker-end="url(#arrow)"/>
+  <text class="txt" x="212" y="188" text-anchor="middle">T</text>
+  <path class="dash" d="M125 206 L177 164"/>
+  <text class="small" x="77" y="301">||Tx|| ≤ ||T|| ||x||</text>
+  <rect class="teal" x="72" y="329" width="258" height="34" rx="10"/>
+  <text class="txt" x="201" y="351" text-anchor="middle">Neumann · inverse · adjoint</text>
+  <text class="small" x="201" y="388" text-anchor="middle">bounded does not mean compact</text>
+  <text class="small" x="201" y="407" text-anchor="middle">small norm does not mean compact</text>
+
+  <rect class="panel" x="417" y="20" width="365" height="420" rx="16"/>
+  <text class="ttl" x="437" y="52">B  Compact = subsequence recovery</text>
+  <text class="sub" x="437" y="74">bounded x_n may wander; Kx_n has convergent subsequence</text>
+  <rect class="ghost" x="453" y="107" width="292" height="188" rx="18"/>
+  <circle class="dotb" cx="474" cy="145" r="6"/><circle class="dotb" cx="518" cy="262" r="6"/>
+  <circle class="dotb" cx="559" cy="132" r="6"/><circle class="dotb" cx="608" cy="271" r="6"/>
+  <circle class="dotb" cx="672" cy="153" r="6"/><circle class="dotb" cx="724" cy="246" r="6"/>
+  <text class="small" x="599" y="318" text-anchor="middle">bounded sequence (x_n)</text>
+  <path class="line" d="M599 328 L599 349" marker-end="url(#arrow)"/>
+  <circle class="teal" cx="599" cy="382" r="42"/>
+  <circle class="dott" cx="573" cy="396" r="5"/><circle class="dott" cx="585" cy="389" r="5"/>
+  <circle class="dott" cx="595" cy="383" r="5"/><circle class="dott" cx="604" cy="378" r="5"/>
+  <circle class="dott" cx="612" cy="375" r="5"/><circle class="dotr" cx="623" cy="369" r="7"/>
+  <text class="small" x="697" y="382">Kx_nj → y</text>
+  <text class="small" x="457" y="93">finite rank closure in operator norm (Hilbert)</text>
+
+  <rect class="panel" x="814" y="20" width="366" height="420" rx="16"/>
+  <text class="ttl" x="834" y="52">C  Spectrum: three diagonalization levels</text>
+  <text class="sub" x="834" y="74">eigenvalues alone are insufficient in general infinite dimension</text>
+
+  <text class="txt" x="840" y="112">matrix</text>
+  <line class="axis" x1="914" y1="108" x2="1144" y2="108"/>
+  <circle class="dotb" cx="948" cy="108" r="6"/><circle class="dotb" cx="1012" cy="108" r="6"/>
+  <circle class="dotb" cx="1090" cy="108" r="6"/><text class="small" x="1029" y="132" text-anchor="middle">finite eigenvalue set</text>
+
+  <text class="txt" x="840" y="188">compact</text>
+  <line class="axis" x1="914" y1="184" x2="1144" y2="184"/>
+  <circle class="dotr" cx="994" cy="184" r="7"/><circle class="dott" cx="1029" cy="184" r="6"/>
+  <circle class="dott" cx="1053" cy="184" r="5"/><circle class="dott" cx="1070" cy="184" r="4.5"/>
+  <circle class="dott" cx="1082" cy="184" r="4"/><circle class="dott" cx="1091" cy="184" r="3.5"/>
+  <text class="small" x="1029" y="210" text-anchor="middle">countable; only accumulation at 0</text>
+  <text class="small" x="994" y="172" text-anchor="middle">0</text>
+
+  <text class="txt" x="840" y="270">general</text>
+  <line class="axis" x1="914" y1="266" x2="1144" y2="266"/>
+  <rect class="violet" x="952" y="253" width="154" height="26" rx="13"/>
+  <text class="small" x="1029" y="300" text-anchor="middle">continuous spectrum may fill intervals</text>
+
+  <rect class="blue" x="845" y="333" width="142" height="58" rx="11"/>
+  <text class="txt" x="916" y="356" text-anchor="middle">self-adjoint compact</text>
+  <text class="small" x="916" y="376" text-anchor="middle">orthogonal eigen-expansion</text>
+  <rect class="rose" x="1015" y="333" width="142" height="58" rx="11"/>
+  <text class="txt" x="1086" y="356" text-anchor="middle">finite section</text>
+  <text class="small" x="1086" y="376" text-anchor="middle">needs convergence theorem</text>
+  <path class="line" d="M988 362 L1005 362" marker-end="url(#arrow)"/>
+  <text class="small" x="1001" y="417" text-anchor="middle">matrix residual ≠ continuum spectral error</text>
+</svg>

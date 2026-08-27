@@ -1,0 +1,7 @@
+format,exponent_bits,fraction_bits,precision_bits,ulp_at_one,unit_roundoff_normal,contract_role
+FP32,8,23,24,1.1920928955078125e-07,5.960464477539063e-08,storage_and_execution
+TF32-multiply,8,10,11,0.0009765625,0.00048828125,execution_policy
+FP16,5,10,11,0.0009765625,0.00048828125,storage_and_execution
+BF16,8,7,8,0.0078125,0.00390625,storage_and_execution
+FP8-E4M3,4,3,4,0.125,0.0625,scaled_execution
+FP8-E5M2,5,2,3,0.25,0.125,scaled_execution

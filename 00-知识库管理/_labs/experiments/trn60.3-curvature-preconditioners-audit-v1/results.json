@@ -1,0 +1,415 @@
+{
+  "seed": 20260826,
+  "curvature_objects": {
+    "decomposition_rows": [
+      {
+        "theta": 0.0,
+        "GGN": 0.0,
+        "model_second_order_term": -2.0,
+        "Hessian": -2.0,
+        "decomposition_error": 0.0
+      },
+      {
+        "theta": 0.25,
+        "GGN": 0.25,
+        "model_second_order_term": -1.875,
+        "Hessian": -1.625,
+        "decomposition_error": 0.0
+      },
+      {
+        "theta": 0.5,
+        "GGN": 1.0,
+        "model_second_order_term": -1.5,
+        "Hessian": -0.5,
+        "decomposition_error": 0.0
+      },
+      {
+        "theta": 1.0,
+        "GGN": 4.0,
+        "model_second_order_term": 0.0,
+        "Hessian": 4.0,
+        "decomposition_error": 0.0
+      },
+      {
+        "theta": 1.5,
+        "GGN": 9.0,
+        "model_second_order_term": 2.5,
+        "Hessian": 11.5,
+        "decomposition_error": 0.0
+      }
+    ],
+    "max_decomposition_error": 0.0,
+    "logistic_rows": [
+      {
+        "observed_label": 0,
+        "Hessian": 0.6399999999999999,
+        "GGN": 0.6399999999999999,
+        "true_Fisher": 0.6399999999999999,
+        "empirical_Fisher": 2.5600000000000005
+      },
+      {
+        "observed_label": 1,
+        "Hessian": 0.6399999999999999,
+        "GGN": 0.6399999999999999,
+        "true_Fisher": 0.6399999999999999,
+        "empirical_Fisher": 0.15999999999999992
+      }
+    ],
+    "gaussian_optimum": {
+      "theta": 2.0,
+      "observed_y": 2.0,
+      "Hessian": 1.0,
+      "GGN": 1.0,
+      "true_Fisher": 1.0,
+      "empirical_Fisher": 0.0
+    },
+    "reduction_counterexample": {
+      "gradients": [
+        1.0,
+        -1.0
+      ],
+      "mean_per_sample_outer": 1.0,
+      "outer_batch_mean": 0.0
+    }
+  },
+  "trust_region_and_damping": {
+    "quartic_rows": [
+      {
+        "damping": 0.0,
+        "step": -0.3333333333333333,
+        "predicted_reduction": 0.16666666666666666,
+        "actual_reduction": 0.20061728395061726,
+        "rho": 1.2037037037037037
+      },
+      {
+        "damping": 0.25,
+        "step": -0.3076923076923077,
+        "predicted_reduction": 0.16568047337278108,
+        "actual_reduction": 0.19257028815517666,
+        "rho": 1.1622992392223161
+      },
+      {
+        "damping": 1.0,
+        "step": -0.25,
+        "predicted_reduction": 0.15625,
+        "actual_reduction": 0.1708984375,
+        "rho": 1.09375
+      },
+      {
+        "damping": 3.0,
+        "step": -0.16666666666666666,
+        "predicted_reduction": 0.125,
+        "actual_reduction": 0.1294367283950617,
+        "rho": 1.0354938271604937
+      },
+      {
+        "damping": 10.0,
+        "step": -0.07692307692307693,
+        "predicted_reduction": 0.06804733727810651,
+        "actual_reduction": 0.06849375021882984,
+        "rho": 1.0065603293028036
+      }
+    ],
+    "eigenmode_rows": [
+      {
+        "eigenvalue": -1.0,
+        "damping": 2.0,
+        "inverse_gain": 1.0,
+        "regularized_positive": true
+      },
+      {
+        "eigenvalue": 0.1,
+        "damping": 2.0,
+        "inverse_gain": 0.47619047619047616,
+        "regularized_positive": true
+      },
+      {
+        "eigenvalue": 1.0,
+        "damping": 2.0,
+        "inverse_gain": 0.3333333333333333,
+        "regularized_positive": true
+      },
+      {
+        "eigenvalue": 10.0,
+        "damping": 2.0,
+        "inverse_gain": 0.08333333333333333,
+        "regularized_positive": true
+      }
+    ]
+  },
+  "hvp_and_cg": {
+    "exact_hvp": [
+      1.0,
+      -3.0
+    ],
+    "symmetry_gap": 0.0,
+    "finite_difference_rows": [
+      {
+        "h": 0.1,
+        "estimate": -0.8996642721322134,
+        "exact_Hv": -0.8374829934089983,
+        "absolute_error": 0.062181278723215105
+      },
+      {
+        "h": 0.01,
+        "estimate": -0.8439222299676752,
+        "exact_Hv": -0.8374829934089983,
+        "absolute_error": 0.006439236558676842
+      },
+      {
+        "h": 0.001,
+        "estimate": -0.8381290490752091,
+        "exact_Hv": -0.8374829934089983,
+        "absolute_error": 0.0006460556662107875
+      },
+      {
+        "h": 0.0001,
+        "estimate": -0.837547620214929,
+        "exact_Hv": -0.8374829934089983,
+        "absolute_error": 6.462680593066761e-05
+      },
+      {
+        "h": 1e-05,
+        "estimate": -0.8374894563067946,
+        "exact_Hv": -0.8374829934089983,
+        "absolute_error": 6.462897796266631e-06
+      },
+      {
+        "h": 1e-06,
+        "estimate": -0.8374836397706531,
+        "exact_Hv": -0.8374829934089983,
+        "absolute_error": 6.463616547547346e-07
+      },
+      {
+        "h": 1e-07,
+        "estimate": -0.8374830584578774,
+        "exact_Hv": -0.8374829934089983,
+        "absolute_error": 6.504887906100265e-08
+      },
+      {
+        "h": 1e-08,
+        "estimate": -0.8374830051671722,
+        "exact_Hv": -0.8374829934089983,
+        "absolute_error": 1.1758173878995137e-08
+      },
+      {
+        "h": 1e-09,
+        "estimate": -0.837483082882784,
+        "exact_Hv": -0.8374829934089983,
+        "absolute_error": 8.94737856027561e-08
+      },
+      {
+        "h": 1e-10,
+        "estimate": -0.8374834159496913,
+        "exact_Hv": -0.8374829934089983,
+        "absolute_error": 4.2254069299030306e-07
+      },
+      {
+        "h": 1e-11,
+        "estimate": -0.8374856363957406,
+        "exact_Hv": -0.8374829934089983,
+        "absolute_error": 2.642986742240616e-06
+      },
+      {
+        "h": 1e-12,
+        "estimate": -0.8374412274747556,
+        "exact_Hv": -0.8374829934089983,
+        "absolute_error": 4.1765934242765645e-05
+      },
+      {
+        "h": 1e-13,
+        "estimate": -0.8382183835919932,
+        "exact_Hv": -0.8374829934089983,
+        "absolute_error": 0.0007353901829948439
+      }
+    ],
+    "cg_rows": [
+      {
+        "iteration": 0,
+        "residual_norm": 2.449489742783178,
+        "solution_error_norm": 1.1403946685248927
+      },
+      {
+        "iteration": 1,
+        "residual_norm": 3.179574480579283,
+        "solution_error_norm": 1.0850985095880485
+      },
+      {
+        "iteration": 2,
+        "residual_norm": 3.3558635419214577,
+        "solution_error_norm": 0.9180209557706887
+      },
+      {
+        "iteration": 3,
+        "residual_norm": 1.538050992626978,
+        "solution_error_norm": 0.7539765624536199
+      },
+      {
+        "iteration": 4,
+        "residual_norm": 0.8533023924357714,
+        "solution_error_norm": 0.4134915195479255
+      },
+      {
+        "iteration": 5,
+        "residual_norm": 0.3000959349996446,
+        "solution_error_norm": 0.19386359785979074
+      },
+      {
+        "iteration": 6,
+        "residual_norm": 2.8997719766067887e-11,
+        "solution_error_norm": 2.900560017854033e-13
+      }
+    ],
+    "unpreconditioned_condition_number": 100.0,
+    "exact_diagonal_preconditioned_condition_number": 1.0,
+    "steihaug_negative_curvature": -1.0
+  },
+  "natural_gradient": {
+    "p": 0.8,
+    "grad_logit": -0.19999999999999996,
+    "fisher_logit": 0.15999999999999998,
+    "natural_logit": 1.25,
+    "grad_probability": -1.25,
+    "fisher_probability": 6.250000000000001,
+    "natural_probability": 0.19999999999999998,
+    "tangent_from_logit": 0.19999999999999996,
+    "tangent_gap": 2.7755575615628914e-17,
+    "finite_step_rows": [
+      {
+        "eta": 1.0,
+        "endpoint_via_logit": 0.9331612093213913,
+        "endpoint_via_probability": 1.0,
+        "endpoint_gap": 0.06683879067860865,
+        "gap_over_eta_squared": 0.06683879067860865
+      },
+      {
+        "eta": 0.5,
+        "endpoint_via_logit": 0.8819778226778467,
+        "endpoint_via_probability": 0.9,
+        "endpoint_gap": 0.018022177322153277,
+        "gap_over_eta_squared": 0.0720887092886131
+      },
+      {
+        "eta": 0.25,
+        "endpoint_via_logit": 0.8453772059440265,
+        "endpoint_via_probability": 0.8500000000000001,
+        "endpoint_gap": 0.004622794055973545,
+        "gap_over_eta_squared": 0.07396470489557672
+      },
+      {
+        "eta": 0.1,
+        "endpoint_via_logit": 0.8192529518825834,
+        "endpoint_via_probability": 0.8200000000000001,
+        "endpoint_gap": 0.0007470481174166599,
+        "gap_over_eta_squared": 0.07470481174166597
+      },
+      {
+        "eta": 0.05,
+        "endpoint_via_logit": 0.80981281563879,
+        "endpoint_via_probability": 0.81,
+        "endpoint_gap": 0.00018718436121001325,
+        "gap_over_eta_squared": 0.07487374448400529
+      },
+      {
+        "eta": 0.01,
+        "endpoint_via_logit": 0.8019925021728807,
+        "endpoint_via_probability": 0.802,
+        "endpoint_gap": 7.49782711939595e-06,
+        "gap_over_eta_squared": 0.0749782711939595
+      },
+      {
+        "eta": 0.001,
+        "endpoint_via_logit": 0.8001999250020924,
+        "endpoint_via_probability": 0.8002,
+        "endpoint_gap": 7.499790766196668e-08,
+        "gap_over_eta_squared": 0.07499790766196668
+      }
+    ]
+  },
+  "kfac": {
+    "sample_identity_error": 0.0,
+    "vectorized_gradient": [
+      3.0,
+      -1.0,
+      6.0,
+      -2.0
+    ],
+    "exact_correlated_moment": 8.5,
+    "factorized_correlated_moment": 6.25,
+    "factorization_gap": 2.25,
+    "damping_rows": [
+      {
+        "mode": 1,
+        "exact_denominator": 37.0,
+        "factored_denominator": 50.0,
+        "exact_step": -0.02702702702702703,
+        "factored_step": -0.02
+      },
+      {
+        "mode": 2,
+        "exact_denominator": 5.0,
+        "factored_denominator": 10.0,
+        "exact_step": -0.2,
+        "factored_step": -0.1
+      },
+      {
+        "mode": 3,
+        "exact_denominator": 10.0,
+        "factored_denominator": 20.0,
+        "exact_step": -0.1,
+        "factored_step": -0.05
+      },
+      {
+        "mode": 4,
+        "exact_denominator": 2.0,
+        "factored_denominator": 4.0,
+        "exact_step": -0.5,
+        "factored_step": -0.25
+      }
+    ],
+    "damped_step_cosine": 0.9997216302874169,
+    "damped_step_relative_norm_gap": 0.4992776653185215
+  },
+  "shampoo_and_soap": {
+    "shampoo_update": [
+      [
+        0.5,
+        0.16666666666666666
+      ],
+      [
+        1.0,
+        0.3333333333333333
+      ]
+    ],
+    "inverse_root_residual": 0.0,
+    "wrong_root_residual": 0.9375,
+    "soap_rotated_gradient": [
+      [
+        0.9999999999999998,
+        0.9999999999999998
+      ],
+      [
+        0.9999999999999998,
+        0.9999999999999998
+      ]
+    ],
+    "rotation_roundtrip_error": 6.661338147750939e-16,
+    "rotation_norm_gap": 4.440892098500626e-16,
+    "elementwise_returned_update": [
+      1.414213562373095,
+      0.0
+    ],
+    "nonlinear_equivariance_gap": 0.4142135623730949,
+    "transported_second_moment": [
+      [
+        4.999999999999999,
+        -3.999999999999999
+      ],
+      [
+        -3.999999999999999,
+        4.999999999999999
+      ]
+    ],
+    "lost_offdiagonal_norm": 5.656854249492379
+  }
+}

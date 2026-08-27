@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">Fisher 信息、Cramér–Rao 下界与渐近正态性</title>
+  <desc id="desc">三面板展示 score 波动与期望曲率的恒等式、Fisher 信息决定无偏估计量方差下界、以及 Taylor 展开结合中心极限定理得到最大似然渐近正态性，并标注非正则边界。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ECFDF5"/><stop offset="0.5" stop-color="#F8FAFC"/><stop offset="1" stop-color="#EFF6FF"/></linearGradient>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#4F46E5"/></marker>
+    <style>.title{font:700 21px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#0F172A}.head{font:700 17px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#4F46E5}.small{font:12px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#64748B}.label{font:13px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#334155}.math{font:15px Georgia,"Times New Roman",serif;fill:#0F172A}.card{fill:#fff;stroke:#CBD5E1;stroke-width:1.3}.axis{stroke:#64748B;stroke-width:1.2}.arrow{stroke:#4F46E5;stroke-width:2.2;fill:none;marker-end:url(#arr)}</style>
+  </defs>
+  <rect width="1200" height="430" rx="22" fill="url(#bg)"/>
+  <text x="40" y="38" class="title">局部统计精度链：score 波动 = expected curvature → CRLB → MLE 的 Gaussian 极限</text>
+  <rect x="28" y="58" width="368" height="342" rx="17" class="card"/><rect x="416" y="58" width="368" height="342" rx="17" class="card"/><rect x="804" y="58" width="368" height="342" rx="17" class="card"/>
+
+  <text x="50" y="88" class="head">A　Fisher：敏感度、曲率与 KL 几何</text>
+  <line x1="61" y1="251" x2="361" y2="251" class="axis"/><line x1="66" y1="258" x2="66" y2="124" class="axis"/>
+  <path d="M68 246C110 239 147 217 180 170C202 139 226 127 249 149C278 178 293 222 326 241C339 248 350 250 360 250" fill="#DBEAFE" stroke="#2563EB" stroke-width="2.7"/>
+  <line x1="224" y1="126" x2="224" y2="262" stroke="#DC2626" stroke-width="1.7" stroke-dasharray="5 4"/>
+  <text x="232" y="137" class="math">theta_0</text><text x="79" y="282" class="small">expected log-likelihood curvature</text>
+  <rect x="69" y="304" width="289" height="58" rx="10" fill="#ECFDF5" stroke="#34D399"/>
+  <text x="87" y="329" class="math">I = E[s s^T] = -E[H log p]</text>
+  <text x="87" y="350" class="math">KL(theta,theta+d) ~= d^T I d / 2</text>
+  <text x="70" y="385" class="small">等式需要固定支持与交换微分/期望等正则条件</text>
+
+  <text x="438" y="88" class="head">B　CRLB：无偏估计的局部方差地板</text>
+  <line x1="447" y1="278" x2="754" y2="278" class="axis"/>
+  <path d="M453 276C505 276 536 264 564 224C590 188 613 153 638 170C666 188 677 240 706 266C720 276 736 278 752 278" fill="#C7D2FE" stroke="#4F46E5" stroke-width="2.6"/>
+  <path d="M453 276C515 276 556 271 589 247C619 225 643 213 667 226C691 239 710 267 752 276" fill="none" stroke="#F59E0B" stroke-width="2.5" stroke-dasharray="6 4"/>
+  <line x1="638" y1="154" x2="638" y2="289" stroke="#DC2626" stroke-width="1.7" stroke-dasharray="4 3"/>
+  <text x="647" y="161" class="math">theta</text><text x="459" y="139" class="small" fill="#4F46E5">更窄：信息更大</text><text x="459" y="160" class="small" fill="#D97706">更宽：信息更小</text>
+  <rect x="452" y="308" width="297" height="48" rx="10" fill="#FFF7ED" stroke="#FB923C"/>
+  <text x="471" y="337" class="math">Var(T) &gt;= [g'(theta)]^2 / I_n(theta)</text>
+  <text x="452" y="384" class="small">有偏估计、边界模型与 MSE 比较必须另行陈述</text>
+
+  <text x="826" y="88" class="head">C　MLE 极限：Taylor + CLT + LLN</text>
+  <rect x="832" y="110" width="312" height="52" rx="10" fill="#EEF2FF" stroke="#818CF8"/>
+  <text x="850" y="132" class="math">0 = s_n(theta_hat)</text><text x="850" y="151" class="small">~= s_n(theta_0) + H_n(theta_tilde) * (theta_hat - theta_0)</text>
+  <path d="M990 167L990 192" class="arrow"/>
+  <rect x="833" y="199" width="145" height="63" rx="10" fill="#DBEAFE" stroke="#60A5FA"/><text x="850" y="223" class="label">score / sqrt(n)</text><text x="850" y="245" class="math">--d--&gt; N(0,I)</text>
+  <rect x="999" y="199" width="145" height="63" rx="10" fill="#DCFCE7" stroke="#4ADE80"/><text x="1016" y="223" class="label">-Hessian / n</text><text x="1016" y="245" class="math">--p--&gt; I</text>
+  <path d="M904 268L954 301" class="arrow"/><path d="M1070 268L1018 301" class="arrow"/>
+  <rect x="861" y="309" width="255" height="50" rx="11" fill="#F5F3FF" stroke="#A78BFA"/>
+  <text x="882" y="339" class="math">sqrt(n)(theta_hat-theta_0) --d--&gt; N(0,I^-1)</text>
+  <rect x="832" y="374" width="312" height="20" rx="6" fill="#FEF2F2" stroke="#FCA5A5"/>
+  <text x="844" y="389" class="small">移动支持、边界、奇异 Fisher、高维时，速率和极限都可能改变</text>
+</svg>

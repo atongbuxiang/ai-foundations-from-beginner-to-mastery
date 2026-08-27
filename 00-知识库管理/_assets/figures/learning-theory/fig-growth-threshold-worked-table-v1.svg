@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+  <rect width="1200" height="700" fill="#fbf7ed"/>
+  <pattern id="paper" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0V28" fill="none" stroke="#d8e2ed" stroke-width="1" opacity="0.35"/></pattern>
+  <rect width="1200" height="700" fill="url(#paper)"/>
+  <style>.s{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.m{font-family:"SFMono-Regular",Menlo,monospace}.ink{fill:#1f2937}.muted{fill:#64748b}.b{fill:#195cc5}.g{fill:#147d64}.r{fill:#b63a34}</style>
+  <text x="60" y="60" class="s ink" font-size="31" font-weight="750">例题板：三个有序点把无穷多个阈值压成四种行为</text>
+  <text x="60" y="96" class="s muted" font-size="17">固定 x₁ &lt; x₂ &lt; x₃。参数 t 只在越过样本点时改变 restriction；空心点=0，实心点=1。</text>
+
+  <line x1="64" y1="142" x2="1136" y2="142" stroke="#8fa1b5" stroke-width="2"/>
+  <text x="82" y="178" class="s ink" font-size="16" font-weight="700">阈值所在区域</text><text x="350" y="178" class="s ink" font-size="16" font-weight="700">一个参数例子</text><text x="585" y="178" class="s ink" font-size="16" font-weight="700">在 (x₁,x₂,x₃) 上的标签</text><text x="960" y="178" class="s ink" font-size="16" font-weight="700">新模式？</text>
+  <line x1="64" y1="194" x2="1136" y2="194" stroke="#8fa1b5" stroke-width="2"/>
+
+  <g class="s" font-size="17">
+    <text x="82" y="245" class="ink">t &gt; x₃</text><text x="350" y="245" class="muted">t = x₃ + 1</text><text x="1000" y="245" class="g" font-weight="700">第 1 种</text>
+    <text x="82" y="335" class="ink">x₂ &lt; t ≤ x₃</text><text x="350" y="335" class="muted">t = (x₂+x₃)/2</text><text x="1000" y="335" class="g" font-weight="700">第 2 种</text>
+    <text x="82" y="425" class="ink">x₁ &lt; t ≤ x₂</text><text x="350" y="425" class="muted">t = (x₁+x₂)/2</text><text x="1000" y="425" class="g" font-weight="700">第 3 种</text>
+    <text x="82" y="515" class="ink">t ≤ x₁</text><text x="350" y="515" class="muted">t = x₁</text><text x="1000" y="515" class="g" font-weight="700">第 4 种</text>
+  </g>
+  <g stroke="#c2cedb" stroke-width="1.5"><line x1="64" y1="278" x2="1136" y2="278"/><line x1="64" y1="368" x2="1136" y2="368"/><line x1="64" y1="458" x2="1136" y2="458"/><line x1="64" y1="548" x2="1136" y2="548"/></g>
+  <g>
+    <circle cx="655" cy="239" r="11" fill="#fbf7ed" stroke="#195cc5" stroke-width="3"/><circle cx="700" cy="239" r="11" fill="#fbf7ed" stroke="#195cc5" stroke-width="3"/><circle cx="745" cy="239" r="11" fill="#fbf7ed" stroke="#195cc5" stroke-width="3"/>
+    <circle cx="655" cy="329" r="11" fill="#fbf7ed" stroke="#195cc5" stroke-width="3"/><circle cx="700" cy="329" r="11" fill="#fbf7ed" stroke="#195cc5" stroke-width="3"/><circle cx="745" cy="329" r="11" fill="#195cc5"/>
+    <circle cx="655" cy="419" r="11" fill="#fbf7ed" stroke="#195cc5" stroke-width="3"/><circle cx="700" cy="419" r="11" fill="#195cc5"/><circle cx="745" cy="419" r="11" fill="#195cc5"/>
+    <circle cx="655" cy="509" r="11" fill="#195cc5"/><circle cx="700" cy="509" r="11" fill="#195cc5"/><circle cx="745" cy="509" r="11" fill="#195cc5"/>
+  </g>
+  <path d="M90 608 C260 575 440 575 610 608" fill="none" stroke="#b63a34" stroke-width="3"/>
+  <text x="60" y="637" class="s r" font-size="17" font-weight="700">参数 t 有不可数多个，但样本只能区分 m+1=4 种 restrictions。</text>
+  <text x="60" y="672" class="s ink" font-size="16">关键计数对象是 |H restricted to C|，不是参数文件数，也不是训练得到的某一个 pattern。</text>
+</svg>

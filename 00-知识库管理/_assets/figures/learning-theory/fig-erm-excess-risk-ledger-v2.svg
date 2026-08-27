@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">ERM、类内最优与超额风险分解</title>
+<desc id="desc">Bayes optimum、class optimum、empirical ERM 与 computed output 是四个对象；超额风险需分为 target mismatch、approximation、estimation/selection 与 optimization，而 approximate ERM 的类内风险由两侧泛化间隙和优化容差控制。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">四个最优对象不能合并</text>
+<rect x="55" y="82" width="290" height="54" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="200.0" y="115.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">Bayes h* in F</text>
+<line x1="200" y1="139" x2="200" y2="166" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="55" y="174" width="290" height="54" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="200.0" y="207.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">class oracle h_H*</text>
+<line x1="200" y1="231" x2="200" y2="258" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="55" y="266" width="290" height="54" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="200.0" y="299.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">empirical ERM h_hat</text>
+<line x1="200" y1="323" x2="200" y2="350" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="55" y="358" width="290" height="54" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="200.0" y="391.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">computed output h_tilde</text>
+<text x="45" y="478" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">each argmin may fail to exist</text>
+<text x="45" y="507" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">infimum and returned iterate are different。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">风险预算按来源相加</text>
+<text x="430" y="110" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937" class="math">R_target(h_tilde)-R_target*</text>
+<line x1="430" y1="132" x2="760" y2="132" stroke="#D7DEE8" stroke-width="2"/>
+<text x="430" y="175" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">target mismatch</text>
+<text x="575" y="175" font-size="15" font-weight="600" text-anchor="start" fill="#1F2937">deployment P != training target</text>
+<text x="430" y="253" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">approximation</text>
+<text x="575" y="253" font-size="15" font-weight="600" text-anchor="start" fill="#1F2937">R_P(h_H*) - R_P*</text>
+<text x="430" y="331" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">selection</text>
+<text x="575" y="331" font-size="15" font-weight="600" text-anchor="start" fill="#1F2937">R_P(h_hat) - R_P(h_H*)</text>
+<text x="430" y="409" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">optimization</text>
+<text x="575" y="409" font-size="15" font-weight="600" text-anchor="start" fill="#1F2937">R_S(h_tilde)-inf_H R_S</text>
+<text x="430" y="505" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">regularization can move several ledgers at once。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Approximate ERM 的桥</text>
+<rect x="840" y="88" width="300" height="58" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="990.0" y="123.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">R_S(h_tilde) &lt;= inf_H R_S + rho</text>
+<line x1="990" y1="149" x2="990" y2="190" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="840" y="202" width="300" height="80" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="990" y="234" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">class excess &lt;=</text>
+<text x="990" y="264" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">2 sup_h |R_P(h)-R_S(h)| + rho</text>
+<text x="830" y="340" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">two gaps: output and class comparator</text>
+<text x="830" y="375" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">uniform convergence is sufficient, not necessary</text>
+<text x="830" y="420" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">optimization tolerance rho is empirical</text>
+<text x="830" y="462" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">population difference may have either sign</text>
+<text x="830" y="505" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">train loss descent closes only one ledger。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">ERM 连接可计算目标与总体目标，但风险结论必须同时交付比较器、泛化控制和优化容差。</text>
+</svg>

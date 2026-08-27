@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">VAE 条件、聚类和解耦主张的证据矩阵</title>
+  <desc id="desc">矩阵行表示条件生成、覆盖、聚类、控制和可识别解耦主张，列表示可视化、统计、多随机种子、干预、分布外与定理证据。</desc>
+  <rect width="1200" height="620" fill="#FFFEFB"/>
+  <style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}</style>
+  <g font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif">
+    <text x="54" y="52" font-size="23" font-weight="700" fill="#1F2937">主张越强，越不能只靠“潜空间看起来不错”</text>
+    <text x="54" y="81" font-size="15" fill="#64748B">深色格：该主张的关键证据；浅色格：只能提供辅助线索；空白：不能直接回答。</text>
+    <g font-size="14" font-weight="700" fill="#334155">
+      <text x="330" y="130" text-anchor="middle">样例 / traversal</text>
+      <text x="480" y="130" text-anchor="middle">统计指标</text>
+      <text x="630" y="130" text-anchor="middle">多 seed / 消融</text>
+      <text x="780" y="130" text-anchor="middle">受控干预</text>
+      <text x="930" y="130" text-anchor="middle">OOD / 下游</text>
+      <text x="1080" y="130" text-anchor="middle">可识别性定理</text>
+    </g>
+    <g font-size="16" font-weight="700" fill="#1F2937">
+      <text x="60" y="184">按条件 c 生成</text>
+      <text x="60" y="254">条件内多样性 / 覆盖</text>
+      <text x="60" y="324">cluster 语义一致</text>
+      <text x="60" y="394">latent 因素可控</text>
+      <text x="60" y="464">无监督真实解耦</text>
+    </g>
+    <g stroke="#D7DEE8" stroke-width="1.5">
+      <path d="M255 145H1155M255 215H1155M255 285H1155M255 355H1155M255 425H1155M255 495H1155"/>
+      <path d="M255 145V495M405 145V495M555 145V495M705 145V495M855 145V495M1005 145V495M1155 145V495"/>
+    </g>
+    <g fill="#DCE8FF">
+      <rect x="265" y="155" width="130" height="50" rx="5"/><rect x="415" y="155" width="130" height="50" rx="5"/>
+      <rect x="265" y="225" width="130" height="50" rx="5"/><rect x="415" y="225" width="130" height="50" rx="5"/>
+      <rect x="265" y="295" width="130" height="50" rx="5"/><rect x="415" y="295" width="130" height="50" rx="5"/>
+      <rect x="265" y="365" width="130" height="50" rx="5"/><rect x="415" y="365" width="130" height="50" rx="5"/>
+      <rect x="265" y="435" width="130" height="50" rx="5"/><rect x="415" y="435" width="130" height="50" rx="5"/>
+    </g>
+    <g fill="#0F766E">
+      <rect x="565" y="155" width="130" height="50" rx="5"/><rect x="715" y="155" width="130" height="50" rx="5"/>
+      <rect x="565" y="225" width="130" height="50" rx="5"/><rect x="715" y="225" width="130" height="50" rx="5"/>
+      <rect x="565" y="295" width="130" height="50" rx="5"/><rect x="715" y="295" width="130" height="50" rx="5"/>
+      <rect x="565" y="365" width="130" height="50" rx="5"/><rect x="715" y="365" width="130" height="50" rx="5"/><rect x="865" y="365" width="130" height="50" rx="5"/>
+      <rect x="565" y="435" width="130" height="50" rx="5"/><rect x="715" y="435" width="130" height="50" rx="5"/><rect x="865" y="435" width="130" height="50" rx="5"/><rect x="1015" y="435" width="130" height="50" rx="5"/>
+    </g>
+    <g font-size="14" fill="#FFFEFB" font-weight="700">
+      <text x="630" y="186" text-anchor="middle">复现</text><text x="780" y="186" text-anchor="middle">条件交换</text>
+      <text x="630" y="256" text-anchor="middle">覆盖协议</text><text x="780" y="256" text-anchor="middle">固定 c 多采样</text>
+      <text x="630" y="326" text-anchor="middle">ARI/NMI+seed</text><text x="780" y="326" text-anchor="middle">去 shortcut</text>
+      <text x="630" y="396" text-anchor="middle">泄漏消融</text><text x="780" y="396" text-anchor="middle">单因素干预</text><text x="930" y="396" text-anchor="middle">迁移</text>
+      <text x="630" y="466" text-anchor="middle">选择稳定性</text><text x="780" y="466" text-anchor="middle">机制干预</text><text x="930" y="466" text-anchor="middle">环境变化</text><text x="1080" y="466" text-anchor="middle">假设下唯一</text>
+    </g>
+    <g font-size="13" fill="#334155">
+      <text x="330" y="186" text-anchor="middle">辅助</text><text x="480" y="186" text-anchor="middle">一致性/质量</text>
+      <text x="330" y="256" text-anchor="middle">辅助</text><text x="480" y="256" text-anchor="middle">diversity</text>
+      <text x="330" y="326" text-anchor="middle">散点仅辅助</text><text x="480" y="326" text-anchor="middle">label match</text>
+      <text x="330" y="396" text-anchor="middle">traversal</text><text x="480" y="396" text-anchor="middle">leakage matrix</text>
+      <text x="330" y="466" text-anchor="middle">不足</text><text x="480" y="466" text-anchor="middle">指标依赖</text>
+    </g>
+    <rect x="54" y="522" width="1092" height="64" rx="7" fill="#FFF0EE" stroke="#C24135" stroke-width="2"/>
+    <text x="75" y="550" font-size="16" font-weight="700" fill="#C24135">根本边界</text>
+    <text x="175" y="550" font-size="15" fill="#334155">没有数据/模型归纳偏置，观测分布通常不能唯一识别真实生成因素。</text>
+    <text x="75" y="575" font-size="14" fill="#64748B">弱监督、group structure、temporal/environment variation 与 causal intervention 可以增加可识别信息。</text>
+  </g>
+</svg>

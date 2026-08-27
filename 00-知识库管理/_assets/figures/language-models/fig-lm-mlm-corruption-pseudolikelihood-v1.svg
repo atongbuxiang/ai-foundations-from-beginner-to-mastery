@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Masked LM：Clean、Corruption 与条件预测</title>
+<desc id="desc">先从 corruption law 抽 mask set，再构造 corrupted input；loss 只在选中位置估计条件分布，不能直接称为规范化 joint likelihood。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">三个随机对象</text>
+<rect x="55" y="100" width="285" height="52" rx="8" fill="#F8FAFC" stroke="#2563EB" stroke-width="2"/>
+<text x="197.5" y="132.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">clean X</text>
+<line x1="197" y1="155" x2="197" y2="202" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="55" y="210" width="285" height="52" rx="8" fill="#F8FAFC" stroke="#B7791F" stroke-width="2"/>
+<text x="197.5" y="242.0" font-size="15" font-weight="650" text-anchor="middle" fill="#B7791F">mask set M ~ q(M|X)</text>
+<line x1="197" y1="265" x2="197" y2="312" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="55" y="320" width="285" height="52" rx="8" fill="#F8FAFC" stroke="#C24135" stroke-width="2"/>
+<text x="197.5" y="352.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">corrupted X-tilde ~ q(.|X,M)</text>
+<line x1="197" y1="375" x2="197" y2="422" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="55" y="430" width="285" height="52" rx="8" fill="#F8FAFC" stroke="#0F766E" stroke-width="2"/>
+<text x="197.5" y="462.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">targets X_M</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">BERT-style 80 / 10 / 10</text>
+<rect x="455" y="125" width="245" height="46" rx="5" fill="#FEE2E2" stroke="#C24135" stroke-width="2"/>
+<text x="577" y="154" font-size="15" font-weight="750" text-anchor="middle" fill="#C24135">80%  [MASK]</text>
+<rect x="455" y="215" width="150" height="46" rx="5" fill="#FFF7ED" stroke="#B7791F" stroke-width="2"/>
+<text x="530" y="244" font-size="15" font-weight="700" text-anchor="middle" fill="#B7791F">10% random</text>
+<rect x="455" y="305" width="150" height="46" rx="5" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="530" y="334" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">10% unchanged</text>
+<text x="445" y="420" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">ratios are recipe choices, not MLM definition</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Objective vs pseudo-score</text>
+<text x="845" y="115" font-size="15" font-weight="800" text-anchor="start" fill="#0F766E">training</text>
+<text x="845" y="155" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">E_M sum_{i in M} -log p(x_i | X-tilde)</text>
+<text x="845" y="245" font-size="15" font-weight="800" text-anchor="start" fill="#2563EB">PLL scoring</text>
+<text x="845" y="285" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">sum_i log p(x_i | x_-i)</text>
+<rect x="845" y="345" width="285" height="60" rx="6" fill="#FEE2E2" stroke="#C24135" stroke-width="2"/>
+<text x="987" y="372" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">conditionals need not define</text>
+<text x="987" y="394" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">one normalized joint</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">MLM 的核心是 corruption-conditioned prediction；mask recipe、loss denominator 与 pseudo-likelihood 评分必须分别声明。</text>
+</svg>

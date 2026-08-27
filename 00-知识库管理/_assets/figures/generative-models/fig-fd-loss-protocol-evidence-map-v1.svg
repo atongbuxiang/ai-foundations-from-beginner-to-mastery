@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#26364a"/></marker><style>.t{font-family:Inter,'Noto Sans SC',sans-serif;fill:#172033}.h{font-size:26px;font-weight:700}.s{font-size:17px}.m{font-family:'IBM Plex Mono',monospace;font-size:15px;fill:#233a59}.mut{font-size:14px;fill:#647184}.box{fill:#fffdf7;stroke:#26364a;stroke-width:2}.arr{stroke:#26364a;stroke-width:2.2;fill:none;marker-end:url(#a)}</style></defs>
+  <rect width="1200" height="620" fill="#f4f0e6"/><text x="54" y="52" class="t h">FD Loss：跨样本统计、局部反向与 evaluator 隔离</text><line x1="54" y1="72" x2="1146" y2="72" stroke="#c7bda9"/>
+  <rect x="54" y="105" width="620" height="400" rx="12" class="box"/><text x="78" y="142" class="t h" font-size="21">A  population moments → microbatch gradient</text>
+  <g><rect x="85" y="185" width="125" height="62" rx="8" fill="#e7eef8" stroke="#56769a"/><rect x="85" y="273" width="125" height="62" rx="8" fill="#e7eef8" stroke="#56769a"/><rect x="85" y="361" width="125" height="62" rx="8" fill="#e7eef8" stroke="#56769a"/></g>
+  <g class="t s"><text x="108" y="222">batch 1</text><text x="108" y="310">batch 2</text><text x="108" y="398">batch k</text></g>
+  <path d="M215 216 C275 216,275 285,330 285" class="arr"/><path d="M215 304 H330" class="arr"/><path d="M215 392 C275 392,275 325,330 325" class="arr"/>
+  <rect x="337" y="247" width="270" height="116" rx="10" fill="#e4f0e2" stroke="#608459" stroke-width="2"/><text x="363" y="282" class="t s">global moments</text><text x="363" y="312" class="m">mu, V, Sigma</text><text x="363" y="340" class="t mut">large population / streaming</text>
+  <path d="M472 365 V420" class="arr"/><rect x="327" y="429" width="290" height="48" rx="8" fill="#f8e6df" stroke="#b7654c"/><text x="351" y="459" class="m">stop-grad context + local path</text>
+  <text x="240" y="191" class="t mut">value 汇总</text><text x="505" y="409" class="t mut">gradient 回流</text>
+  <rect x="704" y="105" width="442" height="400" rx="12" class="box"/><text x="728" y="142" class="t h" font-size="21">B  四层隔离</text>
+  <rect x="748" y="180" width="350" height="56" rx="8" fill="#f8e6df" stroke="#b7654c"/><text x="774" y="214" class="t s">phi_train：FD Loss 直接优化</text>
+  <path d="M923 238 V264" class="arr"/><rect x="748" y="270" width="350" height="56" rx="8" fill="#fff0c9" stroke="#aa8830"/><text x="774" y="304" class="t s">phi_select：validation 选模型</text>
+  <path d="M923 328 V354" class="arr"/><rect x="748" y="360" width="350" height="56" rx="8" fill="#e7eef8" stroke="#56769a"/><text x="774" y="394" class="t s">phi_test：冻结后一次评估</text>
+  <path d="M923 418 V444" class="arr"/><rect x="748" y="450" width="350" height="38" rx="8" fill="#e4f0e2" stroke="#608459"/><text x="774" y="475" class="t s">human / task / copy audit</text>
+  <rect x="54" y="535" width="1092" height="49" rx="8" fill="#fff8de" stroke="#c7a84d"/><text x="77" y="566" class="t s">当尺子成为目标：held-out representation、P/R、人评与失败集必须保留，否则 test 只是训练目标的回声。</text>
+</svg>

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">序列概率：链式法则、前缀树与 EOS</title>
+<desc id="desc">联合分布由条件概率沿前缀树相乘；EOS 把长度并入样本空间；负对数把乘积变为逐 token 求和。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#B7791F"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">链式法则不是独立假设</text>
+<text x="55" y="115" font-size="18" font-weight="800" text-anchor="start" fill="#2563EB">p(x1,x2,x3)</text>
+<text x="55" y="165" font-size="17" font-weight="650" text-anchor="start" fill="#1F2937">= p(x1)</text>
+<text x="55" y="205" font-size="17" font-weight="650" text-anchor="start" fill="#1F2937">× p(x2 | x1)</text>
+<text x="55" y="245" font-size="17" font-weight="650" text-anchor="start" fill="#1F2937">× p(x3 | x1,x2)</text>
+<text x="55" y="315" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">identity: any joint distribution</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">前缀树分配概率质量</text>
+<circle cx="470" cy="125" r="24" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="470" y="131" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">BOS</text>
+<circle cx="535" cy="220" r="24" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="535" y="226" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">A</text>
+<circle cx="685" cy="220" r="24" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="685" y="226" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">B</text>
+<circle cx="500" cy="345" r="24" fill="#FFF7ED" stroke="#B7791F" stroke-width="2"/>
+<text x="500" y="351" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">EOS</text>
+<circle cx="585" cy="345" r="24" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="585" y="351" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">B</text>
+<circle cx="655" cy="345" r="24" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="655" y="351" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">A</text>
+<circle cx="735" cy="345" r="24" fill="#FFF7ED" stroke="#B7791F" stroke-width="2"/>
+<text x="735" y="351" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">EOS</text>
+<line x1="490" y1="140" x2="520" y2="200" stroke="#2563EB" stroke-width="2" marker-end="url(#a0)"/>
+<text x="505.0" y="170.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">.6</text>
+<line x1="490" y1="140" x2="670" y2="200" stroke="#2563EB" stroke-width="2" marker-end="url(#a0)"/>
+<text x="580.0" y="170.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">.4</text>
+<line x1="535" y1="245" x2="500" y2="320" stroke="#2563EB" stroke-width="2" marker-end="url(#a0)"/>
+<text x="517.5" y="282.5" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">.2</text>
+<line x1="550" y1="245" x2="585" y2="320" stroke="#2563EB" stroke-width="2" marker-end="url(#a0)"/>
+<text x="567.5" y="282.5" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">.8</text>
+<line x1="675" y1="245" x2="655" y2="320" stroke="#2563EB" stroke-width="2" marker-end="url(#a0)"/>
+<text x="665.0" y="282.5" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">.7</text>
+<line x1="695" y1="245" x2="735" y2="320" stroke="#2563EB" stroke-width="2" marker-end="url(#a0)"/>
+<text x="715.0" y="282.5" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">.3</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#B7791F">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Log loss 是路径码长</text>
+<text x="845" y="115" font-size="18" font-weight="800" text-anchor="start" fill="#B7791F">NLL(x)</text>
+<text x="845" y="165" font-size="18" font-weight="650" text-anchor="start" fill="#1F2937">= - log p(x)</text>
+<text x="845" y="215" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">= sum_t -log p(xt | x&lt;t)</text>
+<rect x="845" y="275" width="285" height="58" rx="6" fill="#FFF7ED" stroke="#B7791F" stroke-width="2"/>
+<text x="987" y="310" font-size="15" font-weight="750" text-anchor="middle" fill="#B7791F">EOS loss learns length</text>
+<text x="845" y="390" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">teacher forcing evaluates known prefixes;</text>
+<text x="845" y="420" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">free generation samples new prefixes.</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">链式法则给联合概率坐标；因果模型的限制来自条件函数族、数据与有限训练，而不是法则本身。</text>
+</svg>

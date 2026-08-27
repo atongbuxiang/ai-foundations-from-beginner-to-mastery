@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">共轭梯度的能量几何、谱收敛与有限精度契约</title>
+<desc id="desc">SPD 线性系统等价于严格凸二次优化；CG 在 Krylov 空间中最小化 A 能量误差并生成 A 共轭方向，速度受预条件谱分布控制；有限精度会使递推 residual 漂移，因此必须周期性重算真 residual 并监测曲率。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">SPD 把线性方程变成能量最小化</text>
+<ellipse cx="205" cy="270" rx="145" ry="52" transform="rotate(-28 205 270)" fill="none" stroke="#D7DEE8" stroke-width="2"/>
+<ellipse cx="205" cy="270" rx="112" ry="40" transform="rotate(-28 205 270)" fill="none" stroke="#D7DEE8" stroke-width="2"/>
+<ellipse cx="205" cy="270" rx="78" ry="28" transform="rotate(-28 205 270)" fill="none" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="70" y1="380" x2="230" y2="335" stroke="#C24135" stroke-width="2.2" marker-end="url(#a2)"/>
+<line x1="230" y1="335" x2="155" y2="260" stroke="#C24135" stroke-width="2.2" marker-end="url(#a2)"/>
+<line x1="155" y1="260" x2="225" y2="278" stroke="#C24135" stroke-width="2.2" marker-end="url(#a2)"/>
+<line x1="225" y1="278" x2="205" y2="270" stroke="#C24135" stroke-width="2.2" marker-end="url(#a2)"/>
+<line x1="70" y1="380" x2="275" y2="330" stroke="#2563EB" stroke-width="3" marker-end="url(#a1)"/>
+<line x1="275" y1="330" x2="205" y2="270" stroke="#2563EB" stroke-width="3" marker-end="url(#a1)"/>
+<circle cx="205" cy="270" r="7" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<text x="217" y="260" font-size="16" font-weight="700" text-anchor="start" fill="#0F766E">x*</text>
+<text x="45" y="445" font-size="16" font-weight="700" text-anchor="start" fill="#1F2937" class="math">phi(x)=1/2 x^T A x-b^T x</text>
+<text x="45" y="478" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">CG: minimize ||x-x*||_A in x0+K_k</text>
+<text x="45" y="507" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">steepest descent ignores accumulated geometry。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">四个不变量连接同一算法</text>
+<text x="430" y="102" font-size="16" font-weight="700" text-anchor="start" fill="#2563EB" class="math">r_i^T r_j=0</text>
+<text x="430" y="129" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">residual orthogonality</text>
+<text x="430" y="185" font-size="16" font-weight="700" text-anchor="start" fill="#0F766E" class="math">p_i^T A p_j=0</text>
+<text x="430" y="212" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">A-conjugate directions</text>
+<text x="430" y="268" font-size="16" font-weight="700" text-anchor="start" fill="#C24135" class="math">x_k in x0+K_k</text>
+<text x="430" y="295" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">Krylov containment</text>
+<text x="430" y="351" font-size="16" font-weight="700" text-anchor="start" fill="#2563EB" class="math">min ||x-x*||_A</text>
+<text x="430" y="378" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">energy optimality</text>
+<line x1="430" y1="430" x2="765" y2="430" stroke="#D7DEE8" stroke-width="2"/>
+<text x="430" y="461" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">worst-case bound uses kappa</text>
+<text x="430" y="487" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">actual speed also uses spectral clusters。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">PCG 与浮点实现必须验收</text>
+<rect x="840" y="92" width="300" height="56" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="990.0" y="126.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">verify A=A^T and positive curvature</text>
+<line x1="990" y1="151" x2="990" y2="176" stroke="#1F2937" stroke-width="2.1" marker-end="url(#a3)"/>
+<rect x="840" y="183" width="300" height="56" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="990.0" y="217.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">solve M z_k=r_k； require SPD M</text>
+<line x1="990" y1="242" x2="990" y2="267" stroke="#1F2937" stroke-width="2.1" marker-end="url(#a3)"/>
+<rect x="840" y="274" width="300" height="56" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="990.0" y="308.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">update x,r,p by short recurrences</text>
+<line x1="990" y1="333" x2="990" y2="358" stroke="#1F2937" stroke-width="2.1" marker-end="url(#a3)"/>
+<rect x="840" y="365" width="300" height="56" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="990.0" y="399.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">recompute true r=b-Ax periodically</text>
+<text x="830" y="474" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">recursive residual can reach a false floor</text>
+<text x="830" y="503" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">report true residual, curvature and matvecs。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">CG 的短递推来自 SPD 能量几何；速度由预条件谱决定，可信停止由原方程真 residual 决定。</text>
+</svg>

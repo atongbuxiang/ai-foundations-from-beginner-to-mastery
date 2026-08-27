@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">实验 LM70.7-A：温度分布与截断 support</title><desc id="desc">由脚本数值输出直接绘制的 softmax 与 support。</desc>
+<rect width="1200" height="700" fill="#FBF8F1"/>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}</style>
+<line x1="50" y1="70" x2="1150" y2="70" stroke="#245AA8" stroke-width="4"/>
+<text x="52" y="48" font-size="24" font-weight="700" fill="#183044">实验 LM70.7-A：温度分布与截断 support</text>
+<line x1="75" y1="405" x2="575" y2="405" stroke="#183044"/>
+<line x1="75" y1="405" x2="75" y2="155" stroke="#183044"/>
+<path d="M75.00,156.68 L100.00,168.17 L125.00,185.71 L150.00,203.23 L175.00,218.46 L200.00,231.09 L225.00,241.44 L250.00,249.92 L275.00,256.95 L300.00,262.81 L325.00,267.77 L350.00,272.00 L375.00,275.64 L400.00,278.81 L425.00,281.58 L450.00,284.02 L475.00,286.20 L500.00,288.14 L525.00,289.88 L550.00,291.46 L575.00,292.89" fill="none" stroke="#245AA8" stroke-width="4"/>
+<text x="520" y="155" text-anchor="start" font-size="13" font-weight="700" fill="#245AA8">token 1</text>
+<path d="M75.00,403.33 L100.00,392.49 L125.00,377.69 L150.00,364.79 L175.00,354.96 L200.00,347.75 L225.00,342.47 L250.00,338.55 L275.00,335.59 L300.00,333.32 L325.00,331.55 L350.00,330.14 L375.00,329.00 L400.00,328.08 L425.00,327.32 L450.00,326.68 L475.00,326.14 L500.00,325.69 L525.00,325.30 L550.00,324.96 L575.00,324.67" fill="none" stroke="#17766E" stroke-width="4"/>
+<text x="520" y="182" text-anchor="start" font-size="13" font-weight="700" fill="#17766E">token 2</text>
+<path d="M75.00,404.99 L100.00,404.34 L125.00,401.60 L150.00,396.98 L175.00,391.58 L200.00,386.15 L225.00,381.09 L250.00,376.53 L275.00,372.46 L300.00,368.86 L325.00,365.68 L350.00,362.86 L375.00,360.35 L400.00,358.11 L425.00,356.10 L450.00,354.30 L475.00,352.66 L500.00,351.17 L525.00,349.82 L550.00,348.58 L575.00,347.44" fill="none" stroke="#C87922" stroke-width="4"/>
+<text x="520" y="209" text-anchor="start" font-size="13" font-weight="700" fill="#C87922">token 3</text>
+<text x="75.0" y="430" text-anchor="middle" font-size="10" font-weight="400" fill="#667784">0.2</text>
+<text x="200.0" y="430" text-anchor="middle" font-size="10" font-weight="400" fill="#667784">0.9</text>
+<text x="325.0" y="430" text-anchor="middle" font-size="10" font-weight="400" fill="#667784">1.6</text>
+<text x="450.0" y="430" text-anchor="middle" font-size="10" font-weight="400" fill="#667784">2.3</text>
+<text x="575.0" y="430" text-anchor="middle" font-size="10" font-weight="400" fill="#667784">3.0</text>
+<text x="325" y="465" text-anchor="middle" font-size="13" font-weight="400" fill="#667784">temperature</text>
+<text x="655" y="115" text-anchor="start" font-size="15" font-weight="700" fill="#183044">固定概率剖面 p=(.34,.23,.16,.11,.07,.04,.03,.02)</text>
+<text x="655" y="175" text-anchor="start" font-size="14" font-weight="700" fill="#245AA8">top-3</text>
+<rect x="655" y="195" width="42" height="42" rx="5" fill="#245AA8"/>
+<text x="676" y="222" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">v1</text>
+<rect x="711" y="195" width="42" height="42" rx="5" fill="#245AA8"/>
+<text x="732" y="222" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">v2</text>
+<rect x="767" y="195" width="42" height="42" rx="5" fill="#245AA8"/>
+<text x="788" y="222" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">v3</text>
+<rect x="823" y="195" width="42" height="42" rx="5" fill="#E5E2DB"/>
+<text x="844" y="222" text-anchor="middle" font-size="11" font-weight="700" fill="#667784">v4</text>
+<rect x="879" y="195" width="42" height="42" rx="5" fill="#E5E2DB"/>
+<text x="900" y="222" text-anchor="middle" font-size="11" font-weight="700" fill="#667784">v5</text>
+<rect x="935" y="195" width="42" height="42" rx="5" fill="#E5E2DB"/>
+<text x="956" y="222" text-anchor="middle" font-size="11" font-weight="700" fill="#667784">v6</text>
+<rect x="991" y="195" width="42" height="42" rx="5" fill="#E5E2DB"/>
+<text x="1012" y="222" text-anchor="middle" font-size="11" font-weight="700" fill="#667784">v7</text>
+<rect x="1047" y="195" width="42" height="42" rx="5" fill="#E5E2DB"/>
+<text x="1068" y="222" text-anchor="middle" font-size="11" font-weight="700" fill="#667784">v8</text>
+<text x="655" y="300" text-anchor="start" font-size="14" font-weight="700" fill="#17766E">top-p=.75</text>
+<rect x="655" y="320" width="42" height="42" rx="5" fill="#17766E"/>
+<text x="676" y="347" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">v1</text>
+<rect x="711" y="320" width="42" height="42" rx="5" fill="#17766E"/>
+<text x="732" y="347" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">v2</text>
+<rect x="767" y="320" width="42" height="42" rx="5" fill="#17766E"/>
+<text x="788" y="347" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">v3</text>
+<rect x="823" y="320" width="42" height="42" rx="5" fill="#17766E"/>
+<text x="844" y="347" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">v4</text>
+<rect x="879" y="320" width="42" height="42" rx="5" fill="#E5E2DB"/>
+<text x="900" y="347" text-anchor="middle" font-size="11" font-weight="700" fill="#667784">v5</text>
+<rect x="935" y="320" width="42" height="42" rx="5" fill="#E5E2DB"/>
+<text x="956" y="347" text-anchor="middle" font-size="11" font-weight="700" fill="#667784">v6</text>
+<rect x="991" y="320" width="42" height="42" rx="5" fill="#E5E2DB"/>
+<text x="1012" y="347" text-anchor="middle" font-size="11" font-weight="700" fill="#667784">v7</text>
+<rect x="1047" y="320" width="42" height="42" rx="5" fill="#E5E2DB"/>
+<text x="1068" y="347" text-anchor="middle" font-size="11" font-weight="700" fill="#667784">v8</text>
+<text x="655" y="425" text-anchor="start" font-size="14" font-weight="700" fill="#C87922">min-p=.2</text>
+<rect x="655" y="445" width="42" height="42" rx="5" fill="#C87922"/>
+<text x="676" y="472" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">v1</text>
+<rect x="711" y="445" width="42" height="42" rx="5" fill="#C87922"/>
+<text x="732" y="472" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">v2</text>
+<rect x="767" y="445" width="42" height="42" rx="5" fill="#C87922"/>
+<text x="788" y="472" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">v3</text>
+<rect x="823" y="445" width="42" height="42" rx="5" fill="#C87922"/>
+<text x="844" y="472" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">v4</text>
+<rect x="879" y="445" width="42" height="42" rx="5" fill="#C87922"/>
+<text x="900" y="472" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">v5</text>
+<rect x="935" y="445" width="42" height="42" rx="5" fill="#E5E2DB"/>
+<text x="956" y="472" text-anchor="middle" font-size="11" font-weight="700" fill="#667784">v6</text>
+<rect x="991" y="445" width="42" height="42" rx="5" fill="#E5E2DB"/>
+<text x="1012" y="472" text-anchor="middle" font-size="11" font-weight="700" fill="#667784">v7</text>
+<rect x="1047" y="445" width="42" height="42" rx="5" fill="#E5E2DB"/>
+<text x="1068" y="472" text-anchor="middle" font-size="11" font-weight="700" fill="#667784">v8</text>
+<text x="655" y="570" text-anchor="start" font-size="13" font-weight="700" fill="#B7443E">颜色 = 保留；灰色 = 删除；随后必须重归一化</text>
+<line x1="50" y1="650" x2="1150" y2="650" stroke="#D9D5CB"/>
+<text x="52" y="675" font-size="13" fill="#667784">曲线与集合均来自 results.json 同一组数值，不代表真实模型质量。</text>
+</svg>

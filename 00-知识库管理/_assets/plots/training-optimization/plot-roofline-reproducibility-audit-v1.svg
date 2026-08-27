@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+<title id="title">A systems counter becomes a training claim only after the evidence ladder</title>
+<desc id="desc">Roofline bounds attainable rate; matched curves and interventions test quality and causality.</desc>
+<rect width="1200" height="800" fill="#FFFEFB"/>
+<text x="60" y="58" text-anchor="start" font-family="Arial,sans-serif" font-size="28" font-weight="700" fill="#172033">A systems counter becomes a training claim only after the evidence ladder</text>
+<text x="60" y="91" text-anchor="start" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#52606D">Roofline bounds attainable rate; matched curves and interventions test quality and causality.</text>
+<rect x="45" y="125" width="600" height="590" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+<rect x="670" y="125" width="485" height="590" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+<text x="70" y="166" text-anchor="start" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172033">A  Roofline and offload lower bound</text>
+<text x="695" y="166" text-anchor="start" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172033">B  Evidence E0 to E5</text>
+<line x1="115" y1="620" x2="590" y2="620" stroke="#52606D" stroke-width="2"/>
+<line x1="115" y1="620" x2="115" y2="220" stroke="#52606D" stroke-width="2"/>
+<path d="M120 610 L350 285 H585" fill="none" stroke="#2563EB" stroke-width="4"/>
+<text x="575" y="270" text-anchor="end" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#2563EB">compute ceiling: 300 TFLOP/s</text>
+<line x1="350" y1="285" x2="350" y2="620" stroke="#2563EB" stroke-width="2" stroke-dasharray="8 7"/>
+<text x="350" y="650" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#52606D">ridge I*=100</text>
+<circle cx="212.00" cy="490.40" r="10" fill="#0F766E"/>
+<text x="225.0" y="482.4" text-anchor="start" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#0F766E">I=40: 120</text>
+<circle cx="350.00" cy="296.00" r="10" fill="#B76E00"/>
+<text x="364.0" y="326.0" text-anchor="start" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#B76E00">I=100: 300</text>
+<circle cx="580.00" cy="296.00" r="10" fill="#C0392B"/>
+<text x="568.0" y="326.0" text-anchor="end" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#C0392B">I=200: 300</text>
+<rect x="150" y="500" width="370" height="75" rx="12" fill="#FFF7F4"/>
+<text x="335" y="531" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#C0392B">offload: 24 GB / 48 GB/s = 0.50 s</text>
+<text x="335" y="558" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="400" fill="#52606D">compute = 0.35 s; no overlap =&gt; transfer dominates</text>
+<rect x="715.0" y="590" width="390" height="52" rx="10" fill="#F1F3F5"/>
+<text x="910" y="622" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#172033">E0  configuration + manifest</text>
+<rect x="730.0" y="522" width="360" height="52" rx="10" fill="#EAF2FF"/>
+<text x="910" y="554" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#2563EB">E1  throughput + memory counters</text>
+<rect x="745.0" y="454" width="330" height="52" rx="10" fill="#EAF2FF"/>
+<text x="910" y="486" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#2563EB">E2  profiler critical path</text>
+<rect x="760.0" y="386" width="300" height="52" rx="10" fill="#E8F6F3"/>
+<text x="910" y="418" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#0F766E">E3  matched learning curve</text>
+<rect x="775.0" y="318" width="270" height="52" rx="10" fill="#FFF3D6"/>
+<text x="910" y="350" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#B76E00">E4  paired repeats + CI</text>
+<rect x="790.0" y="250" width="240" height="52" rx="10" fill="#FFF7F4"/>
+<text x="910" y="282" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#C0392B">E5  causal intervention + controls</text>
+<text x="910" y="655" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#C0392B">(a+b)+c = 3.14; a+(b+c) = 0.0</text>
+<text x="910" y="682" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="400" fill="#52606D">non-associativity is not itself a failed decision</text>
+<text x="60" y="760" text-anchor="start" font-family="Arial,sans-serif" font-size="15" font-weight="400" fill="#52606D">Synthetic audit — E3 tests quality; E5 supports a scoped causal claim; no rung grants universal validity.</text>
+</svg>

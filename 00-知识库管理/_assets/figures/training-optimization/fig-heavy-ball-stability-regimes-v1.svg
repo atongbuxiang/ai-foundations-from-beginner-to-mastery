@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Heavy-ball 单特征模态的稳定与振荡区域</title>
+  <desc id="desc">横轴为归一化步长 eta lambda，依次标出正实根、复共轭根、负实根和发散区，并用四个单位圆小图展示根的位置。</desc>
+  <rect width="1200" height="700" fill="#FFFEFB"/>
+  <style>.sans{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}.ink{fill:#1F2937}.muted{fill:#64748B}.blue{fill:#2563EB}.green{fill:#0F766E}.amber{fill:#B7791F}.red{fill:#C24135}</style>
+  <text x="58" y="58" class="sans blue" font-size="23" font-weight="700">A｜固定 0 ≤ μ &lt; 1 时，沿 ηλ 增大</text>
+  <line x1="90" y1="152" x2="1110" y2="152" stroke="#1F2937" stroke-width="3"/>
+  <rect x="90" y="118" width="220" height="68" fill="#E8F5F1"/><rect x="310" y="118" width="390" height="68" fill="#EEF3FF"/><rect x="700" y="118" width="260" height="68" fill="#FFF6E5"/><rect x="960" y="118" width="150" height="68" fill="#FFF1EE"/>
+  <g class="sans ink" font-size="17" text-anchor="middle"><text x="200" y="145">正实根</text><text x="200" y="171" class="green">无换号收缩</text><text x="505" y="145">复共轭根</text><text x="505" y="171" class="blue">阻尼振荡，|r|=√μ</text><text x="830" y="145">负实根</text><text x="830" y="171" class="amber">交替收缩</text><text x="1035" y="145" class="red">发散</text></g>
+  <g stroke="#1F2937" stroke-width="2"><line x1="90" y1="109" x2="90" y2="197"/><line x1="310" y1="109" x2="310" y2="197"/><line x1="700" y1="109" x2="700" y2="197"/><line x1="960" y1="109" x2="960" y2="197"/></g>
+  <g class="mono ink" font-size="16" text-anchor="middle"><text x="90" y="224">0</text><text x="310" y="224">(1−√μ)²</text><text x="700" y="224">(1+√μ)²</text><text x="960" y="224">2(1+μ)</text></g>
+  <text x="58" y="282" class="sans blue" font-size="23" font-weight="700">B｜根在单位圆中的位置</text>
+  <g transform="translate(180 430)"><circle r="88" fill="none" stroke="#94A3B8" stroke-width="2"/><line x1="-104" y1="0" x2="104" y2="0" stroke="#D7DEE8" stroke-width="2"/><line x1="0" y1="-104" x2="0" y2="104" stroke="#D7DEE8" stroke-width="2"/><circle cx="35" cy="0" r="8" fill="#0F766E"/><circle cx="68" cy="0" r="8" fill="#0F766E"/><text x="0" y="132" class="sans green" font-size="17" text-anchor="middle">两个正根</text></g>
+  <g transform="translate(460 430)"><circle r="88" fill="none" stroke="#94A3B8" stroke-width="2"/><line x1="-104" y1="0" x2="104" y2="0" stroke="#D7DEE8" stroke-width="2"/><line x1="0" y1="-104" x2="0" y2="104" stroke="#D7DEE8" stroke-width="2"/><circle cx="28" cy="58" r="8" fill="#2563EB"/><circle cx="28" cy="-58" r="8" fill="#2563EB"/><text x="0" y="132" class="sans blue" font-size="17" text-anchor="middle">共轭根，模 √μ</text></g>
+  <g transform="translate(740 430)"><circle r="88" fill="none" stroke="#94A3B8" stroke-width="2"/><line x1="-104" y1="0" x2="104" y2="0" stroke="#D7DEE8" stroke-width="2"/><line x1="0" y1="-104" x2="0" y2="104" stroke="#D7DEE8" stroke-width="2"/><circle cx="-35" cy="0" r="8" fill="#B7791F"/><circle cx="-68" cy="0" r="8" fill="#B7791F"/><text x="0" y="132" class="sans amber" font-size="17" text-anchor="middle">两个负根</text></g>
+  <g transform="translate(1020 430)"><circle r="88" fill="none" stroke="#94A3B8" stroke-width="2"/><line x1="-118" y1="0" x2="104" y2="0" stroke="#D7DEE8" stroke-width="2"/><line x1="0" y1="-104" x2="0" y2="104" stroke="#D7DEE8" stroke-width="2"/><circle cx="-108" cy="0" r="8" fill="#C24135"/><circle cx="-8" cy="0" r="8" fill="#C24135"/><text x="0" y="132" class="sans red" font-size="17" text-anchor="middle">至少一个根越界</text></g>
+  <line x1="58" y1="610" x2="1142" y2="610" stroke="#0F766E" stroke-width="3"/>
+  <text x="58" y="650" class="sans green" font-size="18" font-weight="700">稳定只表示 |r| &lt; 1；不保证每步 loss 单调，也不直接覆盖时变非凸深网。</text>
+</svg>
+

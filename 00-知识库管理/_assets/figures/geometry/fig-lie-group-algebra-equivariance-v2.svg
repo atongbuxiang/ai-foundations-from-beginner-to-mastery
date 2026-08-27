@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Lie group–algebra、作用轨道与等变交换图</title>
+<desc id="desc">Lie group 同时具有光滑流形和群结构；单位元 tangent space 是 Lie algebra，exponential 把局部生成元积分成有限变换，bracket 测量不交换；group action 产生 orbit/stabilizer，equivariant model 使输入和输出作用组成 commuting square。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">单位元 tangent 编码连续局部变换</text>
+<circle cx="190" cy="245" r="125" fill="#FFFEFB" stroke="#2563EB" stroke-width="2.5"/>
+<circle cx="190" cy="245" r="7" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<text x="205" y="238" font-size="16" font-weight="700" text-anchor="start" fill="#C24135">e</text>
+<line x1="190" y1="245" x2="300" y2="145" stroke="#0F766E" stroke-width="3" marker-end="url(#a1)"/>
+<text x="315" y="140" font-size="15" font-weight="700" text-anchor="end" fill="#0F766E">xi in g=T_eG</text>
+<path d="M200 235 C245 220 285 205 330 180" fill="none" stroke="#2563EB" stroke-width="2.5"/>
+<text x="45" y="405" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">exp_G(t xi): generator -&gt; one-parameter subgroup</text>
+<text x="45" y="440" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">[A,B]=AB-BA measures infinitesimal</text>
+<text x="45" y="463" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">noncommutativity / BCH correction</text>
+<text x="45" y="494" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">Lie exp != Riemannian Exp in general</text>
+<text x="45" y="518" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">algebra sees only the identity component。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">作用把空间分成 orbit 与 stabilizer</text>
+<circle cx="600" cy="255" r="7" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<circle cx="720" cy="255" r="6" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<path d="M600 255 Q660 230 720 255" fill="none" stroke="#D7DEE8" stroke-width="1.8"/>
+<circle cx="675" cy="155" r="6" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<path d="M600 255 Q638 180 675 155" fill="none" stroke="#D7DEE8" stroke-width="1.8"/>
+<circle cx="520" cy="145" r="6" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<path d="M600 255 Q560 175 520 145" fill="none" stroke="#D7DEE8" stroke-width="1.8"/>
+<circle cx="480" cy="280" r="6" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<path d="M600 255 Q540 242 480 280" fill="none" stroke="#D7DEE8" stroke-width="1.8"/>
+<circle cx="585" cy="360" r="6" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<path d="M600 255 Q592 282 585 360" fill="none" stroke="#D7DEE8" stroke-width="1.8"/>
+<circle cx="710" cy="345" r="6" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<path d="M600 255 Q655 275 710 345" fill="none" stroke="#D7DEE8" stroke-width="1.8"/>
+<text x="430" y="405" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">orbit G dot x = reachable states</text>
+<text x="430" y="437" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">stabilizer G_x = transformations fixing x</text>
+<text x="430" y="469" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">orbit ~= G/G_x under regular conditions</text>
+<text x="430" y="501" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">same orbit != semantic equivalence。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">equivariance 交换图</text>
+<rect x="840" y="90" width="115" height="55" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="897.5" y="123.5" font-size="17" font-weight="650" text-anchor="middle" fill="#2563EB">x</text>
+<rect x="1025" y="90" width="115" height="55" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="1082.5" y="123.5" font-size="17" font-weight="650" text-anchor="middle" fill="#0F766E">F(x)</text>
+<rect x="840" y="285" width="115" height="55" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="897.5" y="318.5" font-size="17" font-weight="650" text-anchor="middle" fill="#C24135">g dot x</text>
+<rect x="1025" y="285" width="115" height="55" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="1082.5" y="318.5" font-size="17" font-weight="650" text-anchor="middle" fill="#2563EB">g dot F(x)</text>
+<line x1="958" y1="118" x2="1018" y2="118" stroke="#1F2937" stroke-width="2.1" marker-end="url(#a3)"/>
+<line x1="958" y1="313" x2="1018" y2="313" stroke="#1F2937" stroke-width="2.1" marker-end="url(#a3)"/>
+<line x1="898" y1="148" x2="898" y2="278" stroke="#1F2937" stroke-width="2.1" marker-end="url(#a3)"/>
+<line x1="1082" y1="148" x2="1082" y2="278" stroke="#1F2937" stroke-width="2.1" marker-end="url(#a3)"/>
+<text x="830" y="390" font-size="16" font-weight="700" text-anchor="start" fill="#C24135">F(g dot x)=g dot F(x)</text>
+<text x="830" y="425" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">invariance: output action is trivial</text>
+<text x="830" y="457" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">augmentation != exact architectural law</text>
+<text x="830" y="489" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">state input/output representations</text>
+<text x="830" y="514" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">and tested group elements。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">Lie theory 区分有限变换、无穷小生成元与作用；equivariance 是有类型的交换关系。</text>
+</svg>

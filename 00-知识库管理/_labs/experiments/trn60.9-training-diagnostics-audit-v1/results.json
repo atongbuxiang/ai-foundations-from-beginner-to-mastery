@@ -1,0 +1,357 @@
+{
+  "artifact_sha256": {
+    "checkpoint_selection.csv": "cff8d227a2b9678701a7b6589522d02a6baf0476b0476c2325c8579381d2c650",
+    "clock_alignment.csv": "9a331ff4314fbf3303e9acd2d1bf21d215037afc2ed8e274a35b59f3fa18796f",
+    "compute_matching.csv": "a8629c3eb375fbde49ac381d5bbe4a897b6e059e160c5144ac23dd565b87dff9",
+    "confounding_simpson.csv": "58b820e5ab8b0cc5cf4c0a6fbd3964609cdf4930db3a3061530ae12ad2119715",
+    "factorial_interaction.csv": "030041f4939c0e5c6500f367070239a77c2eb13cbd5b9ab68c86e50e3097f934",
+    "first_bad_event.csv": "bdacb0651788d0fe2a95e4c663136766d3973b0bac84089e541a2466f1560631",
+    "paired_variance.csv": "9954cc846f0a50f39ef2bb69b6c361de03c4fbbbf4d38740885a292a64e00ab6",
+    "plot-causal-factorial-paired-audit-v1.svg": "5c9c663b758b8ec1d0f26bda35b7bbc18362fef9c656522b9d23fb907c880130",
+    "plot-selection-sequential-ledger-audit-v1.svg": "51ca9aca9b1d3000c2f9526b9966dad9c362def2cabd60c3224a610cb3a01090",
+    "plot-telemetry-first-bad-audit-v1.svg": "6ff54138368a959d229c4f409015cafd40206109bcf2e67f8660c40c2e8b9e8e",
+    "research_ledger.csv": "2939d36eb64466b6e76d13b35f937576d296713f4f89bfeea754f8bde3b8dd3a",
+    "sequential_boundary.csv": "994d41ad4571e911b1cb4247b75c096c0e30ed643e1c1d870c646618c0c0aeea",
+    "uwr_spectrum.csv": "3f5d5ce182a0f3834f152176fdedb6fd0ac59685feb226a24c5df2a4841f000c"
+  },
+  "boundaries": [
+    "Synthetic deterministic or finite analytical oracles are not a real training benchmark.",
+    "The finite-horizon union-bound interval is a valid teaching construction under bounded observations, not a substitute for a chosen production confidence-sequence method.",
+    "Telemetry ordering and a complete ledger do not by themselves identify causality.",
+    "Compute and checkpoint results are protocol examples, not universal model rankings."
+  ],
+  "check_count": 40,
+  "checks": [
+    {
+      "expected": 8,
+      "id": "CLK-01",
+      "observed": 8,
+      "passed": true
+    },
+    {
+      "expected": 3,
+      "id": "CLK-02",
+      "observed": 3,
+      "passed": true
+    },
+    {
+      "expected": 7990,
+      "id": "CLK-03",
+      "observed": 7990,
+      "passed": true
+    },
+    {
+      "expected": "diverge",
+      "id": "CLK-04",
+      "observed": [
+        2,
+        1
+      ],
+      "passed": true
+    },
+    {
+      "expected": 12341,
+      "id": "BAD-01",
+      "observed": 12341,
+      "passed": true
+    },
+    {
+      "expected": 12340,
+      "id": "BAD-02",
+      "observed": 12340,
+      "passed": true
+    },
+    {
+      "expected": "<=10",
+      "id": "BAD-03",
+      "observed": 10,
+      "passed": true
+    },
+    {
+      "expected": 1,
+      "id": "BAD-04",
+      "observed": 1,
+      "passed": true
+    },
+    {
+      "expected": 0.01,
+      "id": "UWR-01",
+      "observed": 0.01,
+      "passed": true
+    },
+    {
+      "expected": 1,
+      "id": "UWR-02",
+      "observed": 1.0,
+      "passed": true
+    },
+    {
+      "expected": 100,
+      "id": "UWR-03",
+      "observed": 100.0,
+      "passed": true
+    },
+    {
+      "expected": "rank-one larger",
+      "id": "UWR-04",
+      "observed": [
+        0.125,
+        0.0125
+      ],
+      "passed": true
+    },
+    {
+      "expected": "both positive",
+      "id": "CFD-01",
+      "observed": [
+        0.020000000000000018,
+        0.050000000000000044
+      ],
+      "passed": true
+    },
+    {
+      "expected": "crude reversal",
+      "id": "CFD-02",
+      "observed": [
+        0.8400000000000001,
+        0.7040000000000001
+      ],
+      "passed": true
+    },
+    {
+      "expected": "positive standardized",
+      "id": "CFD-03",
+      "observed": 0.026000000000000023,
+      "passed": true
+    },
+    {
+      "expected": 0.866,
+      "id": "CFD-04",
+      "observed": 0.8660000000000001,
+      "passed": true
+    },
+    {
+      "expected": 3.5,
+      "id": "FAC-01",
+      "observed": 3.5,
+      "passed": true
+    },
+    {
+      "expected": 2.5,
+      "id": "FAC-02",
+      "observed": 2.5,
+      "passed": true
+    },
+    {
+      "expected": 1.5,
+      "id": "FAC-03",
+      "observed": 1.5,
+      "passed": true
+    },
+    {
+      "expected": 6,
+      "id": "FAC-04",
+      "observed": 6.0,
+      "passed": true
+    },
+    {
+      "expected": "variance identity",
+      "id": "PAIR-01",
+      "observed": [
+        0.03500000000000004,
+        0.03500000000000014
+      ],
+      "passed": true
+    },
+    {
+      "expected": "paired smaller",
+      "id": "PAIR-02",
+      "observed": [
+        0.03500000000000004,
+        6.534999999999998
+      ],
+      "passed": true
+    },
+    {
+      "expected": "positive covariance",
+      "id": "PAIR-03",
+      "observed": 3.249999999999999,
+      "passed": true
+    },
+    {
+      "expected": 6,
+      "id": "PAIR-04",
+      "observed": 6,
+      "passed": true
+    },
+    {
+      "expected": "uniform wider",
+      "id": "SEQ-01",
+      "observed": "all",
+      "passed": true
+    },
+    {
+      "expected": 20,
+      "id": "SEQ-02",
+      "observed": 20,
+      "passed": true
+    },
+    {
+      "expected": "mean inside",
+      "id": "SEQ-03",
+      "observed": [
+        -0.5725947484951165,
+        0.24500000000000002,
+        1.0625947484951166
+      ],
+      "passed": true
+    },
+    {
+      "expected": "shrinks",
+      "id": "SEQ-04",
+      "observed": [
+        3.6563948713638483,
+        0.8175947484951165
+      ],
+      "passed": true
+    },
+    {
+      "expected": 3,
+      "id": "CKPT-01",
+      "observed": 3,
+      "passed": true
+    },
+    {
+      "expected": "positive optimism",
+      "id": "CKPT-02",
+      "observed": [
+        0.07999999999999996,
+        0.10999999999999999,
+        0.08999999999999997
+      ],
+      "passed": true
+    },
+    {
+      "expected": ">=2 selected indices",
+      "id": "CKPT-03",
+      "observed": [
+        2,
+        4,
+        5
+      ],
+      "passed": true
+    },
+    {
+      "expected": 18,
+      "id": "CKPT-04",
+      "observed": 18,
+      "passed": true
+    },
+    {
+      "expected": "A throughput higher",
+      "id": "CMP-01",
+      "observed": [
+        120000.0,
+        100000.0
+      ],
+      "passed": true
+    },
+    {
+      "expected": "A time worse",
+      "id": "CMP-02",
+      "observed": [
+        250000.0,
+        200000.0
+      ],
+      "passed": true
+    },
+    {
+      "expected": 45,
+      "id": "CMP-03",
+      "observed": 45,
+      "passed": true
+    },
+    {
+      "expected": 200000,
+      "id": "CMP-04",
+      "observed": 200000.0,
+      "passed": true
+    },
+    {
+      "expected": 7,
+      "id": "LED-01",
+      "observed": 7,
+      "passed": true
+    },
+    {
+      "expected": 0,
+      "id": "LED-02",
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "expected": "E5",
+      "id": "LED-03",
+      "observed": "E5",
+      "passed": true
+    },
+    {
+      "expected": 8,
+      "id": "LED-04",
+      "observed": 8,
+      "passed": true
+    }
+  ],
+  "checks_passed": 40,
+  "experiment_id": "EXP-TRN-609-V1",
+  "key_results": {
+    "clock_final": {
+      "attempt": 4,
+      "effective_token_clock": 7990,
+      "microstep_clock": 8,
+      "optimizer_step_after": 3,
+      "optimizer_step_before": 2,
+      "outcome": "success",
+      "scheduler_by_attempt": 4,
+      "scheduler_by_update": 3,
+      "skipped_update": 0
+    },
+    "factorial": {
+      "beta_A": 3.5,
+      "beta_AB": 1.5,
+      "beta_B": 2.5,
+      "difference_in_differences": 6.0
+    },
+    "first_bad_boundary": {
+      "bad_upper": 12341,
+      "interval_width_before": 1,
+      "midpoint": 12341,
+      "midpoint_bad": 1,
+      "normal_lower": 12340,
+      "round": 9
+    },
+    "ledger_missing_fields": {
+      "claim": 0,
+      "external_replication": 4,
+      "incident": 0,
+      "manifest": 0,
+      "mechanism_intervention": 2,
+      "protocol": 0,
+      "randomized_study": 0,
+      "telemetry": 1
+    },
+    "paired_variance_ratio": 0.00535577658760521,
+    "simpson": {
+      "new_crude_success": 0.7040000000000001,
+      "new_standardized_to_old_mix": 0.8660000000000001,
+      "old_crude_success": 0.8400000000000001,
+      "standardized_effect": 0.026000000000000023
+    },
+    "time_to_quality": {
+      "A": 250000.0,
+      "B": 200000.0
+    }
+  },
+  "seed": 20260826,
+  "track_count": 10
+}

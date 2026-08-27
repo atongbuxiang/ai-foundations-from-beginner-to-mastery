@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Maxout：Upper Envelope、Winner Region 与计算语义</title>
+<desc id="desc">多个 affine candidates 的上包络形成 convex piecewise-linear unit；唯一 winner 给局部梯度，tie 给次微分；梯度稀疏不等于前向跳算。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Affine candidates 与上包络</text>
+<line x1="65" y1="330" x2="350" y2="330" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="205" y1="110" x2="205" y2="420" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="70" y1="385" x2="345" y2="145" stroke="#2563EB" stroke-width="2" stroke-dasharray="7 5"/>
+<line x1="70" y1="155" x2="345" y2="385" stroke="#0F766E" stroke-width="2" stroke-dasharray="7 5"/>
+<line x1="70" y1="245" x2="345" y2="245" stroke="#C24135" stroke-width="2" stroke-dasharray="7 5"/>
+<path d="M70 155L160 230L175 245L240 245L255 230L345 145" fill="none" stroke="#1F2937" stroke-width="4"/>
+<circle cx="175" cy="245" r="6" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<circle cx="240" cy="245" r="6" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="90" y="139" font-size="15" font-weight="650" text-anchor="start" fill="#0F766E">candidate 2</text>
+<text x="268" y="132" font-size="15" font-weight="650" text-anchor="start" fill="#2563EB">candidate 1</text>
+<text x="260" y="268" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">candidate 3</text>
+<text x="205" y="464" font-size="16" font-weight="700" text-anchor="middle" fill="#1F2937">bold curve = upper envelope</text>
+<text x="205" y="491" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">ties sit on region boundaries</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Winner 决定局部 VJP</text>
+<rect x="450" y="105" width="92" height="58" rx="0" fill="#0F766E" stroke="#0F766E" stroke-width="1"/>
+<text x="496.0" y="141" font-size="16" font-weight="700" text-anchor="middle" fill="#FFFEFB">R2</text>
+<rect x="542" y="105" width="118" height="58" rx="0" fill="#C24135" stroke="#C24135" stroke-width="1"/>
+<text x="601.0" y="141" font-size="16" font-weight="700" text-anchor="middle" fill="#FFFEFB">R3</text>
+<rect x="660" y="105" width="92" height="58" rx="0" fill="#2563EB" stroke="#2563EB" stroke-width="1"/>
+<text x="706.0" y="141" font-size="16" font-weight="700" text-anchor="middle" fill="#FFFEFB">R1</text>
+<text x="450" y="205" font-size="16" font-weight="700" text-anchor="start" fill="#0F766E">unique winner r*</text>
+<text x="450" y="237" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">gradient = winning slope</text>
+<line x1="450" y1="263" x2="755" y2="263" stroke="#D7DEE8" stroke-width="2"/>
+<text x="450" y="305" font-size="16" font-weight="700" text-anchor="start" fill="#C24135">tie active set A</text>
+<text x="450" y="337" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">subgradient = convex hull of active slopes</text>
+<text x="450" y="375" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">directional slope = max active dot product</text>
+<rect x="450" y="418" width="302" height="70" rx="6" fill="#FFF5F2" stroke="#C24135" stroke-width="2"/>
+<text x="601" y="446" font-size="16" font-weight="700" text-anchor="middle" fill="#C24135">framework tie rule</text>
+<text x="601" y="471" font-size="15" font-weight="500" text-anchor="middle" fill="#64748B">is a convention, not a derivative theorem</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">三种“稀疏”不可混用</text>
+<rect x="845" y="105" width="285" height="68" rx="7" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="862" y="132" font-size="16" font-weight="700" text-anchor="start" fill="#2563EB">Maxout forward</text>
+<text x="862" y="156" font-size="15" font-weight="500" text-anchor="start" fill="#64748B">compute all k candidates</text>
+<line x1="987" y1="176" x2="987" y2="201" stroke="#D7DEE8" stroke-width="1.5"/>
+<rect x="845" y="205" width="285" height="68" rx="7" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="862" y="232" font-size="16" font-weight="700" text-anchor="start" fill="#0F766E">Maxout backward</text>
+<text x="862" y="256" font-size="15" font-weight="500" text-anchor="start" fill="#64748B">route VJP to winner</text>
+<line x1="987" y1="276" x2="987" y2="301" stroke="#D7DEE8" stroke-width="1.5"/>
+<rect x="845" y="305" width="285" height="68" rx="7" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="862" y="332" font-size="16" font-weight="700" text-anchor="start" fill="#C24135">MoE routing</text>
+<text x="862" y="356" font-size="15" font-weight="500" text-anchor="start" fill="#64748B">select before expert compute</text>
+<line x1="987" y1="376" x2="987" y2="401" stroke="#D7DEE8" stroke-width="1.5"/>
+<rect x="845" y="405" width="285" height="68" rx="7" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="862" y="432" font-size="16" font-weight="700" text-anchor="start" fill="#2563EB">ReLU zeros</text>
+<text x="862" y="456" font-size="15" font-weight="500" text-anchor="start" fill="#64748B">dense GEMM already happened</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">先计算 candidate、再选择 winner 是普通 Maxout；只有选择发生在昂贵分支之前，才构成真正条件计算。</text>
+</svg>

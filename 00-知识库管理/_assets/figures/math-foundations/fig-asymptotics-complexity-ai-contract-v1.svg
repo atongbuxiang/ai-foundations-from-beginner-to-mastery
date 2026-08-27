@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="760" viewBox="0 0 1440 760" role="img" aria-labelledby="title desc">
+  <title id="title">渐近关系、复杂度资源账与 AI 计算图合同</title>
+  <desc id="desc">三面板展示大O与Theta等渐近量词、从输入表示和操作图到多资源复杂度，以及Attention与经验Scaling Law的AI证据边界。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#071527"/><stop offset="1" stop-color="#10263e"/></linearGradient>
+    <linearGradient id="p1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#173754"/><stop offset="1" stop-color="#102a43"/></linearGradient>
+    <linearGradient id="p2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#173d3b"/><stop offset="1" stop-color="#102f31"/></linearGradient>
+    <linearGradient id="p3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#372d58"/><stop offset="1" stop-color="#282442"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="6" stdDeviation="9" flood-color="#000" flood-opacity=".28"/></filter>
+    <marker id="ab" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#66c7ff"/></marker>
+    <marker id="ag" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#70e0bf"/></marker>
+    <style>
+      .title{font:700 30px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#f5f9ff}.sub{font:400 15px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#a9bfd4}.head{font:700 22px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#f8fbff}.body{font:500 16px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#dceaf7}.small{font:400 14px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#b8cada}.tiny{font:400 12px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#aebfd0}.math{font:500 17px Georgia,"Times New Roman",serif;fill:#f6fbff}.tag{font:700 13px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:.7px}.mono{font:600 13px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#dceaf7}
+    </style>
+  </defs>
+  <rect width="1440" height="760" fill="url(#bg)"/>
+  <circle cx="1290" cy="60" r="250" fill="#547ec7" opacity=".08"/><circle cx="120" cy="730" r="280" fill="#27a98b" opacity=".07"/>
+  <text x="70" y="59" class="title">复杂度先是一份量词合同，再是一张计算图的多资源账本</text>
+  <text x="70" y="88" class="sub">variable + direction → asymptotic relation → input representation + cost model → AI operation shape + empirical boundary</text>
+
+  <g filter="url(#shadow)"><rect x="55" y="125" width="410" height="535" rx="24" fill="url(#p1)" stroke="#427ca6"/><rect x="515" y="125" width="410" height="535" rx="24" fill="url(#p2)" stroke="#438b7c"/><rect x="975" y="125" width="410" height="535" rx="24" fill="url(#p3)" stroke="#7b6cad"/></g>
+
+  <rect x="80" y="148" width="154" height="27" rx="13" fill="#13324d" stroke="#66c7ff"/><text x="157" y="166" text-anchor="middle" class="tag" fill="#7bd2ff">ASYMPTOTIC LOGIC</text>
+  <text x="80" y="207" class="head">① 先固定变量、方向与统一常数</text>
+  <text x="80" y="240" class="body">比较的是函数尾部；有限前缀与孤立点无权裁决</text>
+  <rect x="85" y="268" width="345" height="111" rx="14" fill="#0d263d" stroke="#4e91ba"/>
+  <text x="106" y="299" class="small">Upper bound · f ∈ O(g)</text>
+  <text x="106" y="329" class="math">∃ C &gt; 0　∃ n_0　∀ n ≥ n_0</text>
+  <text x="106" y="358" class="math">|f(n)| ≤ C |g(n)|</text>
+  <rect x="85" y="398" width="345" height="98" rx="14" fill="#0c2338" stroke="#4e91ba"/>
+  <text x="106" y="428" class="small">Strength ladder</text>
+  <text x="106" y="458" class="math">f ~ g　⇒　f ∈ Θ(g)　⇒　f ∈ O(g)</text>
+  <text x="106" y="483" class="tiny">little-o: ratio → 0；反向一般不成立</text>
+  <rect x="85" y="515" width="345" height="106" rx="14" fill="#0c2338" stroke="#4e91ba"/>
+  <text x="106" y="544" class="small">Negation / counterexample contract</text>
+  <text x="106" y="574" class="math">∀ C　∀ n_0　∃ n ≥ n_0: |f| &gt; C|g|</text>
+  <text x="106" y="602" class="tiny">常数不能依赖 n；一个有限失败点不能否定 Big-O</text>
+
+  <rect x="540" y="148" width="153" height="27" rx="13" fill="#123630" stroke="#70e0bf"/><text x="616" y="166" text-anchor="middle" class="tag" fill="#82e9cb">COST LEDGER</text>
+  <text x="540" y="207" class="head">② 从表示与操作图数真实资源</text>
+  <text x="540" y="240" class="body">同一算法同时拥有 work、memory、I/O 与 span</text>
+  <rect x="545" y="268" width="350" height="94" rx="14" fill="#102f31" stroke="#53ad98"/>
+  <text x="565" y="298" class="small">Input contract</text>
+  <text x="565" y="327" class="mono">shape · encoding · sparse/dense · precision</text>
+  <text x="565" y="350" class="tiny">数值 N 的 bit-length 是 Θ(log N)；表示改变成本</text>
+  <path d="M720 369 L720 397" stroke="#70e0bf" stroke-width="3" marker-end="url(#ag)"/>
+  <rect x="545" y="405" width="350" height="96" rx="14" fill="#102f31" stroke="#53ad98"/>
+  <text x="565" y="435" class="small">Exact graph → recurrence / sum / contraction</text>
+  <text x="565" y="465" class="math">C(n) = K(n, ε) × C_step(n)</text>
+  <text x="565" y="490" class="tiny">先精确计数，再提主导项；轮数不能替代总工作</text>
+  <path d="M720 508 L720 533" stroke="#70e0bf" stroke-width="3" marker-end="url(#ag)"/>
+  <rect x="545" y="541" width="350" height="80" rx="14" fill="#102f31" stroke="#53ad98"/>
+  <text x="565" y="571" class="small">Resource vector</text>
+  <text x="565" y="600" class="mono">work · span · peak memory · bytes · rounds</text>
+
+  <rect x="1000" y="148" width="141" height="27" rx="13" fill="#2c2645" stroke="#b29cff"/><text x="1070" y="166" text-anchor="middle" class="tag" fill="#c5b2ff">AI / EVIDENCE</text>
+  <text x="1000" y="207" class="head">③ 多维制度决定谁真正主导</text>
+  <text x="1000" y="240" class="body">Attention算术、峰值内存与经验幂律必须分层</text>
+  <rect x="1001" y="268" width="357" height="113" rx="14" fill="#24213c" stroke="#8a78c2"/>
+  <text x="1021" y="298" class="small">Dense self-attention forward</text>
+  <text x="1021" y="328" class="math">work: Θ(B T d² + B T² d)</text>
+  <text x="1021" y="356" class="math">score memory: Θ(B h T²)</text>
+  <text x="1021" y="375" class="tiny">T/d 决定 pairwise 与 projection 的主导制度</text>
+  <rect x="1001" y="399" width="357" height="96" rx="14" fill="#24213c" stroke="#8a78c2"/>
+  <text x="1021" y="429" class="small">Operation count ≠ wall-clock</text>
+  <text x="1021" y="458" class="mono">compute · bandwidth · fusion · communication</text>
+  <text x="1021" y="483" class="tiny">tiling 可降峰值内存/流量而不改变 T² 算术阶数</text>
+  <rect x="1001" y="513" width="357" height="108" rx="14" fill="#211e38" stroke="#8a78c2"/>
+  <text x="1021" y="543" class="small">Empirical scaling law</text>
+  <text x="1021" y="573" class="math">L(N) = L_inf + A N^(-alpha)</text>
+  <text x="1021" y="601" class="tiny">有限窗口拟合 → 假设模型；不是 N→∞ 的无条件定理</text>
+
+  <path d="M472 392 L504 392" stroke="#66c7ff" stroke-width="3" marker-end="url(#ab)"/><path d="M932 392 L964 392" stroke="#70e0bf" stroke-width="3" marker-end="url(#ag)"/>
+  <rect x="120" y="689" width="1200" height="42" rx="21" fill="#0b1d30" stroke="#385b76"/><text x="720" y="716" text-anchor="middle" class="body">闭环：写清变量与方向 → 展开量词 → 按输入表示数计算图 → 分账资源与口径 → 再用实验检验有限区间，拒绝无条件外推。</text>
+</svg>

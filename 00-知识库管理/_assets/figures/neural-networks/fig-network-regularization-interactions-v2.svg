@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">网络级正则化：干预位置、交互效应与证据阶梯</title>
+<desc id="desc">正则化可作用于 target、input、activation/path、parameter/update 或 function derivative；联合使用会改变目标、噪声、优化与计算，必须用 factorial interaction 和分层证据审计。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">五个干预位置</text>
+<rect x="52" y="82" width="310" height="58" rx="4" fill="#FFFEFB" stroke="#2563EB" stroke-width="1.8"/>
+<text x="67" y="107" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">target</text>
+<text x="347" y="107" font-size="15" font-weight="600" text-anchor="end" fill="#64748B">label smoothing</text>
+<rect x="52" y="164" width="310" height="58" rx="4" fill="#FFFEFB" stroke="#0F766E" stroke-width="1.8"/>
+<text x="67" y="189" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">input / hidden</text>
+<text x="347" y="189" font-size="15" font-weight="600" text-anchor="end" fill="#64748B">mixup</text>
+<rect x="52" y="246" width="310" height="58" rx="4" fill="#FFFEFB" stroke="#B7791F" stroke-width="1.8"/>
+<text x="67" y="271" font-size="15" font-weight="700" text-anchor="start" fill="#B7791F">activation / path</text>
+<text x="347" y="271" font-size="15" font-weight="600" text-anchor="end" fill="#64748B">dropout / DropPath</text>
+<rect x="52" y="328" width="310" height="58" rx="4" fill="#FFFEFB" stroke="#C24135" stroke-width="1.8"/>
+<text x="67" y="353" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">parameter / update</text>
+<text x="347" y="353" font-size="15" font-weight="600" text-anchor="end" fill="#64748B">L2 / AdamW</text>
+<rect x="52" y="410" width="310" height="58" rx="4" fill="#FFFEFB" stroke="#0F766E" stroke-width="1.8"/>
+<text x="67" y="435" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">function</text>
+<text x="347" y="435" font-size="15" font-weight="600" text-anchor="end" fill="#64748B">Jacobian / consistency</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">2×2 才看得见 interaction</text>
+<rect x="478" y="140" width="112" height="94" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="534" y="175" font-size="16" font-weight="700" text-anchor="middle" fill="#2563EB">risk 0.30</text>
+<text x="534" y="207" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">A=0, B=0</text>
+<rect x="624" y="140" width="112" height="94" rx="5" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="680" y="175" font-size="16" font-weight="700" text-anchor="middle" fill="#0F766E">risk 0.27</text>
+<text x="680" y="207" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">A=0, B=1</text>
+<rect x="478" y="286" width="112" height="94" rx="5" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="534" y="321" font-size="16" font-weight="700" text-anchor="middle" fill="#0F766E">risk 0.26</text>
+<text x="534" y="353" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">A=1, B=0</text>
+<rect x="624" y="286" width="112" height="94" rx="5" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="680" y="321" font-size="16" font-weight="700" text-anchor="middle" fill="#C24135">risk 0.20</text>
+<text x="680" y="353" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">A=1, B=1</text>
+<text x="534" y="112" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">B=0</text>
+<text x="680" y="112" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">B=1</text>
+<text x="455" y="190" font-size="15" font-weight="700" text-anchor="end" fill="#0F766E">A=0</text>
+<text x="455" y="336" font-size="15" font-weight="700" text-anchor="end" fill="#0F766E">A=1</text>
+<rect x="445" y="414" width="310" height="68" rx="5" fill="#FFFBEB" stroke="#B7791F" stroke-width="2"/>
+<text x="600" y="440" font-size="15" font-weight="700" text-anchor="middle" fill="#B7791F">Delta_AB=(-.06)-(-.03)=-.03</text>
+<text x="600" y="468" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">synergy on risk in this protocol only</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">claim 逐级升级</text>
+<rect x="845" y="82" width="286" height="58" rx="4" fill="#FFFEFB" stroke="#2563EB" stroke-width="1.8"/>
+<text x="861" y="104" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">1 exact</text>
+<text x="1115" y="129" font-size="15" font-weight="600" text-anchor="end" fill="#64748B">operator / objective identity</text>
+<rect x="845" y="164" width="286" height="58" rx="4" fill="#FFFEFB" stroke="#0F766E" stroke-width="1.8"/>
+<text x="861" y="186" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">2 local</text>
+<text x="1115" y="211" font-size="15" font-weight="600" text-anchor="end" fill="#64748B">Taylor / finite-sample estimate</text>
+<rect x="845" y="246" width="286" height="58" rx="4" fill="#FFFEFB" stroke="#B7791F" stroke-width="1.8"/>
+<text x="861" y="268" font-size="15" font-weight="700" text-anchor="start" fill="#B7791F">3 mechanism</text>
+<text x="1115" y="293" font-size="15" font-weight="600" text-anchor="end" fill="#64748B">controlled mediator + ablation</text>
+<rect x="845" y="328" width="286" height="58" rx="4" fill="#FFFEFB" stroke="#C24135" stroke-width="1.8"/>
+<text x="861" y="350" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">4 benchmark</text>
+<text x="1115" y="375" font-size="15" font-weight="600" text-anchor="end" fill="#64748B">multi-seed held-out comparison</text>
+<rect x="845" y="410" width="286" height="58" rx="4" fill="#FFFEFB" stroke="#0F766E" stroke-width="1.8"/>
+<text x="861" y="432" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">5 deployment</text>
+<text x="1115" y="457" font-size="15" font-weight="600" text-anchor="end" fill="#64748B">shift, cost, monitoring</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">联合正则化不是把系数相加；要记录干预位置、交互、调参预算、计算成本与证据等级。</text>
+</svg>

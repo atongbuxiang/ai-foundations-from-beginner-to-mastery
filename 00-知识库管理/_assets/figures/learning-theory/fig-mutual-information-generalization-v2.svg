@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">互信息泛化：学习算法作为 sample-to-output channel</title>
+<desc id="desc">学习算法把样本映射为随机输出 W。transport lemma 比较 joint law 与独立 product law；互信息度量二者距离，从而控制期望 signed generalization gap。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">算法是一条随机信道</text>
+<rect x="55" y="105" width="125" height="64" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="117.5" y="143.0" font-size="17" font-weight="650" text-anchor="middle" fill="#2563EB">sample S</text>
+<rect x="230" y="105" width="125" height="64" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="292.5" y="143.0" font-size="17" font-weight="650" text-anchor="middle" fill="#0F766E">output W</text>
+<line x1="185" y1="137" x2="225" y2="137" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<text x="205" y="112" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">A</text>
+<circle cx="80" cy="250" r="13" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="80" y="255" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">z1</text>
+<circle cx="135" cy="250" r="13" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="135" y="255" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">z2</text>
+<circle cx="190" cy="250" r="13" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="190" y="255" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">z3</text>
+<circle cx="245" cy="250" r="13" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="245" y="255" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">z4</text>
+<circle cx="300" cy="250" r="13" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="300" y="255" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">z5</text>
+<text x="45" y="330" font-size="20" font-weight="700" text-anchor="start" fill="#0F766E" class="math">complexity = I(S;W)</text>
+<text x="45" y="380" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">algorithm randomness belongs to P(W|S)</text>
+<text x="45" y="430" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">post-processing cannot increase information</text>
+<text x="45" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">exact continuous outputs may leak infinite bits。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Joint law 对比 product law</text>
+<rect x="445" y="105" width="135" height="72" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="512.5" y="147.0" font-size="17" font-weight="650" text-anchor="middle" fill="#C24135">P_(W,Z)</text>
+<rect x="640" y="105" width="115" height="72" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="697.5" y="147.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">P_W x P_Z</text>
+<line x1="585" y1="142" x2="635" y2="142" stroke="#C24135" stroke-width="3" marker-end="url(#a2)"/>
+<text x="610" y="110" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">KL</text>
+<text x="430" y="245" font-size="16" font-weight="700" text-anchor="start" fill="#1F2937" class="math">|E_joint f - E_product f|</text>
+<text x="430" y="290" font-size="18" font-weight="700" text-anchor="start" fill="#0F766E" class="math">&lt;= sqrt(2 sigma^2 KL)</text>
+<line x1="450" y1="345" x2="740" y2="345" stroke="#D7DEE8" stroke-width="2"/>
+<text x="430" y="390" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">product law means W does not know this Z</text>
+<text x="430" y="440" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">sub-Gaussian loss makes the transport finite</text>
+<text x="430" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">dependence is averaged under the data law。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">信息预算给出期望间隙</text>
+<text x="830" y="120" font-size="15" font-weight="700" text-anchor="start" fill="#C24135" class="math">|E gen| &lt;= sqrt[2 sigma^2 I(S;W) / m]</text>
+<rect x="840" y="190" width="290" height="62" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="985.0" y="227.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">K outputs: I &lt;= log K</text>
+<rect x="840" y="285" width="290" height="62" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="985.0" y="322.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">b-bit transcript: I &lt;= b log 2</text>
+<rect x="840" y="380" width="290" height="62" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="985.0" y="417.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">k adaptive rounds: use chain rule</text>
+<text x="830" y="475" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">expected signed != high probability</text>
+<text x="830" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">I(X;representation) is a different object。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">输出关于训练样本携带得越少，平均训练—总体偏差越难被自适应选择放大。</text>
+</svg>

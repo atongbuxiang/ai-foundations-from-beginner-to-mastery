@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+  <title id="title">张成、线性无关与坐标唯一性</title>
+  <desc id="desc">用二维向量构造展示张成是所有可达线性组合，第三个冗余向量产生非零线性关系，删除冗余后基同时保证存在性和唯一性。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#2563eb"/></marker>
+    <marker id="green-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#0f766e"/></marker>
+    <marker id="amber-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#b7791f"/></marker>
+    <style>
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}.blue{fill:#2563eb}.green{fill:#0f766e}.amber{fill:#b7791f}.h{font-size:19px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}.axis{stroke:#94a3b8;stroke-width:1.5}.v{stroke:#2563eb;stroke-width:3;fill:none;marker-end:url(#arrow)}.g{stroke:#0f766e;stroke-width:3;fill:none;marker-end:url(#green-arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="600" fill="#ffffff"/>
+  <rect x="42" y="42" width="630" height="443" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="70" y="80" class="sans h blue">从“能到达哪里”看张成</text>
+  <path d="M88 411H625M154 454V99" class="axis"/>
+  <g stroke="#e2e8f0" stroke-width="1"><path d="M88 337H625M88 263H625M88 189H625M88 115H625"/><path d="M254 99V454M354 99V454M454 99V454M554 99V454"/></g>
+  <circle cx="154" cy="411" r="5" fill="#1f2937"/><text x="133" y="435" class="math small ink">0</text>
+  <path d="M154 411L304 337" class="v"/><path d="M154 411L254 263" class="v"/>
+  <path d="M154 411L404 189" stroke="#b7791f" stroke-width="3" fill="none" stroke-dasharray="8 6" marker-end="url(#amber-arrow)"/>
+  <text x="288" y="327" class="math body blue">v₁</text><text x="258" y="254" class="math body blue">v₂</text><text x="410" y="183" class="math body amber">v₃=v₁+v₂</text>
+  <path d="M304 337L404 189M254 263L404 189" stroke="#94a3b8" stroke-width="2" stroke-dasharray="5 5"/>
+  <path d="M154 411L554 115" class="g"/>
+  <text x="475" y="108" class="math body green">x=a v₁+b v₂</text>
+  <text x="82" y="473" class="sans small muted">两个不共线方向的所有线性组合覆盖整个平面；图只画出一个目标 x。</text>
+
+  <rect x="708" y="42" width="450" height="202" rx="12" fill="#fffbeb" stroke="#fcd34d"/>
+  <text x="738" y="80" class="sans h amber">冗余意味着存在非零关系</text>
+  <text x="738" y="122" class="math formula ink">v₃ = v₁ + v₂</text>
+  <text x="738" y="161" class="math formula amber">v₁ + v₂ − v₃ = 0</text>
+  <text x="738" y="205" class="sans body ink">删除 v₃ 不改变 span，却消除一条重复描述。</text>
+  <rect x="708" y="273" width="450" height="212" rx="12" fill="#ecfdf5" stroke="#6ee7b7"/>
+  <text x="738" y="312" class="sans h green">基 = 存在性 + 唯一性</text>
+  <text x="738" y="354" class="math formula ink">span(v₁,…,vᵣ)=U</text><text x="1075" y="354" class="sans body green" text-anchor="end">每个 x 都能表示</text>
+  <text x="738" y="399" class="math formula ink">Σ cᵢvᵢ=0 ⇒ cᵢ=0</text><text x="1075" y="399" class="sans body green" text-anchor="end">表示不会重复</text>
+  <line x1="738" y1="423" x2="1128" y2="423" stroke="#a7f3d0"/>
+  <text x="933" y="458" class="sans body ink" text-anchor="middle">因此每个 x∈U 都有唯一坐标。</text>
+  <rect x="92" y="525" width="1016" height="48" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="600" y="556" class="sans result ink" text-anchor="middle">张成控制“覆盖多少”，线性无关控制“是否重复”；二者缺一都不是基。</text>
+</svg>

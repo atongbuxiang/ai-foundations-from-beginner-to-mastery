@@ -1,0 +1,313 @@
+{
+  "experiment_id": "EXP-LM-703-V1",
+  "checks": {
+    "selection_distribution_shift": true,
+    "minhash_enumeration_equals_jaccard": true,
+    "lsh_candidate_probability": true,
+    "threshold_clustering_nontransitive": true,
+    "contamination_bayes_base_rate": true,
+    "mixture_document_token_target_separation": true,
+    "packing_relation_boundary_loss_contract": true,
+    "curriculum_update_order_noncommutes": true,
+    "provenance_effective_target_and_hash_stability": true
+  },
+  "selection": {
+    "rows": [
+      {
+        "group": "A",
+        "source_share": 0.6,
+        "retention": 0.75,
+        "kept_mass": 0.44999999999999996,
+        "selected_share": 0.7894736842105263
+      },
+      {
+        "group": "B",
+        "source_share": 0.4,
+        "retention": 0.3,
+        "kept_mass": 0.12,
+        "selected_share": 0.2105263157894737
+      }
+    ],
+    "total_retention": 0.57
+  },
+  "minhash_lsh": {
+    "universe": [
+      "a",
+      "b",
+      "c"
+    ],
+    "left": [
+      "a",
+      "b"
+    ],
+    "right": [
+      "b",
+      "c"
+    ],
+    "permutations": 6,
+    "equal_count": 2,
+    "exact_jaccard": 0.3333333333333333,
+    "enumerated_minhash_probability": 0.3333333333333333,
+    "lsh": {
+      "similarity": 0.8,
+      "bands": 10,
+      "rows_per_band": 4,
+      "candidate_probability": 0.9948540745744485
+    }
+  },
+  "threshold_clustering": {
+    "sets": {
+      "A": [
+        1,
+        2
+      ],
+      "B": [
+        1,
+        2,
+        3
+      ],
+      "C": [
+        2,
+        3
+      ]
+    },
+    "pair_jaccard": {
+      "A-B": 0.6666666666666666,
+      "B-C": 0.6666666666666666,
+      "A-C": 0.3333333333333333
+    },
+    "threshold": 0.5,
+    "edges": [
+      "A-B",
+      "B-C"
+    ],
+    "connected_component": [
+      "A",
+      "B",
+      "C"
+    ]
+  },
+  "contamination": {
+    "prevalence": 0.02,
+    "recall": 0.9,
+    "false_positive_rate": 0.01,
+    "positive_posterior": 0.6474820143884893
+  },
+  "mixture": {
+    "rows": [
+      {
+        "domain": "A",
+        "document_share": 0.5,
+        "mean_tokens": 100,
+        "loss_fraction": 1.0,
+        "token_share": 0.2,
+        "target_share": 0.3333333333333333
+      },
+      {
+        "domain": "B",
+        "document_share": 0.5,
+        "mean_tokens": 400,
+        "loss_fraction": 0.5,
+        "token_share": 0.8,
+        "target_share": 0.6666666666666666
+      }
+    ],
+    "power_counts": [
+      10000,
+      100,
+      1
+    ],
+    "power_sampling": {
+      "1.0": [
+        0.99000099000099,
+        0.0099000099000099,
+        9.9000099000099e-05
+      ],
+      "0.5": [
+        0.9009009009009009,
+        0.09009009009009009,
+        0.009009009009009009
+      ],
+      "0.0": [
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333
+      ]
+    }
+  },
+  "packing": {
+    "lengths": [
+      6,
+      5,
+      4,
+      3,
+      2
+    ],
+    "capacity": 10,
+    "bins": [
+      [
+        6,
+        4
+      ],
+      [
+        5,
+        3,
+        2
+      ]
+    ],
+    "utilization": 1.0,
+    "document_ids": [
+      "A",
+      "A",
+      "B",
+      "B",
+      "B"
+    ],
+    "relation": [
+      [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        1,
+        1
+      ]
+    ],
+    "inputs": [
+      "a",
+      "EOS",
+      "b",
+      "c"
+    ],
+    "labels": [
+      "EOS",
+      "b",
+      "c",
+      "EOS"
+    ],
+    "loss_mask": [
+      1,
+      0,
+      1,
+      1
+    ],
+    "effective_targets": 3
+  },
+  "curriculum": {
+    "eta": 0.1,
+    "AB": {
+      "after_A": 0.1,
+      "final": -0.12000000000000002
+    },
+    "BA": {
+      "after_B": -0.2,
+      "final": -0.08000000000000002
+    },
+    "absolute_path_gap": 0.04000000000000001,
+    "loss_changes": {
+      "new": -0.8,
+      "old": 0.3999999999999999
+    }
+  },
+  "provenance": {
+    "stages": [
+      {
+        "name": "raw_bytes",
+        "count": 100
+      },
+      {
+        "name": "parsed",
+        "count": 80
+      },
+      {
+        "name": "filtered",
+        "count": 60
+      },
+      {
+        "name": "unique",
+        "count": 45
+      },
+      {
+        "name": "draws",
+        "count": 50
+      },
+      {
+        "name": "targets",
+        "count": 42
+      }
+    ],
+    "adjacent_ratios": [
+      {
+        "edge": "raw_bytes->parsed",
+        "ratio": 0.8,
+        "kind": "fraction"
+      },
+      {
+        "edge": "parsed->filtered",
+        "ratio": 0.75,
+        "kind": "fraction"
+      },
+      {
+        "edge": "filtered->unique",
+        "ratio": 0.75,
+        "kind": "fraction"
+      },
+      {
+        "edge": "unique->draws",
+        "ratio": 1.1111111111111112,
+        "kind": "exposure"
+      },
+      {
+        "edge": "draws->targets",
+        "ratio": 0.84,
+        "kind": "fraction"
+      }
+    ],
+    "loss_masks": [
+      [
+        1,
+        1,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        0,
+        0
+      ]
+    ],
+    "effective_targets": 4,
+    "nll_sum": 6.0,
+    "mean_nll": 1.5,
+    "manifest_hash_a": "5662012e11e53c6572fad6aa7ad188e45ad8668c65b054fed2da890b8b3dd17a",
+    "manifest_hash_b": "5662012e11e53c6572fad6aa7ad188e45ad8668c65b054fed2da890b8b3dd17a"
+  }
+}

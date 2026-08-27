@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Xavier / Glorot：Forward 与 Backward 的非方阵折中</title>
+<desc id="desc">Forward 每坐标累加 fan-in 项，reverse 每坐标累加 fan-out 项；Xavier 采用两者算术平均的倒数，并不让非方层两边同时守恒。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">同一矩阵，两条求和方向</text>
+<rect x="55" y="115" width="80" height="50" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="95.0" y="146.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">n_in</text>
+<rect x="268" y="115" width="80" height="50" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="308.0" y="146.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">n_out</text>
+<rect x="160" y="205" width="82" height="60" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="201.0" y="241.0" font-size="21" font-weight="650" text-anchor="middle" fill="#C24135">W</text>
+<line x1="138" y1="140" x2="174" y2="201" stroke="#2563EB" stroke-width="2.7" marker-end="url(#a0)"/>
+<line x1="228" y1="201" x2="265" y2="140" stroke="#0F766E" stroke-width="2.7" marker-end="url(#a1)"/>
+<text x="60" y="305" font-size="17" font-weight="700" text-anchor="start" fill="#2563EB">forward</text>
+<text x="60" y="337" font-size="17" font-weight="650" text-anchor="start" fill="#1F2937" class="math">v = 1 / n_in</text>
+<text x="218" y="305" font-size="17" font-weight="700" text-anchor="start" fill="#0F766E">backward</text>
+<text x="218" y="337" font-size="17" font-weight="650" text-anchor="start" fill="#1F2937" class="math">v = 1 / n_out</text>
+<rect x="55" y="382" width="292" height="72" rx="7" fill="#FFF5F2" stroke="#C24135" stroke-width="2"/>
+<text x="201" y="411" font-size="17" font-weight="700" text-anchor="middle" fill="#C24135">Xavier compromise</text>
+<text x="201" y="437" font-size="16" font-weight="650" text-anchor="middle" fill="#1F2937" class="math">v = 2 / (n_in + n_out)</text>
+<text x="201" y="488" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">exact on both sides only when square</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Normal / Uniform：同方差合同</text>
+<line x1="450" y1="300" x2="590" y2="300" stroke="#D7DEE8" stroke-width="2"/>
+<polyline points="450.00,298.67 451.40,298.41 452.80,298.10 454.20,297.75 455.60,297.34 457.00,296.87 458.40,296.32 459.80,295.70 461.20,294.99 462.60,294.18 464.00,293.26 465.40,292.23 466.80,291.08 468.20,289.79 469.60,288.36 471.00,286.77 472.40,285.02 473.80,283.10 475.20,281.00 476.60,278.72 478.00,276.25 479.40,273.59 480.80,270.74 482.20,267.69 483.60,264.46 485.00,261.04 486.40,257.45 487.80,253.69 489.20,249.79 490.60,245.75 492.00,241.59 493.40,237.34 494.80,233.03 496.20,228.67 497.60,224.31 499.00,219.96 500.40,215.67 501.80,211.47 503.20,207.40 504.60,203.49 506.00,199.77 507.40,196.28 508.80,193.06 510.20,190.13 511.60,187.53 513.00,185.28 514.40,183.41 515.80,181.93 517.20,180.86 518.60,180.22 520.00,180.00 521.40,180.22 522.80,180.86 524.20,181.93 525.60,183.41 527.00,185.28 528.40,187.53 529.80,190.13 531.20,193.06 532.60,196.28 534.00,199.77 535.40,203.49 536.80,207.40 538.20,211.47 539.60,215.67 541.00,219.96 542.40,224.31 543.80,228.67 545.20,233.03 546.60,237.34 548.00,241.59 549.40,245.75 550.80,249.79 552.20,253.69 553.60,257.45 555.00,261.04 556.40,264.46 557.80,267.69 559.20,270.74 560.60,273.59 562.00,276.25 563.40,278.72 564.80,281.00 566.20,283.10 567.60,285.02 569.00,286.77 570.40,288.36 571.80,289.79 573.20,291.08 574.60,292.23 576.00,293.26 577.40,294.18 578.80,294.99 580.20,295.70 581.60,296.32 583.00,296.87 584.40,297.34 585.80,297.75 587.20,298.10 588.60,298.41 590.00,298.67" fill="none" stroke="#2563EB" stroke-width="3"/>
+<text x="520" y="330" font-size="16" font-weight="700" text-anchor="middle" fill="#2563EB">Gaussian</text>
+<line x1="630" y1="180" x2="630" y2="300" stroke="#0F766E" stroke-width="3"/>
+<line x1="630" y1="180" x2="755" y2="180" stroke="#0F766E" stroke-width="3"/>
+<line x1="755" y1="180" x2="755" y2="300" stroke="#0F766E" stroke-width="3"/>
+<line x1="620" y1="300" x2="765" y2="300" stroke="#D7DEE8" stroke-width="2"/>
+<text x="692" y="330" font-size="16" font-weight="700" text-anchor="middle" fill="#0F766E">Uniform</text>
+<rect x="445" y="370" width="310" height="54" rx="6" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600" y="402" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB" class="math">std = sqrt(2 / fan_sum)</text>
+<rect x="445" y="440" width="310" height="54" rx="6" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="600" y="472" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E" class="math">bound = sqrt(6 / fan_sum)</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Aspect ratio 让乘数对向变化</text>
+<line x1="850" y1="340" x2="1125" y2="340" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="850" y1="115" x2="850" y2="340" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="850" y1="228" x2="1125" y2="228" stroke="#D7DEE8" stroke-width="1.5" stroke-dasharray="5 5"/>
+<polyline points="850.00,135.50 852.29,136.23 854.58,136.98 856.88,137.75 859.17,138.54 861.46,139.37 863.75,140.21 866.04,141.08 868.33,141.98 870.62,142.90 872.92,143.85 875.21,144.83 877.50,145.84 879.79,146.87 882.08,147.93 884.38,149.03 886.67,150.15 888.96,151.30 891.25,152.48 893.54,153.70 895.83,154.94 898.12,156.21 900.42,157.52 902.71,158.86 905.00,160.23 907.29,161.63 909.58,163.06 911.88,164.53 914.17,166.02 916.46,167.55 918.75,169.11 921.04,170.70 923.33,172.32 925.62,173.98 927.92,175.66 930.21,177.37 932.50,179.12 934.79,180.89 937.08,182.69 939.38,184.52 941.67,186.37 943.96,188.25 946.25,190.16 948.54,192.09 950.83,194.04 953.12,196.02 955.42,198.02 957.71,200.03 960.00,202.07 962.29,204.13 964.58,206.20 966.88,208.28 969.17,210.38 971.46,212.50 973.75,214.62 976.04,216.75 978.33,218.89 980.62,221.04 982.92,223.19 985.21,225.34 987.50,227.50 989.79,229.66 992.08,231.81 994.38,233.96 996.67,236.11 998.96,238.25 1001.25,240.38 1003.54,242.50 1005.83,244.62 1008.12,246.72 1010.42,248.80 1012.71,250.87 1015.00,252.93 1017.29,254.97 1019.58,256.98 1021.88,258.98 1024.17,260.96 1026.46,262.91 1028.75,264.84 1031.04,266.75 1033.33,268.63 1035.62,270.48 1037.92,272.31 1040.21,274.11 1042.50,275.88 1044.79,277.63 1047.08,279.34 1049.38,281.02 1051.67,282.68 1053.96,284.30 1056.25,285.89 1058.54,287.45 1060.83,288.98 1063.12,290.47 1065.42,291.94 1067.71,293.37 1070.00,294.77 1072.29,296.14 1074.58,297.48 1076.88,298.79 1079.17,300.06 1081.46,301.30 1083.75,302.52 1086.04,303.70 1088.33,304.85 1090.62,305.97 1092.92,307.07 1095.21,308.13 1097.50,309.16 1099.79,310.17 1102.08,311.15 1104.38,312.10 1106.67,313.02 1108.96,313.92 1111.25,314.79 1113.54,315.63 1115.83,316.46 1118.12,317.25 1120.42,318.02 1122.71,318.77 1125.00,319.50" fill="none" stroke="#2563EB" stroke-width="3"/>
+<polyline points="850.00,319.50 852.29,318.77 854.58,318.02 856.88,317.25 859.17,316.46 861.46,315.63 863.75,314.79 866.04,313.92 868.33,313.02 870.62,312.10 872.92,311.15 875.21,310.17 877.50,309.16 879.79,308.13 882.08,307.07 884.38,305.97 886.67,304.85 888.96,303.70 891.25,302.52 893.54,301.30 895.83,300.06 898.12,298.79 900.42,297.48 902.71,296.14 905.00,294.77 907.29,293.37 909.58,291.94 911.88,290.47 914.17,288.98 916.46,287.45 918.75,285.89 921.04,284.30 923.33,282.68 925.62,281.02 927.92,279.34 930.21,277.63 932.50,275.88 934.79,274.11 937.08,272.31 939.38,270.48 941.67,268.63 943.96,266.75 946.25,264.84 948.54,262.91 950.83,260.96 953.12,258.98 955.42,256.98 957.71,254.97 960.00,252.93 962.29,250.87 964.58,248.80 966.88,246.72 969.17,244.62 971.46,242.50 973.75,240.38 976.04,238.25 978.33,236.11 980.62,233.96 982.92,231.81 985.21,229.66 987.50,227.50 989.79,225.34 992.08,223.19 994.38,221.04 996.67,218.89 998.96,216.75 1001.25,214.62 1003.54,212.50 1005.83,210.38 1008.12,208.28 1010.42,206.20 1012.71,204.13 1015.00,202.07 1017.29,200.03 1019.58,198.02 1021.88,196.02 1024.17,194.04 1026.46,192.09 1028.75,190.16 1031.04,188.25 1033.33,186.37 1035.62,184.52 1037.92,182.69 1040.21,180.89 1042.50,179.12 1044.79,177.37 1047.08,175.66 1049.38,173.98 1051.67,172.32 1053.96,170.70 1056.25,169.11 1058.54,167.55 1060.83,166.02 1063.12,164.53 1065.42,163.06 1067.71,161.63 1070.00,160.23 1072.29,158.86 1074.58,157.52 1076.88,156.21 1079.17,154.94 1081.46,153.70 1083.75,152.48 1086.04,151.30 1088.33,150.15 1090.62,149.03 1092.92,147.93 1095.21,146.87 1097.50,145.84 1099.79,144.83 1102.08,143.85 1104.38,142.90 1106.67,141.98 1108.96,141.08 1111.25,140.21 1113.54,139.37 1115.83,138.54 1118.12,137.75 1120.42,136.98 1122.71,136.23 1125.00,135.50" fill="none" stroke="#0F766E" stroke-width="3"/>
+<text x="865" y="140" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">forward multiplier</text>
+<text x="865" y="169" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">backward multiplier</text>
+<text x="850" y="370" font-size="15" font-weight="600" text-anchor="start" fill="#64748B">n_out &lt;&lt; n_in</text>
+<text x="1125" y="370" font-size="15" font-weight="600" text-anchor="end" fill="#64748B">n_out &gt;&gt; n_in</text>
+<rect x="845" y="404" width="285" height="88" rx="7" fill="#FFF5F2" stroke="#C24135" stroke-width="2"/>
+<text x="987" y="431" font-size="16" font-weight="700" text-anchor="middle" fill="#C24135">layout audit</text>
+<text x="987" y="456" font-size="15" font-weight="500" text-anchor="middle" fill="#64748B">helper assumes x @ W^T</text>
+<text x="987" y="479" font-size="15" font-weight="500" text-anchor="middle" fill="#64748B">transpose if code uses x @ W</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">Xavier 是明确的前后向尺度折中；必须同时记录 aspect ratio、distribution、gain 与实际矩阵布局。</text>
+</svg>

@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Transformer Encoder：双向可见、逐位置表示与任务读出</title>
+<desc id="desc">Encoder 每层让有效 tokens 双向交互；输出仍是一列 token states，pooling/head 决定任务出口。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#B7791F"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">双向 self-attention</text>
+<rect x="65" y="115" width="45" height="45" rx="3" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.5"/>
+<text x="87" y="143" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="117" y="115" width="45" height="45" rx="3" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.5"/>
+<text x="139" y="143" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="169" y="115" width="45" height="45" rx="3" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.5"/>
+<text x="191" y="143" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="221" y="115" width="45" height="45" rx="3" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.5"/>
+<text x="243" y="143" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="273" y="115" width="45" height="45" rx="3" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.5"/>
+<text x="295" y="143" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="65" y="167" width="45" height="45" rx="3" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.5"/>
+<text x="87" y="195" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="117" y="167" width="45" height="45" rx="3" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.5"/>
+<text x="139" y="195" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="169" y="167" width="45" height="45" rx="3" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.5"/>
+<text x="191" y="195" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="221" y="167" width="45" height="45" rx="3" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.5"/>
+<text x="243" y="195" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="273" y="167" width="45" height="45" rx="3" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.5"/>
+<text x="295" y="195" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="65" y="219" width="45" height="45" rx="3" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.5"/>
+<text x="87" y="247" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="117" y="219" width="45" height="45" rx="3" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.5"/>
+<text x="139" y="247" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="169" y="219" width="45" height="45" rx="3" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.5"/>
+<text x="191" y="247" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="221" y="219" width="45" height="45" rx="3" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.5"/>
+<text x="243" y="247" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="273" y="219" width="45" height="45" rx="3" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.5"/>
+<text x="295" y="247" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="65" y="271" width="45" height="45" rx="3" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.5"/>
+<text x="87" y="299" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="117" y="271" width="45" height="45" rx="3" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.5"/>
+<text x="139" y="299" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="169" y="271" width="45" height="45" rx="3" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.5"/>
+<text x="191" y="299" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="221" y="271" width="45" height="45" rx="3" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.5"/>
+<text x="243" y="299" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="273" y="271" width="45" height="45" rx="3" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.5"/>
+<text x="295" y="299" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="65" y="323" width="45" height="45" rx="3" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.5"/>
+<text x="87" y="351" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="117" y="323" width="45" height="45" rx="3" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.5"/>
+<text x="139" y="351" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="169" y="323" width="45" height="45" rx="3" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.5"/>
+<text x="191" y="351" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="221" y="323" width="45" height="45" rx="3" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.5"/>
+<text x="243" y="351" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<rect x="273" y="323" width="45" height="45" rx="3" fill="#D1FAE5" stroke="#0F766E" stroke-width="1.5"/>
+<text x="295" y="351" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">✓</text>
+<text x="55" y="420" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">padding 列另屏蔽；双向不等于无位置。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">每层仍输出 T × d</text>
+<rect x="455" y="100" width="290" height="58" rx="8" fill="#F8FAFC" stroke="#2563EB" stroke-width="2"/>
+<text x="600.0" y="135.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">token + position</text>
+<line x1="600" y1="161" x2="600" y2="196" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="455" y="200" width="290" height="58" rx="8" fill="#F8FAFC" stroke="#0F766E" stroke-width="2"/>
+<text x="600.0" y="235.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">encoder block × L</text>
+<line x1="600" y1="261" x2="600" y2="296" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="455" y="300" width="290" height="58" rx="8" fill="#F8FAFC" stroke="#B7791F" stroke-width="2"/>
+<text x="600.0" y="335.0" font-size="15" font-weight="650" text-anchor="middle" fill="#B7791F">contextual states H_L</text>
+<text x="455" y="405" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">每行可依赖全部有效输入，</text>
+<text x="455" y="438" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">但行身份仍由位置/结构合同保留。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#B7791F">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">三类常见出口</text>
+<rect x="845" y="75" width="90" height="42" rx="6" fill="#F8FAFC" stroke="#2563EB" stroke-width="2"/>
+<text x="890" y="102" font-size="15" font-weight="800" text-anchor="middle" fill="#2563EB">token</text>
+<text x="950" y="102" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">tag / span / dense output</text>
+<rect x="845" y="195" width="90" height="42" rx="6" fill="#F8FAFC" stroke="#0F766E" stroke-width="2"/>
+<text x="890" y="222" font-size="15" font-weight="800" text-anchor="middle" fill="#0F766E">pool</text>
+<text x="950" y="222" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">CLS / mean / attention pool</text>
+<rect x="845" y="315" width="90" height="42" rx="6" fill="#F8FAFC" stroke="#C24135" stroke-width="2"/>
+<text x="890" y="342" font-size="15" font-weight="800" text-anchor="middle" fill="#C24135">masked</text>
+<text x="950" y="342" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">predict corrupted positions</text>
+<text x="845" y="450" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">BERT 的 MLM 是训练目标，不是 encoder 定义。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">Encoder 的架构合同是双向有效集、等长 token states 与显式任务读出。</text>
+</svg>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">随机变量、分布函数与分位数</title>
+  <desc id="desc">展示随机变量的推前映射、PMF PDF CDF的区别以及广义分位数和逆变换采样。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFF7ED"/><stop offset="1" stop-color="#F5F3FF"/></linearGradient>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#7C3AED"/></marker>
+    <style>.title{font:700 22px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#0F172A}.head{font:700 17px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#7C2D12}.txt{font:14px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#334155}.small{font:12px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#64748B}.math{font:15px Georgia,"Times New Roman",serif;fill:#0F172A}.card{fill:#fff;stroke:#CBD5E1;stroke-width:1.3}.blue{fill:#EFF6FF;stroke:#93C5FD}.violet{fill:#F5F3FF;stroke:#C4B5FD}.amber{fill:#FFFBEB;stroke:#FCD34D}.green{fill:#ECFDF5;stroke:#6EE7B7}.line{stroke:#7C3AED;stroke-width:2;fill:none;marker-end:url(#arrow)}.axis{stroke:#64748B;stroke-width:1.3;fill:none}</style>
+  </defs>
+  <rect width="1200" height="430" rx="22" fill="url(#bg)"/>
+  <text x="40" y="38" class="title">随机变量是可测映射；分布是概率质量被推到数值空间后的结果</text>
+  <rect x="28" y="58" width="368" height="342" rx="17" class="card"/><rect x="416" y="58" width="368" height="342" rx="17" class="card"/><rect x="804" y="58" width="368" height="342" rx="17" class="card"/>
+
+  <text x="50" y="88" class="head">A　X: Ω → ℝ，把 outcomes 分组</text>
+  <circle cx="87" cy="140" r="22" class="blue"/><circle cx="87" cy="204" r="22" class="blue"/><circle cx="87" cy="268" r="22" class="blue"/><circle cx="87" cy="332" r="22" class="blue"/>
+  <text x="75" y="146" class="math">HH</text><text x="75" y="210" class="math">HT</text><text x="75" y="274" class="math">TH</text><text x="75" y="338" class="math">TT</text>
+  <circle cx="307" cy="148" r="27" class="amber"/><circle cx="307" cy="225" r="27" class="amber"/><circle cx="307" cy="315" r="27" class="amber"/>
+  <text x="302" y="154" class="math">2</text><text x="302" y="231" class="math">1</text><text x="302" y="321" class="math">0</text>
+  <path d="M111 140L277 148" class="line"/><path d="M111 204L277 225" class="line"/><path d="M111 268L277 225" class="line"/><path d="M111 332L277 315" class="line"/>
+  <text x="146" y="373" class="small">X=正面个数；P_X=P∘X⁻¹</text>
+
+  <text x="438" y="88" class="head">B　质量、密度与累计不是同一对象</text>
+  <rect x="449" y="111" width="302" height="68" rx="11" class="blue"/><text x="470" y="137" class="txt">PMF　p(x)=P(X=x)</text><text x="470" y="160" class="small">可数点质量；对支持点求和为 1</text>
+  <rect x="449" y="197" width="302" height="68" rx="11" class="amber"/><text x="470" y="223" class="txt">PDF　P(X∈A)=∫ₐ f(x)dx</text><text x="470" y="246" class="small">局部密度可大于 1；单点概率通常为 0</text>
+  <rect x="449" y="283" width="302" height="68" rx="11" class="green"/><text x="470" y="309" class="txt">CDF　F(x)=P(X≤x)</text><text x="470" y="332" class="small">总存在；跳跃高度等于 atom 的质量</text>
+  <text x="455" y="382" class="small">混合分布可同时有 CDF 跳跃和连续密度部分</text>
+
+  <text x="826" y="88" class="head">C　广义分位数与逆变换</text>
+  <line x1="856" y1="322" x2="1128" y2="322" class="axis"/><line x1="856" y1="322" x2="856" y2="122" class="axis"/>
+  <path d="M856 303 C905 300 913 278 940 262 L940 225 C982 221 1004 188 1030 171 L1030 143 C1078 139 1090 126 1128 125" stroke="#7C3AED" stroke-width="3" fill="none"/>
+  <line x1="856" y1="225" x2="940" y2="225" stroke="#F59E0B" stroke-width="2" stroke-dasharray="6 5"/><line x1="940" y1="225" x2="940" y2="322" stroke="#F59E0B" stroke-width="2" stroke-dasharray="6 5"/>
+  <text x="832" y="230" class="math">u</text><text x="934" y="344" class="math">Q(u)</text><text x="1113" y="344" class="math">x</text><text x="836" y="126" class="math">F</text>
+  <rect x="836" y="352" width="304" height="38" rx="9" class="violet"/><text x="856" y="376" class="math">Q(u)=inf{x:F(x)≥u},　U∼Unif ⇒ Q(U)∼F</text>
+</svg>

@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">尺度轴、观测对象与证据量词合同</title>
+  <desc id="desc">将模型宽度、深度、形状、数据时间和计算尺度翻译为坐标、向量、算子和功能对象，再用时刻与概率量词验收。</desc>
+  <rect width="1200" height="800" fill="#FFFEFB"/>
+  <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}.h{font-size:27px;font-weight:700}.sh{font-size:18px;font-weight:700}.b{font-size:15px}.s{font-size:15px;fill:#64748B}.blue{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.teal{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.amber{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.red{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}.arr{stroke:#2563EB;stroke-width:3;fill:none}.dash{stroke:#94A3B8;stroke-width:2;stroke-dasharray:7 6;fill:none}</style>
+  <defs><marker id="ab" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#2563EB"/></marker></defs>
+  <text x="48" y="48" class="h" fill="#2563EB">一条尺度结论 = 路径 × 对象 × 时间 × 量词</text>
+
+  <text x="48" y="88" class="sh" fill="#2563EB">① 哪些轴在变？</text>
+  <rect x="48" y="108" width="280" height="92" rx="12" class="blue"/>
+  <text x="70" y="140" class="sh">Width / shape</text>
+  <text x="70" y="168" class="b">d_model · d_ff · heads · d_head</text>
+  <text x="70" y="188" class="s">同时写固定比例与 transpose 约定</text>
+  <rect x="48" y="216" width="280" height="92" rx="12" class="teal"/>
+  <text x="70" y="248" class="sh">Depth / residual</text>
+  <text x="70" y="276" class="b">L 与 residual branch scale αL</text>
+  <text x="70" y="296" class="s">L(n) 不是把 width 表机械替换</text>
+  <rect x="48" y="324" width="280" height="92" rx="12" class="amber"/>
+  <text x="70" y="356" class="sh">Data / training clock</text>
+  <text x="70" y="384" class="b">batch · seq · tokens · steps</text>
+  <text x="70" y="404" class="s">固定 step、token 与 FLOP 不等价</text>
+  <rect x="48" y="432" width="280" height="92" rx="12" class="red"/>
+  <text x="70" y="464" class="sh">Compute / system</text>
+  <text x="70" y="492" class="b">FLOPs · memory · wall time</text>
+  <text x="70" y="512" class="s">参数量不是唯一 scale axis</text>
+
+  <path d="M344 315 C380 315 390 315 420 315" class="arr" marker-end="url(#ab)"/>
+  <text x="420" y="88" class="sh" fill="#0F766E">② 哪个对象要非退化？</text>
+  <rect x="420" y="108" width="344" height="92" rx="12" class="blue"/>
+  <text x="442" y="140" class="sh">坐标 / RMS</text>
+  <text x="442" y="168" class="b">RMS(x) = ||x||₂ / √n</text>
+  <text x="442" y="188" class="s">坐标 Θ(1) 不等于向量范数 Θ(1)</text>
+  <rect x="420" y="216" width="344" height="92" rx="12" class="teal"/>
+  <text x="442" y="248" class="sh">向量 / 参数更新</text>
+  <text x="442" y="276" class="b">||Δθ|| · RMS(Δθ)/RMS(θ)</text>
+  <text x="442" y="296" class="s">参数步不等于 feature step</text>
+  <rect x="420" y="324" width="344" height="92" rx="12" class="amber"/>
+  <text x="442" y="356" class="sh">算子 / 最坏方向</text>
+  <text x="442" y="384" class="b">||W||₂ · ||ΔW||₂ · Jacobian</text>
+  <text x="442" y="404" class="s">谱控制与典型输入方差互补</text>
+  <rect x="420" y="432" width="344" height="92" rx="12" class="red"/>
+  <text x="442" y="464" class="sh">功能 / 训练结果</text>
+  <text x="442" y="492" class="b">Δh · Δlogit · Δloss · NTK drift</text>
+  <text x="442" y="512" class="s">稳定遥测不自动推出泛化</text>
+
+  <path d="M780 315 C816 315 826 315 856 315" class="arr" marker-end="url(#ab)"/>
+  <text x="856" y="88" class="sh" fill="#B76E00">③ 何时、以何种量词？</text>
+  <rect x="856" y="108" width="296" height="112" rx="12" class="blue"/>
+  <text x="878" y="140" class="sh">时间合同</text>
+  <text x="878" y="168" class="b">t = 0 · step 1 · fixed T</text>
+  <text x="878" y="192" class="b">T(n) · converged</text>
+  <text x="878" y="212" class="s">初始化结论不覆盖训练全过程</text>
+  <rect x="856" y="240" width="296" height="132" rx="12" class="teal"/>
+  <text x="878" y="272" class="sh">概率合同</text>
+  <text x="878" y="300" class="b">E[Z] · O_p(1) · high probability</text>
+  <text x="878" y="326" class="b">sup / operator worst case</text>
+  <text x="878" y="352" class="s">期望有界不排除罕见爆炸</text>
+  <rect x="856" y="392" width="296" height="132" rx="12" class="amber"/>
+  <text x="878" y="424" class="sh">非退化门</text>
+  <text x="878" y="454" class="b">0 &lt; c ≤ scale(Zn) ≤ C</text>
+  <text x="878" y="480" class="b">log M(n) slope κ ≈ 0</text>
+  <text x="878" y="506" class="s">有限窗口水平 ≠ 渐近证明</text>
+
+  <path d="M188 540 L188 584 L1004 584 L1004 540" class="dash"/>
+  <rect x="48" y="606" width="1104" height="116" rx="14" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="72" y="642" class="sh">合格声明示例</text>
+  <text x="72" y="674" class="b">固定 block / depth / optimizer；令 d_model=n、d_ff=4n，以 4 个宽度扩展。</text>
+  <text x="72" y="700" class="b">在 t∈{0,1,8} 上，activation RMS 与 feature-update RMS 对初始化和 batch 随机性保持 O_p(1)。</text>
+  <rect x="48" y="744" width="1104" height="38" rx="8" fill="#FFF1F0" stroke="#C0392B"/>
+  <text x="70" y="769" class="s">边界：模型未 NaN、参数量相同或单个均值稳定，都不能替代这条完整合同。</text>
+</svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">双阈值拒答：正确性与安全风险不是同一坐标</title><desc id="desc">五种动作决策面、risk–coverage 与组别 over-refusal。</desc>
+<rect width="1200" height="700" fill="#FBF8F1"/>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#667784"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#183044" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<line x1="48" y1="70" x2="1152" y2="70" stroke="#4F7B45" stroke-width="4"/>
+<text x="52" y="49" font-size="24" font-weight="700" fill="#183044">双阈值拒答：正确性与安全风险不是同一坐标</text>
+<text x="55" y="105" text-anchor="start" font-size="13" font-weight="700" fill="#4F7B45">A · 决策面</text>
+<rect x="70" y="140" width="450" height="290" fill="#EEF4FC" stroke="#D9D5CB"/>
+<rect x="349.0" y="140" width="171.0" height="159.5" fill="#EEF7EA" opacity=".95"/>
+<rect x="70" y="140" width="450" height="81.2" fill="#FFF0ED" opacity=".93"/>
+<line x1="349.0" y1="430" x2="349.0" y2="140" stroke="#7054A3" stroke-width="3" stroke-dasharray="7 5"/>
+<line x1="70" y1="299.5" x2="520" y2="299.5" stroke="#B7443E" stroke-width="3" stroke-dasharray="7 5"/>
+<text x="180" y="195" text-anchor="middle" font-size="12" font-weight="700" fill="#B7443E">REFUSE / SAFE-COMPLETE</text>
+<text x="190" y="350" text-anchor="middle" font-size="12" font-weight="700" fill="#7054A3">ABSTAIN / ESCALATE</text>
+<text x="430" y="310" text-anchor="middle" font-size="15" font-weight="700" fill="#4F7B45">ANSWER</text>
+<text x="295" y="458" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">correctness confidence →</text>
+<text x="42" y="285" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">safety risk ↑</text>
+<rect x="70" y="475" width="450" height="125" rx="10" fill="#FFF5E7" stroke="#C87922" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="85" y="503" text-anchor="start" font-size="15" font-weight="700" fill="#C87922">动作来自代价矩阵</text>
+<text x="85" y="527" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">answer · abstain · refuse · safe-complete · escalate</text>
+<text x="85" y="546" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">知识不足与政策禁止分开；高风险领域需更低容忍、更多人工容量。</text>
+<text x="85" y="565" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">阈值只在 validation 选，test 冻结。</text>
+<text x="600" y="105" text-anchor="start" font-size="13" font-weight="700" fill="#245AA8">B · Risk–Coverage 与群体代价</text>
+<line x1="620" y1="335" x2="1120" y2="335" stroke="#183044"/>
+<line x1="620" y1="335" x2="620" y2="150" stroke="#183044"/>
+<path d="M695.0,325.8 L795.0,320.2 L895.0,310.9 L995.0,294.3 L1095.0,270.2" fill="none" stroke="#4F7B45" stroke-width="4"/>
+<text x="1090.0" y="260.25" text-anchor="end" font-size="11" font-weight="700" fill="#4F7B45">group A</text>
+<path d="M670.0,318.4 L745.0,307.2 L845.0,292.4 L945.0,275.8 L1030.0,253.6" fill="none" stroke="#B7443E" stroke-width="4"/>
+<text x="1025.0" y="243.6" text-anchor="end" font-size="11" font-weight="700" fill="#B7443E">group B</text>
+<text x="870" y="360" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">coverage</text>
+<text x="590" y="240" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">risk</text>
+<rect x="620" y="390" width="500" height="210" rx="10" fill="#FFF0ED" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="635" y="418" text-anchor="start" font-size="15" font-weight="700" fill="#B7443E">同一总体 risk 会隐藏什么</text>
+<text x="635" y="442" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">unsafe answer rate = P(answer | harmful)</text>
+<text x="635" y="461" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">over-refusal = P(refuse | benign)</text>
+<text x="635" y="480" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">coverage_g、risk_g 与升级延迟必须逐组报告。</text>
+<text x="635" y="499" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784"></text>
+<text x="635" y="518" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">低 risk 若靠极低 coverage、对某语言集中拒答或无限人工升级获得，不能描述为“模型更可靠”。</text>
+<line x1="48" y1="650" x2="1152" y2="650" stroke="#D9D5CB"/>
+<text x="52" y="674" font-size="13" fill="#667784">分别校准 correctness 与 safety 事件；同时报告 risk、coverage、over-refusal、群体切片、人工容量和置信上界。</text>
+</svg>

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">深度泛化证据地图：从现象到部署</title>
+<desc id="desc">插值、选解、容量、表示与风险保证属于不同证据层；每条箭头都需要独立的定理、证书或干预。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">证据不可越级</text>
+<rect x="65" y="95" width="245" height="48" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="187.5" y="125.0" font-size="16" font-weight="650" text-anchor="middle" fill="#2563EB">phenomenon</text>
+<line x1="190" y1="147" x2="220" y2="175" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="95" y="183" width="245" height="48" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="217.5" y="213.0" font-size="16" font-weight="650" text-anchor="middle" fill="#0F766E">selection</text>
+<line x1="220" y1="235" x2="250" y2="263" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="125" y="271" width="245" height="48" rx="8" fill="#FFFEFB" stroke="#B7791F" stroke-width="2"/>
+<text x="247.5" y="301.0" font-size="16" font-weight="650" text-anchor="middle" fill="#B7791F">risk bound</text>
+<line x1="250" y1="323" x2="280" y2="351" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="155" y="359" width="245" height="48" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="277.5" y="389.0" font-size="16" font-weight="650" text-anchor="middle" fill="#C24135">deployment</text>
+<text x="55" y="486" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">an adjacent theorem cannot fill a missing arrow</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">机制是拼图，不是赢家赛</text>
+<rect x="455" y="110" width="125" height="72" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="517.5" y="152.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">interpolation</text>
+<rect x="620" y="110" width="125" height="72" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="682.5" y="152.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">implicit bias</text>
+<rect x="455" y="230" width="125" height="72" rx="8" fill="#FFFEFB" stroke="#B7791F" stroke-width="2"/>
+<text x="517.5" y="272.0" font-size="15" font-weight="650" text-anchor="middle" fill="#B7791F">norm/margin</text>
+<rect x="620" y="230" width="125" height="72" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="682.5" y="272.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">data/features</text>
+<line x1="580" y1="146" x2="615" y2="146" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<line x1="517" y1="187" x2="517" y2="222" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<line x1="682" y1="187" x2="682" y2="222" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<line x1="580" y1="266" x2="615" y2="266" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<text x="445" y="455" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">NTK / mean-field specify regimes</text>
+<text x="445" y="493" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">none alone proves OOD safety</text>
+<rect x="492" y="350" width="220" height="56" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="602.0" y="384.0" font-size="17" font-weight="650" text-anchor="middle" fill="#C24135">population risk</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">一个指标的五项验收</text>
+<circle cx="860" cy="110" r="13" fill="#FFFEFB" stroke="#2563EB" stroke-width="2.5"/>
+<text x="888" y="116" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">valid?</text>
+<circle cx="860" cy="186" r="13" fill="#FFFEFB" stroke="#0F766E" stroke-width="2.5"/>
+<text x="888" y="192" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">nonvacuous?</text>
+<circle cx="860" cy="262" r="13" fill="#FFFEFB" stroke="#B7791F" stroke-width="2.5"/>
+<text x="888" y="268" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">right trend?</text>
+<circle cx="860" cy="338" r="13" fill="#FFFEFB" stroke="#2563EB" stroke-width="2.5"/>
+<text x="888" y="344" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">invariant?</text>
+<circle cx="860" cy="414" r="13" fill="#FFFEFB" stroke="#C24135" stroke-width="2.5"/>
+<text x="888" y="420" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">intervention?</text>
+<rect x="840" y="475" width="300" height="45" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="990.0" y="503.5" font-size="16" font-weight="650" text-anchor="middle" fill="#C24135">state the falsifier</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">好的泛化理论不仅给出一个数，还说明对象、量词、适用域以及什么结果会推翻它。</text>
+</svg>

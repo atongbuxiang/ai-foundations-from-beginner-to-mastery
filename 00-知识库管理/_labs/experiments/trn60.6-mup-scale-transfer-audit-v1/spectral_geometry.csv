@@ -1,0 +1,9 @@
+matrix,width,entry_rms,spectral_norm_exact,power_iteration_estimate,effective_rank
+rank_one_aligned,16,0.0625,1.0,1.0,1.0
+scaled_hadamard,16,0.0625,0.25,0.25,16.0
+rank_one_aligned,64,0.015625,1.0,1.0,1.0
+scaled_hadamard,64,0.015625,0.125,0.125,64.0
+rank_one_aligned,256,0.00390625,1.0,1.0,1.0
+scaled_hadamard,256,0.00390625,0.0625,0.0625,256.0
+rank_one_aligned,1024,0.0009765625,1.0,1.0,1.0
+scaled_hadamard,1024,0.0009765625,0.03125,0.03125,1024.0

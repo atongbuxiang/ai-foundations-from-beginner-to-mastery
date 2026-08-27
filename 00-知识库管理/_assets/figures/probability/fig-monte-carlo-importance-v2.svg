@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Monte Carlo 的平均、重要性权重与方差设计</title>
+<desc id="desc">简单 Monte Carlo 的误差由被积函数方差决定；重要性采样要求支持覆盖并诊断权重集中；control variate 通过相关辅助量削减残差方差。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">样本平均：误差按平方根缩小</text>
+<rect x="48" y="115" width="48" height="44" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="72.0" y="143.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">f1</text>
+<line x1="72" y1="161" x2="200" y2="220" stroke="#D7DEE8" stroke-width="2"/>
+<rect x="114" y="115" width="48" height="44" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="138.0" y="143.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">f2</text>
+<line x1="138" y1="161" x2="200" y2="220" stroke="#D7DEE8" stroke-width="2"/>
+<rect x="180" y="115" width="48" height="44" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="204.0" y="143.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">f3</text>
+<line x1="204" y1="161" x2="200" y2="220" stroke="#D7DEE8" stroke-width="2"/>
+<rect x="246" y="115" width="48" height="44" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="270.0" y="143.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">...</text>
+<line x1="270" y1="161" x2="200" y2="220" stroke="#D7DEE8" stroke-width="2"/>
+<rect x="312" y="115" width="48" height="44" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="336.0" y="143.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">fn</text>
+<line x1="336" y1="161" x2="200" y2="220" stroke="#D7DEE8" stroke-width="2"/>
+<rect x="92" y="222" width="216" height="62" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="200.0" y="259.0" font-size="16" font-weight="650" text-anchor="middle" fill="#0F766E">mu_hat = (1/n) sum fi</text>
+<text x="45" y="340" font-size="17" font-weight="650" text-anchor="start" fill="#1F2937" class="math">E[mu_hat]=mu</text>
+<text x="45" y="378" font-size="17" font-weight="650" text-anchor="start" fill="#1F2937" class="math">SE(mu_hat)=sigma_f/sqrt(n)</text>
+<text x="45" y="422" font-size="17" font-weight="650" text-anchor="start" fill="#C24135">误差减半  -&gt;  样本预算约乘 4</text>
+<text x="45" y="460" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">前提：iid 与有限二阶矩；一次运行仍会波动。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">重要性采样：覆盖比 ESS 更先</text>
+<line x1="440" y1="345" x2="770" y2="345" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="455" y1="365" x2="455" y2="105" stroke="#D7DEE8" stroke-width="2"/>
+<path d="M455.0 303.8L458.1 300.3L461.1 296.7L464.1 292.8L467.2 288.8L470.2 284.6L473.3 280.2L476.4 275.7L479.4 270.9L482.4 266.0L485.5 261.0L488.6 255.8L491.6 250.5L494.6 245.1L497.7 239.6L500.8 234.1L503.8 228.4L506.9 222.8L509.9 217.1L513.0 211.5L516.0 205.9L519.0 200.3L522.1 194.9L525.1 189.6L528.2 184.4L531.2 179.4L534.3 174.5L537.4 169.9L540.4 165.6L543.5 161.5L546.5 157.7L549.5 154.3L552.6 151.1L555.6 148.4L558.7 146.0L561.8 144.0L564.8 142.4L567.9 141.2L570.9 140.4L574.0 140.0L577.0 140.1L580.0 140.6L583.1 141.5L586.1 142.8L589.2 144.6L592.2 146.7L595.3 149.2L598.4 152.1L601.4 155.3L604.5 158.9L607.5 162.8L610.5 166.9L613.6 171.3L616.6 176.0L619.7 180.9L622.8 186.0L625.8 191.2L628.9 196.6L631.9 202.1L635.0 207.6L638.0 213.2L641.0 218.9L644.1 224.6L647.1 230.2L650.2 235.8L653.2 241.4L656.3 246.8L659.4 252.2L662.4 257.5L665.5 262.6L668.5 267.6L671.5 272.4L674.6 277.1L677.6 281.6L680.7 285.9L683.8 290.1L686.8 294.1L689.9 297.8L692.9 301.4L696.0 304.8L699.0 308.0L702.0 311.0L705.1 313.9L708.1 316.5L711.2 319.0L714.2 321.4L717.3 323.5L720.4 325.5L723.4 327.4L726.5 329.1L729.5 330.6L732.5 332.1L735.6 333.4L738.6 334.6L741.7 335.7L744.8 336.7L747.8 337.6L750.9 338.5L753.9 339.2L757.0 339.9L760.0 340.5" fill="none" stroke="#2563EB" stroke-width="3"/>
+<path d="M455.0 344.9L458.1 344.8L461.1 344.8L464.1 344.7L467.2 344.6L470.2 344.6L473.3 344.4L476.4 344.3L479.4 344.1L482.4 343.9L485.5 343.6L488.6 343.3L491.6 343.0L494.6 342.5L497.7 342.0L500.8 341.4L503.8 340.6L506.9 339.7L509.9 338.7L513.0 337.6L516.0 336.2L519.0 334.7L522.1 332.9L525.1 330.9L528.2 328.7L531.2 326.2L534.3 323.4L537.4 320.2L540.4 316.8L543.5 313.1L546.5 309.0L549.5 304.5L552.6 299.8L555.6 294.7L558.7 289.3L561.8 283.6L564.8 277.6L567.9 271.3L570.9 264.9L574.0 258.3L577.0 251.6L580.0 244.8L583.1 238.0L586.1 231.3L589.2 224.8L592.2 218.4L595.3 212.3L598.4 206.5L601.4 201.2L604.5 196.3L607.5 192.0L610.5 188.3L613.6 185.2L616.6 182.8L619.7 181.1L622.8 180.2L625.8 180.0L628.9 180.6L631.9 181.9L635.0 184.0L638.0 186.7L641.0 190.2L644.1 194.2L647.1 198.8L650.2 203.9L653.2 209.5L656.3 215.5L659.4 221.7L662.4 228.2L665.5 234.8L668.5 241.6L671.5 248.4L674.6 255.1L677.6 261.8L680.7 268.3L683.8 274.6L686.8 280.7L689.9 286.6L692.9 292.1L696.0 297.4L699.0 302.3L702.0 306.9L705.1 311.2L708.1 315.1L711.2 318.7L714.2 321.9L717.3 324.9L720.4 327.5L723.4 329.9L726.5 332.0L729.5 333.9L732.5 335.5L735.6 337.0L738.6 338.2L741.7 339.3L744.8 340.2L747.8 341.0L750.9 341.7L753.9 342.3L757.0 342.8L760.0 343.2" fill="none" stroke="#0F766E" stroke-width="3" stroke-dasharray="8 5"/>
+<text x="535" y="145" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">target p</text>
+<text x="650" y="215" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">proposal q</text>
+<circle cx="490" cy="318" r="6" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<text x="500" y="312" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">q 很小 -&gt; w=p/q 很大</text>
+<text x="430" y="405" font-size="17" font-weight="650" text-anchor="start" fill="#1F2937" class="math">mu = E_q[w f]</text>
+<text x="430" y="440" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937" class="math">ESS = (sum w)^2 / sum w^2</text>
+<text x="430" y="475" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">ESS 只看权重集中，不是误差证书。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Control variate：削减残差方差</text>
+<line x1="845" y1="370" x2="1145" y2="370" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="870" y1="400" x2="870" y2="105" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="882" y1="340" x2="1130" y2="160" stroke="#0F766E" stroke-width="3"/>
+<line x1="890" y1="330" x2="890" y2="334.16" stroke="#D7DEE8" stroke-width="1.5" stroke-dasharray="4 4"/>
+<circle cx="890" cy="330" r="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<line x1="925" y1="315" x2="925" y2="308.61" stroke="#D7DEE8" stroke-width="1.5" stroke-dasharray="4 4"/>
+<circle cx="925" cy="315" r="5" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<line x1="955" y1="280" x2="955" y2="286.71" stroke="#D7DEE8" stroke-width="1.5" stroke-dasharray="4 4"/>
+<circle cx="955" cy="280" r="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<line x1="990" y1="275" x2="990" y2="261.15999999999997" stroke="#D7DEE8" stroke-width="1.5" stroke-dasharray="4 4"/>
+<circle cx="990" cy="275" r="5" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<line x1="1020" y1="235" x2="1020" y2="239.26" stroke="#D7DEE8" stroke-width="1.5" stroke-dasharray="4 4"/>
+<circle cx="1020" cy="235" r="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<line x1="1060" y1="225" x2="1060" y2="210.06" stroke="#D7DEE8" stroke-width="1.5" stroke-dasharray="4 4"/>
+<circle cx="1060" cy="225" r="5" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<line x1="1095" y1="185" x2="1095" y2="184.51" stroke="#D7DEE8" stroke-width="1.5" stroke-dasharray="4 4"/>
+<circle cx="1095" cy="185" r="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<line x1="1120" y1="175" x2="1120" y2="166.26" stroke="#D7DEE8" stroke-width="1.5" stroke-dasharray="4 4"/>
+<circle cx="1120" cy="175" r="5" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="855" y="126" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">f(X)</text>
+<text x="1128" y="395" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">h(X)</text>
+<text x="830" y="430" font-size="17" font-weight="650" text-anchor="start" fill="#1F2937" class="math">f_cv = f - beta(h-Eh)</text>
+<text x="830" y="466" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937" class="math">beta* = Cov(f,h)/Var(h)</text>
+<text x="830" y="500" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">减掉可预测部分；代价是 Eh 必须已知。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">Monte Carlo 可信度来自误差预算、支持与尾部诊断，而不是只报告样本数。</text>
+</svg>

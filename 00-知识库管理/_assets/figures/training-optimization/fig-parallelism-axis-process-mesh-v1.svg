@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Parallelism axes and process mesh</title>
+  <desc id="desc">A process mesh separates data, tensor, pipeline, sequence and expert parallel axes, with tensor-shape cuts and their required collectives.</desc>
+  <rect width="1200" height="800" fill="#FFFEFB"/>
+  <text x="60" y="58" font-family="Arial,sans-serif" font-size="28" font-weight="700" fill="#172033">Parallelism names are incomplete until the cut tensor and collective are declared</text>
+  <text x="60" y="91" font-family="Arial,sans-serif" font-size="17" fill="#52606D">A hybrid job is a Cartesian process mesh; every axis owns a shape transformation, communication primitive and synchronization point.</text>
+  <rect x="45" y="125" width="510" height="590" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+  <rect x="580" y="125" width="575" height="590" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+  <text x="70" y="166" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172033">A  Three-dimensional process mesh</text>
+  <g font-family="Arial,sans-serif">
+    <g fill="#EAF2FF" stroke="#2563EB" stroke-width="2">
+      <rect x="120" y="245" width="95" height="70" rx="10"/><rect x="235" y="245" width="95" height="70" rx="10"/><rect x="350" y="245" width="95" height="70" rx="10"/>
+      <rect x="120" y="345" width="95" height="70" rx="10"/><rect x="235" y="345" width="95" height="70" rx="10"/><rect x="350" y="345" width="95" height="70" rx="10"/>
+      <rect x="120" y="445" width="95" height="70" rx="10"/><rect x="235" y="445" width="95" height="70" rx="10"/><rect x="350" y="445" width="95" height="70" rx="10"/>
+    </g>
+    <g text-anchor="middle" font-size="16" font-weight="700" fill="#172033"><text x="167" y="287">d0,t0,p0</text><text x="282" y="287">d0,t1,p0</text><text x="397" y="287">d0,t2,p0</text><text x="167" y="387">d1,t0,p0</text><text x="282" y="387">d1,t1,p0</text><text x="397" y="387">d1,t2,p0</text><text x="167" y="487">d2,t0,p0</text><text x="282" y="487">d2,t1,p0</text><text x="397" y="487">d2,t2,p0</text></g>
+    <path d="M120 550 H445" stroke="#2563EB" stroke-width="5"/><text x="282" y="582" text-anchor="middle" font-size="17" font-weight="700" fill="#2563EB">tensor axis t: split hidden / heads</text>
+    <path d="M82 245 V515" stroke="#0F766E" stroke-width="5"/><text x="63" y="380" transform="rotate(-90 63 380)" text-anchor="middle" font-size="17" font-weight="700" fill="#0F766E">data axis d: split samples</text>
+    <rect x="115" y="610" width="335" height="70" rx="10" fill="#FFF3D6"/><text x="282" y="638" text-anchor="middle" font-size="16" font-weight="700" fill="#B76E00">pipeline axis p</text><text x="282" y="663" text-anchor="middle" font-size="15" fill="#52606D">another stage plane lies behind this one</text>
+  </g>
+  <text x="605" y="166" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172033">B  Five cuts, five communication contracts</text>
+  <g font-family="Arial,sans-serif">
+    <rect x="620" y="205" width="500" height="78" rx="12" fill="#E8F6F3"/><text x="645" y="235" font-size="18" font-weight="700" fill="#0F766E">Data</text><text x="645" y="261" font-size="15" fill="#52606D">samples B/Pd → gradient All-Reduce or Reduce-Scatter</text>
+    <rect x="620" y="298" width="500" height="78" rx="12" fill="#EAF2FF"/><text x="645" y="328" font-size="18" font-weight="700" fill="#2563EB">Tensor</text><text x="645" y="354" font-size="15" fill="#52606D">features / heads → All-Gather, All-Reduce or Reduce-Scatter</text>
+    <rect x="620" y="391" width="500" height="78" rx="12" fill="#FFF3D6"/><text x="645" y="421" font-size="18" font-weight="700" fill="#B76E00">Pipeline</text><text x="645" y="447" font-size="15" fill="#52606D">layer stages → point-to-point activations; bubble depends on schedule</text>
+    <rect x="620" y="484" width="500" height="78" rx="12" fill="#F1F3F5"/><text x="645" y="514" font-size="18" font-weight="700" fill="#172033">Sequence / context</text><text x="645" y="540" font-size="15" fill="#52606D">tokens → gather/scatter or attention-specific exchange</text>
+    <rect x="620" y="577" width="500" height="78" rx="12" fill="#FFF7F4"/><text x="645" y="607" font-size="18" font-weight="700" fill="#C0392B">Expert</text><text x="645" y="633" font-size="15" fill="#52606D">routed tokens → All-to-All plus capacity and load-balance policy</text>
+  </g>
+  <text x="60" y="760" font-family="Arial,sans-serif" font-size="15" fill="#52606D">Do not multiply advertised degrees blindly: verify mesh dimensions, tensor layouts, replicated axes and whether each collective stays inside its intended group.</text>
+</svg>

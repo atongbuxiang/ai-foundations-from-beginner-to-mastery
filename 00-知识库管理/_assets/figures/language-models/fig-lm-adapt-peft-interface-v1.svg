@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">PEFT 方法的本质差异：改权重、插模块、加状态，还是缩放激活</title><desc id="desc">以 Transformer block 为中心标出 Adapter、Prompt、Prefix、IA3 与 LoRA 的注入位置和服务成本。</desc>
+<rect width="1200" height="700" fill="#FFFEFB"/>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#64748B"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#17324D" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<text x="55" y="55" font-size="25" font-weight="700" fill="#2563EB">PEFT 方法的本质差异：改权重、插模块、加状态，还是缩放激活</text>
+<text x="455" y="100" font-size="18" font-weight="700" fill="#17324D">Frozen Transformer block</text>
+<rect x="430" y="125" width="340" height="85" rx="12" fill="#FFFFFF" stroke="#2563EB" stroke-width="2" filter="url(#shadow)"/>
+<text x="446" y="154" font-size="16" font-weight="700" fill="#2563EB">Attention</text>
+<text x="446" y="181" font-size="13" fill="#64748B">frozen base computation</text>
+<line x1="600" y1="210" x2="600" y2="265" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="430" y="275" width="340" height="85" rx="12" fill="#FFFFFF" stroke="#7C3AED" stroke-width="2" filter="url(#shadow)"/>
+<text x="446" y="304" font-size="16" font-weight="700" fill="#7C3AED">FFN</text>
+<text x="446" y="331" font-size="13" fill="#64748B">frozen base computation</text>
+<line x1="600" y1="360" x2="600" y2="415" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="430" y="425" width="340" height="85" rx="12" fill="#FFFFFF" stroke="#0F766E" stroke-width="2" filter="url(#shadow)"/>
+<text x="446" y="454" font-size="16" font-weight="700" fill="#0F766E">Residual + output</text>
+<text x="446" y="481" font-size="13" fill="#64748B">frozen base computation</text>
+<rect x="55" y="120" width="315" height="105" rx="12" fill="#FFFFFF" stroke="#2563EB" stroke-width="2" filter="url(#shadow)"/>
+<text x="71" y="149" font-size="16" font-weight="700" fill="#2563EB">Prompt tuning</text>
+<text x="71" y="176" font-size="13" fill="#64748B">learn input embeddings</text>
+<text x="71" y="198" font-size="13" fill="#64748B">context + prefill cost</text>
+<line x1="370" y1="172" x2="430" y2="155" stroke="#2563EB" stroke-width="2.5" marker-end="url(#arrow)" stroke-dasharray="6 4"/>
+<rect x="55" y="275" width="315" height="105" rx="12" fill="#FFFFFF" stroke="#7C3AED" stroke-width="2" filter="url(#shadow)"/>
+<text x="71" y="304" font-size="16" font-weight="700" fill="#7C3AED">Prefix tuning</text>
+<text x="71" y="331" font-size="13" fill="#64748B">learn per-layer K/V prefix</text>
+<text x="71" y="353" font-size="13" fill="#64748B">KV + context cost</text>
+<line x1="370" y1="327" x2="430" y2="190" stroke="#7C3AED" stroke-width="2.5" marker-end="url(#arrow)" stroke-dasharray="6 4"/>
+<rect x="55" y="455" width="315" height="105" rx="12" fill="#FFFFFF" stroke="#D97706" stroke-width="2" filter="url(#shadow)"/>
+<text x="71" y="484" font-size="16" font-weight="700" fill="#D97706">Adapter</text>
+<text x="71" y="511" font-size="13" fill="#64748B">bottleneck residual module</text>
+<text x="71" y="533" font-size="13" fill="#64748B">extra layer FLOPs</text>
+<line x1="370" y1="507" x2="430" y2="455" stroke="#D97706" stroke-width="2.5" marker-end="url(#arrow)" stroke-dasharray="6 4"/>
+<rect x="825" y="120" width="315" height="105" rx="12" fill="#FFFFFF" stroke="#0F766E" stroke-width="2" filter="url(#shadow)"/>
+<text x="841" y="149" font-size="16" font-weight="700" fill="#0F766E">LoRA</text>
+<text x="841" y="176" font-size="13" fill="#64748B">low-rank ΔW on chosen linear maps</text>
+<text x="841" y="198" font-size="13" fill="#64748B">merge may remove latency</text>
+<line x1="825" y1="172" x2="770" y2="165" stroke="#0F766E" stroke-width="2.5" marker-end="url(#arrow)" stroke-dasharray="6 4"/>
+<rect x="825" y="310" width="315" height="105" rx="12" fill="#FFFFFF" stroke="#C24135" stroke-width="2" filter="url(#shadow)"/>
+<text x="841" y="339" font-size="16" font-weight="700" fill="#C24135">IA3</text>
+<text x="841" y="366" font-size="13" fill="#64748B">learn vectors that scale K/V/FFN</text>
+<text x="841" y="388" font-size="13" fill="#64748B">channelwise gates</text>
+<line x1="825" y1="362" x2="770" y2="320" stroke="#C24135" stroke-width="2.5" marker-end="url(#arrow)" stroke-dasharray="6 4"/>
+<rect x="385" y="560" width="430" height="72" rx="10" fill="#F8FAFC" stroke="#D7DEE8"/>
+<text x="600" y="586" text-anchor="middle" font-size="14" font-weight="700" fill="#17324D">比较轴：trainable params · saved state · extra FLOPs</text>
+<text x="600" y="611" text-anchor="middle" font-size="14" fill="#64748B">context/KV · mergeability · task batching · quality frontier</text>
+<text x="55" y="670" font-size="14" fill="#64748B">所有 PEFT 都冻结大部分基座，但它们修改的计算图位置不同；参数少不能直接推出训练快、推理快或效果相同。</text>
+</svg>

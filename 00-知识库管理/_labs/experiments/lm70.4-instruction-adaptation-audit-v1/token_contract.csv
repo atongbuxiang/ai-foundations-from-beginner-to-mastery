@@ -1,0 +1,6 @@
+position,input,label,response_mask
+0,U,q,0
+1,q,A,0
+2,A,a,1
+3,a,b,1
+4,b,EOS,1

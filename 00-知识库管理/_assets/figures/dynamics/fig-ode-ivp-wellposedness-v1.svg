@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">ODE 初值问题的适定性、反例与 Neural ODE 层级</title>
+  <desc id="desc">三面板机制图。第一面板把初值问题改写为轨迹空间上的 Picard 不动点；第二面板分开连续性、局部 Lipschitz 与全局延拓条件，并展示不唯一和有限时爆破解；第三面板展示唯一流的轨迹不交叉，以及数值求解器只产生离散近似。</desc>
+  <defs>
+    <marker id="blue-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#2563eb"/></marker>
+    <marker id="green-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#059669"/></marker>
+    <style>
+      .panel{fill:#fff;stroke:#cbd5e1;stroke-width:1.5}.title{font:700 18px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#0f172a}.sub{font:13px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#475569}.body{font:14px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#334155}.small{font:12px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#64748b}.tiny{font:11px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#64748b}.math{font:italic 14px Georgia,"Times New Roman",serif;fill:#334155}.axis{stroke:#94a3b8;stroke-width:1.4}.guide{stroke:#cbd5e1;stroke-width:1.2;stroke-dasharray:5 5}
+    </style>
+  </defs>
+  <rect width="1200" height="430" fill="#f8fafc"/>
+  <rect class="panel" x="20" y="20" width="370" height="390" rx="14"/>
+  <rect class="panel" x="415" y="20" width="370" height="390" rx="14"/>
+  <rect class="panel" x="810" y="20" width="370" height="390" rx="14"/>
+
+  <text class="title" x="40" y="53">A · ODE 变成轨迹空间的不动点</text>
+  <text class="sub" x="40" y="78">微分式 → Volterra 积分式 → Picard contraction</text>
+  <rect x="48" y="105" width="132" height="84" rx="10" fill="#eff6ff" stroke="#93c5fd"/>
+  <text class="math" x="114" y="136" text-anchor="middle">ẏ = f(t,y)</text>
+  <text class="math" x="114" y="163" text-anchor="middle">y(t₀)=y₀</text>
+  <line x1="180" y1="147" x2="220" y2="147" stroke="#2563eb" stroke-width="2.5" marker-end="url(#blue-arrow)"/>
+  <rect x="230" y="105" width="132" height="84" rx="10" fill="#ecfdf5" stroke="#6ee7b7"/>
+  <text class="math" x="296" y="134" text-anchor="middle">(Tφ)(t)=y₀+</text>
+  <text class="math" x="296" y="158" text-anchor="middle">∫ f(s,φ(s))ds</text>
+  <text class="tiny" x="296" y="178" text-anchor="middle">fixed point Tφ=φ</text>
+  <rect x="49" y="218" width="313" height="103" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <path d="M68 290 C102 286 117 252 151 255 C183 258 199 300 235 289 C270 278 298 238 343 246" fill="none" stroke="#2563eb" stroke-width="3"/>
+  <path d="M68 302 C104 299 120 272 153 274 C186 277 205 308 238 301 C273 293 300 259 343 266" fill="none" stroke="#94a3b8" stroke-width="1.8" stroke-dasharray="5 4"/>
+  <circle cx="68" cy="290" r="5" fill="#7c3aed"/>
+  <text class="tiny" x="62" y="342">sup-norm trajectory space</text>
+  <text class="tiny" x="222" y="342">q=Lh&lt;1 ⇒ unique fixed point</text>
+  <rect x="48" y="360" width="314" height="34" rx="8" fill="#fff7ed" stroke="#fed7aa"/>
+  <text class="small" x="205" y="382" text-anchor="middle">Mh≤b 保持在盒内；Lh&lt;1 负责压缩</text>
+
+  <text class="title" x="435" y="53">B · 三个结论需要三层条件</text>
+  <text class="sub" x="435" y="78">existence、uniqueness、global continuation 不可混写</text>
+  <rect x="442" y="107" width="100" height="62" rx="10" fill="#eff6ff" stroke="#93c5fd"/>
+  <text class="body" x="492" y="134" text-anchor="middle">f continuous</text>
+  <text class="small" x="492" y="154" text-anchor="middle">local existence</text>
+  <line x1="542" y1="138" x2="573" y2="138" stroke="#2563eb" stroke-width="2.2" marker-end="url(#blue-arrow)"/>
+  <rect x="581" y="107" width="100" height="62" rx="10" fill="#ecfdf5" stroke="#6ee7b7"/>
+  <text class="body" x="631" y="132" text-anchor="middle">local Lipschitz</text>
+  <text class="small" x="631" y="154" text-anchor="middle">+ uniqueness</text>
+  <line x1="681" y1="138" x2="712" y2="138" stroke="#059669" stroke-width="2.2" marker-end="url(#green-arrow)"/>
+  <rect x="720" y="107" width="48" height="62" rx="10" fill="#f0fdf4" stroke="#86efac"/>
+  <text class="small" x="744" y="131" text-anchor="middle">growth</text>
+  <text class="small" x="744" y="149" text-anchor="middle">bound</text>
+  <text class="tiny" x="744" y="163" text-anchor="middle">global</text>
+
+  <line class="axis" x1="453" y1="318" x2="596" y2="318"/>
+  <line class="axis" x1="453" y1="201" x2="453" y2="318"/>
+  <path d="M455 318 L501 318 C522 318 528 283 548 251 C563 227 580 220 592 216" fill="none" stroke="#d97706" stroke-width="3"/>
+  <path d="M455 318 L518 318 C538 318 543 290 558 263 C571 240 584 231 592 227" fill="none" stroke="#d97706" stroke-width="2" stroke-dasharray="5 4"/>
+  <text class="small" x="522" y="347" text-anchor="middle">y′=√|y|：可等待任意 c</text>
+  <text class="tiny" x="522" y="368" text-anchor="middle">continuous，但不 unique</text>
+
+  <line class="axis" x1="625" y1="318" x2="758" y2="318"/>
+  <line class="axis" x1="625" y1="201" x2="625" y2="318"/>
+  <line class="guide" x1="722" y1="201" x2="722" y2="318"/>
+  <path d="M628 296 C666 289 692 267 705 231 C714 207 719 175 721 143" fill="none" stroke="#dc2626" stroke-width="3"/>
+  <text class="small" x="691" y="347" text-anchor="middle">y′=y²：t=1 爆破</text>
+  <text class="tiny" x="691" y="368" text-anchor="middle">C¹且 local unique，仍非 global</text>
+
+  <text class="title" x="830" y="53">C · exact flow 与 solver 不是同一层</text>
+  <text class="sub" x="830" y="78">unique trajectories不交叉；数值点只近似连续曲线</text>
+  <line class="axis" x1="848" y1="310" x2="1144" y2="310"/>
+  <line class="axis" x1="848" y1="108" x2="848" y2="310"/>
+  <path d="M858 278 C914 268 938 219 985 203 C1034 186 1071 198 1135 150" fill="none" stroke="#2563eb" stroke-width="3"/>
+  <path d="M858 146 C914 153 938 172 985 170 C1034 168 1071 146 1135 112" fill="none" stroke="#059669" stroke-width="3"/>
+  <circle cx="858" cy="278" r="5" fill="#2563eb"/>
+  <circle cx="858" cy="146" r="5" fill="#059669"/>
+  <circle cx="898" cy="257" r="4" fill="#7c3aed"/>
+  <circle cx="941" cy="220" r="4" fill="#7c3aed"/>
+  <circle cx="987" cy="204" r="4" fill="#7c3aed"/>
+  <circle cx="1040" cy="189" r="4" fill="#7c3aed"/>
+  <circle cx="1090" cy="174" r="4" fill="#7c3aed"/>
+  <line x1="941" y1="220" x2="941" y2="232" stroke="#dc2626" stroke-width="1.4"/>
+  <text class="tiny" x="948" y="239">solver error</text>
+  <rect x="838" y="334" width="318" height="58" rx="10" fill="#eef2ff" stroke="#c7d2fe"/>
+  <text class="body" x="997" y="357" text-anchor="middle">fθ → exact flow Φ(t,s) → computed states</text>
+  <text class="small" x="997" y="379" text-anchor="middle">existence ≠ solver accuracy ≠ predictive validity</text>
+</svg>

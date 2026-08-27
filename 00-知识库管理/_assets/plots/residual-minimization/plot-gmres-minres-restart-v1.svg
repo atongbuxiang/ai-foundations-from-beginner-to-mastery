@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="610" viewBox="0 0 1440 610" role="img" aria-labelledby="title desc">
+<title id="title">GMRES, MINRES, restart and residual minimization</title>
+<desc id="desc">Three panels show full and restarted GMRES on a nonnormal matrix, MINRES succeeding where CG breaks down on a symmetric indefinite system, and restart memory versus residual tradeoffs.</desc>
+<style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:13px;fill:#172033}.title{font-size:23px;font-weight:600}.panel{font-size:16px;font-weight:600}.axis{font-size:14px}.frame{fill:#fbfcfe;stroke:#7b879a}.grid{stroke:#dbe1e8}.note{font-size:12px;fill:#445067}.legend{font-size:12px}</style>
+<rect width="1440" height="610" fill="#ffffff"/>
+<text x="720" y="34" text-anchor="middle" class="title">残差最小化：结构决定方法，重启决定记忆与停滞</text>
+<text x="75" y="67" class="panel">A  非正规 Grcar：完整与重启 GMRES</text>
+<text x="555" y="67" class="panel">B  对称不定：CG breakdown，MINRES 仍合法</text>
+<text x="1035" y="67" class="panel">C  固定 120 matvec 的重启权衡</text>
+<rect x="75" y="88" width="330" height="330" class="frame"/>
+<line x1="75.00" y1="88" x2="75.00" y2="418" class="grid"/>
+<text x="75.00" y="438" text-anchor="middle">0</text>
+<line x1="157.50" y1="88" x2="157.50" y2="418" class="grid"/>
+<text x="157.50" y="438" text-anchor="middle">30</text>
+<line x1="240.00" y1="88" x2="240.00" y2="418" class="grid"/>
+<text x="240.00" y="438" text-anchor="middle">60</text>
+<line x1="322.50" y1="88" x2="322.50" y2="418" class="grid"/>
+<text x="322.50" y="438" text-anchor="middle">90</text>
+<line x1="405.00" y1="88" x2="405.00" y2="418" class="grid"/>
+<text x="405.00" y="438" text-anchor="middle">120</text>
+<line x1="75" y1="418.00" x2="405" y2="418.00" class="grid"/>
+<text x="66" y="422.00" text-anchor="end">10⁻¹⁴</text>
+<line x1="75" y1="323.71" x2="405" y2="323.71" class="grid"/>
+<text x="66" y="327.71" text-anchor="end">10⁻¹⁰</text>
+<line x1="75" y1="229.43" x2="405" y2="229.43" class="grid"/>
+<text x="66" y="233.43" text-anchor="end">10⁻⁶</text>
+<line x1="75" y1="135.14" x2="405" y2="135.14" class="grid"/>
+<text x="66" y="139.14" text-anchor="end">10⁻²</text>
+<line x1="75" y1="88.00" x2="405" y2="88.00" class="grid"/>
+<text x="66" y="92.00" text-anchor="end">1</text>
+<text x="240.0" y="463" text-anchor="middle" class="axis">matvec 次数</text>
+<text x="20" y="253.0" text-anchor="middle" class="axis" transform="rotate(-90 20 253.0)">真相对残差</text>
+<polyline points="75.00,88.00 77.75,91.12 80.50,101.42 83.25,101.67 86.00,105.61 88.75,108.23 91.50,110.98 94.25,112.80 97.00,113.96 99.75,115.06 102.50,116.17 105.25,117.17 108.00,118.61 110.75,119.66 113.50,120.48 116.25,122.52 119.00,123.59 121.75,125.16 124.50,126.89 127.25,129.30 130.00,130.78 132.75,131.07 135.50,131.91 138.25,134.43 141.00,137.33 143.75,140.56 146.50,144.36 149.25,148.85 152.00,154.11 154.75,160.24 157.50,167.25 160.25,174.99 163.00,183.55 165.75,191.54 168.50,201.83 171.25,208.69 174.00,224.64 176.75,230.45 179.50,256.59 182.25,262.46 185.00,418.00" fill="none" stroke="#248a57" stroke-width="2.5"/>
+<path d="M75.00,83.80 L79.20,88.00 L75.00,92.20 L70.80,88.00Z" fill="#248a57"/>
+<path d="M88.75,104.03 L92.95,108.23 L88.75,112.43 L84.55,108.23Z" fill="#248a57"/>
+<path d="M102.50,111.97 L106.70,116.17 L102.50,120.37 L98.30,116.17Z" fill="#248a57"/>
+<path d="M116.25,118.32 L120.45,122.52 L116.25,126.72 L112.05,122.52Z" fill="#248a57"/>
+<path d="M130.00,126.58 L134.20,130.78 L130.00,134.98 L125.80,130.78Z" fill="#248a57"/>
+<path d="M143.75,136.36 L147.95,140.56 L143.75,144.76 L139.55,140.56Z" fill="#248a57"/>
+<path d="M157.50,163.05 L161.70,167.25 L157.50,171.45 L153.30,167.25Z" fill="#248a57"/>
+<path d="M171.25,204.49 L175.45,208.69 L171.25,212.89 L167.05,208.69Z" fill="#248a57"/>
+<path d="M185.00,413.80 L189.20,418.00 L185.00,422.20 L180.80,418.00Z" fill="#248a57"/>
+<polyline points="75.00,88.00 77.75,91.12 80.50,101.42 83.25,101.67 86.00,105.61 88.75,108.23 91.50,110.98 94.25,112.80 97.00,113.96 99.75,115.06 102.50,116.17 105.25,117.17 108.00,118.61 110.75,119.66 113.50,120.48 116.25,122.52 119.00,123.59 121.75,123.76 124.50,124.21 127.25,124.87 130.00,125.69 132.75,126.57 135.50,127.48 138.25,128.37 141.00,129.22 143.75,130.04 146.50,130.84 149.25,131.66 152.00,132.52 154.75,133.46 157.50,134.37 160.25,135.40 163.00,136.18 165.75,136.37 168.50,136.98 171.25,137.90 174.00,138.76 176.75,139.47 179.50,140.09 182.25,140.71 185.00,141.38 187.75,142.13 190.50,142.94 193.25,143.76 196.00,144.60 198.75,145.48 201.50,146.33 204.25,147.17 207.00,147.64 209.75,147.98 212.50,149.04 215.25,149.88 218.00,150.56 220.75,151.19 223.50,151.81 226.25,152.45 229.00,153.12 231.75,153.80 234.50,154.49 237.25,155.25 240.00,156.12 242.75,157.03 245.50,157.77 248.25,158.41 251.00,158.71 253.75,158.99 256.50,160.14 259.25,161.12 262.00,162.01 264.75,162.93 267.50,163.80 270.25,164.57 273.00,165.35 275.75,166.25 278.50,167.32 281.25,168.55 284.00,169.93 286.75,171.41 289.50,173.20 292.25,176.06 295.00,176.83 297.75,177.19 300.50,178.04 303.25,178.64 306.00,179.43 308.75,180.19 311.50,180.98 314.25,181.76 317.00,182.56 319.75,183.38 322.50,184.18 325.25,184.85 328.00,185.45 330.75,186.55 333.50,190.06 336.25,194.63 339.00,196.21 341.75,196.36 344.50,197.37 347.25,198.15 350.00,198.61 352.75,199.54 355.50,200.43 358.25,200.93 361.00,201.65 363.75,202.45 366.50,203.03 369.25,203.87 372.00,204.88 374.75,205.57 377.50,206.04 380.25,206.98 383.00,208.08 385.75,208.96 388.50,210.16 391.25,210.40 394.00,212.21 396.75,213.38 399.50,214.21 402.25,215.67 405.00,217.15" fill="none" stroke="#2f6fbd" stroke-width="2.5"/>
+<circle cx="75.00" cy="88.00" r="3.2" fill="#2f6fbd"/>
+<circle cx="121.75" cy="123.76" r="3.2" fill="#2f6fbd"/>
+<circle cx="168.50" cy="136.98" r="3.2" fill="#2f6fbd"/>
+<circle cx="215.25" cy="149.88" r="3.2" fill="#2f6fbd"/>
+<circle cx="262.00" cy="162.01" r="3.2" fill="#2f6fbd"/>
+<circle cx="308.75" cy="180.19" r="3.2" fill="#2f6fbd"/>
+<circle cx="355.50" cy="200.43" r="3.2" fill="#2f6fbd"/>
+<circle cx="402.25" cy="215.67" r="3.2" fill="#2f6fbd"/>
+<polyline points="75.00,88.00 77.75,91.12 80.50,101.42 83.25,101.67 86.00,105.61 88.75,108.23 91.50,110.98 94.25,112.80 97.00,113.96 99.75,114.20 102.50,114.99 105.25,116.20 108.00,117.45 110.75,118.74 113.50,119.44 116.25,120.74 119.00,121.55 121.75,121.71 124.50,122.27 127.25,122.97 130.00,123.97 132.75,124.84 135.50,125.62 138.25,126.50 141.00,126.98 143.75,127.17 146.50,127.80 149.25,128.51 152.00,129.20 154.75,129.90 157.50,130.57 160.25,131.41 163.00,131.80 165.75,131.99 168.50,132.61 171.25,133.29 174.00,134.03 176.75,134.78 179.50,135.59 182.25,136.67 185.00,137.26 187.75,137.62 190.50,138.24 193.25,138.83 196.00,139.46 198.75,140.08 201.50,140.69 204.25,141.29 207.00,141.81 209.75,142.21 212.50,142.80 215.25,143.61 218.00,144.52 220.75,145.47 223.50,146.42 226.25,148.68 229.00,148.94 231.75,149.09 234.50,150.03 237.25,150.73 240.00,151.58 242.75,152.42 245.50,153.32 248.25,155.10 251.00,156.39 253.75,157.40 256.50,158.05 259.25,158.67 262.00,159.31 264.75,159.92 267.50,160.61 270.25,161.06 273.00,162.49 275.75,163.66 278.50,164.44 281.25,165.31 284.00,166.44 286.75,167.55 289.50,169.48 292.25,172.05 295.00,172.26 297.75,172.40 300.50,173.32 303.25,174.21 306.00,175.05 308.75,176.15 311.50,177.69 314.25,183.93 317.00,186.45 319.75,187.63 322.50,188.66 325.25,189.32 328.00,190.03 330.75,190.64 333.50,191.23 336.25,192.67 339.00,196.59 341.75,199.23 344.50,200.63 347.25,201.44 350.00,202.27 352.75,203.06 355.50,204.03 358.25,204.39 361.00,205.93 363.75,207.40 366.50,208.55 369.25,209.60 372.00,211.28 374.75,213.70 377.50,215.69 380.25,234.37 383.00,236.03 385.75,236.47 388.50,237.88 391.25,238.79 394.00,239.81 396.75,240.78 399.50,242.66 402.25,245.18 405.00,248.96" fill="none" stroke="#c36a14" stroke-width="2.5" stroke-dasharray="6 4"/>
+<rect x="71.80" y="84.80" width="6.4" height="6.4" fill="#c36a14"/>
+<rect x="118.55" y="118.51" width="6.4" height="6.4" fill="#c36a14"/>
+<rect x="165.30" y="129.41" width="6.4" height="6.4" fill="#c36a14"/>
+<rect x="212.05" y="140.41" width="6.4" height="6.4" fill="#c36a14"/>
+<rect x="258.80" y="156.11" width="6.4" height="6.4" fill="#c36a14"/>
+<rect x="305.55" y="172.95" width="6.4" height="6.4" fill="#c36a14"/>
+<rect x="352.30" y="200.83" width="6.4" height="6.4" fill="#c36a14"/>
+<rect x="399.05" y="241.98" width="6.4" height="6.4" fill="#c36a14"/>
+<line x1="97.00" y1="88" x2="97.00" y2="418" stroke="#c36a14" stroke-dasharray="2 5" opacity=".35"/>
+<line x1="119.00" y1="88" x2="119.00" y2="418" stroke="#c36a14" stroke-dasharray="2 5" opacity=".35"/>
+<line x1="141.00" y1="88" x2="141.00" y2="418" stroke="#c36a14" stroke-dasharray="2 5" opacity=".35"/>
+<line x1="163.00" y1="88" x2="163.00" y2="418" stroke="#c36a14" stroke-dasharray="2 5" opacity=".35"/>
+<line x1="185.00" y1="88" x2="185.00" y2="418" stroke="#c36a14" stroke-dasharray="2 5" opacity=".35"/>
+<line x1="207.00" y1="88" x2="207.00" y2="418" stroke="#c36a14" stroke-dasharray="2 5" opacity=".35"/>
+<line x1="229.00" y1="88" x2="229.00" y2="418" stroke="#c36a14" stroke-dasharray="2 5" opacity=".35"/>
+<line x1="251.00" y1="88" x2="251.00" y2="418" stroke="#c36a14" stroke-dasharray="2 5" opacity=".35"/>
+<line x1="273.00" y1="88" x2="273.00" y2="418" stroke="#c36a14" stroke-dasharray="2 5" opacity=".35"/>
+<line x1="295.00" y1="88" x2="295.00" y2="418" stroke="#c36a14" stroke-dasharray="2 5" opacity=".35"/>
+<line x1="317.00" y1="88" x2="317.00" y2="418" stroke="#c36a14" stroke-dasharray="2 5" opacity=".35"/>
+<line x1="339.00" y1="88" x2="339.00" y2="418" stroke="#c36a14" stroke-dasharray="2 5" opacity=".35"/>
+<line x1="361.00" y1="88" x2="361.00" y2="418" stroke="#c36a14" stroke-dasharray="2 5" opacity=".35"/>
+<line x1="383.00" y1="88" x2="383.00" y2="418" stroke="#c36a14" stroke-dasharray="2 5" opacity=".35"/>
+<text x="90" y="112" class="note">竖虚线为 GMRES(8) 重启；真残差在完整周期内单调</text>
+<rect x="555" y="88" width="330" height="330" class="frame"/>
+<line x1="555.00" y1="88" x2="555.00" y2="418" class="grid"/>
+<text x="555.00" y="438" text-anchor="middle">0</text>
+<line x1="637.50" y1="88" x2="637.50" y2="418" class="grid"/>
+<text x="637.50" y="438" text-anchor="middle">.5</text>
+<line x1="720.00" y1="88" x2="720.00" y2="418" class="grid"/>
+<text x="720.00" y="438" text-anchor="middle">1</text>
+<line x1="802.50" y1="88" x2="802.50" y2="418" class="grid"/>
+<text x="802.50" y="438" text-anchor="middle">1.5</text>
+<line x1="885.00" y1="88" x2="885.00" y2="418" class="grid"/>
+<text x="885.00" y="438" text-anchor="middle">2</text>
+<line x1="555" y1="418.00" x2="885" y2="418.00" class="grid"/>
+<text x="546" y="422.00" text-anchor="end">0</text>
+<line x1="555" y1="335.50" x2="885" y2="335.50" class="grid"/>
+<text x="546" y="339.50" text-anchor="end">.25</text>
+<line x1="555" y1="253.00" x2="885" y2="253.00" class="grid"/>
+<text x="546" y="257.00" text-anchor="end">.5</text>
+<line x1="555" y1="170.50" x2="885" y2="170.50" class="grid"/>
+<text x="546" y="174.50" text-anchor="end">.75</text>
+<line x1="555" y1="88.00" x2="885" y2="88.00" class="grid"/>
+<text x="546" y="92.00" text-anchor="end">1</text>
+<text x="720.0" y="463" text-anchor="middle" class="axis">Krylov 步数</text>
+<text x="500" y="253.0" text-anchor="middle" class="axis" transform="rotate(-90 500 253.0)">相对残差</text>
+<polyline points="555.00,88.00 720.00,88.00 885.00,418.00" fill="none" stroke="#248a57" stroke-width="2.5"/>
+<path d="M555.00,83.00 L560.00,88.00 L555.00,93.00 L550.00,88.00Z" fill="#248a57"/>
+<path d="M720.00,83.00 L725.00,88.00 L720.00,93.00 L715.00,88.00Z" fill="#248a57"/>
+<path d="M885.00,413.00 L890.00,418.00 L885.00,423.00 L880.00,418.00Z" fill="#248a57"/>
+<line x1="555" y1="88" x2="555" y2="418" stroke="#c43d3d" stroke-width="3"/>
+<rect x="551.00" y="84.00" width="8" height="8" fill="#c43d3d"/>
+<text x="570" y="112" class="note">A=diag(1,−1), b=(1,1)：p₀ᵀAp₀=0，CG 首步无定义</text>
+<text x="720" y="250" text-anchor="middle" class="note">MINRES 第 1 步只能保持残差；第 2 步精确求解</text>
+<rect x="1035" y="88" width="330" height="330" class="frame"/>
+<line x1="1035.00" y1="88" x2="1035.00" y2="418" class="grid"/>
+<text x="1035.00" y="438" text-anchor="middle">4</text>
+<line x1="1071.67" y1="88" x2="1071.67" y2="418" class="grid"/>
+<text x="1071.67" y="438" text-anchor="middle">8</text>
+<line x1="1145.00" y1="88" x2="1145.00" y2="418" class="grid"/>
+<text x="1145.00" y="438" text-anchor="middle">16</text>
+<line x1="1218.33" y1="88" x2="1218.33" y2="418" class="grid"/>
+<text x="1218.33" y="438" text-anchor="middle">24</text>
+<line x1="1365.00" y1="88" x2="1365.00" y2="418" class="grid"/>
+<text x="1365.00" y="438" text-anchor="middle">40</text>
+<line x1="1035" y1="418.00" x2="1365" y2="418.00" class="grid"/>
+<text x="1026" y="422.00" text-anchor="end">10⁻¹⁴</text>
+<line x1="1035" y1="323.71" x2="1365" y2="323.71" class="grid"/>
+<text x="1026" y="327.71" text-anchor="end">10⁻¹⁰</text>
+<line x1="1035" y1="229.43" x2="1365" y2="229.43" class="grid"/>
+<text x="1026" y="233.43" text-anchor="end">10⁻⁶</text>
+<line x1="1035" y1="135.14" x2="1365" y2="135.14" class="grid"/>
+<text x="1026" y="139.14" text-anchor="end">10⁻²</text>
+<line x1="1035" y1="88.00" x2="1365" y2="88.00" class="grid"/>
+<text x="1026" y="92.00" text-anchor="end">1</text>
+<text x="1200.0" y="463" text-anchor="middle" class="axis">重启维数 m（≈ 基向量内存）</text>
+<text x="980" y="253.0" text-anchor="middle" class="axis" transform="rotate(-90 980 253.0)">120 次后的真残差</text>
+<circle cx="1035.00" cy="245.74" r="7.1304951684997055" fill="#8a4fb8"/>
+<text x="1035.00" y="233.74" text-anchor="middle" class="note">m=4</text>
+<circle cx="1053.33" cy="237.37" r="7.704051835490427" fill="#8a4fb8"/>
+<text x="1053.33" y="225.37" text-anchor="middle" class="note">m=6</text>
+<circle cx="1071.67" cy="248.96" r="8.2" fill="#8a4fb8"/>
+<text x="1071.67" y="236.96" text-anchor="middle" class="note">m=8</text>
+<circle cx="1108.33" cy="221.76" r="9.047771785649585" fill="#8a4fb8"/>
+<text x="1108.33" y="209.76" text-anchor="middle" class="note">m=12</text>
+<circle cx="1145.00" cy="217.15" r="9.681079709585727" fill="#8a4fb8"/>
+<text x="1145.00" y="205.15" text-anchor="middle" class="note">m=16</text>
+<circle cx="1218.33" cy="249.24" r="11.0" fill="#8a4fb8"/>
+<text x="1218.33" y="237.24" text-anchor="middle" class="note">m=24</text>
+<circle cx="1365.00" cy="418.00" r="9.17558370299106" fill="#8a4fb8"/>
+<text x="1365.00" y="406.00" text-anchor="middle" class="note">m=40</text>
+<polyline points="1035.00,245.74 1053.33,237.37 1071.67,248.96 1108.33,221.76 1145.00,217.15 1218.33,249.24 1365.00,418.00" fill="none" stroke="#8a4fb8" stroke-width="2.5" stroke-dasharray="4 4"/>
+<text x="1050" y="112" class="note">圆越大表示累计正交内积越多；内存增大不保证同预算最优</text>
+<path d="M90.00,495.80 L94.20,500.00 L90.00,504.20 L85.80,500.00Z" fill="#248a57"/>
+<text x="101" y="504" class="legend">full GMRES</text>
+<circle cx="200.00" cy="500.00" r="3.2" fill="#2f6fbd"/>
+<text x="211" y="504" class="legend">GMRES(16)</text>
+<rect x="316.80" y="496.80" width="6.4" height="6.4" fill="#c36a14"/>
+<text x="331" y="504" class="legend">GMRES(8)</text>
+<path d="M575.00,495.80 L579.20,500.00 L575.00,504.20 L570.80,500.00Z" fill="#248a57"/>
+<text x="586" y="504" class="legend">MINRES</text>
+<rect x="686.80" y="496.80" width="6.4" height="6.4" fill="#c43d3d"/>
+<text x="701" y="504" class="legend">CG breakdown</text>
+<circle cx="1060.00" cy="500.00" r="3.2" fill="#8a4fb8"/>
+<text x="1071" y="504" class="legend">restart tradeoff</text>
+<text x="720" y="555" text-anchor="middle" class="note">A 分离完整最优与重启遗忘；B 强调对称不定不能用 CG；C 同时计入基内存与正交化工作。</text>
+<text x="720" y="580" text-anchor="middle" class="note">生成：plot_gmres_minres_restart.py · Python 标准库 · n=40 Grcar 与确定性右端</text>
+</svg>

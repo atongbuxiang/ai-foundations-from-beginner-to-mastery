@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#40506a"/>
+    </marker>
+    <linearGradient id="surface" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#dce9ff"/>
+      <stop offset="1" stop-color="#eef5ff"/>
+    </linearGradient>
+    <style>
+      .title{font:700 20px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#18243a}
+      .panel{font:700 16px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#18243a}
+      .label{font:13px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#34415a}
+      .small{font:11px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#5d6980}
+      .math{font:italic 13px Georgia,serif;fill:#26354e}
+      .box{fill:#fff;stroke:#d8deea;stroke-width:1.2}
+      .arrow{stroke:#40506a;stroke-width:1.8;fill:none;marker-end:url(#arrow)}
+      .blue{stroke:#3268d8;stroke-width:2.4;fill:none}
+      .orange{stroke:#dc7a20;stroke-width:2.4;fill:none}
+      .green{stroke:#16866f;stroke-width:2.4;fill:none}
+      .purple{stroke:#8a52c7;stroke-width:2.4;fill:none}
+    </style>
+  </defs>
+  <rect width="1200" height="430" fill="#fbfcfe"/>
+  <text x="28" y="31" class="title">Smooth manifold: local coordinates, linearized objects, and AI audit</text>
+
+  <rect x="22" y="49" width="365" height="356" rx="10" class="box"/>
+  <text x="39" y="76" class="panel">A · Charts glue local Euclidean views</text>
+  <path d="M70 156 C105 92,235 88,318 149 C348 172,327 224,277 244 C206 273,104 252,67 202 C54 185,57 174,70 156Z" fill="url(#surface)" stroke="#3268d8" stroke-width="2"/>
+  <ellipse cx="150" cy="173" rx="70" ry="48" fill="#f4a261" fill-opacity="0.28" stroke="#dc7a20" stroke-width="1.8"/>
+  <ellipse cx="237" cy="181" rx="72" ry="51" fill="#8a52c7" fill-opacity="0.24" stroke="#8a52c7" stroke-width="1.8"/>
+  <text x="112" y="164" class="math">U</text>
+  <text x="267" y="169" class="math">V</text>
+  <path d="M132 243 C127 270,111 279,98 293" class="arrow"/>
+  <path d="M262 246 C271 267,287 279,300 293" class="arrow"/>
+  <rect x="45" y="298" width="130" height="58" rx="5" fill="#eef5ff" stroke="#3268d8"/>
+  <rect x="215" y="298" width="130" height="58" rx="5" fill="#f6effc" stroke="#8a52c7"/>
+  <text x="110" y="322" class="math" text-anchor="middle">φ: U → ℝᵈ</text>
+  <text x="280" y="322" class="math" text-anchor="middle">ψ: V → ℝᵈ</text>
+  <path d="M175 340 L215 340" class="arrow"/>
+  <text x="195" y="374" class="small" text-anchor="middle">transition ψ∘φ⁻¹ must be smooth</text>
+  <text x="204" y="394" class="small" text-anchor="middle">coordinates differ; the manifold point does not</text>
+
+  <rect x="417" y="49" width="365" height="356" rx="10" class="box"/>
+  <text x="434" y="76" class="panel">B · Tangent vectors and covectors</text>
+  <path d="M458 252 C505 144,633 119,744 205" fill="none" stroke="#3268d8" stroke-width="4"/>
+  <circle cx="603" cy="164" r="5" fill="#172033"/>
+  <text x="614" y="156" class="math">p</text>
+  <line x1="501" y1="207" x2="710" y2="119" class="green"/>
+  <path d="M603 164 L682 131" class="arrow"/>
+  <text x="684" y="126" class="math">v ∈ T_p M</text>
+  <line x1="561" y1="112" x2="637" y2="292" stroke="#dc7a20" stroke-width="2"/>
+  <line x1="576" y1="106" x2="652" y2="286" stroke="#dc7a20" stroke-width="1.3" stroke-dasharray="5 4"/>
+  <line x1="591" y1="100" x2="667" y2="280" stroke="#dc7a20" stroke-width="1.3" stroke-dasharray="5 4"/>
+  <text x="674" y="268" class="math">α ∈ T_p* M</text>
+  <text x="600" y="321" class="label" text-anchor="middle">α(v) is a scalar; v and α transform oppositely</text>
+  <text x="600" y="347" class="math" text-anchor="middle">df_p(v) = d/dt f(γ(t)) at t=0</text>
+  <text x="600" y="374" class="small" text-anchor="middle">without a metric, df is not yet a gradient vector</text>
+
+  <rect x="812" y="49" width="365" height="356" rx="10" class="box"/>
+  <text x="829" y="76" class="panel">C · Decoder Jacobian ≠ manifold proof</text>
+  <rect x="842" y="108" width="105" height="55" rx="6" fill="#eef5ff" stroke="#3268d8"/>
+  <text x="894" y="132" class="math" text-anchor="middle">z ∈ ℝᵈ</text>
+  <text x="894" y="151" class="small" text-anchor="middle">latent chart?</text>
+  <path d="M947 136 L1001 136" class="arrow"/>
+  <text x="974" y="119" class="math" text-anchor="middle">gθ</text>
+  <path d="M1010 119 C1050 93,1128 104,1145 150 C1156 180,1104 196,1052 181 C1019 172,994 143,1010 119Z" fill="#e7f6f1" stroke="#16866f" stroke-width="2"/>
+  <circle cx="1069" cy="147" r="4.5" fill="#172033"/>
+  <path d="M1069 147 L1120 121" class="arrow"/>
+  <path d="M1069 147 L1096 181" class="arrow"/>
+  <text x="1077" y="213" class="math" text-anchor="middle">col(J_g) spans candidate T_x M</text>
+  <line x1="846" y1="254" x2="1148" y2="254" stroke="#d8deea"/>
+  <circle cx="863" cy="291" r="3" fill="#3268d8"/><circle cx="884" cy="282" r="3" fill="#3268d8"/><circle cx="906" cy="294" r="3" fill="#3268d8"/><circle cx="929" cy="279" r="3" fill="#3268d8"/><circle cx="952" cy="288" r="3" fill="#3268d8"/>
+  <path d="M849 303 C884 270,921 271,966 286" class="blue"/>
+  <text x="1004" y="287" class="label">local PCA / Jacobian audit</text>
+  <text x="829" y="326" class="small">Must check rank, chart overlap, injectivity, sampling, noise, scale.</text>
+  <text x="829" y="350" class="small">Low reconstruction loss alone does not certify an embedding.</text>
+  <text x="829" y="374" class="small">Population manifold claims require explicit regularity assumptions.</text>
+</svg>

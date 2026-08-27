@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430">
+  <rect width="1200" height="430" fill="#f8fafc"/>
+  <style>
+    .panel{fill:#fff;stroke:#cbd5e1;stroke-width:1.5}.title{font:700 18px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#0f172a}.sub{font:13px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#475569}.body{font:14px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#334155}.small{font:12px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#64748b}.node{fill:#eff6ff;stroke:#60a5fa;stroke-width:1.4}.good{fill:#ecfdf5;stroke:#34d399;stroke-width:1.4}.warn{fill:#fff7ed;stroke:#fb923c;stroke-width:1.4}.bad{fill:#fef2f2;stroke:#f87171;stroke-width:1.4}.arrow{stroke:#64748b;stroke-width:1.6;fill:none;marker-end:url(#arrow)}
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker>
+  </defs>
+
+  <rect class="panel" x="20" y="20" width="370" height="390" rx="14"/>
+  <text class="title" x="40" y="53">A · metric 生成“附近”，topology 忘掉刻度</text>
+  <text class="sub" x="40" y="78">同一集合 X：距离数值更细，开集结构更粗</text>
+  <ellipse cx="132" cy="202" rx="83" ry="42" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <ellipse cx="132" cy="202" rx="50" ry="27" fill="#bfdbfe" stroke="#2563eb" stroke-width="1.7"/>
+  <circle cx="132" cy="202" r="5" fill="#1d4ed8"/>
+  <text class="body" x="132" y="145" text-anchor="middle">d₁-ball</text>
+  <text class="small" x="132" y="207" text-anchor="middle">x</text>
+  <rect x="224" y="147" width="124" height="110" rx="28" fill="#fef3c7" stroke="#d97706" stroke-width="2" transform="rotate(-9 286 202)"/>
+  <rect x="251" y="170" width="70" height="64" rx="18" fill="#fde68a" stroke="#b45309" stroke-width="1.7" transform="rotate(-9 286 202)"/>
+  <circle cx="286" cy="202" r="5" fill="#92400e"/>
+  <text class="body" x="286" y="132" text-anchor="middle">d₂-ball</text>
+  <path class="arrow" d="M104 276 C130 305,161 312,190 323"/>
+  <path class="arrow" d="M294 274 C271 305,242 312,211 323"/>
+  <rect class="good" x="126" y="319" width="140" height="48" rx="10"/>
+  <text class="body" x="196" y="340" text-anchor="middle">同一 open sets?</text>
+  <text class="small" x="196" y="357" text-anchor="middle">若是：topologically equivalent</text>
+  <text class="small" x="40" y="391">相同 topology 不保证相同距离、Lipschitz 常数或 completeness</text>
+
+  <rect class="panel" x="415" y="20" width="370" height="390" rx="14"/>
+  <text class="title" x="435" y="53">B · 三条不能混写的强度阶梯</text>
+  <text class="sub" x="435" y="78">空间性质、映射性质与有限维特例分别验收</text>
+  <rect class="node" x="449" y="105" width="116" height="40" rx="9"/>
+  <text class="body" x="507" y="130" text-anchor="middle">Lipschitz</text>
+  <path class="arrow" d="M565 125 L609 125"/>
+  <rect class="node" x="611" y="105" width="139" height="40" rx="9"/>
+  <text class="body" x="680" y="130" text-anchor="middle">uniform continuous</text>
+  <path class="arrow" d="M680 145 L680 181"/>
+  <rect class="node" x="611" y="183" width="139" height="40" rx="9"/>
+  <text class="body" x="680" y="208" text-anchor="middle">continuous</text>
+  <rect class="good" x="449" y="183" width="116" height="40" rx="9"/>
+  <text class="body" x="507" y="208" text-anchor="middle">compact domain</text>
+  <path class="arrow" d="M565 203 L609 203"/>
+  <text class="small" x="449" y="244">连续 + compact domain ⇒ uniform continuous</text>
+
+  <rect class="warn" x="449" y="270" width="132" height="45" rx="9"/>
+  <text class="body" x="515" y="289" text-anchor="middle">closed + bounded</text>
+  <text class="small" x="515" y="305" text-anchor="middle">一般 metric space</text>
+  <path class="arrow" d="M581 292 L620 292"/>
+  <rect class="bad" x="622" y="270" width="128" height="45" rx="9"/>
+  <text class="body" x="686" y="289" text-anchor="middle">compact?</text>
+  <text class="small" x="686" y="305" text-anchor="middle">一般不成立</text>
+  <rect class="good" x="495" y="337" width="210" height="43" rx="9"/>
+  <text class="body" x="600" y="355" text-anchor="middle">metric compact</text>
+  <text class="small" x="600" y="372" text-anchor="middle">⇔ complete + totally bounded</text>
+  <text class="small" x="435" y="398">Heine–Borel 是 ℝⁿ / finite-dimensional normed space 特例</text>
+
+  <rect class="panel" x="810" y="20" width="370" height="390" rx="14"/>
+  <text class="title" x="830" y="53">C · AI 中 topology 是声明边界，不是装饰词</text>
+  <text class="sub" x="830" y="78">先写对象，再问 metric、scale、sample 与 map</text>
+  <rect class="node" x="838" y="105" width="135" height="54" rx="10"/>
+  <text class="body" x="905" y="127" text-anchor="middle">representation metric</text>
+  <text class="small" x="905" y="146" text-anchor="middle">neighbor / margin / robustness</text>
+  <rect class="node" x="1010" y="105" width="142" height="54" rx="10"/>
+  <text class="body" x="1081" y="127" text-anchor="middle">probability metric</text>
+  <text class="small" x="1081" y="146" text-anchor="middle">which convergence?</text>
+  <rect class="good" x="838" y="190" width="135" height="58" rx="10"/>
+  <text class="body" x="905" y="212" text-anchor="middle">homeomorphic flow</text>
+  <text class="small" x="905" y="231" text-anchor="middle">preserves connectedness</text>
+  <rect class="warn" x="1010" y="190" width="142" height="58" rx="10"/>
+  <text class="body" x="1081" y="212" text-anchor="middle">finite point cloud</text>
+  <text class="small" x="1081" y="231" text-anchor="middle">topology needs scale</text>
+  <path class="arrow" d="M905 159 L905 188"/>
+  <path class="arrow" d="M1081 159 L1081 188"/>
+  <rect class="bad" x="872" y="284" width="246" height="52" rx="10"/>
+  <text class="body" x="995" y="306" text-anchor="middle">禁止：图上两簇 ⇒ support 不连通</text>
+  <text class="small" x="995" y="325" text-anchor="middle">禁止：低维投影 ⇒ data manifold theorem</text>
+  <path class="arrow" d="M905 248 C905 268,940 271,966 282"/>
+  <path class="arrow" d="M1081 248 C1081 268,1047 271,1022 282"/>
+  <text class="small" x="830" y="371">正确合同：ground metric + domain + sampling + map regularity</text>
+  <text class="small" x="830" y="392">连续性是 qualitative；鲁棒半径通常需要 quantitative bound</text>
+</svg>

@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">自信息、二元熵与前缀码长度</title>
+  <desc id="desc">三面板分别展示负对数惊讶度、二元熵曲线和概率与二进制前缀码长的对应关系。</desc>
+  <defs>
+    <style>
+      .bg{fill:#f8fafc}.panel{fill:#fff;stroke:#cbd5e1;stroke-width:1.5}.title{font:700 20px -apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;fill:#0f172a}.sub{font:14px -apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;fill:#475569}.axis{stroke:#64748b;stroke-width:1.2}.grid{stroke:#e2e8f0;stroke-width:1}.label{font:13px -apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;fill:#334155}.small{font:12px -apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;fill:#64748b}.curve1{fill:none;stroke:#2563eb;stroke-width:3}.curve2{fill:none;stroke:#7c3aed;stroke-width:3}.accent{fill:#2563eb}.violet{fill:#7c3aed}.green{fill:#059669}.edge{stroke:#334155;stroke-width:2;fill:none}.code{font:600 14px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#0f172a}.formula{font:italic 15px Georgia,serif;fill:#0f172a}
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#334155"/></marker>
+  </defs>
+  <rect class="bg" width="1200" height="430"/>
+
+  <rect class="panel" x="20" y="20" width="370" height="390" rx="14"/>
+  <text class="title" x="40" y="52">A · 越罕见，单次惊讶越大</text>
+  <text class="sub" x="40" y="76">自信息 i(x) = −log₂ p(x)</text>
+  <line class="grid" x1="82" y1="135" x2="360" y2="135"/>
+  <line class="grid" x1="82" y1="205" x2="360" y2="205"/>
+  <line class="grid" x1="82" y1="275" x2="360" y2="275"/>
+  <line class="axis" x1="82" y1="325" x2="360" y2="325"/>
+  <line class="axis" x1="82" y1="105" x2="82" y2="325"/>
+  <path class="curve1" d="M92 112 C112 151,138 193,172 231 C220 278,286 310,350 325"/>
+  <circle class="accent" cx="113" cy="153" r="5"/><text class="small" x="121" y="148">p=1/8 → 3 bits</text>
+  <circle class="accent" cx="171" cy="231" r="5"/><text class="small" x="179" y="226">p=1/4 → 2 bits</text>
+  <circle class="accent" cx="258" cy="299" r="5"/><text class="small" x="266" y="294">p=1/2 → 1 bit</text>
+  <text class="label" x="220" y="350">概率 p(x) →</text>
+  <text class="label" transform="translate(54 250) rotate(-90)">惊讶度 / bits →</text>
+  <text class="small" x="86" y="343">0</text><text class="small" x="344" y="343">1</text>
+  <text class="small" x="40" y="383">同一结果换一个概率模型，惊讶度也会改变。</text>
+
+  <rect class="panel" x="415" y="20" width="370" height="390" rx="14"/>
+  <text class="title" x="435" y="52">B · Bernoulli 的平均不确定性</text>
+  <text class="sub" x="435" y="76">h₂(p) = −p log₂p − (1−p)log₂(1−p)</text>
+  <line class="grid" x1="462" y1="155" x2="755" y2="155"/>
+  <line class="grid" x1="462" y1="235" x2="755" y2="235"/>
+  <line class="axis" x1="462" y1="325" x2="755" y2="325"/>
+  <line class="axis" x1="462" y1="115" x2="462" y2="325"/>
+  <path class="curve2" d="M462 325 C495 243,535 167,608 145 C681 167,721 243,755 325"/>
+  <line x1="608" y1="145" x2="608" y2="325" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="5 5"/>
+  <circle class="violet" cx="608" cy="145" r="6"/>
+  <text class="label" x="624" y="140">最大值：p=1/2, h₂=1 bit</text>
+  <text class="small" x="454" y="344">0</text><text class="small" x="600" y="344">1/2</text><text class="small" x="750" y="344">1</text>
+  <text class="label" x="592" y="370">p →</text>
+  <text class="label" transform="translate(444 252) rotate(-90)">entropy →</text>
+  <text class="small" x="435" y="397">确定分布为 0；固定二元 support 上均匀分布最大。</text>
+
+  <rect class="panel" x="810" y="20" width="370" height="390" rx="14"/>
+  <text class="title" x="830" y="52">C · 概率塑造码树</text>
+  <text class="sub" x="830" y="76">p=(1/2,1/4,1/4)，理想长度=(1,2,2)</text>
+  <circle cx="875" cy="145" r="7" fill="#334155"/>
+  <path class="edge" d="M882 145 L955 110"/><path class="edge" d="M882 145 L955 205"/>
+  <text class="code" x="914" y="121">0</text><text class="code" x="913" y="184">1</text>
+  <rect x="955" y="91" width="74" height="38" rx="8" fill="#dbeafe" stroke="#2563eb"/>
+  <text class="label" x="969" y="115">a : 0</text>
+  <circle cx="962" cy="205" r="7" fill="#334155"/>
+  <path class="edge" d="M969 205 L1040 174"/><path class="edge" d="M969 205 L1040 248"/>
+  <text class="code" x="1002" y="180">0</text><text class="code" x="1002" y="236">1</text>
+  <rect x="1040" y="155" width="92" height="38" rx="8" fill="#ede9fe" stroke="#7c3aed"/>
+  <rect x="1040" y="229" width="92" height="38" rx="8" fill="#dcfce7" stroke="#059669"/>
+  <text class="label" x="1054" y="179">b : 10</text><text class="label" x="1054" y="253">c : 11</text>
+  <text class="formula" x="845" y="309">L = ½·1 + ¼·2 + ¼·2 = 1.5 bits</text>
+  <rect x="838" y="331" width="314" height="45" rx="9" fill="#f1f5f9"/>
+  <text class="label" x="855" y="350">Kraft：Σ 2⁻ˡ = 1</text>
+  <text class="label" x="855" y="368">此例恰有 L = H₂(P)；一般 H₂ ≤ L &lt; H₂+1</text>
+  <text class="small" x="830" y="397">block coding 把每符号整数冗余压到小于 1/n bit。</text>
+</svg>

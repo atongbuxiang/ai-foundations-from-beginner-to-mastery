@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Normed、Banach、Hilbert 与正交投影</title>
+<desc id="desc">Norm 先给距离，completeness 得 Banach；inner product 还给角度和正交，完备后得 Hilbert。Hilbert 中 closed convex set 有唯一最近点，closed subspace 的 residual 与子空间正交；连续函数对象不可与有限采样向量混同。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">结构逐层增加，结论随之增加</text>
+<rect x="55" y="90" width="290" height="54" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="200.0" y="123.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">vector space</text>
+<line x1="200" y1="147" x2="200" y2="176" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="55" y="185" width="290" height="54" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="200.0" y="218.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">norm -&gt; distance / Cauchy</text>
+<line x1="140" y1="242" x2="140" y2="271" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<line x1="260" y1="242" x2="260" y2="271" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="45" y="280" width="180" height="60" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="135.0" y="316.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">complete -&gt; Banach</text>
+<rect x="225" y="280" width="150" height="60" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="300.0" y="316.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">inner product</text>
+<line x1="300" y1="343" x2="300" y2="372" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="225" y="382" width="150" height="60" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="300.0" y="418.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">complete -&gt; Hilbert</text>
+<text x="45" y="480" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">Hilbert is Banach, but not conversely</text>
+<text x="45" y="510" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">in infinite dimension, bounded != compact。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Projection theorem：最近点与正交</text>
+<path d="M450 360L755 360" fill="none" stroke="#0F766E" stroke-width="3"/>
+<circle cx="590" cy="360" r="7" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<circle cx="690" cy="145" r="8" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<line x1="690" y1="145" x2="590" y2="360" stroke="#C24135" stroke-width="3" marker-end="url(#a2)"/>
+<line x1="590" y1="360" x2="745" y2="360" stroke="#2563EB" stroke-width="2"/>
+<text x="690" y="126" font-size="16" font-weight="700" text-anchor="middle" fill="#2563EB">x</text>
+<text x="590" y="390" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">p=P_M x</text>
+<text x="645" y="245" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">x-p</text>
+<text x="430" y="430" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">p in closed subspace M minimizes ||x-m||</text>
+<text x="430" y="462" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">x-p is orthogonal to every m in M</text>
+<text x="430" y="492" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">closed convex -&gt; unique nearest point</text>
+<text x="430" y="516" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">orthogonality additionally requires a subspace。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">函数对象、采样与误差范数</text>
+<path d="M845 145C900 70 930 225 985 135C1030 62 1075 205 1135 112" fill="none" stroke="#2563EB" stroke-width="3"/>
+<text x="840" y="90" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">continuum function f</text>
+<circle cx="860" cy="132" r="5" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<circle cx="915" cy="158" r="5" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<circle cx="970" cy="151" r="5" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<circle cx="1025" cy="105" r="5" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<circle cx="1080" cy="168" r="5" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<circle cx="1130" cy="118" r="5" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<line x1="990" y1="220" x2="990" y2="252" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="840" y="265" width="300" height="62" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="990.0" y="302.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">sample vector + quadrature weights</text>
+<line x1="990" y1="330" x2="990" y2="362" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="840" y="375" width="300" height="62" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="990.0" y="412.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">finite representation / model</text>
+<text x="830" y="475" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">L2 / sup / Sobolev norms ask different questions</text>
+<text x="830" y="505" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">grid error != continuum function-space error。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">完备性保证极限不逃出空间；Hilbert 结构再给正交投影，但离散采样仍需单独误差合同。</text>
+</svg>

@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">矩阵分裂、谱半径与非正规暂态</title>
+<desc id="desc">定常迭代由 A=M-K 导出固定迭代矩阵 B=M^{-1}K；谱半径小于一等价于任意初值渐近收敛，但不同误差模态的阻尼、非正规暂态放大和 residual 到 error 的条件放大仍需分别分析。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">一次分裂固定全部误差动力学</text>
+<rect x="45" y="105" width="315" height="55" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="202.5" y="138.5" font-size="17" font-weight="650" text-anchor="middle" fill="#2563EB">A=M-K； B=M^{-1}K</text>
+<line x1="202" y1="163" x2="202" y2="199" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="45" y="211" width="315" height="62" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="202.5" y="248.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">x_(k+1)=B x_k+M^{-1}b</text>
+<line x1="202" y1="276" x2="202" y2="312" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="45" y="324" width="315" height="62" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="202.5" y="361.0" font-size="16" font-weight="650" text-anchor="middle" fill="#C24135">e_(k+1)=B e_k</text>
+<text x="45" y="425" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">Jacobi: diagonal M； GS: triangular M</text>
+<text x="45" y="456" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">SOR / Richardson add a relaxation parameter</text>
+<text x="45" y="498" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">M^{-1} means solve Mz=y, not form inverse。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">rho(B)&lt;1 只给渐近结论</text>
+<line x1="450" y1="350" x2="770" y2="350" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="470" y1="390" x2="470" y2="105" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="515" y1="350" x2="515" y2="145" stroke="#2563EB" stroke-width="18"/>
+<text x="515" y="131" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">slow mode</text>
+<line x1="590" y1="350" x2="590" y2="225" stroke="#0F766E" stroke-width="18"/>
+<text x="590" y="211" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">middle</text>
+<line x1="665" y1="350" x2="665" y2="300" stroke="#C24135" stroke-width="18"/>
+<text x="665" y="286" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">fast mode</text>
+<text x="430" y="410" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">mode k decays like |lambda_i(B)|^k</text>
+<text x="430" y="445" font-size="16" font-weight="700" text-anchor="start" fill="#1F2937" class="math">all initial errors -&gt; 0  iff  rho(B)&lt;1</text>
+<text x="430" y="484" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">smoothers may damp high frequency first。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">非正规矩阵可先放大再衰减</text>
+<line x1="850" y1="370" x2="1145" y2="370" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="870" y1="405" x2="870" y2="120" stroke="#D7DEE8" stroke-width="2"/>
+<path d="M870 345 C910 330 920 185 980 190 C1040 195 1070 290 1135 335" fill="none" stroke="#C24135" stroke-width="3"/>
+<line x1="875" y1="190" x2="1130" y2="335" stroke="#0F766E" stroke-width="2.5"/>
+<text x="1085" y="190" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">||B^k||</text>
+<text x="1080" y="315" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">rho^k</text>
+<text x="830" y="425" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">rho(B)&lt;1 does not imply monotone ||e_k||</text>
+<text x="830" y="456" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">true residual r_k=b-Ax_k</text>
+<text x="830" y="485" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">error interpretation still needs condition(A)</text>
+<text x="830" y="514" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">and a scale-aware stopping rule。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">谱半径回答最终是否收敛；模态、非正规性与 residual 证书回答实际怎样收敛、何时可信停止。</text>
+</svg>

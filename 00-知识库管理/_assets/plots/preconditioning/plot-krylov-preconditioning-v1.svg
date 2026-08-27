@@ -1,0 +1,228 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="610" viewBox="0 0 1440 610" role="img" aria-labelledby="title desc">
+<title id="title">Preconditioning changes the spectrum seen by Krylov methods</title>
+<desc id="desc">Three panels compare eigenvalue distributions, PCG residual histories, and iteration versus work tradeoffs for block Jacobi preconditioners.</desc>
+<style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:13px;fill:#172033}.title{font-size:23px;font-weight:600}.panel{font-size:16px;font-weight:600}.axis{font-size:14px}.frame{fill:#fbfcfe;stroke:#7b879a}.grid{stroke:#dbe1e8}.note{font-size:12px;fill:#445067}.legend{font-size:12px}</style>
+<rect width="1440" height="610" fill="#ffffff"/>
+<text x="720" y="34" text-anchor="middle" class="title">预条件不是求逆：它用廉价近似重塑 Krylov 方法看到的谱</text>
+<text x="75" y="67" class="panel">A  对称预条件后的特征值分布</text>
+<text x="555" y="67" class="panel">B  同一系统的 PCG 真残差</text>
+<text x="1035" y="67" class="panel">C  预条件强度的工作—迭代取舍</text>
+<rect x="75" y="88" width="330" height="330" class="frame"/>
+<line x1="75.00" y1="88" x2="75.00" y2="418" class="grid"/>
+<text x="75.00" y="438" text-anchor="middle">10⁻³</text>
+<line x1="157.50" y1="88" x2="157.50" y2="418" class="grid"/>
+<text x="157.50" y="438" text-anchor="middle">10⁻¹</text>
+<line x1="240.00" y1="88" x2="240.00" y2="418" class="grid"/>
+<text x="240.00" y="438" text-anchor="middle">10</text>
+<line x1="322.50" y1="88" x2="322.50" y2="418" class="grid"/>
+<text x="322.50" y="438" text-anchor="middle">10³</text>
+<line x1="405.00" y1="88" x2="405.00" y2="418" class="grid"/>
+<text x="405.00" y="438" text-anchor="middle">10⁵</text>
+<line x1="75" y1="418.00" x2="405" y2="418.00" class="grid"/>
+<text x="66" y="422.00" text-anchor="end"></text>
+<line x1="75" y1="335.50" x2="405" y2="335.50" class="grid"/>
+<text x="66" y="339.50" text-anchor="end">none</text>
+<line x1="75" y1="253.00" x2="405" y2="253.00" class="grid"/>
+<text x="66" y="257.00" text-anchor="end">Jacobi</text>
+<line x1="75" y1="170.50" x2="405" y2="170.50" class="grid"/>
+<text x="66" y="174.50" text-anchor="end">block-8</text>
+<line x1="75" y1="88.00" x2="405" y2="88.00" class="grid"/>
+<text x="66" y="92.00" text-anchor="end"></text>
+<text x="240.0" y="463" text-anchor="middle" class="axis">特征值 λ（log）</text>
+<text x="20" y="253.0" text-anchor="middle" class="axis" transform="rotate(-90 20 253.0)">预条件</text>
+<rect x="158.90" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<rect x="187.54" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<rect x="201.57" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<rect x="211.23" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<rect x="218.69" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<rect x="224.68" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<rect x="229.87" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<rect x="234.59" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<rect x="239.09" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<rect x="244.24" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<rect x="250.13" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<rect x="256.20" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<rect x="262.17" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<rect x="267.89" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<rect x="273.25" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<rect x="278.22" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<rect x="282.86" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<rect x="287.81" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<rect x="293.84" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<rect x="300.35" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<rect x="306.75" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<rect x="312.79" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<rect x="318.40" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<rect x="323.60" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<rect x="328.45" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<rect x="333.70" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<rect x="340.45" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<rect x="348.09" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<rect x="355.81" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<rect x="363.19" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<rect x="370.10" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<rect x="376.92" y="333.00" width="5.0" height="5.0" fill="#c43d3d"/>
+<circle cx="102.06" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<circle cx="126.85" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<circle cx="141.31" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<circle cx="151.52" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<circle cx="159.40" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<circle cx="165.78" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<circle cx="171.13" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<circle cx="175.70" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<circle cx="179.69" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<circle cx="183.21" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<circle cx="186.33" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<circle cx="189.13" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<circle cx="191.65" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<circle cx="193.93" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<circle cx="196.00" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<circle cx="197.88" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<circle cx="199.58" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<circle cx="201.13" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<circle cx="202.54" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<circle cx="203.82" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<circle cx="204.97" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<circle cx="206.01" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<circle cx="206.95" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<circle cx="207.77" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<circle cx="208.50" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<circle cx="209.14" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<circle cx="209.69" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<circle cx="210.14" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<circle cx="210.51" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<circle cx="210.80" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<circle cx="211.00" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<circle cx="211.13" cy="253.00" r="2.5" fill="#2f6fbd"/>
+<path d="M138.27,167.00 L141.77,170.50 L138.27,174.00 L134.77,170.50Z" fill="#248a57"/>
+<path d="M159.94,167.00 L163.44,170.50 L159.94,174.00 L156.44,170.50Z" fill="#248a57"/>
+<path d="M169.14,167.00 L172.64,170.50 L169.14,174.00 L165.64,170.50Z" fill="#248a57"/>
+<path d="M198.75,167.00 L202.25,170.50 L198.75,174.00 L195.25,170.50Z" fill="#248a57"/>
+<path d="M198.75,167.00 L202.25,170.50 L198.75,174.00 L195.25,170.50Z" fill="#248a57"/>
+<path d="M198.75,167.00 L202.25,170.50 L198.75,174.00 L195.25,170.50Z" fill="#248a57"/>
+<path d="M198.75,167.00 L202.25,170.50 L198.75,174.00 L195.25,170.50Z" fill="#248a57"/>
+<path d="M198.75,167.00 L202.25,170.50 L198.75,174.00 L195.25,170.50Z" fill="#248a57"/>
+<path d="M198.75,167.00 L202.25,170.50 L198.75,174.00 L195.25,170.50Z" fill="#248a57"/>
+<path d="M198.75,167.00 L202.25,170.50 L198.75,174.00 L195.25,170.50Z" fill="#248a57"/>
+<path d="M198.75,167.00 L202.25,170.50 L198.75,174.00 L195.25,170.50Z" fill="#248a57"/>
+<path d="M198.75,167.00 L202.25,170.50 L198.75,174.00 L195.25,170.50Z" fill="#248a57"/>
+<path d="M198.75,167.00 L202.25,170.50 L198.75,174.00 L195.25,170.50Z" fill="#248a57"/>
+<path d="M198.75,167.00 L202.25,170.50 L198.75,174.00 L195.25,170.50Z" fill="#248a57"/>
+<path d="M198.75,167.00 L202.25,170.50 L198.75,174.00 L195.25,170.50Z" fill="#248a57"/>
+<path d="M198.75,167.00 L202.25,170.50 L198.75,174.00 L195.25,170.50Z" fill="#248a57"/>
+<path d="M198.75,167.00 L202.25,170.50 L198.75,174.00 L195.25,170.50Z" fill="#248a57"/>
+<path d="M198.75,167.00 L202.25,170.50 L198.75,174.00 L195.25,170.50Z" fill="#248a57"/>
+<path d="M198.75,167.00 L202.25,170.50 L198.75,174.00 L195.25,170.50Z" fill="#248a57"/>
+<path d="M198.75,167.00 L202.25,170.50 L198.75,174.00 L195.25,170.50Z" fill="#248a57"/>
+<path d="M198.75,167.00 L202.25,170.50 L198.75,174.00 L195.25,170.50Z" fill="#248a57"/>
+<path d="M198.75,167.00 L202.25,170.50 L198.75,174.00 L195.25,170.50Z" fill="#248a57"/>
+<path d="M198.75,167.00 L202.25,170.50 L198.75,174.00 L195.25,170.50Z" fill="#248a57"/>
+<path d="M198.75,167.00 L202.25,170.50 L198.75,174.00 L195.25,170.50Z" fill="#248a57"/>
+<path d="M198.75,167.00 L202.25,170.50 L198.75,174.00 L195.25,170.50Z" fill="#248a57"/>
+<path d="M198.75,167.00 L202.25,170.50 L198.75,174.00 L195.25,170.50Z" fill="#248a57"/>
+<path d="M198.75,167.00 L202.25,170.50 L198.75,174.00 L195.25,170.50Z" fill="#248a57"/>
+<path d="M198.75,167.00 L202.25,170.50 L198.75,174.00 L195.25,170.50Z" fill="#248a57"/>
+<path d="M198.75,167.00 L202.25,170.50 L198.75,174.00 L195.25,170.50Z" fill="#248a57"/>
+<path d="M209.36,167.00 L212.86,170.50 L209.36,174.00 L205.86,170.50Z" fill="#248a57"/>
+<path d="M210.11,167.00 L213.61,170.50 L210.11,174.00 L206.61,170.50Z" fill="#248a57"/>
+<path d="M210.86,167.00 L214.36,170.50 L210.86,174.00 L207.36,170.50Z" fill="#248a57"/>
+<text x="90" y="112" class="note">κ: 1.9e+05 → 440.7 → 57.5</text>
+<rect x="555" y="88" width="330" height="330" class="frame"/>
+<line x1="555.00" y1="88" x2="555.00" y2="418" class="grid"/>
+<text x="555.00" y="438" text-anchor="middle">0</text>
+<line x1="637.50" y1="88" x2="637.50" y2="418" class="grid"/>
+<text x="637.50" y="438" text-anchor="middle">15</text>
+<line x1="720.00" y1="88" x2="720.00" y2="418" class="grid"/>
+<text x="720.00" y="438" text-anchor="middle">30</text>
+<line x1="802.50" y1="88" x2="802.50" y2="418" class="grid"/>
+<text x="802.50" y="438" text-anchor="middle">45</text>
+<line x1="885.00" y1="88" x2="885.00" y2="418" class="grid"/>
+<text x="885.00" y="438" text-anchor="middle">60</text>
+<line x1="555" y1="418.00" x2="885" y2="418.00" class="grid"/>
+<text x="546" y="422.00" text-anchor="end">10⁻¹²</text>
+<line x1="555" y1="335.50" x2="885" y2="335.50" class="grid"/>
+<text x="546" y="339.50" text-anchor="end">10⁻⁹</text>
+<line x1="555" y1="253.00" x2="885" y2="253.00" class="grid"/>
+<text x="546" y="257.00" text-anchor="end">10⁻⁶</text>
+<line x1="555" y1="170.50" x2="885" y2="170.50" class="grid"/>
+<text x="546" y="174.50" text-anchor="end">10⁻³</text>
+<line x1="555" y1="88.00" x2="885" y2="88.00" class="grid"/>
+<text x="546" y="92.00" text-anchor="end">1</text>
+<text x="720.0" y="463" text-anchor="middle" class="axis">PCG 迭代次数</text>
+<text x="500" y="253.0" text-anchor="middle" class="axis" transform="rotate(-90 500 253.0)">真残差 / ‖b‖₂</text>
+<polyline points="555.00,88.00 560.50,98.53 566.00,108.83 571.50,117.21 577.00,121.05 582.50,119.47 588.00,122.26 593.50,135.40 599.00,135.48 604.50,141.61 610.00,146.13 615.50,149.46 621.00,151.55 626.50,151.66 632.00,139.38 637.50,155.90 643.00,157.90 648.50,140.20 654.00,162.55 659.50,141.60 665.00,166.55 670.50,171.08 676.00,164.50 681.50,177.04 687.00,160.95 692.50,151.73 698.00,179.07 703.50,178.09 709.00,180.92 714.50,153.61 720.00,187.61 725.50,164.23 731.00,161.61 736.50,191.90 742.00,182.84 747.50,192.01 753.00,179.79 758.50,175.91 764.00,177.06 769.50,193.29 775.00,167.45 780.50,169.87 786.00,183.57 791.50,200.65 797.00,182.04 802.50,168.17 808.00,184.43 813.50,207.23 819.00,185.95 824.50,189.82 830.00,209.98 835.50,183.66 841.00,186.73 846.50,190.85 852.00,203.98 857.50,213.74 863.00,201.75 868.50,186.55 874.00,198.63 879.50,207.90 885.00,227.68" fill="none" stroke="#c43d3d" stroke-width="2.5"/>
+<rect x="551.80" y="84.80" width="6.4" height="6.4" fill="#c43d3d"/>
+<rect x="595.80" y="132.28" width="6.4" height="6.4" fill="#c43d3d"/>
+<rect x="639.80" y="154.70" width="6.4" height="6.4" fill="#c43d3d"/>
+<rect x="683.80" y="157.75" width="6.4" height="6.4" fill="#c43d3d"/>
+<rect x="727.80" y="158.41" width="6.4" height="6.4" fill="#c43d3d"/>
+<rect x="771.80" y="164.25" width="6.4" height="6.4" fill="#c43d3d"/>
+<rect x="815.80" y="182.75" width="6.4" height="6.4" fill="#c43d3d"/>
+<rect x="859.80" y="198.55" width="6.4" height="6.4" fill="#c43d3d"/>
+<polyline points="555.00,88.00 560.50,99.36 566.00,109.89 571.50,116.20 577.00,120.29 582.50,123.31 588.00,126.06 593.50,130.57 599.00,136.40 604.50,142.76 610.00,148.45 615.50,152.04 621.00,154.14 626.50,156.01 632.00,159.20 637.50,164.33 643.00,169.70 648.50,172.20 654.00,172.39 659.50,172.73 665.00,174.27 670.50,177.83 676.00,184.06 681.50,187.05 687.00,185.84 692.50,186.38 698.00,188.51 703.50,192.70 709.00,199.76 714.50,193.46 720.00,183.13 725.50,181.23 731.00,418.00" fill="none" stroke="#2f6fbd" stroke-width="2.5"/>
+<circle cx="555.00" cy="88.00" r="3.2" fill="#2f6fbd"/>
+<circle cx="599.00" cy="136.40" r="3.2" fill="#2f6fbd"/>
+<circle cx="643.00" cy="169.70" r="3.2" fill="#2f6fbd"/>
+<circle cx="687.00" cy="185.84" r="3.2" fill="#2f6fbd"/>
+<circle cx="731.00" cy="418.00" r="3.2" fill="#2f6fbd"/>
+<polyline points="555.00,88.00 560.50,117.85 566.00,117.15 571.50,140.02 577.00,141.84 582.50,154.91 588.00,159.01 593.50,165.15 599.00,168.06 604.50,168.11 610.00,166.94 615.50,183.19 621.00,177.46 626.50,179.83 632.00,181.17 637.50,418.00" fill="none" stroke="#c36a14" stroke-width="2.5" stroke-dasharray="6 4"/>
+<rect x="551.80" y="84.80" width="6.4" height="6.4" fill="#c36a14"/>
+<rect x="595.80" y="164.86" width="6.4" height="6.4" fill="#c36a14"/>
+<polyline points="555.00,88.00 560.50,124.01 566.00,140.64 571.50,148.46 577.00,168.34 582.50,174.25 588.00,189.12 593.50,418.00" fill="none" stroke="#248a57" stroke-width="2.5"/>
+<path d="M555.00,83.80 L559.20,88.00 L555.00,92.20 L550.80,88.00Z" fill="#248a57"/>
+<text x="570" y="112" class="note">对角缩放先修复单位失衡；更大块继续捕获局部耦合</text>
+<rect x="1035" y="88" width="330" height="330" class="frame"/>
+<line x1="1035.00" y1="88" x2="1035.00" y2="418" class="grid"/>
+<text x="1035.00" y="438" text-anchor="middle">10³</text>
+<line x1="1113.73" y1="88" x2="1113.73" y2="418" class="grid"/>
+<text x="1113.73" y="438" text-anchor="middle">3×10³</text>
+<line x1="1200.00" y1="88" x2="1200.00" y2="418" class="grid"/>
+<text x="1200.00" y="438" text-anchor="middle">10⁴</text>
+<line x1="1278.73" y1="88" x2="1278.73" y2="418" class="grid"/>
+<text x="1278.73" y="438" text-anchor="middle">3×10⁴</text>
+<line x1="1365.00" y1="88" x2="1365.00" y2="418" class="grid"/>
+<text x="1365.00" y="438" text-anchor="middle">10⁵</text>
+<line x1="1035" y1="418.00" x2="1365" y2="418.00" class="grid"/>
+<text x="1026" y="422.00" text-anchor="end">0</text>
+<line x1="1035" y1="335.50" x2="1365" y2="335.50" class="grid"/>
+<text x="1026" y="339.50" text-anchor="end">10</text>
+<line x1="1035" y1="253.00" x2="1365" y2="253.00" class="grid"/>
+<text x="1026" y="257.00" text-anchor="end">20</text>
+<line x1="1035" y1="170.50" x2="1365" y2="170.50" class="grid"/>
+<text x="1026" y="174.50" text-anchor="end">30</text>
+<line x1="1035" y1="88.00" x2="1365" y2="88.00" class="grid"/>
+<text x="1026" y="92.00" text-anchor="end">40</text>
+<text x="1200.0" y="463" text-anchor="middle" class="axis">总工作代理（log）</text>
+<text x="980" y="253.0" text-anchor="middle" class="axis" transform="rotate(-90 980 253.0)">达到 10⁻⁸ 的迭代数</text>
+<rect x="1175.27" y="84.00" width="8" height="8" fill="#c43d3d"/>
+<text x="1186.27" y="81.00" class="note">none</text>
+<path d="M1152.18,149.00 L1157.18,154.00 L1152.18,159.00 L1147.18,154.00Z" fill="#248a57"/>
+<text x="1159.18" y="147.00" class="note">b1</text>
+<path d="M1171.97,165.50 L1176.97,170.50 L1171.97,175.50 L1166.97,170.50Z" fill="#248a57"/>
+<text x="1178.97" y="163.50" class="note">b2</text>
+<path d="M1156.51,289.25 L1161.51,294.25 L1156.51,299.25 L1151.51,294.25Z" fill="#248a57"/>
+<text x="1163.51" y="287.25" class="note">b4</text>
+<path d="M1149.45,355.25 L1154.45,360.25 L1149.45,365.25 L1144.45,360.25Z" fill="#248a57"/>
+<text x="1156.45" y="353.25" class="note">b8</text>
+<path d="M1164.47,388.25 L1169.47,393.25 L1164.47,398.25 L1159.47,393.25Z" fill="#248a57"/>
+<text x="1171.47" y="386.25" class="note">b16</text>
+<path d="M1219.17,404.75 L1224.17,409.75 L1219.17,414.75 L1214.17,409.75Z" fill="#248a57"/>
+<text x="1226.17" y="402.75" class="note">exact</text>
+<text x="1050" y="112" class="note">代理含 setup、三对角 matvec 与 block solve；只比较本矩阵族</text>
+<rect x="91.80" y="496.80" width="6.4" height="6.4" fill="#c43d3d"/>
+<text x="105" y="504" class="legend">none</text>
+<circle cx="180.00" cy="500.00" r="3.2" fill="#2f6fbd"/>
+<text x="190" y="504" class="legend">Jacobi</text>
+<path d="M285.00,495.80 L289.20,500.00 L285.00,504.20 L280.80,500.00Z" fill="#248a57"/>
+<text x="295" y="504" class="legend">block-8</text>
+<rect x="571.80" y="496.80" width="6.4" height="6.4" fill="#c43d3d"/>
+<text x="585" y="504" class="legend">none</text>
+<circle cx="650.00" cy="500.00" r="3.2" fill="#2f6fbd"/>
+<text x="660" y="504" class="legend">Jacobi</text>
+<rect x="741.80" y="496.80" width="6.4" height="6.4" fill="#c36a14"/>
+<text x="755" y="504" class="legend">block-4</text>
+<path d="M845.00,495.80 L849.20,500.00 L845.00,504.20 L840.80,500.00Z" fill="#248a57"/>
+<text x="855" y="504" class="legend">block-8</text>
+<text x="720" y="555" text-anchor="middle" class="note">A 显示谱重塑；B 用原系统真残差验收；C 表明更强预条件通常减少迭代，却可能增加 setup、内存与每步成本。</text>
+<text x="720" y="580" text-anchor="middle" class="note">生成：plot_krylov_preconditioning.py · Python 标准库 · n=32 变尺度 SPD 三对角矩阵</text>
+</svg>

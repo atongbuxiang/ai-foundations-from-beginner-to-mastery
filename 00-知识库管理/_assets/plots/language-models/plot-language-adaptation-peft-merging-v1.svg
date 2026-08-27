@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">Data weights, PEFT states and parameter merging</title><desc id="desc">Three panels compare instruction target shares, PEFT state counts and merging outputs.</desc>
+<rect width="1200" height="700" fill="#FFFEFB"/>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<text x="55" y="55" font-size="25" font-weight="700" fill="#17324D">Adaptation claims move through data, state and coordinate contracts</text>
+<line x1="400" y1="110" x2="400" y2="620" stroke="#D7DEE8"/><line x1="800" y1="110" x2="800" y2="620" stroke="#D7DEE8"/>
+<text x="55" y="130" font-size="18" font-weight="700" fill="#17324D">1 · task draw ≠ target share</text>
+<text x="65" y="180" font-size="16" font-weight="700" fill="#2563EB">Task A</text>
+<rect x="135" y="156" width="100.0" height="28" rx="5" fill="#93C5FD"/><text x="250" y="175" font-size="13">draw 50%</text>
+<rect x="135" y="200" width="40.0" height="28" rx="5" fill="#2563EB"/><text x="250" y="220" font-size="13">target 20%</text>
+<text x="65" y="300" font-size="16" font-weight="700" fill="#D97706">Task B</text>
+<rect x="135" y="276" width="100.0" height="28" rx="5" fill="#93C5FD"/><text x="250" y="295" font-size="13">draw 50%</text>
+<rect x="135" y="320" width="160.0" height="28" rx="5" fill="#D97706"/><text x="250" y="340" font-size="13">target 80%</text>
+<text x="430" y="130" font-size="18" font-weight="700" fill="#17324D">2 · same frozen base, different state</text>
+<text x="440" y="185" font-size="15" fill="#17324D">prompt</text>
+<rect x="530" y="160" width="32.5" height="34" rx="6" fill="#2563EB"/>
+<text x="577.5" y="183" font-size="14" fill="#2563EB">500</text>
+<text x="440" y="290" font-size="15" fill="#17324D">prefix KV</text>
+<rect x="530" y="265" width="260.0" height="34" rx="6" fill="#7C3AED"/>
+<text x="805.0" y="288" font-size="14" fill="#7C3AED">4000</text>
+<text x="440" y="395" font-size="15" fill="#17324D">adapter</text>
+<rect x="530" y="370" width="104.0" height="34" rx="6" fill="#D97706"/>
+<text x="649.0" y="393" font-size="14" fill="#D97706">1600</text>
+<text x="830" y="130" font-size="18" font-weight="700" fill="#17324D">3 · coordinates do not guarantee function</text>
+<text x="845" y="190" font-size="15">uniform soup = [1.5, 1.5]</text>
+<text x="845" y="235" font-size="15">task-vector sum = [2.0, 2.0]</text>
+<text x="845" y="300" font-size="15" fill="#0F766E">TIES + coordinate = 0.70</text>
+<text x="845" y="345" font-size="15" fill="#C24135">TIES − coordinate = -0.65</text>
+<rect x="835" y="415" width="300" height="145" rx="11" fill="#FEE2E2" stroke="#C24135"/>
+<text x="855" y="452" font-size="15" font-weight="700" fill="#C24135">Permutation counterexample</text>
+<text x="855" y="492" font-size="14">fA = fB = 6.0</text>
+<text x="855" y="530" font-size="14">f(parameter average) = 0.0</text>
+<text x="55" y="650" font-size="14" fill="#64748B">Every bar is tied to a unit; every merged tensor still needs independent task, OOD and safety evaluation.</text>
+</svg>

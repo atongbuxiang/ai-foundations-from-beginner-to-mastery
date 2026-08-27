@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">指令数据不是一行 prompt-response：来源、模板、turn 与选择构成经验分布</title><desc id="desc">展示任务祖先、模板扩展、synthetic teacher、过滤和多轮切分如何共同决定训练份额。</desc>
+<rect width="1200" height="700" fill="#FFFEFB"/>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#64748B"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#17324D" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<text x="55" y="55" font-size="25" font-weight="700" fill="#2563EB">指令数据不是一行 prompt-response：来源、模板、turn 与选择构成经验分布</text>
+<rect x="55" y="120" width="235" height="118" rx="12" fill="#FFFFFF" stroke="#2563EB" stroke-width="2" filter="url(#shadow)"/>
+<text x="71" y="149" font-size="16" font-weight="700" fill="#2563EB">Task ancestors</text>
+<text x="71" y="176" font-size="13" fill="#64748B">dataset / author / license</text>
+<text x="71" y="198" font-size="13" fill="#64748B">benchmark overlap</text>
+<line x1="290" y1="179" x2="320" y2="179" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="330" y="120" width="235" height="118" rx="12" fill="#FFFFFF" stroke="#7C3AED" stroke-width="2" filter="url(#shadow)"/>
+<text x="346" y="149" font-size="16" font-weight="700" fill="#7C3AED">Templates</text>
+<text x="346" y="176" font-size="13" fill="#64748B">instruction variants</text>
+<text x="346" y="198" font-size="13" fill="#64748B">few-shot / CoT / locale</text>
+<line x1="565" y1="179" x2="595" y2="179" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="605" y="120" width="235" height="118" rx="12" fill="#FFFFFF" stroke="#D97706" stroke-width="2" filter="url(#shadow)"/>
+<text x="621" y="149" font-size="16" font-weight="700" fill="#D97706">Instances</text>
+<text x="621" y="176" font-size="13" fill="#64748B">human / synthetic teacher</text>
+<text x="621" y="198" font-size="13" fill="#64748B">input + target + metadata</text>
+<line x1="840" y1="179" x2="870" y2="179" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="880" y="120" width="235" height="118" rx="12" fill="#FFFFFF" stroke="#0F766E" stroke-width="2" filter="url(#shadow)"/>
+<text x="896" y="149" font-size="16" font-weight="700" fill="#0F766E">Selected examples</text>
+<text x="896" y="176" font-size="13" fill="#64748B">quality / safety / dedup</text>
+<text x="896" y="198" font-size="13" fill="#64748B">turn + target masks</text>
+<text x="55" y="300" font-size="18" font-weight="700" fill="#17324D">三种不可合并的权重</text>
+<text x="65" y="357" font-size="14" fill="#17324D">task share</text>
+<rect x="230" y="335" width="310" height="30" rx="5" fill="#EEF2F7"/><rect x="230" y="335" width="170.5" height="30" rx="5" fill="#2563EB"/>
+<text x="552" y="356" font-size="14" fill="#2563EB">55%</text>
+<text x="65" y="419" font-size="14" fill="#17324D">conversation share</text>
+<rect x="230" y="397" width="310" height="30" rx="5" fill="#EEF2F7"/><rect x="230" y="397" width="93.0" height="30" rx="5" fill="#7C3AED"/>
+<text x="552" y="418" font-size="14" fill="#7C3AED">30%</text>
+<text x="65" y="481" font-size="14" fill="#17324D">assistant target share</text>
+<rect x="230" y="459" width="310" height="30" rx="5" fill="#EEF2F7"/><rect x="230" y="459" width="223.2" height="30" rx="5" fill="#0F766E"/>
+<text x="552" y="480" font-size="14" fill="#0F766E">72%</text>
+<path d="M930 245 C1120 300,1090 500,880 515" fill="none" stroke="#C24135" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#arrow)"/>
+<path d="M880 515 C720 555,650 435,700 250" fill="none" stroke="#C24135" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#arrow)"/>
+<text x="765" y="570" font-size="15" font-weight="700" fill="#C24135">teacher → filter → student → next teacher</text>
+<text x="705" y="600" font-size="13" fill="#64748B">self-generation can amplify style, factual and safety selection biases</text>
+<rect x="620" y="315" width="240" height="185" rx="12" fill="#FFF7E8" stroke="#D97706" stroke-width="2" filter="url(#shadow)"/>
+<text x="636" y="344" font-size="16" font-weight="700" fill="#D97706">Multi-turn unit</text>
+<text x="636" y="371" font-size="13" fill="#64748B">turn 1: user → assistant</text>
+<text x="636" y="393" font-size="13" fill="#64748B">turn 2: user → assistant</text>
+<text x="636" y="415" font-size="13" fill="#64748B">document-uniform?</text>
+<text x="636" y="437" font-size="13" fill="#64748B">conversation-uniform?</text>
+<text x="636" y="459" font-size="13" fill="#64748B">assistant-target-uniform?</text>
+<text x="55" y="670" font-size="14" fill="#64748B">数据质量是相对目标的测量问题；必须同时报告 kept 与 rejected pool、teacher version、mixing unit 和有效 targets。</text>
+</svg>

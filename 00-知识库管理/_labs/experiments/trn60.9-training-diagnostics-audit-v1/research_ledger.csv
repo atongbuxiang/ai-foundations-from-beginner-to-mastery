@@ -1,0 +1,9 @@
+record,required_fields,present_fields,missing_fields,completeness_fraction,evidence_target,claim_language_allowed
+claim,8,8,0,1.0,E0,defined
+protocol,10,10,0,1.0,E0,defined
+manifest,9,9,0,1.0,E1,local_oracle
+telemetry,8,7,1,0.875,E2,compatible_timeline
+incident,9,9,0,1.0,E2,compatible_timeline
+randomized_study,8,8,0,1.0,E3,protocol_effect
+mechanism_intervention,7,5,2,0.7142857142857143,E4,mechanism_discrimination
+external_replication,6,2,4,0.3333333333333333,E5,bounded_external_robustness

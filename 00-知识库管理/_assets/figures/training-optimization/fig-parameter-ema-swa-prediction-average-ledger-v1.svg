@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">参数 EMA、SWA 与预测平均的对象边界</title>
+  <desc id="desc">区分参数轨迹平均、预测平均与教师平均，并列出对称性、归一化统计、时钟和反馈语义等有效性边界。</desc>
+  <rect width="1200" height="800" fill="#FFFEFB"/>
+  <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}.h{font-size:27px;font-weight:700}.sh{font-size:18px;font-weight:700}.b{font-size:14px}.s{font-size:12.5px;fill:#64748B}.bb{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.bg{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.ba{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.br{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}.line{stroke:#CBD5E1;stroke-width:2}.traj{stroke:#2563EB;stroke-width:3;fill:none}.avg{stroke:#0F766E;stroke-width:3;fill:none;stroke-dasharray:7 6}.arr{stroke:#2563EB;stroke-width:3;fill:none}</style>
+  <defs><marker id="ab" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#2563EB"/></marker></defs>
+  <text x="48" y="48" class="h" fill="#2563EB">先问“平均什么对象”，再问“平均是否有意义”</text>
+
+  <rect x="48" y="86" width="338" height="410" rx="14" class="bb"/>
+  <text x="72" y="124" class="sh">① 参数轨迹上的平均</text>
+  <text x="72" y="153" class="s">同一训练轨迹，不同权重核</text>
+  <path d="M94 300 C126 208 176 360 222 224 S300 318 344 190" class="traj"/>
+  <circle cx="109" cy="265" r="6" fill="#2563EB"/><circle cx="178" cy="321" r="6" fill="#2563EB"/><circle cx="245" cy="254" r="6" fill="#2563EB"/><circle cx="322" cy="220" r="6" fill="#2563EB"/>
+  <line x1="118" y1="352" x2="330" y2="352" class="avg"/>
+  <circle cx="248" cy="352" r="10" fill="#0F766E"/>
+  <text x="72" y="390" class="b">EMA：αₖ ∝ βᵗ⁻ᵏ</text>
+  <text x="72" y="420" class="b">SWA：尾段 checkpoint 近似等权</text>
+  <text x="72" y="452" class="s">窗口、采样时钟、burn-in 都是算法合同</text>
+
+  <rect x="431" y="86" width="338" height="410" rx="14" class="bg"/>
+  <text x="455" y="124" class="sh">② 参数平均 ≠ 预测平均</text>
+  <rect x="455" y="170" width="118" height="70" rx="10" class="bb"/>
+  <text x="479" y="199" class="b">θ₁, θ₂, …</text><text x="479" y="224" class="s">parameter states</text>
+  <line x1="573" y1="205" x2="613" y2="205" class="arr" marker-end="url(#ab)"/>
+  <rect x="623" y="170" width="122" height="70" rx="10" class="ba"/>
+  <text x="650" y="199" class="b">θ̄ = Σαθ</text><text x="650" y="224" class="s">one model</text>
+  <text x="477" y="290" class="sh" fill="#C0392B">f(θ̄, x) ≠ Σₖ αₖ f(θₖ, x)</text>
+  <text x="455" y="328" class="s">仅在线性化邻域、同一 basin 且高阶项较小时接近</text>
+  <rect x="455" y="360" width="290" height="92" rx="10" class="br"/>
+  <text x="477" y="390" class="b">置换/缩放对称会让坐标平均失效</text>
+  <text x="477" y="418" class="s">两个功能相近模型的参数中点</text>
+  <text x="477" y="442" class="s">可能对应完全不同的函数。</text>
+
+  <rect x="814" y="86" width="338" height="410" rx="14" class="ba"/>
+  <text x="838" y="124" class="sh">③ 教师平均多了反馈回路</text>
+  <rect x="840" y="178" width="116" height="70" rx="10" class="bb"/>
+  <text x="869" y="208" class="b">student</text><text x="858" y="233" class="s">gradient update</text>
+  <rect x="1010" y="178" width="116" height="70" rx="10" class="bg"/>
+  <text x="1041" y="208" class="b">teacher</text><text x="1030" y="233" class="s">EMA update</text>
+  <path d="M956 201 C978 178 991 178 1006 201" class="arr" marker-end="url(#ab)"/>
+  <path d="M1010 232 C984 264 970 264 956 232" class="arr" marker-end="url(#ab)"/>
+  <text x="838" y="302" class="b">teacher 产生 target / pseudo-label</text>
+  <text x="838" y="334" class="s">这会改变后续 student 梯度分布</text>
+  <text x="838" y="376" class="b">因此它不是“仅用于评估的 EMA”</text>
+  <text x="838" y="408" class="s">衰减率、更新时钟和停止梯度</text>
+  <text x="838" y="436" class="s">共同定义闭环动力系统</text>
+
+  <text x="48" y="552" class="h" fill="#0F766E">四个验收边界决定平均模型能否被正确解释</text>
+  <rect x="48" y="590" width="252" height="118" rx="12" class="bb"/>
+  <text x="72" y="626" class="sh">对齐</text><text x="72" y="658" class="b">同架构、同坐标、同 basin？</text><text x="72" y="685" class="s">跨 run 平均尤其危险</text>
+  <rect x="332" y="590" width="252" height="118" rx="12" class="bg"/>
+  <text x="356" y="626" class="sh">状态</text><text x="356" y="658" class="b">BN running stats 是否重估？</text><text x="356" y="685" class="s">参数平均不等于完整状态平均</text>
+  <rect x="616" y="590" width="252" height="118" rx="12" class="ba"/>
+  <text x="640" y="626" class="sh">时钟</text><text x="640" y="658" class="b">step / token / checkpoint 间隔</text><text x="640" y="685" class="s">β 的物理窗口依赖更新频率</text>
+  <rect x="900" y="590" width="252" height="118" rx="12" class="br"/>
+  <text x="924" y="626" class="sh">选择</text><text x="924" y="658" class="b">last / best / EMA / SWA</text><text x="924" y="685" class="s">选择预算必须计入比较</text>
+  <rect x="48" y="752" width="1104" height="30" rx="8" fill="#F8FAFC" stroke="#CBD5E1"/>
+  <text x="72" y="772" class="s">边界：EMA/SWA 是轨迹后处理或闭环教师机制；它们不自动等价于贝叶斯后验平均。</text>
+</svg>

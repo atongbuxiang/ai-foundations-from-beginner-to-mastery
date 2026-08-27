@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="580" viewBox="0 0 1200 580" role="img" aria-labelledby="title desc">
+  <title id="title">从目标量到最终上界的构造与松弛账本</title>
+  <desc id="desc">上部流程从目标量经过精确分解、选择不等式和调节自由参数得到上界，下部表格记录每一步删除的结构、等号条件和新增松弛。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
+    <style>
+      .ink{fill:#1f2937}.muted{fill:#64748b}.line{stroke:#cbd5e1;stroke-width:1.5}.rule{stroke:#334155;stroke-width:2}.arrow{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#arrow)}.soft{fill:#f8fafc}.blue{fill:#2563eb}.blue-soft{fill:#eff6ff}.green{fill:#047857}.green-soft{fill:#ecfdf5}.amber{fill:#b45309}.amber-soft{fill:#fffbeb}
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.h{font-size:18px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}
+    </style>
+  </defs>
+  <rect width="1200" height="580" fill="#ffffff"/>
+  <g>
+    <rect x="54" y="48" width="222" height="102" rx="11" class="soft" stroke="#cbd5e1"/>
+    <rect x="352" y="48" width="222" height="102" rx="11" class="blue-soft" stroke="#bfdbfe"/>
+    <rect x="650" y="48" width="222" height="102" rx="11" class="amber-soft" stroke="#fde68a"/>
+    <rect x="948" y="48" width="198" height="102" rx="11" class="green-soft" stroke="#a7f3d0"/>
+  </g>
+  <g class="sans h ink" text-anchor="middle"><text x="165" y="81">1　目标量</text><text x="463" y="81">2　精确分解</text><text x="761" y="81">3　选择工具</text><text x="1047" y="81">4　最终界</text></g>
+  <g class="sans small muted" text-anchor="middle"><text x="165" y="118">方向、定义域、量词</text><text x="463" y="118">先暴露可控制结构</text><text x="761" y="118">不等式与自由参数</text><text x="1047" y="118">紧度和用途</text></g>
+  <path d="M276 99 L342 99" class="arrow"/><path d="M574 99 L640 99" class="arrow"/><path d="M872 99 L938 99" class="arrow"/>
+  <rect x="174" y="183" width="852" height="66" rx="10" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="600" y="210" class="math formula ink" text-anchor="middle">‖e+δ‖² = ‖e‖² + 2⟨e,δ⟩ + ‖δ‖²</text>
+  <text x="600" y="237" class="math body blue" text-anchor="middle">2|⟨e,δ⟩| ≤ 2‖e‖‖δ‖ ≤ η‖e‖² + η⁻¹‖δ‖²　　η&gt;0</text>
+
+  <rect x="42" y="286" width="1116" height="210" rx="12" class="soft" stroke="#cbd5e1"/>
+  <g class="sans h ink"><text x="70" y="325">步骤</text><text x="286" y="325">保留了什么</text><text x="612" y="325">丢掉或放松了什么</text><text x="944" y="325">等号条件</text></g>
+  <line x1="62" y1="343" x2="1138" y2="343" class="rule"/>
+  <g class="line"><line x1="238" y1="304" x2="238" y2="476"/><line x1="564" y1="304" x2="564" y2="476"/><line x1="896" y1="304" x2="896" y2="476"/><line x1="62" y1="406" x2="1138" y2="406"/></g>
+  <g class="sans body ink"><text x="70" y="379">Cauchy</text><text x="286" y="379">内积与范数结构</text><text x="612" y="379">丢掉夹角，只保留长度</text><text x="944" y="379">e 与 δ 线性相关</text><text x="70" y="445">Young</text><text x="286" y="445">把乘积拆成两个平方</text><text x="612" y="445">用 η 分配误差预算</text><text x="944" y="445">η‖e‖ = ‖δ‖</text></g>
+  <rect x="92" y="520" width="1016" height="42" rx="10" class="green-soft"/>
+  <text x="600" y="547" class="sans result ink" text-anchor="middle">正确公式、紧上界与稳定实现是三本账；每次“≤”都要登记新增 slack。</text>
+</svg>

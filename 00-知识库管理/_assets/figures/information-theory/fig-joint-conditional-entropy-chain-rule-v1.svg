@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">联合熵、条件熵与链式法则</title>
+  <desc id="desc">三面板展示联合信息分阶段编码、复制与独立两种极端、以及自回归序列条件熵分解。</desc>
+  <defs>
+    <style>
+      .bg{fill:#f8fafc}.panel{fill:#fff;stroke:#cbd5e1;stroke-width:1.5}.title{font:700 20px -apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;fill:#0f172a}.sub{font:14px -apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;fill:#475569}.label{font:14px -apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;fill:#334155}.small{font:12px -apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;fill:#64748b}.formula{font:italic 16px Georgia,serif;fill:#0f172a}.arrow{stroke:#334155;stroke-width:2;fill:none;marker-end:url(#arrow)}.blue{fill:#dbeafe;stroke:#2563eb;stroke-width:1.5}.violet{fill:#ede9fe;stroke:#7c3aed;stroke-width:1.5}.green{fill:#dcfce7;stroke:#059669;stroke-width:1.5}.amber{fill:#fef3c7;stroke:#d97706;stroke-width:1.5}.token{font:700 17px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#0f172a}.dash{stroke:#94a3b8;stroke-width:1.5;stroke-dasharray:5 5}
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#334155"/></marker>
+  </defs>
+  <rect class="bg" width="1200" height="430"/>
+
+  <rect class="panel" x="20" y="20" width="370" height="390" rx="14"/>
+  <text class="title" x="40" y="52">A · 先描述 X，再描述 Y|X</text>
+  <text class="sub" x="40" y="76">概率乘法经 −log 变成信息加法</text>
+  <rect class="blue" x="52" y="118" width="112" height="62" rx="10"/>
+  <text class="label" x="73" y="143">第一段码</text><text class="formula" x="70" y="166">−log p(x)</text>
+  <path class="arrow" d="M171 149 L225 149"/>
+  <rect class="violet" x="233" y="118" width="125" height="62" rx="10"/>
+  <text class="label" x="250" y="143">第二段条件码</text><text class="formula" x="248" y="166">−log p(y|x)</text>
+  <path class="arrow" d="M205 202 L205 245"/>
+  <rect class="green" x="74" y="253" width="264" height="67" rx="10"/>
+  <text class="label" x="106" y="278">联合码长：−log p(x,y)</text>
+  <text class="formula" x="98" y="304">p(x,y)=p(x)p(y|x)</text>
+  <text class="formula" x="48" y="356">H(X,Y) = H(X) + H(Y|X)</text>
+  <text class="small" x="40" y="389">恒等式对任意 joint distribution 成立，不要求独立。</text>
+
+  <rect class="panel" x="415" y="20" width="370" height="390" rx="14"/>
+  <text class="title" x="435" y="52">B · 依赖决定“新增”的信息</text>
+  <text class="sub" x="435" y="76">同样两个公平 bit，joint entropy 可不同</text>
+  <text class="label" x="448" y="113">复制：Y=X</text>
+  <circle cx="495" cy="172" r="53" fill="#dbeafe" fill-opacity="0.82" stroke="#2563eb" stroke-width="2"/>
+  <circle cx="555" cy="172" r="53" fill="#ede9fe" fill-opacity="0.78" stroke="#7c3aed" stroke-width="2"/>
+  <text class="token" x="516" y="178">1 bit</text>
+  <text class="small" x="447" y="238">H(X)=H(Y)=1，H(Y|X)=0，H(X,Y)=1</text>
+  <line class="dash" x1="438" y1="262" x2="762" y2="262"/>
+  <text class="label" x="448" y="289">独立：X ⟂ Y</text>
+  <circle cx="514" cy="337" r="41" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <circle cx="681" cy="337" r="41" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text class="token" x="494" y="343">1 bit</text><text class="token" x="661" y="343">1 bit</text>
+  <text class="small" x="445" y="399">H(Y|X)=H(Y)=1，因此 H(X,Y)=2 bits</text>
+
+  <rect class="panel" x="810" y="20" width="370" height="390" rx="14"/>
+  <text class="title" x="830" y="52">C · 序列按 prefix 精确展开</text>
+  <text class="sub" x="830" y="76">autoregressive chain rule 不是独立假设</text>
+  <rect class="blue" x="835" y="122" width="62" height="48" rx="9"/><text class="token" x="857" y="153">x₁</text>
+  <rect class="violet" x="918" y="122" width="62" height="48" rx="9"/><text class="token" x="940" y="153">x₂</text>
+  <rect class="green" x="1001" y="122" width="62" height="48" rx="9"/><text class="token" x="1023" y="153">x₃</text>
+  <rect class="amber" x="1084" y="122" width="70" height="48" rx="9"/><text class="token" x="1097" y="153">EOS</text>
+  <path class="arrow" d="M898 146 L912 146"/><path class="arrow" d="M981 146 L995 146"/><path class="arrow" d="M1064 146 L1078 146"/>
+  <text class="small" x="840" y="200">p(x₁)</text><text class="small" x="913" y="200">p(x₂|x₁)</text><text class="small" x="985" y="200">p(x₃|x₁:₂)</text><text class="small" x="1076" y="200">p(EOS|x₁:₃)</text>
+  <rect x="833" y="230" width="324" height="76" rx="10" fill="#f1f5f9"/>
+  <text class="formula" x="849" y="257">H(sequence) = Σ conditional entropy</text>
+  <text class="formula" x="849" y="288">NLL(sequence) = Σ token NLL</text>
+  <text class="label" x="836" y="344">实现审计</text>
+  <text class="small" x="836" y="367">• padding 不计概率；EOS 是停止事件</text>
+  <text class="small" x="836" y="389">• per-token 与 per-sequence reduction 权重不同</text>
+</svg>

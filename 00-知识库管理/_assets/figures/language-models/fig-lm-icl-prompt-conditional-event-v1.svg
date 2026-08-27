@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">Prompt 是精确条件事件，不是肉眼语义标签</title><desc id="desc">同一意图经不同模板、tokenizer 和答案边界形成不同 token 前缀与条件分布。</desc>
+<rect width="1200" height="700" fill="#FFFEFB"/>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#64748B"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#17324D" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<text x="55" y="55" font-size="25" font-weight="700" fill="#2563EB">Prompt 是精确条件事件，不是肉眼语义标签</text>
+<rect x="55" y="120" width="235" height="110" rx="12" fill="#EFF6FF" stroke="#2563EB" stroke-width="2" filter="url(#shadow)"/>
+<text x="71" y="149" font-size="16" font-weight="700" fill="#2563EB">语义任务</text>
+<text x="71" y="176" font-size="13" fill="#64748B">判断评论情感</text>
+<text x="71" y="198" font-size="13" fill="#64748B">输出 positive / negative</text>
+<line x1="300" y1="175" x2="365" y2="175" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="380" y="95" width="260" height="105" rx="12" fill="#FFFFFF" stroke="#0F766E" stroke-width="2" filter="url(#shadow)"/>
+<text x="396" y="124" font-size="16" font-weight="700" fill="#0F766E">序列 A</text>
+<text x="396" y="151" font-size="13" fill="#64748B">Review: ...</text>
+<text x="396" y="173" font-size="13" fill="#64748B">Sentiment:</text>
+<line x1="650" y1="147" x2="730" y2="147" stroke="#0F766E" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="380" y="245" width="260" height="105" rx="12" fill="#FFFFFF" stroke="#7C3AED" stroke-width="2" filter="url(#shadow)"/>
+<text x="396" y="274" font-size="16" font-weight="700" fill="#7C3AED">序列 B</text>
+<text x="396" y="301" font-size="13" fill="#64748B">文本：...</text>
+<text x="396" y="323" font-size="13" fill="#64748B">标签：</text>
+<line x1="650" y1="297" x2="730" y2="297" stroke="#7C3AED" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="380" y="395" width="260" height="105" rx="12" fill="#FFFFFF" stroke="#D97706" stroke-width="2" filter="url(#shadow)"/>
+<text x="396" y="424" font-size="16" font-weight="700" fill="#D97706">序列 C</text>
+<text x="396" y="451" font-size="13" fill="#64748B">&lt;user&gt;...&lt;assistant&gt;</text>
+<text x="396" y="473" font-size="13" fill="#64748B">leading space + marker</text>
+<line x1="650" y1="447" x2="730" y2="447" stroke="#D97706" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="745" y="95" width="285" height="105" rx="12" fill="#FFFFFF" stroke="#0F766E" stroke-width="2" filter="url(#shadow)"/>
+<text x="761" y="124" font-size="16" font-weight="700" fill="#0F766E">IDs [11, 93, 7, ...]</text>
+<text x="761" y="151" font-size="13" fill="#64748B">P(pos)=.72</text>
+<rect x="745" y="245" width="285" height="105" rx="12" fill="#FFFFFF" stroke="#7C3AED" stroke-width="2" filter="url(#shadow)"/>
+<text x="761" y="274" font-size="16" font-weight="700" fill="#7C3AED">IDs [51, 18, 4, ...]</text>
+<text x="761" y="301" font-size="13" fill="#64748B">P(pos)=.41</text>
+<rect x="745" y="395" width="285" height="105" rx="12" fill="#FFFFFF" stroke="#D97706" stroke-width="2" filter="url(#shadow)"/>
+<text x="761" y="424" font-size="16" font-weight="700" fill="#D97706">IDs [1, 320, 9, ...]</text>
+<text x="761" y="451" font-size="13" fill="#64748B">P(pos)=.63</text>
+<rect x="55" y="525" width="975" height="90" rx="12" fill="#FEE2E2" stroke="#C24135" stroke-width="2" filter="url(#shadow)"/>
+<text x="71" y="554" font-size="16" font-weight="700" fill="#C24135">可比较性合同</text>
+<text x="71" y="581" font-size="13" fill="#64748B">固定 bytes → normalization → template → token IDs → label token set → generation boundary → sampler；逐因子做 counterfactual sweep。</text>
+<text x="55" y="670" font-size="14" fill="#64748B">语义相近不推出条件概率相同；prompt sensitivity 是实验对象，不是需要藏掉的噪声。</text>
+</svg>

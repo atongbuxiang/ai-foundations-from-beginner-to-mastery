@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Softmax Bottleneck：跨 context 的 centered log-ratio rank</title>
+<desc id="desc">单个 context 的自由 logits 可覆盖单纯形内部；瓶颈来自多个 contexts 共用低维 hidden-to-vocabulary 线性 head。先消去 row-shift gauge，再比较目标秩与模型秩。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">目标矩阵可能是高秩</text>
+<text x="60" y="100" font-size="16" font-weight="700" text-anchor="start" fill="#1F2937">P*: diag=.7, off-diag=.1</text>
+<text x="76" y="174" font-size="15" font-weight="700" text-anchor="end" fill="#64748B">c1</text>
+<text x="118" y="128" font-size="15" font-weight="700" text-anchor="middle" fill="#64748B">w1</text>
+<rect x="92" y="142" width="46" height="42" rx="3" fill="#FFF5F2" stroke="#C24135" stroke-width="1.5"/>
+<text x="115" y="169" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">.7</text>
+<rect x="144" y="142" width="46" height="42" rx="3" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+<text x="167" y="169" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">.1</text>
+<rect x="196" y="142" width="46" height="42" rx="3" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+<text x="219" y="169" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">.1</text>
+<rect x="248" y="142" width="46" height="42" rx="3" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+<text x="271" y="169" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">.1</text>
+<text x="76" y="226" font-size="15" font-weight="700" text-anchor="end" fill="#64748B">c2</text>
+<text x="170" y="128" font-size="15" font-weight="700" text-anchor="middle" fill="#64748B">w2</text>
+<rect x="92" y="194" width="46" height="42" rx="3" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+<text x="115" y="221" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">.1</text>
+<rect x="144" y="194" width="46" height="42" rx="3" fill="#FFF5F2" stroke="#C24135" stroke-width="1.5"/>
+<text x="167" y="221" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">.7</text>
+<rect x="196" y="194" width="46" height="42" rx="3" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+<text x="219" y="221" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">.1</text>
+<rect x="248" y="194" width="46" height="42" rx="3" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+<text x="271" y="221" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">.1</text>
+<text x="76" y="278" font-size="15" font-weight="700" text-anchor="end" fill="#64748B">c3</text>
+<text x="222" y="128" font-size="15" font-weight="700" text-anchor="middle" fill="#64748B">w3</text>
+<rect x="92" y="246" width="46" height="42" rx="3" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+<text x="115" y="273" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">.1</text>
+<rect x="144" y="246" width="46" height="42" rx="3" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+<text x="167" y="273" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">.1</text>
+<rect x="196" y="246" width="46" height="42" rx="3" fill="#FFF5F2" stroke="#C24135" stroke-width="1.5"/>
+<text x="219" y="273" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">.7</text>
+<rect x="248" y="246" width="46" height="42" rx="3" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+<text x="271" y="273" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">.1</text>
+<text x="76" y="330" font-size="15" font-weight="700" text-anchor="end" fill="#64748B">c4</text>
+<text x="274" y="128" font-size="15" font-weight="700" text-anchor="middle" fill="#64748B">w4</text>
+<rect x="92" y="298" width="46" height="42" rx="3" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+<text x="115" y="325" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">.1</text>
+<rect x="144" y="298" width="46" height="42" rx="3" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+<text x="167" y="325" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">.1</text>
+<rect x="196" y="298" width="46" height="42" rx="3" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+<text x="219" y="325" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">.1</text>
+<rect x="248" y="298" width="46" height="42" rx="3" fill="#FFF5F2" stroke="#C24135" stroke-width="1.5"/>
+<text x="271" y="325" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">.7</text>
+<rect x="52" y="382" width="310" height="92" rx="5" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="207" y="412" font-size="17" font-weight="700" text-anchor="middle" fill="#0F766E">L*C = log(7) C</text>
+<text x="207" y="442" font-size="17" font-weight="700" text-anchor="middle" fill="#C24135">rank = V - 1 = 3</text>
+<text x="207" y="466" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">row shifts already removed</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">线性 head 的可辨识秩界</text>
+<rect x="445" y="100" width="102" height="70" rx="5" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="496" y="128" font-size="19" font-weight="700" text-anchor="middle" fill="#2563EB">H</text>
+<text x="496" y="154" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">N x d</text>
+<rect x="592" y="100" width="102" height="70" rx="5" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="643" y="128" font-size="19" font-weight="700" text-anchor="middle" fill="#0F766E">W^T</text>
+<text x="643" y="154" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">d x V</text>
+<line x1="552" y1="135" x2="585" y2="135" stroke="#1F2937" stroke-width="2.1" marker-end="url(#a3)"/>
+<rect x="445" y="218" width="249" height="72" rx="5" fill="#FFFBEB" stroke="#B7791F" stroke-width="2"/>
+<text x="569" y="248" font-size="16" font-weight="700" text-anchor="middle" fill="#B7791F">Z = H W^T + 1 b^T</text>
+<text x="569" y="276" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">shared across contexts</text>
+<line x1="569" y1="297" x2="569" y2="335" stroke="#1F2937" stroke-width="2.1" marker-end="url(#a3)"/>
+<rect x="445" y="344" width="315" height="118" rx="5" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="602" y="374" font-size="18" font-weight="700" text-anchor="middle" fill="#0F766E">L C = Z C</text>
+<text x="602" y="406" font-size="18" font-weight="700" text-anchor="middle" fill="#C24135">rank(L C) &lt;= d + 1</text>
+<text x="602" y="436" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">C removes common logit shift</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">突破方式与证据边界</text>
+<rect x="845" y="98" width="285" height="76" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="987" y="127" font-size="16" font-weight="700" text-anchor="middle" fill="#2563EB">increase d</text>
+<text x="987" y="155" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">raise linear rank budget</text>
+<rect x="845" y="202" width="285" height="76" rx="5" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="987" y="231" font-size="16" font-weight="700" text-anchor="middle" fill="#0F766E">nonlinear decoder</text>
+<text x="987" y="259" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">change output family</text>
+<rect x="845" y="306" width="285" height="76" rx="5" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="987" y="335" font-size="16" font-weight="700" text-anchor="middle" fill="#C24135">Mixture of Softmaxes</text>
+<text x="987" y="363" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">sum_k pi_k p_k</text>
+<rect x="845" y="420" width="285" height="66" rx="5" fill="#FFFBEB" stroke="#B7791F" stroke-width="2"/>
+<text x="987" y="447" font-size="15" font-weight="700" text-anchor="middle" fill="#B7791F">rank diagnostic is necessary</text>
+<text x="987" y="474" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">not a quality guarantee</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">瓶颈不是单点 Softmax，而是跨 contexts 的共享低维参数化；先 quotient 掉 row-shift gauge，再比较目标与模型的 centered log-ratio rank。</text>
+</svg>

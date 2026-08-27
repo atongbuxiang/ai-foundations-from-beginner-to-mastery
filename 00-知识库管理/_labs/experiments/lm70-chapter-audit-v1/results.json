@@ -1,0 +1,281 @@
+{
+  "audit_id": "lm70-chapter-audit-v1",
+  "status": "passed",
+  "checks_passed": 10,
+  "checks_total": 10,
+  "summary": {
+    "chapter_markdown": 112,
+    "nodes": 72,
+    "questions": 1080,
+    "solutions": 1080,
+    "unique_sources": 157,
+    "image_embeds": 99,
+    "strict_figure_units": 99,
+    "experiments": 9
+  },
+  "checks": [
+    {
+      "name": "node_ids_and_status",
+      "passed": true,
+      "observed": {
+        "nodes": 72,
+        "ids": [
+          1,
+          72
+        ],
+        "unique": 72,
+        "status_bad": []
+      },
+      "expected": {
+        "nodes": 72,
+        "ids": [
+          1,
+          72
+        ],
+        "unique": 72,
+        "status_bad": []
+      },
+      "note": "LM-01--LM-72 must be unique, contiguous and verified."
+    },
+    {
+      "name": "nine_volume_core_contract",
+      "passed": true,
+      "observed": [
+        {
+          "volume": "70.1-文本Unicode与Tokenization",
+          "markdown": 9,
+          "nodes": 8,
+          "moc": 1
+        },
+        {
+          "volume": "70.2-语言模型目标",
+          "markdown": 9,
+          "nodes": 8,
+          "moc": 1
+        },
+        {
+          "volume": "70.3-预训练数据工程",
+          "markdown": 9,
+          "nodes": 8,
+          "moc": 1
+        },
+        {
+          "volume": "70.4-指令适配与参数高效微调",
+          "markdown": 9,
+          "nodes": 8,
+          "moc": 1
+        },
+        {
+          "volume": "70.5-上下文学习与推理时计算",
+          "markdown": 9,
+          "nodes": 8,
+          "moc": 1
+        },
+        {
+          "volume": "70.6-检索增强与外部记忆",
+          "markdown": 9,
+          "nodes": 8,
+          "moc": 1
+        },
+        {
+          "volume": "70.7-解码推理服务与加速",
+          "markdown": 9,
+          "nodes": 8,
+          "moc": 1
+        },
+        {
+          "volume": "70.8-评估校准与幻觉",
+          "markdown": 9,
+          "nodes": 8,
+          "moc": 1
+        },
+        {
+          "volume": "70.9-安全隐私与部署证据",
+          "markdown": 9,
+          "nodes": 8,
+          "moc": 1
+        }
+      ],
+      "expected": "Each of 9 volumes keeps 8 core nodes + 1 MOC at the learning-path level.",
+      "note": "Experiments, assessments and maintenance audits are checked in dedicated support folders."
+    },
+    {
+      "name": "chapter_support_material_contract",
+      "passed": true,
+      "observed": [
+        {
+          "directory": "实验与复现",
+          "type": "experiment",
+          "markdown": 9,
+          "typed": 9,
+          "expected": 9
+        },
+        {
+          "directory": "测验与解答",
+          "type": "assessment",
+          "markdown": 10,
+          "typed": 10,
+          "expected": 10
+        },
+        {
+          "directory": "课程维护",
+          "type": "audit",
+          "markdown": 10,
+          "typed": 10,
+          "expected": 10
+        }
+      ],
+      "expected": {
+        "实验与复现": [
+          "experiment",
+          9
+        ],
+        "测验与解答": [
+          "assessment",
+          10
+        ],
+        "课程维护": [
+          "audit",
+          10
+        ]
+      },
+      "note": "Support materials remain complete but no longer compete visually with the core learning path."
+    },
+    {
+      "name": "exercise_solution_bijection",
+      "passed": true,
+      "observed": {
+        "exercise": 1080,
+        "exercise_unique": 1080,
+        "solution": 1080,
+        "solution_unique": 1080,
+        "bijection": true
+      },
+      "expected": {
+        "exercise": 1080,
+        "solution": 1080,
+        "unique": true,
+        "bijection": true
+      },
+      "note": "Every node has A--E x 3 questions and a same-ID solution."
+    },
+    {
+      "name": "source_cards_verified",
+      "passed": true,
+      "observed": {
+        "unique_sources": 157,
+        "bad": []
+      },
+      "expected": {
+        "unique_sources": 157,
+        "bad": []
+      },
+      "note": "Only actually called node sources are counted."
+    },
+    {
+      "name": "image_embeds_and_svg",
+      "passed": true,
+      "observed": {
+        "embeds": 99,
+        "unique_targets": 99,
+        "bad": []
+      },
+      "expected": {
+        "minimum_embeds": 99,
+        "bad": []
+      },
+      "note": "All chapter figures use rooted paths, numeric widths and parseable SVG/XML."
+    },
+    {
+      "name": "strict_figure_units",
+      "passed": true,
+      "observed": {
+        "records": 99,
+        "bad": []
+      },
+      "expected": {
+        "records": 99,
+        "bad": []
+      },
+      "note": "Question to image to provenance to read-back to explicit boundary."
+    },
+    {
+      "name": "internal_links_resolved",
+      "passed": true,
+      "observed": {
+        "wiki_links": 1745,
+        "unresolved": []
+      },
+      "expected": {
+        "unresolved": []
+      },
+      "note": "Bare links resolve by filename/stem; rooted links resolve from the vault root."
+    },
+    {
+      "name": "nine_experiments_passed",
+      "passed": true,
+      "observed": [
+        {
+          "experiment": "lm70.1-tokenization-audit-v1",
+          "passed": true,
+          "checks": "9/9"
+        },
+        {
+          "experiment": "lm70.2-language-objectives-audit-v1",
+          "passed": true,
+          "checks": "9/9"
+        },
+        {
+          "experiment": "lm70.3-pretraining-data-audit-v1",
+          "passed": true,
+          "checks": "9/9"
+        },
+        {
+          "experiment": "lm70.4-instruction-adaptation-audit-v1",
+          "passed": true,
+          "checks": "9/9"
+        },
+        {
+          "experiment": "lm70.5-icl-reasoning-audit-v1",
+          "passed": true,
+          "checks": "9/9"
+        },
+        {
+          "experiment": "lm70.6-rag-audit-v1",
+          "passed": true,
+          "checks": "9/9"
+        },
+        {
+          "experiment": "lm70.7-decoding-serving-v1",
+          "passed": true,
+          "checks": "9/9"
+        },
+        {
+          "experiment": "lm70.8-evaluation-v1",
+          "passed": true,
+          "checks": "9/9"
+        },
+        {
+          "experiment": "lm70.9-safety-deployment-v1",
+          "passed": true,
+          "checks": "9/9"
+        }
+      ],
+      "expected": "Nine deterministic experiments, each with 9/9 checks.",
+      "note": "The audit reads results produced by scripts rerun in the same handoff."
+    },
+    {
+      "name": "markdown_delimiters_and_controls",
+      "passed": true,
+      "observed": {
+        "delimiter_bad": [],
+        "control_bad": []
+      },
+      "expected": {
+        "delimiter_bad": [],
+        "control_bad": []
+      },
+      "note": "Block math and Markdown fences are balanced; no embedded control bytes."
+    }
+  ]
+}

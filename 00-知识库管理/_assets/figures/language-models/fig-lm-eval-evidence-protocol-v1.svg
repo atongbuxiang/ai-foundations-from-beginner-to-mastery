@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">能力—行为—系统：用 intervention 建证据地图</title><desc id="desc">四层对象、oracle ladder、metric tree 与上线门。</desc>
+<rect width="1200" height="700" fill="#FBF8F1"/>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#667784"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#183044" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<line x1="48" y1="70" x2="1152" y2="70" stroke="#245AA8" stroke-width="4"/>
+<text x="52" y="49" font-size="24" font-weight="700" fill="#183044">能力—行为—系统：用 intervention 建证据地图</text>
+<text x="58" y="108" text-anchor="start" font-size="13" font-weight="700" fill="#245AA8">A · FOUR LAYERS</text>
+<rect x="58" y="130" width="225" height="70" rx="10" fill="#FFFDF8" stroke="#245AA8" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="73" y="158" text-anchor="start" font-size="15" font-weight="700" fill="#245AA8">条件模型</text>
+<text x="73" y="183" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">NLL / logits / representation</text>
+<rect x="58" y="225" width="225" height="70" rx="10" fill="#FFFDF8" stroke="#7054A3" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="73" y="253" text-anchor="start" font-size="15" font-weight="700" fill="#7054A3">生成行为</text>
+<text x="73" y="278" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">prompt + decoder + seed</text>
+<rect x="58" y="320" width="225" height="70" rx="10" fill="#FFFDF8" stroke="#17766E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="73" y="348" text-anchor="start" font-size="15" font-weight="700" fill="#17766E">工具系统</text>
+<text x="73" y="373" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">retriever / tools / judge</text>
+<rect x="58" y="415" width="225" height="70" rx="10" fill="#FFFDF8" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="73" y="443" text-anchor="start" font-size="15" font-weight="700" fill="#B7443E">在线产品</text>
+<text x="73" y="468" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">user / load / policy / SLO</text>
+<line x1="170" y1="200" x2="170" y2="223" stroke="#667784" stroke-width="2.1" marker-end="url(#arrow)"/>
+<line x1="170" y1="295" x2="170" y2="318" stroke="#667784" stroke-width="2.1" marker-end="url(#arrow)"/>
+<line x1="170" y1="390" x2="170" y2="413" stroke="#667784" stroke-width="2.1" marker-end="url(#arrow)"/>
+<text x="340" y="108" text-anchor="start" font-size="13" font-weight="700" fill="#4F7B45">B · ORACLE LADDER</text>
+<rect x="345" y="440" width="250" height="43" rx="5" fill="#B7443E" opacity=".86"/>
+<text x="470.0" y="467" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">end-to-end</text>
+<rect x="385" y="385" width="210" height="43" rx="5" fill="#C87922" opacity=".86"/>
+<text x="490.0" y="412" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">perfect parser</text>
+<rect x="425" y="330" width="170" height="43" rx="5" fill="#17766E" opacity=".86"/>
+<text x="510.0" y="357" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">gold evidence</text>
+<rect x="465" y="275" width="130" height="43" rx="5" fill="#4F7B45" opacity=".86"/>
+<text x="530.0" y="302" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">gold tool</text>
+<rect x="505" y="220" width="90" height="43" rx="5" fill="#245AA8" opacity=".86"/>
+<text x="550.0" y="247" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">gold answer</text>
+<rect x="535" y="165" width="60" height="43" rx="5" fill="#7054A3" opacity=".86"/>
+<text x="565.0" y="192" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">model</text>
+<text x="335" y="510" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">每次只替换一层为 oracle，观察 Δmetric。</text>
+<text x="335" y="531" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">这定位瓶颈，但不假设各层误差可线性相加。</text>
+<text x="660" y="108" text-anchor="start" font-size="13" font-weight="700" fill="#7054A3">C · METRIC TREE</text>
+<rect x="820" y="125" width="180" height="62" rx="10" fill="#F3EFFA" stroke="#7054A3" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="835" y="153" text-anchor="start" font-size="15" font-weight="700" fill="#7054A3">上线决策</text>
+<text x="835" y="178" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">多目标约束</text>
+<line x1="910" y1="187" x2="685" y2="243" stroke="#4F7B45" stroke-width="2.1" marker-end="url(#arrow)"/>
+<rect x="615" y="255" width="140" height="88" rx="10" fill="#FFFDF8" stroke="#4F7B45" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="630" y="283" text-anchor="start" font-size="15" font-weight="700" fill="#4F7B45">质量</text>
+<text x="630" y="308" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">EM / factuality</text>
+<line x1="910" y1="187" x2="865" y2="243" stroke="#B7443E" stroke-width="2.1" marker-end="url(#arrow)"/>
+<rect x="795" y="255" width="140" height="88" rx="10" fill="#FFFDF8" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="810" y="283" text-anchor="start" font-size="15" font-weight="700" fill="#B7443E">风险</text>
+<text x="810" y="308" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">harm / refusal</text>
+<line x1="910" y1="187" x2="1045" y2="243" stroke="#245AA8" stroke-width="2.1" marker-end="url(#arrow)"/>
+<rect x="975" y="255" width="140" height="88" rx="10" fill="#FFFDF8" stroke="#245AA8" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="990" y="283" text-anchor="start" font-size="15" font-weight="700" fill="#245AA8">系统</text>
+<text x="990" y="308" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">latency / cost</text>
+<circle cx="640" cy="395" r="35" fill="#FFFDF8" stroke="#D9D5CB" stroke-width="2"/>
+<text x="640" y="392" text-anchor="middle" font-size="10.5" font-weight="700" fill="#667784">总体+slice</text>
+<circle cx="760" cy="395" r="35" fill="#FFFDF8" stroke="#D9D5CB" stroke-width="2"/>
+<text x="760" y="392" text-anchor="middle" font-size="10.5" font-weight="700" fill="#667784">CI+effect</text>
+<circle cx="850" cy="395" r="35" fill="#FFFDF8" stroke="#D9D5CB" stroke-width="2"/>
+<text x="850" y="392" text-anchor="middle" font-size="10.5" font-weight="700" fill="#667784">coverage</text>
+<circle cx="955" cy="395" r="35" fill="#FFFDF8" stroke="#D9D5CB" stroke-width="2"/>
+<text x="955" y="392" text-anchor="middle" font-size="10.5" font-weight="700" fill="#667784">severity</text>
+<circle cx="1040" cy="395" r="35" fill="#FFFDF8" stroke="#D9D5CB" stroke-width="2"/>
+<text x="1040" y="392" text-anchor="middle" font-size="10.5" font-weight="700" fill="#667784">TTFT/TPOT</text>
+<circle cx="1120" cy="395" r="35" fill="#FFFDF8" stroke="#D9D5CB" stroke-width="2"/>
+<text x="1120" y="392" text-anchor="middle" font-size="10.5" font-weight="700" fill="#667784">goodput</text>
+<rect x="650" y="485" width="485" height="125" rx="10" fill="#FFF0ED" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="665" y="513" text-anchor="start" font-size="15" font-weight="700" fill="#B7443E">Decision gate</text>
+<text x="665" y="538" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">先写 non-inferiority / superiority margin 与 SLO；</text>
+<text x="665" y="558" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">再看 paired effect、cluster interval、slice regressions、成本。</text>
+<text x="665" y="578" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">若一个总分掩盖硬约束，保留 metric vector 而不是加权洗平。</text>
+<line x1="48" y1="650" x2="1152" y2="650" stroke="#D9D5CB"/>
+<text x="52" y="674" font-size="13" fill="#667784">证据地图把“测了什么、哪层变了、oracle 是谁、区间多宽、如何决策”连接起来；它不把 benchmark 分数神化为能力本体。</text>
+</svg>

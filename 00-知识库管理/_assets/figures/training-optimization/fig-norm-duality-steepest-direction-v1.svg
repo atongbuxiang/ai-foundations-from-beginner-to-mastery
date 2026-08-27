@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">范数单位球、支撑超平面与最速方向</title>
+  <desc id="desc">比较二范数、无穷范数和一范数单位球上同一线性泛函的最速方向，并给出相应对偶范数。</desc>
+  <rect width="1200" height="760" fill="#FFFEFB"/>
+  <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}.h{font-size:28px;font-weight:700}.sh{font-size:20px;font-weight:700}.b{font-size:16px}.s{font-size:14px;fill:#64748B}.axis{stroke:#CBD5E1;stroke-width:1.5}.level{stroke:#94A3B8;stroke-width:2;stroke-dasharray:7 7}.ball{fill:#EEF4FF;fill-opacity:.72;stroke:#2563EB;stroke-width:3}.dir{stroke:#C0392B;stroke-width:4;fill:none}.touch{fill:#C0392B}.card{fill:#F8FAFC;stroke:#CBD5E1;stroke-width:1.5}</style>
+  <defs><marker id="ar" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#C0392B"/></marker></defs>
+  <text x="48" y="48" class="h" fill="#2563EB">同一个梯度 g，为什么会有三种“最速方向”？</text>
+  <text x="48" y="78" class="s">规则：固定单位步预算，沿 −g 平移线性等值线；最后接触单位球的位置就是最优方向。</text>
+
+  <g transform="translate(52,112)">
+    <rect x="0" y="0" width="344" height="430" rx="14" class="card"/>
+    <text x="22" y="36" class="sh">A｜ℓ₂ 单位球</text>
+    <line x1="48" y1="222" x2="298" y2="222" class="axis"/><line x1="173" y1="92" x2="173" y2="352" class="axis"/>
+    <circle cx="173" cy="222" r="94" class="ball"/>
+    <line x1="98" y1="148" x2="248" y2="298" class="level"/><line x1="77" y1="169" x2="227" y2="319" class="level"/>
+    <line x1="173" y1="222" x2="106" y2="289" class="dir" marker-end="url(#ar)"/>
+    <circle cx="106" cy="289" r="6" class="touch"/>
+    <text x="22" y="382" class="b">d* = −g / ||g||₂</text>
+    <text x="22" y="410" class="s">support value = ||g||₂；g≠0 时唯一</text>
+  </g>
+
+  <g transform="translate(428,112)">
+    <rect x="0" y="0" width="344" height="430" rx="14" class="card"/>
+    <text x="22" y="36" class="sh">B｜ℓ∞ 单位球</text>
+    <line x1="48" y1="222" x2="298" y2="222" class="axis"/><line x1="173" y1="92" x2="173" y2="352" class="axis"/>
+    <rect x="79" y="128" width="188" height="188" class="ball"/>
+    <line x1="92" y1="143" x2="252" y2="303" class="level"/><line x1="61" y1="174" x2="221" y2="334" class="level"/>
+    <line x1="173" y1="222" x2="83" y2="312" class="dir" marker-end="url(#ar)"/>
+    <circle cx="79" cy="316" r="6" class="touch"/>
+    <text x="22" y="382" class="b">d* = −sign(g)</text>
+    <text x="22" y="410" class="s">support value = ||g||₁；逐坐标走满预算</text>
+  </g>
+
+  <g transform="translate(804,112)">
+    <rect x="0" y="0" width="344" height="430" rx="14" class="card"/>
+    <text x="22" y="36" class="sh">C｜ℓ₁ 单位球</text>
+    <line x1="48" y1="222" x2="298" y2="222" class="axis"/><line x1="173" y1="92" x2="173" y2="352" class="axis"/>
+    <path d="M173 118 L267 222 L173 326 L79 222 Z" class="ball"/>
+    <line x1="116" y1="132" x2="276" y2="292" class="level"/><line x1="66" y1="182" x2="226" y2="342" class="level"/>
+    <line x1="173" y1="222" x2="83" y2="222" class="dir" marker-end="url(#ar)"/>
+    <circle cx="79" cy="222" r="6" class="touch"/>
+    <text x="22" y="382" class="b">d* 集中到 |gᵢ| 最大坐标</text>
+    <text x="22" y="410" class="s">support value = ||g||∞；并列时不唯一</text>
+  </g>
+
+  <rect x="52" y="574" width="1096" height="124" rx="14" fill="#ECF7F4" stroke="#0F766E" stroke-width="2"/>
+  <text x="76" y="610" class="sh" fill="#0F766E">统一式：min ||d||≤1 〈g,d〉 = −||g||*</text>
+  <text x="76" y="644" class="b">单位球决定接触点；对偶范数给出最大线性下降量；非严格凸边界决定解是否可能不唯一。</text>
+  <text x="76" y="675" class="s">finite step 还需 smoothness remainder：局部线性最优 ≠ 任意学习率下真实 loss 必降。</text>
+  <text x="52" y="731" class="s">原创机制图｜数学依据：support function、Hölder inequality 与 norm duality。</text>
+</svg>
+

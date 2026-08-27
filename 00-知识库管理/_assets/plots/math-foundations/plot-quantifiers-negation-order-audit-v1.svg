@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="760" viewBox="0 0 1440 760">
+<style>
+.title{font:700 24px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#182236}
+.sub{font:13px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#53627a}
+.paneltitle{font:700 16px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#182236}
+.label{font:12px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#35445c}
+.small{font:11px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#5e6d84}
+.metric{font:700 18px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#182236}
+.grid{stroke:#dce4ef;stroke-width:1}.axis{stroke:#8292aa;stroke-width:1.2}
+.blue{stroke:#2672dd;fill:none;stroke-width:2.7}.purple{stroke:#783ee8;fill:none;stroke-width:2.7}
+.orange{stroke:#e77817;fill:none;stroke-width:2.7}.green{stroke:#07956d;fill:none;stroke-width:2.7}
+</style>
+<rect width="1440" height="760" fill="#f6f8fb"/>
+<text x="36" y="38" class="title">MATH-02 audit · truth tables, witness order, and uniform guarantees</text>
+<text x="36" y="62" class="sub">Finite exhaustive semantics can expose countermodels; infinite-domain and probabilistic claims still require theorem-level arguments.</text>
+<rect x="24.00" y="82.00" width="688.00" height="300.00" rx="12.00" fill="#ffffff" stroke="#cbd6e5"/>
+<text x="42.00" y="109.00" class="paneltitle" text-anchor="start">A · Exhaustive propositional semantics</text>
+<rect x="728.00" y="82.00" width="688.00" height="300.00" rx="12.00" fill="#ffffff" stroke="#cbd6e5"/>
+<text x="746.00" y="109.00" class="paneltitle" text-anchor="start">B · All 512 Boolean predicates on a 3×3 domain</text>
+<rect x="24.00" y="398.00" width="688.00" height="330.00" rx="12.00" fill="#ffffff" stroke="#cbd6e5"/>
+<text x="42.00" y="425.00" class="paneltitle" text-anchor="start">C · Fixed-event success can approach 1 while uniform success is 0</text>
+<rect x="728.00" y="398.00" width="688.00" height="330.00" rx="12.00" fill="#ffffff" stroke="#cbd6e5"/>
+<text x="746.00" y="425.00" class="paneltitle" text-anchor="start">D · Pointwise thresholds diverge near the boundary</text>
+<text x="45.00" y="146.00" class="label" text-anchor="start">implication elimination</text>
+<rect x="205.00" y="132.00" width="275.00" height="18.00" rx="4.00" fill="#e8edf4" stroke="none"/>
+<rect x="205.00" y="132.00" width="275.00" height="18.00" rx="4.00" fill="#07956d" stroke="none"/>
+<text x="494.00" y="146.00" class="small" text-anchor="start">4/4</text>
+<text x="45.00" y="193.00" class="label" text-anchor="start">contraposition</text>
+<rect x="205.00" y="179.00" width="275.00" height="18.00" rx="4.00" fill="#e8edf4" stroke="none"/>
+<rect x="205.00" y="179.00" width="275.00" height="18.00" rx="4.00" fill="#07956d" stroke="none"/>
+<text x="494.00" y="193.00" class="small" text-anchor="start">4/4</text>
+<text x="45.00" y="240.00" class="label" text-anchor="start">De Morgan</text>
+<rect x="205.00" y="226.00" width="275.00" height="18.00" rx="4.00" fill="#e8edf4" stroke="none"/>
+<rect x="205.00" y="226.00" width="275.00" height="18.00" rx="4.00" fill="#07956d" stroke="none"/>
+<text x="494.00" y="240.00" class="small" text-anchor="start">4/4</text>
+<text x="45.00" y="287.00" class="label" text-anchor="start">implication transitivity</text>
+<rect x="205.00" y="273.00" width="275.00" height="18.00" rx="4.00" fill="#e8edf4" stroke="none"/>
+<rect x="205.00" y="273.00" width="275.00" height="18.00" rx="4.00" fill="#07956d" stroke="none"/>
+<text x="494.00" y="287.00" class="small" text-anchor="start">8/8</text>
+<text x="45.00" y="326.00" class="small" text-anchor="start">converse as equivalent</text>
+<text x="205.00" y="326.00" class="small" text-anchor="start">accidental pass 50%</text>
+<text x="45.00" y="342.00" class="small" text-anchor="start">wrong De Morgan</text>
+<text x="205.00" y="342.00" class="small" text-anchor="start">accidental pass 50%</text>
+<text x="45.00" y="358.00" class="small" text-anchor="start">affirm consequent</text>
+<text x="205.00" y="358.00" class="small" text-anchor="start">accidental pass 75%</text>
+<text x="485.00" y="342.00" class="metric" text-anchor="start">valid: 100%</text>
+<text x="485.00" y="365.00" class="small" text-anchor="start">mutants need one counterrow</text>
+<line x1="790.00" y1="312.00" x2="1345.00" y2="312.00" class="grid"/>
+<text x="780.00" y="316.00" class="small" text-anchor="end">0%</text>
+<line x1="790.00" y1="269.50" x2="1345.00" y2="269.50" class="grid"/>
+<text x="780.00" y="273.50" class="small" text-anchor="end">25%</text>
+<line x1="790.00" y1="227.00" x2="1345.00" y2="227.00" class="grid"/>
+<text x="780.00" y="231.00" class="small" text-anchor="end">50%</text>
+<line x1="790.00" y1="184.50" x2="1345.00" y2="184.50" class="grid"/>
+<text x="780.00" y="188.50" class="small" text-anchor="end">75%</text>
+<line x1="790.00" y1="142.00" x2="1345.00" y2="142.00" class="grid"/>
+<text x="780.00" y="146.00" class="small" text-anchor="end">100%</text>
+<rect x="815.00" y="198.11" width="70.00" height="113.89" rx="4.00" fill="#2672dd" stroke="none"/>
+<text x="850.00" y="334.00" class="small" text-anchor="middle">∀x∃y</text>
+<text x="850.00" y="191.11" class="small" text-anchor="middle">343 (67.0%)</text>
+<rect x="955.00" y="255.89" width="70.00" height="56.11" rx="4.00" fill="#783ee8" stroke="none"/>
+<text x="990.00" y="334.00" class="small" text-anchor="middle">∃y∀x</text>
+<text x="990.00" y="248.89" class="small" text-anchor="middle">169 (33.0%)</text>
+<rect x="1095.00" y="255.89" width="70.00" height="56.11" rx="4.00" fill="#07956d" stroke="none"/>
+<text x="1130.00" y="334.00" class="small" text-anchor="middle">both</text>
+<text x="1130.00" y="248.89" class="small" text-anchor="middle">169 (33.0%)</text>
+<rect x="1235.00" y="254.23" width="70.00" height="57.77" rx="4.00" fill="#e77817" stroke="none"/>
+<text x="1270.00" y="334.00" class="small" text-anchor="middle">row-only</text>
+<text x="1270.00" y="349.00" class="small" text-anchor="middle">countermodels</text>
+<text x="1270.00" y="247.23" class="small" text-anchor="middle">174 (34.0%)</text>
+<text x="755.00" y="371.00" class="sub" text-anchor="start">Global witness ⇒ row-wise witnesses; the converse has many finite countermodels.</text>
+<line x1="78.00" y1="456.00" x2="648.00" y2="456.00" class="grid"/>
+<text x="68.00" y="650.00" class="small" text-anchor="end">0%</text>
+<line x1="78.00" y1="503.50" x2="648.00" y2="503.50" class="grid"/>
+<text x="68.00" y="602.50" class="small" text-anchor="end">25%</text>
+<line x1="78.00" y1="551.00" x2="648.00" y2="551.00" class="grid"/>
+<text x="68.00" y="555.00" class="small" text-anchor="end">50%</text>
+<line x1="78.00" y1="598.50" x2="648.00" y2="598.50" class="grid"/>
+<text x="68.00" y="507.50" class="small" text-anchor="end">75%</text>
+<line x1="78.00" y1="646.00" x2="648.00" y2="646.00" class="grid"/>
+<text x="68.00" y="460.00" class="small" text-anchor="end">100%</text>
+<line x1="78.00" y1="646.00" x2="648.00" y2="646.00" class="axis"/>
+<polyline points="78.00,551.00 135.00,519.33 192.00,503.50 249.00,494.00 306.00,487.67 363.00,483.14 420.00,479.75 477.00,477.11 534.00,475.00 591.00,473.27 648.00,471.83" class="blue"/>
+<polyline points="78.00,646.00 135.00,646.00 192.00,646.00 249.00,646.00 306.00,646.00 363.00,646.00 420.00,646.00 477.00,646.00 534.00,646.00 591.00,646.00 648.00,646.00" class="orange"/>
+<circle cx="78.00" cy="551.00" r="3.4" fill="#2672dd"/>
+<circle cx="135.00" cy="519.33" r="3.4" fill="#2672dd"/>
+<circle cx="192.00" cy="503.50" r="3.4" fill="#2672dd"/>
+<circle cx="249.00" cy="494.00" r="3.4" fill="#2672dd"/>
+<circle cx="306.00" cy="487.67" r="3.4" fill="#2672dd"/>
+<circle cx="363.00" cy="483.14" r="3.4" fill="#2672dd"/>
+<circle cx="420.00" cy="479.75" r="3.4" fill="#2672dd"/>
+<circle cx="477.00" cy="477.11" r="3.4" fill="#2672dd"/>
+<circle cx="534.00" cy="475.00" r="3.4" fill="#2672dd"/>
+<circle cx="591.00" cy="473.27" r="3.4" fill="#2672dd"/>
+<circle cx="648.00" cy="471.83" r="3.4" fill="#2672dd"/>
+<circle cx="78.00" cy="646.00" r="3.4" fill="#e77817"/>
+<circle cx="135.00" cy="646.00" r="3.4" fill="#e77817"/>
+<circle cx="192.00" cy="646.00" r="3.4" fill="#e77817"/>
+<circle cx="249.00" cy="646.00" r="3.4" fill="#e77817"/>
+<circle cx="306.00" cy="646.00" r="3.4" fill="#e77817"/>
+<circle cx="363.00" cy="646.00" r="3.4" fill="#e77817"/>
+<circle cx="420.00" cy="646.00" r="3.4" fill="#e77817"/>
+<circle cx="477.00" cy="646.00" r="3.4" fill="#e77817"/>
+<circle cx="534.00" cy="646.00" r="3.4" fill="#e77817"/>
+<circle cx="591.00" cy="646.00" r="3.4" fill="#e77817"/>
+<circle cx="648.00" cy="646.00" r="3.4" fill="#e77817"/>
+<text x="363.00" y="672.00" class="small" text-anchor="middle">number of hypotheses M</text>
+<rect x="178.00" y="695.00" width="16.00" height="4.00" rx="2.00" fill="#2672dd" stroke="none"/>
+<text x="201.00" y="700.00" class="small" text-anchor="start">each fixed event: 1−1/M</text>
+<rect x="409.00" y="695.00" width="16.00" height="4.00" rx="2.00" fill="#e77817" stroke="none"/>
+<text x="432.00" y="700.00" class="small" text-anchor="start">shared intersection: 0</text>
+<line x1="790.00" y1="456.00" x2="1350.00" y2="456.00" class="grid"/>
+<line x1="790.00" y1="456.00" x2="790.00" y2="646.00" class="grid"/>
+<line x1="790.00" y1="503.50" x2="1350.00" y2="503.50" class="grid"/>
+<line x1="930.00" y1="456.00" x2="930.00" y2="646.00" class="grid"/>
+<line x1="790.00" y1="551.00" x2="1350.00" y2="551.00" class="grid"/>
+<line x1="1070.00" y1="456.00" x2="1070.00" y2="646.00" class="grid"/>
+<line x1="790.00" y1="598.50" x2="1350.00" y2="598.50" class="grid"/>
+<line x1="1210.00" y1="456.00" x2="1210.00" y2="646.00" class="grid"/>
+<line x1="790.00" y1="646.00" x2="1350.00" y2="646.00" class="grid"/>
+<line x1="1350.00" y1="456.00" x2="1350.00" y2="646.00" class="grid"/>
+<line x1="790.00" y1="646.00" x2="1350.00" y2="646.00" class="axis"/>
+<line x1="790.00" y1="456.00" x2="790.00" y2="646.00" class="axis"/>
+<polyline points="790.00,617.40 836.03,605.86 872.57,596.53 935.03,582.23 997.49,567.47 1080.05,548.30 1142.51,533.82 1204.97,519.52 1350.00,486.30" class="purple"/>
+<circle cx="790.00" cy="617.40" r="3.4" fill="#783ee8"/>
+<circle cx="836.03" cy="605.86" r="3.4" fill="#783ee8"/>
+<circle cx="872.57" cy="596.53" r="3.4" fill="#783ee8"/>
+<circle cx="935.03" cy="582.23" r="3.4" fill="#783ee8"/>
+<circle cx="997.49" cy="567.47" r="3.4" fill="#783ee8"/>
+<circle cx="1080.05" cy="548.30" r="3.4" fill="#783ee8"/>
+<circle cx="1142.51" cy="533.82" r="3.4" fill="#783ee8"/>
+<circle cx="1204.97" cy="519.52" r="3.4" fill="#783ee8"/>
+<circle cx="1350.00" cy="486.30" r="3.4" fill="#783ee8"/>
+<text x="1070.00" y="672.00" class="small" text-anchor="middle">boundary resolution 1/(1−x), log scale</text>
+<text x="775.00" y="551.00" class="small" text-anchor="middle">log N</text>
+<text x="755.00" y="700.00" class="sub" text-anchor="start">ε=0.1 · N(0.999)=2302 · sup_[0,1) xⁿ=1 ⇒ no uniform N</text>
+</svg>

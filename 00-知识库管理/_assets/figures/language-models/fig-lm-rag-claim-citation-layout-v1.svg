@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">Context 不是一堆卡片：每个命题都要落到支持 span</title><desc id="desc">候选去重、预算编排、冲突呈现与 claim-level citation。</desc>
+<rect width="1200" height="700" fill="#FBF8F1"/>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#667784"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#183044" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<line x1="48" y1="70" x2="1152" y2="70" stroke="#245AA8" stroke-width="4"/>
+<text x="52" y="49" font-size="24" font-weight="700" fill="#183044">Context 不是一堆卡片：每个命题都要落到支持 span</text>
+<text x="70" y="108" text-anchor="start" font-size="11" font-weight="700" fill="#667784">SOURCE CARDS</text>
+<rect x="70" y="130" width="260" height="90" rx="10" fill="#FFFDF8" stroke="#4F7B45" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="85" y="158" font-size="15" font-weight="700" fill="#4F7B45">A · policy v7</text>
+<text x="85" y="182" font-size="12.5" fill="#667784">effective 2026-08</text>
+<text x="85" y="202" font-size="12.5" fill="#667784">… rate is 4.2% …</text>
+<rect x="70" y="245" width="260" height="90" rx="10" fill="#FFFDF8" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="85" y="273" font-size="15" font-weight="700" fill="#B7443E">B · old FAQ</text>
+<text x="85" y="297" font-size="12.5" fill="#667784">effective 2024-01</text>
+<text x="85" y="317" font-size="12.5" fill="#667784">… rate is 3.8% …</text>
+<rect x="70" y="360" width="260" height="90" rx="10" fill="#FFFDF8" stroke="#C87922" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="85" y="388" font-size="15" font-weight="700" fill="#C87922">C · news copy</text>
+<text x="85" y="412" font-size="12.5" fill="#667784">copies B; no new evidence</text>
+<line x1="340" y1="175" x2="445" y2="175" stroke="#4F7B45" stroke-width="2.2" marker-end="url(#arrow)"/>
+<line x1="340" y1="290" x2="445" y2="290" stroke="#B7443E" stroke-width="2.2" marker-end="url(#arrow)"/>
+<line x1="340" y1="405" x2="445" y2="405" stroke="#C87922" stroke-width="2.2" marker-end="url(#arrow)"/>
+<text x="465" y="108" text-anchor="start" font-size="11" font-weight="700" fill="#667784">CONTEXT LAYOUT · 420 tokens</text>
+<rect x="445" y="130" width="320" height="365" rx="5" fill="#FFFDF8" stroke="#D9D5CB" stroke-width="1.5"/>
+<text x="465" y="163" text-anchor="start" font-size="12" font-weight="700" fill="#4F7B45">[A §2 · current]</text>
+<text x="465" y="190" text-anchor="start" font-size="13" font-weight="400" fill="#183044">The current official rate is 4.2%.</text>
+<rect x="462" y="202" width="278" height="4" fill="#4F7B45"/>
+<text x="465" y="250" text-anchor="start" font-size="12" font-weight="700" fill="#B7443E">[B §1 · historical]</text>
+<text x="465" y="277" text-anchor="start" font-size="13" font-weight="400" fill="#183044">The earlier FAQ reported 3.8%.</text>
+<rect x="462" y="289" width="265" height="4" fill="#B7443E"/>
+<text x="465" y="345" text-anchor="start" font-size="12" font-weight="400" fill="#C87922">C removed: duplicate of B</text>
+<text x="465" y="405" text-anchor="start" font-size="12" font-weight="700" fill="#667784">Budget ledger</text>
+<text x="465" y="432" text-anchor="start" font-size="12" font-weight="400" fill="#183044">A 160 · B 140 · instructions 70 · answer 50</text>
+<text x="850" y="108" text-anchor="start" font-size="11" font-weight="700" fill="#667784">ANSWER + CITATIONS</text>
+<rect x="830" y="135" width="315" height="100" rx="10" fill="#EFF6EA" stroke="#4F7B45" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="845" y="163" font-size="15" font-weight="700" fill="#4F7B45">Claim 1 · current value</text>
+<text x="845" y="187" font-size="12.5" fill="#667784">The rate is 4.2%.  [A §2]</text>
+<text x="845" y="207" font-size="12.5" fill="#667784">✓ precise span entails claim</text>
+<rect x="830" y="265" width="315" height="115" rx="10" fill="#EEF4FC" stroke="#245AA8" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="845" y="293" font-size="15" font-weight="700" fill="#245AA8">Claim 2 · historical contrast</text>
+<text x="845" y="317" font-size="12.5" fill="#667784">It was previously 3.8%.  [B §1]</text>
+<text x="845" y="337" font-size="12.5" fill="#667784">✓ time-scoped; conflict preserved</text>
+<rect x="830" y="410" width="315" height="100" rx="10" fill="#FFF0ED" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="845" y="438" font-size="15" font-weight="700" fill="#B7443E">Bad citation pattern</text>
+<text x="845" y="462" font-size="12.5" fill="#667784">The policy is universally best. [A]</text>
+<text x="845" y="482" font-size="12.5" fill="#667784">✗ related page does not entail claim</text>
+<path d="M740 202 C790 190,790 185,830 185" fill="none" stroke="#4F7B45" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M727 289 C790 300,790 320,830 320" fill="none" stroke="#245AA8" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="70" y="540" width="1075" height="75" rx="10" fill="#F3EFFA" stroke="#7054A3" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="85" y="568" font-size="15" font-weight="700" fill="#7054A3">四问审计</text>
+<text x="85" y="592" font-size="12.5" fill="#667784">citation exists?  ·  cited span relevant?  ·  span entails exact claim?  ·  source valid and authoritative at query time?</text>
+<line x1="48" y1="650" x2="1152" y2="650" stroke="#D9D5CB" stroke-width="1"/>
+<text x="52" y="674" font-size="13" fill="#667784">相关性、支持性、世界事实、正确归因与因果 faithfulness 是五个不同事件。</text>
+</svg>

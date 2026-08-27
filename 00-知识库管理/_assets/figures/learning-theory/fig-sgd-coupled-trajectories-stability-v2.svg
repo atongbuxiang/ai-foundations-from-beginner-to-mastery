@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">SGD 耦合轨迹、扩张因子与训练时间</title>
+<desc id="desc">在相邻数据集上复用相同初始化和随机索引。多数步骤读取相同样本；只有以一除以 m 的概率读到不同坐标。更新映射是否收缩、非扩张或扩张，决定扰动如何累积。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">两条轨迹共享随机索引</text>
+<line x1="70" y1="320" x2="125" y2="285" stroke="#2563EB" stroke-width="3"/>
+<line x1="125" y1="285" x2="180" y2="245" stroke="#2563EB" stroke-width="3"/>
+<line x1="180" y1="245" x2="235" y2="205" stroke="#2563EB" stroke-width="3"/>
+<line x1="235" y1="205" x2="290" y2="180" stroke="#2563EB" stroke-width="3"/>
+<line x1="290" y1="180" x2="345" y2="155" stroke="#2563EB" stroke-width="3"/>
+<circle cx="70" cy="320" r="5" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<circle cx="125" cy="285" r="5" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<circle cx="180" cy="245" r="5" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<circle cx="235" cy="205" r="5" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<circle cx="290" cy="180" r="5" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<circle cx="345" cy="155" r="5" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<line x1="70" y1="320" x2="125" y2="285" stroke="#0F766E" stroke-width="3"/>
+<line x1="125" y1="285" x2="180" y2="245" stroke="#0F766E" stroke-width="3"/>
+<line x1="180" y1="245" x2="235" y2="250" stroke="#0F766E" stroke-width="3"/>
+<line x1="235" y1="250" x2="290" y2="285" stroke="#0F766E" stroke-width="3"/>
+<line x1="290" y1="285" x2="345" y2="315" stroke="#0F766E" stroke-width="3"/>
+<circle cx="70" cy="320" r="5" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<circle cx="125" cy="285" r="5" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<circle cx="180" cy="245" r="5" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<circle cx="235" cy="250" r="5" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<circle cx="290" cy="285" r="5" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<circle cx="345" cy="315" r="5" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<line x1="180" y1="245" x2="235" y2="250" stroke="#C24135" stroke-width="2.5" stroke-dasharray="5 4"/>
+<text x="190" y="225" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">first hit of i*</text>
+<text x="45" y="390" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937">same init + same I_t + same randomness</text>
+<text x="45" y="435" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">P{I_t=i*}=1/m under replacement sampling</text>
+<text x="45" y="480" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">before the first hit, the paths coincide</text>
+<text x="45" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">a coupling is a proof device, not two retrainings。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">一步映射控制扰动传播</text>
+<rect x="445" y="105" width="310" height="78" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="600" y="135" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">strongly convex + smooth</text>
+<text x="600" y="166" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937" class="math">q &lt; 1  contractive</text>
+<rect x="445" y="230" width="310" height="78" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600" y="260" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">convex + smooth</text>
+<text x="600" y="291" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937" class="math">q = 1  nonexpansive</text>
+<rect x="445" y="355" width="310" height="78" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="600" y="385" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">smooth nonconvex</text>
+<text x="600" y="416" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937" class="math">q &lt;= 1 + eta gamma</text>
+<text x="430" y="485" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">hit step adds at most 2 eta_t L</text>
+<text x="430" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">regularity must hold along the coupled paths。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">步长总和成为稳定性预算</text>
+<text x="830" y="120" font-size="16" font-weight="700" text-anchor="start" fill="#2563EB">convex smooth case</text>
+<text x="830" y="165" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937" class="math">epsilon_stab &lt;= (2L^2/m) sum_t eta_t</text>
+<line x1="850" y1="375" x2="1125" y2="375" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="850" y1="215" x2="850" y2="375" stroke="#D7DEE8" stroke-width="2"/>
+<path d="M860 355C930 335 1000 300 1115 235" fill="none" stroke="#C24135" stroke-width="3"/>
+<path d="M860 235C930 270 1000 320 1115 350" fill="none" stroke="#0F766E" stroke-width="3"/>
+<text x="890" y="340" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">stability cost</text>
+<text x="1010" y="335" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">optimization error</text>
+<text x="830" y="425" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">early stopping balances two errors</text>
+<text x="830" y="470" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">mini-batch and adaptive updates need new maps</text>
+<text x="830" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">global deep-net assumptions may be vacuous。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">SGD 稳定性由遇到差异的概率、单步扩张率和训练时长共同决定。</text>
+</svg>

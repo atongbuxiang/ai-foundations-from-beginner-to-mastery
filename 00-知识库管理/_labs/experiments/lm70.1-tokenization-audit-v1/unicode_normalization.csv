@@ -1,0 +1,21 @@
+sample,form,text,codepoints,codepoint_count,utf8_bytes
+precomposed_e_acute,identity,é,U+00E9,1,2
+precomposed_e_acute,NFC,é,U+00E9,1,2
+precomposed_e_acute,NFD,é,U+0065 U+0301,2,3
+precomposed_e_acute,NFKC,é,U+00E9,1,2
+precomposed_e_acute,NFKD,é,U+0065 U+0301,2,3
+decomposed_e_acute,identity,é,U+0065 U+0301,2,3
+decomposed_e_acute,NFC,é,U+00E9,1,2
+decomposed_e_acute,NFD,é,U+0065 U+0301,2,3
+decomposed_e_acute,NFKC,é,U+00E9,1,2
+decomposed_e_acute,NFKD,é,U+0065 U+0301,2,3
+circled_one,identity,①,U+2460,1,3
+circled_one,NFC,①,U+2460,1,3
+circled_one,NFD,①,U+2460,1,3
+circled_one,NFKC,1,U+0031,1,1
+circled_one,NFKD,1,U+0031,1,1
+fullwidth_A,identity,Ａ,U+FF21,1,3
+fullwidth_A,NFC,Ａ,U+FF21,1,3
+fullwidth_A,NFD,Ａ,U+FF21,1,3
+fullwidth_A,NFKC,A,U+0041,1,1
+fullwidth_A,NFKD,A,U+0041,1,1

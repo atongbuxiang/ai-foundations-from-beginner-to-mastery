@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+  <title id="title">Sauer–Shelah 精确上界、解析松弛与平凡上界</title>
+  <desc id="desc">固定 VC 维为二，比较二项式精确和、常用解析松弛和全部二分模式上界，显示小样本时解析松弛可能比平凡上界更差。</desc>
+  <rect width="1200" height="650" fill="#ffffff"/>
+  <style>.s{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.m{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}</style>
+  <line x1="92" y1="552" x2="1130" y2="552" stroke="#e2e8f0" stroke-width="1.2"/>
+<text x="79" y="557" text-anchor="end" class="s muted" font-size="15">0</text>
+<line x1="92" y1="450" x2="1130" y2="450" stroke="#e2e8f0" stroke-width="1.2"/>
+<text x="79" y="455" text-anchor="end" class="s muted" font-size="15">4</text>
+<line x1="92" y1="348" x2="1130" y2="348" stroke="#e2e8f0" stroke-width="1.2"/>
+<text x="79" y="353" text-anchor="end" class="s muted" font-size="15">8</text>
+<line x1="92" y1="246" x2="1130" y2="246" stroke="#e2e8f0" stroke-width="1.2"/>
+<text x="79" y="251" text-anchor="end" class="s muted" font-size="15">12</text>
+<line x1="92" y1="144" x2="1130" y2="144" stroke="#e2e8f0" stroke-width="1.2"/>
+<text x="79" y="149" text-anchor="end" class="s muted" font-size="15">16</text>
+<line x1="92" y1="42" x2="1130" y2="42" stroke="#e2e8f0" stroke-width="1.2"/>
+<text x="79" y="47" text-anchor="end" class="s muted" font-size="15">20</text>
+<line x1="92" y1="42" x2="92" y2="552" stroke="#e2e8f0" stroke-width="1.2" stroke-dasharray="3 7"/>
+<text x="92" y="580" text-anchor="middle" class="s muted" font-size="15">2</text>
+<line x1="265" y1="42" x2="265" y2="552" stroke="#e2e8f0" stroke-width="1.2" stroke-dasharray="3 7"/>
+<text x="265" y="580" text-anchor="middle" class="s muted" font-size="15">5</text>
+<line x1="438" y1="42" x2="438" y2="552" stroke="#e2e8f0" stroke-width="1.2" stroke-dasharray="3 7"/>
+<text x="438" y="580" text-anchor="middle" class="s muted" font-size="15">8</text>
+<line x1="611" y1="42" x2="611" y2="552" stroke="#e2e8f0" stroke-width="1.2" stroke-dasharray="3 7"/>
+<text x="611" y="580" text-anchor="middle" class="s muted" font-size="15">11</text>
+<line x1="784" y1="42" x2="784" y2="552" stroke="#e2e8f0" stroke-width="1.2" stroke-dasharray="3 7"/>
+<text x="784" y="580" text-anchor="middle" class="s muted" font-size="15">14</text>
+<line x1="957" y1="42" x2="957" y2="552" stroke="#e2e8f0" stroke-width="1.2" stroke-dasharray="3 7"/>
+<text x="957" y="580" text-anchor="middle" class="s muted" font-size="15">17</text>
+<line x1="1130" y1="42" x2="1130" y2="552" stroke="#e2e8f0" stroke-width="1.2" stroke-dasharray="3 7"/>
+<text x="1130" y="580" text-anchor="middle" class="s muted" font-size="15">20</text>
+<line x1="92" y1="552" x2="1130" y2="552" stroke="#475569" stroke-width="2"/>
+<line x1="92" y1="42" x2="92" y2="552" stroke="#475569" stroke-width="2"/>
+<text x="611" y="621" text-anchor="middle" class="s ink" font-size="17">样本点数 m（固定 d = 2）</text>
+<text x="27" y="297" text-anchor="middle" transform="rotate(-90 27 297)" class="s ink" font-size="17">log₂ 上界</text><path d="M92.0,501.0 L149.7,475.5 L207.3,450.0 L265.0,424.5 L322.7,399.0 L380.3,373.5 L438.0,348.0 L495.7,322.5 L553.3,297.0 L611.0,271.5 L668.7,246.0 L726.3,220.5 L784.0,195.0 L841.7,169.5 L899.3,144.0 L957.0,118.5 L1014.7,93.0 L1072.3,67.5 L1130.0,42.0" fill="none" stroke="#b91c1c" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M92.0,478.4 L149.7,448.6 L207.3,427.4 L265.0,411.0 L322.7,397.6 L380.3,386.2 L438.0,376.4 L495.7,367.8 L553.3,360.0 L611.0,353.0 L668.7,346.6 L726.3,340.7 L784.0,335.2 L841.7,330.2 L899.3,325.4 L957.0,321.0 L1014.7,316.8 L1072.3,312.8 L1130.0,309.0" fill="none" stroke="#b45309" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M92.0,501.0 L149.7,480.4 L207.3,463.8 L265.0,450.0 L322.7,438.3 L380.3,428.1 L438.0,419.2 L495.7,411.1 L553.3,403.9 L611.0,397.3 L668.7,391.3 L726.3,385.6 L784.0,380.4 L841.7,375.6 L899.3,371.0 L957.0,366.7 L1014.7,362.6 L1072.3,358.8 L1130.0,355.1" fill="none" stroke="#047857" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><text x="1118" y="63" text-anchor="end" class="s" fill="#b91c1c" font-size="16" font-weight="600">trivial：2ᵐ</text>
+<text x="1118" y="297.0042200754074" text-anchor="end" class="s" fill="#b45309" font-size="16" font-weight="600">解析松弛：(em/d)ᵈ</text>
+<text x="1118" y="376.1119706879668" text-anchor="end" class="s" fill="#047857" font-size="16" font-weight="600">Sauer 精确和</text><circle cx="265" cy="450" r="5.5" fill="#047857"/>
+  <text x="278" y="470" class="s" fill="#047857" font-size="15">m=5：精确和为 16</text>
+  <circle cx="265" cy="411.0042200754074" r="5.5" fill="#b45309"/>
+  <text x="278" y="400.0042200754074" class="s" fill="#b45309" font-size="15">解析式约 46.2，甚至大于 2⁵</text>
+</svg>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">生成模型的求值、归一化与采样接口</title>
+  <desc id="desc">三栏比较归一化条件乘积、未归一化能量和隐式推前分布实际给出的计算对象及额外代价。</desc>
+  <rect width="1200" height="620" fill="#FFFEFB"/>
+  <style>.sans{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}.ink{fill:#1F2937}.muted{fill:#64748B}.blue{fill:#2563EB}.green{fill:#0F766E}.amber{fill:#B7791F}.red{fill:#C24135}</style>
+  <line x1="400" y1="45" x2="400" y2="565" stroke="#D7DEE8" stroke-width="2"/><line x1="800" y1="45" x2="800" y2="565" stroke="#D7DEE8" stroke-width="2"/>
+  <text x="52" y="66" class="sans blue" font-size="23" font-weight="700">A｜Normalized factors</text>
+  <text x="52" y="100" class="sans muted" font-size="17">自回归模型实际给出条件概率</text>
+  <g><rect x="64" y="150" width="82" height="68" fill="#EEF3FF" stroke="#2563EB" stroke-width="3"/><rect x="166" y="150" width="82" height="68" fill="#EEF3FF" stroke="#2563EB" stroke-width="3"/><rect x="268" y="150" width="82" height="68" fill="#EEF3FF" stroke="#2563EB" stroke-width="3"/><text x="105" y="191" class="mono ink" font-size="18" text-anchor="middle">p(x₁)</text><text x="207" y="191" class="mono ink" font-size="18" text-anchor="middle">p(x₂|x₁)</text><text x="309" y="191" class="mono ink" font-size="18" text-anchor="middle">p(x₃|x&lt;3)</text></g>
+  <text x="201" y="262" class="mono blue" font-size="21" text-anchor="middle">product → pθ(x)</text>
+  <text x="64" y="332" class="sans green" font-size="18">✓ log density：逐项相加</text>
+  <text x="64" y="370" class="sans green" font-size="18">✓ 归一化：逐条件保证</text>
+  <text x="64" y="408" class="sans amber" font-size="18">△ sampling：按维度串行</text>
+  <text x="64" y="495" class="sans ink" font-size="17">困难移到：条件表示与长序列成本</text>
+  <text x="448" y="66" class="sans amber" font-size="23" font-weight="700">B｜Unnormalized energy</text>
+  <text x="448" y="100" class="sans muted" font-size="17">能量网络给相对偏好而非概率</text>
+  <path d="M458 252 C492 242 504 165 548 170 C594 176 606 274 650 262 C693 250 698 163 750 171" fill="none" stroke="#B7791F" stroke-width="4"/>
+  <text x="600" y="304" class="mono amber" font-size="21" text-anchor="middle">exp(−Eθ(x)) / Zθ</text>
+  <text x="464" y="350" class="sans green" font-size="18">✓ energy：点上可算</text>
+  <text x="464" y="388" class="sans red" font-size="18">× Zθ：全空间积分</text>
+  <text x="464" y="426" class="sans amber" font-size="18">△ sampling：MCMC 与 mixing</text>
+  <text x="464" y="495" class="sans ink" font-size="17">困难移到：配分函数与有限步采样</text>
+  <text x="848" y="66" class="sans green" font-size="23" font-weight="700">C｜Implicit pushforward</text>
+  <text x="848" y="100" class="sans muted" font-size="17">基分布样本经生成器映射</text>
+  <circle cx="902" cy="199" r="48" fill="#E8F5F1" stroke="#0F766E" stroke-width="3"/><text x="902" y="194" class="mono ink" font-size="20" text-anchor="middle">Z ~ pZ</text><text x="902" y="222" class="sans muted" font-size="16" text-anchor="middle">易采样</text>
+  <path d="M950 199 H1026" stroke="#1F2937" stroke-width="3"/><path d="M1026 199 l-16 -10 v20 z" fill="#1F2937"/><text x="988" y="178" class="mono green" font-size="18" text-anchor="middle">Gθ</text>
+  <path d="M1048 156 C1112 151 1143 181 1122 213 C1101 245 1044 249 1024 216 C1005 187 1023 165 1048 156" fill="#EEF3FF" stroke="#2563EB" stroke-width="3"/>
+  <text x="1082" y="286" class="mono green" font-size="21" text-anchor="middle">X = Gθ(Z)</text>
+  <text x="864" y="350" class="sans green" font-size="18">✓ sampling：一次前向</text>
+  <text x="864" y="388" class="sans red" font-size="18">× density：一般不可求</text>
+  <text x="864" y="426" class="sans amber" font-size="18">△ compare：critic / samples</text>
+  <text x="864" y="495" class="sans ink" font-size="17">困难移到：密度、覆盖与目标估计</text>
+  <line x1="52" y1="548" x2="1148" y2="548" stroke="#0F766E" stroke-width="3"/>
+  <text x="52" y="586" class="sans green" font-size="17">审计原则｜“有公式”“能求值”“已归一化”“能精确高效采样”是四个不同断言。</text>
+</svg>
+

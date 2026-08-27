@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="620" viewBox="0 0 1100 620" role="img" aria-labelledby="title desc">
+<title id="title">实验图 1｜检索分数与近似保真</title><desc id="desc">BM25 饱和、RRF 名次融合与 exact/ANN 集合保真。</desc>
+<rect width="1100" height="620" fill="#FBF8F1"/>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}</style>
+<text x="50" y="48" font-size="23" font-weight="700" fill="#183044">实验图 1｜检索分数与近似保真</text>
+<line x1="48" y1="65" x2="1052" y2="65" stroke="#245AA8" stroke-width="3"/>
+<line x1="70" y1="330" x2="420" y2="330" stroke="#183044"/>
+<line x1="70" y1="330" x2="70" y2="105" stroke="#183044"/>
+<path d="M70,330.0 L105,246.0 L140,210.0 L175,190.0 L210,177.3 L245,168.5 L280,162.0 L315,157.1 L350,153.2 L385,150.0 L420,147.4" fill="none" stroke="#C87922" stroke-width="4"/>
+<circle cx="70" cy="330.0" r="4" fill="#C87922"/>
+<circle cx="140" cy="210.0" r="4" fill="#C87922"/>
+<circle cx="210" cy="177.27272727272728" r="4" fill="#C87922"/>
+<circle cx="280" cy="162.0" r="4" fill="#C87922"/>
+<circle cx="350" cy="153.1578947368421" r="4" fill="#C87922"/>
+<circle cx="420" cy="147.3913043478261" r="4" fill="#C87922"/>
+<text x="70" y="92" font-size="15" font-weight="700" fill="#183044">BM25 tf saturation · limit 2.5</text>
+<rect x="500" y="105" width="250" height="190" rx="10" fill="#FFFDF8" stroke="#7054A3" stroke-width="2"/>
+<text x="514" y="132" font-size="14" font-weight="700" fill="#7054A3">RRF</text>
+<text x="514" y="157" font-size="12" fill="#667784">A ranks (1,10) = 0.03068</text>
+<text x="514" y="176" font-size="12" fill="#667784">B ranks (3,3) = 0.03175</text>
+<text x="514" y="195" font-size="12" fill="#667784"></text>
+<text x="514" y="214" font-size="12" fill="#667784">winner = B</text>
+<rect x="805" y="105" width="245" height="190" rx="10" fill="#FFFDF8" stroke="#17766E" stroke-width="2"/>
+<text x="819" y="132" font-size="14" font-weight="700" fill="#17766E">ANN preservation</text>
+<text x="819" y="157" font-size="12" fill="#667784">exact top-5: a,b,c,d,e</text>
+<text x="819" y="176" font-size="12" fill="#667784">ANN top-5: a,c,e,f,g</text>
+<text x="819" y="195" font-size="12" fill="#667784">intersection = 3</text>
+<text x="819" y="214" font-size="12" fill="#667784">ANN recall@5 = 0.6</text>
+<rect x="500" y="350" width="550" height="150" rx="10" fill="#FFFDF8" stroke="#B7443E" stroke-width="2"/>
+<text x="514" y="377" font-size="14" font-weight="700" fill="#B7443E">Candidate upper bound</text>
+<text x="514" y="402" font-size="12" fill="#667784">gold e is present after ANN, but removed by final top-3 rerank.</text>
+<text x="514" y="421" font-size="12" fill="#667784">This is a reranker/context loss, not an ANN miss.</text>
+<text x="514" y="440" font-size="12" fill="#667784">Always retain IDs at every stage.</text>
+<line x1="48" y1="575" x2="1052" y2="575" stroke="#D9D5CB"/>
+<text x="50" y="598" font-size="12" fill="#667784">All values are deterministic toy oracles; they demonstrate bookkeeping, not production retrieval quality.</text>
+</svg>

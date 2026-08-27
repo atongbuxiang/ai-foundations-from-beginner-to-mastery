@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+<title id="title">参数平均与训练控制器交互</title>
+<desc id="desc">左侧比较原参数轨迹、EMA 和前缀 SWA，右侧展示二乘二因子单元及非零交互。</desc>
+<rect width="1200" height="800" fill="#FFFEFB"/>
+<style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}.h{font-size:27px;font-weight:700}.sh{font-size:18px;font-weight:700}.b{font-size:14px}.s{font-size:12.5px;fill:#64748B}.axis{stroke:#94A3B8;stroke-width:1.5}.grid{stroke:#E2E8F0;stroke-width:1}.blue{stroke:#2563EB;stroke-width:3;fill:none}.green{stroke:#0F766E;stroke-width:3;fill:none}.amber{stroke:#B76E00;stroke-width:3;fill:none}.red{stroke:#C0392B;stroke-width:3;fill:none}.panel{fill:#F8FAFC;stroke:#CBD5E1;stroke-width:2}</style>
+<text x="48.0" y="48.0" class="h" fill="#2563EB">平均对象与联合实验：输出选择也属于训练控制系统</text>
+<rect x="48" y="86" width="540" height="566" rx="14" fill="#EEF4FF" stroke="#2563EB" stroke-width="2"/>
+<text x="72.0" y="124.0" class="sh">同一参数轨迹的三种读法</text>
+<line x1="92.0" y1="476.0" x2="532.0" y2="476.0" class="axis"/>
+<line x1="92.0" y1="176.0" x2="92.0" y2="476.0" class="axis"/>
+<text x="87.0" y="501.0" class="s">1</text>
+<text x="307.0" y="501.0" class="s">2</text>
+<text x="527.0" y="501.0" class="s">3</text>
+<polyline points="92.00,416.00 312.00,356.00 532.00,176.00" class="blue"/>
+<polyline points="92.00,470.00 312.00,458.60 532.00,430.34" class="red"/>
+<polyline points="92.00,416.00 312.00,386.00 532.00,316.00" class="green"/>
+<text x="92.0" y="526.0" class="b">蓝：θₜ　红：EMA　绿：prefix SWA</text>
+<text x="92.0" y="560.0" class="b" fill="#C0392B">非线性反例：f(θ̄)=4，但平均预测=5</text>
+<text x="92.0" y="592.0" class="s">参数平均不是 prediction ensemble</text>
+<rect x="624" y="86" width="528" height="566" rx="14" fill="#ECF7F4" stroke="#0F766E" stroke-width="2"/>
+<text x="648.0" y="124.0" class="sh">2×2 因子单元与交互</text>
+<rect x="720" y="190" width="150" height="112" rx="12" fill="#EEF4FF" stroke="#2563EB" stroke-width="2"/>
+<text x="768.0" y="233.0" class="sh">y00</text>
+<text x="770.0" y="268.0" class="sh" fill="#2563EB">2.0</text>
+<rect x="910" y="190" width="150" height="112" rx="12" fill="#FFF6E5" stroke="#B76E00" stroke-width="2"/>
+<text x="958.0" y="233.0" class="sh">y01</text>
+<text x="960.0" y="268.0" class="sh" fill="#B76E00">1.8</text>
+<rect x="720" y="340" width="150" height="112" rx="12" fill="#ECF7F4" stroke="#0F766E" stroke-width="2"/>
+<text x="768.0" y="383.0" class="sh">y10</text>
+<text x="770.0" y="418.0" class="sh" fill="#0F766E">1.7</text>
+<rect x="910" y="340" width="150" height="112" rx="12" fill="#FFF1F0" stroke="#C0392B" stroke-width="2"/>
+<text x="958.0" y="383.0" class="sh">y11</text>
+<text x="960.0" y="418.0" class="sh" fill="#C0392B">1.2</text>
+<text x="648.0" y="520.0" class="b">I = y11 − y10 − y01 + y00 = -0.3</text>
+<text x="648.0" y="554.0" class="b" fill="#C0392B">I≠0：单因素排序不能外推联合配置</text>
+<text x="648.0" y="588.0" class="s">paired seeds 共享扰动，先比较 cell 内差值</text>
+<rect x="48" y="694" width="1104" height="62" rx="10" fill="#FFF6E5" stroke="#B76E00"/>
+<text x="72.0" y="722.0" class="b">读图边界：EMA/SWA 曲线不证明更好；非零交互只在当前模型、数据、因子水平与预算范围内成立。</text>
+<text x="72.0" y="746.0" class="s">最终 claim 仍须报告 paired seeds、失败分母与训练/调参/选择/评估四本预算。</text>
+</svg>

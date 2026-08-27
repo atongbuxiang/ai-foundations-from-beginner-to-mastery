@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">五类泛化证书：对象、量词与失败模式</title>
+<desc id="desc">容量、稳定性、样本压缩、PAC-Bayes 与互信息都可产生泛化界，但它们控制不同对象、使用不同概率量词。比较前必须统一数据、损失、输出、置信度和随机性。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">同一 risk，五种复杂度</text>
+<rect x="145" y="235" width="120" height="70" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="205.0" y="276.0" font-size="19" font-weight="650" text-anchor="middle" fill="#C24135">risk gap</text>
+<rect x="55" y="95" width="110" height="55" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="110.0" y="128.5" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">capacity</text>
+<line x1="110" y1="150" x2="205" y2="235" stroke="#2563EB" stroke-width="2"/>
+<rect x="235" y="95" width="110" height="55" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="290.0" y="128.5" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">stability</text>
+<line x1="290" y1="150" x2="205" y2="235" stroke="#0F766E" stroke-width="2"/>
+<rect x="45" y="390" width="110" height="55" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="100.0" y="423.5" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">compression</text>
+<line x1="100" y1="390" x2="205" y2="305" stroke="#2563EB" stroke-width="2"/>
+<rect x="245" y="390" width="110" height="55" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="300.0" y="423.5" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">PAC-Bayes</text>
+<line x1="300" y1="390" x2="205" y2="305" stroke="#0F766E" stroke-width="2"/>
+<rect x="150" y="450" width="100" height="45" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="200.0" y="478.5" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">mutual info</text>
+<line x1="205" y1="305" x2="200" y2="450" stroke="#C24135" stroke-width="2"/>
+<text x="45" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">the numerator is not a universal currency。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">先对齐量词，再比较数值</text>
+<text x="445" y="122" font-size="15" font-weight="650" text-anchor="start" fill="#2563EB">class sup</text>
+<line x1="570" y1="115" x2="625" y2="115" stroke="#D7DEE8" stroke-width="2"/>
+<text x="645" y="122" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">capacity</text>
+<text x="445" y="207" font-size="15" font-weight="650" text-anchor="start" fill="#0F766E">neighboring S</text>
+<line x1="570" y1="200" x2="625" y2="200" stroke="#D7DEE8" stroke-width="2"/>
+<text x="645" y="207" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">stability</text>
+<text x="445" y="292" font-size="15" font-weight="650" text-anchor="start" fill="#2563EB">short decoder</text>
+<line x1="570" y1="285" x2="625" y2="285" stroke="#D7DEE8" stroke-width="2"/>
+<text x="645" y="292" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">compression</text>
+<text x="445" y="377" font-size="15" font-weight="650" text-anchor="start" fill="#0F766E">all posterior Q</text>
+<line x1="570" y1="370" x2="625" y2="370" stroke="#D7DEE8" stroke-width="2"/>
+<text x="645" y="377" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">PAC-Bayes</text>
+<text x="445" y="462" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">average channel</text>
+<line x1="570" y1="455" x2="625" y2="455" stroke="#D7DEE8" stroke-width="2"/>
+<text x="645" y="462" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">information</text>
+<text x="430" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">uniform / algorithmic / randomized are distinct。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">选择证书也会产生选择偏差</text>
+<rect x="845" y="100" width="275" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="982.5" y="135.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">predeclare valid certificates</text>
+<line x1="982" y1="163" x2="982" y2="198" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="845" y="210" width="275" height="72" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="982.5" y="252.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">align loss, data, confidence</text>
+<line x1="982" y1="287" x2="982" y2="322" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="845" y="335" width="275" height="72" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="982.5" y="377.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">union-budget selection or fixed rule</text>
+<text x="830" y="465" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">do not take an uncorrected post-hoc minimum</text>
+<text x="830" y="495" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">a vacuous bound is still logically valid</text>
+<text x="830" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">no single theory explains every deep net。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">证书选择不是看谁公式最漂亮，而是先匹配对象与量词，再检查能否非空、可算和可复现。</text>
+</svg>

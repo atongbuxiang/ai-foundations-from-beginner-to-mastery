@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">互信息、条件依赖与估计边界</title>
+  <desc id="desc">三面板展示联合分布相对独立基线、互信息的熵差表达，以及有限样本估计与InfoNCE上限。</desc>
+  <defs><style>
+    .bg{fill:#f8fafc}.panel{fill:#fff;stroke:#cbd5e1;stroke-width:1.5}.title{font:700 20px -apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;fill:#0f172a}.sub{font:14px -apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;fill:#475569}.label{font:14px -apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;fill:#334155}.small{font:12px -apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;fill:#64748b}.formula{font:italic 16px -apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;fill:#0f172a}.blue{fill:#dbeafe;stroke:#2563eb;stroke-width:1.5}.violet{fill:#ede9fe;stroke:#7c3aed;stroke-width:1.5}.green{fill:#dcfce7;stroke:#059669;stroke-width:1.5}.red{fill:#fee2e2;stroke:#dc2626;stroke-width:1.5}.axis{stroke:#64748b;stroke-width:1.2}.grid{stroke:#e2e8f0;stroke-width:1}.curve{fill:none;stroke:#2563eb;stroke-width:3}.dash{fill:none;stroke:#dc2626;stroke-width:2;stroke-dasharray:6 5}.cell1{fill:#eff6ff}.cell2{fill:#93c5fd}.cell3{fill:#2563eb}.cell4{fill:#dbeafe}
+  </style></defs>
+  <rect class="bg" width="1200" height="430"/>
+  <rect class="panel" x="20" y="20" width="370" height="390" rx="14"/>
+  <text class="title" x="40" y="52">A · joint 对比独立基线</text><text class="sub" x="40" y="76">MI = KL(Pxy || Px Py)</text>
+  <text class="label" x="55" y="112">真实 joint</text><text class="label" x="235" y="112">marginals product</text>
+  <rect class="cell3" x="65" y="130" width="62" height="62"/><rect class="cell1" x="129" y="130" width="62" height="62"/>
+  <rect class="cell1" x="65" y="194" width="62" height="62"/><rect class="cell3" x="129" y="194" width="62" height="62"/>
+  <rect class="cell4" x="250" y="130" width="62" height="62"/><rect class="cell4" x="314" y="130" width="62" height="62"/>
+  <rect class="cell4" x="250" y="194" width="62" height="62"/><rect class="cell4" x="314" y="194" width="62" height="62"/>
+  <text class="small" x="77" y="277">依赖：质量集中在对角</text><text class="small" x="247" y="277">独立：同 marginals 均匀</text>
+  <rect class="blue" x="47" y="302" width="316" height="58" rx="9"/>
+  <text class="formula" x="61" y="327">PMI(x,y) = log p(x,y) / [p(x)p(y)]</text>
+  <text class="formula" x="61" y="350">I(X;Y) = E joint [PMI(X,Y)] ≥ 0</text>
+  <text class="small" x="42" y="390">PMI 可正可负；MI 是 joint 加权平均，零当且仅当独立。</text>
+
+  <rect class="panel" x="415" y="20" width="370" height="390" rx="14"/>
+  <text class="title" x="435" y="52">B · 观察 Y 后减少多少不确定性</text><text class="sub" x="435" y="76">同一个量的 entropy、KL 与 conditional 视角</text>
+  <circle cx="540" cy="184" r="88" fill="#dbeafe" fill-opacity="0.82" stroke="#2563eb" stroke-width="2"/>
+  <circle cx="656" cy="184" r="88" fill="#ede9fe" fill-opacity="0.78" stroke="#7c3aed" stroke-width="2"/>
+  <text class="label" x="483" y="111">H(X)</text><text class="label" x="690" y="111">H(Y)</text>
+  <text class="formula" x="567" y="185">I(X;Y)</text>
+  <text class="small" x="453" y="216">H(X|Y)</text><text class="small" x="696" y="216">H(Y|X)</text>
+  <rect class="green" x="447" y="294" width="306" height="70" rx="9"/>
+  <text class="formula" x="462" y="319">I = H(X) − H(X|Y)</text>
+  <text class="formula" x="462" y="345">I = E x D(P(Y|x) || P(Y))</text>
+  <text class="small" x="440" y="392">XOR：I(X;Z)=0，但 I(X;Z|Y)=1；条件 MI 无单调性。</text>
+
+  <rect class="panel" x="810" y="20" width="370" height="390" rx="14"/>
+  <text class="title" x="830" y="52">C · estimator 不是 MI 真值</text><text class="sub" x="830" y="76">独立变量也会有正的 finite-sample plug-in MI</text>
+  <line class="grid" x1="858" y1="145" x2="1152" y2="145"/><line class="grid" x1="858" y1="215" x2="1152" y2="215"/>
+  <line class="axis" x1="858" y1="285" x2="1152" y2="285"/><line class="axis" x1="858" y1="112" x2="858" y2="285"/>
+  <path class="curve" d="M870 132 C905 165,945 202,1000 232 C1050 256,1100 270,1144 277"/>
+  <line class="dash" x1="858" y1="278" x2="1152" y2="278"/>
+  <text class="small" x="875" y="125">plug-in estimate</text><text class="small" x="1030" y="270">true MI = 0</text>
+  <text class="label" x="975" y="309">sample size →</text><text class="label" transform="translate(838 240) rotate(-90)">estimated MI →</text>
+  <rect class="red" x="842" y="329" width="312" height="52" rx="9"/>
+  <text class="label" x="858" y="352">InfoNCE certificate ≤ log N</text>
+  <text class="small" x="858" y="371">还依赖 critic、negative sampling 与 held-out evaluation</text>
+  <text class="small" x="830" y="401">训练 objective 可有用，但不能无校准地改名为“真实 MI”。</text>
+</svg>

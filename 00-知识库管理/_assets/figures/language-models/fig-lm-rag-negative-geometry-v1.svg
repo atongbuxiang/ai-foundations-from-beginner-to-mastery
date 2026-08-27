@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">困难负样本：梯度更强，也更接近标注边界</title><desc id="desc">InfoNCE 下不同负样本与 false negative 的二维教学投影。</desc>
+<rect width="1200" height="700" fill="#FBF8F1"/>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#667784"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#183044" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<line x1="48" y1="70" x2="1152" y2="70" stroke="#B7443E" stroke-width="4"/>
+<text x="52" y="49" font-size="24" font-weight="700" fill="#183044">困难负样本：梯度更强，也更接近标注边界</text>
+<circle cx="410" cy="335" r="85" fill="none" stroke="#D9D5CB" stroke-width="1.3" stroke-dasharray="4 5"/>
+<circle cx="410" cy="335" r="165" fill="none" stroke="#D9D5CB" stroke-width="1.3" stroke-dasharray="4 5"/>
+<circle cx="410" cy="335" r="245" fill="none" stroke="#D9D5CB" stroke-width="1.3" stroke-dasharray="4 5"/>
+<circle cx="410" cy="335" r="15" fill="#245AA8"/>
+<text x="432" y="340" text-anchor="start" font-size="14" font-weight="700" fill="#245AA8">query q</text>
+<circle cx="350" cy="275" r="10" fill="#4F7B45"/>
+<text x="366" y="280" text-anchor="start" font-size="12" font-weight="400" fill="#4F7B45">positive d⁺</text>
+<circle cx="610" cy="500" r="10" fill="#667784"/>
+<text x="626" y="505" text-anchor="start" font-size="12" font-weight="400" fill="#667784">random negative</text>
+<path d="M265,475 L255,494 L275,494 Z" fill="#C87922"/>
+<text x="281" y="490" text-anchor="start" font-size="12" font-weight="400" fill="#C87922">BM25 hard negative</text>
+<path d="M520,235 L510,254 L530,254 Z" fill="#B7443E"/>
+<text x="536" y="250" text-anchor="start" font-size="12" font-weight="400" fill="#B7443E">model-mined negative</text>
+<circle cx="455" cy="380" r="13" fill="#FFFDF8" stroke="#7054A3" stroke-width="4"/>
+<circle cx="455" cy="380" r="5" fill="#7054A3"/>
+<text x="471" y="385" text-anchor="start" font-size="12" font-weight="400" fill="#7054A3">unlabeled alternative evidence</text>
+<rect x="755" y="115" width="365" height="160" rx="10" fill="#EEF4FC" stroke="#245AA8" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="770" y="143" font-size="15" font-weight="700" fill="#245AA8">Softmax 梯度</text>
+<text x="770" y="167" font-size="12.5" fill="#667784">∂L/∂s(d) = [π(d|q) − 1{d=d⁺}] / τ</text>
+<text x="770" y="187" font-size="12.5" fill="#667784"></text>
+<text x="770" y="207" font-size="12.5" fill="#667784">高分负例 π 大 → 下推更强</text>
+<text x="770" y="227" font-size="12.5" fill="#667784">温度小 → 梯度更尖锐</text>
+<rect x="755" y="315" width="365" height="125" rx="10" fill="#FFF0ED" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="770" y="343" font-size="15" font-weight="700" fill="#B7443E">False-negative audit</text>
+<text x="770" y="367" font-size="12.5" fill="#667784">相关但不支持？替代证据？</text>
+<text x="770" y="387" font-size="12.5" fill="#667784">时间/权限错位？parent/chunk 粒度错？</text>
+<rect x="755" y="480" width="365" height="125" rx="10" fill="#F3EFFA" stroke="#7054A3" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="770" y="508" font-size="15" font-weight="700" fill="#7054A3">Index lag</text>
+<text x="770" y="532" font-size="12.5" fill="#667784">miner uses encoder η(t−Δ)</text>
+<text x="770" y="552" font-size="12.5" fill="#667784">Δ 过大：负样本分布陈旧</text>
+<text x="770" y="572" font-size="12.5" fill="#667784">刷新更快：计算与通信成本上升</text>
+<line x1="48" y1="650" x2="1152" y2="650" stroke="#D9D5CB" stroke-width="1"/>
+<text x="52" y="674" font-size="13" fill="#667784">二维距离仅用于解释采样；是否蕴含答案必须回到原文、时点、权限和标注协议。</text>
+</svg>

@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">污染路径 × Prompt 方差 × 独立单位</title><desc id="desc">训练暴露、记忆利用、item–prompt 热图与 cluster 区间。</desc>
+<rect width="1200" height="700" fill="#FBF8F1"/>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#667784"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#183044" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<line x1="48" y1="70" x2="1152" y2="70" stroke="#7054A3" stroke-width="4"/>
+<text x="52" y="49" font-size="24" font-weight="700" fill="#183044">污染路径 × Prompt 方差 × 独立单位</text>
+<text x="60" y="108" text-anchor="start" font-size="13" font-weight="700" fill="#B7443E">A · CONTAMINATION PATH</text>
+<rect x="60" y="125" width="135" height="75" rx="10" fill="#FFFDF8" stroke="#245AA8" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="75" y="153" text-anchor="start" font-size="15" font-weight="700" fill="#245AA8">公开题库</text>
+<text x="75" y="178" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784"></text>
+<rect x="235" y="125" width="135" height="75" rx="10" fill="#FFFDF8" stroke="#C87922" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="250" y="153" text-anchor="start" font-size="15" font-weight="700" fill="#C87922">训练语料</text>
+<text x="250" y="178" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784"></text>
+<rect x="410" y="125" width="135" height="75" rx="10" fill="#FFFDF8" stroke="#7054A3" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="425" y="153" text-anchor="start" font-size="15" font-weight="700" fill="#7054A3">参数记忆</text>
+<text x="425" y="178" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784"></text>
+<rect x="585" y="125" width="135" height="75" rx="10" fill="#FFFDF8" stroke="#4F7B45" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="600" y="153" text-anchor="start" font-size="15" font-weight="700" fill="#4F7B45">测试行为</text>
+<text x="600" y="178" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784"></text>
+<line x1="195" y1="162" x2="233" y2="162" stroke="#667784" stroke-width="2.1" marker-end="url(#arrow)"/>
+<line x1="370" y1="162" x2="408" y2="162" stroke="#667784" stroke-width="2.1" marker-end="url(#arrow)"/>
+<line x1="545" y1="162" x2="583" y2="162" stroke="#667784" stroke-width="2.1" marker-end="url(#arrow)"/>
+<text x="410" y="230" text-anchor="middle" font-size="12" font-weight="700" fill="#B7443E">exposure ≠ memorization ≠ exploitation</text>
+<text x="60" y="290" text-anchor="start" font-size="13" font-weight="700" fill="#17766E">B · ITEM × PROMPT SCORE</text>
+<text x="65" y="340" text-anchor="start" font-size="11" font-weight="400" fill="#667784">item 1</text>
+<rect x="135" y="315" width="62" height="38" rx="5" fill="#4F7B45" opacity="0.89"/>
+<text x="166" y="340" text-anchor="middle" font-size="11" font-weight="700" fill="#183044">0.9</text>
+<rect x="210" y="315" width="62" height="38" rx="5" fill="#B7443E" opacity="0.59"/>
+<text x="241" y="340" text-anchor="middle" font-size="11" font-weight="700" fill="#183044">0.4</text>
+<rect x="285" y="315" width="62" height="38" rx="5" fill="#C87922" opacity="0.77"/>
+<text x="316" y="340" text-anchor="middle" font-size="11" font-weight="700" fill="#183044">0.7</text>
+<rect x="360" y="315" width="62" height="38" rx="5" fill="#4F7B45" opacity="0.83"/>
+<text x="391" y="340" text-anchor="middle" font-size="11" font-weight="700" fill="#183044">0.8</text>
+<text x="65" y="388" text-anchor="start" font-size="11" font-weight="400" fill="#667784">item 2</text>
+<rect x="135" y="363" width="62" height="38" rx="5" fill="#B7443E" opacity="0.47"/>
+<text x="166" y="388" text-anchor="middle" font-size="11" font-weight="700" fill="#183044">0.2</text>
+<rect x="210" y="363" width="62" height="38" rx="5" fill="#B7443E" opacity="0.41"/>
+<text x="241" y="388" text-anchor="middle" font-size="11" font-weight="700" fill="#183044">0.1</text>
+<rect x="285" y="363" width="62" height="38" rx="5" fill="#C87922" opacity="0.65"/>
+<text x="316" y="388" text-anchor="middle" font-size="11" font-weight="700" fill="#183044">0.5</text>
+<rect x="360" y="363" width="62" height="38" rx="5" fill="#B7443E" opacity="0.53"/>
+<text x="391" y="388" text-anchor="middle" font-size="11" font-weight="700" fill="#183044">0.3</text>
+<text x="65" y="436" text-anchor="start" font-size="11" font-weight="400" fill="#667784">item 3</text>
+<rect x="135" y="411" width="62" height="38" rx="5" fill="#4F7B45" opacity="0.83"/>
+<text x="166" y="436" text-anchor="middle" font-size="11" font-weight="700" fill="#183044">0.8</text>
+<rect x="210" y="411" width="62" height="38" rx="5" fill="#4F7B45" opacity="0.83"/>
+<text x="241" y="436" text-anchor="middle" font-size="11" font-weight="700" fill="#183044">0.8</text>
+<rect x="285" y="411" width="62" height="38" rx="5" fill="#4F7B45" opacity="0.89"/>
+<text x="316" y="436" text-anchor="middle" font-size="11" font-weight="700" fill="#183044">0.9</text>
+<rect x="360" y="411" width="62" height="38" rx="5" fill="#C87922" opacity="0.71"/>
+<text x="391" y="436" text-anchor="middle" font-size="11" font-weight="700" fill="#183044">0.6</text>
+<text x="65" y="484" text-anchor="start" font-size="11" font-weight="400" fill="#667784">item 4</text>
+<rect x="135" y="459" width="62" height="38" rx="5" fill="#B7443E" opacity="0.59"/>
+<text x="166" y="484" text-anchor="middle" font-size="11" font-weight="700" fill="#183044">0.4</text>
+<rect x="210" y="459" width="62" height="38" rx="5" fill="#C87922" opacity="0.77"/>
+<text x="241" y="484" text-anchor="middle" font-size="11" font-weight="700" fill="#183044">0.7</text>
+<rect x="285" y="459" width="62" height="38" rx="5" fill="#B7443E" opacity="0.47"/>
+<text x="316" y="484" text-anchor="middle" font-size="11" font-weight="700" fill="#183044">0.2</text>
+<rect x="360" y="459" width="62" height="38" rx="5" fill="#C87922" opacity="0.65"/>
+<text x="391" y="484" text-anchor="middle" font-size="11" font-weight="700" fill="#183044">0.5</text>
+<text x="65" y="532" text-anchor="start" font-size="11" font-weight="400" fill="#667784">item 5</text>
+<rect x="135" y="507" width="62" height="38" rx="5" fill="#4F7B45" opacity="0.89"/>
+<text x="166" y="532" text-anchor="middle" font-size="11" font-weight="700" fill="#183044">0.9</text>
+<rect x="210" y="507" width="62" height="38" rx="5" fill="#B7443E" opacity="0.53"/>
+<text x="241" y="532" text-anchor="middle" font-size="11" font-weight="700" fill="#183044">0.3</text>
+<rect x="285" y="507" width="62" height="38" rx="5" fill="#B7443E" opacity="0.53"/>
+<text x="316" y="532" text-anchor="middle" font-size="11" font-weight="700" fill="#183044">0.3</text>
+<rect x="360" y="507" width="62" height="38" rx="5" fill="#C87922" opacity="0.77"/>
+<text x="391" y="532" text-anchor="middle" font-size="11" font-weight="700" fill="#183044">0.7</text>
+<text x="166" y="590" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">p1</text>
+<text x="241" y="590" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">p2</text>
+<text x="316" y="590" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">p3</text>
+<text x="391" y="590" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">p4</text>
+<rect x="490" y="290" width="280" height="140" rx="10" fill="#EAF7F4" stroke="#17766E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="505" y="318" text-anchor="start" font-size="15" font-weight="700" fill="#17766E">三种 robustness estimand</text>
+<text x="505" y="343" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">mean over prompt distribution</text>
+<text x="505" y="363" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">worst-case over allowed set</text>
+<text x="505" y="383" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">variance / quantile across formats</text>
+<text x="505" y="403" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784"></text>
+<text x="505" y="423" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">“挑最好模板”是选择过程，不是稳健性。</text>
+<rect x="490" y="455" width="280" height="140" rx="10" fill="#F3EFFA" stroke="#7054A3" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="505" y="483" text-anchor="start" font-size="15" font-weight="700" fill="#7054A3">不确定性的独立层</text>
+<text x="505" y="508" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">item sampling</text>
+<text x="505" y="528" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">prompt sampling</text>
+<text x="505" y="548" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">generation seed</text>
+<text x="505" y="568" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">run / judge / retriever</text>
+<text x="505" y="588" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">同一 item 的多 prompt 不是独立题。</text>
+<rect x="820" y="125" width="315" height="185" rx="10" fill="#FFF0ED" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="835" y="153" text-anchor="start" font-size="15" font-weight="700" fill="#B7443E">黑箱 canonical-order 信号</text>
+<text x="835" y="178" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">若打乱选择题选项后显著掉分，</text>
+<text x="835" y="198" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">可能提示记住了规范答案位置/字符串；</text>
+<text x="835" y="218" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">但也可能来自位置偏差或格式敏感。</text>
+<text x="835" y="238" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784"></text>
+<text x="835" y="258" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">它是诊断信号，不是污染证明。</text>
+<rect x="820" y="340" width="315" height="255" rx="10" fill="#EEF4FC" stroke="#245AA8" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="835" y="368" text-anchor="start" font-size="15" font-weight="700" fill="#245AA8">最小稳健性报告</text>
+<text x="835" y="393" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">dataset hash + time cutoff</text>
+<text x="835" y="413" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">dedup / overlap 方法与阈值</text>
+<text x="835" y="433" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">预注册 prompt family</text>
+<text x="835" y="453" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">item×prompt×seed 原始表</text>
+<text x="835" y="473" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">hierarchical / cluster bootstrap</text>
+<text x="835" y="493" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">mean + worst-case + interval</text>
+<text x="835" y="513" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">失败、污染可疑项与版本变化</text>
+<text x="835" y="533" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784"></text>
+<text x="835" y="553" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">外推只覆盖被抽到的模板族与总体。</text>
+<line x1="48" y1="650" x2="1152" y2="650" stroke="#D9D5CB"/>
+<text x="52" y="674" font-size="13" fill="#667784">污染检测没有单一完美 oracle；把数据谱系、近似重叠、行为探针和受控重跑作为证据组合，并保留替代解释。</text>
+</svg>

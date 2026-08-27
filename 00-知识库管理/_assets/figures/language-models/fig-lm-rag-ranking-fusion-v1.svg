@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">BM25、Dense 与 RRF：先理解分数，再做融合</title><desc id="desc">词频饱和曲线、双编码器相似度与名次融合算例。</desc>
+<rect width="1200" height="700" fill="#FBF8F1"/>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#667784"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#183044" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<line x1="48" y1="70" x2="1152" y2="70" stroke="#C87922" stroke-width="4"/>
+<text x="52" y="49" font-size="24" font-weight="700" fill="#183044">BM25、Dense 与 RRF：先理解分数，再做融合</text>
+<line x1="70" y1="345" x2="400" y2="345" stroke="#183044" stroke-width="1.7"/>
+<line x1="70" y1="345" x2="70" y2="125" stroke="#183044" stroke-width="1.7"/>
+<path d="M70.0,345.0 L103.0,260.4 L136.0,222.8 L169.0,201.5 L202.0,187.9 L235.0,178.3 L268.0,171.3 L301.0,165.9 L334.0,161.7 L367.0,158.2 L400.0,155.3" fill="none" stroke="#C87922" stroke-width="4"/>
+<circle cx="70.0" cy="345.0" r="4.5" fill="#C87922"/>
+<circle cx="136.0" cy="222.77777777777777" r="4.5" fill="#C87922"/>
+<circle cx="202.0" cy="187.85714285714286" r="4.5" fill="#C87922"/>
+<circle cx="268.0" cy="171.3157894736842" r="4.5" fill="#C87922"/>
+<circle cx="334.0" cy="161.66666666666666" r="4.5" fill="#C87922"/>
+<circle cx="400.0" cy="155.34482758620692" r="4.5" fill="#C87922"/>
+<text x="72" y="105" text-anchor="start" font-size="17" font-weight="700" fill="#183044">① BM25：词频收益递减</text>
+<text x="205" y="376" text-anchor="middle" font-size="12" font-weight="400" fill="#667784">term frequency</text>
+<text x="47" y="215" text-anchor="middle" font-size="12" font-weight="400" fill="#667784">weight</text>
+<rect x="455" y="115" width="265" height="225" rx="10" fill="#EEF4FC" stroke="#245AA8" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="470" y="143" font-size="15" font-weight="700" fill="#245AA8">② Dense dual encoder</text>
+<text x="470" y="167" font-size="12.5" fill="#667784">query q → [0.8, 0.1]</text>
+<text x="470" y="187" font-size="12.5" fill="#667784"></text>
+<text x="470" y="207" font-size="12.5" fill="#667784">D₁ → [0.7, 0.2]  dot .58</text>
+<text x="470" y="227" font-size="12.5" fill="#667784">D₂ → [0.2, 0.9]  dot .25</text>
+<text x="470" y="247" font-size="12.5" fill="#667784"></text>
+<text x="470" y="267" font-size="12.5" fill="#667784">向量可预计算；分数非概率</text>
+<rect x="775" y="105" width="355" height="252" rx="10" fill="#F3EFFA" stroke="#7054A3" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="790" y="133" font-size="15" font-weight="700" fill="#7054A3">③ RRF 只融合名次</text>
+<text x="790" y="157" font-size="12.5" fill="#667784">             BM25   dense</text>
+<text x="790" y="177" font-size="12.5" fill="#667784">Doc A          1       10</text>
+<text x="790" y="197" font-size="12.5" fill="#667784">Doc B          3        3</text>
+<text x="790" y="217" font-size="12.5" fill="#667784"></text>
+<text x="790" y="237" font-size="12.5" fill="#667784">A: 1/61 + 1/70 = .03068</text>
+<text x="790" y="257" font-size="12.5" fill="#667784">B: 1/63 + 1/63 = .03175</text>
+<text x="790" y="277" font-size="12.5" fill="#667784"></text>
+<text x="790" y="297" font-size="12.5" fill="#667784">→ B 稳定靠前，融合后排第一</text>
+<rect x="455" y="405" width="675" height="150" rx="10" fill="#FFF0ED" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="470" y="433" font-size="15" font-weight="700" fill="#B7443E">候选集合先决定上界</text>
+<text x="470" y="457" font-size="12.5" fill="#667784">BM25 top-K = B    Dense top-K = D</text>
+<text x="470" y="477" font-size="12.5" fill="#667784">Union oracle = gold ∈ (B ∪ D) ?</text>
+<text x="470" y="497" font-size="12.5" fill="#667784">再比较 raw-score calibration / learned fusion / RRF；验证集选参数，测试集只评一次。</text>
+<line x1="48" y1="650" x2="1152" y2="650" stroke="#D9D5CB" stroke-width="1"/>
+<text x="52" y="674" font-size="13" fill="#667784">BM25 与 dense 使用不同归纳偏置；hybrid 的互补性是待测假设，不是系统名称带来的保证。</text>
+</svg>

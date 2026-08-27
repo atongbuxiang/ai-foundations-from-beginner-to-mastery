@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">曲率对象的三个反例数值审计</title>
+<desc id="desc">非线性模型二阶项、标签测度与 reduction order 三类不等价的定量对照。</desc>
+<rect width="1200" height="700" fill="#FFFEFB"/>
+<style>.sans{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif}.mono{font-family:"SFMono-Regular",Consolas,monospace}.ink{fill:#0F172A}.muted{fill:#64748B}.white{fill:#FFFFFF}.blue{fill:#2563EB}.teal{fill:#0F766E}.red{fill:#C0392B}.amber{fill:#B76E00}</style>
+<text x="48" y="54" class="sans blue" font-size="26" font-weight="700">曲率对象不是同 shape 矩阵的同义词</text>
+<text x="48" y="92" class="sans muted" font-size="16">每个 panel 只删除一条错误等号；数值来自可复跑 toy model。</text>
+<rect x="48" y="125" width="330" height="465" rx="14" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+<text x="72" y="168" class="sans ink" font-size="21" font-weight="700">A | nonlinear term</text>
+<text x="72" y="198" class="sans muted" font-size="15">theta=0</text>
+<rect x="83.0" y="390.0" width="55" height="0.0" fill="#0F766E" opacity="0.88"/>
+<text x="110.5" y="565" class="sans ink" font-size="15" text-anchor="middle">GGN</text>
+<text x="110.5" y="380.0" class="mono ink" font-size="16" text-anchor="middle">0</text>
+<rect x="208.0" y="390.0" width="55" height="160.0" fill="#C0392B" opacity="0.88"/>
+<text x="235.5" y="565" class="sans ink" font-size="15" text-anchor="middle">Hessian</text>
+<text x="235.5" y="538.0" class="mono white" font-size="16" text-anchor="middle">-2</text>
+<line x1="72" y1="390.0" x2="354" y2="390.0" stroke="#94A3B8" stroke-width="2"/>
+<rect x="420" y="125" width="330" height="465" rx="14" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+<text x="444" y="168" class="sans ink" font-size="21" font-weight="700">B | label measure</text>
+<text x="444" y="198" class="sans muted" font-size="15">logistic p=0.8, x=2</text>
+<rect x="455.0" y="338.8" width="55" height="51.2" fill="#2563EB" opacity="0.88"/>
+<text x="482.5" y="565" class="sans ink" font-size="15" text-anchor="middle">true F</text>
+<text x="482.5" y="328.8" class="mono ink" font-size="16" text-anchor="middle">0.64</text>
+<rect x="538.3" y="377.2" width="55" height="12.8" fill="#0F766E" opacity="0.88"/>
+<text x="565.8" y="565" class="sans ink" font-size="15" text-anchor="middle">EF y=1</text>
+<text x="565.8" y="367.2" class="mono ink" font-size="16" text-anchor="middle">0.16</text>
+<rect x="621.7" y="190.0" width="55" height="200.0" fill="#B76E00" opacity="0.88"/>
+<text x="649.2" y="565" class="sans ink" font-size="15" text-anchor="middle">EF y=0</text>
+<text x="649.2" y="180.0" class="mono ink" font-size="16" text-anchor="middle">2.56</text>
+<line x1="444" y1="390.0" x2="726" y2="390.0" stroke="#94A3B8" stroke-width="2"/>
+<rect x="792" y="125" width="330" height="465" rx="14" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+<text x="816" y="168" class="sans ink" font-size="21" font-weight="700">C | reduction order</text>
+<text x="816" y="198" class="sans muted" font-size="15">per-sample g=+1,-1</text>
+<rect x="827.0" y="310.0" width="55" height="80.0" fill="#2563EB" opacity="0.88"/>
+<text x="854.5" y="565" class="sans ink" font-size="15" text-anchor="middle">mean outer</text>
+<text x="854.5" y="300.0" class="mono ink" font-size="16" text-anchor="middle">1</text>
+<rect x="952.0" y="390.0" width="55" height="0.0" fill="#C0392B" opacity="0.88"/>
+<text x="979.5" y="565" class="sans ink" font-size="15" text-anchor="middle">outer mean</text>
+<text x="979.5" y="380.0" class="mono ink" font-size="16" text-anchor="middle">0</text>
+<line x1="816" y1="390.0" x2="1098" y2="390.0" stroke="#94A3B8" stroke-width="2"/>
+<text x="48" y="638" class="sans red" font-size="17">Gaussian optimum: empirical Fisher=0, true Fisher=Hessian=1.</text>
+<text x="48" y="670" class="sans muted" font-size="15">PSD、样本更多或变量名都不能修复对象、测度与 reduction 的错配。</text>
+</svg>

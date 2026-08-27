@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">不确定性：信息集、层级分解与可证伪评价</title>
+<desc id="desc">aleatoric和epistemic只在已声明的信息集与层级模型下有精确含义；likelihood错设、推断近似和分布偏移不能被一个方差或熵数字自动覆盖。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">同一事件，不同信息状态</text>
+<rect x="55" y="92" width="300" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="205.0" y="127.0" font-size="16" font-weight="650" text-anchor="middle" fill="#2563EB">Y | X : unresolved variation</text>
+<line x1="205" y1="155" x2="205" y2="188" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="55" y="198" width="300" height="58" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="205.0" y="233.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">Y | X,Z : better sensor / information</text>
+<text x="45" y="310" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937">aleatoric is conditional on what is observed</text>
+<text x="45" y="350" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">epistemic belongs to an agent + model state</text>
+<text x="45" y="398" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">parameter / function / model-form</text>
+<text x="45" y="438" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">approximation / optimization / shift</text>
+<text x="45" y="482" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">different causes require different remedies</text>
+<text x="45" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">uncertainty has no context-free scalar。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">两个精确但条件化的分解</text>
+<rect x="445" y="92" width="310" height="72" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600.0" y="134.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">total variance = E[variance] + Var[mean]</text>
+<text x="455" y="205" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">within-model</text>
+<text x="645" y="205" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">between-model</text>
+<line x1="500" y1="225" x2="500" y2="275" stroke="#2563EB" stroke-width="8"/>
+<line x1="690" y1="225" x2="690" y2="315" stroke="#0F766E" stroke-width="8"/>
+<rect x="445" y="338" width="310" height="68" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="600.0" y="378.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">H(mean p) = E H(p_theta) + I(Y;theta)</text>
+<text x="430" y="452" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937">identity is exact for the declared hierarchy</text>
+<text x="430" y="490" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">semantic labels are model/measure dependent</text>
+<text x="430" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">MI is disagreement, not a universal truth。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">三道遗漏检查</text>
+<rect x="845" y="92" width="285" height="58" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="987.5" y="127.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">likelihood / label misspecification</text>
+<rect x="845" y="176" width="285" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="987.5" y="211.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">posterior / ensemble approximation</text>
+<rect x="845" y="260" width="285" height="58" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="987.5" y="295.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">support gap / deployment shift</text>
+<text x="830" y="362" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937">evaluate proper score + calibration</text>
+<text x="830" y="402" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">coverage + width / set size</text>
+<text x="830" y="442" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">risk-coverage + decision utility</text>
+<text x="830" y="482" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">stratify by group, time and severity</text>
+<text x="830" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">OOD is not synonymous with epistemic。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">先固定预测对象和信息集，再解释分解项；任何uncertainty方法最终都要接受校准、coverage、shift和行动价值检验。</text>
+</svg>

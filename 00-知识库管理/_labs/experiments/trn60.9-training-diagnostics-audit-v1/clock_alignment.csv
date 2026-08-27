@@ -1,0 +1,5 @@
+attempt,outcome,microstep_clock,optimizer_step_before,optimizer_step_after,effective_token_clock,scheduler_by_update,scheduler_by_attempt,skipped_update
+1,success,2,0,1,1990,1,1,0
+2,overflow,4,1,1,3990,1,2,1
+3,success,6,1,2,5990,2,3,0
+4,success,8,2,3,7990,3,4,0

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">从线上 SLI 到 Incident：监控必须能触发行动</title><desc id="desc">五层监控、反馈选择与告警—回滚—复盘时间线。</desc>
+<rect width="1200" height="700" fill="#FBF8F1"/>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#667784"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#183044" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<line x1="48" y1="70" x2="1152" y2="70" stroke="#C87922" stroke-width="4"/>
+<text x="52" y="49" font-size="24" font-weight="700" fill="#183044">从线上 SLI 到 Incident：监控必须能触发行动</text>
+<text x="55" y="105" text-anchor="start" font-size="13" font-weight="700" fill="#245AA8">A · 五层 SLI 与反馈环</text>
+<rect x="55" y="140" width="160" height="90" rx="10" fill="#FFFDF8" stroke="#245AA8" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="70" y="168" text-anchor="start" font-size="15" font-weight="700" fill="#245AA8">Traffic</text>
+<text x="70" y="192" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">language/domain/length</text>
+<rect x="245" y="140" width="160" height="90" rx="10" fill="#FFFDF8" stroke="#17766E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="260" y="168" text-anchor="start" font-size="15" font-weight="700" fill="#17766E">RAG / Tools</text>
+<text x="260" y="192" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">freshness/error/denial</text>
+<rect x="435" y="140" width="160" height="90" rx="10" fill="#FFFDF8" stroke="#7054A3" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="450" y="168" text-anchor="start" font-size="15" font-weight="700" fill="#7054A3">Behavior</text>
+<text x="450" y="192" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">answer/refuse/policy</text>
+<rect x="625" y="140" width="160" height="90" rx="10" fill="#FFFDF8" stroke="#4F7B45" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="640" y="168" text-anchor="start" font-size="15" font-weight="700" fill="#4F7B45">Outcome</text>
+<text x="640" y="192" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">completion/escalation</text>
+<rect x="815" y="140" width="160" height="90" rx="10" fill="#FFFDF8" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="830" y="168" text-anchor="start" font-size="15" font-weight="700" fill="#B7443E">Impact</text>
+<text x="830" y="192" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">harm/cost/SLO</text>
+<line x1="215" y1="185" x2="235" y2="185" stroke="#667784" stroke-width="2.1" marker-end="url(#arrow)"/>
+<line x1="405" y1="185" x2="425" y2="185" stroke="#667784" stroke-width="2.1" marker-end="url(#arrow)"/>
+<line x1="595" y1="185" x2="615" y2="185" stroke="#667784" stroke-width="2.1" marker-end="url(#arrow)"/>
+<line x1="785" y1="185" x2="805" y2="185" stroke="#667784" stroke-width="2.1" marker-end="url(#arrow)"/>
+<line x1="895" y1="235" x2="530" y2="310" stroke="#B7443E" stroke-width="2.1" marker-end="url(#arrow)" stroke-dasharray="7 5"/>
+<line x1="530" y1="310" x2="135" y2="235" stroke="#B7443E" stroke-width="2.1" marker-end="url(#arrow)" stroke-dasharray="7 5"/>
+<text x="510" y="338" text-anchor="middle" font-size="11" font-weight="700" fill="#B7443E">策略改变谁继续使用、谁被标注：observed labels ≠ target population</text>
+<rect x="1010" y="135" width="125" height="105" rx="10" fill="#FFF5E7" stroke="#C87922" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="1025" y="163" text-anchor="start" font-size="15" font-weight="700" fill="#C87922">SLO</text>
+<text x="1025" y="187" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">window + slice</text>
+<text x="1025" y="206" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">分母 + CI</text>
+<text x="1025" y="225" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">owner + runbook</text>
+<text x="55" y="385" text-anchor="start" font-size="13" font-weight="700" fill="#B7443E">B · 一次事故的证据时间线</text>
+<line x1="75" y1="470" x2="1120" y2="470" stroke="#183044" stroke-width="3"/>
+<circle cx="120" cy="470" r="11" fill="#245AA8"/>
+<text x="120" y="445" text-anchor="middle" font-size="11" font-weight="700" fill="#245AA8">deploy</text>
+<text x="120" y="505" text-anchor="middle" font-size="10" font-weight="400" fill="#667784">bundle v17</text>
+<circle cx="310" cy="470" r="11" fill="#B7443E"/>
+<text x="310" y="445" text-anchor="middle" font-size="11" font-weight="700" fill="#B7443E">first bad</text>
+<text x="310" y="505" text-anchor="middle" font-size="10" font-weight="400" fill="#667784">首个受影响请求</text>
+<circle cx="500" cy="470" r="11" fill="#C87922"/>
+<text x="500" y="445" text-anchor="middle" font-size="11" font-weight="700" fill="#C87922">detect</text>
+<text x="500" y="505" text-anchor="middle" font-size="10" font-weight="400" fill="#667784">SLI 上界越线</text>
+<circle cx="690" cy="470" r="11" fill="#7054A3"/>
+<text x="690" y="445" text-anchor="middle" font-size="11" font-weight="700" fill="#7054A3">mitigate</text>
+<text x="690" y="505" text-anchor="middle" font-size="10" font-weight="400" fill="#667784">禁用高权工具</text>
+<circle cx="865" cy="470" r="11" fill="#4F7B45"/>
+<text x="865" y="445" text-anchor="middle" font-size="11" font-weight="700" fill="#4F7B45">recover</text>
+<text x="865" y="505" text-anchor="middle" font-size="10" font-weight="400" fill="#667784">rollback + verify</text>
+<circle cx="1050" cy="470" r="11" fill="#17766E"/>
+<text x="1050" y="445" text-anchor="middle" font-size="11" font-weight="700" fill="#17766E">learn</text>
+<text x="1050" y="505" text-anchor="middle" font-size="10" font-weight="400" fill="#667784">行动项验收</text>
+<rect x="75" y="550" width="1045" height="65" rx="10" fill="#FFF0ED" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="90" y="578" text-anchor="start" font-size="15" font-weight="700" fill="#B7443E">Postmortem 必须连接证据与责任</text>
+<text x="90" y="602" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">impact · detection gap · timeline · trigger/contributors · logs/replay · mitigation/rollback · owner/deadline · 验收测试；blameless 不等于无责任或无可证伪性。</text>
+<line x1="48" y1="650" x2="1152" y2="650" stroke="#D9D5CB"/>
+<text x="52" y="674" font-size="13" fill="#667784">Drift 指标是告警线索，不是根因；时间线相关也不自动识别因果。回滚优先止损，复盘再用日志、重放和干预更新证据。</text>
+</svg>

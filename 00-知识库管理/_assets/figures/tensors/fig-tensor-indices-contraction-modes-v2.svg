@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">张量外积、缩并与 mode 乘积的指标语义</title>
+  <desc id="desc">左侧展示外积创建两个自由指标，中间展示缩并对重复配对指标求和并消去该轴，右侧展示 mode 乘积只替换一个轴；底部用 einsum 例子区分自由指标、求和指标与批量轴。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
+    <style>
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.mono{font-family:"SFMono-Regular","Menlo","Consolas",monospace}.math{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}.blue{fill:#2563eb}.green{fill:#0f766e}.amber{fill:#b7791f}.h{font-size:19px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}.arrow{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <rect x="42" y="43" width="350" height="397" rx="12" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="68" y="81" class="sans h blue">外积：创建独立自由指标</text>
+  <rect x="84" y="129" width="76" height="188" rx="10" fill="#ffffff" stroke="#93c5fd"/><text x="122" y="227" class="math formula blue" text-anchor="middle">uᵢ</text>
+  <text x="186" y="227" class="math formula ink">⊗</text>
+  <rect x="231" y="169" width="118" height="82" rx="10" fill="#ffffff" stroke="#6ee7b7"/><text x="290" y="217" class="math formula green" text-anchor="middle">vⱼ</text>
+  <path d="M218 282V327" class="arrow"/><rect x="90" y="337" width="256" height="58" rx="9" fill="#ffffff" stroke="#93c5fd"/><text x="218" y="373" class="math body ink" text-anchor="middle">Tᵢⱼ=uᵢvⱼ　shape I×J</text><text x="218" y="421" class="sans small muted" text-anchor="middle">i、j 都留在输出中，因此都是自由指标。</text>
+
+  <rect x="425" y="43" width="350" height="397" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="451" y="81" class="sans h green">缩并：配对求和并消去指标</text>
+  <rect x="464" y="124" width="116" height="102" rx="10" fill="#eff6ff" stroke="#93c5fd"/><text x="522" y="181" class="math formula blue" text-anchor="middle">Aᵢⱼ</text>
+  <text x="604" y="181" class="math formula ink">×</text>
+  <rect x="642" y="124" width="94" height="102" rx="10" fill="#ecfdf5" stroke="#6ee7b7"/><text x="689" y="181" class="math formula green" text-anchor="middle">xⱼ</text>
+  <path d="M600 236V287" class="arrow"/><rect x="471" y="296" width="258" height="62" rx="9" fill="#ffffff" stroke="#6ee7b7"/><text x="600" y="334" class="math body ink" text-anchor="middle">yᵢ=ΣⱼAᵢⱼxⱼ</text><text x="600" y="391" class="sans body amber" text-anchor="middle">j 重复且求和：缩并指标</text><text x="600" y="421" class="sans small muted" text-anchor="middle">i 只出现一次并留在输出：自由指标。</text>
+
+  <rect x="808" y="43" width="350" height="397" rx="12" fill="#ecfdf5" stroke="#6ee7b7"/>
+  <text x="834" y="81" class="sans h green">mode-n 乘积：只替换一个轴</text>
+  <rect x="849" y="126" width="268" height="92" rx="10" fill="#ffffff" stroke="#a7f3d0"/><text x="983" y="164" class="math formula ink" text-anchor="middle">X ∈ Rᴵˣᴶˣᴷ</text><text x="983" y="196" class="sans small muted" text-anchor="middle">三个轴：sample、token、feature</text>
+  <path d="M983 218V266" class="arrow"/><text x="1005" y="247" class="math small green">沿 feature 轴乘 W</text>
+  <rect x="849" y="266" width="268" height="92" rx="10" fill="#ffffff" stroke="#6ee7b7"/><text x="983" y="304" class="math formula green" text-anchor="middle">Yᵢⱼₗ=ΣₖXᵢⱼₖWₗₖ</text><text x="983" y="336" class="math small muted" text-anchor="middle">shape I×J×L</text><text x="983" y="393" class="sans body ink" text-anchor="middle">I、J 轴保留；K 轴替换为 L。</text><text x="983" y="421" class="sans small amber" text-anchor="middle">reshape/transpose 本身不做求和。</text>
+  <rect x="70" y="472" width="1060" height="100" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="97" y="505" class="sans h blue">用 einsum 做指标审计</text><text x="97" y="540" class="mono body ink">ij,j-&gt;i</text><text x="250" y="540" class="sans small muted">矩阵乘向量</text><text x="418" y="540" class="mono body ink">bhd,btd-&gt;bht</text><text x="653" y="540" class="sans small muted">Attention score</text><text x="833" y="540" class="mono body ink">ijk,lk-&gt;ijl</text><text x="1086" y="540" class="sans small muted" text-anchor="end">mode-3 线性映射</text>
+  <text x="600" y="610" class="sans result ink" text-anchor="middle">先标每个轴的语义，再决定哪些指标保留、哪些配对求和；数组阶数只是表示，指标合同才是运算。</text>
+</svg>

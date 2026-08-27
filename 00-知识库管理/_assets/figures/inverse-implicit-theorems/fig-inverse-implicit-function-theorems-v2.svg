@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">逆函数定理与隐函数定理</title>
+<desc id="desc">可逆线性化生成局部逆或唯一隐式分支；定量稳定、全局可逆与数值求解仍是不同层次。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">局部逆来自可逆线性化</text>
+<circle cx="120" cy="220" r="78" fill="#ECFDF5" stroke="#0F766E" stroke-width="2.5"/>
+<circle cx="300" cy="220" r="68" fill="#EFF6FF" stroke="#2563EB" stroke-width="2.5"/>
+<path d="M100 250C125 190 145 270 175 175" fill="none" stroke="#0F766E" stroke-width="3"/>
+<line x1="200" y1="220" x2="230" y2="220" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<text x="120" y="330" font-size="16" font-weight="650" text-anchor="middle" fill="#1F2937">a 附近</text>
+<text x="300" y="310" font-size="16" font-weight="650" text-anchor="middle" fill="#1F2937">f(a) 附近</text>
+<text x="45" y="405" font-size="17" font-weight="650" text-anchor="start" fill="#1F2937" class="math">D(f^-1)(f(a)) = Df(a)^-1</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">零水平集成为函数图像</text>
+<line x1="450" y1="390" x2="750" y2="390" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="480" y1="420" x2="480" y2="115" stroke="#D7DEE8" stroke-width="2"/>
+<path d="M480 345C540 325 570 210 650 240C700 260 720 185 755 150" fill="none" stroke="#0F766E" stroke-width="4"/>
+<circle cx="650" cy="240" r="7" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<text x="660" y="226" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">(x,g(x))</text>
+<text x="445" y="445" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937" class="math">DyF 可逆 =&gt; Dg = -(DyF)^-1 DxF</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">四个层次必须分开</text>
+<rect x="840" y="105" width="300" height="56" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="990.0" y="139.0" font-size="16" font-weight="650" text-anchor="middle" fill="#0F766E">局部存在唯一：Jacobian 可逆</text>
+<rect x="840" y="193" width="300" height="56" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="990.0" y="227.0" font-size="16" font-weight="650" text-anchor="middle" fill="#2563EB">定量稳定：sigma_min 不太小</text>
+<rect x="840" y="281" width="300" height="56" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="990.0" y="315.0" font-size="16" font-weight="650" text-anchor="middle" fill="#C24135">全局可逆：需要额外结构</text>
+<rect x="840" y="369" width="300" height="56" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="990.0" y="403.0" font-size="16" font-weight="650" text-anchor="middle" fill="#0F766E">数值求解：分支、残差与吸引域</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">逆/隐函数定理给出精确的局部结构；它不自动提供全局双射或数值算法保证。</text>
+</svg>

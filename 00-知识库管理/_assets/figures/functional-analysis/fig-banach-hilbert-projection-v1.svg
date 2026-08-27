@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">Banach 完备化、Hilbert 正交投影与函数空间接口</title>
+  <desc id="desc">左侧展示稠密子空间的柯西序列在完备化中获得极限，中间展示闭子空间的正交投影和勾股分解，右侧展示条件期望、HiPPO、RKHS和神经算子的函数空间接口。</desc>
+  <defs>
+    <style>
+      .bg{fill:#f8fafc}.panel{fill:#fff;stroke:#cbd5e1;stroke-width:1.5}.ttl{font:700 18px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#0f172a}.sub{font:500 12px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#475569}.txt{font:600 13px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#1e293b}.small{font:500 11px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#475569}.math{font:italic 14px Georgia,serif;fill:#0f172a}.blue{fill:#dbeafe;stroke:#2563eb;stroke-width:2}.teal{fill:#ccfbf1;stroke:#0f766e;stroke-width:2}.amber{fill:#fef3c7;stroke:#d97706;stroke-width:2}.rose{fill:#ffe4e6;stroke:#e11d48;stroke-width:2}.violet{fill:#ede9fe;stroke:#7c3aed;stroke-width:2}.line{fill:none;stroke:#334155;stroke-width:1.8}.dash{fill:none;stroke:#64748b;stroke-width:1.5;stroke-dasharray:5 5}.dense{fill:#eff6ff;stroke:#2563eb;stroke-width:1.5;stroke-dasharray:5 4}.space{fill:#f1f5f9;stroke:#64748b;stroke-width:1.5}.right{stroke:#e11d48;stroke-width:1.6;fill:none}
+    </style>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#334155"/></marker>
+  </defs>
+  <rect class="bg" width="1200" height="430"/>
+
+  <rect class="panel" x="20" y="20" width="365" height="390" rx="16"/>
+  <text class="ttl" x="40" y="52">A  Norm、Cauchy 与 completion</text>
+  <text class="sub" x="40" y="73">稠密 approximants 的极限可能不在原空间</text>
+  <ellipse class="space" cx="205" cy="221" rx="135" ry="112"/>
+  <path class="dense" d="M91 244 C112 152 244 125 317 189 C350 218 313 307 214 322 C134 333 78 294 91 244 Z"/>
+  <text class="txt" x="109" y="305">dense X</text>
+  <text class="txt" x="247" y="122">completion X̂</text>
+  <circle class="blue" cx="128" cy="259" r="7"/><text class="small" x="111" y="279">x₁</text>
+  <circle class="blue" cx="166" cy="229" r="7"/><text class="small" x="151" y="248">x₂</text>
+  <circle class="blue" cx="201" cy="208" r="7"/><text class="small" x="188" y="227">x₃</text>
+  <circle class="blue" cx="233" cy="192" r="7"/>
+  <path class="line" d="M135 254 L158 235 L193 213 L225 196 L265 174" marker-end="url(#arrow)"/>
+  <circle class="rose" cx="276" cy="169" r="10"/><text class="math" x="290" y="174">x ∈ X̂ \ X</text>
+  <text class="small" x="76" y="350">Cauchy in X · convergent only after completion</text>
+  <rect class="teal" x="91" y="366" width="230" height="27" rx="9"/>
+  <text class="txt" x="206" y="385" text-anchor="middle">Banach = no escaping limit</text>
+
+  <rect class="panel" x="417" y="20" width="365" height="390" rx="16"/>
+  <text class="ttl" x="437" y="52">B  Hilbert projection 分账误差</text>
+  <text class="sub" x="437" y="73">closed subspace M 给唯一 nearest point</text>
+  <path class="blue" d="M469 304 L723 224 L742 259 L488 339 Z"/>
+  <text class="txt" x="681" y="290">M</text>
+  <circle class="rose" cx="581" cy="131" r="9"/><text class="math" x="594" y="130">x</text>
+  <circle class="amber" cx="619" cy="275" r="9"/><text class="math" x="631" y="279">Pₘx</text>
+  <path class="line" d="M586 140 L616 264" marker-end="url(#arrow)"/>
+  <text class="small" x="536" y="207">residual x − Pₘx</text>
+  <path class="right" d="M609 242 L626 238 L631 255"/>
+  <path class="dash" d="M581 131 L496 312"/>
+  <text class="small" x="455" y="354">x = Pₘx + (I − Pₘ)x</text>
+  <text class="small" x="455" y="374">‖x−m‖² = ‖x−Pₘx‖² + ‖Pₘx−m‖²</text>
+  <rect class="teal" x="485" y="88" width="229" height="28" rx="9"/>
+  <text class="txt" x="599" y="107" text-anchor="middle">Hilbert = orthogonal error ledger</text>
+
+  <rect class="panel" x="814" y="20" width="366" height="390" rx="16"/>
+  <text class="ttl" x="834" y="52">C  Function-space AI 接口</text>
+  <text class="sub" x="834" y="73">先指定 space · norm · measure · convergence</text>
+  <rect class="blue" x="848" y="105" width="130" height="48" rx="10"/>
+  <text class="txt" x="913" y="125" text-anchor="middle">signal/function f</text>
+  <text class="small" x="913" y="142" text-anchor="middle">in L², H¹, RKHS…</text>
+  <rect class="amber" x="1016" y="105" width="130" height="48" rx="10"/>
+  <text class="txt" x="1081" y="125" text-anchor="middle">finite coefficients</text>
+  <text class="small" x="1081" y="142" text-anchor="middle">projection Pₙf</text>
+  <path class="line" d="M979 129 L1006 129" marker-end="url(#arrow)"/>
+  <rect class="teal" x="847" y="190" width="138" height="55" rx="11"/>
+  <text class="txt" x="916" y="212" text-anchor="middle">E[Y | 𝒢]</text>
+  <text class="small" x="916" y="230" text-anchor="middle">L² conditional projection</text>
+  <rect class="violet" x="1010" y="190" width="138" height="55" rx="11"/>
+  <text class="txt" x="1079" y="212" text-anchor="middle">HiPPO memory</text>
+  <text class="small" x="1079" y="230" text-anchor="middle">weighted polynomial basis</text>
+  <rect class="rose" x="847" y="281" width="138" height="55" rx="11"/>
+  <text class="txt" x="916" y="303" text-anchor="middle">RKHS / kernel</text>
+  <text class="small" x="916" y="321" text-anchor="middle">bounded point evaluation</text>
+  <rect class="amber" x="1010" y="281" width="138" height="55" rx="11"/>
+  <text class="txt" x="1079" y="303" text-anchor="middle">neural operator</text>
+  <text class="small" x="1079" y="321" text-anchor="middle">map X → Y, then discretize</text>
+  <path class="dash" d="M913 154 L916 180" marker-end="url(#arrow)"/>
+  <path class="dash" d="M1081 154 L1079 180" marker-end="url(#arrow)"/>
+  <path class="dash" d="M916 246 L916 271" marker-end="url(#arrow)"/>
+  <path class="dash" d="M1079 246 L1079 271" marker-end="url(#arrow)"/>
+  <text class="small" x="997" y="371" text-anchor="middle">sampled vector ≠ continuum function</text>
+  <text class="small" x="997" y="390" text-anchor="middle">exact theorem ≠ discretized empirical result</text>
+</svg>

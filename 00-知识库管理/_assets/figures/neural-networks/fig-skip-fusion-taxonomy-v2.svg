@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Skip Taxonomy：加法、门控、拼接与跨尺度</title>
+<desc id="desc">四类 skip 的差别不只是连线形状：融合算子决定状态维度、Jacobian、信息身份和系统成本；连接数也不等于独立路径数。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">融合算子先于网络名称</text>
+<rect x="52" y="92" width="310" height="72" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="68" y="118" font-size="16" font-weight="700" text-anchor="start" fill="#2563EB">add</text>
+<text x="345" y="138" font-size="15" font-weight="650" text-anchor="end" fill="#1F2937">P(x) + F(x)</text>
+<text x="345" y="158" font-size="15" font-weight="600" text-anchor="end" fill="#64748B">fixed width</text>
+<rect x="52" y="188" width="310" height="72" rx="5" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="68" y="214" font-size="16" font-weight="700" text-anchor="start" fill="#0F766E">gate</text>
+<text x="345" y="234" font-size="15" font-weight="650" text-anchor="end" fill="#1F2937">T H + (1-T)x</text>
+<text x="345" y="254" font-size="15" font-weight="600" text-anchor="end" fill="#64748B">data dependent</text>
+<rect x="52" y="284" width="310" height="72" rx="5" fill="#FFFEFB" stroke="#B7791F" stroke-width="2"/>
+<text x="68" y="310" font-size="16" font-weight="700" text-anchor="start" fill="#B7791F">concat</text>
+<text x="345" y="330" font-size="15" font-weight="650" text-anchor="end" fill="#1F2937">[x, z1, ..., zl]</text>
+<text x="345" y="350" font-size="15" font-weight="600" text-anchor="end" fill="#64748B">width grows</text>
+<rect x="52" y="380" width="310" height="72" rx="5" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="68" y="406" font-size="16" font-weight="700" text-anchor="start" fill="#C24135">long skip</text>
+<text x="345" y="426" font-size="15" font-weight="650" text-anchor="end" fill="#1F2937">enc -&gt; align -&gt; dec</text>
+<text x="345" y="446" font-size="15" font-weight="600" text-anchor="end" fill="#64748B">cross scale</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Highway：别漏 gate 导数</text>
+<rect x="450" y="104" width="80" height="48" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="490.0" y="134.0" font-size="17" font-weight="650" text-anchor="middle" fill="#2563EB">x</text>
+<rect x="580" y="96" width="105" height="54" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="632.5" y="129.0" font-size="17" font-weight="650" text-anchor="middle" fill="#0F766E">H(x)</text>
+<path d="M493 153V233H575" fill="none" stroke="#2563EB" stroke-width="2.4" marker-end="url(#a0)"/>
+<line x1="535" y1="128" x2="575" y2="123" stroke="#0F766E" stroke-width="2.4" marker-end="url(#a1)"/>
+<path d="M633 153V205H615V222" fill="none" stroke="#0F766E" stroke-width="2.4" marker-end="url(#a1)"/>
+<circle cx="615" cy="235" r="8" fill="#FFFEFB" stroke="#1F2937" stroke-width="2"/>
+<text x="602" y="290" font-size="16" font-weight="700" text-anchor="middle" fill="#1F2937">y = T H + (1-T)x</text>
+<rect x="445" y="330" width="315" height="112" rx="5" fill="#FFF5F2" stroke="#C24135" stroke-width="2"/>
+<text x="602" y="360" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">J includes Diag(H-x) J_T</text>
+<text x="602" y="394" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">gate can amplify or cancel carry</text>
+<text x="602" y="420" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">T near 0 is only an initialization bias</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Dense block：宽度增长</text>
+<rect x="845" y="90" width="85" height="44" rx="4" fill="#F8FAFC" stroke="#2563EB" stroke-width="1.8"/>
+<text x="856" y="118" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">x0: C=64</text>
+<rect x="845" y="162" width="109" height="44" rx="4" fill="#F8FAFC" stroke="#0F766E" stroke-width="1.8"/>
+<text x="856" y="190" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">z1: C=96</text>
+<rect x="845" y="234" width="134" height="44" rx="4" fill="#F8FAFC" stroke="#0F766E" stroke-width="1.8"/>
+<text x="856" y="262" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">z2: C=128</text>
+<rect x="845" y="306" width="159" height="44" rx="4" fill="#F8FAFC" stroke="#B7791F" stroke-width="1.8"/>
+<text x="856" y="334" font-size="15" font-weight="700" text-anchor="start" fill="#B7791F">z3: C=160</text>
+<rect x="845" y="378" width="184" height="44" rx="4" fill="#F8FAFC" stroke="#C24135" stroke-width="1.8"/>
+<text x="856" y="406" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">z4: C=192</text>
+<text x="987" y="466" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">C0=64, k=32, L=4 -&gt; C=192</text>
+<text x="987" y="492" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">input-channel work: 64+96+128+160</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">统一比较 skip 时，逐项登记 source、transform、fusion、shape、Jacobian 与 memory traffic。</text>
+</svg>

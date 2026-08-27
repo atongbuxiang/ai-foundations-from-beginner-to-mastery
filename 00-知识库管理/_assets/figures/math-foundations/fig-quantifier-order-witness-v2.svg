@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+  <title id="title">量词顺序如何改变见证依赖与结论强度</title>
+  <desc id="desc">左栏展示每个输入可以选择自己的见证，右栏展示一个统一见证必须服务全部输入，底部给出逐层否定量词产生失败证书的规则。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
+    <style>
+      .ink{fill:#1f2937}.muted{fill:#64748b}.line{stroke:#cbd5e1;stroke-width:1.5}.arrow{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#arrow)}.soft{fill:#f8fafc}.blue{fill:#2563eb}.blue-soft{fill:#eff6ff}.green{fill:#047857}.green-soft{fill:#ecfdf5}.red{fill:#b91c1c}.red-soft{fill:#fef2f2}
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.h{font-size:18px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:23px}.result{font-size:19px;font-weight:600}
+    </style>
+  </defs>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <rect x="42" y="42" width="532" height="346" rx="12" class="blue-soft" stroke="#bfdbfe"/>
+  <rect x="626" y="42" width="532" height="346" rx="12" class="green-soft" stroke="#a7f3d0"/>
+  <text x="68" y="80" class="sans h blue">每个输入可有自己的见证</text><text x="652" y="80" class="sans h green">一个见证必须服务全部输入</text>
+  <text x="308" y="126" class="math formula ink" text-anchor="middle">∀x ∃y　P(x,y)</text>
+  <text x="892" y="126" class="math formula ink" text-anchor="middle">∃y ∀x　P(x,y)</text>
+  <g class="blue"><circle cx="122" cy="191" r="12"/><circle cx="122" cy="256" r="12"/><circle cx="122" cy="321" r="12"/></g>
+  <g class="green"><circle cx="490" cy="178" r="12"/><circle cx="490" cy="256" r="12"/><circle cx="490" cy="334" r="12"/></g>
+  <g class="math body ink" text-anchor="middle"><text x="122" y="196">x₁</text><text x="122" y="261">x₂</text><text x="122" y="326">x₃</text><text x="490" y="183">y₁</text><text x="490" y="261">y₂</text><text x="490" y="339">y₃</text></g>
+  <path d="M139 191 C235 191 380 178 475 178" class="arrow"/><path d="M139 256 L475 256" class="arrow"/><path d="M139 321 C235 321 380 334 475 334" class="arrow"/>
+  <text x="308" y="367" class="sans small muted" text-anchor="middle">y 可以依赖 x：写作 y=y(x)</text>
+
+  <g class="blue"><circle cx="706" cy="191" r="12"/><circle cx="706" cy="256" r="12"/><circle cx="706" cy="321" r="12"/></g>
+  <circle cx="1074" cy="256" r="14" class="green"/>
+  <g class="math body ink" text-anchor="middle"><text x="706" y="196">x₁</text><text x="706" y="261">x₂</text><text x="706" y="326">x₃</text><text x="1074" y="261" fill="#ffffff">y</text></g>
+  <path d="M723 191 C820 191 963 230 1058 251" class="arrow"/><path d="M723 256 L1058 256" class="arrow"/><path d="M723 321 C820 321 963 282 1058 261" class="arrow"/>
+  <text x="892" y="367" class="sans small muted" text-anchor="middle">y 在看到 x 之前就固定：通常更强</text>
+
+  <rect x="84" y="420" width="1032" height="100" rx="11" class="red-soft" stroke="#fecaca"/>
+  <text x="112" y="451" class="sans h red">否定时逐层翻转量词</text>
+  <text x="112" y="489" class="math formula ink">¬(∀x ∃y P(x,y))　⇔　∃x ∀y ¬P(x,y)</text>
+  <text x="785" y="487" class="sans body red">失败证书：找一个 x，使所有 y 都失败</text>
+  <text x="600" y="548" class="sans result ink" text-anchor="middle">量词顺序就是依赖合同；先出现的变量不能依赖后出现的变量。</text>
+</svg>

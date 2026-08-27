@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+  <title id="title">阈值类与区间类的增长函数</title>
+  <desc id="desc">对数坐标下，全部二分标记线性增长；右阈值和区间类在超过各自 VC 维后明显偏离指数包络。</desc>
+  <rect width="1200" height="650" fill="#ffffff"/>
+  <style>.s{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.m{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}</style>
+  <line x1="92" y1="552" x2="1130" y2="552" stroke="#e2e8f0" stroke-width="1.2"/>
+<text x="79" y="557" text-anchor="end" class="s muted" font-size="15">0</text>
+<line x1="92" y1="467" x2="1130" y2="467" stroke="#e2e8f0" stroke-width="1.2"/>
+<text x="79" y="472" text-anchor="end" class="s muted" font-size="15">2</text>
+<line x1="92" y1="382" x2="1130" y2="382" stroke="#e2e8f0" stroke-width="1.2"/>
+<text x="79" y="387" text-anchor="end" class="s muted" font-size="15">4</text>
+<line x1="92" y1="297" x2="1130" y2="297" stroke="#e2e8f0" stroke-width="1.2"/>
+<text x="79" y="302" text-anchor="end" class="s muted" font-size="15">6</text>
+<line x1="92" y1="212" x2="1130" y2="212" stroke="#e2e8f0" stroke-width="1.2"/>
+<text x="79" y="217" text-anchor="end" class="s muted" font-size="15">8</text>
+<line x1="92" y1="127" x2="1130" y2="127" stroke="#e2e8f0" stroke-width="1.2"/>
+<text x="79" y="132" text-anchor="end" class="s muted" font-size="15">10</text>
+<line x1="92" y1="42" x2="1130" y2="42" stroke="#e2e8f0" stroke-width="1.2"/>
+<text x="79" y="47" text-anchor="end" class="s muted" font-size="15">12</text>
+<line x1="92" y1="42" x2="92" y2="552" stroke="#e2e8f0" stroke-width="1.2" stroke-dasharray="3 7"/>
+<text x="92" y="580" text-anchor="middle" class="s muted" font-size="15">0</text>
+<line x1="265" y1="42" x2="265" y2="552" stroke="#e2e8f0" stroke-width="1.2" stroke-dasharray="3 7"/>
+<text x="265" y="580" text-anchor="middle" class="s muted" font-size="15">2</text>
+<line x1="438" y1="42" x2="438" y2="552" stroke="#e2e8f0" stroke-width="1.2" stroke-dasharray="3 7"/>
+<text x="438" y="580" text-anchor="middle" class="s muted" font-size="15">4</text>
+<line x1="611" y1="42" x2="611" y2="552" stroke="#e2e8f0" stroke-width="1.2" stroke-dasharray="3 7"/>
+<text x="611" y="580" text-anchor="middle" class="s muted" font-size="15">6</text>
+<line x1="784" y1="42" x2="784" y2="552" stroke="#e2e8f0" stroke-width="1.2" stroke-dasharray="3 7"/>
+<text x="784" y="580" text-anchor="middle" class="s muted" font-size="15">8</text>
+<line x1="957" y1="42" x2="957" y2="552" stroke="#e2e8f0" stroke-width="1.2" stroke-dasharray="3 7"/>
+<text x="957" y="580" text-anchor="middle" class="s muted" font-size="15">10</text>
+<line x1="1130" y1="42" x2="1130" y2="552" stroke="#e2e8f0" stroke-width="1.2" stroke-dasharray="3 7"/>
+<text x="1130" y="580" text-anchor="middle" class="s muted" font-size="15">12</text>
+<line x1="92" y1="552" x2="1130" y2="552" stroke="#475569" stroke-width="2"/>
+<line x1="92" y1="42" x2="92" y2="552" stroke="#475569" stroke-width="2"/>
+<text x="611" y="621" text-anchor="middle" class="s ink" font-size="17">样本点数 m</text>
+<text x="27" y="297" text-anchor="middle" transform="rotate(-90 27 297)" class="s ink" font-size="17">log₂ tau_H(m)</text><line x1="178.5" y1="42" x2="178.5" y2="552" stroke="#2563eb" stroke-width="1.8" stroke-dasharray="7 6"/>
+  <text x="186.5" y="70" class="s" fill="#2563eb" font-size="15">阈值 VC 维 = 1</text>
+  <line x1="265" y1="42" x2="265" y2="552" stroke="#047857" stroke-width="1.8" stroke-dasharray="7 6"/>
+  <text x="273" y="96" class="s" fill="#047857" font-size="15">区间 VC 维 = 2</text><path d="M92.0,552.0 L178.5,509.5 L265.0,467.0 L351.5,424.5 L438.0,382.0 L524.5,339.5 L611.0,297.0 L697.5,254.5 L784.0,212.0 L870.5,169.5 L957.0,127.0 L1043.5,84.5 L1130.0,42.0" fill="none" stroke="#b91c1c" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M92.0,552.0 L178.5,509.5 L265.0,467.0 L351.5,432.7 L438.0,405.0 L524.5,382.0 L611.0,362.5 L697.5,345.5 L784.0,330.6 L870.5,317.2 L957.0,305.2 L1043.5,294.2 L1130.0,284.1" fill="none" stroke="#047857" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M92.0,552.0 L178.5,509.5 L265.0,484.6 L351.5,467.0 L438.0,453.3 L524.5,442.1 L611.0,432.7 L697.5,424.5 L784.0,417.3 L870.5,410.8 L957.0,405.0 L1043.5,399.6 L1130.0,394.7" fill="none" stroke="#2563eb" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><text x="1118" y="62" text-anchor="end" class="s" fill="#b91c1c" font-size="16" font-weight="600">全部二分：2ᵐ</text>
+<text x="1118" y="274.0893182024731" text-anchor="end" class="s" fill="#047857" font-size="16" font-weight="600">区间：1+m(m+1)/2</text>
+<text x="1118" y="415.7313119790036" text-anchor="end" class="s" fill="#2563eb" font-size="16" font-weight="600">右阈值：m+1</text>
+</svg>

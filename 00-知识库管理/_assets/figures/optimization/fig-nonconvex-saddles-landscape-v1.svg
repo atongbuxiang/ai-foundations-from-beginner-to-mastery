@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">非凸驻点、严格鞍点逃逸与参数化 sharpness</title>
+  <desc id="desc">三面板机制图：第一面板比较局部极小、严格鞍点和退化鞍点；第二面板展示梯度下降在严格鞍点附近的稳定与不稳定方向；第三面板展示因子分解尺度对称性如何保持预测器不变却改变 Hessian sharpness。</desc>
+  <defs>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#2563eb"/></marker>
+    <marker id="arrow-red" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#dc2626"/></marker>
+    <linearGradient id="valley" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dbeafe"/><stop offset="1" stop-color="#eff6ff"/></linearGradient>
+    <style>
+      .panel{fill:#fff;stroke:#cbd5e1;stroke-width:1.5}.title{font:700 18px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#0f172a}.sub{font:13px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#475569}.body{font:14px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#334155}.small{font:12px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#64748b}.math{font:italic 14px Georgia,"Times New Roman",serif;fill:#334155}.axis{stroke:#94a3b8;stroke-width:1.4}.guide{stroke:#cbd5e1;stroke-width:1.2;stroke-dasharray:5 5}.blue{stroke:#2563eb;fill:none}.red{stroke:#dc2626;fill:none}.green{stroke:#059669;fill:none}.amber{stroke:#d97706;fill:none}
+    </style>
+  </defs>
+  <rect width="1200" height="430" fill="#f8fafc"/>
+  <rect class="panel" x="20" y="20" width="370" height="390" rx="14"/>
+  <rect class="panel" x="415" y="20" width="370" height="390" rx="14"/>
+  <rect class="panel" x="810" y="20" width="370" height="390" rx="14"/>
+
+  <text class="title" x="40" y="53">A · 二阶信息能分类什么？</text>
+  <text class="sub" x="40" y="78">驻点相同，Hessian 与更高阶项决定局部形状</text>
+  <line class="axis" x1="55" y1="183" x2="145" y2="183"/>
+  <path d="M58 130 C82 132 91 183 100 183 C110 183 121 132 143 130" fill="none" stroke="#2563eb" stroke-width="3"/>
+  <circle cx="100" cy="183" r="5" fill="#2563eb"/>
+  <text class="body" x="100" y="216" text-anchor="middle">严格局部极小</text>
+  <text class="math" x="100" y="238" text-anchor="middle">H ≻ 0</text>
+
+  <line class="axis" x1="162" y1="183" x2="252" y2="183"/>
+  <path d="M165 132 C188 135 197 183 207 183 C217 183 229 135 249 132" fill="none" stroke="#059669" stroke-width="3"/>
+  <path d="M166 178 C187 176 198 150 207 150 C217 150 229 176 249 178" fill="none" stroke="#dc2626" stroke-width="3" stroke-dasharray="5 4"/>
+  <circle cx="207" cy="166" r="5" fill="#dc2626"/>
+  <text class="body" x="207" y="216" text-anchor="middle">严格鞍点</text>
+  <text class="math" x="207" y="238" text-anchor="middle">λmin(H) &lt; 0</text>
+
+  <line class="axis" x1="269" y1="183" x2="359" y2="183"/>
+  <path d="M272 132 C300 140 303 183 314 183 C326 183 330 140 356 132" fill="none" stroke="#2563eb" stroke-width="3"/>
+  <path d="M272 178 C299 178 303 182 314 183 C326 184 330 190 356 219" fill="none" stroke="#d97706" stroke-width="3" stroke-dasharray="5 4"/>
+  <circle cx="314" cy="183" r="5" fill="#d97706"/>
+  <text class="body" x="314" y="246" text-anchor="middle">退化鞍点</text>
+  <text class="math" x="314" y="268" text-anchor="middle">H ⪰ 0，但 −y⁴ 下降</text>
+  <rect x="42" y="300" width="326" height="78" rx="10" fill="#fff7ed" stroke="#fed7aa"/>
+  <text class="body" x="57" y="326">FOSP：只看 ∇f；SOSP：再看 λmin(H)</text>
+  <text class="body" x="57" y="350">H 有零特征值时，二阶检验可能沉默</text>
+  <text class="small" x="57" y="370">例：x⁴ 是平坦极小；x²−y⁴ 是退化鞍点</text>
+
+  <text class="title" x="435" y="53">B · 严格鞍点为何通常会逃？</text>
+  <text class="sub" x="435" y="78">GD 的局部 Jacobian：I−ηH</text>
+  <line class="axis" x1="470" y1="230" x2="730" y2="230"/>
+  <line class="axis" x1="600" y1="105" x2="600" y2="350"/>
+  <path d="M474 155 C530 205 554 218 600 230 C646 242 674 259 726 308" fill="none" stroke="#94a3b8" stroke-width="1.4"/>
+  <path d="M474 305 C530 255 554 242 600 230 C646 218 674 201 726 152" fill="none" stroke="#94a3b8" stroke-width="1.4"/>
+  <circle cx="600" cy="230" r="7" fill="#7c3aed"/>
+  <path d="M590 230 L515 230" class="blue" stroke-width="3" marker-end="url(#arrow-blue)"/>
+  <path d="M610 230 L685 230" class="blue" stroke-width="3" marker-end="url(#arrow-blue)"/>
+  <path d="M600 216 L600 166" class="red" stroke-width="3" marker-end="url(#arrow-red)"/>
+  <path d="M600 244 L600 294" class="red" stroke-width="3" marker-end="url(#arrow-red)"/>
+  <text class="body" x="600" y="125" text-anchor="middle">λ &gt; 0：|1−ηλ|&lt;1，收缩</text>
+  <text class="body" x="600" y="333" text-anchor="middle">λ &lt; 0：1−ηλ&gt;1，扩张</text>
+  <text class="small" x="438" y="372">恰在稳定流形上可收敛到鞍点；随机初始化只给</text>
+  <text class="small" x="438" y="390">渐近零概率，有限时间还需扰动与 Hessian-Lipschitz。</text>
+
+  <text class="title" x="830" y="53">C · 同一函数，sharpness 可任意变</text>
+  <text class="sub" x="830" y="78">f(a,b)=½(ab−1)²；取 (a,b)=(s,1/s)</text>
+  <line class="axis" x1="850" y1="315" x2="1145" y2="315"/>
+  <line class="axis" x1="850" y1="112" x2="850" y2="315"/>
+  <path d="M860 130 C900 230 945 296 997 303 C1052 296 1093 230 1135 130" fill="url(#valley)" stroke="#2563eb" stroke-width="3"/>
+  <line class="guide" x1="997" y1="108" x2="997" y2="315"/>
+  <circle cx="875" cy="161" r="5" fill="#dc2626"/>
+  <circle cx="997" cy="303" r="5" fill="#059669"/>
+  <circle cx="1120" cy="161" r="5" fill="#dc2626"/>
+  <text class="small" x="875" y="145" text-anchor="middle">s=0.1</text>
+  <text class="small" x="997" y="291" text-anchor="middle">s=1</text>
+  <text class="small" x="1120" y="145" text-anchor="middle">s=10</text>
+  <text class="math" x="997" y="345" text-anchor="middle">log scale s</text>
+  <text class="math" x="838" y="205" text-anchor="middle" transform="rotate(-90 838 205)">λmax = s²+s⁻²</text>
+  <rect x="835" y="357" width="320" height="38" rx="9" fill="#ecfdf5" stroke="#a7f3d0"/>
+  <text class="body" x="995" y="381" text-anchor="middle">ab=1 与预测不变；raw Hessian 曲率却改变</text>
+</svg>

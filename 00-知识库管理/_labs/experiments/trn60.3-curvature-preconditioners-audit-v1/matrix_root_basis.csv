@@ -1,0 +1,7 @@
+metric,value
+correct_inverse_root_residual,0.0
+wrong_inverse_root_residual,0.9375
+rotation_roundtrip_error,6.661338147750939e-16
+rotation_norm_gap,4.440892098500626e-16
+nonlinear_equivariance_gap,0.4142135623730949
+lost_offdiagonal_norm,5.656854249492379

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">原样祖先采样、温度、截断与搜索解码</title>
+  <desc id="desc">四个小面板对同一token分布展示原样采样、低温幂次重加权、top-p截断重归一化和beam前缀搜索。</desc>
+  <rect width="1200" height="620" fill="#FFFEFB"/>
+  <style>.sans{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}.ink{fill:#1F2937}.muted{fill:#64748B}.blue{fill:#2563EB}.green{fill:#0F766E}.amber{fill:#B7791F}.red{fill:#C24135}</style>
+  <line x1="300" y1="45" x2="300" y2="525" stroke="#D7DEE8" stroke-width="2"/><line x1="600" y1="45" x2="600" y2="525" stroke="#D7DEE8" stroke-width="2"/><line x1="900" y1="45" x2="900" y2="525" stroke="#D7DEE8" stroke-width="2"/>
+  <text x="35" y="62" class="sans blue" font-size="21" font-weight="700">A｜原样 sample</text><text x="35" y="93" class="mono muted" font-size="16">q = pθ</text>
+  <g><rect x="56" y="166" width="38" height="230" fill="#2563EB"/><rect x="112" y="238" width="38" height="158" fill="#2563EB"/><rect x="168" y="316" width="38" height="80" fill="#2563EB"/><rect x="224" y="358" width="38" height="38" fill="#2563EB"/></g>
+  <line x1="44" y1="396" x2="276" y2="396" stroke="#1F2937" stroke-width="2"/>
+  <g class="mono ink" font-size="15" text-anchor="middle"><text x="75" y="425">.50</text><text x="131" y="425">.30</text><text x="187" y="425">.15</text><text x="243" y="425">.05</text></g>
+  <text x="35" y="480" class="sans green" font-size="16">joint 保持模型定义</text>
+  <text x="335" y="62" class="sans amber" font-size="21" font-weight="700">B｜低温 τ&lt;1</text><text x="335" y="93" class="mono muted" font-size="16">q ∝ pθ^(1/τ)</text>
+  <g><rect x="356" y="123" width="38" height="273" fill="#B7791F"/><rect x="412" y="275" width="38" height="121" fill="#B7791F"/><rect x="468" y="363" width="38" height="33" fill="#B7791F"/><rect x="524" y="388" width="38" height="8" fill="#B7791F"/></g>
+  <line x1="344" y1="396" x2="576" y2="396" stroke="#1F2937" stroke-width="2"/>
+  <text x="335" y="448" class="sans amber" font-size="16">排序不变，entropy 降低</text><text x="335" y="480" class="sans muted" font-size="16">仍是新的条件核</text>
+  <text x="635" y="62" class="sans green" font-size="21" font-weight="700">C｜Top-p 截断</text><text x="635" y="93" class="mono muted" font-size="16">保留累计质量 ≥ p₀</text>
+  <g><rect x="656" y="142" width="38" height="254" fill="#0F766E"/><rect x="712" y="244" width="38" height="152" fill="#0F766E"/><rect x="768" y="320" width="38" height="76" fill="#0F766E"/><rect x="824" y="358" width="38" height="38" fill="#FFFEFB" stroke="#C24135" stroke-width="3" stroke-dasharray="7 5"/></g>
+  <line x1="644" y1="396" x2="876" y2="396" stroke="#1F2937" stroke-width="2"/>
+  <line x1="817" y1="342" x2="869" y2="390" stroke="#C24135" stroke-width="3"/><line x1="869" y1="342" x2="817" y2="390" stroke="#C24135" stroke-width="3"/>
+  <text x="635" y="448" class="sans green" font-size="16">删尾部后重新归一化</text><text x="635" y="480" class="sans muted" font-size="16">候选数随前缀改变</text>
+  <text x="935" y="62" class="sans red" font-size="21" font-weight="700">D｜Beam 搜索</text><text x="935" y="93" class="sans muted" font-size="16">保留高累计 score 前缀</text>
+  <circle cx="969" cy="148" r="15" fill="#1F2937"/>
+  <path d="M969 163 L932 232 M969 163 L1006 232 M969 163 L1060 232" stroke="#64748B" stroke-width="2.5"/>
+  <circle cx="932" cy="232" r="14" fill="#C24135"/><circle cx="1006" cy="232" r="14" fill="#C24135"/><circle cx="1060" cy="232" r="14" fill="#FFFEFB" stroke="#64748B" stroke-width="2.5"/>
+  <path d="M932 246 L914 322 M932 246 L956 322 M1006 246 L994 322 M1006 246 L1035 322" stroke="#C24135" stroke-width="3"/>
+  <g fill="#C24135"><circle cx="914" cy="322" r="12"/><circle cx="956" cy="322" r="12"/><circle cx="994" cy="322" r="12"/><circle cx="1035" cy="322" r="12"/></g>
+  <text x="935" y="390" class="sans red" font-size="16">剪枝路径，不是 iid sample</text><text x="935" y="425" class="sans muted" font-size="16">greedy 是 beam=1 特例</text>
+  <line x1="35" y1="535" x2="1165" y2="535" stroke="#0F766E" stroke-width="3"/>
+  <text x="35" y="579" class="sans green" font-size="17">程序合同｜penalty → temperature → truncation → renormalize → sample；换顺序通常换分布。</text>
+</svg>
+

@@ -1,0 +1,5 @@
+parameter_group,entry_init_exponent,raw_lr_exponent,entry_update_exponent,aligned_terms_exponent,feature_update_exponent
+input_matrix_SGD,-0.5,0.0,-0.5,0.5,0.0
+hidden_matrix_SGD,-0.5,-1.0,-1.0,1.0,0.0
+readout_SGD,-1.0,-1.0,-1.0,1.0,0.0
+hidden_matrix_Adam_like,-0.5,-1.0,-1.0,1.0,0.0

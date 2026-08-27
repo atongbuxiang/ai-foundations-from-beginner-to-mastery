@@ -1,0 +1,7 @@
+object,parameter,value,meaning
+minhash,"J(A,B)",0.3333333333333333,exact_oracle
+lsh,candidate_probability,0.9948540745744485,retrieval_not_truth
+cluster,A-B,0.6666666666666666,verified_pair_jaccard
+cluster,B-C,0.6666666666666666,verified_pair_jaccard
+cluster,A-C,0.3333333333333333,verified_pair_jaccard
+contamination,positive_posterior,0.6474820143884893,depends_on_base_rate

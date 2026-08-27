@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430">
+  <rect width="1200" height="430" fill="#f8fafc"/>
+  <style>
+    .panel{fill:#fff;stroke:#cbd5e1;stroke-width:1.5}.title{font:700 18px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#0f172a}.sub{font:13px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#475569}.body{font:14px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#334155}.small{font:12px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#64748b}.math{font:13px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#334155}
+  </style>
+  <defs>
+    <marker id="an" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#2563eb"/></marker>
+    <marker id="ag" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#059669"/></marker>
+  </defs>
+  <rect class="panel" x="20" y="20" width="370" height="390" rx="14"/><rect class="panel" x="415" y="20" width="370" height="390" rx="14"/><rect class="panel" x="810" y="20" width="370" height="390" rx="14"/>
+
+  <text class="title" x="40" y="53">A · Newton：局部二次模型</text><text class="sub" x="40" y="78">切线给方向，曲率给尺度；远处仍需 globalizer</text>
+  <path d="M55 325 C100 315 115 105 196 115 C270 123 278 321 352 335" fill="none" stroke="#2563eb" stroke-width="3"/>
+  <path d="M70 334 Q198 64 340 334" fill="none" stroke="#7c3aed" stroke-width="2.5" stroke-dasharray="7 5"/>
+  <circle cx="112" cy="181" r="6" fill="#dc2626"/><circle cx="199" cy="112" r="7" fill="#059669"/>
+  <line x1="112" y1="181" x2="198" y2="112" stroke="#2563eb" stroke-width="3" marker-end="url(#an)"/>
+  <text class="small" x="74" y="165">x_k</text><text class="small" x="205" y="104">x_k + p_N</text>
+  <text class="math" x="205" y="370" text-anchor="middle">H_k p_N = -g_k · predicted drop = λ²/2</text>
+  <text class="small" x="205" y="393" text-anchor="middle">H ≻ 0 才保证 raw Newton direction 下降</text>
+
+  <text class="title" x="435" y="53">B · 三类 curvature object</text><text class="sub" x="435" y="78">exact derivative、结构近似、trajectory secant</text>
+  <rect x="450" y="103" width="300" height="73" rx="10" fill="#dbeafe" stroke="#2563eb"/><text class="body" x="600" y="130" text-anchor="middle">Newton · exact Hessian</text><text class="math" x="600" y="154" text-anchor="middle">H = ∇²f · 可 indefinite</text>
+  <rect x="450" y="200" width="300" height="73" rx="10" fill="#dcfce7" stroke="#059669"/><text class="body" x="600" y="227" text-anchor="middle">Gauss–Newton / GGN</text><text class="math" x="600" y="251" text-anchor="middle">JᵀJ or Jᵀ H_loss J ⪰ 0</text>
+  <rect x="450" y="297" width="300" height="73" rx="10" fill="#ede9fe" stroke="#7c3aed"/><text class="body" x="600" y="324" text-anchor="middle">BFGS / L-BFGS</text><text class="math" x="600" y="348" text-anchor="middle">B_(k+1) s_k = y_k</text>
+  <text class="small" x="600" y="393" text-anchor="middle">PSD 更稳定；不等于更接近 exact Hessian</text>
+
+  <text class="title" x="830" y="53">C · 内外两层必须分别验收</text><text class="sub" x="830" y="78">solve 得准 ≠ model 可信 ≠ 已到 minimum</text>
+  <rect x="840" y="106" width="138" height="64" rx="10" fill="#fff7ed" stroke="#d97706"/><text class="body" x="909" y="132" text-anchor="middle">inner solve</text><text class="math" x="909" y="154" text-anchor="middle">r = Bp + g</text>
+  <line x1="978" y1="138" x2="1025" y2="138" stroke="#2563eb" stroke-width="2" marker-end="url(#an)"/>
+  <rect x="1032" y="106" width="132" height="64" rx="10" fill="#dbeafe" stroke="#2563eb"/><text class="body" x="1098" y="132" text-anchor="middle">candidate p</text><text class="small" x="1098" y="154" text-anchor="middle">HVP / factor / pairs</text>
+  <line x1="1098" y1="170" x2="1098" y2="213" stroke="#059669" stroke-width="2" marker-end="url(#ag)"/>
+  <rect x="840" y="220" width="324" height="74" rx="10" fill="#dcfce7" stroke="#059669"/><text class="body" x="1002" y="247" text-anchor="middle">line search / trust ratio</text><text class="math" x="1002" y="272" text-anchor="middle">actual drop ÷ predicted drop</text>
+  <line x1="1002" y1="294" x2="1002" y2="330" stroke="#059669" stroke-width="2" marker-end="url(#ag)"/>
+  <rect x="840" y="337" width="324" height="52" rx="10" fill="#fee2e2" stroke="#dc2626"/><text class="body" x="1002" y="359" text-anchor="middle">outer: ‖∇f‖ · curvature type · validation</text><text class="small" x="1002" y="379" text-anchor="middle">negative curvature / damping / batch 都要记录</text>
+</svg>

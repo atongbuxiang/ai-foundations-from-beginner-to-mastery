@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">SVD 的输入旋转、非负缩放、输出旋转与子空间结构</title>
+  <desc id="desc">单位圆先由右奇异向量坐标旋转，再由奇异值沿坐标轴缩放成椭圆，最后由左奇异向量旋转到输出；下方说明正奇异方向、零空间与截断。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
+    <style>
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}.blue{fill:#2563eb}.green{fill:#0f766e}.amber{fill:#b7791f}.h{font-size:19px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}.axis{stroke:#cbd5e1;stroke-width:1.4}.arrow{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <text x="600" y="42" class="sans h ink" text-anchor="middle">A=UΣV*：任意矩形映射都能拆成两侧良态换基与中间非负轴向缩放</text>
+  <rect x="42" y="75" width="270" height="326" rx="12" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="68" y="111" class="sans h blue">输入空间 Fⁿ</text><path d="M76 278H278M177 371V154" class="axis"/><circle cx="177" cy="278" r="78" fill="none" stroke="#2563eb" stroke-width="2.5"/><path d="M177 278L239 216" stroke="#2563eb" stroke-width="3"/><path d="M177 278L115 216" stroke="#0f766e" stroke-width="3"/><text x="242" y="210" class="math body blue">v₁</text><text x="91" y="210" class="math body green">v₂</text><text x="177" y="384" class="sans small muted" text-anchor="middle">右奇异向量：输入正交方向</text>
+  <path d="M312 239H398" class="arrow"/><text x="355" y="219" class="math h blue" text-anchor="middle">V*</text><text x="355" y="267" class="sans small muted" text-anchor="middle">取输入坐标</text>
+  <rect x="398" y="75" width="270" height="326" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="424" y="111" class="sans h ink">奇异坐标</text><path d="M432 278H634M533 371V154" class="axis"/><circle cx="533" cy="278" r="78" fill="none" stroke="#94a3b8" stroke-width="2"/><text x="533" y="384" class="math small muted" text-anchor="middle">‖V*x‖₂=‖x‖₂</text>
+  <path d="M668 239H754" class="arrow"/><text x="711" y="219" class="math h green" text-anchor="middle">Σ</text><text x="711" y="267" class="sans small muted" text-anchor="middle">各轴乘 σᵢ</text>
+  <rect x="754" y="75" width="404" height="326" rx="12" fill="#ecfdf5" stroke="#6ee7b7"/>
+  <text x="780" y="111" class="sans h green">输出椭球：再由 U 定向</text><path d="M790 278H1122M956 371V154" class="axis"/><ellipse cx="956" cy="278" rx="139" ry="58" transform="rotate(-22 956 278)" fill="none" stroke="#0f766e" stroke-width="3"/><path d="M956 278L1084 227" stroke="#2563eb" stroke-width="3"/><path d="M956 278L934 225" stroke="#0f766e" stroke-width="3"/><text x="1086" y="220" class="math body blue">σ₁u₁</text><text x="899" y="219" class="math body green">σ₂u₂</text><text x="956" y="384" class="sans small muted" text-anchor="middle">半轴长度是奇异值；左奇异向量给输出方向。</text>
+  <rect x="70" y="436" width="1060" height="112" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="97" y="470" class="sans h blue">从同一分解读取结构</text><text x="97" y="505" class="math body ink">rank A = 正奇异值个数 r</text><text x="398" y="505" class="math body amber">N(A)=span{vᵣ₊₁,…}</text><text x="720" y="505" class="math body green">R(A)=span{u₁,…,uᵣ}</text><text x="1098" y="505" class="math body blue" text-anchor="end">Aₖ=Σᵢ≤ₖσᵢuᵢvᵢ*</text><text x="600" y="535" class="sans small muted" text-anchor="middle">零奇异方向被压到 0；截断保留最大半轴，是低秩近似的几何主线。</text>
+  <text x="600" y="603" class="sans result ink" text-anchor="middle">SVD 不要求方阵或可对角化：左右方向分居两个空间，奇异值始终非负。</text>
+</svg>

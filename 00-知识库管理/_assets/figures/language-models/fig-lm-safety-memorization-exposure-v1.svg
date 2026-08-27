@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">从 Canary 排名到隐私伤害：Exposure 不是终点</title><desc id="desc">合成候选排序、Exposure bits 与部署风险漏斗。</desc>
+<rect width="1200" height="700" fill="#FBF8F1"/>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#667784"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#183044" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<line x1="48" y1="70" x2="1152" y2="70" stroke="#C87922" stroke-width="4"/>
+<text x="52" y="49" font-size="24" font-weight="700" fill="#183044">从 Canary 排名到隐私伤害：Exposure 不是终点</text>
+<text x="55" y="108" text-anchor="start" font-size="13" font-weight="700" fill="#245AA8">A · 候选空间中的损失排序</text>
+<text x="55" y="154" text-anchor="start" font-size="11" font-weight="400" fill="#245AA8">candidate 1</text>
+<rect x="155" y="140" width="77.7" height="19" rx="4" fill="#245AA8" opacity=".82"/>
+<text x="415" y="154" text-anchor="end" font-size="10" font-weight="400" fill="#667784">loss 1.3</text>
+<text x="55" y="191" text-anchor="start" font-size="11" font-weight="400" fill="#245AA8">candidate 2</text>
+<rect x="155" y="177" width="107.6" height="19" rx="4" fill="#245AA8" opacity=".82"/>
+<text x="415" y="191" text-anchor="end" font-size="10" font-weight="400" fill="#667784">loss 1.8</text>
+<text x="55" y="228" text-anchor="start" font-size="11" font-weight="700" fill="#B7443E">canary r★</text>
+<rect x="155" y="214" width="119.5" height="19" rx="4" fill="#B7443E" opacity=".82"/>
+<text x="415" y="228" text-anchor="end" font-size="10" font-weight="400" fill="#667784">loss 2.0</text>
+<text x="55" y="265" text-anchor="start" font-size="11" font-weight="400" fill="#245AA8">candidate 4</text>
+<rect x="155" y="251" width="143.4" height="19" rx="4" fill="#245AA8" opacity=".82"/>
+<text x="415" y="265" text-anchor="end" font-size="10" font-weight="400" fill="#667784">loss 2.4</text>
+<text x="55" y="302" text-anchor="start" font-size="11" font-weight="400" fill="#245AA8">candidate 5</text>
+<rect x="155" y="288" width="155.4" height="19" rx="4" fill="#245AA8" opacity=".82"/>
+<text x="415" y="302" text-anchor="end" font-size="10" font-weight="400" fill="#667784">loss 2.6</text>
+<text x="55" y="339" text-anchor="start" font-size="11" font-weight="400" fill="#245AA8">candidate 6</text>
+<rect x="155" y="325" width="173.3" height="19" rx="4" fill="#245AA8" opacity=".82"/>
+<text x="415" y="339" text-anchor="end" font-size="10" font-weight="400" fill="#667784">loss 2.9</text>
+<text x="55" y="376" text-anchor="start" font-size="11" font-weight="400" fill="#245AA8">candidate 7</text>
+<rect x="155" y="362" width="191.2" height="19" rx="4" fill="#245AA8" opacity=".82"/>
+<text x="415" y="376" text-anchor="end" font-size="10" font-weight="400" fill="#667784">loss 3.2</text>
+<text x="55" y="413" text-anchor="start" font-size="11" font-weight="400" fill="#245AA8">candidate 8</text>
+<rect x="155" y="399" width="203.2" height="19" rx="4" fill="#245AA8" opacity=".82"/>
+<text x="415" y="413" text-anchor="end" font-size="10" font-weight="400" fill="#667784">loss 3.4</text>
+<text x="55" y="450" text-anchor="start" font-size="11" font-weight="400" fill="#245AA8">candidate 9</text>
+<rect x="155" y="436" width="227.1" height="19" rx="4" fill="#245AA8" opacity=".82"/>
+<text x="415" y="450" text-anchor="end" font-size="10" font-weight="400" fill="#667784">loss 3.8</text>
+<text x="55" y="487" text-anchor="start" font-size="11" font-weight="400" fill="#245AA8">candidate 10</text>
+<rect x="155" y="473" width="245.0" height="19" rx="4" fill="#245AA8" opacity=".82"/>
+<text x="415" y="487" text-anchor="end" font-size="10" font-weight="400" fill="#667784">loss 4.1</text>
+<rect x="455" y="130" width="285" height="150" rx="10" fill="#F3EFFA" stroke="#7054A3" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="470" y="158" text-anchor="start" font-size="15" font-weight="700" fill="#7054A3">Exposure</text>
+<text x="470" y="182" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">|R| = 2²⁰</text>
+<text x="470" y="201" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">rank(r★) = 2¹⁰</text>
+<text x="470" y="220" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">exposure = log₂|R| − log₂rank</text>
+<text x="470" y="239" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">         = 10 bits</text>
+<rect x="455" y="310" width="285" height="120" rx="10" fill="#EAF7F4" stroke="#17766E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="470" y="338" text-anchor="start" font-size="15" font-weight="700" fill="#17766E">Control 必不可少</text>
+<text x="470" y="362" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">同分布未插入字符串</text>
+<text x="470" y="381" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">重复 × prefix × tokenizer 切片</text>
+<text x="470" y="400" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">事前固定候选空间与 tie 规则</text>
+<text x="790" y="108" text-anchor="start" font-size="13" font-weight="700" fill="#B7443E">B · 风险漏斗</text>
+<polygon points="790,135 1120,135 1095,191 815,191" fill="#245AA8" opacity=".82"/>
+<text x="955.0" y="169" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">训练包含 / 行为影响</text>
+<polygon points="820,210 1090,210 1065,266 845,266" fill="#7054A3" opacity=".82"/>
+<text x="955.0" y="244" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">接口可观察</text>
+<polygon points="850,285 1060,285 1035,341 875,341" fill="#C87922" opacity=".82"/>
+<text x="955.0" y="319" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">预算内抽取</text>
+<polygon points="880,360 1030,360 1005,416 905,416" fill="#17766E" opacity=".82"/>
+<text x="955.0" y="394" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">来源核验</text>
+<polygon points="910,435 1000,435 975,491 935,491" fill="#B7443E" opacity=".82"/>
+<text x="955.0" y="469" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">实际伤害</text>
+<rect x="455" y="475" width="285" height="135" rx="10" fill="#EEF7EA" stroke="#4F7B45" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="470" y="503" text-anchor="start" font-size="15" font-weight="700" fill="#4F7B45">报告合同</text>
+<text x="470" y="527" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">黑/白盒访问 · prefix 知识</text>
+<text x="470" y="546" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">query/token/人工预算 · 匹配规则</text>
+<text x="470" y="565" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">去重/公开来源核验 · 主体影响</text>
+<text x="470" y="584" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">成功与未成功样本都保留</text>
+<line x1="48" y1="650" x2="1152" y2="650" stroke="#D9D5CB"/>
+<text x="52" y="674" font-size="13" fill="#667784">只用合成 canary；高 exposure 说明排序异常，不自动证明黑盒可抽取、来自训练或造成真实隐私伤害。</text>
+</svg>

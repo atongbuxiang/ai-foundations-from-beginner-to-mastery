@@ -1,0 +1,6 @@
+parameter_group,base_shape,delta_shape,target_shape,axis_classification,forward_semantics,base_to_target_scale
+token_embedding,32000x128,32000x256,32000x1024,"finite,infinite",lookup,8.0
+hidden_square,128x128,256x256,1024x1024,"infinite,infinite",width_sum,8.0
+ffn_up,128x512,256x1024,1024x4096,"infinite,infinite",non_square_width_sum,8.0
+readout,128x32000,256x32000,1024x32000,"infinite,finite",logit_width_sum,8.0
+norm_scale,128,256,1024,infinite,coordinate_affine,8.0

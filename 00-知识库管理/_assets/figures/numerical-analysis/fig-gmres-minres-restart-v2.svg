@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">GMRES、MINRES 的结构选择、残差最小化与重启</title>
+<desc id="desc">一般方阵的 GMRES 用 Arnoldi 将原残差最小化压缩为小型 Hessenberg 最小二乘；对称不定矩阵的 MINRES 用 Lanczos 保持短递推；重启与预条件会改变搜索空间或 residual 语义，因此最终必须回到原方程验收。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">先由可信结构选择方法</text>
+<circle cx="58" cy="105" r="6" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<text x="80" y="109" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">SPD</text>
+<text x="80" y="134" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">CG / PCG</text>
+<circle cx="58" cy="190" r="6" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<text x="80" y="194" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">symmetric indefinite</text>
+<text x="80" y="219" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">MINRES / MINRES-QLP</text>
+<circle cx="58" cy="275" r="6" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<text x="80" y="279" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">general square</text>
+<text x="80" y="304" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">GMRES / FGMRES</text>
+<circle cx="58" cy="360" r="6" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<text x="80" y="364" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">rectangular LS</text>
+<text x="80" y="389" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">LSQR / LSMR</text>
+<line x1="45" y1="445" x2="365" y2="445" stroke="#D7DEE8" stroke-width="2"/>
+<text x="45" y="475" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">symmetry and definiteness are contracts,</text>
+<text x="45" y="500" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">not guesses from the application name。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">GMRES 压缩为小最小二乘</text>
+<rect x="445" y="92" width="310" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600.0" y="127.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">Arnoldi: A V_k=V_(k+1) Hbar_k</text>
+<line x1="600" y1="153" x2="600" y2="190" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="445" y="202" width="310" height="70" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="600.0" y="243.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">min_y ||beta e1-Hbar_k y||_2</text>
+<line x1="600" y1="275" x2="600" y2="312" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="445" y="324" width="310" height="62" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="600.0" y="361.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">x_k=x0+V_k y_k</text>
+<text x="430" y="425" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">Givens updates residual norm online</text>
+<text x="430" y="456" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">full GMRES residual is nonincreasing</text>
+<text x="430" y="487" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">GMRES(m) discards part of the polynomial。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">MINRES、重启与 residual 语义</text>
+<text x="830" y="100" font-size="16" font-weight="700" text-anchor="start" fill="#0F766E">symmetric indefinite</text>
+<text x="830" y="130" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">Lanczos tridiagonal + residual LS</text>
+<text x="830" y="170" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">CG curvature may fail；MINRES remains legal</text>
+<line x1="830" y1="200" x2="1145" y2="200" stroke="#D7DEE8" stroke-width="2"/>
+<rect x="840" y="225" width="300" height="48" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="990.0" y="255.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">expand m steps</text>
+<line x1="990" y1="276" x2="990" y2="295" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="840" y="301" width="300" height="48" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="990.0" y="331.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">retain useful spectral information</text>
+<line x1="990" y1="352" x2="990" y2="371" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="840" y="377" width="300" height="48" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="990.0" y="407.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">restart / flexible update</text>
+<text x="830" y="457" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">left/right preconditioning changes norms</text>
+<text x="830" y="486" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">recompute true r=b-Ax and orthogonality。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">最小残差只在当前搜索空间与当前坐标中成立；结构合法性、重启信息与真 residual 决定生产可靠性。</text>
+</svg>

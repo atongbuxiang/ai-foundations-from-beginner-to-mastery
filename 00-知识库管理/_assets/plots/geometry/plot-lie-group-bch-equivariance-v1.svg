@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img">
+<style>
+    .bg{fill:#f8fafc}.panel{fill:#fff;stroke:#cbd5e1;stroke-width:1.4}.title{font:700 16px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#0f172a}.sub{font:500 11px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#475569}.axis{fill:none;stroke:#334155;stroke-width:1.3}.grid{stroke:#e2e8f0;stroke-width:1}.tick{font:500 10px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#64748b}.label{font:600 11px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#334155}.head{font:700 22px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#0f172a}.foot{font:500 11px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#334155}
+    </style>
+<rect width="1200" height="520" class="bg"/>
+<text x="30" y="34" class="head">Lie 指数、BCH 与群平均等变审计</text>
+<text x="1170" y="32" text-anchor="end" class="sub">deterministic · Python standard library · 2026-08-19</text>
+<rect x="20" y="52" width="370" height="400" rx="14" class="panel"/>
+<text x="38" y="80" class="title">A  SO(2): generator → one-parameter group</text>
+<text x="38" y="100" class="sub">central difference recovers J with second order</text>
+<path d="M78,124 V394 H372" class="axis"/>
+<path d="M78,178.00 H372" class="grid"/>
+<text x="70" y="182.00" text-anchor="end" class="tick">1e-1</text>
+<path d="M78,232.00 H372" class="grid"/>
+<text x="70" y="236.00" text-anchor="end" class="tick">1e-3</text>
+<path d="M78,286.00 H372" class="grid"/>
+<text x="70" y="290.00" text-anchor="end" class="tick">1e-5</text>
+<path d="M78,340.00 H372" class="grid"/>
+<text x="70" y="344.00" text-anchor="end" class="tick">1e-7</text>
+<path d="M78,394.00 H372" class="grid"/>
+<text x="70" y="398.00" text-anchor="end" class="tick">1e-9</text>
+<polyline points="78.00,138.41 127.00,158.64 176.00,178.94 225.00,199.25 274.00,219.57 323.00,239.89 372.00,260.21" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+<circle cx="78.00" cy="138.41" r="3.6" fill="#2563eb"/><circle cx="127.00" cy="158.64" r="3.6" fill="#2563eb"/><circle cx="176.00" cy="178.94" r="3.6" fill="#2563eb"/><circle cx="225.00" cy="199.25" r="3.6" fill="#2563eb"/><circle cx="274.00" cy="219.57" r="3.6" fill="#2563eb"/><circle cx="323.00" cy="239.89" r="3.6" fill="#2563eb"/><circle cx="372.00" cy="260.21" r="3.6" fill="#2563eb"/>
+<text x="86" y="416" class="label">h: 0.4 → 0.00625</text>
+<text x="86" y="142" class="label" fill="#2563eb">observed p = 1.99994083</text>
+<text x="86" y="160" class="tick">group law max = 1.57e-16</text>
+<text x="86" y="175" class="tick">orthogonality max = 3.14e-16</text>
+<rect x="415" y="52" width="370" height="400" rx="14" class="panel"/>
+<text x="433" y="80" class="title">B  SO(3): noncommutativity and BCH</text>
+<text x="433" y="100" class="sub">naive sum is O(a²); bracket correction is O(a³)</text>
+<path d="M473,124 V394 H767" class="axis"/>
+<path d="M473,124.00 H767" class="grid"/>
+<text x="465" y="128.00" text-anchor="end" class="tick">1e-1</text>
+<path d="M473,191.50 H767" class="grid"/>
+<text x="465" y="195.50" text-anchor="end" class="tick">1e-4</text>
+<path d="M473,259.00 H767" class="grid"/>
+<text x="465" y="263.00" text-anchor="end" class="tick">1e-7</text>
+<path d="M473,326.50 H767" class="grid"/>
+<text x="465" y="330.50" text-anchor="end" class="tick">1e-10</text>
+<path d="M473,394.00 H767" class="grid"/>
+<text x="465" y="398.00" text-anchor="end" class="tick">1e-13</text>
+<polyline points="473.00,122.88 522.00,136.36 571.00,149.89 620.00,163.43 669.00,176.98 718.00,190.53 767.00,204.07" fill="none" stroke="#e11d48" stroke-width="2.5"/>
+<circle cx="473.00" cy="122.88" r="3.6" fill="#e11d48"/><circle cx="522.00" cy="136.36" r="3.6" fill="#e11d48"/><circle cx="571.00" cy="149.89" r="3.6" fill="#e11d48"/><circle cx="620.00" cy="163.43" r="3.6" fill="#e11d48"/><circle cx="669.00" cy="176.98" r="3.6" fill="#e11d48"/><circle cx="718.00" cy="190.53" r="3.6" fill="#e11d48"/><circle cx="767.00" cy="204.07" r="3.6" fill="#e11d48"/>
+<polyline points="473.00,145.79 522.00,166.17 571.00,186.50 620.00,206.83 669.00,227.15 718.00,247.47 767.00,267.79" fill="none" stroke="#0f766e" stroke-width="2.5"/>
+<circle cx="473.00" cy="145.79" r="3.6" fill="#0f766e"/><circle cx="522.00" cy="166.17" r="3.6" fill="#0f766e"/><circle cx="571.00" cy="186.50" r="3.6" fill="#0f766e"/><circle cx="620.00" cy="206.83" r="3.6" fill="#0f766e"/><circle cx="669.00" cy="227.15" r="3.6" fill="#0f766e"/><circle cx="718.00" cy="247.47" r="3.6" fill="#0f766e"/><circle cx="767.00" cy="267.79" r="3.6" fill="#0f766e"/>
+<text x="481" y="142" class="label" fill="#e11d48">exp(X+Y): p = 1.99993423</text>
+<text x="481" y="160" class="label" fill="#0f766e">BCH₂: p = 3.00005914</text>
+<text x="481" y="416" class="label">a: 0.4 → 0.00625</text>
+<rect x="810" y="52" width="370" height="400" rx="14" class="panel"/>
+<text x="828" y="80" class="title">C  C₁₂: Reynolds projection</text>
+<text x="828" y="100" class="sub">averaging conjugates projects a dense map to a circulant intertwiner</text>
+<path d="M868,124 V394 H1162" class="axis"/>
+<path d="M868,124.00 H1162" class="grid"/>
+<text x="860" y="128.00" text-anchor="end" class="tick">1e0</text>
+<path d="M868,191.50 H1162" class="grid"/>
+<text x="860" y="195.50" text-anchor="end" class="tick">1e-4</text>
+<path d="M868,259.00 H1162" class="grid"/>
+<text x="860" y="263.00" text-anchor="end" class="tick">1e-8</text>
+<path d="M868,326.50 H1162" class="grid"/>
+<text x="860" y="330.50" text-anchor="end" class="tick">1e-12</text>
+<path d="M868,394.00 H1162" class="grid"/>
+<text x="860" y="398.00" text-anchor="end" class="tick">1e-16</text>
+<polyline points="868.00,122.24 894.73,124.82 921.45,126.43 948.18,127.82 974.91,128.78 1001.64,130.19 1028.36,130.39 1055.09,131.08 1081.82,131.49 1108.55,132.17 1135.27,133.25 1162.00,390.52" fill="none" stroke="#7c3aed" stroke-width="2.5"/>
+<circle cx="868.00" cy="122.24" r="3.6" fill="#7c3aed"/><circle cx="894.73" cy="124.82" r="3.6" fill="#7c3aed"/><circle cx="921.45" cy="126.43" r="3.6" fill="#7c3aed"/><circle cx="948.18" cy="127.82" r="3.6" fill="#7c3aed"/><circle cx="974.91" cy="128.78" r="3.6" fill="#7c3aed"/><circle cx="1001.64" cy="130.19" r="3.6" fill="#7c3aed"/><circle cx="1028.36" cy="130.39" r="3.6" fill="#7c3aed"/><circle cx="1055.09" cy="131.08" r="3.6" fill="#7c3aed"/><circle cx="1081.82" cy="131.49" r="3.6" fill="#7c3aed"/><circle cx="1108.55" cy="132.17" r="3.6" fill="#7c3aed"/><circle cx="1135.27" cy="133.25" r="3.6" fill="#7c3aed"/><circle cx="1162.00" cy="390.52" r="3.6" fill="#7c3aed"/>
+<text x="876" y="142" class="tick">raw defect = 1.272e+00</text>
+<text x="876" y="159" class="tick">full-group defect = 1.607e-16</text>
+<text x="876" y="176" class="tick">circular-conv defect = 0.000e+00</text>
+<text x="876" y="416" class="label">number of averaged elements: 1 → 12</text>
+<text x="30" y="486" class="foot">Assertions: p(SO2)=2 · p(naive)=2 · p(BCH₂)=3 · full C₁₂ average commutes with shift · circulant convolution commutes with shift</text>
+<text x="30" y="505" class="foot">Claim boundary: finite deterministic matrices; no statement about learned-model task accuracy or continuous-group discretization.</text>
+</svg>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">SOAP 的旋转基、快慢状态与五道证据门</title>
+  <desc id="desc">展示 gradient 在 Shampoo eigenbasis 中旋转、Adam moments 每步更新、basis 低频刷新、重复特征值风险与算法数值系统调参统计五道证据门。</desc>
+  <rect width="1200" height="720" fill="#FFFEFB"/>
+  <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}.h{font-size:27px;font-weight:700}.sh{font-size:19px;font-weight:700}.b{font-size:16px}.s{font-size:15px;fill:#64748B}.boxb{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.boxg{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.boxa{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.boxr{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}.line{stroke:#CBD5E1;stroke-width:2}.arr{stroke:#2563EB;stroke-width:3;fill:none}</style>
+  <defs><marker id="ab" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#2563EB"/></marker></defs>
+  <text x="48" y="50" class="h" fill="#2563EB">A｜原坐标 → Shampoo basis → Adam-like update → 原坐标</text>
+  <rect x="48" y="82" width="214" height="104" rx="12" class="boxb"/><text x="72" y="118" class="sh">raw G</text><text x="72" y="151" class="s">parameter coordinates</text>
+  <line x1="262" y1="134" x2="314" y2="134" class="arr" marker-end="url(#ab)"/>
+  <rect x="324" y="82" width="274" height="104" rx="12" class="boxa"/><text x="348" y="118" class="sh">rotate</text><text x="348" y="151" class="b">G_bar = Q_L^T G Q_R</text>
+  <line x1="598" y1="134" x2="650" y2="134" class="arr" marker-end="url(#ab)"/>
+  <rect x="660" y="82" width="244" height="104" rx="12" class="boxg"/><text x="684" y="118" class="sh">Adam in basis</text><text x="684" y="151" class="b">m_bar, v_bar, eps</text>
+  <line x1="904" y1="134" x2="956" y2="134" class="arr" marker-end="url(#ab)"/>
+  <rect x="966" y="82" width="186" height="104" rx="12" class="boxb"/><text x="990" y="118" class="sh">unrotate U</text><text x="990" y="151" class="s">Q_L U_bar Q_R^T</text>
+
+  <line x1="48" y1="220" x2="1152" y2="220" class="line"/>
+  <text x="48" y="262" class="h" fill="#0F766E">B｜双时间尺度与 state transport 风险</text>
+  <rect x="48" y="294" width="340" height="146" rx="12" class="boxg"/><text x="72" y="330" class="sh">Fast clock：every step</text><text x="72" y="365" class="b">update rotated m, v</text><text x="72" y="398" class="b">normalize / LR / decay</text><text x="72" y="426" class="s">adapts scale inside current basis</text>
+  <rect x="430" y="294" width="340" height="146" rx="12" class="boxa"/><text x="454" y="330" class="sh">Slow clock：every K steps</text><text x="454" y="365" class="b">update Gram + eigenbasis Q</text><text x="454" y="398" class="b">root / block / precision</text><text x="454" y="426" class="s">reduces eigendecomposition frequency</text>
+  <rect x="812" y="294" width="340" height="146" rx="12" class="boxr"/><text x="836" y="330" class="sh" fill="#C0392B">When Q changes</text><text x="836" y="365" class="b">old m, v live in old coordinates</text><text x="836" y="398" class="b">repeated eigenvalues: Q not unique</text><text x="836" y="426" class="s">transport / reset / reuse must be defined</text>
+
+  <text x="48" y="498" class="h" fill="#2563EB">C｜“更好”要连续通过五道门</text>
+  <rect x="48" y="530" width="198" height="120" rx="12" class="boxb"/><text x="72" y="566" class="sh">1 算法门</text><text x="72" y="600" class="s">equations / groups</text><text x="72" y="626" class="s">state transport</text>
+  <rect x="274" y="530" width="198" height="120" rx="12" class="boxg"/><text x="298" y="566" class="sh">2 数值门</text><text x="298" y="600" class="s">gap / residual / dtype</text><text x="298" y="626" class="s">repair artifacts</text>
+  <rect x="500" y="530" width="198" height="120" rx="12" class="boxa"/><text x="524" y="566" class="sh">3 系统门</text><text x="524" y="600" class="s">bytes / peak / comm</text><text x="524" y="626" class="s">average + tail time</text>
+  <rect x="726" y="530" width="198" height="120" rx="12" class="boxb"/><text x="750" y="566" class="sh">4 调参门</text><text x="750" y="600" class="s">equal search budget</text><text x="750" y="626" class="s">failed runs counted</text>
+  <rect x="952" y="530" width="200" height="120" rx="12" class="boxr"/><text x="976" y="566" class="sh" fill="#C0392B">5 统计门</text><text x="976" y="600" class="s">paired seeds / CI</text><text x="976" y="626" class="s">checkpoint rule</text>
+  <text x="48" y="690" class="s">少 iteration 只有在系统、预算和统计合同对齐后，才能升级为指定平台上的 time-to-quality 改善。</text>
+</svg>

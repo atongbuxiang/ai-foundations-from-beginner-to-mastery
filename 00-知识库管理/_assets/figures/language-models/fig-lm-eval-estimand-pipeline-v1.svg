@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">一个分数的谱系：从目标总体到决策</title><desc id="desc">总体、cluster 抽样、运行配置、评分与不确定性流水线。</desc>
+<rect width="1200" height="700" fill="#FBF8F1"/>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#667784"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#183044" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<line x1="48" y1="70" x2="1152" y2="70" stroke="#245AA8" stroke-width="4"/>
+<text x="52" y="49" font-size="24" font-weight="700" fill="#183044">一个分数的谱系：从目标总体到决策</text>
+<rect x="58" y="120" width="170" height="118" rx="10" fill="#EEF4FC" stroke="#245AA8" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="73" y="148" text-anchor="start" font-size="15" font-weight="700" fill="#245AA8">目标总体 P*</text>
+<text x="73" y="173" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">用户 / 题目 / 时间</text>
+<text x="73" y="193" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">estimand θ(c)</text>
+<rect x="260" y="120" width="170" height="118" rx="10" fill="#EAF7F4" stroke="#17766E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="275" y="148" text-anchor="start" font-size="15" font-weight="700" fill="#17766E">抽样单位 U</text>
+<text x="275" y="173" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">user → request</text>
+<text x="275" y="193" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">strata + cluster</text>
+<rect x="462" y="120" width="170" height="118" rx="10" fill="#F3EFFA" stroke="#7054A3" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="477" y="148" text-anchor="start" font-size="15" font-weight="700" fill="#7054A3">配置 c</text>
+<text x="477" y="173" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">model + prompt</text>
+<text x="477" y="193" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">decoder + tools</text>
+<rect x="664" y="120" width="170" height="118" rx="10" fill="#FFF5E7" stroke="#C87922" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="679" y="148" text-anchor="start" font-size="15" font-weight="700" fill="#C87922">输出与失败</text>
+<text x="679" y="173" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">Y / timeout / refusal</text>
+<text x="679" y="193" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">trace + finish reason</text>
+<rect x="866" y="120" width="170" height="118" rx="10" fill="#EEF7EA" stroke="#4F7B45" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="881" y="148" text-anchor="start" font-size="15" font-weight="700" fill="#4F7B45">评分算子</text>
+<text x="881" y="173" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">parser + reference</text>
+<text x="881" y="193" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">metric / judge</text>
+<line x1="228" y1="179" x2="258" y2="179" stroke="#667784" stroke-width="2.1" marker-end="url(#arrow)"/>
+<line x1="430" y1="179" x2="460" y2="179" stroke="#667784" stroke-width="2.1" marker-end="url(#arrow)"/>
+<line x1="632" y1="179" x2="662" y2="179" stroke="#667784" stroke-width="2.1" marker-end="url(#arrow)"/>
+<line x1="834" y1="179" x2="864" y2="179" stroke="#667784" stroke-width="2.1" marker-end="url(#arrow)"/>
+<text x="52" y="292" text-anchor="start" font-size="16" font-weight="700" fill="#183044">同一原始结果，换分母就换问题</text>
+<text x="90" y="345" text-anchor="start" font-size="13" font-weight="700" fill="#245AA8">用户 A</text>
+<circle cx="195" cy="340" r="14" fill="#4F7B45" opacity=".88"/>
+<text x="195" y="345" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">✓</text>
+<circle cx="238" cy="340" r="14" fill="#4F7B45" opacity=".88"/>
+<text x="238" y="345" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">✓</text>
+<circle cx="281" cy="340" r="14" fill="#4F7B45" opacity=".88"/>
+<text x="281" y="345" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">✓</text>
+<circle cx="324" cy="340" r="14" fill="#4F7B45" opacity=".88"/>
+<text x="324" y="345" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">✓</text>
+<circle cx="367" cy="340" r="14" fill="#B7443E" opacity=".88"/>
+<text x="367" y="345" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">×</text>
+<text x="90" y="455" text-anchor="start" font-size="13" font-weight="700" fill="#B7443E">用户 B</text>
+<circle cx="195" cy="450" r="14" fill="#B7443E" opacity=".88"/>
+<text x="195" y="455" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">×</text>
+<rect x="420" y="322" width="280" height="128" rx="10" fill="#EAF7F4" stroke="#17766E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="435" y="350" text-anchor="start" font-size="15" font-weight="700" fill="#17766E">request-micro</text>
+<text x="435" y="375" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">4 / 6 = 0.667</text>
+<text x="435" y="395" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">随机请求的平均表现</text>
+<text x="435" y="415" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">用户 A 权重是 B 的 5 倍</text>
+<rect x="420" y="475" width="280" height="128" rx="10" fill="#F3EFFA" stroke="#7054A3" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="435" y="503" text-anchor="start" font-size="15" font-weight="700" fill="#7054A3">user-macro</text>
+<text x="435" y="528" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">[(4/5) + (0/1)] / 2 = 0.400</text>
+<text x="435" y="548" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">随机用户的平均表现</text>
+<text x="435" y="568" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">按 user cluster 重采样</text>
+<rect x="750" y="322" width="380" height="281" rx="10" fill="#FFF0ED" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="765" y="350" text-anchor="start" font-size="15" font-weight="700" fill="#B7443E">决策端必须看到的东西</text>
+<text x="765" y="375" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">点估计  θ̂</text>
+<text x="765" y="395" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">cluster-aware interval</text>
+<text x="765" y="415" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">预注册 slices 与 multiplicity</text>
+<text x="765" y="435" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">失败分母和 missingness</text>
+<text x="765" y="455" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">版本差异与预算</text>
+<text x="765" y="475" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784"></text>
+<text x="765" y="495" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">结论：0.667 与 0.400 都可算对，</text>
+<text x="765" y="515" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">但它们不回答同一个 estimand。</text>
+<line x1="48" y1="650" x2="1152" y2="650" stroke="#D9D5CB"/>
+<text x="52" y="674" font-size="13" fill="#667784">Benchmark 名称不是 estimand；总体、对象、随机性、独立单位、失败规则和版本共同定义可解释的分数。</text>
+</svg>

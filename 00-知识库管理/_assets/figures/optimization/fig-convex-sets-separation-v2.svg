@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">凸集线段判据、投影分离与三类锥几何</title>
+<desc id="desc">凸集包含任意两点间整条线段；闭凸集最近点给出分离超平面；simplex、second-order cone 与 PSD cone 是不同结构的凸集合。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">线段是否始终留在集合内</text>
+<path d="M55 120C105 82 180 105 190 170C200 245 115 275 60 230C30 205 30 150 55 120Z" fill="none" stroke="#2563EB" stroke-width="3"/>
+<circle cx="75" cy="205" r="6" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<circle cx="165" cy="135" r="6" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<line x1="80" y1="201" x2="160" y2="139" stroke="#0F766E" stroke-width="3"/>
+<text x="110" y="295" font-size="16" font-weight="700" text-anchor="middle" fill="#2563EB">convex</text>
+<path d="M230 130C255 95 305 100 315 140C325 180 290 205 260 190C235 178 215 160 230 130Z" fill="none" stroke="#C24135" stroke-width="3"/>
+<path d="M250 250C275 210 330 215 345 255C360 295 315 325 280 310C248 296 230 275 250 250Z" fill="none" stroke="#C24135" stroke-width="3"/>
+<circle cx="270" cy="155" r="6" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<circle cx="300" cy="275" r="6" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<line x1="274" y1="160" x2="296" y2="270" stroke="#C24135" stroke-width="3" stroke-dasharray="7 5"/>
+<text x="290" y="350" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">nonconvex: segment leaves set</text>
+<text x="45" y="455" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">convex combinations preserve feasibility。</text>
+<text x="45" y="490" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">rank constraint / union 通常破坏凸性。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">最近点产生分离超平面</text>
+<path d="M455 145C505 105 600 110 640 165C685 230 615 320 525 300C450 283 420 200 455 145Z" fill="none" stroke="#2563EB" stroke-width="3"/>
+<circle cx="720" cy="170" r="7" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<circle cx="635" cy="175" r="7" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<line x1="635" y1="175" x2="720" y2="170" stroke="#C24135" stroke-width="3"/>
+<line x1="655" y1="85" x2="665" y2="330" stroke="#0F766E" stroke-width="3"/>
+<text x="720" y="155" font-size="16" font-weight="700" text-anchor="middle" fill="#C24135">y</text>
+<text x="623" y="165" font-size="15" font-weight="700" text-anchor="end" fill="#0F766E">Pi_C(y)</text>
+<text x="430" y="375" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937" class="math">normal = y - Pi_C(y)</text>
+<text x="430" y="415" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">&lt;y-p, x-p&gt; &lt;= 0 for all x in C</text>
+<text x="430" y="465" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">closed + convex 给 existence 与 uniqueness。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Simplex、SOC 与 PSD cone</text>
+<path d="M845 225L915 105L985 225Z" fill="none" stroke="#2563EB" stroke-width="3"/>
+<text x="915" y="255" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">simplex</text>
+<path d="M1000 225L1050 105L1100 225Z" fill="none" stroke="#0F766E" stroke-width="3"/>
+<path d="M1000 225C1020 245 1080 245 1100 225" fill="none" stroke="#0F766E" stroke-width="3"/>
+<text x="1050" y="270" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">SOC</text>
+<path d="M865 345L975 345L945 465L895 465Z" fill="none" stroke="#C24135" stroke-width="3"/>
+<text x="920" y="410" font-size="17" font-weight="700" text-anchor="middle" fill="#C24135">X &gt;= 0</text>
+<text x="1060" y="375" font-size="16" font-weight="700" text-anchor="middle" fill="#C24135">PSD cone</text>
+<text x="830" y="495" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">三者都凸，但 projection / barrier / dual cone 不同。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">凸性是一条线段闭包性质；投影和分离把它转成证书，不同凸锥仍需不同计算结构。</text>
+</svg>

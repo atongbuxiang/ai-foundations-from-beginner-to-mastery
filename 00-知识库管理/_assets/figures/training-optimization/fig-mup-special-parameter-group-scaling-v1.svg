@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">μP 特殊参数组的使用语义</title>
+  <desc id="desc">比较 embedding 查表、readout 宽度求和、权重共享、attention 内积和 bias norm LoRA 的不同缩放语义。</desc>
+  <rect width="1200" height="800" fill="#FFFEFB"/>
+  <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}.h{font-size:27px;font-weight:700}.sh{font-size:18px;font-weight:700}.b{font-size:15px}.s{font-size:15px;fill:#64748B}.blue{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.teal{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.amber{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.red{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}.arr{stroke:#2563EB;stroke-width:3;fill:none}.dash{stroke:#94A3B8;stroke-width:2;stroke-dasharray:7 6;fill:none}</style>
+  <defs><marker id="ab" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#2563EB"/></marker></defs>
+  <text x="48" y="48" class="h" fill="#2563EB">先看参数怎样被使用，再谈 fan-in / fan-out</text>
+
+  <rect x="48" y="84" width="322" height="208" rx="14" class="blue"/>
+  <text x="72" y="120" class="sh">Embedding：row lookup</text>
+  <rect x="72" y="144" width="92" height="112" rx="8" fill="#FFFFFF" stroke="#2563EB"/>
+  <line x1="72" y1="172" x2="164" y2="172" stroke="#CBD5E1"/>
+  <line x1="72" y1="200" x2="164" y2="200" stroke="#CBD5E1"/>
+  <line x1="72" y1="228" x2="164" y2="228" stroke="#CBD5E1"/>
+  <rect x="72" y="172" width="92" height="28" fill="#DBEAFE"/>
+  <path d="M174 186 L222 186" class="arr" marker-end="url(#ab)"/>
+  <text x="232" y="178" class="b">E[i,:]</text>
+  <text x="232" y="206" class="s">不对 d 求和</text>
+  <text x="72" y="278" class="s">gradient：活跃 token rows + frequency</text>
+
+  <rect x="398" y="84" width="322" height="208" rx="14" class="teal"/>
+  <text x="422" y="120" class="sh">Readout：width sum</text>
+  <text x="422" y="158" class="b">zᵥ = Σⱼ hⱼ Wⱼᵥ</text>
+  <text x="422" y="192" class="b">init Std(W) ∼ 1/d</text>
+  <text x="422" y="224" class="b">update entry ∼ 1/d</text>
+  <text x="422" y="260" class="s">d 项对齐 → Δlogit = O(1)</text>
+
+  <rect x="748" y="84" width="404" height="208" rx="14" class="amber"/>
+  <text x="772" y="120" class="sh">Weight tying：一个参数，两条路径</text>
+  <text x="772" y="158" class="b">input: token → E[i,:]</text>
+  <text x="772" y="192" class="b">output: h Eᵀ × width multiplier</text>
+  <text x="772" y="226" class="b">grad = sparse-input + dense-output</text>
+  <text x="772" y="260" class="s">需要 shared readout / 专门 group audit</text>
+
+  <text x="48" y="344" class="h" fill="#0F766E">Attention：随机内积与训练对齐内积不是同一尺度</text>
+  <rect x="48" y="378" width="520" height="182" rx="14" class="blue"/>
+  <text x="72" y="414" class="sh">初始化二阶尺度</text>
+  <text x="72" y="450" class="b">qᵀk 有 d_head 个近似独立项</text>
+  <text x="72" y="482" class="b">Std(qᵀk) ∼ √d_head</text>
+  <text x="72" y="520" class="s">1/√d_head → 初始 score O(1)</text>
+  <rect x="632" y="378" width="520" height="182" rx="14" class="teal"/>
+  <text x="656" y="414" class="sh">μP 训练尺度</text>
+  <text x="656" y="450" class="b">训练后 q / k update 可与特征对齐</text>
+  <text x="656" y="482" class="b">d_head 项可能按 d_head 累积</text>
+  <text x="656" y="520" class="s">1/d_head → 为非发散 maximal update 留空间</text>
+
+  <text x="48" y="610" class="h" fill="#B76E00">其余参数组：按操作逐一归类</text>
+  <rect x="48" y="642" width="252" height="104" rx="12" class="amber"/>
+  <text x="72" y="676" class="sh">Bias</text>
+  <text x="72" y="708" class="b">直接加；无 fan-in sum</text>
+  <text x="72" y="734" class="s">coordinate update</text>
+  <rect x="332" y="642" width="252" height="104" rx="12" class="blue"/>
+  <text x="356" y="676" class="sh">Norm γ / β</text>
+  <text x="356" y="708" class="b">逐坐标乘/加</text>
+  <text x="356" y="734" class="s">不是 hidden matrix</text>
+  <rect x="616" y="642" width="252" height="104" rx="12" class="teal"/>
+  <text x="640" y="676" class="sh">Q/K/V/O</text>
+  <text x="640" y="708" class="b">分别标 orientation</text>
+  <text x="640" y="734" class="s">heads 与 d_head 分轴</text>
+  <rect x="900" y="642" width="252" height="104" rx="12" class="red"/>
+  <text x="924" y="676" class="sh">LoRA A/B</text>
+  <text x="924" y="708" class="b">审计组合 Δ(xAB)</text>
+  <text x="924" y="734" class="s">rank 是独立 scale axis</text>
+  <text x="48" y="784" class="s">边界：二维 tensor ≠ 同一种矩阵几何；规则绑定 forward、optimizer、shape path 与实现版本。</text>
+</svg>

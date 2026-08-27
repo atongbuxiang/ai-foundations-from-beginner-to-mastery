@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="480" viewBox="0 0 1200 480" role="img" aria-labelledby="title desc">
+<title id="title">数学基础十卷跨章累计复现门</title>
+<desc id="desc">三面板分别展示线性高斯信息账本、二次优化的连续与离散稳定，以及圆周上的核回归、旋转不变性和retraction误差。</desc>
+<defs><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",Arial,sans-serif}.title{font-size:24px;font-weight:700;fill:#1F2937}.head{font-size:22px;font-weight:700;fill:#334155}.small{font-size:15px;fill:#64748B}.label{font-size:17px;fill:#334155}.card{fill:#FFFEFB;stroke:#D7DEE8;stroke-width:1.3}.axis{stroke:#64748B;stroke-width:1.1}.dash{stroke-dasharray:5 5}</style></defs>
+<rect width="1200" height="480" fill="#FFFFFF"/>
+<text x="40" y="39" class="title">MATH-FND-CAP-01：信息、优化动力与几何核方法的跨卷证据账</text>
+<rect x="28" y="59" width="368" height="390" class="card"/><rect x="416" y="59" width="368" height="390" class="card"/><rect x="804" y="59" width="368" height="390" class="card"/>
+<text x="50" y="89" class="head">A　Gaussian information</text>
+<text x="438" y="89" class="head">B　Discrete stability</text>
+<text x="826" y="89" class="head">C　Circle-kernel geometry</text>
+<line x1="72.0" y1="269.0" x2="352.0" y2="269.0" class="axis"/>
+<line x1="72.0" y1="124.0" x2="72.0" y2="269.0" class="axis"/>
+<polyline points="72.0,126.5 142.0,164.9 212.0,204.0 282.0,233.4 352.0,254.3" fill="none" stroke="#7C3AED" stroke-width="2.5"/>
+<circle cx="72.0" cy="126.5" r="3.2" fill="#7C3AED"/>
+<circle cx="142.0" cy="164.9" r="3.2" fill="#7C3AED"/>
+<circle cx="212.0" cy="204.0" r="3.2" fill="#7C3AED"/>
+<circle cx="282.0" cy="233.4" r="3.2" fill="#7C3AED"/>
+<circle cx="352.0" cy="254.3" r="3.2" fill="#7C3AED"/>
+<polyline points="72.0,220.7 142.0,217.0 212.0,206.2 282.0,185.6 352.0,156.9" fill="none" stroke="#16A34A" stroke-width="2.5"/>
+<circle cx="72.0" cy="220.7" r="3.2" fill="#16A34A"/>
+<circle cx="142.0" cy="217.0" r="3.2" fill="#16A34A"/>
+<circle cx="212.0" cy="206.2" r="3.2" fill="#16A34A"/>
+<circle cx="282.0" cy="185.6" r="3.2" fill="#16A34A"/>
+<circle cx="352.0" cy="156.9" r="3.2" fill="#16A34A"/>
+<text x="72.0" y="294.0" class="label" text-anchor="start">purple: I(X;Z) [0,2] nats</text>
+<text x="72.0" y="316.0" class="label" text-anchor="start">green: tr Cov(X|Z) [0,5]</text>
+<text x="50.0" y="350.0" class="small" text-anchor="start">R=1: I=0.8959, posterior trace=2.1667</text>
+<text x="50.0" y="375.0" class="small" text-anchor="start">posterior det=0.6667; noise ↑ ⇒ information ↓</text>
+<text x="50.0" y="402.0" class="small" text-anchor="start">定理值 ≠ estimator；先验/噪声/方向必须分账</text>
+<text x="50.0" y="428.0" class="small" text-anchor="start">x-axis noise variance: 0.1, 0.3, 1, 3, 10</text>
+<polyline points="458.0,187.9 469.2,196.4 480.4,198.5 491.6,200.5 502.8,202.5 514.0,204.6 525.2,206.6 536.4,208.6 547.6,210.6 558.8,212.6 570.0,214.6 581.2,216.6 592.4,218.6 603.6,220.6 614.8,222.6 626.0,224.6 637.2,226.6 648.4,228.6 659.6,230.6 670.8,232.6 682.0,234.6 693.2,236.6 704.4,238.6 715.6,240.6 726.8,242.6 738.0,244.6" fill="none" stroke="#2563EB" stroke-width="2.5"/>
+<circle cx="458.0" cy="187.9" r="3.2" fill="#2563EB"/>
+<circle cx="469.2" cy="196.4" r="3.2" fill="#2563EB"/>
+<circle cx="480.4" cy="198.5" r="3.2" fill="#2563EB"/>
+<circle cx="491.6" cy="200.5" r="3.2" fill="#2563EB"/>
+<circle cx="502.8" cy="202.5" r="3.2" fill="#2563EB"/>
+<circle cx="514.0" cy="204.6" r="3.2" fill="#2563EB"/>
+<circle cx="525.2" cy="206.6" r="3.2" fill="#2563EB"/>
+<circle cx="536.4" cy="208.6" r="3.2" fill="#2563EB"/>
+<circle cx="547.6" cy="210.6" r="3.2" fill="#2563EB"/>
+<circle cx="558.8" cy="212.6" r="3.2" fill="#2563EB"/>
+<circle cx="570.0" cy="214.6" r="3.2" fill="#2563EB"/>
+<circle cx="581.2" cy="216.6" r="3.2" fill="#2563EB"/>
+<circle cx="592.4" cy="218.6" r="3.2" fill="#2563EB"/>
+<circle cx="603.6" cy="220.6" r="3.2" fill="#2563EB"/>
+<circle cx="614.8" cy="222.6" r="3.2" fill="#2563EB"/>
+<circle cx="626.0" cy="224.6" r="3.2" fill="#2563EB"/>
+<circle cx="637.2" cy="226.6" r="3.2" fill="#2563EB"/>
+<circle cx="648.4" cy="228.6" r="3.2" fill="#2563EB"/>
+<circle cx="659.6" cy="230.6" r="3.2" fill="#2563EB"/>
+<circle cx="670.8" cy="232.6" r="3.2" fill="#2563EB"/>
+<circle cx="682.0" cy="234.6" r="3.2" fill="#2563EB"/>
+<circle cx="693.2" cy="236.6" r="3.2" fill="#2563EB"/>
+<circle cx="704.4" cy="238.6" r="3.2" fill="#2563EB"/>
+<circle cx="715.6" cy="240.6" r="3.2" fill="#2563EB"/>
+<circle cx="726.8" cy="242.6" r="3.2" fill="#2563EB"/>
+<circle cx="738.0" cy="244.6" r="3.2" fill="#2563EB"/>
+<polyline points="458.0,187.9 469.2,192.2 480.4,196.4 491.6,200.7 502.8,204.9 514.0,209.2 525.2,213.4 536.4,217.6 547.6,221.9 558.8,226.1 570.0,230.4 581.2,234.6 592.4,238.9 603.6,243.1 614.8,247.3 626.0,251.6 637.2,255.8 648.4,260.1 659.6,264.3 670.8,268.5 682.0,272.8 693.2,277.0 704.4,281.3 715.6,285.5 726.8,289.8 738.0,294.0" fill="none" stroke="#16A34A" stroke-width="2.5"/>
+<circle cx="458.0" cy="187.9" r="3.2" fill="#16A34A"/>
+<circle cx="469.2" cy="192.2" r="3.2" fill="#16A34A"/>
+<circle cx="480.4" cy="196.4" r="3.2" fill="#16A34A"/>
+<circle cx="491.6" cy="200.7" r="3.2" fill="#16A34A"/>
+<circle cx="502.8" cy="204.9" r="3.2" fill="#16A34A"/>
+<circle cx="514.0" cy="209.2" r="3.2" fill="#16A34A"/>
+<circle cx="525.2" cy="213.4" r="3.2" fill="#16A34A"/>
+<circle cx="536.4" cy="217.6" r="3.2" fill="#16A34A"/>
+<circle cx="547.6" cy="221.9" r="3.2" fill="#16A34A"/>
+<circle cx="558.8" cy="226.1" r="3.2" fill="#16A34A"/>
+<circle cx="570.0" cy="230.4" r="3.2" fill="#16A34A"/>
+<circle cx="581.2" cy="234.6" r="3.2" fill="#16A34A"/>
+<circle cx="592.4" cy="238.9" r="3.2" fill="#16A34A"/>
+<circle cx="603.6" cy="243.1" r="3.2" fill="#16A34A"/>
+<circle cx="614.8" cy="247.3" r="3.2" fill="#16A34A"/>
+<circle cx="626.0" cy="251.6" r="3.2" fill="#16A34A"/>
+<circle cx="637.2" cy="255.8" r="3.2" fill="#16A34A"/>
+<circle cx="648.4" cy="260.1" r="3.2" fill="#16A34A"/>
+<circle cx="659.6" cy="264.3" r="3.2" fill="#16A34A"/>
+<circle cx="670.8" cy="268.5" r="3.2" fill="#16A34A"/>
+<circle cx="682.0" cy="272.8" r="3.2" fill="#16A34A"/>
+<circle cx="693.2" cy="277.0" r="3.2" fill="#16A34A"/>
+<circle cx="704.4" cy="281.3" r="3.2" fill="#16A34A"/>
+<circle cx="715.6" cy="285.5" r="3.2" fill="#16A34A"/>
+<circle cx="726.8" cy="289.8" r="3.2" fill="#16A34A"/>
+<circle cx="738.0" cy="294.0" r="3.2" fill="#16A34A"/>
+<polyline points="458.0,187.9 469.2,188.3 480.4,187.3 491.6,185.3 502.8,182.9 514.0,180.3 525.2,177.5 536.4,174.8 547.6,172.0 558.8,169.1 570.0,166.3 581.2,163.5 592.4,160.7 603.6,157.9 614.8,155.0 626.0,152.2 637.2,149.4 648.4,146.6 659.6,143.8 670.8,140.9 682.0,138.1 693.2,135.3 704.4,132.5 715.6,129.6 726.8,126.8 738.0,124.0" fill="none" stroke="#DC2626" stroke-width="2.5"/>
+<circle cx="458.0" cy="187.9" r="3.2" fill="#DC2626"/>
+<circle cx="469.2" cy="188.3" r="3.2" fill="#DC2626"/>
+<circle cx="480.4" cy="187.3" r="3.2" fill="#DC2626"/>
+<circle cx="491.6" cy="185.3" r="3.2" fill="#DC2626"/>
+<circle cx="502.8" cy="182.9" r="3.2" fill="#DC2626"/>
+<circle cx="514.0" cy="180.3" r="3.2" fill="#DC2626"/>
+<circle cx="525.2" cy="177.5" r="3.2" fill="#DC2626"/>
+<circle cx="536.4" cy="174.8" r="3.2" fill="#DC2626"/>
+<circle cx="547.6" cy="172.0" r="3.2" fill="#DC2626"/>
+<circle cx="558.8" cy="169.1" r="3.2" fill="#DC2626"/>
+<circle cx="570.0" cy="166.3" r="3.2" fill="#DC2626"/>
+<circle cx="581.2" cy="163.5" r="3.2" fill="#DC2626"/>
+<circle cx="592.4" cy="160.7" r="3.2" fill="#DC2626"/>
+<circle cx="603.6" cy="157.9" r="3.2" fill="#DC2626"/>
+<circle cx="614.8" cy="155.0" r="3.2" fill="#DC2626"/>
+<circle cx="626.0" cy="152.2" r="3.2" fill="#DC2626"/>
+<circle cx="637.2" cy="149.4" r="3.2" fill="#DC2626"/>
+<circle cx="648.4" cy="146.6" r="3.2" fill="#DC2626"/>
+<circle cx="659.6" cy="143.8" r="3.2" fill="#DC2626"/>
+<circle cx="670.8" cy="140.9" r="3.2" fill="#DC2626"/>
+<circle cx="682.0" cy="138.1" r="3.2" fill="#DC2626"/>
+<circle cx="693.2" cy="135.3" r="3.2" fill="#DC2626"/>
+<circle cx="704.4" cy="132.5" r="3.2" fill="#DC2626"/>
+<circle cx="715.6" cy="129.6" r="3.2" fill="#DC2626"/>
+<circle cx="726.8" cy="126.8" r="3.2" fill="#DC2626"/>
+<circle cx="738.0" cy="124.0" r="3.2" fill="#DC2626"/>
+<polyline points="458.0,187.9 469.2,198.0 480.4,202.1 491.6,205.9 502.8,209.7 514.0,213.5 525.2,217.4 536.4,221.2 547.6,225.0 558.8,228.8 570.0,232.6 581.2,236.4 592.4,240.2 603.6,244.0 614.8,247.8 626.0,251.6 637.2,255.4 648.4,259.2 659.6,263.0 670.8,266.8 682.0,270.6 693.2,274.4 704.4,278.2 715.6,282.0 726.8,285.8 738.0,289.6" fill="none" stroke="#7C3AED" stroke-width="2.5"/>
+<circle cx="458.0" cy="187.9" r="3.2" fill="#7C3AED"/>
+<circle cx="469.2" cy="198.0" r="3.2" fill="#7C3AED"/>
+<circle cx="480.4" cy="202.1" r="3.2" fill="#7C3AED"/>
+<circle cx="491.6" cy="205.9" r="3.2" fill="#7C3AED"/>
+<circle cx="502.8" cy="209.7" r="3.2" fill="#7C3AED"/>
+<circle cx="514.0" cy="213.5" r="3.2" fill="#7C3AED"/>
+<circle cx="525.2" cy="217.4" r="3.2" fill="#7C3AED"/>
+<circle cx="536.4" cy="221.2" r="3.2" fill="#7C3AED"/>
+<circle cx="547.6" cy="225.0" r="3.2" fill="#7C3AED"/>
+<circle cx="558.8" cy="228.8" r="3.2" fill="#7C3AED"/>
+<circle cx="570.0" cy="232.6" r="3.2" fill="#7C3AED"/>
+<circle cx="581.2" cy="236.4" r="3.2" fill="#7C3AED"/>
+<circle cx="592.4" cy="240.2" r="3.2" fill="#7C3AED"/>
+<circle cx="603.6" cy="244.0" r="3.2" fill="#7C3AED"/>
+<circle cx="614.8" cy="247.8" r="3.2" fill="#7C3AED"/>
+<circle cx="626.0" cy="251.6" r="3.2" fill="#7C3AED"/>
+<circle cx="637.2" cy="255.4" r="3.2" fill="#7C3AED"/>
+<circle cx="648.4" cy="259.2" r="3.2" fill="#7C3AED"/>
+<circle cx="659.6" cy="263.0" r="3.2" fill="#7C3AED"/>
+<circle cx="670.8" cy="266.8" r="3.2" fill="#7C3AED"/>
+<circle cx="682.0" cy="270.6" r="3.2" fill="#7C3AED"/>
+<circle cx="693.2" cy="274.4" r="3.2" fill="#7C3AED"/>
+<circle cx="704.4" cy="278.2" r="3.2" fill="#7C3AED"/>
+<circle cx="715.6" cy="282.0" r="3.2" fill="#7C3AED"/>
+<circle cx="726.8" cy="285.8" r="3.2" fill="#7C3AED"/>
+<circle cx="738.0" cy="289.6" r="3.2" fill="#7C3AED"/>
+<line x1="458.0" y1="294.0" x2="738.0" y2="294.0" class="axis"/>
+<line x1="458.0" y1="124.0" x2="458.0" y2="294.0" class="axis"/>
+<text x="458.0" y="319.0" class="label" text-anchor="start">blue η=.10　green η=.20　red η=.24</text>
+<text x="458.0" y="342.0" class="small" text-anchor="start">purple: exact flow sampled at t=0.2k</text>
+<text x="438.0" y="372.0" class="small" text-anchor="start">stability: 0 &lt; η &lt; 2/9 ≈ .2222</text>
+<text x="438.0" y="398.0" class="small" text-anchor="start">k=25: η=.20 error=0.00534</text>
+<text x="438.0" y="421.0" class="small" text-anchor="start">k=25: η=.24 error=40.9 (diverges)</text>
+<line x1="846.0" y1="269.0" x2="1116.0" y2="269.0" class="axis"/>
+<line x1="846.0" y1="124.0" x2="846.0" y2="269.0" class="axis"/>
+<polyline points="846.0,124.0 936.0,225.1 1026.0,247.2 1116.0,269.0" fill="none" stroke="#DB2777" stroke-width="2.5"/>
+<circle cx="846.0" cy="124.0" r="3.2" fill="#DB2777"/>
+<circle cx="936.0" cy="225.1" r="3.2" fill="#DB2777"/>
+<circle cx="1026.0" cy="247.2" r="3.2" fill="#DB2777"/>
+<circle cx="1116.0" cy="269.0" r="3.2" fill="#DB2777"/>
+<text x="846.0" y="294.0" class="label" text-anchor="start">log10 test RMSE; n = 8, 12, 24, 48</text>
+<text x="826.0" y="328.0" class="small" text-anchor="start">n=48: RMSE=0.000188, cond(K+λI)≈1.34e+04</text>
+<text x="826.0" y="352.0" class="small" text-anchor="start">finite Gram min eigenvalue=-1.6e-14</text>
+<text x="826.0" y="376.0" class="small" text-anchor="start">rotation-kernel defect=5.0e-16</text>
+<text x="826.0" y="400.0" class="small" text-anchor="start">retraction−Exp: h=0.3 → 0.0085</text>
+<text x="826.0" y="422.0" class="small" text-anchor="start">h=0.01 → 3.3e-07; finite mesh ≠ operator theorem</text>
+</svg>

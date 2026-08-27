@@ -1,0 +1,7 @@
+evidence_level,evidence_object,directly_tests_training_quality,supports_specific_causal_claim,left_association,right_association,association_difference,strong_scaling_efficiency_64,bitwise_reproducibility_implied,decision_reproducibility_implied
+E0,configuration_manifest,0,0,3.14,0.0,3.14,0.6944444444444444,0,0
+E1,throughput_memory_counters,0,0,3.14,0.0,3.14,0.6944444444444444,0,0
+E2,profiler_critical_path,0,0,3.14,0.0,3.14,0.6944444444444444,0,0
+E3,matched_learning_curve,1,0,3.14,0.0,3.14,0.6944444444444444,0,0
+E4,paired_repeats_confidence_interval,1,0,3.14,0.0,3.14,0.6944444444444444,0,0
+E5,causal_intervention_controls,1,1,3.14,0.0,3.14,0.6944444444444444,0,0

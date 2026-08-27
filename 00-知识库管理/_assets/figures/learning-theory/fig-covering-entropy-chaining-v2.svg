@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">覆盖数、Metric Entropy 与 Chaining</title>
+<desc id="desc">经验度量把函数压成样本上的向量；单尺度覆盖只保留一张网，而 chaining 在逐渐变细的网之间累加增量，最终把离散层级和写成熵积分。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">先固定度量与分辨率</text>
+<circle cx="90" cy="145" r="5" fill="#1F2937" stroke="#1F2937" stroke-width="2"/>
+<circle cx="140" cy="195" r="5" fill="#1F2937" stroke="#1F2937" stroke-width="2"/>
+<circle cx="205" cy="125" r="5" fill="#1F2937" stroke="#1F2937" stroke-width="2"/>
+<circle cx="260" cy="210" r="5" fill="#1F2937" stroke="#1F2937" stroke-width="2"/>
+<circle cx="315" cy="155" r="5" fill="#1F2937" stroke="#1F2937" stroke-width="2"/>
+<circle cx="175" cy="285" r="5" fill="#1F2937" stroke="#1F2937" stroke-width="2"/>
+<circle cx="290" cy="325" r="5" fill="#1F2937" stroke="#1F2937" stroke-width="2"/>
+<circle cx="115" cy="170" r="55" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<circle cx="115" cy="170" r="7" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<circle cx="230" cy="165" r="55" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<circle cx="230" cy="165" r="7" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<circle cx="235" cy="300" r="55" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<circle cx="235" cy="300" r="7" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<text x="45" y="390" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">epsilon-cover: every restriction is nearby</text>
+<text x="45" y="430" font-size="16" font-weight="700" text-anchor="start" fill="#2563EB" class="math">H(epsilon) = log N(epsilon)</text>
+<text x="45" y="475" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">d_S uses values on the current sample</text>
+<text x="45" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">entropy is geometric, not Shannon entropy。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Chaining 累加多尺度增量</text>
+<text x="445" y="120" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">epsilon_1</text>
+<circle cx="550.0" cy="115" r="6" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<circle cx="645.0" cy="115" r="6" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<circle cx="740.0" cy="115" r="6" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<text x="445" y="230" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">epsilon_2</text>
+<circle cx="550.0" cy="225" r="6" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<circle cx="597.5" cy="225" r="6" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<circle cx="645.0" cy="225" r="6" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<circle cx="692.5" cy="225" r="6" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<circle cx="740.0" cy="225" r="6" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<text x="445" y="340" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">epsilon_3</text>
+<circle cx="550.0" cy="335" r="6" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<circle cx="573.75" cy="335" r="6" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<circle cx="597.5" cy="335" r="6" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<circle cx="621.25" cy="335" r="6" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<circle cx="645.0" cy="335" r="6" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<circle cx="668.75" cy="335" r="6" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<circle cx="692.5" cy="335" r="6" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<circle cx="716.25" cy="335" r="6" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<circle cx="740.0" cy="335" r="6" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<line x1="550" y1="121" x2="550.0" y2="219" stroke="#D7DEE8" stroke-width="1.6"/>
+<line x1="645" y1="121" x2="597.5" y2="219" stroke="#D7DEE8" stroke-width="1.6"/>
+<line x1="740" y1="121" x2="645.0" y2="219" stroke="#D7DEE8" stroke-width="1.6"/>
+<line x1="550.0" y1="231" x2="550.0" y2="329" stroke="#D7DEE8" stroke-width="1.4"/>
+<line x1="597.5" y1="231" x2="573.75" y2="329" stroke="#D7DEE8" stroke-width="1.4"/>
+<line x1="645.0" y1="231" x2="597.5" y2="329" stroke="#D7DEE8" stroke-width="1.4"/>
+<line x1="692.5" y1="231" x2="621.25" y2="329" stroke="#D7DEE8" stroke-width="1.4"/>
+<line x1="740.0" y1="231" x2="645.0" y2="329" stroke="#D7DEE8" stroke-width="1.4"/>
+<text x="430" y="395" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">f = coarse + sum of increments</text>
+<text x="430" y="440" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">each scale pays sqrt(log N)</text>
+<text x="430" y="480" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">fine residual is stopped at alpha</text>
+<text x="430" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">one net cannot reveal every useful scale。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">离散层级和变成熵积分</text>
+<line x1="855" y1="350" x2="1125" y2="350" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="855" y1="105" x2="855" y2="350" stroke="#D7DEE8" stroke-width="2"/>
+<path d="M855 125C900 145 930 180 965 220C1010 270 1060 315 1125 330" fill="none" stroke="#C24135" stroke-width="3"/>
+<text x="875" y="125" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">sqrt(log N(epsilon))</text>
+<text x="855" y="400" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB" class="math">hat R &lt;= 4 alpha</text>
+<text x="855" y="435" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">+ 12/sqrt(m) integral sqrt(log N)</text>
+<text x="830" y="480" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">optimize the cutoff alpha</text>
+<text x="830" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">constants follow the chosen convention。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">覆盖数回答每个尺度需要多少代表；chaining 把所有尺度的近似误差组织成一个复杂度预算。</text>
+</svg>

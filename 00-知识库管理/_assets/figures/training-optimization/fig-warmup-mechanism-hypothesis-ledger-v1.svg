@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Warmup 六类机制假说与干预账本</title>
+  <desc id="desc">区分早期曲率、优化器状态、相对角更新、噪声、低精度和架构参数化六类 warmup 解释及其观测。</desc>
+  <rect width="1200" height="800" fill="#FFFEFB"/>
+  <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}.h{font-size:27px;font-weight:700}.sh{font-size:18px;font-weight:700}.b{font-size:14px}.s{font-size:12.5px;fill:#64748B}.bb{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.bg{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.ba{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.br{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}.line{stroke:#CBD5E1;stroke-width:2}.lr{stroke:#C0392B;stroke-width:4;fill:none}</style>
+  <text x="48" y="48" class="h" fill="#2563EB">Warmup 是共同控制器，不是唯一机制的名字</text>
+  <line x1="66" y1="126" x2="470" y2="126" class="line"/>
+  <line x1="66" y1="126" x2="66" y2="76" class="line"/>
+  <path d="M66 126 L255 80 L470 80" class="lr"/>
+  <text x="80" y="106" class="s">η₀</text><text x="246" y="70" class="s">T_w</text><text x="420" y="70" class="s">η_peak</text>
+  <rect x="536" y="74" width="616" height="74" rx="12" fill="#F8FAFC" stroke="#CBD5E1"/>
+  <text x="560" y="105" class="sh">同一条 LR ramp 可同时遮蔽多个越界对象</text>
+  <text x="560" y="132" class="s">必须用替代干预 + 定向 telemetry 区分机制。</text>
+
+  <rect x="48" y="190" width="338" height="146" rx="13" class="bb"/>
+  <text x="72" y="225" class="sh">A 早期曲率 / sharpness</text>
+  <text x="72" y="256" class="b">风险：η·λmax(H) 越界</text>
+  <text x="72" y="283" class="s">观测：HVP top eigenvalue、loss catapult</text>
+  <text x="72" y="309" class="s">干预：初始化 / residual scale / curvature LR</text>
+  <rect x="431" y="190" width="338" height="146" rx="13" class="bg"/>
+  <text x="455" y="225" class="sh">B optimizer state 未建立</text>
+  <text x="455" y="256" class="b">风险：m/v/ε 的早期过渡</text>
+  <text x="455" y="283" class="s">观测：state age、u RMS、bias correction</text>
+  <text x="455" y="309" class="s">干预：v₀ 初始化 / 显式 update normalization</text>
+  <rect x="814" y="190" width="338" height="146" rx="13" class="ba"/>
+  <text x="838" y="225" class="sh">C 相对 / 角 / 表示更新</text>
+  <text x="838" y="256" class="b">风险：小权重被大角度旋转</text>
+  <text x="838" y="283" class="s">观测：U/W、angle、probe Δh/h</text>
+  <text x="838" y="309" class="s">干预：layer/unit 相对限制</text>
+
+  <rect x="48" y="374" width="338" height="146" rx="13" class="ba"/>
+  <text x="72" y="409" class="sh">D early noise / critical batch</text>
+  <text x="72" y="440" class="b">风险：η² tr(HΣ)/B 过大</text>
+  <text x="72" y="467" class="s">观测：noise scale、batch covariance</text>
+  <text x="72" y="493" class="s">干预：batch / sampling / accumulation</text>
+  <rect x="431" y="374" width="338" height="146" rx="13" class="br"/>
+  <text x="455" y="409" class="sh">E dtype / loss scale / overflow</text>
+  <text x="455" y="440" class="b">风险：LR 介入前数值已失真</text>
+  <text x="455" y="467" class="s">观测：首个 Inf、skipped step、scale</text>
+  <text x="455" y="493" class="s">干预：precision / accumulation / scaler</text>
+  <rect x="814" y="374" width="338" height="146" rx="13" class="bb"/>
+  <text x="838" y="409" class="sh">F 架构 / 参数化 / Norm 放置</text>
+  <text x="838" y="440" class="b">风险：早期 Jacobian 或 feature 不稳</text>
+  <text x="838" y="467" class="s">观测：activation、gradient、feature scale</text>
+  <text x="838" y="493" class="s">干预：Pre/Post-Norm、residual/μP scale</text>
+
+  <text x="48" y="576" class="h" fill="#0F766E">判定顺序：先定位越界，再选择最直接干预</text>
+  <rect x="48" y="612" width="252" height="104" rx="12" class="bb"/>
+  <text x="72" y="646" class="sh">1 记录</text><text x="72" y="678" class="b">η、g、u、state age</text>
+  <rect x="332" y="612" width="252" height="104" rx="12" class="bg"/>
+  <text x="356" y="646" class="sh">2 定位</text><text x="356" y="678" class="b">首个越界 tensor/metric</text>
+  <rect x="616" y="612" width="252" height="104" rx="12" class="ba"/>
+  <text x="640" y="646" class="sh">3 干预</text><text x="640" y="678" class="b">改变一个机制变量</text>
+  <rect x="900" y="612" width="252" height="104" rx="12" class="br"/>
+  <text x="924" y="646" class="sh">4 否证</text><text x="924" y="678" class="b">多 seed / 同预算复查</text>
+  <rect x="48" y="746" width="1104" height="34" rx="8" fill="#F8FAFC" stroke="#CBD5E1"/>
+  <text x="72" y="768" class="s">图没有证明六类机制穷尽所有原因，也没有给出普适 warmup 比例。</text>
+</svg>

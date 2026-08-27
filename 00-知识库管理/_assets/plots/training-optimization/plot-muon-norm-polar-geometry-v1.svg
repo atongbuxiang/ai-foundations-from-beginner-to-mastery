@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+<title id="title">Norm oracle 与 polar 对偶极值</title>
+<desc id="desc">左侧比较同一向量梯度在三种单位球上的最大预测下降，右侧验证四个矩阵的 polar pairing 等于 nuclear norm。</desc>
+<rect width="1200" height="720" fill="#FFFEFB"/>
+<style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}.h{font-size:27px;font-weight:700}.sh{font-size:18px;font-weight:700}.b{font-size:14px}.s{font-size:12px;fill:#64748B}.axis{stroke:#94A3B8;stroke-width:1.5}.grid{stroke:#E2E8F0;stroke-width:1}.blue{stroke:#2563EB;fill:none;stroke-width:3}.green{stroke:#0F766E;fill:none;stroke-width:3}.amber{stroke:#B76E00;fill:none;stroke-width:3}.red{stroke:#C0392B;fill:none;stroke-width:3}.card{fill:#F8FAFC;stroke:#CBD5E1;stroke-width:1.5}</style>
+<text x="48" y="48" class="h" fill="#2563EB">Norm oracle 与 polar：两次 support-function 验收</text>
+<rect x="48" y="88" width="520" height="520" rx="14" class="card"/>
+<text x="72" y="124" class="sh">A｜g=(3,1) 的三种单位步预算</text>
+<line x1="104" y1="538" x2="522" y2="538" class="axis"/>
+<line x1="104" y1="178" x2="104" y2="538" class="axis"/>
+<rect x="148" y="312.12" width="72" height="225.88" rx="7" fill="#2563EB"/>
+<text x="184" y="566" text-anchor="middle" class="b">l2</text>
+<text x="184" y="300.12" text-anchor="middle" class="b">3.162</text>
+<rect x="272" y="252.29" width="72" height="285.71" rx="7" fill="#0F766E"/>
+<text x="308" y="566" text-anchor="middle" class="b">linf</text>
+<text x="308" y="240.29" text-anchor="middle" class="b">4.000</text>
+<rect x="396" y="323.71" width="72" height="214.29" rx="7" fill="#B76E00"/>
+<text x="432" y="566" text-anchor="middle" class="b">l1</text>
+<text x="432" y="311.71" text-anchor="middle" class="b">3.000</text>
+<text x="104" y="594" class="s">柱高 = −〈g,d*〉 = dual norm；单位球不同，数值不可直接当同一物理步长比较。</text>
+<rect x="612" y="88" width="540" height="520" rx="14" class="card"/>
+<text x="636" y="124" class="sh">B｜matrix polar pairing / nuclear norm</text>
+<line x1="672" y1="538" x2="1110" y2="538" class="axis"/>
+<line x1="672" y1="178" x2="672" y2="538" class="axis"/>
+<rect x="704" y="277.13" width="30" height="260.87" fill="#CBD5E1"/>
+<rect x="736" y="277.13" width="30" height="260.87" fill="#0F766E"/>
+<text x="735" y="566" text-anchor="middle" class="s">diagonal</text>
+<rect x="802" y="381.48" width="30" height="156.52" fill="#CBD5E1"/>
+<rect x="834" y="381.48" width="30" height="156.52" fill="#0F766E"/>
+<text x="833" y="566" text-anchor="middle" class="s">off_diagonal</text>
+<rect x="900" y="381.48" width="30" height="156.52" fill="#CBD5E1"/>
+<rect x="932" y="381.48" width="30" height="156.52" fill="#0F766E"/>
+<text x="931" y="566" text-anchor="middle" class="s">rank_one</text>
+<rect x="998" y="329.30" width="30" height="208.70" fill="#CBD5E1"/>
+<rect x="1030" y="329.30" width="30" height="208.70" fill="#0F766E"/>
+<text x="1029" y="566" text-anchor="middle" class="s">rotated</text>
+<rect x="690" y="584" width="14" height="14" fill="#CBD5E1"/><text x="712" y="596" class="s">nuclear norm</text>
+<rect x="814" y="584" width="14" height="14" fill="#0F766E"/><text x="836" y="596" class="s">〈G,polar(G)〉</text>
+<rect x="48" y="644" width="1104" height="48" rx="9" fill="#ECF7F4" stroke="#0F766E"/>
+<text x="72" y="674" class="b">机器断言：vector optimality gap 与 matrix duality gap 均在浮点容差内；rank-one 的 null-space maximizer 仍不唯一。</text>
+<text x="48" y="712" class="s">确定性标准库实验｜条形图展示 exact/toy identities，不是训练 benchmark。</text>
+</svg>

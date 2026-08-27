@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Stochastic rounding and micro-update preservation</title>
+  <desc id="desc">The left panel derives stochastic rounding probabilities between adjacent grid points; the right compares deterministic stagnation with random jumps whose ensemble mean follows the exact trajectory.</desc>
+  <rect width="1200" height="800" fill="#FFFEFB"/>
+  <text x="60" y="58" font-family="Arial,sans-serif" font-size="28" font-weight="700" fill="#172033">Stochastic rounding trades systematic stagnation for auditable variance</text>
+  <text x="60" y="91" font-family="Arial,sans-serif" font-size="17" fill="#52606D">Local conditional unbiasedness preserves tiny updates in expectation; nonlinear training can still create trajectory bias.</text>
+  <rect x="50" y="125" width="520" height="590" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+  <rect x="600" y="125" width="550" height="590" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+  <text x="78" y="166" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172033">A  One value between adjacent grid points</text>
+  <line x1="110" y1="360" x2="515" y2="360" stroke="#52606D" stroke-width="3"/>
+  <circle cx="145" cy="360" r="11" fill="#2563EB"/><circle cx="485" cy="360" r="11" fill="#2563EB"/><circle cx="355" cy="360" r="9" fill="#C0392B"/>
+  <text x="145" y="405" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#2563EB">q−</text>
+  <text x="485" y="405" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#2563EB">q+</text>
+  <text x="355" y="330" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#C0392B">x</text>
+  <path d="M350 310 Q250 230 155 330" fill="none" stroke="#0F766E" stroke-width="4"/>
+  <path d="M365 310 Q430 245 478 330" fill="none" stroke="#B76E00" stroke-width="4"/>
+  <text x="205" y="225" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" fill="#0F766E">P(q−) = (q+−x)/Δ</text>
+  <text x="450" y="245" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" fill="#B76E00">P(q+) = (x−q−)/Δ</text>
+  <rect x="105" y="475" width="410" height="120" rx="14" fill="#E8F6F3" stroke="#0F766E" stroke-width="2"/>
+  <text x="310" y="515" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" font-weight="700" fill="#0F766E">E[QSR(x) | x] = x</text>
+  <text x="310" y="550" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" fill="#52606D">Var(error | x) = p(1−p)Δ² ≤ Δ²/4</text>
+  <text x="310" y="580" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#52606D">Unbiased does not mean noiseless.</text>
+  <text x="628" y="166" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172033">B  Tiny repeated updates</text>
+  <line x1="675" y1="620" x2="1090" y2="620" stroke="#52606D" stroke-width="2"/><line x1="675" y1="620" x2="675" y2="210" stroke="#52606D" stroke-width="2"/>
+  <g stroke="#D9E0E7"><line x1="675" y1="520" x2="1090" y2="520"/><line x1="675" y1="420" x2="1090" y2="420"/><line x1="675" y1="320" x2="1090" y2="320"/></g>
+  <polyline points="690,245 760,285 830,325 900,365 970,405 1040,445" fill="none" stroke="#172033" stroke-width="3" stroke-dasharray="9 7"/>
+  <polyline points="690,245 760,245 830,245 900,245 970,245 1040,245" fill="none" stroke="#C0392B" stroke-width="4"/>
+  <polyline points="690,245 760,245 830,320 900,320 970,420 1040,420" fill="none" stroke="#2563EB" stroke-width="3" opacity="0.75"/>
+  <polyline points="690,245 760,320 830,320 900,420 970,420 1040,520" fill="none" stroke="#B76E00" stroke-width="3" opacity="0.75"/>
+  <text x="735" y="225" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#C0392B">round-to-nearest stalls</text>
+  <text x="860" y="470" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#172033">exact / ensemble mean</text>
+  <text x="880" y="565" font-family="Arial,sans-serif" font-size="15" fill="#52606D">individual SR paths jump at random times</text>
+  <text x="885" y="680" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" fill="#52606D">update attempts t →</text>
+  <text x="600" y="758" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" fill="#52606D">Evidence boundary: an exact local estimator identity; not a proof that an adaptive nonlinear optimizer has an unbiased final model.</text>
+</svg>

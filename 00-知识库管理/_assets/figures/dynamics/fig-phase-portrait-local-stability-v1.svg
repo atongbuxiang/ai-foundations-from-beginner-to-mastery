@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">相图、二维线性分类与非线性线性化边界</title>
+  <desc id="desc">三面板机制图。第一面板区分向量场箭头、零流线和平面轨道；第二面板展示迹行列式平面中的鞍点、结点、螺旋与中心区域；第三面板比较双曲线性化的局部拓扑有效性和纯虚特征值下相同雅可比矩阵对应的向内、向外螺旋。</desc>
+  <defs>
+    <marker id="arrow-blue" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L8,3 z" fill="#2563eb"/></marker>
+    <marker id="arrow-green" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L8,3 z" fill="#059669"/></marker>
+    <marker id="arrow-red" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L8,3 z" fill="#dc2626"/></marker>
+    <marker id="arrow-slate" markerWidth="8" markerHeight="8" refX="6.8" refY="2.7" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,5.4 L7.2,2.7 z" fill="#64748b"/></marker>
+    <clipPath id="clip-b"><rect x="427" y="92" width="346" height="260" rx="8"/></clipPath>
+    <style>
+      .panel{fill:#fff;stroke:#cbd5e1;stroke-width:1.5}.title{font:700 18px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#0f172a}.sub{font:13px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#475569}.body{font:14px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#334155}.small{font:12px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#64748b}.tiny{font:11px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#64748b}.math{font:italic 14px Georgia,"Times New Roman",serif;fill:#334155}.axis{stroke:#94a3b8;stroke-width:1.2}.grid{stroke:#e2e8f0;stroke-width:1}.dash{stroke-dasharray:5 4}.label{font:700 12px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif}
+    </style>
+  </defs>
+
+  <rect width="1200" height="430" fill="#f8fafc"/>
+  <rect class="panel" x="20" y="20" width="370" height="390" rx="14"/>
+  <rect class="panel" x="415" y="20" width="370" height="390" rx="14"/>
+  <rect class="panel" x="810" y="20" width="370" height="390" rx="14"/>
+
+  <!-- Panel A -->
+  <text class="title" x="40" y="53">A · 局部箭头不等于完整轨道</text>
+  <text class="sub" x="40" y="78">nullclines 给方向骨架，积分曲线才是 orbit</text>
+  <rect x="43" y="95" width="324" height="245" rx="9" fill="#f8fafc" stroke="#e2e8f0"/>
+  <line class="grid" x1="75" y1="115" x2="75" y2="320"/><line class="grid" x1="125" y1="115" x2="125" y2="320"/><line class="grid" x1="175" y1="115" x2="175" y2="320"/><line class="grid" x1="225" y1="115" x2="225" y2="320"/><line class="grid" x1="275" y1="115" x2="275" y2="320"/><line class="grid" x1="325" y1="115" x2="325" y2="320"/>
+  <line class="grid" x1="57" y1="135" x2="350" y2="135"/><line class="grid" x1="57" y1="180" x2="350" y2="180"/><line class="grid" x1="57" y1="225" x2="350" y2="225"/><line class="grid" x1="57" y1="270" x2="350" y2="270"/><line class="grid" x1="57" y1="315" x2="350" y2="315"/>
+  <path d="M64 280 C116 245 148 190 194 173 C243 155 293 174 347 125" fill="none" stroke="#7c3aed" stroke-width="2.2" stroke-dasharray="7 5"/>
+  <path d="M72 125 C119 169 146 203 194 225 C247 249 302 250 347 303" fill="none" stroke="#ea580c" stroke-width="2.2" stroke-dasharray="7 5"/>
+  <text class="tiny" x="273" y="146" fill="#7c3aed">x-nullcline: ẋ=0</text>
+  <text class="tiny" x="252" y="293" fill="#ea580c">y-nullcline: ẏ=0</text>
+  <g stroke="#64748b" stroke-width="1.35" marker-end="url(#arrow-slate)">
+    <line x1="91" y1="147" x2="105" y2="136"/><line x1="142" y1="145" x2="156" y2="137"/><line x1="237" y1="139" x2="247" y2="153"/><line x1="303" y1="146" x2="310" y2="162"/>
+    <line x1="83" y1="207" x2="99" y2="195"/><line x1="134" y1="205" x2="151" y2="194"/><line x1="242" y1="203" x2="251" y2="219"/><line x1="304" y1="205" x2="311" y2="220"/>
+    <line x1="82" y1="266" x2="95" y2="251"/><line x1="139" y1="267" x2="151" y2="252"/><line x1="241" y1="268" x2="251" y2="281"/><line x1="302" y1="267" x2="311" y2="281"/>
+  </g>
+  <path d="M69 303 C106 284 129 251 157 229 C181 210 198 209 213 221 C232 237 223 267 203 276 C177 288 157 266 169 246 C182 226 207 229 218 244" fill="none" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow-blue)"/>
+  <circle cx="199" cy="225" r="6" fill="#0f172a" stroke="#fff" stroke-width="2"/>
+  <text class="tiny" x="211" y="216">equilibrium</text>
+  <text class="tiny" x="69" y="329" fill="#2563eb">blue = one integrated trajectory</text>
+  <rect x="44" y="356" width="322" height="35" rx="8" fill="#fff7ed" stroke="#fdba74"/>
+  <text class="small" x="205" y="378" text-anchor="middle">箭头是瞬时速度 · 虚线通常会被轨道横穿</text>
+
+  <!-- Panel B -->
+  <text class="title" x="435" y="53">B · 二维线性系统的 trace–det 平面</text>
+  <text class="sub" x="435" y="78">τ = tr A，Δ = det A，抛物线 Δ = τ²/4</text>
+  <rect x="427" y="92" width="346" height="260" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+  <g clip-path="url(#clip-b)">
+    <rect x="427" y="278" width="346" height="74" fill="#fee2e2"/>
+    <path d="M430 278 C490 275 527 250 575 167 C595 132 600 105 600 92 L600 278 Z" fill="#dbeafe" opacity="0.85"/>
+    <path d="M600 92 C600 105 605 132 625 167 C673 250 710 275 770 278 L600 278 Z" fill="#ffedd5" opacity="0.9"/>
+    <path d="M430 278 C490 275 527 250 575 167 C588 144 595 119 600 92 C605 119 612 144 625 167 C673 250 710 275 770 278 L770 92 L430 92 Z" fill="#ede9fe" opacity="0.88"/>
+    <path d="M430 278 C490 275 527 250 575 167 C588 144 595 119 600 92 C605 119 612 144 625 167 C673 250 710 275 770 278" fill="none" stroke="#7c3aed" stroke-width="2.4"/>
+  </g>
+  <line class="axis" x1="438" y1="278" x2="762" y2="278" marker-end="url(#arrow-slate)"/>
+  <line class="axis" x1="600" y1="338" x2="600" y2="102" marker-end="url(#arrow-slate)"/>
+  <text class="math" x="754" y="297">τ</text><text class="math" x="611" y="112">Δ</text>
+  <text class="label" x="505" y="207" fill="#1d4ed8">stable nodes</text>
+  <text class="label" x="628" y="207" fill="#c2410c">unstable nodes</text>
+  <text class="label" x="485" y="138" fill="#6d28d9">spiral sinks</text>
+  <text class="label" x="630" y="138" fill="#6d28d9">spiral sources</text>
+  <text class="label" x="575" y="321" fill="#b91c1c">saddles</text>
+  <line x1="600" y1="111" x2="600" y2="271" stroke="#059669" stroke-width="2" stroke-dasharray="5 4"/>
+  <text class="tiny" x="606" y="157" fill="#047857">τ=0: centers</text>
+  <text class="tiny" x="665" y="254" fill="#6d28d9">D=0: repeated root</text>
+  <text class="tiny" x="606" y="291">Δ=0</text>
+  <rect x="436" y="365" width="328" height="27" rx="7" fill="#ecfdf5" stroke="#a7f3d0"/>
+  <text class="small" x="600" y="383" text-anchor="middle">双曲区可迁移到非线性局部相图；边界必须另判</text>
+
+  <!-- Panel C -->
+  <text class="title" x="830" y="53">C · 线性化的有效区与失效区</text>
+  <text class="sub" x="830" y="78">strict spectral gap gives a theorem; zero real part does not</text>
+  <rect x="833" y="98" width="324" height="86" rx="9" fill="#ecfdf5" stroke="#6ee7b7"/>
+  <text class="body" x="850" y="122">hyperbolic J*</text>
+  <text class="math" x="850" y="147">Re λ ≠ 0 for every λ</text>
+  <line x1="1000" y1="141" x2="1040" y2="141" stroke="#059669" stroke-width="2.3" marker-end="url(#arrow-green)"/>
+  <text class="small" x="1091" y="123" text-anchor="middle">local orbit topology</text>
+  <text class="small" x="1091" y="146" text-anchor="middle">sink / source / saddle</text>
+  <text class="tiny" x="996" y="174" text-anchor="middle">不承诺距离、速率、吸引域或全局相图</text>
+
+  <rect x="833" y="203" width="324" height="175" rx="9" fill="#fff7ed" stroke="#fdba74"/>
+  <text class="body" x="849" y="227">same J* = [[0, −1], [1, 0]], λ = ±i</text>
+  <circle cx="903" cy="295" r="43" fill="none" stroke="#cbd5e1"/>
+  <path d="M943 296 C941 270 922 252 900 255 C879 258 865 278 870 298 C875 318 894 329 911 322 C926 316 932 301 927 288 C922 277 909 272 900 277 C891 282 890 293 895 299" fill="none" stroke="#059669" stroke-width="2.6" marker-end="url(#arrow-green)"/>
+  <text class="tiny" x="903" y="349" text-anchor="middle" fill="#047857">ṙ = −r³ · slow sink</text>
+  <circle cx="1084" cy="295" r="17" fill="none" stroke="#cbd5e1"/>
+  <path d="M1097 294 C1098 304 1091 314 1081 315 C1067 316 1057 304 1059 291 C1061 274 1077 264 1092 269 C1112 276 1120 298 1112 315 C1106 328 1094 336 1078 339" fill="none" stroke="#dc2626" stroke-width="2.6" marker-end="url(#arrow-red)"/>
+  <text class="tiny" x="1084" y="349" text-anchor="middle" fill="#b91c1c">ṙ = +r³ · unstable</text>
+  <text class="small" x="995" y="369" text-anchor="middle">zero real part ⇒ inspect nonlinear terms</text>
+  <rect x="833" y="389" width="324" height="16" rx="6" fill="#fee2e2"/>
+  <text class="tiny" x="995" y="401" text-anchor="middle" fill="#991b1b">“线性化未决”不是“系统中性稳定”</text>
+</svg>

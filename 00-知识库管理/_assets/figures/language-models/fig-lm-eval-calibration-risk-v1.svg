@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">置信度的三次审问：事件、proper loss、选择风险</title><desc id="desc">reliability diagram、Brier/log loss 与 risk–coverage 曲线。</desc>
+<rect width="1200" height="700" fill="#FBF8F1"/>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#667784"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#183044" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<line x1="48" y1="70" x2="1152" y2="70" stroke="#C87922" stroke-width="4"/>
+<text x="52" y="49" font-size="24" font-weight="700" fill="#183044">置信度的三次审问：事件、proper loss、选择风险</text>
+<text x="80" y="110" text-anchor="start" font-size="13" font-weight="700" fill="#245AA8">A · RELIABILITY</text>
+<rect x="90" y="125" width="260" height="260" fill="#FFFDF8" stroke="#D9D5CB"/>
+<line x1="90" y1="385" x2="350" y2="125" stroke="#667784" stroke-dasharray="6 5"/>
+<circle cx="116.0" cy="366.8" r="7" fill="#245AA8"/>
+<circle cx="168.0" cy="338.2" r="7" fill="#245AA8"/>
+<circle cx="220.0" cy="270.6" r="7" fill="#245AA8"/>
+<circle cx="272.0" cy="236.8" r="7" fill="#245AA8"/>
+<circle cx="324.0" cy="187.4" r="7" fill="#245AA8"/>
+<text x="220" y="410" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">mean confidence</text>
+<text x="66" y="258" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">accuracy</text>
+<text x="220" y="445" text-anchor="middle" font-size="12" font-weight="700" fill="#B7443E">点在对角线下：over-confidence</text>
+<text x="455" y="110" text-anchor="start" font-size="13" font-weight="700" fill="#7054A3">B · PROPER SCORES</text>
+<rect x="445" y="125" width="300" height="122" rx="10" fill="#EAF7F4" stroke="#17766E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="460" y="153" text-anchor="start" font-size="15" font-weight="700" fill="#17766E">Brier</text>
+<text x="460" y="178" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">(p − y)²</text>
+<text x="460" y="198" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">有限且对误差平方惩罚</text>
+<text x="460" y="218" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">多类：Σc(pc−1[y=c])²</text>
+<rect x="445" y="270" width="300" height="122" rx="10" fill="#F3EFFA" stroke="#7054A3" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="460" y="298" text-anchor="start" font-size="15" font-weight="700" fill="#7054A3">Log loss</text>
+<text x="460" y="323" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">−y log p − (1−y)log(1−p)</text>
+<text x="460" y="343" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">对确信但错误的预测重罚</text>
+<text x="460" y="363" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">p=0 且 y=1 → ∞</text>
+<rect x="445" y="415" width="300" height="72" rx="10" fill="#FFF0ED" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="460" y="443" text-anchor="start" font-size="15" font-weight="700" fill="#B7443E">ECE</text>
+<text x="460" y="468" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">描述性分箱摘要；一般不是 proper score，也不唯一。</text>
+<text x="825" y="110" text-anchor="start" font-size="13" font-weight="700" fill="#4F7B45">C · SELECTIVE GENERATION</text>
+<rect x="825" y="125" width="300" height="260" fill="#FFFDF8" stroke="#D9D5CB"/>
+<path d="M885.0,372.0 L945.0,364.2 L1005.0,348.6 L1065.0,325.2 L1125.0,296.6" fill="none" stroke="#4F7B45" stroke-width="4"/>
+<path d="M885.0,359.0 L945.0,343.4 L1005.0,322.6 L1065.0,299.2 L1125.0,281.0" fill="none" stroke="#B7443E" stroke-width="3" stroke-dasharray="7 5"/>
+<text x="975" y="410" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">coverage</text>
+<text x="795" y="260" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">risk</text>
+<text x="978" y="446" text-anchor="middle" font-size="12" font-weight="700" fill="#4F7B45">排序更好 → 同 coverage 风险更低</text>
+<rect x="80" y="520" width="1045" height="100" rx="10" fill="#FFF0ED" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="95" y="548" text-anchor="start" font-size="15" font-weight="700" fill="#B7443E">先定义概率事件</text>
+<text x="95" y="573" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">“答案正确”“每个 atomic claim 有证据”“调用工具会成功”是不同 Bernoulli 事件；token probability、verbal confidence 与 judge score 不能自动互换。</text>
+<text x="95" y="593" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">校准是相对总体与事件的条件性质；分布、prompt、decoding 或拒答策略改变后必须重新验证。</text>
+<line x1="48" y1="650" x2="1152" y2="650" stroke="#D9D5CB"/>
+<text x="52" y="674" font-size="13" fill="#667784">好 ECE 不推出好决策；同时报告 proper loss、reliability、coverage–risk、分箱规则、失败分母与置信区间。</text>
+</svg>

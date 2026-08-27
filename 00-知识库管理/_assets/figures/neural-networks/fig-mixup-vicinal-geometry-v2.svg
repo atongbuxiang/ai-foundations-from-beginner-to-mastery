@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Mixup：Vicinal Chord、Beta 强度与 Hidden-Space 边界</title>
+<desc id="desc">Mixup 用同一 lambda 插值输入与标签；Beta alpha 决定 chord interior 的采样强度。输入 chord 或 hidden chord 都是归纳偏置，不自动等于真实语义流形。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">同一 lambda 混 x 与 y</text>
+<line x1="76" y1="374" x2="350" y2="374" stroke="#1F2937" stroke-width="2"/>
+<line x1="76" y1="374" x2="76" y2="105" stroke="#1F2937" stroke-width="2"/>
+<text x="350" y="402" font-size="15" font-weight="600" text-anchor="end" fill="#64748B">x[1]</text>
+<text x="80" y="100" font-size="15" font-weight="600" text-anchor="start" fill="#64748B">x[2]</text>
+<line x1="260" y1="342" x2="100" y2="138" stroke="#D7DEE8" stroke-width="3" stroke-dasharray="7 5"/>
+<circle cx="260" cy="342" r="9" fill="#2563EB" stroke="#2563EB" stroke-width="1"/>
+<circle cx="100" cy="138" r="9" fill="#C24135" stroke="#C24135" stroke-width="1"/>
+<circle cx="140" cy="189" r="10" fill="#FFFEFB" stroke="#0F766E" stroke-width="3"/>
+<text x="272" y="348" font-size="15" font-weight="650" text-anchor="start" fill="#2563EB">x1=(2,0)</text>
+<text x="112" y="128" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">x2=(0,4)</text>
+<text x="155" y="194" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">x~=(.5,3)</text>
+<rect x="52" y="421" width="310" height="62" rx="5" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="207" y="447" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">lambda=.25 → y~=(.25,0,.75)</text>
+<text x="207" y="473" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">same lambda, paired permutation</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Beta(alpha,alpha) 决定混合强度</text>
+<line x1="470" y1="355" x2="715" y2="355" stroke="#1F2937" stroke-width="2"/>
+<line x1="470" y1="355" x2="470" y2="140" stroke="#1F2937" stroke-width="2"/>
+<text x="715" y="128" font-size="15" font-weight="600" text-anchor="end" fill="#64748B">alpha →</text>
+<text x="472" y="128" font-size="15" font-weight="650" text-anchor="start" fill="#64748B">E[lam(1-lam)]</text>
+<circle cx="470.0" cy="319.1666666666667" r="4.5" fill="#0F766E" stroke="#0F766E" stroke-width="1"/>
+<circle cx="506.8761744688377" cy="293.57142857142856" r="4.5" fill="#0F766E" stroke="#0F766E" stroke-width="1"/>
+<circle cx="555.6238255311623" cy="247.5" r="4.5" fill="#0F766E" stroke="#0F766E" stroke-width="1"/>
+<circle cx="592.5" cy="211.66666666666669" r="4.5" fill="#0F766E" stroke="#0F766E" stroke-width="1"/>
+<circle cx="629.3761744688377" cy="183.0" r="4.5" fill="#0F766E" stroke="#0F766E" stroke-width="1"/>
+<circle cx="715.0" cy="150.23809523809524" r="4.5" fill="#0F766E" stroke="#0F766E" stroke-width="1"/>
+<path d="M470.0 319.2L506.9 293.6L555.6 247.5L592.5 211.7L629.4 183.0L715.0 150.2" fill="none" stroke="#0F766E" stroke-width="3"/>
+<text x="470" y="384" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">.1</text>
+<text x="592.5" y="384" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">1</text>
+<text x="715" y="384" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">10</text>
+<rect x="445" y="405" width="315" height="78" rx="5" fill="#FFFBEB" stroke="#B7791F" stroke-width="2"/>
+<text x="602" y="435" font-size="16" font-weight="700" text-anchor="middle" fill="#B7791F">E[lambda]=.5</text>
+<text x="602" y="464" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">Var(lambda)=1 / {4(2 alpha+1)}</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">三份实现合同</text>
+<rect x="845" y="90" width="286" height="70" rx="4" fill="#FFFEFB" stroke="#2563EB" stroke-width="1.8"/>
+<text x="988" y="118" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">input mixup</text>
+<text x="988" y="145" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">pixel/token chord can leave semantics</text>
+<rect x="845" y="184" width="286" height="70" rx="4" fill="#FFFEFB" stroke="#0F766E" stroke-width="1.8"/>
+<text x="988" y="212" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">manifold mixup</text>
+<text x="988" y="239" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">choose layer, suffix and target</text>
+<rect x="845" y="278" width="286" height="70" rx="4" fill="#FFFEFB" stroke="#B7791F" stroke-width="1.8"/>
+<text x="988" y="306" font-size="15" font-weight="700" text-anchor="middle" fill="#B7791F">normalization</text>
+<text x="988" y="333" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">mixed batch changes statistics</text>
+<rect x="845" y="372" width="286" height="70" rx="4" fill="#FFFEFB" stroke="#C24135" stroke-width="1.8"/>
+<text x="988" y="400" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">distributed pair</text>
+<text x="988" y="427" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">pairing + RNG define the method</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">Mixup 训练的是 vicinal distribution；chord 的统计、语义、目标与系统实现必须同时声明。</text>
+</svg>

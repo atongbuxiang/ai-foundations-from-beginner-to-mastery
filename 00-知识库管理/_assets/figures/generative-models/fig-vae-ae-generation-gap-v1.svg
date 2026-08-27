@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">自编码器的重构通路与生成缺口</title>
+  <desc id="desc">数据经编码器落入两个稀疏编码岛，训练只约束岛附近；标准正态先验的大量样本落在未训练区域。</desc>
+  <defs><marker id="arr1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#334155"/></marker></defs>
+  <rect width="1200" height="620" fill="#FFFEFB"/>
+  <style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}</style>
+  <g font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif">
+    <text x="54" y="55" font-size="23" font-weight="700" fill="#1F2937">训练只验证往返路径；生成却从另一分布进入 decoder</text>
+    <rect x="54" y="105" width="205" height="332" rx="8" fill="#EEF3FF" stroke="#2563EB" stroke-width="2.5"/>
+    <text x="156" y="145" text-anchor="middle" font-size="20" font-weight="700" fill="#2563EB">数据空间 X</text>
+    <g fill="#2563EB" opacity=".86">
+      <circle cx="107" cy="213" r="16"/><circle cx="150" cy="194" r="13"/><circle cx="200" cy="220" r="17"/>
+      <circle cx="111" cy="336" r="15"/><circle cx="158" cy="365" r="17"/><circle cx="205" cy="332" r="14"/>
+    </g>
+    <text x="156" y="408" text-anchor="middle" font-size="16" fill="#64748B">观测样本与重构</text>
+    <path d="M259 248 C310 206 342 190 391 190" fill="none" stroke="#334155" stroke-width="3" marker-end="url(#arr1)"/>
+    <text x="323" y="190" text-anchor="middle" font-size="17" fill="#334155">encoder fφ</text>
+    <rect x="392" y="105" width="383" height="332" rx="8" fill="#F8FAFC" stroke="#64748B" stroke-width="2.5"/>
+    <text x="583" y="145" text-anchor="middle" font-size="20" font-weight="700" fill="#334155">潜空间 Z</text>
+    <ellipse cx="493" cy="233" rx="66" ry="45" fill="#DCE8FF" stroke="#2563EB" stroke-width="2"/>
+    <ellipse cx="681" cy="321" rx="60" ry="50" fill="#DCE8FF" stroke="#2563EB" stroke-width="2"/>
+    <g fill="#2563EB"><circle cx="466" cy="225" r="7"/><circle cx="502" cy="214" r="7"/><circle cx="518" cy="246" r="7"/><circle cx="657" cy="301" r="7"/><circle cx="690" cy="329" r="7"/><circle cx="707" cy="300" r="7"/></g>
+    <ellipse cx="590" cy="273" rx="145" ry="116" fill="#FFF7E6" fill-opacity=".42" stroke="#B7791F" stroke-width="3" stroke-dasharray="10 8"/>
+    <circle cx="584" cy="273" r="10" fill="#B7791F"/><circle cx="612" cy="244" r="7" fill="#B7791F"/><circle cx="561" cy="305" r="7" fill="#B7791F"/>
+    <text x="584" y="409" text-anchor="middle" font-size="16" fill="#B7791F">虚线：任意指定的 prior 高密度区</text>
+    <path d="M493 233 C415 274 360 315 259 330" fill="none" stroke="#334155" stroke-width="3" marker-end="url(#arr1)"/>
+    <text x="343" y="326" text-anchor="middle" font-size="17" fill="#334155">decoder gθ</text>
+    <path d="M775 273 H898" fill="none" stroke="#C24135" stroke-width="3" stroke-dasharray="10 8" marker-end="url(#arr1)"/>
+    <text x="837" y="250" text-anchor="middle" font-size="17" fill="#C24135">prior sampling</text>
+    <rect x="900" y="105" width="246" height="332" rx="8" fill="#FFF0EE" stroke="#C24135" stroke-width="2.5"/>
+    <text x="1023" y="145" text-anchor="middle" font-size="20" font-weight="700" fill="#C24135">未约束输出</text>
+    <path d="M945 218 C975 166 1015 279 1048 202 C1075 142 1103 254 1119 192" fill="none" stroke="#C24135" stroke-width="4"/>
+    <path d="M947 324 L985 290 L1022 346 L1067 271 L1116 339" fill="none" stroke="#C24135" stroke-width="4"/>
+    <text x="1023" y="405" text-anchor="middle" font-size="16" fill="#64748B">重构 loss 从未看过这些 z</text>
+    <line x1="54" y1="486" x2="1146" y2="486" stroke="#D7DEE8" stroke-width="2"/>
+    <text x="54" y="528" font-size="18" font-weight="700" fill="#1F2937">逻辑缺口</text>
+    <text x="175" y="528" font-size="17" fill="#2563EB">g(f(x))≈x</text>
+    <text x="300" y="528" font-size="17" fill="#64748B">不能推出</text>
+    <text x="390" y="528" font-size="17" fill="#C24135">(g)#ν≈P*</text>
+    <text x="54" y="566" font-size="16" fill="#64748B">需要补：先验 p(z)、观测模型 pθ(x|z)、joint、evidence 目标与祖先采样合同。</text>
+  </g>
+</svg>

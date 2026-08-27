@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">可见 Chain-of-Thought 既是计算工作区，也可能是事后叙述</title><desc id="desc">结构图分离问题、隐藏状态、可见 trace 与答案，并列出四类反事实干预。</desc>
+<rect width="1200" height="700" fill="#FFFEFB"/>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#64748B"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#17324D" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<text x="55" y="55" font-size="25" font-weight="700" fill="#2563EB">可见 Chain-of-Thought 既是计算工作区，也可能是事后叙述</text>
+<rect x="55" y="150" width="205" height="105" rx="12" fill="#EFF6FF" stroke="#2563EB" stroke-width="2" filter="url(#shadow)"/>
+<text x="71" y="179" font-size="16" font-weight="700" fill="#2563EB">Question X</text>
+<text x="71" y="206" font-size="13" fill="#64748B">facts + wording</text>
+<text x="71" y="228" font-size="13" fill="#64748B">possible bias cue H</text>
+<line x1="270" y1="202" x2="355" y2="202" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="370" y="120" width="235" height="165" rx="12" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2" filter="url(#shadow)"/>
+<text x="386" y="149" font-size="16" font-weight="700" fill="#7C3AED">Model state U</text>
+<text x="386" y="176" font-size="13" fill="#64748B">distributed activations</text>
+<text x="386" y="198" font-size="13" fill="#64748B">parametric knowledge</text>
+<text x="386" y="220" font-size="13" fill="#64748B">attention + MLP computation</text>
+<line x1="615" y1="165" x2="710" y2="165" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="725" y="105" width="205" height="110" rx="12" fill="#FFF7E8" stroke="#D97706" stroke-width="2" filter="url(#shadow)"/>
+<text x="741" y="134" font-size="16" font-weight="700" fill="#D97706">Visible trace R</text>
+<text x="741" y="161" font-size="13" fill="#64748B">step 1, step 2, ...</text>
+<text x="741" y="183" font-size="13" fill="#64748B">editable text channel</text>
+<line x1="940" y1="160" x2="1015" y2="202" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="1025" y="150" width="120" height="105" rx="12" fill="#ECFDF5" stroke="#0F766E" stroke-width="2" filter="url(#shadow)"/>
+<text x="1041" y="179" font-size="16" font-weight="700" fill="#0F766E">Answer Y</text>
+<text x="1041" y="206" font-size="13" fill="#64748B">parsed</text>
+<text x="1041" y="228" font-size="13" fill="#64748B">scored</text>
+<line x1="605" y1="245" x2="1015" y2="230" stroke="#C24135" stroke-width="2.5" marker-end="url(#arrow)" stroke-dasharray="7 5"/>
+<text x="755" y="275" font-size="13" fill="#C24135">direct hidden path may bypass stated rationale</text>
+<rect x="55" y="355" width="245" height="100" rx="12" fill="#FFFFFF" stroke="#2563EB" stroke-width="2" filter="url(#shadow)"/>
+<text x="71" y="384" font-size="16" font-weight="700" fill="#2563EB">truncate</text>
+<text x="71" y="411" font-size="13" fill="#64748B">remove late steps</text>
+<rect x="325" y="355" width="245" height="100" rx="12" fill="#FFFFFF" stroke="#0F766E" stroke-width="2" filter="url(#shadow)"/>
+<text x="341" y="384" font-size="16" font-weight="700" fill="#0F766E">paraphrase</text>
+<text x="341" y="411" font-size="13" fill="#64748B">same claimed content</text>
+<rect x="595" y="355" width="245" height="100" rx="12" fill="#FFFFFF" stroke="#C24135" stroke-width="2" filter="url(#shadow)"/>
+<text x="611" y="384" font-size="16" font-weight="700" fill="#C24135">inject error</text>
+<text x="611" y="411" font-size="13" fill="#64748B">flip one premise/step</text>
+<rect x="865" y="355" width="245" height="100" rx="12" fill="#FFFFFF" stroke="#7C3AED" stroke-width="2" filter="url(#shadow)"/>
+<text x="881" y="384" font-size="16" font-weight="700" fill="#7C3AED">bias cue</text>
+<text x="881" y="411" font-size="13" fill="#64748B">affects answer; is it mentioned?</text>
+<rect x="190" y="515" width="820" height="95" rx="12" fill="#FEE2E2" stroke="#C24135" stroke-width="2" filter="url(#shadow)"/>
+<text x="206" y="544" font-size="16" font-weight="700" fill="#C24135">Faithfulness 不是单一分数</text>
+<text x="206" y="571" font-size="13" fill="#64748B">causal dependence · sufficiency · completeness · executable validity · counterfactual stability；先选定义，再选干预和指标。</text>
+<text x="55" y="670" font-size="14" fill="#64748B">答案正确、步骤可读、步骤局部正确、解释忠实是四个不同事件；任何两者都不能自动推出另一个。</text>
+</svg>

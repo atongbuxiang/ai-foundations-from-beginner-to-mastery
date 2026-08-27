@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">有限维谱定理的结构条件、正交特征基与谱投影</title>
+  <desc id="desc">左侧区分正规、自伴、酉和半正定结构，中间展示酉或正交特征基对角化，右侧用正交投影写出算子、恒等算子与矩阵函数，并给出实数域边界。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
+    <style>
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}.blue{fill:#2563eb}.green{fill:#0f766e}.amber{fill:#b7791f}.h{font-size:19px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}.arrow{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <rect x="42" y="43" width="336" height="420" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="68" y="81" class="sans h blue">先检查结构</text>
+  <rect x="81" y="116" width="258" height="62" rx="10" fill="#eff6ff" stroke="#93c5fd"/><text x="210" y="143" class="math body blue" text-anchor="middle">正规：A*A=AA*</text><text x="210" y="166" class="sans small muted" text-anchor="middle">复空间中恰可酉对角化</text>
+  <rect x="67" y="224" width="132" height="80" rx="10" fill="#ecfdf5" stroke="#6ee7b7"/><text x="133" y="256" class="math body green" text-anchor="middle">自伴 A=A*</text><text x="133" y="282" class="sans small muted" text-anchor="middle">谱全为实数</text>
+  <rect x="221" y="224" width="132" height="80" rx="10" fill="#ffffff" stroke="#cbd5e1"/><text x="287" y="256" class="math body ink" text-anchor="middle">酉 A*A=I</text><text x="287" y="282" class="sans small muted" text-anchor="middle">谱在单位圆</text>
+  <path d="M133 224V190H188" class="arrow"/><path d="M287 224V190H232" class="arrow"/>
+  <rect x="67" y="350" width="132" height="72" rx="10" fill="#fffbeb" stroke="#fcd34d"/><text x="133" y="380" class="math body amber" text-anchor="middle">半正定</text><text x="133" y="405" class="sans small muted" text-anchor="middle">自伴且 λ≥0</text><path d="M133 350V316" class="arrow"/>
+  <text x="221" y="371" class="sans body ink">实对称矩阵</text><text x="221" y="399" class="sans small muted">是自伴的实特例</text><text x="221" y="425" class="sans small amber">实正规未必实对角化</text>
+
+  <rect x="416" y="43" width="344" height="420" rx="12" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="442" y="81" class="sans h blue">再得到正交/酉特征基</text>
+  <circle cx="588" cy="243" r="112" fill="#ffffff" stroke="#93c5fd" stroke-width="2"/>
+  <path d="M588 243L681 177" stroke="#2563eb" stroke-width="4"/><path d="M588 243L522 150" stroke="#0f766e" stroke-width="4"/><path d="M588 243L495 309" stroke="#b7791f" stroke-width="4"/>
+  <text x="687" y="172" class="math body blue">u₁</text><text x="500" y="142" class="math body green">u₂</text><text x="464" y="329" class="math body amber">u₃</text><text x="588" y="271" class="sans small muted" text-anchor="middle">两两正交、单位长度</text>
+  <text x="588" y="386" class="math formula ink" text-anchor="middle">A=UΛU*</text><text x="588" y="418" class="math body blue" text-anchor="middle">U*U=I，κ₂(U)=1</text><text x="588" y="447" class="sans small muted" text-anchor="middle">不同特征空间正交；重根内基可旋转。</text>
+
+  <rect x="798" y="43" width="360" height="420" rx="12" fill="#ecfdf5" stroke="#6ee7b7"/>
+  <text x="824" y="81" class="sans h green">最后用谱投影表达对象</text>
+  <text x="824" y="132" class="math formula ink">Pⱼ=uⱼuⱼ*</text><text x="824" y="171" class="math formula blue">I=ΣⱼPⱼ</text><text x="824" y="210" class="math formula green">A=ΣⱼλⱼPⱼ</text><text x="824" y="249" class="math formula amber">f(A)=Σⱼf(λⱼ)Pⱼ</text>
+  <line x1="824" y1="278" x2="1132" y2="278" stroke="#a7f3d0"/>
+  <text x="824" y="316" class="sans body ink">重复特征值时，更本质的是</text><text x="824" y="346" class="sans body ink">整个特征空间的投影 Pλ，</text><text x="824" y="376" class="sans body ink">而不是某一组可旋转的基向量。</text><text x="824" y="420" class="math small muted">Rayleigh 商是 λⱼ 的加权平均</text><text x="824" y="445" class="math small muted">λmin≤x*Ax/x*x≤λmax</text>
+  <rect x="92" y="500" width="1016" height="72" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="600" y="530" class="sans body ink" text-anchor="middle">复正规 ⇔ 酉对角化；实对称 ⇔ 实正交对角化。实正规矩阵可能只能化为含 2×2 旋转块的实形式。</text><text x="600" y="558" class="sans small muted" text-anchor="middle">结构定理保证存在良态基；具体特征值簇的扰动稳定性仍需单独分析。</text>
+  <text x="600" y="610" class="sans result ink" text-anchor="middle">谱定理比一般对角化更强：不仅模式独立，而且换基不放大 Euclidean/Hermitian 范数。</text>
+</svg>

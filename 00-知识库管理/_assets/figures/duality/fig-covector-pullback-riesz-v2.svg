@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">协向量的等值面、对偶映射拉回与 Riesz 表示</title>
+  <desc id="desc">左侧把线性泛函画成平行等值面，中间展示向量由线性映射前推而协向量由对偶映射反向拉回，右侧说明选择内积后微分才对应梯度向量。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
+    <marker id="blue-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#2563eb"/></marker>
+    <style>
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}.blue{fill:#2563eb}.green{fill:#0f766e}.amber{fill:#b7791f}.h{font-size:19px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}.arrow{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <rect x="42" y="43" width="350" height="431" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="68" y="81" class="sans h blue">协向量：线性读取标量</text>
+  <g stroke="#2563eb" stroke-width="2.5"><path d="M78 354L329 119"/><path d="M111 387L362 152"/><path d="M78 420L362 154" opacity="0"/><path d="M78 287L296 86"/><path d="M144 420L362 219"/></g>
+  <circle cx="224" cy="281" r="6" fill="#1f2937"/><text x="235" y="277" class="math body ink">x</text>
+  <path d="M224 281L308 371" stroke="#0f766e" stroke-width="3" marker-end="url(#blue-arrow)"/><text x="292" y="389" class="math body green">法向表示</text>
+  <text x="78" y="112" class="math small muted">φ(x)=c₂</text><text x="105" y="178" class="math small muted">φ(x)=c₁</text><text x="155" y="420" class="math small muted">φ(x)=c₀</text>
+  <text x="217" y="448" class="sans small muted" text-anchor="middle">原始对象是 φ:V→F；等值面不是“移动方向”。</text>
+
+  <rect x="430" y="43" width="350" height="431" rx="12" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="456" y="81" class="sans h blue">前推向量，反向拉回测量</text>
+  <rect x="468" y="115" width="92" height="58" rx="9" fill="#ffffff" stroke="#93c5fd"/><text x="514" y="151" class="math formula ink" text-anchor="middle">V</text>
+  <rect x="650" y="115" width="92" height="58" rx="9" fill="#ffffff" stroke="#6ee7b7"/><text x="696" y="151" class="math formula ink" text-anchor="middle">W</text>
+  <path d="M560 144H638" class="arrow"/><text x="599" y="129" class="math body blue" text-anchor="middle">T</text><text x="599" y="188" class="sans small muted" text-anchor="middle">v ↦ Tv</text>
+  <rect x="468" y="294" width="92" height="58" rx="9" fill="#ffffff" stroke="#93c5fd"/><text x="514" y="330" class="math formula ink" text-anchor="middle">V′</text>
+  <rect x="650" y="294" width="92" height="58" rx="9" fill="#ffffff" stroke="#6ee7b7"/><text x="696" y="330" class="math formula ink" text-anchor="middle">W′</text>
+  <path d="M650 323H572" class="arrow"/><text x="611" y="307" class="math body green" text-anchor="middle">T′</text><text x="611" y="374" class="sans small muted" text-anchor="middle">ψ ↦ ψ∘T</text>
+  <rect x="468" y="405" width="274" height="44" rx="9" fill="#ffffff" stroke="#bfdbfe"/><text x="605" y="433" class="math body ink" text-anchor="middle">(T′ψ)(v)=ψ(Tv)</text>
+
+  <rect x="818" y="43" width="340" height="431" rx="12" fill="#ecfdf5" stroke="#6ee7b7"/>
+  <text x="844" y="81" class="sans h green">内积把协向量表示成向量</text>
+  <rect x="854" y="120" width="268" height="66" rx="10" fill="#ffffff" stroke="#a7f3d0"/><text x="988" y="148" class="math formula ink" text-anchor="middle">dfₓ ∈ V′</text><text x="988" y="173" class="sans small muted" text-anchor="middle">微分天然先是线性泛函</text>
+  <path d="M988 186V248" class="arrow"/><text x="1010" y="220" class="sans small green">选择内积 g</text>
+  <rect x="854" y="248" width="268" height="76" rx="10" fill="#ffffff" stroke="#a7f3d0"/><text x="988" y="280" class="math formula green" text-anchor="middle">grad g f ∈ V</text><text x="988" y="307" class="math small muted" text-anchor="middle">dfₓ(h)=⟨h,grad g f⟩g</text>
+  <line x1="844" y1="357" x2="1132" y2="357" stroke="#a7f3d0"/>
+  <text x="988" y="393" class="sans body ink" text-anchor="middle">换内积：df 不变，梯度表示改变</text><text x="988" y="427" class="sans small amber" text-anchor="middle">列坐标看起来相似，不代表对象类型相同</text>
+  <rect x="92" y="510" width="1016" height="66" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="600" y="539" class="math body ink" text-anchor="middle">向量 v∈V　　协向量 φ∈V′　　梯度 grad g f∈V</text><text x="600" y="565" class="sans small muted" text-anchor="middle">V′ 的定义不需要内积；V′ 与 V 的识别需要额外选择度量。</text>
+  <text x="600" y="610" class="sans result ink" text-anchor="middle">反向传播拉回的是输出测量；把它显示成“梯度向量”还隐含了内积。</text>
+</svg>

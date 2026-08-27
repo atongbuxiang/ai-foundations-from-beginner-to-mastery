@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="780" viewBox="0 0 1200 780" role="img" aria-labelledby="title desc">
+  <title id="title">Muon 形状缩放与更新 RMS 翻译器</title>
+  <desc id="desc">从 partial isometry 的 Frobenius 范数推导逐元素 RMS，并比较 PyTorch Muon 三种形状缩放公式及其监控目标。</desc>
+  <rect width="1200" height="780" fill="#FFFEFB"/>
+  <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}.h{font-size:27px;font-weight:700}.sh{font-size:18px;font-weight:700}.b{font-size:15px}.s{font-size:13px;fill:#64748B}.boxb{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.boxg{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.boxa{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.boxr{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}.arr{stroke:#2563EB;stroke-width:3;fill:none}.line{stroke:#CBD5E1;stroke-width:2}</style>
+  <defs><marker id="ab" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#2563EB"/></marker></defs>
+  <text x="48" y="48" class="h" fill="#2563EB">先把“奇异值为 1”翻译成逐元素 RMS</text>
+  <rect x="48" y="82" width="300" height="112" rx="13" class="boxb"/>
+  <text x="72" y="118" class="sh">固定 shape 约定</text>
+  <text x="72" y="149" class="b">y=xW，W∈Rᴬˣᴮ</text>
+  <text x="72" y="176" class="s">A=rows/input；B=columns/output</text>
+  <line x1="348" y1="138" x2="412" y2="138" class="arr" marker-end="url(#ab)"/>
+  <rect x="422" y="82" width="330" height="112" rx="13" class="boxg"/>
+  <text x="446" y="118" class="sh">Q=UᵣVᵣᵀ</text>
+  <text x="446" y="149" class="b">||Q||F²=r；RMS(Q)=√(r/AB)</text>
+  <text x="446" y="176" class="s">full rank：r=min(A,B)</text>
+  <line x1="752" y1="138" x2="816" y2="138" class="arr" marker-end="url(#ab)"/>
+  <rect x="826" y="82" width="326" height="112" rx="13" class="boxa"/>
+  <text x="850" y="118" class="sh">未缩放结论</text>
+  <text x="850" y="149" class="b">RMS(Q)=1/√max(A,B)</text>
+  <text x="850" y="176" class="s">spectral norm=1 并不表示 RMS=1</text>
+
+  <line x1="48" y1="230" x2="1152" y2="230" class="line"/>
+  <text x="48" y="270" class="h" fill="#0F766E">当前 PyTorch 三种 adjustment：它们匹配的不是同一尺度</text>
+
+  <rect x="48" y="306" width="338" height="170" rx="13" class="boxb"/>
+  <text x="72" y="340" class="sh">original</text>
+  <text x="72" y="374" class="b">s=√max(1,A/B)</text>
+  <text x="72" y="408" class="b">RMS(sQ)=1/√B</text>
+  <text x="72" y="438" class="s">在 xW 约定下锁定 output width</text>
+  <text x="72" y="462" class="s">宽矩阵分支被 clamp</text>
+
+  <rect x="431" y="306" width="338" height="170" rx="13" class="boxg"/>
+  <text x="455" y="340" class="sh">match_rms_adamw</text>
+  <text x="455" y="374" class="b">s=0.2√max(A,B)</text>
+  <text x="455" y="408" class="b">RMS(sQ)=0.2</text>
+  <text x="455" y="438" class="s">直接匹配常数 element RMS</text>
+  <text x="455" y="462" class="s">0.2 是设计/经验合同</text>
+
+  <rect x="814" y="306" width="338" height="170" rx="13" class="boxa"/>
+  <text x="838" y="340" class="sh">spectral_unclamped</text>
+  <text x="838" y="374" class="b">s=√(A/B)</text>
+  <text x="838" y="408" class="b">A≥B：1/√B；A&lt;B：√A/B</text>
+  <text x="838" y="438" class="s">保留有方向的 width ratio</text>
+  <text x="838" y="462" class="s">转置 convention 必须交换 A/B</text>
+
+  <text x="48" y="532" class="h" fill="#2563EB">最后选择真正要守恒或监控的量</text>
+  <rect x="48" y="566" width="252" height="116" rx="12" class="boxg"/>
+  <text x="72" y="600" class="sh">parameter RMS</text>
+  <text x="72" y="632" class="b">RMS(ΔW)</text>
+  <text x="72" y="660" class="s">易测，但依赖 parameterization</text>
+  <rect x="332" y="566" width="252" height="116" rx="12" class="boxb"/>
+  <text x="356" y="600" class="sh">relative update</text>
+  <text x="356" y="632" class="b">RMS(ΔW)/RMS(W)</text>
+  <text x="356" y="660" class="s">受初始化与 decay 影响</text>
+  <rect x="616" y="566" width="252" height="116" rx="12" class="boxa"/>
+  <text x="640" y="600" class="sh">average output</text>
+  <text x="640" y="632" class="b">tr(ΔWᵀ Cₓ ΔW)</text>
+  <text x="640" y="660" class="s">依赖 activation covariance</text>
+  <rect x="900" y="566" width="252" height="116" rx="12" class="boxr"/>
+  <text x="924" y="600" class="sh">worst-case output</text>
+  <text x="924" y="632" class="b">||ΔW||₂</text>
+  <text x="924" y="660" class="s">spectral bound；不是平均效果</text>
+  <rect x="48" y="716" width="1104" height="42" rx="9" fill="#F8FAFC" stroke="#CBD5E1"/>
+  <text x="72" y="743" class="s">版本审计：implementation/date · global/local shape · NS actual RMS · base/adjusted LR · decay order。</text>
+</svg>
+

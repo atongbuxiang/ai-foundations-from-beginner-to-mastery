@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+<title id="title">MLM corruption 与 mixture 权重账本</title><desc id="desc">左侧显示 MLM targets 和输入可见分支，右侧显示同样本份额但不同 target token 份额。</desc>
+<rect width="1200" height="650" fill="#FFFEFB"/>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<text x="55" y="55" font-size="25" font-weight="700" fill="#2563EB">Sampler 先决定训练分布，别从名字猜 loss</text>
+<line x1="600" y1="105" x2="600" y2="570" stroke="#D7DEE8" stroke-width="2"/>
+<text x="75" y="115" font-size="20" font-weight="700" fill="#17324D">MLM：10,000 clean positions</text>
+<rect x="80" y="160" width="470" height="62" rx="10" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="315" y="198" text-anchor="middle" font-size="20" font-weight="700">1500 loss targets (15%)</text>
+<rect x="105" y="270" width="370.0" height="34" rx="6" fill="#2563EB"/>
+<text x="490.0" y="293" font-size="15" fill="#17324D">[MASK] visible = 1200</text>
+<rect x="105" y="348" width="46.25" height="34" rx="6" fill="#B7791F"/>
+<text x="166.25" y="371" font-size="15" fill="#17324D">random visible = 150</text>
+<rect x="105" y="426" width="46.25" height="34" rx="6" fill="#0F766E"/>
+<text x="166.25" y="449" font-size="15" fill="#17324D">unchanged visible = 150</text>
+<text x="75" y="545" font-size="15" fill="#C24135">可见 [MASK] 数 1200 ≠ loss positions 1500</text>
+<text x="645" y="115" font-size="20" font-weight="700" fill="#17324D">Mixture：相同 sample share</text>
+<text x="655" y="180" font-size="18" font-weight="700" fill="#0F766E">mode R</text>
+<rect x="750" y="158" width="190.0" height="34" rx="6" fill="#93C5FD"/><text x="760" y="181" font-size="14">sample 50%</text>
+<rect x="750" y="215" width="76.0" height="34" rx="6" fill="#0F766E"/><text x="760" y="238" font-size="14" fill="#FFFFFF">target 20%</text>
+<text x="750" y="276" font-size="14" fill="#64748B">50 samples × 20 targets</text>
+<text x="655" y="370" font-size="18" font-weight="700" fill="#C24135">mode X</text>
+<rect x="750" y="348" width="190.0" height="34" rx="6" fill="#93C5FD"/><text x="760" y="371" font-size="14">sample 50%</text>
+<rect x="750" y="405" width="304.0" height="34" rx="6" fill="#C24135"/><text x="760" y="428" font-size="14" fill="#FFFFFF">target 80%</text>
+<text x="750" y="466" font-size="14" fill="#64748B">50 samples × 80 targets</text>
+<text x="645" y="575" font-size="15" fill="#64748B">sample、token、compute、gradient 是四份不同账本</text>
+</svg>

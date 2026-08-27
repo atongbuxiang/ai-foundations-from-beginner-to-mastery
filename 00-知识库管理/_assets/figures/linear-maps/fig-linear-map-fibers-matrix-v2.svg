@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+  <title id="title">线性映射保持组合并把核方向压缩为纤维</title>
+  <desc id="desc">左侧定义域中平行于核的输入层，经过线性映射后成为像中的点；下方说明选择基后同一映射由矩阵表示，非零偏置则是仿射而非线性。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
+    <style>
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}.blue{fill:#2563eb}.green{fill:#0f766e}.amber{fill:#b7791f}.h{font-size:19px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}.map{stroke:#64748b;stroke-width:2.2;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="600" fill="#ffffff"/>
+  <text x="52" y="43" class="sans h ink">一条保持线性组合的规则，决定了整个空间怎样被传送与压缩</text>
+  <ellipse cx="280" cy="262" rx="200" ry="170" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
+  <text x="118" y="102" class="math h blue">定义域 V</text>
+  <g stroke="#2563eb" stroke-width="2.5"><path d="M145 180L360 121"/><path d="M170 247L385 188"/><path d="M195 314L410 255"/><path d="M220 381L435 322"/></g>
+  <text x="113" y="421" class="sans small blue">每条平行线是一个 x+ker T</text>
+  <circle cx="252" cy="225" r="6" fill="#1f2937"/><circle cx="316" cy="207" r="6" fill="#1f2937"/><text x="240" y="209" class="math small ink">x</text><text x="324" y="201" class="math small ink">x+k</text>
+  <text x="251" y="274" class="math body muted">k∈ker T ⇒ T(x+k)=T(x)</text>
+
+  <path d="M492 260C560 260 584 260 640 260" class="map"/><text x="559" y="238" class="math h ink" text-anchor="middle">T</text><text x="559" y="288" class="math small muted" text-anchor="middle">保持线性组合</text>
+  <ellipse cx="812" cy="262" rx="156" ry="170" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="2"/>
+  <text x="690" y="102" class="math h green">像 im T</text>
+  <line x1="812" y1="145" x2="812" y2="375" stroke="#0f766e" stroke-width="3"/>
+  <circle cx="812" cy="194" r="8" fill="#0f766e"/><circle cx="812" cy="262" r="8" fill="#0f766e"/><circle cx="812" cy="330" r="8" fill="#0f766e"/>
+  <path d="M454 151C584 151 660 194 799 194" class="map"/><path d="M473 234C590 234 675 262 799 262" class="map"/><path d="M450 342C584 342 664 330 799 330" class="map"/>
+  <rect x="995" y="118" width="155" height="288" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="1073" y="155" class="sans h ink" text-anchor="middle">陪域 W</text><text x="1073" y="198" class="sans small green" text-anchor="middle">像内：可达</text><text x="1073" y="235" class="sans small amber" text-anchor="middle">像外：不可达</text><path d="M1032 272H1114" stroke="#0f766e" stroke-width="3"/><circle cx="1073" cy="318" r="31" fill="none" stroke="#b7791f" stroke-width="2" stroke-dasharray="6 5"/><text x="1073" y="372" class="math small muted" text-anchor="middle">im T ⊆ W</text>
+  <rect x="92" y="463" width="1016" height="58" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="122" y="499" class="math formula blue">T(au+bv)=aT(u)+bT(v)</text><text x="600" y="499" class="math formula ink" text-anchor="middle">选基后：y=Ax</text><text x="1078" y="499" class="math formula amber" text-anchor="end">Ax+b 是仿射，b≠0</text>
+  <text x="600" y="560" class="sans result ink" text-anchor="middle">矩阵是线性映射在基下的坐标表；核和像是映射本身的结构，不依赖表示。</text>
+</svg>

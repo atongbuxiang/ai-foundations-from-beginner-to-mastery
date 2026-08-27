@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">镜像下降、熵几何与 Fisher 自然梯度</title>
+<desc id="desc">镜像下降在由 convex potential 定义的 dual coordinates 中做梯度更新；负熵在 simplex 上产生乘法权重；自然梯度从局部 KL trust region 得到 Fisher-preconditioned direction，但近似 Fisher 与 damping 会改变算法。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">先到 dual coordinate 再返回</text>
+<rect x="45" y="115" width="125" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="107.5" y="150.0" font-size="17" font-weight="650" text-anchor="middle" fill="#2563EB">primal x_t</text>
+<rect x="235" y="115" width="130" height="58" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="300.0" y="150.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">z_t=grad psi(x_t)</text>
+<line x1="172" y1="144" x2="230" y2="144" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<text x="200" y="125" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">grad psi</text>
+<rect x="235" y="265" width="130" height="58" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="300.0" y="300.0" font-size="16" font-weight="650" text-anchor="middle" fill="#C24135">z_t-eta g_t</text>
+<rect x="45" y="265" width="125" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="107.5" y="300.0" font-size="17" font-weight="650" text-anchor="middle" fill="#2563EB">x_(t+1)</text>
+<line x1="300" y1="176" x2="300" y2="258" stroke="#C24135" stroke-width="3" marker-end="url(#a2)"/>
+<line x1="230" y1="294" x2="175" y2="294" stroke="#0F766E" stroke-width="3" marker-end="url(#a1)"/>
+<text x="202" y="280" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">grad psi*</text>
+<text x="45" y="390" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">argmin_x {eta &lt;g_t,x&gt; + D_psi(x,x_t)}</text>
+<text x="45" y="432" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">D_psi is directional；usually not a metric。</text>
+<text x="45" y="478" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">Euclidean psi recovers projected gradient。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">负熵在 simplex 上给乘法更新</text>
+<path d="M465 385L600 105L745 385Z" fill="none" stroke="#2563EB" stroke-width="3"/>
+<circle cx="535" cy="290" r="10" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="2"/>
+<circle cx="600" cy="255" r="14" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="2"/>
+<circle cx="665" cy="320" r="8" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="2"/>
+<circle cx="555" cy="315" r="7" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<circle cx="615" cy="185" r="18" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<circle cx="680" cy="340" r="5" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<text x="430" y="430" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">x_(t+1,i) proportional to x_(t,i) exp(-eta g_i)</text>
+<text x="430" y="466" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">positivity + normalization are built into geometry。</text>
+<text x="430" y="497" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">rates depend on the chosen norm and potential。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">KL trust region 产生 Fisher step</text>
+<ellipse cx="990" cy="240" rx="150" ry="78" fill="none" stroke="#0F766E" stroke-width="2.5"/>
+<circle cx="930" cy="260" r="7" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<line x1="930" y1="260" x2="1065" y2="210" stroke="#C24135" stroke-width="3" marker-end="url(#a2)"/>
+<text x="1070" y="205" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">-F^-1 grad L</text>
+<text x="835" y="345" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">min_d &lt;grad L,d&gt;  s.t.  d^T F d &lt;= 2 epsilon</text>
+<text x="830" y="395" font-size="15" font-weight="650" text-anchor="start" fill="#0F766E">exact Fisher: model expectation</text>
+<text x="830" y="427" font-size="15" font-weight="650" text-anchor="start" fill="#2563EB">empirical Fisher / GGN / K-FAC: different objects</text>
+<text x="830" y="459" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">damping changes metric and invariance</text>
+<text x="830" y="492" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">singular F needs range/pseudoinverse conditions。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">几何选择决定一步的含义：Bregman、KL 与 Euclidean 距离可共享框架，但其对象和不变量不能混用。</text>
+</svg>

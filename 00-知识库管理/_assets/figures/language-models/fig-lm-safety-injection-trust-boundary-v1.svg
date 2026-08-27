@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">Indirect Prompt Injection：把权限边界放回系统</title><desc id="desc">Tool-RAG 数据流、信任区与确定性参考监视器。</desc>
+<rect width="1200" height="700" fill="#FBF8F1"/>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#667784"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#183044" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<line x1="48" y1="70" x2="1152" y2="70" stroke="#B7443E" stroke-width="4"/>
+<text x="52" y="49" font-size="24" font-weight="700" fill="#183044">Indirect Prompt Injection：把权限边界放回系统</text>
+<rect x="45" y="100" width="310" height="520" rx="12" fill="#FFF0ED" stroke="#B7443E" stroke-width="2"/>
+<text x="63" y="130" text-anchor="start" font-size="14" font-weight="700" fill="#B7443E">不可信区</text>
+<rect x="385" y="100" width="360" height="520" rx="12" fill="#F3EFFA" stroke="#7054A3" stroke-width="2"/>
+<text x="403" y="130" text-anchor="start" font-size="14" font-weight="700" fill="#7054A3">模型编排区</text>
+<rect x="775" y="100" width="380" height="520" rx="12" fill="#EEF7EA" stroke="#4F7B45" stroke-width="2"/>
+<text x="793" y="130" text-anchor="start" font-size="14" font-weight="700" fill="#4F7B45">授权执行区</text>
+<rect x="75" y="155" width="245" height="80" rx="10" fill="#FFFDF8" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="90" y="183" text-anchor="start" font-size="15" font-weight="700" fill="#B7443E">用户输入</text>
+<text x="90" y="207" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">可直接控制；身份与会话另验证</text>
+<rect x="75" y="285" width="245" height="105" rx="10" fill="#FFFDF8" stroke="#C87922" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="90" y="313" text-anchor="start" font-size="15" font-weight="700" fill="#C87922">网页 / 邮件 / RAG 文档</text>
+<text x="90" y="337" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">内容可能含祈使语句</text>
+<text x="90" y="356" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">必须保留 source、trust、timestamp</text>
+<rect x="75" y="450" width="245" height="80" rx="10" fill="#FFFDF8" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="90" y="478" text-anchor="start" font-size="15" font-weight="700" fill="#B7443E">工具返回</text>
+<text x="90" y="502" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">数据可再次进入上下文</text>
+<rect x="420" y="155" width="290" height="95" rx="10" fill="#FFFDF8" stroke="#7054A3" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="435" y="183" text-anchor="start" font-size="15" font-weight="700" fill="#7054A3">结构化序列化</text>
+<text x="435" y="207" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">role 与 data 标记增强可分性</text>
+<text x="435" y="226" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">不是操作系统式隔离</text>
+<rect x="420" y="305" width="290" height="110" rx="10" fill="#FFFDF8" stroke="#245AA8" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="435" y="333" text-anchor="start" font-size="15" font-weight="700" fill="#245AA8">LLM planner</text>
+<text x="435" y="357" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">读取数据并提出 typed action</text>
+<text x="435" y="376" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">模型没有最终 execution authority</text>
+<rect x="420" y="485" width="290" height="80" rx="10" fill="#FFFDF8" stroke="#17766E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="435" y="513" text-anchor="start" font-size="15" font-weight="700" fill="#17766E">输出/调用提案</text>
+<text x="435" y="537" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">不携带长期凭据</text>
+<rect x="810" y="145" width="310" height="105" rx="10" fill="#FFFDF8" stroke="#4F7B45" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="825" y="173" text-anchor="start" font-size="15" font-weight="700" fill="#4F7B45">Reference monitor</text>
+<text x="825" y="197" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">identity · schema · scope · policy</text>
+<text x="825" y="216" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">rate limit · confirmation</text>
+<rect x="810" y="315" width="310" height="85" rx="10" fill="#FFFDF8" stroke="#245AA8" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="825" y="343" text-anchor="start" font-size="15" font-weight="700" fill="#245AA8">Least-privilege tools</text>
+<text x="825" y="367" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">read/write 分离；短期凭据；sandbox</text>
+<rect x="810" y="465" width="310" height="105" rx="10" fill="#FFFDF8" stroke="#C87922" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="825" y="493" text-anchor="start" font-size="15" font-weight="700" fill="#C87922">审计与回滚</text>
+<text x="825" y="517" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">request/source/bundle/policy IDs</text>
+<text x="825" y="536" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">执行/拒绝都留痕；限制 blast radius</text>
+<line x1="320" y1="200" x2="410" y2="200" stroke="#667784" stroke-width="2.1" marker-end="url(#arrow)"/>
+<line x1="320" y1="335" x2="410" y2="335" stroke="#667784" stroke-width="2.1" marker-end="url(#arrow)"/>
+<line x1="565" y1="250" x2="565" y2="295" stroke="#667784" stroke-width="2.1" marker-end="url(#arrow)"/>
+<line x1="565" y1="415" x2="565" y2="475" stroke="#667784" stroke-width="2.1" marker-end="url(#arrow)"/>
+<line x1="710" y1="525" x2="800" y2="210" stroke="#4F7B45" stroke-width="2.1" marker-end="url(#arrow)"/>
+<line x1="965" y1="250" x2="965" y2="305" stroke="#4F7B45" stroke-width="2.1" marker-end="url(#arrow)"/>
+<line x1="965" y1="400" x2="965" y2="455" stroke="#4F7B45" stroke-width="2.1" marker-end="url(#arrow)"/>
+<line x1="810" y1="355" x2="720" y2="355" stroke="#B7443E" stroke-width="2.1" marker-end="url(#arrow)" stroke-dasharray="7 5"/>
+<text x="760" y="340" text-anchor="middle" font-size="10" font-weight="700" fill="#B7443E">结果仍是不可信数据</text>
+<line x1="48" y1="650" x2="1152" y2="650" stroke="#D9D5CB"/>
+<text x="52" y="674" font-size="13" fill="#667784">Structured prompt 只是一层；真正的安全边界由身份、schema、最小权限、用户确认、沙箱、速率限制和审计共同实现。</text>
+</svg>

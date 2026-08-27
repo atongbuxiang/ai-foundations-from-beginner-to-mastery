@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="610" viewBox="0 0 1440 610" role="img" aria-labelledby="title desc">
+<title id="title">Least-squares stability: normal equations, QR, SVD, and truncation</title>
+<desc id="desc">Three panels show coefficient error versus condition number, residual and stationarity diagnostics, and the residual-solution-norm tradeoff under singular-value truncation.</desc>
+<style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:13px;fill:#172033}.title{font-size:23px;font-weight:600}.panel{font-size:16px;font-weight:600}.axis{font-size:14px}.frame{fill:#fbfcfe;stroke:#7b879a;stroke-width:1}.grid{stroke:#dbe1e8;stroke-width:1}.note{font-size:12px;fill:#445067}.legend{font-size:12px}</style>
+<rect width="1440" height="610" fill="#ffffff"/>
+<text id="vis-title" x="720" y="34" text-anchor="middle" class="title">稳定最小二乘：小残差不等于参数可信</text>
+<text x="82" y="67" class="panel">A  参数前向误差</text>
+<rect x="82" y="88" width="365" height="330" class="frame"/>
+<line x1="82.00" y1="88" x2="82.00" y2="418" class="grid"/>
+<text x="82.00" y="438" text-anchor="middle">10¹</text>
+<line x1="181.55" y1="88" x2="181.55" y2="418" class="grid"/>
+<text x="181.55" y="438" text-anchor="middle">10⁴</text>
+<line x1="314.27" y1="88" x2="314.27" y2="418" class="grid"/>
+<text x="314.27" y="438" text-anchor="middle">10⁸</text>
+<line x1="447.00" y1="88" x2="447.00" y2="418" class="grid"/>
+<text x="447.00" y="438" text-anchor="middle">10¹²</text>
+<line x1="82" y1="418.00" x2="447" y2="418.00" class="grid"/>
+<text x="72" y="422.00" text-anchor="end">10⁻¹⁶</text>
+<line x1="82" y1="335.50" x2="447" y2="335.50" class="grid"/>
+<text x="72" y="339.50" text-anchor="end">10⁻¹²</text>
+<line x1="82" y1="253.00" x2="447" y2="253.00" class="grid"/>
+<text x="72" y="257.00" text-anchor="end">10⁻⁸</text>
+<line x1="82" y1="170.50" x2="447" y2="170.50" class="grid"/>
+<text x="72" y="174.50" text-anchor="end">10⁻⁴</text>
+<line x1="82" y1="88.00" x2="447" y2="88.00" class="grid"/>
+<text x="72" y="92.00" text-anchor="end">1</text>
+<text x="264.5" y="464" text-anchor="middle" class="axis">κ₂(A)（对数）</text>
+<text x="28" y="253.0" text-anchor="middle" class="axis" transform="rotate(-90 28 253.0)">||x̂−x||₂ / ||x||₂</text>
+<rect x="84.03" y="404.22" width="6" height="6" fill="#c43d3d"/>
+<rect x="117.18" y="340.40" width="6" height="6" fill="#c43d3d"/>
+<rect x="150.36" y="299.96" width="6" height="6" fill="#c43d3d"/>
+<rect x="183.54" y="249.08" width="6" height="6" fill="#c43d3d"/>
+<rect x="216.72" y="231.08" width="6" height="6" fill="#c43d3d"/>
+<rect x="249.90" y="168.55" width="6" height="6" fill="#c43d3d"/>
+<rect x="283.09" y="148.87" width="6" height="6" fill="#c43d3d"/>
+<rect x="316.27" y="85.00" width="6" height="6" fill="#c43d3d"/>
+<rect x="349.45" y="85.00" width="6" height="6" fill="#c43d3d"/>
+<rect x="382.63" y="85.00" width="6" height="6" fill="#c43d3d"/>
+<rect x="415.81" y="85.00" width="6" height="6" fill="#c43d3d"/>
+<rect x="444.00" y="85.00" width="6" height="6" fill="#c43d3d"/>
+<polyline points="87.03,407.22 120.18,343.40 153.36,302.96 186.54,252.08 219.72,234.08 252.90,171.55 286.09,151.87 319.27,88.00 352.45,88.00 385.63,88.00 418.81,88.00 447.00,88.00" fill="none" stroke="#c43d3d" stroke-width="2.5" stroke-dasharray="7 4"/>
+<circle cx="87.03" cy="406.75" r="3.5" fill="#2f6fbd"/>
+<circle cx="120.18" cy="410.85" r="3.5" fill="#2f6fbd"/>
+<circle cx="153.36" cy="410.85" r="3.5" fill="#2f6fbd"/>
+<circle cx="186.54" cy="410.33" r="3.5" fill="#2f6fbd"/>
+<circle cx="219.72" cy="412.96" r="3.5" fill="#2f6fbd"/>
+<circle cx="252.90" cy="412.96" r="3.5" fill="#2f6fbd"/>
+<circle cx="286.09" cy="402.47" r="3.5" fill="#2f6fbd"/>
+<circle cx="319.27" cy="410.85" r="3.5" fill="#2f6fbd"/>
+<circle cx="352.45" cy="417.06" r="3.5" fill="#2f6fbd"/>
+<circle cx="385.63" cy="418.00" r="3.5" fill="#2f6fbd"/>
+<circle cx="418.81" cy="410.85" r="3.5" fill="#2f6fbd"/>
+<circle cx="447.00" cy="410.85" r="3.5" fill="#2f6fbd"/>
+<polyline points="87.03,406.75 120.18,410.85 153.36,410.85 186.54,410.33 219.72,412.96 252.90,412.96 286.09,402.47 319.27,410.85 352.45,417.06 385.63,418.00 418.81,410.85 447.00,410.85" fill="none" stroke="#2f6fbd" stroke-width="2.5"/>
+<path d="M 87.03 406.85 L 91.03 410.85 L 87.03 414.85 L 83.03 410.85 Z" fill="#248a57"/>
+<path d="M 120.18 406.85 L 124.18 410.85 L 120.18 414.85 L 116.18 410.85 Z" fill="#248a57"/>
+<path d="M 153.36 406.85 L 157.36 410.85 L 153.36 414.85 L 149.36 410.85 Z" fill="#248a57"/>
+<path d="M 186.54 406.85 L 190.54 410.85 L 186.54 414.85 L 182.54 410.85 Z" fill="#248a57"/>
+<path d="M 219.72 406.85 L 223.72 410.85 L 219.72 414.85 L 215.72 410.85 Z" fill="#248a57"/>
+<path d="M 252.90 406.85 L 256.90 410.85 L 252.90 414.85 L 248.90 410.85 Z" fill="#248a57"/>
+<path d="M 286.09 406.85 L 290.09 410.85 L 286.09 414.85 L 282.09 410.85 Z" fill="#248a57"/>
+<path d="M 319.27 406.85 L 323.27 410.85 L 319.27 414.85 L 315.27 410.85 Z" fill="#248a57"/>
+<path d="M 352.45 406.85 L 356.45 410.85 L 352.45 414.85 L 348.45 410.85 Z" fill="#248a57"/>
+<path d="M 385.63 406.85 L 389.63 410.85 L 385.63 414.85 L 381.63 410.85 Z" fill="#248a57"/>
+<path d="M 418.81 406.85 L 422.81 410.85 L 418.81 414.85 L 414.81 410.85 Z" fill="#248a57"/>
+<path d="M 447.00 403.22 L 451.00 407.22 L 447.00 411.22 L 443.00 407.22 Z" fill="#248a57"/>
+<polyline points="87.03,410.85 120.18,410.85 153.36,410.85 186.54,410.85 219.72,410.85 252.90,410.85 286.09,410.85 319.27,410.85 352.45,410.85 385.63,410.85 418.81,410.85 447.00,407.22" fill="none" stroke="#248a57" stroke-width="2.5"/>
+<text x="95" y="111" class="note">正规方程约在 κ≈u⁻¹ᐟ² 后失去弱方向</text>
+<text x="555" y="67" class="panel">B  三种验收量不可互换</text>
+<rect x="555" y="88" width="330" height="330" class="frame"/>
+<line x1="555.00" y1="88" x2="555.00" y2="418" class="grid"/>
+<text x="555.00" y="438" text-anchor="middle">正规方程</text>
+<line x1="720.00" y1="88" x2="720.00" y2="418" class="grid"/>
+<text x="720.00" y="438" text-anchor="middle">Householder QR</text>
+<line x1="885.00" y1="88" x2="885.00" y2="418" class="grid"/>
+<text x="885.00" y="438" text-anchor="middle">结构 SVD</text>
+<line x1="555" y1="418.00" x2="885" y2="418.00" class="grid"/>
+<text x="545" y="422.00" text-anchor="end">10⁻¹⁶</text>
+<line x1="555" y1="335.50" x2="885" y2="335.50" class="grid"/>
+<text x="545" y="339.50" text-anchor="end">10⁻¹²</text>
+<line x1="555" y1="253.00" x2="885" y2="253.00" class="grid"/>
+<text x="545" y="257.00" text-anchor="end">10⁻⁸</text>
+<line x1="555" y1="170.50" x2="885" y2="170.50" class="grid"/>
+<text x="545" y="174.50" text-anchor="end">10⁻⁴</text>
+<line x1="555" y1="88.00" x2="885" y2="88.00" class="grid"/>
+<text x="545" y="92.00" text-anchor="end">1</text>
+<text x="720.0" y="464" text-anchor="middle" class="axis">方法（κ₂(A)≈1.4×10⁷）</text>
+<text x="501" y="253.0" text-anchor="middle" class="axis" transform="rotate(-90 501 253.0)">相对量（对数）</text>
+<circle cx="545.00" cy="151.87" r="3.5" fill="#8b4bb6"/>
+<circle cx="710.00" cy="402.47" r="3.5" fill="#8b4bb6"/>
+<circle cx="875.00" cy="410.85" r="3.5" fill="#8b4bb6"/>
+<polyline points="545.00,151.87 710.00,402.47 875.00,410.85" fill="none" stroke="#8b4bb6" stroke-width="2.5"/>
+<rect x="552.00" y="148.87" width="6" height="6" fill="#e08a28"/>
+<rect x="717.00" y="249.89" width="6" height="6" fill="#e08a28"/>
+<rect x="882.00" y="250.00" width="6" height="6" fill="#e08a28"/>
+<polyline points="555.00,151.87 720.00,252.89 885.00,253.00" fill="none" stroke="#e08a28" stroke-width="2.5"/>
+<path d="M 565.00 231.48 L 569.00 235.48 L 565.00 239.48 L 561.00 235.48 Z" fill="#2b8a86"/>
+<path d="M 730.00 100.69 L 734.00 104.69 L 730.00 108.69 L 726.00 104.69 Z" fill="#2b8a86"/>
+<path d="M 895.00 387.68 L 899.00 391.68 L 895.00 395.68 L 891.00 391.68 Z" fill="#2b8a86"/>
+<polyline points="565.00,235.48 730.00,104.69 895.00,391.68" fill="none" stroke="#2b8a86" stroke-width="2.5"/>
+<text x="570" y="111" class="note">残差接近噪声地板时，参数仍可因病态放大而错误</text>
+<text x="1010" y="67" class="panel">C  截断 SVD 的偏差—方差取舍</text>
+<rect x="1010" y="88" width="350" height="330" class="frame"/>
+<line x1="1010.00" y1="88" x2="1010.00" y2="418" class="grid"/>
+<text x="1010.00" y="438" text-anchor="middle">10⁻⁸</text>
+<line x1="1126.67" y1="88" x2="1126.67" y2="418" class="grid"/>
+<text x="1126.67" y="438" text-anchor="middle">10⁻⁶</text>
+<line x1="1243.33" y1="88" x2="1243.33" y2="418" class="grid"/>
+<text x="1243.33" y="438" text-anchor="middle">10⁻⁴</text>
+<line x1="1360.00" y1="88" x2="1360.00" y2="418" class="grid"/>
+<text x="1360.00" y="438" text-anchor="middle">10⁻²</text>
+<line x1="1010" y1="418.00" x2="1360" y2="418.00" class="grid"/>
+<text x="1000" y="422.00" text-anchor="end">1</text>
+<line x1="1010" y1="260.55" x2="1360" y2="260.55" class="grid"/>
+<text x="1000" y="264.55" text-anchor="end">3</text>
+<line x1="1010" y1="88.00" x2="1360" y2="88.00" class="grid"/>
+<text x="1000" y="92.00" text-anchor="end">10</text>
+<text x="1185.0" y="464" text-anchor="middle" class="axis">||Ax̂−b||₂</text>
+<text x="956" y="253.0" text-anchor="middle" class="axis" transform="rotate(-90 956 253.0)">||x̂||₂</text>
+<path d="M 1010.00 199.04 L 1014.00 203.04 L 1010.00 207.04 L 1006.00 203.04 Z" fill="#6a55a3"/>
+<text x="1017.00" y="196.04" class="note">无截断</text>
+<path d="M 1010.00 199.04 L 1014.00 203.04 L 1010.00 207.04 L 1006.00 203.04 Z" fill="#6a55a3"/>
+<path d="M 1045.12 313.22 L 1049.12 317.22 L 1045.12 321.22 L 1041.12 317.22 Z" fill="#6a55a3"/>
+<text x="1052.12" y="310.22" class="note">rcond=1e-07</text>
+<path d="M 1127.68 335.29 L 1131.68 339.29 L 1127.68 343.29 L 1123.68 339.29 Z" fill="#6a55a3"/>
+<text x="1134.68" y="332.29" class="note">rcond=1e-05</text>
+<path d="M 1243.33 364.33 L 1247.33 368.33 L 1243.33 372.33 L 1239.33 368.33 Z" fill="#6a55a3"/>
+<text x="1250.33" y="361.33" class="note">rcond=1e-03</text>
+<path d="M 1360.00 414.00 L 1364.00 418.00 L 1360.00 422.00 L 1356.00 418.00 Z" fill="#6a55a3"/>
+<polyline points="1010.00,203.04 1010.00,203.04 1045.12,317.22 1127.68,339.29 1243.33,368.33 1360.00,418.00" fill="none" stroke="#6a55a3" stroke-width="2.5"/>
+<text x="1025" y="111" class="note">舍弃弱方向会增加残差，但抑制解范数与噪声放大</text>
+<rect x="97.00" y="497.00" width="6" height="6" fill="#c43d3d"/>
+<text x="110" y="504" class="legend">正规方程</text>
+<circle cx="255.00" cy="500.00" r="3.5" fill="#2f6fbd"/>
+<text x="265" y="504" class="legend">Householder QR</text>
+<path d="M 410.00 496.00 L 414.00 500.00 L 410.00 504.00 L 406.00 500.00 Z" fill="#248a57"/>
+<text x="420" y="504" class="legend">结构 SVD</text>
+<circle cx="610.00" cy="500.00" r="3.5" fill="#8b4bb6"/>
+<text x="620" y="504" class="legend">参数误差</text>
+<rect x="752.00" y="497.00" width="6" height="6" fill="#e08a28"/>
+<text x="765" y="504" class="legend">原始残差</text>
+<path d="M 900.00 496.00 L 904.00 500.00 L 900.00 504.00 L 896.00 500.00 Z" fill="#2b8a86"/>
+<text x="910" y="504" class="legend">驻点残差</text>
+<text x="720" y="555" text-anchor="middle" class="note">A/B：Aε=[[1,1],[ε,0],[0,ε]]、x=(1,−1)、固定相对正交残差；C：奇异值 1…10⁻⁸ 的对角谱加固定噪声。仅验证这些确定性构造。</text>
+<text x="720" y="580" text-anchor="middle" class="note">生成：plot_least_squares_stability.py · Python 标准库 · seed=无随机性</text>
+</svg>

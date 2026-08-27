@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">多重积分与换元公式</title>
+  <desc id="desc">三面板展示 Riemann 小体积累加、Jacobian 局部体积缩放和概率密度换元。</desc>
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFF7ED"/><stop offset="1" stop-color="#ECFEFF"/></linearGradient>
+    <marker id="arr3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#475569"/></marker>
+    <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0V28" fill="none" stroke="#FDBA74" stroke-width="1"/></pattern>
+    <style>.title{font:700 22px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#0F172A}.head{font:700 17px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#9A3412}.txt{font:14px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#334155}.math{font:15px Georgia,"Times New Roman",serif;fill:#0F172A}.small{font:12px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#64748B}.card{fill:#fff;stroke:#CBD5E1;stroke-width:1.3}.orange{fill:#FFF7ED;stroke:#FDBA74}.cyan{fill:#ECFEFF;stroke:#67E8F9}.blue{fill:#EFF6FF;stroke:#93C5FD}.red{fill:#FEF2F2;stroke:#FCA5A5}.line{stroke:#475569;stroke-width:1.6;fill:none;marker-end:url(#arr3)}</style>
+  </defs>
+  <rect width="1200" height="430" rx="22" fill="url(#bg3)"/><text x="40" y="38" class="title">多元换元：同一质量在不同局部体积坐标中的重新计价</text>
+  <rect x="28" y="58" width="368" height="342" rx="17" class="card"/><rect x="416" y="58" width="368" height="342" rx="17" class="card"/><rect x="804" y="58" width="368" height="342" rx="17" class="card"/>
+  <text x="50" y="88" class="head">A　多重积分 = 小体积加权和</text>
+  <rect x="67" y="113" width="292" height="196" rx="7" fill="url(#grid)" stroke="#F97316" stroke-width="2"/><path d="M68 266 C122 202,141 238,185 164 C226 96,293 139,357 179 L357 309 L68 309Z" fill="#FED7AA" fill-opacity=".72" stroke="#EA580C" stroke-width="2"/>
+  <rect x="55" y="335" width="314" height="42" rx="10" class="orange"/><text x="91" y="361" class="math">∫R f(x)dx ≈ Σk f(ξk) ΔVk</text>
+  <text x="438" y="88" class="head">B　Jacobian 负责局部体积</text>
+  <rect x="458" y="128" width="93" height="93" fill="#CFFAFE" stroke="#06B6D4" stroke-width="2"/><text x="474" y="247" class="small">参数域 du</text>
+  <path d="M566 175L628 175" class="line"/><text x="579" y="157" class="small">T, DT(u)</text>
+  <polygon points="654,120 748,143 721,229 628,206" fill="#A5F3FC" stroke="#0891B2" stroke-width="2"/><text x="639" y="257" class="small">像空间 dx</text>
+  <rect x="448" y="286" width="313" height="62" rx="11" class="cyan"/><text x="471" y="312" class="math">dx = |det DT(u)| du</text><text x="471" y="336" class="small">局部线性化 + 全局不重复计数</text>
+  <text x="456" y="380" class="small">绝对值去掉定向翻转；det=0 表示体积塌缩</text>
+  <text x="826" y="88" class="head">C　概率密度与 flow</text>
+  <rect x="838" y="111" width="302" height="72" rx="11" class="blue"/><text x="858" y="137" class="txt">Y=T(X)</text><text x="858" y="163" class="math">pY(y)=pX(x)/|det DT(x)|</text>
+  <rect x="838" y="205" width="302" height="72" rx="11" class="cyan"/><text x="858" y="231" class="txt">编码 z=f(x)</text><text x="858" y="257" class="math">log pX=log pZ+log|det Jf|</text>
+  <rect x="838" y="300" width="302" height="65" rx="11" class="red"/><text x="858" y="326" class="txt">非单射：对每个原像分支求和</text><text x="858" y="350" class="small">维数改变：改用面积 / coarea 公式</text>
+  <text x="842" y="391" class="small">支持集、双射、可积性与数值条件性必须同时审计</text>
+</svg>

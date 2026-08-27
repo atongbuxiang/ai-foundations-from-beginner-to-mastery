@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">MLP：逐层前向、形状账本与输出合同</title>
+<desc id="desc">多层感知机是 affine 与非线性的函数复合；形状沿 feature 轴变化，参数、计算和训练缓存分账；最后输出必须与任务和损失匹配。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">函数复合形成表示阶梯</text>
+<circle cx="65" cy="120" r="27" fill="#FFFEFB" stroke="#2563EB" stroke-width="2.5"/>
+<text x="65" y="126" font-size="16" font-weight="700" text-anchor="middle" fill="#2563EB">x</text>
+<text x="65" y="170" font-size="15" font-weight="650" text-anchor="middle" fill="#64748B">d₀</text>
+<line x1="93" y1="128" x2="120" y2="182" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<text x="107.5" y="145.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">affine + φ</text>
+<circle cx="150" cy="190" r="27" fill="#FFFEFB" stroke="#0F766E" stroke-width="2.5"/>
+<text x="150" y="196" font-size="16" font-weight="700" text-anchor="middle" fill="#0F766E">h¹</text>
+<text x="150" y="240" font-size="15" font-weight="650" text-anchor="middle" fill="#64748B">d₁</text>
+<line x1="178" y1="198" x2="215" y2="262" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<text x="197.5" y="220.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">affine + φ</text>
+<circle cx="245" cy="270" r="27" fill="#FFFEFB" stroke="#0F766E" stroke-width="2.5"/>
+<text x="245" y="276" font-size="16" font-weight="700" text-anchor="middle" fill="#0F766E">h²</text>
+<text x="245" y="320" font-size="15" font-weight="650" text-anchor="middle" fill="#64748B">d₂</text>
+<line x1="273" y1="278" x2="300" y2="337" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<text x="287.5" y="297.5" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">affine + φ</text>
+<circle cx="330" cy="345" r="27" fill="#FFFEFB" stroke="#C24135" stroke-width="2.5"/>
+<text x="330" y="351" font-size="16" font-weight="700" text-anchor="middle" fill="#C24135">ŷ</text>
+<text x="330" y="395" font-size="15" font-weight="650" text-anchor="middle" fill="#64748B">d₃</text>
+<text x="45" y="430" font-size="18" font-weight="700" text-anchor="start" fill="#1F2937" class="math">h(l) = phi_l(h(l−1) W(l) + b(l))</text>
+<text x="45" y="470" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">所有 phi=identity  ⇒  整体仍是一个 affine map。</text>
+<text x="45" y="505" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">hidden representation 可重排数据，但也可能丢失信息。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Layer ledger：每层两次命名</text>
+<text x="440" y="105" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">layer</text>
+<text x="510" y="105" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">input × weight</text>
+<text x="680" y="105" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">Z → H</text>
+<line x1="435" y1="120" x2="760" y2="120" stroke="#0F766E" stroke-width="2"/>
+<text x="455" y="165" font-size="17" font-weight="700" text-anchor="start" fill="#2563EB">1</text>
+<text x="505" y="165" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">[B,d₀] × [d₀,d₁]</text>
+<text x="682" y="165" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">[B,d₁]</text>
+<line x1="435" y1="187" x2="760" y2="187" stroke="#D7DEE8" stroke-width="1"/>
+<text x="455" y="235" font-size="17" font-weight="700" text-anchor="start" fill="#2563EB">2</text>
+<text x="505" y="235" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">[B,d₁] × [d₁,d₂]</text>
+<text x="682" y="235" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">[B,d₂]</text>
+<line x1="435" y1="257" x2="760" y2="257" stroke="#D7DEE8" stroke-width="1"/>
+<text x="455" y="305" font-size="17" font-weight="700" text-anchor="start" fill="#2563EB">3</text>
+<text x="505" y="305" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">[B,d₂] × [d₂,d₃]</text>
+<text x="682" y="305" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">[B,d₃]</text>
+<line x1="435" y1="327" x2="760" y2="327" stroke="#D7DEE8" stroke-width="1"/>
+<text x="438" y="370" font-size="16" font-weight="700" text-anchor="start" fill="#2563EB">Z: pre-activation</text>
+<text x="605" y="370" font-size="16" font-weight="700" text-anchor="start" fill="#0F766E">H: after φ</text>
+<text x="438" y="416" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">sequence input: [B,T,d]；B,T 保留。</text>
+<text x="438" y="460" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">forward cache 保存 H/Z；inference 可丢弃多数中间量。</text>
+<text x="438" y="500" font-size="16" font-weight="700" text-anchor="start" fill="#C24135" class="math">参数数 = Σ_l (d(l−1)+1)d(l)</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">资源与输出语义分开验收</text>
+<text x="845" y="112" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">static</text>
+<text x="910" y="112" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">parameters</text>
+<text x="1040" y="112" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">Σ(din+1)dout</text>
+<text x="845" y="165" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">work</text>
+<text x="910" y="165" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">MACs</text>
+<text x="1040" y="165" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">BΣ din·dout</text>
+<text x="845" y="218" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">cache</text>
+<text x="910" y="218" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">H/Z/masks</text>
+<text x="1040" y="218" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">∝ BΣ d(l)</text>
+<line x1="840" y1="247" x2="1140" y2="247" stroke="#D7DEE8" stroke-width="2"/>
+<text x="845" y="282" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">regression</text>
+<text x="940" y="282" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">identity → real value</text>
+<text x="845" y="342" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">binary</text>
+<text x="940" y="342" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">one logit → sigmoid/BCE</text>
+<text x="845" y="402" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">K-class</text>
+<text x="940" y="402" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">K logits → softmax/CE</text>
+<text x="845" y="462" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">multi-label</text>
+<text x="940" y="462" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">K independent logits</text>
+<text x="842" y="505" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">output activation 由 action space 与 loss 决定。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">沿计算图核对 Z/H 与 shape，再分别验收资源账本和输出任务合同。</text>
+</svg>

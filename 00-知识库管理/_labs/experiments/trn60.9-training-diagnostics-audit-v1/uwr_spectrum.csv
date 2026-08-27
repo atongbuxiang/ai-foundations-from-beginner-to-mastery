@@ -1,0 +1,4 @@
+case,dimension,frobenius_norm,entry_rms,spectral_norm,stable_rank,weight_frobenius_norm,weight_spectral_norm,frobenius_uwr,spectral_uwr
+rank_one,100,1.0,0.01,1.0,1.0,20.0,8.0,0.05,0.125
+rank_25_equal,100,1.0,0.01,0.2,25.0,20.0,8.0,0.05,0.025
+rank_100_equal,100,1.0,0.01,0.1,100.0,20.0,8.0,0.05,0.0125

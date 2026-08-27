@@ -1,0 +1,6 @@
+chunk_id,start,end,covers_gold,acl,version
+C0,0,256,0,tenant-A,v1
+C1,192,448,1,tenant-A,v1
+C2,384,640,0,tenant-A,v1
+C3,576,832,0,tenant-A,v1
+C4,768,1000,0,tenant-A,v1

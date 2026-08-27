@@ -1,0 +1,15 @@
+family,metric,value
+estimand,task_macro,0.5
+estimand,example_micro,0.575
+estimand,user_average,0.375
+estimand,request_average,0.6
+text_metric,exact_match,0.0
+text_metric,token_f1,0.5
+text_metric,bleu_bp,0.7165313105737893
+text_metric,rouge_l_f1,0.6666666666666666
+calibration,brier,0.19000000000000003
+calibration,ece,0.11
+factuality,atomic_precision,0.75
+factuality,citation_precision,0.8
+factuality,claim_coverage,0.6
+factuality,weighted_precision,0.5

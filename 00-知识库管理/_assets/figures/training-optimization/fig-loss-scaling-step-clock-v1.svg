@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Dynamic loss scaling and optimizer clock</title>
+  <desc id="desc">A state machine separates scaled backward, unscale and finite check, successful update, skipped update, and scheduler or EMA clocks.</desc>
+  <rect width="1200" height="800" fill="#FFFEFB"/>
+  <text x="60" y="58" font-family="Arial,sans-serif" font-size="28" font-weight="700" fill="#172033">An overflow skip is a control-flow event, not an empty line in the log</text>
+  <text x="60" y="91" font-family="Arial,sans-serif" font-size="17" fill="#52606D">Loss scale changes range; master weights preserve small updates; only successful updates advance optimizer time.</text>
+  <rect x="50" y="125" width="720" height="590" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+  <rect x="800" y="125" width="350" height="590" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+  <text x="78" y="166" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172033">A  Dynamic scale state machine</text>
+  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#52606D"/></marker></defs>
+  <g font-family="Arial,sans-serif">
+    <rect x="95" y="215" width="180" height="80" rx="16" fill="#EAF2FF" stroke="#2563EB" stroke-width="2"/><text x="185" y="247" text-anchor="middle" font-size="18" font-weight="700" fill="#2563EB">Scale loss</text><text x="185" y="274" text-anchor="middle" font-size="16" fill="#52606D">scaled L = S(t) · L</text>
+    <rect x="330" y="215" width="180" height="80" rx="16" fill="#EAF2FF" stroke="#2563EB" stroke-width="2"/><text x="420" y="247" text-anchor="middle" font-size="18" font-weight="700" fill="#2563EB">Backward</text><text x="420" y="274" text-anchor="middle" font-size="16" fill="#52606D">accumulate S(t) · g</text>
+    <rect x="565" y="215" width="160" height="80" rx="16" fill="#E8F6F3" stroke="#0F766E" stroke-width="2"/><text x="645" y="247" text-anchor="middle" font-size="18" font-weight="700" fill="#0F766E">Unscale</text><text x="645" y="274" text-anchor="middle" font-size="16" fill="#52606D">inspect g</text>
+    <path d="M275 255 H330" stroke="#52606D" stroke-width="2" marker-end="url(#a)"/><path d="M510 255 H565" stroke="#52606D" stroke-width="2" marker-end="url(#a)"/>
+    <polygon points="420,350 520,420 420,490 320,420" fill="#FFF3D6" stroke="#B76E00" stroke-width="2"/><text x="420" y="412" text-anchor="middle" font-size="18" font-weight="700" fill="#B76E00">all finite?</text><text x="420" y="437" text-anchor="middle" font-size="15" fill="#52606D">global rank consensus</text>
+    <path d="M645 295 V330 H490 V365" stroke="#52606D" stroke-width="2" fill="none" marker-end="url(#a)"/>
+    <rect x="85" y="555" width="250" height="95" rx="16" fill="#FFF7F4" stroke="#C0392B" stroke-width="2"/><text x="210" y="588" text-anchor="middle" font-size="18" font-weight="700" fill="#C0392B">NO: skip optimizer</text><text x="210" y="615" text-anchor="middle" font-size="16" fill="#52606D">S(t+1) = backoff · S(t)</text><text x="210" y="638" text-anchor="middle" font-size="15" fill="#52606D">attempt clock only</text>
+    <rect x="505" y="555" width="220" height="95" rx="16" fill="#E8F6F3" stroke="#0F766E" stroke-width="2"/><text x="615" y="588" text-anchor="middle" font-size="18" font-weight="700" fill="#0F766E">YES: clip + step</text><text x="615" y="615" text-anchor="middle" font-size="16" fill="#52606D">update master/state</text><text x="615" y="638" text-anchor="middle" font-size="15" fill="#52606D">update clock advances</text>
+    <path d="M350 455 L230 555" stroke="#C0392B" stroke-width="3" fill="none" marker-end="url(#a)"/><text x="265" y="490" font-size="16" fill="#C0392B">Inf / NaN</text>
+    <path d="M490 455 L595 555" stroke="#0F766E" stroke-width="3" fill="none" marker-end="url(#a)"/><text x="548" y="490" font-size="16" fill="#0F766E">finite</text>
+  </g>
+  <text x="828" y="166" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172033">B  Which clocks advance?</text>
+  <g font-family="Arial,sans-serif" font-size="16">
+    <rect x="835" y="205" width="280" height="58" rx="10" fill="#EAF2FF"/><text x="855" y="240" fill="#172033">attempt / backward</text><text x="1095" y="240" text-anchor="end" fill="#2563EB" font-weight="700">all attempts</text>
+    <rect x="835" y="278" width="280" height="58" rx="10" fill="#E8F6F3"/><text x="855" y="313" fill="#172033">optimizer + EMA</text><text x="1095" y="313" text-anchor="end" fill="#0F766E" font-weight="700">success only</text>
+    <rect x="835" y="351" width="280" height="58" rx="10" fill="#E8F6F3"/><text x="855" y="386" fill="#172033">LR scheduler</text><text x="1095" y="386" text-anchor="end" fill="#0F766E" font-weight="700">policy</text>
+    <rect x="835" y="424" width="280" height="58" rx="10" fill="#FFF3D6"/><text x="855" y="459" fill="#172033">loss-scale state</text><text x="1095" y="459" text-anchor="end" fill="#B76E00" font-weight="700">every check</text>
+  </g>
+  <rect x="835" y="530" width="280" height="125" rx="14" fill="#FFF7F4" stroke="#C0392B" stroke-width="2"/>
+  <text x="975" y="565" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#C0392B">Ordering invariant</text>
+  <text x="975" y="598" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" fill="#52606D">unscale → inspect → clip → step</text>
+  <text x="975" y="627" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#52606D">Clip before unscale makes τ drift with S.</text>
+  <text x="600" y="758" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" fill="#52606D">Textbook state machine — exact framework behavior must be checked against the current AMP and distributed implementation.</text>
+</svg>

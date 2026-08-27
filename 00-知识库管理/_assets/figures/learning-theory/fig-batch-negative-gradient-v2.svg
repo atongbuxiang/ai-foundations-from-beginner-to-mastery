@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">正负样本与 Batch：目标、梯度和碰撞</title>
+<desc id="desc">in-batch contrastive learning中，batch不只是Monte Carlo容器：它定义候选集合、负样本分布、collision概率与梯度权重。temperature、hard mining、memory bank和distributed gather都会改变有效目标。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">一个 Batch 定义一场比赛</text>
+<rect x="55" y="92" width="120" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="115.0" y="127.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">anchor z_i</text>
+<rect x="235" y="92" width="120" height="58" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="295.0" y="127.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">positive z_j</text>
+<line x1="180" y1="121" x2="230" y2="121" stroke="#0F766E" stroke-width="3" marker-end="url(#a3)"/>
+<circle cx="80" cy="245" r="9" fill="#FFFEFB" stroke="#C24135" stroke-width="3"/>
+<circle cx="165" cy="285" r="9" fill="#FFFEFB" stroke="#C24135" stroke-width="3"/>
+<circle cx="250" cy="235" r="9" fill="#FFFEFB" stroke="#C24135" stroke-width="3"/>
+<circle cx="320" cy="320" r="9" fill="#FFFEFB" stroke="#C24135" stroke-width="3"/>
+<text x="45" y="375" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937">all other eligible views enter denominator</text>
+<text x="45" y="420" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">larger B changes K and collision exposure</text>
+<text x="45" y="465" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">group-aware eligibility changes the objective</text>
+<text x="45" y="510" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">batch size is not only estimator variance。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Softmax 权重就是梯度注意力</text>
+<rect x="445" y="92" width="310" height="62" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600.0" y="129.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">p_k = softmax(sim_k / temperature)</text>
+<line x1="600" y1="159" x2="600" y2="192" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="445" y="202" width="310" height="62" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="600.0" y="239.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">grad score_k = p_k - 1{k=positive}</text>
+<line x1="600" y1="269" x2="600" y2="302" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="445" y="312" width="310" height="62" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="600.0" y="349.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">small temperature emphasizes hard items</text>
+<text x="430" y="420" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">hard can mean useful, duplicate, or mislabeled</text>
+<text x="430" y="462" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">sum vs mean and all-gather change scaling</text>
+<text x="430" y="510" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">log the exact denominator and stop-gradient graph。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Negative 不是天然真负例</text>
+<rect x="845" y="92" width="285" height="62" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="987.5" y="129.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">false negative: same semantics</text>
+<rect x="845" y="180" width="285" height="62" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="987.5" y="217.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">dependent: same user / sequence</text>
+<rect x="845" y="268" width="285" height="62" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="987.5" y="305.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">stale: old encoder / queue</text>
+<text x="830" y="382" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">debiasing requires class-prior assumptions</text>
+<text x="830" y="420" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">hard mining can amplify false negatives</text>
+<text x="830" y="458" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">distributed replicas change effective K</text>
+<text x="830" y="495" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">sample users and time before augmenting views</text>
+<text x="830" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">sampler code is part of the statistical method。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">对比学习的batch、sampler和通信图共同定义目标；梯度、false negatives与部署评价必须一并审计。</text>
+</svg>

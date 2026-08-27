@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">从原始字节到向量条目：正向构建、反向追溯</title><desc id="desc">文档解析、span、chunk、embedding 和 index 的可逆数据血缘。</desc>
+<rect width="1200" height="700" fill="#FBF8F1"/>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#667784"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#183044" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<line x1="48" y1="70" x2="1152" y2="70" stroke="#4F7B45" stroke-width="4"/>
+<text x="52" y="49" font-size="24" font-weight="700" fill="#183044">从原始字节到向量条目：正向构建、反向追溯</text>
+<rect x="65" y="115" width="185" height="105" rx="10" fill="#EFF6EA" stroke="#4F7B45" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="80" y="143" font-size="15" font-weight="700" fill="#4F7B45">原始文件</text>
+<text x="80" y="167" font-size="12.5" fill="#667784">doc-id D17</text>
+<text x="80" y="187" font-size="12.5" fill="#667784">hash · license · ACL</text>
+<rect x="285" y="115" width="185" height="105" rx="10" fill="#EEF4FC" stroke="#245AA8" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="300" y="143" font-size="15" font-weight="700" fill="#245AA8">规范文本</text>
+<text x="300" y="167" font-size="12.5" fill="#667784">parser v4</text>
+<text x="300" y="187" font-size="12.5" fill="#667784">UTF-8 · pages · tables</text>
+<rect x="505" y="115" width="185" height="105" rx="10" fill="#FFF5E7" stroke="#C87922" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="520" y="143" font-size="15" font-weight="700" fill="#C87922">可引用 span</text>
+<text x="520" y="167" font-size="12.5" fill="#667784">[a,b) offsets</text>
+<text x="520" y="187" font-size="12.5" fill="#667784">section · page · time</text>
+<rect x="725" y="115" width="185" height="105" rx="10" fill="#F3EFFA" stroke="#7054A3" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="740" y="143" font-size="15" font-weight="700" fill="#7054A3">检索 chunk</text>
+<text x="740" y="167" font-size="12.5" fill="#667784">C17-04</text>
+<text x="740" y="187" font-size="12.5" fill="#667784">parent · overlap · ACL</text>
+<rect x="945" y="115" width="185" height="105" rx="10" fill="#EAF7F4" stroke="#17766E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="960" y="143" font-size="15" font-weight="700" fill="#17766E">向量与索引</text>
+<text x="960" y="167" font-size="12.5" fill="#667784">encoder hash · dim</text>
+<text x="960" y="187" font-size="12.5" fill="#667784">distance · index build</text>
+<line x1="250" y1="167" x2="285" y2="167" stroke="#667784" stroke-width="2.2" marker-end="url(#arrow)"/>
+<line x1="470" y1="167" x2="505" y2="167" stroke="#667784" stroke-width="2.2" marker-end="url(#arrow)"/>
+<line x1="690" y1="167" x2="725" y2="167" stroke="#667784" stroke-width="2.2" marker-end="url(#arrow)"/>
+<line x1="910" y1="167" x2="945" y2="167" stroke="#667784" stroke-width="2.2" marker-end="url(#arrow)"/>
+<text x="65" y="273" text-anchor="start" font-size="15" font-weight="700" fill="#183044">反向追溯：citation → vector-id → chunk-id → span → original bytes</text>
+<line x1="1037" y1="300" x2="817" y2="300" stroke="#B7443E" stroke-width="2.2" marker-end="url(#arrow)" stroke-dasharray="6 4"/>
+<line x1="817" y1="300" x2="597" y2="300" stroke="#B7443E" stroke-width="2.2" marker-end="url(#arrow)" stroke-dasharray="6 4"/>
+<line x1="597" y1="300" x2="377" y2="300" stroke="#B7443E" stroke-width="2.2" marker-end="url(#arrow)" stroke-dasharray="6 4"/>
+<line x1="377" y1="300" x2="157" y2="300" stroke="#B7443E" stroke-width="2.2" marker-end="url(#arrow)" stroke-dasharray="6 4"/>
+<rect x="65" y="350" width="240" height="105" rx="10" fill="#FFFDF8" stroke="#245AA8" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="80" y="378" font-size="15" font-weight="700" fill="#245AA8">边界覆盖</text>
+<text x="80" y="402" font-size="12.5" fill="#667784">gold span 是否被任一 chunk 完整覆盖？</text>
+<rect x="335" y="350" width="240" height="105" rx="10" fill="#FFFDF8" stroke="#7054A3" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="350" y="378" font-size="15" font-weight="700" fill="#7054A3">距离合同</text>
+<text x="350" y="402" font-size="12.5" fill="#667784">normalized? cosine / dot / L2 是否一致？</text>
+<rect x="605" y="350" width="240" height="105" rx="10" fill="#FFFDF8" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="620" y="378" font-size="15" font-weight="700" fill="#B7443E">权限传播</text>
+<text x="620" y="402" font-size="12.5" fill="#667784">pre-filter / post-filter；cache 是否二次验证？</text>
+<rect x="875" y="350" width="240" height="105" rx="10" fill="#FFFDF8" stroke="#4F7B45" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="890" y="378" font-size="15" font-weight="700" fill="#4F7B45">删除传播</text>
+<text x="890" y="402" font-size="12.5" fill="#667784">doc → chunks → vectors → replicas → cache</text>
+<rect x="65" y="500" width="1055" height="108" rx="10" fill="#FFF0ED" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="80" y="528" font-size="15" font-weight="700" fill="#B7443E">版本闭包</text>
+<text x="80" y="552" font-size="12.5" fill="#667784">index-version  ↦  corpus snapshot + parser + chunker + metadata schema + encoder/tokenizer + dtype/quantization + ANN parameters</text>
+<line x1="48" y1="650" x2="1152" y2="650" stroke="#D9D5CB" stroke-width="1"/>
+<text x="52" y="674" font-size="13" fill="#667784">完整 manifest 不保证检索有效；它保证对象可识别、更新可传播、引用可定位、错误可复现。</text>
+</svg>

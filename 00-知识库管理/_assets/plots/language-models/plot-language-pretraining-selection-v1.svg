@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">Selection changes the empirical distribution</title><desc id="desc">Source shares, group-specific retention and selected shares are shown as separate ledgers.</desc>
+<rect width="1200" height="700" fill="#FFFEFB"/>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<text x="55" y="55" font-size="26" font-weight="700" fill="#17324D">Selection is a distributional operator, not neutral cleanup</text>
+<text x="55" y="88" font-size="15" fill="#64748B">P(group) × retention(group) → kept mass → Q(group)</text>
+<text x="90" y="145" font-size="17" font-weight="700" fill="#17324D">SOURCE SHARE</text>
+<text x="90" y="195" font-size="18" font-weight="700" fill="#2563EB">Group A</text>
+<rect x="90" y="213" width="260" height="44" rx="7" fill="#EEF2F7"/>
+<rect x="90" y="213" width="156.00" height="44" rx="7" fill="#2563EB"/>
+<text x="365" y="243" font-size="17" fill="#17324D">60.00%</text>
+<text x="90" y="340" font-size="18" font-weight="700" fill="#D97706">Group B</text>
+<rect x="90" y="358" width="260" height="44" rx="7" fill="#EEF2F7"/>
+<rect x="90" y="358" width="104.00" height="44" rx="7" fill="#D97706"/>
+<text x="365" y="388" font-size="17" fill="#17324D">40.00%</text>
+<text x="440" y="145" font-size="17" font-weight="700" fill="#17324D">RETENTION</text>
+<text x="440" y="195" font-size="18" font-weight="700" fill="#2563EB">Group A</text>
+<rect x="440" y="213" width="260" height="44" rx="7" fill="#EEF2F7"/>
+<rect x="440" y="213" width="195.00" height="44" rx="7" fill="#2563EB"/>
+<text x="715" y="243" font-size="17" fill="#17324D">75.00%</text>
+<text x="440" y="340" font-size="18" font-weight="700" fill="#D97706">Group B</text>
+<rect x="440" y="358" width="260" height="44" rx="7" fill="#EEF2F7"/>
+<rect x="440" y="358" width="78.00" height="44" rx="7" fill="#D97706"/>
+<text x="715" y="388" font-size="17" fill="#17324D">30.00%</text>
+<text x="790" y="145" font-size="17" font-weight="700" fill="#17324D">SELECTED SHARE</text>
+<text x="790" y="195" font-size="18" font-weight="700" fill="#2563EB">Group A</text>
+<rect x="790" y="213" width="260" height="44" rx="7" fill="#EEF2F7"/>
+<rect x="790" y="213" width="205.26" height="44" rx="7" fill="#2563EB"/>
+<text x="1065" y="243" font-size="17" fill="#17324D">78.95%</text>
+<text x="790" y="340" font-size="18" font-weight="700" fill="#D97706">Group B</text>
+<rect x="790" y="358" width="260" height="44" rx="7" fill="#EEF2F7"/>
+<rect x="790" y="358" width="54.74" height="44" rx="7" fill="#D97706"/>
+<text x="1065" y="388" font-size="17" fill="#17324D">21.05%</text>
+<path d="M365 300 L415 300" stroke="#94A3B8" stroke-width="3" marker-end="url(#arrow)"/>
+<path d="M715 300 L765 300" stroke="#94A3B8" stroke-width="3" marker-end="url(#arrow)"/>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#94A3B8"/></marker></defs>
+<rect x="70" y="525" width="1060" height="105" rx="13" fill="#F8FAFC" stroke="#CBD5E1"/>
+<text x="95" y="565" font-size="18" fill="#17324D">Overall retention = 57%</text>
+<text x="95" y="600" font-size="18" fill="#C24135">A moves 60% → 78.95%; B moves 40% → 21.05%.</text>
+<text x="605" y="565" font-size="15" fill="#64748B">The rejected set contains both noise and selection errors.</text>
+<text x="605" y="600" font-size="15" fill="#64748B">Audit rates by language, domain, length and rights status.</text>
+</svg>

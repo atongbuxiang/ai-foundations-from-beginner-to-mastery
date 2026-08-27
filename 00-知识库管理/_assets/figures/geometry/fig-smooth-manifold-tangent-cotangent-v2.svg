@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Charts、切余切空间与 decoder Jacobian 边界</title>
+<desc id="desc">smooth manifold 由局部 Euclidean charts 和光滑 transition maps 胶合；tangent vectors 描述一阶运动，cotangent vectors 描述线性测量；pushforward 与 pullback 方向相反，decoder Jacobian 只有在 rank 和局部嵌入条件下才给候选 tangent space。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">流形由相容局部坐标胶合</text>
+<path d="M55 285 C90 135 245 110 355 250 C285 400 125 390 55 285" fill="none" stroke="#D7DEE8" stroke-width="3"/>
+<circle cx="195" cy="250" r="6" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<rect x="65" y="105" width="120" height="90" rx="6" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<rect x="225" y="115" width="120" height="90" rx="6" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<line x1="185" y1="150" x2="225" y2="150" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<text x="100" y="155" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">chart phi</text>
+<text x="258" y="165" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">chart psi</text>
+<text x="45" y="425" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">psi o phi^{-1}: overlap -&gt; overlap</text>
+<text x="45" y="456" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">transition maps must be smooth</text>
+<text x="45" y="486" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">one global chart may be impossible</text>
+<text x="45" y="514" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">point cloud patches are not an atlas proof。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">tangent 运动，cotangent 测量</text>
+<circle cx="550" cy="245" r="8" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<line x1="550" y1="245" x2="710" y2="165" stroke="#2563EB" stroke-width="3" marker-end="url(#a1)"/>
+<line x1="550" y1="245" x2="690" y2="315" stroke="#0F766E" stroke-width="3" marker-end="url(#a1)"/>
+<text x="710" y="155" font-size="15" font-weight="700" text-anchor="end" fill="#2563EB">v in T_pM</text>
+<text x="705" y="340" font-size="15" font-weight="700" text-anchor="end" fill="#0F766E">w in T_pM</text>
+<text x="430" y="100" font-size="16" font-weight="700" text-anchor="start" fill="#C24135">df_p in T_p^*M</text>
+<text x="430" y="380" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">df_p(v): directional measurement</text>
+<text x="430" y="414" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">dF_p: T_pM -&gt; T_F(p)N</text>
+<text x="430" y="446" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">F^*: T^*N -&gt; T^*M</text>
+<text x="430" y="478" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">gradient needs an added metric</text>
+<text x="430" y="508" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">covectors do not canonically equal vectors。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">decoder Jacobian：候选切空间</text>
+<rect x="840" y="88" width="300" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="990.0" y="123.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">latent z -&gt; decoder D(z)</text>
+<line x1="990" y1="149" x2="990" y2="186" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="840" y="198" width="300" height="70" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="990.0" y="239.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">columns of J_D(z)</text>
+<line x1="990" y1="271" x2="990" y2="308" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="840" y="320" width="300" height="70" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="990.0" y="361.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">candidate image tangent</text>
+<text x="830" y="430" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">check rank + local injectivity</text>
+<text x="830" y="460" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">chart overlap + reconstruction identity</text>
+<text x="830" y="489" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">radius / curvature / noise / boundary</text>
+<text x="830" y="516" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">low loss is not a manifold certificate。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">光滑流形的局部线性化来自相容 charts；切向量、余切测量和学习到的 Jacobian 必须按类型与条件分开。</text>
+</svg>

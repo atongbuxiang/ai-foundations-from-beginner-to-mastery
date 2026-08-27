@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+<title id="title">Coordinate slopes and feature-learning regimes</title>
+<desc id="desc">Two textbook panels compare stable versus faulty coordinate slopes and NTK versus mean-field relative feature updates.</desc>
+<rect width="1200" height="800" fill="#FFFEFB"/>
+<text x="60.0" y="58.0" font-family="Inter, Arial, sans-serif" font-size="28" fill="#172033" text-anchor="start" font-weight="700">Coordinate audit: horizontal is a claim, not a decoration</text>
+<text x="60.0" y="91.0" font-family="Inter, Arial, sans-serif" font-size="17" fill="#52606D" text-anchor="start" font-weight="400">Log-width slopes isolate implementation drift; regime comparison asks whether features actually move.</text>
+<rect x="55" y="125" width="530" height="590" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+<text x="79.0" y="163.0" font-family="Inter, Arial, sans-serif" font-size="20" fill="#172033" text-anchor="start" font-weight="700">A  Multi-width coordinate check</text>
+<rect x="615" y="125" width="530" height="590" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+<text x="639.0" y="163.0" font-family="Inter, Arial, sans-serif" font-size="20" fill="#172033" text-anchor="start" font-weight="700">B  Lazy versus feature-learning update</text>
+<line x1="105" y1="185" x2="105" y2="620" stroke="#D9E0E7" stroke-width="1"/>
+<text x="105.0" y="650.0" font-family="Inter, Arial, sans-serif" font-size="16" fill="#52606D" text-anchor="middle" font-weight="400">16</text>
+<line x1="240" y1="185" x2="240" y2="620" stroke="#D9E0E7" stroke-width="1"/>
+<text x="240.0" y="650.0" font-family="Inter, Arial, sans-serif" font-size="16" fill="#52606D" text-anchor="middle" font-weight="400">64</text>
+<line x1="375" y1="185" x2="375" y2="620" stroke="#D9E0E7" stroke-width="1"/>
+<text x="375.0" y="650.0" font-family="Inter, Arial, sans-serif" font-size="16" fill="#52606D" text-anchor="middle" font-weight="400">256</text>
+<line x1="510" y1="185" x2="510" y2="620" stroke="#D9E0E7" stroke-width="1"/>
+<text x="510.0" y="650.0" font-family="Inter, Arial, sans-serif" font-size="16" fill="#52606D" text-anchor="middle" font-weight="400">1024</text>
+<text x="350.0" y="684.0" font-family="Inter, Arial, sans-serif" font-size="17" fill="#52606D" text-anchor="middle" font-weight="400">width n</text>
+<line x1="105" y1="620.0" x2="510" y2="620.0" stroke="#D9E0E7" stroke-width="1"/>
+<text x="92.0" y="625.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">0.125</text>
+<line x1="105" y1="515.0" x2="510" y2="515.0" stroke="#D9E0E7" stroke-width="1"/>
+<text x="92.0" y="520.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">0.25</text>
+<line x1="105" y1="410.0" x2="510" y2="410.0" stroke="#D9E0E7" stroke-width="1"/>
+<text x="92.0" y="415.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">0.5</text>
+<line x1="105" y1="305.0" x2="510" y2="305.0" stroke="#D9E0E7" stroke-width="1"/>
+<text x="92.0" y="310.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">1.0</text>
+<polyline points="105.0,515.0 240.0,515.0 375.0,515.0 510.0,515.0" fill="none" stroke="#0F766E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="105.0,515.0 240.0,410.0 375.0,305.0 510.0,200.0" fill="none" stroke="#C0392B" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="125.0" y="210.0" font-family="Inter, Arial, sans-serif" font-size="16" fill="#0F766E" text-anchor="start" font-weight="700">stable slope = 0</text>
+<text x="330.0" y="260.0" font-family="Inter, Arial, sans-serif" font-size="16" fill="#C0392B" text-anchor="start" font-weight="700">faulty slope = +0.5</text>
+<line x1="675" y1="185" x2="675" y2="620" stroke="#D9E0E7" stroke-width="1"/>
+<text x="675.0" y="650.0" font-family="Inter, Arial, sans-serif" font-size="16" fill="#52606D" text-anchor="middle" font-weight="400">16</text>
+<line x1="810" y1="185" x2="810" y2="620" stroke="#D9E0E7" stroke-width="1"/>
+<text x="810.0" y="650.0" font-family="Inter, Arial, sans-serif" font-size="16" fill="#52606D" text-anchor="middle" font-weight="400">64</text>
+<line x1="945" y1="185" x2="945" y2="620" stroke="#D9E0E7" stroke-width="1"/>
+<text x="945.0" y="650.0" font-family="Inter, Arial, sans-serif" font-size="16" fill="#52606D" text-anchor="middle" font-weight="400">256</text>
+<line x1="1080" y1="185" x2="1080" y2="620" stroke="#D9E0E7" stroke-width="1"/>
+<text x="1080.0" y="650.0" font-family="Inter, Arial, sans-serif" font-size="16" fill="#52606D" text-anchor="middle" font-weight="400">1024</text>
+<text x="920.0" y="684.0" font-family="Inter, Arial, sans-serif" font-size="17" fill="#52606D" text-anchor="middle" font-weight="400">width n</text>
+<line x1="675" y1="580.0" x2="1080" y2="580.0" stroke="#D9E0E7" stroke-width="1"/>
+<text x="662.0" y="585.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">1/32</text>
+<line x1="675" y1="436.0" x2="1080" y2="436.0" stroke="#D9E0E7" stroke-width="1"/>
+<text x="662.0" y="441.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">1/8</text>
+<line x1="675" y1="292.0" x2="1080" y2="292.0" stroke="#D9E0E7" stroke-width="1"/>
+<text x="662.0" y="297.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">1/2</text>
+<line x1="675" y1="220.0" x2="1080" y2="220.0" stroke="#D9E0E7" stroke-width="1"/>
+<text x="662.0" y="225.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">1</text>
+<polyline points="675.0,364.0 810.0,436.0 945.0,508.0 1080.0,580.0" fill="none" stroke="#2563EB" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="675.0,220.0 810.0,220.0 945.0,220.0 1080.0,220.0" fill="none" stroke="#B76E00" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="700.0" y="210.0" font-family="Inter, Arial, sans-serif" font-size="16" fill="#B76E00" text-anchor="start" font-weight="700">mean-field: O(1)</text>
+<text x="850.0" y="480.0" font-family="Inter, Arial, sans-serif" font-size="16" fill="#2563EB" text-anchor="start" font-weight="700">NTK: n^-1/2</text>
+<text x="600.0" y="756.0" font-family="Inter, Arial, sans-serif" font-size="16" fill="#52606D" text-anchor="middle" font-weight="400">Evidence boundary: analytic scaling identities; not a trained-network benchmark.</text>
+</svg>

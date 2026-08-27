@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">QLoRA 显存总账：4-bit 是基座存储格式，不是全部训练状态</title><desc id="desc">权重从量化存储经反量化参与计算，梯度流向 LoRA；下方用堆叠账本区分持久与峰值内存。</desc>
+<rect width="1200" height="700" fill="#FFFEFB"/>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#64748B"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#17324D" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<text x="55" y="55" font-size="25" font-weight="700" fill="#2563EB">QLoRA 显存总账：4-bit 是基座存储格式，不是全部训练状态</text>
+<rect x="55" y="115" width="245" height="125" rx="12" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2" filter="url(#shadow)"/>
+<text x="71" y="144" font-size="16" font-weight="700" fill="#7C3AED">4-bit base storage</text>
+<text x="71" y="171" font-size="13" fill="#64748B">quantized blocks q</text>
+<text x="71" y="193" font-size="13" fill="#64748B">scale / zero / metadata</text>
+<text x="71" y="215" font-size="13" fill="#64748B">frozen parameters</text>
+<line x1="315" y1="178" x2="375" y2="178" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="390" y="115" width="245" height="125" rx="12" fill="#FFF7E8" stroke="#D97706" stroke-width="2" filter="url(#shadow)"/>
+<text x="406" y="144" font-size="16" font-weight="700" fill="#D97706">Dequantize for compute</text>
+<text x="406" y="171" font-size="13" fill="#64748B">W̃ = dequant(q, scale)</text>
+<text x="406" y="193" font-size="13" fill="#64748B">bf16/fp16 compute tiles</text>
+<text x="406" y="215" font-size="13" fill="#64748B">temporary buffers</text>
+<line x1="650" y1="178" x2="710" y2="178" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="725" y="115" width="200" height="125" rx="12" fill="#EFF6FF" stroke="#2563EB" stroke-width="2" filter="url(#shadow)"/>
+<text x="741" y="144" font-size="16" font-weight="700" fill="#2563EB">Forward / backward</text>
+<text x="741" y="171" font-size="13" fill="#64748B">activations</text>
+<text x="741" y="193" font-size="13" fill="#64748B">checkpointing</text>
+<text x="741" y="215" font-size="13" fill="#64748B">kernel workspace</text>
+<line x1="940" y1="178" x2="995" y2="178" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="1010" y="115" width="135" height="125" rx="12" fill="#ECFDF5" stroke="#0F766E" stroke-width="2" filter="url(#shadow)"/>
+<text x="1026" y="144" font-size="16" font-weight="700" fill="#0F766E">LoRA</text>
+<text x="1026" y="171" font-size="13" fill="#64748B">A,B grads</text>
+<text x="1026" y="193" font-size="13" fill="#64748B">optimizer</text>
+<text x="1026" y="215" font-size="13" fill="#64748B">master state</text>
+<path d="M1075 255 C1075 295,520 300,520 255" fill="none" stroke="#0F766E" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="780" y="285" text-anchor="middle" font-size="13" fill="#0F766E">gradient passes through dequantized base; base q is not updated</text>
+<text x="55" y="345" font-size="18" font-weight="700" fill="#17324D">memory ledger（illustrative, not to scale）</text>
+<text x="55" y="418" font-size="14" fill="#17324D">quantized base + metadata</text>
+<rect x="335" y="390" width="330" height="38" rx="6" fill="#7C3AED"/>
+<text x="680" y="416" font-size="13" fill="#7C3AED">330 relative units</text>
+<text x="55" y="474" font-size="14" fill="#17324D">LoRA weights + grads + optimizer</text>
+<rect x="335" y="446" width="170" height="38" rx="6" fill="#0F766E"/>
+<text x="520" y="472" font-size="13" fill="#0F766E">170 relative units</text>
+<text x="55" y="530" font-size="14" fill="#17324D">activations / saved tensors</text>
+<rect x="335" y="502" width="300" height="38" rx="6" fill="#2563EB"/>
+<text x="650" y="528" font-size="13" fill="#2563EB">300 relative units</text>
+<text x="55" y="586" font-size="14" fill="#17324D">dequant / kernel / allocator peak</text>
+<rect x="335" y="558" width="180" height="38" rx="6" fill="#D97706"/>
+<text x="530" y="584" font-size="13" fill="#D97706">180 relative units</text>
+<rect x="805" y="365" width="340" height="235" rx="12" fill="#FEE2E2" stroke="#C24135" stroke-width="2" filter="url(#shadow)"/>
+<text x="821" y="394" font-size="16" font-weight="700" fill="#C24135">必须记录</text>
+<text x="821" y="421" font-size="13" fill="#64748B">quant format + group size</text>
+<text x="821" y="443" font-size="13" fill="#64748B">quant metadata / double quant</text>
+<text x="821" y="465" font-size="13" fill="#64748B">compute dtype + accumulation</text>
+<text x="821" y="487" font-size="13" fill="#64748B">LoRA rank / target modules</text>
+<text x="821" y="509" font-size="13" fill="#64748B">sequence / batch / checkpointing</text>
+<text x="821" y="531" font-size="13" fill="#64748B">optimizer + page / offload</text>
+<text x="821" y="553" font-size="13" fill="#64748B">allocated vs reserved vs peak</text>
+<text x="55" y="670" font-size="14" fill="#64748B">显存比较必须在同 sequence、batch、checkpointing、kernel 与硬件上测峰值；4-bit 不是自动的 4× 端到端节省。</text>
+</svg>

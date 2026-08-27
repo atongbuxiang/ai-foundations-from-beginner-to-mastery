@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="720" viewBox="0 0 1400 720">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f8faff"/><stop offset="1" stop-color="#eef7f4"/></linearGradient><filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#26324d" flood-opacity="0.10"/></filter><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6366f1"/></marker></defs>
+<rect width="1400" height="720" fill="url(#bg)"/>
+<text x="70" y="70" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="34" fill="#172554" font-weight="750" text-anchor="start">从一次浓缩到有限类 PAC 保证</text>
+<text x="70" y="108" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="20" fill="#53627a" font-weight="450" text-anchor="start">固定一个函数 → 写全量词 → 同时控制整个类 → 利用可实现结构提速。</text>
+<g filter="url(#shadow)"><rect x="70" y="155" width="300" height="455" rx="18" fill="#fff" stroke="#dbe4f0" stroke-width="2"/></g>
+<rect x="92" y="180" width="58" height="42" rx="12" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+<text x="121" y="209" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="19" fill="#4f46e5" font-weight="750" text-anchor="middle">09</text>
+<text x="166" y="211" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="23" fill="#172554" font-weight="700" text-anchor="start">固定 h 的浓缩</text>
+<text x="94" y="252" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="15" fill="#64748b" font-weight="450" text-anchor="start">先固定预测器，再抽独立样本</text>
+<g filter="url(#shadow)"><rect x="400" y="155" width="300" height="455" rx="18" fill="#fff" stroke="#dbe4f0" stroke-width="2"/></g>
+<rect x="422" y="180" width="58" height="42" rx="12" fill="#ecfeff" stroke="#0891b2" stroke-width="2"/>
+<text x="451" y="209" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="19" fill="#0891b2" font-weight="750" text-anchor="middle">10</text>
+<text x="496" y="211" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="23" fill="#172554" font-weight="700" text-anchor="start">PAC 量词合同</text>
+<text x="424" y="252" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="15" fill="#64748b" font-weight="450" text-anchor="start">ε 是精度，δ 是失败概率，m 是资源</text>
+<g filter="url(#shadow)"><rect x="730" y="155" width="300" height="455" rx="18" fill="#fff" stroke="#dbe4f0" stroke-width="2"/></g>
+<rect x="752" y="180" width="58" height="42" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+<text x="781" y="209" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="19" fill="#16a34a" font-weight="750" text-anchor="middle">11</text>
+<text x="826" y="211" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="23" fill="#172554" font-weight="700" text-anchor="start">有限类一致控制</text>
+<text x="754" y="252" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="15" fill="#64748b" font-weight="450" text-anchor="start">Union Bound 把 M 个坏事件相加</text>
+<g filter="url(#shadow)"><rect x="1060" y="155" width="300" height="455" rx="18" fill="#fff" stroke="#dbe4f0" stroke-width="2"/></g>
+<rect x="1082" y="180" width="58" height="42" rx="12" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+<text x="1111" y="209" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="19" fill="#ea580c" font-weight="750" text-anchor="middle">12</text>
+<text x="1156" y="211" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="23" fill="#172554" font-weight="700" text-anchor="start">可实现一致 ERM</text>
+<text x="1084" y="252" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="15" fill="#64748b" font-weight="450" text-anchor="start">坏函数要在 m 次抽样中零失误</text>
+<text x="94" y="304" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="17" fill="#4338ca" font-weight="700" text-anchor="start">R_S(h)</text>
+<line x1="100" y1="377" x2="342" y2="377" stroke="#cbd5e1" stroke-width="3"/>
+<rect x="170" y="347" width="104" height="60" rx="14" fill="#eef2ff" stroke="#a5b4fc" stroke-width="2"/>
+<text x="222" y="372" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="16" fill="#4338ca" font-weight="700" text-anchor="middle">R_P(h) ± ε</text>
+<text x="222" y="395" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="12" fill="#64748b" font-weight="500" text-anchor="middle">置信带</text>
+<circle cx="122" cy="377" r="7" fill="#ef4444"/><circle cx="320" cy="377" r="7" fill="#ef4444"/>
+<text x="92" y="455" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="15" fill="#475569" font-weight="600" text-anchor="start">P(|R_S−R_P|&gt;ε)</text>
+<text x="92" y="487" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="18" fill="#4338ca" font-weight="700" text-anchor="start">≤ 2 exp(−2mε²)</text>
+<text x="92" y="544" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="14" fill="#b45309" font-weight="650" text-anchor="start">h 若由同一 S 选出：不能直接代入</text>
+<rect x="430" y="300" width="104" height="54" rx="13" fill="#ecfeff" stroke="#67e8f9" stroke-width="2"/>
+<text x="482" y="333" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="15" fill="#0e7490" font-weight="650" text-anchor="middle">精度</text>
+<path d="M536 327 L573 327" stroke="#6366f1" stroke-width="3" fill="none" marker-end="url(#arr)"/>
+<rect x="576" y="300" width="92" height="54" rx="13" fill="#fff" stroke="#a5f3fc" stroke-width="2"/>
+<text x="622" y="333" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="18" fill="#0e7490" font-weight="700" text-anchor="middle">ε ↓</text>
+<rect x="430" y="375" width="104" height="54" rx="13" fill="#ecfeff" stroke="#67e8f9" stroke-width="2"/>
+<text x="482" y="408" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="15" fill="#0e7490" font-weight="650" text-anchor="middle">置信</text>
+<path d="M536 402 L573 402" stroke="#6366f1" stroke-width="3" fill="none" marker-end="url(#arr)"/>
+<rect x="576" y="375" width="92" height="54" rx="13" fill="#fff" stroke="#a5f3fc" stroke-width="2"/>
+<text x="622" y="408" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="18" fill="#0e7490" font-weight="700" text-anchor="middle">δ ↓</text>
+<rect x="430" y="450" width="104" height="54" rx="13" fill="#ecfeff" stroke="#67e8f9" stroke-width="2"/>
+<text x="482" y="483" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="15" fill="#0e7490" font-weight="650" text-anchor="middle">样本</text>
+<path d="M536 477 L573 477" stroke="#6366f1" stroke-width="3" fill="none" marker-end="url(#arr)"/>
+<rect x="576" y="450" width="92" height="54" rx="13" fill="#fff" stroke="#a5f3fc" stroke-width="2"/>
+<text x="622" y="483" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="18" fill="#0e7490" font-weight="700" text-anchor="middle">m ↑</text>
+<text x="425" y="535" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="14" fill="#475569" font-weight="650" text-anchor="start">∀P，P_S(excess ≤ ε) ≥ 1−δ</text>
+<rect x="755" y="320" width="52" height="42" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="2"/>
+<text x="781" y="347" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="12" fill="#166534" font-weight="650" text-anchor="middle">h1</text>
+<rect x="811" y="320" width="52" height="42" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="2"/>
+<text x="837" y="347" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="12" fill="#166534" font-weight="650" text-anchor="middle">h2</text>
+<rect x="867" y="320" width="52" height="42" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="2"/>
+<text x="893" y="347" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="12" fill="#166534" font-weight="650" text-anchor="middle">h3</text>
+<rect x="755" y="384" width="52" height="42" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="2"/>
+<text x="781" y="411" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="12" fill="#166534" font-weight="650" text-anchor="middle">h4</text>
+<rect x="811" y="384" width="52" height="42" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="2"/>
+<text x="837" y="411" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="12" fill="#166534" font-weight="650" text-anchor="middle">h5</text>
+<rect x="867" y="384" width="52" height="42" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="2"/>
+<text x="893" y="411" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="12" fill="#166534" font-weight="650" text-anchor="middle">h6</text>
+<rect x="755" y="448" width="52" height="42" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="2"/>
+<text x="781" y="475" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="12" fill="#166534" font-weight="650" text-anchor="middle">h7</text>
+<rect x="811" y="448" width="52" height="42" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="2"/>
+<text x="837" y="475" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="12" fill="#166534" font-weight="650" text-anchor="middle">h8</text>
+<rect x="867" y="448" width="52" height="42" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="2"/>
+<text x="893" y="475" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="12" fill="#166534" font-weight="650" text-anchor="middle">h9</text>
+<path d="M922 386 L946 386" stroke="#6366f1" stroke-width="3" fill="none" marker-end="url(#arr)"/>
+<rect x="950" y="350" width="58" height="72" rx="12" fill="#fff" stroke="#86efac" stroke-width="2"/>
+<text x="979" y="380" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="23" fill="#15803d" font-weight="750" text-anchor="middle">Σ</text>
+<text x="979" y="405" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="11" fill="#64748b" font-weight="500" text-anchor="middle">坏事件</text>
+<text x="760" y="516" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="14" fill="#166534" font-weight="650" text-anchor="start">P(∃h bad) ≤ 2M e^(−2mε²)</text>
+<text x="760" y="548" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="15" fill="#475569" font-weight="600" text-anchor="start">complexity = log M</text>
+<rect x="1090" y="292" width="114" height="58" rx="14" fill="#fff7ed" stroke="#fdba74" stroke-width="2"/>
+<text x="1147" y="320" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="16" fill="#c2410c" font-weight="700" text-anchor="middle">坏 h</text>
+<text x="1147" y="342" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="12" fill="#64748b" font-weight="500" text-anchor="middle">R_P(h)&gt;ε</text>
+<path d="M1206 321 L1240 321" stroke="#6366f1" stroke-width="3" fill="none" marker-end="url(#arr)"/>
+<rect x="1244" y="292" width="92" height="58" rx="14" fill="#fff" stroke="#fdba74" stroke-width="2"/>
+<text x="1290" y="320" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="13" fill="#c2410c" font-weight="650" text-anchor="middle">零训练错</text>
+<text x="1290" y="341" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="12" fill="#64748b" font-weight="500" text-anchor="middle">生存</text>
+<text x="1092" y="402" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="15" fill="#7c2d12" font-weight="600" text-anchor="start">P(R_S(h)=0)</text>
+<text x="1092" y="434" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="16" fill="#9a3412" font-weight="700" text-anchor="start">= (1−R_P(h))^m</text>
+<text x="1092" y="466" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="18" fill="#c2410c" font-weight="750" text-anchor="start">≤ exp(−mε)</text>
+<text x="1092" y="520" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="17" fill="#475569" font-weight="650" text-anchor="start">× |H| ≤ δ</text>
+<text x="1092" y="552" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="15" fill="#b45309" font-weight="700" text-anchor="start">m ≥ log(|H|/δ) / ε</text>
+<line x1="70" y1="650" x2="1330" y2="650" stroke="#dbe4f0" stroke-width="2"/>
+<text x="70" y="687" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="18" fill="#334155" font-weight="650" text-anchor="start">固定 h 的 concentration 不是终点；学习保证必须覆盖数据选出的输出。</text>
+<text x="1330" y="687" font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif" font-size="15" fill="#64748b" font-weight="500" text-anchor="end">LT-09—12 · v1</text>
+</svg>

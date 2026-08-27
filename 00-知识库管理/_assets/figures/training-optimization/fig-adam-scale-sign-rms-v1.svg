@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Adam 的尺度消去、Sign 近似与 Update RMS 证据层级</title>
+  <desc id="desc">区分梯度缩放的精确恒等式、Sign 近似条件和低信噪比平均场下的 Update RMS 估计，并标出 epsilon 与实际参数位移。</desc>
+  <rect width="1200" height="720" fill="#FFFEFB"/>
+  <style>
+    text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}
+    .h{font-size:27px;font-weight:700}.sh{font-size:19px;font-weight:700}.b{font-size:16px}.s{font-size:15px;fill:#64748B}
+    .boxb{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.boxg{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.boxa{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.boxr{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}.line{stroke:#CBD5E1;stroke-width:2}.arr{stroke:#2563EB;stroke-width:3;fill:none}
+  </style>
+  <defs><marker id="ab" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#2563EB"/></marker></defs>
+  <text x="48" y="50" class="h" fill="#2563EB">A｜Exact identity：完整历史同步乘 c</text>
+  <rect x="48" y="82" width="174" height="74" rx="12" class="boxb"/><text x="92" y="115" class="sh">g' = c g</text><text x="73" y="142" class="s">positive coordinate scale</text>
+  <line x1="222" y1="119" x2="278" y2="119" class="arr" marker-end="url(#ab)"/>
+  <rect x="288" y="70" width="188" height="82" rx="12" class="boxb"/><text x="328" y="105" class="sh">m' = c m</text><text x="316" y="135" class="s">same beta1 history</text>
+  <rect x="288" y="174" width="188" height="82" rx="12" class="boxg"/><text x="321" y="209" class="sh">v' = c^2 v</text><text x="316" y="239" class="s">same beta2 history</text>
+  <path d="M222 119 C258 119 254 215 278 215" class="arr" marker-end="url(#ab)"/>
+  <path d="M476 111 C536 111 534 163 580 163" class="arr" marker-end="url(#ab)"/>
+  <path d="M476 215 C536 215 534 176 580 176" class="arr" marker-end="url(#ab)"/>
+  <rect x="590" y="112" width="244" height="112" rx="12" class="boxg"/>
+  <text x="627" y="149" class="sh">m' / sqrt(v')</text><text x="633" y="181" class="b" fill="#0F766E">= m / sqrt(v)</text><text x="619" y="209" class="s">eps = 0; state translated</text>
+  <rect x="874" y="82" width="278" height="174" rx="14" class="boxr"/>
+  <text x="902" y="118" class="sh" fill="#C0392B">断点</text>
+  <text x="902" y="153" class="b">epsilon / c changes</text>
+  <text x="902" y="184" class="b">mid-run state not translated</text>
+  <text x="902" y="215" class="b">coupled L2 / clipping / quantization</text>
+  <text x="902" y="242" class="s">更不推出任意 reparameterization invariance</text>
+
+  <line x1="48" y1="292" x2="1152" y2="292" class="line"/>
+  <text x="48" y="334" class="h" fill="#0F766E">B｜Claim ladder：从恒等式到平均场估计</text>
+  <rect x="48" y="366" width="322" height="136" rx="14" class="boxg"/>
+  <text x="76" y="402" class="sh">1. identity</text><text x="76" y="437" class="b">m → c m, v → c^2 v</text><text x="76" y="468" class="s">可逐步代数证明</text>
+  <rect x="404" y="366" width="322" height="136" rx="14" class="boxa"/>
+  <text x="432" y="402" class="sh" fill="#B76E00">2. regime approximation</text><text x="432" y="437" class="b">m ≈ g, v ≈ g^2 ⇒ sign</text><text x="432" y="468" class="s">依赖时标、SNR 与 eps</text>
+  <rect x="760" y="366" width="392" height="136" rx="14" class="boxb"/>
+  <text x="788" y="402" class="sh">3. statistical estimate</text><text x="788" y="437" class="b">low SNR: RMS(u) ≈ sqrt((1-beta1)/(1+beta1))</text><text x="788" y="468" class="s">stationary + ratio-of-expectations + high-d average</text>
+  <line x1="370" y1="434" x2="404" y2="434" stroke="#B76E00" stroke-width="3"/><line x1="726" y1="434" x2="760" y2="434" stroke="#B76E00" stroke-width="3"/>
+
+  <text x="48" y="558" class="h" fill="#2563EB">C｜日志里的 “update” 必须带单位</text>
+  <rect x="48" y="590" width="322" height="86" rx="12" class="boxb"/>
+  <text x="76" y="623" class="sh">direction RMS</text><text x="76" y="653" class="s">RMS(u_t), no LR, no decay</text>
+  <rect x="404" y="590" width="322" height="86" rx="12" class="boxg"/>
+  <text x="432" y="623" class="sh">parameter delta RMS</text><text x="432" y="653" class="s">eta_t × RMS(u_t)</text>
+  <rect x="760" y="590" width="392" height="86" rx="12" class="boxa"/>
+  <text x="788" y="623" class="sh">full AdamW delta</text><text x="788" y="653" class="s">-eta_t (u_t + lambda_t theta_t), group-specific</text>
+  <line x1="48" y1="704" x2="1152" y2="704" stroke="#0F766E" stroke-width="3"/>
+</svg>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">Kronecker 积、向量化与矩阵方程</title>
+  <desc id="desc">三面板展示块 Kronecker 矩阵、列向量化恒等式和 Sylvester/K-FAC 结构。</desc>
+  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#334155"/></marker><style>.p{fill:#f8fafc;stroke:#cbd5e1;stroke-width:2}.h{font:700 19px system-ui,sans-serif;fill:#0f172a}.t{font:15px system-ui,sans-serif;fill:#334155}.s{font:13px system-ui,sans-serif;fill:#475569}.m{font:italic 15px Georgia,serif;fill:#0f172a}.b{fill:#dbeafe;stroke:#2563eb;stroke-width:2}.g{fill:#dcfce7;stroke:#059669;stroke-width:2}.r{fill:#fee2e2;stroke:#dc2626;stroke-width:2}.ln{stroke:#334155;stroke-width:2;fill:none}</style></defs>
+  <rect width="1200" height="430" fill="white"/><rect class="p" x="18" y="18" width="372" height="394" rx="14"/><rect class="p" x="414" y="18" width="372" height="394" rx="14"/><rect class="p" x="810" y="18" width="372" height="394" rx="14"/>
+  <text class="h" x="38" y="52">A. Kronecker：标量变成块</text>
+  <text class="m" x="54" y="91">A = [aᵢⱼ]</text><text class="m" x="247" y="91">B ∈ ℝᵖˣᑫ</text>
+  <rect class="b" x="52" y="119" width="62" height="55"/><rect class="b" x="119" y="119" width="62" height="55"/><rect class="b" x="52" y="179" width="62" height="55"/><rect class="b" x="119" y="179" width="62" height="55"/>
+  <text class="t" x="70" y="152">a₁₁</text><text class="t" x="137" y="152">a₁₂</text><text class="t" x="70" y="212">a₂₁</text><text class="t" x="137" y="212">a₂₂</text>
+  <path class="ln" d="M190 176H230" marker-end="url(#a)"/>
+  <rect class="g" x="245" y="111" width="54" height="48"/><rect class="g" x="304" y="111" width="54" height="48"/><rect class="g" x="245" y="164" width="54" height="48"/><rect class="g" x="304" y="164" width="54" height="48"/>
+  <text class="s" x="257" y="140">a₁₁B</text><text class="s" x="316" y="140">a₁₂B</text><text class="s" x="257" y="193">a₂₁B</text><text class="s" x="316" y="193">a₂₂B</text>
+  <text class="m" x="55" y="286">(m×n) ⊗ (p×q) → (mp)×(nq)</text><text class="s" x="55" y="326">两个映射分别作用于两个因子空间</text><text class="s" x="55" y="353">不是 Hadamard，也不是普通矩阵乘法</text>
+  <text class="h" x="434" y="52">B. vec：矩阵映射变线性系统</text>
+  <rect class="b" x="451" y="102" width="93" height="130"/><line x1="482" y1="102" x2="482" y2="232" stroke="#2563eb"/><line x1="513" y1="102" x2="513" y2="232" stroke="#2563eb"/>
+  <text class="s" x="462" y="252">X 按列堆叠</text><path class="ln" d="M550 167H591" marker-end="url(#a)"/>
+  <rect class="g" x="607" y="86" width="48" height="185"/><line x1="607" y1="148" x2="655" y2="148" stroke="#059669"/><line x1="607" y1="210" x2="655" y2="210" stroke="#059669"/>
+  <text class="s" x="616" y="112">x₁</text><text class="s" x="616" y="174">x₂</text><text class="s" x="616" y="236">x₃</text><text class="s" x="596" y="291">vec(X)</text>
+  <text class="m" x="447" y="336">vec(AXB) = (Bᵀ ⊗ A) vec(X)</text><text class="s" x="447" y="367">右乘因子转置，并出现在 Kronecker 左侧</text><text class="s" x="447" y="394">列优先约定必须与软件 flatten 顺序一致</text>
+  <text class="h" x="830" y="52">C. 结构：方程与 AI 曲率</text>
+  <rect class="r" x="842" y="89" width="142" height="67" rx="8"/><text class="t" x="861" y="117">AX + XB = C</text><text class="s" x="854" y="141">Sylvester 方程</text>
+  <path class="ln" d="M987 122H1030" marker-end="url(#a)"/>
+  <rect class="b" x="1045" y="80" width="113" height="86" rx="8"/><text class="s" x="1053" y="108">I⊗A + Bᵀ⊗I</text><text class="s" x="1070" y="132">作用 vec(X)</text><text class="s" x="1068" y="153">但不物化</text>
+  <rect class="g" x="843" y="215" width="131" height="76" rx="8"/><text class="t" x="863" y="241">G = δxᵀ</text><text class="s" x="854" y="266">vec(G)=x⊗δ</text><text class="s" x="858" y="284">线性层梯度</text>
+  <path class="ln" d="M978 252H1021" marker-end="url(#a)"/>
+  <rect class="b" x="1036" y="205" width="122" height="96" rx="8"/><text class="s" x="1047" y="232">(xxᵀ)⊗(δδᵀ)</text><text class="s" x="1054" y="258">K-FAC 因子</text><text class="s" x="1048" y="282">期望拆分是近似</text>
+  <text class="m" x="837" y="351">表达式揭示谱、唯一性与 Jacobian</text><text class="s" x="837" y="381">实现利用 Schur / reshape / matmul / VJP</text><text class="s" x="837" y="404">“可写成大矩阵”不等于“应构造大矩阵”</text>
+</svg>
+

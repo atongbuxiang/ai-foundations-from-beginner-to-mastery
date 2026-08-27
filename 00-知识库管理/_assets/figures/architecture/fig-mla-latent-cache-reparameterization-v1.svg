@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">MLA：联合 KV Latent、投影吸收与 Partial RoPE</title>
+<desc id="desc">训练可展开为多头 K/V；解码缓存低维 content latent 加不可任意吸收的位置 key 分支。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Encode Once into Cache</text>
+<rect x="55" y="105" width="285" height="52" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="197.5" y="137.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">x_t : d</text>
+<rect x="55" y="215" width="285" height="62" rx="8" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="197.5" y="252.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">c_t^{KV}=W_D x_t : d_c</text>
+<rect x="55" y="340" width="285" height="62" rx="8" fill="#FEF2F2" stroke="#C24135" stroke-width="2"/>
+<text x="197.5" y="377.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">cache [c_t^{KV}, k_t^R]</text>
+<line x1="198" y1="160" x2="198" y2="205" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<line x1="198" y1="280" x2="198" y2="330" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<text x="55" y="455" font-size="15" font-weight="800" text-anchor="start" fill="#C24135">cache/token ≈ d_c + d_R, not h(d_k+d_v)</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Two Algebraic Forms</text>
+<rect x="455" y="95" width="285" height="70" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="597.5" y="136.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">training: K_h=W^K_h c, V_h=W^V_h c</text>
+<rect x="455" y="240" width="285" height="76" rx="8" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="597.5" y="284.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">decode: absorb W^K; aggregate c</text>
+<line x1="598" y1="168" x2="598" y2="230" stroke="#1F2937" stroke-width="2.5" stroke-dasharray="5 4" marker-end="url(#a3)"/>
+<text x="455" y="370" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">exact in real algebra for absorbable branch</text>
+<text x="455" y="410" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">BF16 order and RoPE branch need separate audit。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Evidence Ledger</text>
+<rect x="845" y="105" width="38" height="34" rx="8" fill="#F8FAFC" stroke="#0F766E" stroke-width="2"/>
+<text x="864.0" y="128.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">I</text>
+<text x="900" y="127" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">shape/cache/reparameterization</text>
+<rect x="845" y="185" width="38" height="34" rx="8" fill="#F8FAFC" stroke="#2563EB" stroke-width="2"/>
+<text x="864.0" y="208.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">E</text>
+<text x="900" y="207" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">DeepSeek-V2 system comparison</text>
+<rect x="845" y="265" width="38" height="34" rx="8" fill="#F8FAFC" stroke="#B7791F" stroke-width="2"/>
+<text x="864.0" y="288.0" font-size="15" font-weight="650" text-anchor="middle" fill="#B7791F">E</text>
+<text x="900" y="287" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">10907 controlled ablations</text>
+<rect x="845" y="345" width="38" height="34" rx="8" fill="#F8FAFC" stroke="#C24135" stroke-width="2"/>
+<text x="864.0" y="368.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">H</text>
+<text x="900" y="367" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">11111 limited-family optimality</text>
+<rect x="845" y="425" width="38" height="34" rx="8" fill="#F8FAFC" stroke="#C24135" stroke-width="2"/>
+<text x="864.0" y="448.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">O</text>
+<text x="900" y="447" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">MTP、quant、kernel Pareto frontier</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">MLA 的强点要拆成 cache bytes、可吸收代数、head/position 设计和系统实测；整模型胜负不能替代消融。</text>
+</svg>

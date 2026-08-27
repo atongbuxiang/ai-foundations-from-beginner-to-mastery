@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">直和、商空间与不变子空间三面板图</title>
+  <desc id="desc">左面板展示向量唯一分解为U与W分量，中面板展示平行陪集压缩为商空间中的点，右面板展示不变子空间对应分块上三角矩阵以及补空间向U的耦合。</desc>
+  <defs>
+    <marker id="blue-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2563eb"/>
+    </marker>
+    <marker id="orange-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#ea580c"/>
+    </marker>
+    <style>
+      .panel { fill:#f8fafc; stroke:#64748b; stroke-width:1.5; }
+      .title { font:700 19px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; fill:#0f172a; }
+      .label { font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; fill:#1e293b; }
+      .small { font:13px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; fill:#475569; }
+      .blue { stroke:#2563eb; stroke-width:4; fill:none; marker-end:url(#blue-arrow); }
+      .orange { stroke:#ea580c; stroke-width:4; fill:none; marker-end:url(#orange-arrow); }
+      .purple { stroke:#7c3aed; stroke-width:3; fill:none; }
+      .dash { stroke:#a78bfa; stroke-width:2; stroke-dasharray:7 5; }
+    </style>
+  </defs>
+  <rect width="1200" height="430" fill="#ffffff"/>
+
+  <g transform="translate(20,20)">
+    <rect class="panel" x="0" y="0" width="370" height="380" rx="14"/>
+    <text class="title" x="22" y="34">1. 直和：唯一分解</text>
+    <line x1="61" y1="305" x2="327" y2="305" stroke="#94a3b8" stroke-width="2"/>
+    <line x1="96" y1="342" x2="96" y2="83" stroke="#94a3b8" stroke-width="2"/>
+    <circle cx="96" cy="305" r="4" fill="#0f172a"/>
+    <line class="blue" x1="96" y1="305" x2="269" y2="305"/>
+    <line class="orange" x1="269" y1="305" x2="269" y2="134"/>
+    <line class="purple" x1="96" y1="305" x2="269" y2="134"/>
+    <text class="label" x="178" y="328">u ∈ U</text>
+    <text class="label" x="278" y="218">w ∈ W</text>
+    <text class="label" x="176" y="190">v = u + w</text>
+    <text class="small" x="22" y="68">U ∩ W = {0} 使分量不能互相挪用</text>
+    <text class="small" x="65" y="360">存在 + 唯一 ⇒ V = U ⊕ W</text>
+  </g>
+
+  <g transform="translate(415,20)">
+    <rect class="panel" x="0" y="0" width="370" height="380" rx="14"/>
+    <text class="title" x="22" y="34">2. 商空间：整层压成一点</text>
+    <line class="dash" x1="50" y1="281" x2="248" y2="115"/>
+    <line class="dash" x1="80" y1="317" x2="278" y2="151"/>
+    <line class="purple" x1="112" y1="349" x2="310" y2="183"/>
+    <line class="dash" x1="142" y1="365" x2="340" y2="199"/>
+    <circle cx="236" cy="245" r="6" fill="#7c3aed"/>
+    <text class="label" x="249" y="239">v + U</text>
+    <path d="M318,90 C339,126 339,250 318,290" stroke="#2563eb" stroke-width="3" fill="none" marker-end="url(#blue-arrow)"/>
+    <circle cx="327" cy="322" r="7" fill="#2563eb"/>
+    <text class="label" x="233" y="346">商空间中的一个点</text>
+    <text class="small" x="22" y="68">同一平行层内的向量只相差 U 中元素</text>
+    <text class="small" x="42" y="369">不选择代表元，也能定义线性运算</text>
+  </g>
+
+  <g transform="translate(810,20)">
+    <rect class="panel" x="0" y="0" width="370" height="380" rx="14"/>
+    <text class="title" x="22" y="34">3. 不变子空间：上三角耦合</text>
+    <rect x="55" y="99" width="111" height="94" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <rect x="166" y="99" width="141" height="94" fill="#ffedd5" stroke="#ea580c" stroke-width="2"/>
+    <rect x="55" y="193" width="111" height="112" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
+    <rect x="166" y="193" width="141" height="112" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text class="label" x="96" y="151">A</text>
+    <text class="label" x="231" y="151">B</text>
+    <text class="label" x="100" y="254">0</text>
+    <text class="label" x="231" y="254">C</text>
+    <text class="small" x="58" y="88">输入 U</text>
+    <text class="small" x="206" y="88">输入补空间</text>
+    <text class="small" x="19" y="148">输出 U</text>
+    <text class="small" x="16" y="250">输出商</text>
+    <path class="orange" d="M281,187 C265,176 243,174 218,181"/>
+    <text class="small" x="194" y="329">B：补方向可以泄入 U</text>
+    <text class="small" x="62" y="352">左下为 0：从 U 出发不会逃离 U</text>
+  </g>
+</svg>

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" role="img" aria-labelledby="title desc">
+  <title id="title">Eckart–Young–Mirsky 定理的奇异值截断、尾误差与适用边界</title>
+  <desc id="desc">奇异值柱状谱在第 k 项切开，前段构成最佳秩 k 近似，尾部最大值给谱范数误差，尾部平方能量给 Frobenius 误差，并标出定理不直接覆盖的损失。</desc>
+  <defs>
+    <style>
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}.blue{fill:#2563eb}.green{fill:#0f766e}.amber{fill:#b7791f}.h{font-size:19px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}.axis{stroke:#cbd5e1;stroke-width:1.4}
+    </style>
+  </defs>
+  <rect width="1200" height="640" fill="#ffffff"/>
+  <text x="600" y="42" class="sans h ink" text-anchor="middle">最佳秩-k 近似：保留最大的 k 个奇异方向，误差完全记在尾谱账本中</text>
+
+  <rect x="42" y="74" width="700" height="340" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="68" y="110" class="sans h blue">奇异值谱在 k 处分账</text>
+  <path d="M90 348H704M90 348V137" class="axis"/>
+  <rect x="120" y="158" width="62" height="190" rx="4" fill="#2563eb"/>
+  <rect x="202" y="190" width="62" height="158" rx="4" fill="#2563eb" opacity="0.9"/>
+  <rect x="284" y="222" width="62" height="126" rx="4" fill="#2563eb" opacity="0.8"/>
+  <rect x="366" y="254" width="62" height="94" rx="4" fill="#2563eb" opacity="0.7"/>
+  <rect x="478" y="278" width="52" height="70" rx="4" fill="#b7791f"/>
+  <rect x="550" y="302" width="52" height="46" rx="4" fill="#b7791f" opacity="0.82"/>
+  <rect x="622" y="320" width="52" height="28" rx="4" fill="#b7791f" opacity="0.65"/>
+  <path d="M452 133V374" stroke="#0f766e" stroke-width="2.5" stroke-dasharray="7 6"/>
+  <text x="452" y="128" class="math h green" text-anchor="middle">k</text>
+  <text x="274" y="384" class="sans body blue" text-anchor="middle">保留：Aₖ=Σᵢ≤ₖ σᵢuᵢvᵢ*</text>
+  <text x="576" y="384" class="sans body amber" text-anchor="middle">丢弃：尾部奇异值</text>
+  <text x="104" y="153" class="math small muted">σᵢ</text>
+
+  <rect x="780" y="74" width="378" height="155" rx="12" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="806" y="110" class="sans h blue">谱范数：只看尾部最高柱</text>
+  <text x="806" y="151" class="math formula ink">‖A−Aₖ‖₂ = σₖ₊₁</text>
+  <text x="806" y="188" class="sans body muted">任何秩≤k 的 B 都无法压低这个最坏方向。</text>
+
+  <rect x="780" y="259" width="378" height="155" rx="12" fill="#ecfdf5" stroke="#6ee7b7"/>
+  <text x="806" y="295" class="sans h green">Frobenius：累计全部尾能量</text>
+  <text x="806" y="336" class="math formula ink">‖A−Aₖ‖F = (Σᵢ&gt;ₖ σᵢ²)¹ᐟ²</text>
+  <text x="806" y="373" class="sans body muted">误差由所有被舍弃方向共同贡献。</text>
+
+  <rect x="70" y="450" width="1060" height="116" rx="12" fill="#fffaf0" stroke="#f5c04a"/>
+  <text x="97" y="484" class="sans h amber">定理边界：先核对目标是否真的是“酉不变范数下的矩阵近似”</text>
+  <text x="97" y="520" class="sans body ink">直接覆盖：谱范数、Frobenius、核范数与一般酉不变范数</text>
+  <text x="1098" y="520" class="sans body amber" text-anchor="end">不直接覆盖：加权误差、缺失数据、量化约束、任务损失</text>
+  <text x="600" y="550" class="sans small muted" text-anchor="middle">最优误差值、最优子空间和最优矩阵的唯一性是三件不同的事；σₖ=σₖ₊₁ 时尤其要区分。</text>
+  <text x="600" y="620" class="sans result ink" text-anchor="middle">证明结构：构造截断 SVD 给上界，再用维数交集或奇异值不等式给任何候选的下界。</text>
+</svg>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Attention 的三种数学视角：几何、核与条件分布</title>
+<desc id="desc">同一组权重可同时由向量匹配、指数核和可见位置上的 categorical distribution 来理解。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#B7791F"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">几何：dot product 混合角度与范数</text>
+<line x1="165" y1="340" x2="165" y2="120" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="65" y1="340" x2="345" y2="340" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="165" y1="340" x2="305" y2="170" stroke="#2563EB" stroke-width="4" marker-end="url(#a0)"/>
+<line x1="165" y1="340" x2="300" y2="275" stroke="#0F766E" stroke-width="4" marker-end="url(#a1)"/>
+<path d="M220 340A55 55 0 0 0 207 298" fill="none" stroke="#B7791F" stroke-width="3"/>
+<text x="310" y="165" font-size="17" font-weight="800" text-anchor="start" fill="#2563EB">q</text>
+<text x="305" y="280" font-size="17" font-weight="800" text-anchor="start" fill="#0F766E">k</text>
+<text x="215" y="315" font-size="16" font-weight="750" text-anchor="start" fill="#B7791F">θ</text>
+<text x="55" y="420" font-size="18" font-weight="750" text-anchor="start" fill="#1F2937" class="math">qᵀk = ||q|| ||k|| cos θ</text>
+<text x="55" y="465" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">cosine normalization removes norm channel.</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#B7791F">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">核：指数 affinity 的 feature 展开</text>
+<text x="450" y="110" font-size="20" font-weight="800" text-anchor="start" fill="#B7791F" class="math">K(q,k)=exp(qᵀk)</text>
+<text x="450" y="175" font-size="18" font-weight="700" text-anchor="start" fill="#1F2937" class="math">= Σₙ (qᵀk)ⁿ / n!</text>
+<text x="450" y="235" font-size="19" font-weight="800" text-anchor="start" fill="#0F766E" class="math">= &lt;φ(q), φ(k)&gt;</text>
+<line x1="465" y1="275" x2="740" y2="275" stroke="#D7DEE8" stroke-width="2"/>
+<text x="450" y="325" font-size="16" font-weight="750" text-anchor="start" fill="#2563EB">finite/random features</text>
+<text x="450" y="360" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">approximate numerator + denominator</text>
+<text x="450" y="415" font-size="15" font-weight="750" text-anchor="start" fill="#C24135">small denominator can amplify error</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">概率：每行是位置分布</text>
+<rect x="850" y="230.0" width="44" height="150.0" rx="3" fill="#A7F3D0" stroke="#0F766E" stroke-width="2"/>
+<text x="872" y="405" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">k1</text>
+<text x="872" y="210.0" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">0.56</text>
+<rect x="922" y="313.0357142857143" width="44" height="66.96428571428571" rx="3" fill="#A7F3D0" stroke="#0F766E" stroke-width="2"/>
+<text x="944" y="405" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">k2</text>
+<text x="944" y="293.0357142857143" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">0.25</text>
+<rect x="994" y="345.17857142857144" width="44" height="34.82142857142857" rx="3" fill="#A7F3D0" stroke="#0F766E" stroke-width="2"/>
+<text x="1016" y="405" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">k3</text>
+<text x="1016" y="325.17857142857144" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">0.13</text>
+<rect x="1066" y="363.92857142857144" width="44" height="16.07142857142857" rx="3" fill="#A7F3D0" stroke="#0F766E" stroke-width="2"/>
+<text x="1088" y="405" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">k4</text>
+<text x="1088" y="343.92857142857144" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">0.06</text>
+<line x1="840" y1="381" x2="1145" y2="381" stroke="#D7DEE8" stroke-width="2"/>
+<text x="845" y="115" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937" class="math">a_ij = p(J=j | q_i, visible keys)</text>
+<text x="845" y="165" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">o_i lies in convex hull{v_j}</text>
+<text x="845" y="445" font-size="15" font-weight="750" text-anchor="start" fill="#C24135">这不是‘位置 j 为真’的概率。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">三种视角互补：几何解释 logit，核解释 factorization，概率解释行归一；都不自动给因果解释。</text>
+</svg>

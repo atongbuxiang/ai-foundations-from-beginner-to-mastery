@@ -1,0 +1,7 @@
+gate,status,budget_gpu_hours,evidence,included_in_total_budget
+shape,pass,2.0,infshape and orientation complete,True
+coordinate,pass,4.0,all absolute slopes <= 0.05,True
+spectral_depth,fail,6.0,rank-one update normalized spectrum drifts,True
+training_safety,pass,10.0,0 NaN/OOM in 8 launched runs,True
+transfer,blocked,80.0,target confirm forbidden after spectral failure,True
+target_confirm,not_spent,8.0,reserved budget remains unused,True

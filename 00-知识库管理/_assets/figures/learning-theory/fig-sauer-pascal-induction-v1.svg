@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+  <rect width="1200" height="700" fill="#fbf7ed"/>
+  <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0V28" fill="none" stroke="#b8c8d8" stroke-width="1" opacity=".28"/></pattern><rect width="1200" height="700" fill="url(#grid)"/>
+  <style>.s{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.m{font-family:"SFMono-Regular",Menlo,monospace}.ink{fill:#1f2937}.muted{fill:#64748b}.b{fill:#195cc5}.g{fill:#147d64}.r{fill:#b63a34}</style>
+  <text x="58" y="59" class="s ink" font-size="31" font-weight="750">证明板：fiber 递推为何正好闭合成 Pascal 三角形</text>
+  <text x="58" y="96" class="s muted" font-size="17">左边做结构分解，中央做归纳，右边把组合上界压成便于代数处理的解析式。</text>
+  <line x1="58" y1="124" x2="1142" y2="124" stroke="#91a3b6" stroke-width="2"/>
+
+  <text x="66" y="169" class="s b" font-size="20" font-weight="750">① 删除第 m 个坐标</text>
+  <text x="66" y="214" class="m ink" font-size="21">T_d(m)</text><text x="180" y="214" class="m ink" font-size="21">≤</text>
+  <text x="220" y="196" class="m b" font-size="20">T_d(m−1)</text><text x="220" y="222" class="s muted" font-size="14">所有旧 patterns</text>
+  <text x="347" y="214" class="m ink" font-size="21">+</text>
+  <text x="380" y="196" class="m g" font-size="20">T_{d−1}(m−1)</text><text x="380" y="222" class="s muted" font-size="14">可双延伸 patterns</text>
+  <path d="M65 243 C170 272 370 272 520 243" fill="none" stroke="#b63a34" stroke-width="3"/>
+  <text x="66" y="291" class="s r" font-size="16" font-weight="700">第二项降一维，是整个递推有效的关键。</text>
+
+  <line x1="565" y1="148" x2="565" y2="640" stroke="#a9b8c8" stroke-width="2"/>
+  <text x="606" y="169" class="s b" font-size="20" font-weight="750">② Pascal 恒等式逐项拼合</text>
+  <g class="m ink" font-size="18" text-anchor="middle">
+    <text x="790" y="220">1</text>
+    <text x="750" y="262">1</text><text x="830" y="262">1</text>
+    <text x="710" y="304">1</text><text x="790" y="304">2</text><text x="870" y="304">1</text>
+    <text x="670" y="346">1</text><text x="750" y="346">3</text><text x="830" y="346">3</text><text x="910" y="346">1</text>
+    <text x="630" y="388">1</text><text x="710" y="388">4</text><text x="790" y="388">6</text><text x="870" y="388">4</text><text x="950" y="388">1</text>
+  </g>
+  <path d="M604 362 H820 V405 H604 Z" fill="none" stroke="#147d64" stroke-width="3"/>
+  <text x="606" y="446" class="s ink" font-size="17">m=4，d=2：</text><text x="747" y="446" class="m g" font-size="18">Σ_{i=0}² C(4,i)=1+4+6=11</text>
+  <text x="606" y="489" class="m ink" font-size="18">C(m−1,i)+C(m−1,i−1)=C(m,i)</text>
+  <text x="606" y="523" class="s muted" font-size="15">两条归纳上界像 Pascal 三角形的相邻父节点一样合并。</text>
+
+  <line x1="58" y1="554" x2="1142" y2="554" stroke="#91a3b6" stroke-width="2"/>
+  <text x="66" y="598" class="s b" font-size="20" font-weight="750">③ 精确组合界 → 粗解析界</text>
+  <text x="66" y="639" class="m ink" font-size="18">a=d/m:　a^d Σ_{i=0}^d C(m,i) ≤ (1+a)^m ≤ e^d</text>
+  <text x="66" y="677" class="m g" font-size="21" font-weight="700">Σ_{i=0}^d C(m,i) ≤ (em/d)^d</text>
+  <text x="650" y="677" class="s r" font-size="16">解析式便于代数，但小样本时可能比 2^m 还松。</text>
+</svg>

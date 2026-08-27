@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+<title id="title">VP、VE 与 sub-VP 的系数和边缘方差账本</title>
+<desc id="desc">左侧比较三种线性 SDE 的 signal decay，中央画条件方差随累计噪声 B 增长的曲线，右侧给出由方差 ODE 检查闭式解的最小账本。</desc>
+<rect width="1200" height="620" fill="#FFFEFB"/>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.ink{fill:#1F2937}.muted{fill:#64748B}.blue{fill:#2563EB}.green{fill:#0F766E}.amber{fill:#B7791F}.line{fill:none;stroke-linecap:round;stroke-linejoin:round}</style>
+<text x="58" y="45" font-size="19" font-weight="700" class="ink">A　同一线性模板：drift 决定 signal，diffusion 决定新增 variance</text>
+<line x1="58" y1="67" x2="1142" y2="67" stroke="#D7DEE8" stroke-width="2"/>
+<g font-size="17" class="ink"><text x="74" y="110" font-weight="700">过程</text><text x="210" y="110" font-weight="700">drift a(t)x</text><text x="405" y="110" font-weight="700">noise g(t)^2</text><text x="640" y="110" font-weight="700">mean m(t)</text><text x="840" y="110" font-weight="700">conditional V(t)</text></g>
+<g stroke="#D7DEE8" stroke-width="1.5"><line x1="58" y1="124" x2="1142" y2="124"/><line x1="58" y1="174" x2="1142" y2="174"/><line x1="58" y1="224" x2="1142" y2="224"/><line x1="58" y1="274" x2="1142" y2="274"/></g>
+<g font-size="17"><text x="74" y="157" class="blue" font-weight="700">VP</text><text x="210" y="157" class="ink">- beta x / 2</text><text x="405" y="157" class="ink">beta</text><text x="640" y="157" class="ink">exp(-B/2)</text><text x="840" y="157" class="blue">1 - exp(-B)</text><text x="74" y="207" class="green" font-weight="700">VE</text><text x="210" y="207" class="ink">0</text><text x="405" y="207" class="ink">Sigma'(t)</text><text x="640" y="207" class="ink">1</text><text x="840" y="207" class="green">Sigma(t)</text><text x="74" y="257" class="amber" font-weight="700">sub-VP</text><text x="210" y="257" class="ink">- beta x / 2</text><text x="405" y="257" class="ink">beta [1-exp(-2B)]</text><text x="640" y="257" class="ink">exp(-B/2)</text><text x="840" y="257" class="amber">[1-exp(-B)]^2</text></g>
+<text x="58" y="324" font-size="19" font-weight="700" class="ink">B　累计噪声 B 增大时：VP 与 sub-VP 同均值、异方差</text>
+<line x1="95" y1="532" x2="620" y2="532" stroke="#1F2937" stroke-width="2.5"/><line x1="95" y1="532" x2="95" y2="357" stroke="#1F2937" stroke-width="2.5"/>
+<text x="612" y="559" font-size="15" class="muted">B(t)</text><text x="58" y="372" font-size="15" class="muted">value</text>
+<path d="M95 532 C180 430 290 376 605 360" class="line" stroke="#2563EB" stroke-width="4"/>
+<path d="M95 532 C190 505 300 402 605 365" class="line" stroke="#B7791F" stroke-width="4" stroke-dasharray="10 8"/>
+<path d="M95 357 C185 432 300 500 605 525" class="line" stroke="#0F766E" stroke-width="4"/>
+<text x="445" y="384" font-size="16" class="blue">VP variance</text><text x="365" y="445" font-size="16" class="amber">sub-VP variance</text><text x="390" y="511" font-size="16" class="green">signal exp(-B/2)</text>
+<rect x="690" y="347" width="452" height="205" fill="#FFFFFF" stroke="#D7DEE8" stroke-width="2"/>
+<text x="718" y="382" font-size="19" font-weight="700" class="ink">C　闭式不靠背：代回 variance ODE</text>
+<text x="718" y="423" font-size="18" class="ink">V'(t) = 2 a(t) V(t) + g(t)^2</text>
+<g font-size="16"><text x="718" y="463" class="blue">VP</text><text x="772" y="463" class="ink">V' = - beta V + beta</text><text x="718" y="495" class="amber">sub</text><text x="772" y="495" class="ink">V' = - beta V + beta[1-exp(-2B)]</text></g>
+<path d="M718 519H1095" stroke="#0F766E" stroke-width="3"/><text x="718" y="542" font-size="15" class="green">初值 V(0)=0；小步 covariance = g(t)^2 dt</text>
+<text x="58" y="596" font-size="15" class="muted">比较时先对齐 noise level 或 log-SNR；“同一 t”不保证三种过程处于同一 corruption 强度。</text>
+</svg>

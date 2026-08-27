@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="610" viewBox="0 0 1440 610" role="img" aria-labelledby="title desc">
+<title id="title">Mixed precision iterative refinement and GMRES-IR</title>
+<desc id="desc">Three panels show the condition-number convergence boundary, the impact of residual precision, and the wider success region of GMRES-based iterative refinement.</desc>
+<style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif;font-size:13px;fill:#172033}.title{font-size:23px;font-weight:600}.panel{font-size:16px;font-weight:600}.axis{font-size:14px}.frame{fill:#fbfcfe;stroke:#7b879a}.grid{stroke:#dbe1e8}.note{font-size:12px;fill:#445067}.legend{font-size:12px}</style>
+<rect width="1440" height="610" fill="#ffffff"/>
+<text x="720" y="34" text-anchor="middle" class="title">迭代改进与混合精度：低精度负责大工作，高精度负责纠错与验收</text>
+<text x="75" y="67" class="panel">A  binary16 LU 的条件数收敛边界</text>
+<text x="555" y="67" class="panel">B  残差精度决定可达到的误差地板</text>
+<text x="1035" y="67" class="panel">C  GMRES-IR 扩展低精度因子的可用区间</text>
+<rect x="75" y="88" width="330" height="330" class="frame"/>
+<line x1="75.00" y1="88" x2="75.00" y2="418" class="grid"/>
+<text x="75.00" y="438" text-anchor="middle">0</text>
+<line x1="141.00" y1="88" x2="141.00" y2="418" class="grid"/>
+<text x="141.00" y="438" text-anchor="middle">2</text>
+<line x1="207.00" y1="88" x2="207.00" y2="418" class="grid"/>
+<text x="207.00" y="438" text-anchor="middle">4</text>
+<line x1="273.00" y1="88" x2="273.00" y2="418" class="grid"/>
+<text x="273.00" y="438" text-anchor="middle">6</text>
+<line x1="339.00" y1="88" x2="339.00" y2="418" class="grid"/>
+<text x="339.00" y="438" text-anchor="middle">8</text>
+<line x1="405.00" y1="88" x2="405.00" y2="418" class="grid"/>
+<text x="405.00" y="438" text-anchor="middle">10</text>
+<line x1="75" y1="418.00" x2="405" y2="418.00" class="grid"/>
+<text x="66" y="422.00" text-anchor="end">1e−8</text>
+<line x1="75" y1="335.50" x2="405" y2="335.50" class="grid"/>
+<text x="66" y="339.50" text-anchor="end">1e−6</text>
+<line x1="75" y1="253.00" x2="405" y2="253.00" class="grid"/>
+<text x="66" y="257.00" text-anchor="end">1e−4</text>
+<line x1="75" y1="170.50" x2="405" y2="170.50" class="grid"/>
+<text x="66" y="174.50" text-anchor="end">1e−2</text>
+<line x1="75" y1="88.00" x2="405" y2="88.00" class="grid"/>
+<text x="66" y="92.00" text-anchor="end">1</text>
+<text x="240.0" y="463" text-anchor="middle" class="axis">refinement step</text>
+<text x="17" y="253.0" text-anchor="middle" class="axis" transform="rotate(-90 17 253.0)">relative forward error</text>
+<polyline points="75.00,178.23 108.00,266.47 141.00,314.52 174.00,313.12 207.00,323.23 240.00,324.59 273.00,327.26 306.00,319.90 339.00,319.33 372.00,333.69 405.00,340.68" fill="none" stroke="#248a57" stroke-width="2.6"/>
+<circle cx="75.00" cy="178.23" r="3.5" fill="#248a57"/>
+<circle cx="141.00" cy="314.52" r="3.5" fill="#248a57"/>
+<circle cx="207.00" cy="323.23" r="3.5" fill="#248a57"/>
+<circle cx="273.00" cy="327.26" r="3.5" fill="#248a57"/>
+<circle cx="339.00" cy="319.33" r="3.5" fill="#248a57"/>
+<circle cx="405.00" cy="340.68" r="3.5" fill="#248a57"/>
+<polyline points="75.00,127.26 108.00,160.82 141.00,194.47 174.00,229.39 207.00,269.01 240.00,273.12 273.00,284.66 306.00,267.37 339.00,286.94 372.00,294.03 405.00,272.48" fill="none" stroke="#2f6fbd" stroke-width="2.6"/>
+<rect x="71.50" y="123.76" width="7.0" height="7.0" fill="#2f6fbd"/>
+<rect x="137.50" y="190.97" width="7.0" height="7.0" fill="#2f6fbd"/>
+<rect x="203.50" y="265.51" width="7.0" height="7.0" fill="#2f6fbd"/>
+<rect x="269.50" y="281.16" width="7.0" height="7.0" fill="#2f6fbd"/>
+<rect x="335.50" y="283.44" width="7.0" height="7.0" fill="#2f6fbd"/>
+<rect x="401.50" y="268.98" width="7.0" height="7.0" fill="#2f6fbd"/>
+<polyline points="75.00,88.00 108.00,89.50 141.00,95.07 174.00,101.00 207.00,106.93 240.00,113.05 273.00,118.89 306.00,124.66 339.00,130.68 372.00,136.83 405.00,142.54" fill="none" stroke="#c43d3d" stroke-width="2.6"/>
+<path d="M75.00,83.50 L79.50,88.00 L75.00,92.50 L70.50,88.00Z" fill="#c43d3d"/>
+<path d="M141.00,90.57 L145.50,95.07 L141.00,99.57 L136.50,95.07Z" fill="#c43d3d"/>
+<path d="M207.00,102.43 L211.50,106.93 L207.00,111.43 L202.50,106.93Z" fill="#c43d3d"/>
+<path d="M273.00,114.39 L277.50,118.89 L273.00,123.39 L268.50,118.89Z" fill="#c43d3d"/>
+<path d="M339.00,126.18 L343.50,130.68 L339.00,135.18 L334.50,130.68Z" fill="#c43d3d"/>
+<path d="M405.00,138.04 L409.50,142.54 L405.00,147.04 L400.50,142.54Z" fill="#c43d3d"/>
+<text x="93" y="113" class="note">n=8 DCT 相似 SPD；LU 每个算术步骤舍入到 binary16</text>
+<text x="90" y="496" class="legend" fill="#248a57">● κ=10²</text>
+<text x="195" y="496" class="legend" fill="#2f6fbd">■ κ=10³</text>
+<text x="300" y="496" class="legend" fill="#c43d3d">◆ κ=10⁴</text>
+<rect x="555" y="88" width="330" height="330" class="frame"/>
+<line x1="555.00" y1="88" x2="555.00" y2="418" class="grid"/>
+<text x="555.00" y="438" text-anchor="middle">0</text>
+<line x1="621.00" y1="88" x2="621.00" y2="418" class="grid"/>
+<text x="621.00" y="438" text-anchor="middle">2</text>
+<line x1="687.00" y1="88" x2="687.00" y2="418" class="grid"/>
+<text x="687.00" y="438" text-anchor="middle">4</text>
+<line x1="753.00" y1="88" x2="753.00" y2="418" class="grid"/>
+<text x="753.00" y="438" text-anchor="middle">6</text>
+<line x1="819.00" y1="88" x2="819.00" y2="418" class="grid"/>
+<text x="819.00" y="438" text-anchor="middle">8</text>
+<line x1="885.00" y1="88" x2="885.00" y2="418" class="grid"/>
+<text x="885.00" y="438" text-anchor="middle">10</text>
+<line x1="555" y1="418.00" x2="885" y2="418.00" class="grid"/>
+<text x="546" y="422.00" text-anchor="end">1e−8</text>
+<line x1="555" y1="335.50" x2="885" y2="335.50" class="grid"/>
+<text x="546" y="339.50" text-anchor="end">1e−6</text>
+<line x1="555" y1="253.00" x2="885" y2="253.00" class="grid"/>
+<text x="546" y="257.00" text-anchor="end">1e−4</text>
+<line x1="555" y1="170.50" x2="885" y2="170.50" class="grid"/>
+<text x="546" y="174.50" text-anchor="end">1e−2</text>
+<line x1="555" y1="88.00" x2="885" y2="88.00" class="grid"/>
+<text x="546" y="92.00" text-anchor="end">1</text>
+<text x="720.0" y="463" text-anchor="middle" class="axis">refinement step</text>
+<text x="497" y="253.0" text-anchor="middle" class="axis" transform="rotate(-90 497 253.0)">relative forward error</text>
+<polyline points="555.00,178.23 588.00,184.29 621.00,179.30 654.00,170.47 687.00,177.12 720.00,185.37 753.00,178.55 786.00,177.25 819.00,186.90 852.00,180.47 885.00,173.48" fill="none" stroke="#c36a14" stroke-width="2.6"/>
+<circle cx="555.00" cy="178.23" r="3.5" fill="#c36a14"/>
+<circle cx="621.00" cy="179.30" r="3.5" fill="#c36a14"/>
+<circle cx="687.00" cy="177.12" r="3.5" fill="#c36a14"/>
+<circle cx="753.00" cy="178.55" r="3.5" fill="#c36a14"/>
+<circle cx="819.00" cy="186.90" r="3.5" fill="#c36a14"/>
+<circle cx="885.00" cy="173.48" r="3.5" fill="#c36a14"/>
+<polyline points="555.00,178.23 588.00,268.17 621.00,311.40 654.00,322.45 687.00,309.43 720.00,306.94 753.00,322.78 786.00,310.92 819.00,324.00 852.00,313.41 885.00,333.59" fill="none" stroke="#2f6fbd" stroke-width="2.6"/>
+<rect x="551.50" y="174.73" width="7.0" height="7.0" fill="#2f6fbd"/>
+<rect x="617.50" y="307.90" width="7.0" height="7.0" fill="#2f6fbd"/>
+<rect x="683.50" y="305.93" width="7.0" height="7.0" fill="#2f6fbd"/>
+<rect x="749.50" y="319.28" width="7.0" height="7.0" fill="#2f6fbd"/>
+<rect x="815.50" y="320.50" width="7.0" height="7.0" fill="#2f6fbd"/>
+<rect x="881.50" y="330.09" width="7.0" height="7.0" fill="#2f6fbd"/>
+<polyline points="555.00,178.23 588.00,266.47 621.00,314.52 654.00,313.12 687.00,323.23 720.00,324.59 753.00,327.26 786.00,319.90 819.00,319.33 852.00,333.69 885.00,340.68" fill="none" stroke="#8a4fb8" stroke-width="2.6" stroke-dasharray="6 4"/>
+<path d="M555.00,173.73 L559.50,178.23 L555.00,182.73 L550.50,178.23Z" fill="#8a4fb8"/>
+<path d="M621.00,310.02 L625.50,314.52 L621.00,319.02 L616.50,314.52Z" fill="#8a4fb8"/>
+<path d="M687.00,318.73 L691.50,323.23 L687.00,327.73 L682.50,323.23Z" fill="#8a4fb8"/>
+<path d="M753.00,322.76 L757.50,327.26 L753.00,331.76 L748.50,327.26Z" fill="#8a4fb8"/>
+<path d="M819.00,314.83 L823.50,319.33 L819.00,323.83 L814.50,319.33Z" fill="#8a4fb8"/>
+<path d="M885.00,336.18 L889.50,340.68 L885.00,345.18 L880.50,340.68Z" fill="#8a4fb8"/>
+<text x="573" y="113" class="note">固定 κ=10²、同一 binary16 LU，只改变 r=b−Ax 的精度</text>
+<text x="580" y="496" class="legend" fill="#c36a14">● FP16 residual</text>
+<text x="700" y="496" class="legend" fill="#2f6fbd">■ FP32 residual</text>
+<text x="815" y="496" class="legend" fill="#8a4fb8">◆ FP64</text>
+<rect x="1035" y="88" width="330" height="330" class="frame"/>
+<line x1="1035.00" y1="88" x2="1035.00" y2="418" class="grid"/>
+<text x="1035.00" y="438" text-anchor="middle">10</text>
+<line x1="1117.50" y1="88" x2="1117.50" y2="418" class="grid"/>
+<text x="1117.50" y="438" text-anchor="middle">10²</text>
+<line x1="1200.00" y1="88" x2="1200.00" y2="418" class="grid"/>
+<text x="1200.00" y="438" text-anchor="middle">10³</text>
+<line x1="1282.50" y1="88" x2="1282.50" y2="418" class="grid"/>
+<text x="1282.50" y="438" text-anchor="middle">10⁴</text>
+<line x1="1365.00" y1="88" x2="1365.00" y2="418" class="grid"/>
+<text x="1365.00" y="438" text-anchor="middle">10⁵</text>
+<line x1="1035" y1="418.00" x2="1365" y2="418.00" class="grid"/>
+<text x="1026" y="422.00" text-anchor="end">1e−8</text>
+<line x1="1035" y1="335.50" x2="1365" y2="335.50" class="grid"/>
+<text x="1026" y="339.50" text-anchor="end">1e−6</text>
+<line x1="1035" y1="253.00" x2="1365" y2="253.00" class="grid"/>
+<text x="1026" y="257.00" text-anchor="end">1e−4</text>
+<line x1="1035" y1="170.50" x2="1365" y2="170.50" class="grid"/>
+<text x="1026" y="174.50" text-anchor="end">1e−2</text>
+<line x1="1035" y1="88.00" x2="1365" y2="88.00" class="grid"/>
+<text x="1026" y="92.00" text-anchor="end">1</text>
+<text x="1200.0" y="463" text-anchor="middle" class="axis">κ₂(A)</text>
+<text x="977" y="253.0" text-anchor="middle" class="axis" transform="rotate(-90 977 253.0)">final relative forward error</text>
+<polyline points="1035.00,351.75 1074.36,351.35 1117.50,340.68 1156.86,321.22 1200.00,272.48 1239.36,253.98 1282.50,142.54 1321.86,199.41 1365.00,88.00" fill="none" stroke="#c43d3d" stroke-width="2.6"/>
+<circle cx="1035.00" cy="351.75" r="3.5" fill="#c43d3d"/>
+<circle cx="1074.36" cy="351.35" r="3.5" fill="#c43d3d"/>
+<circle cx="1117.50" cy="340.68" r="3.5" fill="#c43d3d"/>
+<circle cx="1156.86" cy="321.22" r="3.5" fill="#c43d3d"/>
+<circle cx="1200.00" cy="272.48" r="3.5" fill="#c43d3d"/>
+<circle cx="1239.36" cy="253.98" r="3.5" fill="#c43d3d"/>
+<circle cx="1282.50" cy="142.54" r="3.5" fill="#c43d3d"/>
+<circle cx="1321.86" cy="199.41" r="3.5" fill="#c43d3d"/>
+<circle cx="1365.00" cy="88.00" r="3.5" fill="#c43d3d"/>
+<polyline points="1035.00,404.61 1074.36,404.61 1117.50,404.61 1156.86,404.61 1200.00,404.61 1239.36,404.61 1282.50,404.61 1321.86,404.61 1365.00,88.00" fill="none" stroke="#248a57" stroke-width="2.6" stroke-dasharray="6 4"/>
+<path d="M1035.00,400.11 L1039.50,404.61 L1035.00,409.11 L1030.50,404.61Z" fill="#248a57"/>
+<path d="M1074.36,400.11 L1078.86,404.61 L1074.36,409.11 L1069.86,404.61Z" fill="#248a57"/>
+<path d="M1117.50,400.11 L1122.00,404.61 L1117.50,409.11 L1113.00,404.61Z" fill="#248a57"/>
+<path d="M1156.86,400.11 L1161.36,404.61 L1156.86,409.11 L1152.36,404.61Z" fill="#248a57"/>
+<path d="M1200.00,400.11 L1204.50,404.61 L1200.00,409.11 L1195.50,404.61Z" fill="#248a57"/>
+<path d="M1239.36,400.11 L1243.86,404.61 L1239.36,409.11 L1234.86,404.61Z" fill="#248a57"/>
+<path d="M1282.50,400.11 L1287.00,404.61 L1282.50,409.11 L1278.00,404.61Z" fill="#248a57"/>
+<path d="M1321.86,400.11 L1326.36,404.61 L1321.86,409.11 L1317.36,404.61Z" fill="#248a57"/>
+<path d="M1365.00,83.50 L1369.50,88.00 L1365.00,92.50 L1360.50,88.00Z" fill="#248a57"/>
+<text x="1053" y="113" class="note">classical：每轮一次低精度 solve；GMRES-IR：5 步预条件内迭代</text>
+<text x="1090" y="496" class="legend" fill="#c43d3d">● classical IR</text>
+<text x="1240" y="496" class="legend" fill="#248a57">◆ GMRES-IR</text>
+<text x="720" y="568" text-anchor="middle" class="note">A：κ·u_factor 接近 1 时经典校正失去收缩；B：高精度残差避免纠错信号被再次舍入；C：GMRES 近似解预条件校正方程。</text>
+<text x="720" y="590" text-anchor="middle" class="note">生成：plot_mixed_precision_refinement.py · Python 标准库 · binary16 LU / binary32 update / binary64 reference</text>
+</svg>

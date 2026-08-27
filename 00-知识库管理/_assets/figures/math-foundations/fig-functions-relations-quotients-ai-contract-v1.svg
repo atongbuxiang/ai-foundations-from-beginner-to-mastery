@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="760" viewBox="0 0 1440 760" role="img" aria-labelledby="title desc">
+  <title id="title">函数、关系、商结构与 AI 映射合同</title>
+  <desc id="desc">三面板展示函数的定义域陪域像与单双射，等价关系产生划分和商集并要求代表元无关，以及神经网络复合、分类器、可逆流和参数对称性调用的不同映射合同。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#071527"/><stop offset="1" stop-color="#10263e"/></linearGradient>
+    <linearGradient id="p1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#173754"/><stop offset="1" stop-color="#102a43"/></linearGradient>
+    <linearGradient id="p2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#173d3b"/><stop offset="1" stop-color="#102f31"/></linearGradient>
+    <linearGradient id="p3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#372d58"/><stop offset="1" stop-color="#282442"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="6" stdDeviation="9" flood-color="#000" flood-opacity=".28"/></filter>
+    <marker id="ab" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#66c7ff"/></marker>
+    <marker id="ag" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#70e0bf"/></marker>
+    <marker id="ap" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#b29cff"/></marker>
+    <style>
+      .title{font:700 30px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#f5f9ff}.sub{font:400 15px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#a9bfd4}.head{font:700 22px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#f8fbff}.body{font:500 16px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#dceaf7}.small{font:400 14px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#b8cada}.tiny{font:400 12px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#aebfd0}.math{font:500 17px Georgia,"Times New Roman",serif;fill:#f6fbff}.tag{font:700 13px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:.7px}.mono{font:600 14px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#dceaf7}
+    </style>
+  </defs>
+  <rect width="1440" height="760" fill="url(#bg)"/>
+  <circle cx="1290" cy="60" r="250" fill="#547ec7" opacity=".08"/><circle cx="120" cy="730" r="280" fill="#27a98b" opacity=".07"/>
+  <text x="70" y="59" class="title">函数先声明类型，商映射再消除代表元依赖</text>
+  <text x="70" y="88" class="sub">domain / codomain / image、equivalence class / quotient 与 AI architecture contract 必须逐层分账</text>
+
+  <g filter="url(#shadow)"><rect x="55" y="125" width="410" height="535" rx="24" fill="url(#p1)" stroke="#427ca6"/><rect x="515" y="125" width="410" height="535" rx="24" fill="url(#p2)" stroke="#438b7c"/><rect x="975" y="125" width="410" height="535" rx="24" fill="url(#p3)" stroke="#7b6cad"/></g>
+
+  <rect x="80" y="148" width="151" height="27" rx="13" fill="#13324d" stroke="#66c7ff"/><text x="155" y="166" text-anchor="middle" class="tag" fill="#7bd2ff">FUNCTION CONTRACT</text>
+  <text x="80" y="207" class="head">① 箭头先回答“从哪到哪”</text>
+  <text x="80" y="240" class="body">函数 = total + single-valued relation</text>
+
+  <rect x="84" y="270" width="152" height="211" rx="17" fill="#0b2439" stroke="#4e91ba"/>
+  <rect x="282" y="270" width="152" height="211" rx="17" fill="#0b2439" stroke="#4e91ba"/>
+  <text x="160" y="296" text-anchor="middle" class="small">domain X</text><text x="358" y="296" text-anchor="middle" class="small">codomain Y</text>
+  <g fill="#66c7ff"><circle cx="130" cy="338" r="8"/><circle cx="130" cy="390" r="8"/><circle cx="130" cy="442" r="8"/></g>
+  <g fill="#70e0bf"><circle cx="330" cy="325" r="8"/><circle cx="330" cy="377" r="8"/><circle cx="330" cy="429" r="8"/><circle cx="390" cy="455" r="8" opacity=".35"/></g>
+  <path d="M139 338 C205 338 251 325 321 325" stroke="#66c7ff" stroke-width="2.5" fill="none" marker-end="url(#ab)"/>
+  <path d="M139 390 C205 390 251 377 321 377" stroke="#66c7ff" stroke-width="2.5" fill="none" marker-end="url(#ab)"/>
+  <path d="M139 442 C205 442 251 377 321 377" stroke="#66c7ff" stroke-width="2.5" fill="none" marker-end="url(#ab)"/>
+  <text x="259" y="505" text-anchor="middle" class="tiny">碰撞 → 非单射　　遗漏 → 非满射</text>
+  <rect x="88" y="530" width="342" height="96" rx="13" fill="#0d263d" stroke="#4e91ba"/>
+  <text x="108" y="558" class="math">f⁻¹(B): preimage — always defined</text>
+  <text x="108" y="584" class="math">inverse function — requires bijection</text>
+  <text x="108" y="610" class="tiny">same formula + different domain/codomain = different function</text>
+
+  <rect x="540" y="148" width="164" height="27" rx="13" fill="#123630" stroke="#70e0bf"/><text x="622" y="166" text-anchor="middle" class="tag" fill="#82e9cb">RELATION → QUOTIENT</text>
+  <text x="540" y="207" class="head">② “视为相同”必须闭合</text>
+  <text x="540" y="240" class="body">reflexive + symmetric + transitive</text>
+
+  <rect x="546" y="272" width="154" height="172" rx="17" fill="#0b2929" stroke="#53ad98"/>
+  <text x="623" y="297" text-anchor="middle" class="small">X</text>
+  <ellipse cx="623" cy="340" rx="48" ry="26" fill="#1a665c" stroke="#70e0bf"/><text x="623" y="345" text-anchor="middle" class="small">[a]</text>
+  <ellipse cx="599" cy="402" rx="30" ry="21" fill="#245b58" stroke="#70e0bf"/><text x="599" y="407" text-anchor="middle" class="small">[b]</text>
+  <ellipse cx="657" cy="402" rx="31" ry="21" fill="#245b58" stroke="#70e0bf"/><text x="657" y="407" text-anchor="middle" class="small">[c]</text>
+  <path d="M708 355 L753 355" stroke="#70e0bf" stroke-width="2.8" marker-end="url(#ag)"/>
+  <text x="730" y="341" text-anchor="middle" class="tiny">π</text>
+  <rect x="762" y="272" width="132" height="172" rx="17" fill="#0b2929" stroke="#53ad98"/>
+  <text x="828" y="297" text-anchor="middle" class="small">X / ~</text>
+  <circle cx="828" cy="340" r="16" fill="#70e0bf"/><circle cx="805" cy="398" r="13" fill="#4fbca5"/><circle cx="851" cy="398" r="13" fill="#4fbca5"/>
+  <text x="720" y="473" text-anchor="middle" class="tiny">classes cover X and never partly overlap</text>
+  <rect x="546" y="499" width="348" height="127" rx="14" fill="#102f31" stroke="#53ad98"/>
+  <text x="566" y="529" class="math">F([x]) = Φ(x)</text>
+  <text x="566" y="557" class="small">well-defined iff x ~ x′ ⇒ Φ(x)=Φ(x′)</text>
+  <text x="566" y="584" class="small">constant on classes ⇔ factors through π</text>
+  <text x="566" y="610" class="tiny">能代入一个代表元，不等于已经定义了商上的函数</text>
+
+  <rect x="1000" y="148" width="114" height="27" rx="13" fill="#2c2645" stroke="#b29cff"/><text x="1057" y="166" text-anchor="middle" class="tag" fill="#c5b2ff">AI CONTRACT</text>
+  <text x="1000" y="207" class="head">③ 四类模型，四种要求</text>
+  <text x="1000" y="240" class="body">不要把“可调用”误写成“可逆”</text>
+
+  <rect x="1001" y="270" width="357" height="74" rx="14" fill="#24213c" stroke="#8a78c2"/>
+  <text x="1021" y="298" class="small">Layer composition</text><text x="1021" y="324" class="tiny">image/shape/state must fit the next domain</text>
+  <rect x="1001" y="356" width="357" height="74" rx="14" fill="#24213c" stroke="#8a78c2"/>
+  <text x="1021" y="384" class="small">Classifier: X → labels</text><text x="1021" y="410" class="tiny">many-to-one is expected; same label ≠ same representation</text>
+  <rect x="1001" y="442" width="357" height="74" rx="14" fill="#24213c" stroke="#8a78c2"/>
+  <text x="1021" y="470" class="small">Normalizing flow</text><text x="1021" y="496" class="tiny">bijection + differentiability + tractable logdet + stable inverse</text>
+  <rect x="1001" y="528" width="357" height="98" rx="14" fill="#211e38" stroke="#8a78c2"/>
+  <text x="1021" y="556" class="small">Parameter symmetry</text>
+  <text x="1021" y="582" class="math">θ ~ θ′  iff  fθ = fθ′</text>
+  <text x="1021" y="608" class="tiny">uniqueness and regularization must state parameter vs function level</text>
+
+  <path d="M472 392 L504 392" stroke="#66c7ff" stroke-width="3" marker-end="url(#ab)"/><path d="M932 392 L964 392" stroke="#70e0bf" stroke-width="3" marker-end="url(#ag)"/>
+  <rect x="174" y="689" width="1092" height="42" rx="21" fill="#0b1d30" stroke="#385b76"/><text x="720" y="716" text-anchor="middle" class="body">审计顺序：对象与类型 → total / unique output → collision / coverage → relation closure → representative independence。</text>
+</svg>

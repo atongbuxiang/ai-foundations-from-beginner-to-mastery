@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Multi-Head Attention：多个投影子空间与一张完整预算表</title>
+<desc id="desc">固定总宽时，增加 head 数通常缩小每头维度；标准四投影主阶参数量并不随 head 数增加。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">分头—独立寻址—拼接</text>
+<rect x="55" y="90" width="290" height="55" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="200.0" y="123.5" font-size="16" font-weight="650" text-anchor="middle" fill="#2563EB">X : T × d_model</text>
+<line x1="89" y1="148" x2="89" y2="205" stroke="#2563EB" stroke-width="2" marker-end="url(#a1)"/>
+<rect x="55" y="215" width="68" height="100" rx="6" fill="#F8FAFC" stroke="#2563EB" stroke-width="2"/>
+<text x="89" y="245" font-size="15" font-weight="750" text-anchor="middle" fill="#2563EB">head 1</text>
+<text x="89" y="280" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">T×d_h</text>
+<line x1="165" y1="148" x2="165" y2="205" stroke="#0F766E" stroke-width="2" marker-end="url(#a1)"/>
+<rect x="131" y="215" width="68" height="100" rx="6" fill="#F8FAFC" stroke="#0F766E" stroke-width="2"/>
+<text x="165" y="245" font-size="15" font-weight="750" text-anchor="middle" fill="#0F766E">head 2</text>
+<text x="165" y="280" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">T×d_h</text>
+<line x1="241" y1="148" x2="241" y2="205" stroke="#B7791F" stroke-width="2" marker-end="url(#a1)"/>
+<rect x="207" y="215" width="68" height="100" rx="6" fill="#F8FAFC" stroke="#B7791F" stroke-width="2"/>
+<text x="241" y="245" font-size="15" font-weight="750" text-anchor="middle" fill="#B7791F">head 3</text>
+<text x="241" y="280" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">T×d_h</text>
+<line x1="317" y1="148" x2="317" y2="205" stroke="#C24135" stroke-width="2" marker-end="url(#a1)"/>
+<rect x="283" y="215" width="68" height="100" rx="6" fill="#F8FAFC" stroke="#C24135" stroke-width="2"/>
+<text x="317" y="245" font-size="15" font-weight="750" text-anchor="middle" fill="#C24135">head 4</text>
+<text x="317" y="280" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">T×d_h</text>
+<line x1="89" y1="318" x2="190" y2="370" stroke="#2563EB" stroke-width="2"/>
+<line x1="165" y1="318" x2="190" y2="370" stroke="#0F766E" stroke-width="2"/>
+<line x1="241" y1="318" x2="190" y2="370" stroke="#B7791F" stroke-width="2"/>
+<line x1="317" y1="318" x2="190" y2="370" stroke="#C24135" stroke-width="2"/>
+<rect x="80" y="380" width="220" height="48" rx="6" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="190" y="410" font-size="16" font-weight="750" text-anchor="middle" fill="#0F766E">Concat → W_O</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">标准参数量：h 消去</text>
+<text x="450" y="115" font-size="20" font-weight="800" text-anchor="start" fill="#2563EB" class="math">h d_h = d_model</text>
+<text x="450" y="180" font-size="17" font-weight="700" text-anchor="start" fill="#1F2937" class="math">W_Q, W_K, W_V : 3 d_model²</text>
+<text x="450" y="235" font-size="17" font-weight="700" text-anchor="start" fill="#1F2937" class="math">W_O : d_model²</text>
+<line x1="455" y1="270" x2="750" y2="270" stroke="#D7DEE8" stroke-width="2"/>
+<text x="450" y="320" font-size="22" font-weight="850" text-anchor="start" fill="#0F766E" class="math">total ≈ 4 d_model²</text>
+<text x="450" y="390" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">偏置另计；GQA/MQA/unequal dims 需重算。</text>
+<text x="450" y="430" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">score 元素仍为 B·h·T_q·T_k。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">更多头会改变什么</text>
+<text x="845" y="105" font-size="15" font-weight="750" text-anchor="start" fill="#C24135">per-head width</text>
+<text x="845" y="135" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">d_h = d_model / h ↓</text>
+<text x="845" y="195" font-size="15" font-weight="750" text-anchor="start" fill="#C24135">score storage</text>
+<text x="845" y="225" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">B h T_q T_k ↑</text>
+<text x="845" y="285" font-size="15" font-weight="750" text-anchor="start" fill="#C24135">kernel scheduling</text>
+<text x="845" y="315" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">small GEMMs / fusion change</text>
+<text x="845" y="375" font-size="15" font-weight="750" text-anchor="start" fill="#C24135">functional use</text>
+<text x="845" y="405" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">must test ablation/pruning</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">多头不是免费表达力：参数、每头宽度、score 存储、kernel 和训练后利用率必须分开审计。</text>
+</svg>

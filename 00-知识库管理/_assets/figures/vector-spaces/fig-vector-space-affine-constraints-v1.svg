@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">向量空间、子空间、仿射集合和非线性约束对比</title>
+  <desc id="desc">三个面板依次展示环境向量空间中的线性组合、经过原点的子空间与平移后的仿射集合，以及概率单纯形和单位圆等不对任意线性组合封闭的约束集合。</desc>
+  <defs>
+    <marker id="blueArrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#2563eb"/></marker>
+    <marker id="orangeArrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#ea580c"/></marker>
+    <style>
+      .panel{fill:#f8fafc;stroke:#64748b;stroke-width:1.5}.title{font:700 18px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#0f172a}.label{font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#1e293b}.small{font:13px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#475569}.axis{stroke:#94a3b8;stroke-width:1.5}.blue{stroke:#2563eb;stroke-width:4;marker-end:url(#blueArrow)}.orange{stroke:#ea580c;stroke-width:4;marker-end:url(#orangeArrow)}.sub{fill:#dbeafe;stroke:#3b82f6;stroke-width:2}.aff{fill:#ffedd5;stroke:#f97316;stroke-width:2}.bad{fill:none;stroke:#7c3aed;stroke-width:3}.origin{fill:#0f172a}
+    </style>
+  </defs>
+  <rect width="1200" height="430" fill="#fff"/>
+  <g transform="translate(20,20)">
+    <rect class="panel" width="370" height="390" rx="14"/>
+    <text class="title" x="20" y="34">1. 环境向量空间 V</text>
+    <line class="axis" x1="48" y1="310" x2="330" y2="310"/><line class="axis" x1="90" y1="350" x2="90" y2="80"/>
+    <circle class="origin" cx="90" cy="310" r="5"/><text class="small" x="72" y="333">0</text>
+    <line class="blue" x1="90" y1="310" x2="255" y2="180"/><line class="orange" x1="90" y1="310" x2="185" y2="250"/>
+    <line x1="90" y1="310" x2="315" y2="135" stroke="#059669" stroke-width="4" stroke-dasharray="7 5" marker-end="url(#blueArrow)"/>
+    <text class="label" x="248" y="170">u</text><text class="label" x="180" y="244">v</text><text class="label" x="270" y="128">au+bv</text>
+    <text class="small" x="20" y="370">任意 a,b∈F，线性组合仍是合法对象</text>
+  </g>
+  <g transform="translate(415,20)">
+    <rect class="panel" width="370" height="390" rx="14"/>
+    <text class="title" x="20" y="34">2. 子空间与仿射平移</text>
+    <line class="axis" x1="45" y1="322" x2="330" y2="322"/><line class="axis" x1="92" y1="355" x2="92" y2="72"/>
+    <circle class="origin" cx="92" cy="322" r="5"/><text class="small" x="73" y="345">0</text>
+    <polygon class="sub" points="48,305 295,190 332,220 85,335" opacity=".78"/>
+    <polygon class="aff" points="48,190 295,75 332,105 85,220" opacity=".82"/>
+    <line class="orange" x1="92" y1="322" x2="92" y2="207"/>
+    <text class="label" x="220" y="260">U：经过原点</text><text class="label" x="185" y="142">a+U：不必经过原点</text>
+    <text class="small" x="20" y="370">方向相同，但只有 U 对任意线性组合封闭</text>
+  </g>
+  <g transform="translate(810,20)">
+    <rect class="panel" width="370" height="390" rx="14"/>
+    <text class="title" x="20" y="34">3. 约束集合通常不是空间</text>
+    <line class="axis" x1="45" y1="322" x2="330" y2="322"/><line class="axis" x1="92" y1="355" x2="92" y2="72"/>
+    <circle class="origin" cx="92" cy="322" r="5"/>
+    <circle class="bad" cx="185" cy="220" r="78"/><text class="label" x="215" y="126">单位范数</text>
+    <polygon points="110,300 295,300 295,115" fill="#ede9fe" stroke="#7c3aed" stroke-width="2" opacity=".8"/>
+    <text class="label" x="195" y="280">概率单纯形</text>
+    <line class="blue" x1="185" y1="220" x2="305" y2="220"/>
+    <text class="small" x="20" y="365">缩放/相加可离开集合；先分环境空间与可行集</text>
+  </g>
+</svg>

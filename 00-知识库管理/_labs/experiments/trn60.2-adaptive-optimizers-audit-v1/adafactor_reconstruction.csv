@@ -1,0 +1,4 @@
+case,max_row_marginal_error,max_column_marginal_error,element_rms_error
+rank_one,0.0,0.0,0.0
+identity,0.0,0.0,0.5
+general,0.0,0.0,1.2879651263394778

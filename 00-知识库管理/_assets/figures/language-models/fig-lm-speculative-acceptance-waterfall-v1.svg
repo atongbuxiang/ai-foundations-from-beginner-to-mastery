@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">Speculative sampling：重叠质量被接受，缺口由 residual 补齐</title><desc id="desc">单步质量恒等式与多 token 首拒绝 waterfall。</desc>
+<rect width="1200" height="700" fill="#FBF8F1"/>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#667784"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#183044" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<line x1="48" y1="70" x2="1152" y2="70" stroke="#7054A3" stroke-width="4"/>
+<text x="52" y="49" font-size="24" font-weight="700" fill="#183044">Speculative sampling：重叠质量被接受，缺口由 residual 补齐</text>
+<text x="80" y="108" text-anchor="start" font-size="16" font-weight="700" fill="#183044">单步质量分解</text>
+<rect x="80" y="145" width="230.0" height="45" fill="#245AA8" opacity="1"/>
+<text x="195.0" y="173" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">A 0.50</text>
+<rect x="310.0" y="145" width="138.0" height="45" fill="#17766E" opacity="1"/>
+<text x="379.0" y="173" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">B 0.30</text>
+<rect x="448.0" y="145" width="92.0" height="45" fill="#C87922" opacity="1"/>
+<text x="494.0" y="173" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">C 0.20</text>
+<text x="555" y="173" text-anchor="start" font-size="12" font-weight="400" fill="#667784">target p</text>
+<rect x="80" y="215" width="161.0" height="45" fill="#245AA8" opacity="0.62"/>
+<text x="160.5" y="243" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">A 0.35</text>
+<rect x="241.0" y="215" width="207.0" height="45" fill="#17766E" opacity="0.62"/>
+<text x="344.5" y="243" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">B 0.45</text>
+<rect x="448.0" y="215" width="92.0" height="45" fill="#C87922" opacity="0.62"/>
+<text x="494.0" y="243" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">C 0.20</text>
+<text x="555" y="243" text-anchor="start" font-size="12" font-weight="400" fill="#667784">draft q</text>
+<rect x="80" y="295" width="500" height="125" rx="10" fill="#EFF6EA" stroke="#4F7B45" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="95" y="323" text-anchor="start" font-size="15" font-weight="700" fill="#4F7B45">质量恒等式</text>
+<text x="95" y="348" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">accepted(x)=min[p(x),q(x)]</text>
+<text x="95" y="368" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">residual(x)=(p(x)−q(x))+</text>
+<text x="95" y="388" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">α=Σ min(p,q)=0.85=1−TV(p,q)</text>
+<text x="665" y="108" text-anchor="start" font-size="16" font-weight="700" fill="#183044">多 token 首拒绝瀑布</text>
+<circle cx="665" cy="145" r="40" fill="#FFFDF8" stroke="#4F7B45" stroke-width="3" filter="url(#shadow)"/>
+<text x="665" y="141" text-anchor="middle" font-size="16" font-weight="700" fill="#4F7B45">x₁</text>
+<text x="665" y="162" text-anchor="middle" font-size="10.5" font-weight="400" fill="#667784">accept · .92</text>
+<line x1="699" y1="169" x2="751" y2="201" stroke="#4F7B45" stroke-width="2.2" marker-end="url(#arrow)"/>
+<circle cx="785" cy="225" r="40" fill="#FFFDF8" stroke="#4F7B45" stroke-width="3" filter="url(#shadow)"/>
+<text x="785" y="221" text-anchor="middle" font-size="16" font-weight="700" fill="#4F7B45">x₂</text>
+<text x="785" y="242" text-anchor="middle" font-size="10.5" font-weight="400" fill="#667784">accept · .78</text>
+<line x1="819" y1="249" x2="871" y2="281" stroke="#4F7B45" stroke-width="2.2" marker-end="url(#arrow)"/>
+<circle cx="905" cy="305" r="40" fill="#FFFDF8" stroke="#B7443E" stroke-width="3" filter="url(#shadow)"/>
+<text x="905" y="301" text-anchor="middle" font-size="16" font-weight="700" fill="#B7443E">x₃</text>
+<text x="905" y="322" text-anchor="middle" font-size="10.5" font-weight="400" fill="#667784">reject · .41</text>
+<line x1="939" y1="329" x2="991" y2="361" stroke="#B7443E" stroke-width="2.2" marker-end="url(#arrow)"/>
+<circle cx="1025" cy="385" r="40" fill="#FFFDF8" stroke="#667784" stroke-width="3" filter="url(#shadow)"/>
+<text x="1025" y="381" text-anchor="middle" font-size="16" font-weight="700" fill="#667784">x₄</text>
+<text x="1025" y="402" text-anchor="middle" font-size="10.5" font-weight="400" fill="#667784">discard</text>
+<rect x="650" y="465" width="475" height="115" rx="10" fill="#FFF0ED" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="665" y="493" text-anchor="start" font-size="15" font-weight="700" fill="#B7443E">首次拒绝后的动作</text>
+<text x="665" y="518" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">从该位置 (p−q)+ / R 采一个 token</text>
+<text x="665" y="538" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">丢弃后续 draft；KV 回滚/复用须记录</text>
+<text x="665" y="558" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">若全接受，算法可再提交一个 target bonus token</text>
+<rect x="80" y="465" width="500" height="115" rx="10" fill="#EEF4FC" stroke="#245AA8" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="95" y="493" text-anchor="start" font-size="15" font-weight="700" fill="#245AA8">exact 的边界</text>
+<text x="95" y="518" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">保持 target 的输出分布 ≠ 固定 seed 字节一致</text>
+<text x="95" y="538" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">processors/support/tokenizer/stop 必须一致</text>
+<text x="95" y="558" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">accept rate ≠ wall-clock speedup</text>
+<line x1="48" y1="650" x2="1152" y2="650" stroke="#D9D5CB"/>
+<text x="52" y="674" font-size="13" fill="#667784">分布精确性可由质量守恒证明；系统加速仍取决于 draft 成本、验证形状、batch 和 KV 策略。</text>
+</svg>

@@ -1,0 +1,9 @@
+regime,width,output_multiplier,per_neuron_feature_change,aligned_output_change,relative_feature_change
+NTK_lazy,16,0.25,0.25,1.0,0.25
+mean_field_feature,16,0.0625,1.0,1.0,1.0
+NTK_lazy,64,0.125,0.125,1.0,0.125
+mean_field_feature,64,0.015625,1.0,1.0,1.0
+NTK_lazy,256,0.0625,0.0625,1.0,0.0625
+mean_field_feature,256,0.00390625,1.0,1.0,1.0
+NTK_lazy,1024,0.03125,0.03125,1.0,0.03125
+mean_field_feature,1024,0.0009765625,1.0,1.0,1.0

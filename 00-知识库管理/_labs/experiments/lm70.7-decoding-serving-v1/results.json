@@ -1,0 +1,255 @@
+{
+  "experiment_id": "lm70.7-decoding-serving-v1",
+  "status": "passed",
+  "checks_passed": 9,
+  "checks_total": 9,
+  "checks": [
+    {
+      "name": "softmax_shift_temperature",
+      "passed": true,
+      "observed": {
+        "softmax": [
+          0.6652409557748218,
+          0.24472847105479764,
+          0.09003057317038046
+        ],
+        "shifted": [
+          0.6652409557748218,
+          0.24472847105479764,
+          0.09003057317038046
+        ],
+        "odds_tau_0_5": 7.38905609893065
+      },
+      "expected": {
+        "shift_invariant": true,
+        "odds_tau_0_5": 7.38905609893065
+      },
+      "note": "LM49"
+    },
+    {
+      "name": "greedy_vs_sequence_map",
+      "passed": true,
+      "observed": {
+        "greedy_Ax": 0.3,
+        "global_By": 0.36000000000000004
+      },
+      "expected": {
+        "global_best": "By",
+        "probability": 0.36
+      },
+      "note": "LM50"
+    },
+    {
+      "name": "truncation_supports",
+      "passed": true,
+      "observed": {
+        "top3": [
+          0,
+          1,
+          2
+        ],
+        "top_p_075": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "min_p_02": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "expected": {
+        "top3": [
+          0,
+          1,
+          2
+        ],
+        "top_p_075": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "min_p_02": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "note": "LM51"
+    },
+    {
+      "name": "eos_survival",
+      "passed": true,
+      "observed": {
+        "survival": [
+          1.0,
+          0.9,
+          0.7200000000000001,
+          0.36000000000000004
+        ],
+        "stop_at_3": 0.36000000000000004
+      },
+      "expected": {
+        "survival": [
+          1,
+          0.9,
+          0.72,
+          0.36
+        ],
+        "stop_at_3": 0.36
+      },
+      "note": "LM52"
+    },
+    {
+      "name": "grammar_mask",
+      "passed": true,
+      "observed": {
+        "valid": [
+          "b",
+          "c"
+        ],
+        "Z": 0.7,
+        "q": {
+          "b": 0.5714285714285715,
+          "c": 0.4285714285714286
+        }
+      },
+      "expected": {
+        "valid": [
+          "b",
+          "c"
+        ],
+        "Z": 0.7,
+        "q": {
+          "b": 0.5714285714285714,
+          "c": 0.42857142857142855
+        }
+      },
+      "note": "LM53"
+    },
+    {
+      "name": "kv_bytes_and_blocks",
+      "passed": true,
+      "observed": {
+        "bytes_per_token": 131072,
+        "rows": [
+          {
+            "length": 17,
+            "blocks": 2,
+            "waste_tokens": 15
+          },
+          {
+            "length": 32,
+            "blocks": 2,
+            "waste_tokens": 0
+          },
+          {
+            "length": 47,
+            "blocks": 3,
+            "waste_tokens": 1
+          }
+        ]
+      },
+      "expected": {
+        "bytes_per_token": 131072,
+        "blocks_total": 7,
+        "waste_total": 16
+      },
+      "note": "LM54"
+    },
+    {
+      "name": "speculative_mass_conservation",
+      "passed": true,
+      "observed": {
+        "accepted_mass": [
+          0.35,
+          0.3,
+          0.2
+        ],
+        "alpha": 0.85,
+        "residual": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "recovered": [
+          0.5,
+          0.3,
+          0.2
+        ]
+      },
+      "expected": {
+        "alpha": 0.85,
+        "residual": [
+          1,
+          0,
+          0
+        ],
+        "recovered": [
+          0.5,
+          0.3,
+          0.2
+        ]
+      },
+      "note": "LM55"
+    },
+    {
+      "name": "serving_metrics_and_goodput",
+      "passed": true,
+      "observed": {
+        "requests": [
+          {
+            "request": "R1",
+            "arrival_ms": 0,
+            "prefill_start_ms": 40,
+            "first_token_ms": 140,
+            "complete_ms": 300,
+            "ttft_ms": 140,
+            "e2e_ms": 300
+          },
+          {
+            "request": "R2",
+            "arrival_ms": 50,
+            "prefill_start_ms": 130,
+            "first_token_ms": 250,
+            "complete_ms": 500,
+            "ttft_ms": 200,
+            "e2e_ms": 450
+          }
+        ],
+        "goodput_req_s": 4.2
+      },
+      "expected": {
+        "ttft_ms": [
+          140,
+          200
+        ],
+        "goodput_req_s": 4.2
+      },
+      "note": "LM56"
+    },
+    {
+      "name": "pareto_and_speed_model",
+      "passed": true,
+      "observed": {
+        "C_dominates_A": true,
+        "C_dominates_B": true,
+        "speedup": 1.3636363636363635
+      },
+      "expected": {
+        "C_dominates_A": true,
+        "C_dominates_B": true,
+        "speedup": 1.3636363636363635
+      },
+      "note": "LM55-LM56"
+    }
+  ],
+  "determinism": "No model/API/GPU dependency; standard-library arithmetic and SVG only."
+}

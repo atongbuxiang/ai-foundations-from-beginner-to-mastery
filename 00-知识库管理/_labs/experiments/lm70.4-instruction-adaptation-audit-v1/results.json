@@ -1,0 +1,302 @@
+{
+  "experiment_id": "EXP-LM-704-V1",
+  "checks": {
+    "chat_train_inference_prefix": true,
+    "sft_shift_mask_and_global_denominator": true,
+    "instruction_draw_target_selection_shares": true,
+    "small_parameter_large_function_flip": true,
+    "lora_gradient_and_merge_oracle": true,
+    "qlora_memory_accounting": true,
+    "peft_parameter_counts": true,
+    "soup_task_arithmetic_and_ties": true,
+    "permutation_breaks_naive_average": true
+  },
+  "template": {
+    "train": [
+      "BOS",
+      "SYSTEM",
+      "s",
+      "EOT",
+      "USER",
+      "q",
+      "EOT",
+      "ASSISTANT",
+      "a",
+      "EOS"
+    ],
+    "infer": [
+      "BOS",
+      "SYSTEM",
+      "s",
+      "EOT",
+      "USER",
+      "q",
+      "EOT",
+      "ASSISTANT"
+    ],
+    "answer_start": 8,
+    "train_prefix": [
+      "BOS",
+      "SYSTEM",
+      "s",
+      "EOT",
+      "USER",
+      "q",
+      "EOT",
+      "ASSISTANT"
+    ]
+  },
+  "sft": {
+    "full": [
+      "U",
+      "q",
+      "A",
+      "a",
+      "b",
+      "EOS"
+    ],
+    "inputs": [
+      "U",
+      "q",
+      "A",
+      "a",
+      "b"
+    ],
+    "labels": [
+      "q",
+      "A",
+      "a",
+      "b",
+      "EOS"
+    ],
+    "response_mask": [
+      0,
+      0,
+      1,
+      1,
+      1
+    ],
+    "effective_targets": 3,
+    "global_mean": 2.3333333333333335,
+    "equal_device_mean": 2.5,
+    "per_token_mean": 1.6666666666666667,
+    "per_turn_mean": 2.0
+  },
+  "instruction_distribution": {
+    "tasks": [
+      {
+        "task": "A",
+        "draw_share": 0.5,
+        "mean_targets": 20,
+        "target_share": 0.2
+      },
+      {
+        "task": "B",
+        "draw_share": 0.5,
+        "mean_targets": 80,
+        "target_share": 0.8
+      }
+    ],
+    "selection": [
+      {
+        "group": "A",
+        "candidate_share": 0.6,
+        "retention": 0.8,
+        "selected_share": 0.857142857142857
+      },
+      {
+        "group": "B",
+        "candidate_share": 0.4,
+        "retention": 0.2,
+        "selected_share": 0.14285714285714288
+      }
+    ],
+    "total_retention": 0.56
+  },
+  "low_margin": {
+    "epsilon": 0.001,
+    "parameter_change": 0.002,
+    "samples": 100,
+    "prediction_flips": 100
+  },
+  "lora": {
+    "base": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "A": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "B": [
+      [
+        2.0,
+        0.0
+      ],
+      [
+        0.0,
+        3.0
+      ]
+    ],
+    "scale": 0.5,
+    "delta": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.5
+      ]
+    ],
+    "x": [
+      1.0,
+      2.0
+    ],
+    "unmerged_output": [
+      2.0,
+      5.0
+    ],
+    "merged_output": [
+      2.0,
+      5.0
+    ],
+    "grad_B_when_B_zero": [
+      [
+        0.5,
+        1.0
+      ],
+      [
+        1.5,
+        2.0
+      ]
+    ],
+    "grad_A_when_B_zero": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ]
+  },
+  "qlora_memory": {
+    "rows": [
+      {
+        "item": "4bit_codes",
+        "gb": 0.5
+      },
+      {
+        "item": "quant_metadata",
+        "gb": 0.1
+      },
+      {
+        "item": "adapter_states",
+        "gb": 0.12
+      },
+      {
+        "item": "activations",
+        "gb": 1.4
+      },
+      {
+        "item": "temporary",
+        "gb": 0.5
+      }
+    ],
+    "accounted_sum_gb": 2.62
+  },
+  "peft_counts": {
+    "d": 100,
+    "layers": 4,
+    "prompt_length": 5,
+    "rank": 2,
+    "prompt_parameters": 500,
+    "prefix_kv_parameters": 4000,
+    "adapter_parameters": 1600
+  },
+  "merging": {
+    "theta0": [
+      1.0,
+      1.0
+    ],
+    "theta1": [
+      2.0,
+      0.0
+    ],
+    "theta2": [
+      1.0,
+      3.0
+    ],
+    "uniform_soup": [
+      1.5,
+      1.5
+    ],
+    "tau1": [
+      1.0,
+      -1.0
+    ],
+    "tau2": [
+      0.0,
+      2.0
+    ],
+    "task_vector_sum": [
+      2.0,
+      2.0
+    ],
+    "ties_positive": {
+      "raw": [
+        0.8,
+        0.6,
+        -0.1
+      ],
+      "trimmed": [
+        0.8,
+        0.6,
+        0.0
+      ],
+      "elected_sign": 1,
+      "aligned": [
+        0.8,
+        0.6
+      ],
+      "merged": 0.7
+    },
+    "ties_negative": {
+      "raw": [
+        -0.7,
+        0.5,
+        -0.6
+      ],
+      "trimmed": [
+        -0.7,
+        0.5,
+        -0.6
+      ],
+      "elected_sign": -1,
+      "aligned": [
+        -0.7,
+        -0.6
+      ],
+      "merged": -0.6499999999999999
+    },
+    "permutation_counterexample": {
+      "f_a": 6.0,
+      "f_b": 6.0,
+      "f_average": 0.0
+    }
+  }
+}

@@ -1,0 +1,22 @@
+---
+type: moc
+status: active
+area: [neural-networks/regularization]
+prerequisites: ["[[学习问题、决策与风险 MOC]]", "[[残差连接、深度与稳定性 MOC]]"]
+related: ["[[神经网络基础完整课程地图与掌握标准]]", "[[容量界、稳定性界与 PAC-Bayes 的比较]]"]
+created: 2026-08-23
+updated: 2026-08-24
+---
+# 随机正则化与网络级泛化接口 MOC
+| ID | 节点 | 出口 | 状态 |
+|---|---|---|---|
+| NN-57 | [[Dropout 的随机掩码、期望与 Inverted Scaling]] | mask expectation | draft + A–E 闭环 |
+| NN-58 | [[Dropout 的方差、共适应解释与 Bayesian 边界]] | evidence boundary | draft + A–E 闭环 |
+| NN-59 | [[DropConnect、权重噪声与激活噪声]] | noise location | draft + A–E 闭环 |
+| NN-60 | [[Stochastic Depth、DropPath 与有效深度]] | random paths | draft + A–E 闭环 |
+| NN-61 | [[Label Smoothing、置信度与目标偏置]] | target change | draft + A–E 闭环 |
+| NN-62 | [[Mixup、Manifold Mixup 与插值正则]] | interpolation prior | draft + A–E 闭环 |
+| NN-63 | [[Jacobian、Gradient Penalty 与 Lipschitz 正则接口]] | local derivative penalty | draft + A–E 闭环 |
+| NN-64 | [[网络级正则化的交互、消融与证据地图]] | causal audit | draft + A–E 闭环 |
+
+当前为 **8/8 正文、8/8 A—E 题解闭环、0/8 真实验收**，共 120 道节点题及逐题独立详解。30.8 的静态材料已经闭合，并已纳入[[阶段测验 - 神经网络基础（第三章）|NN-CUM-01]]与[[实验 - 神经网络基础累计复现门]]；`draft` 只表示材料组成，不能替代学习者闭卷、重做与迁移证据。

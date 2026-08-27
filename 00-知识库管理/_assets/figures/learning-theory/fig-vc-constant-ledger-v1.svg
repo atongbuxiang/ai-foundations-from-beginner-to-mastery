@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720">
+  <rect width="1200" height="720" fill="#fffefb"/>
+  <style>.s{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.m{font-family:"SFMono-Regular",Menlo,monospace}.ink{fill:#182235}.muted{fill:#64748b}.b{fill:#2457d6}.g{fill:#147d64}.r{fill:#c83d32}</style>
+  <text x="62" y="61" class="s ink" font-size="31" font-weight="750">VC inequality 常数账本：每一个 2 与 1/8 从哪里来</text>
+  <text x="62" y="98" class="s muted" font-size="17">沿证明方向逐行记账；更换对称化或浓缩版本会改变常数，因此不能跨教材拼接。</text>
+  <line x1="62" y1="126" x2="1138" y2="126" stroke="#d7dee8" stroke-width="2"/>
+
+  <g class="s">
+    <text x="72" y="176" class="b" font-size="17" font-weight="750">步骤</text><text x="200" y="176" class="b" font-size="17" font-weight="750">事件或不等式</text><text x="820" y="176" class="b" font-size="17" font-weight="750">本步代价</text><text x="1010" y="176" class="b" font-size="17" font-weight="750">累计</text>
+    <line x1="62" y1="194" x2="1138" y2="194" stroke="#94a3b8" stroke-width="2"/>
+
+    <text x="72" y="246" class="ink" font-size="16" font-weight="700">1　ghost</text>
+    <text x="200" y="232" class="ink" font-size="16">S 坏时，Chebyshev 保证 S′ 至少以 1/2 概率靠近 Pf</text>
+    <text x="200" y="259" class="m muted" font-size="15">Pr(bad S) ≤ 2 Pr(two-sample bad)</text>
+    <text x="820" y="246" class="r" font-size="20" font-weight="750">× 2</text><text x="1010" y="246" class="m ink" font-size="18">2</text>
+    <line x1="62" y1="286" x2="1138" y2="286" stroke="#d7dee8"/>
+
+    <text x="72" y="338" class="ink" font-size="16" font-weight="700">2　swap</text>
+    <text x="200" y="324" class="ink" font-size="16">pairwise exchangeability 引入独立 σᵢ，不放大概率</text>
+    <text x="200" y="351" class="m muted" font-size="15">P_m f−P′_m f  ≡_d  m⁻¹Σ σᵢaᵢ(f)</text>
+    <text x="820" y="338" class="g" font-size="18" font-weight="750">× 1</text><text x="1010" y="338" class="m ink" font-size="18">2</text>
+    <line x1="62" y1="378" x2="1138" y2="378" stroke="#d7dee8"/>
+
+    <text x="72" y="430" class="ink" font-size="16" font-weight="700">3　Hoeffding</text>
+    <text x="200" y="416" class="ink" font-size="16">双侧尾界给前因子 2；阈值 ε/2 与区间长度 2 进入指数</text>
+    <text x="200" y="443" class="m muted" font-size="15">Prσ(|m⁻¹Σσᵢaᵢ|&gt;ε/2) ≤ 2 exp(−mε²/8)</text>
+    <text x="820" y="430" class="r" font-size="20" font-weight="750">× 2，1/8</text><text x="1010" y="430" class="m ink" font-size="18">4</text>
+    <line x1="62" y1="470" x2="1138" y2="470" stroke="#d7dee8"/>
+
+    <text x="72" y="522" class="ink" font-size="16" font-weight="700">4　计数</text>
+    <text x="200" y="508" class="ink" font-size="16">pooled 2m 点上的 distinct error patterns 至多 τ_H(2m)</text>
+    <text x="200" y="535" class="m muted" font-size="15">相同 pattern → 相同 conditional event，只 union 一次</text>
+    <text x="820" y="522" class="b" font-size="18" font-weight="750">× τ_H(2m)</text><text x="1010" y="522" class="m ink" font-size="18">4τ_H(2m)</text>
+  </g>
+
+  <path d="M62 577 H1138 V682 H62 Z" fill="#e8f7f2" stroke="#147d64" stroke-width="3"/>
+  <text x="86" y="616" class="s g" font-size="18" font-weight="750">最终：</text>
+  <text x="190" y="616" class="m ink" font-size="21">Pr(sup_h |R_P(h)−R_S(h)| &gt; ε)</text>
+  <text x="190" y="656" class="m g" font-size="24" font-weight="750">≤ 4 τ_H(2m) exp(−mε²/8)</text>
+  <text x="720" y="656" class="s r" font-size="15">前提：iid、0–1 loss、固定 class、mε²≥2。</text>
+</svg>

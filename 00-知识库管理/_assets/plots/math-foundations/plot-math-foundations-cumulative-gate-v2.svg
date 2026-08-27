@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="540" viewBox="0 0 1440 540" role="img" aria-labelledby="title desc">
+<title id="title">数学语言、逻辑与证明累计复现门</title>
+<desc id="desc">三面板展示有限量词换序反例、递推误差证书与不同增长制度下的复杂度曲线。</desc>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",Arial,sans-serif}</style>
+<rect x="0.00" y="0.00" width="1440.00" height="540.00" rx="0.00" fill="#ffffff" stroke="none" opacity="1.000"/>
+<text x="40.00" y="38.00" font-size="24" font-weight="750" fill="#1f2937" text-anchor="start">MATH-CUM-01 · 量词—证明—复杂度三轨复现门</text>
+<text x="40.00" y="66.00" font-size="15" font-weight="400" fill="#64748b" text-anchor="start">有限枚举负责找反例，解析界负责无限结论，复杂度曲线必须绑定增长制度</text>
+<rect x="30.00" y="86.00" width="440.00" height="430.00" rx="14.00" fill="#fffefb" stroke="#d7dee8" opacity="1.000"/>
+<text x="48.00" y="116.00" font-size="17" font-weight="700" fill="#1f2937" text-anchor="start">A  量词换序的有限反模型</text>
+<text x="48.00" y="138.00" font-size="15" font-weight="400" fill="#64748b" text-anchor="start">枚举全部 Boolean relations；计数是有限定理</text>
+<line x1="60.00" y1="355.00" x2="310.00" y2="355.00" stroke="#d7dee8" stroke-width="1.00"/>
+<text x="53.00" y="359.00" font-size="15" font-weight="400" fill="#64748b" text-anchor="end">0k</text>
+<line x1="60.00" y1="308.75" x2="310.00" y2="308.75" stroke="#d7dee8" stroke-width="1.00"/>
+<text x="53.00" y="312.75" font-size="15" font-weight="400" fill="#64748b" text-anchor="end">16k</text>
+<line x1="60.00" y1="262.50" x2="310.00" y2="262.50" stroke="#d7dee8" stroke-width="1.00"/>
+<text x="53.00" y="266.50" font-size="15" font-weight="400" fill="#64748b" text-anchor="end">32k</text>
+<line x1="60.00" y1="216.25" x2="310.00" y2="216.25" stroke="#d7dee8" stroke-width="1.00"/>
+<text x="53.00" y="220.25" font-size="15" font-weight="400" fill="#64748b" text-anchor="end">49k</text>
+<line x1="60.00" y1="170.00" x2="310.00" y2="170.00" stroke="#d7dee8" stroke-width="1.00"/>
+<text x="53.00" y="174.00" font-size="15" font-weight="400" fill="#64748b" text-anchor="end">65k</text>
+<rect x="88.00" y="212.09" width="52.00" height="142.91" rx="5.00" fill="#2563eb" stroke="none" opacity="0.900"/>
+<text x="114.00" y="204.09" font-size="15" font-weight="700" fill="#2563eb" text-anchor="middle">50,625</text>
+<text x="114.00" y="375.00" font-size="15" font-weight="600" fill="#1f2937" text-anchor="middle">∀x∃y</text>
+<rect x="163.00" y="312.91" width="52.00" height="42.09" rx="5.00" fill="#16836b" stroke="none" opacity="0.900"/>
+<text x="189.00" y="304.91" font-size="15" font-weight="700" fill="#16836b" text-anchor="middle">14,911</text>
+<text x="189.00" y="375.00" font-size="15" font-weight="600" fill="#1f2937" text-anchor="middle">∃y∀x</text>
+<rect x="238.00" y="254.18" width="52.00" height="100.82" rx="5.00" fill="#dc4545" stroke="none" opacity="0.900"/>
+<text x="264.00" y="246.18" font-size="15" font-weight="700" fill="#dc4545" text-anchor="middle">35,714</text>
+<text x="264.00" y="375.00" font-size="15" font-weight="600" fill="#1f2937" text-anchor="middle">换序缺口</text>
+<text x="388.00" y="169.00" font-size="15" font-weight="700" fill="#7c3aed" text-anchor="middle">反例 R(x,y) ⇔ x=y</text>
+<text x="332.00" y="199.00" font-size="15" font-weight="400" fill="#64748b" text-anchor="end">x0</text>
+<rect x="340.00" y="182.00" width="22.00" height="22.00" rx="3.00" fill="#7c3aed" stroke="none" opacity="1.000"/>
+<text x="351.00" y="198.00" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">1</text>
+<rect x="364.00" y="182.00" width="22.00" height="22.00" rx="3.00" fill="#eef1f6" stroke="none" opacity="1.000"/>
+<text x="375.00" y="198.00" font-size="15" font-weight="700" fill="#64748b" text-anchor="middle">0</text>
+<rect x="388.00" y="182.00" width="22.00" height="22.00" rx="3.00" fill="#eef1f6" stroke="none" opacity="1.000"/>
+<text x="399.00" y="198.00" font-size="15" font-weight="700" fill="#64748b" text-anchor="middle">0</text>
+<rect x="412.00" y="182.00" width="22.00" height="22.00" rx="3.00" fill="#eef1f6" stroke="none" opacity="1.000"/>
+<text x="423.00" y="198.00" font-size="15" font-weight="700" fill="#64748b" text-anchor="middle">0</text>
+<text x="332.00" y="223.00" font-size="15" font-weight="400" fill="#64748b" text-anchor="end">x1</text>
+<rect x="340.00" y="206.00" width="22.00" height="22.00" rx="3.00" fill="#eef1f6" stroke="none" opacity="1.000"/>
+<text x="351.00" y="222.00" font-size="15" font-weight="700" fill="#64748b" text-anchor="middle">0</text>
+<rect x="364.00" y="206.00" width="22.00" height="22.00" rx="3.00" fill="#7c3aed" stroke="none" opacity="1.000"/>
+<text x="375.00" y="222.00" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">1</text>
+<rect x="388.00" y="206.00" width="22.00" height="22.00" rx="3.00" fill="#eef1f6" stroke="none" opacity="1.000"/>
+<text x="399.00" y="222.00" font-size="15" font-weight="700" fill="#64748b" text-anchor="middle">0</text>
+<rect x="412.00" y="206.00" width="22.00" height="22.00" rx="3.00" fill="#eef1f6" stroke="none" opacity="1.000"/>
+<text x="423.00" y="222.00" font-size="15" font-weight="700" fill="#64748b" text-anchor="middle">0</text>
+<text x="332.00" y="247.00" font-size="15" font-weight="400" fill="#64748b" text-anchor="end">x2</text>
+<rect x="340.00" y="230.00" width="22.00" height="22.00" rx="3.00" fill="#eef1f6" stroke="none" opacity="1.000"/>
+<text x="351.00" y="246.00" font-size="15" font-weight="700" fill="#64748b" text-anchor="middle">0</text>
+<rect x="364.00" y="230.00" width="22.00" height="22.00" rx="3.00" fill="#eef1f6" stroke="none" opacity="1.000"/>
+<text x="375.00" y="246.00" font-size="15" font-weight="700" fill="#64748b" text-anchor="middle">0</text>
+<rect x="388.00" y="230.00" width="22.00" height="22.00" rx="3.00" fill="#7c3aed" stroke="none" opacity="1.000"/>
+<text x="399.00" y="246.00" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">1</text>
+<rect x="412.00" y="230.00" width="22.00" height="22.00" rx="3.00" fill="#eef1f6" stroke="none" opacity="1.000"/>
+<text x="423.00" y="246.00" font-size="15" font-weight="700" fill="#64748b" text-anchor="middle">0</text>
+<text x="332.00" y="271.00" font-size="15" font-weight="400" fill="#64748b" text-anchor="end">x3</text>
+<rect x="340.00" y="254.00" width="22.00" height="22.00" rx="3.00" fill="#eef1f6" stroke="none" opacity="1.000"/>
+<text x="351.00" y="270.00" font-size="15" font-weight="700" fill="#64748b" text-anchor="middle">0</text>
+<rect x="364.00" y="254.00" width="22.00" height="22.00" rx="3.00" fill="#eef1f6" stroke="none" opacity="1.000"/>
+<text x="375.00" y="270.00" font-size="15" font-weight="700" fill="#64748b" text-anchor="middle">0</text>
+<rect x="388.00" y="254.00" width="22.00" height="22.00" rx="3.00" fill="#eef1f6" stroke="none" opacity="1.000"/>
+<text x="399.00" y="270.00" font-size="15" font-weight="700" fill="#64748b" text-anchor="middle">0</text>
+<rect x="412.00" y="254.00" width="22.00" height="22.00" rx="3.00" fill="#7c3aed" stroke="none" opacity="1.000"/>
+<text x="423.00" y="270.00" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">1</text>
+<text x="388.00" y="297.00" font-size="15" font-weight="400" fill="#64748b" text-anchor="middle">每行有 1；没有全 1 列</text>
+<rect x="54.00" y="397.00" width="392.00" height="88.00" rx="8.00" fill="#f2f6ff" stroke="none" opacity="1.000"/>
+<text x="68.00" y="422.00" font-size="15" font-weight="700" fill="#2563eb" text-anchor="start">能推出</text>
+<text x="133.00" y="422.00" font-size="15" font-weight="400" fill="#1f2937" text-anchor="start">在 4×4 有限域中，uniform ⇒ pointwise</text>
+<text x="68.00" y="450.00" font-size="15" font-weight="700" fill="#dc4545" text-anchor="start">不能推出</text>
+<text x="133.00" y="450.00" font-size="15" font-weight="400" fill="#1f2937" text-anchor="start">任意无穷域上的量词定理；真实模型的性质</text>
+<text x="68.00" y="477.00" font-size="15" font-weight="400" fill="#64748b" text-anchor="start">全部关系 65,536；换序反例 35,714</text>
+<rect x="500.00" y="86.00" width="440.00" height="430.00" rx="14.00" fill="#fffefb" stroke="#d7dee8" opacity="1.000"/>
+<text x="518.00" y="116.00" font-size="17" font-weight="700" fill="#1f2937" text-anchor="start">B  递推 → 界 → 极限 → 步数</text>
+<text x="518.00" y="138.00" font-size="15" font-weight="400" fill="#64748b" text-anchor="start">同一 proof certificate 串联 MATH-05—08</text>
+<line x1="554.00" y1="332.86" x2="910.00" y2="332.86" stroke="#d7dee8" stroke-width="1.00"/>
+<text x="546.00" y="336.86" font-size="15" font-weight="400" fill="#64748b" text-anchor="end">10^-8</text>
+<line x1="554.00" y1="296.67" x2="910.00" y2="296.67" stroke="#d7dee8" stroke-width="1.00"/>
+<text x="546.00" y="300.67" font-size="15" font-weight="400" fill="#64748b" text-anchor="end">10^-6</text>
+<line x1="554.00" y1="260.48" x2="910.00" y2="260.48" stroke="#d7dee8" stroke-width="1.00"/>
+<text x="546.00" y="264.48" font-size="15" font-weight="400" fill="#64748b" text-anchor="end">10^-4</text>
+<line x1="554.00" y1="224.29" x2="910.00" y2="224.29" stroke="#d7dee8" stroke-width="1.00"/>
+<text x="546.00" y="228.29" font-size="15" font-weight="400" fill="#64748b" text-anchor="end">10^-2</text>
+<line x1="554.00" y1="188.10" x2="910.00" y2="188.10" stroke="#d7dee8" stroke-width="1.00"/>
+<text x="546.00" y="192.10" font-size="15" font-weight="400" fill="#64748b" text-anchor="end">10^0</text>
+<line x1="554.00" y1="170.00" x2="554.00" y2="360.00" stroke="#d7dee8" stroke-width="1.00"/>
+<text x="554.00" y="379.00" font-size="15" font-weight="400" fill="#64748b" text-anchor="middle">0</text>
+<line x1="628.95" y1="170.00" x2="628.95" y2="360.00" stroke="#d7dee8" stroke-width="1.00"/>
+<text x="628.95" y="379.00" font-size="15" font-weight="400" fill="#64748b" text-anchor="middle">20</text>
+<line x1="703.89" y1="170.00" x2="703.89" y2="360.00" stroke="#d7dee8" stroke-width="1.00"/>
+<text x="703.89" y="379.00" font-size="15" font-weight="400" fill="#64748b" text-anchor="middle">40</text>
+<line x1="778.84" y1="170.00" x2="778.84" y2="360.00" stroke="#d7dee8" stroke-width="1.00"/>
+<text x="778.84" y="379.00" font-size="15" font-weight="400" fill="#64748b" text-anchor="middle">60</text>
+<line x1="853.79" y1="170.00" x2="853.79" y2="360.00" stroke="#d7dee8" stroke-width="1.00"/>
+<text x="853.79" y="379.00" font-size="15" font-weight="400" fill="#64748b" text-anchor="middle">80</text>
+<polyline points="554.00,178.25 557.75,180.00 561.49,181.76 565.24,183.51 568.99,185.26 572.74,187.02 576.48,188.77 580.23,190.53 583.98,192.28 587.73,194.03 591.47,195.79 595.22,197.54 598.97,199.29 602.72,201.05 606.46,202.80 610.21,204.55 613.96,206.31 617.71,208.06 621.45,209.82 625.20,211.57 628.95,213.32 632.69,215.08 636.44,216.83 640.19,218.58 643.94,220.34 647.68,222.09 651.43,223.84 655.18,225.60 658.93,227.35 662.67,229.10 666.42,230.86 670.17,232.61 673.92,234.37 677.66,236.12 681.41,237.87 685.16,239.63 688.91,241.38 692.65,243.13 696.40,244.89 700.15,246.64 703.89,248.39 707.64,250.15 711.39,251.90 715.14,253.66 718.88,255.41 722.63,257.16 726.38,258.92 730.13,260.67 733.87,262.42 737.62,264.18 741.37,265.93 745.12,267.68 748.86,269.44 752.61,271.19 756.36,272.95 760.11,274.70 763.85,276.45 767.60,278.21 771.35,279.96 775.09,281.71 778.84,283.47 782.59,285.22 786.34,286.97 790.08,288.73 793.83,290.48 797.58,292.23 801.33,293.99 805.07,295.74 808.82,297.50 812.57,299.25 816.32,301.00 820.06,302.76 823.81,304.51 827.56,306.26 831.31,308.02 835.05,309.77 838.80,311.52 842.55,313.28 846.29,315.03 850.04,316.79 853.79,318.54 857.54,320.29 861.28,322.05 865.03,323.80 868.78,325.55 872.53,327.31 876.27,329.06 880.02,330.81 883.77,332.57 887.52,334.32 891.26,336.08 895.01,337.83 898.76,339.58 902.51,341.34 906.25,343.09 910.00,344.84" fill="none" stroke="#d97706" stroke-width="2.20" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="7 5"/>
+<polyline points="554.00,188.10 557.75,186.03 561.49,185.80 565.24,186.33 568.99,187.28 572.74,188.48 576.48,189.84 580.23,191.31 583.98,192.86 587.73,194.47 591.47,196.11 595.22,197.78 598.97,199.47 602.72,201.18 606.46,202.90 610.21,204.63 613.96,206.36 617.71,208.10 621.45,209.85 625.20,211.59 628.95,213.34 632.69,215.09 636.44,216.84 640.19,218.59 643.94,220.34 647.68,222.09 651.43,223.85 655.18,225.60 658.93,227.35 662.67,229.11 666.42,230.86 670.17,232.61 673.92,234.37 677.66,236.12 681.41,237.87 685.16,239.63 688.91,241.38 692.65,243.13 696.40,244.89 700.15,246.64 703.89,248.39 707.64,250.15 711.39,251.90 715.14,253.66 718.88,255.41 722.63,257.16 726.38,258.92 730.13,260.67 733.87,262.42 737.62,264.18 741.37,265.93 745.12,267.68 748.86,269.44 752.61,271.19 756.36,272.95 760.11,274.70 763.85,276.45 767.60,278.21 771.35,279.96 775.09,281.71 778.84,283.47 782.59,285.22 786.34,286.97 790.08,288.73 793.83,290.48 797.58,292.23 801.33,293.99 805.07,295.74 808.82,297.50 812.57,299.25 816.32,301.00 820.06,302.76 823.81,304.51 827.56,306.26 831.31,308.02 835.05,309.77 838.80,311.52 842.55,313.28 846.29,315.03 850.04,316.79 853.79,318.54 857.54,320.29 861.28,322.05 865.03,323.80 868.78,325.55 872.53,327.31 876.27,329.06 880.02,330.81 883.77,332.57 887.52,334.32 891.26,336.08 895.01,337.83 898.76,339.58 902.51,341.34 906.25,343.09 910.00,344.84" fill="none" stroke="#2563eb" stroke-width="2.80" stroke-linejoin="round" stroke-linecap="round"/>
+<line x1="572.00" y1="382.00" x2="600.00" y2="382.00" stroke="#2563eb" stroke-width="2.80"/>
+<text x="608.00" y="386.00" font-size="15" font-weight="400" fill="#1f2937" text-anchor="start">exact eₖ</text>
+<line x1="701.00" y1="382.00" x2="729.00" y2="382.00" stroke="#d97706" stroke-width="2.20" stroke-dasharray="7 5"/>
+<text x="737.00" y="386.00" font-size="15" font-weight="400" fill="#1f2937" text-anchor="start">3.5·0.8ᵏ envelope</text>
+<rect x="524.00" y="404.00" width="392.00" height="82.00" rx="8.00" fill="#fff8ec" stroke="none" opacity="1.000"/>
+<text x="538.00" y="426.00" font-size="15" font-weight="700" fill="#64748b" text-anchor="start">ε</text>
+<text x="610.00" y="426.00" font-size="15" font-weight="700" fill="#64748b" text-anchor="start">证书 N</text>
+<text x="700.00" y="426.00" font-size="15" font-weight="700" fill="#64748b" text-anchor="start">真实首达</text>
+<text x="538.00" y="446.00" font-size="15" font-weight="400" fill="#1f2937" text-anchor="start">1e-02</text>
+<text x="623.00" y="446.00" font-size="15" font-weight="700" fill="#d97706" text-anchor="middle">27</text>
+<text x="724.00" y="446.00" font-size="15" font-weight="700" fill="#2563eb" text-anchor="middle">27</text>
+<text x="538.00" y="459.00" font-size="15" font-weight="400" fill="#1f2937" text-anchor="start">1e-04</text>
+<text x="623.00" y="459.00" font-size="15" font-weight="700" fill="#d97706" text-anchor="middle">47</text>
+<text x="724.00" y="459.00" font-size="15" font-weight="700" fill="#2563eb" text-anchor="middle">47</text>
+<text x="538.00" y="472.00" font-size="15" font-weight="400" fill="#1f2937" text-anchor="start">1e-06</text>
+<text x="623.00" y="472.00" font-size="15" font-weight="700" fill="#d97706" text-anchor="middle">68</text>
+<text x="724.00" y="472.00" font-size="15" font-weight="700" fill="#2563eb" text-anchor="middle">68</text>
+<text x="538.00" y="485.00" font-size="15" font-weight="400" fill="#1f2937" text-anchor="start">1e-08</text>
+<text x="623.00" y="485.00" font-size="15" font-weight="700" fill="#d97706" text-anchor="middle">89</text>
+<text x="724.00" y="485.00" font-size="15" font-weight="700" fill="#2563eb" text-anchor="middle">89</text>
+<text x="800.00" y="453.00" font-size="15" font-weight="400" fill="#64748b" text-anchor="start">固定 q=0.8</text>
+<text x="800.00" y="470.00" font-size="15" font-weight="700" fill="#16836b" text-anchor="start">N(ε)=Θ(log 1/ε)</text>
+<rect x="970.00" y="86.00" width="440.00" height="430.00" rx="14.00" fill="#fffefb" stroke="#d7dee8" opacity="1.000"/>
+<text x="988.00" y="116.00" font-size="17" font-weight="700" fill="#1f2937" text-anchor="start">C  Attention 复杂度制度</text>
+<text x="988.00" y="138.00" font-size="15" font-weight="400" fill="#64748b" text-anchor="start">解析 operation proxy；不是 GPU wall-time</text>
+<line x1="1028.00" y1="365.00" x2="1384.00" y2="365.00" stroke="#d7dee8" stroke-width="1.00"/>
+<text x="1020.00" y="369.00" font-size="15" font-weight="400" fill="#64748b" text-anchor="end">10^3</text>
+<line x1="1028.00" y1="316.25" x2="1384.00" y2="316.25" stroke="#d7dee8" stroke-width="1.00"/>
+<text x="1020.00" y="320.25" font-size="15" font-weight="400" fill="#64748b" text-anchor="end">10^5</text>
+<line x1="1028.00" y1="267.50" x2="1384.00" y2="267.50" stroke="#d7dee8" stroke-width="1.00"/>
+<text x="1020.00" y="271.50" font-size="15" font-weight="400" fill="#64748b" text-anchor="end">10^7</text>
+<line x1="1028.00" y1="218.75" x2="1384.00" y2="218.75" stroke="#d7dee8" stroke-width="1.00"/>
+<text x="1020.00" y="222.75" font-size="15" font-weight="400" fill="#64748b" text-anchor="end">10^9</text>
+<line x1="1028.00" y1="170.00" x2="1384.00" y2="170.00" stroke="#d7dee8" stroke-width="1.00"/>
+<text x="1020.00" y="174.00" font-size="15" font-weight="400" fill="#64748b" text-anchor="end">10^11</text>
+<line x1="1028.00" y1="170.00" x2="1028.00" y2="365.00" stroke="#d7dee8" stroke-width="1.00"/>
+<text x="1028.00" y="384.00" font-size="15" font-weight="400" fill="#64748b" text-anchor="middle">2^5</text>
+<line x1="1117.00" y1="170.00" x2="1117.00" y2="365.00" stroke="#d7dee8" stroke-width="1.00"/>
+<text x="1117.00" y="384.00" font-size="15" font-weight="400" fill="#64748b" text-anchor="middle">2^7</text>
+<line x1="1206.00" y1="170.00" x2="1206.00" y2="365.00" stroke="#d7dee8" stroke-width="1.00"/>
+<text x="1206.00" y="384.00" font-size="15" font-weight="400" fill="#64748b" text-anchor="middle">2^9</text>
+<line x1="1295.00" y1="170.00" x2="1295.00" y2="365.00" stroke="#d7dee8" stroke-width="1.00"/>
+<text x="1295.00" y="384.00" font-size="15" font-weight="400" fill="#64748b" text-anchor="middle">2^11</text>
+<line x1="1384.00" y1="170.00" x2="1384.00" y2="365.00" stroke="#d7dee8" stroke-width="1.00"/>
+<text x="1384.00" y="384.00" font-size="15" font-weight="400" fill="#64748b" text-anchor="middle">2^13</text>
+<polyline points="1028.00,254.36 1072.50,246.71 1117.00,238.76 1161.50,230.31 1206.00,221.04 1250.50,210.66 1295.00,199.03 1339.50,186.28 1384.00,172.72" fill="none" stroke="#2563eb" stroke-width="2.60" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1028.00" cy="254.36" r="2.60" fill="#2563eb" stroke="none"/>
+<circle cx="1072.50" cy="246.71" r="2.60" fill="#2563eb" stroke="none"/>
+<circle cx="1117.00" cy="238.76" r="2.60" fill="#2563eb" stroke="none"/>
+<circle cx="1161.50" cy="230.31" r="2.60" fill="#2563eb" stroke="none"/>
+<circle cx="1206.00" cy="221.04" r="2.60" fill="#2563eb" stroke="none"/>
+<circle cx="1250.50" cy="210.66" r="2.60" fill="#2563eb" stroke="none"/>
+<circle cx="1295.00" cy="199.03" r="2.60" fill="#2563eb" stroke="none"/>
+<circle cx="1339.50" cy="186.28" r="2.60" fill="#2563eb" stroke="none"/>
+<circle cx="1384.00" cy="172.72" r="2.60" fill="#2563eb" stroke="none"/>
+<polyline points="1028.00,276.70 1072.50,269.36 1117.00,262.02 1161.50,254.68 1206.00,247.35 1250.50,240.01 1295.00,232.67 1339.50,225.33 1384.00,218.00" fill="none" stroke="#16836b" stroke-width="2.60" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1028.00" cy="276.70" r="2.60" fill="#16836b" stroke="none"/>
+<circle cx="1072.50" cy="269.36" r="2.60" fill="#16836b" stroke="none"/>
+<circle cx="1117.00" cy="262.02" r="2.60" fill="#16836b" stroke="none"/>
+<circle cx="1161.50" cy="254.68" r="2.60" fill="#16836b" stroke="none"/>
+<circle cx="1206.00" cy="247.35" r="2.60" fill="#16836b" stroke="none"/>
+<circle cx="1250.50" cy="240.01" r="2.60" fill="#16836b" stroke="none"/>
+<circle cx="1295.00" cy="232.67" r="2.60" fill="#16836b" stroke="none"/>
+<circle cx="1339.50" cy="225.33" r="2.60" fill="#16836b" stroke="none"/>
+<circle cx="1384.00" cy="218.00" r="2.60" fill="#16836b" stroke="none"/>
+<polyline points="1028.00,298.71 1072.50,284.04 1117.00,269.36 1161.50,254.68 1206.00,240.01 1250.50,225.33 1295.00,210.66 1339.50,195.98 1384.00,181.31" fill="none" stroke="#dc4545" stroke-width="2.60" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1028.00" cy="298.71" r="2.60" fill="#dc4545" stroke="none"/>
+<circle cx="1072.50" cy="284.04" r="2.60" fill="#dc4545" stroke="none"/>
+<circle cx="1117.00" cy="269.36" r="2.60" fill="#dc4545" stroke="none"/>
+<circle cx="1161.50" cy="254.68" r="2.60" fill="#dc4545" stroke="none"/>
+<circle cx="1206.00" cy="240.01" r="2.60" fill="#dc4545" stroke="none"/>
+<circle cx="1250.50" cy="225.33" r="2.60" fill="#dc4545" stroke="none"/>
+<circle cx="1295.00" cy="210.66" r="2.60" fill="#dc4545" stroke="none"/>
+<circle cx="1339.50" cy="195.98" r="2.60" fill="#dc4545" stroke="none"/>
+<circle cx="1384.00" cy="181.31" r="2.60" fill="#dc4545" stroke="none"/>
+<polyline points="1028.00,364.75 1072.50,350.07 1117.00,335.40 1161.50,320.72 1206.00,306.05 1250.50,291.37 1295.00,276.70 1339.50,262.02 1384.00,247.35" fill="none" stroke="#7c3aed" stroke-width="2.60" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1028.00" cy="364.75" r="2.60" fill="#7c3aed" stroke="none"/>
+<circle cx="1072.50" cy="350.07" r="2.60" fill="#7c3aed" stroke="none"/>
+<circle cx="1117.00" cy="335.40" r="2.60" fill="#7c3aed" stroke="none"/>
+<circle cx="1161.50" cy="320.72" r="2.60" fill="#7c3aed" stroke="none"/>
+<circle cx="1206.00" cy="306.05" r="2.60" fill="#7c3aed" stroke="none"/>
+<circle cx="1250.50" cy="291.37" r="2.60" fill="#7c3aed" stroke="none"/>
+<circle cx="1295.00" cy="276.70" r="2.60" fill="#7c3aed" stroke="none"/>
+<circle cx="1339.50" cy="262.02" r="2.60" fill="#7c3aed" stroke="none"/>
+<circle cx="1384.00" cy="247.35" r="2.60" fill="#7c3aed" stroke="none"/>
+<line x1="1004.00" y1="392.00" x2="1028.00" y2="392.00" stroke="#2563eb" stroke-width="2.60"/>
+<text x="1035.00" y="396.00" font-size="15" font-weight="400" fill="#1f2937" text-anchor="start">dense work: p=1.379</text>
+<line x1="1209.00" y1="392.00" x2="1233.00" y2="392.00" stroke="#16836b" stroke-width="2.60"/>
+<text x="1240.00" y="396.00" font-size="15" font-weight="400" fill="#1f2937" text-anchor="start">fixed-r work: p=1.000</text>
+<line x1="1004.00" y1="412.00" x2="1028.00" y2="412.00" stroke="#dc4545" stroke-width="2.60"/>
+<text x="1035.00" y="416.00" font-size="15" font-weight="400" fill="#1f2937" text-anchor="start">r=T/4 work: p=2.000</text>
+<line x1="1209.00" y1="412.00" x2="1233.00" y2="412.00" stroke="#7c3aed" stroke-width="2.60"/>
+<text x="1240.00" y="416.00" font-size="15" font-weight="400" fill="#1f2937" text-anchor="start">score elements: p=2.000</text>
+<rect x="994.00" y="440.00" width="392.00" height="47.00" rx="8.00" fill="#f0fbf7" stroke="none" opacity="1.000"/>
+<text x="1008.00" y="461.00" font-size="15" font-weight="700" fill="#16836b" text-anchor="start">d=512, fixed r=64: linear；r=T/4: quadratic</text>
+<text x="1008.00" y="478.00" font-size="15" font-weight="400" fill="#64748b" text-anchor="start">改变 r(T) 就改变 theorem；memory 与 work 分账</text>
+<text x="720.00" y="531.00" font-size="15" font-weight="400" fill="#64748b" text-anchor="middle">Generated deterministically with Python standard library · composed ≠ mastered</text>
+</svg>

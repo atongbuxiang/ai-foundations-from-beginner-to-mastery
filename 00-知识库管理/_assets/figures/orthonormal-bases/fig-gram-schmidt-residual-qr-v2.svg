@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">Gram-Schmidt 的投影消除、归一化与 QR 结构</title>
+  <desc id="desc">几何图把第二个向量拆为沿第一标准正交方向的投影与垂直残差，右侧列出逐步算法，底部说明张成不变并得到 A 等于 QR。</desc>
+  <defs>
+    <marker id="blue-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#2563eb"/></marker>
+    <marker id="green-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#0f766e"/></marker>
+    <marker id="amber-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#b7791f"/></marker>
+    <style>
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}.blue{fill:#2563eb}.green{fill:#0f766e}.amber{fill:#b7791f}.h{font-size:19px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}.axis{stroke:#cbd5e1;stroke-width:1.5}.blue-arrow{stroke:#2563eb;stroke-width:3;fill:none;marker-end:url(#blue-arrow)}.green-arrow{stroke:#0f766e;stroke-width:3;fill:none;marker-end:url(#green-arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <rect x="42" y="43" width="646" height="426" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="68" y="81" class="sans h blue">把新向量中“旧方向的部分”减掉</text>
+  <path d="M87 402H642M132 437V104" class="axis"/>
+  <circle cx="132" cy="402" r="5" fill="#1f2937"/>
+  <path d="M132 402L552 282" class="blue-arrow"/><text x="518" y="269" class="math body blue">a₁ 与 q₁ 的方向</text>
+  <path d="M132 402L456 132" class="blue-arrow"/><text x="456" y="121" class="math body blue">a₂</text>
+  <circle cx="377" cy="332" r="6" fill="#0f766e"/><path d="M377 332L456 132" class="green-arrow"/><text x="468" y="218" class="math body green">r₂</text>
+  <path d="M456 132L377 332" stroke="#0f766e" stroke-width="2" stroke-dasharray="7 5"/>
+  <path d="M377 332L392 328L396 343" stroke="#64748b" stroke-width="1.5" fill="none"/>
+  <text x="222" y="355" class="math body amber">proj q₁(a₂)</text><path d="M132 402L377 332" stroke="#b7791f" stroke-width="3" marker-end="url(#amber-arrow)"/>
+  <text x="365" y="437" class="math small muted" text-anchor="middle">a₂ = proj q₁(a₂) + r₂，且 r₂ ⟂ q₁</text>
+
+  <rect x="728" y="43" width="430" height="426" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="754" y="81" class="sans h green">逐步构造</text>
+  <circle cx="765" cy="126" r="17" fill="#eff6ff" stroke="#93c5fd"/><text x="765" y="132" class="sans body blue" text-anchor="middle">1</text><text x="798" y="130" class="math formula ink">q₁ = a₁ / ‖a₁‖</text>
+  <circle cx="765" cy="199" r="17" fill="#fffbeb" stroke="#fcd34d"/><text x="765" y="205" class="sans body amber" text-anchor="middle">2</text><text x="798" y="191" class="math body ink">r₂ = a₂ − ⟨a₂,q₁⟩q₁</text><text x="798" y="218" class="sans small muted">消除所有旧方向分量</text>
+  <circle cx="765" cy="278" r="17" fill="#ecfdf5" stroke="#6ee7b7"/><text x="765" y="284" class="sans body green" text-anchor="middle">3</text><text x="798" y="282" class="math formula ink">q₂ = r₂ / ‖r₂‖</text>
+  <line x1="754" y1="322" x2="1132" y2="322" stroke="#cbd5e1"/>
+  <text x="754" y="357" class="math body blue">一般步：rⱼ=aⱼ−Σᵢ&lt;ⱼ⟨aⱼ,qᵢ⟩qᵢ</text>
+  <text x="754" y="394" class="sans body ink">若 rⱼ=0，新向量没有增加方向；</text><text x="754" y="422" class="sans body ink">线性无关保证每次都能归一化。</text>
+  <rect x="92" y="500" width="1016" height="72" rx="12" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="600" y="530" class="math formula ink" text-anchor="middle">span(a₁,…,aⱼ)=span(q₁,…,qⱼ)　　Q*Q=I　　A=QR</text>
+  <text x="600" y="558" class="sans small muted" text-anchor="middle">经典 Gram–Schmidt 给出数学构造；浮点实现还需比较 MGS、Householder QR 与重正交化。</text>
+  <text x="600" y="607" class="sans result ink" text-anchor="middle">每一步只删除旧方向，不删除新方向；所以张成空间保持不变，而坐标系统变得正交。</text>
+</svg>

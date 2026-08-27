@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+  <defs><marker id="d" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0 0L10 3L0 6Z" fill="#26384d"/></marker><marker id="dr" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0 0L10 3L0 6Z" fill="#a64c43"/></marker><style>.t{font-family:Inter,'Noto Sans SC',sans-serif;fill:#172033}.h{font-size:25px;font-weight:700}.s{font-size:17px}.mut{font-size:14px;fill:#667386}.m{font-family:'IBM Plex Mono',monospace;font-size:17px}.arr{stroke:#26384d;stroke-width:2.2;fill:none;marker-end:url(#d)}.grad{stroke:#a64c43;stroke-width:2.5;stroke-dasharray:8 6;fill:none;marker-end:url(#dr)}.upd{stroke:#39745b;stroke-width:2.5;fill:none;marker-end:url(#d)}</style></defs>
+  <rect width="1200" height="620" fill="#f5f1e8"/>
+  <text x="50" y="50" class="t h">VQ-VAE：同一张图里分清值、代理梯度、code 更新与生成 prior</text>
+  <rect x="50" y="91" width="1100" height="263" rx="12" fill="#fffdf8" stroke="#384d66" stroke-width="2"/>
+  <text x="73" y="126" class="t h" font-size="19">Hard forward（黑色）</text>
+  <g class="t s" text-anchor="middle"><rect x="79" y="175" width="120" height="65" rx="8" fill="#dce8f3" stroke="#355f8a"/><text x="139" y="214">image x</text><rect x="256" y="175" width="120" height="65" rx="8" fill="#e9edf6" stroke="#526f9b"/><text x="316" y="203">encoder</text><text x="316" y="226">z</text><rect x="433" y="175" width="144" height="65" rx="8" fill="#fff1c9" stroke="#a98027"/><text x="505" y="203">nearest code</text><text x="505" y="226">k, q=e_k</text><rect x="634" y="175" width="120" height="65" rx="8" fill="#e1eddf" stroke="#4f7d4c"/><text x="694" y="203">decoder</text><text x="694" y="226">D(q)</text><rect x="811" y="175" width="120" height="65" rx="8" fill="#f0dfdc" stroke="#a34f45"/><text x="871" y="214">x_hat</text></g>
+  <path d="M200 207H244" class="arr"/><path d="M377 207H421" class="arr"/><path d="M578 207H622" class="arr"/><path d="M755 207H799" class="arr"/>
+  <text x="964" y="180" class="m">z_q = z + sg(q-z)</text><text x="964" y="211" class="t mut">前向 z_q=q</text><text x="964" y="238" class="t mut">反向 dz_q/dz := I</text>
+  <path d="M871 263 C820 329 355 329 316 251" class="grad"/><text x="515" y="326" class="t s" fill="#a64c43">reconstruction gradient 经 STE 绕回 encoder</text>
+  <rect x="50" y="383" width="690" height="174" rx="12" fill="#fffdf8" stroke="#47725b" stroke-width="2"/>
+  <text x="73" y="419" class="t h" font-size="19">Quantizer update（绿色）</text>
+  <text x="80" y="462" class="m" fill="#315e49">codebook loss: ||sg(z)-q||^2  → 更新 e_k</text>
+  <text x="80" y="500" class="m" fill="#315e49">commitment:  beta ||z-sg(q)||^2 → 更新 encoder</text>
+  <text x="80" y="535" class="t mut">或使用 EMA/K-means 式更新；这会改变 optimizer contract。</text>
+  <rect x="777" y="383" width="373" height="174" rx="12" fill="#fffdf8" stroke="#7b6335" stroke-width="2"/>
+  <text x="800" y="419" class="t h" font-size="19">Second-stage generation</text>
+  <rect x="807" y="453" width="125" height="55" rx="7" fill="#fff1c9" stroke="#a98027"/><text x="869" y="486" class="t s" text-anchor="middle">token prior</text>
+  <rect x="994" y="453" width="125" height="55" rx="7" fill="#e1eddf" stroke="#4f7d4c"/><text x="1056" y="486" class="t s" text-anchor="middle">decoder</text>
+  <path d="M933 480H982" class="arr"/><text x="941" y="463" class="t mut">k_1:n</text>
+  <text x="800" y="538" class="t mut">AE 重构好 ≠ prior 已学好。</text>
+  <text x="50" y="592" class="t s">图例：黑实线=前向值；红虚线=代理反向；绿色=codebook/commitment 更新；右侧=生成所需额外模型。</text>
+</svg>

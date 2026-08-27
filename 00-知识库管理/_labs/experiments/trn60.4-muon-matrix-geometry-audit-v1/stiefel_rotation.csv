@@ -1,0 +1,5 @@
+case,eta,tangent_residual,euler_feasibility_residual,polar_retraction_feasibility_residual,sigma1_before,sigma2_before,sigma1_after,sigma2_after,singular_value_invariance_gap
+stiefel_step,0.01,0.0,0.00014142135623729392,3.1401849173675503e-16,,,,,
+stiefel_step,0.1,0.0,0.014142135623730963,3.1401849173675503e-16,,,,,
+stiefel_step,0.5,0.0,0.3535533905932738,1.5700924586837752e-16,,,,,
+double_rotation,0.0,0.0,0.0,0.0,3.0,1.0,3.0,0.9999999999999996,4.440892098500626e-16

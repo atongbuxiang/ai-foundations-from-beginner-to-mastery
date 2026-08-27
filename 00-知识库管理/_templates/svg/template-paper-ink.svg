@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+  <title id="title">纸面线稿模板：对象、关系与最小反例</title>
+  <desc id="desc">左侧展示研究对象及其最小构型，右侧展示关系成立或失败的见证。颜色同时配合实心、空心和线型，不单独承载结论。</desc>
+  <rect width="1200" height="520" fill="#FFFEFB"/>
+  <style>
+    .sans{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}
+    .serif{font-family:"STIX Two Text","Times New Roman",serif}
+    .ink{fill:#1F2937}.muted{fill:#64748B}.blue{fill:#2563EB}.green{fill:#0F766E}.red{fill:#C24135}
+  </style>
+
+  <!-- 正文标题留在 Markdown；图内从 panel 标签开始。 -->
+  <text x="64" y="62" class="sans blue" font-size="24" font-weight="700">A｜[对象与最小构型]</text>
+  <text x="64" y="94" class="sans muted" font-size="17">[一句说明对象和符号，不复制完整定义]</text>
+
+  <line x1="96" y1="302" x2="520" y2="302" stroke="#1F2937" stroke-width="2.5"/>
+  <circle cx="190" cy="302" r="14" fill="#FFFEFB" stroke="#2563EB" stroke-width="3"/>
+  <circle cx="310" cy="302" r="14" fill="#2563EB"/>
+  <circle cx="430" cy="302" r="14" fill="#FFFEFB" stroke="#C24135" stroke-width="3"/>
+  <text x="190" y="344" class="serif ink" font-size="18" text-anchor="middle">x₁</text>
+  <text x="310" y="344" class="serif ink" font-size="18" text-anchor="middle">x₂</text>
+  <text x="430" y="344" class="serif ink" font-size="18" text-anchor="middle">x₃</text>
+  <path d="M166 224 Q310 170 454 224" fill="none" stroke="#0F766E" stroke-width="3"/>
+  <text x="310" y="194" class="sans green" font-size="17" text-anchor="middle">[关键关系或可行见证]</text>
+  <text x="64" y="444" class="sans ink" font-size="18">[读者应从左图读出的一个结论]</text>
+
+  <line x1="600" y1="54" x2="600" y2="466" stroke="#D7DEE8" stroke-width="2"/>
+
+  <text x="656" y="62" class="sans red" font-size="24" font-weight="700">B｜[边界或最小反例]</text>
+  <text x="656" y="94" class="sans muted" font-size="17">[说明只改变了哪个条件或 labeling]</text>
+
+  <line x1="690" y1="302" x2="1110" y2="302" stroke="#1F2937" stroke-width="2.5"/>
+  <circle cx="780" cy="302" r="14" fill="#2563EB"/>
+  <circle cx="900" cy="302" r="14" fill="#FFFEFB" stroke="#C24135" stroke-width="3"/>
+  <circle cx="1020" cy="302" r="14" fill="#2563EB"/>
+  <path d="M748 230 Q900 162 1052 230" fill="none" stroke="#C24135" stroke-width="3" stroke-dasharray="9 7"/>
+  <line x1="872" y1="180" x2="928" y2="236" stroke="#C24135" stroke-width="4"/>
+  <line x1="928" y1="180" x2="872" y2="236" stroke="#C24135" stroke-width="4"/>
+  <text x="900" y="366" class="sans red" font-size="17" text-anchor="middle">[为什么无法实现]</text>
+  <text x="656" y="444" class="sans ink" font-size="18">[反例排除了什么，但没有证明什么]</text>
+</svg>
+

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">五把尺测同一答案：匹配单位决定盲区</title><desc id="desc">EM、token F1、BLEU、ROUGE-L 与 contextual similarity 的对照注解图。</desc>
+<rect width="1200" height="700" fill="#FBF8F1"/>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#667784"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#183044" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<line x1="48" y1="70" x2="1152" y2="70" stroke="#17766E" stroke-width="4"/>
+<text x="52" y="49" font-size="24" font-weight="700" fill="#183044">五把尺测同一答案：匹配单位决定盲区</text>
+<text x="66" y="112" text-anchor="start" font-size="11" font-weight="700" fill="#667784">REFERENCE</text>
+<text x="155" y="112" text-anchor="start" font-size="17" font-weight="700" fill="#183044">the red fox jumps over the fence</text>
+<text x="66" y="154" text-anchor="start" font-size="11" font-weight="700" fill="#667784">CANDIDATE</text>
+<text x="155" y="154" text-anchor="start" font-size="17" font-weight="700" fill="#7054A3">a crimson fox leaped over the fence</text>
+<line x1="155" y1="169" x2="1090" y2="169" stroke="#D9D5CB"/>
+<rect x="66" y="178" width="1068" height="58" rx="8" fill="#FFFDF8" stroke="#D9D5CB"/>
+<rect x="66" y="178" width="12" height="58" rx="6" fill="#B7443E"/>
+<text x="98" y="212" text-anchor="start" font-size="14" font-weight="700" fill="#B7443E">Exact Match</text>
+<text x="285" y="212" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">整串规范化后完全相同？</text>
+<text x="1096" y="212" text-anchor="end" font-size="12.5" font-weight="700" fill="#B7443E">0</text>
+<rect x="66" y="253" width="1068" height="58" rx="8" fill="#FFFDF8" stroke="#D9D5CB"/>
+<rect x="66" y="253" width="12" height="58" rx="6" fill="#C87922"/>
+<text x="98" y="287" text-anchor="start" font-size="14" font-weight="700" fill="#C87922">Token F1</text>
+<text x="285" y="287" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">多重集合 overlap；同义词仍算错</text>
+<text x="1096" y="287" text-anchor="end" font-size="12.5" font-weight="700" fill="#C87922">P=4/7 · R=4/7</text>
+<rect x="66" y="328" width="1068" height="58" rx="8" fill="#FFFDF8" stroke="#D9D5CB"/>
+<rect x="66" y="328" width="12" height="58" rx="6" fill="#245AA8"/>
+<text x="98" y="362" text-anchor="start" font-size="14" font-weight="700" fill="#245AA8">BLEU</text>
+<text x="285" y="362" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">modified n-gram precision + BP；偏 precision</text>
+<text x="1096" y="362" text-anchor="end" font-size="12.5" font-weight="700" fill="#245AA8">短语重合 / 长度惩罚</text>
+<rect x="66" y="403" width="1068" height="58" rx="8" fill="#FFFDF8" stroke="#D9D5CB"/>
+<rect x="66" y="403" width="12" height="58" rx="6" fill="#4F7B45"/>
+<text x="98" y="437" text-anchor="start" font-size="14" font-weight="700" fill="#4F7B45">ROUGE-L</text>
+<text x="285" y="437" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">最长公共子序列；偏 recall 的摘要视角</text>
+<text x="1096" y="437" text-anchor="end" font-size="12.5" font-weight="700" fill="#4F7B45">LCS = fox over the fence</text>
+<rect x="66" y="478" width="1068" height="58" rx="8" fill="#FFFDF8" stroke="#D9D5CB"/>
+<rect x="66" y="478" width="12" height="58" rx="6" fill="#7054A3"/>
+<text x="98" y="512" text-anchor="start" font-size="14" font-weight="700" fill="#7054A3">Contextual</text>
+<text x="285" y="512" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">embedding 对齐；允许相似词，但依赖编码器</text>
+<text x="1096" y="512" text-anchor="end" font-size="12.5" font-weight="700" fill="#7054A3">red↔crimson · jumps↔leaped</text>
+<rect x="66" y="580" width="515" height="52" rx="10" fill="#EEF4FC" stroke="#245AA8" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="81" y="608" text-anchor="start" font-size="15" font-weight="700" fill="#245AA8">语料级 ≠ 句级</text>
+<text x="81" y="633" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">BLEU 聚合计数后再取几何平均；不可随意平均句级 BLEU。</text>
+<rect x="610" y="580" width="524" height="52" rx="10" fill="#FFF0ED" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="625" y="608" text-anchor="start" font-size="15" font-weight="700" fill="#B7443E">相似 ≠ 正确</text>
+<text x="625" y="633" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">语义指标也可能奖励流畅但事实错误的改写。</text>
+<line x1="48" y1="650" x2="1152" y2="650" stroke="#D9D5CB"/>
+<text x="52" y="674" font-size="13" fill="#667784">先固定 normalization、tokenizer、reference 与聚合层；再把多个指标当诊断向量，而不是挑最高的一把尺。</text>
+</svg>

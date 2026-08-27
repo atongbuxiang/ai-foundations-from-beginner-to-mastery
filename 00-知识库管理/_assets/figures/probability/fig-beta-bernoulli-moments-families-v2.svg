@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Beta–Bernoulli：从连续隐变量到矩、依赖与分布族</title>
+<desc id="desc">随机成功率 Θ 把连续密度、条件 Bernoulli、边缘相关和过度离散连接成同一份可复算模型。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#B7791F"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">连续隐变量与矩</text>
+<line x1="62" y1="345" x2="350" y2="345" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="62" y1="345" x2="62" y2="125" stroke="#D7DEE8" stroke-width="2"/>
+<path d="M62.0 345.0L64.9 337.6L67.8 330.3L70.6 323.2L73.5 316.2L76.4 309.4L79.3 302.7L82.2 296.2L85.0 289.8L87.9 283.6L90.8 277.5L93.7 271.6L96.6 265.8L99.4 260.2L102.3 254.7L105.2 249.4L108.1 244.2L111.0 239.2L113.8 234.3L116.7 229.6L119.6 225.0L122.5 220.6L125.4 216.3L128.2 212.2L131.1 208.2L134.0 204.4L136.9 200.7L139.8 197.2L142.6 193.8L145.5 190.6L148.4 187.5L151.3 184.6L154.2 181.8L157.0 179.2L159.9 176.7L162.8 174.4L165.7 172.2L168.6 170.2L171.4 168.3L174.3 166.6L177.2 165.0L180.1 163.6L183.0 162.3L185.8 161.2L188.7 160.2L191.6 159.4L194.5 158.7L197.4 158.2L200.2 157.8L203.1 157.6L206.0 157.5L208.9 157.6L211.8 157.8L214.6 158.2L217.5 158.7L220.4 159.4L223.3 160.2L226.2 161.2L229.0 162.3L231.9 163.6L234.8 165.0L237.7 166.6L240.6 168.3L243.4 170.2L246.3 172.2L249.2 174.4L252.1 176.7L255.0 179.2L257.8 181.8L260.7 184.6L263.6 187.5L266.5 190.6L269.4 193.8L272.2 197.2L275.1 200.7L278.0 204.4L280.9 208.2L283.8 212.2L286.6 216.3L289.5 220.6L292.4 225.0L295.3 229.6L298.2 234.3L301.0 239.2L303.9 244.2L306.8 249.4L309.7 254.7L312.6 260.2L315.4 265.8L318.3 271.6L321.2 277.5L324.1 283.6L327.0 289.8L329.8 296.2L332.7 302.7L335.6 309.4L338.5 316.2L341.4 323.2L344.2 330.3L347.1 337.6L350.0 345.0" fill="none" stroke="#0F766E" stroke-width="3"/>
+<line x1="206" y1="345" x2="206" y2="155" stroke="#B7791F" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="206" y="372" font-size="15" font-weight="650" text-anchor="middle" fill="#B7791F">1/2</text>
+<text x="205" y="112" font-size="17" font-weight="700" text-anchor="middle" fill="#0F766E" class="math">f(theta)=6 theta(1-theta)</text>
+<text x="48" y="416" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937" class="math">E[Theta]=1/2; E[Theta^2]=3/10</text>
+<text x="48" y="458" font-size="18" font-weight="700" text-anchor="start" fill="#2563EB" class="math">Var(Theta)=1/20</text>
+<text x="48" y="493" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">参数本身随样本变化。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">条件独立，边缘正相关</text>
+<rect x="535" y="103" width="120" height="58" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="595.0" y="138.0" font-size="18" font-weight="650" text-anchor="middle" fill="#0F766E">Theta</text>
+<rect x="450" y="220" width="115" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="507.5" y="255.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">X1 | Theta</text>
+<rect x="625" y="220" width="115" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="682.5" y="255.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">X2 | Theta</text>
+<line x1="565" y1="163" x2="510" y2="213" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<line x1="625" y1="163" x2="682" y2="213" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<text x="600" y="325" font-size="16" font-weight="700" text-anchor="middle" fill="#0F766E">X1 independent X2 | Theta</text>
+<text x="440" y="376" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">P(1,1)=3/10; Cov=1/20; rho=1/5</text>
+<text x="440" y="422" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937" class="math">E[X2|X1=1]=3/5</text>
+<text x="440" y="458" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937" class="math">E[X2|X1=0]=2/5</text>
+<text x="440" y="493" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">共享原因被边缘化后留下依赖。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#B7791F">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">同均值，不同计数波动</text>
+<line x1="862" y1="260" x2="862" y2="228.75" stroke="#2563EB" stroke-width="13"/>
+<line x1="912" y1="260" x2="912" y2="197.5" stroke="#2563EB" stroke-width="13"/>
+<line x1="962" y1="260" x2="962" y2="228.75" stroke="#2563EB" stroke-width="13"/>
+<line x1="1030" y1="260" x2="1030" y2="222.5" stroke="#0F766E" stroke-width="13"/>
+<line x1="1080" y1="260" x2="1080" y2="210.0" stroke="#0F766E" stroke-width="13"/>
+<line x1="1130" y1="260" x2="1130" y2="222.5" stroke="#0F766E" stroke-width="13"/>
+<line x1="845" y1="260" x2="1145" y2="260" stroke="#D7DEE8" stroke-width="2"/>
+<text x="912" y="130" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">Bin(2,1/2)</text>
+<text x="1080" y="130" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">Beta-Binomial</text>
+<text x="912" y="294" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">(1/4, 1/2, 1/4)</text>
+<text x="1080" y="294" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">(3/10, 2/5, 3/10)</text>
+<text x="845" y="346" font-size="17" font-weight="700" text-anchor="start" fill="#1F2937" class="math">same E[S]=1</text>
+<text x="845" y="384" font-size="18" font-weight="700" text-anchor="start" fill="#B7791F" class="math">Var: 1/2  -&gt;  3/5</text>
+<text x="845" y="430" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">Bernoulli exponential family:</text>
+<text x="845" y="462" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">A&#x27;(eta)=theta; A&#x27;&#x27;(eta)=theta(1-theta)</text>
+<text x="845" y="493" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">随机参数使计数出现额外离散。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">先读连续参数，再读条件结构，最后比较边缘计数；均值相同并不意味着不确定性结构相同。</text>
+</svg>

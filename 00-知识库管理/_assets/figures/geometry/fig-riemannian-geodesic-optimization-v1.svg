@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">Riemannian metric, geodesic, and manifold optimization mechanism</title>
+  <desc id="desc">Three panels show position-dependent tangent unit ellipses, length and geodesic distinctions, and ambient gradient projection followed by exponential or retraction steps.</desc>
+  <defs>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#316bd6"/>
+    </marker>
+    <marker id="arrowOrange" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#d8751c"/>
+    </marker>
+    <style>
+      .title{font:700 21px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#152033}
+      .ptitle{font:700 15px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#152033}
+      .label{font:12px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#354159}
+      .small{font:11px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#59667b}
+      .formula{font:13px Georgia,'Times New Roman',serif;fill:#24334d}
+      .panel{fill:#ffffff;stroke:#d7dee9;stroke-width:1.2}
+      .surface{fill:#edf3ff;stroke:#6684bd;stroke-width:1.5}
+      .tangent{stroke:#61718b;stroke-width:1.2}
+      .blue{stroke:#316bd6;fill:none;stroke-width:2.6}
+      .orange{stroke:#d8751c;fill:none;stroke-width:2.6}
+      .green{stroke:#16876f;fill:none;stroke-width:2.6}
+      .purple{stroke:#8a52c7;fill:none;stroke-width:2.4}
+      .dash{stroke-dasharray:6 5}
+    </style>
+  </defs>
+  <rect width="1200" height="430" fill="#fbfcfe"/>
+  <text x="28" y="31" class="title">Riemannian geometry: from local rulers to paths and feasible updates</text>
+
+  <rect x="25" y="50" width="365" height="352" rx="11" class="panel"/>
+  <text x="43" y="77" class="ptitle">A · Metric lives on each tangent fiber</text>
+  <path d="M58 251 C112 187, 178 278, 243 208 C289 159, 334 194, 361 153 L361 296 C314 322, 252 289, 204 331 C149 369, 93 322, 58 345 Z" class="surface"/>
+  <path d="M75 279 C128 222, 181 291, 244 229 C290 185, 326 211, 352 180" class="blue"/>
+  <circle cx="122" cy="247" r="4.5" fill="#172033"/>
+  <circle cx="287" cy="211" r="4.5" fill="#172033"/>
+  <line x1="78" y1="251" x2="167" y2="243" class="tangent"/>
+  <line x1="246" y1="218" x2="329" y2="198" class="tangent"/>
+  <ellipse cx="122" cy="247" rx="29" ry="13" transform="rotate(-5 122 247)" fill="none" stroke="#16876f" stroke-width="2.3"/>
+  <ellipse cx="287" cy="211" rx="17" ry="31" transform="rotate(76 287 211)" fill="none" stroke="#d8751c" stroke-width="2.3"/>
+  <line x1="122" y1="247" x2="148" y2="239" class="green" marker-end="url(#arrowBlue)"/>
+  <line x1="287" y1="211" x2="304" y2="186" class="orange" marker-end="url(#arrowOrange)"/>
+  <text x="48" y="105" class="formula">g_p : T_pM × T_pM → R</text>
+  <text x="48" y="126" class="formula">||v||²_(g,p) = vᵀG(x)v</text>
+  <text x="48" y="148" class="small">Components and unit ellipses change with chart and position;</text>
+  <text x="48" y="165" class="small">the tangent norm is the coordinate-independent object.</text>
+  <text x="72" y="382" class="label">same component scale ≠ same geometric length</text>
+
+  <rect x="417" y="50" width="365" height="352" rx="11" class="panel"/>
+  <text x="435" y="77" class="ptitle">B · Length, energy, and geodesic differ</text>
+  <circle cx="600" cy="238" r="116" fill="#f5f8fd" stroke="#8b98ac" stroke-width="1.6"/>
+  <circle cx="503" cy="174" r="5" fill="#172033"/>
+  <circle cx="697" cy="174" r="5" fill="#172033"/>
+  <text x="487" y="163" class="label">p</text>
+  <text x="705" y="163" class="label">q</text>
+  <path d="M503 174 C548 108, 652 108, 697 174" class="blue"/>
+  <path d="M503 174 C541 136, 576 145, 600 121 C624 145, 659 136, 697 174" class="green dash"/>
+  <path d="M503 174 C449 249, 507 347, 600 354 C693 347, 751 249, 697 174" class="orange"/>
+  <text x="532" y="104" class="small">geodesic image</text>
+  <text x="521" y="142" class="small">same image, nonconstant speed</text>
+  <text x="542" y="375" class="small">long detour</text>
+  <text x="438" y="104" class="formula">L = ∫ ‖γ̇‖ dt</text>
+  <text x="438" y="124" class="formula">E = ½∫ ‖γ̇‖² dt</text>
+  <text x="438" y="308" class="formula">nabla_(gamma dot) gamma dot = 0</text>
+  <text x="438" y="328" class="small">zero covariant acceleration</text>
+  <text x="619" y="308" class="small">geodesic ⇒ locally minimizing</text>
+  <text x="619" y="328" class="small">not necessarily globally minimizing</text>
+
+  <rect x="809" y="50" width="365" height="352" rx="11" class="panel"/>
+  <text x="827" y="77" class="ptitle">C · Gradient direction is not yet an update</text>
+  <path d="M843 302 C899 209, 1026 195, 1140 264" fill="#f0f6ff" stroke="#6684bd" stroke-width="2"/>
+  <circle cx="961" cy="231" r="5" fill="#172033"/>
+  <text x="947" y="220" class="label">x</text>
+  <line x1="893" y1="260" x2="1033" y2="218" class="tangent"/>
+  <text x="1019" y="208" class="small">TₓM</text>
+  <line x1="961" y1="231" x2="926" y2="139" class="orange" marker-end="url(#arrowOrange)"/>
+  <text x="836" y="133" class="small">ambient ∇f</text>
+  <line x1="961" y1="231" x2="1019" y2="214" class="blue" marker-end="url(#arrowBlue)"/>
+  <text x="1018" y="196" class="small">grad f = Pₓ∇f</text>
+  <circle cx="1030" cy="230" r="5" fill="#d8751c"/>
+  <text x="1060" y="222" class="small">x - alpha grad f</text>
+  <path d="M961 231 C991 217, 1021 226, 1047 236" class="purple dash"/>
+  <circle cx="1047" cy="236" r="5" fill="#8a52c7"/>
+  <text x="1054" y="269" class="small">Exp_x(-alpha grad f)</text>
+  <path d="M961 231 C987 225, 1017 238, 1044 246" class="green"/>
+  <circle cx="1044" cy="246" r="4.5" fill="#16876f"/>
+  <text x="982" y="294" class="small">R_x(-alpha grad f)</text>
+  <text x="827" y="104" class="formula">df -- g sharp --&gt; grad f in T_xM</text>
+  <text x="827" y="328" class="formula">R_x(0)=x,   D R_x(0)=id</text>
+  <text x="827" y="349" class="small">Retraction is first-order compatible with Exp, not generally equal.</text>
+  <text x="827" y="369" class="small">Audit objective decrease and constraint residual separately.</text>
+</svg>

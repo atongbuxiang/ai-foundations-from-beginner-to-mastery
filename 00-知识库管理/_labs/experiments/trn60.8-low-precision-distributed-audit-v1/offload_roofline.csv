@@ -1,0 +1,4 @@
+intensity_flop_per_byte,compute_ceiling_tflops,bandwidth_tbps,ridge_intensity,roofline_tflops,bottleneck,offload_total_gb,offload_bandwidth_gbps,offload_transfer_lower_bound_seconds,compute_seconds
+40.0,300.0,3.0,100.0,120.0,bandwidth,24.0,48.0,0.5,0.35
+100.0,300.0,3.0,100.0,300.0,compute,24.0,48.0,0.5,0.35
+200.0,300.0,3.0,100.0,300.0,compute,24.0,48.0,0.5,0.35

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Adam 的状态更新、偏差修正与实现合同</title>
+  <desc id="desc">展示梯度进入一阶和二阶矩状态、经过偏差修正形成逐坐标方向，并区分矩估计无偏与比值无偏。</desc>
+  <rect width="1200" height="720" fill="#FFFEFB"/>
+  <style>
+    text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}
+    .h{font-size:27px;font-weight:700}.sh{font-size:18px;font-weight:700}.b{font-size:16px}.s{font-size:15px;fill:#64748B}
+    .boxb{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.boxg{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.boxa{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.boxr{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}.line{stroke:#CBD5E1;stroke-width:2}.arrow{stroke:#2563EB;stroke-width:3;fill:none}
+  </style>
+  <defs><marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#2563EB"/></marker></defs>
+  <text x="48" y="50" class="h" fill="#2563EB">A｜一个 optimizer step 的严格顺序</text>
+  <rect x="48" y="86" width="136" height="74" rx="12" class="boxb"/>
+  <text x="88" y="117" class="sh">g_t</text><text x="66" y="143" class="s">raw gradient</text>
+  <line x1="184" y1="123" x2="238" y2="123" class="arrow" marker-end="url(#arr)"/>
+  <rect x="248" y="72" width="208" height="96" rx="12" class="boxb"/>
+  <text x="270" y="104" class="sh">一阶状态 m_t</text><text x="270" y="134" class="s">beta1 m_(t-1) + (1-beta1) g_t</text>
+  <rect x="248" y="188" width="208" height="96" rx="12" class="boxg"/>
+  <text x="270" y="220" class="sh">二阶状态 v_t</text><text x="270" y="250" class="s">beta2 v_(t-1) + (1-beta2) g_t^2</text>
+  <path d="M184 123 C220 123 212 236 238 236" class="arrow" marker-end="url(#arr)"/>
+  <line x1="456" y1="120" x2="510" y2="120" class="arrow" marker-end="url(#arr)"/>
+  <line x1="456" y1="236" x2="510" y2="236" class="arrow" marker-end="url(#arr)"/>
+  <rect x="520" y="72" width="222" height="96" rx="12" class="boxa"/>
+  <text x="542" y="104" class="sh">m_hat</text><text x="542" y="134" class="s">m_t / (1 - beta1^t)</text>
+  <rect x="520" y="188" width="222" height="96" rx="12" class="boxa"/>
+  <text x="542" y="220" class="sh">v_hat</text><text x="542" y="250" class="s">v_t / (1 - beta2^t)</text>
+  <path d="M742 120 C790 120 790 160 824 160" class="arrow" marker-end="url(#arr)"/>
+  <path d="M742 236 C790 236 790 186 824 186" class="arrow" marker-end="url(#arr)"/>
+  <rect x="834" y="118" width="184" height="110" rx="12" class="boxg"/>
+  <text x="863" y="153" class="sh">u_t</text><text x="854" y="183" class="s">m_hat / (sqrt(v_hat)+eps)</text><text x="864" y="210" class="s">coordinate direction</text>
+  <line x1="1018" y1="173" x2="1064" y2="173" class="arrow" marker-end="url(#arr)"/>
+  <rect x="1074" y="118" width="78" height="110" rx="12" class="boxb"/>
+  <text x="1088" y="154" class="sh">theta</text><text x="1085" y="184" class="s">- eta u</text>
+
+  <line x1="48" y1="318" x2="1152" y2="318" class="line"/>
+  <text x="48" y="362" class="h" fill="#0F766E">B｜偏差修正到底修正了什么</text>
+  <rect x="48" y="392" width="330" height="150" rx="14" class="boxg"/>
+  <text x="76" y="426" class="sh">平稳矩 + 零初始化</text>
+  <text x="76" y="461" class="b">E[m_t] = (1-beta1^t) mu</text>
+  <text x="76" y="493" class="b">E[v_t] = (1-beta2^t) nu</text>
+  <text x="76" y="523" class="s">除以权重和，可恢复各自 moment expectation</text>
+  <rect x="414" y="392" width="330" height="150" rx="14" class="boxa"/>
+  <text x="442" y="426" class="sh" fill="#B76E00">第一步：方向近似 soft-sign</text>
+  <text x="442" y="461" class="b">m_hat_1 = g_1</text>
+  <text x="442" y="493" class="b">v_hat_1 = g_1^2</text>
+  <text x="442" y="523" class="s">u_1 = g_1 / (|g_1| + eps)</text>
+  <rect x="780" y="392" width="372" height="150" rx="14" class="boxr"/>
+  <text x="808" y="426" class="sh" fill="#C0392B">不可推出：ratio 无偏</text>
+  <text x="808" y="464" class="b">E[m_hat / sqrt(v_hat)]</text>
+  <text x="808" y="494" class="b">≠ E[m_hat] / sqrt(E[v_hat])</text>
+  <text x="808" y="523" class="s">更不等于 population-gradient unbiased step</text>
+
+  <text x="48" y="596" class="h" fill="#2563EB">C｜checkpoint 必须一起保存</text>
+  <rect x="48" y="622" width="1104" height="58" rx="12" fill="#F8FAFC" stroke="#94A3B8" stroke-width="2"/>
+  <text x="72" y="657" class="b">m, v, step t　｜　betas, eps, LR schedule　｜　coupled/decoupled decay　｜　dtype, overflow/skip, fused path</text>
+  <line x1="48" y1="700" x2="1152" y2="700" stroke="#0F766E" stroke-width="3"/>
+</svg>

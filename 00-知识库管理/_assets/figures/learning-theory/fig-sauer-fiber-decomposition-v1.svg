@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720">
+  <rect width="1200" height="720" fill="#fffefb"/>
+  <style>.s{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.m{font-family:"SFMono-Regular",Menlo,monospace}.ink{fill:#182235}.muted{fill:#64748b}.b{fill:#2457d6}.g{fill:#147d64}.r{fill:#c83d32}</style>
+  <text x="64" y="62" class="s ink" font-size="31" font-weight="750">删除最后一位以后：六个 patterns 怎样精确分成 4 + 2</text>
+  <text x="64" y="98" class="s muted" font-size="17">竖线左侧是旧 pattern B，右侧是最后一位 x₃；同一个 B 若有 0、1 两种延伸，就进入双实现族 F₁。</text>
+  <line x1="64" y1="126" x2="1136" y2="126" stroke="#d7dee8" stroke-width="2"/>
+
+  <text x="78" y="171" class="s b" font-size="20" font-weight="750">原集合族 F</text>
+  <text x="78" y="202" class="s muted" font-size="15">六个三位 patterns，按前两位分 fiber</text>
+  <g class="m ink" font-size="22">
+    <text x="105" y="259">00 | 0</text><text x="105" y="301">00 | 1</text>
+    <text x="105" y="373">10 | 0</text><text x="105" y="415">10 | 1</text>
+    <text x="105" y="487">01 | 0</text><text x="105" y="601">11 | 0</text>
+  </g>
+  <g fill="none" stroke-width="3">
+    <path d="M238 251 C330 251 340 244 415 244" stroke="#147d64"/><path d="M238 293 C330 293 340 244 415 244" stroke="#147d64"/>
+    <path d="M238 365 C330 365 340 360 415 360" stroke="#147d64"/><path d="M238 407 C330 407 340 360 415 360" stroke="#147d64"/>
+    <path d="M238 479 C330 479 340 482 415 482" stroke="#94a3b8"/><path d="M238 593 C330 593 340 596 415 596" stroke="#94a3b8"/>
+  </g>
+
+  <text x="430" y="171" class="s b" font-size="20" font-weight="750">投影族 F₀</text>
+  <text x="430" y="202" class="s muted" font-size="15">删掉 x₃ 后出现过的所有 B</text>
+  <g class="m ink" font-size="25" text-anchor="middle">
+    <text x="485" y="252">00</text><text x="485" y="368">10</text><text x="485" y="490">01</text><text x="485" y="604">11</text>
+  </g>
+  <g fill="#2457d6"><circle cx="485" cy="218" r="6"/><circle cx="485" cy="334" r="6"/><circle cx="485" cy="456" r="6"/><circle cx="485" cy="570" r="6"/></g>
+
+  <g fill="none" stroke="#147d64" stroke-width="3"><path d="M520 244 C650 244 650 282 765 282"/><path d="M520 360 C650 360 650 398 765 398"/></g>
+  <g fill="none" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6 6"><path d="M520 482 C650 482 650 516 765 516"/><path d="M520 596 C650 596 650 630 765 630"/></g>
+
+  <text x="785" y="171" class="s g" font-size="20" font-weight="750">双实现族 F₁</text>
+  <text x="785" y="202" class="s muted" font-size="15">只有最后一位能自由取 0/1 的 B</text>
+  <g class="m ink" font-size="25"><text x="810" y="290">00 → {000, 001}</text><text x="810" y="406">10 → {100, 101}</text></g>
+  <g class="s muted" font-size="15"><text x="785" y="522">01 只有 010：不进入 F₁</text><text x="785" y="636">11 只有 110：不进入 F₁</text></g>
+
+  <line x1="64" y1="664" x2="1136" y2="664" stroke="#d7dee8" stroke-width="2"/>
+  <text x="64" y="702" class="s ink" font-size="20" font-weight="700">|F| = 6 = |F₀| + |F₁| = 4 + 2</text>
+  <text x="540" y="702" class="s g" font-size="18">双延伸占用一个自由 bit，所以 VCdim(F₁) 至少比 F 少 1。</text>
+</svg>

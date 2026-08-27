@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">真实分布、经验分布、模型分布与程序输出分布</title>
+  <desc id="desc">四个独立框依次展示未知总体、有限样本经验分布、训练后的参数模型和解码或有限步采样器产生的实际输出分布。</desc>
+  <rect width="1200" height="620" fill="#FFFEFB"/>
+  <style>.sans{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}.ink{fill:#1F2937}.muted{fill:#64748B}.blue{fill:#2563EB}.green{fill:#0F766E}.amber{fill:#B7791F}.red{fill:#C24135}</style>
+  <text x="56" y="62" class="sans blue" font-size="22" font-weight="700">① 世界与数据协议</text>
+  <rect x="56" y="92" width="230" height="240" rx="6" fill="#EEF3FF" stroke="#2563EB" stroke-width="3"/>
+  <text x="171" y="145" class="mono blue" font-size="25" text-anchor="middle">P*</text>
+  <text x="171" y="184" class="sans ink" font-size="18" text-anchor="middle">未知总体规律</text>
+  <circle cx="116" cy="239" r="18" fill="#2563EB"/><circle cx="171" cy="239" r="18" fill="#0F766E"/><circle cx="226" cy="239" r="18" fill="#B7791F"/>
+  <text x="171" y="292" class="sans muted" font-size="16" text-anchor="middle">不能直接读取概率表</text>
+  <path d="M286 212 H340" stroke="#1F2937" stroke-width="3"/><path d="M340 212 l-16 -10 v20 z" fill="#1F2937"/>
+  <text x="313" y="190" class="sans muted" font-size="16" text-anchor="middle">采样</text>
+  <text x="350" y="62" class="sans green" font-size="22" font-weight="700">② 观测</text>
+  <rect x="350" y="92" width="230" height="240" rx="6" fill="#E8F5F1" stroke="#0F766E" stroke-width="3"/>
+  <text x="465" y="145" class="mono green" font-size="25" text-anchor="middle">P̂n</text>
+  <text x="465" y="184" class="sans ink" font-size="18" text-anchor="middle">有限经验分布</text>
+  <g fill="#0F766E"><circle cx="406" cy="232" r="9"/><circle cx="436" cy="232" r="9"/><circle cx="466" cy="232" r="9"/><circle cx="496" cy="232" r="9"/><circle cx="526" cy="232" r="9"/></g>
+  <text x="465" y="292" class="sans muted" font-size="16" text-anchor="middle">估计误差仍存在</text>
+  <path d="M580 212 H634" stroke="#1F2937" stroke-width="3"/><path d="M634 212 l-16 -10 v20 z" fill="#1F2937"/>
+  <text x="607" y="190" class="sans muted" font-size="16" text-anchor="middle">训练</text>
+  <text x="644" y="62" class="sans amber" font-size="22" font-weight="700">③ 模型声明</text>
+  <rect x="644" y="92" width="230" height="240" rx="6" fill="#FFF7E6" stroke="#B7791F" stroke-width="3"/>
+  <text x="759" y="145" class="mono amber" font-size="25" text-anchor="middle">Pθ</text>
+  <text x="759" y="184" class="sans ink" font-size="18" text-anchor="middle">参数化概率对象</text>
+  <path d="M695 269 C720 208 755 307 781 232 C804 175 832 260 841 221" fill="none" stroke="#B7791F" stroke-width="4"/>
+  <text x="759" y="312" class="sans muted" font-size="16" text-anchor="middle">density / energy / path</text>
+  <path d="M874 212 H928" stroke="#1F2937" stroke-width="3"/><path d="M928 212 l-16 -10 v20 z" fill="#1F2937"/>
+  <text x="901" y="178" class="sans muted" font-size="16" text-anchor="middle">解码器 φ</text><text x="901" y="199" class="sans muted" font-size="16" text-anchor="middle">有限步 sampler</text>
+  <text x="938" y="62" class="sans red" font-size="22" font-weight="700">④ 实际输出</text>
+  <rect x="938" y="92" width="206" height="240" rx="6" fill="#FFF0EE" stroke="#C24135" stroke-width="3"/>
+  <text x="1041" y="145" class="mono red" font-size="25" text-anchor="middle">Qθ,φ</text>
+  <text x="1041" y="184" class="sans ink" font-size="18" text-anchor="middle">程序诱导分布</text>
+  <circle cx="995" cy="239" r="18" fill="#2563EB"/><circle cx="1041" cy="239" r="18" fill="#0F766E"/><circle cx="1087" cy="239" r="18" fill="#FFFEFB" stroke="#C24135" stroke-width="3"/>
+  <line x1="1074" y1="226" x2="1100" y2="252" stroke="#C24135" stroke-width="3"/><line x1="1100" y1="226" x2="1074" y2="252" stroke="#C24135" stroke-width="3"/>
+  <text x="1041" y="292" class="sans muted" font-size="16" text-anchor="middle">截断、过滤、solver 偏差</text>
+  <line x1="56" y1="388" x2="1144" y2="388" stroke="#D7DEE8" stroke-width="2"/>
+  <text x="56" y="435" class="sans ink" font-size="19" font-weight="700">比较前先写清两端</text>
+  <text x="56" y="474" class="sans blue" font-size="17">统计学习：P̂n 能否支持关于 P* 的结论？</text>
+  <text x="56" y="512" class="sans amber" font-size="17">建模：Pθ 的 support、归一化与条件对象是什么？</text>
+  <text x="56" y="550" class="sans red" font-size="17">部署：Qθ,φ 与 Pθ 的差来自何种算法、预算或后处理？</text>
+</svg>
+

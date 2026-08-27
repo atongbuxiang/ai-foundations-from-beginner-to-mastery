@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">内积作为几何测量契约</title>
+  <desc id="desc">相同坐标向量在标准点积与加权内积下具有不同的正交关系和单位球；右侧列出内积公理以及由内积导出的长度、角度、投影和梯度。</desc>
+  <defs>
+    <marker id="blue-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#2563eb"/></marker>
+    <marker id="green-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#0f766e"/></marker>
+    <style>
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}.blue{fill:#2563eb}.green{fill:#0f766e}.amber{fill:#b7791f}.h{font-size:19px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}.axis{stroke:#94a3b8;stroke-width:1.4}.xvec{stroke:#2563eb;stroke-width:3;marker-end:url(#blue-arrow)}.yvec{stroke:#0f766e;stroke-width:3;marker-end:url(#green-arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <text x="600" y="42" class="sans h ink" text-anchor="middle">向量空间规定怎样组合；内积另行规定怎样测量</text>
+  <rect x="42" y="72" width="342" height="360" rx="12" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="68" y="108" class="sans h blue">标准内积</text><text x="68" y="137" class="math body ink">⟨x,y⟩ = y* x</text>
+  <path d="M85 317H348M215 397V159" class="axis"/><circle cx="215" cy="317" r="82" fill="none" stroke="#93c5fd" stroke-width="2"/>
+  <path d="M215 317L285 247" class="xvec"/><path d="M215 317L285 387" class="yvec"/><text x="289" y="242" class="math body blue">x=(1,1)</text><text x="290" y="395" class="math body green">y=(1,−1)</text>
+  <path d="M230 302L245 317L230 332" stroke="#64748b" stroke-width="1.5" fill="none"/>
+  <text x="215" y="414" class="math body blue" text-anchor="middle">yᵀx=0：正交</text>
+
+  <rect x="429" y="72" width="342" height="360" rx="12" fill="#ecfdf5" stroke="#6ee7b7"/>
+  <text x="455" y="108" class="sans h green">加权内积</text><text x="455" y="137" class="math body ink">⟨x,y⟩ᴹ = y* Mx，M≻0</text>
+  <path d="M472 317H735M602 397V159" class="axis"/><ellipse cx="602" cy="317" rx="58" ry="91" fill="none" stroke="#6ee7b7" stroke-width="2"/>
+  <path d="M602 317L672 247" class="xvec"/><path d="M602 317L672 387" class="yvec"/><text x="602" y="188" class="math small muted" text-anchor="middle">M=diag(2,1)</text>
+  <path d="M626 293Q650 317 626 341" stroke="#b7791f" stroke-width="2" fill="none"/>
+  <text x="602" y="414" class="math body amber" text-anchor="middle">yᵀMx=1：不再正交</text>
+
+  <rect x="816" y="72" width="342" height="360" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="842" y="108" class="sans h ink">测量契约</text>
+  <text x="842" y="154" class="sans body blue">正定</text><text x="936" y="154" class="math body ink">⟨x,x⟩&gt;0，x≠0</text>
+  <text x="842" y="205" class="sans body blue">共轭对称</text><text x="936" y="205" class="math body ink">⟨x,y⟩=conj(⟨y,x⟩)</text>
+  <text x="842" y="256" class="sans body blue">线性</text><text x="936" y="256" class="math body ink">⟨ax+bz,y⟩=a⟨x,y⟩+b⟨z,y⟩</text>
+  <line x1="842" y1="287" x2="1132" y2="287" stroke="#cbd5e1"/>
+  <text x="842" y="326" class="sans body ink">由此导出：</text><text x="842" y="360" class="sans body green">范数、距离、角度、正交、最近点</text><text x="842" y="393" class="sans small muted">坐标点积只是标准正交基下的表示。</text>
+
+  <rect x="70" y="466" width="1060" height="83" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="97" y="499" class="sans h ink">同一结构的 AI 接口</text><text x="97" y="529" class="sans body blue">相似度与 Attention</text><text x="366" y="529" class="sans body green">投影与最小二乘</text><text x="627" y="529" class="sans body amber">梯度依赖所选度量</text><text x="1098" y="529" class="sans small muted" text-anchor="end">还须声明 batch、token、head、feature 轴</text>
+  <text x="600" y="594" class="sans result ink" text-anchor="middle">坐标相同不代表几何相同；改变内积会同时改变长度、正交、投影和“最陡方向”。</text>
+</svg>

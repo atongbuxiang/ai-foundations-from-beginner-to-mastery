@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">收缩引理：Lipschitz 损失不能制造过多随机符号复杂度</title>
+<desc id="desc">若逐坐标变换在相关区间上 L-Lipschitz，中心化后其 Rademacher 复杂度由原函数类复杂度乘 L 控制；平方损失、cross-entropy 与 vector logits 必须另审范围或使用向量收缩。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">先确定原始 score class</text>
+<path d="M60 365C120 315 160 150 220 205C275 255 300 115 350 145" fill="none" stroke="#2563EB" stroke-width="3"/>
+<line x1="60" y1="405" x2="350" y2="405" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="60" y1="100" x2="60" y2="405" stroke="#D7DEE8" stroke-width="2"/>
+<text x="45" y="455" font-size="16" font-weight="700" text-anchor="start" fill="#2563EB">F: z -&gt; score f(z)</text>
+<text x="45" y="490" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">complexity is measured on f(z_i)</text>
+<text x="45" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">not yet on the training loss。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Lipschitz map controls distortion</text>
+<line x1="465" y1="395" x2="745" y2="395" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="465" y1="105" x2="465" y2="395" stroke="#D7DEE8" stroke-width="2"/>
+<path d="M465 340L540 300L610 240L680 175L745 130" fill="none" stroke="#0F766E" stroke-width="3"/>
+<path d="M465 370L540 335L610 280L680 225L745 180" fill="none" stroke="#C24135" stroke-width="2" stroke-dasharray="7 5"/>
+<text x="490" y="135" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">|phi(u)-phi(v)| &lt;= L|u-v|</text>
+<text x="430" y="440" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">center: psi_i(t)=phi_i(t)-phi_i(0)</text>
+<text x="430" y="480" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">hat R(phi o F) &lt;= 2 L hat R(F)</text>
+<text x="430" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">some conventions sharpen the factor 2。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">不同损失需要不同合同</text>
+<rect x="840" y="90" width="300" height="66" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="855" y="117" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">absolute / hinge</text>
+<text x="855" y="144" font-size="15" font-weight="600" text-anchor="start" fill="#1F2937">L = 1</text>
+<rect x="840" y="185" width="300" height="66" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="855" y="212" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">logistic margin</text>
+<text x="855" y="239" font-size="15" font-weight="600" text-anchor="start" fill="#1F2937">L &lt;= 1</text>
+<rect x="840" y="280" width="300" height="66" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="855" y="307" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">squared loss</text>
+<text x="855" y="334" font-size="15" font-weight="600" text-anchor="start" fill="#1F2937">L needs bounded scores and y</text>
+<rect x="840" y="375" width="300" height="66" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="855" y="402" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">softmax CE</text>
+<text x="855" y="429" font-size="15" font-weight="600" text-anchor="start" fill="#1F2937">vector contraction / logit control</text>
+<text x="830" y="485" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">margin ramp pays L=1/gamma</text>
+<text x="830" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">global Lipschitzness must hold on the used range。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">收缩引理是一座组合桥：先控制 score class，再用损失的 Lipschitz 几何传递复杂度；它不负责尾部、校准或分布偏移。</text>
+</svg>

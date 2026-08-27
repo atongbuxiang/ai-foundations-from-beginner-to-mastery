@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="435" viewBox="0 0 1200 435" role="img" aria-labelledby="title desc">
+<title id="title">结构化扰动、切空间与受限条件数</title>
+<desc id="desc">左侧展示梯度的结构投影，中间区分切向步与有限回缩，右侧比较精确结构化条件数。</desc>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}</style>
+<rect width="1200" height="435" fill="#fffefb"/>
+<g transform="scale(0.86956522)">
+<defs>
+<marker id="arrow-2563eb" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><polygon points="0 0, 7 3.5, 0 7" fill="#2563eb"/></marker>
+<marker id="arrow-0f766e" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><polygon points="0 0, 7 3.5, 0 7" fill="#0f766e"/></marker>
+<marker id="arrow-64748b" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><polygon points="0 0, 7 3.5, 0 7" fill="#64748b"/></marker>
+<marker id="arrow-b7791f" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><polygon points="0 0, 7 3.5, 0 7" fill="#b7791f"/></marker>
+<marker id="arrow-0f766e" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><polygon points="0 0, 7 3.5, 0 7" fill="#0f766e"/></marker>
+</defs>
+<text x="48.0" y="38.0" font-size="19" font-weight="700" text-anchor="start" fill="#172033">A  环境梯度如何收缩到合法结构</text>
+<text x="48.0" y="63.0" font-size="18" font-weight="400" text-anchor="start" fill="#5d6978">F(A)=uᵀAv；G=uvᵀ，结构梯度为 PₛG</text>
+<text x="100.0" y="107.0" font-size="18" font-weight="600" text-anchor="middle" fill="#172033">G</text>
+<rect x="58.0" y="118.0" width="21" height="21" fill="#c8d8fa" stroke="#ffffff" stroke-width="1"/>
+<rect x="79.0" y="118.0" width="21" height="21" fill="#f6eee3" stroke="#ffffff" stroke-width="1"/>
+<rect x="100.0" y="118.0" width="21" height="21" fill="#dbbc8f" stroke="#ffffff" stroke-width="1"/>
+<rect x="121.0" y="118.0" width="21" height="21" fill="#e4cdab" stroke="#ffffff" stroke-width="1"/>
+<rect x="58.0" y="139.0" width="21" height="21" fill="#92b1f5" stroke="#ffffff" stroke-width="1"/>
+<rect x="79.0" y="139.0" width="21" height="21" fill="#eddec7" stroke="#ffffff" stroke-width="1"/>
+<rect x="100.0" y="139.0" width="21" height="21" fill="#b7791f" stroke="#ffffff" stroke-width="1"/>
+<rect x="121.0" y="139.0" width="21" height="21" fill="#c99a57" stroke="#ffffff" stroke-width="1"/>
+<rect x="58.0" y="160.0" width="21" height="21" fill="#eddec7" stroke="#ffffff" stroke-width="1"/>
+<rect x="79.0" y="160.0" width="21" height="21" fill="#e4ecfc" stroke="#ffffff" stroke-width="1"/>
+<rect x="100.0" y="160.0" width="21" height="21" fill="#92b1f5" stroke="#ffffff" stroke-width="1"/>
+<rect x="121.0" y="160.0" width="21" height="21" fill="#adc4f8" stroke="#ffffff" stroke-width="1"/>
+<rect x="58.0" y="181.0" width="21" height="21" fill="#e4ecfc" stroke="#ffffff" stroke-width="1"/>
+<rect x="79.0" y="181.0" width="21" height="21" fill="#faf7f1" stroke="#ffffff" stroke-width="1"/>
+<rect x="100.0" y="181.0" width="21" height="21" fill="#eddec7" stroke="#ffffff" stroke-width="1"/>
+<rect x="121.0" y="181.0" width="21" height="21" fill="#f2e6d5" stroke="#ffffff" stroke-width="1"/>
+<rect x="58.0" y="118.0" width="84" height="84" fill="none" stroke="#aeb8c5" stroke-width="1"/>
+<line x1="153.0" y1="160.0" x2="195.0" y2="160.0" stroke="#0f766e" stroke-width="2.0" marker-end="url(#arrow-0f766e)"/>
+<text x="248.0" y="107.0" font-size="18" font-weight="600" text-anchor="middle" fill="#172033">P对称G</text>
+<rect x="206.0" y="118.0" width="21" height="21" fill="#c8d8fa" stroke="#ffffff" stroke-width="1"/>
+<rect x="227.0" y="118.0" width="21" height="21" fill="#d6e2fb" stroke="#ffffff" stroke-width="1"/>
+<rect x="248.0" y="118.0" width="21" height="21" fill="#e4cdab" stroke="#ffffff" stroke-width="1"/>
+<rect x="269.0" y="118.0" width="21" height="21" fill="#f6eee3" stroke="#ffffff" stroke-width="1"/>
+<rect x="206.0" y="139.0" width="21" height="21" fill="#d6e2fb" stroke="#ffffff" stroke-width="1"/>
+<rect x="227.0" y="139.0" width="21" height="21" fill="#eddec7" stroke="#ffffff" stroke-width="1"/>
+<rect x="248.0" y="139.0" width="21" height="21" fill="#e0c49d" stroke="#ffffff" stroke-width="1"/>
+<rect x="269.0" y="139.0" width="21" height="21" fill="#e2c9a4" stroke="#ffffff" stroke-width="1"/>
+<rect x="206.0" y="160.0" width="21" height="21" fill="#e4cdab" stroke="#ffffff" stroke-width="1"/>
+<rect x="227.0" y="160.0" width="21" height="21" fill="#e0c49d" stroke="#ffffff" stroke-width="1"/>
+<rect x="248.0" y="160.0" width="21" height="21" fill="#92b1f5" stroke="#ffffff" stroke-width="1"/>
+<rect x="269.0" y="160.0" width="21" height="21" fill="#f1f5fe" stroke="#ffffff" stroke-width="1"/>
+<rect x="206.0" y="181.0" width="21" height="21" fill="#f6eee3" stroke="#ffffff" stroke-width="1"/>
+<rect x="227.0" y="181.0" width="21" height="21" fill="#e2c9a4" stroke="#ffffff" stroke-width="1"/>
+<rect x="248.0" y="181.0" width="21" height="21" fill="#f1f5fe" stroke="#ffffff" stroke-width="1"/>
+<rect x="269.0" y="181.0" width="21" height="21" fill="#f2e6d5" stroke="#ffffff" stroke-width="1"/>
+<rect x="206.0" y="118.0" width="84" height="84" fill="none" stroke="#aeb8c5" stroke-width="1"/>
+<text x="396.0" y="107.0" font-size="18" font-weight="600" text-anchor="middle" fill="#172033">PToeplitzG</text>
+<rect x="354.0" y="118.0" width="21" height="21" fill="#eef3fd" stroke="#ffffff" stroke-width="1"/>
+<rect x="375.0" y="118.0" width="21" height="21" fill="#eddec7" stroke="#ffffff" stroke-width="1"/>
+<rect x="396.0" y="118.0" width="21" height="21" fill="#d2ab73" stroke="#ffffff" stroke-width="1"/>
+<rect x="417.0" y="118.0" width="21" height="21" fill="#e4cdab" stroke="#ffffff" stroke-width="1"/>
+<rect x="354.0" y="139.0" width="21" height="21" fill="#e4ecfc" stroke="#ffffff" stroke-width="1"/>
+<rect x="375.0" y="139.0" width="21" height="21" fill="#eef3fd" stroke="#ffffff" stroke-width="1"/>
+<rect x="396.0" y="139.0" width="21" height="21" fill="#eddec7" stroke="#ffffff" stroke-width="1"/>
+<rect x="417.0" y="139.0" width="21" height="21" fill="#d2ab73" stroke="#ffffff" stroke-width="1"/>
+<rect x="354.0" y="160.0" width="21" height="21" fill="#f4eadc" stroke="#ffffff" stroke-width="1"/>
+<rect x="375.0" y="160.0" width="21" height="21" fill="#e4ecfc" stroke="#ffffff" stroke-width="1"/>
+<rect x="396.0" y="160.0" width="21" height="21" fill="#eef3fd" stroke="#ffffff" stroke-width="1"/>
+<rect x="417.0" y="160.0" width="21" height="21" fill="#eddec7" stroke="#ffffff" stroke-width="1"/>
+<rect x="354.0" y="181.0" width="21" height="21" fill="#e4ecfc" stroke="#ffffff" stroke-width="1"/>
+<rect x="375.0" y="181.0" width="21" height="21" fill="#f4eadc" stroke="#ffffff" stroke-width="1"/>
+<rect x="396.0" y="181.0" width="21" height="21" fill="#e4ecfc" stroke="#ffffff" stroke-width="1"/>
+<rect x="417.0" y="181.0" width="21" height="21" fill="#eef3fd" stroke="#ffffff" stroke-width="1"/>
+<rect x="354.0" y="118.0" width="84" height="84" fill="none" stroke="#aeb8c5" stroke-width="1"/>
+<path d="M 142 207 Q 274 231, 354 207" fill="none" stroke="#b7791f" stroke-width="2" marker-end="url(#arrow-ea580c)"/>
+<text x="58.0" y="237.0" font-size="18" font-weight="400" text-anchor="start" fill="#5d6978">蓝：负值    白：零    红：正值</text>
+<text x="58.0" y="270.0" font-size="18" font-weight="700" text-anchor="start" fill="#172033">同一个输出导数</text>
+<text x="58.0" y="293.0" font-size="18" font-weight="400" text-anchor="start" fill="#5d6978">允许方向越少，最坏一阶增益不增。</text>
+<text x="58.0" y="330.0" font-size="18" font-weight="600" text-anchor="start" fill="#0f766e">线性结构：Pₛ 是固定正交投影</text>
+<text x="58.0" y="355.0" font-size="18" font-weight="600" text-anchor="start" fill="#b7791f">流形结构：投影随基点 A 改变</text>
+<text x="475.0" y="38.0" font-size="19" font-weight="700" text-anchor="start" fill="#172033">B  切向合法 ≠ 有限步可行</text>
+<text x="475.0" y="63.0" font-size="18" font-weight="400" text-anchor="start" fill="#5d6978">以曲面 M 上的基点 A 为例</text>
+<path d="M 500 335 C 545 195, 715 170, 840 310" fill="none" stroke="#0f766e" stroke-width="4"/>
+<circle cx="665" cy="215" r="6" fill="#172033"/>
+<text x="661.0" y="200.0" font-size="18" font-weight="700" text-anchor="middle" fill="#172033">A</text>
+<line x1="557" y1="269" x2="781" y2="156" stroke="#8290a3" stroke-width="1.6" stroke-dasharray="6 5"/>
+<text x="773.0" y="145.0" font-size="18" font-weight="600" text-anchor="middle" fill="#5d6978">TₐM</text>
+<line x1="665.0" y1="215.0" x2="757.0" y2="169.0" stroke="#b7791f" stroke-width="3.0" marker-end="url(#arrow-b7791f)"/>
+<text x="765.0" y="166.0" font-size="18" font-weight="600" text-anchor="start" fill="#b7791f">hZ（切向）</text>
+<circle cx="757" cy="169" r="5" fill="#ffffff" stroke="#b7791f" stroke-width="2"/>
+<path d="M 757 169 Q 777 217, 747 240" fill="none" stroke="#0f766e" stroke-width="2.4" stroke-dasharray="5 4" marker-end="url(#arrow-059669)"/>
+<circle cx="747" cy="240" r="5" fill="#0f766e" stroke="#ffffff" stroke-width="1.4"/>
+<text x="756.0" y="258.0" font-size="18" font-weight="600" text-anchor="start" fill="#0f766e">Rₐ(hZ)</text>
+<text x="503.0" y="374.0" font-size="18" font-weight="400" text-anchor="start" fill="#5d6978">直线点 A+hZ 通常离开 M；</text>
+<text x="503.0" y="398.0" font-size="18" font-weight="400" text-anchor="start" fill="#5d6978">retraction 把有限步送回结构集合。</text>
+<text x="925.0" y="38.0" font-size="19" font-weight="700" text-anchor="start" fill="#172033">C  受限条件数的精确比较</text>
+<text x="925.0" y="63.0" font-size="18" font-weight="400" text-anchor="start" fill="#5d6978">condₛ=||PₛG||F；同一 Frobenius 尺度</text>
+<rect x="979" y="100" width="335" height="285" fill="#ffffff" stroke="#cad2dc" stroke-width="1"/>
+<line x1="979" y1="385.0" x2="1314" y2="385.0" stroke="#edf0f4" stroke-width="1"/>
+<text x="970.0" y="389.0" font-size="18" font-weight="400" text-anchor="end" fill="#5d6978">0.00</text>
+<line x1="979" y1="313.8" x2="1314" y2="313.8" stroke="#edf0f4" stroke-width="1"/>
+<text x="970.0" y="317.8" font-size="18" font-weight="400" text-anchor="end" fill="#5d6978">0.25</text>
+<line x1="979" y1="242.5" x2="1314" y2="242.5" stroke="#edf0f4" stroke-width="1"/>
+<text x="970.0" y="246.5" font-size="18" font-weight="400" text-anchor="end" fill="#5d6978">0.50</text>
+<line x1="979" y1="171.2" x2="1314" y2="171.2" stroke="#edf0f4" stroke-width="1"/>
+<text x="970.0" y="175.2" font-size="18" font-weight="400" text-anchor="end" fill="#5d6978">0.75</text>
+<line x1="979" y1="100.0" x2="1314" y2="100.0" stroke="#edf0f4" stroke-width="1"/>
+<text x="970.0" y="104.0" font-size="18" font-weight="400" text-anchor="end" fill="#5d6978">1.00</text>
+<rect x="993.0" y="100.0" width="39" height="285.0" fill="#2563eb" opacity="0.9"/>
+<text x="1012.5" y="91.0" font-size="18" font-weight="700" text-anchor="middle" fill="#172033">1.000</text>
+<text x="1012.5" y="407.0" font-size="18" font-weight="600" text-anchor="middle" fill="#172033">无结构</text>
+<rect x="1060.0" y="180.1" width="39" height="204.9" fill="#0f766e" opacity="0.9"/>
+<text x="1079.5" y="171.1" font-size="18" font-weight="700" text-anchor="middle" fill="#172033">0.719</text>
+<text x="1079.5" y="407.0" font-size="18" font-weight="600" text-anchor="middle" fill="#172033">对称</text>
+<rect x="1127.0" y="155.8" width="39" height="229.2" fill="#0f766e" opacity="0.9"/>
+<text x="1146.5" y="146.8" font-size="18" font-weight="700" text-anchor="middle" fill="#172033">0.804</text>
+<text x="1146.5" y="407.0" font-size="18" font-weight="600" text-anchor="middle" fill="#172033">带宽 1</text>
+<rect x="1194.0" y="199.2" width="39" height="185.8" fill="#b7791f" opacity="0.9"/>
+<text x="1213.5" y="190.2" font-size="18" font-weight="700" text-anchor="middle" fill="#172033">0.652</text>
+<text x="1213.5" y="407.0" font-size="18" font-weight="600" text-anchor="middle" fill="#172033">Toeplitz</text>
+<rect x="1261.0" y="278.4" width="39" height="106.6" fill="#64748b" opacity="0.9"/>
+<text x="1280.5" y="269.4" font-size="18" font-weight="700" text-anchor="middle" fill="#172033">0.374</text>
+<text x="1280.5" y="407.0" font-size="18" font-weight="600" text-anchor="middle" fill="#172033">对角</text>
+<text x="939" y="242.5" font-size="18" font-weight="600" text-anchor="middle" fill="#172033" transform="rotate(-90 939 242.5)">一阶最坏增益</text>
+<text x="979.0" y="441.0" font-size="18" font-weight="400" text-anchor="start" fill="#5d6978">结构最强不必最好；柱高只回答局部敏感性。</text>
+<text x="1346.0" y="480.0" font-size="18" font-weight="400" text-anchor="end" fill="#5d6978">确定性解析数据；n=4</text>
+</g>
+</svg>

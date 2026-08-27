@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" role="img" aria-labelledby="title desc">
+<title id="title">Mini-batch 方差按一除以 B 缩放的 Monte Carlo 审计</title>
+<desc id="desc">对固定四点梯度总体重复有放回抽样，比较批量均值经验方差与理论 C 除以 B，并在下方给出相对误差。</desc>
+<rect width="1200" height="640" fill="#FFFEFB"/>
+<style>
+.sans{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}
+.ink{fill:#1F2937}.muted{fill:#64748B}.blue{fill:#2563EB}.green{fill:#0F766E}.amber{fill:#B7791F}.red{fill:#C24135}
+</style>
+<text x="62" y="58" class="sans blue" font-size="23" font-weight="700">Monte Carlo：batch mean variance</text>
+<line x1="110.0" y1="500.0" x2="1070.0" y2="500.0" stroke="#1F2937" stroke-width="2"/>
+<line x1="110.0" y1="500.0" x2="110.0" y2="140.0" stroke="#1F2937" stroke-width="2"/>
+<circle cx="110.00" cy="136.04" r="7" fill="#2563EB"/>
+<text x="110.00" y="530" class="mono ink" font-size="16" text-anchor="middle">1</text>
+<circle cx="270.00" cy="321.49" r="7" fill="#2563EB"/>
+<line x1="110.00" y1="140.00" x2="270.00" y2="320.00" stroke="#0F766E" stroke-width="3"/>
+<text x="270.00" y="530" class="mono ink" font-size="16" text-anchor="middle">2</text>
+<circle cx="430.00" cy="410.87" r="7" fill="#2563EB"/>
+<line x1="270.00" y1="320.00" x2="430.00" y2="410.00" stroke="#0F766E" stroke-width="3"/>
+<text x="430.00" y="530" class="mono ink" font-size="16" text-anchor="middle">4</text>
+<circle cx="590.00" cy="455.31" r="7" fill="#2563EB"/>
+<line x1="430.00" y1="410.00" x2="590.00" y2="455.00" stroke="#0F766E" stroke-width="3"/>
+<text x="590.00" y="530" class="mono ink" font-size="16" text-anchor="middle">8</text>
+<circle cx="750.00" cy="477.77" r="7" fill="#2563EB"/>
+<line x1="590.00" y1="455.00" x2="750.00" y2="477.50" stroke="#0F766E" stroke-width="3"/>
+<text x="750.00" y="530" class="mono ink" font-size="16" text-anchor="middle">16</text>
+<circle cx="910.00" cy="488.67" r="7" fill="#2563EB"/>
+<line x1="750.00" y1="477.50" x2="910.00" y2="488.75" stroke="#0F766E" stroke-width="3"/>
+<text x="910.00" y="530" class="mono ink" font-size="16" text-anchor="middle">32</text>
+<circle cx="1070.00" cy="494.41" r="7" fill="#2563EB"/>
+<line x1="910.00" y1="488.75" x2="1070.00" y2="494.38" stroke="#0F766E" stroke-width="3"/>
+<text x="1070.00" y="530" class="mono ink" font-size="16" text-anchor="middle">64</text>
+<text x="590" y="574" class="sans ink" font-size="17" text-anchor="middle">batch size B（横轴为倍增序列）</text>
+<text x="34" y="320" class="sans ink" font-size="17" text-anchor="middle" transform="rotate(-90 34 320)">variance</text>
+<circle cx="852" cy="76" r="7" fill="#2563EB"/><text x="870" y="82" class="sans ink" font-size="17">empirical</text>
+<line x1="982" y1="76" x2="1024" y2="76" stroke="#0F766E" stroke-width="3"/><text x="1036" y="82" class="sans ink" font-size="17">C/B</text>
+<text x="62" y="614" class="sans muted" font-size="16">seed=20260826；误差来自有限 Monte Carlo，不代表真实深网 gradient 为 Gaussian。</text>
+</svg>

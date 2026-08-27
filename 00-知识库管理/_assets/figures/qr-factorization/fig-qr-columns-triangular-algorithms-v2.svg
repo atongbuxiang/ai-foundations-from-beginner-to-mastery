@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">QR 分解的正交方向、上三角坐标与算法路线</title>
+  <desc id="desc">左侧把矩阵的倾斜列向量改写为标准正交列，中央上三角矩阵记录逐列坐标，右侧给出薄 QR 形状和最小二乘用途，底部比较 Gram-Schmidt、Householder 与 Givens。</desc>
+  <defs>
+    <marker id="blue-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#2563eb"/></marker>
+    <marker id="green-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#0f766e"/></marker>
+    <style>
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}.blue{fill:#2563eb}.green{fill:#0f766e}.amber{fill:#b7791f}.h{font-size:19px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}.axis{stroke:#cbd5e1;stroke-width:1.5}
+    </style>
+  </defs>
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <text x="600" y="42" class="sans h ink" text-anchor="middle">A 的列空间不变；Q 提供标准正交方向，R 记录原列在这些方向中的坐标</text>
+  <rect x="42" y="73" width="372" height="354" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="68" y="110" class="sans h blue">原矩阵 A：倾斜列</text><path d="M88 377H377M120 398V139" class="axis"/>
+  <path d="M120 377L312 183" stroke="#2563eb" stroke-width="4" marker-end="url(#blue-arrow)"/><path d="M120 377L356 258" stroke="#b7791f" stroke-width="4" marker-end="url(#blue-arrow)"/>
+  <text x="298" y="173" class="math body blue">a₁</text><text x="349" y="282" class="math body amber">a₂</text><text x="228" y="409" class="sans small muted" text-anchor="middle">列线性无关，但不正交</text>
+
+  <text x="444" y="247" class="math formula ink">=</text>
+  <rect x="490" y="73" width="280" height="354" rx="12" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="516" y="110" class="sans h blue">Q：标准正交列</text><path d="M516 377H744M630 398V139" class="axis"/>
+  <path d="M630 377L720 287" stroke="#2563eb" stroke-width="4" marker-end="url(#blue-arrow)"/>
+  <path d="M630 377L540 287" stroke="#0f766e" stroke-width="4" marker-end="url(#green-arrow)"/>
+  <text x="716" y="278" class="math body blue">q₁</text><text x="518" y="278" class="math body green">q₂</text><path d="M615 362L630 347L645 362" stroke="#64748b" stroke-width="1.5" fill="none"/><text x="630" y="409" class="math small muted" text-anchor="middle">Q*Q=I</text>
+
+  <text x="798" y="247" class="math formula ink">×</text>
+  <rect x="838" y="73" width="320" height="354" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="864" y="110" class="sans h green">R：上三角坐标</text>
+  <path d="M910 150H897V278H910M1082 150H1095V278H1082" stroke="#64748b" stroke-width="2" fill="none"/>
+  <line x1="996" y1="158" x2="996" y2="270" stroke="#cbd5e1"/><line x1="906" y1="214" x2="1086" y2="214" stroke="#cbd5e1"/>
+  <g class="math formula ink" text-anchor="middle"><text x="951" y="194">r₁₁</text><text x="1041" y="194">r₁₂</text><text x="951" y="251" class="green">0</text><text x="1041" y="251">r₂₂</text></g>
+  <text x="998" y="315" class="math body ink" text-anchor="middle">aⱼ = Σᵢ≤ⱼ qᵢrᵢⱼ</text><text x="998" y="348" class="sans small muted" text-anchor="middle">逐列构造产生三角结构</text><text x="998" y="392" class="math body blue" text-anchor="middle">薄 QR：m×n = (m×n)(n×n)</text>
+  <rect x="42" y="458" width="1116" height="105" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="68" y="492" class="sans h green">算法不是同义词</text><text x="68" y="530" class="sans body blue">MGS：教学清楚、可增量</text><text x="373" y="530" class="sans body green">Householder：稠密 QR 稳定主线</text><text x="733" y="530" class="sans body amber">Givens：局部消元、稀疏更新</text><text x="1125" y="530" class="math body ink" text-anchor="end">最小二乘：Rx=Q*b</text>
+  <text x="600" y="608" class="sans result ink" text-anchor="middle">QR 把“列空间几何”和“上三角求解”分开；显式形成 Q 还是只保存反射器取决于任务。</text>
+</svg>

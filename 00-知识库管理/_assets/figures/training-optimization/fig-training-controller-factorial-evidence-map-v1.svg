@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">训练控制器的因子实验与证据地图</title>
+  <desc id="desc">把学习率、预热、裁剪、衰减、平均和停止规则放入共同控制向量，展示二乘二因子交互与从配对随机种子到限定结论的证据门。</desc>
+  <rect width="1200" height="800" fill="#FFFEFB"/>
+  <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}.h{font-size:27px;font-weight:700}.sh{font-size:18px;font-weight:700}.b{font-size:14px}.s{font-size:12.5px;fill:#64748B}.bb{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.bg{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.ba{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.br{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}.line{stroke:#CBD5E1;stroke-width:2}.arr{stroke:#2563EB;stroke-width:3;fill:none}</style>
+  <defs><marker id="ab" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#2563EB"/></marker></defs>
+  <text x="48" y="48" class="h" fill="#2563EB">控制器不是独立旋钮：要用联合设计识别主效应与交互</text>
+
+  <rect x="48" y="86" width="338" height="420" rx="14" class="bb"/>
+  <text x="72" y="124" class="sh">① 完整控制向量 cₜ</text>
+  <rect x="72" y="154" width="126" height="44" rx="8" class="bb"/><text x="91" y="181" class="b">LR / schedule</text>
+  <rect x="220" y="154" width="126" height="44" rx="8" class="bg"/><text x="245" y="181" class="b">warmup</text>
+  <rect x="72" y="218" width="126" height="44" rx="8" class="ba"/><text x="101" y="245" class="b">clipping</text>
+  <rect x="220" y="218" width="126" height="44" rx="8" class="br"/><text x="239" y="245" class="b">weight decay</text>
+  <rect x="72" y="282" width="126" height="44" rx="8" class="bg"/><text x="98" y="309" class="b">averaging</text>
+  <rect x="220" y="282" width="126" height="44" rx="8" class="bb"/><text x="234" y="309" class="b">stop / select</text>
+  <line x1="209" y1="346" x2="209" y2="382" class="arr" marker-end="url(#ab)"/>
+  <rect x="72" y="394" width="274" height="82" rx="10" fill="#FFFFFF" stroke="#2563EB"/>
+  <text x="94" y="424" class="b">共同决定：actual step 与 memory</text>
+  <text x="94" y="451" class="s">参数轨迹 · 优化器状态 · 输出 checkpoint</text>
+
+  <rect x="431" y="86" width="338" height="420" rx="14" class="bg"/>
+  <text x="455" y="124" class="sh">② 2×2 因子设计识别交互</text>
+  <text x="536" y="158" class="s">B=0</text><text x="666" y="158" class="s">B=1</text>
+  <text x="462" y="225" class="s">A=0</text><text x="462" y="333" class="s">A=1</text>
+  <rect x="510" y="174" width="104" height="92" rx="9" class="bb"/><text x="545" y="210" class="sh">y₀₀</text><text x="528" y="240" class="s">baseline</text>
+  <rect x="632" y="174" width="104" height="92" rx="9" class="ba"/><text x="667" y="210" class="sh">y₀₁</text><text x="651" y="240" class="s">only B</text>
+  <rect x="510" y="282" width="104" height="92" rx="9" class="bg"/><text x="545" y="318" class="sh">y₁₀</text><text x="528" y="348" class="s">only A</text>
+  <rect x="632" y="282" width="104" height="92" rx="9" class="br"/><text x="667" y="318" class="sh">y₁₁</text><text x="649" y="348" class="s">A + B</text>
+  <text x="455" y="420" class="b">交互 I = y₁₁ − y₁₀ − y₀₁ + y₀₀</text>
+  <text x="455" y="452" class="s">I≠0：单因素排名不能外推到联合配置</text>
+  <text x="455" y="480" class="s">用相同 seed 配对，比较每个 cell 的差值分布</text>
+
+  <rect x="814" y="86" width="338" height="420" rx="14" class="ba"/>
+  <text x="838" y="124" class="sh">③ 证据门：从观测到可复核结论</text>
+  <rect x="838" y="154" width="290" height="64" rx="9" class="bb"/>
+  <text x="858" y="181" class="b">Gate 1　配对 seeds 与置信区间</text><text x="858" y="205" class="s">把初始化/数据顺序噪声显式化</text>
+  <rect x="838" y="234" width="290" height="64" rx="9" class="bg"/>
+  <text x="858" y="261" class="b">Gate 2　四本预算账</text><text x="858" y="285" class="s">训练 · 调参 · 选择 · 评估</text>
+  <rect x="838" y="314" width="290" height="64" rx="9" class="ba"/>
+  <text x="858" y="341" class="b">Gate 3　失败模式与负结果</text><text x="858" y="365" class="s">overflow、diverge、OOM 也进入分母</text>
+  <rect x="838" y="394" width="290" height="84" rx="9" class="br"/>
+  <text x="858" y="421" class="b">Gate 4　限定作用域的 claim</text><text x="858" y="448" class="s">模型 × 数据 × 预算 × 指标</text><text x="858" y="470" class="s">不要把局部消融写成普适规律</text>
+
+  <text x="48" y="562" class="h" fill="#0F766E">一个可信实验必须同时回答四类问题</text>
+  <rect x="48" y="598" width="252" height="112" rx="12" class="bb"/>
+  <text x="72" y="634" class="sh">实现</text><text x="72" y="664" class="b">控制顺序与状态是否一致？</text><text x="72" y="690" class="s">config + checkpoint contract</text>
+  <rect x="332" y="598" width="252" height="112" rx="12" class="bg"/>
+  <text x="356" y="634" class="sh">比较</text><text x="356" y="664" class="b">预算与停止规则是否相同？</text><text x="356" y="690" class="s">compute-normalized baseline</text>
+  <rect x="616" y="598" width="252" height="112" rx="12" class="ba"/>
+  <text x="640" y="634" class="sh">机制</text><text x="640" y="664" class="b">中间量是否支持因果链？</text><text x="640" y="690" class="s">telemetry + intervention</text>
+  <rect x="900" y="598" width="252" height="112" rx="12" class="br"/>
+  <text x="924" y="634" class="sh">外推</text><text x="924" y="664" class="b">结论超出了哪些边界？</text><text x="924" y="690" class="s">scope + uncertainty</text>
+  <rect x="48" y="752" width="1104" height="30" rx="8" fill="#F8FAFC" stroke="#CBD5E1"/>
+  <text x="72" y="772" class="s">边界：因子实验能识别给定范围内的交互；它不会自动解决超出采样空间的分布外外推。</text>
+</svg>

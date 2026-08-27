@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">K-FAC 的精确 Kronecker 结构、moment factorization 与阻尼</title>
+  <desc id="desc">从线性层 gradient outer product 精确推出 Kronecker 项，再标出 expectation factorization 和 factored damping 两层近似，以及 statistics、inverse、apply 三个时钟。</desc>
+  <rect width="1200" height="720" fill="#FFFEFB"/>
+  <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}.h{font-size:27px;font-weight:700}.sh{font-size:19px;font-weight:700}.b{font-size:16px}.s{font-size:15px;fill:#64748B}.boxb{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.boxg{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.boxa{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.boxr{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}.line{stroke:#CBD5E1;stroke-width:2}.arr{stroke:#2563EB;stroke-width:3;fill:none}</style>
+  <defs><marker id="ab" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#2563EB"/></marker></defs>
+  <text x="48" y="50" class="h" fill="#2563EB">A｜先 exact algebra，再 statistical approximation</text>
+  <rect x="48" y="82" width="242" height="118" rx="12" class="boxb"/><text x="72" y="118" class="sh">linear layer</text><text x="72" y="151" class="b">grad_W = delta a^T</text><text x="72" y="181" class="s">exact outer product</text>
+  <line x1="290" y1="141" x2="342" y2="141" class="arr" marker-end="url(#ab)"/>
+  <rect x="352" y="82" width="330" height="118" rx="12" class="boxg"/><text x="376" y="118" class="sh">exact sample block</text><text x="376" y="151" class="b">(aa^T) tensor (delta delta^T)</text><text x="376" y="181" class="s">vec convention fixed</text>
+  <line x1="682" y1="141" x2="734" y2="141" class="arr" marker-end="url(#ab)"/>
+  <rect x="744" y="82" width="408" height="118" rx="12" class="boxa"/><text x="768" y="118" class="sh">K-FAC moment factorization</text><text x="768" y="151" class="b">E[AA tensor SS] ≈ E[AA] tensor E[SS]</text><text x="768" y="181" class="s">依赖结构被删除：approximation starts here</text>
+
+  <line x1="48" y1="236" x2="1152" y2="236" class="line"/>
+  <text x="48" y="278" class="h" fill="#0F766E">B｜Inverse apply 与 damping 不是同一层</text>
+  <rect x="48" y="310" width="330" height="130" rx="12" class="boxg"/><text x="72" y="346" class="sh">Kronecker inverse</text><text x="72" y="380" class="b">P(G) = S^(-1) G A^(-1)</text><text x="72" y="412" class="s">two small solves + matrix multiplies</text>
+  <rect x="414" y="310" width="330" height="130" rx="12" class="boxb"/><text x="438" y="346" class="sh">Exact block damping target</text><text x="438" y="380" class="b">A tensor S + lambda I</text><text x="438" y="412" class="s">eigenvalue products a_i s_j + lambda</text>
+  <rect x="780" y="310" width="372" height="130" rx="12" class="boxr"/><text x="804" y="346" class="sh" fill="#C0392B">Factored damping</text><text x="804" y="380" class="b">(A + alpha I) tensor (S + beta I)</text><text x="804" y="412" class="s">adds two cross terms；not exact target</text>
+
+  <text x="48" y="498" class="h" fill="#2563EB">C｜生产算法有三个时钟</text>
+  <rect x="48" y="530" width="320" height="116" rx="12" class="boxb"/><text x="72" y="566" class="sh">1. statistics update</text><text x="72" y="599" class="b">A_t, S_t EMA / samples</text><text x="72" y="627" class="s">reduction axes define scale</text>
+  <rect x="404" y="530" width="320" height="116" rx="12" class="boxa"/><text x="428" y="566" class="sh">2. inverse refresh</text><text x="428" y="599" class="b">every K steps</text><text x="428" y="627" class="s">eigen/root/damping residual</text>
+  <rect x="760" y="530" width="392" height="116" rx="12" class="boxg"/><text x="784" y="566" class="sh">3. apply + globalization</text><text x="784" y="599" class="b">precondition → momentum → norm / LR</text><text x="784" y="627" class="s">plus state bytes and communication</text>
+  <rect x="48" y="674" width="1104" height="30" rx="8" fill="#F8FAFC" stroke="#CBD5E1"/><text x="600" y="696" class="s" text-anchor="middle">Exact vec identity ≠ moment independence ≠ numerical damping ≠ systems evidence。</text>
+</svg>

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430">
+  <rect width="1200" height="430" fill="#f8fafc"/>
+  <style>
+    .panel{fill:#fff;stroke:#cbd5e1;stroke-width:1.5}.title{font:700 19px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#0f172a}.sub{font:14px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#475569}.body{font:15px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#334155}.math{font:italic 17px Georgia,"Times New Roman",serif;fill:#0f172a}.small{font:12px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#64748b}.blue{fill:#dbeafe;stroke:#2563eb;stroke-width:1.5}.green{fill:#dcfce7;stroke:#059669;stroke-width:1.5}.amber{fill:#fef3c7;stroke:#d97706;stroke-width:1.5}.purple{fill:#ede9fe;stroke:#7c3aed;stroke-width:1.5}.arrow{stroke:#334155;stroke-width:2;fill:none;marker-end:url(#a)}
+  </style>
+  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#334155"/></marker></defs>
+  <rect class="panel" x="20" y="20" width="370" height="390" rx="14"/>
+  <rect class="panel" x="415" y="20" width="370" height="390" rx="14"/>
+  <rect class="panel" x="810" y="20" width="370" height="390" rx="14"/>
+  <text class="title" x="40" y="53">A · 先固定可行 moment 集</text>
+  <text class="sub" x="40" y="78">最大熵只在已声明 constraints 内“少承诺”</text>
+  <path d="M85 326L205 118L333 326Z" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text class="small" x="64" y="347">p₁=1</text><text class="small" x="191" y="105">p₂=1</text><text class="small" x="325" y="347">p₃=1</text>
+  <line x1="127" y1="276" x2="287" y2="188" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="207" cy="232" r="10" fill="#059669" stroke="#fff" stroke-width="3"/>
+  <text class="body" x="223" y="228">moment line 上</text>
+  <text class="body" x="223" y="248">entropy 最大点</text>
+  <rect class="amber" x="53" y="362" width="306" height="31" rx="8"/>
+  <text class="small" x="67" y="382">support / base measure / constraints 一变，答案也变</text>
+  <text class="title" x="435" y="53">B · primal 推出 exponential family</text>
+  <rect class="blue" x="445" y="95" width="310" height="63" rx="10"/>
+  <text class="math" x="466" y="122">max H(p)  s.t.  E[T] = τ</text>
+  <text class="small" x="466" y="145">distribution-space concave problem</text>
+  <path class="arrow" d="M600 163V194"/>
+  <rect class="purple" x="445" y="201" width="310" height="64" rx="10"/>
+  <text class="math" x="468" y="229">pη(x)=exp{η·T(x)−A(η)}</text>
+  <text class="small" x="468" y="252">normalization 由 log-partition 负责</text>
+  <path class="arrow" d="M600 270V301"/>
+  <rect class="green" x="445" y="308" width="310" height="64" rx="10"/>
+  <text class="math" x="472" y="336">min over η: A(η)−η·τ</text>
+  <text class="small" x="472" y="359">parameter-space convex dual</text>
+  <text class="title" x="830" y="53">C · moment map、曲率与边界</text>
+  <rect class="green" x="840" y="91" width="310" height="70" rx="10"/>
+  <text class="math" x="862" y="120">∇A(η) = mean of T under pη</text>
+  <text class="math" x="862" y="146">∇²A(η) = Cov under pη ⪰ 0</text>
+  <line x1="855" y1="234" x2="1135" y2="234" stroke="#94a3b8" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="910" cy="234" r="9" fill="#2563eb"/><circle cx="1040" cy="234" r="9" fill="#059669"/><circle cx="1134" cy="234" r="9" fill="#dc2626"/>
+  <text class="small" x="870" y="263">interior τ</text><text class="small" x="1000" y="263">finite η</text><text class="small" x="1088" y="263">boundary</text>
+  <path d="M1085 285C1115 302 1128 322 1138 350" stroke="#dc2626" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <text class="body" x="842" y="310">τ 不可行 → 无 primal 解</text>
+  <text class="body" x="842" y="337">τ 在边界 → 分布可塌到 face</text>
+  <text class="body" x="842" y="364">但 finite η 可能不存在</text>
+  <text class="small" x="842" y="392">moment matching 不是自动的泛化证书。</text>
+</svg>

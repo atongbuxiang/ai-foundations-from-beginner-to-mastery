@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">AdaGrad 的累计平方梯度、坐标几何与稀疏更新</title>
+  <desc id="desc">比较频繁和稀有坐标的累计平方梯度，展示对角度量如何改变单位球和有效更新，并标出永久记忆边界。</desc>
+  <rect width="1200" height="720" fill="#FFFEFB"/>
+  <style>
+    text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}
+    .h{font-size:28px;font-weight:700}.sh{font-size:20px;font-weight:700}.b{font-size:17px}.s{font-size:15px;fill:#64748B}
+    .blue{stroke:#2563EB;fill:none;stroke-width:4}.green{stroke:#0F766E;fill:none;stroke-width:4}.amber{stroke:#B76E00;fill:none;stroke-width:4}.red{stroke:#C0392B;fill:none;stroke-width:3}
+    .boxb{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.boxg{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.boxa{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.line{stroke:#CBD5E1;stroke-width:2}
+  </style>
+  <defs>
+    <marker id="ab" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#2563EB"/></marker>
+    <marker id="ag" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#0F766E"/></marker>
+  </defs>
+
+  <text x="54" y="52" class="h" fill="#2563EB">A｜两只只增不减的坐标里程表</text>
+  <rect x="54" y="82" width="512" height="190" rx="14" class="boxb"/>
+  <text x="82" y="119" class="sh">相同当前梯度：g_A = g_B = 1</text>
+  <text x="82" y="158" class="b">频繁坐标 A</text>
+  <rect x="218" y="135" width="178" height="30" rx="8" fill="#DCE8FF"/>
+  <rect x="218" y="135" width="160" height="30" rx="8" fill="#2563EB" opacity="0.85"/>
+  <text x="414" y="157" class="b">G_A = 4</text>
+  <text x="82" y="210" class="b">稀有坐标 B</text>
+  <rect x="218" y="187" width="178" height="30" rx="8" fill="#DCE8FF"/>
+  <rect x="218" y="187" width="40" height="30" rx="8" fill="#0F766E" opacity="0.88"/>
+  <text x="414" y="210" class="b">G_B = 1</text>
+  <text x="82" y="250" class="s">G_i = tau_i + sum_s g_(s,i)^2</text>
+
+  <line x1="590" y1="104" x2="1144" y2="104" class="line"/>
+  <text x="620" y="52" class="h" fill="#0F766E">B｜当前步：相同 g，不同有效尺度</text>
+  <text x="620" y="146" class="b">A:  g / sqrt(G_A) = 1/2</text>
+  <line x1="620" y1="170" x2="842" y2="170" class="blue" marker-end="url(#ab)"/>
+  <text x="867" y="176" class="b" fill="#2563EB">Delta theta_A = -eta/2</text>
+  <text x="620" y="222" class="b">B:  g / sqrt(G_B) = 1</text>
+  <line x1="620" y1="246" x2="1038" y2="246" class="green" marker-end="url(#ag)"/>
+  <text x="867" y="226" class="b" fill="#0F766E">Delta theta_B = -eta</text>
+
+  <line x1="54" y1="304" x2="1146" y2="304" class="line"/>
+  <text x="54" y="350" class="h" fill="#2563EB">C｜“除一下”其实是在更换单位球</text>
+  <text x="112" y="393" class="sh">SGD：Euclidean</text>
+  <line x1="236" y1="580" x2="236" y2="408" stroke="#0F172A" stroke-width="2"/>
+  <line x1="142" y1="504" x2="330" y2="504" stroke="#0F172A" stroke-width="2"/>
+  <circle cx="236" cy="504" r="72" class="blue"/>
+  <line x1="236" y1="504" x2="292" y2="448" class="red" marker-end="url(#ab)"/>
+  <text x="300" y="445" class="s" fill="#C0392B">raw gradient</text>
+  <text x="319" y="524" class="s">x1</text><text x="217" y="417" class="s">x2</text>
+
+  <text x="445" y="393" class="sh">AdaGrad：H_t metric</text>
+  <line x1="586" y1="580" x2="586" y2="408" stroke="#0F172A" stroke-width="2"/>
+  <line x1="455" y1="504" x2="717" y2="504" stroke="#0F172A" stroke-width="2"/>
+  <ellipse cx="586" cy="504" rx="112" ry="52" class="green"/>
+  <line x1="586" y1="504" x2="676" y2="472" class="green" marker-end="url(#ag)"/>
+  <text x="660" y="452" class="s" fill="#0F766E">preconditioned step</text>
+  <text x="705" y="524" class="s">rare axis</text><text x="594" y="425" class="s">frequent axis</text>
+
+  <rect x="790" y="382" width="356" height="206" rx="14" class="boxa"/>
+  <text x="818" y="423" class="sh" fill="#B76E00">永久记忆的收益与代价</text>
+  <path d="M820 535 C880 460 950 542 1015 448 S1090 420 1120 402" class="amber"/>
+  <text x="820" y="471" class="b">G_t 单调不减</text>
+  <text x="820" y="505" class="b">+ 稀疏历史得到 data-dependent 几何</text>
+  <text x="820" y="548" class="b" fill="#C0392B">− 中途换尺度时，旧历史不会忘记</text>
+  <text x="54" y="657" class="b" fill="#0F766E">稀有坐标的相对大步长来自平方幅值总账；它不是“稀有 = 更重要”的证明。</text>
+  <line x1="54" y1="675" x2="1146" y2="675" stroke="#0F766E" stroke-width="3"/>
+</svg>

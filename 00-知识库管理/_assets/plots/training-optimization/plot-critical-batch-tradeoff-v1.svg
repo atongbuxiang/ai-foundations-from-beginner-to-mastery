@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" role="img" aria-labelledby="title desc">
+<title id="title">Critical batch 经验模型中的 step 与 example 代价</title>
+<desc id="desc">以 B noise 为二百五十六，绘制归一化 optimizer steps 随 batch 下降、归一化 examples 随 batch 上升，并标出两者为二的交点。</desc>
+<rect width="1200" height="640" fill="#FFFEFB"/>
+<style>
+.sans{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}
+.ink{fill:#1F2937}.muted{fill:#64748B}.blue{fill:#2563EB}.green{fill:#0F766E}.amber{fill:#B7791F}.red{fill:#C24135}
+</style>
+<text x="62" y="58" class="sans blue" font-size="23" font-weight="700">Empirical tradeoff model：B_noise=256</text>
+<line x1="100.0" y1="500.0" x2="1100.0" y2="500.0" stroke="#1F2937" stroke-width="2"/>
+<line x1="100.0" y1="500.0" x2="100.0" y2="140.0" stroke="#1F2937" stroke-width="2"/>
+<text x="100.00" y="530" class="mono ink" font-size="15" text-anchor="middle">1</text>
+<text x="433.33" y="530" class="mono ink" font-size="15" text-anchor="middle">16</text>
+<text x="766.67" y="530" class="mono ink" font-size="15" text-anchor="middle">256</text>
+<text x="1100.00" y="530" class="mono ink" font-size="15" text-anchor="middle">4096</text>
+<polyline points="100.00,140.00 183.33,140.00 266.67,140.00 350.00,140.00 433.33,140.00 516.67,176.00 600.00,320.00 683.33,392.00 766.67,428.00 850.00,446.00 933.33,455.00 1016.67,459.50 1100.00,461.75" fill="none" stroke="#2563EB" stroke-width="4"/>
+<polyline points="100.00,463.86 183.33,463.72 266.67,463.44 350.00,462.88 433.33,461.75 516.67,459.50 600.00,455.00 683.33,446.00 766.67,428.00 850.00,392.00 933.33,320.00 1016.67,176.00 1100.00,140.00" fill="none" stroke="#B7791F" stroke-width="4"/>
+<line x1="766.67" y1="500.0" x2="766.67" y2="140.0" stroke="#0F766E" stroke-width="2" stroke-dasharray="8 7"/>
+<circle cx="766.67" cy="428.00" r="8" fill="#0F766E"/>
+<text x="600" y="574" class="sans ink" font-size="17" text-anchor="middle">batch size B（倍增序列）</text>
+<text x="34" y="320" class="sans ink" font-size="17" text-anchor="middle" transform="rotate(-90 34 320)">normalized cost（上端截断为 10）</text>
+<line x1="800" y1="82" x2="842" y2="82" stroke="#2563EB" stroke-width="4"/><text x="854" y="88" class="sans ink" font-size="17">steps / min</text>
+<line x1="980" y1="82" x2="1022" y2="82" stroke="#B7791F" stroke-width="4"/><text x="1034" y="88" class="sans ink" font-size="17">examples / min</text>
+<text x="62" y="614" class="sans muted" font-size="16">这是 McCandlish 风格经验拟合，不含硬件 step time，也不是普遍定理。</text>
+</svg>

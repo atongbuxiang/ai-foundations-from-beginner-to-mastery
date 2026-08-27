@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">同一 LTI 状态空间的三种计算接口</title>
+<desc id="desc">线性时不变 recurrence 可展开为 convolution，也可把仿射更新编码成 associative scan。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">递推：流式状态</text>
+<rect x="55" y="165" width="52" height="45" rx="5" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="81" y="193" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">x0</text>
+<line x1="108" y1="187" x2="133" y2="187" stroke="#2563EB" stroke-width="2.5" marker-end="url(#a1)"/>
+<rect x="137" y="165" width="52" height="45" rx="5" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="163" y="193" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">x1</text>
+<line x1="190" y1="187" x2="215" y2="187" stroke="#2563EB" stroke-width="2.5" marker-end="url(#a1)"/>
+<rect x="219" y="165" width="52" height="45" rx="5" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="245" y="193" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">x2</text>
+<line x1="272" y1="187" x2="297" y2="187" stroke="#2563EB" stroke-width="2.5" marker-end="url(#a1)"/>
+<rect x="301" y="165" width="52" height="45" rx="5" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="327" y="193" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">x3</text>
+<text x="45" y="280" font-size="16" font-weight="700" text-anchor="start" fill="#1F2937" class="math">x_(k+1) = Abar x_k + Bbar u_k</text>
+<text x="45" y="350" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">stream: O(N) state</text>
+<text x="45" y="390" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">time span: O(L)</text>
+<text x="45" y="475" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">最适合逐 token 推进。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">卷积：固定 impulse response</text>
+<text x="445" y="115" font-size="17" font-weight="700" text-anchor="start" fill="#0F766E" class="math">K_j = C Abar^j Bbar</text>
+<rect x="460" y="352" width="25" height="38" rx="2" fill="#ECFDF5" stroke="#0F766E" stroke-width="1.5"/>
+<rect x="505" y="320" width="25" height="70" rx="2" fill="#ECFDF5" stroke="#0F766E" stroke-width="1.5"/>
+<rect x="550" y="290" width="25" height="100" rx="2" fill="#ECFDF5" stroke="#0F766E" stroke-width="1.5"/>
+<rect x="595" y="314" width="25" height="76" rx="2" fill="#ECFDF5" stroke="#0F766E" stroke-width="1.5"/>
+<rect x="640" y="338" width="25" height="52" rx="2" fill="#ECFDF5" stroke="#0F766E" stroke-width="1.5"/>
+<rect x="685" y="360" width="25" height="30" rx="2" fill="#ECFDF5" stroke="#0F766E" stroke-width="1.5"/>
+<text x="445" y="430" font-size="18" font-weight="700" text-anchor="start" fill="#1F2937" class="math">y=K*u</text>
+<text x="445" y="475" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">只在 A,B,C 固定且 time-invariant 时是单一核。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">scan：仿射变换的结合律</text>
+<text x="845" y="115" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">pair p=(A,b)</text>
+<text x="845" y="155" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">p2 o p1=(A2 A1, A2 b1+b2)</text>
+<circle cx="850" cy="270" r="18" fill="#FFF5F2" stroke="#C24135" stroke-width="2"/>
+<text x="850" y="275" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">p1</text>
+<circle cx="925" cy="270" r="18" fill="#FFF5F2" stroke="#C24135" stroke-width="2"/>
+<text x="925" y="275" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">p2</text>
+<circle cx="1000" cy="270" r="18" fill="#FFF5F2" stroke="#C24135" stroke-width="2"/>
+<text x="1000" y="275" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">p3</text>
+<circle cx="1075" cy="270" r="18" fill="#FFF5F2" stroke="#C24135" stroke-width="2"/>
+<text x="1075" y="275" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">p4</text>
+<path d="M850 245 Q887 205 925 245" fill="none" stroke="#C24135" stroke-width="2"/>
+<path d="M1000 245 Q1037 205 1075 245" fill="none" stroke="#C24135" stroke-width="2"/>
+<path d="M888 202 Q963 125 1038 202" fill="none" stroke="#2563EB" stroke-width="2.5"/>
+<text x="842" y="370" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">work O(L), span O(log L)</text>
+<text x="842" y="420" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">但 kernel fusion、IO 与数值顺序决定墙钟表现。</text>
+<text x="842" y="480" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">input-dependent A_t：可 scan，不再是固定卷积。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">recurrence、convolution 与 scan 是条件化的等价接口，不是可无条件互换的口号。</text>
+</svg>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">伴随算子的配对守恒与反向传播方向</title>
+  <desc id="desc">前向映射把输入向量送到输出空间，伴随把输出测试向量送回输入空间，两条路径给出相同标量内积；右侧展示加权坐标公式和核像正交关系。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
+    <style>
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}.blue{fill:#2563eb}.green{fill:#0f766e}.amber{fill:#b7791f}.h{font-size:19px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}.arrow{stroke:#64748b;stroke-width:2.2;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <text x="52" y="43" class="sans h ink">伴随不是逆映射：它保存的是内积配对，而不是撤销前向作用</text>
+  <rect x="42" y="73" width="746" height="405" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <ellipse cx="192" cy="190" rx="112" ry="76" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/><text x="192" y="166" class="math h blue" text-anchor="middle">v∈V</text><text x="192" y="205" class="sans small muted" text-anchor="middle">输入扰动</text>
+  <ellipse cx="640" cy="190" rx="112" ry="76" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="2"/><text x="640" y="166" class="math h green" text-anchor="middle">Tv∈W</text><text x="640" y="205" class="sans small muted" text-anchor="middle">前向响应</text>
+  <path d="M304 190H516" class="arrow"/><text x="410" y="170" class="math h blue" text-anchor="middle">T</text>
+  <ellipse cx="192" cy="376" rx="112" ry="76" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/><text x="192" y="352" class="math h blue" text-anchor="middle">T*w∈V</text><text x="192" y="391" class="sans small muted" text-anchor="middle">输入侧测量</text>
+  <ellipse cx="640" cy="376" rx="112" ry="76" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="2"/><text x="640" y="352" class="math h green" text-anchor="middle">w∈W</text><text x="640" y="391" class="sans small muted" text-anchor="middle">输出测试向量</text>
+  <path d="M528 376H316" class="arrow"/><text x="422" y="356" class="math h green" text-anchor="middle">T*</text>
+  <path d="M192 266V288" class="arrow"/><path d="M640 266V288" class="arrow"/>
+  <rect x="302" y="274" width="228" height="70" rx="10" fill="#ffffff" stroke="#cbd5e1"/><text x="416" y="305" class="sans small muted" text-anchor="middle">两边计算同一个标量</text><text x="416" y="332" class="math body ink" text-anchor="middle">⟨Tv,w⟩W = ⟨v,T*w⟩V</text>
+
+  <rect x="826" y="73" width="332" height="405" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="852" y="111" class="sans h blue">坐标与结构</text>
+  <text x="852" y="154" class="sans body ink">标准正交坐标</text><text x="852" y="185" class="math formula blue">matrix(T*) = A*</text>
+  <text x="852" y="236" class="sans body ink">加权内积 Gᵥ、G𝑤</text><text x="852" y="270" class="math body green">A† = Gᵥ⁻¹ A* G𝑤</text>
+  <line x1="852" y1="299" x2="1132" y2="299" stroke="#cbd5e1"/>
+  <text x="852" y="337" class="math body ink">N(T*) = R(T)⊥</text><text x="852" y="374" class="math body ink">R(T*) = N(T)⊥</text><text x="852" y="417" class="sans small amber">T* 一般不等于 T⁻¹，也不要求 T 可逆。</text><text x="852" y="447" class="sans small muted">矩形映射同样有伴随。</text>
+  <rect x="92" y="510" width="1016" height="66" rx="12" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="600" y="539" class="sans body ink" text-anchor="middle">自动微分中的 VJP：输出侧协变量经过局部 Jacobian 的对偶/伴随，反向累积到输入侧。</text><text x="600" y="565" class="sans small muted" text-anchor="middle">卷积转置是卷积线性算子的伴随实现；它不是一般意义上的逆卷积。</text>
+  <text x="600" y="610" class="sans result ink" text-anchor="middle">前向传播状态，反向传播测量；伴随恒等式保证两侧对同一变化给出相同标量响应。</text>
+</svg>

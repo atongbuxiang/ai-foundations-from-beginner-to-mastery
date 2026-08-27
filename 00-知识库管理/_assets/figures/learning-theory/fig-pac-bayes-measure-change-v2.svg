@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">PAC-Bayes：先验矩、测度变换与 Bernoulli-KL 证书</title>
+<desc id="desc">先在数据随机性下控制 prior 平均指数矩，再以 KL 为代价把 prior 换成任意 data-dependent posterior，最后利用 Bernoulli KL 联合凸性聚合 Gibbs 风险。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">先控制 prior 平均矩</text>
+<circle cx="85" cy="175" r="24" fill="#FFFEFB" stroke="#2563EB" stroke-width="2.5"/>
+<circle cx="155" cy="175" r="38" fill="#FFFEFB" stroke="#0F766E" stroke-width="2.5"/>
+<circle cx="245" cy="175" r="18" fill="#FFFEFB" stroke="#2563EB" stroke-width="2.5"/>
+<circle cx="315" cy="175" r="30" fill="#FFFEFB" stroke="#0F766E" stroke-width="2.5"/>
+<text x="200" y="270" font-size="16" font-weight="700" text-anchor="middle" fill="#2563EB">h ~ P fixed before S</text>
+<text x="45" y="330" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">E_S E_P exp[m kl(Rhat(h)||R(h))]</text>
+<text x="45" y="370" font-size="20" font-weight="700" text-anchor="start" fill="#0F766E" class="math">&lt;= m + 1</text>
+<line x1="55" y1="420" x2="340" y2="420" stroke="#D7DEE8" stroke-width="2"/>
+<text x="45" y="460" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">Markov turns expectation into one good event</text>
+<text x="45" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">the prior cannot be refit on this same S。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">换到 posterior，支付 KL</text>
+<circle cx="520" cy="190" r="82" fill="#FFFEFB" stroke="#2563EB" stroke-width="3"/>
+<circle cx="655" cy="250" r="68" fill="#FFFEFB" stroke="#0F766E" stroke-width="3"/>
+<text x="520" y="195" font-size="25" font-weight="700" text-anchor="middle" fill="#2563EB">P</text>
+<text x="655" y="255" font-size="23" font-weight="700" text-anchor="middle" fill="#0F766E">Q_S</text>
+<line x1="570" y1="185" x2="620" y2="220" stroke="#C24135" stroke-width="3" marker-end="url(#a2)"/>
+<text x="610" y="145" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">measure change</text>
+<text x="430" y="350" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">E_Q f &lt;= KL(Q||P) + log E_P exp(f)</text>
+<text x="430" y="405" font-size="16" font-weight="700" text-anchor="start" fill="#0F766E">Q may depend on S</text>
+<text x="430" y="450" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">Q not &lt;&lt; P  =&gt;  KL = infinity</text>
+<text x="430" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">posterior means a certificate distribution。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">聚合成可反演的证书</text>
+<rect x="840" y="100" width="290" height="70" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="985.0" y="141.0" font-size="16" font-weight="650" text-anchor="middle" fill="#2563EB">empirical Gibbs risk</text>
+<line x1="985" y1="175" x2="985" y2="210" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="840" y="220" width="290" height="88" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="985.0" y="270.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">binary kl &lt;= (KL + confidence) / m</text>
+<line x1="985" y1="313" x2="985" y2="348" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="840" y="360" width="290" height="70" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="985.0" y="401.0" font-size="16" font-weight="650" text-anchor="middle" fill="#0F766E">invert for population risk</text>
+<text x="830" y="475" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">Pinsker gives a looser square-root corollary</text>
+<text x="830" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">the statement is simultaneous over every Q。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">PAC-Bayes 的三步：prior 矩控制、KL 测度变换、binary-kl 风险反演。</text>
+</svg>

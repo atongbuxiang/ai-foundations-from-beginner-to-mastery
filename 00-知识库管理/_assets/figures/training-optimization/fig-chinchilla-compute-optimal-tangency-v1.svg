@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Compute-optimal tangency for model and data allocation</title>
+  <desc id="desc">A textbook figure shows IsoFLOP constraints, loss contours, a U-shaped profile, and the derived compute-optimal exponents.</desc>
+  <rect width="1200" height="800" fill="#FFFEFB"/>
+  <text x="60" y="60" font-family="Arial,sans-serif" font-size="28" font-weight="700" fill="#172033">Compute-optimal means equal marginal return under a fixed budget</text>
+  <text x="60" y="94" font-family="Arial,sans-serif" font-size="17" fill="#52606D">Move along N·D = C/kappa; the optimum is where the lowest reachable loss contour is tangent.</text>
+  <rect x="50" y="125" width="430" height="585" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+  <rect x="510" y="125" width="330" height="585" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+  <rect x="870" y="125" width="280" height="585" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+  <text x="75" y="165" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172033">A  log N – log D plane</text>
+  <line x1="105" y1="625" x2="445" y2="625" stroke="#52606D" stroke-width="2"/>
+  <line x1="105" y1="625" x2="105" y2="205" stroke="#52606D" stroke-width="2"/>
+  <text x="275" y="675" font-family="Arial,sans-serif" font-size="17" text-anchor="middle" fill="#52606D">larger model N →</text>
+  <text x="65" y="415" font-family="Arial,sans-serif" font-size="17" text-anchor="middle" transform="rotate(-90 65 415)" fill="#52606D">larger data D →</text>
+  <line x1="125" y1="570" x2="420" y2="250" stroke="#2563EB" stroke-width="4"/>
+  <line x1="125" y1="625" x2="420" y2="305" stroke="#2563EB" stroke-width="2" opacity="0.45"/>
+  <text x="300" y="325" font-family="Arial,sans-serif" font-size="15" fill="#2563EB">IsoFLOP: log D = const - log N</text>
+  <ellipse cx="275" cy="415" rx="165" ry="125" fill="none" stroke="#D9E0E7" stroke-width="3" transform="rotate(-43 275 415)"/>
+  <ellipse cx="275" cy="415" rx="115" ry="78" fill="none" stroke="#B76E00" stroke-width="3" transform="rotate(-43 275 415)"/>
+  <ellipse cx="275" cy="415" rx="65" ry="38" fill="none" stroke="#0F766E" stroke-width="4" transform="rotate(-43 275 415)"/>
+  <circle cx="277" cy="414" r="10" fill="#C0392B"/>
+  <text x="292" y="403" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#C0392B">tangent optimum</text>
+  <text x="535" y="165" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172033">B  One IsoFLOP profile</text>
+  <line x1="555" y1="625" x2="810" y2="625" stroke="#52606D" stroke-width="2"/>
+  <line x1="555" y1="625" x2="555" y2="205" stroke="#52606D" stroke-width="2"/>
+  <path d="M575 300 C625 535, 690 590, 790 300" fill="none" stroke="#0F766E" stroke-width="5"/>
+  <line x1="683" y1="290" x2="683" y2="625" stroke="#C0392B" stroke-width="2" stroke-dasharray="8 7"/>
+  <text x="683" y="650" font-family="Arial,sans-serif" font-size="15" text-anchor="middle" fill="#C0392B">N*(C)</text>
+  <text x="600" y="260" font-family="Arial,sans-serif" font-size="15" fill="#2563EB">too small N:</text>
+  <text x="600" y="280" font-family="Arial,sans-serif" font-size="15" fill="#2563EB">capacity-limited</text>
+  <text x="710" y="260" font-family="Arial,sans-serif" font-size="15" fill="#B76E00">too large N:</text>
+  <text x="710" y="280" font-family="Arial,sans-serif" font-size="15" fill="#B76E00">too few tokens</text>
+  <text x="683" y="680" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" fill="#52606D">model size along fixed compute</text>
+  <text x="895" y="165" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172033">C  Derived exponents</text>
+  <rect x="900" y="205" width="220" height="85" rx="12" fill="#EAF1FF" stroke="#2563EB" stroke-width="2"/>
+  <text x="1010" y="238" font-family="Arial,sans-serif" font-size="17" text-anchor="middle" font-weight="700" fill="#2563EB">N*(C)</text>
+  <text x="1010" y="268" font-family="Arial,sans-serif" font-size="17" text-anchor="middle" fill="#172033">∝ C^[beta/(alpha+beta)]</text>
+  <rect x="900" y="315" width="220" height="85" rx="12" fill="#E9F7F4" stroke="#0F766E" stroke-width="2"/>
+  <text x="1010" y="348" font-family="Arial,sans-serif" font-size="17" text-anchor="middle" font-weight="700" fill="#0F766E">D*(C)</text>
+  <text x="1010" y="378" font-family="Arial,sans-serif" font-size="17" text-anchor="middle" fill="#172033">∝ C^[alpha/(alpha+beta)]</text>
+  <rect x="900" y="425" width="220" height="85" rx="12" fill="#FFF4DE" stroke="#B76E00" stroke-width="2"/>
+  <text x="1010" y="458" font-family="Arial,sans-serif" font-size="17" text-anchor="middle" font-weight="700" fill="#B76E00">L*(C) - E</text>
+  <text x="1010" y="488" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" fill="#172033">∝ C^[-alpha·beta/(alpha+beta)]</text>
+  <rect x="900" y="545" width="220" height="95" rx="12" fill="#FBECEC" stroke="#C0392B" stroke-width="2"/>
+  <text x="1010" y="575" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" font-weight="700" fill="#C0392B">Not a universal ratio</text>
+  <text x="1010" y="602" font-family="Arial,sans-serif" font-size="15" text-anchor="middle" fill="#52606D">depends on alpha, beta, A, B,</text>
+  <text x="1010" y="625" font-family="Arial,sans-serif" font-size="15" text-anchor="middle" fill="#52606D">compute and feasible models</text>
+  <text x="600" y="758" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" fill="#52606D">Textbook schematic — tangency is an optimization identity, not a measured Chinchilla coefficient.</text>
+</svg>

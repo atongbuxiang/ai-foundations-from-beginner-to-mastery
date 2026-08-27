@@ -1,0 +1,24 @@
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python caches
+**/__pycache__/
+*.py[cod]
+
+# Local QA and render scratch space
+tmp/
+**/tmp/
+
+# Obsidian per-device session state
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache/
+
+# Credentials and local environment overrides
+.env
+.env.*
+!.env.example
+*.pem
+*.key

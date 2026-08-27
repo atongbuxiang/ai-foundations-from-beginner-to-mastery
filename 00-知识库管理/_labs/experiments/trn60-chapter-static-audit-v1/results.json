@@ -1,0 +1,398 @@
+{
+  "boundaries": [
+    "A passing static audit does not mean that the learner answered or reproduced anything independently.",
+    "The nine deterministic experiments verify declared finite constructions and protocol counterexamples, not universal deep-network behavior.",
+    "Source-card verification records provenance and scope; it does not turn exposition, hypotheses, or scoped experiments into general theorems."
+  ],
+  "curriculum": {
+    "core_ids": [
+      "TRN-01",
+      "TRN-02",
+      "TRN-03",
+      "TRN-04",
+      "TRN-05",
+      "TRN-06",
+      "TRN-07",
+      "TRN-08",
+      "TRN-09",
+      "TRN-10",
+      "TRN-11",
+      "TRN-12",
+      "TRN-13",
+      "TRN-14",
+      "TRN-15",
+      "TRN-16",
+      "TRN-17",
+      "TRN-18",
+      "TRN-19",
+      "TRN-20",
+      "TRN-21",
+      "TRN-22",
+      "TRN-23",
+      "TRN-24",
+      "TRN-25",
+      "TRN-26",
+      "TRN-27",
+      "TRN-28",
+      "TRN-29",
+      "TRN-30",
+      "TRN-31",
+      "TRN-32",
+      "TRN-33",
+      "TRN-34",
+      "TRN-35",
+      "TRN-36",
+      "TRN-37",
+      "TRN-38",
+      "TRN-39",
+      "TRN-40",
+      "TRN-41",
+      "TRN-42",
+      "TRN-43",
+      "TRN-44",
+      "TRN-45",
+      "TRN-46",
+      "TRN-47",
+      "TRN-48",
+      "TRN-49",
+      "TRN-50",
+      "TRN-51",
+      "TRN-52",
+      "TRN-53",
+      "TRN-54",
+      "TRN-55",
+      "TRN-56",
+      "TRN-57",
+      "TRN-58",
+      "TRN-59",
+      "TRN-60",
+      "TRN-61",
+      "TRN-62",
+      "TRN-63",
+      "TRN-64",
+      "TRN-65",
+      "TRN-66",
+      "TRN-67",
+      "TRN-68",
+      "TRN-69",
+      "TRN-70",
+      "TRN-71",
+      "TRN-72"
+    ],
+    "core_nodes": 72,
+    "exercise_files": 72,
+    "exercise_ids": 1080,
+    "exercise_solution_bijection": true,
+    "level_counts": {
+      "A": 216,
+      "B": 216,
+      "C": 216,
+      "D": 216,
+      "E": 216
+    },
+    "solution_files": 72,
+    "solution_ids": 1080,
+    "source_calls": 324,
+    "sources_indexed": 156,
+    "sources_verified": 156,
+    "support_directory_contract": [
+      {
+        "directory": "实验与复现",
+        "expected": {
+          "experiment": 9
+        },
+        "markdown": 9,
+        "types": {
+          "experiment": 9
+        }
+      },
+      {
+        "directory": "测验与解答",
+        "expected": {
+          "assessment": 10,
+          "solution": 1
+        },
+        "markdown": 11,
+        "types": {
+          "assessment": 10,
+          "solution": 1
+        }
+      },
+      {
+        "directory": "课程维护",
+        "expected": {
+          "audit": 10
+        },
+        "markdown": 10,
+        "types": {
+          "audit": 10
+        }
+      }
+    ],
+    "unique_sources": 156,
+    "volume_directory_contract": [
+      {
+        "core_nodes": 8,
+        "markdown": 9,
+        "moc": 1,
+        "volume": "60.1-SGD、Momentum与随机优化噪声"
+      },
+      {
+        "core_nodes": 8,
+        "markdown": 9,
+        "moc": 1,
+        "volume": "60.2-AdaGrad、RMSProp、Adam与AdamW"
+      },
+      {
+        "core_nodes": 8,
+        "markdown": 9,
+        "moc": 1,
+        "volume": "60.3-曲率、自然梯度与矩阵预条件"
+      },
+      {
+        "core_nodes": 8,
+        "markdown": 9,
+        "moc": 1,
+        "volume": "60.4-矩阵优化、谱最速下降与Muon"
+      },
+      {
+        "core_nodes": 8,
+        "markdown": 9,
+        "moc": 1,
+        "volume": "60.5-学习率、Warmup与训练控制"
+      },
+      {
+        "core_nodes": 8,
+        "markdown": 9,
+        "moc": 1,
+        "volume": "60.6-参数化、μP与尺度迁移"
+      },
+      {
+        "core_nodes": 8,
+        "markdown": 9,
+        "moc": 1,
+        "volume": "60.7-Scaling-Law与资源最优分配"
+      },
+      {
+        "core_nodes": 8,
+        "markdown": 9,
+        "moc": 1,
+        "volume": "60.8-低精度、量化与分布式训练"
+      },
+      {
+        "core_nodes": 8,
+        "markdown": 9,
+        "moc": 1,
+        "volume": "60.9-训练诊断、消融与因果归因"
+      }
+    ]
+  },
+  "errors": [],
+  "experiments": {
+    "checks_passed": 224,
+    "checks_total": 224,
+    "committed_and_rerun_files": 115,
+    "committed_artifact_sha256": {
+      "60.1/covariance_with_replacement.csv": "e48a7d7a75bd27d8fc65617ac4329615d6e67f5877b219c8f4f92f4fd7f25090",
+      "60.1/covariance_without_replacement.csv": "f9e0887d315d55941e04ba3dbbd92ca23e820ebfcfcdda8c191321e97cd0dcd4",
+      "60.1/critical_batch_tradeoff.csv": "1e1d6ef7b26f87ed1417e555870ab61d899b42311b5d8b8a98d2f7a7eeb7e7e9",
+      "60.1/heavy_ball_scan.csv": "0b0455387eee412ec34c7e59d2bac4d727b04c58d00ee0b64e8977577101a907",
+      "60.1/plot-batch-covariance-scaling-v1.svg": "760ae5402ddfb4a003b8f29d2ee46d2413a349107a4ff6ab9af7ecb33b9b8362",
+      "60.1/plot-critical-batch-tradeoff-v1.svg": "2add0999c1c08985525a28c7b9f1e8ffd76052b24b558be1488194e43b6f7ee2",
+      "60.1/plot-heavy-ball-stability-audit-v1.svg": "a39728c506606fc65dd58e9289d09c213cc69082058efde7c7c1e01fcb8f68bc",
+      "60.1/results.json": "2e77b82331b1ba7a3f25dd9e4cf97edb6251581e256fbb62053ed9eabee672be",
+      "60.2/adafactor_reconstruction.csv": "bdb3b463bf89a382f67c91f76a5f6c46792b8a3c208cd80ca9253eb502a9ca8b",
+      "60.2/adagrad_scale_switch.csv": "abc59887f449f5b8cfcf7b4bcc1c402b267bb21db6017bbd2baa19ef4edd5351",
+      "60.2/adam_amsgrad_counterexample.csv": "3c7dfaa238449b0f7e02610ad3f6f16e949d7c3e9c5520ca29c3bcb0fe22525e",
+      "60.2/epsilon_response.csv": "a055e8da60c1e86df1970e562abedfaa2b6398d2cd53f44b8bd3e58d8ee0102b",
+      "60.2/plot-adam-amsgrad-counterexample-v1.svg": "f45ad62d3aaba73ab287bdf86d07bcb660bfb434445d551a2151eb025e737c3b",
+      "60.2/plot-adaptive-epsilon-response-v1.svg": "50da51f8463fe7f347e6a7f0091b27c80b741853ff216e49a86aeb53e20365c9",
+      "60.2/plot-update-weight-rms-audit-v1.svg": "e2dada2e1ecb3749dc11e3b84cda98a2941108c210f5576a2eb6192536004d1a",
+      "60.2/results.json": "dfd407ad741cd28dd6ee61cdae62fb9dcc4ac4d3c438432e0eb73653118e3887",
+      "60.2/rmsprop_step_response.csv": "f4c564b69721b3666421ee04d111a422c17f5c1ebe0b8b507492fecd2be83e59",
+      "60.2/update_rms.csv": "5bb4eb07d63a053d8574e03d7853d17a15722e07dff6de40ee0e61c0d5eaef9f",
+      "60.2/weight_rms_sweep.csv": "b87bc9c6a69d0e4995512956d27b39d1df94c5e544e272b6b68b9717cd877176",
+      "60.3/cg_conditioning.csv": "56efb3cca20e374b09fbd5454e8bd77dc46101a22aa0d296dc6d2980c7ec3c95",
+      "60.3/curvature_decomposition.csv": "a063c404aedf2011ad30c80e6bbbb14dbd9a1caeffb83cd4074c8743f6434a41",
+      "60.3/hvp_finite_difference.csv": "e5defb70c64361bedd8aa904a2f6d8997c8996217b348409c9595882548b81d0",
+      "60.3/kfac_damping.csv": "7015b6fb03a280f6a1a1722743cf73857c3e558d67efa23f2a26d0ea86c46203",
+      "60.3/logistic_label_measure.csv": "be12db7c390bd54bf3da87e9b7e1b887000d4222aee6957ecaf40d3bf00ef143",
+      "60.3/matrix_root_basis.csv": "963e076deffdb58b05eeb2eb944a39dbdc472e14eec2d69e5f1996461e53ae16",
+      "60.3/natural_gradient_coordinates.csv": "d4fc4795fa117cf7a997ee493f21a057b49edf18170d47a31d51fddc1d3dddd1",
+      "60.3/plot-curvature-object-counterexamples-v1.svg": "9529cc859f34ce52f34573cd4efac69133828b41f960fbf7457a56fc4ebfb2d1",
+      "60.3/plot-hvp-cg-trust-region-audit-v1.svg": "1bfb09737627ea2b0cae224f56cad4bebe7eead126a1a3bbf583d64ec72fbf82",
+      "60.3/plot-kfac-shampoo-soap-approximation-v1.svg": "8dd7c2c723ccf73a6d269e54b2639ae5a6f075b584f0db5d3687ee0c5478440b",
+      "60.3/results.json": "b4246fb944a7090a7c6eb7c317e8bd794e7476410e308f557e24a60fc4d2d9f7",
+      "60.3/trust_region_damping.csv": "8153e2663a31ffd08db950f5a1c77f45cffcfc6c77ee12d247a79461df66faa0",
+      "60.4/momentum_semantics.csv": "04d5cbf3276d12ce0784584e4afd4eb71097b904977ead6d3a280afacf46024e",
+      "60.4/newton_schulz_matrix.csv": "d42d42d62e498f25a37d89070f43079ec4e4416f1e1ddffe4a36e7e49cefdebe",
+      "60.4/newton_schulz_scalar.csv": "0a426969dfc5c2bb16e3349305efaee23efb70dd092d232a1fc29e7faae98e40",
+      "60.4/norm_duality.csv": "8b2a4350c03aed0a2b22a3e220f2362a7486090ccc4339781c91862ddc0e506f",
+      "60.4/optimizer_boundary.csv": "35755c55c6c45a7a64b41ebd443df2939829a41adf72baf794b57c4d444afbc5",
+      "60.4/plot-muon-newton-schulz-spectral-audit-v1.svg": "63e00960b79de0a216faa69a0d9b5a2c04253083ff4766dba64ebbbce18bb610",
+      "60.4/plot-muon-norm-polar-geometry-v1.svg": "3864e55b3efc23303ce060ca9843f1437523a8041626b90ed0be50e04b28bcc1",
+      "60.4/plot-muon-scaling-state-system-v1.svg": "353c0abb93fe4e0e591089fe0d029b6116150495fda65e7ea5572cde1ef077ef",
+      "60.4/polar_geometry.csv": "99738a77f797422c7f68d0eb88d430e3ce6bf12208e36e318645c19898e01766",
+      "60.4/rank_nonuniqueness.csv": "698d593e7ac2014eb995fb7d0a2546ce8a4b1a0c1a692e3338dc7c40ce798857",
+      "60.4/results.json": "b6c6973b0afa77f433a3a9de10ecc936da196e980f6c415114bb1c016d01a576",
+      "60.4/shape_scaling.csv": "7ab1847a0603c957a77aca40b4cb11b2c1579c05b12934481bfedfa73ce36983",
+      "60.4/stiefel_rotation.csv": "ab7ca81c96ff967ca6d475c1346f2139a58349981a37393a7d34a5f8faf2d262",
+      "60.4/system_proxy.csv": "67a8e9563663fc26478dea12db338d431ed6a12a17e02adda621c46ae053210e",
+      "60.5/averaging.csv": "1208e1295e9a3bd0be8c8d0c2b58942735d4eda5e8d76b18c5b5c88d5ff030a4",
+      "60.5/budget_ledger.csv": "1e887cd3cf29c60aa648057e87c4c2c6a6ec79213f9fac25e17a2ceb70b33f3f",
+      "60.5/clipping_bias.csv": "642115c8f22a293b064b5086fdc9d9899565fe27b839f4fa6e43dd4a793ce0d6",
+      "60.5/clipping_scope.csv": "6bc2c7a1b15f1397558e1b6788b34dec6718f6706faedaa8317ff7668b289d79",
+      "60.5/factorial.csv": "f98a9512ff60d6071d2e872e5ecd9c9fea6a4e487abe9e089e33758ec646a390",
+      "60.5/horizon_rewrite.csv": "f119bb78980503988143845a78f400178d74cd8902df8b447d43bb3898a155c5",
+      "60.5/learning_rate_scale.csv": "7af5361839e6982f531c3cef19575f2067abdf4379bb7b1265d598bea1e0a7ed",
+      "60.5/plot-training-control-averaging-factorial-v1.svg": "8dc19876b2732ff8bbd7793e7ed6c5951284cfab27965d81e1f4fc46c3ddf12f",
+      "60.5/plot-training-control-clipping-weight-rms-v1.svg": "de34166d1c8450b44001c80a0ec145a9b66dea629362470819d9168ef4916eb0",
+      "60.5/plot-training-control-schedule-horizon-v1.svg": "c35bbe25797b0b9baec9ed41a04ad7069ca9e2c908459e991794f2f3a97ade94",
+      "60.5/results.json": "18774b31e73425417c51d54ad6835462b456312203f7bb76e4b529a9204cfc55",
+      "60.5/schedule_audit.csv": "7182a4938df83f496961601d0b06d460df795e42214e5954fdda90d6f4303e19",
+      "60.5/warmup_quadratic.csv": "88303fd804f59ced17c28d345030d8b50286da08551aa508b2d64c768c1fb906",
+      "60.5/weight_rms.csv": "7801bf364f8b9bd82272fc0f6c303228648882573c1115678bdc1b633d04ee33",
+      "60.6/accumulation_scaling.csv": "aecdbbdfb398ac5cf1aaf4e1680686c371ece95488b96bbdfda0bd0f8f7a9208",
+      "60.6/attention_scaling.csv": "0353a9d3a4d09450965db08d0ebec49c4018fbc0a9ed494b672f3053fcab18f6",
+      "60.6/coordinate_checks.csv": "349b8c59d43befcffaf3b653179e198c74cb7a8dfea9b6b71d0b3f6e287ab5dc",
+      "60.6/evidence_ledger.csv": "72be145024bb1cf9731fdd541989932a8430df4d180ef99ed91bbafab3bdaf4e",
+      "60.6/infshape_classification.csv": "e4e530153ba7bf36f653e5176ab0f85c1db48bc6b8f5fdd077910c9bd7425f45",
+      "60.6/mup_exponent_ledger.csv": "49ce3f674a2880a2eb65ede63265c1b5870b2ba80b012c8ef2b884811efe771f",
+      "60.6/parameterization_regimes.csv": "b3f99245615eefd5f0bb30fcb8c68dfbc12b09acfc1749a6b582eb42493aef22",
+      "60.6/plot-mup-coordinate-regime-audit-v1.svg": "14edd934567b3d185551d8d59bbbcbd1d667068f0e5055555bc55f042b88eba3",
+      "60.6/plot-mup-spectral-width-depth-audit-v1.svg": "a6ae2040a142f35992451d2aba0eedda620433c876718e6ebad4a1ba7d98c60e",
+      "60.6/plot-mutransfer-curve-evidence-audit-v1.svg": "ba7b749fd48b04e427f74b1578c3e03012a097b64ecb18b9e3ded52a5635e8a3",
+      "60.6/results.json": "a9ae78841db07b4c9aff1599abd156488a3f17df472bb72405bf1e8b5cec2dd7",
+      "60.6/spectral_geometry.csv": "f0ae26b35081e67aaf9c933fbc61752bbfc612719686c5ca9c6f522da753d8c2",
+      "60.6/transfer_curves.csv": "cc1988037e224805cf25d102431943cf2de746b670549226ea87429215f08d93",
+      "60.6/width_depth.csv": "8faf269c5051a85250d3f3f7a2eceb5455c4fc51d45b87c5f8ac50337c034398",
+      "60.7/broken_emergence.csv": "ecba38cf3ee5bc74a797e06128752ecbfdc66e1a959be7351e2b5ca8fb622c91",
+      "60.7/compute_optimal_allocation.csv": "472e4fcf11ba4b13c3b2db15b682a5af42ebaad29fec7b2d931cc7bcda0f5975",
+      "60.7/compute_system_ledger.csv": "44fc3a80d2e59132c6f600a7e93d4be53bb12dfaa3846cb071bddbc6e33a1b61",
+      "60.7/extrapolation_families.csv": "67abf9d5757b6f23da2144a67553cc799fdbb92e9de202a404a800759498f461",
+      "60.7/heldout_evidence.csv": "e54853bda6a206cc40d4338499d448d831aca4452f82ef79990d803d2413b4bd",
+      "60.7/inference_break_even.csv": "e571fba6767b47876de9d33cc95677f9abbf1210dba38e487ed65bb4af0a0b3a",
+      "60.7/joint_identifiability.csv": "c7f2bfa454ab29d6eea640c5a3b6cf9665e4dff28287d534f7eaa9b0fa497076",
+      "60.7/mixture_transfer.csv": "7d9de6e1f6eb5c42438a19cad6085b92e95c8093ebf6690e16e2c7c3b93af28e",
+      "60.7/offset_slopes.csv": "822db80cb82608097233a51cbacec4b769d3d463e445635de0c11a605856302e",
+      "60.7/plot-scaling-broken-heldout-evidence-audit-v1.svg": "946748d4d16205765fa1adf592d33dfb379b2bccd84c652a7b062c06579e12eb",
+      "60.7/plot-scaling-compute-data-allocation-audit-v1.svg": "941151148a2e4cf8a35421bfea970ef5c83808d7446de93e8231c780056761f5",
+      "60.7/plot-scaling-offset-extrapolation-audit-v1.svg": "747dd9998ea0a06ad501e9747f1c8bdc2216f18c88f6aa4fc1f74320b23c9aea",
+      "60.7/repeated_tokens.csv": "e088222b882f024ae2eb1996d91823c05f4b21dc5137528efc94f058e9af24b1",
+      "60.7/results.json": "be53de6e7fe340e49591bbbf40697fc8973c24a4c2683b0b1ee2dc9e8d94c4fe",
+      "60.8/dtype_contract.csv": "e1198a904d3a8061ed7d6308d7e0826bb5703e20f52991fc1030883c59fa1a10",
+      "60.8/global_batch.csv": "2d8fd25873535b2cfad4b43aedd46e2959a7abb59ca2dd5a35f2a1c0ba7846d3",
+      "60.8/loss_scaling_clocks.csv": "e6e530a73a89c6817b80f4d59173a18b3894e7bffac135168a2b4b63a9a7a735",
+      "60.8/offload_roofline.csv": "0d45a23421ab2be4fc58a1881ee3b7531f783bcca7b63d96d844a755d67bf801",
+      "60.8/parallelism_shapes.csv": "78076af42ff478abb210e47a6d449c38908682688be25d00988b27a5fd6fc04c",
+      "60.8/plot-distributed-batch-memory-audit-v1.svg": "c0e1027a3ede30dccb9984f29a85c3f433bd4307e7ded520c9348faa004bc1b0",
+      "60.8/plot-low-precision-state-estimators-audit-v1.svg": "194fc8c53bfee52efec2502c1279b2683abeb56031398aec5e8d929afaf0d61c",
+      "60.8/plot-roofline-reproducibility-audit-v1.svg": "61d016cdca30f28c3ffe664a3238ceba2cf42ee5ef62f44f7d13ec239c8f6475",
+      "60.8/quantization_ledger.csv": "34c8deffa857a61b1c6600d09f2fcacd2a3ae3f6bfcf5bc5b12e686e4d504d26",
+      "60.8/reproducibility_evidence.csv": "c53641b7ce634e863157b534128da440f54a06e228e18c766682d326b1f391db",
+      "60.8/results.json": "b08f167246497182e5b9d4f564d4a82e706666a8e469e21fb1a672d8c65afd94",
+      "60.8/ring_allreduce.csv": "1c06e35d511e978e8517cf8dba0cfceb8910f4e19358c77e61997ae1ec0abefe",
+      "60.8/stochastic_rounding.csv": "c5c67e1e6b0b25398d860d0d3a238cf27378d4bc3934952f658b99b1f5bcc95e",
+      "60.8/zero_memory.csv": "b442712f948b4fd4d103f45c4afec00c9d63bc3e44560534c17c1d10fa97128b",
+      "60.9/checkpoint_selection.csv": "cff8d227a2b9678701a7b6589522d02a6baf0476b0476c2325c8579381d2c650",
+      "60.9/clock_alignment.csv": "9a331ff4314fbf3303e9acd2d1bf21d215037afc2ed8e274a35b59f3fa18796f",
+      "60.9/compute_matching.csv": "a8629c3eb375fbde49ac381d5bbe4a897b6e059e160c5144ac23dd565b87dff9",
+      "60.9/confounding_simpson.csv": "58b820e5ab8b0cc5cf4c0a6fbd3964609cdf4930db3a3061530ae12ad2119715",
+      "60.9/factorial_interaction.csv": "030041f4939c0e5c6500f367070239a77c2eb13cbd5b9ab68c86e50e3097f934",
+      "60.9/first_bad_event.csv": "bdacb0651788d0fe2a95e4c663136766d3973b0bac84089e541a2466f1560631",
+      "60.9/paired_variance.csv": "9954cc846f0a50f39ef2bb69b6c361de03c4fbbbf4d38740885a292a64e00ab6",
+      "60.9/plot-causal-factorial-paired-audit-v1.svg": "5c9c663b758b8ec1d0f26bda35b7bbc18362fef9c656522b9d23fb907c880130",
+      "60.9/plot-selection-sequential-ledger-audit-v1.svg": "51ca9aca9b1d3000c2f9526b9966dad9c362def2cabd60c3224a610cb3a01090",
+      "60.9/plot-telemetry-first-bad-audit-v1.svg": "6ff54138368a959d229c4f409015cafd40206109bcf2e67f8660c40c2e8b9e8e",
+      "60.9/research_ledger.csv": "2939d36eb64466b6e76d13b35f937576d296713f4f89bfeea754f8bde3b8dd3a",
+      "60.9/results.json": "9c22f1dc875a71e64ce31efc2f16ee3a013628728da23768a71a8c98c4bb84b0",
+      "60.9/sequential_boundary.csv": "994d41ad4571e911b1cb4247b75c096c0e30ed643e1c1d870c646618c0c0aeea",
+      "60.9/uwr_spectrum.csv": "3f5d5ce182a0f3834f152176fdedb6fd0ac59685feb226a24c5df2a4841f000c"
+    },
+    "deep_rerun_enabled": false,
+    "total_tracks": 81,
+    "volumes": [
+      {
+        "checks_passed": 6,
+        "checks_total": 6,
+        "committed_files": 8,
+        "tracks": 6,
+        "volume": "60.1"
+      },
+      {
+        "checks_passed": 13,
+        "checks_total": 13,
+        "committed_files": 11,
+        "tracks": 9,
+        "volume": "60.2"
+      },
+      {
+        "checks_passed": 16,
+        "checks_total": 16,
+        "committed_files": 12,
+        "tracks": 6,
+        "volume": "60.3"
+      },
+      {
+        "checks_passed": 21,
+        "checks_total": 21,
+        "committed_files": 14,
+        "tracks": 10,
+        "volume": "60.4"
+      },
+      {
+        "checks_passed": 27,
+        "checks_total": 27,
+        "committed_files": 14,
+        "tracks": 10,
+        "volume": "60.5"
+      },
+      {
+        "checks_passed": 29,
+        "checks_total": 29,
+        "committed_files": 14,
+        "tracks": 10,
+        "volume": "60.6"
+      },
+      {
+        "checks_passed": 34,
+        "checks_total": 34,
+        "committed_files": 14,
+        "tracks": 10,
+        "volume": "60.7"
+      },
+      {
+        "checks_passed": 38,
+        "checks_total": 38,
+        "committed_files": 14,
+        "tracks": 10,
+        "volume": "60.8"
+      },
+      {
+        "checks_passed": 40,
+        "checks_total": 40,
+        "committed_files": 14,
+        "tracks": 10,
+        "volume": "60.9"
+      }
+    ]
+  },
+  "graph_and_visuals": {
+    "ambiguous_wiki_links": [],
+    "image_embeds": 99,
+    "missing_wiki_links": [],
+    "numeric_width_image_embeds": 99,
+    "odd_display_math_files": [],
+    "root_stable_image_embeds": 99,
+    "scope_markdown_files": 257,
+    "svg_metadata_xml_failures": [],
+    "unique_svg_assets": 99,
+    "wiki_link_calls": 2500
+  },
+  "passed": true,
+  "repository_gates": {
+    "enabled": false
+  },
+  "schema": "trn60-chapter-static-audit-v1",
+  "scope": "Chapter 6 static course artifacts; learner mastery and real-model evidence excluded"
+}

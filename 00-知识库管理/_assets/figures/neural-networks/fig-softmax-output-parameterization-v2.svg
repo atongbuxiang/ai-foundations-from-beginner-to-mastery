@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Softmax Output：logit 差、温度与概率单纯形</title>
+<desc id="desc">线性 head 产生未归一化 logits；Softmax 只依赖两两差并映到单纯形内部；正尺度保持 argmax 却改变熵、梯度和校准，大词表仍需全量归一化。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">从 hidden 到 categorical law</text>
+<rect x="52" y="105" width="80" height="48" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="92.0" y="135.0" font-size="17" font-weight="650" text-anchor="middle" fill="#2563EB">h</text>
+<rect x="170" y="96" width="108" height="56" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="224.0" y="130.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">W h + b</text>
+<rect x="52" y="240" width="108" height="52" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="106.0" y="272.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">logits z</text>
+<rect x="220" y="232" width="112" height="56" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="276.0" y="266.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">softmax</text>
+<line x1="137" y1="129" x2="165" y2="125" stroke="#2563EB" stroke-width="2.2" marker-end="url(#a0)"/>
+<path d="M224 157V205H106V235" fill="none" stroke="#0F766E" stroke-width="2.2" marker-end="url(#a1)"/>
+<line x1="165" y1="266" x2="215" y2="260" stroke="#C24135" stroke-width="2.2" marker-end="url(#a2)"/>
+<rect x="52" y="342" width="310" height="82" rx="5" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="207" y="372" font-size="16" font-weight="700" text-anchor="middle" fill="#2563EB">log p_i / p_j = z_i - z_j</text>
+<text x="207" y="402" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">only pairwise differences are identifiable</text>
+<text x="207" y="476" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">finite logits -&gt; interior probabilities</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">shift gauge 与 temperature</text>
+<rect x="445" y="96" width="315" height="82" rx="5" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="602" y="126" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">softmax(z + c1) = softmax(z)</text>
+<text x="602" y="154" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">fix gauge: max=0 or sum z=0</text>
+<rect x="445" y="222" width="315" height="46" rx="4" fill="#FFFEFB" stroke="#C24135" stroke-width="1.7"/>
+<text x="462" y="251" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">tau &lt; 1</text>
+<text x="742" y="251" font-size="15" font-weight="650" text-anchor="end" fill="#64748B">sharper</text>
+<rect x="445" y="290" width="315" height="46" rx="4" fill="#FFFEFB" stroke="#2563EB" stroke-width="1.7"/>
+<text x="462" y="319" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">tau = 1</text>
+<text x="742" y="319" font-size="15" font-weight="650" text-anchor="end" fill="#64748B">baseline</text>
+<rect x="445" y="358" width="315" height="46" rx="4" fill="#FFFEFB" stroke="#0F766E" stroke-width="1.7"/>
+<text x="462" y="387" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">tau &gt; 1</text>
+<text x="742" y="387" font-size="15" font-weight="650" text-anchor="end" fill="#64748B">flatter</text>
+<text x="602" y="454" font-size="15" font-weight="700" text-anchor="middle" fill="#B7791F">dH/dtau = Var_p(z) / tau^3 &gt;= 0</text>
+<text x="602" y="484" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">argmax stays; probabilities and gradients change</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">边界、数值与大词表</text>
+<rect x="845" y="94" width="285" height="76" rx="5" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="987" y="123" font-size="16" font-weight="700" text-anchor="middle" fill="#2563EB">stable value</text>
+<text x="987" y="151" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">subtract max + logsumexp</text>
+<rect x="845" y="208" width="285" height="76" rx="5" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="987" y="237" font-size="16" font-weight="700" text-anchor="middle" fill="#0F766E">probability boundary</text>
+<text x="987" y="265" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">p_i=0 needs infinite logit gap</text>
+<rect x="845" y="322" width="285" height="92" rx="5" fill="#FFF5F2" stroke="#C24135" stroke-width="2"/>
+<text x="987" y="351" font-size="16" font-weight="700" text-anchor="middle" fill="#C24135">full vocabulary</text>
+<text x="987" y="380" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">logits / normalize over V</text>
+<text x="987" y="402" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">compute, memory and communication</text>
+<text x="987" y="468" font-size="15" font-weight="700" text-anchor="middle" fill="#B7791F">confidence != calibration</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">Softmax 定义的是 logit 差的概率参数化；scale、bias、mask、数值实现与词表成本都属于同一个输出合同。</text>
+</svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">Rayleigh 商、Courant–Fischer 与 Ky Fan 原理</title>
+  <desc id="desc">三面板展示二维 Rayleigh 商极值、子空间极小极大和前 k 个方向的总能量最大化。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#334155"/></marker>
+    <style>
+      .panel{fill:#f8fafc;stroke:#cbd5e1;stroke-width:2}.h{font:700 19px system-ui,sans-serif;fill:#0f172a}.t{font:15px system-ui,sans-serif;fill:#334155}.s{font:13px system-ui,sans-serif;fill:#475569}.math{font:italic 16px Georgia,serif;fill:#0f172a}.blue{stroke:#2563eb;fill:none;stroke-width:3}.red{stroke:#dc2626;fill:none;stroke-width:3}.green{stroke:#059669;fill:none;stroke-width:3}.dash{stroke:#94a3b8;stroke-width:1.5;stroke-dasharray:5 5}.bar1{fill:#2563eb}.bar2{fill:#60a5fa}.bar3{fill:#cbd5e1}
+    </style>
+  </defs>
+  <rect width="1200" height="430" fill="#ffffff"/>
+  <rect class="panel" x="18" y="18" width="372" height="394" rx="14"/>
+  <rect class="panel" x="414" y="18" width="372" height="394" rx="14"/>
+  <rect class="panel" x="810" y="18" width="372" height="394" rx="14"/>
+
+  <text class="h" x="38" y="52">A. 一个方向：Rayleigh 商</text>
+  <line class="dash" x1="72" y1="235" x2="350" y2="235"/><line class="dash" x1="210" y1="92" x2="210" y2="372"/>
+  <circle cx="210" cy="235" r="96" fill="none" stroke="#cbd5e1" stroke-width="2"/>
+  <ellipse cx="210" cy="235" rx="124" ry="61" transform="rotate(-28 210 235)" fill="#dbeafe" fill-opacity=".55" stroke="#2563eb" stroke-width="3"/>
+  <line class="red" x1="116" y1="288" x2="304" y2="182" marker-end="url(#arrow)"/><line class="green" x1="182" y1="185" x2="238" y2="285" marker-end="url(#arrow)"/>
+  <text class="s" x="269" y="174">u₁：最大 λ₁</text><text class="s" x="241" y="302">uₙ：最小 λₙ</text>
+  <text class="math" x="82" y="394">ρ(x)=x*Ax / x*x ∈ [λₙ, λ₁]</text>
+
+  <text class="h" x="434" y="52">B. 第 k 个值：极小极大</text>
+  <line x1="455" y1="329" x2="750" y2="329" stroke="#64748b" stroke-width="2"/>
+  <line x1="455" y1="329" x2="455" y2="92" stroke="#64748b" stroke-width="2"/>
+  <rect class="bar1" x="480" y="116" width="44" height="213" rx="5"/><rect class="bar1" x="536" y="157" width="44" height="172" rx="5"/><rect class="bar2" x="592" y="204" width="44" height="125" rx="5"/><rect class="bar3" x="648" y="246" width="44" height="83" rx="5"/><rect class="bar3" x="704" y="280" width="28" height="49" rx="5"/>
+  <text class="s" x="493" y="350">λ₁</text><text class="s" x="549" y="350">λ₂</text><text class="s" x="605" y="350">λₖ</text><text class="s" x="658" y="350">…</text>
+  <path d="M470 190 C530 76, 616 81, 646 189" fill="none" stroke="#dc2626" stroke-width="3" marker-end="url(#arrow)"/>
+  <text class="t" x="460" y="382">选 k 维 S，使 S 内最弱方向最强</text>
+  <text class="math" x="464" y="405">λₖ = max dim(S)=k  min x∈S ρ(x)</text>
+
+  <text class="h" x="830" y="52">C. k 个方向：Ky Fan / PCA</text>
+  <rect x="844" y="100" width="126" height="222" rx="10" fill="#e2e8f0"/>
+  <g fill="#94a3b8"><circle cx="866" cy="287" r="5"/><circle cx="884" cy="270" r="5"/><circle cx="901" cy="252" r="5"/><circle cx="919" cy="236" r="5"/><circle cx="938" cy="216" r="5"/><circle cx="953" cy="198" r="5"/><circle cx="873" cy="220" r="5"/><circle cx="897" cy="199" r="5"/><circle cx="926" cy="175" r="5"/><circle cx="949" cy="151" r="5"/></g>
+  <line class="blue" x1="856" y1="302" x2="960" y2="142" marker-end="url(#arrow)"/><line class="green" x1="852" y1="224" x2="957" y2="242" marker-end="url(#arrow)"/>
+  <path d="M994 120 L994 319 L1154 319" fill="none" stroke="#64748b" stroke-width="2"/>
+  <rect class="bar1" x="1012" y="162" width="28" height="157"/><rect class="bar1" x="1050" y="208" width="28" height="111"/><rect class="bar3" x="1088" y="263" width="28" height="56"/><rect class="bar3" x="1126" y="288" width="18" height="31"/>
+  <text class="s" x="1011" y="341">top-k 能量</text>
+  <text class="math" x="837" y="382">max Q*Q=I tr(Q*AQ) = Σᵏᵢ₌₁ λᵢ</text>
+  <text class="s" x="843" y="405">基可旋转；最优子空间才是几何对象</text>
+</svg>
+

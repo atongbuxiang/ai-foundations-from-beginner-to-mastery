@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">ODE 初值问题的适定性阶梯与三层对象</title>
+<desc id="desc">初值问题先改写为函数空间积分算子的固定点；连续性、局部 Lipschitz 与增长或先验界分别支持存在、唯一连续依赖和全局延拓；精确流、数值轨迹与 Neural ODE 训练声明是不同层级。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">把轨迹变成函数空间固定点</text>
+<rect x="45" y="95" width="315" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="202.5" y="130.0" font-size="17" font-weight="650" text-anchor="middle" fill="#2563EB">candidate path y(t)</text>
+<line x1="202" y1="156" x2="202" y2="193" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="45" y="205" width="315" height="78" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="202.5" y="250.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">T[y](t)=y0+integral f(s,y(s)) ds</text>
+<line x1="202" y1="286" x2="202" y2="323" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="45" y="335" width="315" height="62" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="202.5" y="372.0" font-size="16" font-weight="650" text-anchor="middle" fill="#C24135">fixed point y=T[y]</text>
+<text x="45" y="435" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">choose a closed ball in C([t0,t0+h])</text>
+<text x="45" y="468" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">self-map + contraction =&gt; unique local path</text>
+<text x="45" y="501" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">h depends on bounds and Lipschitz scale。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">四级结论需要不同资源</text>
+<rect x="445" y="92" width="165" height="55" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="527.5" y="125.5" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">existence</text>
+<line x1="613" y1="120" x2="635" y2="120" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<text x="648" y="126" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">continuity / compactness</text>
+<rect x="445" y="187" width="165" height="55" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="527.5" y="220.5" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">uniqueness</text>
+<line x1="613" y1="215" x2="635" y2="215" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<text x="648" y="221" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">state-local Lipschitz</text>
+<rect x="445" y="282" width="165" height="55" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="527.5" y="315.5" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">continuous dependence</text>
+<line x1="613" y1="310" x2="635" y2="310" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<text x="648" y="316" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">Gronwall estimate</text>
+<rect x="445" y="377" width="165" height="55" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="527.5" y="410.5" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">global continuation</text>
+<line x1="613" y1="405" x2="635" y2="405" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<text x="648" y="411" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">no-blow-up criterion</text>
+<text x="430" y="486" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">continuity alone may allow many solutions</text>
+<text x="430" y="514" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">local uniqueness does not forbid blow-up。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">模型、精确流与求解器不可混同</text>
+<rect x="840" y="90" width="300" height="56" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="990.0" y="124.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">vector field f_theta</text>
+<line x1="990" y1="149" x2="990" y2="175" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="840" y="182" width="300" height="56" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="990.0" y="216.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">exact flow Phi_(t,s)</text>
+<line x1="990" y1="241" x2="990" y2="267" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="840" y="274" width="300" height="56" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="990.0" y="308.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">numerical trajectory y_h</text>
+<line x1="990" y1="333" x2="990" y2="359" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="840" y="366" width="300" height="56" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="990.0" y="400.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">training / empirical claim</text>
+<text x="830" y="472" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">well-posedness precedes discretization</text>
+<text x="830" y="501" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">solver success != model/generalization proof。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">ODE 符号只是起点：固定点给局部解，Gronwall 给稳定依赖，延拓条件给时间范围，数值与学习声明另行验收。</text>
+</svg>

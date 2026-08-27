@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">从高斯消元到 LU 分解与三角求解</title>
+  <desc id="desc">用二阶方程展示消元乘子如何产生上三角矩阵并存入下三角矩阵，随后用置换、前代与回代求解多个右端。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
+    <style>
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}.blue{fill:#2563eb}.green{fill:#0f766e}.amber{fill:#b7791f}.h{font-size:19px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}.arrow{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#arrow)}.cell{fill:#ffffff;stroke:#cbd5e1}
+    </style>
+  </defs>
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <text x="52" y="43" class="sans h ink">消元把难系统变成三角系统；LU 把整段消元历史保存下来</text>
+  <text x="78" y="91" class="sans h blue">具体例子</text>
+  <text x="78" y="137" class="math formula ink">A =</text>
+  <g class="math formula ink" text-anchor="middle"><rect x="135" y="105" width="58" height="50" class="cell"/><rect x="193" y="105" width="58" height="50" class="cell"/><rect x="135" y="155" width="58" height="50" class="cell"/><rect x="193" y="155" width="58" height="50" class="cell"/><text x="164" y="137">2</text><text x="222" y="137">1</text><text x="164" y="188">4</text><text x="222" y="188">3</text></g>
+  <path d="M280 155H435" class="arrow"/><text x="357" y="128" class="math body amber" text-anchor="middle">R₂ ← R₂−2R₁</text><text x="357" y="181" class="sans small muted" text-anchor="middle">消元乘子 m₂₁=2</text>
+  <text x="455" y="137" class="math formula ink">U =</text>
+  <g class="math formula ink" text-anchor="middle"><rect x="512" y="105" width="58" height="50" class="cell"/><rect x="570" y="105" width="58" height="50" class="cell"/><rect x="512" y="155" width="58" height="50" class="cell"/><rect x="570" y="155" width="58" height="50" class="cell"/><text x="541" y="137">2</text><text x="599" y="137">1</text><text x="541" y="188" class="green">0</text><text x="599" y="188">1</text></g>
+  <path d="M662 155H785" class="arrow"/><text x="724" y="132" class="sans body blue" text-anchor="middle">把乘子存入 L</text>
+  <text x="806" y="137" class="math formula ink">L =</text>
+  <g class="math formula ink" text-anchor="middle"><rect x="863" y="105" width="58" height="50" class="cell"/><rect x="921" y="105" width="58" height="50" class="cell"/><rect x="863" y="155" width="58" height="50" class="cell"/><rect x="921" y="155" width="58" height="50" class="cell"/><text x="892" y="137">1</text><text x="950" y="137">0</text><text x="892" y="188" class="blue">2</text><text x="950" y="188">1</text></g>
+  <rect x="1007" y="105" width="144" height="100" rx="10" fill="#eff6ff" stroke="#93c5fd"/><text x="1079" y="146" class="math h blue" text-anchor="middle">A=LU</text><text x="1079" y="177" class="sans small muted" text-anchor="middle">本例无需换行</text>
+
+  <line x1="52" y1="241" x2="1148" y2="241" stroke="#cbd5e1"/>
+  <text x="78" y="283" class="sans h green">分解一次，求解多个右端</text>
+  <rect x="80" y="313" width="188" height="92" rx="12" fill="#f8fafc" stroke="#cbd5e1"/><text x="174" y="348" class="math formula ink" text-anchor="middle">P b</text><text x="174" y="380" class="sans small muted" text-anchor="middle">先应用行置换</text>
+  <path d="M268 359H362" class="arrow"/>
+  <rect x="362" y="313" width="218" height="92" rx="12" fill="#eff6ff" stroke="#93c5fd"/><text x="471" y="348" class="math formula blue" text-anchor="middle">L y = P b</text><text x="471" y="380" class="sans small muted" text-anchor="middle">前向代入，O(n²)</text>
+  <path d="M580 359H674" class="arrow"/>
+  <rect x="674" y="313" width="218" height="92" rx="12" fill="#ecfdf5" stroke="#6ee7b7"/><text x="783" y="348" class="math formula green" text-anchor="middle">U x = y</text><text x="783" y="380" class="sans small muted" text-anchor="middle">后向代入，O(n²)</text>
+  <path d="M892 359H986" class="arrow"/>
+  <rect x="986" y="313" width="164" height="92" rx="12" fill="#ffffff" stroke="#cbd5e1"/><text x="1068" y="349" class="math formula ink" text-anchor="middle">x</text><text x="1068" y="380" class="sans small muted" text-anchor="middle">系统解</text>
+  <rect x="80" y="438" width="1070" height="72" rx="12" fill="#fffbeb" stroke="#fcd34d"/>
+  <text x="108" y="469" class="sans h amber">为什么需要主元选择？</text><text x="108" y="496" class="sans body ink">当前主元为零或相对过小时，先用 P 交换行；一般稳定形式是 PA=LU，而不是无条件写 A=LU。</text>
+  <rect x="92" y="540" width="1016" height="48" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="600" y="571" class="sans result ink" text-anchor="middle">分解约 O(n³)，每个新右端只需两次 O(n²) 三角求解；复用才是 LU 的核心收益。</text>
+</svg>

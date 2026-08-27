@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">LM70.5 实验二：理论透镜与 induction oracle</title><desc id="desc">Bayesian posterior、OLS、一步 GD 与重复 token pattern 的可计算结果。</desc>
+<rect width="1200" height="700" fill="#FFFEFB"/>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}</style>
+<text x="55" y="55" font-size="25" font-weight="700" fill="#2563EB">LM70.5 实验二：理论透镜与 induction oracle</text>
+<rect x="55" y="105" width="320" height="165" rx="12" fill="#FFFFFF" stroke="#7C3AED" stroke-width="2"/>
+<text x="75" y="145" font-size="17" font-weight="700" fill="#7C3AED">Bayesian posterior</text>
+<text x="75" y="185" font-size="16" fill="#17324D">p(z=+|D)=0.90</text>
+<text x="75" y="220" font-size="16" fill="#17324D">p(z=-|D)=0.10</text>
+<rect x="410" y="105" width="320" height="165" rx="12" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+<text x="430" y="145" font-size="17" font-weight="700" fill="#2563EB">Linear estimator</text>
+<text x="430" y="185" font-size="16" fill="#17324D">w_OLS=2.00</text>
+<text x="430" y="220" font-size="16" fill="#17324D">y*(x=3)=6.00</text>
+<rect x="765" y="105" width="320" height="165" rx="12" fill="#FFFFFF" stroke="#0F766E" stroke-width="2"/>
+<text x="785" y="145" font-size="17" font-weight="700" fill="#0F766E">One GD step</text>
+<text x="785" y="185" font-size="16" fill="#17324D">w_1=2.00</text>
+<text x="785" y="220" font-size="16" fill="#17324D">y*(x=3)=6.00</text>
+<text x="55" y="335" font-size="18" font-weight="700" fill="#17324D">Induction counterfactual</text>
+<rect x="85" y="380" width="760" height="72" rx="10" fill="#F8FAFC" stroke="#0F766E" stroke-width="2"/>
+<text x="115" y="424" font-size="18" fill="#17324D">clean: A B C A →</text>
+<rect x="865" y="380" width="120" height="72" rx="10" fill="#0F766E"/>
+<text x="925" y="425" text-anchor="middle" font-size="22" font-weight="700" fill="#FFFFFF">B</text>
+<rect x="85" y="490" width="760" height="72" rx="10" fill="#F8FAFC" stroke="#C24135" stroke-width="2"/>
+<text x="115" y="534" font-size="18" fill="#17324D">corrupt: A X C A →</text>
+<rect x="865" y="490" width="120" height="72" rx="10" fill="#C24135"/>
+<text x="925" y="535" text-anchor="middle" font-size="22" font-weight="700" fill="#FFFFFF">X</text>
+<text x="55" y="670" font-size="14" fill="#64748B">Matching toy outputs do not identify a unique mechanism; counterfactuals expose which input relation the rule uses.</text>
+</svg>

@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">声明窗口不等于有效上下文：长度、证据位置与任务复杂度必须联合扫描</title><desc id="desc">左侧绘制位置效应曲线，右侧展示 length × task 矩阵以及声明窗口与有效窗口的区别。</desc>
+<rect width="1200" height="700" fill="#FFFEFB"/>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#64748B"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#17324D" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<text x="55" y="55" font-size="25" font-weight="700" fill="#2563EB">声明窗口不等于有效上下文：长度、证据位置与任务复杂度必须联合扫描</text>
+<line x1="70" y1="375" x2="535" y2="375" stroke="#17324D" stroke-width="2"/>
+<line x1="70" y1="375" x2="70" y2="135" stroke="#17324D" stroke-width="2"/>
+<path d="M75,175 L145,215 L215,285 L300,330 L385,275 L465,205 L530,165" fill="none" stroke="#C24135" stroke-width="4"/>
+<circle cx="75" cy="175" r="6" fill="#C24135"/>
+<circle cx="145" cy="215" r="6" fill="#C24135"/>
+<circle cx="215" cy="285" r="6" fill="#C24135"/>
+<circle cx="300" cy="330" r="6" fill="#C24135"/>
+<circle cx="385" cy="275" r="6" fill="#C24135"/>
+<circle cx="465" cy="205" r="6" fill="#C24135"/>
+<circle cx="530" cy="165" r="6" fill="#C24135"/>
+<text x="80" y="120" font-size="15" font-weight="700" fill="#17324D">evidence-position accuracy</text>
+<text x="75" y="410" font-size="12" fill="#64748B">start</text>
+<text x="285" y="410" font-size="12" fill="#64748B">middle</text>
+<text x="500" y="410" font-size="12" fill="#64748B">end</text>
+<text x="675" y="128" text-anchor="middle" font-size="12" fill="#17324D">single needle</text>
+<text x="787" y="128" text-anchor="middle" font-size="12" fill="#17324D">multi-needle</text>
+<text x="899" y="128" text-anchor="middle" font-size="12" fill="#17324D">multi-hop</text>
+<text x="1011" y="128" text-anchor="middle" font-size="12" fill="#17324D">aggregation</text>
+<text x="600" y="165" font-size="13" fill="#17324D">8K</text>
+<rect x="635" y="140" width="88" height="52" rx="6" fill="#0F766E" fill-opacity="0.99"/>
+<text x="679" y="172" text-anchor="middle" font-size="13" fill="#FFFFFF">98%</text>
+<rect x="747" y="140" width="88" height="52" rx="6" fill="#0F766E" fill-opacity="0.95"/>
+<text x="791" y="172" text-anchor="middle" font-size="13" fill="#FFFFFF">92%</text>
+<rect x="859" y="140" width="88" height="52" rx="6" fill="#0F766E" fill-opacity="0.88"/>
+<text x="903" y="172" text-anchor="middle" font-size="13" fill="#FFFFFF">82%</text>
+<rect x="971" y="140" width="88" height="52" rx="6" fill="#D97706" fill-opacity="0.77"/>
+<text x="1015" y="172" text-anchor="middle" font-size="13" fill="#FFFFFF">64%</text>
+<text x="600" y="237" font-size="13" fill="#17324D">16K</text>
+<rect x="635" y="212" width="88" height="52" rx="6" fill="#0F766E" fill-opacity="0.94"/>
+<text x="679" y="244" text-anchor="middle" font-size="13" fill="#FFFFFF">91%</text>
+<rect x="747" y="212" width="88" height="52" rx="6" fill="#0F766E" fill-opacity="0.87"/>
+<text x="791" y="244" text-anchor="middle" font-size="13" fill="#FFFFFF">80%</text>
+<rect x="859" y="212" width="88" height="52" rx="6" fill="#D97706" fill-opacity="0.75"/>
+<text x="903" y="244" text-anchor="middle" font-size="13" fill="#FFFFFF">61%</text>
+<rect x="971" y="212" width="88" height="52" rx="6" fill="#C24135" fill-opacity="0.61"/>
+<text x="1015" y="244" text-anchor="middle" font-size="13" fill="#FFFFFF">40%</text>
+<text x="600" y="309" font-size="13" fill="#17324D">32K</text>
+<rect x="635" y="284" width="88" height="52" rx="6" fill="#0F766E" fill-opacity="0.90"/>
+<text x="679" y="316" text-anchor="middle" font-size="13" fill="#FFFFFF">85%</text>
+<rect x="747" y="284" width="88" height="52" rx="6" fill="#D97706" fill-opacity="0.79"/>
+<text x="791" y="316" text-anchor="middle" font-size="13" fill="#FFFFFF">67%</text>
+<rect x="859" y="284" width="88" height="52" rx="6" fill="#C24135" fill-opacity="0.64"/>
+<text x="903" y="316" text-anchor="middle" font-size="13" fill="#FFFFFF">44%</text>
+<rect x="971" y="284" width="88" height="52" rx="6" fill="#C24135" fill-opacity="0.51"/>
+<text x="1015" y="316" text-anchor="middle" font-size="13" fill="#FFFFFF">25%</text>
+<text x="600" y="381" font-size="13" fill="#17324D">64K</text>
+<rect x="635" y="356" width="88" height="52" rx="6" fill="#D97706" fill-opacity="0.86"/>
+<text x="679" y="388" text-anchor="middle" font-size="13" fill="#FFFFFF">79%</text>
+<rect x="747" y="356" width="88" height="52" rx="6" fill="#D97706" fill-opacity="0.73"/>
+<text x="791" y="388" text-anchor="middle" font-size="13" fill="#FFFFFF">58%</text>
+<rect x="859" y="356" width="88" height="52" rx="6" fill="#C24135" fill-opacity="0.58"/>
+<text x="903" y="388" text-anchor="middle" font-size="13" fill="#FFFFFF">36%</text>
+<rect x="971" y="356" width="88" height="52" rx="6" fill="#C24135" fill-opacity="0.47"/>
+<text x="1015" y="388" text-anchor="middle" font-size="13" fill="#FFFFFF">18%</text>
+<rect x="625" y="470" width="500" height="130" rx="12" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2" filter="url(#shadow)"/>
+<text x="641" y="499" font-size="16" font-weight="700" fill="#7C3AED">两个窗口</text>
+<text x="641" y="526" font-size="13" fill="#64748B">declared context: API accepts T tokens</text>
+<text x="641" y="548" font-size="13" fill="#64748B">effective context: task accuracy remains above preregistered threshold</text>
+<text x="641" y="570" font-size="13" fill="#64748B">必须绑定 task × position × distractor × output contract</text>
+<text x="55" y="670" font-size="14" fill="#64748B">Lost-in-the-middle 是经验诊断而非结构定理；RULER 的 synthetic success 也不能替代真实文档理解。</text>
+</svg>

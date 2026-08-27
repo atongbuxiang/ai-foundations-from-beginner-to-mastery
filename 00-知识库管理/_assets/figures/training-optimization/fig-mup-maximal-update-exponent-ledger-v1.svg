@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">μP maximal update 指数账本</title>
+  <desc id="desc">对比随机初始化的平方根累积与梯度更新的线性累积，并沿读出层、隐藏层和输入层展示 SGD 与 Adam 的宽度缩放。</desc>
+  <rect width="1200" height="800" fill="#FFFEFB"/>
+  <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}.h{font-size:27px;font-weight:700}.sh{font-size:18px;font-weight:700}.b{font-size:15px}.s{font-size:15px;fill:#64748B}.blue{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.teal{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.amber{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.red{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}.arr{stroke:#2563EB;stroke-width:3;fill:none}.line{stroke:#CBD5E1;stroke-width:2}</style>
+  <defs><marker id="ab" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#2563EB"/></marker></defs>
+  <text x="48" y="48" class="h" fill="#2563EB">初始化按 √n 抵消，训练更新按 n 对齐</text>
+
+  <rect x="48" y="84" width="520" height="150" rx="14" class="blue"/>
+  <text x="72" y="120" class="sh">随机初始化：Gaussian-like sum</text>
+  <text x="72" y="154" class="b">y_j = sum_i x_i W_ij，Std(W_ij)=1/√n</text>
+  <text x="72" y="186" class="b">独立零均值项：RMS(y_j) ≈ √n · 1/√n = O(1)</text>
+  <text x="72" y="216" class="s">控制的是初始化的典型坐标尺度</text>
+
+  <rect x="632" y="84" width="520" height="150" rx="14" class="teal"/>
+  <text x="656" y="120" class="sh">梯度外积：coherent update</text>
+  <text x="656" y="154" class="b">Delta W_ij = -gamma_n x_i delta_j</text>
+  <text x="656" y="186" class="b">Delta y_j = -gamma_n delta_j sum_i x_i² ≈ -n gamma_n delta_j</text>
+  <text x="656" y="216" class="s">要 Δy=O(1)，典型需要 update entry O(1/n)</text>
+
+  <text x="48" y="280" class="h" fill="#0F766E">三层 MLP 的反向量级：从 readout 倒推到 input</text>
+  <rect x="48" y="314" width="312" height="206" rx="14" class="amber"/>
+  <text x="72" y="350" class="sh">Output / readout W3</text>
+  <text x="72" y="382" class="b">init Std = 1/n</text>
+  <text x="72" y="412" class="b">grad entry = O(1)</text>
+  <text x="72" y="442" class="b">target Delta W3 = O(1/n)</text>
+  <text x="72" y="472" class="s">n 项对齐 → Delta logit = O(1)</text>
+  <text x="72" y="500" class="s">SGD LR 1/n · Adam LR 1/n</text>
+  <path d="M360 416 L410 416" class="arr" marker-end="url(#ab)"/>
+
+  <rect x="422" y="314" width="312" height="206" rx="14" class="blue"/>
+  <text x="446" y="350" class="sh">Hidden matrix W2</text>
+  <text x="446" y="382" class="b">init Std = 1/√n</text>
+  <text x="446" y="412" class="b">grad entry = O(1/n)</text>
+  <text x="446" y="442" class="b">target Delta W2 = O(1/n)</text>
+  <text x="446" y="472" class="s">h1 DeltaW2 的 n 项对齐 → O(1)</text>
+  <text x="446" y="500" class="s">SGD LR 1 · Adam LR 1/n</text>
+  <path d="M734 416 L784 416" class="arr" marker-end="url(#ab)"/>
+
+  <rect x="796" y="314" width="356" height="206" rx="14" class="teal"/>
+  <text x="820" y="350" class="sh">Input matrix W1</text>
+  <text x="820" y="382" class="b">init Std = 1/√d_in</text>
+  <text x="820" y="412" class="b">grad entry = O(1/n)</text>
+  <text x="820" y="442" class="b">target Delta W1 = O(1)</text>
+  <text x="820" y="472" class="s">fan-in 固定，没有 n 项输入聚合</text>
+  <text x="820" y="500" class="s">SGD LR n · Adam LR 1</text>
+
+  <text x="48" y="570" class="h" fill="#B76E00">指数账本：先算实际 update，再算 feature 聚合</text>
+  <rect x="48" y="604" width="1104" height="108" rx="14" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="72" y="640" class="sh">init: n^(1/2 − p − a)　　update: n^(1 − p − u)</text>
+  <text x="72" y="674" class="b">a = init-entry exponent；p = forward multiplier exponent；u = optimizer direction + group-LR exponent</text>
+  <text x="72" y="700" class="s">典型 hidden 条件：p+a=1/2，p+u=1；readout 可允许初始化输出趋零。</text>
+  <rect x="48" y="736" width="1104" height="44" rx="9" class="red"/>
+  <text x="72" y="764" class="s">边界：表格绑定固定深度教学 MLP、矩阵方向与 optimizer 条件；attention、norm、tying、depth 另算。</text>
+</svg>

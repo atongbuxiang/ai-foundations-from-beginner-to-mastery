@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">自监督目标：遮蔽预测、Teacher–Student 与 Target 生成</title>
+<desc id="desc">自监督仍有target。target可来自clean input的被遮蔽部分、tokenizer/quantizer、另一模态或历史模型；corruption、visibility、stop-gradient和target update共同定义统计对象。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">先追溯 Target 来源</text>
+<rect x="55" y="92" width="120" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="115.0" y="127.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">clean X</text>
+<line x1="180" y1="121" x2="222" y2="121" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="228" y="92" width="125" height="58" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="290.5" y="127.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">mask M</text>
+<line x1="290" y1="155" x2="155" y2="215" stroke="#1F2937" stroke-width="2"/>
+<line x1="290" y1="155" x2="320" y2="215" stroke="#1F2937" stroke-width="2"/>
+<rect x="55" y="225" width="150" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="130.0" y="260.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">visible input</text>
+<rect x="240" y="225" width="140" height="58" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="310.0" y="260.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">target T</text>
+<text x="45" y="340" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937">log loss -&gt; conditional target distribution</text>
+<text x="45" y="382" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937">square loss -&gt; conditional target mean</text>
+<text x="45" y="424" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">mask law changes entropy and shortcut</text>
+<text x="45" y="468" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">loss positions and denominator matter</text>
+<text x="45" y="510" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">low pretext loss is not downstream proof。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">四类 Target Geometry</text>
+<rect x="445" y="92" width="145" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="517.5" y="127.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">token CE</text>
+<rect x="610" y="92" width="145" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="682.5" y="127.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">pixel MSE</text>
+<rect x="445" y="190" width="145" height="58" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="517.5" y="225.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">latent match</text>
+<rect x="610" y="190" width="145" height="58" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="682.5" y="225.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">teacher dist.</text>
+<text x="430" y="300" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937">decoder capacity can absorb the task</text>
+<text x="430" y="342" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">quantizer or teacher passes on its bias</text>
+<text x="430" y="384" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">target granularity defines invariance</text>
+<text x="430" y="426" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">other modality can signal or shortcut</text>
+<text x="430" y="468" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">pretrain and deployment visibility differ</text>
+<text x="430" y="510" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">target type is an inductive-bias decision。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Teacher 不是 Ground Truth</text>
+<rect x="845" y="92" width="285" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="987.5" y="127.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">student: gradient update</text>
+<line x1="987" y1="155" x2="987" y2="186" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="845" y="196" width="285" height="58" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="987.5" y="231.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">teacher: EMA of student history</text>
+<line x1="987" y1="259" x2="987" y2="290" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="845" y="300" width="285" height="58" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="987.5" y="335.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">stop-grad target + consistency</text>
+<text x="830" y="400" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937">temperature controls target entropy</text>
+<text x="830" y="438" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">centering controls prototype dominance</text>
+<text x="830" y="476" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">audit leakage and confirmation error</text>
+<text x="830" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">EMA smooths noise but also creates lag。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">自监督的第一问不是模型结构，而是target从哪里来、谁能看见什么，以及哪些梯度被允许穿过target路径。</text>
+</svg>

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">图任务接口：等变输出、不变读出与异构关系</title>
+<desc id="desc">节点、边、链接和整图任务使用不同输出对象；异构图还需声明节点/边类型与泄漏边界。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">四类输出对象</text>
+<text x="50" y="105" font-size="16" font-weight="700" text-anchor="start" fill="#2563EB">node</text>
+<text x="135" y="105" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">one label per node</text>
+<text x="50" y="205" font-size="16" font-weight="700" text-anchor="start" fill="#0F766E">edge</text>
+<text x="135" y="205" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">observed edge target</text>
+<text x="50" y="305" font-size="16" font-weight="700" text-anchor="start" fill="#C24135">link</text>
+<text x="135" y="305" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">candidate pair score</text>
+<text x="50" y="405" font-size="16" font-weight="700" text-anchor="start" fill="#B7791F">graph</text>
+<text x="135" y="405" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">invariant readout</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">从节点状态到图表示</text>
+<circle cx="460" cy="130" r="18" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<line x1="460" y1="152" x2="600" y2="225" stroke="#D7DEE8" stroke-width="2" marker-end="url(#a4)"/>
+<circle cx="535" cy="130" r="18" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<line x1="535" y1="152" x2="600" y2="225" stroke="#D7DEE8" stroke-width="2" marker-end="url(#a4)"/>
+<circle cx="610" cy="130" r="18" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<line x1="610" y1="152" x2="600" y2="225" stroke="#D7DEE8" stroke-width="2" marker-end="url(#a4)"/>
+<circle cx="685" cy="130" r="18" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<line x1="685" y1="152" x2="600" y2="225" stroke="#D7DEE8" stroke-width="2" marker-end="url(#a4)"/>
+<rect x="515" y="235" width="170" height="58" rx="8" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="600.0" y="270.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">sum / set readout</text>
+<line x1="600" y1="296" x2="600" y2="335" stroke="#0F766E" stroke-width="3" marker-end="url(#a1)"/>
+<rect x="515" y="350" width="170" height="58" rx="8" fill="#FFF7ED" stroke="#C24135" stroke-width="2"/>
+<text x="600.0" y="385.0" font-size="16" font-weight="650" text-anchor="middle" fill="#C24135">graph vector</text>
+<text x="445" y="455" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">mean 归一化规模；sum 保留计数线索。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">异构图与 split 合同</text>
+<circle cx="875" cy="145" r="22" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="875" y="151" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">user</text>
+<circle cx="1080" cy="145" r="22" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="1080" y="151" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">item</text>
+<line x1="900" y1="145" x2="1055" y2="145" stroke="#C24135" stroke-width="3" marker-end="url(#a2)"/>
+<text x="977" y="125" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">buys</text>
+<text x="845" y="245" font-size="18" font-weight="700" text-anchor="start" fill="#C24135">•</text>
+<text x="870" y="245" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">relation-specific W_r</text>
+<text x="845" y="305" font-size="18" font-weight="700" text-anchor="start" fill="#C24135">•</text>
+<text x="870" y="305" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">inverse/self-loop convention</text>
+<text x="845" y="365" font-size="18" font-weight="700" text-anchor="start" fill="#C24135">•</text>
+<text x="870" y="365" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">remove target edge before encoding</text>
+<text x="845" y="425" font-size="18" font-weight="700" text-anchor="start" fill="#C24135">•</text>
+<text x="870" y="425" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">inductive vs transductive split</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">先声明预测对象、对称性和 split，再选择 readout、decoder 与关系参数化。</text>
+</svg>

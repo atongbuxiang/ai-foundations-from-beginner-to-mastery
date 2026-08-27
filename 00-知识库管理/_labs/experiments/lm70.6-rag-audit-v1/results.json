@@ -1,0 +1,195 @@
+{
+  "experiment": "lm70.6-rag-audit-v1",
+  "stdlib_only": true,
+  "checks": {
+    "latent_marginal_and_topk": true,
+    "chunk_coverage_and_distance": true,
+    "bm25_saturation": true,
+    "rrf_fusion": true,
+    "ann_exact_preservation": true,
+    "contrastive_gradient": true,
+    "citation_correctness_completeness": true,
+    "iterative_multihop_state": true,
+    "evaluation_joint_and_metrics": true
+  },
+  "passed": 9,
+  "total": 9,
+  "results": {
+    "latent": {
+      "full_marginal": 0.64,
+      "top2_weights": [
+        0.625,
+        0.37499999999999994
+      ],
+      "truncated_mass": 0.2
+    },
+    "index_contract": {
+      "chunk_count": 5,
+      "spans": [
+        [
+          0,
+          256
+        ],
+        [
+          192,
+          448
+        ],
+        [
+          384,
+          640
+        ],
+        [
+          576,
+          832
+        ],
+        [
+          768,
+          1000
+        ]
+      ],
+      "gold": [
+        380,
+        430
+      ],
+      "coverage": true,
+      "unit_sq_distance": 0.3999999999999999
+    },
+    "bm25": {
+      "tf": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "score": [
+        0.0,
+        1.0,
+        1.4285714285714286,
+        1.6666666666666667,
+        1.8181818181818181,
+        1.9230769230769231,
+        2.0,
+        2.0588235294117645,
+        2.1052631578947367,
+        2.142857142857143,
+        2.1739130434782608
+      ],
+      "limit": 2.5
+    },
+    "rrf": {
+      "A": 0.030679156908665108,
+      "B": 0.031746031746031744,
+      "winner": "B"
+    },
+    "ann": {
+      "exact": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "ann": [
+        "a",
+        "c",
+        "e",
+        "f",
+        "g"
+      ],
+      "ann_recall_at_5": 0.6,
+      "candidate_gold": true,
+      "reranked_gold": false
+    },
+    "contrastive": {
+      "logits": [
+        2.0,
+        1.0,
+        0.0
+      ],
+      "probabilities": [
+        0.6652409557748218,
+        0.24472847105479764,
+        0.09003057317038046
+      ],
+      "loss": 0.40760596444438046,
+      "gradients": [
+        -0.3347590442251782,
+        0.24472847105479764,
+        0.09003057317038046
+      ]
+    },
+    "citations": {
+      "completeness": 0.6666666666666666,
+      "correctness": 0.75
+    },
+    "multihop": {
+      "trace": [
+        {
+          "step": 0,
+          "state": "question",
+          "action": "retrieve A relation",
+          "observation": "A -> B",
+          "budget_after": 2
+        },
+        {
+          "step": 1,
+          "state": "entity B",
+          "action": "retrieve B country",
+          "observation": "B -> C",
+          "budget_after": 1
+        },
+        {
+          "step": 2,
+          "state": "two supporting spans",
+          "action": "answer",
+          "observation": "C",
+          "budget_after": 1
+        }
+      ],
+      "joint_evidence": true,
+      "calls": 2
+    },
+    "evaluation": {
+      "rows": [
+        {
+          "id": "q1",
+          "R": 1,
+          "G": 1,
+          "A": 1,
+          "first_rank": 1
+        },
+        {
+          "id": "q2",
+          "R": 1,
+          "G": 0,
+          "A": 0,
+          "first_rank": 2
+        },
+        {
+          "id": "q3",
+          "R": 0,
+          "G": 1,
+          "A": 0,
+          "first_rank": null
+        },
+        {
+          "id": "q4",
+          "R": 1,
+          "G": 1,
+          "A": 0,
+          "first_rank": 3
+        }
+      ],
+      "mrr": 0.4583333333333333,
+      "joint_RGA": 0.25,
+      "dcg_3_2_0": 8.892789260714373
+    }
+  }
+}

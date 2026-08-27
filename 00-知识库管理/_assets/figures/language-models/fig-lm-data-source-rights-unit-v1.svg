@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">从网页资产到训练样本：对象链与权利链不能压成一个字段</title><desc id="desc">左侧是可追溯的数据变换，右侧是分层治理判断；公开可下载不等于内容统一许可。</desc>
+<rect width="1200" height="700" fill="#FFFEFB"/>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#64748B"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#17324D" flood-opacity="0.12"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<text x="55" y="55" font-size="25" font-weight="700" fill="#2563EB">从网页资产到训练样本：对象链与权利链不能压成一个字段</text>
+<text x="55" y="92" font-size="15" fill="#64748B">上方追踪实体/变换，下方逐层审计访问、内容权利、隐私与用途</text>
+<rect x="55" y="130" width="225" height="120" rx="12" fill="#EFF6FF" stroke="#2563EB" stroke-width="2" filter="url(#shadow)"/>
+<text x="73" y="161" font-size="17" font-weight="700" fill="#2563EB">网页/仓库资产</text>
+<text x="73" y="188" font-size="14" fill="#64748B">URI · timestamp</text>
+<text x="73" y="211" font-size="14" fill="#64748B">content owner ?</text>
+<line x1="280" y1="190" x2="327" y2="190" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="337" y="130" width="225" height="120" rx="12" fill="#ECFDF5" stroke="#0F766E" stroke-width="2" filter="url(#shadow)"/>
+<text x="355" y="161" font-size="17" font-weight="700" fill="#0F766E">WARC capture</text>
+<text x="355" y="188" font-size="14" fill="#64748B">record id · HTTP</text>
+<text x="355" y="211" font-size="14" fill="#64748B">payload digest</text>
+<line x1="562" y1="190" x2="609" y2="190" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="619" y="130" width="225" height="120" rx="12" fill="#FFF7E8" stroke="#B7791F" stroke-width="2" filter="url(#shadow)"/>
+<text x="637" y="161" font-size="17" font-weight="700" fill="#B7791F">解析后 document</text>
+<text x="637" y="188" font-size="14" fill="#64748B">main text · metadata</text>
+<text x="637" y="211" font-size="14" fill="#64748B">parser version</text>
+<line x1="844" y1="190" x2="891" y2="190" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="901" y="130" width="225" height="120" rx="12" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2" filter="url(#shadow)"/>
+<text x="919" y="161" font-size="17" font-weight="700" fill="#7C3AED">训练 sample</text>
+<text x="919" y="188" font-size="14" fill="#64748B">token IDs · boundary</text>
+<text x="919" y="211" font-size="14" fill="#64748B">loss eligibility</text>
+<rect x="85" y="325" width="880" height="50" rx="9" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+<text x="105" y="356" font-size="16" font-weight="700" fill="#2563EB">访问/抓取层</text>
+<text x="310" y="356" font-size="15" fill="#17324D">crawler / robots / service terms</text>
+<rect x="990" y="331" width="145" height="38" rx="19" fill="#F2F5F8"/><text x="1062" y="355" text-anchor="middle" font-size="14" fill="#64748B">evidence + owner</text>
+<rect x="85" y="395" width="880" height="50" rx="9" fill="#FFFFFF" stroke="#B7791F" stroke-width="2"/>
+<text x="105" y="426" font-size="16" font-weight="700" fill="#B7791F">内容权利层</text>
+<text x="310" y="426" font-size="15" fill="#17324D">copyright · license · attribution</text>
+<rect x="990" y="401" width="145" height="38" rx="19" fill="#F2F5F8"/><text x="1062" y="425" text-anchor="middle" font-size="14" fill="#64748B">evidence + owner</text>
+<rect x="85" y="465" width="880" height="50" rx="9" fill="#FFFFFF" stroke="#C24135" stroke-width="2"/>
+<text x="105" y="496" font-size="16" font-weight="700" fill="#C24135">主体与隐私层</text>
+<text x="310" y="496" font-size="15" fill="#17324D">PII · sensitive data · deletion</text>
+<rect x="990" y="471" width="145" height="38" rx="19" fill="#F2F5F8"/><text x="1062" y="495" text-anchor="middle" font-size="14" fill="#64748B">evidence + owner</text>
+<rect x="85" y="535" width="880" height="50" rx="9" fill="#FFFFFF" stroke="#7C3AED" stroke-width="2"/>
+<text x="105" y="566" font-size="16" font-weight="700" fill="#7C3AED">用途与法域层</text>
+<text x="310" y="566" font-size="15" fill="#17324D">research/commercial · jurisdiction</text>
+<rect x="990" y="541" width="145" height="38" rx="19" fill="#F2F5F8"/><text x="1062" y="565" text-anchor="middle" font-size="14" fill="#64748B">evidence + owner</text>
+<rect x="765" y="270" width="365" height="38" rx="19" fill="#FEE2E2" stroke="#C24135"/>
+<text x="947" y="295" text-anchor="middle" font-size="15" font-weight="700" fill="#C24135">服务访问条款 ≠ 抓取内容的统一许可</text>
+<text x="55" y="670" font-size="14" fill="#64748B">格式/provenance 是审计基础，不是授权结论；不确定项必须保留并升级审批。</text>
+</svg>

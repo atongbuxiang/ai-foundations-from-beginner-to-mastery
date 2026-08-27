@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">离散bin、连续密度、dequantization下界与BPD</title>
+  <desc id="desc">左侧用直方bin和密度曲线解释离散质量是面积，中间对比均匀与变分去量化，右侧列出BPD的对数底、维度和缩放常数。</desc>
+  <rect width="1200" height="620" fill="#FFFEFB"/>
+  <style>.sans{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}.ink{fill:#1F2937}.muted{fill:#64748B}.blue{fill:#2563EB}.green{fill:#0F766E}.amber{fill:#B7791F}.red{fill:#C24135}</style>
+  <line x1="438" y1="48" x2="438" y2="555" stroke="#D7DEE8" stroke-width="2"/><line x1="820" y1="48" x2="820" y2="555" stroke="#D7DEE8" stroke-width="2"/>
+  <text x="52" y="65" class="sans blue" font-size="22" font-weight="700">A｜离散质量是 bin 面积</text>
+  <line x1="70" y1="386" x2="400" y2="386" stroke="#1F2937" stroke-width="2.5"/><line x1="70" y1="386" x2="70" y2="128" stroke="#1F2937" stroke-width="2.5"/>
+  <rect x="160" y="165" width="100" height="221" fill="#EEF3FF" opacity="0.95"/>
+  <line x1="160" y1="386" x2="160" y2="405" stroke="#1F2937" stroke-width="2"/><line x1="260" y1="386" x2="260" y2="405" stroke="#1F2937" stroke-width="2"/>
+  <text x="160" y="430" class="mono ink" font-size="17" text-anchor="middle">x</text><text x="260" y="430" class="mono ink" font-size="17" text-anchor="middle">x+1</text>
+  <path d="M80 354 C130 335 147 291 170 242 C196 186 224 151 253 182 C278 208 294 308 340 333 C365 346 385 337 398 325" fill="none" stroke="#2563EB" stroke-width="4"/>
+  <text x="210" y="143" class="sans blue" font-size="17" text-anchor="middle">面积 = P(X=x)</text>
+  <text x="52" y="493" class="sans muted" font-size="17">曲线某一点的高度不是离散概率</text>
+  <text x="470" y="65" class="sans amber" font-size="22" font-weight="700">B｜bin 内怎样取 u</text>
+  <rect x="482" y="132" width="304" height="108" fill="#FFF7E6" stroke="#B7791F" stroke-width="3"/>
+  <g fill="#B7791F"><circle cx="520" cy="183" r="7"/><circle cx="565" cy="183" r="7"/><circle cx="610" cy="183" r="7"/><circle cx="655" cy="183" r="7"/><circle cx="700" cy="183" r="7"/><circle cx="745" cy="183" r="7"/></g>
+  <text x="634" y="267" class="sans amber" font-size="17" text-anchor="middle">Uniform q(u|x)=1</text>
+  <rect x="482" y="311" width="304" height="108" fill="#E8F5F1" stroke="#0F766E" stroke-width="3"/>
+  <g fill="#0F766E"><circle cx="560" cy="370" r="6"/><circle cx="592" cy="360" r="8"/><circle cx="620" cy="356" r="10"/><circle cx="648" cy="360" r="8"/><circle cx="680" cy="370" r="6"/></g>
+  <text x="634" y="446" class="sans green" font-size="17" text-anchor="middle">Variational qφ 贴近 bin 后验</text>
+  <text x="470" y="500" class="sans muted" font-size="16">两者都需支持限制在合法 bin 内</text>
+  <text x="852" y="65" class="sans green" font-size="22" font-weight="700">C｜BPD 口径检查</text>
+  <rect x="852" y="113" width="294" height="120" fill="#E8F5F1" stroke="#0F766E" stroke-width="3"/>
+  <text x="999" y="160" class="mono green" font-size="20" text-anchor="middle">−log Pθ(x)</text>
+  <line x1="903" y1="177" x2="1095" y2="177" stroke="#0F766E" stroke-width="2"/>
+  <text x="999" y="210" class="mono green" font-size="20" text-anchor="middle">D log 2</text>
+  <text x="852" y="291" class="sans ink" font-size="18">□ log base 是 e 还是 2？</text>
+  <text x="852" y="337" class="sans ink" font-size="18">□ D 是否包含 channel？</text>
+  <text x="852" y="383" class="sans ink" font-size="18">□ bin width 是 1 还是 1/K？</text>
+  <text x="852" y="429" class="sans ink" font-size="18">□ 报 exact mass 还是 lower bound？</text>
+  <text x="852" y="475" class="sans red" font-size="18">漏缩放常数：可差 log₂K bits/dim</text>
+  <line x1="52" y1="545" x2="1148" y2="545" stroke="#0F766E" stroke-width="3"/>
+  <text x="52" y="585" class="sans green" font-size="17">核心｜连续模型拟合的是 bin 内 density；离散评价关心整块积分。</text>
+</svg>
+

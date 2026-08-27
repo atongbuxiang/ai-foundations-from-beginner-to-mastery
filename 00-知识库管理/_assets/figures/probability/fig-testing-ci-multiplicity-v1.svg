@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">假设检验、置信区间与多重比较</title>
+  <desc id="desc">三面板展示零假设尾概率和拒绝域、置信区间作为重复抽样覆盖程序、以及多重比较从未校正到 Bonferroni 和 BH 的错误率控制。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#EFF6FF"/><stop offset=".5" stop-color="#F8FAFC"/><stop offset="1" stop-color="#FFF7ED"/></linearGradient>
+    <style>.title{font:700 21px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#0F172A}.head{font:700 17px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#4F46E5}.small{font:12px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#64748B}.label{font:13px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#334155}.math{font:15px Georgia,"Times New Roman",serif;fill:#0F172A}.card{fill:#fff;stroke:#CBD5E1;stroke-width:1.3}.axis{stroke:#64748B;stroke-width:1.2}</style>
+  </defs>
+  <rect width="1200" height="430" rx="22" fill="url(#bg)"/>
+  <text x="40" y="38" class="title">频率推断的程序语义：null 尾概率 → 重复抽样覆盖 → 整个选择流程的错误率</text>
+  <rect x="28" y="58" width="368" height="342" rx="17" class="card"/><rect x="416" y="58" width="368" height="342" rx="17" class="card"/><rect x="804" y="58" width="368" height="342" rx="17" class="card"/>
+
+  <text x="50" y="88" class="head">A　p 值：条件在 H0 上的 tail area</text>
+  <line x1="61" y1="278" x2="363" y2="278" class="axis"/>
+  <path d="M65 277C100 276 135 265 165 223C193 185 211 137 233 137C256 137 274 185 302 223C331 265 347 276 360 277" fill="#DBEAFE" stroke="#2563EB" stroke-width="2.7"/>
+  <path d="M65 277C79 276 93 270 111 254C126 241 138 221 148 204L148 278Z" fill="#FCA5A5" stroke="#DC2626" stroke-width="1.5"/>
+  <path d="M318 254C336 270 347 276 360 277L360 278L318 278Z" fill="#FCA5A5" stroke="#DC2626" stroke-width="1.5"/>
+  <line x1="318" y1="196" x2="318" y2="285" stroke="#DC2626" stroke-width="1.7" stroke-dasharray="5 4"/>
+  <text x="294" y="188" class="math">t_obs</text><text x="75" y="312" class="math">p = P_H0( T at least as extreme as t_obs )</text>
+  <rect x="69" y="337" width="287" height="34" rx="8" fill="#FEF2F2" stroke="#FCA5A5"/>
+  <text x="84" y="359" class="small">p-value 不是 P(H0 | data)，也不是 effect size</text>
+  <text x="70" y="389" class="small">方向和 stopping rule 必须在看结果前规定</text>
+
+  <text x="438" y="88" class="head">B　95% CI：随机区间程序的覆盖</text>
+  <line x1="465" y1="122" x2="465" y2="355" stroke="#DC2626" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="447" y="113" class="math">theta</text>
+  <g stroke-width="3" stroke-linecap="round"><line x1="448" y1="141" x2="534" y2="141" stroke="#16A34A"/><line x1="430" y1="168" x2="499" y2="168" stroke="#16A34A"/><line x1="458" y1="195" x2="551" y2="195" stroke="#16A34A"/><line x1="482" y1="222" x2="565" y2="222" stroke="#DC2626"/><line x1="427" y1="249" x2="506" y2="249" stroke="#16A34A"/><line x1="438" y1="276" x2="527" y2="276" stroke="#16A34A"/><line x1="452" y1="303" x2="543" y2="303" stroke="#16A34A"/><line x1="419" y1="330" x2="489" y2="330" stroke="#16A34A"/></g>
+  <text x="587" y="151" class="label">重复采样得到不同 interval</text><text x="587" y="180" class="small">绿色：覆盖真参数</text><text x="587" y="204" class="small" fill="#DC2626">红色：一次 miss</text>
+  <rect x="575" y="233" width="178" height="70" rx="10" fill="#EEF2FF" stroke="#818CF8"/><text x="591" y="259" class="math">P_theta(theta in C(X))</text><text x="591" y="282" class="math">= 0.95</text>
+  <text x="439" y="377" class="small">观测后区间固定；posterior probability 是另一种声明</text>
+
+  <text x="826" y="88" class="head">C　多重选择：控制的是 family</text>
+  <line x1="837" y1="296" x2="1144" y2="296" class="axis"/><line x1="842" y1="300" x2="842" y2="126" class="axis"/>
+  <circle cx="866" cy="268" r="5" fill="#2563EB"/><circle cx="891" cy="252" r="5" fill="#2563EB"/><circle cx="916" cy="238" r="5" fill="#2563EB"/><circle cx="941" cy="214" r="5" fill="#2563EB"/><circle cx="966" cy="204" r="5" fill="#2563EB"/><circle cx="991" cy="181" r="5" fill="#DC2626"/><circle cx="1016" cy="171" r="5" fill="#DC2626"/><circle cx="1041" cy="153" r="5" fill="#DC2626"/>
+  <line x1="850" y1="229" x2="1132" y2="229" stroke="#F59E0B" stroke-width="2" stroke-dasharray="6 4"/>
+  <path d="M850 286L1132 137" fill="none" stroke="#16A34A" stroke-width="2.3"/>
+  <text x="1049" y="145" class="small" fill="#15803D">BH: i*q/m</text><text x="1049" y="221" class="small" fill="#D97706">single cutoff</text>
+  <text x="850" y="326" class="math">FWER = P(V &gt;= 1) ; FDR = E[V / max(R,1)]</text>
+  <rect x="836" y="347" width="307" height="31" rx="8" fill="#FEF2F2" stroke="#FCA5A5"/>
+  <text x="850" y="368" class="small">metrics、datasets、seeds、subgroups 与 tuning 都属于选择机会</text>
+  <text x="837" y="393" class="small">Bonferroni/Holm 控 FWER；BH 在相应假设下控 FDR</text>
+</svg>
+

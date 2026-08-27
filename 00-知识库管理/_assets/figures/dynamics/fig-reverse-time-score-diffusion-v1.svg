@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">从前向加噪到反向时间 score 生成</title>
+  <desc id="desc">三面板展示反向时钟与反向漂移、去噪目标如何回归边缘 score，以及 reverse SDE 和 probability-flow ODE 的系数差异与生成误差账本。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M0,0 L9,4.5 L0,9 Z" fill="#475569"/>
+    </marker>
+    <linearGradient id="bluewash" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eff6ff"/><stop offset="1" stop-color="#dbeafe"/></linearGradient>
+    <linearGradient id="violetwash" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#faf5ff"/><stop offset="1" stop-color="#ede9fe"/></linearGradient>
+    <linearGradient id="greenwash" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ecfdf5"/><stop offset="1" stop-color="#d1fae5"/></linearGradient>
+  </defs>
+  <rect width="1200" height="430" fill="#ffffff"/>
+  <text x="20" y="32" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="20" font-weight="700" fill="#0f172a">DYN-12　加噪容易；从噪声返回数据需要 score</text>
+
+  <rect x="20" y="55" width="370" height="355" rx="18" fill="url(#bluewash)" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="42" y="88" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="18.5" font-weight="700" fill="#0f172a">A　先换时钟，再写反向 SDE</text>
+  <rect x="52" y="111" width="306" height="61" rx="11" fill="#ffffff" stroke="#bfdbfe"/>
+  <text x="205" y="137" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="14" font-weight="600" fill="#1d4ed8">forward: dX = f dt + g dW</text>
+  <text x="205" y="159" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="12.5" fill="#475569">t: 0 → T　　data → noise</text>
+  <line x1="205" y1="182" x2="205" y2="214" stroke="#475569" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <rect x="52" y="224" width="306" height="76" rx="11" fill="#ffffff" stroke="#bfdbfe"/>
+  <text x="205" y="247" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="13.6" font-weight="600" fill="#1d4ed8">Y_s = X_(T-s),　s: 0 → T</text>
+  <text x="205" y="272" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="13.2" font-weight="600" fill="#1d4ed8">dY = [−f + g² score] ds + g dW̄</text>
+  <text x="54" y="332" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="12.8" fill="#0f172a">score 在物理时刻 t=T−s 计算。</text>
+  <text x="54" y="359" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="12.8" fill="#b91c1c">“dt&lt;0”写法不能与 forward-s 混用。</text>
+  <text x="54" y="385" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="12.3" fill="#475569">state-dependent D 还要加 div D。</text>
+
+  <rect x="410" y="55" width="370" height="355" rx="18" fill="url(#violetwash)" stroke="#c4b5fd" stroke-width="1.5"/>
+  <text x="432" y="88" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="18.5" font-weight="700" fill="#0f172a">B　可采样的条件目标教出边缘 score</text>
+  <rect x="442" y="111" width="306" height="61" rx="11" fill="#ffffff" stroke="#ddd6fe"/>
+  <text x="595" y="136" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="13.8" font-weight="600" fill="#6d28d9">X_t = α_t X_0 + σ_t ε</text>
+  <text x="595" y="159" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="12.8" fill="#475569">conditional score = −ε / σ_t</text>
+  <line x1="595" y1="182" x2="595" y2="214" stroke="#475569" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <rect x="442" y="224" width="306" height="76" rx="11" fill="#ffffff" stroke="#ddd6fe"/>
+  <text x="595" y="247" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="13.1" font-weight="600" fill="#6d28d9">E[−ε/σ_t | X_t=x] = ∇ log p_t(x)</text>
+  <text x="595" y="275" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="12.7" fill="#6d28d9">E[X_0|x] = (x + σ_t² score) / α_t</text>
+  <g font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="12.4">
+    <rect x="450" y="319" width="62" height="38" rx="9" fill="#ede9fe"/><text x="481" y="343" text-anchor="middle" fill="#6d28d9">score</text>
+    <rect x="519" y="319" width="62" height="38" rx="9" fill="#ede9fe"/><text x="550" y="343" text-anchor="middle" fill="#6d28d9">ε</text>
+    <rect x="588" y="319" width="62" height="38" rx="9" fill="#ede9fe"/><text x="619" y="343" text-anchor="middle" fill="#6d28d9">x₀</text>
+    <rect x="657" y="319" width="62" height="38" rx="9" fill="#ede9fe"/><text x="688" y="343" text-anchor="middle" fill="#6d28d9">v</text>
+  </g>
+  <text x="595" y="385" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="12.4" fill="#475569">参数化可换；权重、尺度和部署公式必须同步换</text>
+
+  <rect x="800" y="55" width="380" height="355" rx="18" fill="url(#greenwash)" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="822" y="88" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="18.5" font-weight="700" fill="#0f172a">C　同一 score，两种连续生成器</text>
+  <rect x="834" y="111" width="312" height="61" rx="11" fill="#ffffff" stroke="#a7f3d0"/>
+  <text x="990" y="135" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="13.2" font-weight="600" fill="#047857">reverse SDE: −f + g² score + noise</text>
+  <text x="990" y="158" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="13.2" fill="#047857">reverse PF ODE: −f + ½g² score</text>
+  <line x1="990" y1="182" x2="990" y2="214" stroke="#475569" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <rect x="834" y="224" width="312" height="73" rx="11" fill="#ffffff" stroke="#a7f3d0"/>
+  <text x="990" y="247" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="12.5" font-weight="700" fill="#0f172a">理想定理 ≠ 学得模型 ≠ finite-step sampler</text>
+  <text x="990" y="273" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="12.7" fill="#047857">p_T→prior　score_θ→score　h→0</text>
+  <g font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="12.2">
+    <text x="843" y="329" fill="#b91c1c">① terminal mismatch</text>
+    <text x="843" y="354" fill="#b91c1c">② score / guidance bias</text>
+    <text x="843" y="379" fill="#b91c1c">③ solver / stochastic error</text>
+    <text x="1015" y="329" fill="#475569">④ parameterization</text>
+    <text x="1015" y="354" fill="#475569">⑤ evaluation / MC</text>
+    <text x="1015" y="379" fill="#475569">⑥ conditioning shift</text>
+  </g>
+  <text x="843" y="399" font-family="Georgia,'Times New Roman',serif" font-size="11.8" fill="#047857">half coefficient belongs to PF ODE, not noisy reverse SDE</text>
+</svg>

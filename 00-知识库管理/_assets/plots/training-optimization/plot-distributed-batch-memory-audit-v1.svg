@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+<title id="title">Global estimator semantics and peak memory need two-dimensional ledgers</title>
+<desc id="desc">The left panel weights samples before division; the right separates sharded steady state from a live peak.</desc>
+<rect width="1200" height="800" fill="#FFFEFB"/>
+<text x="60" y="58" text-anchor="start" font-family="Arial,sans-serif" font-size="28" font-weight="700" fill="#172033">Global estimator semantics and peak memory need two-dimensional ledgers</text>
+<text x="60" y="91" text-anchor="start" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#52606D">The left panel weights samples before division; the right separates sharded steady state from a live peak.</text>
+<rect x="45" y="125" width="535" height="590" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+<rect x="605" y="125" width="550" height="590" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+<text x="70" y="166" text-anchor="start" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172033">A  Unequal ranks: sum numerator and count</text>
+<text x="630" y="166" text-anchor="start" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172033">B  Model-state steady bytes versus live peak</text>
+<rect x="85" y="220" width="130" height="105" rx="14" fill="#2563EB18" stroke="#2563EB" stroke-width="2"/>
+<text x="150" y="250" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#2563EB">rank 0</text>
+<text x="150" y="278" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="400" fill="#52606D">n=4, mean=1.0</text>
+<text x="150" y="304" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="400" fill="#52606D">sum=4.0</text>
+<rect x="245" y="220" width="130" height="105" rx="14" fill="#0F766E18" stroke="#0F766E" stroke-width="2"/>
+<text x="310" y="250" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#0F766E">rank 1</text>
+<text x="310" y="278" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="400" fill="#52606D">n=2, mean=4.0</text>
+<text x="310" y="304" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="400" fill="#52606D">sum=8.0</text>
+<rect x="405" y="220" width="130" height="105" rx="14" fill="#B76E0018" stroke="#B76E00" stroke-width="2"/>
+<text x="470" y="250" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#B76E00">rank 2</text>
+<text x="470" y="278" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="400" fill="#52606D">n=3, mean=7.0</text>
+<text x="470" y="304" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="400" fill="#52606D">sum=21.0</text>
+<rect x="105" y="395" width="410" height="95" rx="14" fill="#E8F6F3" stroke="#0F766E" stroke-width="2"/>
+<text x="310" y="430" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#0F766E">correct: (4 + 8 + 21) / 9</text>
+<text x="310" y="462" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#172033">global sample mean = 3.666667</text>
+<rect x="105" y="525" width="410" height="80" rx="14" fill="#FFF7F4" stroke="#C0392B" stroke-width="2"/>
+<text x="310" y="558" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#C0392B">incorrect: (1 + 4 + 7) / 3</text>
+<text x="310" y="586" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#52606D">equal-rank mean = 4.0</text>
+<text x="630" y="225" text-anchor="start" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#172033">DDP</text>
+<rect x="720" y="203" width="300.000" height="30" rx="7" fill="#C0392B" opacity="0.82"/>
+<text x="1030.0" y="225" text-anchor="start" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#C0392B">16.00 B/param</text>
+<text x="630" y="300" text-anchor="start" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#172033">ZeRO-1</text>
+<rect x="720" y="278" width="103.125" height="30" rx="7" fill="#B76E00" opacity="0.82"/>
+<text x="833.125" y="300" text-anchor="start" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#B76E00">5.50 B/param</text>
+<text x="630" y="375" text-anchor="start" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#172033">ZeRO-2</text>
+<rect x="720" y="353" width="70.312" height="30" rx="7" fill="#2563EB" opacity="0.82"/>
+<text x="800.3125" y="375" text-anchor="start" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#2563EB">3.75 B/param</text>
+<text x="630" y="450" text-anchor="start" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#172033">ZeRO-3</text>
+<rect x="720" y="428" width="37.500" height="30" rx="7" fill="#0F766E" opacity="0.82"/>
+<text x="767.5" y="450" text-anchor="start" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#0F766E">2.00 B/param</text>
+<rect x="655" y="545" width="455" height="105" rx="14" fill="#FFF3D6" stroke="#B76E00" stroke-width="2"/>
+<text x="882" y="578" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#0F766E">ZeRO-3 steady = 2.0 GB</text>
+<text x="882" y="608" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#C0392B">same timeline live peak = 15.4 GB</text>
+<text x="882" y="634" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="400" fill="#52606D">gather + activation + workspace + buffers</text>
+<text x="60" y="760" text-anchor="start" font-family="Arial,sans-serif" font-size="15" font-weight="400" fill="#52606D">Algebra and capacity audit — neither panel predicts backend schedule, topology or allocator behavior.</text>
+</svg>

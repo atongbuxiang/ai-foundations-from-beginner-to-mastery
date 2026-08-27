@@ -1,0 +1,187 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="610" viewBox="0 0 1440 610" role="img" aria-labelledby="title desc">
+<title id="title">SVD bidiagonal reduction, norm iteration and randomized range approximation</title>
+<desc id="desc">Panels show orthogonal bidiagonal reduction, convergence of spectral norm power estimates, and effects of oversampling and power iteration on randomized range approximation.</desc>
+<style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:13px;fill:#172033}.title{font-size:23px;font-weight:600}.panel{font-size:16px;font-weight:600}.axis{font-size:14px}.frame{fill:#fbfcfe;stroke:#7b879a}.grid{stroke:#dbe1e8}.note{font-size:12px;fill:#445067}.legend{font-size:12px}</style>
+<rect width="1440" height="610" fill="#ffffff"/>
+<text x="720" y="34" text-anchor="middle" class="title">SVD 计算：先压缩结构，再按所需精度与规模选路线</text>
+<text x="70" y="67" class="panel">A  左右正交变换把矩形矩阵压到双对角</text>
+<text x="570" y="67" class="panel">B  谱间隙决定谱范数估计速度</text>
+<text x="1030" y="67" class="panel">C  oversampling 与 power steps 改善随机范围</text>
+<text x="175.0" y="115" text-anchor="middle" class="note">原始 A（7×5）</text>
+<rect x="100.00" y="125.00" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.820" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="130.00" y="125.00" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.148" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="160.00" y="125.00" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.732" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="190.00" y="125.00" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.831" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="220.00" y="125.00" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.658" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="100.00" y="150.71" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.592" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="130.00" y="150.71" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.304" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="160.00" y="150.71" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.679" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="190.00" y="150.71" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.660" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="220.00" y="150.71" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.702" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="100.00" y="176.43" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.170" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="130.00" y="176.43" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.556" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="160.00" y="176.43" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.319" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="190.00" y="176.43" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.546" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="220.00" y="176.43" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.730" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="100.00" y="202.14" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.839" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="130.00" y="202.14" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.420" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="160.00" y="202.14" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.337" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="190.00" y="202.14" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.821" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="220.00" y="202.14" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.738" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="100.00" y="227.86" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.180" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="130.00" y="227.86" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.739" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="160.00" y="227.86" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.780" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="190.00" y="227.86" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.111" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="220.00" y="227.86" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.576" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="100.00" y="253.57" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.298" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="130.00" y="253.57" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.391" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="160.00" y="253.57" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.544" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="190.00" y="253.57" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.631" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="220.00" y="253.57" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.680" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="100.00" y="279.29" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.940" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="130.00" y="279.29" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.868" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="160.00" y="279.29" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.655" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="190.00" y="279.29" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.206" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="220.00" y="279.29" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.604" stroke="#dbe1e8" stroke-width="0.8"/>
+<text x="285" y="220" class="panel">→</text>
+<text x="405.0" y="115" text-anchor="middle" class="note">B=UᵀAV</text>
+<rect x="330.00" y="125.00" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.940" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="360.00" y="125.00" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.713" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="390.00" y="125.00" width="30.00" height="25.71" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="420.00" y="125.00" width="30.00" height="25.71" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="450.00" y="125.00" width="30.00" height="25.71" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="330.00" y="150.71" width="30.00" height="25.71" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="360.00" y="150.71" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.788" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="390.00" y="150.71" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.673" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="420.00" y="150.71" width="30.00" height="25.71" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="450.00" y="150.71" width="30.00" height="25.71" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="330.00" y="176.43" width="30.00" height="25.71" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="360.00" y="176.43" width="30.00" height="25.71" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="390.00" y="176.43" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.742" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="420.00" y="176.43" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.656" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="450.00" y="176.43" width="30.00" height="25.71" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="330.00" y="202.14" width="30.00" height="25.71" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="360.00" y="202.14" width="30.00" height="25.71" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="390.00" y="202.14" width="30.00" height="25.71" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="420.00" y="202.14" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.684" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="450.00" y="202.14" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.544" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="330.00" y="227.86" width="30.00" height="25.71" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="360.00" y="227.86" width="30.00" height="25.71" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="390.00" y="227.86" width="30.00" height="25.71" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="420.00" y="227.86" width="30.00" height="25.71" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="450.00" y="227.86" width="30.00" height="25.71" fill="#2f6fbd" fill-opacity="0.851" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="330.00" y="253.57" width="30.00" height="25.71" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="360.00" y="253.57" width="30.00" height="25.71" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="390.00" y="253.57" width="30.00" height="25.71" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="420.00" y="253.57" width="30.00" height="25.71" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="450.00" y="253.57" width="30.00" height="25.71" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="330.00" y="279.29" width="30.00" height="25.71" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="360.00" y="279.29" width="30.00" height="25.71" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="390.00" y="279.29" width="30.00" height="25.71" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="420.00" y="279.29" width="30.00" height="25.71" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="450.00" y="279.29" width="30.00" height="25.71" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<text x="95" y="342" class="note">归一化约化残差：4.02e-16</text>
+<text x="95" y="367" class="note">U / V 正交缺陷：2.21e-15 / 8.20e-16</text>
+<text x="95" y="405" class="note">蓝色表示非零幅度；B 只保留主对角与第一超对角。</text>
+<rect x="570" y="88" width="330" height="330" class="frame"/>
+<line x1="570.00" y1="88" x2="570.00" y2="418" class="grid"/>
+<text x="570.00" y="438" text-anchor="middle">1</text>
+<line x1="649.66" y1="88" x2="649.66" y2="418" class="grid"/>
+<text x="649.66" y="438" text-anchor="middle">8</text>
+<line x1="729.31" y1="88" x2="729.31" y2="418" class="grid"/>
+<text x="729.31" y="438" text-anchor="middle">15</text>
+<line x1="808.97" y1="88" x2="808.97" y2="418" class="grid"/>
+<text x="808.97" y="438" text-anchor="middle">22</text>
+<line x1="900.00" y1="88" x2="900.00" y2="418" class="grid"/>
+<text x="900.00" y="438" text-anchor="middle">30</text>
+<line x1="570" y1="418.00" x2="900" y2="418.00" class="grid"/>
+<text x="561" y="422.00" text-anchor="end">10⁻¹⁶</text>
+<line x1="570" y1="335.50" x2="900" y2="335.50" class="grid"/>
+<text x="561" y="339.50" text-anchor="end">10⁻¹²</text>
+<line x1="570" y1="253.00" x2="900" y2="253.00" class="grid"/>
+<text x="561" y="257.00" text-anchor="end">10⁻⁸</text>
+<line x1="570" y1="170.50" x2="900" y2="170.50" class="grid"/>
+<text x="561" y="174.50" text-anchor="end">10⁻⁴</text>
+<line x1="570" y1="88.00" x2="900" y2="88.00" class="grid"/>
+<text x="561" y="92.00" text-anchor="end">1</text>
+<text x="735.0" y="463" text-anchor="middle" class="axis">AᵀA 幂迭代次数</text>
+<text x="515" y="253.0" text-anchor="middle" class="axis" transform="rotate(-90 515 253.0)">1 − σ̂₁/σ₁</text>
+<polyline points="570.00,142.19 581.38,199.88 592.76,257.54 604.14,315.21 615.52,372.93 626.90,418.00 638.28,418.00 649.66,418.00 661.03,418.00 672.41,418.00 683.79,418.00 695.17,418.00 706.55,418.00 717.93,418.00 729.31,418.00 740.69,418.00 752.07,418.00 763.45,418.00 774.83,418.00 786.21,418.00 797.59,418.00 808.97,418.00 820.34,418.00 831.72,418.00 843.10,418.00 854.48,418.00 865.86,418.00 877.24,418.00 888.62,418.00 900.00,418.00" fill="none" stroke="#2f6fbd" stroke-width="2.5"/>
+<circle cx="570.00" cy="142.19" r="3.2" fill="#2f6fbd"/>
+<circle cx="626.90" cy="418.00" r="3.2" fill="#2f6fbd"/>
+<circle cx="683.79" cy="418.00" r="3.2" fill="#2f6fbd"/>
+<circle cx="740.69" cy="418.00" r="3.2" fill="#2f6fbd"/>
+<circle cx="797.59" cy="418.00" r="3.2" fill="#2f6fbd"/>
+<circle cx="854.48" cy="418.00" r="3.2" fill="#2f6fbd"/>
+<polyline points="570.00,108.02 581.38,112.75 592.76,118.89 604.14,125.99 615.52,133.59 626.90,141.42 638.28,149.35 649.66,157.32 661.03,165.30 672.41,173.29 683.79,181.28 695.17,189.28 706.55,197.27 717.93,205.27 729.31,213.26 740.69,221.26 752.07,229.25 763.45,237.25 774.83,245.24 786.21,253.24 797.59,261.23 808.97,269.23 820.34,277.22 831.72,285.22 843.10,293.21 854.48,301.21 865.86,309.20 877.24,317.20 888.62,325.19 900.00,333.19" fill="none" stroke="#c36a14" stroke-width="2.5"/>
+<rect x="567.00" y="105.02" width="6" height="6" fill="#c36a14"/>
+<rect x="623.90" y="138.42" width="6" height="6" fill="#c36a14"/>
+<rect x="680.79" y="178.28" width="6" height="6" fill="#c36a14"/>
+<rect x="737.69" y="218.26" width="6" height="6" fill="#c36a14"/>
+<rect x="794.59" y="258.23" width="6" height="6" fill="#c36a14"/>
+<rect x="851.48" y="298.21" width="6" height="6" fill="#c36a14"/>
+<polyline points="570.00,124.78 581.38,125.92 592.76,126.18 604.14,126.40 615.52,126.64 626.90,126.88 638.28,127.14 649.66,127.42 661.03,127.70 672.41,128.00 683.79,128.32 695.17,128.65 706.55,128.99 717.93,129.35 729.31,129.72 740.69,130.11 752.07,130.51 763.45,130.93 774.83,131.36 786.21,131.81 797.59,132.26 808.97,132.74 820.34,133.22 831.72,133.72 843.10,134.23 854.48,134.75 865.86,135.29 877.24,135.83 888.62,136.39 900.00,136.95" fill="none" stroke="#248a57" stroke-width="2.5"/>
+<path d="M570.00,120.78 L574.00,124.78 L570.00,128.78 L566.00,124.78Z" fill="#248a57"/>
+<path d="M626.90,122.88 L630.90,126.88 L626.90,130.88 L622.90,126.88Z" fill="#248a57"/>
+<path d="M683.79,124.32 L687.79,128.32 L683.79,132.32 L679.79,128.32Z" fill="#248a57"/>
+<path d="M740.69,126.11 L744.69,130.11 L740.69,134.11 L736.69,130.11Z" fill="#248a57"/>
+<path d="M797.59,128.26 L801.59,132.26 L797.59,136.26 L793.59,132.26Z" fill="#248a57"/>
+<path d="M854.48,130.75 L858.48,134.75 L854.48,138.75 L850.48,134.75Z" fill="#248a57"/>
+<text x="585" y="112" class="note">有效收敛比约为 (σ₂/σ₁)²；0.98 最慢</text>
+<rect x="1030" y="88" width="330" height="330" class="frame"/>
+<line x1="1030.00" y1="88" x2="1030.00" y2="418" class="grid"/>
+<text x="1030.00" y="438" text-anchor="middle">0</text>
+<line x1="1112.50" y1="88" x2="1112.50" y2="418" class="grid"/>
+<text x="1112.50" y="438" text-anchor="middle">2</text>
+<line x1="1195.00" y1="88" x2="1195.00" y2="418" class="grid"/>
+<text x="1195.00" y="438" text-anchor="middle">4</text>
+<line x1="1277.50" y1="88" x2="1277.50" y2="418" class="grid"/>
+<text x="1277.50" y="438" text-anchor="middle">6</text>
+<line x1="1360.00" y1="88" x2="1360.00" y2="418" class="grid"/>
+<text x="1360.00" y="438" text-anchor="middle">8</text>
+<line x1="1030" y1="418.00" x2="1360" y2="418.00" class="grid"/>
+<text x="1021" y="422.00" text-anchor="end">1</text>
+<line x1="1030" y1="376.75" x2="1360" y2="376.75" class="grid"/>
+<text x="1021" y="380.75" text-anchor="end">1.5</text>
+<line x1="1030" y1="335.50" x2="1360" y2="335.50" class="grid"/>
+<text x="1021" y="339.50" text-anchor="end">2</text>
+<line x1="1030" y1="253.00" x2="1360" y2="253.00" class="grid"/>
+<text x="1021" y="257.00" text-anchor="end">3</text>
+<line x1="1030" y1="88.00" x2="1360" y2="88.00" class="grid"/>
+<text x="1021" y="92.00" text-anchor="end">5</text>
+<text x="1195.0" y="463" text-anchor="middle" class="axis">oversampling p</text>
+<text x="975" y="253.0" text-anchor="middle" class="axis" transform="rotate(-90 975 253.0)">‖(I−QQᵀ)A‖₂ / σₖ₊ₚ₊₁</text>
+<polyline points="1030.00,372.95 1071.25,348.98 1112.50,372.56 1153.75,345.56 1195.00,322.18 1236.25,290.23 1277.50,290.99 1318.75,264.83 1360.00,291.12" fill="none" stroke="#c43d3d" stroke-width="2.5"/>
+<rect x="1027.00" y="369.95" width="6" height="6" fill="#c43d3d"/>
+<rect x="1068.25" y="345.98" width="6" height="6" fill="#c43d3d"/>
+<rect x="1109.50" y="369.56" width="6" height="6" fill="#c43d3d"/>
+<rect x="1150.75" y="342.56" width="6" height="6" fill="#c43d3d"/>
+<rect x="1192.00" y="319.18" width="6" height="6" fill="#c43d3d"/>
+<rect x="1233.25" y="287.23" width="6" height="6" fill="#c43d3d"/>
+<rect x="1274.50" y="287.99" width="6" height="6" fill="#c43d3d"/>
+<rect x="1315.75" y="261.83" width="6" height="6" fill="#c43d3d"/>
+<rect x="1357.00" y="288.12" width="6" height="6" fill="#c43d3d"/>
+<polyline points="1030.00,410.59 1071.25,390.74 1112.50,407.31 1153.75,386.68 1195.00,404.38 1236.25,391.62 1277.50,393.48 1318.75,371.31 1360.00,386.72" fill="none" stroke="#248a57" stroke-width="2.5"/>
+<path d="M1030.00,406.59 L1034.00,410.59 L1030.00,414.59 L1026.00,410.59Z" fill="#248a57"/>
+<path d="M1071.25,386.74 L1075.25,390.74 L1071.25,394.74 L1067.25,390.74Z" fill="#248a57"/>
+<path d="M1112.50,403.31 L1116.50,407.31 L1112.50,411.31 L1108.50,407.31Z" fill="#248a57"/>
+<path d="M1153.75,382.68 L1157.75,386.68 L1153.75,390.68 L1149.75,386.68Z" fill="#248a57"/>
+<path d="M1195.00,400.38 L1199.00,404.38 L1195.00,408.38 L1191.00,404.38Z" fill="#248a57"/>
+<path d="M1236.25,387.62 L1240.25,391.62 L1236.25,395.62 L1232.25,391.62Z" fill="#248a57"/>
+<path d="M1277.50,389.48 L1281.50,393.48 L1277.50,397.48 L1273.50,393.48Z" fill="#248a57"/>
+<path d="M1318.75,367.31 L1322.75,371.31 L1318.75,375.31 L1314.75,371.31Z" fill="#248a57"/>
+<path d="M1360.00,382.72 L1364.00,386.72 L1360.00,390.72 L1356.00,386.72Z" fill="#248a57"/>
+<text x="1045" y="112" class="note">目标秩 k=5；固定 Gaussian sketch seed=20260815</text>
+<circle cx="580.00" cy="500.00" r="3.2" fill="#2f6fbd"/>
+<text x="590" y="504" class="legend">σ₂/σ₁=0.2</text>
+<rect x="697.00" y="497.00" width="6" height="6" fill="#c36a14"/>
+<text x="710" y="504" class="legend">0.8</text>
+<path d="M795.00,496.00 L799.00,500.00 L795.00,504.00 L791.00,500.00Z" fill="#248a57"/>
+<text x="805" y="504" class="legend">0.98</text>
+<rect x="1047.00" y="497.00" width="6" height="6" fill="#c43d3d"/>
+<text x="1060" y="504" class="legend">q=0</text>
+<path d="M1160.00,496.00 L1164.00,500.00 L1160.00,504.00 L1156.00,500.00Z" fill="#248a57"/>
+<text x="1170" y="504" class="legend">q=1</text>
+<text x="720" y="555" text-anchor="middle" class="note">B 面板只估计最大奇异值；C 面板是有限维单种子实验，概率保证、单遍算法与 structured sketch 留给随机低秩专章。</text>
+<text x="720" y="580" text-anchor="middle" class="note">生成：plot_svd_bidiagonal_norm.py · Python 标准库 · seed=20260815</text>
+</svg>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+<title id="title">Representability, control flow and estimator variance are separate contracts</title>
+<desc id="desc">The audit combines ulp spacing, a safe loss-scale interval, and exact stochastic-rounding moments.</desc>
+<rect width="1200" height="800" fill="#FFFEFB"/>
+<text x="60" y="58" text-anchor="start" font-family="Arial,sans-serif" font-size="28" font-weight="700" fill="#172033">Representability, control flow and estimator variance are separate contracts</text>
+<text x="60" y="91" text-anchor="start" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#52606D">The audit combines ulp spacing, a safe loss-scale interval, and exact stochastic-rounding moments.</text>
+<rect x="45" y="125" width="535" height="590" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+<rect x="605" y="125" width="550" height="590" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+<text x="70" y="166" text-anchor="start" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172033">A  ulp at one and safe scale</text>
+<text x="630" y="166" text-anchor="start" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172033">B  Tiny updates: RN versus SR expectation</text>
+<text x="85" y="230" text-anchor="start" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#172033">FP32</text>
+<rect x="190" y="208" width="70.000" height="30" rx="8" fill="#2563EB" opacity="0.84"/>
+<text x="270.0" y="230" text-anchor="start" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#2563EB">2^-23</text>
+<text x="85" y="312" text-anchor="start" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#172033">FP16</text>
+<rect x="190" y="290" width="265.000" height="30" rx="8" fill="#0F766E" opacity="0.84"/>
+<text x="465.0" y="312" text-anchor="start" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#0F766E">2^-10</text>
+<text x="85" y="394" text-anchor="start" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#172033">BF16</text>
+<rect x="190" y="372" width="310.000" height="30" rx="8" fill="#B76E00" opacity="0.84"/>
+<text x="510.0" y="394" text-anchor="start" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#B76E00">2^-7</text>
+<text x="85" y="476" text-anchor="start" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#172033">FP8-E4M3</text>
+<rect x="190" y="454" width="370.000" height="30" rx="8" fill="#C0392B" opacity="0.84"/>
+<text x="570.0" y="476" text-anchor="start" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#C0392B">2^-3</text>
+<rect x="95" y="575" width="420" height="85" rx="14" fill="#FFF3D6" stroke="#B76E00" stroke-width="2"/>
+<text x="305" y="610" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#B76E00">loss-scale proxy: 64 &lt;= S &lt;= 128</text>
+<text x="305" y="638" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="400" fill="#52606D">range feasibility does not choose the final dynamic policy</text>
+<line x1="675" y1="610" x2="1090" y2="610" stroke="#52606D" stroke-width="2"/>
+<line x1="675" y1="610" x2="675" y2="220" stroke="#52606D" stroke-width="2"/>
+<polyline points="710.0,502.0 780.0,520.0 850.0,538.0 920.0,556.0 990.0,574.0 1060.0,592.0" fill="none" stroke="#0F766E" stroke-width="4"/>
+<polyline points="710.0,502.0 780.0,502.0 850.0,502.0 920.0,502.0 990.0,502.0 1060.0,502.0" fill="none" stroke="#C0392B" stroke-width="4"/>
+<text x="735" y="475" text-anchor="start" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#C0392B">RN: repeated update is swallowed</text>
+<text x="820" y="575" text-anchor="start" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#0F766E">SR ensemble mean: -0.02 per step</text>
+<text x="875" y="670" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" font-weight="400" fill="#52606D">update attempts</text>
+<rect x="720" y="300" width="330" height="45" rx="10" fill="#E8F6F3"/>
+<text x="885" y="328" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#0F766E">E[Q]=x; Var(error)=0.015 &lt;= 0.015625</text>
+<text x="60" y="760" text-anchor="start" font-family="Arial,sans-serif" font-size="15" font-weight="400" fill="#52606D">Deterministic analytic audit — no sampled trajectory proves final-model unbiasedness.</text>
+</svg>

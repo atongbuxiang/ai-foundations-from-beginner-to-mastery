@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="620" viewBox="0 0 1100 620" role="img" aria-labelledby="title desc">
+<title id="title">实验图 3｜R × G × A 联合事件</title><desc id="desc">四个样本在 retrieval、generation、attribution 三轴上的不同失败。</desc>
+<rect width="1100" height="620" fill="#FBF8F1"/>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}</style>
+<text x="50" y="48" font-size="23" font-weight="700" fill="#183044">实验图 3｜R × G × A 联合事件</text>
+<line x1="48" y1="65" x2="1052" y2="65" stroke="#245AA8" stroke-width="3"/>
+<text x="70" y="115" font-size="13" font-weight="700" fill="#183044">query</text>
+<text x="250" y="115" font-size="13" font-weight="700" fill="#183044">R</text>
+<text x="360" y="115" font-size="13" font-weight="700" fill="#183044">G</text>
+<text x="470" y="115" font-size="13" font-weight="700" fill="#183044">A</text>
+<text x="580" y="115" font-size="13" font-weight="700" fill="#183044">R∧G∧A</text>
+<text x="760" y="115" font-size="13" font-weight="700" fill="#183044">diagnosis</text>
+<rect x="55" y="125" width="990" height="50" rx="6" fill="#EFF6EA" stroke="#D9D5CB"/>
+<text x="70" y="155" font-size="13" fill="#183044">q1</text>
+<text x="250" y="155" font-size="13" fill="#4F7B45">1</text>
+<text x="360" y="155" font-size="13" fill="#4F7B45">1</text>
+<text x="470" y="155" font-size="13" fill="#4F7B45">1</text>
+<text x="580" y="155" font-size="13" fill="#4F7B45">1</text>
+<text x="760" y="155" font-size="13" fill="#183044">joint success</text>
+<rect x="55" y="195" width="990" height="50" rx="6" fill="#FFFDF8" stroke="#D9D5CB"/>
+<text x="70" y="225" font-size="13" fill="#183044">q2</text>
+<text x="250" y="225" font-size="13" fill="#4F7B45">1</text>
+<text x="360" y="225" font-size="13" fill="#B7443E">0</text>
+<text x="470" y="225" font-size="13" fill="#B7443E">0</text>
+<text x="580" y="225" font-size="13" fill="#B7443E">0</text>
+<text x="760" y="225" font-size="13" fill="#183044">generator failure</text>
+<rect x="55" y="265" width="990" height="50" rx="6" fill="#FFFDF8" stroke="#D9D5CB"/>
+<text x="70" y="295" font-size="13" fill="#183044">q3</text>
+<text x="250" y="295" font-size="13" fill="#B7443E">0</text>
+<text x="360" y="295" font-size="13" fill="#4F7B45">1</text>
+<text x="470" y="295" font-size="13" fill="#B7443E">0</text>
+<text x="580" y="295" font-size="13" fill="#B7443E">0</text>
+<text x="760" y="295" font-size="13" fill="#183044">parametric/guess answer</text>
+<rect x="55" y="335" width="990" height="50" rx="6" fill="#FFFDF8" stroke="#D9D5CB"/>
+<text x="70" y="365" font-size="13" fill="#183044">q4</text>
+<text x="250" y="365" font-size="13" fill="#4F7B45">1</text>
+<text x="360" y="365" font-size="13" fill="#4F7B45">1</text>
+<text x="470" y="365" font-size="13" fill="#B7443E">0</text>
+<text x="580" y="365" font-size="13" fill="#B7443E">0</text>
+<text x="760" y="365" font-size="13" fill="#183044">attribution failure</text>
+<rect x="70" y="455" width="300" height="90" rx="10" fill="#FFFDF8" stroke="#4F7B45" stroke-width="2"/>
+<text x="84" y="482" font-size="14" font-weight="700" fill="#4F7B45">Joint rate</text>
+<text x="84" y="507" font-size="12" fill="#667784">0.25 = 1 / 4</text>
+<rect x="400" y="455" width="300" height="90" rx="10" fill="#FFFDF8" stroke="#245AA8" stroke-width="2"/>
+<text x="414" y="482" font-size="14" font-weight="700" fill="#245AA8">MRR</text>
+<text x="414" y="507" font-size="12" fill="#667784">0.4583</text>
+<rect x="730" y="455" width="300" height="90" rx="10" fill="#FFFDF8" stroke="#7054A3" stroke-width="2"/>
+<text x="744" y="482" font-size="14" font-weight="700" fill="#7054A3">DCG(3,2,0)</text>
+<text x="744" y="507" font-size="12" fill="#667784">8.8928</text>
+<line x1="48" y1="575" x2="1052" y2="575" stroke="#D9D5CB"/>
+<text x="50" y="598" font-size="12" fill="#667784">Marginal averages cannot reconstruct the joint event; evaluate and bootstrap at query level.</text>
+</svg>

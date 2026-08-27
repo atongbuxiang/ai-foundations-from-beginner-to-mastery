@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+  <title id="title">集合语言中的对象层级、成员条件与数据容器</title>
+  <desc id="desc">左侧区分元素、子集与幂集，中间把集合运算还原为成员谓词，右侧比较序列、集合、多重集与笛卡尔积保存的信息。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
+    <style>
+      .ink{fill:#1f2937}.muted{fill:#64748b}.line{stroke:#cbd5e1;stroke-width:1.5}.arrow{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#arrow)}.soft{fill:#f8fafc}.blue{fill:#2563eb}.blue-soft{fill:#eff6ff}.green{fill:#047857}.green-soft{fill:#ecfdf5}
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.h{font-size:18px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}
+    </style>
+  </defs>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <rect x="42" y="42" width="342" height="428" rx="12" class="blue-soft" stroke="#bfdbfe"/>
+  <rect x="429" y="42" width="342" height="428" rx="12" class="soft" stroke="#cbd5e1"/>
+  <rect x="816" y="42" width="342" height="428" rx="12" class="green-soft" stroke="#a7f3d0"/>
+  <text x="68" y="79" class="sans h blue">对象层级</text><text x="455" y="79" class="sans h ink">运算的成员语义</text><text x="842" y="79" class="sans h green">容器保留什么信息</text>
+
+  <rect x="93" y="112" width="240" height="58" rx="9" fill="#ffffff" stroke="#93c5fd"/>
+  <rect x="93" y="218" width="240" height="58" rx="9" fill="#ffffff" stroke="#93c5fd"/>
+  <rect x="93" y="324" width="240" height="58" rx="9" fill="#ffffff" stroke="#93c5fd"/>
+  <g class="math formula ink" text-anchor="middle"><text x="213" y="149">元素 x</text><text x="213" y="255">子集 A ⊆ U</text><text x="213" y="361">幂集 P(U)</text></g>
+  <path d="M213 170 L213 207" class="arrow"/><path d="M213 276 L213 313" class="arrow"/>
+  <g class="sans small muted" text-anchor="middle"><text x="281" y="195">x ∈ A</text><text x="281" y="301">A ∈ P(U)</text></g>
+  <text x="213" y="417" class="math body blue" text-anchor="middle">x∈A ⇔ {x}⊆A</text>
+  <text x="213" y="445" class="math body blue" text-anchor="middle">A∈P(U) ⇔ A⊆U</text>
+
+  <g class="math formula ink">
+    <text x="462" y="136">x ∈ A∪B</text><text x="462" y="192">x ∈ A∩B</text><text x="462" y="248">x ∈ Aᶜ</text><text x="462" y="304">x ∈ A∖B</text>
+  </g>
+  <g class="math body green">
+    <text x="612" y="136">⇔ x∈A or x∈B</text><text x="612" y="192">⇔ x∈A and x∈B</text><text x="612" y="248">⇔ x∈U and x∉A</text><text x="612" y="304">⇔ x∈A and x∉B</text>
+  </g>
+  <line x1="453" y1="331" x2="747" y2="331" class="line"/>
+  <text x="600" y="370" class="sans body ink" text-anchor="middle">证明集合相等：固定任意 x</text>
+  <text x="600" y="402" class="math formula blue" text-anchor="middle">x∈L ⇔ … ⇔ x∈R</text>
+  <text x="600" y="438" class="sans small muted" text-anchor="middle">图形提供直觉；成员等价才关闭证明</text>
+
+  <g class="sans body ink"><text x="845" y="131">序列　⟨a,b,a⟩</text><text x="845" y="189">集合　{a,b}</text><text x="845" y="247">多重集　{a×2,b×1}</text><text x="845" y="305">乘积索引　(b,t,d)</text></g>
+  <g class="sans small muted"><text x="845" y="154">保留顺序与重复</text><text x="845" y="212">丢掉顺序与重复次数</text><text x="845" y="270">保留次数，不保留顺序</text><text x="845" y="328">保留每个坐标轴的角色</text></g>
+  <rect x="842" y="362" width="290" height="76" rx="9" fill="#ffffff" stroke="#6ee7b7"/>
+  <text x="987" y="392" class="sans body green" text-anchor="middle">数据切分先声明单位</text>
+  <text x="987" y="421" class="sans small muted" text-anchor="middle">row、entity、time、source 并不等价</text>
+  <rect x="92" y="500" width="1016" height="42" rx="10" class="soft" stroke="#cbd5e1"/>
+  <text x="600" y="527" class="sans result ink" text-anchor="middle">先确定对象属于哪一层、容器保存什么信息，再选择集合运算与证明规则。</text>
+</svg>

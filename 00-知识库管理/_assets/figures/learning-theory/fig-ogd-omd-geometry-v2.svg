@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">OGD 与 OMD：势能下降和几何选择</title>
+<desc id="desc">Euclidean projection 产生平方距离 telescope；mirror map 把同一证明搬到 Bregman 与 dual-norm 几何。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">OGD：先走一步，再投影</text>
+<path d="M70 390C90 150 290 110 345 355Z" fill="#ECFDF5" stroke="#0F766E" stroke-width="3"/>
+<circle cx="145" cy="285" r="7" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<circle cx="310" cy="190" r="7" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<circle cx="265" cy="245" r="7" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<line x1="145" y1="285" x2="310" y2="190" stroke="#C24135" stroke-width="3" marker-end="url(#a2)"/>
+<line x1="310" y1="190" x2="265" y2="245" stroke="#0F766E" stroke-width="3" marker-end="url(#a1)"/>
+<text x="122" y="315" font-size="15" font-weight="400" text-anchor="start" fill="#2563EB">w(t)</text>
+<text x="280" y="175" font-size="15" font-weight="400" text-anchor="start" fill="#C24135">w(t)-eta g(t)</text>
+<text x="245" y="274" font-size="15" font-weight="400" text-anchor="start" fill="#0F766E">w(t+1)</text>
+<text x="55" y="450" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">projection: feasible + nonexpansive</text>
+<text x="55" y="488" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">potential: ||w(t)-u||^2</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">单步式到 Telescope</text>
+<rect x="445" y="102" width="310" height="65" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600.0" y="140.5" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">convexity: loss gap &lt;= &lt;g,w-u&gt;</text>
+<line x1="600" y1="172" x2="600" y2="204" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="430" y="216" width="340" height="84" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="600.0" y="264.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">potential drop / eta + eta ||g||^2 / 2</text>
+<line x1="600" y1="304" x2="600" y2="337" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="445" y="350" width="310" height="65" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="600.0" y="388.5" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">R(T) &lt;= D^2/(2 eta) + eta G^2 T/2</text>
+<text x="445" y="460" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">eta = D/(G sqrt T)</text>
+<text x="445" y="492" font-size="16" font-weight="700" text-anchor="start" fill="#0F766E">R(T) &lt;= D G sqrt T</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Mirror Map 选择坐标系</text>
+<rect x="840" y="105" width="300" height="55" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="990.0" y="138.5" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">primal w --gradient--&gt; dual</text>
+<line x1="990" y1="165" x2="990" y2="202" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="840" y="214" width="300" height="58" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="990.0" y="249.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">dual step: grad psi(w)-eta g</text>
+<line x1="990" y1="277" x2="990" y2="314" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="840" y="326" width="300" height="58" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="990.0" y="361.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">map back / Bregman projection</text>
+<text x="840" y="430" font-size="15" font-weight="400" text-anchor="start" fill="#2563EB">Euclidean: l2 / l2</text>
+<text x="840" y="463" font-size="15" font-weight="400" text-anchor="start" fill="#0F766E">simplex entropy: l1 / l-infinity</text>
+<text x="840" y="500" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">geometry changes dimension dependence</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">OGD 与 OMD 共享势能证明；mirror map 决定什么距离、什么 gradient bound 最自然。</text>
+</svg>

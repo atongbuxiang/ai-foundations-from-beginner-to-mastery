@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Transformer 稳定性与表达：结构事实、条件定理与前沿实验</title>
+<desc id="desc">Pre/Post-LN、DeepNorm 与 AttnRes 改变不同接线；可训练、表达、最终质量和系统代价不能互相替代。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#B7791F"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">四种深度接线</text>
+<text x="55" y="100" font-size="15" font-weight="800" text-anchor="start" fill="#2563EB">Pre-LN</text>
+<rect x="145" y="73" width="205" height="40" rx="5" fill="#F8FAFC" stroke="#2563EB" stroke-width="2"/>
+<text x="247" y="98" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">x + F(LN x)</text>
+<text x="55" y="195" font-size="15" font-weight="800" text-anchor="start" fill="#0F766E">Post-LN</text>
+<rect x="145" y="168" width="205" height="40" rx="5" fill="#F8FAFC" stroke="#0F766E" stroke-width="2"/>
+<text x="247" y="193" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">LN(x + F(x))</text>
+<text x="55" y="290" font-size="15" font-weight="800" text-anchor="start" fill="#B7791F">DeepNorm</text>
+<rect x="145" y="263" width="205" height="40" rx="5" fill="#F8FAFC" stroke="#B7791F" stroke-width="2"/>
+<text x="247" y="288" font-size="15" font-weight="700" text-anchor="middle" fill="#B7791F">LN(αx + Fβ(x))</text>
+<text x="55" y="385" font-size="15" font-weight="800" text-anchor="start" fill="#C24135">AttnRes</text>
+<rect x="145" y="358" width="205" height="40" rx="5" fill="#F8FAFC" stroke="#C24135" stroke-width="2"/>
+<text x="247" y="383" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">depth-attend previous states</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">问题不止梯度爆炸</text>
+<circle cx="465" cy="100" r="8" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="485" y="105" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">forward scale</text>
+<circle cx="465" cy="170" r="8" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="485" y="175" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">input Jacobian</text>
+<circle cx="465" cy="240" r="8" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="485" y="245" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">parameter update</text>
+<circle cx="465" cy="310" r="8" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="485" y="315" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">relative layer contribution</text>
+<circle cx="465" cy="380" r="8" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="485" y="385" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">optimization + generalization</text>
+<circle cx="465" cy="450" r="8" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="485" y="455" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">memory / communication</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#B7791F">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">证据等级</text>
+<rect x="845" y="85" width="42" height="34" rx="5" fill="#F8FAFC" stroke="#0F766E" stroke-width="2"/>
+<text x="866" y="108" font-size="15" font-weight="800" text-anchor="middle" fill="#0F766E">I</text>
+<text x="900" y="108" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">wiring / shape / exact expansion</text>
+<rect x="845" y="165" width="42" height="34" rx="5" fill="#F8FAFC" stroke="#2563EB" stroke-width="2"/>
+<text x="866" y="188" font-size="15" font-weight="800" text-anchor="middle" fill="#2563EB">T</text>
+<text x="900" y="188" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">assumptions + quantified conclusion</text>
+<rect x="845" y="245" width="42" height="34" rx="5" fill="#F8FAFC" stroke="#B7791F" stroke-width="2"/>
+<text x="866" y="268" font-size="15" font-weight="800" text-anchor="middle" fill="#B7791F">E</text>
+<text x="900" y="268" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">depth/model/data/kernel version</text>
+<rect x="845" y="325" width="42" height="34" rx="5" fill="#F8FAFC" stroke="#C24135" stroke-width="2"/>
+<text x="866" y="348" font-size="15" font-weight="800" text-anchor="middle" fill="#C24135">H</text>
+<text x="900" y="348" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">mechanism interpretation</text>
+<rect x="845" y="405" width="42" height="34" rx="5" fill="#F8FAFC" stroke="#C24135" stroke-width="2"/>
+<text x="866" y="428" font-size="15" font-weight="800" text-anchor="middle" fill="#C24135">O</text>
+<text x="900" y="428" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">untested scale / task</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">稳定性结论必须说明接线、初始化、深度、优化器和测量对象；前沿方案先作为版本化证据。</text>
+</svg>

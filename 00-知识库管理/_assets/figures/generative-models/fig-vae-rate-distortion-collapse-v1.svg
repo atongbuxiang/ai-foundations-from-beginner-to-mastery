@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">VAE 的率失真前沿与后验坍塌分解</title>
+  <desc id="desc">左侧是失真随码率下降的示意前沿及目标支撑线，右侧把总率拆为互信息和聚合后验到先验的KL，并列出两种坍塌机制。</desc>
+  <rect width="1200" height="620" fill="#FFFEFB"/>
+  <style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}</style>
+  <g font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif">
+    <text x="54" y="55" font-size="23" font-weight="700" fill="#1F2937">总 KL 是一张合并账：先拆 rate，再谈 collapse</text>
+    <text x="62" y="102" font-size="20" font-weight="700" fill="#2563EB">A　rate–distortion 选择</text>
+    <line x1="112" y1="450" x2="555" y2="450" stroke="#334155" stroke-width="2.5"/>
+    <line x1="112" y1="450" x2="112" y2="145" stroke="#334155" stroke-width="2.5"/>
+    <text x="558" y="478" font-size="16" fill="#334155">Rate R</text>
+    <text x="64" y="139" font-size="16" fill="#334155">Distortion D</text>
+    <path d="M145 188 C213 251 271 317 358 371 C419 409 476 424 530 429" fill="none" stroke="#2563EB" stroke-width="4"/>
+    <circle cx="164" cy="205" r="9" fill="#C24135"/>
+    <text x="177" y="193" font-size="15" fill="#C24135">低 rate / collapse 区</text>
+    <circle cx="351" cy="367" r="9" fill="#0F766E"/>
+    <line x1="223" y1="420" x2="470" y2="284" stroke="#B7791F" stroke-width="3" stroke-dasharray="10 7"/>
+    <text x="370" y="280" font-size="15" fill="#B7791F">D + βR 的支撑线</text>
+    <text x="131" y="509" font-size="15" fill="#64748B">β、likelihood scale 与优化路径共同决定落点。</text>
+    <line x1="608" y1="91" x2="608" y2="524" stroke="#D7DEE8" stroke-width="2"/>
+    <text x="650" y="102" font-size="20" font-weight="700" fill="#0F766E">B　rate decomposition</text>
+    <rect x="650" y="140" width="490" height="78" rx="8" fill="#F8FAFC" stroke="#64748B" stroke-width="2"/>
+    <text x="895" y="173" text-anchor="middle" font-size="20" font-weight="700" fill="#334155">R = Eₓ KL(q(z|x) || p(z))</text>
+    <text x="895" y="201" text-anchor="middle" font-size="15" fill="#64748B">平均 per-example KL</text>
+    <path d="M895 218 V254" stroke="#334155" stroke-width="3"/>
+    <rect x="650" y="254" width="222" height="98" rx="8" fill="#E8F5F1" stroke="#0F766E" stroke-width="2.5"/>
+    <text x="761" y="292" text-anchor="middle" font-size="18" fill="#64748B">真正依赖信息</text>
+    <text x="761" y="327" text-anchor="middle" font-size="24" font-weight="700" fill="#0F766E">I q(X;Z)</text>
+    <text x="888" y="311" text-anchor="middle" font-size="28" fill="#334155">+</text>
+    <rect x="918" y="254" width="222" height="98" rx="8" fill="#FFF7E6" stroke="#B7791F" stroke-width="2.5"/>
+    <text x="1029" y="292" text-anchor="middle" font-size="18" fill="#64748B">先验匹配代价</text>
+    <text x="1029" y="327" text-anchor="middle" font-size="20" font-weight="700" fill="#B7791F">KL(q(z) || p(z))</text>
+    <rect x="650" y="390" width="230" height="91" rx="8" fill="#FFF0EE" stroke="#C24135" stroke-width="2"/>
+    <text x="765" y="421" text-anchor="middle" font-size="17" font-weight="700" fill="#C24135">结构性 collapse</text>
+    <text x="765" y="450" text-anchor="middle" font-size="15" fill="#64748B">decoder 不看 z 也能解释 x</text>
+    <rect x="910" y="390" width="230" height="91" rx="8" fill="#FFF0EE" stroke="#C24135" stroke-width="2"/>
+    <text x="1025" y="421" text-anchor="middle" font-size="17" font-weight="700" fill="#C24135">动力学 collapse</text>
+    <text x="1025" y="450" text-anchor="middle" font-size="15" fill="#64748B">encoder 落后，decoder 先绕过 z</text>
+    <line x1="54" y1="543" x2="1146" y2="543" stroke="#D7DEE8" stroke-width="2"/>
+    <text x="54" y="579" font-size="16" fill="#1F2937">KL &gt; 0 仍可能 I(X;Z)=0；必须联合 MI、aggregate KL、active units 与 latent intervention。</text>
+  </g>
+</svg>

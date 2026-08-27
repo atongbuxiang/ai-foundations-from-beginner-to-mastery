@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 760" role="img" aria-labelledby="title desc">
+<title id="title">Small residual, large forward error, and hidden componentwise error</title>
+<desc id="desc">Panel A shows a fixed forward error with a vanishing relative residual in a nearly singular two by two system. Panel B shows that normwise residual can vanish while one small right-hand-side component has one hundred percent relative backward error.</desc>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<style>text{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#1F2937}.title{font-size:26px;font-weight:760}.subtitle{font-size:16px;fill:#64748B}.panel{font-size:19px;font-weight:700}.axis{font-size:16px}.tick{font-size:15px;fill:#64748B}.legend{font-size:15px}.callout{font-size:15px;font-weight:650}</style>
+<text class="title" x="640.0" y="38" text-anchor="middle">残差小，不等于答案近；范数小，不等于每个分量都好</text>
+<text class="subtitle" x="640.0" y="65" text-anchor="middle">两个解析 2×2 家族 · 所有曲线由闭式公式生成，无随机数</text>
+<text class="panel" x="340.0" y="104" text-anchor="middle">A. 病态方向：相对残差趋零，前向误差保持 50%</text>
+<text class="panel" x="942.0" y="104" text-anchor="middle">B. 尺度失衡：范数型趋零，第二分量仍错 100%</text>
+<line x1="96" y1="642.00" x2="584" y2="642.00" stroke="#e5eaf0"/>
+<line x1="698" y1="642.00" x2="1186" y2="642.00" stroke="#e5eaf0"/>
+<text class="tick" x="84" y="646.00" text-anchor="end">10^-14</text>
+<text class="tick" x="686" y="646.00" text-anchor="end">10^-14</text>
+<line x1="96" y1="571.58" x2="584" y2="571.58" stroke="#e5eaf0"/>
+<line x1="698" y1="571.58" x2="1186" y2="571.58" stroke="#e5eaf0"/>
+<text class="tick" x="84" y="575.58" text-anchor="end">10^-12</text>
+<text class="tick" x="686" y="575.58" text-anchor="end">10^-12</text>
+<line x1="96" y1="501.15" x2="584" y2="501.15" stroke="#e5eaf0"/>
+<line x1="698" y1="501.15" x2="1186" y2="501.15" stroke="#e5eaf0"/>
+<text class="tick" x="84" y="505.15" text-anchor="end">10^-10</text>
+<text class="tick" x="686" y="505.15" text-anchor="end">10^-10</text>
+<line x1="96" y1="430.73" x2="584" y2="430.73" stroke="#e5eaf0"/>
+<line x1="698" y1="430.73" x2="1186" y2="430.73" stroke="#e5eaf0"/>
+<text class="tick" x="84" y="434.73" text-anchor="end">10^-8</text>
+<text class="tick" x="686" y="434.73" text-anchor="end">10^-8</text>
+<line x1="96" y1="360.31" x2="584" y2="360.31" stroke="#e5eaf0"/>
+<line x1="698" y1="360.31" x2="1186" y2="360.31" stroke="#e5eaf0"/>
+<text class="tick" x="84" y="364.31" text-anchor="end">10^-6</text>
+<text class="tick" x="686" y="364.31" text-anchor="end">10^-6</text>
+<line x1="96" y1="289.89" x2="584" y2="289.89" stroke="#e5eaf0"/>
+<line x1="698" y1="289.89" x2="1186" y2="289.89" stroke="#e5eaf0"/>
+<text class="tick" x="84" y="293.89" text-anchor="end">10^-4</text>
+<text class="tick" x="686" y="293.89" text-anchor="end">10^-4</text>
+<line x1="96" y1="219.46" x2="584" y2="219.46" stroke="#e5eaf0"/>
+<line x1="698" y1="219.46" x2="1186" y2="219.46" stroke="#e5eaf0"/>
+<text class="tick" x="84" y="223.46" text-anchor="end">10^-2</text>
+<text class="tick" x="686" y="223.46" text-anchor="end">10^-2</text>
+<line x1="96" y1="149.04" x2="584" y2="149.04" stroke="#e5eaf0"/>
+<line x1="698" y1="149.04" x2="1186" y2="149.04" stroke="#e5eaf0"/>
+<text class="tick" x="84" y="153.04" text-anchor="end">10^0</text>
+<text class="tick" x="686" y="153.04" text-anchor="end">10^0</text>
+<line x1="96.00" y1="142" x2="96.00" y2="642" stroke="#f1f5f9"/>
+<text class="tick" x="96.00" y="666" text-anchor="middle">1</text>
+<line x1="184.73" y1="142" x2="184.73" y2="642" stroke="#f1f5f9"/>
+<text class="tick" x="184.73" y="666" text-anchor="middle">3</text>
+<line x1="273.45" y1="142" x2="273.45" y2="642" stroke="#f1f5f9"/>
+<text class="tick" x="273.45" y="666" text-anchor="middle">5</text>
+<line x1="362.18" y1="142" x2="362.18" y2="642" stroke="#f1f5f9"/>
+<text class="tick" x="362.18" y="666" text-anchor="middle">7</text>
+<line x1="450.91" y1="142" x2="450.91" y2="642" stroke="#f1f5f9"/>
+<text class="tick" x="450.91" y="666" text-anchor="middle">9</text>
+<line x1="539.64" y1="142" x2="539.64" y2="642" stroke="#f1f5f9"/>
+<text class="tick" x="539.64" y="666" text-anchor="middle">11</text>
+<line x1="584.00" y1="142" x2="584.00" y2="642" stroke="#f1f5f9"/>
+<text class="tick" x="584.00" y="666" text-anchor="middle">12</text>
+<line x1="698.00" y1="142" x2="698.00" y2="642" stroke="#f1f5f9"/>
+<text class="tick" x="698.00" y="666" text-anchor="middle">0</text>
+<line x1="779.33" y1="142" x2="779.33" y2="642" stroke="#f1f5f9"/>
+<text class="tick" x="779.33" y="666" text-anchor="middle">2</text>
+<line x1="860.67" y1="142" x2="860.67" y2="642" stroke="#f1f5f9"/>
+<text class="tick" x="860.67" y="666" text-anchor="middle">4</text>
+<line x1="942.00" y1="142" x2="942.00" y2="642" stroke="#f1f5f9"/>
+<text class="tick" x="942.00" y="666" text-anchor="middle">6</text>
+<line x1="1023.33" y1="142" x2="1023.33" y2="642" stroke="#f1f5f9"/>
+<text class="tick" x="1023.33" y="666" text-anchor="middle">8</text>
+<line x1="1104.67" y1="142" x2="1104.67" y2="642" stroke="#f1f5f9"/>
+<text class="tick" x="1104.67" y="666" text-anchor="middle">10</text>
+<line x1="1186.00" y1="142" x2="1186.00" y2="642" stroke="#f1f5f9"/>
+<text class="tick" x="1186.00" y="666" text-anchor="middle">12</text>
+<line x1="96" y1="642" x2="584" y2="642" stroke="#334155" stroke-width="1.5"/>
+<line x1="96" y1="142" x2="96" y2="642" stroke="#334155" stroke-width="1.5"/>
+<line x1="698" y1="642" x2="1186" y2="642" stroke="#334155" stroke-width="1.5"/>
+<line x1="698" y1="142" x2="698" y2="642" stroke="#334155" stroke-width="1.5"/>
+<text class="axis" x="340.0" y="698" text-anchor="middle">k in ε = 10⁻ᵏ</text>
+<text class="axis" x="942.0" y="698" text-anchor="middle">k in α = 10⁻ᵏ</text>
+<text class="axis" x="30" y="392.0" text-anchor="middle" transform="rotate(-90 30 392.0)">relative quantity</text>
+<text class="axis" x="632" y="392.0" text-anchor="middle" transform="rotate(-90 632 392.0)">relative quantity</text>
+<path d="M 96.00,159.64 L 140.36,159.64 L 184.73,159.64 L 229.09,159.64 L 273.45,159.64 L 317.82,159.64 L 362.18,159.64 L 406.55,159.64 L 450.91,159.64 L 495.27,159.64 L 539.64,159.64 L 584.00,159.64" fill="none" stroke="#dc2626" stroke-width="3.2"/>
+<path d="M 96.00,211.13 L 140.36,246.00 L 184.73,281.18 L 229.09,316.39 L 273.45,351.60 L 317.82,386.81 L 362.18,422.02 L 406.55,457.23 L 450.91,492.44 L 495.27,527.65 L 539.64,562.87 L 584.00,598.08" fill="none" stroke="#2563eb" stroke-width="3.2"/>
+<path d="M 96.00,153.95 L 140.36,154.30 L 184.73,154.34 L 229.09,154.34 L 273.45,154.34 L 317.82,154.34 L 362.18,154.34 L 406.55,154.34 L 450.91,154.34 L 495.27,154.34 L 539.64,154.34 L 584.00,154.34" fill="none" stroke="#7c3aed" stroke-width="3" stroke-dasharray="8 5"/>
+<path d="M 698.00,154.34 L 738.67,154.34 L 779.33,154.34 L 820.00,154.34 L 860.67,154.34 L 901.33,154.34 L 942.00,154.34 L 982.67,154.34 L 1023.33,154.34 L 1064.00,154.34 L 1104.67,154.34 L 1145.33,154.34 L 1186.00,154.34" fill="none" stroke="#dc2626" stroke-width="3.2"/>
+<path d="M 698.00,154.34 L 738.67,184.33 L 779.33,219.47 L 820.00,254.68 L 860.67,289.89 L 901.33,325.10 L 942.00,360.31 L 982.67,395.52 L 1023.33,430.73 L 1064.00,465.94 L 1104.67,501.15 L 1145.33,536.37 L 1186.00,571.58" fill="none" stroke="#2563eb" stroke-width="3.2"/>
+<path d="M 698.00,149.04 L 738.67,149.04 L 779.33,149.04 L 820.00,149.04 L 860.67,149.04 L 901.33,149.04 L 942.00,149.04 L 982.67,149.04 L 1023.33,149.04 L 1064.00,149.04 L 1104.67,149.04 L 1145.33,149.04 L 1186.00,149.04" fill="none" stroke="#059669" stroke-width="3" stroke-dasharray="3 4"/>
+<path d="M 698.00,154.34 L 738.67,149.12 L 779.33,149.04 L 820.00,149.04 L 860.67,149.04 L 901.33,149.04 L 942.00,149.04 L 982.67,149.04 L 1023.33,149.04 L 1064.00,149.04 L 1104.67,149.04 L 1145.33,149.04 L 1186.00,149.04" fill="none" stroke="#7c3aed" stroke-width="3" stroke-dasharray="8 5"/>
+<circle cx="96.00" cy="211.13" r="3.2" fill="#2563eb"/>
+<circle cx="140.36" cy="246.00" r="3.2" fill="#2563eb"/>
+<circle cx="184.73" cy="281.18" r="3.2" fill="#2563eb"/>
+<circle cx="229.09" cy="316.39" r="3.2" fill="#2563eb"/>
+<circle cx="273.45" cy="351.60" r="3.2" fill="#2563eb"/>
+<circle cx="317.82" cy="386.81" r="3.2" fill="#2563eb"/>
+<circle cx="362.18" cy="422.02" r="3.2" fill="#2563eb"/>
+<circle cx="406.55" cy="457.23" r="3.2" fill="#2563eb"/>
+<circle cx="450.91" cy="492.44" r="3.2" fill="#2563eb"/>
+<circle cx="495.27" cy="527.65" r="3.2" fill="#2563eb"/>
+<circle cx="539.64" cy="562.87" r="3.2" fill="#2563eb"/>
+<circle cx="584.00" cy="598.08" r="3.2" fill="#2563eb"/>
+<circle cx="698.00" cy="154.34" r="3.2" fill="#2563eb"/>
+<circle cx="738.67" cy="184.33" r="3.2" fill="#2563eb"/>
+<circle cx="779.33" cy="219.47" r="3.2" fill="#2563eb"/>
+<circle cx="820.00" cy="254.68" r="3.2" fill="#2563eb"/>
+<circle cx="860.67" cy="289.89" r="3.2" fill="#2563eb"/>
+<circle cx="901.33" cy="325.10" r="3.2" fill="#2563eb"/>
+<circle cx="942.00" cy="360.31" r="3.2" fill="#2563eb"/>
+<circle cx="982.67" cy="395.52" r="3.2" fill="#2563eb"/>
+<circle cx="1023.33" cy="430.73" r="3.2" fill="#2563eb"/>
+<circle cx="1064.00" cy="465.94" r="3.2" fill="#2563eb"/>
+<circle cx="1104.67" cy="501.15" r="3.2" fill="#2563eb"/>
+<circle cx="1145.33" cy="536.37" r="3.2" fill="#2563eb"/>
+<circle cx="1186.00" cy="571.58" r="3.2" fill="#2563eb"/>
+<rect x="114" y="159" width="228" height="82" rx="9" fill="#ffffff" fill-opacity="0.95" stroke="#cbd5e1"/>
+<line x1="128" y1="181" x2="160" y2="181" stroke="#dc2626" stroke-width="3"/>
+<text class="legend" x="170" y="186">forward error</text>
+<line x1="128" y1="203" x2="160" y2="203" stroke="#2563eb" stroke-width="3"/>
+<text class="legend" x="170" y="208">relative residual = η_b</text>
+<line x1="128" y1="225" x2="160" y2="225" stroke="#7c3aed" stroke-width="3" stroke-dasharray="8 5"/>
+<text class="legend" x="170" y="230">κ₂(A) × relative residual</text>
+<rect x="716" y="159" width="252" height="104" rx="9" fill="#ffffff" fill-opacity="0.95" stroke="#cbd5e1"/>
+<line x1="730" y1="181" x2="762" y2="181" stroke="#dc2626" stroke-width="3"/>
+<text class="legend" x="772" y="186">forward error</text>
+<line x1="730" y1="203" x2="762" y2="203" stroke="#2563eb" stroke-width="3"/>
+<text class="legend" x="772" y="208">normwise RHS η_b</text>
+<line x1="730" y1="225" x2="762" y2="225" stroke="#059669" stroke-width="3" stroke-dasharray="3 4"/>
+<text class="legend" x="772" y="230">componentwise RHS η_b,comp</text>
+<line x1="730" y1="247" x2="762" y2="247" stroke="#7c3aed" stroke-width="3" stroke-dasharray="8 5"/>
+<text class="legend" x="772" y="252">κ₂(A) × normwise η_b</text>
+<rect x="373" y="161" width="192" height="76" rx="9" fill="#fff7ed" stroke="#f59e0b"/>
+<text class="callout" x="469" y="185" text-anchor="middle">误差沿近零空间方向</text>
+<text class="tick" x="469" y="207" text-anchor="middle">A 把大解误差压成小残差</text>
+<text class="tick" x="469" y="227" text-anchor="middle">κ 恢复了被隐藏的放大</text>
+<rect x="990" y="161" width="177" height="98" rx="9" fill="#ecfdf5" stroke="#10b981"/>
+<text class="callout" x="1078" y="185" text-anchor="middle">小分量仍有独立意义</text>
+<text class="tick" x="1078" y="207" text-anchor="middle">总体范数由第 1 分量主导</text>
+<text class="tick" x="1078" y="227" text-anchor="middle">第 2 个 RHS 却改变 100%</text>
+<text class="tick" x="1078" y="247" text-anchor="middle">需补充分量型指标</text>
+<text class="subtitle" x="640.0" y="736" text-anchor="middle">结论：残差必须尺度化；后向误差必须匹配扰动模型；前向解释必须乘上条件性。</text>
+</svg>

@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">激活、分支与广播：反向是局部伴随的累加</title>
+<desc id="desc">激活函数以局部斜率门控；fan-out 的各路径贡献在共享父节点相加；broadcast 与 gather 的伴随分别是 sum-to-shape 与 scatter-add。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">激活：上游乘局部斜率</text>
+<line x1="58" y1="315" x2="352" y2="315" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="205" y1="105" x2="205" y2="425" stroke="#D7DEE8" stroke-width="2"/>
+<path d="M70 315L205 315L335 145" fill="none" stroke="#2563EB" stroke-width="4"/>
+<text x="328" y="132" font-size="16" font-weight="700" text-anchor="middle" fill="#2563EB">ReLU</text>
+<circle cx="105" cy="315" r="7" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<text x="105" y="362" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">x&lt;0</text>
+<text x="105" y="389" font-size="15" font-weight="500" text-anchor="middle" fill="#64748B">slope 0</text>
+<circle cx="205" cy="315" r="7" fill="#B7791F" stroke="#B7791F" stroke-width="2"/>
+<text x="205" y="362" font-size="15" font-weight="650" text-anchor="middle" fill="#B7791F">x=0</text>
+<text x="205" y="389" font-size="15" font-weight="500" text-anchor="middle" fill="#64748B">rule</text>
+<circle cx="300" cy="190" r="7" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<text x="300" y="362" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">x&gt;0</text>
+<text x="300" y="389" font-size="15" font-weight="500" text-anchor="middle" fill="#64748B">slope 1</text>
+<rect x="62" y="432" width="282" height="55" rx="7" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="203" y="456" font-size="17" font-weight="700" text-anchor="middle" fill="#0F766E" class="math">z_bar = h_bar * phi&#x27;(z)</text>
+<text x="203" y="477" font-size="15" font-weight="500" text-anchor="middle" fill="#64748B">mask controls one local path</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">分支：贡献必须相加</text>
+<circle cx="465" cy="275" r="23" fill="#FFFEFB" stroke="#2563EB" stroke-width="2.5"/>
+<text x="465" y="281" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">x</text>
+<circle cx="575" cy="155" r="23" fill="#FFFEFB" stroke="#0F766E" stroke-width="2.5"/>
+<text x="575" y="161" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">id</text>
+<circle cx="575" cy="380" r="23" fill="#FFFEFB" stroke="#0F766E" stroke-width="2.5"/>
+<text x="575" y="386" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">F</text>
+<circle cx="690" cy="275" r="23" fill="#FFFEFB" stroke="#C24135" stroke-width="2.5"/>
+<text x="690" y="281" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">+</text>
+<circle cx="760" cy="275" r="23" fill="#FFFEFB" stroke="#C24135" stroke-width="2.5"/>
+<text x="760" y="281" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">L</text>
+<line x1="488" y1="275" x2="550" y2="155" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<line x1="488" y1="275" x2="550" y2="380" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<line x1="598" y1="155" x2="665" y2="275" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<line x1="598" y1="380" x2="665" y2="275" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<line x1="713" y1="275" x2="735" y2="275" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<path d="M737 251C675 205 565 205 488 258" fill="none" stroke="#C24135" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#a2)"/>
+<path d="M737 299C675 345 565 345 488 292" fill="none" stroke="#C24135" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#a2)"/>
+<rect x="445" y="430" width="310" height="58" rx="7" fill="#FFF5F2" stroke="#C24135" stroke-width="2"/>
+<text x="600" y="455" font-size="16" font-weight="700" text-anchor="middle" fill="#C24135" class="math">x_bar = y_bar + J_F^T y_bar</text>
+<text x="600" y="477" font-size="15" font-weight="500" text-anchor="middle" fill="#64748B">assignment would erase one path</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">复制的伴随是聚合</text>
+<text x="842" y="105" font-size="16" font-weight="700" text-anchor="start" fill="#2563EB">broadcast</text>
+<rect x="844" y="125" width="70" height="54" rx="7" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="879" y="158" font-size="16" font-weight="700" text-anchor="middle" fill="#2563EB">b:[d]</text>
+<line x1="917" y1="152" x2="985" y2="134" stroke="#2563EB" stroke-width="2.2" marker-end="url(#a0)"/>
+<rect x="990" y="112" width="130" height="44" rx="6" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="1055" y="140" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">row 1:[d]</text>
+<line x1="917" y1="152" x2="985" y2="189" stroke="#2563EB" stroke-width="2.2" marker-end="url(#a0)"/>
+<rect x="990" y="167" width="130" height="44" rx="6" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="1055" y="195" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">row 2:[d]</text>
+<line x1="917" y1="152" x2="985" y2="244" stroke="#2563EB" stroke-width="2.2" marker-end="url(#a0)"/>
+<rect x="990" y="222" width="130" height="44" rx="6" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="1055" y="250" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">row 3:[d]</text>
+<path d="M1122 132C1160 168 1160 250 1122 286" fill="none" stroke="#C24135" stroke-width="2.5" stroke-dasharray="6 5"/>
+<text x="1055" y="315" font-size="16" font-weight="700" text-anchor="middle" fill="#C24135">reverse: sum rows</text>
+<line x1="845" y1="345" x2="1135" y2="345" stroke="#D7DEE8" stroke-width="2"/>
+<text x="842" y="377" font-size="16" font-weight="700" text-anchor="start" fill="#0F766E">gather: indices [2,2,1]</text>
+<rect x="844" y="400" width="290" height="72" rx="7" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="989" y="427" font-size="16" font-weight="650" text-anchor="middle" fill="#0F766E" class="math">y_bar = [a,b,c]</text>
+<text x="989" y="454" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937" class="math">scatter-add -&gt; x_bar=[c,a+b,0]</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">统一原则：每个 primitive 提供局部 VJP；共享路径求和，复制操作用其转置聚合。</text>
+</svg>

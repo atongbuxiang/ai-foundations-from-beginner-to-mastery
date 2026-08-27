@@ -1,0 +1,217 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="610" viewBox="0 0 1440 610" role="img" aria-labelledby="title desc">
+<title id="title">Hessenberg reduction and shifted QR convergence</title>
+<desc id="desc">The first panel shows dense-to-Hessenberg structure preservation, the second compares unshifted, Rayleigh, and Wilkinson-shifted QR deflation, and the third contrasts cubic and quadratic work scaling.</desc>
+<style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:13px;fill:#172033}.title{font-size:23px;font-weight:600}.panel{font-size:16px;font-weight:600}.axis{font-size:14px}.frame{fill:#fbfcfe;stroke:#7b879a;stroke-width:1}.grid{stroke:#dbe1e8;stroke-width:1}.note{font-size:12px;fill:#445067}.legend{font-size:12px}</style>
+<rect width="1440" height="610" fill="#ffffff"/>
+<text x="720" y="34" text-anchor="middle" class="title">Hessenberg 先约化，移位 QR 再迭代</text>
+<text x="70" y="67" class="panel">A  正交相似保持谱，只压缩带宽</text>
+<text x="177.5" y="120" text-anchor="middle" class="note">原始稠密 A</text>
+<rect x="105.00" y="130.00" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.852" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="129.17" y="130.00" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.199" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="153.33" y="130.00" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.816" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="177.50" y="130.00" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.931" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="201.67" y="130.00" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.768" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="225.83" y="130.00" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.389" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="105.00" y="154.17" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.618" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="129.17" y="154.17" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.181" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="153.33" y="154.17" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.716" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="177.50" y="154.17" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.740" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="201.67" y="154.17" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.799" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="225.83" y="154.17" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.471" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="105.00" y="178.33" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.253" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="129.17" y="178.33" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.616" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="153.33" y="178.33" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.422" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="177.50" y="178.33" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.567" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="201.67" y="178.33" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.814" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="225.83" y="178.33" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.481" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="105.00" y="202.50" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.940" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="129.17" y="202.50" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.391" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="153.33" y="202.50" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.321" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="177.50" y="202.50" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.854" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="201.67" y="202.50" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.808" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="225.83" y="202.50" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.265" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="105.00" y="226.67" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.339" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="129.17" y="226.67" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.837" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="153.33" y="226.67" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.866" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="177.50" y="226.67" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.216" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="201.67" y="226.67" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.663" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="225.83" y="226.67" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.623" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="105.00" y="250.83" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.473" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="129.17" y="250.83" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.267" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="153.33" y="250.83" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.522" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="177.50" y="250.83" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.645" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="201.67" y="250.83" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.717" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="225.83" y="250.83" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.631" stroke="#dbe1e8" stroke-width="0.8"/>
+<text x="285" y="205" text-anchor="middle" class="panel">→</text>
+<text x="397.5" y="120" text-anchor="middle" class="note">H=QᵀAQ</text>
+<rect x="325.00" y="130.00" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.817" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="349.17" y="130.00" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.896" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="373.33" y="130.00" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.498" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="397.50" y="130.00" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.788" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="421.67" y="130.00" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.613" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="445.83" y="130.00" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.586" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="325.00" y="154.17" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.940" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="349.17" y="154.17" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.777" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="373.33" y="154.17" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.659" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="397.50" y="154.17" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.333" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="421.67" y="154.17" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.655" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="445.83" y="154.17" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.626" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="325.00" y="178.33" width="24.17" height="24.17" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="349.17" y="178.33" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.822" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="373.33" y="178.33" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.737" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="397.50" y="178.33" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.516" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="421.67" y="178.33" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.638" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="445.83" y="178.33" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.509" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="325.00" y="202.50" width="24.17" height="24.17" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="349.17" y="202.50" width="24.17" height="24.17" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="373.33" y="202.50" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.455" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="397.50" y="202.50" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.509" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="421.67" y="202.50" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.932" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="445.83" y="202.50" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.601" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="325.00" y="226.67" width="24.17" height="24.17" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="349.17" y="226.67" width="24.17" height="24.17" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="373.33" y="226.67" width="24.17" height="24.17" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="397.50" y="226.67" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.915" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="421.67" y="226.67" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.270" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="445.83" y="226.67" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.408" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="325.00" y="250.83" width="24.17" height="24.17" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="349.17" y="250.83" width="24.17" height="24.17" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="373.33" y="250.83" width="24.17" height="24.17" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="397.50" y="250.83" width="24.17" height="24.17" fill="#ffffff" fill-opacity="0.000" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="421.67" y="250.83" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.599" stroke="#dbe1e8" stroke-width="0.8"/>
+<rect x="445.83" y="250.83" width="24.17" height="24.17" fill="#2f6fbd" fill-opacity="0.662" stroke="#dbe1e8" stroke-width="0.8"/>
+<text x="90" y="315" class="note">相似残差：4.95e-16</text>
+<text x="90" y="340" class="note">正交缺陷：1.02e-15</text>
+<text x="90" y="380" class="note">蓝色深浅表示 |aᵢⱼ|；第二条次对角线以下为零。</text>
+<text x="90" y="405" class="note">对称矩阵会进一步约化成三对角矩阵。</text>
+<text x="570" y="67" class="panel">B  移位控制 deflation 速度</text>
+<rect x="570" y="88" width="330" height="330" class="frame"/>
+<line x1="570.00" y1="88" x2="570.00" y2="418" class="grid"/>
+<text x="570.00" y="438" text-anchor="middle">0</text>
+<line x1="652.50" y1="88" x2="652.50" y2="418" class="grid"/>
+<text x="652.50" y="438" text-anchor="middle">20</text>
+<line x1="735.00" y1="88" x2="735.00" y2="418" class="grid"/>
+<text x="735.00" y="438" text-anchor="middle">40</text>
+<line x1="817.50" y1="88" x2="817.50" y2="418" class="grid"/>
+<text x="817.50" y="438" text-anchor="middle">60</text>
+<line x1="900.00" y1="88" x2="900.00" y2="418" class="grid"/>
+<text x="900.00" y="438" text-anchor="middle">80</text>
+<line x1="570" y1="418.00" x2="900" y2="418.00" class="grid"/>
+<text x="560" y="422.00" text-anchor="end">10⁻¹⁶</text>
+<line x1="570" y1="335.50" x2="900" y2="335.50" class="grid"/>
+<text x="560" y="339.50" text-anchor="end">10⁻¹²</text>
+<line x1="570" y1="253.00" x2="900" y2="253.00" class="grid"/>
+<text x="560" y="257.00" text-anchor="end">10⁻⁸</text>
+<line x1="570" y1="170.50" x2="900" y2="170.50" class="grid"/>
+<text x="560" y="174.50" text-anchor="end">10⁻⁴</text>
+<line x1="570" y1="88.00" x2="900" y2="88.00" class="grid"/>
+<text x="560" y="92.00" text-anchor="end">1</text>
+<text x="735.0" y="464" text-anchor="middle" class="axis">QR 步数 k</text>
+<text x="516" y="253.0" text-anchor="middle" class="axis" transform="rotate(-90 516 253.0)">末端次对角元 |hₙ,ₙ₋₁|</text>
+<polyline points="570.00,96.21 574.12,102.84 578.25,109.85 582.38,116.82 586.50,123.74 590.62,130.64 594.75,137.52 598.88,144.40 603.00,151.27 607.12,158.15 611.25,165.02 615.38,171.90 619.50,178.77 623.62,185.64 627.75,192.52 631.88,199.39 636.00,206.26 640.12,213.14 644.25,220.01 648.38,226.88 652.50,233.76 656.62,240.63 660.75,247.50 664.88,254.38 669.00,261.25 673.12,268.12 677.25,275.00 681.38,281.87 685.50,288.75 689.62,295.62 693.75,302.49 697.88,309.37 702.00,316.24 706.12,323.11 710.25,329.99 714.38,336.86 718.50,343.73 722.62,350.61 726.75,357.48 730.88,364.35 735.00,418.00 739.12,418.00 743.25,418.00 747.38,418.00 751.50,418.00 755.62,418.00 759.75,418.00 763.88,418.00 768.00,418.00 772.12,418.00 776.25,418.00 780.38,418.00 784.50,418.00 788.62,418.00 792.75,418.00 796.88,418.00 801.00,418.00 805.12,418.00 809.25,418.00 813.38,418.00 817.50,418.00 821.62,418.00 825.75,418.00 829.88,418.00 834.00,418.00 838.12,418.00 842.25,418.00 846.38,418.00 850.50,418.00 854.62,418.00 858.75,418.00 862.88,418.00 867.00,418.00 871.12,418.00 875.25,418.00 879.38,418.00 883.50,418.00 887.62,418.00 891.75,418.00 895.88,418.00 900.00,418.00" fill="none" stroke="#c43d3d" stroke-width="2.5" stroke-dasharray="7 4"/>
+<rect x="567.00" y="93.21" width="6" height="6" fill="#c43d3d"/>
+<rect x="587.62" y="127.64" width="6" height="6" fill="#c43d3d"/>
+<rect x="608.25" y="162.02" width="6" height="6" fill="#c43d3d"/>
+<rect x="628.88" y="196.39" width="6" height="6" fill="#c43d3d"/>
+<rect x="649.50" y="230.76" width="6" height="6" fill="#c43d3d"/>
+<rect x="670.12" y="265.12" width="6" height="6" fill="#c43d3d"/>
+<rect x="690.75" y="299.49" width="6" height="6" fill="#c43d3d"/>
+<rect x="711.38" y="333.86" width="6" height="6" fill="#c43d3d"/>
+<rect x="732.00" y="415.00" width="6" height="6" fill="#c43d3d"/>
+<rect x="752.62" y="415.00" width="6" height="6" fill="#c43d3d"/>
+<rect x="773.25" y="415.00" width="6" height="6" fill="#c43d3d"/>
+<rect x="793.88" y="415.00" width="6" height="6" fill="#c43d3d"/>
+<rect x="814.50" y="415.00" width="6" height="6" fill="#c43d3d"/>
+<rect x="835.12" y="415.00" width="6" height="6" fill="#c43d3d"/>
+<rect x="855.75" y="415.00" width="6" height="6" fill="#c43d3d"/>
+<rect x="876.38" y="415.00" width="6" height="6" fill="#c43d3d"/>
+<rect x="897.00" y="415.00" width="6" height="6" fill="#c43d3d"/>
+<polyline points="570.00,96.21 574.12,110.30 578.25,154.65 582.38,287.44 586.50,418.00 590.62,418.00 594.75,418.00 598.88,418.00 603.00,418.00 607.12,418.00 611.25,418.00 615.38,418.00 619.50,418.00 623.62,418.00 627.75,418.00 631.88,418.00 636.00,418.00 640.12,418.00 644.25,418.00 648.38,418.00 652.50,418.00 656.62,418.00 660.75,418.00 664.88,418.00 669.00,418.00 673.12,418.00 677.25,418.00 681.38,418.00 685.50,418.00 689.62,418.00 693.75,418.00 697.88,418.00 702.00,418.00 706.12,418.00 710.25,418.00 714.38,418.00 718.50,418.00 722.62,418.00 726.75,418.00 730.88,418.00 735.00,418.00 739.12,418.00 743.25,418.00 747.38,418.00 751.50,418.00 755.62,418.00 759.75,418.00 763.88,418.00 768.00,418.00 772.12,418.00 776.25,418.00 780.38,418.00 784.50,418.00 788.62,418.00 792.75,418.00 796.88,418.00 801.00,418.00 805.12,418.00 809.25,418.00 813.38,418.00 817.50,418.00 821.62,418.00 825.75,418.00 829.88,418.00 834.00,418.00 838.12,418.00 842.25,418.00 846.38,418.00 850.50,418.00 854.62,418.00 858.75,418.00 862.88,418.00 867.00,418.00 871.12,418.00 875.25,418.00 879.38,418.00 883.50,418.00 887.62,418.00 891.75,418.00 895.88,418.00 900.00,418.00" fill="none" stroke="#2f6fbd" stroke-width="2.5"/>
+<circle cx="570.00" cy="96.21" r="3.3" fill="#2f6fbd"/>
+<circle cx="590.62" cy="418.00" r="3.3" fill="#2f6fbd"/>
+<circle cx="611.25" cy="418.00" r="3.3" fill="#2f6fbd"/>
+<circle cx="631.88" cy="418.00" r="3.3" fill="#2f6fbd"/>
+<circle cx="652.50" cy="418.00" r="3.3" fill="#2f6fbd"/>
+<circle cx="673.12" cy="418.00" r="3.3" fill="#2f6fbd"/>
+<circle cx="693.75" cy="418.00" r="3.3" fill="#2f6fbd"/>
+<circle cx="714.38" cy="418.00" r="3.3" fill="#2f6fbd"/>
+<circle cx="735.00" cy="418.00" r="3.3" fill="#2f6fbd"/>
+<circle cx="755.62" cy="418.00" r="3.3" fill="#2f6fbd"/>
+<circle cx="776.25" cy="418.00" r="3.3" fill="#2f6fbd"/>
+<circle cx="796.88" cy="418.00" r="3.3" fill="#2f6fbd"/>
+<circle cx="817.50" cy="418.00" r="3.3" fill="#2f6fbd"/>
+<circle cx="838.12" cy="418.00" r="3.3" fill="#2f6fbd"/>
+<circle cx="858.75" cy="418.00" r="3.3" fill="#2f6fbd"/>
+<circle cx="879.38" cy="418.00" r="3.3" fill="#2f6fbd"/>
+<circle cx="900.00" cy="418.00" r="3.3" fill="#2f6fbd"/>
+<polyline points="570.00,96.21 574.12,129.18 578.25,239.88 582.38,418.00 586.50,418.00 590.62,418.00 594.75,418.00 598.88,418.00 603.00,418.00 607.12,418.00 611.25,418.00 615.38,418.00 619.50,418.00 623.62,418.00 627.75,418.00 631.88,418.00 636.00,418.00 640.12,418.00 644.25,418.00 648.38,418.00 652.50,418.00 656.62,418.00 660.75,418.00 664.88,418.00 669.00,418.00 673.12,418.00 677.25,418.00 681.38,418.00 685.50,418.00 689.62,418.00 693.75,418.00 697.88,418.00 702.00,418.00 706.12,418.00 710.25,418.00 714.38,418.00 718.50,418.00 722.62,418.00 726.75,418.00 730.88,418.00 735.00,418.00 739.12,418.00 743.25,418.00 747.38,418.00 751.50,418.00 755.62,418.00 759.75,418.00 763.88,418.00 768.00,418.00 772.12,418.00 776.25,418.00 780.38,418.00 784.50,418.00 788.62,418.00 792.75,418.00 796.88,418.00 801.00,418.00 805.12,418.00 809.25,418.00 813.38,418.00 817.50,418.00 821.62,418.00 825.75,418.00 829.88,418.00 834.00,418.00 838.12,418.00 842.25,418.00 846.38,418.00 850.50,418.00 854.62,418.00 858.75,418.00 862.88,418.00 867.00,418.00 871.12,418.00 875.25,418.00 879.38,418.00 883.50,418.00 887.62,418.00 891.75,418.00 895.88,418.00 900.00,418.00" fill="none" stroke="#248a57" stroke-width="2.5"/>
+<path d="M570.00,92.21 L574.00,96.21 L570.00,100.21 L566.00,96.21Z" fill="#248a57"/>
+<path d="M590.62,414.00 L594.62,418.00 L590.62,422.00 L586.62,418.00Z" fill="#248a57"/>
+<path d="M611.25,414.00 L615.25,418.00 L611.25,422.00 L607.25,418.00Z" fill="#248a57"/>
+<path d="M631.88,414.00 L635.88,418.00 L631.88,422.00 L627.88,418.00Z" fill="#248a57"/>
+<path d="M652.50,414.00 L656.50,418.00 L652.50,422.00 L648.50,418.00Z" fill="#248a57"/>
+<path d="M673.12,414.00 L677.12,418.00 L673.12,422.00 L669.12,418.00Z" fill="#248a57"/>
+<path d="M693.75,414.00 L697.75,418.00 L693.75,422.00 L689.75,418.00Z" fill="#248a57"/>
+<path d="M714.38,414.00 L718.38,418.00 L714.38,422.00 L710.38,418.00Z" fill="#248a57"/>
+<path d="M735.00,414.00 L739.00,418.00 L735.00,422.00 L731.00,418.00Z" fill="#248a57"/>
+<path d="M755.62,414.00 L759.62,418.00 L755.62,422.00 L751.62,418.00Z" fill="#248a57"/>
+<path d="M776.25,414.00 L780.25,418.00 L776.25,422.00 L772.25,418.00Z" fill="#248a57"/>
+<path d="M796.88,414.00 L800.88,418.00 L796.88,422.00 L792.88,418.00Z" fill="#248a57"/>
+<path d="M817.50,414.00 L821.50,418.00 L817.50,422.00 L813.50,418.00Z" fill="#248a57"/>
+<path d="M838.12,414.00 L842.12,418.00 L838.12,422.00 L834.12,418.00Z" fill="#248a57"/>
+<path d="M858.75,414.00 L862.75,418.00 L858.75,422.00 L854.75,418.00Z" fill="#248a57"/>
+<path d="M879.38,414.00 L883.38,418.00 L879.38,422.00 L875.38,418.00Z" fill="#248a57"/>
+<path d="M900.00,414.00 L904.00,418.00 L900.00,422.00 L896.00,418.00Z" fill="#248a57"/>
+<text x="585" y="112" class="note">Wilkinson shift 选尾部 2×2 特征值中更近者</text>
+<text x="1030" y="67" class="panel">C  结构把每步从 O(n³) 降到 O(n²)</text>
+<rect x="1030" y="88" width="330" height="330" class="frame"/>
+<line x1="1030.00" y1="88" x2="1030.00" y2="418" class="grid"/>
+<text x="1030.00" y="438" text-anchor="middle">16</text>
+<line x1="1096.00" y1="88" x2="1096.00" y2="418" class="grid"/>
+<text x="1096.00" y="438" text-anchor="middle">32</text>
+<line x1="1162.00" y1="88" x2="1162.00" y2="418" class="grid"/>
+<text x="1162.00" y="438" text-anchor="middle">64</text>
+<line x1="1228.00" y1="88" x2="1228.00" y2="418" class="grid"/>
+<text x="1228.00" y="438" text-anchor="middle">128</text>
+<line x1="1294.00" y1="88" x2="1294.00" y2="418" class="grid"/>
+<text x="1294.00" y="438" text-anchor="middle">256</text>
+<line x1="1360.00" y1="88" x2="1360.00" y2="418" class="grid"/>
+<text x="1360.00" y="438" text-anchor="middle">512</text>
+<line x1="1030" y1="418.00" x2="1360" y2="418.00" class="grid"/>
+<text x="1020" y="422.00" text-anchor="end">10³</text>
+<line x1="1030" y1="308.00" x2="1360" y2="308.00" class="grid"/>
+<text x="1020" y="312.00" text-anchor="end">10⁵</text>
+<line x1="1030" y1="198.00" x2="1360" y2="198.00" class="grid"/>
+<text x="1020" y="202.00" text-anchor="end">10⁷</text>
+<line x1="1030" y1="88.00" x2="1360" y2="88.00" class="grid"/>
+<text x="1020" y="92.00" text-anchor="end">10⁹</text>
+<text x="1195.0" y="464" text-anchor="middle" class="axis">矩阵阶数 n（对数）</text>
+<text x="976" y="253.0" text-anchor="middle" class="axis" transform="rotate(-90 976 253.0)">工作量代理（对数）</text>
+<rect x="1027.00" y="381.32" width="6" height="6" fill="#c43d3d"/>
+<path d="M1030.00,403.75 L1034.00,407.75 L1030.00,411.75 L1026.00,407.75Z" fill="#248a57"/>
+<rect x="1093.00" y="331.65" width="6" height="6" fill="#c43d3d"/>
+<path d="M1096.00,370.64 L1100.00,374.64 L1096.00,378.64 L1092.00,374.64Z" fill="#248a57"/>
+<rect x="1159.00" y="281.98" width="6" height="6" fill="#c43d3d"/>
+<path d="M1162.00,337.52 L1166.00,341.52 L1162.00,345.52 L1158.00,341.52Z" fill="#248a57"/>
+<rect x="1225.00" y="232.31" width="6" height="6" fill="#c43d3d"/>
+<path d="M1228.00,304.41 L1232.00,308.41 L1228.00,312.41 L1224.00,308.41Z" fill="#248a57"/>
+<rect x="1291.00" y="182.64" width="6" height="6" fill="#c43d3d"/>
+<path d="M1294.00,271.30 L1298.00,275.30 L1294.00,279.30 L1290.00,275.30Z" fill="#248a57"/>
+<rect x="1357.00" y="132.97" width="6" height="6" fill="#c43d3d"/>
+<path d="M1360.00,238.18 L1364.00,242.18 L1360.00,246.18 L1356.00,242.18Z" fill="#248a57"/>
+<polyline points="1030.00,384.32 1096.00,334.65 1162.00,284.98 1228.00,235.31 1294.00,185.64 1360.00,135.97" fill="none" stroke="#c43d3d" stroke-width="2.5"/>
+<polyline points="1030.00,407.75 1096.00,374.64 1162.00,341.52 1228.00,308.41 1294.00,275.30 1360.00,242.18" fill="none" stroke="#248a57" stroke-width="2.5"/>
+<text x="1045" y="112" class="note">代理：稠密 n³；Hessenberg 隐式 QR 约 6n²</text>
+<rect x="572.00" y="497.00" width="6" height="6" fill="#c43d3d"/>
+<text x="585" y="504" class="legend">无移位</text>
+<circle cx="695.00" cy="500.00" r="3.3" fill="#2f6fbd"/>
+<text x="705" y="504" class="legend">Rayleigh shift</text>
+<path d="M815.00,496.00 L819.00,500.00 L815.00,504.00 L811.00,500.00Z" fill="#248a57"/>
+<text x="825" y="504" class="legend">Wilkinson shift</text>
+<rect x="1047.00" y="497.00" width="6" height="6" fill="#c43d3d"/>
+<text x="1060" y="504" class="legend">稠密 QR 步</text>
+<path d="M1175.00,496.00 L1179.00,500.00 L1175.00,504.00 L1171.00,500.00Z" fill="#248a57"/>
+<text x="1185" y="504" class="legend">Hessenberg 隐式步</text>
+<text x="720" y="555" text-anchor="middle" class="note">显式教学实现用于展示不变量与收敛；生产 eigensolver 还需要平衡、多重移位、aggressive early deflation 与异常退出处理。</text>
+<text x="720" y="580" text-anchor="middle" class="note">生成：plot_hessenberg_qr.py · Python 标准库 · seed=无随机性</text>
+</svg>

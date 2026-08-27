@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760">
+  <rect width="1200" height="760" fill="#ffffff"/>
+  <style>.s{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.ink{fill:#182235}.muted{fill:#64748b}.b{fill:#2457d6}.r{fill:#c83d32}.g{fill:#147d64}</style>
+  <text x="62" y="62" class="s ink" font-size="31" font-weight="750">二维几何中的 VC 上下界：存在一个好构造，排除所有更大构造</text>
+  <text x="62" y="99" class="s muted" font-size="17">左：仿射半空间的 d+1 与 Radon 阻碍。右：轴对齐矩形的 2d 与极值点阻碍。</text>
+  <line x1="600" y1="130" x2="600" y2="700" stroke="#d8dee9" stroke-width="2"/>
+
+  <text x="62" y="160" class="s b" font-size="22" font-weight="750">仿射半空间（R²）</text>
+  <text x="62" y="191" class="s ink" font-size="16">三个不共线点仿射无关：任意 ±1 score 都可由一条仿射函数插值。</text>
+  <line x1="95" y1="442" x2="535" y2="442" stroke="#94a3b8" stroke-width="2"/><line x1="135" y1="500" x2="135" y2="230" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="205,397 355,250 475,405" fill="#eaf0ff" stroke="#9bb3f3" stroke-width="2"/>
+  <circle cx="205" cy="397" r="13" fill="#2457d6"/><circle cx="355" cy="250" r="13" fill="#fff" stroke="#c83d32" stroke-width="4"/><circle cx="475" cy="405" r="13" fill="#2457d6"/>
+  <line x1="150" y1="315" x2="525" y2="332" stroke="#147d64" stroke-width="4"/>
+  <text x="446" y="309" class="s g" font-size="14">一个 labeling 的分离线</text>
+  <text x="205" y="428" class="s b" font-size="15" text-anchor="middle">+1</text><text x="355" y="226" class="s r" font-size="15" text-anchor="middle">−1</text><text x="475" y="436" class="s b" font-size="15" text-anchor="middle">+1</text>
+  <text x="62" y="535" class="s ink" font-size="16" font-weight="700">四点上界的最小图景：交替标记凸四边形</text>
+  <polygon points="170,610 290,555 455,610 330,676" fill="none" stroke="#64748b" stroke-width="2"/>
+  <line x1="170" y1="610" x2="455" y2="610" stroke="#2457d6" stroke-width="4"/><line x1="290" y1="555" x2="330" y2="676" stroke="#c83d32" stroke-width="4"/>
+  <circle cx="170" cy="610" r="11" fill="#2457d6"/><circle cx="455" cy="610" r="11" fill="#2457d6"/><circle cx="290" cy="555" r="11" fill="#c83d32"/><circle cx="330" cy="676" r="11" fill="#c83d32"/>
+  <circle cx="315" cy="610" r="6" fill="#172033"/>
+  <text x="62" y="718" class="s muted" font-size="14">两类点的凸包在黑点相交，任何直线分离都会矛盾。</text>
+
+  <text x="638" y="160" class="s b" font-size="22" font-weight="750">轴对齐矩形（R²）</text>
+  <text x="638" y="191" class="s ink" font-size="16">±e₁、±e₂ 四点可打散；五点中总有一点落在极值见证的包围盒内。</text>
+  <line x1="660" y1="442" x2="1110" y2="442" stroke="#94a3b8" stroke-width="2"/><line x1="875" y1="500" x2="875" y2="230" stroke="#94a3b8" stroke-width="2"/>
+  <circle cx="875" cy="265" r="12" fill="#2457d6"/><circle cx="875" cy="475" r="12" fill="#fff" stroke="#64748b" stroke-width="3"/><circle cx="700" cy="442" r="12" fill="#fff" stroke="#64748b" stroke-width="3"/><circle cx="1050" cy="442" r="12" fill="#2457d6"/>
+  <rect x="850" y="240" width="225" height="227" fill="#e8f7f2" fill-opacity="0.72" stroke="#147d64" stroke-width="4"/>
+  <text x="936" y="221" class="s g" font-size="14" text-anchor="middle">选中 +e₁ 与 +e₂ 的一个矩形</text>
+  <text x="638" y="535" class="s ink" font-size="16" font-weight="700">五点阻碍：四个极值点为 1，内部点为 0</text>
+  <rect x="710" y="575" width="350" height="115" fill="#edf3ff" stroke="#2457d6" stroke-width="3"/>
+  <circle cx="710" cy="625" r="10" fill="#2457d6"/><circle cx="1060" cy="625" r="10" fill="#2457d6"/><circle cx="860" cy="575" r="10" fill="#2457d6"/><circle cx="930" cy="690" r="10" fill="#2457d6"/>
+  <circle cx="880" cy="632" r="12" fill="#fff" stroke="#c83d32" stroke-width="4"/>
+  <text x="638" y="718" class="s muted" font-size="14">包含四个坐标极值见证的矩形必包含整个包围盒，因此不能排除红色内部点。</text>
+</svg>

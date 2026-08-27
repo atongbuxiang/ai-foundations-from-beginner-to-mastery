@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">次梯度、凸共轭与 Fenchel–Young 证书</title>
+<desc id="desc">不可微凸点有一族全局支撑斜率；共轭为每个 dual slope 选择最佳截距；Fenchel–Young gap 非负并在 primal-dual 次梯度匹配时为零。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Kink 处是一束合法支撑线</text>
+<line x1="55" y1="385" x2="355" y2="385" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="205" y1="410" x2="205" y2="95" stroke="#D7DEE8" stroke-width="2"/>
+<path d="M70 150L205 350L340 150" fill="none" stroke="#2563EB" stroke-width="3"/>
+<line x1="85" y1="440.0" x2="325" y2="260.0" stroke="#C24135" stroke-width="2" stroke-dasharray="7 5"/>
+<line x1="85" y1="350.0" x2="325" y2="350.0" stroke="#0F766E" stroke-width="2" stroke-dasharray="7 5"/>
+<line x1="85" y1="266.0" x2="325" y2="434.0" stroke="#C24135" stroke-width="2" stroke-dasharray="7 5"/>
+<circle cx="205" cy="350" r="6" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<text x="205" y="82" font-size="17" font-weight="700" text-anchor="middle" fill="#1F2937">f(x)=|x|</text>
+<text x="45" y="435" font-size="18" font-weight="700" text-anchor="start" fill="#1F2937" class="math">partial |x|(0) = [-1,1]</text>
+<text x="45" y="475" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">每条线都是全局 affine lower bound。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">共轭选择每个 slope 的最佳截距</text>
+<line x1="440" y1="385" x2="770" y2="385" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="470" y1="410" x2="470" y2="95" stroke="#D7DEE8" stroke-width="2"/>
+<path d="M470.0 265.5L472.4 268.5L474.7 271.5L477.1 274.4L479.4 277.3L481.8 280.1L484.1 282.8L486.4 285.5L488.8 288.2L491.1 290.8L493.5 293.3L495.9 295.8L498.2 298.2L500.6 300.5L502.9 302.9L505.2 305.1L507.6 307.3L509.9 309.5L512.3 311.5L514.6 313.6L517.0 315.6L519.4 317.5L521.7 319.3L524.0 321.2L526.4 322.9L528.8 324.6L531.1 326.3L533.5 327.9L535.8 329.4L538.1 330.9L540.5 332.3L542.9 333.7L545.2 335.0L547.5 336.2L549.9 337.4L552.2 338.6L554.6 339.7L557.0 340.7L559.3 341.7L561.6 342.6L564.0 343.5L566.4 344.3L568.7 345.1L571.0 345.8L573.4 346.5L575.8 347.1L578.1 347.6L580.5 348.1L582.8 348.5L585.1 348.9L587.5 349.2L589.9 349.5L592.2 349.7L594.5 349.9L596.9 350.0L599.2 350.0L601.6 350.0L604.0 349.9L606.3 349.8L608.6 349.6L611.0 349.4L613.4 349.1L615.7 348.8L618.0 348.4L620.4 347.9L622.8 347.4L625.1 346.8L627.5 346.2L629.8 345.6L632.1 344.8L634.5 344.0L636.9 343.2L639.2 342.3L641.5 341.4L643.9 340.4L646.2 339.3L648.6 338.2L651.0 337.0L653.3 335.8L655.6 334.5L658.0 333.2L660.4 331.8L662.7 330.3L665.0 328.8L667.4 327.3L669.8 325.7L672.1 324.0L674.5 322.3L676.8 320.5L679.1 318.7L681.5 316.8L683.9 314.8L686.2 312.8L688.5 310.8L690.9 308.7L693.2 306.5L695.6 304.3L698.0 302.0L700.3 299.7L702.6 297.3L705.0 294.9L707.4 292.4L709.7 289.8L712.0 287.2L714.4 284.6L716.8 281.8L719.1 279.1L721.5 276.2L723.8 273.4L726.2 270.4L728.5 267.4L730.9 264.4L733.2 261.3L735.5 258.1L737.9 254.9L740.2 251.6L742.6 248.3L745.0 244.9L747.3 241.5L749.7 238.0L752.0 234.5" fill="none" stroke="#0F766E" stroke-width="3"/>
+<line x1="480" y1="395" x2="750" y2="200" stroke="#D7DEE8" stroke-width="2" stroke-dasharray="6 4"/>
+<line x1="480" y1="360" x2="750" y2="165" stroke="#2563EB" stroke-width="2" stroke-dasharray="6 4"/>
+<line x1="480" y1="325" x2="750" y2="130" stroke="#D7DEE8" stroke-width="2" stroke-dasharray="6 4"/>
+<circle cx="615" cy="260" r="6" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<text x="430" y="430" font-size="17" font-weight="650" text-anchor="start" fill="#1F2937" class="math">f*(y)=sup_x { y^T x - f(x) }</text>
+<text x="430" y="472" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">固定 slope y，向上移动直线直到接触。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Fenchel–Young：gap 即证书</text>
+<rect x="840" y="105" width="130" height="54" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="905.0" y="138.0" font-size="17" font-weight="650" text-anchor="middle" fill="#2563EB">primal x</text>
+<rect x="1010" y="105" width="130" height="54" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="1075.0" y="138.0" font-size="17" font-weight="650" text-anchor="middle" fill="#0F766E">dual y</text>
+<line x1="973" y1="132" x2="1005" y2="132" stroke="#1F2937" stroke-width="2.3" marker-end="url(#a3)"/>
+<text x="830" y="225" font-size="17" font-weight="700" text-anchor="start" fill="#1F2937" class="math">gap = f(x)+f*(y)-&lt;x,y&gt; &gt;= 0</text>
+<line x1="840" y1="260" x2="1135" y2="260" stroke="#D7DEE8" stroke-width="2"/>
+<text x="830" y="315" font-size="18" font-weight="700" text-anchor="start" fill="#C24135">gap=0</text>
+<text x="930" y="315" font-size="17" font-weight="650" text-anchor="start" fill="#1F2937" class="math">iff y in partial f(x)</text>
+<text x="930" y="355" font-size="17" font-weight="650" text-anchor="start" fill="#1F2937" class="math">iff x in partial f*(y)</text>
+<text x="830" y="420" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937" class="math">0 in partial f(x*)  &lt;=&gt;  global optimum</text>
+<text x="830" y="468" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">写出 dual 不自动给 zero gap 或 attainment。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">次梯度给全局支撑，共轭交换变量与斜率，Fenchel–Young 等号把二者闭合为证书。</text>
+</svg>

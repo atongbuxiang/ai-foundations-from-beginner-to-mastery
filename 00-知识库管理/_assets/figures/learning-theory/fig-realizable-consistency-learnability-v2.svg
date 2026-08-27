@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Realizable、agnostic、consistency 与 PAC 的量词轴</title>
+<desc id="desc">Realizable/agnostic 是世界与比较器假设；empirical/statistical consistency 是拟合或渐近性质；PAC 是统一有限样本高概率保证。它们与 computational efficiency 处在不同轴上。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">世界假设轴</text>
+<rect x="55" y="110" width="290" height="72" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="200" y="139" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">realizable</text>
+<text x="200" y="166" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">exists h* in H with R_P(h*)=0</text>
+<rect x="55" y="260" width="290" height="72" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="200" y="289" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">agnostic</text>
+<text x="200" y="316" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">compare to inf_{h in H} R_P(h)</text>
+<text x="45" y="390" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">realizable is a distribution-class relation</text>
+<text x="45" y="430" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">interpolation on S is only empirical</text>
+<text x="45" y="475" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">well specified != optimizer success</text>
+<text x="45" y="510" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">label leakage can fake realizability。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">保证时间轴</text>
+<line x1="470" y1="390" x2="745" y2="390" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="470" y1="390" x2="470" y2="105" stroke="#D7DEE8" stroke-width="2"/>
+<text x="610" y="430" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">sample size m</text>
+<text x="445" y="120" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">risk</text>
+<path d="M480 145C540 230 610 295 745 330" fill="none" stroke="#0F766E" stroke-width="3"/>
+<path d="M480 170C565 250 650 275 745 285" fill="none" stroke="#2563EB" stroke-width="2.5" stroke-dasharray="7 5"/>
+<text x="500" y="150" font-size="15" font-weight="650" text-anchor="start" fill="#2563EB">finite PAC envelope</text>
+<text x="600" y="350" font-size="15" font-weight="650" text-anchor="start" fill="#0F766E">asymptotic consistency</text>
+<text x="430" y="475" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">pointwise rate need not be distribution-uniform</text>
+<text x="430" y="510" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">convergence mode and comparator must be named。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">PAC 与 computation 分开</text>
+<rect x="840" y="88" width="300" height="72" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="990" y="117" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">for all P, eps, delta</text>
+<text x="990" y="144" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">m &gt;= m_H(eps,delta)</text>
+<line x1="990" y1="163" x2="990" y2="198" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="840" y="210" width="300" height="72" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="990" y="239" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">Pr_S[R_P(A(S))-comp &lt;= eps]</text>
+<text x="990" y="266" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">&gt;= 1-delta</text>
+<text x="830" y="340" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">existence of learner</text>
+<text x="830" y="375" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">polynomial sample complexity</text>
+<text x="830" y="410" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">polynomial-time implementation</text>
+<text x="830" y="455" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">optimizer reaches required solution</text>
+<text x="830" y="505" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">four claims do not imply each other automatically。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">先定位世界假设与时间量词，再谈 learner 和 computation；零训练误差、相合与 PAC 不是同义词。</text>
+</svg>

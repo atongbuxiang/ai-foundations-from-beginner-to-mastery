@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">生成覆盖与选择成功：两道门、两个 estimand</title><desc id="desc">candidate pool、oracle pass@k、selector 与 winner&#x27;s curse。</desc>
+<rect width="1200" height="700" fill="#FBF8F1"/>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#667784"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#183044" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<line x1="48" y1="70" x2="1152" y2="70" stroke="#7054A3" stroke-width="4"/>
+<text x="52" y="49" font-size="24" font-weight="700" fill="#183044">生成覆盖与选择成功：两道门、两个 estimand</text>
+<text x="65" y="110" text-anchor="start" font-size="15" font-weight="700" fill="#183044">N = 8 个候选；绿色通过隐藏测试</text>
+<rect x="75" y="145" width="66" height="72" rx="8" fill="#B7443E" opacity=".88"/>
+<text x="108" y="175" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">y1</text>
+<text x="108" y="199" text-anchor="middle" font-size="10" font-weight="700" fill="#FFFFFF">FAIL</text>
+<text x="108" y="240" text-anchor="middle" font-size="11" font-weight="700" fill="#B7443E">ŝ=0.91</text>
+<rect x="167" y="145" width="66" height="72" rx="8" fill="#4F7B45" opacity=".88"/>
+<text x="200" y="175" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">y2</text>
+<text x="200" y="199" text-anchor="middle" font-size="10" font-weight="700" fill="#FFFFFF">PASS</text>
+<text x="200" y="240" text-anchor="middle" font-size="11" font-weight="700" fill="#4F7B45">ŝ=0.62</text>
+<rect x="259" y="145" width="66" height="72" rx="8" fill="#B7443E" opacity=".88"/>
+<text x="292" y="175" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">y3</text>
+<text x="292" y="199" text-anchor="middle" font-size="10" font-weight="700" fill="#FFFFFF">FAIL</text>
+<text x="292" y="240" text-anchor="middle" font-size="11" font-weight="700" fill="#B7443E">ŝ=0.87</text>
+<rect x="351" y="145" width="66" height="72" rx="8" fill="#B7443E" opacity=".88"/>
+<text x="384" y="175" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">y4</text>
+<text x="384" y="199" text-anchor="middle" font-size="10" font-weight="700" fill="#FFFFFF">FAIL</text>
+<text x="384" y="240" text-anchor="middle" font-size="11" font-weight="700" fill="#B7443E">ŝ=0.38</text>
+<rect x="443" y="145" width="66" height="72" rx="8" fill="#4F7B45" opacity=".88"/>
+<text x="476" y="175" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">y5</text>
+<text x="476" y="199" text-anchor="middle" font-size="10" font-weight="700" fill="#FFFFFF">PASS</text>
+<text x="476" y="240" text-anchor="middle" font-size="11" font-weight="700" fill="#4F7B45">ŝ=0.58</text>
+<rect x="535" y="145" width="66" height="72" rx="8" fill="#B7443E" opacity=".88"/>
+<text x="568" y="175" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">y6</text>
+<text x="568" y="199" text-anchor="middle" font-size="10" font-weight="700" fill="#FFFFFF">FAIL</text>
+<text x="568" y="240" text-anchor="middle" font-size="11" font-weight="700" fill="#B7443E">ŝ=0.81</text>
+<rect x="627" y="145" width="66" height="72" rx="8" fill="#4F7B45" opacity=".88"/>
+<text x="660" y="175" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">y7</text>
+<text x="660" y="199" text-anchor="middle" font-size="10" font-weight="700" fill="#FFFFFF">PASS</text>
+<text x="660" y="240" text-anchor="middle" font-size="11" font-weight="700" fill="#4F7B45">ŝ=0.55</text>
+<rect x="719" y="145" width="66" height="72" rx="8" fill="#B7443E" opacity=".88"/>
+<text x="752" y="175" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">y8</text>
+<text x="752" y="199" text-anchor="middle" font-size="10" font-weight="700" fill="#FFFFFF">FAIL</text>
+<text x="752" y="240" text-anchor="middle" font-size="11" font-weight="700" fill="#B7443E">ŝ=0.32</text>
+<line x1="820" y1="182" x2="885" y2="182" stroke="#667784" stroke-width="2.1" marker-end="url(#arrow)"/>
+<rect x="900" y="125" width="235" height="130" rx="10" fill="#FFF0ED" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="915" y="153" text-anchor="start" font-size="15" font-weight="700" fill="#B7443E">selector 取最高 ŝ</text>
+<text x="915" y="178" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">选择 y1：ŝ=.91</text>
+<text x="915" y="198" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">隐藏测试：FAIL</text>
+<text x="915" y="218" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">高噪声分数的极值被放大</text>
+<rect x="65" y="305" width="310" height="132" rx="10" fill="#EEF7EA" stroke="#4F7B45" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="80" y="333" text-anchor="start" font-size="15" font-weight="700" fill="#4F7B45">Oracle coverage</text>
+<text x="80" y="358" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">8 个样本有 c=3 个正确</text>
+<text x="80" y="378" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">pass@k = 1 − C(n−c,k)/C(n,k)</text>
+<text x="80" y="398" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">回答：k 个里至少一个正确？</text>
+<rect x="445" y="305" width="310" height="132" rx="10" fill="#F3EFFA" stroke="#7054A3" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="460" y="333" text-anchor="start" font-size="15" font-weight="700" fill="#7054A3">Selected success</text>
+<text x="460" y="358" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">selector 只返回一个候选</text>
+<text x="460" y="378" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">回答：用户实际拿到正确答案？</text>
+<text x="460" y="398" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">依赖 verifier 的外部验证</text>
+<rect x="825" y="305" width="310" height="132" rx="10" fill="#FFF5E7" stroke="#C87922" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="840" y="333" text-anchor="start" font-size="15" font-weight="700" fill="#C87922">Budget-matched utility</text>
+<text x="840" y="358" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">质量 − λ·tokens − μ·latency</text>
+<text x="840" y="378" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">N 增大既改覆盖，也改成本</text>
+<text x="840" y="398" text-anchor="start" font-size="12.3" font-weight="400" fill="#667784">并可能放大选择偏差</text>
+<text x="65" y="492" text-anchor="start" font-size="14" font-weight="700" fill="#183044">独立单样本成功率 p=.2 时的理论覆盖</text>
+<line x1="480" y1="610" x2="1090" y2="610" stroke="#183044"/>
+<line x1="480" y1="610" x2="480" y2="505" stroke="#183044"/>
+<circle cx="480.0" cy="589.0" r="5" fill="#245AA8"/>
+<text x="480.0" y="630" text-anchor="middle" font-size="10" font-weight="400" fill="#667784">1</text>
+<circle cx="567.1428571428571" cy="572.2" r="5" fill="#245AA8"/>
+<text x="567.1428571428571" y="630" text-anchor="middle" font-size="10" font-weight="400" fill="#667784">2</text>
+<circle cx="654.2857142857142" cy="558.76" r="5" fill="#245AA8"/>
+<text x="654.2857142857142" y="630" text-anchor="middle" font-size="10" font-weight="400" fill="#667784">3</text>
+<circle cx="741.4285714285714" cy="548.008" r="5" fill="#245AA8"/>
+<text x="741.4285714285714" y="630" text-anchor="middle" font-size="10" font-weight="400" fill="#667784">4</text>
+<circle cx="828.5714285714286" cy="539.4064" r="5" fill="#245AA8"/>
+<text x="828.5714285714286" y="630" text-anchor="middle" font-size="10" font-weight="400" fill="#667784">5</text>
+<circle cx="915.7142857142858" cy="532.52512" r="5" fill="#245AA8"/>
+<text x="915.7142857142858" y="630" text-anchor="middle" font-size="10" font-weight="400" fill="#667784">6</text>
+<circle cx="1002.8571428571429" cy="527.020096" r="5" fill="#245AA8"/>
+<text x="1002.8571428571429" y="630" text-anchor="middle" font-size="10" font-weight="400" fill="#667784">7</text>
+<circle cx="1090.0" cy="522.6160768" r="5" fill="#245AA8"/>
+<text x="1090.0" y="630" text-anchor="middle" font-size="10" font-weight="400" fill="#667784">8</text>
+<path d="M480.0,589.0 L567.1,572.2 L654.3,558.8 L741.4,548.0 L828.6,539.4 L915.7,532.5 L1002.9,527.0 L1090.0,522.6" fill="none" stroke="#245AA8" stroke-width="3"/>
+<text x="282" y="552" text-anchor="middle" font-size="22" font-weight="700" fill="#245AA8">1−(1−p)^k</text>
+<text x="282" y="581" text-anchor="middle" font-size="12" font-weight="400" fill="#667784">只在 iid Bernoulli 理想化下成立</text>
+<line x1="48" y1="650" x2="1152" y2="650" stroke="#D9D5CB"/>
+<text x="52" y="674" font-size="13" fill="#667784">pass@k 是候选池覆盖率，不是部署成功率；若看过测试、judge 或 verifier 后选最佳，还必须审计选择偏差。</text>
+</svg>

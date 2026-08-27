@@ -1,0 +1,9 @@
+head_dimension,scaling,multiplier,independent_initial_score_rms,aligned_trained_score
+16,sqrt,0.25,1.0,4.0
+16,linear,0.0625,0.25,1.0
+64,sqrt,0.125,1.0,8.0
+64,linear,0.015625,0.125,1.0
+256,sqrt,0.0625,1.0,16.0
+256,linear,0.00390625,0.0625,1.0
+1024,sqrt,0.03125,1.0,32.0
+1024,linear,0.0009765625,0.03125,1.0

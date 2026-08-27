@@ -1,0 +1,7 @@
+account,gpu_hours,included_runs
+training_lineage_shared,1040.0,8
+training_naive_branch_rerun,2640.0,24
+tuning,64.0,8
+selection,8.0,24
+final_evaluation,6.0,3
+lineage_saving,1600.0,8

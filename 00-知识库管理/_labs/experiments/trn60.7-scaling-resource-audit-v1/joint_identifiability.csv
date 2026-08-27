@@ -1,0 +1,13 @@
+design,model_size,data_size,parameter_term,data_term,loss,parameter_path_exponent,data_path_exponent
+diagonal_D_equals_sqrt_N,1.0,1.0,2.0,3.0,6.0,-0.25,-0.25
+diagonal_D_equals_sqrt_N,16.0,4.0,1.0,1.5,3.5,-0.25,-0.25
+diagonal_D_equals_sqrt_N,256.0,16.0,0.5,0.75,2.25,-0.25,-0.25
+crossed_grid,1.0,1.0,2.0,3.0,6.0,-0.25,-0.5
+crossed_grid,1.0,4.0,2.0,1.5,4.5,-0.25,-0.5
+crossed_grid,1.0,16.0,2.0,0.75,3.75,-0.25,-0.5
+crossed_grid,16.0,1.0,1.0,3.0,5.0,-0.25,-0.5
+crossed_grid,16.0,4.0,1.0,1.5,3.5,-0.25,-0.5
+crossed_grid,16.0,16.0,1.0,0.75,2.75,-0.25,-0.5
+crossed_grid,256.0,1.0,0.5,3.0,4.5,-0.25,-0.5
+crossed_grid,256.0,4.0,0.5,1.5,3.0,-0.25,-0.5
+crossed_grid,256.0,16.0,0.5,0.75,2.25,-0.25,-0.5

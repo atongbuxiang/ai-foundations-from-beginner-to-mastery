@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#26364a"/></marker><style>.t{font-family:Inter,'Noto Sans SC',sans-serif;fill:#172033}.h{font-size:26px;font-weight:700}.s{font-size:18px}.m{font-family:'IBM Plex Mono',monospace;font-size:17px;fill:#233a59}.mut{font-size:15px;fill:#647184}.box{fill:#fffdf7;stroke:#26364a;stroke-width:2}</style></defs>
+  <rect width="1200" height="620" fill="#f4f0e6"/>
+  <text x="54" y="52" class="t h">CFG：从插值到外推，再到多目标评价</text><line x1="54" y1="72" x2="1146" y2="72" stroke="#c7bda9"/>
+  <rect x="54" y="105" width="1092" height="165" rx="12" class="box"/>
+  <text x="78" y="140" class="t h" font-size="21">Prediction space</text>
+  <line x1="145" y1="205" x2="1040" y2="205" stroke="#26364a" stroke-width="3" marker-end="url(#a)"/>
+  <circle cx="260" cy="205" r="13" fill="#426f9e"/><text x="217" y="244" class="t s">r_u, w=0</text>
+  <circle cx="560" cy="205" r="13" fill="#4f8051"/><text x="512" y="244" class="t s">r_c, w=1</text>
+  <circle cx="850" cy="205" r="13" fill="#d46b45"/><text x="800" y="244" class="t s">外推 w&gt;1</text>
+  <path d="M275 174 H545" stroke="#4f8051" stroke-width="4" marker-end="url(#a)"/><path d="M575 174 H835" stroke="#d46b45" stroke-width="4" marker-end="url(#a)"/>
+  <text x="325" y="160" class="m">r_u + w(r_c-r_u)</text><text x="880" y="178" class="t mut">误差也被放大</text>
+  <rect x="54" y="300" width="710" height="210" rx="12" class="box"/>
+  <text x="78" y="338" class="t h" font-size="21">Scale sweep：不要只看一条曲线</text>
+  <line x1="120" y1="466" x2="708" y2="466" stroke="#26364a"/><line x1="120" y1="466" x2="120" y2="370" stroke="#26364a"/>
+  <path d="M130 448 C260 420,380 385,700 374" fill="none" stroke="#4f8051" stroke-width="3"/><text x="552" y="365" class="t s" fill="#426c43">条件一致性</text>
+  <path d="M130 387 C310 382,470 402,700 452" fill="none" stroke="#426f9e" stroke-width="3"/><text x="555" y="446" class="t s" fill="#426f9e">coverage</text>
+  <path d="M130 450 C330 445,520 424,700 392" fill="none" stroke="#d46b45" stroke-width="3" stroke-dasharray="8 6"/><text x="570" y="415" class="t s" fill="#b65334">saturation</text>
+  <text x="364" y="495" class="t mut">guidance scale w</text>
+  <rect x="790" y="300" width="356" height="210" rx="12" class="box"/>
+  <text x="814" y="338" class="t h" font-size="21">复现面板</text>
+  <g class="t s"><text x="820" y="378">□ paired seeds / prompts</text><text x="820" y="411">□ FID/KID + precision/recall</text><text x="820" y="444">□ conditional task + human</text><text x="820" y="477">□ NFE / latency / memory</text></g>
+  <rect x="54" y="535" width="1092" height="49" rx="8" fill="#fff8de" stroke="#c7a84d"/>
+  <text x="77" y="566" class="t s">纪律：先代入 w=0、1 核对 convention；clipping、negative prompt 与 prediction type 都会改变几何解释。</text>
+</svg>

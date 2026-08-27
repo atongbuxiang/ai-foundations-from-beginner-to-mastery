@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Brownian 时间耦合、粗糙尺度与二次变差</title>
+<desc id="desc">Brownian motion 是具有平稳独立增量和连续路径的整条随机函数，不是逐时独立 Gaussian；增量按平方根时间缩放使普通导数爆炸，而平方增量和收敛到时间长度，产生 Itô 微积分的二阶项。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">marginals 不决定 process</text>
+<line x1="55" y1="360" x2="365" y2="360" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="75" y1="400" x2="75" y2="95" stroke="#D7DEE8" stroke-width="2"/>
+<path d="M75 320 C120 260 150 305 190 225 C240 135 300 245 360 145" fill="none" stroke="#2563EB" stroke-width="2.8"/>
+<path d="M75 255 C130 330 170 190 220 270 C275 350 310 115 360 205" fill="none" stroke="#0F766E" stroke-width="2.4"/>
+<line x1="130" y1="110" x2="130" y2="365" stroke="#D7DEE8" stroke-width="1" stroke-dasharray="4 5"/>
+<line x1="210" y1="110" x2="210" y2="365" stroke="#D7DEE8" stroke-width="1" stroke-dasharray="4 5"/>
+<line x1="290" y1="110" x2="290" y2="365" stroke="#D7DEE8" stroke-width="1" stroke-dasharray="4 5"/>
+<line x1="350" y1="110" x2="350" y2="365" stroke="#D7DEE8" stroke-width="1" stroke-dasharray="4 5"/>
+<text x="45" y="410" font-size="16" font-weight="700" text-anchor="start" fill="#1F2937" class="math">W_t-W_s ~ N(0,t-s)</text>
+<text x="45" y="444" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">disjoint increments are independent</text>
+<text x="45" y="475" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">Cov(W_s,W_t)=min(s,t)</text>
+<text x="45" y="506" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">pointwise histograms miss temporal coupling。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">sqrt(dt) 尺度摧毁普通导数</text>
+<line x1="450" y1="350" x2="770" y2="350" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="470" y1="390" x2="470" y2="100" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="520" y1="350" x2="520" y2="125" stroke="#2563EB" stroke-width="18"/>
+<text x="520" y="111" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">dt</text>
+<line x1="610" y1="350" x2="610" y2="215" stroke="#0F766E" stroke-width="18"/>
+<text x="610" y="201" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">dt/4</text>
+<line x1="700" y1="350" x2="700" y2="280" stroke="#C24135" stroke-width="18"/>
+<text x="700" y="266" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">dt/16</text>
+<text x="430" y="410" font-size="16" font-weight="700" text-anchor="start" fill="#1F2937" class="math">Delta W=O_P(sqrt(Delta t))</text>
+<text x="430" y="444" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">Delta W/Delta t=O_P(Delta t^(-1/2))</text>
+<text x="430" y="478" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">paths are continuous but a.s. nowhere smooth</text>
+<text x="430" y="508" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">white noise is a generalized derivative。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">平方增量和留下有限极限</text>
+<rect x="840" y="92" width="300" height="60" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="990.0" y="128.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">partition Pi: 0=t0&lt;...&lt;tn=T</text>
+<line x1="990" y1="155" x2="990" y2="192" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="840" y="204" width="300" height="70" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="990.0" y="245.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">QV_Pi=sum (Delta W_i)^2</text>
+<line x1="990" y1="277" x2="990" y2="314" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="840" y="326" width="300" height="65" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="990.0" y="364.5" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">mesh -&gt;0: QV_Pi -&gt; T</text>
+<text x="830" y="430" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">finite-variation continuous paths: QV=0</text>
+<text x="830" y="460" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">Brownian total variation diverges</text>
+<text x="830" y="490" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">(dW)^2=dt is asymptotic bookkeeping</text>
+<text x="830" y="517" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">not ordinary differential algebra。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">Brownian 的核心是整条路径 law：平方根增量尺度使导数失效，二次变差则保存为 Itô 二阶修正。</text>
+</svg>

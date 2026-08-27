@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="610" viewBox="0 0 1440 610" role="img" aria-labelledby="title desc">
+<title id="title">Randomized SVD probability, power iteration, and certification</title>
+<desc id="desc">Three panels show oversampling quantiles, power iteration versus data passes for two spectra, and independent Gaussian a posteriori residual certificates.</desc>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",Arial,sans-serif;font-size:15px;fill:#1f2937}.title{font-size:27px;font-weight:650}.panel{font-size:19px;font-weight:650}.axis{font-size:16px}.frame{fill:#fffefb;stroke:#d7dee8}.grid{stroke:#e2e8f0}.note{font-size:15px;fill:#64748b}.legend{font-size:15px}</style>
+<rect width="1440" height="610" fill="#ffffff"/>
+<text x="720" y="34" text-anchor="middle" class="title">随机低秩近似：用概率换取少量数据访问，但必须记录尾部与证书</text>
+<text x="75" y="67" class="panel">A  oversampling 降低坏 seed 的尾部</text>
+<text x="555" y="67" class="panel">B  power iteration：精度换数据 passes</text>
+<text x="1035" y="67" class="panel">C  独立 Gaussian 探针的后验上界</text>
+<rect x="75" y="88" width="330" height="330" class="frame"/>
+<line x1="75.00" y1="88" x2="75.00" y2="418" class="grid"/>
+<text x="75.00" y="438" text-anchor="middle">0</text>
+<line x1="141.00" y1="88" x2="141.00" y2="418" class="grid"/>
+<text x="141.00" y="438" text-anchor="middle">2</text>
+<line x1="240.00" y1="88" x2="240.00" y2="418" class="grid"/>
+<text x="240.00" y="438" text-anchor="middle">5</text>
+<line x1="405.00" y1="88" x2="405.00" y2="418" class="grid"/>
+<text x="405.00" y="438" text-anchor="middle">10</text>
+<line x1="75" y1="418.00" x2="405" y2="418.00" class="grid"/>
+<text x="66" y="422.00" text-anchor="end">1</text>
+<line x1="75" y1="331.20" x2="405" y2="331.20" class="grid"/>
+<text x="66" y="335.20" text-anchor="end">1.2</text>
+<line x1="75" y1="257.81" x2="405" y2="257.81" class="grid"/>
+<text x="66" y="261.81" text-anchor="end">1.4</text>
+<line x1="75" y1="194.24" x2="405" y2="194.24" class="grid"/>
+<text x="66" y="198.24" text-anchor="end">1.6</text>
+<line x1="75" y1="88.00" x2="405" y2="88.00" class="grid"/>
+<text x="66" y="92.00" text-anchor="end">2</text>
+<text x="240.0" y="463" text-anchor="middle" class="axis">oversampling p（ℓ=k+p）</text>
+<text x="20" y="253.0" text-anchor="middle" class="axis" transform="rotate(-90 20 253.0)">谱误差 / 最优 σₖ₊₁</text>
+<line x1="75.00" y1="266.96" x2="75.00" y2="195.33" stroke="#2f6fbd" stroke-width="5" opacity=".45"/>
+<line x1="75.00" y1="195.33" x2="75.00" y2="179.68" stroke="#c43d3d" stroke-dasharray="3 3"/>
+<circle cx="75.00" cy="231.58" r="4" fill="#2f6fbd"/>
+<path d="M75.00,175.68 L79.00,179.68 L75.00,183.68 L71.00,179.68Z" fill="#c43d3d"/>
+<line x1="141.00" y1="304.97" x2="141.00" y2="209.55" stroke="#2f6fbd" stroke-width="5" opacity=".45"/>
+<line x1="141.00" y1="209.55" x2="141.00" y2="180.71" stroke="#c43d3d" stroke-dasharray="3 3"/>
+<circle cx="141.00" cy="248.90" r="4" fill="#2f6fbd"/>
+<path d="M141.00,176.71 L145.00,180.71 L141.00,184.71 L137.00,180.71Z" fill="#c43d3d"/>
+<line x1="240.00" y1="354.11" x2="240.00" y2="240.74" stroke="#2f6fbd" stroke-width="5" opacity=".45"/>
+<line x1="240.00" y1="240.74" x2="240.00" y2="221.57" stroke="#c43d3d" stroke-dasharray="3 3"/>
+<circle cx="240.00" cy="293.61" r="4" fill="#2f6fbd"/>
+<path d="M240.00,217.57 L244.00,221.57 L240.00,225.57 L236.00,221.57Z" fill="#c43d3d"/>
+<line x1="405.00" y1="403.62" x2="405.00" y2="329.36" stroke="#2f6fbd" stroke-width="5" opacity=".45"/>
+<line x1="405.00" y1="329.36" x2="405.00" y2="318.15" stroke="#c43d3d" stroke-dasharray="3 3"/>
+<circle cx="405.00" cy="372.74" r="4" fill="#2f6fbd"/>
+<path d="M405.00,314.15 L409.00,318.15 L405.00,322.15 L401.00,318.15Z" fill="#c43d3d"/>
+<polyline points="75.00,231.58 141.00,248.90 240.00,293.61 405.00,372.74" fill="none" stroke="#2f6fbd" stroke-width="2.5"/>
+<text x="90" y="112" class="note">粗线为 10%–90%；红菱形为 30 个 seed 中最坏值</text>
+<rect x="555" y="88" width="330" height="330" class="frame"/>
+<line x1="555.00" y1="88" x2="555.00" y2="418" class="grid"/>
+<text x="555.00" y="438" text-anchor="middle">q=0</text>
+<line x1="665.00" y1="88" x2="665.00" y2="418" class="grid"/>
+<text x="665.00" y="438" text-anchor="middle">q=1</text>
+<line x1="775.00" y1="88" x2="775.00" y2="418" class="grid"/>
+<text x="775.00" y="438" text-anchor="middle">q=2</text>
+<line x1="885.00" y1="88" x2="885.00" y2="418" class="grid"/>
+<text x="885.00" y="438" text-anchor="middle">q=3</text>
+<line x1="555" y1="418.00" x2="885" y2="418.00" class="grid"/>
+<text x="546" y="422.00" text-anchor="end">1</text>
+<line x1="555" y1="331.20" x2="885" y2="331.20" class="grid"/>
+<text x="546" y="335.20" text-anchor="end">1.2</text>
+<line x1="555" y1="257.81" x2="885" y2="257.81" class="grid"/>
+<text x="546" y="261.81" text-anchor="end">1.4</text>
+<line x1="555" y1="194.24" x2="885" y2="194.24" class="grid"/>
+<text x="546" y="198.24" text-anchor="end">1.6</text>
+<line x1="555" y1="88.00" x2="885" y2="88.00" class="grid"/>
+<text x="546" y="92.00" text-anchor="end">2</text>
+<text x="720.0" y="463" text-anchor="middle" class="axis">power steps q（range passes=2q+1）</text>
+<text x="500" y="253.0" text-anchor="middle" class="axis" transform="rotate(-90 500 253.0)">中位谱误差 / σₖ₊₁</text>
+<polyline points="555.00,290.36 665.00,414.75 775.00,417.88 885.00,418.00" fill="none" stroke="#c36a14" stroke-width="2.5"/>
+<rect x="551.00" y="286.36" width="8" height="8" fill="#c36a14"/>
+<rect x="661.00" y="410.75" width="8" height="8" fill="#c36a14"/>
+<rect x="771.00" y="413.88" width="8" height="8" fill="#c36a14"/>
+<rect x="881.00" y="414.00" width="8" height="8" fill="#c36a14"/>
+<polyline points="555.00,396.04 665.00,418.00 775.00,418.00 885.00,418.00" fill="none" stroke="#248a57" stroke-width="2.5"/>
+<path d="M555.00,391.04 L560.00,396.04 L555.00,401.04 L550.00,396.04Z" fill="#248a57"/>
+<path d="M665.00,413.00 L670.00,418.00 L665.00,423.00 L660.00,418.00Z" fill="#248a57"/>
+<path d="M775.00,413.00 L780.00,418.00 L775.00,423.00 L770.00,418.00Z" fill="#248a57"/>
+<path d="M885.00,413.00 L890.00,418.00 L885.00,423.00 L880.00,418.00Z" fill="#248a57"/>
+<text x="570" y="112" class="note">另做 B=QᵀA 还需一次 pass；每次幂步必须重正交</text>
+<rect x="1035" y="88" width="330" height="330" class="frame"/>
+<line x1="1035.00" y1="88" x2="1035.00" y2="418" class="grid"/>
+<text x="1035.00" y="438" text-anchor="middle">1</text>
+<line x1="1101.00" y1="88" x2="1101.00" y2="418" class="grid"/>
+<text x="1101.00" y="438" text-anchor="middle">4</text>
+<line x1="1189.00" y1="88" x2="1189.00" y2="418" class="grid"/>
+<text x="1189.00" y="438" text-anchor="middle">8</text>
+<line x1="1277.00" y1="88" x2="1277.00" y2="418" class="grid"/>
+<text x="1277.00" y="438" text-anchor="middle">12</text>
+<line x1="1365.00" y1="88" x2="1365.00" y2="418" class="grid"/>
+<text x="1365.00" y="438" text-anchor="middle">16</text>
+<line x1="1035" y1="418.00" x2="1365" y2="418.00" class="grid"/>
+<text x="1026" y="422.00" text-anchor="end">.01</text>
+<line x1="1035" y1="335.50" x2="1365" y2="335.50" class="grid"/>
+<text x="1026" y="339.50" text-anchor="end">.1</text>
+<line x1="1035" y1="253.00" x2="1365" y2="253.00" class="grid"/>
+<text x="1026" y="257.00" text-anchor="end">1</text>
+<line x1="1035" y1="170.50" x2="1365" y2="170.50" class="grid"/>
+<text x="1026" y="174.50" text-anchor="end">10</text>
+<line x1="1035" y1="88.00" x2="1365" y2="88.00" class="grid"/>
+<text x="1026" y="92.00" text-anchor="end">100</text>
+<text x="1200.0" y="463" text-anchor="middle" class="axis">近似 seed</text>
+<text x="980" y="253.0" text-anchor="middle" class="axis" transform="rotate(-90 980 253.0)">残差谱范数 / 概率上界</text>
+<polyline points="1035.00,273.64 1057.00,274.96 1079.00,274.06 1101.00,275.34 1123.00,274.59 1145.00,275.19 1167.00,274.70 1189.00,275.29 1211.00,275.34 1233.00,274.80 1255.00,271.83 1277.00,275.27 1299.00,275.34 1321.00,275.29 1343.00,275.14 1365.00,274.46" fill="none" stroke="#2f6fbd" stroke-width="2.5"/>
+<polyline points="1035.00,156.12 1057.00,158.70 1079.00,159.06 1101.00,159.42 1123.00,158.32 1145.00,159.90 1167.00,160.37 1189.00,153.43 1211.00,156.65 1233.00,161.02 1255.00,157.08 1277.00,162.81 1299.00,158.99 1321.00,155.60 1343.00,165.14 1365.00,166.99" fill="none" stroke="#8a4fb8" stroke-width="2.5" stroke-dasharray="6 4"/>
+<circle cx="1035.00" cy="273.64" r="3.2" fill="#2f6fbd"/>
+<circle cx="1057.00" cy="274.96" r="3.2" fill="#2f6fbd"/>
+<circle cx="1079.00" cy="274.06" r="3.2" fill="#2f6fbd"/>
+<circle cx="1101.00" cy="275.34" r="3.2" fill="#2f6fbd"/>
+<circle cx="1123.00" cy="274.59" r="3.2" fill="#2f6fbd"/>
+<circle cx="1145.00" cy="275.19" r="3.2" fill="#2f6fbd"/>
+<circle cx="1167.00" cy="274.70" r="3.2" fill="#2f6fbd"/>
+<circle cx="1189.00" cy="275.29" r="3.2" fill="#2f6fbd"/>
+<circle cx="1211.00" cy="275.34" r="3.2" fill="#2f6fbd"/>
+<circle cx="1233.00" cy="274.80" r="3.2" fill="#2f6fbd"/>
+<circle cx="1255.00" cy="271.83" r="3.2" fill="#2f6fbd"/>
+<circle cx="1277.00" cy="275.27" r="3.2" fill="#2f6fbd"/>
+<circle cx="1299.00" cy="275.34" r="3.2" fill="#2f6fbd"/>
+<circle cx="1321.00" cy="275.29" r="3.2" fill="#2f6fbd"/>
+<circle cx="1343.00" cy="275.14" r="3.2" fill="#2f6fbd"/>
+<circle cx="1365.00" cy="274.46" r="3.2" fill="#2f6fbd"/>
+<path d="M1035.00,151.92 L1039.20,156.12 L1035.00,160.32 L1030.80,156.12Z" fill="#8a4fb8"/>
+<path d="M1057.00,154.50 L1061.20,158.70 L1057.00,162.90 L1052.80,158.70Z" fill="#8a4fb8"/>
+<path d="M1079.00,154.86 L1083.20,159.06 L1079.00,163.26 L1074.80,159.06Z" fill="#8a4fb8"/>
+<path d="M1101.00,155.22 L1105.20,159.42 L1101.00,163.62 L1096.80,159.42Z" fill="#8a4fb8"/>
+<path d="M1123.00,154.12 L1127.20,158.32 L1123.00,162.52 L1118.80,158.32Z" fill="#8a4fb8"/>
+<path d="M1145.00,155.70 L1149.20,159.90 L1145.00,164.10 L1140.80,159.90Z" fill="#8a4fb8"/>
+<path d="M1167.00,156.17 L1171.20,160.37 L1167.00,164.57 L1162.80,160.37Z" fill="#8a4fb8"/>
+<path d="M1189.00,149.23 L1193.20,153.43 L1189.00,157.63 L1184.80,153.43Z" fill="#8a4fb8"/>
+<path d="M1211.00,152.45 L1215.20,156.65 L1211.00,160.85 L1206.80,156.65Z" fill="#8a4fb8"/>
+<path d="M1233.00,156.82 L1237.20,161.02 L1233.00,165.22 L1228.80,161.02Z" fill="#8a4fb8"/>
+<path d="M1255.00,152.88 L1259.20,157.08 L1255.00,161.28 L1250.80,157.08Z" fill="#8a4fb8"/>
+<path d="M1277.00,158.61 L1281.20,162.81 L1277.00,167.01 L1272.80,162.81Z" fill="#8a4fb8"/>
+<path d="M1299.00,154.79 L1303.20,158.99 L1299.00,163.19 L1294.80,158.99Z" fill="#8a4fb8"/>
+<path d="M1321.00,151.40 L1325.20,155.60 L1321.00,159.80 L1316.80,155.60Z" fill="#8a4fb8"/>
+<path d="M1343.00,160.94 L1347.20,165.14 L1343.00,169.34 L1338.80,165.14Z" fill="#8a4fb8"/>
+<path d="M1365.00,162.79 L1369.20,166.99 L1365.00,171.19 L1360.80,166.99Z" fill="#8a4fb8"/>
+<text x="1050" y="112" class="note">α=10、r=5：失败概率上界 α⁻ʳ=10⁻⁵；证书保守但可审计</text>
+<circle cx="90.00" cy="500.00" r="3.2" fill="#2f6fbd"/>
+<text x="101" y="504" class="legend">median / 10–90%</text>
+<path d="M265.00,495.80 L269.20,500.00 L265.00,504.20 L260.80,500.00Z" fill="#c43d3d"/>
+<text x="276" y="504" class="legend">worst seed</text>
+<rect x="571.80" y="496.80" width="6.4" height="6.4" fill="#c36a14"/>
+<text x="586" y="504" class="legend">slow spectrum</text>
+<path d="M720.00,495.80 L724.20,500.00 L720.00,504.20 L715.80,500.00Z" fill="#248a57"/>
+<text x="731" y="504" class="legend">fast spectrum</text>
+<circle cx="1060.00" cy="500.00" r="3.2" fill="#2f6fbd"/>
+<text x="1071" y="504" class="legend">true ‖R‖₂</text>
+<path d="M1190.00,495.80 L1194.20,500.00 L1190.00,504.20 L1185.80,500.00Z" fill="#8a4fb8"/>
+<text x="1201" y="504" class="legend">prob. certificate</text>
+<text x="720" y="555" text-anchor="middle" class="note">A 看分布而非单 seed；B 把精度改善换算为数据访问；C 用独立探针把随机结果升级为可检查输出。</text>
+<text x="720" y="580" text-anchor="middle" class="note">生成：plot_randomized_svd_probability.py · Python 标准库 · n=60，目标秩 k=8</text>
+</svg>

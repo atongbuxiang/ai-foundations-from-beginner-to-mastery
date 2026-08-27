@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">计算图：从依赖关系到可回放的执行记录</title>
+<desc id="desc">共享输入形成 fan-out；拓扑调度只执行已就绪算子；tape 还需保存形状、缓存、随机状态与存储版本。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">表达式展开为 DAG</text>
+<circle cx="78" cy="235" r="24" fill="#FFFEFB" stroke="#2563EB" stroke-width="2.5"/>
+<text x="78" y="241" font-size="16" font-weight="700" text-anchor="middle" fill="#2563EB">x₁</text>
+<circle cx="78" cy="380" r="24" fill="#FFFEFB" stroke="#2563EB" stroke-width="2.5"/>
+<text x="78" y="386" font-size="16" font-weight="700" text-anchor="middle" fill="#2563EB">x₂</text>
+<circle cx="205" cy="325" r="24" fill="#FFFEFB" stroke="#0F766E" stroke-width="2.5"/>
+<text x="205" y="331" font-size="16" font-weight="700" text-anchor="middle" fill="#0F766E">×</text>
+<circle cx="205" cy="150" r="24" fill="#FFFEFB" stroke="#0F766E" stroke-width="2.5"/>
+<text x="205" y="156" font-size="16" font-weight="700" text-anchor="middle" fill="#0F766E">sin</text>
+<circle cx="315" cy="235" r="24" fill="#FFFEFB" stroke="#0F766E" stroke-width="2.5"/>
+<text x="315" y="241" font-size="16" font-weight="700" text-anchor="middle" fill="#0F766E">+</text>
+<circle cx="365" cy="235" r="24" fill="#FFFEFB" stroke="#C24135" stroke-width="2.5"/>
+<text x="365" y="241" font-size="16" font-weight="700" text-anchor="middle" fill="#C24135">sq</text>
+<line x1="102" y1="235" x2="179" y2="150" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<line x1="102" y1="235" x2="179" y2="325" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<line x1="102" y1="380" x2="179" y2="325" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<line x1="229" y1="150" x2="289" y2="235" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<line x1="229" y1="325" x2="289" y2="235" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<line x1="339" y1="235" x2="339" y2="235" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<text x="45" y="445" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937" class="math">a=x₁x₂; b=sin x₁; c=a+b; L=c²</text>
+<text x="45" y="482" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">x₁ 只有一个 value，但被两条分支读取。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Kahn 调度：ready 才可执行</text>
+<text x="442" y="94" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">step</text>
+<text x="510" y="94" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">ready set</text>
+<text x="650" y="94" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">meaning</text>
+<line x1="435" y1="102" x2="765" y2="102" stroke="#0F766E" stroke-width="2"/>
+<text x="450" y="136" font-size="17" font-weight="700" text-anchor="start" fill="#2563EB">0</text>
+<rect x="500" y="112" width="125" height="42" rx="6" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="562" y="139" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">{x₁,x₂}</text>
+<text x="645" y="139" font-size="15" font-weight="500" text-anchor="start" fill="#1F2937">read inputs</text>
+<text x="450" y="216" font-size="17" font-weight="700" text-anchor="start" fill="#2563EB">1</text>
+<rect x="500" y="192" width="125" height="42" rx="6" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="562" y="219" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">{sin,×}</text>
+<text x="645" y="219" font-size="15" font-weight="500" text-anchor="start" fill="#1F2937">independent</text>
+<text x="450" y="296" font-size="17" font-weight="700" text-anchor="start" fill="#2563EB">2</text>
+<rect x="500" y="272" width="125" height="42" rx="6" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="562" y="299" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">{+}</text>
+<text x="645" y="299" font-size="15" font-weight="500" text-anchor="start" fill="#1F2937">both parents ready</text>
+<text x="450" y="376" font-size="17" font-weight="700" text-anchor="start" fill="#2563EB">3</text>
+<rect x="500" y="352" width="125" height="42" rx="6" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="562" y="379" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">{sq}</text>
+<text x="645" y="379" font-size="15" font-weight="500" text-anchor="start" fill="#1F2937">loss ready</text>
+<text x="438" y="442" font-size="16" font-weight="700" text-anchor="start" fill="#C24135">输出数 &lt; |V|  ⇒  剩余子图含 cycle</text>
+<text x="438" y="480" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">合法顺序可不唯一；依赖偏序不可违反。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">tape 不只记节点名</text>
+<rect x="840" y="105" width="300" height="54" rx="7" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="855" y="128" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">value + shape</text>
+<text x="855" y="150" font-size="15" font-weight="500" text-anchor="start" fill="#1F2937">c : scalar</text>
+<rect x="840" y="182" width="300" height="54" rx="7" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="855" y="205" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">local cache</text>
+<text x="855" y="227" font-size="15" font-weight="500" text-anchor="start" fill="#1F2937">x₁,x₂,c</text>
+<rect x="840" y="259" width="300" height="54" rx="7" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="855" y="282" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">mode / RNG</text>
+<text x="855" y="304" font-size="15" font-weight="500" text-anchor="start" fill="#1F2937">train, key, counter</text>
+<rect x="840" y="336" width="300" height="54" rx="7" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="855" y="359" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">state / alias</text>
+<text x="855" y="381" font-size="15" font-weight="500" text-anchor="start" fill="#1F2937">version + storage</text>
+<rect x="840" y="413" width="300" height="54" rx="7" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="855" y="436" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">cost metadata</text>
+<text x="855" y="458" font-size="15" font-weight="500" text-anchor="start" fill="#1F2937">FLOPs, bytes, path</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">可求导执行 = DAG 依赖 + 类型形状 + 实际 trace + 可回放的状态。</text>
+</svg>

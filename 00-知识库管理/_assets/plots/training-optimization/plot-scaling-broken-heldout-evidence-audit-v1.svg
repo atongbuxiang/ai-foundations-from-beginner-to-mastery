@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+<title id="title">Metric-induced emergence and held-out-scale evidence</title>
+<desc id="desc">Left panel maps smooth per-step probability to steep exact match; right panel preserves calibration, validation, held-out splits and failures.</desc>
+<rect width="1200" height="800" fill="#FFFEFB"/>
+<text x="60.0" y="58.0" font-family="Inter, Arial, sans-serif" font-size="28" fill="#172033" text-anchor="start" font-weight="700">Evidence audit: distinguish a steep metric from a tested extrapolation</text>
+<text x="60.0" y="91.0" font-family="Inter, Arial, sans-serif" font-size="17" fill="#52606D" text-anchor="start" font-weight="400">Scale blocks enter in order; failed target runs remain in the denominator.</text>
+<rect x="55" y="125" width="530" height="590" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+<text x="79.0" y="163.0" font-family="Inter, Arial, sans-serif" font-size="20" fill="#172033" text-anchor="start" font-weight="700">A  Smooth latent skill, steep exact match</text>
+<rect x="615" y="125" width="530" height="590" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+<text x="639.0" y="163.0" font-family="Inter, Arial, sans-serif" font-size="20" fill="#172033" text-anchor="start" font-weight="700">B  Locked prediction on held-out scales</text>
+<line x1="95" y1="620.0" x2="515" y2="620.0" stroke="#D9E0E7" stroke-width="1"/>
+<text x="82.0" y="625.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">0.0</text>
+<line x1="95" y1="512.5" x2="515" y2="512.5" stroke="#D9E0E7" stroke-width="1"/>
+<text x="82.0" y="517.5" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">0.25</text>
+<line x1="95" y1="405.0" x2="515" y2="405.0" stroke="#D9E0E7" stroke-width="1"/>
+<text x="82.0" y="410.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">0.5</text>
+<line x1="95" y1="297.5" x2="515" y2="297.5" stroke="#D9E0E7" stroke-width="1"/>
+<text x="82.0" y="302.5" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">0.75</text>
+<line x1="95" y1="190.0" x2="515" y2="190.0" stroke="#D9E0E7" stroke-width="1"/>
+<text x="82.0" y="195.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">1.0</text>
+<polyline points="95.0,355.0 165.0,342.1 235.0,326.2 305.0,308.2 375.0,290.3 445.0,274.4 515.0,261.5" fill="none" stroke="#0F766E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="95.0,616.6 165.0,614.5 235.0,610.5 305.0,602.7 375.0,589.8 445.0,571.6 515.0,550.2" fill="none" stroke="#C0392B" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="120.0" y="240.0" font-family="Inter, Arial, sans-serif" font-size="16" fill="#0F766E" text-anchor="start" font-weight="700">per-step p changes smoothly</text>
+<text x="285.0" y="515.0" font-family="Inter, Arial, sans-serif" font-size="16" fill="#C0392B" text-anchor="start" font-weight="700">exact match = p^10</text>
+<text x="305.0" y="684.0" font-family="Inter, Arial, sans-serif" font-size="17" fill="#52606D" text-anchor="middle" font-weight="400">model scale (log-spaced)</text>
+<rect x="650" y="180" width="235" height="450" fill="#EAF2FF" opacity="0.65"/>
+<rect x="885" y="180" width="110" height="450" fill="#E8F6F3" opacity="0.65"/>
+<rect x="995" y="180" width="120" height="450" fill="#FFF3D6" opacity="0.65"/>
+<line x1="675" y1="598.9" x2="1060" y2="598.9" stroke="#D9E0E7" stroke-width="1"/>
+<text x="663.0" y="603.9" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">1.3</text>
+<line x1="675" y1="493.7" x2="1060" y2="493.7" stroke="#D9E0E7" stroke-width="1"/>
+<text x="663.0" y="498.7" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">1.8</text>
+<line x1="675" y1="388.4" x2="1060" y2="388.4" stroke="#D9E0E7" stroke-width="1"/>
+<text x="663.0" y="393.4" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">2.3</text>
+<line x1="675" y1="283.2" x2="1060" y2="283.2" stroke="#D9E0E7" stroke-width="1"/>
+<text x="663.0" y="288.2" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">2.8</text>
+<line x1="675" y1="249.5" x2="675" y2="236.8" stroke="#2563EB" stroke-width="5"/>
+<circle cx="675.0" cy="241.1" r="5" fill="#0F766E"/>
+<text x="675.0" y="650.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="middle" font-weight="400">1</text>
+<line x1="730" y1="349.3" x2="730" y2="336.7" stroke="#2563EB" stroke-width="5"/>
+<circle cx="730.0" cy="343.0" r="5" fill="#0F766E"/>
+<text x="730.0" y="650.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="middle" font-weight="400">2</text>
+<line x1="785" y1="425.2" x2="785" y2="412.6" stroke="#2563EB" stroke-width="5"/>
+<circle cx="785.0" cy="420.3" r="5" fill="#0F766E"/>
+<text x="785.0" y="650.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="middle" font-weight="400">4</text>
+<line x1="840" y1="483.0" x2="840" y2="470.3" stroke="#2563EB" stroke-width="5"/>
+<circle cx="840.0" cy="478.8" r="5" fill="#0F766E"/>
+<text x="840.0" y="650.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="middle" font-weight="400">8</text>
+<line x1="895" y1="526.9" x2="895" y2="514.3" stroke="#2563EB" stroke-width="5"/>
+<circle cx="895.0" cy="523.2" r="5" fill="#0F766E"/>
+<text x="895.0" y="650.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="middle" font-weight="400">16</text>
+<line x1="950" y1="560.3" x2="950" y2="547.7" stroke="#2563EB" stroke-width="5"/>
+<circle cx="950.0" cy="556.8" r="5" fill="#0F766E"/>
+<text x="950.0" y="650.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="middle" font-weight="400">32</text>
+<line x1="1005" y1="585.7" x2="1005" y2="573.0" stroke="#2563EB" stroke-width="5"/>
+<circle cx="1005.0" cy="582.3" r="5" fill="#0F766E"/>
+<text x="1005.0" y="605.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#C0392B" text-anchor="middle" font-weight="700">fail=1</text>
+<text x="1005.0" y="650.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="middle" font-weight="400">64</text>
+<line x1="1060" y1="605.0" x2="1060" y2="592.4" stroke="#2563EB" stroke-width="5"/>
+<circle cx="1060.0" cy="601.6" r="5" fill="#0F766E"/>
+<text x="1060.0" y="605.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#C0392B" text-anchor="middle" font-weight="700">fail=1</text>
+<text x="1060.0" y="650.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="middle" font-weight="400">128</text>
+<polyline points="675.0,243.2 730.0,343.0 785.0,418.9 840.0,476.7 895.0,520.6 950.0,554.0 1005.0,579.4 1060.0,598.7" fill="none" stroke="#2563EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="715.0" y="210.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#2563EB" text-anchor="start" font-weight="700">calibration</text>
+<text x="905.0" y="210.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#0F766E" text-anchor="start" font-weight="700">validation</text>
+<text x="1020.0" y="210.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#B76E00" text-anchor="start" font-weight="700">held-out</text>
+<text x="895.0" y="684.0" font-family="Inter, Arial, sans-serif" font-size="17" fill="#52606D" text-anchor="middle" font-weight="400">entire scale blocks</text>
+<text x="600.0" y="756.0" font-family="Inter, Arial, sans-serif" font-size="16" fill="#52606D" text-anchor="middle" font-weight="400">Evidence boundary: deterministic coverage example validates bookkeeping; E3 in simulation is not external neural-model evidence.</text>
+</svg>

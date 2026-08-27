@@ -1,0 +1,4 @@
+method,layer_1_output_norm,layer_2_output_norm,layer_norm_ratio,layer_1_scale,layer_2_scale,agc_lambda
+global,4.975185951049946,0.4975185951049946,10.0,0.4975185951049946,0.4975185951049946,
+layerwise,5.0,1.0,5.0,0.5,1.0,
+agc,1.0,0.1,10.0,0.1,0.1,0.1

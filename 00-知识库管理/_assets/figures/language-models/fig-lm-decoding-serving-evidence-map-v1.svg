@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">解码与 Serving 证据地图：对象层、时间线与 Pareto</title><desc id="desc">model—decoder—server 分层评估及质量—延迟前沿。</desc>
+<rect width="1200" height="700" fill="#FBF8F1"/>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#667784"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#183044" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<line x1="48" y1="70" x2="1152" y2="70" stroke="#245AA8" stroke-width="4"/>
+<text x="52" y="49" font-size="24" font-weight="700" fill="#183044">解码与 Serving 证据地图：对象层、时间线与 Pareto</text>
+<rect x="65" y="110" width="245" height="95" rx="10" fill="#EEF4FC" stroke="#245AA8" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="80" y="138" text-anchor="start" font-size="15" font-weight="700" fill="#245AA8">RAW MODEL</text>
+<text x="80" y="163" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">logits · checkpoint</text>
+<rect x="65" y="240" width="245" height="115" rx="10" fill="#F3EFFA" stroke="#7054A3" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="80" y="268" text-anchor="start" font-size="15" font-weight="700" fill="#7054A3">DECODER</text>
+<text x="80" y="293" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">processors · sampler</text>
+<text x="80" y="313" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">constraints · RNG · stop</text>
+<rect x="65" y="390" width="245" height="125" rx="10" fill="#EAF7F4" stroke="#17766E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="80" y="418" text-anchor="start" font-size="15" font-weight="700" fill="#17766E">SERVER</text>
+<text x="80" y="443" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">queue · prefill/decode</text>
+<text x="80" y="463" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">KV · scheduler · hardware</text>
+<line x1="187" y1="205" x2="187" y2="240" stroke="#667784" stroke-width="2.2" marker-end="url(#arrow)"/>
+<line x1="187" y1="355" x2="187" y2="390" stroke="#667784" stroke-width="2.2" marker-end="url(#arrow)"/>
+<text x="375" y="110" text-anchor="start" font-size="11" font-weight="700" fill="#667784">REQUEST TRACE</text>
+<rect x="375" y="145" width="105" height="48" fill="#667784" opacity=".88"/>
+<text x="427.5" y="175" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">queue</text>
+<rect x="480" y="145" width="170" height="48" fill="#245AA8" opacity=".88"/>
+<text x="565.0" y="175" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">prefill</text>
+<rect x="650" y="145" width="90" height="48" fill="#17766E" opacity=".88"/>
+<text x="695.0" y="175" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">d1</text>
+<rect x="740" y="145" width="90" height="48" fill="#17766E" opacity=".88"/>
+<text x="785.0" y="175" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">d2</text>
+<rect x="830" y="145" width="90" height="48" fill="#17766E" opacity=".88"/>
+<text x="875.0" y="175" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">d3</text>
+<rect x="920" y="145" width="125" height="48" fill="#C87922" opacity=".88"/>
+<text x="982.5" y="175" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF">post</text>
+<line x1="375" y1="220" x2="650" y2="220" stroke="#B7443E" stroke-width="2.2" marker-end="url(#arrow)"/>
+<text x="512" y="241" text-anchor="middle" font-size="11" font-weight="700" fill="#B7443E">TTFT</text>
+<line x1="650" y1="260" x2="920" y2="260" stroke="#7054A3" stroke-width="2.2" marker-end="url(#arrow)"/>
+<text x="785" y="281" text-anchor="middle" font-size="11" font-weight="700" fill="#7054A3">per-token TBT / TPOT</text>
+<text x="375" y="330" text-anchor="start" font-size="14" font-weight="700" fill="#183044">PARETO：质量 ↑，p99 latency →</text>
+<line x1="405" y1="570" x2="1095" y2="570" stroke="#183044"/>
+<line x1="405" y1="570" x2="405" y2="365" stroke="#183044"/>
+<circle cx="470" cy="520" r="9" fill="#667784"/>
+<text x="483" y="524" text-anchor="start" font-size="11" font-weight="700" fill="#667784">A</text>
+<circle cx="560" cy="480" r="9" fill="#B7443E"/>
+<text x="573" y="484" text-anchor="start" font-size="11" font-weight="700" fill="#B7443E">B</text>
+<circle cx="650" cy="505" r="9" fill="#667784"/>
+<text x="663" y="509" text-anchor="start" font-size="11" font-weight="700" fill="#667784">C</text>
+<circle cx="745" cy="430" r="9" fill="#17766E"/>
+<text x="758" y="434" text-anchor="start" font-size="11" font-weight="700" fill="#17766E">D</text>
+<circle cx="870" cy="390" r="9" fill="#245AA8"/>
+<text x="883" y="394" text-anchor="start" font-size="11" font-weight="700" fill="#245AA8">E</text>
+<circle cx="1010" cy="405" r="9" fill="#667784"/>
+<text x="1023" y="409" text-anchor="start" font-size="11" font-weight="700" fill="#667784">F</text>
+<path d="M560,480 C640,455 690,450 745,430 C810,405 835,398 870,390" fill="none" stroke="#7054A3" stroke-width="3" stroke-dasharray="7 5"/>
+<text x="760" y="600" text-anchor="middle" font-size="12" font-weight="400" fill="#667784">p50 / p95 / p99 · goodput under SLO · memory · cost</text>
+<rect x="335" y="105" width="820" height="195" rx="10" fill="none" stroke="#D9D5CB" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="350" y="133" text-anchor="start" font-size="15" font-weight="700" fill="#D9D5CB"></text>
+<text x="350" y="158" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784"></text>
+<line x1="48" y1="650" x2="1152" y2="650" stroke="#D9D5CB"/>
+<text x="52" y="674" font-size="13" fill="#667784">同一条输出、同一分布、同 seed 字节复现和同一服务质量是四个不同主张。</text>
+</svg>

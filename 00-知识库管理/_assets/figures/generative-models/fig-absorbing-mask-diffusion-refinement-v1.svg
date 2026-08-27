@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+  <defs><marker id="b" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0 0L10 3L0 6Z" fill="#27384d"/></marker><style>.t{font-family:Inter,'Noto Sans SC',sans-serif;fill:#172033}.h{font-size:25px;font-weight:700}.s{font-size:18px}.mut{font-size:15px;fill:#677487}.arr{stroke:#27384d;stroke-width:2.2;fill:none;marker-end:url(#b)}.dash{stroke:#a45045;stroke-width:2.2;stroke-dasharray:7 6;fill:none;marker-end:url(#b)}</style></defs>
+  <rect width="1200" height="620" fill="#f6f2e9"/>
+  <text x="52" y="50" class="t h">两种“从 mask 生成”：解析吸收链 vs 置信度迭代修正</text>
+  <rect x="52" y="88" width="1096" height="213" rx="12" fill="#fffdf8" stroke="#41556e" stroke-width="2"/>
+  <text x="77" y="125" class="t h" font-size="20">A  严格 absorbing forward / reverse posterior</text>
+  <g class="t s"><rect x="90" y="165" width="92" height="54" rx="27" fill="#dce9f4" stroke="#355f8a"/><text x="114" y="198">token i</text><rect x="284" y="165" width="92" height="54" rx="27" fill="#dce9f4" stroke="#355f8a"/><text x="308" y="198">token i</text><rect x="478" y="165" width="92" height="54" rx="27" fill="#f2dedd" stroke="#a34f45"/><text x="500" y="198">MASK</text></g>
+  <path d="M183 192H272" class="arr"/><path d="M377 192H466" class="arr"/><path d="M570 192H650" class="arr"/>
+  <text x="202" y="177" class="t mut">保持 alpha_t</text><text x="389" y="177" class="t mut">遮掩 1-alpha_t</text><text x="592" y="177" class="t mut">只向 MASK</text>
+  <rect x="718" y="147" width="386" height="100" rx="8" fill="#edf3ea" stroke="#5f8057"/>
+  <text x="740" y="180" class="t s">已观测 x_t=MASK：</text><text x="740" y="211" class="t mut">上一时刻 clean 或已 mask；两项权重可解析归一化</text>
+  <text x="77" y="270" class="t mut">forward 一旦 MASK 不返回；reverse 的揭示概率由 baralpha_(t-1)、alpha_t 确定。</text>
+  <rect x="52" y="329" width="1096" height="222" rx="12" fill="#fffdf8" stroke="#8a6030" stroke-width="2"/>
+  <text x="77" y="367" class="t h" font-size="20">B  MaskGIT：并行预测 → 按置信度保留 → 低置信重新遮掩</text>
+  <g font-family="monospace" font-size="22" text-anchor="middle"><g><rect x="90" y="402" width="180" height="72" rx="8" fill="#f2dedd" stroke="#a34f45"/><text x="180" y="446" fill="#7d332c">M M M M</text></g><g><rect x="360" y="402" width="180" height="72" rx="8" fill="#e8edf7" stroke="#526f9b"/><text x="450" y="446" fill="#334f7a">A C B D</text></g><g><rect x="630" y="402" width="180" height="72" rx="8" fill="#fff1c9" stroke="#a98027"/><text x="720" y="446" fill="#725510">A M B M</text></g><g><rect x="900" y="402" width="180" height="72" rx="8" fill="#e1eddf" stroke="#4f7d4c"/><text x="990" y="446" fill="#345e33">A C B D</text></g></g>
+  <path d="M271 438H348" class="arr"/><path d="M541 438H618" class="arr"/><path d="M811 438H888" class="arr"/>
+  <text x="286" y="420" class="t mut">并行预测</text><text x="557" y="420" class="t mut">重遮掩</text><text x="829" y="420" class="t mut">再协调</text>
+  <path d="M720 486 C720 525 450 525 450 486" class="dash"/>
+  <text x="522" y="539" class="t mut">已填 token 可能再次被 mask：路径非单调</text>
+  <text x="52" y="591" class="t s">共同点：clean-token predictor。不同点：实际 transition、同轮因子化和是否允许反悔。</text>
+</svg>

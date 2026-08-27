@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+<title id="title">DYN-09 Brownian 增量、路径粗糙性与时间耦合审计</title>
+<desc id="desc">三面板显示Brownian路径与联合矩、quadratic variation和total variation的不同缩放，以及三种相同边缘分布时间耦合的增量均方差。</desc>
+<rect width="1200" height="430" fill="#ffffff"/>
+<text x="20" y="32" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="20" font-weight="700" fill="#0f172a">DYN-09 可复现实验：joint law → variation → temporal coupling</text>
+
+<rect x="20" y="55" width="370" height="355" rx="18" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="42" y="88" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="19" font-weight="700" fill="#0f172a">A　同一过程：路径与跨时间联合矩</text>
+<line x1="70" y1="315" x2="355" y2="315" stroke="#94a3b8" stroke-width="1.3"/>
+<line x1="70" y1="125" x2="70" y2="315" stroke="#94a3b8" stroke-width="1.3"/>
+<polyline points="70.00,284.83 71.11,285.28 72.23,291.48 73.34,303.27 74.45,292.31 75.57,289.07 76.68,287.57 77.79,295.42 78.91,291.89 80.02,281.04 81.13,285.39 82.25,289.25 83.36,283.44 84.47,280.87 85.59,282.83 86.70,288.90 87.81,289.73 88.93,284.28 90.04,284.48 91.15,290.38 92.27,286.47 93.38,295.00 94.49,299.23 95.61,290.16 96.72,297.01 97.83,305.08 98.95,302.42 100.06,296.67 101.17,302.60 102.29,294.06 103.40,294.47 104.51,294.50 105.62,310.00 106.74,304.80 107.85,304.60 108.96,308.44 110.08,301.88 111.19,304.55 112.30,308.78 113.42,296.56 114.53,298.71 115.64,293.79 116.76,301.81 117.87,304.28 118.98,289.64 120.10,285.48 121.21,281.46 122.32,281.73 123.44,282.37 124.55,278.23 125.66,269.48 126.78,270.00 127.89,266.07 129.00,266.31 130.12,256.82 131.23,248.80 132.34,248.86 133.46,246.94 134.57,244.33 135.68,249.35 136.80,256.72 137.91,264.50 139.02,278.39 140.14,280.25 141.25,280.11 142.36,288.07 143.48,289.89 144.59,298.01 145.70,298.56 146.82,298.00 147.93,296.38 149.04,308.07 150.16,305.31 151.27,298.45 152.38,292.34 153.50,292.59 154.61,290.32 155.72,276.51 156.84,275.37 157.95,262.01 159.06,264.00 160.18,267.53 161.29,273.38 162.40,282.81 163.52,289.07 164.63,283.67 165.74,283.62 166.86,275.31 167.97,280.21 169.08,265.41 170.20,246.80 171.31,252.56 172.42,254.50 173.54,255.10 174.65,252.48 175.76,250.69 176.88,252.68 177.99,255.18 179.10,257.95 180.21,259.83 181.33,259.23 182.44,251.49 183.55,251.58 184.67,257.44 185.78,262.38 186.89,261.81 188.01,261.41 189.12,253.49 190.23,259.87 191.35,245.22 192.46,245.23 193.57,239.95 194.69,237.08 195.80,248.16 196.91,254.42 198.03,255.39 199.14,249.24 200.25,250.76 201.37,244.01 202.48,239.31 203.59,239.64 204.71,237.70 205.82,238.16 206.93,233.81 208.05,224.10 209.16,222.21 210.27,214.21 211.39,214.29 212.50,211.70 213.61,211.70 214.73,216.33 215.84,216.37 216.95,212.69 218.07,210.67 219.18,209.05 220.29,211.02 221.41,206.89 222.52,208.06 223.63,197.76 224.75,204.26 225.86,205.31 226.97,199.20 228.09,207.11 229.20,198.02 230.31,194.46 231.43,185.12 232.54,181.62 233.65,167.96 234.77,174.88 235.88,173.59 236.99,162.42 238.11,163.88 239.22,170.06 240.33,172.09 241.45,179.79 242.56,174.12 243.67,168.88 244.79,167.66 245.90,167.64 247.01,161.99 248.12,169.70 249.24,157.10 250.35,159.77 251.46,156.32 252.58,163.00 253.69,155.68 254.80,147.31 255.92,149.56 257.03,146.90 258.14,135.00 259.26,145.40 260.37,147.47 261.48,152.94 262.60,156.86 263.71,160.38 264.82,161.98 265.94,151.73 267.05,152.16 268.16,155.85 269.28,155.88 270.39,159.68 271.50,166.79 272.62,172.87 273.73,175.56 274.84,169.88 275.96,164.48 277.07,156.33 278.18,151.91 279.30,152.54 280.41,144.43 281.52,142.41 282.64,143.60 283.75,142.06 284.86,143.64 285.98,137.54 287.09,145.12 288.20,147.19 289.32,154.46 290.43,151.78 291.54,158.52 292.66,159.53 293.77,153.95 294.88,153.72 296.00,153.92 297.11,161.95 298.22,165.44 299.34,185.04 300.45,184.02 301.56,187.79 302.68,190.87 303.79,189.46 304.90,198.97 306.02,197.69 307.13,203.46 308.24,199.06 309.36,195.38 310.47,203.72 311.58,197.95 312.70,197.73 313.81,196.84 314.92,193.86 316.04,206.30 317.15,199.63 318.26,194.89 319.38,196.03 320.49,191.52 321.60,199.92 322.71,203.28 323.83,202.29 324.94,197.54 326.05,202.91 327.17,200.65 328.28,201.86 329.39,202.68 330.51,193.13 331.62,192.90 332.73,186.81 333.85,179.25 334.96,186.77 336.07,181.69 337.19,185.45 338.30,178.48 339.41,178.42 340.53,184.19 341.64,180.34 342.75,189.23 343.87,187.99 344.98,193.77 346.09,194.49 347.21,190.97 348.32,187.40 349.43,188.10 350.55,181.13 351.66,177.63 352.77,174.67 353.89,171.67 355.00,161.80" fill="none" stroke="#2563eb" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="78" y="116" font-family="Georgia,'Times New Roman',serif" font-size="13" font-weight="600" fill="#0f172a">one nested Brownian path</text>
+<text x="79" y="343" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="12.5" fill="#475569">t</text>
+<text x="46" y="210" transform="rotate(-90 46 210)" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="12.5" fill="#475569">W_t</text>
+<text x="78" y="367" font-family="Georgia,'Times New Roman',serif" font-size="13" font-weight="600" fill="#0f172a">Var(W_1)=0.9462; E[W_1]=+0.0982</text>
+<text x="78" y="389" font-family="Georgia,'Times New Roman',serif" font-size="13" fill="#475569">disjoint increment cov=-3.813e-03</text>
+
+<rect x="415" y="55" width="370" height="355" rx="18" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="437" y="88" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="19" font-weight="700" fill="#0f172a">B　平方变差存活；绝对变差增长</text>
+<line x1="465" y1="315" x2="740" y2="315" stroke="#94a3b8" stroke-width="1.3"/>
+<line x1="465" y1="125" x2="465" y2="315" stroke="#94a3b8" stroke-width="1.3"/>
+<polyline points="465.00,181.16 504.29,176.07 543.57,171.61 582.86,172.79 622.14,173.35 661.43,172.43 700.71,173.80 740.00,173.57" fill="none" stroke="#7c3aed" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="465.00" cy="181.16" r="3.4" fill="#7c3aed"/>
+<circle cx="504.29" cy="176.07" r="3.4" fill="#7c3aed"/>
+<circle cx="543.57" cy="171.61" r="3.4" fill="#7c3aed"/>
+<circle cx="582.86" cy="172.79" r="3.4" fill="#7c3aed"/>
+<circle cx="622.14" cy="173.35" r="3.4" fill="#7c3aed"/>
+<circle cx="661.43" cy="172.43" r="3.4" fill="#7c3aed"/>
+<circle cx="700.71" cy="173.80" r="3.4" fill="#7c3aed"/>
+<circle cx="740.00" cy="173.57" r="3.4" fill="#7c3aed"/>
+<polyline points="465.00,272.24 504.29,270.16 543.57,267.96 582.86,268.59 622.14,268.67 661.43,268.54 700.71,268.92 740.00,268.84" fill="none" stroke="#059669" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="465.00" cy="272.24" r="3.4" fill="#059669"/>
+<circle cx="504.29" cy="270.16" r="3.4" fill="#059669"/>
+<circle cx="543.57" cy="267.96" r="3.4" fill="#059669"/>
+<circle cx="582.86" cy="268.59" r="3.4" fill="#059669"/>
+<circle cx="622.14" cy="268.67" r="3.4" fill="#059669"/>
+<circle cx="661.43" cy="268.54" r="3.4" fill="#059669"/>
+<circle cx="700.71" cy="268.92" r="3.4" fill="#059669"/>
+<circle cx="740.00" cy="268.84" r="3.4" fill="#059669"/>
+<text x="478" y="116" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="12.5" fill="#7c3aed">紫：mean Σ(ΔW)² → 1</text>
+<text x="617" y="116" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="12.5" fill="#059669">绿：mean Σ|ΔW| / √N</text>
+<text x="676" y="338" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="12.5" fill="#475569">log₂ N</text>
+<text x="461" y="367" font-family="Georgia,'Times New Roman',serif" font-size="13" font-weight="600" fill="#0f172a">TV slope=0.5013 (theory 0.5)</text>
+<text x="461" y="389" font-family="Georgia,'Times New Roman',serif" font-size="13" fill="#475569">QV RMSE slope=-0.4923 (theory -0.5)</text>
+
+<rect x="810" y="55" width="370" height="355" rx="18" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="832" y="88" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="19" font-weight="700" fill="#0f172a">C　同 marginals，不同 increment order</text>
+<line x1="850" y1="315" x2="1135" y2="315" stroke="#94a3b8" stroke-width="1.3"/>
+<line x1="850" y1="125" x2="850" y2="315" stroke="#94a3b8" stroke-width="1.3"/>
+<polyline points="1135.00,171.29 1078.00,181.32 1021.00,191.12 964.00,200.92 907.00,210.91 850.00,220.65" fill="none" stroke="#2563eb" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1135.00" cy="171.29" r="3.4" fill="#2563eb"/>
+<circle cx="1078.00" cy="181.32" r="3.4" fill="#2563eb"/>
+<circle cx="1021.00" cy="191.12" r="3.4" fill="#2563eb"/>
+<circle cx="964.00" cy="200.92" r="3.4" fill="#2563eb"/>
+<circle cx="907.00" cy="210.91" r="3.4" fill="#2563eb"/>
+<circle cx="850.00" cy="220.65" r="3.4" fill="#2563eb"/>
+<polyline points="1135.00,212.48 1078.00,231.37 1021.00,250.97 964.00,270.48 907.00,290.17 850.00,310.07" fill="none" stroke="#059669" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1135.00" cy="212.48" r="3.4" fill="#059669"/>
+<circle cx="1078.00" cy="231.37" r="3.4" fill="#059669"/>
+<circle cx="1021.00" cy="250.97" r="3.4" fill="#059669"/>
+<circle cx="964.00" cy="270.48" r="3.4" fill="#059669"/>
+<circle cx="907.00" cy="290.17" r="3.4" fill="#059669"/>
+<circle cx="850.00" cy="310.07" r="3.4" fill="#059669"/>
+<polyline points="1135.00,139.93 1078.00,140.60 1021.00,141.32 964.00,141.41 907.00,141.39 850.00,141.65" fill="none" stroke="#ea580c" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1135.00" cy="139.93" r="3.4" fill="#ea580c"/>
+<circle cx="1078.00" cy="140.60" r="3.4" fill="#ea580c"/>
+<circle cx="1021.00" cy="141.32" r="3.4" fill="#ea580c"/>
+<circle cx="964.00" cy="141.41" r="3.4" fill="#ea580c"/>
+<circle cx="907.00" cy="141.39" r="3.4" fill="#ea580c"/>
+<circle cx="850.00" cy="141.65" r="3.4" fill="#ea580c"/>
+<text x="858" y="112" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="12" fill="#2563eb">Brownian</text>
+<text x="935" y="112" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="12" fill="#059669">shared ε</text>
+<text x="1006" y="112" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="12" fill="#ea580c">independent ε_t</text>
+<text x="1070" y="338" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="12.5" fill="#475569">log₂ h</text>
+<text x="826" y="235" transform="rotate(-90 826 235)" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="12.5" fill="#475569">log₁₀ increment MSE</text>
+<text x="848" y="367" font-family="Georgia,'Times New Roman',serif" font-size="13" font-weight="600" fill="#0f172a">orders = 0.997 / 1.974 / 0.032</text>
+<text x="848" y="389" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="12.5" fill="#475569">theory = 1 / 2 / 0；fixed-time N(0,t) 全相同</text>
+
+<rect x="970" y="412" width="180" height="17" rx="9" fill="#ecfdf5" stroke="#10b981"/>
+<text x="998" y="424" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="11.5" fill="#047857">all assertions passed</text>
+</svg>

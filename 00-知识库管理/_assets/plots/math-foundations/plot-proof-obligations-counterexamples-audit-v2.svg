@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="760" viewBox="0 0 1440 760" role="img" aria-labelledby="title desc">
+<title id="title">MATH-03 proof obligations, case coverage, uniqueness, and optimization conditions audit</title>
+<desc id="desc">Four proof-map panels count countermodels for inference rules, classify case coverage, separate existence from uniqueness, and show the exact scalar gradient-descent stability interval.</desc>
+<style>
+.title{font-weight:700;font-size:24px;font-family:Inter,'PingFang SC','Noto Sans CJK SC',Arial,sans-serif;fill:#182236}
+.sub{font-size:15px;font-family:Inter,'PingFang SC','Noto Sans CJK SC',Arial,sans-serif;fill:#53627a}
+.paneltitle{font-weight:700;font-size:22px;font-family:Inter,'PingFang SC','Noto Sans CJK SC',Arial,sans-serif;fill:#182236}
+.label{font-size:17px;font-family:Inter,'PingFang SC','Noto Sans CJK SC',Arial,sans-serif;fill:#35445c}
+.small{font-size:15px;font-family:Inter,'PingFang SC','Noto Sans CJK SC',Arial,sans-serif;fill:#5e6d84}
+.metric{font:700 18px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#182236}
+.grid{stroke:#dce4ef;stroke-width:1}.axis{stroke:#8292aa;stroke-width:1.2}
+.blue{stroke:#2672dd;fill:none;stroke-width:2.7}.orange{stroke:#e77817;fill:none;stroke-width:2.7}
+</style>
+<rect width="1440" height="760" fill="#ffffff"/>
+<text x="36" y="38" class="title">MATH-03 audit · proof obligations, case coverage, uniqueness, and conditions</text>
+<text x="36" y="62" class="sub">Exhaustive finite checks expose invalid inference and missing obligations; theorem-level claims still require a general proof.</text>
+<rect x="24.00" y="82.00" width="688.00" height="300.00" rx="0.00" fill="#fffefb" stroke="#d6dee8"/>
+<text x="42.00" y="109.00" class="paneltitle" text-anchor="start">A · Inference countermodels</text>
+<rect x="728.00" y="82.00" width="688.00" height="300.00" rx="0.00" fill="#fffefb" stroke="#d6dee8"/>
+<text x="746.00" y="109.00" class="paneltitle" text-anchor="start">B · Two-case coverage</text>
+<rect x="24.00" y="398.00" width="688.00" height="330.00" rx="0.00" fill="#fffefb" stroke="#d6dee8"/>
+<text x="42.00" y="425.00" class="paneltitle" text-anchor="start">C · Existence vs uniqueness</text>
+<rect x="728.00" y="398.00" width="688.00" height="330.00" rx="0.00" fill="#fffefb" stroke="#d6dee8"/>
+<text x="746.00" y="425.00" class="paneltitle" text-anchor="start">D · Scalar GD contraction</text>
+<text x="44.00" y="139.00" class="label" text-anchor="start">modus ponens</text>
+<rect x="210.00" y="126.00" width="410.00" height="18.00" rx="6.00" fill="#edf2f7" stroke="none"/>
+<rect x="210.00" y="126.00" width="4.00" height="18.00" rx="6.00" fill="#07956d" stroke="none"/>
+<text x="636.00" y="139.00" class="small" text-anchor="start">0/4</text>
+<text x="44.00" y="177.00" class="label" text-anchor="start">modus tollens</text>
+<rect x="210.00" y="164.00" width="410.00" height="18.00" rx="6.00" fill="#edf2f7" stroke="none"/>
+<rect x="210.00" y="164.00" width="4.00" height="18.00" rx="6.00" fill="#07956d" stroke="none"/>
+<text x="636.00" y="177.00" class="small" text-anchor="start">0/4</text>
+<text x="44.00" y="215.00" class="label" text-anchor="start">hypothetical</text>
+<rect x="210.00" y="202.00" width="410.00" height="18.00" rx="6.00" fill="#edf2f7" stroke="none"/>
+<rect x="210.00" y="202.00" width="4.00" height="18.00" rx="6.00" fill="#07956d" stroke="none"/>
+<text x="636.00" y="215.00" class="small" text-anchor="start">0/8</text>
+<text x="44.00" y="253.00" class="label" text-anchor="start">proof by cases</text>
+<rect x="210.00" y="240.00" width="410.00" height="18.00" rx="6.00" fill="#edf2f7" stroke="none"/>
+<rect x="210.00" y="240.00" width="4.00" height="18.00" rx="6.00" fill="#07956d" stroke="none"/>
+<text x="636.00" y="253.00" class="small" text-anchor="start">0/8</text>
+<text x="44.00" y="291.00" class="label" text-anchor="start">affirm consequent</text>
+<rect x="210.00" y="278.00" width="410.00" height="18.00" rx="6.00" fill="#edf2f7" stroke="none"/>
+<rect x="210.00" y="278.00" width="100.00" height="18.00" rx="6.00" fill="#e77817" stroke="none"/>
+<text x="636.00" y="291.00" class="small" text-anchor="start">1/4</text>
+<text x="44.00" y="329.00" class="label" text-anchor="start">deny antecedent</text>
+<rect x="210.00" y="316.00" width="410.00" height="18.00" rx="6.00" fill="#edf2f7" stroke="none"/>
+<rect x="210.00" y="316.00" width="100.00" height="18.00" rx="6.00" fill="#e77817" stroke="none"/>
+<text x="636.00" y="329.00" class="small" text-anchor="start">1/4</text>
+<text x="44.00" y="365.00" class="sub" text-anchor="start">Valid rules have no valuation with all premises true and conclusion false.</text>
+<line x1="790.00" y1="140.00" x2="1345.00" y2="140.00" class="grid"/>
+<line x1="790.00" y1="182.50" x2="1345.00" y2="182.50" class="grid"/>
+<line x1="790.00" y1="225.00" x2="1345.00" y2="225.00" class="grid"/>
+<line x1="790.00" y1="267.50" x2="1345.00" y2="267.50" class="grid"/>
+<line x1="790.00" y1="310.00" x2="1345.00" y2="310.00" class="grid"/>
+<rect x="840.00" y="309.34" width="115.00" height="0.66" rx="4.00" fill="#2672dd" stroke="none"/>
+<text x="897.50" y="301.34" class="small" text-anchor="middle">256</text>
+<text x="897.50" y="334.00" class="small" text-anchor="middle">partition</text>
+<text x="897.50" y="351.00" class="small" text-anchor="middle">0.4%</text>
+<rect x="1010.00" y="293.64" width="115.00" height="16.36" rx="4.00" fill="#07956d" stroke="none"/>
+<text x="1067.50" y="285.64" class="small" text-anchor="middle">6,305</text>
+<text x="1067.50" y="334.00" class="small" text-anchor="middle">overlapping cover</text>
+<text x="1067.50" y="351.00" class="small" text-anchor="middle">9.6%</text>
+<rect x="1180.00" y="157.02" width="115.00" height="152.98" rx="4.00" fill="#e77817" stroke="none"/>
+<text x="1237.50" y="149.02" class="small" text-anchor="middle">58,975</text>
+<text x="1237.50" y="334.00" class="small" text-anchor="middle">missing cases / gap</text>
+<text x="1237.50" y="351.00" class="small" text-anchor="middle">90.0%</text>
+<text x="748.00" y="365.00" class="sub" text-anchor="start">Coverage is required; disjointness is optional unless counting would double-count.</text>
+<line x1="85.00" y1="460.00" x2="640.00" y2="460.00" class="grid"/>
+<line x1="85.00" y1="505.00" x2="640.00" y2="505.00" class="grid"/>
+<line x1="85.00" y1="550.00" x2="640.00" y2="550.00" class="grid"/>
+<line x1="85.00" y1="595.00" x2="640.00" y2="595.00" class="grid"/>
+<line x1="85.00" y1="640.00" x2="640.00" y2="640.00" class="grid"/>
+<rect x="130.00" y="580.59" width="120.00" height="59.41" rx="4.00" fill="#e77817" stroke="none"/>
+<text x="190.00" y="572.59" class="small" text-anchor="middle">169 (33.0%)</text>
+<text x="190.00" y="662.00" class="small" text-anchor="middle">no witness for some x</text>
+<rect x="308.00" y="528.91" width="120.00" height="111.09" rx="4.00" fill="#2672dd" stroke="none"/>
+<text x="368.00" y="520.91" class="small" text-anchor="middle">316 (61.7%)</text>
+<text x="368.00" y="662.00" class="small" text-anchor="middle">exists, not unique</text>
+<rect x="486.00" y="630.51" width="120.00" height="9.49" rx="4.00" fill="#07956d" stroke="none"/>
+<text x="546.00" y="622.51" class="small" text-anchor="middle">27 (5.3%)</text>
+<text x="546.00" y="662.00" class="small" text-anchor="middle">unique witness each x</text>
+<text x="44.00" y="704.00" class="sub" text-anchor="start">343 relations satisfy existence for every x; only 27 satisfy unique existence.</text>
+<rect x="790.00" y="470.00" width="373.33" height="190.00" rx="0.00" fill="#e8f7f1" stroke="none"/>
+<line x1="790.00" y1="470.00" x2="790.00" y2="660.00" class="grid"/>
+<text x="790.00" y="680.00" class="small" text-anchor="middle">0</text>
+<line x1="976.67" y1="470.00" x2="976.67" y2="660.00" class="grid"/>
+<text x="976.67" y="680.00" class="small" text-anchor="middle">1</text>
+<line x1="1163.33" y1="470.00" x2="1163.33" y2="660.00" class="grid"/>
+<text x="1163.33" y="680.00" class="small" text-anchor="middle">2</text>
+<line x1="1350.00" y1="470.00" x2="1350.00" y2="660.00" class="grid"/>
+<text x="1350.00" y="680.00" class="small" text-anchor="middle">3</text>
+<line x1="790.00" y1="470.00" x2="1350.00" y2="470.00" class="grid"/>
+<text x="780.00" y="474.00" class="small" text-anchor="end">2.0</text>
+<line x1="790.00" y1="517.50" x2="1350.00" y2="517.50" class="grid"/>
+<text x="780.00" y="521.50" class="small" text-anchor="end">1.5</text>
+<line x1="790.00" y1="565.00" x2="1350.00" y2="565.00" class="grid"/>
+<text x="780.00" y="569.00" class="small" text-anchor="end">1.0</text>
+<line x1="790.00" y1="612.50" x2="1350.00" y2="612.50" class="grid"/>
+<text x="780.00" y="616.50" class="small" text-anchor="end">0.5</text>
+<line x1="790.00" y1="660.00" x2="1350.00" y2="660.00" class="grid"/>
+<text x="780.00" y="664.00" class="small" text-anchor="end">0.0</text>
+<line x1="790.00" y1="660.00" x2="1350.00" y2="660.00" class="axis"/>
+<line x1="790.00" y1="470.00" x2="790.00" y2="660.00" class="axis"/>
+<polyline points="790.00,565.00 799.33,569.75 808.67,574.50 818.00,579.25 827.33,584.00 836.67,588.75 846.00,593.50 855.33,598.25 864.67,603.00 874.00,607.75 883.33,612.50 892.67,617.25 902.00,622.00 911.33,626.75 920.67,631.50 930.00,636.25 939.33,641.00 948.67,645.75 958.00,650.50 967.33,655.25 976.67,660.00 986.00,655.25 995.33,650.50 1004.67,645.75 1014.00,641.00 1023.33,636.25 1032.67,631.50 1042.00,626.75 1051.33,622.00 1060.67,617.25 1070.00,612.50 1079.33,607.75 1088.67,603.00 1098.00,598.25 1107.33,593.50 1116.67,588.75 1126.00,584.00 1135.33,579.25 1144.67,574.50 1154.00,569.75 1163.33,565.00 1172.67,560.25 1182.00,555.50 1191.33,550.75 1200.67,546.00 1210.00,541.25 1219.33,536.50 1228.67,531.75 1238.00,527.00 1247.33,522.25 1256.67,517.50 1266.00,512.75 1275.33,508.00 1284.67,503.25 1294.00,498.50 1303.33,493.75 1312.67,489.00 1322.00,484.25 1331.33,479.50 1340.67,474.75 1350.00,470.00" class="blue"/>
+<line x1="790" y1="565.00" x2="1350" y2="565.00" stroke="#e77817" stroke-width="2" stroke-dasharray="7 5"/>
+<circle cx="790.00" cy="565.00" r="3.2" fill="#783ee8"/>
+<text x="790.00" y="555.00" class="small" text-anchor="middle">0</text>
+<circle cx="976.67" cy="660.00" r="3.2" fill="#783ee8"/>
+<text x="976.67" y="650.00" class="small" text-anchor="middle">1</text>
+<circle cx="1163.33" cy="565.00" r="3.2" fill="#783ee8"/>
+<text x="1163.33" y="555.00" class="small" text-anchor="middle">2</text>
+<circle cx="1238.00" cy="527.00" r="3.2" fill="#783ee8"/>
+<text x="1238.00" y="517.00" class="small" text-anchor="middle">2.4</text>
+<text x="1070.00" y="704.00" class="small" text-anchor="middle">normalized step eta·a</text>
+<text x="748.00" y="448.00" class="sub" text-anchor="start">Green region: 0 &lt; eta·a &lt; 2. Boundary points do not contract nonzero initializations.</text>
+</svg>

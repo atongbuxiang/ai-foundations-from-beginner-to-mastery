@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1289" height="853" viewBox="0 0 386.666667 256" role="img" aria-labelledby="title desc" style="font-family:Inter, 'Noto Sans CJK SC', 'Source Han Sans SC', Arial, sans-serif">
+  <title id="title">Model complexity, training loss and generalization loss</title>
+  <desc id="desc">Unmodified Dive into Deep Learning capacity-versus-error figure displayed on an explicit white background. The linked original SVG remains the authoritative external asset.</desc>
+  <rect x="0" y="0" width="386.666667" height="256" fill="#ffffff"/>
+  <image href="d2l-capacity-vs-error-original.svg" xlink:href="d2l-capacity-vs-error-original.svg" x="0" y="0" width="386.666667" height="256" preserveAspectRatio="xMidYMid meet"/>
+</svg>

@@ -1,0 +1,3 @@
+request,arrival_ms,prefill_start_ms,first_token_ms,complete_ms,ttft_ms,e2e_ms
+R1,0,40,140,300,140,300
+R2,50,130,250,500,200,450

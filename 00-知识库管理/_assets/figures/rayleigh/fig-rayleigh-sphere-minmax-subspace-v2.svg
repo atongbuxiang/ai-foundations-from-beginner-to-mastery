@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">Rayleigh 商的球面极值、谱加权平均与 Courant-Fischer 子空间表征</title>
+  <desc id="desc">左侧在单位圆上展示极端特征方向给出最大最小 Rayleigh 商，中间把商写成特征值的非负加权平均，右侧展示第 k 个特征值的极小极大子空间选择和 Ky Fan 总能量。</desc>
+  <defs>
+    <style>
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}.blue{fill:#2563eb}.green{fill:#0f766e}.amber{fill:#b7791f}.h{font-size:19px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}.axis{stroke:#cbd5e1;stroke-width:1.4}
+    </style>
+  </defs>
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <rect x="42" y="43" width="350" height="411" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="68" y="81" class="sans h blue">球面方向：尺度被商消去</text><path d="M84 285H350M217 406V137" class="axis"/><circle cx="217" cy="285" r="105" fill="none" stroke="#94a3b8" stroke-width="2"/><path d="M217 285L301 222" stroke="#2563eb" stroke-width="4"/><path d="M217 285L154 201" stroke="#0f766e" stroke-width="4"/><text x="306" y="216" class="math body blue">u₁：λmax</text><text x="102" y="192" class="math body green">uₙ：λmin</text><path d="M217 285L294 357" stroke="#b7791f" stroke-width="3"/><text x="287" y="378" class="math body amber">一般方向 x</text><text x="217" y="429" class="math body ink" text-anchor="middle">ρA(cx)=ρA(x)，c≠0</text>
+  <rect x="425" y="43" width="350" height="411" rx="12" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="451" y="81" class="sans h blue">谱坐标：Rayleigh 商是加权平均</text><text x="451" y="130" class="math body ink">x=Σᵢcᵢuᵢ</text><text x="451" y="176" class="math formula blue">ρA(x)=Σᵢwᵢλᵢ</text><text x="451" y="213" class="math body ink">wᵢ=|cᵢ|²/Σⱼ|cⱼ|²</text><text x="451" y="250" class="math body green">wᵢ≥0，Σᵢwᵢ=1</text><line x1="451" y1="279" x2="749" y2="279" stroke="#bfdbfe"/><text x="600" y="322" class="math formula ink" text-anchor="middle">λmin≤ρA(x)≤λmax</text><text x="600" y="361" class="sans body ink" text-anchor="middle">等号只在对应极端特征空间达到。</text><text x="600" y="404" class="sans small muted" text-anchor="middle">约束 ‖x‖=1 的驻点条件给 Ax=λx。</text>
+  <rect x="808" y="43" width="350" height="411" rx="12" fill="#ecfdf5" stroke="#6ee7b7"/>
+  <text x="834" y="81" class="sans h green">子空间：从单方向到第 k 个谱值</text><text x="834" y="132" class="sans body ink">Courant–Fischer：</text><text x="834" y="174" class="math body blue">λₖ = max dim S=k min x∈S ρA(x)</text><text x="834" y="214" class="sans small muted">选择 k 维子空间，保护其中最弱方向；</text><text x="834" y="242" class="sans small muted">最优选择是前 k 个特征空间。</text><line x1="834" y1="273" x2="1132" y2="273" stroke="#a7f3d0"/><text x="834" y="313" class="sans body ink">Ky Fan：</text><text x="834" y="352" class="math body green">max Q*Q=I tr(Q*AQ)=Σᵢ≤ₖλᵢ</text><text x="834" y="391" class="sans small muted">PCA 最大化子空间总方差，而不只追踪一个方向。</text><text x="834" y="426" class="sans small amber">非 Hermitian 矩阵不适用这套实数极值序。</text>
+  <rect x="92" y="493" width="1016" height="78" rx="12" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="600" y="525" class="sans body ink" text-anchor="middle">广义 Rayleigh 商 x*Ax/x*Bx 需要 B≻0；用 B¹ᐟ² 白化后转成标准 Hermitian 特征值问题。</text><text x="600" y="555" class="sans small muted" text-anchor="middle">Ritz 值近似谱值时还要报告残差和谱间隙；商值接近不保证单个方向稳定。</text>
+  <text x="600" y="610" class="sans result ink" text-anchor="middle">Rayleigh 商把方向曲率变成尺度无关标量；极小极大原理把谱排序变成子空间优化。</text>
+</svg>

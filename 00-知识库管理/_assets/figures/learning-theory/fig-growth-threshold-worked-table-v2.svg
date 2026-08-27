@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+  <title id="title">阈值分类器在三个有序样本点上的四种二分模式</title>
+  <desc id="desc">阈值跨过样本点时，标签向量依次从零零零变为零零一、零一一和一一一，因此只有四种不同限制。</desc>
+  <defs>
+    <style>
+      .ink{fill:#1f2937}.muted{fill:#64748b}.line{stroke:#cbd5e1;stroke-width:1.5}.rule{stroke:#334155;stroke-width:2}.soft{fill:#f8fafc}.accent{fill:#2563eb}.accent-soft{fill:#eff6ff}.green{fill:#047857}.green-soft{fill:#ecfdf5}
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}
+      .h{font-size:18px;font-weight:600}.body{font-size:17px}.small{font-size:15px}.result{font-size:23px;font-weight:600}
+    </style>
+  </defs>
+  <rect width="1200" height="520" fill="#ffffff"/>
+  <rect x="42" y="34" width="1116" height="406" rx="12" class="soft" stroke="#cbd5e1"/>
+  <text x="72" y="78" class="sans h ink">阈值所在区间</text>
+  <text x="430" y="78" class="sans h ink">在 x₁ &lt; x₂ &lt; x₃ 上的标签</text>
+  <text x="930" y="78" class="sans h ink">限制</text>
+  <line x1="62" y1="96" x2="1138" y2="96" class="rule"/>
+  <line x1="390" y1="52" x2="390" y2="420" class="line"/>
+  <line x1="885" y1="52" x2="885" y2="420" class="line"/>
+
+  <g class="sans body ink">
+    <text x="74" y="145">t &gt; x₃</text>
+    <text x="74" y="231">x₂ &lt; t ≤ x₃</text>
+    <text x="74" y="317">x₁ &lt; t ≤ x₂</text>
+    <text x="74" y="403">t ≤ x₁</text>
+  </g>
+  <g class="line">
+    <line x1="62" y1="166" x2="1138" y2="166"/>
+    <line x1="62" y1="252" x2="1138" y2="252"/>
+    <line x1="62" y1="338" x2="1138" y2="338"/>
+  </g>
+
+  <g class="sans small muted" text-anchor="middle">
+    <text x="505" y="122">x₁</text><text x="615" y="122">x₂</text><text x="725" y="122">x₃</text>
+  </g>
+  <g stroke="#94a3b8" stroke-width="2">
+    <line x1="470" y1="141" x2="760" y2="141"/><line x1="470" y1="227" x2="760" y2="227"/>
+    <line x1="470" y1="313" x2="760" y2="313"/><line x1="470" y1="399" x2="760" y2="399"/>
+  </g>
+  <g fill="#ffffff" stroke="#64748b" stroke-width="2.5">
+    <circle cx="505" cy="141" r="14"/><circle cx="615" cy="141" r="14"/><circle cx="725" cy="141" r="14"/>
+    <circle cx="505" cy="227" r="14"/><circle cx="615" cy="227" r="14"/>
+    <circle cx="505" cy="313" r="14"/>
+  </g>
+  <g class="accent" stroke="#1d4ed8" stroke-width="2.5">
+    <circle cx="725" cy="227" r="14"/>
+    <circle cx="615" cy="313" r="14"/><circle cx="725" cy="313" r="14"/>
+    <circle cx="505" cy="399" r="14"/><circle cx="615" cy="399" r="14"/><circle cx="725" cy="399" r="14"/>
+  </g>
+  <g class="sans small" text-anchor="middle" dominant-baseline="central">
+    <g class="muted"><text x="505" y="141">0</text><text x="615" y="141">0</text><text x="725" y="141">0</text><text x="505" y="227">0</text><text x="615" y="227">0</text><text x="505" y="313">0</text></g>
+    <g fill="#ffffff"><text x="725" y="227">1</text><text x="615" y="313">1</text><text x="725" y="313">1</text><text x="505" y="399">1</text><text x="615" y="399">1</text><text x="725" y="399">1</text></g>
+  </g>
+  <g class="math result ink" text-anchor="middle">
+    <text x="1009" y="146">000</text><text x="1009" y="232">001</text><text x="1009" y="318">011</text><text x="1009" y="404">111</text>
+  </g>
+  <rect x="42" y="458" width="1116" height="42" rx="9" class="green-soft"/>
+  <text x="70" y="486" class="sans body green">阈值只在跨过样本点时改变标签；连续参数在该样本上只留下 4 个等价类。</text>
+  <text x="1118" y="487" class="math result green" text-anchor="end">|H↾C| = 4</text>
+</svg>

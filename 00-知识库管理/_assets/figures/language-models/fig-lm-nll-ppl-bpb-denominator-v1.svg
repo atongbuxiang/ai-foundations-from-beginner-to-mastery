@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">NLL、Perplexity 与 BPB：分母决定可比性</title>
+<desc id="desc">同一字符串概率可以在不同 tokenizer 下拥有不同 per-token NLL/PPL；按相同 raw bytes 归一的 BPB 才有共同单位。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#B7791F"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">同一 total NLL，不同 token count</text>
+<text x="55" y="115" font-size="17" font-weight="800" text-anchor="start" fill="#2563EB">-log p(x) = 12 nats</text>
+<text x="55" y="185" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937">Tokenizer A: T=4</text>
+<text x="55" y="225" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">NLL/token=3, PPL=e^3</text>
+<text x="55" y="300" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937">Tokenizer B: T=8</text>
+<text x="55" y="340" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">NLL/token=1.5, PPL=e^1.5</text>
+<text x="55" y="420" font-size="15" font-weight="400" text-anchor="start" fill="#C24135">PPL ranking differs though string probability same</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#B7791F">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">共同 raw-byte 分母</text>
+<text x="445" y="115" font-size="16" font-weight="700" text-anchor="start" fill="#1F2937">B = 16 UTF-8 bytes</text>
+<text x="445" y="175" font-size="17" font-weight="800" text-anchor="start" fill="#B7791F">BPB = NLL_nats / (B ln 2)</text>
+<text x="445" y="235" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">= 12 / (16 ln 2)</text>
+<text x="445" y="285" font-size="18" font-weight="800" text-anchor="start" fill="#0F766E">≈ 1.082 bits/byte</text>
+<rect x="445" y="350" width="310" height="55" rx="6" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="600" y="383" font-size="15" font-weight="750" text-anchor="middle" fill="#2563EB">same for A and B</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Four denominators</text>
+<rect x="845" y="100" width="285" height="48" rx="5" fill="#F8FAFC" stroke="#2563EB" stroke-width="2"/>
+<text x="987" y="130" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">loss-bearing tokens</text>
+<rect x="845" y="185" width="285" height="48" rx="5" fill="#F8FAFC" stroke="#B7791F" stroke-width="2"/>
+<text x="987" y="215" font-size="15" font-weight="700" text-anchor="middle" fill="#B7791F">all sequence tokens</text>
+<rect x="845" y="270" width="285" height="48" rx="5" fill="#F8FAFC" stroke="#0F766E" stroke-width="2"/>
+<text x="987" y="300" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">Unicode graphemes</text>
+<rect x="845" y="355" width="285" height="48" rx="5" fill="#F8FAFC" stroke="#C24135" stroke-width="2"/>
+<text x="987" y="385" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">raw UTF-8 bytes</text>
+<text x="845" y="450" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">state tokenizer + BOS/EOS + mask + log base</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">PPL 是指定 token 坐标下的几何平均分支因子；跨 tokenizer 比较必须回到 total likelihood 与共同原始单位。</text>
+</svg>

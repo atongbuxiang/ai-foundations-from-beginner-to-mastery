@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">RAG 评估立方体：取回、答对、归因必须联合观察</title><desc id="desc">三轴事件、故障树投影与成本向量。</desc>
+<rect width="1200" height="700" fill="#FBF8F1"/>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#667784"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#183044" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<line x1="48" y1="70" x2="1152" y2="70" stroke="#B7443E" stroke-width="4"/>
+<text x="52" y="49" font-size="24" font-weight="700" fill="#183044">RAG 评估立方体：取回、答对、归因必须联合观察</text>
+<rect x="160" y="455" width="58" height="58" fill="#B7443E" fill-opacity="0.22" stroke="#B7443E" stroke-width="1.2"/>
+<text x="189" y="490" text-anchor="middle" font-size="12" font-weight="700" fill="#183044">000</text>
+<rect x="235" y="390" width="58" height="58" fill="#C87922" fill-opacity="0.33999999999999997" stroke="#C87922" stroke-width="1.2"/>
+<text x="264" y="425" text-anchor="middle" font-size="12" font-weight="700" fill="#183044">001</text>
+<rect x="330" y="455" width="58" height="58" fill="#C87922" fill-opacity="0.33999999999999997" stroke="#C87922" stroke-width="1.2"/>
+<text x="359" y="490" text-anchor="middle" font-size="12" font-weight="700" fill="#183044">010</text>
+<rect x="405" y="390" width="58" height="58" fill="#245AA8" fill-opacity="0.45999999999999996" stroke="#245AA8" stroke-width="1.2"/>
+<text x="434" y="425" text-anchor="middle" font-size="12" font-weight="700" fill="#183044">011</text>
+<rect x="160" y="285" width="58" height="58" fill="#C87922" fill-opacity="0.33999999999999997" stroke="#C87922" stroke-width="1.2"/>
+<text x="189" y="320" text-anchor="middle" font-size="12" font-weight="700" fill="#183044">100</text>
+<rect x="235" y="220" width="58" height="58" fill="#245AA8" fill-opacity="0.45999999999999996" stroke="#245AA8" stroke-width="1.2"/>
+<text x="264" y="255" text-anchor="middle" font-size="12" font-weight="700" fill="#183044">101</text>
+<rect x="330" y="285" width="58" height="58" fill="#245AA8" fill-opacity="0.45999999999999996" stroke="#245AA8" stroke-width="1.2"/>
+<text x="359" y="320" text-anchor="middle" font-size="12" font-weight="700" fill="#183044">110</text>
+<rect x="405" y="220" width="58" height="58" fill="#4F7B45" fill-opacity="0.85" stroke="#4F7B45" stroke-width="1.2"/>
+<text x="434" y="255" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">111</text>
+<line x1="135" y1="525" x2="400" y2="525" stroke="#245AA8" stroke-width="2.2" marker-end="url(#arrow)"/>
+<text x="265.0" y="551" text-anchor="middle" font-size="13" font-weight="700" fill="#245AA8">Generation G</text>
+<line x1="135" y1="515" x2="135" y2="260" stroke="#17766E" stroke-width="2.2" marker-end="url(#arrow)"/>
+<text x="110" y="370.0" text-anchor="middle" font-size="13" font-weight="700" fill="#17766E">Retrieval R</text>
+<line x1="410" y1="505" x2="485" y2="440" stroke="#7054A3" stroke-width="2.2" marker-end="url(#arrow)"/>
+<text x="465" y="445" text-anchor="middle" font-size="13" font-weight="700" fill="#7054A3">Attribution A</text>
+<text x="155" y="120" text-anchor="start" font-size="13" font-weight="700" fill="#183044">cell 111 = joint success; 011/101/110 reveal different compensations</text>
+<rect x="610" y="105" width="505" height="300" rx="10" fill="#FFF0ED" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="625" y="133" font-size="15" font-weight="700" fill="#B7443E">最早失败层</text>
+<text x="625" y="157" font-size="12.5" fill="#667784">1  corpus answerable?</text>
+<text x="625" y="177" font-size="12.5" fill="#667784">2  chunk covers evidence?</text>
+<text x="625" y="197" font-size="12.5" fill="#667784">3  exact retriever ranks it?</text>
+<text x="625" y="217" font-size="12.5" fill="#667784">4  ANN preserves exact candidate?</text>
+<text x="625" y="237" font-size="12.5" fill="#667784">5  fusion / reranker keeps it?</text>
+<text x="625" y="257" font-size="12.5" fill="#667784">6  context retains + positions it?</text>
+<text x="625" y="277" font-size="12.5" fill="#667784">7  generator uses / abstains?</text>
+<text x="625" y="297" font-size="12.5" fill="#667784">8  citation links claim → span?</text>
+<text x="610" y="450" text-anchor="start" font-size="14" font-weight="700" fill="#183044">成本向量：质量曲线必须在同预算比较</text>
+<text x="610" y="495" text-anchor="start" font-size="11" font-weight="400" fill="#667784">index</text>
+<rect x="735" y="480" width="340" height="20" rx="4" fill="#EAE6DD"/>
+<rect x="735" y="480" width="221.0" height="20" rx="4" fill="#245AA8"/>
+<text x="610" y="533" text-anchor="start" font-size="11" font-weight="400" fill="#667784">p95 latency</text>
+<rect x="735" y="518" width="340" height="20" rx="4" fill="#EAE6DD"/>
+<rect x="735" y="518" width="278.8" height="20" rx="4" fill="#17766E"/>
+<text x="610" y="571" text-anchor="start" font-size="11" font-weight="400" fill="#667784">retrieved tokens</text>
+<rect x="735" y="556" width="340" height="20" rx="4" fill="#EAE6DD"/>
+<rect x="735" y="556" width="163.2" height="20" rx="4" fill="#C87922"/>
+<text x="610" y="609" text-anchor="start" font-size="11" font-weight="400" fill="#667784">generator cost</text>
+<rect x="735" y="594" width="340" height="20" rx="4" fill="#EAE6DD"/>
+<rect x="735" y="594" width="244.79999999999998" height="20" rx="4" fill="#7054A3"/>
+<line x1="48" y1="650" x2="1152" y2="650" stroke="#D9D5CB" stroke-width="1"/>
+<text x="52" y="674" font-size="13" fill="#667784">三个边缘平均数不能决定联合成功率；oracle 干预与配对分析比单一端到端分数更可诊断。</text>
+</svg>

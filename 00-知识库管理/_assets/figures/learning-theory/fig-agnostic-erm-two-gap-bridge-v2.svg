@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">不可知有限类 ERM：双侧一致收敛的比较桥</title>
+<desc id="desc">噪声下没有零风险版本空间；在覆盖所有 h 的 uniform event 上，把 ERM 输出和类内 oracle 各跨越一次经验—总体间隙，得到 2 alpha 的 class excess 与 1/eps^2 样本尺度。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">同一共同事件控制所有候选</text>
+<rect x="55" y="95" width="290" height="92" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="200" y="128" font-size="17" font-weight="700" text-anchor="middle" fill="#0F766E">E_alpha</text>
+<text x="200" y="162" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">forall h: |R_S(h)-R_P(h)| &lt;= alpha</text>
+<text x="45" y="250" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">contains both</text>
+<text x="65" y="292" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">data-dependent ERM h_hat</text>
+<text x="65" y="332" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">population oracle h_H*</text>
+<text x="45" y="395" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">alpha=sqrt(log(2M/delta)/(2m))</text>
+<text x="45" y="450" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">the event is built before h_hat is selected</text>
+<text x="45" y="510" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">pointwise control would not cover both objects。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">逐行走过两次泛化间隙</text>
+<rect x="445" y="80" width="310" height="54" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="600.0" y="113.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">R_P(h_hat)</text>
+<line x1="600" y1="137" x2="600" y2="172" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="445" y="180" width="310" height="54" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600.0" y="213.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">&lt;= R_S(h_hat)+alpha</text>
+<line x1="600" y1="237" x2="600" y2="272" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="445" y="280" width="310" height="54" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="600.0" y="313.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">&lt;= R_S(h_H*)+alpha</text>
+<line x1="600" y1="337" x2="600" y2="372" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="445" y="380" width="310" height="54" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="600.0" y="413.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">&lt;= R_P(h_H*)+2alpha</text>
+<text x="430" y="475" font-size="15" font-weight="650" text-anchor="start" fill="#0F766E">middle step is the ERM inequality</text>
+<text x="430" y="510" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">first and last steps spend alpha each。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">风险率与适用边界</text>
+<rect x="840" y="90" width="300" height="74" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="990" y="120" font-size="16" font-weight="700" text-anchor="middle" fill="#C24135">R_P(h_hat)-R_H* &lt;= 2 alpha</text>
+<text x="990" y="149" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">with probability &gt;= 1-delta</text>
+<rect x="840" y="200" width="300" height="72" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="990" y="230" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">m &gt;= 2 log(2M/delta) / eps^2</text>
+<text x="990" y="257" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">suffices for excess &lt;= eps</text>
+<text x="830" y="332" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">approximate ERM adds optimization rho</text>
+<text x="830" y="375" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">unbounded loss needs other concentration</text>
+<text x="830" y="418" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">class excess excludes approximation error</text>
+<text x="830" y="461" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">1/eps^2 reflects noisy mean comparison</text>
+<text x="830" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">it is a general scale, not every problem&#x27;s fate。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">不可知 ERM 的证明是一座三步桥：总体输出到经验输出、ERM 比较、经验 oracle 回到总体 oracle。</text>
+</svg>

@@ -1,0 +1,5 @@
+step,parameter,ema,swa_prefix,ema_effective_weight_current,theta_1,theta_2,parameter_average,prediction_at_parameter_average,prediction_average
+1,2.0,0.19999999999999996,2.0,0.09999999999999998,,,,,
+2,4.0,0.5799999999999998,3.0,0.09999999999999998,,,,,
+3,10.0,1.5219999999999998,5.333333333333333,0.09999999999999998,,,,,
+nonlinear_counterexample,,,,,1.0,3.0,2.0,4.0,5.0

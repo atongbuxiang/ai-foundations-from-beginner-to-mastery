@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="455" viewBox="0 0 1200 455">
+<style>
+.title{font:700 20px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#172033}
+.panel{font:700 15px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#172033}
+.label{font:12px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#3b465c}
+.small{font:11px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#59657a}
+.grid{stroke:#dfe4ec;stroke-width:1}.axis{stroke:#8792a6;stroke-width:1.2}
+.blue{stroke:#3268d8;fill:none;stroke-width:2.5}.orange{stroke:#dd7a21;fill:none;stroke-width:2.5}
+.green{stroke:#16866f;fill:none;stroke-width:2.5}.purple{stroke:#8a52c7;fill:none;stroke-width:2.5}
+.dotb{fill:#3268d8}.doto{fill:#dd7a21}.dotg{fill:#16866f}.dotp{fill:#8a52c7}
+</style>
+<rect width="1200" height="455" fill="#fbfcfe"/>
+<text x="28" y="31" class="title">Metric–topology audit: scale, compactness, finite samples</text>
+<rect x="22.00" y="48" width="365" height="380" rx="10" fill="#fff" stroke="#d8dee9"/>
+<text x="38.00" y="73.00" class="panel" text-anchor="start">A · Same topology ≠ same completeness</text>
+<line x1="69.00" y1="100.00" x2="69.00" y2="305.00" class="grid"/>
+<line x1="69.00" y1="100.00" x2="361.00" y2="100.00" class="grid"/>
+<line x1="142.00" y1="100.00" x2="142.00" y2="305.00" class="grid"/>
+<line x1="69.00" y1="151.25" x2="361.00" y2="151.25" class="grid"/>
+<line x1="215.00" y1="100.00" x2="215.00" y2="305.00" class="grid"/>
+<line x1="69.00" y1="202.50" x2="361.00" y2="202.50" class="grid"/>
+<line x1="288.00" y1="100.00" x2="288.00" y2="305.00" class="grid"/>
+<line x1="69.00" y1="253.75" x2="361.00" y2="253.75" class="grid"/>
+<line x1="361.00" y1="100.00" x2="361.00" y2="305.00" class="grid"/>
+<line x1="69.00" y1="305.00" x2="361.00" y2="305.00" class="grid"/>
+<line x1="69.00" y1="305.00" x2="361.00" y2="305.00" class="axis"/>
+<line x1="69.00" y1="100.00" x2="69.00" y2="305.00" class="axis"/>
+<text x="215.00" y="336.00" class="small" text-anchor="middle">tail index N (log)</text>
+<text x="35.00" y="202.50" class="small" text-anchor="middle">distance (log)</text>
+<polyline points="69.00,213.00 101.44,222.10 133.89,231.77 166.33,241.60 198.78,251.47 231.22,261.36 263.67,271.24 296.11,281.13 328.56,291.01 361.00,300.90" class="blue"/>
+<circle cx="69.00" cy="213.00" r="3.2" class="dotb"/>
+<circle cx="101.44" cy="222.10" r="3.2" class="dotb"/>
+<circle cx="133.89" cy="231.77" r="3.2" class="dotb"/>
+<circle cx="166.33" cy="241.60" r="3.2" class="dotb"/>
+<circle cx="198.78" cy="251.47" r="3.2" class="dotb"/>
+<circle cx="231.22" cy="261.36" r="3.2" class="dotb"/>
+<circle cx="263.67" cy="271.24" r="3.2" class="dotb"/>
+<circle cx="296.11" cy="281.13" r="3.2" class="dotb"/>
+<circle cx="328.56" cy="291.01" r="3.2" class="dotb"/>
+<circle cx="361.00" cy="300.90" r="3.2" class="dotb"/>
+<polyline points="69.00,192.15 101.44,182.27 133.89,172.38 166.33,162.50 198.78,152.61 231.22,142.73 263.67,132.84 296.11,122.95 328.56,113.07 361.00,103.18" class="orange"/>
+<circle cx="69.00" cy="192.15" r="3.2" class="doto"/>
+<circle cx="101.44" cy="182.27" r="3.2" class="doto"/>
+<circle cx="133.89" cy="172.38" r="3.2" class="doto"/>
+<circle cx="166.33" cy="162.50" r="3.2" class="doto"/>
+<circle cx="198.78" cy="152.61" r="3.2" class="doto"/>
+<circle cx="231.22" cy="142.73" r="3.2" class="doto"/>
+<circle cx="263.67" cy="132.84" r="3.2" class="doto"/>
+<circle cx="296.11" cy="122.95" r="3.2" class="doto"/>
+<circle cx="328.56" cy="113.07" r="3.2" class="doto"/>
+<circle cx="361.00" cy="103.18" r="3.2" class="doto"/>
+<text x="80.00" y="374.00" class="small" text-anchor="start">d₂ tail slope = -0.9999; sequence n is d₂-Cauchy</text>
+<text x="80.00" y="393.00" class="small" text-anchor="start">d₁(N,2N)=N: the same sequence is not d₁-Cauchy</text>
+<text x="80.00" y="412.00" class="small" text-anchor="start">Both metrics still induce the usual topology on ℝ.</text>
+<rect x="417.00" y="48" width="365" height="380" rx="10" fill="#fff" stroke="#d8dee9"/>
+<text x="433.00" y="73.00" class="panel" text-anchor="start">B · Compact = complete + totally bounded</text>
+<line x1="464.00" y1="100.00" x2="464.00" y2="305.00" class="grid"/>
+<line x1="464.00" y1="100.00" x2="756.00" y2="100.00" class="grid"/>
+<line x1="537.00" y1="100.00" x2="537.00" y2="305.00" class="grid"/>
+<line x1="464.00" y1="151.25" x2="756.00" y2="151.25" class="grid"/>
+<line x1="610.00" y1="100.00" x2="610.00" y2="305.00" class="grid"/>
+<line x1="464.00" y1="202.50" x2="756.00" y2="202.50" class="grid"/>
+<line x1="683.00" y1="100.00" x2="683.00" y2="305.00" class="grid"/>
+<line x1="464.00" y1="253.75" x2="756.00" y2="253.75" class="grid"/>
+<line x1="756.00" y1="100.00" x2="756.00" y2="305.00" class="grid"/>
+<line x1="464.00" y1="305.00" x2="756.00" y2="305.00" class="grid"/>
+<line x1="464.00" y1="305.00" x2="756.00" y2="305.00" class="axis"/>
+<line x1="464.00" y1="100.00" x2="464.00" y2="305.00" class="axis"/>
+<text x="610.00" y="336.00" class="small" text-anchor="middle">1/ε or truncated dimension D (log)</text>
+<text x="430.00" y="202.50" class="small" text-anchor="middle">cover / packing count (log)</text>
+<polyline points="464.00,320.69 505.71,293.87 547.43,267.05 589.14,240.23 630.86,213.41" class="green"/>
+<circle cx="464.00" cy="320.69" r="3.2" class="dotg"/>
+<circle cx="505.71" cy="293.87" r="3.2" class="dotg"/>
+<circle cx="547.43" cy="267.05" r="3.2" class="dotg"/>
+<circle cx="589.14" cy="240.23" r="3.2" class="dotg"/>
+<circle cx="630.86" cy="213.41" r="3.2" class="dotg"/>
+<polyline points="464.00,293.87 505.71,267.05 547.43,240.23 589.14,213.41 630.86,186.59 672.57,159.77 714.29,132.96 756.00,106.14" class="purple"/>
+<circle cx="464.00" cy="293.87" r="3.2" class="dotp"/>
+<circle cx="505.71" cy="267.05" r="3.2" class="dotp"/>
+<circle cx="547.43" cy="240.23" r="3.2" class="dotp"/>
+<circle cx="589.14" cy="213.41" r="3.2" class="dotp"/>
+<circle cx="630.86" cy="186.59" r="3.2" class="dotp"/>
+<circle cx="672.57" cy="159.77" r="3.2" class="dotp"/>
+<circle cx="714.29" cy="132.96" r="3.2" class="dotp"/>
+<circle cx="756.00" cy="106.14" r="3.2" class="dotp"/>
+<text x="475.00" y="374.00" class="small" text-anchor="start">(0,1): finite ε-nets exist, but 1/n has no limit inside</text>
+<text x="475.00" y="393.00" class="small" text-anchor="start">ℓ² unit vectors: pairwise distance √2, packing size ≥ D</text>
+<text x="475.00" y="412.00" class="small" text-anchor="start">As D grows, no finite 0.6-net can cover the full unit ball.</text>
+<rect x="812.00" y="48" width="365" height="380" rx="10" fill="#fff" stroke="#d8dee9"/>
+<text x="828.00" y="73.00" class="panel" text-anchor="start">C · Finite graph topology depends on scale</text>
+<line x1="859.00" y1="100.00" x2="859.00" y2="305.00" class="grid"/>
+<line x1="859.00" y1="100.00" x2="1151.00" y2="100.00" class="grid"/>
+<line x1="932.00" y1="100.00" x2="932.00" y2="305.00" class="grid"/>
+<line x1="859.00" y1="151.25" x2="1151.00" y2="151.25" class="grid"/>
+<line x1="1005.00" y1="100.00" x2="1005.00" y2="305.00" class="grid"/>
+<line x1="859.00" y1="202.50" x2="1151.00" y2="202.50" class="grid"/>
+<line x1="1078.00" y1="100.00" x2="1078.00" y2="305.00" class="grid"/>
+<line x1="859.00" y1="253.75" x2="1151.00" y2="253.75" class="grid"/>
+<line x1="1151.00" y1="100.00" x2="1151.00" y2="305.00" class="grid"/>
+<line x1="859.00" y1="305.00" x2="1151.00" y2="305.00" class="grid"/>
+<line x1="859.00" y1="305.00" x2="1151.00" y2="305.00" class="axis"/>
+<line x1="859.00" y1="100.00" x2="859.00" y2="305.00" class="axis"/>
+<text x="1005.00" y="336.00" class="small" text-anchor="middle">sample count N (log)</text>
+<text x="825.00" y="202.50" class="small" text-anchor="middle">largest output gap (log)</text>
+<polyline points="859.00,151.62 907.67,176.22 956.33,200.16 1005.00,223.67 1053.67,246.94 1102.33,270.08 1151.00,293.16" class="blue"/>
+<circle cx="859.00" cy="151.62" r="3.2" class="dotb"/>
+<circle cx="907.67" cy="176.22" r="3.2" class="dotb"/>
+<circle cx="956.33" cy="200.16" r="3.2" class="dotb"/>
+<circle cx="1005.00" cy="223.67" r="3.2" class="dotb"/>
+<circle cx="1053.67" cy="246.94" r="3.2" class="dotb"/>
+<circle cx="1102.33" cy="270.08" r="3.2" class="dotb"/>
+<circle cx="1151.00" cy="293.16" r="3.2" class="dotb"/>
+<polyline points="859.00,107.41 907.67,107.41 956.33,107.41 1005.00,107.41 1053.67,107.41 1102.33,107.41 1151.00,107.41" class="orange"/>
+<circle cx="859.00" cy="107.41" r="3.2" class="doto"/>
+<circle cx="907.67" cy="107.41" r="3.2" class="doto"/>
+<circle cx="956.33" cy="107.41" r="3.2" class="doto"/>
+<circle cx="1005.00" cy="107.41" r="3.2" class="doto"/>
+<circle cx="1053.67" cy="107.41" r="3.2" class="doto"/>
+<circle cx="1102.33" cy="107.41" r="3.2" class="doto"/>
+<circle cx="1151.00" cy="107.41" r="3.2" class="doto"/>
+<text x="870.00" y="374.00" class="small" text-anchor="start">smooth warp gap slope = -1.0098 ≈ −1</text>
+<text x="870.00" y="393.00" class="small" text-anchor="start">jump gap stays 2; fixed-radius graph keeps two groups</text>
+<text x="870.00" y="412.00" class="small" text-anchor="start">for smooth warp, r=0.05 graph is connected by N=512</text>
+</svg>

@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">动量、特征根与一阶 oracle 加速</title>
+<desc id="desc">Heavy-ball 在当前位置求梯度，Nesterov 在外推点求梯度；二次型的每个特征模态服从二阶递推并由单位圆内的根控制；一般光滑凸函数上的加速率必须与同一 oracle 类的下界配对。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">HB 与 NAG 的梯度位置不同</text>
+<ellipse cx="205" cy="270" rx="145" ry="92" fill="none" stroke="#D7DEE8" stroke-width="2"/>
+<ellipse cx="205" cy="270" rx="100" ry="62" fill="none" stroke="#D7DEE8" stroke-width="2"/>
+<ellipse cx="205" cy="270" rx="55" ry="32" fill="none" stroke="#D7DEE8" stroke-width="2"/>
+<circle cx="92" cy="168" r="6" fill="#1F2937" stroke="#1F2937" stroke-width="2"/>
+<circle cx="145" cy="350" r="7" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<circle cx="205" cy="270" r="6" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<line x1="92" y1="168" x2="145" y2="350" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<line x1="145" y1="350" x2="205" y2="405" stroke="#C24135" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#a2)"/>
+<line x1="145" y1="350" x2="220" y2="280" stroke="#2563EB" stroke-width="3" marker-end="url(#a0)"/>
+<line x1="205" y1="405" x2="240" y2="270" stroke="#C24135" stroke-width="3" marker-end="url(#a2)"/>
+<text x="78" y="150" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">x_(k-1)</text>
+<text x="120" y="375" font-size="16" font-weight="700" text-anchor="start" fill="#2563EB">x_k</text>
+<text x="212" y="430" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">look-ahead y_k</text>
+<text x="235" y="248" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">x*</text>
+<text x="45" y="468" font-size="16" font-weight="650" text-anchor="start" fill="#2563EB">HB: grad f(x_k)</text>
+<text x="220" y="468" font-size="16" font-weight="650" text-anchor="start" fill="#C24135">NAG: grad f(y_k)</text>
+<text x="45" y="499" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">名称相近，不代表递推或定理相同。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">每个特征值对应两个根</text>
+<text x="430" y="110" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">z_(k+1)=(1+beta-eta lambda)z_k-beta z_(k-1)</text>
+<line x1="452" y1="300" x2="760" y2="300" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="600" y1="170" x2="600" y2="430" stroke="#D7DEE8" stroke-width="2"/>
+<circle cx="600" cy="300" r="112" fill="none" stroke="#0F766E" stroke-width="2.5"/>
+<circle cx="642" cy="255" r="7" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<circle cx="558" cy="345" r="7" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<circle cx="735" cy="260" r="7" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<text x="665" y="225" font-size="16" font-weight="700" text-anchor="start" fill="#2563EB">|r|&lt;1</text>
+<text x="710" y="242" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">unstable</text>
+<text x="430" y="455" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">r^2-(1+beta-eta lambda)r+beta=0</text>
+<text x="430" y="488" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">所有 lambda in [mu,L] 的根都须在单位圆内。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">函数类上的最坏情形阶</text>
+<line x1="850" y1="420" x2="1150" y2="420" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="870" y1="438" x2="870" y2="100" stroke="#D7DEE8" stroke-width="2"/>
+<text x="1145" y="448" font-size="15" font-weight="650" text-anchor="end" fill="#1F2937">iterations k</text>
+<text x="835" y="110" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">gap</text>
+<path d="M877.9 152.6L880.8 171.6L883.7 185.2L886.6 195.6L889.5 204.2L892.4 211.5L895.3 217.7L898.2 223.3L901.1 228.2L904.0 232.7L906.9 236.8L909.8 240.6L912.7 244.0L915.6 247.3L918.5 250.3L921.4 253.2L924.3 255.8L927.2 258.4L930.1 260.8L933.0 263.1L935.9 265.3L938.8 267.4L941.7 269.4L944.6 271.3L947.5 273.1L950.4 274.9L953.3 276.6L956.2 278.3L959.1 279.9L962.0 281.4L964.9 282.9L967.8 284.3L970.7 285.7L973.6 287.1L976.5 288.4L979.4 289.7L982.3 291.0L985.2 292.2L988.1 293.4L991.0 294.5L993.9 295.7L996.8 296.8L999.7 297.9L1002.6 298.9L1005.5 299.9L1008.4 301.0L1011.3 301.9L1014.2 302.9L1017.1 303.9L1020.0 304.8L1022.9 305.7L1025.8 306.6L1028.7 307.5L1031.6 308.3L1034.5 309.2L1037.4 310.0L1040.3 310.8L1043.2 311.6L1046.1 312.4L1049.0 313.2L1051.9 314.0L1054.8 314.7L1057.7 315.5L1060.6 316.2L1063.5 316.9L1066.4 317.6L1069.3 318.3L1072.2 319.0L1075.1 319.7L1078.0 320.3L1080.9 321.0L1083.8 321.7L1086.7 322.3L1089.6 322.9L1092.5 323.5L1095.4 324.2L1098.3 324.8L1101.2 325.4L1104.1 326.0L1107.0 326.5L1109.9 327.1L1112.8 327.7L1115.7 328.2L1118.6 328.8L1121.5 329.4L1124.4 329.9L1127.3 330.4L1130.2 331.0L1133.1 331.5L1136.0 332.0" fill="none" stroke="#C24135" stroke-width="3"/>
+<path d="M877.9 162.3L880.8 187.0L883.7 204.6L886.6 218.2L889.5 229.3L892.4 238.7L895.3 246.8L898.2 254.0L901.1 260.5L904.0 266.3L906.9 271.6L909.8 276.5L912.7 281.0L915.6 285.2L918.5 289.1L921.4 292.8L924.3 296.3L927.2 299.6L930.1 302.7L933.0 305.7L935.9 308.6L938.8 311.3L941.7 313.9L944.6 316.4L947.5 318.7L950.4 321.0L953.3 323.3L956.2 325.4L959.1 327.5L962.0 329.5L964.9 331.4L967.8 333.3L970.7 335.1L973.6 336.9L976.5 338.6L979.4 340.3L982.3 341.9L985.2 343.5L988.1 345.0L991.0 346.5L993.9 348.0L996.8 349.4L999.7 350.8L1002.6 352.2L1005.5 353.5L1008.4 354.9L1011.3 356.1L1014.2 357.4L1017.1 358.6L1020.0 359.8L1022.9 361.0L1025.8 362.2L1028.7 363.3L1031.6 364.4L1034.5 365.5L1037.4 366.6L1040.3 367.7L1043.2 368.7L1046.1 369.8L1049.0 370.8L1051.9 371.8L1054.8 372.7L1057.7 373.7L1060.6 374.6L1063.5 375.6L1066.4 376.5L1069.3 377.4L1072.2 378.3L1075.1 379.2L1078.0 380.0L1080.9 380.9L1083.8 381.7L1086.7 382.5L1089.6 383.4L1092.5 384.2L1095.4 385.0L1098.3 385.8L1101.2 386.5L1104.1 387.3L1107.0 388.1L1109.9 388.8L1112.8 389.5L1115.7 390.3L1118.6 391.0L1121.5 391.7L1124.4 392.4L1127.3 393.1L1130.2 393.8L1133.1 394.5L1136.0 395.2" fill="none" stroke="#2563EB" stroke-width="3.5"/>
+<path d="M877.9 166.2L880.8 189.7L883.7 206.4L886.6 219.3L889.5 229.9L892.4 238.9L895.3 246.6L898.2 253.4L901.1 259.5L904.0 265.1L906.9 270.1L909.8 274.8L912.7 279.1L915.6 283.1L918.5 286.8L921.4 290.3L924.3 293.6L927.2 296.8L930.1 299.8L933.0 302.6L935.9 305.3L938.8 307.9L941.7 310.3L944.6 312.7L947.5 315.0L950.4 317.2L953.3 319.3L956.2 321.3L959.1 323.3L962.0 325.2L964.9 327.0L967.8 328.8L970.7 330.5L973.6 332.2L976.5 333.8L979.4 335.4L982.3 337.0L985.2 338.5L988.1 340.0L991.0 341.4L993.9 342.8L996.8 344.1L999.7 345.5L1002.6 346.8L1005.5 348.1L1008.4 349.3L1011.3 350.5L1014.2 351.7L1017.1 352.9L1020.0 354.0L1022.9 355.2L1025.8 356.3L1028.7 357.4L1031.6 358.4L1034.5 359.5L1037.4 360.5L1040.3 361.5L1043.2 362.5L1046.1 363.5L1049.0 364.4L1051.9 365.4L1054.8 366.3L1057.7 367.2L1060.6 368.1L1063.5 369.0L1066.4 369.9L1069.3 370.7L1072.2 371.6L1075.1 372.4L1078.0 373.2L1080.9 374.0L1083.8 374.8L1086.7 375.6L1089.6 376.4L1092.5 377.2L1095.4 377.9L1098.3 378.7L1101.2 379.4L1104.1 380.2L1107.0 380.9L1109.9 381.6L1112.8 382.3L1115.7 383.0L1118.6 383.7L1121.5 384.4L1124.4 385.0L1127.3 385.7L1130.2 386.3L1133.1 387.0L1136.0 387.6" fill="none" stroke="#0F766E" stroke-width="2" stroke-dasharray="7 5"/>
+<text x="1020" y="245" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">GD  O(1/k)</text>
+<text x="1010" y="350" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">NAG  O(1/k^2)</text>
+<text x="925" y="400" font-size="15" font-weight="650" text-anchor="start" fill="#0F766E">lower bound: same order</text>
+<text x="825" y="488" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">必须固定函数类、oracle、维度与误差准则。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">加速是受函数类与信息模型约束的复杂度结论；动量轨迹、谱半径和 wall-clock 是不同证据。</text>
+</svg>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Residual Placement：合并前后谁过滤恒等轨</title>
+<desc id="desc">原始 post-activation、full pre-activation、Transformer Pre-Norm 与 Post-Norm 的差别可由前向算子和 Jacobian 的乘法顺序精确定位。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">四种放置合同</text>
+<rect x="52" y="92" width="310" height="76" rx="5" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="68" y="117" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">CNN post-act</text>
+<text x="345" y="140" font-size="15" font-weight="650" text-anchor="end" fill="#1F2937">phi(x + F(x))</text>
+<text x="345" y="160" font-size="15" font-weight="600" text-anchor="end" fill="#64748B">J_phi (I + J_F)</text>
+<rect x="52" y="190" width="310" height="76" rx="5" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="68" y="215" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">CNN full pre-act</text>
+<text x="345" y="238" font-size="15" font-weight="650" text-anchor="end" fill="#1F2937">x + F(P(x))</text>
+<text x="345" y="258" font-size="15" font-weight="600" text-anchor="end" fill="#64748B">I + J_F J_P</text>
+<rect x="52" y="288" width="310" height="76" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="68" y="313" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">Transformer Pre-Norm</text>
+<text x="345" y="336" font-size="15" font-weight="650" text-anchor="end" fill="#1F2937">x + F(N(x))</text>
+<text x="345" y="356" font-size="15" font-weight="600" text-anchor="end" fill="#64748B">I + J_F J_N</text>
+<rect x="52" y="386" width="310" height="76" rx="5" fill="#FFFEFB" stroke="#B7791F" stroke-width="2"/>
+<text x="68" y="411" font-size="15" font-weight="700" text-anchor="start" fill="#B7791F">Transformer Post-Norm</text>
+<text x="345" y="434" font-size="15" font-weight="650" text-anchor="end" fill="#1F2937">N(x + F(x))</text>
+<text x="345" y="454" font-size="15" font-weight="600" text-anchor="end" fill="#64748B">J_N (I + J_F)</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">同形外壳，不同内部对象</text>
+<rect x="445" y="98" width="315" height="126" rx="5" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="602" y="126" font-size="16" font-weight="700" text-anchor="middle" fill="#2563EB">CNN full pre-activation</text>
+<text x="602" y="159" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">P = BN / ReLU stack</text>
+<text x="602" y="189" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">axes + train/eval state matter</text>
+<rect x="445" y="270" width="315" height="126" rx="5" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="602" y="298" font-size="16" font-weight="700" text-anchor="middle" fill="#0F766E">Transformer Pre-Norm</text>
+<text x="602" y="331" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">N = token-wise norm</text>
+<text x="602" y="361" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">attention / FFN semantics matter</text>
+<text x="602" y="458" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">same Jacobian shell != same architecture</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">二维局部反例：rail 是否被门控</text>
+<rect x="845" y="96" width="285" height="104" rx="5" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="987" y="125" font-size="16" font-weight="700" text-anchor="middle" fill="#0F766E">pre-activation</text>
+<text x="987" y="157" font-size="16" font-weight="650" text-anchor="middle" fill="#1F2937">J = [[1,0],[2,1]]</text>
+<text x="987" y="184" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">rank 2; det = 1</text>
+<rect x="845" y="250" width="285" height="104" rx="5" fill="#FFF5F2" stroke="#C24135" stroke-width="2"/>
+<text x="987" y="279" font-size="16" font-weight="700" text-anchor="middle" fill="#C24135">post-activation</text>
+<text x="987" y="311" font-size="16" font-weight="650" text-anchor="middle" fill="#1F2937">J = [[1,1],[0,0]]</text>
+<text x="987" y="338" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">rank 1; a direction is deleted</text>
+<text x="987" y="421" font-size="15" font-weight="700" text-anchor="middle" fill="#B7791F">activation mask is local</text>
+<text x="987" y="451" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">boundary points need subgradients</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">先写前向式，再按计算顺序写 Jacobian；名称相似不能替代轴、状态与求值点合同。</text>
+</svg>

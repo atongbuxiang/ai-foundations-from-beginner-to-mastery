@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">直和、商空间与不变子空间的三种结构操作</title>
+  <desc id="desc">左侧展示直和的唯一分解，中间展示商空间把同一陪集压成一个点，右侧展示不变子空间在算子作用下保持封闭并产生分块上三角矩阵。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
+    <style>
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}.blue{fill:#2563eb}.green{fill:#0f766e}.amber{fill:#b7791f}.h{font-size:19px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}.arrow{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <rect x="38" y="44" width="350" height="470" rx="12" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="64" y="82" class="sans h blue">1　直和：唯一拆开</text>
+  <circle cx="135" cy="357" r="5" fill="#1f2937"/><path d="M135 357L280 200" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/><path d="M135 357L286 385" stroke="#0f766e" stroke-width="3" marker-end="url(#arrow)"/><path d="M135 357L347 228" stroke="#1f2937" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="266" y="190" class="math body blue">u∈U</text><text x="270" y="412" class="math body green">w∈W</text><text x="319" y="217" class="math body ink">x</text>
+  <path d="M280 200L347 228L286 385" stroke="#94a3b8" stroke-width="1.8" fill="none" stroke-dasharray="6 5"/>
+  <text x="213" y="130" class="math formula ink" text-anchor="middle">x=u+w</text><text x="213" y="160" class="sans small muted" text-anchor="middle">U∩W={0} 保证唯一性</text>
+  <rect x="72" y="448" width="282" height="42" rx="9" fill="#ffffff" stroke="#bfdbfe"/><text x="213" y="475" class="math body blue" text-anchor="middle">V = U ⊕ W</text>
+
+  <rect x="425" y="44" width="350" height="470" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="451" y="82" class="sans h ink">2　取商：忽略差异</text>
+  <g stroke="#2563eb" stroke-width="3"><path d="M468 180L692 125"/><path d="M482 247L706 192"/><path d="M496 314L720 259"/><path d="M510 381L734 326"/></g>
+  <circle cx="548" cy="231" r="6" fill="#1f2937"/><circle cx="632" cy="210" r="6" fill="#1f2937"/><text x="530" y="219" class="math small ink">x</text><text x="642" y="205" class="math small ink">x+u</text>
+  <path d="M600 401V441" class="arrow"/><text x="621" y="430" class="sans small muted">压缩</text>
+  <circle cx="600" cy="466" r="18" fill="#0f766e"/><text x="600" y="473" class="math body" fill="#ffffff" text-anchor="middle">x+U</text>
+  <text x="600" y="127" class="sans small muted" text-anchor="middle">同一条平行层中的点只相差 U 中元素</text><text x="600" y="490" class="sans small muted" text-anchor="middle">一个陪集成为商空间中的一个点</text>
+
+  <rect x="812" y="44" width="350" height="470" rx="12" fill="#ecfdf5" stroke="#6ee7b7"/>
+  <text x="838" y="82" class="sans h green">3　不变：作用后留下</text>
+  <rect x="856" y="120" width="262" height="226" rx="12" fill="#ffffff" stroke="#a7f3d0"/>
+  <rect x="882" y="152" width="210" height="74" rx="9" fill="#ecfdf5" stroke="#6ee7b7"/><text x="987" y="184" class="math body green" text-anchor="middle">U</text><path d="M918 204C945 166 1025 166 1054 204" class="arrow"/><text x="987" y="213" class="math small ink" text-anchor="middle">T(U)⊆U</text>
+  <text x="987" y="281" class="sans body ink" text-anchor="middle">从 U 出发不会逃出 U</text><text x="987" y="316" class="sans small amber" text-anchor="middle">补空间却未必也保持不变</text>
+  <text x="900" y="391" class="math formula ink">T ↦</text>
+  <path d="M960 354H949V414H960M1063 354H1074V414H1063" stroke="#64748b" stroke-width="2" fill="none"/>
+  <line x1="1011" y1="360" x2="1011" y2="408" stroke="#cbd5e1"/><line x1="958" y1="384" x2="1065" y2="384" stroke="#cbd5e1"/>
+  <g class="math body ink" text-anchor="middle"><text x="985" y="378">A</text><text x="1038" y="378">B</text><text x="985" y="405">0</text><text x="1038" y="405">C</text></g>
+  <text x="987" y="438" class="sans small muted" text-anchor="middle">适配 U 的基给出分块上三角</text>
+  <rect x="842" y="448" width="290" height="42" rx="9" fill="#ffffff" stroke="#a7f3d0"/><text x="987" y="475" class="sans body green" text-anchor="middle">保持结构，不等于完全解耦</text>
+
+  <rect x="92" y="548" width="1016" height="48" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="600" y="579" class="sans result ink" text-anchor="middle">直和负责分解，商空间负责遗忘，不变子空间负责在算子作用下保留。</text>
+</svg>

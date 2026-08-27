@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">数据混合在 simplex 上：raw share、sample share 与 loss share 分开</title><desc id="desc">三域 mixture triangle 展示幂次采样移动，右侧给文档、token、loss 和梯度四份权重账。</desc>
+<rect width="1200" height="700" fill="#FFFEFB"/>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#64748B"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#17324D" flood-opacity="0.12"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<text x="55" y="55" font-size="25" font-weight="700" fill="#2563EB">数据混合在 simplex 上：raw share、sample share 与 loss share 分开</text>
+<polygon points="120,545 520,545 320,175" fill="#F8FAFC" stroke="#17324D" stroke-width="2"/>
+<text x="90" y="575" font-size="16" font-weight="700" fill="#2563EB">web</text>
+<text x="515" y="575" font-size="16" font-weight="700" fill="#0F766E">books</text>
+<text x="320" y="150" text-anchor="middle" font-size="16" font-weight="700" fill="#7C3AED">code</text>
+<circle cx="365" cy="485" r="10" fill="#C24135"/>
+<text x="379" y="480" font-size="14" font-weight="700" fill="#C24135">raw</text>
+<circle cx="320" cy="400" r="10" fill="#B7791F"/>
+<text x="334" y="395" font-size="14" font-weight="700" fill="#B7791F">α&lt;1</text>
+<circle cx="285" cy="315" r="10" fill="#0F766E"/>
+<text x="299" y="310" font-size="14" font-weight="700" fill="#0F766E">optimized</text>
+<line x1="365" y1="473" x2="323" y2="411" stroke="#B7791F" stroke-width="2.5" marker-end="url(#arrow)"/>
+<line x1="315" y1="388" x2="289" y2="326" stroke="#0F766E" stroke-width="2.5" marker-end="url(#arrow)"/>
+<text x="55" y="105" font-size="18" font-weight="700" fill="#17324D">mixture vector π∈Δ²</text>
+<text x="55" y="625" font-size="14" fill="#64748B">温度/幂次采样：q_d ∝ n_d^α；α=1 按规模，α→0 近域均匀</text>
+<text x="625" y="105" font-size="18" font-weight="700" fill="#17324D">一次配置需要四份 share</text>
+<rect x="630" y="135" width="500" height="72" rx="10" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+<text x="650" y="164" font-size="16" font-weight="700" fill="#2563EB">document draw</text>
+<text x="820" y="164" font-size="15" fill="#17324D">π = [0.60,0.25,0.15]</text>
+<rect x="650" y="179" width="110" height="12" rx="6" fill="#2563EB" opacity="0.75"/>
+<line x1="880" y1="210" x2="880" y2="229" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="630" y="235" width="500" height="72" rx="10" fill="#FFFFFF" stroke="#0F766E" stroke-width="2"/>
+<text x="650" y="264" font-size="16" font-weight="700" fill="#0F766E">model tokens</text>
+<text x="820" y="264" font-size="15" fill="#17324D">长文/ fertility 后 ≠ π</text>
+<rect x="650" y="279" width="170" height="12" rx="6" fill="#0F766E" opacity="0.75"/>
+<line x1="880" y1="310" x2="880" y2="329" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="630" y="335" width="500" height="72" rx="10" fill="#FFFFFF" stroke="#B7791F" stroke-width="2"/>
+<text x="650" y="364" font-size="16" font-weight="700" fill="#B7791F">effective loss</text>
+<text x="820" y="364" font-size="15" fill="#17324D">packing / ignore 后再变</text>
+<rect x="650" y="379" width="230" height="12" rx="6" fill="#B7791F" opacity="0.75"/>
+<line x1="880" y1="410" x2="880" y2="429" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="630" y="435" width="500" height="72" rx="10" fill="#FFFFFF" stroke="#C24135" stroke-width="2"/>
+<text x="650" y="464" font-size="16" font-weight="700" fill="#C24135">gradient / utility</text>
+<text x="820" y="464" font-size="15" fill="#17324D">norm + direction + eval weights</text>
+<rect x="650" y="479" width="290" height="12" rx="6" fill="#C24135" opacity="0.75"/>
+<rect x="630" y="555" width="500" height="80" rx="12" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2" filter="url(#shadow)"/>
+<text x="648" y="586" font-size="17" font-weight="700" fill="#7C3AED">评价聚合也有权重</text>
+<text x="648" y="613" font-size="14" fill="#64748B">R(π)=Σₑ ρₑ Lₑ(π)；训练 mixture π 与评测权重 ρ 不要混名</text>
+<text x="55" y="670" font-size="14" fill="#64748B">Mixture 优化依赖 domain taxonomy、proxy scale、预算和 evaluation weights；没有唯一脱离任务的最优 π。</text>
+</svg>

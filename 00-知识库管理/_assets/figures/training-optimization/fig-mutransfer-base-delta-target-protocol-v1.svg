@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">μTransfer Base Delta Proxy Target 协议</title>
+  <desc id="desc">Base 与 Delta 的形状差异定义有限和无限维度，Proxy 梯用于坐标检查与超参数曲线，Target 只接受锁定后的基础坐标超参数和预注册确认。</desc>
+  <rect width="1200" height="800" fill="#FFFEFB"/>
+  <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}.h{font-size:27px;font-weight:700}.sh{font-size:18px;font-weight:700}.b{font-size:15px}.s{font-size:15px;fill:#64748B}.blue{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.teal{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.amber{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.red{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}.arr{stroke:#2563EB;stroke-width:3;fill:none}.dash{stroke:#94A3B8;stroke-width:2;stroke-dasharray:7 6;fill:none}</style>
+  <defs><marker id="ab" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#2563EB"/></marker></defs>
+  <text x="48" y="48" class="h" fill="#2563EB">四个模型角色，三道不可跳过的门</text>
+
+  <text x="48" y="92" class="sh" fill="#2563EB">① Shape oracle</text>
+  <rect x="48" y="112" width="246" height="176" rx="14" class="blue"/>
+  <text x="72" y="148" class="sh">Base shapes B</text>
+  <text x="72" y="180" class="b">d_model=256</text>
+  <text x="72" y="208" class="b">d_ff=1024 · heads=4</text>
+  <text x="72" y="236" class="b">d_head=64 · depth=12</text>
+  <text x="72" y="270" class="s">定义兼容坐标锚</text>
+  <rect x="326" y="112" width="246" height="176" rx="14" class="teal"/>
+  <text x="350" y="148" class="sh">Delta shapes D</text>
+  <text x="350" y="180" class="b">d_model=512</text>
+  <text x="350" y="208" class="b">d_ff=2048 · heads=8</text>
+  <text x="350" y="236" class="b">d_head=64 · depth=12</text>
+  <text x="350" y="270" class="s">变化维 → infinite；不变 → finite</text>
+  <path d="M294 200 L326 200" class="arr" marker-end="url(#ab)"/>
+
+  <rect x="604" y="112" width="268" height="176" rx="14" class="amber"/>
+  <text x="628" y="148" class="sh">infshape translator</text>
+  <text x="628" y="180" class="b">parameter name / rank</text>
+  <text x="628" y="208" class="b">finite vs infinite dims</text>
+  <text x="628" y="236" class="b">fan-in / fan-out orientation</text>
+  <text x="628" y="270" class="s">生成 init 与 group-LR ratio</text>
+  <path d="M572 200 L604 200" class="arr" marker-end="url(#ab)"/>
+
+  <rect x="904" y="112" width="248" height="176" rx="14" class="red"/>
+  <text x="928" y="148" class="sh">Shape gate</text>
+  <text x="928" y="180" class="b">每个拟扩展轴都变了吗？</text>
+  <text x="928" y="208" class="b">custom orientation 对吗？</text>
+  <text x="928" y="236" class="b">depth / tying 有专门处理吗？</text>
+  <text x="928" y="270" class="s">未通过：禁止调参</text>
+  <path d="M872 200 L904 200" class="arr" marker-end="url(#ab)"/>
+
+  <text x="48" y="344" class="sh" fill="#0F766E">② Proxy ladder：检查整条超参数曲线</text>
+  <rect x="48" y="368" width="694" height="236" rx="14" fill="#F8FAFC" stroke="#0F766E" stroke-width="2"/>
+  <text x="72" y="404" class="sh">n₀ → n₁ → n₂</text>
+  <path d="M94 558 L94 438 L690 438" stroke="#CBD5E1" stroke-width="2" fill="none"/>
+  <path d="M120 520 C220 454 300 452 390 516 C480 578 570 544 664 488" stroke="#2563EB" stroke-width="3" fill="none"/>
+  <path d="M120 530 C220 464 300 462 390 526 C480 588 570 554 664 498" stroke="#0F766E" stroke-width="3" fill="none"/>
+  <path d="M120 540 C220 474 300 472 390 536 C480 598 570 564 664 508" stroke="#B76E00" stroke-width="3" fill="none"/>
+  <text x="116" y="582" class="s">base-coordinate HP h：比较 curve、near-optimal set、failure，而非只看一个 argmin</text>
+
+  <rect x="774" y="368" width="378" height="236" rx="14" class="blue"/>
+  <text x="798" y="404" class="sh">Proxy gate</text>
+  <text x="798" y="440" class="b">✓ multi-width coord check</text>
+  <text x="798" y="472" class="b">✓ HP curve / regret / seeds</text>
+  <text x="798" y="504" class="b">✓ failure 与四本预算账</text>
+  <text x="798" y="536" class="b">✓ regularization 单独标记</text>
+  <text x="798" y="572" class="s">曲线未稳定：扩大 proxy 或 telescoping</text>
+
+  <text x="48" y="658" class="sh" fill="#B76E00">③ Target：复制 base HP，不复制同一个 raw tensor LR</text>
+  <rect x="48" y="680" width="1104" height="84" rx="14" class="amber"/>
+  <text x="72" y="714" class="b">locked base HP → μP parameter-group translator → target init / LR / multiplier</text>
+  <text x="72" y="744" class="b">只执行预注册 health / failure / final-eval；若按 target 结果反复改 recipe，改称 few-shot 或 telescoping。</text>
+  <text x="48" y="792" class="s">边界：depth、data、batch、sequence、regularization 与架构变化不由 width shape oracle 自动担保。</text>
+</svg>

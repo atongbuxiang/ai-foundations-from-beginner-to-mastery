@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">架构比较：结构、信息混合与成本合同</title>
+<desc id="desc">同一输入向量可由全连接、局部共享、递推状态或内容寻址处理；设计差异必须沿对称性、交互图和资源成本分账。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">先声明输入结构</text>
+<circle cx="68" cy="150" r="18" fill="#EFF6FF" stroke="#2563EB" stroke-width="2.5"/>
+<text x="68" y="156" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">x₁</text>
+<line x1="87" y1="150" x2="112" y2="150" stroke="#D7DEE8" stroke-width="2"/>
+<circle cx="131" cy="150" r="18" fill="#EFF6FF" stroke="#2563EB" stroke-width="2.5"/>
+<text x="131" y="156" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">x₂</text>
+<line x1="150" y1="150" x2="175" y2="150" stroke="#D7DEE8" stroke-width="2"/>
+<circle cx="194" cy="150" r="18" fill="#EFF6FF" stroke="#2563EB" stroke-width="2.5"/>
+<text x="194" y="156" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">x₃</text>
+<line x1="213" y1="150" x2="238" y2="150" stroke="#D7DEE8" stroke-width="2"/>
+<circle cx="257" cy="150" r="18" fill="#EFF6FF" stroke="#2563EB" stroke-width="2.5"/>
+<text x="257" y="156" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">x₄</text>
+<line x1="276" y1="150" x2="301" y2="150" stroke="#D7DEE8" stroke-width="2"/>
+<circle cx="320" cy="150" r="18" fill="#EFF6FF" stroke="#2563EB" stroke-width="2.5"/>
+<text x="320" y="156" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">x₅</text>
+<text x="45" y="215" font-size="16" font-weight="700" text-anchor="start" fill="#1F2937">序列：有顺序与位移</text>
+<text x="45" y="252" font-size="16" font-weight="700" text-anchor="start" fill="#1F2937">图像：二维网格与局部邻域</text>
+<text x="45" y="289" font-size="16" font-weight="700" text-anchor="start" fill="#1F2937">图：邻接而非固定索引</text>
+<rect x="55" y="340" width="300" height="95" rx="6" fill="#FFF5F2" stroke="#C24135" stroke-width="2"/>
+<text x="205" y="372" font-size="17" font-weight="700" text-anchor="middle" fill="#C24135">若先 flatten</text>
+<text x="205" y="405" font-size="16" font-weight="650" text-anchor="middle" fill="#C24135">结构不会自动保留</text>
+<text x="45" y="485" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">归纳偏置 = 先限制可表示/易学习的函数。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">四种信息混合图</text>
+<text x="438" y="125" font-size="16" font-weight="700" text-anchor="start" fill="#2563EB">Dense</text>
+<text x="540" y="125" font-size="15" font-weight="650" text-anchor="start" fill="#64748B">all-to-all</text>
+<circle cx="660" cy="119" r="5" fill="#2563EB" stroke="#2563EB" stroke-width="1"/>
+<circle cx="690" cy="119" r="5" fill="#2563EB" stroke="#2563EB" stroke-width="1"/>
+<circle cx="720" cy="119" r="5" fill="#2563EB" stroke="#2563EB" stroke-width="1"/>
+<circle cx="750" cy="119" r="5" fill="#2563EB" stroke="#2563EB" stroke-width="1"/>
+<line x1="660" y1="119" x2="770" y2="119" stroke="#2563EB" stroke-width="1"/>
+<line x1="690" y1="119" x2="770" y2="119" stroke="#2563EB" stroke-width="1"/>
+<line x1="720" y1="119" x2="770" y2="119" stroke="#2563EB" stroke-width="1"/>
+<line x1="750" y1="119" x2="770" y2="119" stroke="#2563EB" stroke-width="1"/>
+<text x="438" y="220" font-size="16" font-weight="700" text-anchor="start" fill="#0F766E">Conv</text>
+<text x="540" y="220" font-size="15" font-weight="650" text-anchor="start" fill="#64748B">local + shared</text>
+<circle cx="660" cy="214" r="5" fill="#0F766E" stroke="#0F766E" stroke-width="1"/>
+<circle cx="690" cy="214" r="5" fill="#0F766E" stroke="#0F766E" stroke-width="1"/>
+<circle cx="720" cy="214" r="5" fill="#0F766E" stroke="#0F766E" stroke-width="1"/>
+<circle cx="750" cy="214" r="5" fill="#0F766E" stroke="#0F766E" stroke-width="1"/>
+<line x1="660" y1="214" x2="690" y2="214" stroke="#0F766E" stroke-width="3"/>
+<line x1="690" y1="214" x2="720" y2="214" stroke="#0F766E" stroke-width="3"/>
+<line x1="720" y1="214" x2="750" y2="214" stroke="#0F766E" stroke-width="3"/>
+<text x="438" y="315" font-size="16" font-weight="700" text-anchor="start" fill="#C24135">RNN</text>
+<text x="540" y="315" font-size="15" font-weight="650" text-anchor="start" fill="#64748B">state chain</text>
+<circle cx="660" cy="309" r="5" fill="#C24135" stroke="#C24135" stroke-width="1"/>
+<circle cx="690" cy="309" r="5" fill="#C24135" stroke="#C24135" stroke-width="1"/>
+<circle cx="720" cy="309" r="5" fill="#C24135" stroke="#C24135" stroke-width="1"/>
+<circle cx="750" cy="309" r="5" fill="#C24135" stroke="#C24135" stroke-width="1"/>
+<line x1="665" y1="309" x2="685" y2="309" stroke="#C24135" stroke-width="2.5" marker-end="url(#a2)"/>
+<line x1="695" y1="309" x2="715" y2="309" stroke="#C24135" stroke-width="2.5" marker-end="url(#a2)"/>
+<line x1="725" y1="309" x2="745" y2="309" stroke="#C24135" stroke-width="2.5" marker-end="url(#a2)"/>
+<text x="438" y="410" font-size="16" font-weight="700" text-anchor="start" fill="#2563EB">Attention</text>
+<text x="540" y="410" font-size="15" font-weight="650" text-anchor="start" fill="#64748B">data-dependent</text>
+<circle cx="660" cy="404" r="5" fill="#2563EB" stroke="#2563EB" stroke-width="1"/>
+<circle cx="690" cy="404" r="5" fill="#2563EB" stroke="#2563EB" stroke-width="1"/>
+<circle cx="720" cy="404" r="5" fill="#2563EB" stroke="#2563EB" stroke-width="1"/>
+<circle cx="750" cy="404" r="5" fill="#2563EB" stroke="#2563EB" stroke-width="1"/>
+<path d="M660 404 Q705 350 750 404" fill="none" stroke="#2563EB" stroke-width="2.5"/>
+<path d="M690 404 Q720 455 750 404" fill="none" stroke="#2563EB" stroke-width="2.5"/>
+<text x="438" y="490" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">交互图决定一步能看多远，也决定并行和缓存。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">比较时至少六本账</text>
+<text x="845" y="110" font-size="16" font-weight="700" text-anchor="start" fill="#2563EB">symmetry</text>
+<text x="1000" y="110" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">不变 / 等变</text>
+<line x1="842" y1="126" x2="1138" y2="126" stroke="#D7DEE8" stroke-width="1"/>
+<text x="845" y="175" font-size="16" font-weight="700" text-anchor="start" fill="#2563EB">range</text>
+<text x="1000" y="175" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">局部 / 全局 / 状态</text>
+<line x1="842" y1="191" x2="1138" y2="191" stroke="#D7DEE8" stroke-width="1"/>
+<text x="845" y="240" font-size="16" font-weight="700" text-anchor="start" fill="#2563EB">parameters</text>
+<text x="1000" y="240" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">是否随位置增长</text>
+<line x1="842" y1="256" x2="1138" y2="256" stroke="#D7DEE8" stroke-width="1"/>
+<text x="845" y="305" font-size="16" font-weight="700" text-anchor="start" fill="#0F766E">arithmetic</text>
+<text x="1000" y="305" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">MACs / FLOPs</text>
+<line x1="842" y1="321" x2="1138" y2="321" stroke="#D7DEE8" stroke-width="1"/>
+<text x="845" y="370" font-size="16" font-weight="700" text-anchor="start" fill="#0F766E">memory &amp; IO</text>
+<text x="1000" y="370" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">激活 / cache / 搬运</text>
+<line x1="842" y1="386" x2="1138" y2="386" stroke="#D7DEE8" stroke-width="1"/>
+<text x="845" y="435" font-size="16" font-weight="700" text-anchor="start" fill="#0F766E">evidence</text>
+<text x="1000" y="435" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">I / T / E / H / O</text>
+<line x1="842" y1="451" x2="1138" y2="451" stroke="#D7DEE8" stroke-width="1"/>
+<text x="842" y="493" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">没有脱离数据、任务和硬件的唯一最佳架构。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">架构选择不是名称偏好，而是结构假设、信息路径和资源约束的联合合同。</text>
+</svg>

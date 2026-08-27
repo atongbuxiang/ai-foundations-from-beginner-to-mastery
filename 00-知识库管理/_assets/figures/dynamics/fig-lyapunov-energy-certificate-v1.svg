@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">Lyapunov 子水平集、LaSalle 不变集与连续离散验证边界</title>
+  <desc id="desc">三面板机制图。第一面板展示轨道沿嵌套 Lyapunov 子水平集向内演化；第二面板区分阻尼振子能量导数为零的集合与其中最大不变子集；第三面板并列连续导数、离散差分以及神经候选在采样点和整个区域上的不同验证对象。</desc>
+  <defs>
+    <marker id="arrow-blue" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L8,3 z" fill="#2563eb"/></marker>
+    <marker id="arrow-green" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L8,3 z" fill="#059669"/></marker>
+    <marker id="arrow-orange" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L8,3 z" fill="#ea580c"/></marker>
+    <marker id="arrow-slate" markerWidth="8" markerHeight="8" refX="6.8" refY="2.7" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,5.4 L7.2,2.7 z" fill="#64748b"/></marker>
+    <style>
+      .panel{fill:#fff;stroke:#cbd5e1;stroke-width:1.5}.title{font:700 18px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#0f172a}.sub{font:13px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#475569}.body{font:14px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#334155}.small{font:12px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#64748b}.tiny{font:11px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans CJK SC",sans-serif;fill:#64748b}.math{font:italic 14px Georgia,"Times New Roman",serif;fill:#334155}.axis{stroke:#94a3b8;stroke-width:1.2}.grid{stroke:#e2e8f0;stroke-width:1;stroke-dasharray:4 4}.box{fill:#f8fafc;stroke:#cbd5e1;stroke-width:1.1}
+    </style>
+  </defs>
+  <rect width="1200" height="430" fill="#f8fafc"/>
+  <rect class="panel" x="20" y="20" width="370" height="390" rx="14"/>
+  <rect class="panel" x="415" y="20" width="370" height="390" rx="14"/>
+  <rect class="panel" x="810" y="20" width="370" height="390" rx="14"/>
+
+  <!-- Panel A -->
+  <text class="title" x="40" y="53">A · 标量证书困住高维轨道</text>
+  <text class="sub" x="40" y="78">V positive definite · V̇ ≤ 0 · nested sublevels</text>
+  <rect x="43" y="94" width="324" height="248" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <ellipse cx="205" cy="220" rx="139" ry="97" transform="rotate(-18 205 220)" fill="#dbeafe" fill-opacity="0.34" stroke="#60a5fa" stroke-width="2"/>
+  <ellipse cx="205" cy="220" rx="97" ry="67" transform="rotate(-18 205 220)" fill="#bfdbfe" fill-opacity="0.38" stroke="#3b82f6" stroke-width="2"/>
+  <ellipse cx="205" cy="220" rx="55" ry="37" transform="rotate(-18 205 220)" fill="#93c5fd" fill-opacity="0.40" stroke="#2563eb" stroke-width="2"/>
+  <text class="tiny" x="300" y="131" fill="#2563eb">V(x)=c₃</text>
+  <text class="tiny" x="272" y="177" fill="#2563eb">c₂</text>
+  <text class="tiny" x="244" y="211" fill="#2563eb">c₁</text>
+  <path d="M326 165 C286 125 230 148 217 185 C205 220 249 237 251 209 C253 184 218 178 194 198 C171 218 180 249 204 251 C222 253 230 239 224 226" fill="none" stroke="#059669" stroke-width="3" marker-end="url(#arrow-green)"/>
+  <circle cx="205" cy="220" r="6" fill="#0f172a" stroke="#fff" stroke-width="2"/>
+  <text class="tiny" x="214" y="235">x*</text>
+  <rect x="67" y="289" width="276" height="36" rx="8" fill="#ecfdf5" stroke="#6ee7b7"/>
+  <text class="body" x="205" y="312" text-anchor="middle">V(x(t)) ≤ V(x₀) ⇒ cannot cross outward</text>
+  <rect x="44" y="356" width="322" height="35" rx="8" fill="#eff6ff" stroke="#93c5fd"/>
+  <text class="small" x="205" y="378" text-anchor="middle">certificate controls containment, not the exact path</text>
+
+  <!-- Panel B -->
+  <text class="title" x="435" y="53">B · LaSalle：零导数集还不是终点</text>
+  <text class="sub" x="435" y="78">damped oscillator · V̇ = −γp²</text>
+  <rect x="438" y="94" width="324" height="248" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <line class="axis" x1="455" y1="220" x2="745" y2="220" marker-end="url(#arrow-slate)"/>
+  <line class="axis" x1="600" y1="325" x2="600" y2="110" marker-end="url(#arrow-slate)"/>
+  <text class="math" x="740" y="239">q</text><text class="math" x="610" y="118">p</text>
+  <line x1="458" y1="220" x2="742" y2="220" stroke="#ea580c" stroke-width="4" stroke-dasharray="8 5" opacity="0.85"/>
+  <text class="tiny" x="463" y="210" fill="#c2410c">E = {p=0}: V̇=0</text>
+  <g stroke="#ea580c" stroke-width="2" marker-end="url(#arrow-orange)">
+    <line x1="500" y1="220" x2="500" y2="250"/>
+    <line x1="548" y1="220" x2="548" y2="241"/>
+    <line x1="652" y1="220" x2="652" y2="199"/>
+    <line x1="700" y1="220" x2="700" y2="190"/>
+  </g>
+  <path d="M716 145 C660 108 504 118 484 202 C468 272 548 315 633 287 C701 264 721 191 674 164 C632 139 560 157 551 208 C544 248 591 268 626 248 C650 234 652 206 634 194" fill="none" stroke="#2563eb" stroke-width="2.8" marker-end="url(#arrow-blue)"/>
+  <circle cx="600" cy="220" r="7" fill="#0f172a" stroke="#fff" stroke-width="2"/>
+  <text class="tiny" x="612" y="239">M = {(0,0)}</text>
+  <text class="tiny" x="600" y="324" text-anchor="middle">nonzero points on E leave immediately because ṗ = −q</text>
+  <rect x="436" y="356" width="328" height="35" rx="8" fill="#fff7ed" stroke="#fdba74"/>
+  <text class="small" x="600" y="378" text-anchor="middle">trajectory approaches largest invariant subset M ⊂ E</text>
+
+  <!-- Panel C -->
+  <text class="title" x="830" y="53">C · 三种系统，三种验证对象</text>
+  <text class="sub" x="830" y="78">directional derivative ≠ one-step difference ≠ sample loss</text>
+  <rect class="box" x="835" y="98" width="320" height="75" rx="9"/>
+  <rect x="835" y="98" width="8" height="75" rx="4" fill="#059669"/>
+  <text class="body" x="857" y="122">continuous ODE</text>
+  <text class="math" x="857" y="147">L<tspan baseline-shift="sub" font-size="10">f</tspan>V = ∇Vᵀf &lt; 0 on region Ω</text>
+  <text class="tiny" x="1043" y="164">local / regional / global domain</text>
+
+  <rect class="box" x="835" y="188" width="320" height="75" rx="9"/>
+  <rect x="835" y="188" width="8" height="75" rx="4" fill="#2563eb"/>
+  <text class="body" x="857" y="212">discrete map / solver</text>
+  <text class="math" x="857" y="237">ΔV = V(F(x)) − V(x) &lt; 0</text>
+  <text class="tiny" x="1038" y="254">step size and update rule matter</text>
+
+  <rect class="box" x="835" y="278" width="320" height="96" rx="9"/>
+  <rect x="835" y="278" width="8" height="96" rx="4" fill="#ea580c"/>
+  <text class="body" x="857" y="302">learned candidate</text>
+  <line x1="862" y1="337" x2="1124" y2="337" stroke="#94a3b8" stroke-width="1.3"/>
+  <g fill="#059669"><circle cx="878" cy="333" r="4"/><circle cx="920" cy="330" r="4"/><circle cx="965" cy="329" r="4"/><circle cx="1030" cy="329" r="4"/><circle cx="1102" cy="331" r="4"/></g>
+  <path d="M965 329 C982 328 990 356 1005 358 C1018 358 1018 334 1030 329" fill="none" stroke="#dc2626" stroke-width="2.5"/>
+  <text class="tiny" x="857" y="321">green samples pass</text>
+  <text class="tiny" x="1005" y="369" text-anchor="middle" fill="#b91c1c">unsampled violation</text>
+  <rect x="835" y="387" width="320" height="18" rx="6" fill="#fee2e2"/>
+  <text class="tiny" x="995" y="400" text-anchor="middle" fill="#991b1b">training penalty ≠ formal region-wide certificate</text>
+</svg>

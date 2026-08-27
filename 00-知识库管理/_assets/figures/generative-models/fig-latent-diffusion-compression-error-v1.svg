@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+  <defs><marker id="f" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0 0L10 3L0 6Z" fill="#26384d"/></marker><style>.t{font-family:Inter,'Noto Sans SC',sans-serif;fill:#172033}.h{font-size:24px;font-weight:700}.s{font-size:17px}.mut{font-size:14px;fill:#687487}.m{font-family:'IBM Plex Mono',monospace;font-size:16px;fill:#29405c}.arr{stroke:#26384d;stroke-width:2.2;fill:none;marker-end:url(#f)}</style></defs>
+  <rect width="1200" height="620" fill="#f5f1e8"/>
+  <text x="50" y="48" class="t h">Latent diffusion：计算压缩与信息损失来自同一个瓶颈</text>
+  <rect x="50" y="84" width="526" height="240" rx="12" fill="#fffdf8" stroke="#3f536b" stroke-width="2"/>
+  <text x="73" y="120" class="t h" font-size="19">Shape / compute ledger</text>
+  <rect x="82" y="158" width="190" height="120" rx="8" fill="#dce8f3" stroke="#355f8a"/><text x="177" y="199" text-anchor="middle" class="t h" font-size="19">Pixels</text><text x="177" y="230" text-anchor="middle" class="m">H × W × 3</text><text x="177" y="258" text-anchor="middle" class="t mut">spatial sites = HW</text>
+  <path d="M273 218H345" class="arr"/><text x="283" y="199" class="t mut">encoder / f</text>
+  <rect x="357" y="172" width="185" height="92" rx="8" fill="#e2eedf" stroke="#4f7d4c"/><text x="449" y="205" text-anchor="middle" class="t h" font-size="19">Latent</text><text x="449" y="235" text-anchor="middle" class="m">h × w × c</text>
+  <text x="82" y="304" class="t s">位置数比约 1/f^2；wall-clock 还依赖 c、attention、decoder、硬件。</text>
+  <rect x="624" y="84" width="526" height="240" rx="12" fill="#fffdf8" stroke="#7b6335" stroke-width="2"/>
+  <text x="647" y="120" class="t h" font-size="19">Two-stage generation</text>
+  <g class="t s" text-anchor="middle"><rect x="653" y="164" width="112" height="62" rx="8" fill="#dce8f3" stroke="#355f8a"/><text x="709" y="201">x data</text><rect x="818" y="164" width="112" height="62" rx="8" fill="#fff1c9" stroke="#a98027"/><text x="874" y="190">AE</text><text x="874" y="211">z0</text><rect x="983" y="164" width="135" height="62" rx="8" fill="#e9edf6" stroke="#526f9b"/><text x="1050" y="190">latent</text><text x="1050" y="211">diffusion</text></g>
+  <path d="M766 195H806" class="arr"/><path d="M931 195H971" class="arr"/>
+  <path d="M1050 229V266H875" class="arr"/><text x="953" y="259" class="t mut">sample z0_gen</text>
+  <rect x="818" y="274" width="112" height="35" rx="7" fill="#f0dfdc" stroke="#a34f45"/><text x="874" y="298" text-anchor="middle" class="t s">decoder → x</text>
+  <rect x="50" y="358" width="1100" height="198" rx="12" fill="#fffdf8" stroke="#806f56" stroke-width="2"/>
+  <text x="73" y="394" class="t h" font-size="19">Error ledger：哪一项还能靠更好的 denoiser 修复？</text>
+  <g class="t s"><rect x="80" y="425" width="230" height="92" rx="8" fill="#f2dedd" stroke="#a34f45"/><text x="98" y="457" font-weight="700">Representation floor</text><text x="98" y="485" class="mut">D(E(x)) 已丢掉的细节</text><rect x="342" y="425" width="230" height="92" rx="8" fill="#fff1c9" stroke="#a98027"/><text x="360" y="457" font-weight="700">Latent prior</text><text x="360" y="485" class="mut">p_theta(z) 的模型误差</text><rect x="604" y="425" width="230" height="92" rx="8" fill="#e9edf6" stroke="#526f9b"/><text x="622" y="457" font-weight="700">Sampler / solver</text><text x="622" y="485" class="mut">finite NFE、schedule、guidance</text><rect x="866" y="425" width="250" height="92" rx="8" fill="#e2eedf" stroke="#4f7d4c"/><text x="884" y="457" font-weight="700">Decoder / evaluation</text><text x="884" y="485" class="mut">hallucination、metric preference</text></g>
+  <text x="50" y="592" class="t s">关键反例：若 E(x_a)=E(x_b)，任何确定性 decoder 都不可能同时精确恢复 x_a 与 x_b。</text>
+</svg>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">K-FAC、Shampoo 与 SOAP 结构近似审计</title>
+<desc id="desc">K-FAC moment/damping bias、Shampoo inverse-root residual 与 SOAP basis-state nonlinear gap 的并列证据。</desc>
+<rect width="1200" height="700" fill="#FFFEFB"/>
+<style>.sans{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif}.mono{font-family:"SFMono-Regular",Consolas,monospace}.ink{fill:#0F172A}.muted{fill:#64748B}.white{fill:#FFFFFF}.blue{fill:#2563EB}.teal{fill:#0F766E}.red{fill:#C0392B}.amber{fill:#B76E00}</style>
+<text x="48" y="54" class="sans blue" font-size="25" font-weight="700">结构化 optimizer 的误差来自不同接口</text>
+<text x="48" y="92" class="sans muted" font-size="16">同一柱图尺度用于定位量级，不表示六个指标具有相同单位或可直接排名。</text>
+<line x1="88" y1="535" x2="1140" y2="535" stroke="#334155" stroke-width="2"/>
+<rect x="105.0" y="403.74" width="105.0" height="131.26" fill="#B76E00" opacity="0.88"/>
+<text x="157.5" y="383.74" class="mono ink" font-size="16" text-anchor="middle">2.25</text>
+<text x="157.5" y="570" class="sans ink" font-size="15" text-anchor="middle">K-FAC moment gap</text>
+<rect x="277.0" y="505.87" width="105.0" height="29.13" fill="#C0392B" opacity="0.88"/>
+<text x="329.5" y="485.87" class="mono ink" font-size="16" text-anchor="middle">0.4993</text>
+<text x="329.5" y="570" class="sans ink" font-size="15" text-anchor="middle">factored step norm gap</text>
+<rect x="449.0" y="535.00" width="105.0" height="0.00" fill="#0F766E" opacity="0.88"/>
+<text x="501.5" y="515.00" class="mono ink" font-size="16" text-anchor="middle">0</text>
+<text x="501.5" y="570" class="sans ink" font-size="15" text-anchor="middle">correct root residual</text>
+<rect x="621.0" y="480.31" width="105.0" height="54.69" fill="#C0392B" opacity="0.88"/>
+<text x="673.5" y="460.31" class="mono ink" font-size="16" text-anchor="middle">0.9375</text>
+<text x="673.5" y="570" class="sans ink" font-size="15" text-anchor="middle">wrong root residual</text>
+<rect x="793.0" y="510.84" width="105.0" height="24.16" fill="#2563EB" opacity="0.88"/>
+<text x="845.5" y="490.84" class="mono ink" font-size="16" text-anchor="middle">0.4142</text>
+<text x="845.5" y="570" class="sans ink" font-size="15" text-anchor="middle">SOAP nonlinear gap</text>
+<rect x="965.0" y="205.00" width="105.0" height="330.00" fill="#B76E00" opacity="0.88"/>
+<text x="1017.5" y="185.00" class="mono ink" font-size="16" text-anchor="middle">5.657</text>
+<text x="1017.5" y="570" class="sans ink" font-size="15" text-anchor="middle">lost offdiag norm</text>
+<rect x="70" y="615" width="1060" height="54" rx="10" fill="#F8FAFC" stroke="#CBD5E1"/>
+<text x="92" y="648" class="sans muted" font-size="15">exact sample identity = 0；correct inverse-root residual = 0；其余非零量分别来自 statistical factorization、damping 或 basis-state nonlinear operation。</text>
+</svg>

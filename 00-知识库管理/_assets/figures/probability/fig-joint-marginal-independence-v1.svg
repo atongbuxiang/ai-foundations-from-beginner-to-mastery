@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">联合分布、边缘化与独立性</title>
+  <desc id="desc">三面板展示联合概率表沿行列求和得到边缘分布、相同边缘可以对应不同依赖，以及独立性要求联合分布分解为边缘乘积。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#EFF6FF"/><stop offset="1" stop-color="#F0FDF4"/></linearGradient>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker>
+    <style>.title{font:700 22px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#0F172A}.head{font:700 17px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#1E3A8A}.txt{font:14px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#334155}.small{font:12px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#64748B}.math{font:15px Georgia,"Times New Roman",serif;fill:#0F172A}.card{fill:#fff;stroke:#CBD5E1;stroke-width:1.3}.blue{fill:#DBEAFE;stroke:#60A5FA}.green{fill:#D1FAE5;stroke:#34D399}.amber{fill:#FEF3C7;stroke:#FBBF24}.rose{fill:#FFE4E6;stroke:#FB7185}.line{stroke:#2563EB;stroke-width:2;fill:none;marker-end:url(#arrow)}</style>
+  </defs>
+  <rect width="1200" height="430" rx="22" fill="url(#bg)"/>
+  <text x="40" y="38" class="title">联合分布保存共变结构；边缘分布只保留单变量信息</text>
+  <rect x="28" y="58" width="368" height="342" rx="17" class="card"/><rect x="416" y="58" width="368" height="342" rx="17" class="card"/><rect x="804" y="58" width="368" height="342" rx="17" class="card"/>
+
+  <text x="50" y="88" class="head">A　联合表沿轴边缘化</text>
+  <text x="75" y="126" class="math">p(x,y)</text><text x="175" y="126" class="math">Y=0</text><text x="245" y="126" class="math">Y=1</text><text x="316" y="126" class="math">pX</text>
+  <text x="75" y="172" class="math">X=0</text><rect x="160" y="144" width="62" height="40" rx="7" class="blue"/><rect x="230" y="144" width="62" height="40" rx="7" class="green"/><rect x="306" y="144" width="58" height="40" rx="7" class="amber"/><text x="177" y="169" class="math">.30</text><text x="247" y="169" class="math">.20</text><text x="322" y="169" class="math">.50</text>
+  <text x="75" y="218" class="math">X=1</text><rect x="160" y="190" width="62" height="40" rx="7" class="green"/><rect x="230" y="190" width="62" height="40" rx="7" class="blue"/><rect x="306" y="190" width="58" height="40" rx="7" class="amber"/><text x="177" y="215" class="math">.10</text><text x="247" y="215" class="math">.40</text><text x="322" y="215" class="math">.50</text>
+  <text x="75" y="264" class="math">pY</text><rect x="160" y="236" width="62" height="40" rx="7" class="amber"/><rect x="230" y="236" width="62" height="40" rx="7" class="amber"/><text x="177" y="261" class="math">.40</text><text x="247" y="261" class="math">.60</text>
+  <text x="62" y="316" class="math">pX(x)=Σy p(x,y)</text><text x="62" y="345" class="math">pY(y)=Σx p(x,y)</text>
+  <text x="62" y="379" class="small">求和/积分会丢掉 X 与 Y 如何配对的信息</text>
+
+  <text x="438" y="88" class="head">B　相同边缘，不同 coupling</text>
+  <rect x="447" y="116" width="138" height="112" rx="12" class="blue"/><text x="466" y="143" class="txt">完全同向</text><circle cx="482" cy="192" r="13" fill="#2563EB"/><circle cx="550" cy="151" r="13" fill="#2563EB"/><path d="M478 207L554 137" stroke="#1D4ED8" stroke-width="3"/>
+  <rect x="615" y="116" width="138" height="112" rx="12" class="rose"/><text x="633" y="143" class="txt">完全反向</text><circle cx="650" cy="151" r="13" fill="#E11D48"/><circle cx="718" cy="192" r="13" fill="#E11D48"/><path d="M646 137L722 207" stroke="#BE123C" stroke-width="3"/>
+  <text x="460" y="264" class="math">PX = PY = Bernoulli(1/2)</text>
+  <text x="460" y="299" class="math">但 P(X=Y)=1 或 0</text>
+  <rect x="456" y="325" width="290" height="47" rx="10" class="amber"/><text x="476" y="354" class="txt">边缘不能恢复依赖；必须保存联合</text>
+  <text x="451" y="390" class="small">OT：固定边缘，在 coupling 集中选择联合</text>
+
+  <text x="826" y="88" class="head">C　独立是一个强分解合同</text>
+  <rect x="840" y="122" width="108" height="61" rx="11" class="blue"/><text x="874" y="158" class="math">PX</text>
+  <rect x="1024" y="122" width="108" height="61" rx="11" class="green"/><text x="1058" y="158" class="math">PY</text>
+  <path d="M956 152L1016 152" class="line"/><text x="974" y="137" class="math">×</text>
+  <path d="M987 192L987 235" class="line"/>
+  <rect x="852" y="246" width="270" height="63" rx="12" class="amber"/><text x="891" y="283" class="math">P(X,Y)=PX ⊗ PY</text>
+  <text x="846" y="340" class="math">p(x,y)=pX(x)pY(y)</text>
+  <text x="846" y="370" class="small">对所有可测集合成立；不能只查一个事件</text>
+  <text x="846" y="392" class="small">pairwise 不自动推出 mutual</text>
+</svg>

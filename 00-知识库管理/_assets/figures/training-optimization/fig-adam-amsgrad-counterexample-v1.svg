@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Adam 三周期反例与 AMSGrad 的长期记忆修补</title>
+  <desc id="desc">展示三周期线性损失的真实最优端点、Adam 二阶矩遗忘导致的错误净位移，以及 AMSGrad 历史最大二阶矩的单调台阶。</desc>
+  <rect width="1200" height="720" fill="#FFFEFB"/>
+  <style>
+    text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}
+    .h{font-size:27px;font-weight:700}.sh{font-size:19px;font-weight:700}.b{font-size:16px}.s{font-size:15px;fill:#64748B}
+    .blue{stroke:#2563EB;fill:none;stroke-width:4}.green{stroke:#0F766E;fill:none;stroke-width:4}.amber{stroke:#B76E00;fill:none;stroke-width:4}.red{stroke:#C0392B;fill:none;stroke-width:3}.axis{stroke:#0F172A;stroke-width:2}
+    .boxb{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.boxg{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.boxa{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.boxr{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}
+  </style>
+  <defs>
+    <marker id="ab" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#2563EB"/></marker>
+    <marker id="ar" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#C0392B"/></marker>
+  </defs>
+  <text x="48" y="50" class="h" fill="#2563EB">A｜先由 objective 决定最佳端点</text>
+  <rect x="48" y="82" width="354" height="192" rx="14" class="boxb"/>
+  <text x="76" y="119" class="sh">三步 slopes</text>
+  <text x="76" y="157" class="b" fill="#C0392B">step 1:  +C　(C &gt; 2)</text>
+  <text x="76" y="193" class="b" fill="#0F766E">step 2:  -1</text>
+  <text x="76" y="225" class="b" fill="#0F766E">step 3:  -1</text>
+  <text x="76" y="258" class="s">cycle sum slope = C - 2 &gt; 0</text>
+  <line x1="448" y1="183" x2="706" y2="183" class="axis"/>
+  <circle cx="476" cy="183" r="8" fill="#0F766E"/><circle cx="678" cy="183" r="8" fill="#C0392B"/>
+  <text x="448" y="216" class="b" fill="#0F766E">x* = -1  best</text>
+  <text x="626" y="216" class="b" fill="#C0392B">+1 worst</text>
+  <line x1="634" y1="138" x2="490" y2="138" class="green" marker-end="url(#ab)"/>
+  <text x="484" y="116" class="s">objective wants left</text>
+  <rect x="760" y="82" width="392" height="192" rx="14" class="boxa"/>
+  <text x="788" y="119" class="sh" fill="#B76E00">但 optimizer 看到 scaled displacement</text>
+  <text x="788" y="157" class="b">Delta x_t = -alpha_t g_t / sqrt(v_t)</text>
+  <text x="788" y="195" class="b" fill="#C0392B">大 +C 把自己的 denominator 抬高</text>
+  <text x="788" y="229" class="b" fill="#0F766E">随后两个 -1 等到 denominator 遗忘</text>
+  <text x="788" y="258" class="s">净位移可以向右，与 cycle optimum 相反</text>
+
+  <line x1="48" y1="308" x2="1152" y2="308" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="48" y="350" class="h" fill="#C0392B">B｜Adam：峰值进入 v_t，也会从 v_t 消失</text>
+  <line x1="80" y1="574" x2="676" y2="574" class="axis"/>
+  <line x1="80" y1="574" x2="80" y2="382" class="axis"/>
+  <path d="M92 536 L160 405 C210 432 232 470 282 492 C332 512 360 518 408 405 C456 432 482 470 532 492 C580 512 610 518 658 405" class="amber"/>
+  <line x1="160" y1="574" x2="160" y2="390" stroke="#C0392B" stroke-width="2" stroke-dasharray="7 6"/>
+  <line x1="408" y1="574" x2="408" y2="390" stroke="#C0392B" stroke-width="2" stroke-dasharray="7 6"/>
+  <text x="112" y="602" class="b">+C</text><text x="210" y="602" class="b">-1</text><text x="300" y="602" class="b">-1</text>
+  <text x="360" y="602" class="b">+C</text><text x="458" y="602" class="b">-1</text><text x="548" y="602" class="b">-1</text>
+  <text x="104" y="430" class="s" fill="#C0392B">v spike</text><text x="236" y="514" class="s" fill="#B76E00">forgetting</text>
+  <line x1="160" y1="636" x2="110" y2="636" class="red" marker-end="url(#ar)"/>
+  <line x1="230" y1="636" x2="302" y2="636" class="green" marker-end="url(#ab)"/>
+  <line x1="322" y1="656" x2="394" y2="656" class="green" marker-end="url(#ab)"/>
+  <text x="82" y="683" class="s">one left move can lose to two right moves</text>
+
+  <text x="730" y="350" class="h" fill="#0F766E">C｜AMSGrad：max 账本不遗忘</text>
+  <line x1="758" y1="574" x2="1138" y2="574" class="axis"/>
+  <line x1="758" y1="574" x2="758" y2="382" class="axis"/>
+  <path d="M770 536 L838 405 L918 405 L998 405 L1078 405 L1130 405" class="green"/>
+  <path d="M770 536 L838 405 C890 452 920 500 998 405 C1050 452 1080 500 1130 452" class="amber" stroke-dasharray="8 6"/>
+  <text x="854" y="394" class="b" fill="#0F766E">v_max: monotone</text>
+  <text x="1010" y="480" class="s" fill="#B76E00">raw v still forgets</text>
+  <rect x="758" y="612" width="380" height="70" rx="12" class="boxg"/>
+  <text x="782" y="641" class="b">修补 denominator memory</text>
+  <text x="782" y="668" class="s">不自动验证 convexity、bounds、LR schedule 或深网结论</text>
+  <line x1="48" y1="704" x2="1152" y2="704" stroke="#0F766E" stroke-width="3"/>
+</svg>

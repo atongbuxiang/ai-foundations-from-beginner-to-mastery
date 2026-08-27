@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720">
+  <rect width="1200" height="720" fill="#ffffff"/>
+  <style>.s{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.m{font-family:"SFMono-Regular",Menlo,monospace}.ink{fill:#182235}.muted{fill:#64748b}</style>
+  <text x="64" y="60" class="s ink" font-size="31" font-weight="750">Sauer–Shelah 的三层上界：精确、解析与 trivial</text>
+  <text x="64" y="96" class="s muted" font-size="17">解析式适合推导渐近阶，却不保证小样本下最紧；实际使用应取三者的最小值。</text>
+  <line x1="650" y1="130" x2="680" y2="130" stroke="#c83d32" stroke-width="4"/><text x="688" y="135" class="s ink" font-size="13">trivial: 2^m</text><line x1="815" y1="130" x2="845" y2="130" stroke="#b7791f" stroke-width="4"/><text x="853" y="135" class="s ink" font-size="13">analytic: (em/d)^d</text><line x1="980" y1="130" x2="1010" y2="130" stroke="#147d64" stroke-width="4"/><text x="1018" y="135" class="s ink" font-size="13">exact Sauer sum</text><line x1="100" y1="620" x2="1080" y2="620" stroke="#d7dee8"/>
+<text x="86" y="625" text-anchor="end" class="s muted" font-size="14">0</text>
+<line x1="100" y1="526" x2="1080" y2="526" stroke="#d7dee8"/>
+<text x="86" y="531" text-anchor="end" class="s muted" font-size="14">4</text>
+<line x1="100" y1="432" x2="1080" y2="432" stroke="#d7dee8"/>
+<text x="86" y="437" text-anchor="end" class="s muted" font-size="14">8</text>
+<line x1="100" y1="338" x2="1080" y2="338" stroke="#d7dee8"/>
+<text x="86" y="343" text-anchor="end" class="s muted" font-size="14">12</text>
+<line x1="100" y1="244" x2="1080" y2="244" stroke="#d7dee8"/>
+<text x="86" y="249" text-anchor="end" class="s muted" font-size="14">16</text>
+<line x1="100" y1="150" x2="1080" y2="150" stroke="#d7dee8"/>
+<text x="86" y="155" text-anchor="end" class="s muted" font-size="14">20</text>
+<line x1="100" y1="150" x2="100" y2="620" stroke="#d7dee8" stroke-dasharray="4 6"/>
+<text x="100" y="647" text-anchor="middle" class="s muted" font-size="14">2</text>
+<line x1="263.3333333333333" y1="150" x2="263.3333333333333" y2="620" stroke="#d7dee8" stroke-dasharray="4 6"/>
+<text x="263.3333333333333" y="647" text-anchor="middle" class="s muted" font-size="14">5</text>
+<line x1="426.66666666666663" y1="150" x2="426.66666666666663" y2="620" stroke="#d7dee8" stroke-dasharray="4 6"/>
+<text x="426.66666666666663" y="647" text-anchor="middle" class="s muted" font-size="14">8</text>
+<line x1="590" y1="150" x2="590" y2="620" stroke="#d7dee8" stroke-dasharray="4 6"/>
+<text x="590" y="647" text-anchor="middle" class="s muted" font-size="14">11</text>
+<line x1="753.3333333333333" y1="150" x2="753.3333333333333" y2="620" stroke="#d7dee8" stroke-dasharray="4 6"/>
+<text x="753.3333333333333" y="647" text-anchor="middle" class="s muted" font-size="14">14</text>
+<line x1="916.6666666666667" y1="150" x2="916.6666666666667" y2="620" stroke="#d7dee8" stroke-dasharray="4 6"/>
+<text x="916.6666666666667" y="647" text-anchor="middle" class="s muted" font-size="14">17</text>
+<line x1="1080" y1="150" x2="1080" y2="620" stroke="#d7dee8" stroke-dasharray="4 6"/>
+<text x="1080" y="647" text-anchor="middle" class="s muted" font-size="14">20</text>
+<rect x="100" y="150" width="980" height="470" fill="none" stroke="#94a3b8" stroke-width="2"/>
+<text x="590" y="687" text-anchor="middle" class="s ink" font-size="16">样本点数 m（固定 VC 维 d=2）</text>
+<text x="29" y="385" text-anchor="middle" transform="rotate(-90 29 385)" class="s ink" font-size="16">log₂ 上界：有效模式的 bits</text><path d="M100.0,573.0 L154.4,549.5 L208.9,526.0 L263.3,502.5 L317.8,479.0 L372.2,455.5 L426.7,432.0 L481.1,408.5 L535.6,385.0 L590.0,361.5 L644.4,338.0 L698.9,314.5 L753.3,291.0 L807.8,267.5 L862.2,244.0 L916.7,220.5 L971.1,197.0 L1025.6,173.5 L1080.0,150.0" fill="none" stroke="#c83d32" stroke-width="4"/><path d="M100.0,552.2 L154.4,524.7 L208.9,505.2 L263.3,490.1 L317.8,477.7 L372.2,467.2 L426.7,458.2 L481.1,450.2 L535.6,443.1 L590.0,436.6 L644.4,430.7 L698.9,425.3 L753.3,420.2 L807.8,415.6 L862.2,411.2 L916.7,407.1 L971.1,403.2 L1025.6,399.5 L1080.0,396.1" fill="none" stroke="#b7791f" stroke-width="4"/><path d="M100.0,573.0 L154.4,554.0 L208.9,538.7 L263.3,526.0 L317.8,515.2 L372.2,505.8 L426.7,497.6 L481.1,490.2 L535.6,483.5 L590.0,477.4 L644.4,471.9 L698.9,466.7 L753.3,461.9 L807.8,457.4 L862.2,453.2 L916.7,449.2 L971.1,445.5 L1025.6,441.9 L1080.0,438.6" fill="none" stroke="#147d64" stroke-width="4"/><circle cx="263.3333333333333" cy="526" r="6" fill="#147d64"/><text x="275.3333333333333" y="531" class="s" fill="#147d64" font-size="14">m=5: exact=16</text><circle cx="263.3333333333333" cy="490.0627126185127" r="6" fill="#b7791f"/><text x="275.3333333333333" y="480.0627126185127" class="s" fill="#b7791f" font-size="14">coarse≈46.2 &gt; 2^5</text>
+</svg>

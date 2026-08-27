@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">统计模型、估计器、重复抽样与风险</title>
+<desc id="desc">参数索引数据分布；估计器把随机数据映射为动作；重复抽样产生 sampling distribution；损失的期望才定义 risk。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">模型先规定数据怎样随机</text>
+<rect x="55" y="105" width="110" height="52" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="110.0" y="137.0" font-size="16" font-weight="650" text-anchor="middle" fill="#2563EB">theta 固定</text>
+<rect x="220" y="105" width="130" height="52" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="285.0" y="137.0" font-size="17" font-weight="650" text-anchor="middle" fill="#0F766E">P_theta</text>
+<line x1="168" y1="131" x2="215" y2="131" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="165" y="215" width="150" height="48" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="240.0" y="245.0" font-size="16" font-weight="650" text-anchor="middle" fill="#2563EB">X^(1)</text>
+<line x1="285" y1="160" x2="240" y2="212" stroke="#D7DEE8" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="165" y="293" width="150" height="48" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="240.0" y="323.0" font-size="16" font-weight="650" text-anchor="middle" fill="#2563EB">X^(2)</text>
+<line x1="285" y1="160" x2="240" y2="290" stroke="#D7DEE8" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="165" y="371" width="150" height="48" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="240.0" y="401.0" font-size="16" font-weight="650" text-anchor="middle" fill="#2563EB">X^(3)</text>
+<line x1="285" y1="160" x2="240" y2="368" stroke="#D7DEE8" stroke-width="2" marker-end="url(#a3)"/>
+<text x="45" y="472" font-size="16" font-weight="400" text-anchor="start" fill="#64748B">同一 theta 下，重复样本仍不同。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">估计器把每份数据映成一个点</text>
+<rect x="435" y="112" width="98" height="46" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="484.0" y="141.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">X^(1)</text>
+<rect x="650" y="112" width="110" height="46" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="705.0" y="141.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">theta_hat1</text>
+<line x1="536" y1="135" x2="645" y2="135" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="435" y="196" width="98" height="46" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="484.0" y="225.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">X^(2)</text>
+<rect x="650" y="196" width="110" height="46" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="705.0" y="225.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">theta_hat2</text>
+<line x1="536" y1="219" x2="645" y2="219" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="435" y="280" width="98" height="46" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="484.0" y="309.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">X^(3)</text>
+<rect x="650" y="280" width="110" height="46" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="705.0" y="309.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">theta_hat3</text>
+<line x1="536" y1="303" x2="645" y2="303" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<line x1="445" y1="405" x2="755" y2="405" stroke="#D7DEE8" stroke-width="2"/>
+<circle cx="590" cy="405" r="5" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<circle cx="625" cy="405" r="5" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<circle cx="658" cy="405" r="5" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<circle cx="690" cy="405" r="5" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<circle cx="715" cy="405" r="5" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<text x="600" y="442" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">sampling distribution of theta_hat</text>
+<text x="430" y="477" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">一次估计值不是估计器的全部表现。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Loss 局部计分，risk 重复平均</text>
+<line x1="850" y1="260" x2="1140" y2="260" stroke="#D7DEE8" stroke-width="2"/>
+<circle cx="930" cy="260" r="5" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<circle cx="950" cy="260" r="5" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<circle cx="970" cy="260" r="5" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<circle cx="995" cy="260" r="5" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<circle cx="1015" cy="260" r="5" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<circle cx="1040" cy="260" r="5" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<circle cx="1060" cy="260" r="5" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<line x1="900" y1="225" x2="900" y2="295" stroke="#C24135" stroke-width="3"/>
+<line x1="995" y1="225" x2="995" y2="295" stroke="#0F766E" stroke-width="3"/>
+<text x="900" y="214" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">theta</text>
+<text x="995" y="214" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">E[theta_hat]</text>
+<line x1="903" y1="320" x2="992" y2="320" stroke="#C24135" stroke-width="2.5"/>
+<text x="947" y="346" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">bias</text>
+<text x="830" y="400" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937" class="math">R(theta,T)=E_theta[L(theta,T(X))]</text>
+<text x="830" y="440" font-size="17" font-weight="650" text-anchor="start" fill="#1F2937" class="math">MSE = variance + bias^2</text>
+<text x="830" y="480" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">错设模型会让风险精确回答错误目标。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">数据、参数、估计器、sampling distribution 与 risk 是五层对象，不能互相替代。</text>
+</svg>

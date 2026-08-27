@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">内积连接几何、坐标分析与 Attention</title>
+  <desc id="desc">三面板教学图：改变度量会改变长度与正交；标准正交基执行分析与合成；Attention 用批量内积形成分数但 softmax 权重不是内积。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#334155"/></marker>
+    <style>
+      .title{font:700 22px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;fill:#0f172a}
+      .panelTitle{font:700 17px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;fill:#0f172a}
+      .body{font:14px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;fill:#334155}
+      .small{font:12px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;fill:#475569}
+      .math{font:italic 14px Georgia,"Times New Roman",serif;fill:#0f172a}
+    </style>
+  </defs>
+  <rect width="1200" height="430" rx="18" fill="#f8fafc"/>
+  <text x="42" y="38" class="title">内积：同一组向量，测量规则决定几何</text>
+
+  <g transform="translate(30,58)">
+    <rect width="360" height="340" rx="16" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="20" y="31" class="panelTitle">A  度量决定长度与正交</text>
+    <line x1="55" y1="250" x2="315" y2="250" stroke="#94a3b8"/>
+    <line x1="115" y1="292" x2="115" y2="72" stroke="#94a3b8"/>
+    <circle cx="115" cy="250" r="82" fill="none" stroke="#60a5fa" stroke-width="2" stroke-dasharray="6 5"/>
+    <ellipse cx="115" cy="250" rx="58" ry="104" transform="rotate(-18 115 250)" fill="none" stroke="#f59e0b" stroke-width="3"/>
+    <line x1="115" y1="250" x2="220" y2="140" stroke="#2563eb" stroke-width="4" marker-end="url(#arrow)"/>
+    <line x1="115" y1="250" x2="225" y2="300" stroke="#ef4444" stroke-width="4" marker-end="url(#arrow)"/>
+    <text x="218" y="132" class="math">x</text><text x="232" y="312" class="math">y</text>
+    <text x="24" y="292" class="small">蓝圆：标准内积</text>
+    <text x="200" y="83" class="small">橙椭圆：M-内积单位球</text>
+    <rect x="20" y="306" width="320" height="24" rx="8" fill="#fff7ed"/>
+    <text x="32" y="323" class="small">坐标不变；M 改变后，角度与“最陡”都会改变</text>
+  </g>
+
+  <g transform="translate(420,58)">
+    <rect width="360" height="340" rx="16" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="20" y="31" class="panelTitle">B  标准正交基：分析 ⇄ 合成</text>
+    <rect x="24" y="78" width="78" height="54" rx="10" fill="#dbeafe" stroke="#60a5fa"/>
+    <text x="54" y="110" class="math">x</text>
+    <rect x="142" y="78" width="78" height="54" rx="10" fill="#ede9fe" stroke="#8b5cf6"/>
+    <text x="171" y="110" class="math">c</text>
+    <rect x="260" y="78" width="76" height="54" rx="10" fill="#dcfce7" stroke="#22c55e"/>
+    <text x="286" y="110" class="math">x̂</text>
+    <line x1="103" y1="105" x2="139" y2="105" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="221" y1="105" x2="257" y2="105" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="106" y="91" class="small">Q*</text><text x="226" y="91" class="small">Q</text>
+    <text x="20" y="162" class="math">c = Q*x</text>
+    <text x="20" y="188" class="math">x̂ = Qc = QQ*x</text>
+    <line x1="68" y1="268" x2="290" y2="268" stroke="#94a3b8"/>
+    <line x1="158" y1="306" x2="158" y2="205" stroke="#94a3b8"/>
+    <line x1="158" y1="268" x2="245" y2="221" stroke="#8b5cf6" stroke-width="4" marker-end="url(#arrow)"/>
+    <line x1="158" y1="268" x2="93" y2="218" stroke="#22c55e" stroke-width="4" marker-end="url(#arrow)"/>
+    <text x="246" y="216" class="small">q₁</text><text x="70" y="211" class="small">q₂</text>
+    <text x="20" y="326" class="small">Q*Q = I：坐标能量按方向逐项相加</text>
+  </g>
+
+  <g transform="translate(810,58)">
+    <rect width="360" height="340" rx="16" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="20" y="31" class="panelTitle">C  AI 调用：批量内积 ≠ 概率权重</text>
+    <rect x="20" y="63" width="92" height="58" rx="10" fill="#dbeafe" stroke="#60a5fa"/>
+    <text x="35" y="88" class="body">Q</text><text x="35" y="108" class="small">Tq × dk</text>
+    <rect x="134" y="63" width="92" height="58" rx="10" fill="#fee2e2" stroke="#f87171"/>
+    <text x="149" y="88" class="body">Kᵀ</text><text x="149" y="108" class="small">dk × Tk</text>
+    <line x1="113" y1="92" x2="131" y2="92" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="250" y="63" width="88" height="58" rx="10" fill="#fef3c7" stroke="#f59e0b"/>
+    <text x="265" y="88" class="body">S</text><text x="265" y="108" class="small">Tq × Tk</text>
+    <line x1="227" y1="92" x2="247" y2="92" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="20" y="152" class="math">S = QKᵀ / √dk</text>
+    <rect x="20" y="180" width="318" height="60" rx="10" fill="#f1f5f9"/>
+    <text x="34" y="203" class="body">mask + softmax</text>
+    <text x="34" y="226" class="small">分数 → 行归一化权重；这里已加入非线性</text>
+    <line x1="180" y1="242" x2="180" y2="268" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="48" y="272" width="264" height="42" rx="10" fill="#dcfce7" stroke="#22c55e"/>
+    <text x="67" y="298" class="body">softmax(S)V ∈ ℝ^(Tq × dv)</text>
+    <text x="20" y="331" class="small">要点：必须声明 token / head / batch 轴</text>
+  </g>
+</svg>

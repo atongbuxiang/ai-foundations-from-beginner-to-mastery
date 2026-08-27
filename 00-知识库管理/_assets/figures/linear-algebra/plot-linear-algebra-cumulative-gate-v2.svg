@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="460" viewBox="0 0 1200 460" role="img" aria-labelledby="title desc">
+<title id="title">线性代数累计复现门</title>
+<desc id="desc">三面板展示病态基中的坐标放大，非正规 Jordan 系统的幂次瞬态和低秩尾误差，以及 attention score 经 softmax 后的秩变化。</desc>
+<defs><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",Arial,sans-serif}.title{font-size:24px;font-weight:700;fill:#1F2937}.head{font-size:22px;font-weight:700;fill:#334155}.small{font-size:15px;fill:#64748B}.label{font-size:17px;fill:#334155}.math{font-family:Georgia,"Times New Roman",serif;font-size:17px;fill:#1F2937}.card{fill:#FFFEFB;stroke:#D7DEE8;stroke-width:1.3}.axis{stroke:#64748B;stroke-width:1.1}.grid{stroke:#D7DEE8;stroke-width:1;stroke-dasharray:4 4}</style></defs>
+<rect width="1200" height="460" fill="#FFFFFF"/>
+<text x="40" y="38" class="title">LA-CUM-01 计算门：坐标/子空间、谱/SVD 与结构化 AI 运算</text>
+<rect x="28" y="58" width="368" height="372" class="card"/><rect x="416" y="58" width="368" height="372" class="card"/><rect x="804" y="58" width="368" height="372" class="card"/>
+<text x="50" y="88" class="head">A　同一向量：病态基放大坐标</text>
+<text x="438" y="88" class="head">B　同一谱：非正规瞬态与 SVD 尾部</text>
+<text x="826" y="88" class="head">C　低秩 score 与 softmax 增秩</text>
+<line x1="74.0" y1="271.0" x2="349.0" y2="271.0" class="axis"/>
+<line x1="74.0" y1="126.0" x2="74.0" y2="271.0" class="axis"/>
+<text x="211.5" y="296.0" class="small" text-anchor="middle">−log₁₀ ε（两根基向量趋于共线）</text>
+<text x="74.0" y="116.0" class="small" text-anchor="start">log₁₀ magnitude</text>
+<circle cx="74.0" cy="250.4" r="4.5" fill="#DC2626"/>
+<circle cx="74.0" cy="263.6" r="4.5" fill="#2563EB"/>
+<circle cx="131.0" cy="229.9" r="4.5" fill="#DC2626"/>
+<circle cx="131.0" cy="237.8" r="4.5" fill="#2563EB"/>
+<circle cx="183.0" cy="206.9" r="4.5" fill="#DC2626"/>
+<circle cx="183.0" cy="214.3" r="4.5" fill="#2563EB"/>
+<circle cx="240.0" cy="181.2" r="4.5" fill="#DC2626"/>
+<circle cx="240.0" cy="188.6" r="4.5" fill="#2563EB"/>
+<circle cx="292.0" cy="157.7" r="4.5" fill="#DC2626"/>
+<circle cx="292.0" cy="165.1" r="4.5" fill="#2563EB"/>
+<circle cx="349.0" cy="131.9" r="4.5" fill="#DC2626"/>
+<circle cx="349.0" cy="139.3" r="4.5" fill="#2563EB"/>
+<polyline points="74.0,250.4 131.0,229.9 183.0,206.9 240.0,181.2 292.0,157.7 349.0,131.9" fill="none" stroke="#DC2626" stroke-width="2.4"/>
+<polyline points="74.0,263.6 131.0,237.8 183.0,214.3 240.0,188.6 292.0,165.1 349.0,139.3" fill="none" stroke="#2563EB" stroke-width="2.4"/>
+<line x1="78" y1="318" x2="102" y2="318" stroke="#DC2626" stroke-width="2.5"/><text x="110" y="322" class="label">κ₂(Bε)</text>
+<line x1="205" y1="318" x2="229" y2="318" stroke="#2563EB" stroke-width="2.5"/><text x="237" y="322" class="label">‖[v]Bε‖₂</text>
+<text x="50.0" y="354.0" class="label" text-anchor="start">v=(0,1) 不变；坐标约按 1/ε 增长</text>
+<text x="50.0" y="379.0" class="small" text-anchor="start">P²−P Frobenius residual = 1.6e-16</text>
+<text x="50.0" y="402.0" class="small" text-anchor="start">商类代表改变，输出不变（残差 9.2e-16）</text>
+<line x1="458.0" y1="254.0" x2="743.0" y2="254.0" class="axis"/>
+<line x1="458.0" y1="122.0" x2="458.0" y2="254.0" class="axis"/>
+<text x="458.0" y="113.0" class="small" text-anchor="start">operator 2-norm</text>
+<text x="600.5" y="279.0" class="small" text-anchor="middle">power k</text>
+<polyline points="458.0,222.8 462.8,206.2 467.5,188.1 472.2,171.8 477.0,158.5 481.8,148.3 486.5,140.9 491.2,135.9 496.0,133.0 500.8,131.8 505.5,132.0 510.2,133.4 515.0,135.7 519.8,138.8 524.5,142.4 529.2,146.4 534.0,150.8 538.8,155.3 543.5,160.0 548.2,164.7 553.0,169.4 557.8,174.1 562.5,178.7 567.2,183.1 572.0,187.5 576.8,191.6 581.5,195.6 586.2,199.4 591.0,203.1 595.8,206.5 600.5,209.8 605.2,212.9 610.0,215.8 614.8,218.6 619.5,221.2 624.2,223.6 629.0,225.8 633.8,227.9 638.5,229.9 643.2,231.8 648.0,233.5 652.8,235.1 657.5,236.5 662.2,237.9 667.0,239.2 671.8,240.4 676.5,241.5 681.2,242.5 686.0,243.4 690.8,244.3 695.5,245.1 700.2,245.8 705.0,246.5 709.8,247.1 714.5,247.7 719.2,248.2 724.0,248.7 728.8,249.1 733.5,249.5 738.2,249.9 743.0,250.3" fill="none" stroke="#7C3AED" stroke-width="2.6"/>
+<polyline points="458.0,222.8 462.8,225.9 467.5,228.7 472.2,231.2 477.0,233.5 481.8,235.6 486.5,237.4 491.2,239.1 496.0,240.6 500.8,241.9 505.5,243.1 510.2,244.2 515.0,245.2 519.8,246.1 524.5,246.9 529.2,247.6 534.0,248.2 538.8,248.8 543.5,249.3 548.2,249.8 553.0,250.2 557.8,250.6 562.5,250.9 567.2,251.2 572.0,251.5 576.8,251.8 581.5,252.0 586.2,252.2 591.0,252.4 595.8,252.5 600.5,252.7 605.2,252.8 610.0,252.9 614.8,253.0 619.5,253.1 624.2,253.2 629.0,253.3 633.8,253.4 638.5,253.4 643.2,253.5 648.0,253.5 652.8,253.6 657.5,253.6 662.2,253.7 667.0,253.7 671.8,253.7 676.5,253.8 681.2,253.8 686.0,253.8 690.8,253.8 695.5,253.8 700.2,253.9 705.0,253.9 709.8,253.9 714.5,253.9 719.2,253.9 724.0,253.9 728.8,253.9 733.5,253.9 738.2,253.9 743.0,253.9" fill="none" stroke="#16A34A" stroke-width="2.4"/>
+<circle cx="500.8" cy="131.8" r="5" fill="#7C3AED"/>
+<text x="508.8" y="124.8" class="small" text-anchor="start">peak k=9, ‖Jᵏ‖=3.91</text>
+<line x1="464" y1="300" x2="488" y2="300" stroke="#7C3AED" stroke-width="2.5"/><text x="496" y="304" class="label">Jρ=[[ρ,1],[0,ρ]]</text>
+<line x1="626" y1="300" x2="650" y2="300" stroke="#16A34A" stroke-width="2.5"/><text x="658" y="304" class="label">ρI</text>
+<text x="438.0" y="330.0" class="small" text-anchor="start">两者 eigenvalues 都是 ρ=0.9；power behavior 不同</text>
+<text x="438.0" y="356.0" class="label" text-anchor="start">Eckart–Young tail（σ=5,2,0.5,0.1）</text>
+<rect x="456" y="371.0" width="45" height="34.0" rx="4" fill="#F59E0B" fill-opacity=".8"/>
+<text x="478.5" y="421.0" class="small" text-anchor="middle">r=1</text>
+<text x="478.5" y="363.0" class="small" text-anchor="middle">2.1</text>
+<rect x="531" y="396.6" width="45" height="8.4" rx="4" fill="#F59E0B" fill-opacity=".8"/>
+<text x="553.5" y="421.0" class="small" text-anchor="middle">r=2</text>
+<text x="553.5" y="388.6" class="small" text-anchor="middle">0.51</text>
+<rect x="606" y="403.4" width="45" height="1.6" rx="4" fill="#F59E0B" fill-opacity=".8"/>
+<text x="628.5" y="421.0" class="small" text-anchor="middle">r=3</text>
+<text x="628.5" y="395.4" class="small" text-anchor="middle">0.1</text>
+<rect x="681" y="405.0" width="45" height="0.0" rx="4" fill="#F59E0B" fill-opacity=".8"/>
+<text x="703.5" y="421.0" class="small" text-anchor="middle">r=4</text>
+<text x="703.5" y="397.0" class="small" text-anchor="middle">0</text>
+<line x1="844.0" y1="298.0" x2="1126.0" y2="298.0" class="axis"/>
+<line x1="844.0" y1="126.0" x2="844.0" y2="298.0" class="axis"/>
+<text x="844.0" y="117.0" class="small" text-anchor="start">singular value（log scale）</text>
+<rect x="854.0" y="128.7" width="7" height="169.3" fill="#2563EB"/>
+<rect x="864.0" y="148.8" width="7" height="149.2" fill="#DB2777"/>
+<text x="862.0" y="317.0" class="small" text-anchor="middle">1</text>
+<rect x="888.0" y="130.9" width="7" height="167.1" fill="#2563EB"/>
+<rect x="898.0" y="153.7" width="7" height="144.3" fill="#DB2777"/>
+<text x="896.0" y="317.0" class="small" text-anchor="middle">2</text>
+<rect x="922.0" y="298.0" width="7" height="0.0" fill="#2563EB"/>
+<rect x="932.0" y="162.4" width="7" height="135.6" fill="#DB2777"/>
+<text x="930.0" y="317.0" class="small" text-anchor="middle">3</text>
+<rect x="956.0" y="298.0" width="7" height="0.0" fill="#2563EB"/>
+<rect x="966.0" y="173.4" width="7" height="124.6" fill="#DB2777"/>
+<text x="964.0" y="317.0" class="small" text-anchor="middle">4</text>
+<rect x="990.0" y="298.0" width="7" height="0.0" fill="#2563EB"/>
+<rect x="1000.0" y="186.2" width="7" height="111.8" fill="#DB2777"/>
+<text x="998.0" y="317.0" class="small" text-anchor="middle">5</text>
+<rect x="1024.0" y="298.0" width="7" height="0.0" fill="#2563EB"/>
+<rect x="1034.0" y="201.4" width="7" height="96.6" fill="#DB2777"/>
+<text x="1032.0" y="317.0" class="small" text-anchor="middle">6</text>
+<rect x="1058.0" y="298.0" width="7" height="0.0" fill="#2563EB"/>
+<rect x="1068.0" y="219.0" width="7" height="79.0" fill="#DB2777"/>
+<text x="1066.0" y="317.0" class="small" text-anchor="middle">7</text>
+<rect x="1092.0" y="298.0" width="7" height="0.0" fill="#2563EB"/>
+<rect x="1102.0" y="242.1" width="7" height="55.9" fill="#DB2777"/>
+<text x="1100.0" y="317.0" class="small" text-anchor="middle">8</text>
+<rect x="850" y="325" width="10" height="10" fill="#2563EB"/><text x="867" y="335" class="label">S=QKᵀ</text>
+<rect x="965" y="325" width="10" height="10" fill="#DB2777"/><text x="982" y="335" class="label">row-softmax(S)</text>
+<text x="826.0" y="365.0" class="label" text-anchor="start">numerical rank: 2 → 8  (relative tol 10⁻⁶)</text>
+<text x="826.0" y="391.0" class="small" text-anchor="start">vec(AXB) identity residual = 0.0e+00</text>
+<text x="826.0" y="414.0" class="small" text-anchor="start">线性 rank 上界不能无条件穿过非线性</text>
+</svg>

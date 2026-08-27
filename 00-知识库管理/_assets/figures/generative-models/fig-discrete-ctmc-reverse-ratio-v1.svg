@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+  <defs><marker id="c" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0 0L10 3L0 6Z" fill="#24384f"/></marker><style>.t{font-family:Inter,'Noto Sans SC',sans-serif;fill:#172033}.h{font-size:25px;font-weight:700}.s{font-size:18px}.m{font-family:'IBM Plex Mono',monospace;font-size:18px;fill:#28415f}.mut{font-size:15px;fill:#667386}.arr{stroke:#24384f;stroke-width:2.3;fill:none;marker-end:url(#c)}.red{stroke:#a54d43}</style></defs>
+  <rect width="1200" height="620" fill="#f3efe6"/>
+  <text x="52" y="51" class="t h">CTMC：一份 infinitesimal flux 怎样变成反向跳跃率</text>
+  <line x1="52" y1="69" x2="1148" y2="69" stroke="#c7bda9"/>
+  <rect x="52" y="100" width="335" height="400" rx="12" fill="#fffdf8" stroke="#3e536b" stroke-width="2"/>
+  <text x="76" y="140" class="t h" font-size="20">1  Generator</text>
+  <text x="76" y="181" class="m">Q(t,t+h) = I + h R_t + o(h)</text>
+  <circle cx="140" cy="285" r="44" fill="#dce8f3" stroke="#355f8a" stroke-width="2"/><text x="134" y="292" class="t h" font-size="19">i</text>
+  <circle cx="300" cy="285" r="44" fill="#f0dfdc" stroke="#a34f45" stroke-width="2"/><text x="294" y="292" class="t h" font-size="19">j</text>
+  <path d="M185 269 C220 237 252 237 274 263" class="arr"/><text x="205" y="230" class="t mut">R_t[i,j]</text>
+  <text x="76" y="370" class="t s">总离开率 lambda(i)</text><text x="76" y="405" class="m">= sum_(j!=i) R_t[i,j]</text>
+  <text x="76" y="454" class="t mut">off-diagonal 非负；diagonal = -lambda(i)</text>
+  <rect x="433" y="100" width="335" height="400" rx="12" fill="#fffdf8" stroke="#7b6335" stroke-width="2"/>
+  <text x="457" y="140" class="t h" font-size="20">2  Forward joint flux</text>
+  <rect x="469" y="192" width="265" height="95" rx="8" fill="#fff1c9" stroke="#a98027"/>
+  <text x="492" y="228" class="m">mass = p_t(i)</text><text x="492" y="261" class="m">× R_t[i,j] × h</text>
+  <path d="M602 303V343" class="arr"/>
+  <rect x="469" y="352" width="265" height="95" rx="8" fill="#e9edf6" stroke="#526f9b"/>
+  <text x="492" y="389" class="t s">给定终点 j</text><text x="492" y="420" class="m">divide by p_t(j)</text>
+  <rect x="814" y="100" width="334" height="400" rx="12" fill="#fffdf8" stroke="#53774f" stroke-width="2"/>
+  <text x="838" y="140" class="t h" font-size="20">3  Reverse rate / ratio score</text>
+  <rect x="844" y="188" width="275" height="118" rx="8" fill="#e2eedf" stroke="#4f7d4c"/>
+  <text x="867" y="226" class="m">R_rev[j,i]</text><text x="867" y="259" class="m">= R_t[i,j] p_t(i)/p_t(j)</text><text x="867" y="288" class="t mut">反边 rate × 边缘概率比</text>
+  <text x="844" y="352" class="t s">离散 score 的自然对象</text>
+  <text x="844" y="388" class="m">log p_t(i) - log p_t(j)</text>
+  <text x="844" y="430" class="t mut">在边上定义；不是类别 ID 的欧氏梯度</text>
+  <path d="M388 300H421" class="arr"/><path d="M769 300H802" class="arr"/>
+  <rect x="52" y="528" width="1096" height="58" rx="9" fill="#fff8de" stroke="#c6a64c"/>
+  <text x="75" y="562" class="t s">审计：ratio/model error、event/time solver error、terminal prior mismatch 是三本账。</text>
+</svg>

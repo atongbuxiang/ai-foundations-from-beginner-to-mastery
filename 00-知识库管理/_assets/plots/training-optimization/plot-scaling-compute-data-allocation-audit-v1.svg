@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+<title id="title">Compute-optimal allocation and repeated-token value</title>
+<desc id="desc">Left panel shows normalized IsoFLOP regret around the analytic optimum; right panel separates seen from effective repeated tokens.</desc>
+<rect width="1200" height="800" fill="#FFFEFB"/>
+<text x="60.0" y="58.0" font-family="Inter, Arial, sans-serif" font-size="28" fill="#172033" text-anchor="start" font-weight="700">Allocation audit: a budget optimum and a data ledger are different objects</text>
+<text x="60.0" y="91.0" font-family="Inter, Arial, sans-serif" font-size="17" fill="#52606D" text-anchor="start" font-weight="400">The optimum is a valley; repeated exposure grows the seen ledger faster than the effective proxy.</text>
+<rect x="55" y="125" width="530" height="590" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+<text x="79.0" y="163.0" font-family="Inter, Arial, sans-serif" font-size="20" fill="#172033" text-anchor="start" font-weight="700">A  IsoFLOP regret around N*</text>
+<rect x="615" y="125" width="530" height="590" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+<text x="639.0" y="163.0" font-family="Inter, Arial, sans-serif" font-size="20" fill="#172033" text-anchor="start" font-weight="700">B  Repetition: seen versus effective tokens</text>
+<line x1="105" y1="610.0" x2="505" y2="610.0" stroke="#D9E0E7" stroke-width="1"/>
+<text x="92.0" y="615.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">0.0</text>
+<line x1="105" y1="522.0" x2="505" y2="522.0" stroke="#D9E0E7" stroke-width="1"/>
+<text x="92.0" y="527.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">0.025</text>
+<line x1="105" y1="433.9" x2="505" y2="433.9" stroke="#D9E0E7" stroke-width="1"/>
+<text x="92.0" y="438.9" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">0.05</text>
+<line x1="105" y1="345.9" x2="505" y2="345.9" stroke="#D9E0E7" stroke-width="1"/>
+<text x="92.0" y="350.9" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">0.075</text>
+<line x1="105" y1="257.9" x2="505" y2="257.9" stroke="#D9E0E7" stroke-width="1"/>
+<text x="92.0" y="262.9" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">0.1</text>
+<text x="105.0" y="650.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="middle" font-weight="400">0.25</text>
+<text x="205.0" y="650.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="middle" font-weight="400">0.5</text>
+<text x="305.0" y="650.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="middle" font-weight="400">1.0</text>
+<text x="405.0" y="650.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="middle" font-weight="400">2.0</text>
+<text x="505.0" y="650.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="middle" font-weight="400">4.0</text>
+<polyline points="105.0,273.6 205.0,528.0 305.0,610.0 405.0,530.3 505.0,291.8" fill="none" stroke="#B76E00" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="305" y1="185" x2="305" y2="620" stroke="#52606D" stroke-width="2" stroke-dasharray="8 7"/>
+<text x="305.0" y="210.0" font-family="Inter, Arial, sans-serif" font-size="16" fill="#0F766E" text-anchor="middle" font-weight="700">analytic N*</text>
+<text x="305.0" y="684.0" font-family="Inter, Arial, sans-serif" font-size="17" fill="#52606D" text-anchor="middle" font-weight="400">N / N* at fixed compute</text>
+<text x="115.0" y="250.0" font-family="Inter, Arial, sans-serif" font-size="16" fill="#52606D" text-anchor="start" font-weight="400">C=1e4, 1e6, 1e8: exact overlap</text>
+<text x="115.0" y="285.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="start" font-weight="400">relative regret</text>
+<line x1="700" y1="620.0" x2="1080" y2="620.0" stroke="#D9E0E7" stroke-width="1"/>
+<text x="688.0" y="625.0" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">0</text>
+<line x1="700" y1="527.1" x2="1080" y2="527.1" stroke="#D9E0E7" stroke-width="1"/>
+<text x="688.0" y="532.1" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">250</text>
+<line x1="700" y1="434.3" x2="1080" y2="434.3" stroke="#D9E0E7" stroke-width="1"/>
+<text x="688.0" y="439.3" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">500</text>
+<line x1="700" y1="341.4" x2="1080" y2="341.4" stroke="#D9E0E7" stroke-width="1"/>
+<text x="688.0" y="346.4" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">750</text>
+<line x1="700" y1="248.6" x2="1080" y2="248.6" stroke="#D9E0E7" stroke-width="1"/>
+<text x="688.0" y="253.6" font-family="Inter, Arial, sans-serif" font-size="15" fill="#52606D" text-anchor="end" font-weight="400">1000</text>
+<polyline points="702.0,582.9 744.0,545.7 786.0,508.6 828.0,471.4 870.0,434.3 912.0,397.1 954.0,360.0 996.0,322.9 1038.0,285.7 1080.0,248.6" fill="none" stroke="#2563EB" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="702.0,582.9 744.0,560.6 786.0,547.2 828.0,539.2 870.0,534.4 912.0,531.5 954.0,529.7 996.0,528.7 1038.0,528.1 1080.0,527.7" fill="none" stroke="#B76E00" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="730.0" y="245.0" font-family="Inter, Arial, sans-serif" font-size="16" fill="#2563EB" text-anchor="start" font-weight="700">seen = U x epochs</text>
+<text x="820.0" y="505.0" font-family="Inter, Arial, sans-serif" font-size="16" fill="#B76E00" text-anchor="start" font-weight="700">effective proxy saturates</text>
+<text x="890.0" y="684.0" font-family="Inter, Arial, sans-serif" font-size="17" fill="#52606D" text-anchor="middle" font-weight="400">repetitions / epochs</text>
+<text x="600.0" y="756.0" font-family="Inter, Arial, sans-serif" font-size="16" fill="#52606D" text-anchor="middle" font-weight="400">Evidence boundary: analytic proxy with declared exponents and decay; real optima and token value require empirical calibration.</text>
+</svg>

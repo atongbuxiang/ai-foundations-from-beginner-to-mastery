@@ -1,0 +1,4 @@
+rank,effective_sample_count,local_gradient_mean,local_gradient_sum,global_sample_count,correct_global_sample_mean,incorrect_equal_rank_mean,rank_mean_bias
+0,4,1.0,4.0,9,3.6666666666666665,4.0,0.3333333333333335
+1,2,4.0,8.0,9,3.6666666666666665,4.0,0.3333333333333335
+2,3,7.0,21.0,9,3.6666666666666665,4.0,0.3333333333333335

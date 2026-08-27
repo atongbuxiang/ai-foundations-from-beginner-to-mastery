@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 920" role="img" aria-labelledby="title desc">
+  <title id="title">前向误差、残差、后向误差与条件数的关系</title>
+  <desc id="desc">从原始数据与邻近数据出发，比较精确解和计算解；残差经过允许扰动与尺度归一化成为后向误差，条件数把后向误差转换为前向误差界。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8fafc"/>
+      <stop offset="1" stop-color="#eef2ff"/>
+    </linearGradient>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrowAmber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#d97706"/>
+    </marker>
+    <marker id="arrowSlate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#0f172a" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="920" fill="url(#bg)"/>
+  <style>
+    text{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#172033}
+    .title{font-size:36px;font-weight:760;letter-spacing:.2px}
+    .subtitle{font-size:19px;fill:#526078}
+    .boxTitle{font-size:24px;font-weight:720}
+    .formula{font-size:22px;font-weight:620}
+    .body{font-size:18px;fill:#475569}
+    .small{font-size:16px;fill:#64748b}
+    .pill{font-size:17px;font-weight:700}
+    .footer{font-size:18px;font-weight:650;fill:#ffffff}
+    .formulaWhite{font-size:22px;font-weight:620;fill:#ffffff}
+  </style>
+
+  <text class="title" x="800" y="58" text-anchor="middle">误差分析不是一个数字，而是一条可验证的因果链</text>
+  <text class="subtitle" x="800" y="91" text-anchor="middle">先说明原问题、允许扰动与尺度，再用条件性解释最终答案</text>
+
+  <rect x="72" y="150" width="318" height="204" rx="24" fill="#ffffff" stroke="#94a3b8" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="94" y="171" width="115" height="34" rx="17" fill="#e2e8f0"/>
+  <text class="pill" x="151" y="194" text-anchor="middle">原始数据</text>
+  <text class="boxTitle" x="231" y="246" text-anchor="middle">d</text>
+  <text class="body" x="231" y="287" text-anchor="middle">测量、采样、矩阵、参数</text>
+  <text class="small" x="231" y="320" text-anchor="middle">先规定单位、范数和可信尺度</text>
+
+  <rect x="510" y="150" width="318" height="204" rx="24" fill="#eff6ff" stroke="#3b82f6" stroke-width="2.5" filter="url(#shadow)"/>
+  <rect x="532" y="171" width="128" height="34" rx="17" fill="#dbeafe"/>
+  <text class="pill" x="596" y="194" text-anchor="middle" fill="#1d4ed8">精确问题</text>
+  <text class="formula" x="669" y="250" text-anchor="middle">y = f(d)</text>
+  <text class="body" x="669" y="289" text-anchor="middle">原数据对应的真解</text>
+  <text class="small" x="669" y="321" text-anchor="middle">可能是单值，也可能是解集合</text>
+
+  <rect x="950" y="150" width="318" height="204" rx="24" fill="#f0fdf4" stroke="#22c55e" stroke-width="2.5" filter="url(#shadow)"/>
+  <rect x="972" y="171" width="128" height="34" rx="17" fill="#dcfce7"/>
+  <text class="pill" x="1036" y="194" text-anchor="middle" fill="#15803d">计算结果</text>
+  <text class="formula" x="1109" y="250" text-anchor="middle">ŷ = alg(d)</text>
+  <text class="body" x="1109" y="289" text-anchor="middle">有限精度 / 有限迭代 / 近似</text>
+  <text class="small" x="1109" y="321" text-anchor="middle">这是实际拿到的答案</text>
+
+  <rect x="1298" y="150" width="230" height="204" rx="24" fill="#fff7ed" stroke="#f59e0b" stroke-width="2.5" filter="url(#shadow)"/>
+  <rect x="1320" y="171" width="116" height="34" rx="17" fill="#ffedd5"/>
+  <text class="pill" x="1378" y="194" text-anchor="middle" fill="#b45309">直接验收</text>
+  <text class="boxTitle" x="1413" y="247" text-anchor="middle">残差 r</text>
+  <text class="body" x="1413" y="286" text-anchor="middle">代回方程剩多少</text>
+  <text class="small" x="1413" y="319" text-anchor="middle">原始量尚未尺度化</text>
+
+  <path d="M390 252 H502" fill="none" stroke="#2563eb" stroke-width="4" marker-end="url(#arrowBlue)"/>
+  <text class="small" x="446" y="233" text-anchor="middle">精确求解</text>
+  <path d="M828 252 H942" fill="none" stroke="#475569" stroke-width="4" stroke-dasharray="10 8" marker-end="url(#arrowSlate)"/>
+  <text class="small" x="885" y="233" text-anchor="middle">算法逼近</text>
+  <path d="M1268 252 H1290" fill="none" stroke="#d97706" stroke-width="4" marker-end="url(#arrowAmber)"/>
+
+  <rect x="72" y="465" width="404" height="260" rx="28" fill="#fff7ed" stroke="#f59e0b" stroke-width="2.5" filter="url(#shadow)"/>
+  <text class="boxTitle" x="274" y="512" text-anchor="middle" fill="#b45309">后向误差 η</text>
+  <text class="formula" x="274" y="564" text-anchor="middle">min ‖Δd‖ / scale(d)</text>
+  <text class="body" x="274" y="608" text-anchor="middle">使得 ŷ 成为邻近问题的精确解</text>
+  <text class="small" x="274" y="647" text-anchor="middle">必须写明允许改哪些数据</text>
+  <text class="small" x="274" y="678" text-anchor="middle">以及范数型 / 分量型 / 结构化约束</text>
+
+  <rect x="598" y="465" width="404" height="260" rx="28" fill="#eef2ff" stroke="#6366f1" stroke-width="2.5" filter="url(#shadow)"/>
+  <text class="boxTitle" x="800" y="512" text-anchor="middle" fill="#4338ca">条件数 κ</text>
+  <text class="formula" x="800" y="564" text-anchor="middle">输入扰动 → 真解变化</text>
+  <text class="body" x="800" y="608" text-anchor="middle">问题本身的敏感性</text>
+  <text class="small" x="800" y="647" text-anchor="middle">良态：小扰动只引起小变化</text>
+  <text class="small" x="800" y="678" text-anchor="middle">病态：邻近问题的真解也可相距很远</text>
+
+  <rect x="1124" y="465" width="404" height="260" rx="28" fill="#ecfdf5" stroke="#10b981" stroke-width="2.5" filter="url(#shadow)"/>
+  <text class="boxTitle" x="1326" y="512" text-anchor="middle" fill="#047857">前向误差</text>
+  <text class="formula" x="1326" y="564" text-anchor="middle">‖ŷ − y‖ / ‖y‖</text>
+  <text class="body" x="1326" y="608" text-anchor="middle">最终答案离原问题真解多远</text>
+  <text class="small" x="1326" y="647" text-anchor="middle">最贴近用户目标，但真解常未知</text>
+  <text class="small" x="1326" y="678" text-anchor="middle">可由参考解或后验界估计</text>
+
+  <path d="M1413 362 C1413 405 404 405 274 457" fill="none" stroke="#d97706" stroke-width="4" marker-end="url(#arrowAmber)"/>
+  <text class="small" x="882" y="400" text-anchor="middle">按数据尺度归一化，并求最小允许扰动</text>
+  <path d="M484 595 H590" fill="none" stroke="#6366f1" stroke-width="4" marker-end="url(#arrowBlue)"/>
+  <text class="small" x="537" y="575" text-anchor="middle">问题放大</text>
+  <path d="M1010 595 H1116" fill="none" stroke="#10b981" stroke-width="4" marker-end="url(#arrowBlue)"/>
+
+  <rect x="318" y="786" width="964" height="78" rx="24" fill="#172033"/>
+  <text class="footer" x="800" y="820" text-anchor="middle">核心关系（局部、且度量必须匹配）</text>
+  <text class="formulaWhite" x="800" y="851" text-anchor="middle">前向误差 ≲ 条件数 × 后向误差</text>
+
+  <path d="M669 362 C669 404 1190 407 1262 457" fill="none" stroke="#10b981" stroke-width="3.5" stroke-dasharray="9 8" marker-end="url(#arrowBlue)"/>
+  <text class="small" x="997" y="437" text-anchor="middle">若知道真解，可直接比较</text>
+</svg>

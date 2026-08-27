@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">条件概率、全概率与 Bayes 公式</title>
+<desc id="desc">条件化是在事件 B 内重新归一；全概率汇总互斥原因；Bayes 用似然比更新先验 odds。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">限制到 B，再归一化</text>
+<circle cx="160" cy="235" r="115" fill="#EFF6FF" stroke="#2563EB" stroke-width="2.5"/>
+<circle cx="245" cy="235" r="95" fill="#ECFDF5" stroke="#0F766E" stroke-width="2.5"/>
+<text x="112" y="230" font-size="22" font-weight="700" text-anchor="start" fill="#2563EB">B</text>
+<text x="215" y="230" font-size="18" font-weight="700" text-anchor="start" fill="#0F766E">A∩B</text>
+<text x="45" y="385" font-size="19" font-weight="700" text-anchor="start" fill="#1F2937" class="math">P(A|B)=P(A∩B)/P(B)</text>
+<text x="45" y="425" font-size="16" font-weight="400" text-anchor="start" fill="#64748B">B 外质量被排除；B 内总质量缩放为 1。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">分割原因，汇总证据</text>
+<rect x="445" y="130" width="72" height="52" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="481.0" y="162.0" font-size="16" font-weight="650" text-anchor="middle" fill="#0F766E">H1</text>
+<line x1="520" y1="156" x2="675" y2="235" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="445" y="235" width="72" height="52" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="481.0" y="267.0" font-size="16" font-weight="650" text-anchor="middle" fill="#0F766E">H2</text>
+<line x1="520" y1="261" x2="675" y2="235" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="445" y="340" width="72" height="52" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="481.0" y="372.0" font-size="16" font-weight="650" text-anchor="middle" fill="#0F766E">H3</text>
+<line x1="520" y1="366" x2="675" y2="235" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="690" y="205" width="70" height="62" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="725.0" y="242.0" font-size="19" font-weight="650" text-anchor="middle" fill="#2563EB">E</text>
+<text x="430" y="455" font-size="17" font-weight="650" text-anchor="start" fill="#1F2937" class="math">P(E)=sum_i P(E|Hi)P(Hi)</text>
+<text x="430" y="490" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">原因必须互斥且穷尽；遗漏原因会漏掉证据。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Bayes：odds 乘似然比</text>
+<rect x="845" y="115" width="120" height="66" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="905.0" y="154.0" font-size="16" font-weight="650" text-anchor="middle" fill="#2563EB">prior odds
+1:99</text>
+<rect x="1020" y="115" width="120" height="66" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="1080.0" y="154.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">LR=0.99/0.05</text>
+<line x1="968" y1="148" x2="1015" y2="148" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<text x="990" y="130" font-size="22" font-weight="700" text-anchor="middle" fill="#1F2937">×</text>
+<rect x="885" y="235" width="220" height="72" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="995.0" y="277.0" font-size="17" font-weight="650" text-anchor="middle" fill="#C24135">posterior odds ≈ 1:5</text>
+<text x="995" y="345" font-size="22" font-weight="700" text-anchor="middle" fill="#C24135">P≈1/6</text>
+<text x="830" y="405" font-size="17" font-weight="650" text-anchor="start" fill="#1F2937">低 base rate 仍可主导后验。</text>
+<text x="830" y="445" font-size="16" font-weight="400" text-anchor="start" fill="#64748B">恒等式正确不等于模型与因果假设正确。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">条件化改变信息集合并重新归一；Bayes 反转的是概率方向，不自动反转因果方向。</text>
+</svg>

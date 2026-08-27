@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="470" viewBox="0 0 1200 470" role="img" aria-labelledby="title desc">
+<title id="title">矩阵分析累计复现门</title>
+<desc id="desc">三面板展示正定边界与条件数，谱间隙闭合时的特征向量旋转和非正规伪谱，以及矩阵 sign、polar、Frechet 导数与结构化条件数的区别。</desc>
+<defs><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",Arial,sans-serif}.title{font-size:24px;font-weight:700;fill:#1F2937}.head{font-size:22px;font-weight:700;fill:#334155}.small{font-size:15px;fill:#64748B}.label{font-size:17px;fill:#334155}.math{font-family:Georgia,"Times New Roman",serif;font-size:17px;fill:#1F2937}.card{fill:#FFFEFB;stroke:#D7DEE8;stroke-width:1.3}.axis{stroke:#64748B;stroke-width:1.1}.grid{stroke:#D7DEE8;stroke-width:1;stroke-dasharray:4 4}</style></defs>
+<rect width="1200" height="470" fill="#FFFFFF"/>
+<text x="40" y="38" class="title">MA-CUM-01 计算门：正定变分、扰动/非正规与矩阵函数结构</text>
+<rect x="28" y="58" width="368" height="382" class="card"/><rect x="416" y="58" width="368" height="382" class="card"/><rect x="804" y="58" width="368" height="382" class="card"/>
+<text x="50" y="88" class="head">A　PSD 边界与投影条件</text>
+<text x="438" y="88" class="head">B　谱隙与方向旋转</text>
+<text x="826" y="88" class="head">C　sign 与 polar 的结构差异</text>
+<line x1="74.0" y1="276.0" x2="349.0" y2="276.0" class="axis"/>
+<line x1="74.0" y1="126.0" x2="74.0" y2="276.0" class="axis"/>
+<text x="74.0" y="116.0" class="small" text-anchor="start">log₁₀ amplification</text>
+<text x="211.5" y="300.0" class="small" text-anchor="middle">−log₁₀ δ，λmin(Hδ)=δ</text>
+<circle cx="74.0" cy="276.0" r="4.5" fill="#DC2626"/>
+<circle cx="74.0" cy="276.0" r="4.5" fill="#2563EB"/>
+<circle cx="131.0" cy="238.2" r="4.5" fill="#DC2626"/>
+<circle cx="131.0" cy="261.3" r="4.5" fill="#2563EB"/>
+<circle cx="183.0" cy="211.9" r="4.5" fill="#DC2626"/>
+<circle cx="183.0" cy="239.8" r="4.5" fill="#2563EB"/>
+<circle cx="240.0" cy="184.9" r="4.5" fill="#DC2626"/>
+<circle cx="240.0" cy="214.4" r="4.5" fill="#2563EB"/>
+<circle cx="292.0" cy="160.8" r="4.5" fill="#DC2626"/>
+<circle cx="292.0" cy="190.7" r="4.5" fill="#2563EB"/>
+<circle cx="349.0" cy="134.5" r="4.5" fill="#DC2626"/>
+<circle cx="349.0" cy="164.6" r="4.5" fill="#2563EB"/>
+<polyline points="74.0,276.0 131.0,238.2 183.0,211.9 240.0,184.9 292.0,160.8 349.0,134.5" fill="none" stroke="#DC2626" stroke-width="2.4"/>
+<polyline points="74.0,276.0 131.0,261.3 183.0,239.8 240.0,214.4 292.0,190.7 349.0,164.6" fill="none" stroke="#2563EB" stroke-width="2.4"/>
+<line x1="70" y1="323" x2="94" y2="323" stroke="#DC2626" stroke-width="2.5"/><text x="102" y="327" class="label">κ₂(Hδ)</text>
+<line x1="205" y1="323" x2="229" y2="323" stroke="#2563EB" stroke-width="2.5"/><text x="237" y="327" class="label">1/l₂₂²</text>
+<text x="50.0" y="357.0" class="label" text-anchor="start">Hδ=[[1,1−δ],[1−δ,1]]；δ↓0 接近 rank-1</text>
+<text x="50.0" y="385.0" class="small" text-anchor="start">同一退化：margin↓ / κ↑ / pivot↓</text>
+<text x="50.0" y="412.0" class="small" text-anchor="start">max ‖LLᵀ−H‖F = 0.0e+00</text>
+<line x1="458.0" y1="271.0" x2="743.0" y2="271.0" class="axis"/>
+<line x1="458.0" y1="126.0" x2="458.0" y2="271.0" class="axis"/>
+<text x="458.0" y="116.0" class="small" text-anchor="start">top eigenvector rotation (degrees)</text>
+<text x="600.5" y="295.0" class="small" text-anchor="middle">−log₁₀ gap（‖E‖₂=0.02）</text>
+<circle cx="458.0" cy="267.5" r="4.5" fill="#7C3AED"/>
+<circle cx="517.1" cy="259.5" r="4.5" fill="#7C3AED"/>
+<circle cx="571.0" cy="238.1" r="4.5" fill="#7C3AED"/>
+<circle cx="630.0" cy="190.8" r="4.5" fill="#7C3AED"/>
+<circle cx="683.9" cy="156.3" r="4.5" fill="#7C3AED"/>
+<circle cx="743.0" cy="141.5" r="4.5" fill="#7C3AED"/>
+<polyline points="458.0,267.5 517.1,259.5 571.0,238.1 630.0,190.8 683.9,156.3 743.0,141.5" fill="none" stroke="#7C3AED" stroke-width="2.6"/>
+<text x="438.0" y="316.0" class="label" text-anchor="start">Weyl：所有 eigenvalue shifts ≤ 0.02</text>
+<text x="438.0" y="341.0" class="small" text-anchor="start">gap=0.003 时 direction rotation=42.9°</text>
+<text x="438.0" y="360.0" class="label" text-anchor="start">J_K：spectrum={0}，rε ≥ √(εK)</text>
+<rect x="452.0" y="414.2" width="36" height="3.8" rx="4" fill="#F59E0B" fill-opacity=".82"/>
+<text x="470.0" y="433.0" class="small" text-anchor="middle">K=1</text>
+<text x="470.0" y="404.2" class="small" text-anchor="middle">0.032</text>
+<rect x="513.0" y="411.4" width="36" height="6.6" rx="4" fill="#F59E0B" fill-opacity=".82"/>
+<text x="531.0" y="433.0" class="small" text-anchor="middle">K=3</text>
+<text x="531.0" y="401.4" class="small" text-anchor="middle">0.055</text>
+<rect x="574.0" y="406.0" width="36" height="12.0" rx="4" fill="#F59E0B" fill-opacity=".82"/>
+<text x="592.0" y="433.0" class="small" text-anchor="middle">K=10</text>
+<text x="592.0" y="396.0" class="small" text-anchor="middle">0.1</text>
+<rect x="635.0" y="397.2" width="36" height="20.8" rx="4" fill="#F59E0B" fill-opacity=".82"/>
+<text x="653.0" y="433.0" class="small" text-anchor="middle">K=30</text>
+<text x="653.0" y="387.2" class="small" text-anchor="middle">0.17</text>
+<rect x="696.0" y="380.0" width="36" height="38.0" rx="4" fill="#F59E0B" fill-opacity=".82"/>
+<text x="714.0" y="433.0" class="small" text-anchor="middle">K=100</text>
+<text x="714.0" y="370.0" class="small" text-anchor="middle">0.32</text>
+<line x1="844.0" y1="271.0" x2="1126.0" y2="271.0" class="axis"/>
+<line x1="844.0" y1="126.0" x2="844.0" y2="271.0" class="axis"/>
+<text x="844.0" y="116.0" class="small" text-anchor="start">operator 2-norm</text>
+<text x="985.0" y="295.0" class="small" text-anchor="middle">coupling K in T_K=[[1,K],[0,−1]]</text>
+<circle cx="844.0" cy="257.5" r="4.5" fill="#DB2777"/>
+<circle cx="858.1" cy="253.7" r="4.5" fill="#DB2777"/>
+<circle cx="872.2" cy="249.1" r="4.5" fill="#DB2777"/>
+<circle cx="900.4" cy="238.3" r="4.5" fill="#DB2777"/>
+<circle cx="985.0" cy="200.7" r="4.5" fill="#DB2777"/>
+<circle cx="1126.0" cy="134.2" r="4.5" fill="#DB2777"/>
+<polyline points="844.0,257.5 858.1,253.7 872.2,249.1 900.4,238.3 985.0,200.7 1126.0,134.2" fill="none" stroke="#DB2777" stroke-width="2.6"/>
+<polyline points="844.0,257.5 858.1,257.5 872.2,257.5 900.4,257.5 985.0,257.5 1126.0,257.5" fill="none" stroke="#16A34A" stroke-width="2.4"/>
+<line x1="850" y1="318" x2="874" y2="318" stroke="#DB2777" stroke-width="2.5"/><text x="882" y="322" class="label">‖sign(TK)‖₂</text>
+<line x1="1009" y1="318" x2="1033" y2="318" stroke="#16A34A" stroke-width="2.5"/><text x="1041" y="322" class="label">‖Qpolar‖₂=1</text>
+<text x="826.0" y="351.0" class="label" text-anchor="start">sign(TK)=TK and sign²=I，但并非 unitary</text>
+<text x="826.0" y="378.0" class="small" text-anchor="start">Fréchet check: (remainder/h) 0.35 → 0.001</text>
+<text x="826.0" y="404.0" class="small" text-anchor="start">skew functional κunstruct=√2，κsymmetric=0</text>
+<text x="826.0" y="429.0" class="small" text-anchor="start">同一 ambient operator，结构限制会改变 worst direction</text>
+</svg>

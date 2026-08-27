@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="455" viewBox="0 0 1200 455" role="img" aria-labelledby="title desc">
+<title id="title">Riemannian metric, path energy, and sphere retraction audit</title>
+<desc id="desc">Three log-log panels verify second-order circle polygon length, second-order midpoint energy quadrature, and second- versus third-order sphere update errors.</desc>
+<style>
+.title{font:700 20px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#172033}
+.panel{font:700 15px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#172033}
+.label{font:12px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#3b465c}
+.small{font:11px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#59657a}
+.grid{stroke:#dfe4ec;stroke-width:1}.axis{stroke:#8792a6;stroke-width:1.2}
+.blue{stroke:#3268d8;fill:none;stroke-width:2.5}.orange{stroke:#dd7a21;fill:none;stroke-width:2.5}
+.green{stroke:#16866f;fill:none;stroke-width:2.5}.purple{stroke:#8a52c7;fill:none;stroke-width:2.5}
+.dash{stroke-dasharray:5 5;stroke-width:1.6}.dotb{fill:#3268d8}.doto{fill:#dd7a21}.dotg{fill:#16866f}.dotp{fill:#8a52c7}
+</style>
+<rect width="1200" height="455" fill="#fbfcfe"/>
+<text x="28" y="31" class="title">Riemannian audit: coordinate length, path energy, sphere updates</text>
+<rect x="25.00" y="48" width="365" height="380" rx="10" fill="#fff" stroke="#d8dee9"/>
+<text x="41.00" y="73.00" class="panel" text-anchor="start">A · Coordinate metric / circle length</text>
+<line x1="75.00" y1="105.00" x2="75.00" y2="290.00" class="grid"/>
+<line x1="75.00" y1="105.00" x2="361.00" y2="105.00" class="grid"/>
+<line x1="146.50" y1="105.00" x2="146.50" y2="290.00" class="grid"/>
+<line x1="75.00" y1="151.25" x2="361.00" y2="151.25" class="grid"/>
+<line x1="218.00" y1="105.00" x2="218.00" y2="290.00" class="grid"/>
+<line x1="75.00" y1="197.50" x2="361.00" y2="197.50" class="grid"/>
+<line x1="289.50" y1="105.00" x2="289.50" y2="290.00" class="grid"/>
+<line x1="75.00" y1="243.75" x2="361.00" y2="243.75" class="grid"/>
+<line x1="361.00" y1="105.00" x2="361.00" y2="290.00" class="grid"/>
+<line x1="75.00" y1="290.00" x2="361.00" y2="290.00" class="grid"/>
+<line x1="75.00" y1="290.00" x2="361.00" y2="290.00" class="axis"/>
+<line x1="75.00" y1="105.00" x2="75.00" y2="290.00" class="axis"/>
+<text x="218.00" y="321.00" class="small" text-anchor="middle">mesh h = 1/N (log)</text>
+<text x="75.00" y="97.00" class="small" text-anchor="start">|2π − polygon length| (log)</text>
+<polyline points="361.00,113.17 303.80,146.76 246.60,180.39 189.40,214.04 132.20,247.69 75.00,281.34" class="blue"/>
+<circle cx="361.00" cy="113.17" r="3.3" class="dotb"/>
+<circle cx="303.80" cy="146.76" r="3.3" class="dotb"/>
+<circle cx="246.60" cy="180.39" r="3.3" class="dotb"/>
+<circle cx="189.40" cy="214.04" r="3.3" class="dotb"/>
+<circle cx="132.20" cy="247.69" r="3.3" class="dotb"/>
+<circle cx="75.00" cy="281.34" r="3.3" class="dotb"/>
+<text x="43.00" y="350.00" class="label" text-anchor="start">observed order = 1.999725</text>
+<text x="43.00" y="370.00" class="small" text-anchor="start">polar metric integral = 2π to roundoff</text>
+<text x="43.00" y="389.00" class="small" text-anchor="start">blue: Cartesian chord approximation, O(h²)</text>
+<rect x="417.00" y="48" width="365" height="380" rx="10" fill="#fff" stroke="#d8dee9"/>
+<text x="433.00" y="73.00" class="panel" text-anchor="start">B · Same path, different energy</text>
+<line x1="467.00" y1="105.00" x2="467.00" y2="290.00" class="grid"/>
+<line x1="467.00" y1="105.00" x2="753.00" y2="105.00" class="grid"/>
+<line x1="538.50" y1="105.00" x2="538.50" y2="290.00" class="grid"/>
+<line x1="467.00" y1="151.25" x2="753.00" y2="151.25" class="grid"/>
+<line x1="610.00" y1="105.00" x2="610.00" y2="290.00" class="grid"/>
+<line x1="467.00" y1="197.50" x2="753.00" y2="197.50" class="grid"/>
+<line x1="681.50" y1="105.00" x2="681.50" y2="290.00" class="grid"/>
+<line x1="467.00" y1="243.75" x2="753.00" y2="243.75" class="grid"/>
+<line x1="753.00" y1="105.00" x2="753.00" y2="290.00" class="grid"/>
+<line x1="467.00" y1="290.00" x2="753.00" y2="290.00" class="grid"/>
+<line x1="467.00" y1="290.00" x2="753.00" y2="290.00" class="axis"/>
+<line x1="467.00" y1="105.00" x2="467.00" y2="290.00" class="axis"/>
+<text x="610.00" y="321.00" class="small" text-anchor="middle">time mesh h = 1/N (log)</text>
+<text x="467.00" y="97.00" class="small" text-anchor="start">reparameterized energy error (log)</text>
+<polyline points="753.00,113.16 695.80,146.80 638.60,180.44 581.40,214.07 524.20,247.71 467.00,281.35" class="green"/>
+<circle cx="753.00" cy="113.16" r="3.3" class="dotg"/>
+<circle cx="695.80" cy="146.80" r="3.3" class="dotg"/>
+<circle cx="638.60" cy="180.44" r="3.3" class="dotg"/>
+<circle cx="581.40" cy="214.07" r="3.3" class="dotg"/>
+<circle cx="524.20" cy="247.71" r="3.3" class="dotg"/>
+<circle cx="467.00" cy="281.35" r="3.3" class="dotg"/>
+<text x="435.00" y="350.00" class="label" text-anchor="start">midpoint order = 2.000000</text>
+<text x="435.00" y="370.00" class="small" text-anchor="start">constant speed: E = 0.980000</text>
+<text x="435.00" y="389.00" class="small" text-anchor="start">t² speed: same L = 1.4, E = 1.306667</text>
+<rect x="809.00" y="48" width="365" height="380" rx="10" fill="#fff" stroke="#d8dee9"/>
+<text x="825.00" y="73.00" class="panel" text-anchor="start">C · Sphere update error orders</text>
+<line x1="859.00" y1="105.00" x2="859.00" y2="290.00" class="grid"/>
+<line x1="859.00" y1="105.00" x2="1145.00" y2="105.00" class="grid"/>
+<line x1="930.50" y1="105.00" x2="930.50" y2="290.00" class="grid"/>
+<line x1="859.00" y1="151.25" x2="1145.00" y2="151.25" class="grid"/>
+<line x1="1002.00" y1="105.00" x2="1002.00" y2="290.00" class="grid"/>
+<line x1="859.00" y1="197.50" x2="1145.00" y2="197.50" class="grid"/>
+<line x1="1073.50" y1="105.00" x2="1073.50" y2="290.00" class="grid"/>
+<line x1="859.00" y1="243.75" x2="1145.00" y2="243.75" class="grid"/>
+<line x1="1145.00" y1="105.00" x2="1145.00" y2="290.00" class="grid"/>
+<line x1="859.00" y1="290.00" x2="1145.00" y2="290.00" class="grid"/>
+<line x1="859.00" y1="290.00" x2="1145.00" y2="290.00" class="axis"/>
+<line x1="859.00" y1="105.00" x2="859.00" y2="290.00" class="axis"/>
+<text x="1002.00" y="321.00" class="small" text-anchor="middle">tangent step t (log)</text>
+<text x="859.00" y="97.00" class="small" text-anchor="start">error / residual (log)</text>
+<polyline points="1145.00,110.94 1087.80,131.23 1030.60,151.53 973.40,171.83 916.20,192.12 859.00,212.42" class="orange"/>
+<circle cx="1145.00" cy="110.94" r="3.3" class="doto"/>
+<circle cx="1087.80" cy="131.23" r="3.3" class="doto"/>
+<circle cx="1030.60" cy="151.53" r="3.3" class="doto"/>
+<circle cx="973.40" cy="171.83" r="3.3" class="doto"/>
+<circle cx="916.20" cy="192.12" r="3.3" class="doto"/>
+<circle cx="859.00" cy="212.42" r="3.3" class="doto"/>
+<polyline points="1145.00,134.83 1087.80,162.05 1030.60,191.52 973.40,221.71 916.20,252.09 859.00,282.52" class="purple"/>
+<circle cx="1145.00" cy="134.83" r="3.3" class="dotp"/>
+<circle cx="1087.80" cy="162.05" r="3.3" class="dotp"/>
+<circle cx="1030.60" cy="191.52" r="3.3" class="dotp"/>
+<circle cx="973.40" cy="221.71" r="3.3" class="dotp"/>
+<circle cx="916.20" cy="252.09" r="3.3" class="dotp"/>
+<circle cx="859.00" cy="282.52" r="3.3" class="dotp"/>
+<text x="827.00" y="350.00" class="small" text-anchor="start">orange Euler constraint: order 2.000000</text>
+<text x="827.00" y="370.00" class="small" text-anchor="start">purple ‖R−Exp‖: order 2.970892</text>
+<text x="827.00" y="389.00" class="small" text-anchor="start">normalization feasibility: machine zero</text>
+</svg>

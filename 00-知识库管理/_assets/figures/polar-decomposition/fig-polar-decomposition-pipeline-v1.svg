@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="880" viewBox="0 0 1200 880" role="img" aria-labelledby="title desc">
+  <title id="title">极分解的结构、边界、算法与 AI 接口</title>
+  <desc id="desc">从薄奇异值分解出发，把矩阵分成保持方向的半酉因子与正半定伸缩因子；同时标出满秩与秩亏边界、最近 Stiefel 投影、数值算法、微分和 Muon 接口。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,4 L0,8 Z" fill="#334155"/>
+    </marker>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.13"/>
+    </filter>
+    <style>
+      .title { font: 700 29px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+      .subtitle { font: 500 16px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #475569; }
+      .section { font: 700 19px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #1e293b; }
+      .body { font: 650 16px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #1e293b; }
+      .small { font: 500 14px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #475569; }
+      .tiny { font: 500 13px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #475569; }
+      .math { font: 600 20px Georgia, "Times New Roman", serif; fill: #0f172a; }
+      .mathLarge { font: 700 25px Georgia, "Times New Roman", serif; fill: #0f172a; }
+      .chip { font: 700 13px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #1e293b; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="880" rx="24" fill="#f8fafc"/>
+  <text x="52" y="49" class="title">极分解：把方向与伸缩分开</text>
+  <text x="52" y="78" class="subtitle">定理、唯一性、最近点、数值算法和 AI 优化共享同一条 SVD 主线</text>
+
+  <rect x="42" y="105" width="1116" height="250" rx="18" fill="#ffffff" stroke="#cbd5e1" stroke-width="2" filter="url(#shadow)"/>
+  <text x="66" y="141" class="section">1　从薄 SVD 读出右极分解（m ≥ n）</text>
+
+  <rect x="72" y="179" width="255" height="112" rx="17" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="199" y="214" text-anchor="middle" class="body">薄奇异值分解</text>
+  <text x="199" y="248" text-anchor="middle" class="mathLarge">A = L Σ R*</text>
+  <text x="199" y="275" text-anchor="middle" class="small">Σ 的对角元是奇异值</text>
+
+  <line x1="338" y1="234" x2="401" y2="234" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="414" y="164" width="262" height="142" rx="18" fill="#ecfdf5" stroke="#10b981" stroke-width="2.5"/>
+  <text x="545" y="199" text-anchor="middle" class="body">方向因子</text>
+  <text x="545" y="232" text-anchor="middle" class="mathLarge">U = L R*</text>
+  <text x="545" y="260" text-anchor="middle" class="math">U*U = I</text>
+  <text x="545" y="286" text-anchor="middle" class="small">最近的 Stiefel / 半酉因子</text>
+
+  <text x="704" y="241" text-anchor="middle" class="mathLarge">×</text>
+
+  <rect x="731" y="164" width="262" height="142" rx="18" fill="#fff7ed" stroke="#f59e0b" stroke-width="2.5"/>
+  <text x="862" y="199" text-anchor="middle" class="body">伸缩因子</text>
+  <text x="862" y="232" text-anchor="middle" class="mathLarge">H = R Σ R*</text>
+  <text x="862" y="260" text-anchor="middle" class="math">H = (A*A)¹ᐟ² ⪰ 0</text>
+  <text x="862" y="286" text-anchor="middle" class="small">唯一，谱等于 A 的奇异值</text>
+
+  <line x1="1003" y1="234" x2="1060" y2="234" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="1070" y="190" width="64" height="88" rx="15" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+  <text x="1102" y="224" text-anchor="middle" class="mathLarge">A</text>
+  <text x="1102" y="251" text-anchor="middle" class="chip">= UH</text>
+
+  <rect x="42" y="383" width="1116" height="189" rx="18" fill="#ffffff" stroke="#cbd5e1" stroke-width="2" filter="url(#shadow)"/>
+  <text x="66" y="419" class="section">2　唯一性分界：先问秩，再谈“极因子”</text>
+
+  <rect x="72" y="451" width="487" height="88" rx="17" fill="#eef2ff" stroke="#6366f1" stroke-width="2"/>
+  <rect x="91" y="466" width="106" height="27" rx="13" fill="#c7d2fe"/>
+  <text x="144" y="485" text-anchor="middle" class="chip">满列秩 r = n</text>
+  <text x="315" y="487" text-anchor="middle" class="body">H ≻ 0；U 唯一且 U*U = I</text>
+  <text x="315" y="518" text-anchor="middle" class="small">polar(A) 是光滑局部映射，最近点唯一</text>
+
+  <rect x="593" y="451" width="535" height="88" rx="17" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/>
+  <rect x="612" y="466" width="106" height="27" rx="13" fill="#fecaca"/>
+  <text x="665" y="485" text-anchor="middle" class="chip">秩亏 r &lt; n</text>
+  <text x="859" y="487" text-anchor="middle" class="body">H 仍唯一；半酉补全 U 不唯一</text>
+  <text x="859" y="518" text-anchor="middle" class="small">规范 U₀ = A H† 是唯一偏等距，但通常不在 Stiefel 上</text>
+
+  <rect x="42" y="600" width="1116" height="218" rx="18" fill="#ffffff" stroke="#cbd5e1" stroke-width="2" filter="url(#shadow)"/>
+  <text x="66" y="636" class="section">3　同一对象的四条调用路线</text>
+
+  <rect x="70" y="668" width="245" height="111" rx="17" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="192" y="699" text-anchor="middle" class="body">几何与最优化</text>
+  <text x="192" y="729" text-anchor="middle" class="math">min ‖A − Q‖</text>
+  <text x="192" y="755" text-anchor="middle" class="small">Procrustes · Stiefel retraction</text>
+
+  <rect x="338" y="668" width="245" height="111" rx="17" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+  <text x="460" y="699" text-anchor="middle" class="body">数值计算</text>
+  <text x="460" y="729" text-anchor="middle" class="math">SVD · Newton · QDWH</text>
+  <text x="460" y="755" text-anchor="middle" class="small">规模、条件数与硬件共同选路</text>
+
+  <rect x="606" y="668" width="245" height="111" rx="17" fill="#fff7ed" stroke="#f59e0b" stroke-width="2"/>
+  <text x="728" y="699" text-anchor="middle" class="body">微分与反向传播</text>
+  <text x="728" y="729" text-anchor="middle" class="math">HΩ + ΩH = U*E − E*U</text>
+  <text x="728" y="755" text-anchor="middle" class="small">Sylvester 方程 · 谱隙边界</text>
+
+  <rect x="874" y="668" width="254" height="111" rx="17" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="1001" y="699" text-anchor="middle" class="body">AI 矩阵优化</text>
+  <text x="1001" y="729" text-anchor="middle" class="math">−polar(G)</text>
+  <text x="1001" y="755" text-anchor="middle" class="small">Muon 以有限步多项式近似方向</text>
+
+  <text x="52" y="854" class="subtitle">关键边界：经典 sign(A) 与 SVD 型 polar(A) 不是同一函数；有限步 Newton–Schulz 也不自动等于精确极因子。</text>
+</svg>

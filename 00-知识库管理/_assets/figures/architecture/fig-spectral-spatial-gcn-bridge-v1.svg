@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">从图 Laplacian 频域到 GCN 邻居平均</title>
+<desc id="desc">谱滤波由 Laplacian 特征基定义；多项式近似带来局部性，GCN 得到一阶归一化传播。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#B7791F"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">图频率：L = U Lambda U^T</text>
+<path d="M65 380C105 360 120 165 170 150C225 132 250 330 335 185" fill="none" stroke="#2563EB" stroke-width="3"/>
+<line x1="55" y1="390" x2="350" y2="390" stroke="#D7DEE8" stroke-width="2"/>
+<text x="60" y="130" font-size="16" font-weight="700" text-anchor="start" fill="#2563EB">graph signal x</text>
+<text x="55" y="455" font-size="18" font-weight="700" text-anchor="start" fill="#1F2937" class="math">x_hat = U^T x</text>
+<text x="55" y="490" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937" class="math">g(L)x = U g(Lambda) U^T x</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#B7791F">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">多项式 = 有限跳传播</text>
+<circle cx="600" cy="260" r="125" fill="#FFF7ED" stroke="#B7791F" stroke-width="2"/>
+<circle cx="600" cy="260" r="80" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<circle cx="600" cy="260" r="35" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<circle cx="600" cy="260" r="10" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<text x="600" y="265" font-size="15" font-weight="700" text-anchor="middle" fill="#FFFEFB">v</text>
+<text x="452" y="420" font-size="17" font-weight="700" text-anchor="start" fill="#1F2937" class="math">sum_(k=0)^K theta_k L^k x</text>
+<text x="445" y="462" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">K 次乘法只到 K-hop；无需显式 U。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">GCN 的一阶传播合同</text>
+<rect x="840" y="110" width="300" height="62" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="990.0" y="147.0" font-size="17" font-weight="650" text-anchor="middle" fill="#2563EB">A_tilde = A + I</text>
+<line x1="990" y1="175" x2="990" y2="210" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="840" y="225" width="300" height="76" rx="8" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="990.0" y="269.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">S = D_tilde^(-1/2) A_tilde D_tilde^(-1/2)</text>
+<line x1="990" y1="304" x2="990" y2="339" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="840" y="354" width="300" height="62" rx="8" fill="#FFF7ED" stroke="#C24135" stroke-width="2"/>
+<text x="990.0" y="391.0" font-size="17" font-weight="650" text-anchor="middle" fill="#C24135">H&#x27; = sigma(S H W)</text>
+<text x="840" y="470" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">谱动机 != 任意图上的平移卷积。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">多项式把频域函数变成局部算子；GCN 再把它压缩为规范化的一阶邻域混合。</text>
+</svg>

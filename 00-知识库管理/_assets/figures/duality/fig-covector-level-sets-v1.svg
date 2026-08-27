@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 520" role="img" aria-labelledby="title desc">
+  <title id="title">协向量的等值线、表示向量与对偶配对</title>
+  <desc id="desc">左侧展示线性泛函 phi(x)=x1+2x2 的三条平行等值线，以及选定标准内积后对应的法向量。右侧展示向量坐标和协向量坐标配对得到不依赖基的标量。</desc>
+  <rect width="1040" height="520" fill="#ffffff"/>
+  <style>
+    text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",Arial,sans-serif;fill:#172033}
+    .title{font-size:23px;font-weight:650}
+    .subtitle{font-size:14px;fill:#526176}
+    .panel{font-size:17px;font-weight:650}
+    .axis{stroke:#64748b;stroke-width:1.6}
+    .grid{stroke:#e5eaf0;stroke-width:1}
+    .level{stroke:#7c3aed;stroke-width:2.6}
+    .level0{stroke:#7c3aed;stroke-width:3.2}
+    .label{font-size:14px}
+    .small{font-size:12px;fill:#526176}
+    .formula{font-family:"STIX Two Math","Times New Roman",serif;font-size:20px}
+  </style>
+
+  <text class="title" x="520" y="34" text-anchor="middle">协向量是一条线性测量规则</text>
+  <text class="subtitle" x="520" y="58" text-anchor="middle">向量沿空间移动；协向量把每个向量映成标量，并把空间切成平行等值面</text>
+
+  <text class="panel" x="330" y="92" text-anchor="middle">几何图景：φ(x) = x₁ + 2x₂</text>
+  <g>
+    <line class="grid" x1="130" y1="120" x2="130" y2="470"/>
+    <line class="grid" x1="230" y1="120" x2="230" y2="470"/>
+    <line class="grid" x1="430" y1="120" x2="430" y2="470"/>
+    <line class="grid" x1="530" y1="120" x2="530" y2="470"/>
+    <line class="grid" x1="80" y1="170" x2="600" y2="170"/>
+    <line class="grid" x1="80" y1="270" x2="600" y2="270"/>
+    <line class="grid" x1="80" y1="370" x2="600" y2="370"/>
+
+    <line class="axis" x1="80" y1="320" x2="610" y2="320"/>
+    <polygon points="610,320 598,314 598,326" fill="#64748b"/>
+    <line class="axis" x1="330" y1="470" x2="330" y2="110"/>
+    <polygon points="330,110 324,122 336,122" fill="#64748b"/>
+    <text class="label" x="596" y="310">x₁</text>
+    <text class="label" x="340" y="125">x₂</text>
+
+    <line class="level" x1="155" y1="282.5" x2="505" y2="457.5"/>
+    <line class="level0" x1="155" y1="232.5" x2="505" y2="407.5"/>
+    <line class="level" x1="155" y1="182.5" x2="505" y2="357.5"/>
+    <text class="label" x="505" y="472" fill="#6d28d9">φ(x) = -2</text>
+    <text class="label" x="512" y="412" fill="#6d28d9">φ(x) = 0</text>
+    <text class="label" x="512" y="354" fill="#6d28d9">φ(x) = 2</text>
+
+    <line x1="330" y1="320" x2="380" y2="220" stroke="#059669" stroke-width="3.5"/>
+    <polygon points="380,220 368,228 381,235" fill="#059669"/>
+    <text class="label" x="390" y="217" fill="#047857">g = (1,2)</text>
+    <text class="small" x="390" y="236">选定标准内积后的表示向量</text>
+
+    <line x1="330" y1="320" x2="430" y2="320" stroke="#dc2626" stroke-width="3.5"/>
+    <polygon points="430,320 418,314 418,326" fill="#dc2626"/>
+    <circle cx="430" cy="320" r="4.5" fill="#dc2626"/>
+    <text class="label" x="438" y="311" fill="#9f1239">x = (2,0), φ(x)=2</text>
+  </g>
+
+  <line x1="625" y1="105" x2="625" y2="455" stroke="#d5dbe5" stroke-width="1.5"/>
+
+  <text class="panel" x="825" y="105" text-anchor="middle">坐标图景：配对保持不变</text>
+  <rect x="665" y="135" width="320" height="88" rx="12" fill="#eff6ff" stroke="#60a5fa" stroke-width="1.7"/>
+  <text class="label" x="690" y="163">向量坐标</text>
+  <text class="formula" x="825" y="194" text-anchor="middle">c  ∈  Fⁿ</text>
+
+  <rect x="665" y="244" width="320" height="88" rx="12" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1.7"/>
+  <text class="label" x="690" y="272">协向量坐标</text>
+  <text class="formula" x="825" y="303" text-anchor="middle">a  ∈  Fⁿ</text>
+
+  <line x1="825" y1="224" x2="825" y2="242" stroke="#f59e0b" stroke-width="2.5"/>
+  <polygon points="825,242 819,231 831,231" fill="#f59e0b"/>
+
+  <rect x="665" y="354" width="320" height="76" rx="12" fill="#ecfdf5" stroke="#34d399" stroke-width="1.7"/>
+  <text class="label" x="690" y="381">不依赖基的标量</text>
+  <text class="formula" x="825" y="411" text-anchor="middle">φ(x) = aᵀc  ∈  F</text>
+
+  <text class="small" x="825" y="457" text-anchor="middle">c ↦ Pc，a ↦ P⁻ᵀa，因此 aᵀc 不变</text>
+  <text class="small" x="520" y="500" text-anchor="middle">注意：法向量 g 依赖所选内积；线性测量 φ 本身不依赖内积。</text>
+</svg>

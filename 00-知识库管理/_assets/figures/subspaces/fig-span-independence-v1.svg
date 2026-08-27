@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">张成、线性相关与仿射平面的三面板示意图</title>
+  <desc id="desc">左面板展示两个非共线向量生成平面，中面板展示第三向量是前两者之和而不增加维数，右面板对比经过原点的子空间和平移后不经过原点的仿射平面。</desc>
+  <defs>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-orange" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#ea580c"/>
+    </marker>
+    <style>
+      .panel { fill:#f8fafc; stroke:#64748b; stroke-width:1.5; }
+      .axis { stroke:#94a3b8; stroke-width:1.5; }
+      .plane { fill:#dbeafe; stroke:#60a5fa; stroke-width:1.5; opacity:.75; }
+      .affine { fill:#ffedd5; stroke:#f97316; stroke-width:1.5; opacity:.8; }
+      .vblue { stroke:#2563eb; stroke-width:4; marker-end:url(#arrow-blue); }
+      .vorange { stroke:#ea580c; stroke-width:4; marker-end:url(#arrow-orange); }
+      .vdash { stroke:#7c3aed; stroke-width:4; stroke-dasharray:7 5; marker-end:url(#arrow-blue); }
+      .title { font:700 19px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; fill:#0f172a; }
+      .label { font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; fill:#1e293b; }
+      .small { font:13px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; fill:#475569; }
+      .origin { fill:#0f172a; }
+    </style>
+  </defs>
+  <rect width="1200" height="430" fill="#ffffff"/>
+
+  <g transform="translate(20,20)">
+    <rect class="panel" x="0" y="0" width="370" height="380" rx="14"/>
+    <text class="title" x="22" y="34">1. 两个独立方向生成平面</text>
+    <polygon class="plane" points="52,283 283,190 335,236 104,329"/>
+    <line class="axis" x1="76" y1="306" x2="330" y2="204"/>
+    <line class="axis" x1="76" y1="306" x2="168" y2="365"/>
+    <circle class="origin" cx="108" cy="293" r="4"/>
+    <line class="vblue" x1="108" y1="293" x2="278" y2="225"/>
+    <line class="vorange" x1="108" y1="293" x2="191" y2="337"/>
+    <text class="label" x="271" y="214">v₁</text>
+    <text class="label" x="194" y="355">v₂</text>
+    <text class="small" x="22" y="72">非共线 ⇒ 每个平面点有唯一系数</text>
+    <text class="small" x="22" y="350">span(v₁,v₂) 是经过原点的整个蓝色平面</text>
+  </g>
+
+  <g transform="translate(415,20)">
+    <rect class="panel" x="0" y="0" width="370" height="380" rx="14"/>
+    <text class="title" x="22" y="34">2. 冗余向量不增加自由度</text>
+    <polygon class="plane" points="52,283 283,190 335,236 104,329"/>
+    <circle class="origin" cx="108" cy="293" r="4"/>
+    <line class="vblue" x1="108" y1="293" x2="255" y2="234"/>
+    <line class="vorange" x1="108" y1="293" x2="179" y2="331"/>
+    <line class="vdash" x1="108" y1="293" x2="326" y2="272"/>
+    <text class="label" x="248" y="222">v₁</text>
+    <text class="label" x="182" y="349">v₂</text>
+    <text class="label" x="294" y="294">v₃=v₁+v₂</text>
+    <text class="small" x="22" y="72">三个向量、只有两个独立方向</text>
+    <text class="small" x="22" y="350">删除 v₃ 后，张成空间完全不变</text>
+  </g>
+
+  <g transform="translate(810,20)">
+    <rect class="panel" x="0" y="0" width="370" height="380" rx="14"/>
+    <text class="title" x="22" y="34">3. 子空间必须经过原点</text>
+    <line class="axis" x1="54" y1="318" x2="334" y2="318"/>
+    <line class="axis" x1="94" y1="350" x2="94" y2="78"/>
+    <circle class="origin" cx="94" cy="318" r="5"/>
+    <text class="small" x="73" y="341">0</text>
+    <polygon class="plane" points="54,291 297,181 335,213 92,323"/>
+    <polygon class="affine" points="54,190 297,80 335,112 92,222"/>
+    <text class="label" x="221" y="244">U：子空间</text>
+    <text class="label" x="190" y="133">a+U：仿射平面</text>
+    <line class="vorange" x1="94" y1="318" x2="94" y2="217"/>
+    <text class="small" x="105" y="269">平移 a</text>
+    <text class="small" x="22" y="366">形状相同不够；封闭性要求包含零向量</text>
+  </g>
+</svg>

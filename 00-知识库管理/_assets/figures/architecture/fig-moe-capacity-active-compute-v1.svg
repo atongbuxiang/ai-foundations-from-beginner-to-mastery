@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">MoE 的三本账：总容量、每 Token 激活与实际计算</title>
+<desc id="desc">专家参数可以随 E 增长，而理想逐 token 专家计算只随 k 增长；路由、通信、容量与权重驻留另行记账。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Dense 与 Sparse FFN</text>
+<rect x="55" y="102" width="110" height="48" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="110.0" y="132.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">token x</text>
+<rect x="220" y="90" width="120" height="72" rx="8" fill="#FEF2F2" stroke="#C24135" stroke-width="2"/>
+<text x="280.0" y="132.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">Dense FFN</text>
+<line x1="168" y1="126" x2="215" y2="126" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<text x="55" y="205" font-size="16" font-weight="700" text-anchor="start" fill="#1F2937">P_dense ≈ 2 d m</text>
+<text x="55" y="244" font-size="16" font-weight="700" text-anchor="start" fill="#1F2937">C_token ≈ 2 d m</text>
+<rect x="55" y="312" width="110" height="48" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="110.0" y="342.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">token x</text>
+<rect x="215" y="284" width="50" height="46" rx="6" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="240" y="314" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">e1</text>
+<rect x="280" y="284" width="50" height="46" rx="6" fill="#F8FAFC" stroke="#D7DEE8" stroke-width="2"/>
+<text x="305" y="314" font-size="15" font-weight="700" text-anchor="middle" fill="#D7DEE8">e2</text>
+<rect x="215" y="352" width="50" height="46" rx="6" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="240" y="382" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">e3</text>
+<rect x="280" y="352" width="50" height="46" rx="6" fill="#F8FAFC" stroke="#D7DEE8" stroke-width="2"/>
+<text x="305" y="382" font-size="15" font-weight="700" text-anchor="middle" fill="#D7DEE8">e4</text>
+<line x1="168" y1="336" x2="207" y2="312" stroke="#0F766E" stroke-width="2" marker-end="url(#a1)"/>
+<line x1="168" y1="336" x2="272" y2="380" stroke="#0F766E" stroke-width="2" marker-end="url(#a1)"/>
+<text x="55" y="430" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937">P_expert ≈ E·2 d m_e</text>
+<text x="55" y="466" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">ideal C_token ≈ k·2 d m_e</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">一个可复算的例子</text>
+<text x="455" y="112" font-size="17" font-weight="700" text-anchor="start" fill="#1F2937">E=8, k=2, m_e=m/2</text>
+<text x="455" y="165" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">expert parameters</text>
+<text x="700" y="165" font-size="17" font-weight="800" text-anchor="end" fill="#2563EB">4× dense</text>
+<text x="455" y="225" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">active FFN MACs/token</text>
+<text x="700" y="225" font-size="17" font-weight="800" text-anchor="end" fill="#0F766E">≈ dense</text>
+<rect x="455" y="267" width="240" height="24" rx="4" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+<rect x="455" y="327" width="60" height="24" rx="4" fill="#ECFDF5" stroke="#0F766E" stroke-width="1.5"/>
+<text x="455" y="395" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937">4× capacity 不能推出 4× quality；</text>
+<text x="455" y="430" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">≈ compute 也未计 router/comm。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">系统账不得折叠</text>
+<rect x="845" y="104" width="115" height="40" rx="8" fill="#F8FAFC" stroke="#2563EB" stroke-width="2"/>
+<text x="902.5" y="130.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">parameters</text>
+<text x="980" y="130" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">total / active</text>
+<rect x="845" y="174" width="115" height="40" rx="8" fill="#F8FAFC" stroke="#0F766E" stroke-width="2"/>
+<text x="902.5" y="200.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">arithmetic</text>
+<text x="980" y="200" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">expert + router</text>
+<rect x="845" y="244" width="115" height="40" rx="8" fill="#F8FAFC" stroke="#B7791F" stroke-width="2"/>
+<text x="902.5" y="270.0" font-size="15" font-weight="650" text-anchor="middle" fill="#B7791F">memory</text>
+<text x="980" y="270" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">weights + activations</text>
+<rect x="845" y="314" width="115" height="40" rx="8" fill="#F8FAFC" stroke="#C24135" stroke-width="2"/>
+<text x="902.5" y="340.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">network</text>
+<text x="980" y="340" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">dispatch + combine</text>
+<rect x="845" y="384" width="115" height="40" rx="8" fill="#F8FAFC" stroke="#2563EB" stroke-width="2"/>
+<text x="902.5" y="410.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">capacity</text>
+<text x="980" y="410" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">padding / dropping</text>
+<rect x="845" y="454" width="115" height="40" rx="8" fill="#F8FAFC" stroke="#C24135" stroke-width="2"/>
+<text x="902.5" y="480.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">latency</text>
+<text x="980" y="480" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">tail + overlap</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">MoE 的结构承诺是 total capacity 随 E 扩展、active expert work 随 k 扩展；端到端收益仍需系统账验证。</text>
+</svg>

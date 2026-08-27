@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="610" viewBox="0 0 1440 610" role="img" aria-labelledby="title desc">
+<title id="title">Arnoldi projection, orthogonality and restart tradeoff</title>
+<desc id="desc">The panels show Ritz error and residual, one-pass versus two-pass Arnoldi orthogonality, and full versus restarted Arnoldi convergence.</desc>
+<style>text{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Noto Sans CJK SC",sans-serif;font-size:15px;fill:#1F2937}.title{font-size:27px;font-weight:650}.panel{font-size:19px;font-weight:650}.axis{font-size:16px}.frame{fill:#FFFEFB;stroke:#64748B}.grid{stroke:#D7DEE8}.note{font-size:15px;fill:#64748B}.legend{font-size:15px}</style>
+<rect width="1440" height="610" fill="#ffffff"/>
+<text x="720" y="34" text-anchor="middle" class="title">Arnoldi：一般矩阵需要长正交化，重启则用信息换内存</text>
+<text x="75" y="67" class="panel">A  Ritz 值误差与残差不是同一量</text>
+<text x="555" y="67" class="panel">B  两遍正交化控制基缺陷</text>
+<text x="1035" y="67" class="panel">C  重启限制内存，也会丢掉多项式历史</text>
+<rect x="75" y="88" width="330" height="330" class="frame"/>
+<line x1="75.00" y1="88" x2="75.00" y2="418" class="grid"/>
+<text x="75.00" y="438" text-anchor="middle">2</text>
+<line x1="150.00" y1="88" x2="150.00" y2="418" class="grid"/>
+<text x="150.00" y="438" text-anchor="middle">7</text>
+<line x1="240.00" y1="88" x2="240.00" y2="418" class="grid"/>
+<text x="240.00" y="438" text-anchor="middle">13</text>
+<line x1="330.00" y1="88" x2="330.00" y2="418" class="grid"/>
+<text x="330.00" y="438" text-anchor="middle">19</text>
+<line x1="405.00" y1="88" x2="405.00" y2="418" class="grid"/>
+<text x="405.00" y="438" text-anchor="middle">24</text>
+<line x1="75" y1="418.00" x2="405" y2="418.00" class="grid"/>
+<text x="66" y="422.00" text-anchor="end">10⁻¹⁶</text>
+<line x1="75" y1="335.50" x2="405" y2="335.50" class="grid"/>
+<text x="66" y="339.50" text-anchor="end">10⁻¹²</text>
+<line x1="75" y1="253.00" x2="405" y2="253.00" class="grid"/>
+<text x="66" y="257.00" text-anchor="end">10⁻⁸</text>
+<line x1="75" y1="170.50" x2="405" y2="170.50" class="grid"/>
+<text x="66" y="174.50" text-anchor="end">10⁻⁴</text>
+<line x1="75" y1="88.00" x2="405" y2="88.00" class="grid"/>
+<text x="66" y="92.00" text-anchor="end">1</text>
+<text x="240.0" y="463" text-anchor="middle" class="axis">Arnoldi 维数 k</text>
+<text x="20" y="253.0" text-anchor="middle" class="axis" transform="rotate(-90 20 253.0)">误差 / 残差</text>
+<polyline points="75.00,88.00 90.00,101.34 105.00,121.44 120.00,122.19 135.00,132.74 150.00,148.05 165.00,176.48 180.00,165.20 195.00,169.45 210.00,175.93 225.00,183.39 240.00,192.20 255.00,203.57 270.00,218.30 285.00,236.13 300.00,257.36 315.00,289.67 330.00,295.54 345.00,306.46 360.00,321.55 375.00,338.78 390.00,357.55 405.00,377.81" fill="none" stroke="#2f6fbd" stroke-width="2.5"/>
+<circle cx="75.00" cy="88.00" r="3.2" fill="#2f6fbd"/>
+<circle cx="135.00" cy="132.74" r="3.2" fill="#2f6fbd"/>
+<circle cx="195.00" cy="169.45" r="3.2" fill="#2f6fbd"/>
+<circle cx="255.00" cy="203.57" r="3.2" fill="#2f6fbd"/>
+<circle cx="315.00" cy="289.67" r="3.2" fill="#2f6fbd"/>
+<circle cx="375.00" cy="338.78" r="3.2" fill="#2f6fbd"/>
+<polyline points="75.00,88.00 90.00,88.00 105.00,93.32 120.00,101.14 135.00,109.55 150.00,118.43 165.00,127.54 180.00,136.87 195.00,146.31 210.00,155.61 225.00,164.39 240.00,172.48 255.00,180.60 270.00,189.79 285.00,200.16 300.00,211.29 315.00,222.92 330.00,234.97 345.00,247.44 360.00,260.37 375.00,273.86 390.00,288.03 405.00,303.11" fill="none" stroke="#c36a14" stroke-width="2.5"/>
+<rect x="72.00" y="85.00" width="6" height="6" fill="#c36a14"/>
+<rect x="132.00" y="106.55" width="6" height="6" fill="#c36a14"/>
+<rect x="192.00" y="143.31" width="6" height="6" fill="#c36a14"/>
+<rect x="252.00" y="177.60" width="6" height="6" fill="#c36a14"/>
+<rect x="312.00" y="219.92" width="6" height="6" fill="#c36a14"/>
+<rect x="372.00" y="270.86" width="6" height="6" fill="#c36a14"/>
+<polyline points="75.00,88.00 90.00,88.00 105.00,93.32 120.00,101.14 135.00,109.55 150.00,118.43 165.00,127.54 180.00,136.87 195.00,146.31 210.00,155.61 225.00,164.39 240.00,172.48 255.00,180.60 270.00,189.79 285.00,200.16 300.00,211.29 315.00,222.92 330.00,234.97 345.00,247.44 360.00,260.37 375.00,273.86 390.00,288.03 405.00,303.11" fill="none" stroke="#248a57" stroke-width="2.5" stroke-dasharray="6 4"/>
+<path d="M75.00,84.00 L79.00,88.00 L75.00,92.00 L71.00,88.00Z" fill="#248a57"/>
+<path d="M135.00,105.55 L139.00,109.55 L135.00,113.55 L131.00,109.55Z" fill="#248a57"/>
+<path d="M195.00,142.31 L199.00,146.31 L195.00,150.31 L191.00,146.31Z" fill="#248a57"/>
+<path d="M255.00,176.60 L259.00,180.60 L255.00,184.60 L251.00,180.60Z" fill="#248a57"/>
+<path d="M315.00,218.92 L319.00,222.92 L315.00,226.92 L311.00,222.92Z" fill="#248a57"/>
+<path d="M375.00,269.86 L379.00,273.86 L375.00,277.86 L371.00,273.86Z" fill="#248a57"/>
+<text x="90" y="112" class="note">A 为实上三角非正规矩阵；目标 λ=5</text>
+<rect x="555" y="88" width="330" height="330" class="frame"/>
+<line x1="555.00" y1="88" x2="555.00" y2="418" class="grid"/>
+<text x="555.00" y="438" text-anchor="middle">2</text>
+<line x1="630.00" y1="88" x2="630.00" y2="418" class="grid"/>
+<text x="630.00" y="438" text-anchor="middle">7</text>
+<line x1="720.00" y1="88" x2="720.00" y2="418" class="grid"/>
+<text x="720.00" y="438" text-anchor="middle">13</text>
+<line x1="810.00" y1="88" x2="810.00" y2="418" class="grid"/>
+<text x="810.00" y="438" text-anchor="middle">19</text>
+<line x1="885.00" y1="88" x2="885.00" y2="418" class="grid"/>
+<text x="885.00" y="438" text-anchor="middle">24</text>
+<line x1="555" y1="418.00" x2="885" y2="418.00" class="grid"/>
+<text x="546" y="422.00" text-anchor="end">10⁻¹⁶</text>
+<line x1="555" y1="335.50" x2="885" y2="335.50" class="grid"/>
+<text x="546" y="339.50" text-anchor="end">10⁻¹²</text>
+<line x1="555" y1="253.00" x2="885" y2="253.00" class="grid"/>
+<text x="546" y="257.00" text-anchor="end">10⁻⁸</text>
+<line x1="555" y1="170.50" x2="885" y2="170.50" class="grid"/>
+<text x="546" y="174.50" text-anchor="end">10⁻⁴</text>
+<line x1="555" y1="88.00" x2="885" y2="88.00" class="grid"/>
+<text x="546" y="92.00" text-anchor="end">1</text>
+<text x="720.0" y="463" text-anchor="middle" class="axis">Arnoldi 维数 k</text>
+<text x="500" y="253.0" text-anchor="middle" class="axis" transform="rotate(-90 500 253.0)">max |vᵢᵀvⱼ−δᵢⱼ|</text>
+<polyline points="555.00,301.89 570.00,284.16 585.00,275.19 600.00,272.50 615.00,268.65 630.00,268.65 645.00,267.56 660.00,267.20 675.00,267.20 690.00,265.32 705.00,265.32 720.00,263.79 735.00,261.52 750.00,258.24 765.00,255.54 780.00,253.23 795.00,249.22 810.00,246.87 825.00,243.97 840.00,239.87 855.00,235.14 870.00,230.40 885.00,224.98" fill="none" stroke="#c43d3d" stroke-width="2.5"/>
+<rect x="552.00" y="298.89" width="6" height="6" fill="#c43d3d"/>
+<rect x="612.00" y="265.65" width="6" height="6" fill="#c43d3d"/>
+<rect x="672.00" y="264.20" width="6" height="6" fill="#c43d3d"/>
+<rect x="732.00" y="258.52" width="6" height="6" fill="#c43d3d"/>
+<rect x="792.00" y="246.22" width="6" height="6" fill="#c43d3d"/>
+<rect x="852.00" y="232.14" width="6" height="6" fill="#c43d3d"/>
+<polyline points="555.00,301.89 570.00,284.16 585.00,275.19 600.00,275.19 615.00,275.19 630.00,275.19 645.00,274.69 660.00,274.69 675.00,274.69 690.00,274.69 705.00,273.51 720.00,268.67 735.00,268.16 750.00,268.16 765.00,268.16 780.00,268.05 795.00,266.77 810.00,266.77 825.00,264.53 840.00,264.26 855.00,264.26 870.00,264.26 885.00,261.91" fill="none" stroke="#248a57" stroke-width="2.5"/>
+<path d="M555.00,297.89 L559.00,301.89 L555.00,305.89 L551.00,301.89Z" fill="#248a57"/>
+<path d="M615.00,271.19 L619.00,275.19 L615.00,279.19 L611.00,275.19Z" fill="#248a57"/>
+<path d="M675.00,270.69 L679.00,274.69 L675.00,278.69 L671.00,274.69Z" fill="#248a57"/>
+<path d="M735.00,264.16 L739.00,268.16 L735.00,272.16 L731.00,268.16Z" fill="#248a57"/>
+<path d="M795.00,262.77 L799.00,266.77 L795.00,270.77 L791.00,266.77Z" fill="#248a57"/>
+<path d="M855.00,260.26 L859.00,264.26 L855.00,268.26 L851.00,264.26Z" fill="#248a57"/>
+<text x="570" y="112" class="note">模拟 9 位运算；第二遍 MGS 清除回流分量</text>
+<rect x="1035" y="88" width="330" height="330" class="frame"/>
+<line x1="1035.00" y1="88" x2="1035.00" y2="418" class="grid"/>
+<text x="1035.00" y="438" text-anchor="middle">2</text>
+<line x1="1117.50" y1="88" x2="1117.50" y2="418" class="grid"/>
+<text x="1117.50" y="438" text-anchor="middle">9</text>
+<line x1="1200.00" y1="88" x2="1200.00" y2="418" class="grid"/>
+<text x="1200.00" y="438" text-anchor="middle">16</text>
+<line x1="1282.50" y1="88" x2="1282.50" y2="418" class="grid"/>
+<text x="1282.50" y="438" text-anchor="middle">23</text>
+<line x1="1365.00" y1="88" x2="1365.00" y2="418" class="grid"/>
+<text x="1365.00" y="438" text-anchor="middle">30</text>
+<line x1="1035" y1="418.00" x2="1365" y2="418.00" class="grid"/>
+<text x="1026" y="422.00" text-anchor="end">10⁻¹⁶</text>
+<line x1="1035" y1="335.50" x2="1365" y2="335.50" class="grid"/>
+<text x="1026" y="339.50" text-anchor="end">10⁻¹²</text>
+<line x1="1035" y1="253.00" x2="1365" y2="253.00" class="grid"/>
+<text x="1026" y="257.00" text-anchor="end">10⁻⁸</text>
+<line x1="1035" y1="170.50" x2="1365" y2="170.50" class="grid"/>
+<text x="1026" y="174.50" text-anchor="end">10⁻⁴</text>
+<line x1="1035" y1="88.00" x2="1365" y2="88.00" class="grid"/>
+<text x="1026" y="92.00" text-anchor="end">1</text>
+<text x="1200.0" y="463" text-anchor="middle" class="axis">累计矩阵—向量乘</text>
+<text x="980" y="253.0" text-anchor="middle" class="axis" transform="rotate(-90 980 253.0)">主 Ritz 对残差</text>
+<polyline points="1035.00,88.00 1046.79,88.00 1058.57,93.32 1070.36,101.14 1082.14,109.55 1093.93,118.43 1105.71,127.54 1117.50,136.87 1129.29,146.31 1141.07,155.61 1152.86,164.39 1164.64,172.48 1176.43,180.60 1188.21,189.79 1200.00,200.16 1211.79,211.29 1223.57,222.92 1235.36,234.97 1247.14,247.44 1258.93,260.37 1270.71,273.86 1282.50,288.03 1294.29,303.11 1306.07,319.38 1317.86,337.21 1329.64,357.20 1341.43,379.81 1353.21,388.10 1365.00,390.75" fill="none" stroke="#2f6fbd" stroke-width="2.5"/>
+<circle cx="1035.00" cy="88.00" r="3.2" fill="#2f6fbd"/>
+<circle cx="1082.14" cy="109.55" r="3.2" fill="#2f6fbd"/>
+<circle cx="1129.29" cy="146.31" r="3.2" fill="#2f6fbd"/>
+<circle cx="1176.43" cy="180.60" r="3.2" fill="#2f6fbd"/>
+<circle cx="1223.57" cy="222.92" r="3.2" fill="#2f6fbd"/>
+<circle cx="1270.71" cy="273.86" r="3.2" fill="#2f6fbd"/>
+<circle cx="1317.86" cy="337.21" r="3.2" fill="#2f6fbd"/>
+<circle cx="1365.00" cy="390.75" r="3.2" fill="#2f6fbd"/>
+<polyline points="1082.14,109.55 1152.86,150.44 1223.57,194.75 1294.29,242.80 1365.00,289.82" fill="none" stroke="#8a4fb8" stroke-width="2.5" stroke-dasharray="7 4"/>
+<rect x="1079.14" y="106.55" width="6" height="6" fill="#8a4fb8"/>
+<rect x="1149.86" y="147.44" width="6" height="6" fill="#8a4fb8"/>
+<rect x="1220.57" y="191.75" width="6" height="6" fill="#8a4fb8"/>
+<rect x="1291.29" y="239.80" width="6" height="6" fill="#8a4fb8"/>
+<rect x="1362.00" y="286.82" width="6" height="6" fill="#8a4fb8"/>
+<text x="1050" y="112" class="note">重启宽度 m=6；每轮只保留一个 Ritz 向量</text>
+<circle cx="90.00" cy="500.00" r="3.2" fill="#2f6fbd"/>
+<text x="100" y="504" class="legend">|θ−5|</text>
+<rect x="192.00" y="497.00" width="6" height="6" fill="#c36a14"/>
+<text x="205" y="504" class="legend">直接残差</text>
+<path d="M315.00,496.00 L319.00,500.00 L315.00,504.00 L311.00,500.00Z" fill="#248a57"/>
+<text x="325" y="504" class="legend">廉价残差</text>
+<rect x="572.00" y="497.00" width="6" height="6" fill="#c43d3d"/>
+<text x="585" y="504" class="legend">一遍 MGS</text>
+<path d="M715.00,496.00 L719.00,500.00 L715.00,504.00 L711.00,500.00Z" fill="#248a57"/>
+<text x="725" y="504" class="legend">两遍 MGS</text>
+<circle cx="1055.00" cy="500.00" r="3.2" fill="#2f6fbd"/>
+<text x="1065" y="504" class="legend">不重启</text>
+<rect x="1187.00" y="497.00" width="6" height="6" fill="#8a4fb8"/>
+<text x="1200" y="504" class="legend">每 6 步重启</text>
+<text x="720" y="555" text-anchor="middle" class="note">矩阵特征值虽为实对角元，严格上三角耦合使其非正规；小残差仍需结合谱条件性解释前向误差。</text>
+<text x="720" y="580" text-anchor="middle" class="note">生成：plot_arnoldi_restart_nonnormal.py · Python 标准库 · 无随机性</text>
+</svg>

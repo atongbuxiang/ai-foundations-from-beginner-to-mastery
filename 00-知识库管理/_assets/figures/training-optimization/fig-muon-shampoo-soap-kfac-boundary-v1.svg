@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Muon、Shampoo、SOAP 与 K-FAC 对象边界</title>
+  <desc id="desc">比较四种矩阵优化器的输入随机对象、持久状态、变换、几何解释和成本，强调矩阵计算形式相似不代表算法等价。</desc>
+  <rect width="1200" height="800" fill="#FFFEFB"/>
+  <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}.h{font-size:27px;font-weight:700}.sh{font-size:18px;font-weight:700}.b{font-size:14px}.s{font-size:12.5px;fill:#64748B}.headb{fill:#2563EB}.headg{fill:#0F766E}.heada{fill:#B76E00}.headr{fill:#C0392B}.cell{fill:#FFFFFF;stroke:#CBD5E1;stroke-width:1.5}.warn{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}.white{fill:#FFFFFF;font-size:19px;font-weight:700}</style>
+  <text x="48" y="48" class="h" fill="#2563EB">先追踪随机对象与 state，再讨论“几何相似”</text>
+  <text x="48" y="78" class="s">同样出现 GGᵀ、GᵀG 或 matrix root，并不能让四种方法变成同一个预条件器。</text>
+
+  <g transform="translate(48,112)">
+    <rect x="0" y="0" width="254" height="50" rx="10" class="headb"/><text x="24" y="32" class="white">Muon</text>
+    <rect x="0" y="58" width="254" height="94" rx="9" class="cell"/><text x="20" y="86" class="sh">输入 / state</text><text x="20" y="114" class="b">当前 gradient + matrix momentum</text><text x="20" y="138" class="s">通常一个同 shape buffer</text>
+    <rect x="0" y="160" width="254" height="94" rx="9" class="cell"/><text x="20" y="188" class="sh">变换</text><text x="20" y="216" class="b">polar(momentum) ≈ UVᵀ</text><text x="20" y="240" class="s">finite-step Newton–Schulz</text>
+    <rect x="0" y="262" width="254" height="94" rx="9" class="cell"/><text x="20" y="290" class="sh">最直接解释</text><text x="20" y="318" class="b">spectral step norm</text><text x="20" y="342" class="s">first-order duality map</text>
+    <rect x="0" y="364" width="254" height="94" rx="9" class="cell"/><text x="20" y="392" class="sh">主要成本</text><text x="20" y="420" class="b">每步 NS GEMM</text><text x="20" y="444" class="s">shape/grouping/dtype</text>
+  </g>
+
+  <g transform="translate(330,112)">
+    <rect x="0" y="0" width="254" height="50" rx="10" class="headg"/><text x="24" y="32" class="white">Shampoo</text>
+    <rect x="0" y="58" width="254" height="94" rx="9" class="cell"/><text x="20" y="86" class="sh">输入 / state</text><text x="20" y="114" class="b">ΣGτGτᵀ 与 ΣGτᵀGτ</text><text x="20" y="138" class="s">mode-wise Gram history</text>
+    <rect x="0" y="160" width="254" height="94" rx="9" class="cell"/><text x="20" y="188" class="sh">变换</text><text x="20" y="216" class="b">L⁻¹ᐟ⁴ G R⁻¹ᐟ⁴</text><text x="20" y="240" class="s">blocking + grafting 可改变合同</text>
+    <rect x="0" y="262" width="254" height="94" rx="9" class="cell"/><text x="20" y="290" class="sh">最直接解释</text><text x="20" y="318" class="b">gradient second-moment metric</text><text x="20" y="342" class="s">不是自动的 Fisher identity</text>
+    <rect x="0" y="364" width="254" height="94" rx="9" class="cell"/><text x="20" y="392" class="sh">主要成本</text><text x="20" y="420" class="b">factor state + inverse roots</text><text x="20" y="444" class="s">refresh/damping/block size</text>
+  </g>
+
+  <g transform="translate(612,112)">
+    <rect x="0" y="0" width="254" height="50" rx="10" class="heada"/><text x="24" y="32" class="white">SOAP</text>
+    <rect x="0" y="58" width="254" height="94" rx="9" class="cell"/><text x="20" y="86" class="sh">输入 / state</text><text x="20" y="114" class="b">Shampoo basis + Adam moments</text><text x="20" y="138" class="s">旋转基和 elementwise state</text>
+    <rect x="0" y="160" width="254" height="94" rx="9" class="cell"/><text x="20" y="188" class="sh">变换</text><text x="20" y="216" class="b">U_Lᵀ G U_R → Adam → 旋回</text><text x="20" y="240" class="s">basis refresh 有版本</text>
+    <rect x="0" y="262" width="254" height="94" rx="9" class="cell"/><text x="20" y="290" class="sh">最直接解释</text><text x="20" y="318" class="b">rotated adaptive coordinates</text><text x="20" y="342" class="s">不是 polar singular flattening</text>
+    <rect x="0" y="364" width="254" height="94" rx="9" class="cell"/><text x="20" y="392" class="sh">主要成本</text><text x="20" y="420" class="b">basis + moments + rotation</text><text x="20" y="444" class="s">refresh 与 kernel amortization</text>
+  </g>
+
+  <g transform="translate(894,112)">
+    <rect x="0" y="0" width="258" height="50" rx="10" class="headr"/><text x="24" y="32" class="white">K-FAC</text>
+    <rect x="0" y="58" width="258" height="94" rx="9" class="cell"/><text x="20" y="86" class="sh">输入 / state</text><text x="20" y="114" class="b">activation x 与 backprop δ</text><text x="20" y="138" class="s">A=E[xᵀx]，S=E[δᵀδ]</text>
+    <rect x="0" y="160" width="258" height="94" rx="9" class="cell"/><text x="20" y="188" class="sh">变换</text><text x="20" y="216" class="b">damped A⁻¹ G S⁻¹</text><text x="20" y="240" class="s">orientation 随 W convention</text>
+    <rect x="0" y="262" width="258" height="94" rx="9" class="cell"/><text x="20" y="290" class="sh">最直接解释</text><text x="20" y="318" class="b">Fisher / GGN block approximation</text><text x="20" y="342" class="s">需写清期望与 factor 假设</text>
+    <rect x="0" y="364" width="258" height="94" rx="9" class="cell"/><text x="20" y="392" class="sh">主要成本</text><text x="20" y="420" class="b">factor collection + inverses</text><text x="20" y="444" class="s">damping/update frequency</text>
+  </g>
+
+  <rect x="48" y="612" width="1104" height="110" rx="13" class="warn"/>
+  <text x="72" y="647" class="sh" fill="#C0392B">禁止跨越的推论</text>
+  <text x="72" y="679" class="b">“都做矩阵乘法” ⇏ state 相同　　“都压平方向” ⇏ local subproblem 相同　　“都用 Gram” ⇏ Fisher/Hessian 相同</text>
+  <text x="72" y="706" class="s">最小反例：固定当前 G，改变 gradient history 或产生 G 的 activation/backprop 分解，各方法的 state 与 update 即可分离。</text>
+  <rect x="48" y="750" width="1104" height="34" rx="8" fill="#F8FAFC" stroke="#CBD5E1"/>
+  <text x="72" y="772" class="s">判断顺序：random object → expectation/history → persistent state → transformation → metric claim → cost/evidence。</text>
+</svg>
+

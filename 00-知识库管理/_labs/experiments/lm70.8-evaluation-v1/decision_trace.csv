@@ -1,0 +1,7 @@
+record_type,name,n,failures,value,gap
+oracle,end-to-end,,,0.5,0.0
+oracle,gold retriever,,,0.7,0.2
+oracle,gold tool output,,,0.82,0.12
+slice,general,100,5,0.05,
+slice,long,20,4,0.2,
+slice,high-risk,5,2,0.4,

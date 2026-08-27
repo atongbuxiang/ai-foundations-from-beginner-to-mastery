@@ -1,0 +1,499 @@
+{
+  "experiment_id": "EXP-LM-701-V1",
+  "seed": 20260826,
+  "checks": {
+    "unicode_nfc_equivalence": true,
+    "unicode_nfkc_compatibility_change": true,
+    "unicode_normalization_idempotent": true,
+    "bpe_rank_counterexample": true,
+    "bpe_overlap_nonoverlap": true,
+    "wordpiece_greedy_dead_end": true,
+    "unigram_marginal": true,
+    "unigram_sampling": true,
+    "byte_roundtrip": true
+  },
+  "unicode": {
+    "python_unicodedata_version": "15.0.0",
+    "rows": [
+      {
+        "sample": "precomposed_e_acute",
+        "form": "identity",
+        "text": "é",
+        "codepoints": [
+          "U+00E9"
+        ],
+        "codepoint_count": 1,
+        "utf8_bytes": 2
+      },
+      {
+        "sample": "precomposed_e_acute",
+        "form": "NFC",
+        "text": "é",
+        "codepoints": [
+          "U+00E9"
+        ],
+        "codepoint_count": 1,
+        "utf8_bytes": 2
+      },
+      {
+        "sample": "precomposed_e_acute",
+        "form": "NFD",
+        "text": "é",
+        "codepoints": [
+          "U+0065",
+          "U+0301"
+        ],
+        "codepoint_count": 2,
+        "utf8_bytes": 3
+      },
+      {
+        "sample": "precomposed_e_acute",
+        "form": "NFKC",
+        "text": "é",
+        "codepoints": [
+          "U+00E9"
+        ],
+        "codepoint_count": 1,
+        "utf8_bytes": 2
+      },
+      {
+        "sample": "precomposed_e_acute",
+        "form": "NFKD",
+        "text": "é",
+        "codepoints": [
+          "U+0065",
+          "U+0301"
+        ],
+        "codepoint_count": 2,
+        "utf8_bytes": 3
+      },
+      {
+        "sample": "decomposed_e_acute",
+        "form": "identity",
+        "text": "é",
+        "codepoints": [
+          "U+0065",
+          "U+0301"
+        ],
+        "codepoint_count": 2,
+        "utf8_bytes": 3
+      },
+      {
+        "sample": "decomposed_e_acute",
+        "form": "NFC",
+        "text": "é",
+        "codepoints": [
+          "U+00E9"
+        ],
+        "codepoint_count": 1,
+        "utf8_bytes": 2
+      },
+      {
+        "sample": "decomposed_e_acute",
+        "form": "NFD",
+        "text": "é",
+        "codepoints": [
+          "U+0065",
+          "U+0301"
+        ],
+        "codepoint_count": 2,
+        "utf8_bytes": 3
+      },
+      {
+        "sample": "decomposed_e_acute",
+        "form": "NFKC",
+        "text": "é",
+        "codepoints": [
+          "U+00E9"
+        ],
+        "codepoint_count": 1,
+        "utf8_bytes": 2
+      },
+      {
+        "sample": "decomposed_e_acute",
+        "form": "NFKD",
+        "text": "é",
+        "codepoints": [
+          "U+0065",
+          "U+0301"
+        ],
+        "codepoint_count": 2,
+        "utf8_bytes": 3
+      },
+      {
+        "sample": "circled_one",
+        "form": "identity",
+        "text": "①",
+        "codepoints": [
+          "U+2460"
+        ],
+        "codepoint_count": 1,
+        "utf8_bytes": 3
+      },
+      {
+        "sample": "circled_one",
+        "form": "NFC",
+        "text": "①",
+        "codepoints": [
+          "U+2460"
+        ],
+        "codepoint_count": 1,
+        "utf8_bytes": 3
+      },
+      {
+        "sample": "circled_one",
+        "form": "NFD",
+        "text": "①",
+        "codepoints": [
+          "U+2460"
+        ],
+        "codepoint_count": 1,
+        "utf8_bytes": 3
+      },
+      {
+        "sample": "circled_one",
+        "form": "NFKC",
+        "text": "1",
+        "codepoints": [
+          "U+0031"
+        ],
+        "codepoint_count": 1,
+        "utf8_bytes": 1
+      },
+      {
+        "sample": "circled_one",
+        "form": "NFKD",
+        "text": "1",
+        "codepoints": [
+          "U+0031"
+        ],
+        "codepoint_count": 1,
+        "utf8_bytes": 1
+      },
+      {
+        "sample": "fullwidth_A",
+        "form": "identity",
+        "text": "Ａ",
+        "codepoints": [
+          "U+FF21"
+        ],
+        "codepoint_count": 1,
+        "utf8_bytes": 3
+      },
+      {
+        "sample": "fullwidth_A",
+        "form": "NFC",
+        "text": "Ａ",
+        "codepoints": [
+          "U+FF21"
+        ],
+        "codepoint_count": 1,
+        "utf8_bytes": 3
+      },
+      {
+        "sample": "fullwidth_A",
+        "form": "NFD",
+        "text": "Ａ",
+        "codepoints": [
+          "U+FF21"
+        ],
+        "codepoint_count": 1,
+        "utf8_bytes": 3
+      },
+      {
+        "sample": "fullwidth_A",
+        "form": "NFKC",
+        "text": "A",
+        "codepoints": [
+          "U+0041"
+        ],
+        "codepoint_count": 1,
+        "utf8_bytes": 1
+      },
+      {
+        "sample": "fullwidth_A",
+        "form": "NFKD",
+        "text": "A",
+        "codepoints": [
+          "U+0041"
+        ],
+        "codepoint_count": 1,
+        "utf8_bytes": 1
+      }
+    ],
+    "nfc_equivalent": true,
+    "nfkc_circled_one": "1",
+    "nfkc_fullwidth_A": "A",
+    "idempotent": true
+  },
+  "bpe": {
+    "tie_break": "lexicographically smallest pair",
+    "merges": [
+      [
+        "w",
+        "e"
+      ],
+      [
+        "l",
+        "o"
+      ],
+      [
+        "e",
+        "we"
+      ],
+      [
+        "ewe",
+        "s"
+      ],
+      [
+        "ewes",
+        "t"
+      ],
+      [
+        "ewest",
+        "_"
+      ],
+      [
+        "n",
+        "ewest_"
+      ],
+      [
+        "lo",
+        "w"
+      ]
+    ],
+    "history": [
+      {
+        "rank": 0,
+        "chosen": [
+          "w",
+          "e"
+        ],
+        "frequency": 8,
+        "ties": [
+          [
+            "w",
+            "e"
+          ]
+        ]
+      },
+      {
+        "rank": 1,
+        "chosen": [
+          "l",
+          "o"
+        ],
+        "frequency": 7,
+        "ties": [
+          [
+            "l",
+            "o"
+          ]
+        ]
+      },
+      {
+        "rank": 2,
+        "chosen": [
+          "e",
+          "we"
+        ],
+        "frequency": 6,
+        "ties": [
+          [
+            "e",
+            "we"
+          ],
+          [
+            "n",
+            "e"
+          ],
+          [
+            "s",
+            "t"
+          ],
+          [
+            "t",
+            "_"
+          ],
+          [
+            "we",
+            "s"
+          ]
+        ]
+      },
+      {
+        "rank": 3,
+        "chosen": [
+          "ewe",
+          "s"
+        ],
+        "frequency": 6,
+        "ties": [
+          [
+            "ewe",
+            "s"
+          ],
+          [
+            "n",
+            "ewe"
+          ],
+          [
+            "s",
+            "t"
+          ],
+          [
+            "t",
+            "_"
+          ]
+        ]
+      },
+      {
+        "rank": 4,
+        "chosen": [
+          "ewes",
+          "t"
+        ],
+        "frequency": 6,
+        "ties": [
+          [
+            "ewes",
+            "t"
+          ],
+          [
+            "n",
+            "ewes"
+          ],
+          [
+            "t",
+            "_"
+          ]
+        ]
+      },
+      {
+        "rank": 5,
+        "chosen": [
+          "ewest",
+          "_"
+        ],
+        "frequency": 6,
+        "ties": [
+          [
+            "ewest",
+            "_"
+          ],
+          [
+            "n",
+            "ewest"
+          ]
+        ]
+      },
+      {
+        "rank": 6,
+        "chosen": [
+          "n",
+          "ewest_"
+        ],
+        "frequency": 6,
+        "ties": [
+          [
+            "n",
+            "ewest_"
+          ]
+        ]
+      },
+      {
+        "rank": 7,
+        "chosen": [
+          "lo",
+          "w"
+        ],
+        "frequency": 5,
+        "ties": [
+          [
+            "lo",
+            "w"
+          ],
+          [
+            "w",
+            "_"
+          ]
+        ]
+      }
+    ],
+    "rank_counterexample": {
+      "bc_first": [
+        "a",
+        "bc"
+      ],
+      "ab_first": [
+        "ab",
+        "c"
+      ]
+    },
+    "overlap_aaaa": [
+      "aa",
+      "aa"
+    ]
+  },
+  "wordpiece": {
+    "text": "abc",
+    "vocab": [
+      "##bc",
+      "a",
+      "ab"
+    ],
+    "greedy": null,
+    "global_min_piece_path": [
+      "a",
+      "##bc"
+    ],
+    "playing": [
+      "play",
+      "##ing"
+    ],
+    "player": [
+      "player"
+    ]
+  },
+  "unigram": {
+    "piece_probs": {
+      "a": 0.4,
+      "b": 0.3,
+      "ab": 0.2,
+      "x": 0.1
+    },
+    "marginal": 0.32,
+    "map_path": [
+      "ab"
+    ],
+    "alpha": 0.5,
+    "draws": 20000,
+    "rows": [
+      {
+        "path": [
+          "a",
+          "b"
+        ],
+        "path_probability": 0.12,
+        "posterior_alpha_1": 0.375,
+        "target_alpha_0_5": 0.4364916731037084,
+        "empirical_alpha_0_5": 0.43555,
+        "absolute_error": 0.000941673103708407
+      },
+      {
+        "path": [
+          "ab"
+        ],
+        "path_probability": 0.2,
+        "posterior_alpha_1": 0.625,
+        "target_alpha_0_5": 0.5635083268962915,
+        "empirical_alpha_0_5": 0.56445,
+        "absolute_error": 0.000941673103708518
+      }
+    ]
+  },
+  "byte_roundtrip": {
+    "trials": 1000,
+    "passed": true
+  }
+}

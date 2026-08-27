@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">NTK：从 Jacobian 到固定核动力学</title>
+<desc id="desc">平方损失产生精确的时变核方程；只有 kernel drift 可忽略时，residual 才按初始化核特征模指数衰减。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Tangent Features 组成 Gram</text>
+<circle cx="90" cy="125" r="10" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<text x="115" y="131" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">grad f(x1)</text>
+<line x1="222" y1="125" x2="300" y2="125" stroke="#0F766E" stroke-width="2.3"/>
+<circle cx="90" cy="210" r="10" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<text x="115" y="216" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">grad f(x2)</text>
+<line x1="222" y1="210" x2="300" y2="210" stroke="#0F766E" stroke-width="2.3"/>
+<circle cx="90" cy="295" r="10" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<text x="115" y="301" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">grad f(x3)</text>
+<line x1="222" y1="295" x2="300" y2="295" stroke="#0F766E" stroke-width="2.3"/>
+<rect x="300" y="105" width="55" height="220" rx="5" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="327" y="345" font-size="20" font-weight="700" text-anchor="middle" fill="#0F766E">J</text>
+<text x="55" y="395" font-size="19" font-weight="700" text-anchor="start" fill="#2563EB" class="math">K_t = J_t J_t^T</text>
+<text x="55" y="438" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937" class="math">exact: f_dot(X) = -K_t (f-y)</text>
+<text x="55" y="484" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">time-varying until proven otherwise</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">固定核时：模式分速衰减</text>
+<line x1="465" y1="405" x2="755" y2="405" stroke="#D7DEE8" stroke-width="1.5"/>
+<line x1="465" y1="405" x2="465" y2="105" stroke="#D7DEE8" stroke-width="1.5"/>
+<path d="M470 130C530 225 575 330 750 386" fill="none" stroke="#C24135" stroke-width="3"/>
+<path d="M470 165C555 225 645 300 750 352" fill="none" stroke="#0F766E" stroke-width="3"/>
+<path d="M470 200C565 218 665 252 750 286" fill="none" stroke="#2563EB" stroke-width="3"/>
+<text x="704" y="377" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">large lambda</text>
+<text x="690" y="271" font-size="15" font-weight="650" text-anchor="start" fill="#2563EB">small lambda</text>
+<text x="445" y="448" font-size="18" font-weight="700" text-anchor="start" fill="#1F2937" class="math">r_t = exp(-K_0 t) r_0</text>
+<text x="445" y="486" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">training speed != test alignment</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Kernel-Regime 三道门</text>
+<rect x="840" y="100" width="300" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="990.0" y="135.0" font-size="16" font-weight="650" text-anchor="middle" fill="#2563EB">init concentration</text>
+<line x1="990" y1="163" x2="990" y2="202" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="840" y="212" width="300" height="58" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="990.0" y="247.0" font-size="16" font-weight="650" text-anchor="middle" fill="#0F766E">K_t near K_0</text>
+<line x1="990" y1="275" x2="990" y2="314" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="840" y="324" width="300" height="58" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="990.0" y="359.0" font-size="16" font-weight="650" text-anchor="middle" fill="#C24135">kernel risk bridge</text>
+<text x="840" y="447" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">NNGP: initialization covariance</text>
+<text x="840" y="482" font-size="15" font-weight="650" text-anchor="start" fill="#0F766E">NTK: gradient Gram / training</text>
+<text x="840" y="512" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">feature learning is a separate question</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">先证明网络接近固定核，再用核统计理论证明风险；训练拟合不能替代第二步。</text>
+</svg>

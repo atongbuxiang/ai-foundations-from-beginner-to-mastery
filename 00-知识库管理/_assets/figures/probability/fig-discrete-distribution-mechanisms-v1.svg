@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">常用离散分布的生成机制</title>
+  <desc id="desc">三面板展示独立Bernoulli重复产生二项与等待时间分布，多类别和无放回机制，以及二项分布的泊松稀有事件极限。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#EFF6FF"/><stop offset="1" stop-color="#F0FDF4"/></linearGradient>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#2563EB"/></marker>
+    <style>.title{font:700 21px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#0F172A}.head{font:700 17px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#1D4ED8}.txt{font:14px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#334155}.small{font:12px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#64748B}.math{font:15px Georgia,"Times New Roman",serif;fill:#0F172A}.card{fill:#fff;stroke:#CBD5E1;stroke-width:1.3}.blue{fill:#DBEAFE;stroke:#60A5FA}.green{fill:#D1FAE5;stroke:#34D399}.amber{fill:#FEF3C7;stroke:#FBBF24}.rose{fill:#FFE4E6;stroke:#FB7185}.line{stroke:#2563EB;stroke-width:2;fill:none;marker-end:url(#arr)}</style>
+  </defs>
+  <rect width="1200" height="430" rx="22" fill="url(#bg)"/>
+  <text x="40" y="38" class="title">先识别随机机制，再选择离散分布；支持集与依赖假设比关键词更重要</text>
+  <rect x="28" y="58" width="368" height="342" rx="17" class="card"/><rect x="416" y="58" width="368" height="342" rx="17" class="card"/><rect x="804" y="58" width="368" height="342" rx="17" class="card"/>
+
+  <text x="50" y="88" class="head">A　重复二元试验：记录什么？</text>
+  <rect x="58" y="110" width="122" height="52" rx="11" class="blue"/><text x="79" y="141" class="txt">Bernoulli(p)</text>
+  <path d="M185 136L238 136" class="line"/>
+  <rect x="247" y="110" width="118" height="52" rx="11" class="green"/><text x="267" y="141" class="txt">n 次 iid</text>
+  <path d="M306 168L306 199" class="line"/><path d="M247 174L170 213" class="line"/><path d="M347 174L359 213" class="line"/>
+  <rect x="64" y="218" width="128" height="54" rx="11" class="amber"/><text x="83" y="241" class="txt">成功总数</text><text x="80" y="261" class="math">Bin(n,p)</text>
+  <rect x="224" y="218" width="136" height="54" rx="11" class="rose"/><text x="244" y="241" class="txt">首次成功位置</text><text x="250" y="261" class="math">Geom(p)</text>
+  <rect x="112" y="296" width="226" height="50" rx="11" class="blue"/><text x="139" y="318" class="txt">第 r 次成功位置</text><text x="146" y="338" class="math">Negative Binomial(r,p)</text>
+  <text x="66" y="381" class="small">固定次数 vs 等待时间：同一试验序列，不同随机变量</text>
+
+  <text x="438" y="88" class="head">B　多类别与有限总体</text>
+  <rect x="449" y="111" width="131" height="54" rx="11" class="blue"/><text x="465" y="134" class="txt">一次 K 类结果</text><text x="468" y="154" class="math">Categorical(π)</text>
+  <path d="M586 138L636 138" class="line"/>
+  <rect x="645" y="111" width="108" height="54" rx="11" class="green"/><text x="667" y="134" class="txt">n 次 iid</text><text x="661" y="154" class="math">count vector</text>
+  <path d="M699 171L699 207" class="line"/>
+  <rect x="541" y="215" width="181" height="57" rx="11" class="amber"/><text x="563" y="239" class="txt">类别计数和固定为 n</text><text x="568" y="261" class="math">Multinomial(n,π)</text>
+  <rect x="451" y="300" width="132" height="50" rx="11" class="rose"/><text x="470" y="322" class="txt">有限总体 N</text><text x="475" y="341" class="math">K 个成功</text>
+  <path d="M591 325L637 325" class="line"/>
+  <rect x="646" y="296" width="107" height="58" rx="11" class="green"/><text x="658" y="318" class="txt">无放回抽 n</text><text x="652" y="340" class="math">Hypergeom</text>
+  <text x="454" y="381" class="small">无放回制造负相关；不能继续假装每次独立</text>
+
+  <text x="826" y="88" class="head">C　稀有事件极限与 Poisson</text>
+  <text x="838" y="126" class="math">Xₙ ~ Binomial(n,pₙ)</text>
+  <rect x="840" y="148" width="300" height="71" rx="12" class="blue"/>
+  <text x="870" y="176" class="math">n → ∞,　pₙ → 0</text>
+  <text x="890" y="204" class="math">npₙ → λ ∈ (0,∞)</text>
+  <path d="M990 225L990 263" class="line"/>
+  <rect x="884" y="271" width="212" height="63" rx="12" class="amber"/>
+  <text x="917" y="298" class="math">X ~ Poisson(λ)</text>
+  <text x="925" y="322" class="math">E[X]=Var(X)=λ</text>
+  <text x="842" y="361" class="small">“n 大”不够：单次概率须变小，总均值保持有限</text>
+  <text x="842" y="384" class="small">中央区域近似不自动保证极端尾概率同样准确</text>
+</svg>

@@ -1,0 +1,4 @@
+case,raw_learning_rate,direction_scale,direction_norm,delta_1,delta_2,absolute_step,relative_step,loss_before,loss_after
+base,0.1,1.0,5.0,-0.30000000000000004,-0.4,0.5,0.05,,
+rescaled,0.01,10.0,50.0,-0.3,-0.4,0.5,0.05,,
+quadratic_descent,0.2,1.0,8.246211251235321,-0.4,-1.6,1.6492422502470645,1.1661903789690602,5.0,1.8000000000000003

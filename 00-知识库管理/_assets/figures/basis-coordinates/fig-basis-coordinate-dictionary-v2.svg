@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+  <title id="title">同一向量的两套坐标字典与主动被动变换</title>
+  <desc id="desc">中央是抽象向量，左右分别用两组基编码；下方交换关系说明换坐标不改变对象，并区分被动换基与主动线性变换。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
+    <style>
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}.blue{fill:#2563eb}.green{fill:#0f766e}.amber{fill:#b7791f}.h{font-size:19px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}.arrow{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="600" fill="#ffffff"/>
+  <text x="600" y="43" class="sans h ink" text-anchor="middle">坐标是基给出的编码，不是向量本身</text>
+  <rect x="65" y="82" width="300" height="190" rx="12" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="215" y="119" class="sans h blue" text-anchor="middle">字典 B</text><text x="215" y="157" class="math formula ink" text-anchor="middle">B=(b₁,b₂)</text><text x="215" y="201" class="math formula blue" text-anchor="middle">x = α₁b₁+α₂b₂</text><text x="215" y="238" class="math body muted" text-anchor="middle">坐标：xᴮ=(α₁,α₂)ᵀ</text>
+  <rect x="450" y="92" width="300" height="170" rx="85" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+  <text x="600" y="145" class="sans body muted" text-anchor="middle">抽象空间中的对象</text><text x="600" y="197" class="math formula ink" text-anchor="middle">x ∈ V</text><text x="600" y="228" class="sans small muted" text-anchor="middle">不依赖任何坐标系</text>
+  <rect x="835" y="82" width="300" height="190" rx="12" fill="#ecfdf5" stroke="#6ee7b7"/>
+  <text x="985" y="119" class="sans h green" text-anchor="middle">字典 C</text><text x="985" y="157" class="math formula ink" text-anchor="middle">C=(c₁,c₂)</text><text x="985" y="201" class="math formula green" text-anchor="middle">x = β₁c₁+β₂c₂</text><text x="985" y="238" class="math body muted" text-anchor="middle">坐标：xᶜ=(β₁,β₂)ᵀ</text>
+  <path d="M365 174H438" class="arrow"/><path d="M750 174H823" class="arrow"/><text x="401" y="158" class="sans small muted" text-anchor="middle">解码</text><text x="787" y="158" class="sans small muted" text-anchor="middle">编码</text>
+  <path d="M215 292V350H985V292" class="arrow"/><rect x="430" y="326" width="340" height="50" rx="10" fill="#ffffff" stroke="#cbd5e1"/><text x="600" y="358" class="math formula ink" text-anchor="middle">xᶜ = Pᶜ←ᴮ xᴮ</text>
+
+  <rect x="65" y="412" width="500" height="96" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="92" y="447" class="sans h blue">被动换坐标</text><text x="92" y="480" class="sans body ink">x 不变；基和坐标列改变。</text><text x="535" y="480" class="math body blue" text-anchor="end">xᴮ → xᶜ</text>
+  <rect x="635" y="412" width="500" height="96" rx="12" fill="#fffbeb" stroke="#fcd34d"/>
+  <text x="662" y="447" class="sans h amber">主动线性变换</text><text x="662" y="480" class="sans body ink">基不变；对象真的变为 Tx。</text><text x="1105" y="480" class="math body amber" text-anchor="end">x → Tx</text>
+  <rect x="92" y="535" width="1016" height="42" rx="10" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="600" y="562" class="sans result ink" text-anchor="middle">换基矩阵连接两种编码；矩阵方向由“输入哪套坐标、输出哪套坐标”决定。</text>
+</svg>

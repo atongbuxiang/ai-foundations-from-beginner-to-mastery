@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+  <title id="title">向量空间的封闭性与约束集合</title>
+  <desc id="desc">左侧用经过原点的子空间和平移仿射集合对比封闭性，右侧用三个判据区分环境向量空间、线性子空间与非线性可行集。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
+    <marker id="blue-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#2563eb"/></marker>
+    <style>
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}.blue{fill:#2563eb}.green{fill:#0f766e}.amber{fill:#b7791f}.h{font-size:19px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}.axis{stroke:#94a3b8;stroke-width:1.5;marker-end:url(#arrow)}.grid{stroke:#e2e8f0;stroke-width:1}.blue-line{stroke:#2563eb;stroke-width:3;fill:none}.green-line{stroke:#0f766e;stroke-width:3;fill:none}.amber-line{stroke:#b7791f;stroke-width:3;fill:none;stroke-dasharray:8 6}.vector{stroke:#2563eb;stroke-width:3;fill:none;marker-end:url(#blue-arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="600" fill="#ffffff"/>
+  <text x="52" y="43" class="sans h ink">先问结构，而不是先问“长得像不像箭头”</text>
+  <rect x="42" y="65" width="732" height="430" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <g class="grid"><path d="M84 135H738M84 205H738M84 275H738M84 345H738M84 415H738"/><path d="M155 95V465M260 95V465M365 95V465M470 95V465M575 95V465M680 95V465"/></g>
+  <path d="M84 300H738" class="axis"/><path d="M365 465V95" class="axis"/>
+  <text x="748" y="306" class="math small muted">x</text><text x="371" y="103" class="math small muted">y</text><circle cx="365" cy="300" r="5" fill="#1f2937"/><text x="344" y="322" class="math small ink">0</text>
+  <path d="M112 420L698 154" class="blue-line"/><text x="642" y="144" class="math body blue">U：齐次约束</text>
+  <path d="M365 300L504 237" class="vector"/><path d="M365 300L263 346" class="vector"/><text x="487" y="224" class="math body blue">u</text><text x="239" y="369" class="math body blue">v</text>
+  <circle cx="429" cy="271" r="7" fill="#0f766e"/><text x="441" y="268" class="math body green">au+bv 仍在 U</text>
+  <path d="M113 302L699 91" class="amber-line"/><text x="555" y="113" class="sans body amber">仿射平移：不经过 0</text>
+  <circle cx="601" cy="357" r="66" fill="none" stroke="#b7791f" stroke-width="3"/><text x="533" y="450" class="sans body amber">固定范数：缩放后离开集合</text>
+
+  <rect x="812" y="65" width="346" height="430" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="840" y="105" class="sans h blue">三层判断</text>
+  <circle cx="850" cy="151" r="18" fill="#eff6ff" stroke="#93c5fd"/><text x="850" y="157" class="sans body blue" text-anchor="middle">1</text>
+  <text x="882" y="146" class="sans body ink">对象与标量域是什么？</text><text x="882" y="171" class="math small muted">V，F；运算必须先定义</text>
+  <circle cx="850" cy="230" r="18" fill="#ecfdf5" stroke="#6ee7b7"/><text x="850" y="236" class="sans body green" text-anchor="middle">2</text>
+  <text x="882" y="225" class="sans body ink">线性组合是否仍在集合中？</text><text x="882" y="250" class="math small muted">u,v∈U ⇒ au+bv∈U</text>
+  <circle cx="850" cy="309" r="18" fill="#fffbeb" stroke="#fcd34d"/><text x="850" y="315" class="sans body amber" text-anchor="middle">3</text>
+  <text x="882" y="304" class="sans body ink">约束是齐次、仿射还是非线性？</text><text x="882" y="329" class="math small muted">Ax=0，Ax=c，或 ‖x‖=1</text>
+  <line x1="840" y1="364" x2="1130" y2="364" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="840" y="401" class="sans body ink">AI 参数通常住在环境空间 V 中，</text><text x="840" y="429" class="sans body ink">而训练约束只定义 V 内的可行集。</text><text x="840" y="464" class="sans small muted">数组形状描述表示；封闭性决定结构。</text>
+  <rect x="92" y="525" width="1016" height="48" rx="10" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="600" y="556" class="sans result ink" text-anchor="middle">向量空间允许任意有限线性组合；子空间还必须包含零向量并对这些组合封闭。</text>
+</svg>

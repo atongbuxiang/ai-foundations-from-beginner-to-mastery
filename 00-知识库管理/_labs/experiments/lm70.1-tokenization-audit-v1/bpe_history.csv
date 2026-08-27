@@ -1,0 +1,9 @@
+rank,chosen,frequency,ties
+0,w+e,8,w+e
+1,l+o,7,l+o
+2,e+we,6,e+we|n+e|s+t|t+_|we+s
+3,ewe+s,6,ewe+s|n+ewe|s+t|t+_
+4,ewes+t,6,ewes+t|n+ewes|t+_
+5,ewest+_,6,ewest+_|n+ewest
+6,n+ewest_,6,n+ewest_
+7,lo+w,5,lo+w|w+_

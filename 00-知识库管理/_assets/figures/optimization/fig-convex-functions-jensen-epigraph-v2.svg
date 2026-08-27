@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">凸函数的 chord、Jensen gap 与 logsumexp 曲率</title>
+<desc id="desc">凸函数图像在 chord 下、在所有切线之上且 epigraph 为凸集；Jensen 比较先平均与先过函数；logsumexp 的 gradient 与 Hessian 分别是 softmax 与 covariance。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Chord 在上，切线在下</text>
+<line x1="50" y1="390" x2="360" y2="390" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="70" y1="415" x2="70" y2="95" stroke="#D7DEE8" stroke-width="2"/>
+<path d="M70.0 240.6L72.2 244.3L74.5 247.8L76.8 251.3L79.0 254.7L81.2 258.1L83.5 261.4L85.8 264.7L88.0 267.9L90.2 271.0L92.5 274.1L94.8 277.1L97.0 280.0L99.2 282.9L101.5 285.7L103.8 288.5L106.0 291.2L108.2 293.8L110.5 296.4L112.8 298.9L115.0 301.4L117.2 303.8L119.5 306.1L121.8 308.4L124.0 310.6L126.2 312.8L128.5 314.9L130.8 316.9L133.0 318.9L135.2 320.8L137.5 322.7L139.8 324.5L142.0 326.2L144.2 327.9L146.5 329.5L148.8 331.0L151.0 332.5L153.2 333.9L155.5 335.3L157.8 336.6L160.0 337.9L162.2 339.0L164.5 340.2L166.8 341.2L169.0 342.2L171.2 343.2L173.5 344.0L175.8 344.9L178.0 345.6L180.2 346.3L182.5 347.0L184.8 347.5L187.0 348.1L189.2 348.5L191.5 348.9L193.8 349.2L196.0 349.5L198.2 349.7L200.5 349.9L202.8 350.0L205.0 350.0L207.2 350.0L209.5 349.9L211.8 349.7L214.0 349.5L216.2 349.2L218.5 348.9L220.8 348.5L223.0 348.1L225.2 347.5L227.5 347.0L229.8 346.3L232.0 345.6L234.2 344.9L236.5 344.0L238.8 343.2L241.0 342.2L243.2 341.2L245.5 340.2L247.8 339.0L250.0 337.9L252.2 336.6L254.5 335.3L256.8 333.9L259.0 332.5L261.2 331.0L263.5 329.5L265.8 327.9L268.0 326.2L270.2 324.5L272.5 322.7L274.8 320.8L277.0 318.9L279.2 316.9L281.5 314.9L283.8 312.8L286.0 310.6L288.2 308.4L290.5 306.1L292.8 303.8L295.0 301.4L297.2 298.9L299.5 296.4L301.8 293.8L304.0 291.2L306.2 288.5L308.5 285.7L310.8 282.9L313.0 280.0L315.2 277.1L317.5 274.1L319.8 271.0L322.0 267.9L324.2 264.7L326.5 261.4L328.8 258.1L331.0 254.7L333.2 251.3L335.5 247.8L337.8 244.3L340.0 240.6" fill="none" stroke="#2563EB" stroke-width="3"/>
+<line x1="115" y1="301.4" x2="300" y2="295.85" stroke="#C24135" stroke-width="3"/>
+<circle cx="115" cy="301.4" r="5" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<circle cx="300" cy="295.85" r="5" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<line x1="90" y1="314.0" x2="320" y2="396.8" stroke="#0F766E" stroke-width="2.5" stroke-dasharray="7 5"/>
+<text x="255" y="125" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">chord</text>
+<text x="95" y="300" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">supporting tangent</text>
+<text x="45" y="455" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">f(theta x+(1-theta)y) &lt;= theta f(x)+(1-theta)f(y)</text>
+<text x="45" y="490" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">epi f convex；domain 也必须凸。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Jensen 比较两条平均路径</text>
+<rect x="445" y="105" width="100" height="50" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="495.0" y="136.0" font-size="17" font-weight="650" text-anchor="middle" fill="#2563EB">x_i</text>
+<rect x="650" y="105" width="105" height="50" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="702.5" y="136.0" font-size="17" font-weight="650" text-anchor="middle" fill="#C24135">f(x_i)</text>
+<rect x="445" y="280" width="135" height="52" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="512.5" y="312.0" font-size="17" font-weight="650" text-anchor="middle" fill="#0F766E">E[X]</text>
+<rect x="635" y="280" width="120" height="52" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="695.0" y="312.0" font-size="16" font-weight="650" text-anchor="middle" fill="#0F766E">f(E[X])</text>
+<line x1="548" y1="130" x2="645" y2="130" stroke="#1F2937" stroke-width="2.4" marker-end="url(#a3)"/>
+<line x1="495" y1="158" x2="510" y2="273" stroke="#2563EB" stroke-width="2.4" marker-end="url(#a0)"/>
+<line x1="583" y1="306" x2="630" y2="306" stroke="#1F2937" stroke-width="2.4" marker-end="url(#a3)"/>
+<line x1="702" y1="158" x2="702" y2="273" stroke="#C24135" stroke-width="2.4" marker-end="url(#a2)"/>
+<text x="710" y="220" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">E</text>
+<text x="430" y="385" font-size="19" font-weight="700" text-anchor="start" fill="#1F2937" class="math">f(E[X]) &lt;= E[f(X)]</text>
+<text x="430" y="430" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">gap depends on spread + curvature</text>
+<text x="430" y="475" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">等号需检查 affine region / a.s. constancy。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">LogSumExp 的 AI 曲率接口</text>
+<rect x="840" y="105" width="300" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="990.0" y="140.0" font-size="16" font-weight="650" text-anchor="middle" fill="#2563EB">LSE(z)=log sum_i exp(z_i)</text>
+<line x1="990" y1="166" x2="990" y2="205" stroke="#1F2937" stroke-width="2.4" marker-end="url(#a3)"/>
+<rect x="840" y="218" width="300" height="58" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="990.0" y="253.0" font-size="17" font-weight="650" text-anchor="middle" fill="#0F766E">gradient = softmax(z)</text>
+<line x1="990" y1="279" x2="990" y2="318" stroke="#1F2937" stroke-width="2.4" marker-end="url(#a3)"/>
+<rect x="840" y="330" width="300" height="66" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="990.0" y="369.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">Hessian = Diag(p)-p p^T &gt;= 0</text>
+<text x="830" y="442" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">Hessian 是 categorical covariance。</text>
+<text x="830" y="480" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">对 logits 凸，不代表对 deep weights 凸。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">Chord、epigraph、一阶支撑、Hessian 与 Jensen 是同一凸性的不同接口；变量与 domain 不能省略。</text>
+</svg>

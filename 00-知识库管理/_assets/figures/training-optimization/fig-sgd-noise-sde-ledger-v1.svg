@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="690" viewBox="0 0 1200 690" role="img" aria-labelledby="title desc">
+  <title id="title">SGD 噪声从梯度估计到 SDE 与局部 OU 的尺度总账</title>
+  <desc id="desc">四个连续面板展示批量梯度协方差、一步参数增量协方差、连续时间扩散系数和局部二次下的平稳协方差，并列出连续近似的条件。</desc>
+  <rect width="1200" height="690" fill="#FFFEFB"/>
+  <style>.sans{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}.ink{fill:#1F2937}.muted{fill:#64748B}.blue{fill:#2563EB}.green{fill:#0F766E}.amber{fill:#B7791F}.red{fill:#C24135}.box{fill:#F8FAFC;stroke:#94A3B8;stroke-width:2.2}</style>
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#2563EB"/></marker></defs>
+  <text x="52" y="56" class="sans blue" font-size="23" font-weight="700">A｜对象与单位不能跨层混写</text>
+  <g class="sans ink" text-anchor="middle">
+    <rect x="52" y="108" width="230" height="138" rx="7" class="box"/><text x="167" y="143" font-size="18" font-weight="700">Batch gradient</text><text x="167" y="181" class="mono blue" font-size="18">Ĝ = G + ξ</text><text x="167" y="216" class="mono amber" font-size="17">Cov(ξ)=C/B</text>
+    <rect x="342" y="108" width="230" height="138" rx="7" class="box"/><text x="457" y="143" font-size="18" font-weight="700">One update</text><text x="457" y="181" class="mono blue" font-size="18">Δθ=−ηG−ηξ</text><text x="457" y="216" class="mono amber" font-size="17">Cov=η²C/B</text>
+    <rect x="632" y="108" width="230" height="138" rx="7" class="box"/><text x="747" y="143" font-size="18" font-weight="700">SDE at s=tη</text><text x="747" y="181" class="mono blue" font-size="17">dΘ=−G ds+σdW</text><text x="747" y="216" class="mono amber" font-size="17">σ=√(η/B) C¹ᐟ²</text>
+    <rect x="922" y="108" width="230" height="138" rx="7" class="box"/><text x="1037" y="143" font-size="18" font-weight="700">Local OU</text><text x="1037" y="181" class="mono blue" font-size="17">du=−Hu ds+σdW</text><text x="1037" y="216" class="mono amber" font-size="16">HΣ+ΣHᵀ=(η/B)C</text>
+  </g>
+  <g stroke="#2563EB" stroke-width="3" marker-end="url(#a)"><line x1="282" y1="177" x2="338" y2="177"/><line x1="572" y1="177" x2="628" y2="177"/><line x1="862" y1="177" x2="918" y2="177"/></g>
+  <text x="312" y="158" class="sans muted" font-size="16" text-anchor="middle">× η</text><text x="602" y="158" class="sans muted" font-size="16" text-anchor="middle">换时间单位</text><text x="892" y="158" class="sans muted" font-size="16" text-anchor="middle">局部线性化</text>
+  <text x="52" y="315" class="sans green" font-size="23" font-weight="700">B｜OU 椭圆：curvature 与 noise geometry 共同决定宽度</text>
+  <g transform="translate(340 455)"><ellipse rx="210" ry="76" fill="#EEF3FF" stroke="#2563EB" stroke-width="3" transform="rotate(-18)"/><line x1="-240" y1="0" x2="240" y2="0" stroke="#D7DEE8" stroke-width="2"/><line x1="0" y1="-105" x2="0" y2="105" stroke="#D7DEE8" stroke-width="2"/><circle r="8" fill="#1F2937"/><text x="0" y="132" class="sans ink" font-size="17" text-anchor="middle">低曲率或高噪声方向更宽</text></g>
+  <rect x="650" y="352" width="492" height="220" fill="#FFF6E5" stroke="#B7791F" stroke-width="2.5"/>
+  <text x="680" y="390" class="sans amber" font-size="19" font-weight="700">连续近似条件门</text>
+  <g class="sans ink" font-size="17"><text x="680" y="431">① learning rate 足够小，时间缩放已声明</text><text x="680" y="468">② gradient noise 矩存在且局部近似平稳</text><text x="680" y="505">③ sampling correlation / bias 已审计</text><text x="680" y="542">④ OU 还需要局部二次与稳定 H</text></g>
+  <line x1="52" y1="614" x2="1148" y2="614" stroke="#C24135" stroke-width="3"/>
+  <text x="52" y="653" class="sans red" font-size="17">二阶矩匹配 ≠ 路径相同 ≠ 自动 Bayesian posterior ≠ 自动改善泛化。</text>
+</svg>
+

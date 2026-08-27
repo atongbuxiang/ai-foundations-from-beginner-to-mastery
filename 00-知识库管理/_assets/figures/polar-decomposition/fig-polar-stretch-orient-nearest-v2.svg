@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="670" viewBox="0 0 1200 670" role="img" aria-labelledby="title desc">
+  <title id="title">极分解的非负伸缩、方向因子、最近 Stiefel 点与算法边界</title>
+  <desc id="desc">输入单位圆先经正半定因子 H 变成轴对齐椭圆，再由半酉因子 U 定向；下方说明极因子将非零奇异值压到一、最近点性质与不同数值路线。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
+    <style>
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}.blue{fill:#2563eb}.green{fill:#0f766e}.amber{fill:#b7791f}.h{font-size:19px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}.axis{stroke:#cbd5e1;stroke-width:1.4}.arrow{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="670" fill="#ffffff"/>
+  <text x="600" y="42" class="sans h ink" text-anchor="middle">A=UH：H 保存非负伸缩，U 保存有效方向；两者把“大小”与“朝向”分开</text>
+
+  <rect x="42" y="75" width="760" height="350" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="68" y="111" class="sans h blue">矩阵版极坐标：先伸缩，再定向</text>
+  <path d="M91 273H271M181 363V183" class="axis"/><circle cx="181" cy="273" r="70" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="181" y="384" class="sans body muted" text-anchor="middle">输入单位圆</text>
+  <path d="M270 273H338" class="arrow"/><text x="304" y="252" class="math h green" text-anchor="middle">H</text><text x="304" y="300" class="sans small muted" text-anchor="middle">非负伸缩</text>
+  <path d="M350 273H532M441 363V183" class="axis"/><ellipse cx="441" cy="273" rx="83" ry="48" fill="#ecfdf5" stroke="#0f766e" stroke-width="2.5"/>
+  <text x="441" y="384" class="math body green" text-anchor="middle">H=(A* A)¹ᐟ² ⪰ 0</text>
+  <path d="M532 273H600" class="arrow"/><text x="566" y="252" class="math h blue" text-anchor="middle">U</text><text x="566" y="300" class="sans small muted" text-anchor="middle">半酉定向</text>
+  <path d="M600 273H770M685 363V183" class="axis"/><ellipse cx="685" cy="273" rx="83" ry="48" transform="rotate(-27 685 273)" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="685" y="384" class="math body blue" text-anchor="middle">A=UH</text>
+
+  <rect x="840" y="75" width="318" height="350" rx="12" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="866" y="111" class="sans h blue">最近 Stiefel 点</text>
+  <text x="866" y="151" class="math formula ink">U = L R*</text>
+  <text x="866" y="181" class="sans body muted">若 A=LΣR*，则把非零 σᵢ 推到 1</text>
+  <path d="M883 252H1116" class="axis"/>
+  <circle cx="913" cy="215" r="15" fill="#b7791f"/><circle cx="963" cy="228" r="12" fill="#b7791f" opacity="0.85"/><circle cx="1013" cy="238" r="9" fill="#b7791f" opacity="0.7"/><text x="999" y="203" class="sans small amber">原奇异值</text>
+  <path d="M913 261V315M963 261V315M1013 261V315" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <circle cx="913" cy="337" r="13" fill="#2563eb"/><circle cx="963" cy="337" r="13" fill="#2563eb"/><circle cx="1013" cy="337" r="13" fill="#2563eb"/><text x="1085" y="343" class="sans small blue" text-anchor="end">全变成 1</text>
+  <text x="866" y="397" class="math body ink">min Q*Q=I ‖A−Q‖F</text>
+
+  <rect x="70" y="460" width="1060" height="130" rx="12" fill="#fffaf0" stroke="#f5c04a"/>
+  <text x="97" y="495" class="sans h amber">计算路线由任务、秩与精度共同决定</text>
+  <text x="97" y="530" class="sans body ink">稳健基线：SVD　　高矩阵：先 QR 再分解小因子　　高精度方阵：Newton / QDWH</text>
+  <text x="97" y="561" class="sans body muted">矩阵乘法友好：Newton–Schulz（需缩放与收敛区间）</text>
+  <text x="1098" y="561" class="sans body amber" text-anchor="end">秩亏不能被迭代“修复”；小 σ 抬高固定步误差与导数敏感性</text>
+  <text x="600" y="648" class="sans result ink" text-anchor="middle">polar factor 按奇异值处理；经典 matrix sign 按特征值半平面处理；逐元素 sign 又是另一对象。</text>
+</svg>

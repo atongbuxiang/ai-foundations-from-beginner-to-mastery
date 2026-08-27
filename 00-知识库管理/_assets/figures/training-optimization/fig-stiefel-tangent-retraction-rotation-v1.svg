@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Stiefel 切空间、retraction 与双旋转轨道</title>
+  <desc id="desc">区分正交化的 ambient update、Stiefel tangent direction、finite-step retraction 和保持全部奇异值的左右正交旋转。</desc>
+  <rect width="1200" height="800" fill="#FFFEFB"/>
+  <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}.h{font-size:27px;font-weight:700}.sh{font-size:18px;font-weight:700}.b{font-size:15px}.s{font-size:13px;fill:#64748B}.boxb{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.boxg{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.boxa{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.boxr{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}.man{fill:#EEF4FF;stroke:#2563EB;stroke-width:3}.tan{stroke:#0F766E;stroke-width:3}.arr{stroke:#2563EB;stroke-width:3;fill:none}.bad{stroke:#C0392B;stroke-width:3;stroke-dasharray:7 6;fill:none}.orbit{stroke:#B76E00;stroke-width:4;fill:none}</style>
+  <defs><marker id="ab" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#2563EB"/></marker><marker id="ar" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#C0392B"/></marker><marker id="aa" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#B76E00"/></marker></defs>
+  <text x="48" y="48" class="h" fill="#2563EB">“update 正交”不等于“parameter 留在 Stiefel 上”</text>
+  <text x="48" y="78" class="s">St(m,p)={W:WᵀW=I}；constrained step 必须经过 tangent 与 finite-step feasibility 两道门。</text>
+
+  <g transform="translate(48,112)">
+    <rect x="0" y="0" width="680" height="394" rx="14" fill="#F8FAFC" stroke="#CBD5E1"/>
+    <text x="22" y="36" class="sh">A｜标准 Stiefel 流程</text>
+    <path d="M65 283 C130 130 310 91 524 143 C607 163 637 235 591 304 C510 375 225 364 65 283 Z" class="man"/>
+    <text x="414" y="335" class="s">Stiefel manifold</text>
+    <circle cx="256" cy="238" r="8" fill="#2563EB"/>
+    <text x="238" y="268" class="b">W</text>
+    <line x1="147" y1="290" x2="395" y2="178" class="tan"/>
+    <text x="387" y="169" class="s">tangent plane at W</text>
+    <line x1="256" y1="238" x2="365" y2="189" class="arr" marker-end="url(#ab)"/>
+    <text x="302" y="225" class="s">Ξ=ΠW(G)</text>
+    <circle cx="365" cy="189" r="6" fill="#0F766E"/>
+    <path d="M365 189 C405 174 443 170 477 183" class="arr" marker-end="url(#ab)"/>
+    <circle cx="482" cy="185" r="8" fill="#2563EB"/>
+    <text x="492" y="181" class="s">R_W(ηΞ)</text>
+    <text x="22" y="338" class="b">tangent gate：WᵀΞ+ΞᵀW=0</text>
+    <text x="22" y="368" class="b">retraction gate：(W+ηΞ)[(W+ηΞ)ᵀ(W+ηΞ)]⁻¹ᐟ²</text>
+  </g>
+
+  <g transform="translate(758,112)">
+    <rect x="0" y="0" width="394" height="394" rx="14" class="boxr"/>
+    <text x="22" y="36" class="sh" fill="#C0392B">B｜常见错误捷径</text>
+    <rect x="44" y="82" width="140" height="72" rx="10" class="boxb"/>
+    <text x="62" y="112" class="b">polar(G)=QG</text><text x="62" y="138" class="s">QGᵀQG≈I</text>
+    <line x1="184" y1="118" x2="244" y2="118" class="bad" marker-end="url(#ar)"/>
+    <rect x="254" y="82" width="96" height="72" rx="10" class="boxr"/>
+    <text x="273" y="112" class="b">W−ηQG</text><text x="273" y="138" class="s">一般不 feasible</text>
+    <text x="22" y="206" class="b">缺失条件：</text>
+    <text x="44" y="238" class="b">WᵀQG + QGᵀW = 0 ？</text>
+    <text x="44" y="270" class="b">(W−ηQG)ᵀ(W−ηQG) = I ？</text>
+    <text x="22" y="318" class="s">update 自己正交，只说明它的列/行关系；</text>
+    <text x="22" y="344" class="s">它没有说明与当前 parameter W 的相对关系。</text>
+  </g>
+
+  <text x="48" y="558" class="h" fill="#0F766E">C｜另一类约束：双旋转把 W 限制在固定奇异值轨道</text>
+  <rect x="48" y="594" width="1104" height="142" rx="13" class="boxa"/>
+  <rect x="78" y="632" width="172" height="62" rx="10" class="boxb"/><text x="104" y="669" class="sh">W=UΣVᵀ</text>
+  <path d="M250 663 C330 612 409 613 487 655" class="orbit" marker-end="url(#aa)"/>
+  <rect x="497" y="632" width="226" height="62" rx="10" class="boxg"/><text x="520" y="669" class="sh">W₊=Q_L W Q_Rᵀ</text>
+  <path d="M723 663 C803 612 882 613 960 655" class="orbit" marker-end="url(#aa)"/>
+  <rect x="970" y="618" width="152" height="90" rx="10" class="boxr"/><text x="990" y="650" class="b">σᵢ(W₊)=σᵢ(W)</text><text x="990" y="678" class="s">rank/各范数保持</text><text x="990" y="699" class="s">可能过强约束</text>
+  <text x="78" y="718" class="s">精确不变量 ≠ loss 优势；若任务需要改变 gain、rank profile 或 condition number，轨道内更新无法完成。</text>
+  <rect x="48" y="758" width="1104" height="30" rx="7" fill="#F8FAFC" stroke="#CBD5E1"/>
+  <text x="72" y="779" class="s">审计：tangent residual · feasibility residual · retraction cost · singular-value invariants · task quality。</text>
+</svg>
+

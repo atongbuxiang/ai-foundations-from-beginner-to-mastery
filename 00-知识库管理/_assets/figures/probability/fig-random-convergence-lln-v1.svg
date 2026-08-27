@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">随机变量四种收敛关系与弱大数定律证明链</title>
+  <desc id="desc">上半部分展示Lp与几乎处处收敛推出依概率收敛，继而推出依分布收敛，并标注逆命题反例；下半部分展示样本均值方差按一除以n缩小并由Chebyshev得到弱大数定律。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#EFF6FF"/><stop offset="1" stop-color="#F0FDF4"/></linearGradient>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#2563EB"/></marker>
+    <marker id="arrRed" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#DC2626"/></marker>
+    <style>.title{font:700 21px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#0F172A}.head{font:700 16px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#1D4ED8}.txt{font:14px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#334155}.small{font:12px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#64748B}.math{font:15px Georgia,"Times New Roman",serif;fill:#0F172A}.box{stroke-width:1.5}.arrow{stroke:#2563EB;stroke-width:2.5;fill:none;marker-end:url(#arr)}.no{stroke:#DC2626;stroke-width:1.7;fill:none;stroke-dasharray:6 5;marker-end:url(#arrRed)}</style>
+  </defs>
+  <rect width="1200" height="430" rx="22" fill="url(#bg)"/>
+  <text x="40" y="38" class="title">“越来越接近”有四种量词；大数定律选择的是样本平均的概率/路径稳定</text>
+  <rect x="28" y="58" width="1144" height="177" rx="17" fill="#fff" stroke="#CBD5E1"/>
+  <text x="50" y="87" class="head">A　一般蕴含：实线恒成立，红色虚线逆向一般失败</text>
+  <rect x="72" y="112" width="172" height="66" rx="13" fill="#EDE9FE" stroke="#8B5CF6" class="box"/>
+  <text x="120" y="140" class="math">L^p convergence</text><text x="105" y="162" class="small">E|X_n−X|^p → 0</text>
+  <rect x="307" y="112" width="172" height="66" rx="13" fill="#FEF3C7" stroke="#F59E0B" class="box"/>
+  <text x="351" y="140" class="math">almost surely</text><text x="327" y="162" class="small">pathwise, except null set</text>
+  <rect x="542" y="112" width="172" height="66" rx="13" fill="#D1FAE5" stroke="#10B981" class="box"/>
+  <text x="584" y="140" class="math">in probability</text><text x="572" y="162" class="small">P(|X_n−X|&gt;ε) → 0</text>
+  <rect x="835" y="112" width="172" height="66" rx="13" fill="#DBEAFE" stroke="#3B82F6" class="box"/>
+  <text x="871" y="140" class="math">in distribution</text><text x="861" y="162" class="small">F_n(x) → F(x)</text>
+  <path d="M245 145C312 90 478 89 537 132" class="arrow"/><text x="377" y="96" class="small">Markov</text>
+  <path d="M480 145L537 145" class="arrow"/>
+  <path d="M715 145L830 145" class="arrow"/>
+  <path d="M920 184C830 220 697 218 632 184" class="no"/><text x="719" y="220" class="small" fill="#B91C1C">同分布独立副本</text>
+  <path d="M626 107C572 68 452 68 394 107" class="no"/><text x="446" y="78" class="small" fill="#B91C1C">稀有事件可无穷次发生</text>
+  <text x="321" y="204" class="small">a.s. ↛ L^1：高而窄尖峰</text>
+
+  <rect x="28" y="253" width="1144" height="147" rx="17" fill="#fff" stroke="#CBD5E1"/>
+  <text x="50" y="281" class="head">B　有限方差 WLLN：三步把独立平均送进依概率收敛</text>
+  <rect x="61" y="302" width="255" height="69" rx="12" fill="#DBEAFE" stroke="#60A5FA"/>
+  <text x="81" y="328" class="math">Xbar_n = (1/n) Σ_i X_i</text><text x="81" y="354" class="small">iid, E[X_i]=μ, Var(X_i)=σ²</text>
+  <path d="M319 337L375 337" class="arrow"/>
+  <rect x="381" y="302" width="222" height="69" rx="12" fill="#D1FAE5" stroke="#34D399"/>
+  <text x="409" y="329" class="math">E[Xbar_n]=μ</text><text x="409" y="354" class="math">Var(Xbar_n)=σ²/n</text>
+  <path d="M606 337L662 337" class="arrow"/>
+  <rect x="668" y="302" width="251" height="69" rx="12" fill="#FEF3C7" stroke="#FBBF24"/>
+  <text x="691" y="329" class="math">P(|Xbar_n−μ|≥ε)</text><text x="714" y="354" class="math">≤ σ²/(nε²) → 0</text>
+  <path d="M922 337L978 337" class="arrow"/>
+  <rect x="984" y="302" width="153" height="69" rx="12" fill="#EDE9FE" stroke="#A78BFA"/>
+  <text x="1014" y="331" class="math">Xbar_n →P μ</text><text x="1003" y="355" class="small">一致性，不是速率证书</text>
+</svg>

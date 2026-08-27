@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Lyapunov 子水平集、LaSalle 与多种证书语义</title>
+<desc id="desc">正定标量函数的子水平集把轨道约束在嵌套区域；导数符号依次支持稳定、渐近或指数结论，半负定时 LaSalle 还需寻找零导数集中的最大不变子集；连续、离散与学习证书验证的是不同不等式。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">一个标量约束所有未来轨道</text>
+<ellipse cx="205" cy="270" rx="145" ry="105" fill="none" stroke="#D7DEE8" stroke-width="2"/>
+<ellipse cx="205" cy="270" rx="110" ry="78" fill="none" stroke="#D7DEE8" stroke-width="2"/>
+<ellipse cx="205" cy="270" rx="72" ry="48" fill="none" stroke="#0F766E" stroke-width="2"/>
+<path d="M335 180 C290 205 290 335 235 300 C195 276 230 235 205 270" fill="none" stroke="#2563EB" stroke-width="3" marker-end="url(#a1)"/>
+<circle cx="205" cy="270" r="7" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<text x="218" y="260" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">x*</text>
+<text x="45" y="410" font-size="16" font-weight="700" text-anchor="start" fill="#1F2937" class="math">Omega_c={x: V(x)&lt;=c}</text>
+<text x="45" y="445" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">V&gt;0 and Vdot&lt;=0 =&gt; forward invariance</text>
+<text x="45" y="479" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">bounded sublevel set can certify a region</text>
+<text x="45" y="507" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">if solutions remain forward complete。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">导数强度决定结论强度</text>
+<rect x="445" y="98" width="190" height="55" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="540.0" y="131.5" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">V&gt;0, Vdot&lt;=0</text>
+<line x1="638" y1="126" x2="662" y2="126" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<text x="675" y="132" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">stable</text>
+<rect x="445" y="188" width="190" height="55" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="540.0" y="221.5" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">Vdot&lt;0</text>
+<line x1="638" y1="216" x2="662" y2="216" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<text x="675" y="222" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">asymptotic stability</text>
+<rect x="445" y="278" width="190" height="55" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="540.0" y="311.5" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">Vdot&lt;=-alpha V</text>
+<line x1="638" y1="306" x2="662" y2="306" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<text x="675" y="312" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">exponential rate</text>
+<line x1="430" y1="380" x2="765" y2="380" stroke="#D7DEE8" stroke-width="2"/>
+<text x="430" y="414" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">if Vdot&lt;=0 only:</text>
+<text x="430" y="444" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">find largest invariant set in {Vdot=0}</text>
+<text x="430" y="476" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">LaSalle can prove attraction beyond strict decay</text>
+<text x="430" y="506" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">but compactness/invariance are hypotheses。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">三种证书验证不同对象</text>
+<text x="830" y="105" font-size="16" font-weight="700" text-anchor="start" fill="#2563EB">continuous ODE</text>
+<text x="830" y="137" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">L_f V(x)&lt;=0 on D</text>
+<line x1="830" y1="163" x2="1145" y2="163" stroke="#D7DEE8" stroke-width="2"/>
+<text x="830" y="220" font-size="16" font-weight="700" text-anchor="start" fill="#0F766E">discrete map</text>
+<text x="830" y="252" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">V(F_h(x))-V(x)&lt;=0</text>
+<line x1="830" y1="278" x2="1145" y2="278" stroke="#D7DEE8" stroke-width="2"/>
+<text x="830" y="335" font-size="16" font-weight="700" text-anchor="start" fill="#C24135">learned V_theta</text>
+<text x="830" y="367" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">verify domain + counterexamples</text>
+<text x="830" y="456" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">sampled training loss is not a proof</text>
+<text x="830" y="486" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">state local/regional/global and robustness</text>
+<text x="830" y="514" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">continuous decay need not survive a stepper。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">Lyapunov 证书的力量来自量词与不变集，而不来自一条下降曲线；连续、离散和学习验证必须分层。</text>
+</svg>

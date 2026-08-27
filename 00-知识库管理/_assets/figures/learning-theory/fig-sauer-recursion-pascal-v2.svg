@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+  <title id="title">Sauer–Shelah 递推与 Pascal 恒等式的闭合</title>
+  <desc id="desc">极值函数分成投影项和双重延拓项，分别由维数 d 与 d 减一控制；两个二项式和借助 Pascal 恒等式合并。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
+    <style>
+      .ink{fill:#1f2937}.muted{fill:#64748b}.line{stroke:#cbd5e1;stroke-width:1.5}.arrow{stroke:#64748b;stroke-width:2.2;fill:none;marker-end:url(#arrow)}.soft{fill:#f8fafc}.blue{fill:#2563eb}.blue-soft{fill:#eff6ff}.green{fill:#047857}.green-soft{fill:#ecfdf5}
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.h{font-size:18px;font-weight:600}.body{font-size:17px}.small{font-size:15px}.formula{font-size:24px}.result{font-size:26px;font-weight:600}
+    </style>
+  </defs>
+  <rect width="1200" height="520" fill="#ffffff"/>
+  <rect x="44" y="46" width="510" height="354" rx="12" class="soft" stroke="#cbd5e1"/>
+  <text x="72" y="82" class="sans h ink">组合递推</text>
+  <rect x="176" y="111" width="244" height="58" rx="10" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="298" y="148" class="math formula ink" text-anchor="middle">T(m,d)</text>
+  <path d="M256 169 C229 205 188 212 162 246" class="arrow"/>
+  <path d="M340 169 C369 205 410 212 438 246" class="arrow"/>
+  <rect x="72" y="246" width="188" height="72" rx="10" class="blue-soft" stroke="#93c5fd"/>
+  <rect x="338" y="246" width="188" height="72" rx="10" class="green-soft" stroke="#6ee7b7"/>
+  <text x="166" y="283" class="math formula blue" text-anchor="middle">T(m−1,d)</text>
+  <text x="432" y="283" class="math formula green" text-anchor="middle">T(m−1,d−1)</text>
+  <text x="166" y="343" class="sans small muted" text-anchor="middle">投影：维数不增加</text>
+  <text x="432" y="343" class="sans small muted" text-anchor="middle">双重延拓：维数至多 d−1</text>
+  <text x="299" y="382" class="math body ink" text-anchor="middle">T(m,d) ≤ T(m−1,d) + T(m−1,d−1)</text>
+
+  <rect x="598" y="46" width="558" height="354" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="626" y="82" class="sans h ink">Pascal 闭合</text>
+  <g class="math body ink" text-anchor="middle">
+    <text x="716" y="139">C(m−1, i)</text>
+    <text x="894" y="139">+</text>
+    <text x="1042" y="139">C(m−1, i−1)</text>
+  </g>
+  <path d="M716 156 C744 203 810 217 862 252" class="arrow"/>
+  <path d="M1042 156 C1012 203 944 217 892 252" class="arrow"/>
+  <rect x="731" y="252" width="292" height="68" rx="10" class="blue-soft" stroke="#93c5fd"/>
+  <text x="877" y="294" class="math formula blue" text-anchor="middle">C(m, i)</text>
+  <text x="877" y="354" class="sans small muted" text-anchor="middle">相邻两项合并为下一行的一项</text>
+  <rect x="108" y="432" width="984" height="60" rx="10" class="green-soft" stroke="#6ee7b7"/>
+  <text x="600" y="470" class="math result green" text-anchor="middle">Σᵢ₌₀ᵈ C(m−1,i) + Σᵢ₌₀ᵈ⁻¹ C(m−1,i) = Σᵢ₌₀ᵈ C(m,i)</text>
+</svg>

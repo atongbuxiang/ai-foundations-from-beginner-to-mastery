@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="470" viewBox="0 0 1200 470" role="img" aria-labelledby="title desc">
+<title id="title">流映射、Liouville 与 Hutchinson 三轨审计</title>
+<desc id="desc">非正规线性流的剪切与面积收缩、非线性连续正规化流的四阶数值收敛、随机迹估计的精确方差和标准误差。</desc>
+<defs><style>
+text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",Arial,sans-serif}.panel{fill:#fffefb;stroke:#d6dee8;stroke-width:1.5}.title{font:700 22px Inter,"PingFang SC","Noto Sans CJK SC",Arial,sans-serif;fill:#0f172a}.label{font:500 17px Inter,"PingFang SC","Noto Sans CJK SC",Arial,sans-serif;fill:#475569}.math{font:600 17px Georgia,"Times New Roman",serif;fill:#1e293b}.axis{stroke:#64748b;stroke-width:1.2}.grid{stroke:#e2e8f0;stroke-width:1}.blue{fill:none;stroke:#2563eb;stroke-width:2.6}.orange{fill:none;stroke:#ea580c;stroke-width:2.6}.green{fill:none;stroke:#059669;stroke-width:2.6}.violet{fill:none;stroke:#7c3aed;stroke-width:2.2;stroke-dasharray:6 4}.dotb{fill:#2563eb}.doto{fill:#ea580c}.dotg{fill:#059669}.square0{fill:#dbeafe;fill-opacity:.55;stroke:#2563eb;stroke-width:2}.square1{fill:#ffedd5;fill-opacity:.60;stroke:#ea580c;stroke-width:2}.badge{fill:#ecfdf5;stroke:#10b981;stroke-width:1.2}.small{font:500 15px Inter,"PingFang SC","Noto Sans CJK SC",Arial,sans-serif;fill:#475569}
+</style></defs>
+<rect width="1200" height="470" fill="#ffffff"/>
+<text class="title" x="20" y="32">DYN-07 可复现实验：geometry → log-density → stochastic trace</text>
+<rect class="panel" x="20" y="55" width="370" height="385"/>
+<rect class="panel" x="415" y="55" width="370" height="385"/>
+<rect class="panel" x="810" y="55" width="370" height="385"/>
+<text class="title" x="42" y="88">A　非正规形变与面积收缩</text>
+<line class="axis" x1="65" y1="350" x2="350" y2="350"/>
+<line class="axis" x1="105" y1="375" x2="105" y2="120"/>
+<polygon class="square0" points="105.00,350.00 187.00,350.00 187.00,268.00 105.00,268.00"/>
+<polygon class="square1" points="105.00,350.00 154.74,350.00 311.29,319.83 261.56,319.83"/>
+<text class="label" x="70" y="398">蓝：t=0　橙：t=0.5</text>
+<text class="math" x="45" y="112">det exp(tA)=exp(-3t)=0.223130</text>
+<text class="label" x="45" y="420">polygon area=0.223130; σmax=2.034</text>
+<text class="title" x="437" y="88">B　RK4 增广系统同步阶</text>
+<line class="axis" x1="470" y1="365" x2="755" y2="365"/>
+<line class="axis" x1="470" y1="365" x2="470" y2="125"/>
+<text class="small" x="676" y="386">steps N (log₂)</text>
+<text class="small" transform="translate(446 245) rotate(-90)">endpoint error (log₁₀)</text>
+<polyline class="blue" points="480.00,213.55 545.00,252.45 610.00,277.74 675.00,308.98 740.00,341.63"/>
+<polyline class="orange" points="480.00,153.37 545.00,188.41 610.00,222.85 675.00,256.90 740.00,290.73"/>
+<circle class="dotb" cx="480.00" cy="213.55" r="4"/>
+<circle class="dotb" cx="545.00" cy="252.45" r="4"/>
+<circle class="dotb" cx="610.00" cy="277.74" r="4"/>
+<circle class="dotb" cx="675.00" cy="308.98" r="4"/>
+<circle class="dotb" cx="740.00" cy="341.63" r="4"/>
+<circle class="doto" cx="480.00" cy="153.37" r="4"/>
+<circle class="doto" cx="545.00" cy="188.41" r="4"/>
+<circle class="doto" cx="610.00" cy="222.85" r="4"/>
+<circle class="doto" cx="675.00" cy="256.90" r="4"/>
+<circle class="doto" cx="740.00" cy="290.73" r="4"/>
+<text class="label" x="490" y="113" fill="#2563eb">● state error</text>
+<text class="label" x="600" y="113" fill="#ea580c">● logp error</text>
+<text class="math" x="482" y="409">last observed order: x=3.887, logp=4.028</text>
+<text class="label" x="482" y="429">Liouville residual=0.00e+00</text>
+<text class="title" x="832" y="88">C　Hutchinson 无偏、方差与 SE</text>
+<line class="axis" x1="855" y1="350" x2="1145" y2="350"/>
+<line class="axis" x1="855" y1="350" x2="855" y2="130"/>
+<text class="small" x="1070" y="374">probes m (log₂)</text>
+<text class="small" transform="translate(833 274) rotate(-90)">absolute error / theoretical SE</text>
+<polyline class="green" points="865.00,176.36 918.00,202.82 971.00,229.27 1024.00,255.73 1077.00,282.18 1130.00,308.64"/>
+<polyline class="violet" points="865.00,182.03 918.00,182.03 971.00,207.44 1024.00,263.57 1077.00,268.03 1130.00,299.00"/>
+<circle class="dotg" cx="865.00" cy="176.36" r="4"/>
+<circle class="dotg" cx="918.00" cy="202.82" r="4"/>
+<circle class="dotg" cx="971.00" cy="229.27" r="4"/>
+<circle class="dotg" cx="1024.00" cy="255.73" r="4"/>
+<circle class="dotg" cx="1077.00" cy="282.18" r="4"/>
+<circle class="dotg" cx="1130.00" cy="308.64" r="4"/>
+<text class="label" x="868" y="113">绿：理论 SE ∝ m⁻¹ᐟ²　紫虚线：单条累计均值误差</text>
+<text class="math" x="868" y="396">trace=2.50; exact-enum mean=2.50</text>
+<text class="label" x="868" y="420">enum variance=27.25 = theory 27.25</text>
+<rect class="badge" x="970" y="445" width="180" height="18" rx="9"/>
+<text class="small" x="998" y="458">all assertions passed</text>
+</svg>

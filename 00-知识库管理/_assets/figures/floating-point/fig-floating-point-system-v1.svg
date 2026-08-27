@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 900" role="img" aria-labelledby="title desc">
+  <title id="title">从实数到 AI 低精度计算的浮点误差链</title>
+  <desc id="desc">实数经过有限格式和舍入成为浮点数；一次运算满足局部相对误差模型，多次运算通过 gamma n 累积。求和、点积和矩阵乘法进一步连接到混合精度、损失缩放、稳定归约和数值验收。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,4 L0,8 Z" fill="#334155"/>
+    </marker>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#0f172a" flood-opacity="0.12"/>
+    </filter>
+    <style>
+      .title{font:700 30px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#0f172a}
+      .subtitle{font:500 16px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#475569}
+      .section{font:700 19px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#1e293b}
+      .body{font:650 16px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#1e293b}
+      .small{font:500 14px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#475569}
+      .tiny{font:500 12.5px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#64748b}
+      .math{font:600 20px Georgia,"Times New Roman",serif;fill:#0f172a}
+      .mathLarge{font:700 24px Georgia,"Times New Roman",serif;fill:#0f172a}
+    </style>
+  </defs>
+
+  <rect width="1280" height="900" rx="26" fill="#f8fafc"/>
+  <text x="54" y="50" class="title">浮点计算：从有限表示到 AI 数值行为</text>
+  <text x="54" y="80" class="subtitle">每个局部舍入都很小，不代表长归约、消去或低精度训练的最终误差一定小</text>
+
+  <rect x="42" y="108" width="1196" height="248" rx="20" fill="#ffffff" stroke="#cbd5e1" stroke-width="2" filter="url(#shadow)"/>
+  <text x="68" y="145" class="section">1　表示层：把无限连续的实数压入有限离散的机器数</text>
+
+  <rect x="72" y="178" width="250" height="128" rx="18" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="197" y="210" text-anchor="middle" class="body">数学对象</text>
+  <text x="197" y="249" text-anchor="middle" class="mathLarge">x ∈ ℝ</text>
+  <text x="197" y="278" text-anchor="middle" class="small">连续、无限、通常不可精确存储</text>
+
+  <line x1="335" y1="242" x2="413" y2="242" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="374" y="224" text-anchor="middle" class="tiny">round</text>
+
+  <rect x="426" y="168" width="348" height="148" rx="18" fill="#ecfdf5" stroke="#10b981" stroke-width="2.5"/>
+  <text x="600" y="201" text-anchor="middle" class="body">浮点格式 F(β,p,eₘᵢₙ,eₘₐₓ)</text>
+  <text x="600" y="239" text-anchor="middle" class="math">±(d₀.d₁…dₚ₋₁)βᵉ</text>
+  <text x="600" y="270" text-anchor="middle" class="small">符号位 · 指数 · 有效数；正规数与次正规数</text>
+  <text x="600" y="296" text-anchor="middle" class="tiny">另含 ±0、±∞、NaN；间距随指数缩放</text>
+
+  <line x1="788" y1="242" x2="863" y2="242" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="876" y="178" width="326" height="128" rx="18" fill="#fff7ed" stroke="#f59e0b" stroke-width="2"/>
+  <text x="1039" y="210" text-anchor="middle" class="body">一次正确舍入</text>
+  <text x="1039" y="247" text-anchor="middle" class="mathLarge">fl(x ○ y)</text>
+  <text x="1039" y="278" text-anchor="middle" class="small">先取精确结果，再按指定模式落回格式</text>
+
+  <rect x="42" y="386" width="1196" height="218" rx="20" fill="#ffffff" stroke="#cbd5e1" stroke-width="2" filter="url(#shadow)"/>
+  <text x="68" y="423" class="section">2　分析层：从一次运算的小误差，推到整条计算图的误差</text>
+
+  <rect x="72" y="458" width="330" height="105" rx="17" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="237" y="489" text-anchor="middle" class="body">局部模型（正规范围内）</text>
+  <text x="237" y="525" text-anchor="middle" class="math">fl(x ○ y)=(x ○ y)(1+δ)</text>
+  <text x="237" y="550" text-anchor="middle" class="small">|δ| ≤ u</text>
+
+  <line x1="416" y1="510" x2="475" y2="510" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="488" y="458" width="304" height="105" rx="17" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/>
+  <text x="640" y="489" text-anchor="middle" class="body">累积引理</text>
+  <text x="640" y="525" text-anchor="middle" class="math">∏(1+δᵢ)=1+θₙ</text>
+  <text x="640" y="550" text-anchor="middle" class="small">|θₙ| ≤ γₙ = nu/(1−nu)</text>
+
+  <line x1="806" y1="510" x2="865" y2="510" stroke="#334155" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="878" y="448" width="324" height="125" rx="17" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+  <text x="1040" y="480" text-anchor="middle" class="body">结构决定误差放大方式</text>
+  <text x="1040" y="512" text-anchor="middle" class="small">吸收 · 消去 · 上溢/下溢</text>
+  <text x="1040" y="537" text-anchor="middle" class="small">串行求和 · 成对求和 · 补偿求和</text>
+  <text x="1040" y="562" text-anchor="middle" class="tiny">同样遵守 IEEE 754，括号不同仍可得到不同结果</text>
+
+  <rect x="42" y="634" width="1196" height="214" rx="20" fill="#ffffff" stroke="#cbd5e1" stroke-width="2" filter="url(#shadow)"/>
+  <text x="68" y="671" class="section">3　AI 接口：格式选择是“精度、范围、累加器和算法”的联合设计</text>
+
+  <rect x="72" y="704" width="250" height="106" rx="17" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="197" y="735" text-anchor="middle" class="body">低精度乘法</text>
+  <text x="197" y="766" text-anchor="middle" class="math">FP16 / BF16 / TF32</text>
+  <text x="197" y="792" text-anchor="middle" class="tiny">吞吐、带宽与动态范围的交换</text>
+
+  <rect x="354" y="704" width="250" height="106" rx="17" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+  <text x="479" y="735" text-anchor="middle" class="body">高精度累加</text>
+  <text x="479" y="766" text-anchor="middle" class="math">FP32 accumulator</text>
+  <text x="479" y="792" text-anchor="middle" class="tiny">点积、归约、统计量和优化器状态</text>
+
+  <rect x="636" y="704" width="250" height="106" rx="17" fill="#fff7ed" stroke="#f59e0b" stroke-width="2"/>
+  <text x="761" y="735" text-anchor="middle" class="body">范围管理</text>
+  <text x="761" y="766" text-anchor="middle" class="math">loss scaling · max shift</text>
+  <text x="761" y="792" text-anchor="middle" class="tiny">避免梯度下溢与指数函数上溢</text>
+
+  <rect x="918" y="704" width="284" height="106" rx="17" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/>
+  <text x="1060" y="735" text-anchor="middle" class="body">验收与复现</text>
+  <text x="1060" y="766" text-anchor="middle" class="math">residual · reference · sweep</text>
+  <text x="1060" y="792" text-anchor="middle" class="tiny">不要把“无 NaN”误当作“数值可信”</text>
+
+  <text x="54" y="881" class="subtitle">章节边界：本图解释误差从哪里来；问题条件性、前向/后向误差与算法稳定性的完整定义在后续节点展开。</text>
+</svg>

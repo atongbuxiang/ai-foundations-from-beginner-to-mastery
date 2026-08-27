@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">AdaBoost：弱边、重加权与指数势能</title>
+<desc id="desc">样本分布驱动弱规则；归一化常数同时记录指数损失和训练错误上界。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">一轮重加权回路</text>
+<circle cx="195" cy="110" r="38" fill="#FFFEFB" stroke="#2563EB" stroke-width="2.5"/>
+<text x="195" y="116" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">D(t)</text>
+<circle cx="305" cy="220" r="38" fill="#FFFEFB" stroke="#0F766E" stroke-width="2.5"/>
+<text x="305" y="226" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">h(t)</text>
+<circle cx="195" cy="340" r="38" fill="#FFFEFB" stroke="#B7791F" stroke-width="2.5"/>
+<text x="195" y="346" font-size="15" font-weight="700" text-anchor="middle" fill="#B7791F">alpha(t)</text>
+<circle cx="82" cy="220" r="38" fill="#FFFEFB" stroke="#C24135" stroke-width="2.5"/>
+<text x="82" y="226" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">D(t+1)</text>
+<path d="M225 135C265 150 285 175 295 195" fill="none" stroke="#1F2937" stroke-width="2.3" marker-end="url(#a3)"/>
+<path d="M295 248C280 285 250 315 225 325" fill="none" stroke="#1F2937" stroke-width="2.3" marker-end="url(#a3)"/>
+<path d="M165 325C125 305 105 270 98 250" fill="none" stroke="#1F2937" stroke-width="2.3" marker-end="url(#a3)"/>
+<path d="M98 190C110 150 145 125 165 115" fill="none" stroke="#1F2937" stroke-width="2.3" marker-end="url(#a3)"/>
+<text x="55" y="420" font-size="15" font-weight="400" text-anchor="start" fill="#C24135">wrong samples multiply by exp(+alpha)</text>
+<text x="55" y="454" font-size="15" font-weight="400" text-anchor="start" fill="#0F766E">correct samples multiply by exp(-alpha)</text>
+<text x="55" y="490" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">weak learner must win on every D(t)</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Z(t) 是势能收缩率</text>
+<rect x="445" y="100" width="310" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600.0" y="135.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">epsilon(t) = 1/2 - gamma(t)</text>
+<line x1="600" y1="163" x2="600" y2="198" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="445" y="210" width="310" height="62" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="600.0" y="247.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">Z(t)=2 sqrt(epsilon(1-epsilon))</text>
+<line x1="600" y1="277" x2="600" y2="312" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="430" y="324" width="340" height="72" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600.0" y="366.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">mean exp(-y F(T,x)) = product Z(t)</text>
+<text x="445" y="444" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">training error &lt;= exp(-2 sum gamma(t)^2)</text>
+<text x="445" y="482" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">zero edge -&gt; no contraction</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">证据阶梯与失效模式</text>
+<circle cx="865" cy="122" r="20" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="865" y="128" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">1</text>
+<line x1="890" y1="122" x2="920" y2="122" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<text x="932" y="128" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">positive edge</text>
+<circle cx="865" cy="202" r="20" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="865" y="208" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">2</text>
+<line x1="890" y1="202" x2="920" y2="202" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<text x="932" y="208" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">training exp loss</text>
+<circle cx="865" cy="282" r="20" fill="#FFFEFB" stroke="#B7791F" stroke-width="2"/>
+<text x="865" y="288" font-size="15" font-weight="700" text-anchor="middle" fill="#B7791F">3</text>
+<line x1="890" y1="282" x2="920" y2="282" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<text x="932" y="288" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">margin distribution</text>
+<circle cx="865" cy="362" r="20" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="865" y="368" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">4</text>
+<line x1="890" y1="362" x2="920" y2="362" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<text x="932" y="368" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">test generalization</text>
+<rect x="840" y="430" width="300" height="55" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="990.0" y="463.5" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">label noise attracts exponential weight</text>
+<text x="840" y="512" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">training theorem is not a test theorem</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">AdaBoost 的可验证主线是 D(t) → edge → Z(t) → exponential loss；泛化与噪声另开账户。</text>
+</svg>

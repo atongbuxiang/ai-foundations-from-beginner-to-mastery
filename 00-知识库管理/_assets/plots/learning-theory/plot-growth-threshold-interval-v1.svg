@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720">
+  <rect width="1200" height="720" fill="#ffffff"/>
+  <style>.s{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.m{font-family:"SFMono-Regular",Menlo,monospace}.ink{fill:#182235}.muted{fill:#64748b}</style>
+  <text x="64" y="60" class="s ink" font-size="31" font-weight="750">增长曲线：VC 维只记录最后一次碰到 2^m 的位置</text>
+  <text x="64" y="96" class="s muted" font-size="17">纵轴取 log₂，指数包络成为直线；阈值与区间在跨过各自 VC 维后转为多项式增长。</text>
+  <line x1="660" y1="128" x2="694" y2="128" stroke="#c83d32" stroke-width="4"/><text x="704" y="133" class="s ink" font-size="14">全部二分标记 2^m</text><line x1="910" y1="128" x2="944" y2="128" stroke="#147d64" stroke-width="4"/><text x="954" y="133" class="s ink" font-size="14">区间 1+m(m+1)/2</text><line x1="660" y1="153" x2="694" y2="153" stroke="#2457d6" stroke-width="4"/><text x="704" y="158" class="s ink" font-size="14">右阈值 m+1</text><line x1="100" y1="620" x2="1080" y2="620" stroke="#d7dee8"/>
+<text x="86" y="625" text-anchor="end" class="s muted" font-size="14">0</text>
+<line x1="100" y1="541.6666666666666" x2="1080" y2="541.6666666666666" stroke="#d7dee8"/>
+<text x="86" y="546.6666666666666" text-anchor="end" class="s muted" font-size="14">2</text>
+<line x1="100" y1="463.33333333333337" x2="1080" y2="463.33333333333337" stroke="#d7dee8"/>
+<text x="86" y="468.33333333333337" text-anchor="end" class="s muted" font-size="14">4</text>
+<line x1="100" y1="385" x2="1080" y2="385" stroke="#d7dee8"/>
+<text x="86" y="390" text-anchor="end" class="s muted" font-size="14">6</text>
+<line x1="100" y1="306.6666666666667" x2="1080" y2="306.6666666666667" stroke="#d7dee8"/>
+<text x="86" y="311.6666666666667" text-anchor="end" class="s muted" font-size="14">8</text>
+<line x1="100" y1="228.33333333333331" x2="1080" y2="228.33333333333331" stroke="#d7dee8"/>
+<text x="86" y="233.33333333333331" text-anchor="end" class="s muted" font-size="14">10</text>
+<line x1="100" y1="150" x2="1080" y2="150" stroke="#d7dee8"/>
+<text x="86" y="155" text-anchor="end" class="s muted" font-size="14">12</text>
+<line x1="100" y1="150" x2="100" y2="620" stroke="#d7dee8" stroke-dasharray="4 6"/>
+<text x="100" y="647" text-anchor="middle" class="s muted" font-size="14">0</text>
+<line x1="263.3333333333333" y1="150" x2="263.3333333333333" y2="620" stroke="#d7dee8" stroke-dasharray="4 6"/>
+<text x="263.3333333333333" y="647" text-anchor="middle" class="s muted" font-size="14">2</text>
+<line x1="426.66666666666663" y1="150" x2="426.66666666666663" y2="620" stroke="#d7dee8" stroke-dasharray="4 6"/>
+<text x="426.66666666666663" y="647" text-anchor="middle" class="s muted" font-size="14">4</text>
+<line x1="590" y1="150" x2="590" y2="620" stroke="#d7dee8" stroke-dasharray="4 6"/>
+<text x="590" y="647" text-anchor="middle" class="s muted" font-size="14">6</text>
+<line x1="753.3333333333333" y1="150" x2="753.3333333333333" y2="620" stroke="#d7dee8" stroke-dasharray="4 6"/>
+<text x="753.3333333333333" y="647" text-anchor="middle" class="s muted" font-size="14">8</text>
+<line x1="916.6666666666667" y1="150" x2="916.6666666666667" y2="620" stroke="#d7dee8" stroke-dasharray="4 6"/>
+<text x="916.6666666666667" y="647" text-anchor="middle" class="s muted" font-size="14">10</text>
+<line x1="1080" y1="150" x2="1080" y2="620" stroke="#d7dee8" stroke-dasharray="4 6"/>
+<text x="1080" y="647" text-anchor="middle" class="s muted" font-size="14">12</text>
+<rect x="100" y="150" width="980" height="470" fill="none" stroke="#94a3b8" stroke-width="2"/>
+<text x="590" y="687" text-anchor="middle" class="s ink" font-size="16">样本点数 m</text>
+<text x="29" y="385" text-anchor="middle" transform="rotate(-90 29 385)" class="s ink" font-size="16">log₂ τ(m)：可区分标签模式的 bits</text><path d="M100.0,620.0 L181.7,580.8 L263.3,541.7 L345.0,502.5 L426.7,463.3 L508.3,424.2 L590.0,385.0 L671.7,345.8 L753.3,306.7 L835.0,267.5 L916.7,228.3 L998.3,189.2 L1080.0,150.0" fill="none" stroke="#c83d32" stroke-width="4"/>
+<path d="M100.0,620.0 L181.7,580.8 L263.3,541.7 L345.0,510.0 L426.7,484.5 L508.3,463.3 L590.0,445.3 L671.7,429.7 L753.3,416.0 L835.0,403.7 L916.7,392.5 L998.3,382.4 L1080.0,373.1" fill="none" stroke="#147d64" stroke-width="4"/>
+<path d="M100.0,620.0 L181.7,580.8 L263.3,557.9 L345.0,541.7 L426.7,529.1 L508.3,518.8 L590.0,510.0 L671.7,502.5 L753.3,495.8 L835.0,489.9 L916.7,484.5 L998.3,479.6 L1080.0,475.1" fill="none" stroke="#2457d6" stroke-width="4"/><line x1="181.66666666666666" y1="150" x2="181.66666666666666" y2="620" stroke="#2457d6" stroke-width="2" stroke-dasharray="7 6"/><text x="190.66666666666666" y="190" class="s" fill="#2457d6" font-size="14">threshold VC=1</text>
+  <line x1="263.3333333333333" y1="150" x2="263.3333333333333" y2="620" stroke="#147d64" stroke-width="2" stroke-dasharray="7 6"/><text x="272.3333333333333" y="217" class="s" fill="#147d64" font-size="14">interval VC=2</text>
+</svg>

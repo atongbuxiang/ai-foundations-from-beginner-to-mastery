@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="780" viewBox="0 0 1200 780" role="img" aria-labelledby="title desc">
+  <title id="title">Newton–Schulz 奇异值映射与数值审计</title>
+  <desc id="desc">展示矩阵奇多项式如何逐奇异值作用，对比经典 Newton–Schulz 与 Muon 五次多项式，并列出四种残差和有限精度护栏。</desc>
+  <rect width="1200" height="780" fill="#FFFEFB"/>
+  <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}.h{font-size:27px;font-weight:700}.sh{font-size:18px;font-weight:700}.b{font-size:15px}.s{font-size:13px;fill:#64748B}.boxb{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.boxg{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.boxa{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.boxr{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}.axis{stroke:#94A3B8;stroke-width:1.5}.classic{stroke:#0F766E;stroke-width:3;fill:none}.jordan{stroke:#B76E00;stroke-width:3;fill:none}.diag{stroke:#64748B;stroke-width:2;stroke-dasharray:6 5}.arr{stroke:#2563EB;stroke-width:3;fill:none}</style>
+  <defs><marker id="ab" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#2563EB"/></marker></defs>
+  <text x="48" y="48" class="h" fill="#2563EB">从矩阵迭代到标量 singular-value map</text>
+  <text x="48" y="78" class="s">exact arithmetic：X=UΣVᵀ → p(X)=U p(Σ)Vᵀ；实际低精度实现还要另做矩阵残差审计。</text>
+
+  <g transform="translate(48,112)">
+    <rect x="0" y="0" width="430" height="318" rx="14" fill="#F8FAFC" stroke="#CBD5E1"/>
+    <text x="22" y="34" class="sh">A｜标量映射示意</text>
+    <line x1="56" y1="268" x2="392" y2="268" class="axis"/><line x1="56" y1="268" x2="56" y2="62" class="axis"/>
+    <line x1="56" y1="268" x2="352" y2="72" class="diag"/>
+    <path d="M56 268 C110 190 170 118 250 83 C294 65 330 70 370 105" class="classic"/>
+    <path d="M56 268 C92 142 155 65 216 96 C265 120 302 62 370 92" class="jordan"/>
+    <line x1="86" y1="246" x2="116" y2="210" class="arr" marker-end="url(#ab)"/>
+    <text x="66" y="292" class="s">0</text><text x="331" y="292" class="s">s</text><text x="34" y="76" class="s">φ(s)</text>
+    <text x="223" y="199" class="s">灰虚线：φ(s)=s</text>
+    <line x1="218" y1="232" x2="253" y2="232" class="classic"/><text x="264" y="237" class="s">经典 ½s(3−s²)</text>
+    <line x1="218" y1="258" x2="253" y2="258" class="jordan"/><text x="264" y="263" class="s">Muon 五次多项式</text>
+  </g>
+
+  <g transform="translate(510,112)">
+    <rect x="0" y="0" width="642" height="318" rx="14" class="boxb"/>
+    <text x="24" y="36" class="sh">B｜矩阵路径与不能省略的边界</text>
+    <rect x="24" y="68" width="152" height="72" rx="10" class="boxg"/>
+    <text x="43" y="98" class="b">X₀=UΣ₀Vᵀ</text><text x="43" y="124" class="s">先 scaling</text>
+    <line x1="176" y1="104" x2="222" y2="104" class="arr" marker-end="url(#ab)"/>
+    <rect x="232" y="68" width="180" height="72" rx="10" class="boxa"/>
+    <text x="251" y="98" class="b">Σₖ₊₁=φ(Σₖ)</text><text x="251" y="124" class="s">zero singular value stays zero</text>
+    <line x1="412" y1="104" x2="458" y2="104" class="arr" marker-end="url(#ab)"/>
+    <rect x="468" y="68" width="150" height="72" rx="10" class="boxg"/>
+    <text x="487" y="98" class="b">X̂=UΣₖVᵀ</text><text x="487" y="124" class="s">finite K</text>
+    <text x="24" y="186" class="b">经典局部误差：eₖ=1−sₖ²，eₖ₊₁=¼eₖ²(3+eₖ)</text>
+    <text x="24" y="218" class="b">Jordan 系数：有限步训练近似；不要求每一步单调逼近 1</text>
+    <text x="24" y="250" class="b">病态/rank-deficient：有效数值 rank 由 spectrum、K 与 dtype 共同决定</text>
+    <text x="24" y="282" class="s">Frobenius normalization 给 ||X₀||₂≤1，但 flat spectrum 会把每个 s 压到约 1/√r。</text>
+  </g>
+
+  <text x="48" y="482" class="h" fill="#0F766E">C｜不能只报“5 steps”：至少四种残差 + 三类运行护栏</text>
+  <rect x="48" y="518" width="252" height="136" rx="12" class="boxg"/>
+  <text x="72" y="551" class="sh">orthogonality</text><text x="72" y="582" class="b">||Q̂ᵀQ̂−I||F / √n</text><text x="72" y="610" class="s">宽矩阵换成 Q̂Q̂ᵀ</text><text x="72" y="636" class="s">rank 缺失时目标是 projector</text>
+  <rect x="332" y="518" width="252" height="136" rx="12" class="boxb"/>
+  <text x="356" y="551" class="sh">polar alignment</text><text x="356" y="582" class="b">||G−Q̂(Q̂ᵀG)||F / ||G||F</text><text x="356" y="610" class="s">并检查 Q̂ᵀG 近似 PSD</text><text x="356" y="636" class="s">正交但方向错仍会失败</text>
+  <rect x="616" y="518" width="252" height="136" rx="12" class="boxa"/>
+  <text x="640" y="551" class="sh">direction + dual gap</text><text x="640" y="582" class="b">cosF(Q̂,Q) 与对偶极值缺口</text><text x="640" y="610" class="s">方向和 scale 分开报告</text><text x="640" y="636" class="s">对 exact FP64 polar</text>
+  <rect x="900" y="518" width="252" height="136" rx="12" class="boxr"/>
+  <text x="924" y="551" class="sh">runtime guards</text><text x="924" y="582" class="b">NaN/Inf · residual rebound</text><text x="924" y="610" class="b">dtype/accumulation · peak memory</text><text x="924" y="636" class="s">记录 spectrum 与 condition</text>
+
+  <rect x="48" y="690" width="1104" height="52" rx="10" fill="#F8FAFC" stroke="#CBD5E1"/>
+  <text x="72" y="722" class="b">结论层级：exact polar target → exact-arithmetic polynomial → finite-step approximation → finite-precision kernel；四层不可静默合并。</text>
+  <text x="48" y="770" class="s">原创机制图｜曲线为概念示意；不是 BF16 实测结果。</text>
+</svg>
+

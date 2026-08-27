@@ -1,0 +1,5 @@
+width,entry_scale,independent_sum_rms,coherent_sum,mean_field_independent_sum_rms,mean_field_coherent_sum
+16,0.25,1.0,4.0,0.25,1.0
+64,0.125,1.0,8.0,0.125,1.0
+256,0.0625,1.0,16.0,0.0625,1.0
+1024,0.03125,1.0,32.0,0.03125,1.0

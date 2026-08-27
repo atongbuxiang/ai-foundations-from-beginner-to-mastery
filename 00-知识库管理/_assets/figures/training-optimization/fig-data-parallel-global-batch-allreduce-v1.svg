@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Data-parallel global batch semantics and ring All-Reduce</title>
+  <desc id="desc">A textbook diagram separates sample-weighted global gradient semantics from the communication path of ring All-Reduce and the overlap timeline.</desc>
+  <rect width="1200" height="800" fill="#FFFEFB"/>
+  <text x="60" y="58" font-family="Arial,sans-serif" font-size="28" font-weight="700" fill="#172033">Data parallelism must preserve a global estimator—not merely average ranks</text>
+  <text x="60" y="91" font-family="Arial,sans-serif" font-size="17" fill="#52606D">Weight local sums by sample count, declare collective semantics, then audit bytes and overlap on the critical path.</text>
+  <rect x="45" y="125" width="535" height="590" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+  <rect x="605" y="125" width="550" height="590" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+  <text x="70" y="166" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172033">A  One global mean from unequal local batches</text>
+  <defs><marker id="d" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#52606D"/></marker></defs>
+  <g font-family="Arial,sans-serif">
+    <rect x="82" y="215" width="135" height="100" rx="14" fill="#EAF2FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="149" y="248" text-anchor="middle" font-size="18" font-weight="700" fill="#2563EB">rank 0</text><text x="149" y="275" text-anchor="middle" font-size="16" fill="#52606D">n₀ = 4</text><text x="149" y="300" text-anchor="middle" font-size="15" fill="#52606D">sum s₀</text>
+    <rect x="245" y="215" width="135" height="100" rx="14" fill="#E8F6F3" stroke="#0F766E" stroke-width="2"/>
+    <text x="312" y="248" text-anchor="middle" font-size="18" font-weight="700" fill="#0F766E">rank 1</text><text x="312" y="275" text-anchor="middle" font-size="16" fill="#52606D">n₁ = 2</text><text x="312" y="300" text-anchor="middle" font-size="15" fill="#52606D">sum s₁</text>
+    <rect x="408" y="215" width="135" height="100" rx="14" fill="#FFF3D6" stroke="#B76E00" stroke-width="2"/>
+    <text x="475" y="248" text-anchor="middle" font-size="18" font-weight="700" fill="#B76E00">rank 2</text><text x="475" y="275" text-anchor="middle" font-size="16" fill="#52606D">n₂ = 3</text><text x="475" y="300" text-anchor="middle" font-size="15" fill="#52606D">sum s₂</text>
+    <path d="M149 315 V365 H312" fill="none" stroke="#52606D" stroke-width="2" marker-end="url(#d)"/><path d="M312 315 V365" stroke="#52606D" stroke-width="2" marker-end="url(#d)"/><path d="M475 315 V365 H335" fill="none" stroke="#52606D" stroke-width="2" marker-end="url(#d)"/>
+    <rect x="135" y="395" width="355" height="105" rx="16" fill="#F1F3F5" stroke="#52606D" stroke-width="2"/>
+    <text x="312" y="430" text-anchor="middle" font-size="18" font-weight="700" fill="#172033">All-Reduce sums two ledgers</text><text x="312" y="460" text-anchor="middle" font-size="17" fill="#52606D">S = Σᵣ sᵣ  and  N = Σᵣ nᵣ</text><text x="312" y="486" text-anchor="middle" font-size="15" fill="#52606D">do not erase nᵣ before reduction</text>
+    <path d="M312 500 V545" stroke="#52606D" stroke-width="2" marker-end="url(#d)"/>
+    <rect x="135" y="555" width="355" height="85" rx="16" fill="#E8F6F3" stroke="#0F766E" stroke-width="2"/>
+    <text x="312" y="588" text-anchor="middle" font-size="19" font-weight="700" fill="#0F766E">g = S / N = (s₀+s₁+s₂)/9</text><text x="312" y="617" text-anchor="middle" font-size="15" fill="#52606D">equal rank means would target a different estimator</text>
+  </g>
+  <text x="630" y="166" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172033">B  Ring bytes and bucket overlap</text>
+  <g font-family="Arial,sans-serif">
+    <circle cx="760" cy="300" r="46" fill="#EAF2FF" stroke="#2563EB" stroke-width="3"/><circle cx="1000" cy="300" r="46" fill="#E8F6F3" stroke="#0F766E" stroke-width="3"/><circle cx="1000" cy="470" r="46" fill="#FFF3D6" stroke="#B76E00" stroke-width="3"/><circle cx="760" cy="470" r="46" fill="#FFF7F4" stroke="#C0392B" stroke-width="3"/>
+    <text x="760" y="307" text-anchor="middle" font-size="18" font-weight="700" fill="#2563EB">R0</text><text x="1000" y="307" text-anchor="middle" font-size="18" font-weight="700" fill="#0F766E">R1</text><text x="1000" y="477" text-anchor="middle" font-size="18" font-weight="700" fill="#B76E00">R2</text><text x="760" y="477" text-anchor="middle" font-size="18" font-weight="700" fill="#C0392B">R3</text>
+    <path d="M810 300 H944" stroke="#52606D" stroke-width="3" marker-end="url(#d)"/><path d="M1000 350 V414" stroke="#52606D" stroke-width="3" marker-end="url(#d)"/><path d="M950 470 H816" stroke="#52606D" stroke-width="3" marker-end="url(#d)"/><path d="M760 420 V356" stroke="#52606D" stroke-width="3" marker-end="url(#d)"/>
+    <text x="880" y="245" text-anchor="middle" font-size="16" fill="#52606D">reduce-scatter → all-gather</text>
+    <rect x="650" y="555" width="455" height="95" rx="14" fill="#F1F3F5"/>
+    <text x="878" y="585" text-anchor="middle" font-size="18" font-weight="700" fill="#172033">per-rank volume ≈ 2(P−1)M/P</text>
+    <text x="878" y="615" text-anchor="middle" font-size="16" fill="#52606D">bucket ready time + α steps + β bytes</text><text x="878" y="638" text-anchor="middle" font-size="15" fill="#C0392B">only the uncovered tail extends the step</text>
+  </g>
+  <text x="60" y="760" font-family="Arial,sans-serif" font-size="15" fill="#52606D">Semantic audit: local reduction → collective operator → final divisor. Systems audit: topology → bucket order → exposed communication tail.</text>
+</svg>

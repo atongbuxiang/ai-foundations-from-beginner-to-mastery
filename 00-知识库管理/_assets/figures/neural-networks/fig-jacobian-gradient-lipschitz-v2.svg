@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Jacobian、Gradient Penalty 与 Lipschitz：对象层级与证书缺口</title>
+<desc id="desc">Loss input-gradient、model Jacobian、sampled gradient penalty、layer spectral norm 与 global Lipschitz certificate 是不同对象；有限点和方向的测量不能替代定义域上的 supremum。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">先写清被惩罚对象</text>
+<rect x="52" y="92" width="310" height="68" rx="4" fill="#FFFEFB" stroke="#2563EB" stroke-width="1.8"/>
+<text x="207" y="119" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">loss gradient</text>
+<text x="207" y="145" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">||grad_x ell(f(x),y)||</text>
+<rect x="52" y="185" width="310" height="68" rx="4" fill="#FFFEFB" stroke="#0F766E" stroke-width="1.8"/>
+<text x="207" y="212" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">model Jacobian</text>
+<text x="207" y="238" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">||J_f(x)||_F or operator norm</text>
+<rect x="52" y="278" width="310" height="68" rx="4" fill="#FFFEFB" stroke="#B7791F" stroke-width="1.8"/>
+<text x="207" y="305" font-size="15" font-weight="700" text-anchor="middle" fill="#B7791F">WGAN-GP</text>
+<text x="207" y="331" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">(||grad_x D(xhat)||-1)^2</text>
+<rect x="52" y="371" width="310" height="68" rx="4" fill="#FFFEFB" stroke="#C24135" stroke-width="1.8"/>
+<text x="207" y="398" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">parameter grad</text>
+<text x="207" y="424" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">||grad_theta ell||^2</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">一个方向可漏掉 worst case</text>
+<line x1="455" y1="267" x2="750" y2="267" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="600" y1="105" x2="600" y2="410" stroke="#D7DEE8" stroke-width="2"/>
+<path d="M480 267 C480 212 720 212 720 267 C720 322 480 322 480 267Z" fill="#EFF6FF" stroke="#2563EB" stroke-width="3"/>
+<line x1="600" y1="267" x2="720" y2="267" stroke="#C24135" stroke-width="4" marker-end="url(#a2)"/>
+<line x1="600" y1="267" x2="600" y2="212" stroke="#0F766E" stroke-width="4" marker-end="url(#a1)"/>
+<text x="725" y="273" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">J e1: 3</text>
+<text x="608" y="206" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">J e2: 1</text>
+<rect x="445" y="414" width="310" height="68" rx="5" fill="#FFFBEB" stroke="#B7791F" stroke-width="2"/>
+<text x="600" y="440" font-size="16" font-weight="700" text-anchor="middle" fill="#B7791F">J = diag(3,1)</text>
+<text x="600" y="467" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">||J||_2=3,  ||J||_F=sqrt(10)</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">local penalty ≠ global bound</text>
+<rect x="845" y="91" width="286" height="68" rx="4" fill="#FFFEFB" stroke="#2563EB" stroke-width="1.8"/>
+<text x="988" y="118" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">sample points</text>
+<text x="988" y="144" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">where was x or xhat drawn?</text>
+<rect x="845" y="184" width="286" height="68" rx="4" fill="#FFFEFB" stroke="#0F766E" stroke-width="1.8"/>
+<text x="988" y="211" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">sample directions</text>
+<text x="988" y="237" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">Hutchinson estimates Frobenius</text>
+<rect x="845" y="277" width="286" height="68" rx="4" fill="#FFFEFB" stroke="#B7791F" stroke-width="1.8"/>
+<text x="988" y="304" font-size="15" font-weight="700" text-anchor="middle" fill="#B7791F">layer bounds</text>
+<text x="988" y="330" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">product/sum can be very loose</text>
+<rect x="845" y="370" width="286" height="68" rx="4" fill="#FFFEFB" stroke="#C24135" stroke-width="1.8"/>
+<text x="988" y="397" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">global claim</text>
+<text x="988" y="423" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">needs domain supremum or certificate</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">导数正则只对声明的输出、norm、点和方向成立；global Lipschitz 与鲁棒泛化需要额外证书。</text>
+</svg>

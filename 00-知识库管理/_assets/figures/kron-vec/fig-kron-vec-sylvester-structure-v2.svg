@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">Kronecker 积、列向量化恒等式与矩阵方程结构</title>
+  <desc id="desc">左侧展示 Kronecker 积的块矩阵定义，中间展示按列堆叠 vec 及 vec AXB 恒等式，右侧把 Sylvester 方程写成形式上的大线性系统并强调实际算法利用 Schur 结构而不显式形成巨型矩阵。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
+    <style>
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}.blue{fill:#2563eb}.green{fill:#0f766e}.amber{fill:#b7791f}.h{font-size:19px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}.arrow{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <rect x="42" y="43" width="340" height="417" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="68" y="81" class="sans h blue">A⊗B：每个标量替换成一个块</text>
+  <text x="68" y="126" class="math formula ink">A = ( a₁₁  a₁₂ ; a₂₁  a₂₂ )</text>
+  <path d="M199 145V185" class="arrow"/>
+  <g text-anchor="middle"><rect x="76" y="191" width="126" height="88" rx="8" fill="#eff6ff" stroke="#93c5fd"/><rect x="202" y="191" width="126" height="88" rx="8" fill="#ecfdf5" stroke="#6ee7b7"/><rect x="76" y="279" width="126" height="88" rx="8" fill="#fffbeb" stroke="#fcd34d"/><rect x="202" y="279" width="126" height="88" rx="8" fill="#ffffff" stroke="#cbd5e1"/><text x="139" y="241" class="math formula blue">a₁₁B</text><text x="265" y="241" class="math formula green">a₁₂B</text><text x="139" y="329" class="math formula amber">a₂₁B</text><text x="265" y="329" class="math formula ink">a₂₂B</text></g>
+  <text x="68" y="404" class="math body ink">A:m×n，B:p×q</text><text x="68" y="434" class="math body blue">A⊗B:(mp)×(nq)</text>
+
+  <rect x="420" y="43" width="350" height="417" rx="12" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="446" y="81" class="sans h blue">vec：固定列顺序后重排坐标</text>
+  <g class="math body ink" text-anchor="middle"><rect x="456" y="119" width="60" height="54" fill="#ffffff" stroke="#cbd5e1"/><rect x="516" y="119" width="60" height="54" fill="#ffffff" stroke="#cbd5e1"/><rect x="456" y="173" width="60" height="54" fill="#ffffff" stroke="#cbd5e1"/><rect x="516" y="173" width="60" height="54" fill="#ffffff" stroke="#cbd5e1"/><text x="486" y="152">x₁₁</text><text x="546" y="152">x₁₂</text><text x="486" y="206">x₂₁</text><text x="546" y="206">x₂₂</text></g>
+  <path d="M594 173H641" class="arrow"/><g class="math small ink" text-anchor="middle"><rect x="653" y="103" width="78" height="48" fill="#ffffff" stroke="#93c5fd"/><rect x="653" y="151" width="78" height="48" fill="#ffffff" stroke="#93c5fd"/><rect x="653" y="199" width="78" height="48" fill="#ffffff" stroke="#6ee7b7"/><rect x="653" y="247" width="78" height="48" fill="#ffffff" stroke="#6ee7b7"/><text x="692" y="133">x₁₁</text><text x="692" y="181">x₂₁</text><text x="692" y="229">x₁₂</text><text x="692" y="277">x₂₂</text></g>
+  <text x="446" y="332" class="sans small muted">先第一列，再第二列；行优先软件需转换。</text><rect x="446" y="358" width="298" height="66" rx="10" fill="#ffffff" stroke="#93c5fd"/><text x="595" y="399" class="math body blue" text-anchor="middle">vec(AXB)=(Bᵀ⊗A)vec(X)</text>
+
+  <rect x="808" y="43" width="350" height="417" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="834" y="81" class="sans h green">矩阵方程：公式展平，算法保留结构</text>
+  <text x="834" y="132" class="math formula ink">AX+XB=C</text><path d="M983 147V190" class="arrow"/>
+  <rect x="834" y="190" width="298" height="82" rx="10" fill="#eff6ff" stroke="#93c5fd"/><text x="983" y="222" class="math body blue" text-anchor="middle">(I⊗A+Bᵀ⊗I)vec X</text><text x="983" y="251" class="math body ink" text-anchor="middle">= vec C</text>
+  <text x="834" y="313" class="sans body amber">理论：</text><text x="902" y="313" class="sans body ink">给出唯一可解的谱条件</text><text x="834" y="351" class="sans body green">计算：</text><text x="902" y="351" class="sans body ink">Schur + 三角 Sylvester 求解</text><text x="834" y="389" class="sans body amber">避免：</text><text x="902" y="389" class="sans body ink">显式构造 n²×n² 系数矩阵</text><text x="834" y="432" class="sans small muted">结构化 matvec 也可直接作用而不物化 kron。</text>
+  <rect x="92" y="497" width="1016" height="74" rx="12" fill="#ecfdf5" stroke="#6ee7b7"/>
+  <text x="600" y="528" class="sans body green" text-anchor="middle">AI 接口：可分离协方差、K-FAC、矩阵 Jacobian 与双边线性层都复用同一索引结构。</text><text x="600" y="557" class="sans small muted" text-anchor="middle">外积、Hadamard、普通矩阵乘法和 Kronecker 积形状与指标规则不同，必须逐项声明。</text>
+  <text x="600" y="610" class="sans result ink" text-anchor="middle">vec 把矩阵方程编码成普通线性系统；Kronecker 公式用于推导，结构化算法用于真正计算。</text>
+</svg>

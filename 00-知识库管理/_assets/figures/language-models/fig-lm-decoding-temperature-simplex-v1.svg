@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">温度：排名不动，概率质量沿 simplex 移动</title><desc id="desc">三分类 softmax 随温度变化及 inverse-CDF 采样。</desc>
+<rect width="1200" height="700" fill="#FBF8F1"/>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#667784"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#183044" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<line x1="48" y1="70" x2="1152" y2="70" stroke="#245AA8" stroke-width="4"/>
+<text x="52" y="49" font-size="24" font-weight="700" fill="#183044">温度：排名不动，概率质量沿 simplex 移动</text>
+<line x1="75" y1="405" x2="645" y2="405" stroke="#183044" stroke-width="1.7"/>
+<line x1="75" y1="405" x2="75" y2="130" stroke="#183044" stroke-width="1.7"/>
+<path d="M75.0,131.9 L82.1,133.9 L89.2,136.8 L96.4,140.3 L103.5,144.5 L110.6,149.0 L117.8,153.8 L124.9,158.8 L132.0,163.8 L139.1,168.8 L146.2,173.6 L153.4,178.4 L160.5,183.1 L167.6,187.5 L174.8,191.8 L181.9,195.9 L189.0,199.8 L196.1,203.5 L203.2,207.1 L210.4,210.5 L217.5,213.7 L224.6,216.8 L231.8,219.7 L238.9,222.4 L246.0,225.1 L253.1,227.6 L260.2,230.0 L267.4,232.2 L274.5,234.4 L281.6,236.5 L288.8,238.5 L295.9,240.3 L303.0,242.1 L310.1,243.9 L317.2,245.5 L324.4,247.1 L331.5,248.6 L338.6,250.0 L345.8,251.4 L352.9,252.8 L360.0,254.0 L367.1,255.3 L374.2,256.5 L381.4,257.6 L388.5,258.7 L395.6,259.8 L402.8,260.8 L409.9,261.8 L417.0,262.7 L424.1,263.6 L431.2,264.5 L438.4,265.4 L445.5,266.2 L452.6,267.0 L459.8,267.8 L466.9,268.5 L474.0,269.2 L481.1,269.9 L488.2,270.6 L495.4,271.3 L502.5,271.9 L509.6,272.6 L516.8,273.2 L523.9,273.7 L531.0,274.3 L538.1,274.9 L545.2,275.4 L552.4,275.9 L559.5,276.5 L566.6,277.0 L573.8,277.4 L580.9,277.9 L588.0,278.4 L595.1,278.8 L602.2,279.3 L609.4,279.7 L616.5,280.1 L623.6,280.5 L630.8,280.9 L637.9,281.3 L645.0,281.7" fill="none" stroke="#245AA8" stroke-width="3.5"/>
+<text x="530" y="145" text-anchor="start" font-size="13" font-weight="700" fill="#245AA8">token A</text>
+<path d="M75.0,403.2 L82.1,401.2 L89.2,398.4 L96.4,395.0 L103.5,391.2 L110.6,387.2 L117.8,383.1 L124.9,379.0 L132.0,375.0 L139.1,371.1 L146.2,367.4 L153.4,364.0 L160.5,360.8 L167.6,357.8 L174.8,355.0 L181.9,352.4 L189.0,350.0 L196.1,347.7 L203.2,345.7 L210.4,343.8 L217.5,342.0 L224.6,340.4 L231.8,338.9 L238.9,337.5 L246.0,336.2 L253.1,335.0 L260.2,333.9 L267.4,332.9 L274.5,331.9 L281.6,331.0 L288.8,330.2 L295.9,329.4 L303.0,328.7 L310.1,328.0 L317.2,327.3 L324.4,326.7 L331.5,326.2 L338.6,325.6 L345.8,325.1 L352.9,324.6 L360.0,324.2 L367.1,323.8 L374.2,323.4 L381.4,323.0 L388.5,322.7 L395.6,322.3 L402.8,322.0 L409.9,321.7 L417.0,321.4 L424.1,321.1 L431.2,320.9 L438.4,320.6 L445.5,320.4 L452.6,320.2 L459.8,319.9 L466.9,319.7 L474.0,319.5 L481.1,319.4 L488.2,319.2 L495.4,319.0 L502.5,318.8 L509.6,318.7 L516.8,318.5 L523.9,318.4 L531.0,318.3 L538.1,318.1 L545.2,318.0 L552.4,317.9 L559.5,317.8 L566.6,317.6 L573.8,317.5 L580.9,317.4 L588.0,317.3 L595.1,317.2 L602.2,317.1 L609.4,317.0 L616.5,317.0 L623.6,316.9 L630.8,316.8 L637.9,316.7 L645.0,316.6" fill="none" stroke="#17766E" stroke-width="3.5"/>
+<text x="530" y="172" text-anchor="start" font-size="13" font-weight="700" fill="#17766E">token B</text>
+<path d="M75.0,405.0 L82.1,404.9 L89.2,404.8 L96.4,404.6 L103.5,404.3 L110.6,403.8 L117.8,403.1 L124.9,402.2 L132.0,401.3 L139.1,400.1 L146.2,398.9 L153.4,397.6 L160.5,396.2 L167.6,394.7 L174.8,393.3 L181.9,391.7 L189.0,390.2 L196.1,388.7 L203.2,387.2 L210.4,385.7 L217.5,384.3 L224.6,382.8 L231.8,381.4 L238.9,380.0 L246.0,378.7 L253.1,377.4 L260.2,376.1 L267.4,374.9 L274.5,373.7 L281.6,372.5 L288.8,371.4 L295.9,370.3 L303.0,369.2 L310.1,368.2 L317.2,367.2 L324.4,366.2 L331.5,365.3 L338.6,364.3 L345.8,363.4 L352.9,362.6 L360.0,361.8 L367.1,360.9 L374.2,360.2 L381.4,359.4 L388.5,358.6 L395.6,357.9 L402.8,357.2 L409.9,356.6 L417.0,355.9 L424.1,355.2 L431.2,354.6 L438.4,354.0 L445.5,353.4 L452.6,352.9 L459.8,352.3 L466.9,351.7 L474.0,351.2 L481.1,350.7 L488.2,350.2 L495.4,349.7 L502.5,349.2 L509.6,348.8 L516.8,348.3 L523.9,347.9 L531.0,347.4 L538.1,347.0 L545.2,346.6 L552.4,346.2 L559.5,345.8 L566.6,345.4 L573.8,345.0 L580.9,344.7 L588.0,344.3 L595.1,343.9 L602.2,343.6 L609.4,343.3 L616.5,342.9 L623.6,342.6 L630.8,342.3 L637.9,342.0 L645.0,341.7" fill="none" stroke="#C87922" stroke-width="3.5"/>
+<text x="530" y="199" text-anchor="start" font-size="13" font-weight="700" fill="#C87922">token C</text>
+<line x1="75.0" y1="405" x2="75.0" y2="411" stroke="#183044"/>
+<text x="75.0" y="429" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">0.2</text>
+<line x1="237.8571428571429" y1="405" x2="237.8571428571429" y2="411" stroke="#183044"/>
+<text x="237.8571428571429" y="429" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">1</text>
+<line x1="441.42857142857144" y1="405" x2="441.42857142857144" y2="411" stroke="#183044"/>
+<text x="441.42857142857144" y="429" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">2</text>
+<line x1="645.0" y1="405" x2="645.0" y2="411" stroke="#183044"/>
+<text x="645.0" y="429" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">3</text>
+<text x="360.0" y="452" text-anchor="middle" font-size="13" font-weight="400" fill="#667784">temperature τ</text>
+<text x="52" y="265" text-anchor="middle" font-size="12" font-weight="400" fill="#667784">probability</text>
+<rect x="705" y="115" width="410" height="105" rx="10" fill="#F3EFFA" stroke="#7054A3" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="720" y="143" text-anchor="start" font-size="15" font-weight="700" fill="#7054A3">Odds 的精确变化</text>
+<text x="720" y="168" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">pτ(A)/pτ(B) = exp[(zA−zB)/τ]</text>
+<text x="720" y="188" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">有限 τ &gt; 0：A &gt; B &gt; C 的排名不变</text>
+<text x="705" y="268" text-anchor="start" font-size="15" font-weight="700" fill="#183044">τ = 1 的 categorical 区间</text>
+<rect x="705" y="292" width="272.7487918676769" height="54" fill="#245AA8"/>
+<text x="841.3743959338385" y="325" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">A · 0.665</text>
+<rect x="977.7487918676769" y="292" width="100.33867313246704" height="54" fill="#17766E"/>
+<text x="1027.9181284339104" y="325" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">B · 0.245</text>
+<rect x="1078.087465000144" y="292" width="36.91253499985599" height="54" fill="#C87922"/>
+<text x="1096.5437325000719" y="325" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">C · 0.090</text>
+<line x1="1024.8" y1="270" x2="1024.8" y2="365" stroke="#B7443E" stroke-width="3"/>
+<path d="M1017.8,270 L1031.8,270 L1024.8,282 Z" fill="#B7443E"/>
+<text x="1024.8" y="390" text-anchor="middle" font-size="13" font-weight="700" fill="#B7443E">U=.78 → B</text>
+<rect x="705" y="430" width="410" height="145" rx="10" fill="#FFF0ED" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="720" y="458" text-anchor="start" font-size="15" font-weight="700" fill="#B7443E">复现合同</text>
+<text x="720" y="483" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">checkpoint + tokenizer/template</text>
+<text x="720" y="503" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">processors 与顺序 + sampler</text>
+<text x="720" y="523" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">RNG algorithm/state/counter + scheduler</text>
+<text x="720" y="543" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">stop/parser + kernel/hardware</text>
+<line x1="48" y1="650" x2="1152" y2="650" stroke="#D9D5CB"/>
+<text x="52" y="674" font-size="13" fill="#667784">升温增加 token entropy，不等于增加事实性或语义创造力；seed 也不是完整复现合同。</text>
+</svg>

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="820" viewBox="0 0 1200 820" role="img" aria-labelledby="title desc">
+  <title id="title">Muon 证据层级、系统成本与迁移协议</title>
+  <desc id="desc">将 Muon 的数学、原型、大规模训练、框架支持和跨组织复现分级，并连接系统成本分母和从 AdamW 迁移的验收门。</desc>
+  <rect width="1200" height="820" fill="#FFFEFB"/>
+  <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}.h{font-size:27px;font-weight:700}.sh{font-size:18px;font-weight:700}.b{font-size:14px}.s{font-size:12.5px;fill:#64748B}.boxb{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.boxg{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.boxa{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.boxr{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}.arr{stroke:#2563EB;stroke-width:3;fill:none}.gate{fill:#FFFFFF;stroke:#0F766E;stroke-width:2}</style>
+  <defs><marker id="ab" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#2563EB"/></marker></defs>
+  <text x="48" y="48" class="h" fill="#2563EB">Muon 决策三联表：证据有多强、分母是什么、如何安全迁移</text>
+  <text x="48" y="78" class="s">任何“更快”声明必须同时指出左栏证据等级和中栏成本口径，才能进入右栏工程 gate。</text>
+
+  <g transform="translate(48,112)">
+    <text x="0" y="0" class="sh" fill="#2563EB">A｜证据阶梯</text>
+    <rect x="0" y="22" width="340" height="74" rx="10" class="boxg"/><text x="20" y="51" class="b">L0　数学身份</text><text x="20" y="78" class="s">norm duality · polar · exact RMS；不含训练优势</text>
+    <rect x="22" y="106" width="318" height="74" rx="10" class="boxb"/><text x="42" y="135" class="b">L1　原始算法与小规模原型</text><text x="42" y="162" class="s">Jordan 2024：定义、代码、指定任务曲线</text>
+    <rect x="44" y="190" width="296" height="74" rx="10" class="boxa"/><text x="64" y="219" class="b">L2　大规模单组织主证据</text><text x="64" y="246" class="s">Moonlight：3B/16B MoE、5.7T tokens</text>
+    <rect x="66" y="274" width="274" height="74" rx="10" class="boxb"/><text x="86" y="303" class="b">L3　框架产品化</text><text x="86" y="330" class="s">API 可用性 ≠ 独立 superiority 证据</text>
+    <rect x="88" y="358" width="252" height="86" rx="10" class="boxr"/><text x="108" y="387" class="b">L4　跨组织长期复现</text><text x="108" y="414" class="s">跨模型/硬件/预算；含失败结果</text><text x="108" y="436" class="s">当前仍需继续积累</text>
+  </g>
+
+  <g transform="translate(432,112)">
+    <text x="0" y="0" class="sh" fill="#0F766E">B｜“效率”的分母账</text>
+    <rect x="0" y="22" width="326" height="86" rx="10" class="boxb"/><text x="20" y="52" class="b">quality vs tokens</text><text x="20" y="79" class="s">样本效率；不含 optimizer compute</text>
+    <rect x="0" y="120" width="326" height="86" rx="10" class="boxg"/><text x="20" y="150" class="b">quality vs model / total FLOPs</text><text x="20" y="177" class="s">另计 NS GEMM、fallback optimizer</text>
+    <rect x="0" y="218" width="326" height="86" rx="10" class="boxa"/><text x="20" y="248" class="b">quality vs wall-clock / energy</text><text x="20" y="275" class="s">kernel、通信、tail、失败与重启</text>
+    <rect x="0" y="316" width="326" height="128" rx="10" class="boxr"/><text x="20" y="346" class="b">系统侧账本</text><text x="20" y="374" class="s">persistent state + NS workspace</text><text x="20" y="400" class="s">all-reduce / shard / gather layout</text><text x="20" y="426" class="s">step median/P95 + peak memory</text>
+  </g>
+
+  <g transform="translate(802,112)">
+    <text x="0" y="0" class="sh" fill="#B76E00">C｜AdamW → Muon 迁移门</text>
+    <rect x="0" y="22" width="350" height="76" rx="10" class="gate"/><text x="20" y="51" class="b">① offline replay</text><text x="20" y="78" class="s">scale · direction · residual · kernel cost</text>
+    <line x1="175" y1="98" x2="175" y2="126" class="arr" marker-end="url(#ab)"/>
+    <rect x="0" y="136" width="350" height="76" rx="10" class="gate"/><text x="20" y="165" class="b">② controlled small run</text><text x="20" y="192" class="s">同 seeds / data / search budget + ablation</text>
+    <line x1="175" y1="212" x2="175" y2="240" class="arr" marker-end="url(#ab)"/>
+    <rect x="0" y="250" width="350" height="76" rx="10" class="gate"/><text x="20" y="279" class="b">③ shadow-scale systems test</text><text x="20" y="306" class="s">P95 · network bytes · OOM · checkpoint</text>
+    <line x1="175" y1="326" x2="175" y2="354" class="arr" marker-end="url(#ab)"/>
+    <rect x="0" y="364" width="350" height="80" rx="10" class="boxa"/><text x="20" y="393" class="b">④ expand only after gates pass</text><text x="20" y="420" class="s">质量 · 数值 · 系统 · 稳健 · 运维</text>
+  </g>
+
+  <rect x="48" y="600" width="1104" height="142" rx="14" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
+  <text x="72" y="635" class="sh">迁移时最容易被忽略的三个不兼容</text>
+  <rect x="72" y="660" width="316" height="58" rx="9" class="boxr"/><text x="91" y="684" class="b">state：Adam (m,v) 无 lossless map 到 Muon B</text><text x="91" y="706" class="s">reset / heuristic map / overlap 都要标记</text>
+  <rect x="442" y="660" width="316" height="58" rx="9" class="boxa"/><text x="461" y="684" class="b">LR：相同数字不表示相同 update scale</text><text x="461" y="706" class="s">对齐 RMS、relative step 与 spectral norm</text>
+  <rect x="812" y="660" width="316" height="58" rx="9" class="boxb"/><text x="831" y="684" class="b">ownership：tied weight 只能属于一个 optimizer</text><text x="831" y="706" class="s">group manifest、decay rule、rollback 必须保存</text>
+
+  <rect x="48" y="772" width="1104" height="32" rx="8" fill="#ECF7F4" stroke="#0F766E"/>
+  <text x="72" y="793" class="s">决策原则：数学可证 ≠ 训练因果；公开规模 ≠ 跨域通用；框架收录 ≠ 无需 benchmark。</text>
+</svg>
+

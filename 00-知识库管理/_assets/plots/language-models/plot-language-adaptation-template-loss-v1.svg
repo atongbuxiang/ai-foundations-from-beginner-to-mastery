@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">Template prefix and SFT loss are one executable contract</title><desc id="desc">Train and inference prefixes are aligned above; shifted labels and response mask are aligned below.</desc>
+<rect width="1200" height="700" fill="#FFFEFB"/>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<text x="55" y="55" font-size="25" font-weight="700" fill="#17324D">Template prefix and SFT target must agree token by token</text>
+<text x="55" y="105" font-size="18" font-weight="700" fill="#17324D">1 · train sequence; red divider = generation / answer start</text>
+<rect x="55" y="135" width="94" height="46" rx="6" fill="#7C3AED"/>
+<text x="102" y="164" text-anchor="middle" font-size="12" fill="#FFFFFF">BOS</text>
+<rect x="160" y="135" width="94" height="46" rx="6" fill="#7C3AED"/>
+<text x="207" y="164" text-anchor="middle" font-size="12" fill="#FFFFFF">SYSTEM</text>
+<rect x="265" y="135" width="94" height="46" rx="6" fill="#7C3AED"/>
+<text x="312" y="164" text-anchor="middle" font-size="12" fill="#FFFFFF">s</text>
+<rect x="370" y="135" width="94" height="46" rx="6" fill="#94A3B8"/>
+<text x="417" y="164" text-anchor="middle" font-size="12" fill="#FFFFFF">EOT</text>
+<rect x="475" y="135" width="94" height="46" rx="6" fill="#2563EB"/>
+<text x="522" y="164" text-anchor="middle" font-size="12" fill="#FFFFFF">USER</text>
+<rect x="580" y="135" width="94" height="46" rx="6" fill="#2563EB"/>
+<text x="627" y="164" text-anchor="middle" font-size="12" fill="#FFFFFF">q</text>
+<rect x="685" y="135" width="94" height="46" rx="6" fill="#94A3B8"/>
+<text x="732" y="164" text-anchor="middle" font-size="12" fill="#FFFFFF">EOT</text>
+<rect x="790" y="135" width="94" height="46" rx="6" fill="#0F766E"/>
+<text x="837" y="164" text-anchor="middle" font-size="12" fill="#FFFFFF">ASSISTANT</text>
+<rect x="895" y="135" width="94" height="46" rx="6" fill="#0F766E"/>
+<text x="942" y="164" text-anchor="middle" font-size="12" fill="#FFFFFF">a</text>
+<rect x="1000" y="135" width="94" height="46" rx="6" fill="#0F766E"/>
+<text x="1047" y="164" text-anchor="middle" font-size="12" fill="#FFFFFF">EOS</text>
+<line x1="889" y1="120" x2="889" y2="215" stroke="#C24135" stroke-width="4" stroke-dasharray="7 5"/>
+<text x="55" y="225" font-size="14" fill="#0F766E">inference sequence is exactly the prefix left of the divider</text>
+<text x="55" y="295" font-size="18" font-weight="700" fill="#17324D">2 · one shift, then choose the response targets</text>
+<rect x="180" y="335" width="125" height="42" rx="6" fill="#DBEAFE"/><text x="242" y="362" text-anchor="middle" font-size="14">input U</text>
+<rect x="180" y="392" width="125" height="42" rx="6" fill="#FEF3C7"/><text x="242" y="419" text-anchor="middle" font-size="14">label q</text>
+<rect x="180" y="449" width="125" height="42" rx="6" fill="#EEF2F7"/><text x="242" y="476" text-anchor="middle" font-size="14" fill="#17324D">mask 0</text>
+<rect x="350" y="335" width="125" height="42" rx="6" fill="#DBEAFE"/><text x="412" y="362" text-anchor="middle" font-size="14">input q</text>
+<rect x="350" y="392" width="125" height="42" rx="6" fill="#FEF3C7"/><text x="412" y="419" text-anchor="middle" font-size="14">label A</text>
+<rect x="350" y="449" width="125" height="42" rx="6" fill="#EEF2F7"/><text x="412" y="476" text-anchor="middle" font-size="14" fill="#17324D">mask 0</text>
+<rect x="520" y="335" width="125" height="42" rx="6" fill="#DBEAFE"/><text x="582" y="362" text-anchor="middle" font-size="14">input A</text>
+<rect x="520" y="392" width="125" height="42" rx="6" fill="#FEF3C7"/><text x="582" y="419" text-anchor="middle" font-size="14">label a</text>
+<rect x="520" y="449" width="125" height="42" rx="6" fill="#0F766E"/><text x="582" y="476" text-anchor="middle" font-size="14" fill="#FFFFFF">mask 1</text>
+<rect x="690" y="335" width="125" height="42" rx="6" fill="#DBEAFE"/><text x="752" y="362" text-anchor="middle" font-size="14">input a</text>
+<rect x="690" y="392" width="125" height="42" rx="6" fill="#FEF3C7"/><text x="752" y="419" text-anchor="middle" font-size="14">label b</text>
+<rect x="690" y="449" width="125" height="42" rx="6" fill="#0F766E"/><text x="752" y="476" text-anchor="middle" font-size="14" fill="#FFFFFF">mask 1</text>
+<rect x="860" y="335" width="125" height="42" rx="6" fill="#DBEAFE"/><text x="922" y="362" text-anchor="middle" font-size="14">input b</text>
+<rect x="860" y="392" width="125" height="42" rx="6" fill="#FEF3C7"/><text x="922" y="419" text-anchor="middle" font-size="14">label EOS</text>
+<rect x="860" y="449" width="125" height="42" rx="6" fill="#0F766E"/><text x="922" y="476" text-anchor="middle" font-size="14" fill="#FFFFFF">mask 1</text>
+<rect x="55" y="545" width="1090" height="82" rx="11" fill="#F8FAFC" stroke="#CBD5E1"/>
+<text x="80" y="578" font-size="16" fill="#17324D">global target mean = 21/9 = 2.3333</text>
+<text x="445" y="578" font-size="16" fill="#C24135">equal-device mean = 2.5000</text>
+<text x="780" y="578" font-size="16" fill="#17324D">per-token / per-turn = 1.6667 / 2.0000</text>
+<text x="80" y="610" font-size="14" fill="#64748B">Same tokens can define different estimands when the mask or denominator changes.</text>
+</svg>

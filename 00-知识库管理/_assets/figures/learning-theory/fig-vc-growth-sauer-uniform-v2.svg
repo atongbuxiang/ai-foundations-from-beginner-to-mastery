@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="440" viewBox="0 0 1200 440" role="img" aria-labelledby="title desc">
+  <title id="title">从 VC 维到一致收敛的四节点路线</title>
+  <desc id="desc">路线依次从打散与 VC 维进入增长函数，再用 Sauer–Shelah 得到多项式模式上界，最后通过概率工具得到一致收敛。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
+    <style>
+      .ink{fill:#1f2937}.muted{fill:#64748b}.line{stroke:#cbd5e1;stroke-width:1.5}.arrow{stroke:#64748b;stroke-width:2.2;fill:none;marker-end:url(#arrow)}.soft{fill:#f8fafc}.blue{fill:#2563eb}.blue-soft{fill:#eff6ff}.green{fill:#047857}.green-soft{fill:#ecfdf5}
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.id{font-size:16px;font-weight:600}.h{font-size:18px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:19px}.result{font-size:19px;font-weight:600}
+    </style>
+  </defs>
+  <rect width="1200" height="440" fill="#ffffff"/>
+  <g>
+    <rect x="42" y="52" width="246" height="272" rx="12" class="soft" stroke="#cbd5e1"/>
+    <rect x="332" y="52" width="246" height="272" rx="12" class="soft" stroke="#cbd5e1"/>
+    <rect x="622" y="52" width="246" height="272" rx="12" class="soft" stroke="#cbd5e1"/>
+    <rect x="912" y="52" width="246" height="272" rx="12" class="green-soft" stroke="#a7f3d0"/>
+  </g>
+  <g class="sans id blue">
+    <text x="66" y="84">LT-17</text><text x="356" y="84">LT-18</text><text x="646" y="84">LT-19</text>
+  </g>
+  <text x="936" y="84" class="sans id green">LT-20</text>
+  <g class="sans h ink">
+    <text x="66" y="119">打散与 VC 维</text><text x="356" y="119">增长函数</text><text x="646" y="119">Sauer–Shelah</text><text x="936" y="119">一致收敛</text>
+  </g>
+  <g class="sans small muted">
+    <text x="66" y="153">最大的完全自由点集有多大？</text><text x="356" y="153">固定 m 时最多有多少模式？</text><text x="646" y="153">有限维怎样压制模式增长？</text><text x="936" y="153">模式数怎样变成风险保证？</text>
+  </g>
+  <g class="math formula ink" text-anchor="middle">
+    <text x="165" y="213">∃C: |C|=d, |H↾C|=2ᵈ</text>
+    <text x="455" y="196" font-size="17">tau_H(m) = max_C</text>
+    <text x="455" y="222" font-size="16">patterns(H,C), |C|=m</text>
+    <text x="745" y="196" font-size="17">tau_H(m) ≤</text>
+    <text x="745" y="222" font-size="17">sum_{i=0}^d C(m,i)</text>
+    <text x="1035" y="203">Pr(gap &gt; ε)</text>
+  </g>
+  <g class="sans body blue" text-anchor="middle">
+    <text x="165" y="274">一个容量坐标 d</text><text x="455" y="274">整条模式增长曲线</text><text x="745" y="274">指数上限变为多项式</text>
+  </g>
+  <text x="1035" y="250" class="math body green" text-anchor="middle">≤ 4 tau_H(2m) exp(−m eps²/8)</text>
+  <text x="1035" y="280" class="sans body green" text-anchor="middle">有限样本概率界</text>
+  <path d="M288 188 L322 188" class="arrow"/><path d="M578 188 L612 188" class="arrow"/><path d="M868 188 L902 188" class="arrow"/>
+  <g class="sans small muted" text-anchor="middle"><text x="305" y="173">细化</text><text x="595" y="173">上界</text><text x="885" y="173">集中</text></g>
+  <rect x="92" y="360" width="1016" height="52" rx="10" class="blue-soft"/>
+  <text x="600" y="393" class="sans result ink" text-anchor="middle">存在性见证 → 最坏点集上的有限计数 → 多项式包络 → 分布无关的随机保证</text>
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#26364a"/></marker><style>.t{font-family:Inter,'Noto Sans SC',sans-serif;fill:#172033}.h{font-size:26px;font-weight:700}.s{font-size:18px}.m{font-family:'IBM Plex Mono',monospace;font-size:15px;fill:#233a59}.mut{font-size:15px;fill:#647184}.box{fill:#fffdf7;stroke:#26364a;stroke-width:2}.arr{stroke:#26364a;stroke-width:2.2;fill:none;marker-end:url(#a)}</style></defs>
+  <rect width="1200" height="620" fill="#f4f0e6"/><text x="54" y="52" class="t h">同样是 1-NFE：三种监督对象完全不同</text><line x1="54" y1="72" x2="1146" y2="72" stroke="#c7bda9"/>
+  <rect x="54" y="105" width="342" height="410" rx="12" class="box"/><text x="78" y="142" class="t h" font-size="21">A  Progressive Distill</text>
+  <circle cx="105" cy="240" r="19" fill="#426f9e"/><circle cx="225" cy="240" r="19" fill="#426f9e"/><circle cx="345" cy="240" r="19" fill="#4f8051"/>
+  <path d="M126 240 H202" class="arr"/><path d="M246 240 H322" class="arr"/>
+  <path d="M105 290 C160 340,292 340,345 290" fill="none" stroke="#d46b45" stroke-width="4" marker-end="url(#a)"/>
+  <text x="82" y="205" class="t mut">teacher 两小步 target</text><text x="112" y="365" class="t s" fill="#b65334">student 一大步</text><text x="82" y="420" class="m">N → N/2 → ...</text><text x="82" y="457" class="t mut">继承 teacher bias</text>
+  <rect x="429" y="105" width="342" height="410" rx="12" class="box"/><text x="453" y="142" class="t h" font-size="21">B  Consistency</text>
+  <path d="M478 370 C515 185,680 170,727 370" fill="none" stroke="#426f9e" stroke-width="4"/>
+  <circle cx="505" cy="302" r="11" fill="#426f9e"/><circle cx="587" cy="218" r="11" fill="#426f9e"/><circle cx="690" cy="286" r="11" fill="#426f9e"/><circle cx="605" cy="410" r="17" fill="#4f8051"/>
+  <path d="M505 302 L592 395" class="arr"/><path d="M587 218 L600 390" class="arr"/><path d="M690 286 L618 396" class="arr"/>
+  <text x="488" y="185" class="t mut">同一 trajectory</text><text x="493" y="447" class="t s">所有时间点 → 共同端点</text><text x="493" y="480" class="m">f(x, epsilon)=x</text>
+  <rect x="804" y="105" width="342" height="410" rx="12" class="box"/><text x="828" y="142" class="t h" font-size="21">C  Shortcut</text>
+  <circle cx="855" cy="270" r="19" fill="#426f9e"/><circle cx="970" cy="270" r="19" fill="#426f9e"/><circle cx="1090" cy="270" r="19" fill="#4f8051"/>
+  <path d="M876 270 H947" class="arr"/><path d="M991 270 H1067" class="arr"/>
+  <path d="M855 320 C915 380,1030 380,1090 320" fill="none" stroke="#d46b45" stroke-width="4" marker-end="url(#a)"/>
+  <text x="838" y="220" class="m">h</text><text x="954" y="220" class="m">h</text><text x="922" y="405" class="m">2h</text>
+  <text x="839" y="447" class="t s">一次 2h ≈ 两次 h</text><text x="839" y="480" class="t mut">还需 h=0/base supervision</text>
+  <rect x="54" y="538" width="1092" height="46" rx="8" fill="#fff8de" stroke="#c7a84d"/><text x="77" y="567" class="t s">自洽只是结构约束：常数 map 也可能自洽；正确分布、off-trajectory 与未见步长必须另测。</text>
+</svg>

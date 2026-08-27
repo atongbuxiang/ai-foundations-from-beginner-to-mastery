@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">多元高斯分布的几何、条件化与重参数</title>
+  <desc id="desc">三面板展示协方差的等马氏距离椭圆，分块高斯条件化后的均值移动和方差缩小，以及标准高斯经Cholesky因子映射为目标分布。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F5F3FF"/><stop offset="1" stop-color="#EFF6FF"/></linearGradient>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#7C3AED"/></marker>
+    <style>.title{font:700 21px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#0F172A}.head{font:700 17px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#5B21B6}.txt{font:14px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#334155}.small{font:12px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#64748B}.math{font:15px Georgia,"Times New Roman",serif;fill:#0F172A}.card{fill:#fff;stroke:#CBD5E1;stroke-width:1.3}.blue{fill:#DBEAFE;stroke:#60A5FA}.green{fill:#D1FAE5;stroke:#34D399}.amber{fill:#FEF3C7;stroke:#FBBF24}.violet{fill:#EDE9FE;stroke:#A78BFA}.line{stroke:#7C3AED;stroke-width:2;fill:none;marker-end:url(#arr)}</style>
+  </defs>
+  <rect width="1200" height="430" rx="22" fill="url(#bg)"/>
+  <text x="40" y="38" class="title">协方差决定 Gaussian 椭球；条件化取 Schur 补；Cholesky 连接采样与稳定计算</text>
+  <rect x="28" y="58" width="368" height="342" rx="17" class="card"/><rect x="416" y="58" width="368" height="342" rx="17" class="card"/><rect x="804" y="58" width="368" height="342" rx="17" class="card"/>
+
+  <text x="50" y="88" class="head">A　等 Mahalanobis 距离椭圆</text>
+  <line x1="67" y1="276" x2="357" y2="276" stroke="#64748B"/><line x1="105" y1="301" x2="105" y2="112" stroke="#64748B"/>
+  <g transform="rotate(-28 216 205)"><ellipse cx="216" cy="205" rx="126" ry="58" fill="#DBEAFE" fill-opacity=".65" stroke="#2563EB" stroke-width="2.5"/><ellipse cx="216" cy="205" rx="78" ry="36" fill="none" stroke="#60A5FA" stroke-width="2"/></g>
+  <circle cx="216" cy="205" r="6" fill="#7C3AED"/>
+  <line x1="216" y1="205" x2="317" y2="150" stroke="#7C3AED" stroke-width="2"/><line x1="216" y1="205" x2="243" y2="255" stroke="#F59E0B" stroke-width="2"/>
+  <text x="221" y="195" class="math">μ</text>
+  <text x="72" y="326" class="math">(x−μ)ᵀΣ⁻¹(x−μ)=c</text>
+  <text x="67" y="354" class="small">eigenvector 给主轴；√eigenvalue 给尺度</text>
+  <text x="67" y="381" class="small">边界不是覆盖率；覆盖率还需 χ² 分位数</text>
+
+  <text x="438" y="88" class="head">B　条件化：均值移动，协方差缩小</text>
+  <ellipse cx="584" cy="195" rx="120" ry="71" transform="rotate(-24 584 195)" fill="#EDE9FE" fill-opacity=".55" stroke="#8B5CF6" stroke-width="2"/>
+  <line x1="663" y1="113" x2="663" y2="280" stroke="#EF4444" stroke-width="2" stroke-dasharray="6 5"/>
+  <ellipse cx="663" cy="160" rx="19" ry="49" fill="#D1FAE5" fill-opacity=".85" stroke="#10B981" stroke-width="2"/>
+  <circle cx="584" cy="195" r="5" fill="#7C3AED"/><circle cx="663" cy="160" r="5" fill="#059669"/>
+  <text x="672" y="126" class="math">Xb=b</text>
+  <text x="454" y="314" class="math">μa|b=μa+ΣabΣbb⁻¹(b−μb)</text>
+  <text x="454" y="344" class="math">Σa|b=Σaa−ΣabΣbb⁻¹Σba</text>
+  <text x="454" y="379" class="small">Schur 补 ⪯ 原边缘协方差；观测值不改变条件协方差</text>
+
+  <text x="826" y="88" class="head">C　重参数与 Cholesky 计算</text>
+  <circle cx="891" cy="168" r="55" fill="#DBEAFE" fill-opacity=".7" stroke="#3B82F6" stroke-width="2"/>
+  <text x="860" y="173" class="math">Z ~ N(0,I)</text>
+  <path d="M953 168L1011 168" class="line"/><text x="968" y="151" class="math">L</text>
+  <ellipse cx="1080" cy="168" rx="73" ry="39" transform="rotate(-24 1080 168)" fill="#D1FAE5" fill-opacity=".75" stroke="#10B981" stroke-width="2"/>
+  <text x="1031" y="174" class="math">X=μ+LZ</text>
+  <rect x="840" y="255" width="301" height="81" rx="12" class="amber"/>
+  <text x="866" y="282" class="math">Σ=LLᵀ,　Ly=x−μ</text>
+  <text x="866" y="310" class="math">quadratic=‖y‖²</text>
+  <text x="866" y="331" class="math">log det Σ=2 Σᵢ log Lᵢᵢ</text>
+  <text x="842" y="379" class="small">采样与 log-density 都用 solve；不显式形成 Σ⁻¹</text>
+</svg>

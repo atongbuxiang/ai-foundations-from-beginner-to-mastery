@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">问题条件性、算法稳定性与最终准确性的分工</title>
+<desc id="desc">条件数属于数学问题，稳定性属于浮点算法，准确性属于一次计算结果；代数等价公式可有不同舍入路径；后向、前向与混合稳定承诺的扰动位置不同。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">问题与算法共同决定准确性</text>
+<rect x="45" y="115" width="140" height="62" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="115.0" y="152.0" font-size="16" font-weight="650" text-anchor="middle" fill="#2563EB">problem condition</text>
+<rect x="220" y="115" width="145" height="62" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="292.5" y="152.0" font-size="16" font-weight="650" text-anchor="middle" fill="#0F766E">algorithm stability</text>
+<line x1="115" y1="180" x2="175" y2="245" stroke="#2563EB" stroke-width="2.5" marker-end="url(#a0)"/>
+<line x1="292" y1="180" x2="230" y2="245" stroke="#0F766E" stroke-width="2.5" marker-end="url(#a1)"/>
+<rect x="120" y="255" width="170" height="64" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="205.0" y="293.0" font-size="17" font-weight="650" text-anchor="middle" fill="#C24135">forward accuracy</text>
+<text x="45" y="365" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">forward error roughly &lt;= kappa * backward error</text>
+<text x="45" y="410" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">ill-conditioned + stable can still be inaccurate</text>
+<text x="45" y="449" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">well-conditioned + unstable can also fail</text>
+<text x="45" y="488" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">convergence and robustness are separate terms。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">代数等价不等于执行路径等价</text>
+<rect x="435" y="105" width="145" height="58" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="507.5" y="140.0" font-size="16" font-weight="650" text-anchor="middle" fill="#C24135">sqrt(1+x)-1</text>
+<rect x="620" y="105" width="145" height="58" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="692.5" y="140.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">x/(sqrt(1+x)+1)</text>
+<line x1="507" y1="167" x2="507" y2="210" stroke="#C24135" stroke-width="2.5" marker-end="url(#a2)"/>
+<line x1="692" y1="167" x2="692" y2="210" stroke="#0F766E" stroke-width="2.5" marker-end="url(#a1)"/>
+<text x="435" y="245" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">cancels leading digits</text>
+<text x="620" y="245" font-size="15" font-weight="650" text-anchor="start" fill="#0F766E">stable rationalization</text>
+<line x1="430" y1="290" x2="770" y2="290" stroke="#D7DEE8" stroke-width="2"/>
+<text x="430" y="335" font-size="17" font-weight="700" text-anchor="start" fill="#1F2937">other design tools</text>
+<text x="430" y="375" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">scaling · reordering · factorization · compensation</text>
+<text x="430" y="420" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">same formula, different range and rounding</text>
+<text x="430" y="478" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">test extremes, not only typical random inputs。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">三种稳定性承诺</text>
+<text x="830" y="105" font-size="17" font-weight="700" text-anchor="start" fill="#0F766E">backward</text>
+<line x1="830" y1="123" x2="885" y2="123" stroke="#0F766E" stroke-width="2.5" marker-end="url(#a1)"/>
+<text x="900" y="129" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">alg_u(x)=f(x+Delta x)</text>
+<text x="830" y="210" font-size="17" font-weight="700" text-anchor="start" fill="#2563EB">forward</text>
+<line x1="830" y1="228" x2="885" y2="228" stroke="#2563EB" stroke-width="2.5" marker-end="url(#a0)"/>
+<text x="900" y="234" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">alg_u(x) near f(x)</text>
+<text x="830" y="315" font-size="17" font-weight="700" text-anchor="start" fill="#C24135">mixed</text>
+<line x1="830" y1="333" x2="885" y2="333" stroke="#C24135" stroke-width="2.5" marker-end="url(#a2)"/>
+<text x="900" y="339" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">alg_u(x)=f(x+Delta x)+Delta y</text>
+<line x1="830" y1="420" x2="1145" y2="420" stroke="#D7DEE8" stroke-width="2"/>
+<text x="830" y="455" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">state scale, norm, structure and size factor</text>
+<text x="830" y="487" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">also state rounding mode and overflow assumptions。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">稳定算法只承诺忠实求解邻近问题；最终准确性仍由问题条件性和所选误差度量决定。</text>
+</svg>

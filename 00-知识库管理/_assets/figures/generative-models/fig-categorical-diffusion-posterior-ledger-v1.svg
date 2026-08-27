@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#26364a"/></marker>
+    <style>.t{font-family:Inter,'Noto Sans SC',sans-serif;fill:#172033}.h{font-weight:700;font-size:26px}.s{font-size:18px}.m{font-family:'IBM Plex Mono',monospace;font-size:18px;fill:#233a59}.box{fill:#fffdf7;stroke:#26364a;stroke-width:2}.mut{fill:#657084;font-size:15px}.arr{stroke:#26364a;stroke-width:2.3;fill:none;marker-end:url(#a)}</style>
+  </defs>
+  <rect width="1200" height="620" fill="#f4f0e6"/>
+  <text x="54" y="52" class="t h">Categorical diffusion：一步核、累计边缘与 Bayes 后验</text>
+  <line x1="54" y1="72" x2="1146" y2="72" stroke="#c7bda9"/>
+  <rect x="55" y="112" width="310" height="390" rx="10" class="box"/>
+  <text x="80" y="150" class="t h" font-size="21">1  一步转移 Q_t</text>
+  <text x="80" y="190" class="t s">每一行都是一个类别分布</text>
+  <rect x="92" y="225" width="230" height="160" rx="6" fill="#edf4f7" stroke="#55758e"/>
+  <g class="m"><text x="120" y="263">0.8   0.1   0.1</text><text x="120" y="303">0.1   0.8   0.1</text><text x="120" y="343">0.1   0.1   0.8</text></g>
+  <text x="80" y="425" class="t s">Q_t[i,j] = q(x_t=j | x_(t-1)=i)</text>
+  <text x="80" y="458" class="t mut">检查：非负；每行和为 1</text>
+  <rect x="445" y="112" width="310" height="390" rx="10" class="box"/>
+  <text x="470" y="150" class="t h" font-size="21">2  消去中间状态</text>
+  <circle cx="500" cy="245" r="28" fill="#dce8f3" stroke="#355f8a" stroke-width="2"/><text x="487" y="252" class="t s">x0</text>
+  <circle cx="600" cy="245" r="28" fill="#f7e6b5" stroke="#9a7420" stroke-width="2"/><text x="587" y="252" class="t s">x1</text>
+  <circle cx="700" cy="245" r="28" fill="#e1eddf" stroke="#4f7d4c" stroke-width="2"/><text x="687" y="252" class="t s">xt</text>
+  <path d="M529 245 H568" class="arr"/><path d="M629 245 H668" class="arr"/>
+  <text x="543" y="224" class="t mut">Q1</text><text x="642" y="224" class="t mut">...</text>
+  <text x="472" y="330" class="m">barQ_t = Q1 Q2 ... Qt</text>
+  <text x="472" y="374" class="m">q(x_t | x0=k) = e_k barQ_t</text>
+  <text x="472" y="430" class="t mut">矩阵乘法 = 对全部中间路径求和</text>
+  <rect x="835" y="112" width="310" height="390" rx="10" class="box"/>
+  <text x="860" y="150" class="t h" font-size="21">3  反看 x_(t-1)</text>
+  <text x="865" y="198" class="t s">候选 i 的未归一权重</text>
+  <rect x="862" y="225" width="255" height="88" rx="8" fill="#f9e3df" stroke="#a54f43"/>
+  <text x="880" y="260" class="m">arrival_i × Q_t[i,j]</text>
+  <text x="880" y="291" class="t mut">到达 i × 最后一步到观测 j</text>
+  <path d="M990 330 V365" class="arr"/>
+  <rect x="862" y="374" width="255" height="88" rx="8" fill="#e8edf7" stroke="#556d9a"/>
+  <text x="880" y="409" class="m">weight_i / sum_l weight_l</text>
+  <text x="880" y="441" class="t mut">分母 = (e_k barQ_t)_j</text>
+  <path d="M365 305 H433" class="arr"/><path d="M755 305 H823" class="arr"/>
+  <rect x="55" y="535" width="1090" height="50" rx="8" fill="#fff8de" stroke="#c7a84d"/>
+  <text x="78" y="567" class="t s">纪律：row-vector convention 固定到底；Gumbel–Softmax 是梯度松弛层，不是 Q_t 的定义。</text>
+</svg>

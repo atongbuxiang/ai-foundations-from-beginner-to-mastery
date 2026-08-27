@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Transformer 成本总账：参数、投影、Pairwise 与 FFN</title>
+<desc id="desc">一个 block 的主参数约 4d²+2dd_ff；work 还含 T²d，训练/预填充/解码必须分阶段。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">参数账（忽略 bias）</text>
+<text x="55" y="110" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">MHA Q/K/V/O</text>
+<text x="250" y="110" font-size="17" font-weight="800" text-anchor="middle" fill="#2563EB">4d²</text>
+<text x="55" y="210" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">FFN up/down</text>
+<text x="250" y="210" font-size="17" font-weight="800" text-anchor="middle" fill="#0F766E">2dd_ff</text>
+<text x="55" y="310" font-size="15" font-weight="700" text-anchor="start" fill="#B7791F">LayerNorm</text>
+<text x="250" y="310" font-size="17" font-weight="800" text-anchor="middle" fill="#B7791F">≈4d</text>
+<text x="55" y="410" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">L blocks</text>
+<text x="250" y="410" font-size="17" font-weight="800" text-anchor="middle" fill="#C24135">L(4d²+2dd_ff)</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">每 block 前向 work</text>
+<text x="450" y="110" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">projections</text>
+<text x="450" y="145" font-size="18" font-weight="800" text-anchor="start" fill="#1F2937">≈ 4 T d²</text>
+<text x="450" y="215" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">attention pairs</text>
+<text x="450" y="250" font-size="18" font-weight="800" text-anchor="start" fill="#1F2937">≈ 2 T² d</text>
+<text x="450" y="320" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">FFN</text>
+<text x="450" y="355" font-size="18" font-weight="800" text-anchor="start" fill="#1F2937">≈ 2 T d d_ff</text>
+<text x="450" y="435" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">constants vary with MAC/FLOP convention</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">阶段不同，主导项不同</text>
+<rect x="845" y="75" width="95" height="42" rx="6" fill="#F8FAFC" stroke="#2563EB" stroke-width="2"/>
+<text x="892" y="102" font-size="15" font-weight="800" text-anchor="middle" fill="#2563EB">training</text>
+<text x="955" y="102" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">forward + activations + backward</text>
+<rect x="845" y="195" width="95" height="42" rx="6" fill="#F8FAFC" stroke="#C24135" stroke-width="2"/>
+<text x="892" y="222" font-size="15" font-weight="800" text-anchor="middle" fill="#C24135">prefill</text>
+<text x="955" y="222" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">all prompt rows; T² pairwise</text>
+<rect x="845" y="315" width="95" height="42" rx="6" fill="#F8FAFC" stroke="#0F766E" stroke-width="2"/>
+<text x="892" y="342" font-size="15" font-weight="800" text-anchor="middle" fill="#0F766E">decode</text>
+<text x="955" y="342" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">one query row; KV grows with t</text>
+<text x="845" y="450" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">wall-clock 还依 kernel、IO、batch、dtype。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">先声明 d、d_ff、T、L、batch、heads 与阶段，再用参数/FLOP/显存/IO 四本账比较。</text>
+</svg>

@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">Fine-tuning 的改变要分参数、函数与能力三层测量</title><desc id="desc">左侧显示不同可训练参数集合，右侧以新域改善和旧域遗忘的二维平面展示多目标权衡。</desc>
+<rect width="1200" height="700" fill="#FFFEFB"/>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#64748B"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#17324D" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<text x="55" y="55" font-size="25" font-weight="700" fill="#2563EB">Fine-tuning 的改变要分参数、函数与能力三层测量</text>
+<text x="55" y="105" font-size="18" font-weight="700" fill="#17324D">1 · trainable-set contract</text>
+<text x="55" y="169" font-size="14" font-weight="700" fill="#C24135">full</text>
+<rect x="170" y="140" width="62" height="42" rx="6" fill="#C24135"/>
+<text x="201" y="205" text-anchor="middle" font-size="10" fill="#64748B">embed</text>
+<rect x="242" y="140" width="62" height="42" rx="6" fill="#C24135"/>
+<text x="273" y="205" text-anchor="middle" font-size="10" fill="#64748B">attn-1</text>
+<rect x="314" y="140" width="62" height="42" rx="6" fill="#C24135"/>
+<text x="345" y="205" text-anchor="middle" font-size="10" fill="#64748B">ffn-1</text>
+<rect x="386" y="140" width="62" height="42" rx="6" fill="#C24135"/>
+<text x="417" y="205" text-anchor="middle" font-size="10" fill="#64748B">attn-2</text>
+<rect x="458" y="140" width="62" height="42" rx="6" fill="#C24135"/>
+<text x="489" y="205" text-anchor="middle" font-size="10" fill="#64748B">ffn-2</text>
+<rect x="530" y="140" width="62" height="42" rx="6" fill="#C24135"/>
+<text x="561" y="205" text-anchor="middle" font-size="10" fill="#64748B">head</text>
+<text x="55" y="257" font-size="14" font-weight="700" fill="#D97706">freeze lower</text>
+<rect x="170" y="228" width="62" height="42" rx="6" fill="#EEF2F7"/>
+<text x="201" y="293" text-anchor="middle" font-size="10" fill="#64748B">embed</text>
+<rect x="242" y="228" width="62" height="42" rx="6" fill="#EEF2F7"/>
+<text x="273" y="293" text-anchor="middle" font-size="10" fill="#64748B">attn-1</text>
+<rect x="314" y="228" width="62" height="42" rx="6" fill="#EEF2F7"/>
+<text x="345" y="293" text-anchor="middle" font-size="10" fill="#64748B">ffn-1</text>
+<rect x="386" y="228" width="62" height="42" rx="6" fill="#D97706"/>
+<text x="417" y="293" text-anchor="middle" font-size="10" fill="#64748B">attn-2</text>
+<rect x="458" y="228" width="62" height="42" rx="6" fill="#D97706"/>
+<text x="489" y="293" text-anchor="middle" font-size="10" fill="#64748B">ffn-2</text>
+<rect x="530" y="228" width="62" height="42" rx="6" fill="#D97706"/>
+<text x="561" y="293" text-anchor="middle" font-size="10" fill="#64748B">head</text>
+<text x="55" y="345" font-size="14" font-weight="700" fill="#2563EB">head only</text>
+<rect x="170" y="316" width="62" height="42" rx="6" fill="#EEF2F7"/>
+<text x="201" y="381" text-anchor="middle" font-size="10" fill="#64748B">embed</text>
+<rect x="242" y="316" width="62" height="42" rx="6" fill="#EEF2F7"/>
+<text x="273" y="381" text-anchor="middle" font-size="10" fill="#64748B">attn-1</text>
+<rect x="314" y="316" width="62" height="42" rx="6" fill="#EEF2F7"/>
+<text x="345" y="381" text-anchor="middle" font-size="10" fill="#64748B">ffn-1</text>
+<rect x="386" y="316" width="62" height="42" rx="6" fill="#EEF2F7"/>
+<text x="417" y="381" text-anchor="middle" font-size="10" fill="#64748B">attn-2</text>
+<rect x="458" y="316" width="62" height="42" rx="6" fill="#EEF2F7"/>
+<text x="489" y="381" text-anchor="middle" font-size="10" fill="#64748B">ffn-2</text>
+<rect x="530" y="316" width="62" height="42" rx="6" fill="#2563EB"/>
+<text x="561" y="381" text-anchor="middle" font-size="10" fill="#64748B">head</text>
+<text x="650" y="105" font-size="18" font-weight="700" fill="#17324D">2 · function-space audit</text>
+<line x1="690" y1="435" x2="1110" y2="435" stroke="#17324D" stroke-width="2"/>
+<line x1="690" y1="435" x2="690" y2="150" stroke="#17324D" stroke-width="2"/>
+<text x="1000" y="469" font-size="13" fill="#64748B">new-domain gain →</text>
+<text x="665" y="135" font-size="13" fill="#64748B">old retention ↑</text>
+<circle cx="735" cy="220" r="12" fill="#2563EB"/>
+<text x="751" y="212" font-size="14" font-weight="700" fill="#2563EB">base</text>
+<circle cx="935" cy="305" r="12" fill="#C24135"/>
+<text x="951" y="297" font-size="14" font-weight="700" fill="#C24135">full FT</text>
+<circle cx="865" cy="210" r="12" fill="#0F766E"/>
+<text x="881" y="202" font-size="14" font-weight="700" fill="#0F766E">replay</text>
+<circle cx="815" cy="250" r="12" fill="#D97706"/>
+<text x="831" y="242" font-size="14" font-weight="700" fill="#D97706">freeze</text>
+<path d="M735 220 C805 245,865 280,935 305" fill="none" stroke="#C24135" stroke-width="2.5" stroke-dasharray="7 5"/>
+<rect x="55" y="485" width="545" height="135" rx="12" fill="#F8FAFC" stroke="#D7DEE8"/>
+<text x="75" y="520" font-size="15" font-weight="700" fill="#17324D">不要用一个数替代三层变化</text>
+<text x="75" y="550" font-size="14" fill="#64748B">参数：norm / cosine / layerwise drift</text>
+<text x="75" y="578" font-size="14" fill="#64748B">函数：logit KL / representation / calibration</text>
+<text x="75" y="606" font-size="14" fill="#64748B">能力：new / old / safety / temporal slices</text>
+<text x="55" y="670" font-size="14" fill="#64748B">冻结参数限制可移动坐标，不自动限制功能变化；遗忘必须由旧能力切片和 matched checkpoint protocol 识别。</text>
+</svg>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">HVP、有限差分、CG 与阻尼数值审计</title>
+<desc id="desc">左侧展示 finite-difference HVP 的 U 型误差，中间展示 CG residual 与 solution error，右侧展示 quartic model 的 damping 与 rho。</desc>
+<rect width="1200" height="700" fill="#FFFEFB"/>
+<style>.sans{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif}.mono{font-family:"SFMono-Regular",Consolas,monospace}.ink{fill:#0F172A}.muted{fill:#64748B}.white{fill:#FFFFFF}.blue{fill:#2563EB}.teal{fill:#0F766E}.red{fill:#C0392B}.amber{fill:#B76E00}</style>
+<text x="48" y="54" class="sans blue" font-size="25" font-weight="700">Matrix-free 二阶步仍需三类数值证书</text>
+<text x="48" y="92" class="sans muted" font-size="16">finite difference 只作诊断；CG residual 与 solution error 分开；rho 检验 local model。</text>
+<text x="58" y="145" class="sans teal" font-size="21" font-weight="700">A | finite-difference U curve</text>
+<line x1="70.0" y1="520.0" x2="370.0" y2="520.0" stroke="#334155" stroke-width="2"/>
+<line x1="70.0" y1="210.0" x2="70.0" y2="520.0" stroke="#334155" stroke-width="2"/>
+<polyline points="70.00,210.00 95.00,255.41 120.00,301.45 145.00,347.55 170.00,393.66 195.00,439.77 220.00,485.75 245.00,520.00 270.00,479.36 295.00,448.28 320.00,411.56 345.00,356.29 370.00,298.86" fill="none" stroke="#C0392B" stroke-width="4"/>
+<text x="220" y="557" class="sans muted" font-size="15" text-anchor="middle">h: 1e-1 → 1e-13</text>
+<text x="430" y="145" class="sans teal" font-size="21" font-weight="700">B | CG: residual vs error</text>
+<line x1="455.0" y1="520.0" x2="755.0" y2="520.0" stroke="#334155" stroke-width="2"/>
+<line x1="455.0" y1="210.0" x2="455.0" y2="520.0" stroke="#334155" stroke-width="2"/>
+<polyline points="455.00,259.15 505.00,218.70 555.00,210.00 605.00,323.79 655.00,390.03 705.00,464.71 755.00,520.00" fill="none" stroke="#2563EB" stroke-width="4"/>
+<polyline points="455.00,359.69 505.00,365.20 555.00,382.79 605.00,401.63 655.00,447.10 705.00,482.67 755.00,520.00" fill="none" stroke="#B76E00" stroke-width="4" stroke-dasharray="8 6"/>
+<text x="605" y="557" class="sans muted" font-size="15" text-anchor="middle">CG iteration; kappa=100</text>
+<line x1="490" y1="180" x2="530" y2="180" stroke="#2563EB" stroke-width="4"/><text x="540" y="186" class="sans ink" font-size="15">residual</text>
+<line x1="625" y1="180" x2="665" y2="180" stroke="#B76E00" stroke-width="4" stroke-dasharray="8 6"/><text x="675" y="186" class="sans ink" font-size="15">error</text>
+<text x="805" y="145" class="sans teal" font-size="21" font-weight="700">C | damping and model ratio</text>
+<rect x="800" y="170" width="350" height="350" rx="12" fill="#FFF6E5" stroke="#B76E00" stroke-width="2"/>
+<text x="824" y="207" class="mono ink" font-size="16">lambda    step      rho</text>
+<text x="824" y="245" class="mono ink" font-size="16"> 0.00    -0.3333    1.2037</text>
+<text x="824" y="293" class="mono ink" font-size="16"> 0.25    -0.3077    1.1623</text>
+<text x="824" y="341" class="mono ink" font-size="16"> 1.00    -0.2500    1.0938</text>
+<text x="824" y="389" class="mono ink" font-size="16"> 3.00    -0.1667    1.0355</text>
+<text x="824" y="437" class="mono ink" font-size="16">10.00    -0.0769    1.0066</text>
+<text x="824" y="495" class="sans red" font-size="15">damping changes step; rho tests the model.</text>
+<text x="48" y="638" class="sans muted" font-size="15">Steihaug negative-curvature certificate: d^T B d = -1；这不是 residual convergence。</text>
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">Huffman编码、典型集与源编码阈值</title>
+  <desc id="desc">三面板展示Huffman树、典型集约二的nH次方规模，以及固定长度压缩率跨越熵时的成功与失败。</desc>
+  <defs><style>
+    .bg{fill:#f8fafc}.panel{fill:#fff;stroke:#cbd5e1;stroke-width:1.5}.title{font:700 20px -apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;fill:#0f172a}.sub{font:14px -apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;fill:#475569}.label{font:14px -apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;fill:#334155}.small{font:12px -apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;fill:#64748b}.formula{font:italic 16px -apple-system,BlinkMacSystemFont,"Noto Sans SC",sans-serif;fill:#0f172a}.edge{stroke:#334155;stroke-width:2;fill:none}.node{fill:#334155}.leaf1{fill:#dbeafe;stroke:#2563eb;stroke-width:1.5}.leaf2{fill:#ede9fe;stroke:#7c3aed;stroke-width:1.5}.leaf3{fill:#dcfce7;stroke:#059669;stroke-width:1.5}.leaf4{fill:#fef3c7;stroke:#d97706;stroke-width:1.5}.axis{stroke:#64748b;stroke-width:1.2}.curve{fill:none;stroke:#2563eb;stroke-width:3}.band{fill:#bfdbfe;fill-opacity:.7}.dash{stroke:#dc2626;stroke-width:2;stroke-dasharray:6 5}.green{stroke:#059669;stroke-width:3;fill:none}.red{stroke:#dc2626;stroke-width:3;fill:none}
+  </style></defs>
+  <rect class="bg" width="1200" height="430"/>
+  <rect class="panel" x="20" y="20" width="370" height="390" rx="14"/>
+  <text class="title" x="40" y="52">A · Huffman：最小概率先合并</text><text class="sub" x="40" y="76">p=(0.4,0.3,0.2,0.1)，一个最优长度=(1,2,3,3)</text>
+  <circle class="node" cx="82" cy="192" r="7"/><path class="edge" d="M89 192 L156 126"/><path class="edge" d="M89 192 L156 240"/>
+  <rect class="leaf1" x="156" y="104" width="78" height="42" rx="8"/><text class="label" x="172" y="130">a · .4</text>
+  <circle class="node" cx="163" cy="240" r="7"/><path class="edge" d="M170 240 L235 196"/><path class="edge" d="M170 240 L235 287"/>
+  <rect class="leaf2" x="235" y="175" width="78" height="42" rx="8"/><text class="label" x="251" y="201">b · .3</text>
+  <circle class="node" cx="242" cy="287" r="7"/><path class="edge" d="M249 287 L305 259"/><path class="edge" d="M249 287 L305 330"/>
+  <rect class="leaf3" x="305" y="238" width="64" height="42" rx="8"/><text class="label" x="315" y="264">c · .2</text>
+  <rect class="leaf4" x="305" y="309" width="64" height="42" rx="8"/><text class="label" x="315" y="335">d · .1</text>
+  <text class="small" x="118" y="151">0</text><text class="small" x="119" y="222">1</text><text class="small" x="199" y="213">0</text><text class="small" x="199" y="275">1</text><text class="small" x="270" y="273">0</text><text class="small" x="270" y="319">1</text>
+  <text class="formula" x="48" y="377">L = 1.9 bits, H₂(P) ≈ 1.846 bits</text><text class="small" x="40" y="399">Huffman 对已知单符号 binary prefix code 最优，不含模型成本。</text>
+
+  <rect class="panel" x="415" y="20" width="370" height="390" rx="14"/>
+  <text class="title" x="435" y="52">B · AEP：质量集中在典型集</text><text class="sub" x="435" y="76">−(1/n) log₂ p(Xⁿ) → H₂(X)</text>
+  <line class="axis" x1="458" y1="293" x2="756" y2="293"/><line class="axis" x1="458" y1="112" x2="458" y2="293"/>
+  <path class="band" d="M520 293 C548 274 570 155 610 132 C650 155 672 274 700 293 Z"/>
+  <path class="curve" d="M474 292 C520 287 542 252 560 188 C575 137 592 122 610 122 C628 122 645 137 660 188 C678 252 700 287 746 292"/>
+  <line class="dash" x1="543" y1="116" x2="543" y2="293"/><line class="dash" x1="677" y1="116" x2="677" y2="293"/>
+  <text class="small" x="554" y="108">typical band around H</text><text class="small" x="584" y="315">H(X)</text>
+  <rect x="448" y="334" width="316" height="48" rx="9" fill="#eff6ff"/>
+  <text class="formula" x="463" y="355">probability → 1; size ≈ 2^(nH)</text>
+  <text class="small" x="463" y="374">each typical sequence has probability ≈ 2^(−nH)</text>
+  <text class="small" x="438" y="404">“指数尺度近似等概率”不等于所有序列完全等概率。</text>
+
+  <rect class="panel" x="810" y="20" width="370" height="390" rx="14"/>
+  <text class="title" x="830" y="52">C · 熵是固定长度压缩的阈值</text><text class="sub" x="830" y="76">rate R bits/source-symbol；iid finite alphabet</text>
+  <line class="axis" x1="850" y1="285" x2="1153" y2="285"/><line class="axis" x1="850" y1="110" x2="850" y2="285"/>
+  <line class="dash" x1="1001" y1="105" x2="1001" y2="302"/>
+  <path class="red" d="M862 126 C910 130 955 155 987 258"/><path class="green" d="M1015 258 C1045 156 1090 130 1144 126"/>
+  <text class="small" x="878" y="119">error → 1</text><text class="small" x="1074" y="119">success → 1</text>
+  <text class="label" x="989" y="323">H</text><text class="label" x="1050" y="323">rate R →</text>
+  <rect class="leaf4" x="837" y="341" width="316" height="49" rx="9"/>
+  <text class="label" x="853" y="362">R &gt; H：枚举 typical set，error → 0</text>
+  <text class="label" x="853" y="381">R &lt; H：codebook 覆盖质量 → 0</text>
+  <text class="small" x="831" y="408">finite-n 的 redundancy/error 仍需单独证书。</text>
+</svg>

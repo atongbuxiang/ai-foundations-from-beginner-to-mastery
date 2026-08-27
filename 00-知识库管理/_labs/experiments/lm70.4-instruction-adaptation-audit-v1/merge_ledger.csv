@@ -1,0 +1,5 @@
+object,coordinate_0,coordinate_1,meaning
+uniform_soup,1.5,1.5,checkpoint_average
+task_vector_sum,2.0,2.0,base_plus_deltas
+ties_positive,0.7,,trim_elect_aligned_mean
+ties_negative,-0.6499999999999999,,trim_elect_aligned_mean

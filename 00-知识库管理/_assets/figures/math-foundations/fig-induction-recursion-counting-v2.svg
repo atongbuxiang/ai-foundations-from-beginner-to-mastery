@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+  <title id="title">归纳覆盖、递归下降与组合计数的三种离散结构</title>
+  <desc id="desc">左栏展示归纳从基例沿步进覆盖全部指标，中栏展示递归调用的规模必须严格下降，右栏展示分支数与深度如何形成指数搜索空间。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
+    <style>
+      .ink{fill:#1f2937}.muted{fill:#64748b}.line{stroke:#cbd5e1;stroke-width:1.5}.arrow{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#arrow)}.soft{fill:#f8fafc}.blue{fill:#2563eb}.blue-soft{fill:#eff6ff}.green{fill:#047857}.green-soft{fill:#ecfdf5}.amber{fill:#b45309}.amber-soft{fill:#fffbeb}
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.h{font-size:18px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}
+    </style>
+  </defs>
+  <rect width="1200" height="560" fill="#ffffff"/>
+  <rect x="42" y="42" width="342" height="426" rx="12" class="blue-soft" stroke="#bfdbfe"/>
+  <rect x="429" y="42" width="342" height="426" rx="12" class="green-soft" stroke="#a7f3d0"/>
+  <rect x="816" y="42" width="342" height="426" rx="12" class="amber-soft" stroke="#fde68a"/>
+  <text x="68" y="80" class="sans h blue">归纳：覆盖无限指标链</text><text x="455" y="80" class="sans h green">递归：调用必须走向更小对象</text><text x="842" y="80" class="sans h amber">计数：先明确分支与路径</text>
+
+  <g class="blue"><circle cx="93" cy="180" r="14"/><circle cx="178" cy="180" r="14"/><circle cx="263" cy="180" r="14"/><circle cx="348" cy="180" r="8"/></g>
+  <path d="M109 180 L162 180" class="arrow"/><path d="M194 180 L247 180" class="arrow"/><path d="M279 180 L333 180" class="arrow"/>
+  <g class="math small ink" text-anchor="middle"><text x="93" y="214">P(n₀)</text><text x="178" y="214">P(n₀+1)</text><text x="263" y="214">P(n₀+2)</text><text x="348" y="214">…</text></g>
+  <rect x="70" y="252" width="286" height="122" rx="9" fill="#ffffff" stroke="#93c5fd"/>
+  <text x="91" y="282" class="sans body ink">① 基例：P(n₀)</text><text x="91" y="316" class="math body ink">② 任意 n≥n₀：P(n)⇒P(n+1)</text><text x="91" y="350" class="sans body ink">③ 归纳原理负责闭合全称结论</text>
+  <text x="213" y="418" class="sans small muted" text-anchor="middle">缺基例或步长覆盖错误，链不会启动或漏项</text>
+
+  <circle cx="600" cy="137" r="28" class="green"/><text x="600" y="143" class="math body" fill="#ffffff" text-anchor="middle">n</text>
+  <circle cx="520" cy="232" r="24" fill="#ffffff" stroke="#047857" stroke-width="2.5"/><circle cx="680" cy="232" r="24" fill="#ffffff" stroke="#047857" stroke-width="2.5"/>
+  <text x="520" y="238" class="math body green" text-anchor="middle">n−1</text><text x="680" y="238" class="math body green" text-anchor="middle">n−2</text>
+  <path d="M580 158 L537 211" class="arrow"/><path d="M620 158 L663 211" class="arrow"/>
+  <circle cx="486" cy="323" r="20" fill="#ffffff" stroke="#64748b" stroke-width="2"/><circle cx="554" cy="323" r="20" fill="#ffffff" stroke="#64748b" stroke-width="2"/><circle cx="646" cy="323" r="20" fill="#ffffff" stroke="#64748b" stroke-width="2"/><circle cx="714" cy="323" r="20" fill="#ffffff" stroke="#64748b" stroke-width="2"/>
+  <path d="M508 252 L492 302" class="arrow"/><path d="M532 252 L550 302" class="arrow"/><path d="M668 252 L650 302" class="arrow"/><path d="M692 252 L708 302" class="arrow"/>
+  <g class="sans small muted" text-anchor="middle"><text x="486" y="328">base</text><text x="554" y="328">…</text><text x="646" y="328">…</text><text x="714" y="328">base</text></g>
+  <text x="600" y="376" class="math body green" text-anchor="middle">每条边都满足 μ(child) &lt; μ(parent)</text>
+  <text x="600" y="417" class="sans small muted" text-anchor="middle">终止性、正确性与成本递推必须分开证明</text>
+
+  <circle cx="987" cy="132" r="22" class="amber"/>
+  <g class="arrow"><path d="M975 151 L915 215"/><path d="M987 154 L987 215"/><path d="M999 151 L1059 215"/></g>
+  <g fill="#ffffff" stroke="#b45309" stroke-width="2"><circle cx="902" cy="230" r="18"/><circle cx="987" cy="230" r="18"/><circle cx="1072" cy="230" r="18"/></g>
+  <g class="arrow"><path d="M891 247 L855 302"/><path d="M913 247 L935 302"/><path d="M976 247 L965 302"/><path d="M998 247 L1011 302"/><path d="M1061 247 L1038 302"/><path d="M1083 247 L1118 302"/></g>
+  <g class="amber"><circle cx="847" cy="316" r="10"/><circle cx="943" cy="316" r="10"/><circle cx="957" cy="316" r="10"/><circle cx="1019" cy="316" r="10"/><circle cx="1030" cy="316" r="10"/><circle cx="1126" cy="316" r="10"/></g>
+  <text x="987" y="365" class="math formula amber" text-anchor="middle">V choices × T positions ⇒ Vᵀ paths</text>
+  <text x="987" y="402" class="sans small muted" text-anchor="middle">beam width K 只保留前缀，不等于遍历整棵树</text>
+  <rect x="92" y="498" width="1016" height="44" rx="10" class="soft" stroke="#cbd5e1"/>
+  <text x="600" y="526" class="sans result ink" text-anchor="middle">归纳证明覆盖，递归构造对象，计数衡量规模；三者相连但不能互相替代。</text>
+</svg>

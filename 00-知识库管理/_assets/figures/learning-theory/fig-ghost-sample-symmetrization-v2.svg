@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Ghost sample、随机交换与对称化</title>
+<desc id="desc">总体期望先由独立 ghost sample 的条件期望替代；成对交换保持联合分布不变，并把双样本差编码为 Rademacher signs；最后拆成两个同分布的单样本随机过程。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">未知总体量换成独立样本</text>
+<rect x="55" y="95" width="290" height="64" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="200.0" y="133.0" font-size="16" font-weight="650" text-anchor="middle" fill="#2563EB">sup_f (P f - P_m f)</text>
+<line x1="200" y1="163" x2="200" y2="205" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="55" y="218" width="290" height="76" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="200.0" y="262.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">E_{S&#x27;} sup_f (P&#x27;_m f - P_m f)</text>
+<text x="45" y="350" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">Jensen moves E_{S&#x27;} inside the supremum</text>
+<text x="45" y="395" font-size="15" font-weight="650" text-anchor="start" fill="#2563EB">S&#x27; has the same law and is independent</text>
+<text x="45" y="455" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">ghost data is only a proof device</text>
+<text x="45" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">the learner never receives S&#x27;。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">每一对样本随机交换</text>
+<rect x="443" y="105" width="54" height="38" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="470" y="130" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">Z1</text>
+<rect x="443" y="205" width="54" height="38" rx="5" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="470" y="230" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">Z&#x27;1</text>
+<path d="M462 150C450 170 450 185 462 198" fill="none" stroke="#C24135" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#a2)"/>
+<text x="485" y="178" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">+</text>
+<rect x="523" y="105" width="54" height="38" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="550" y="130" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">Z2</text>
+<rect x="523" y="205" width="54" height="38" rx="5" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="550" y="230" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">Z&#x27;2</text>
+<path d="M558 150C570 170 570 185 558 198" fill="none" stroke="#2563EB" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#a0)"/>
+<text x="565" y="178" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">-</text>
+<rect x="603" y="105" width="54" height="38" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="630" y="130" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">Z3</text>
+<rect x="603" y="205" width="54" height="38" rx="5" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="630" y="230" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">Z&#x27;3</text>
+<path d="M622 150C610 170 610 185 622 198" fill="none" stroke="#C24135" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#a2)"/>
+<text x="645" y="178" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">+</text>
+<rect x="683" y="105" width="54" height="38" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="710" y="130" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">Z4</text>
+<rect x="683" y="205" width="54" height="38" rx="5" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="710" y="230" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">Z&#x27;4</text>
+<path d="M718 150C730 170 730 185 718 198" fill="none" stroke="#2563EB" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#a0)"/>
+<text x="725" y="178" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">-</text>
+<text x="430" y="315" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">(Z_i,Z&#x27;_i) is exchangeable</text>
+<text x="430" y="360" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">sigma_i records which member is first</text>
+<text x="430" y="415" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">difference = m^-1 sum sigma_i(f(Z&#x27;_i)-f(Z_i))</text>
+<text x="430" y="470" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">condition on the pooled sample before counting</text>
+<text x="430" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">exchangeability—not magic—creates signs。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">拆成两个单样本随机过程</text>
+<rect x="840" y="95" width="300" height="72" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="990.0" y="137.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">sup_f sum sigma_i(f&#x27;_i-f_i)</text>
+<line x1="990" y1="171" x2="990" y2="210" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="840" y="222" width="300" height="80" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="990" y="252" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E" class="math">&lt;= sup_f sum sigma_i f&#x27;_i</text>
+<text x="990" y="282" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E" class="math">+ sup_f sum (-sigma_i) f_i</text>
+<text x="830" y="360" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">the two expectations are identical</text>
+<text x="830" y="405" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">one-sided expected gap &lt;= 2 R_m(F)</text>
+<text x="830" y="450" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">absolute gap needs an absolute/symmetric class</text>
+<text x="830" y="490" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">high probability adds concentration</text>
+<text x="830" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">symmetrization alone is an expectation bound。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">对称化的每一步都改变随机对象：总体期望、双样本差、随机符号过程不能在公式中被悄悄等同。</text>
+</svg>

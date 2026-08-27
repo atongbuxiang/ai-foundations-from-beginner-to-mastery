@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">交叉熵、KL 方向与支持失配</title>
+<desc id="desc">数据由 P 加权而用 Q 的码长评分，得到 cross-entropy；它分解为不可约 entropy 与失配 KL；KL 的方向和支持关系决定惩罚形态与是否有限。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">P 产生数据，Q 提供码长</text>
+<rect x="55" y="143.4" width="25" height="201.6" rx="1" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<rect x="84" y="252.6" width="25" height="92.4" rx="1" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="82" y="378" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">x1</text>
+<rect x="127" y="219.0" width="25" height="126.0" rx="1" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<rect x="156" y="227.39999999999998" width="25" height="117.60000000000001" rx="1" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="154" y="378" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">x2</text>
+<rect x="199" y="277.8" width="25" height="67.2" rx="1" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<rect x="228" y="214.8" width="25" height="130.2" rx="1" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="226" y="378" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">x3</text>
+<rect x="271" y="319.8" width="25" height="25.2" rx="1" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<rect x="300" y="265.2" width="25" height="79.8" rx="1" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="298" y="378" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">x4</text>
+<text x="45" y="105" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">P weight</text>
+<text x="135" y="105" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">Q score</text>
+<text x="45" y="420" font-size="17" font-weight="650" text-anchor="start" fill="#1F2937" class="math">H(P,Q)=E_P[-log q(X)]</text>
+<text x="45" y="460" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">外层 expectation 在 P；log 内评价 Q。</text>
+<text x="45" y="492" font-size="15" font-weight="400" text-anchor="start" fill="#C24135">q(x)=0 且 p(x)&gt;0 -&gt; infinite cost</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">交叉熵 = 不可约项 + 失配项</text>
+<rect x="450" y="155" width="165" height="70" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<rect x="615" y="155" width="130" height="70" rx="5" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="532" y="195" font-size="20" font-weight="700" text-anchor="middle" fill="#2563EB">H(P)</text>
+<text x="680" y="195" font-size="17" font-weight="700" text-anchor="middle" fill="#C24135">KL(P||Q)</text>
+<text x="600" y="275" font-size="17" font-weight="700" text-anchor="middle" fill="#1F2937" class="math">H(P,Q) = H(P) + D_KL(P||Q)</text>
+<text x="430" y="335" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">固定 P 时：min_Q cross-entropy</text>
+<text x="430" y="372" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">等价于 min_Q KL(P||Q)。</text>
+<text x="430" y="425" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">经验 NLL 是样本平均；总体结论还需泛化。</text>
+<text x="430" y="468" font-size="15" font-weight="400" text-anchor="start" fill="#C24135">KL&gt;=0，但不是距离 metric。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">方向改变“漏模态”与“追模态”</text>
+<line x1="840" y1="320" x2="1140" y2="320" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="855" y1="345" x2="855" y2="95" stroke="#D7DEE8" stroke-width="2"/>
+<path d="M855.0 314.1L857.3 312.7L859.6 311.2L861.9 309.3L864.2 307.2L866.5 304.8L868.8 302.0L871.1 298.8L873.4 295.3L875.7 291.3L878.0 287.0L880.3 282.3L882.6 277.1L884.9 271.6L887.2 265.7L889.5 259.6L891.8 253.2L894.1 246.6L896.4 239.9L898.7 233.2L901.0 226.5L903.3 220.0L905.6 213.8L907.9 208.0L910.2 202.6L912.5 197.8L914.8 193.7L917.1 190.3L919.4 187.7L921.7 185.9L924.0 185.0L926.3 185.1L928.6 186.0L930.9 187.9L933.2 190.6L935.5 194.0L937.8 198.2L940.1 203.0L942.4 208.4L944.7 214.2L947.0 220.4L949.3 226.8L951.6 233.3L953.9 239.9L956.2 246.4L958.5 252.7L960.8 258.8L963.1 264.5L965.4 269.9L967.7 274.9L970.0 279.4L972.3 283.5L974.6 287.0L976.9 290.0L979.2 292.5L981.5 294.4L983.8 295.8L986.1 296.7L988.4 297.1L990.7 297.0L993.0 296.5L995.3 295.5L997.6 294.0L999.9 292.2L1002.2 289.9L1004.5 287.3L1006.8 284.4L1009.1 281.1L1011.4 277.5L1013.7 273.7L1016.0 269.6L1018.3 265.4L1020.6 261.0L1022.9 256.4L1025.2 251.8L1027.5 247.2L1029.8 242.5L1032.1 238.0L1034.4 233.5L1036.7 229.2L1039.0 225.1L1041.3 221.3L1043.6 217.8L1045.9 214.7L1048.2 211.9L1050.5 209.6L1052.8 207.8L1055.1 206.4L1057.4 205.6L1059.7 205.3L1062.0 205.4L1064.3 206.2L1066.6 207.4L1068.9 209.1L1071.2 211.3L1073.5 213.9L1075.8 217.0L1078.1 220.4L1080.4 224.2L1082.7 228.2L1085.0 232.4L1087.3 236.9L1089.6 241.4L1091.9 246.1L1094.2 250.8L1096.5 255.5L1098.8 260.2L1101.1 264.7L1103.4 269.2L1105.7 273.5L1108.0 277.6L1110.3 281.6L1112.6 285.3L1114.9 288.8L1117.2 292.1L1119.5 295.2L1121.8 298.0L1124.1 300.6L1126.4 303.0L1128.7 305.1L1131.0 307.0" fill="none" stroke="#2563EB" stroke-width="3"/>
+<path d="M855.0 319.9L857.3 319.9L859.6 319.9L861.9 319.8L864.2 319.8L866.5 319.8L868.8 319.7L871.1 319.7L873.4 319.6L875.7 319.6L878.0 319.5L880.3 319.4L882.6 319.3L884.9 319.2L887.2 319.0L889.5 318.9L891.8 318.7L894.1 318.5L896.4 318.2L898.7 318.0L901.0 317.7L903.3 317.3L905.6 316.9L907.9 316.5L910.2 316.0L912.5 315.4L914.8 314.8L917.1 314.1L919.4 313.4L921.7 312.6L924.0 311.6L926.3 310.6L928.6 309.5L930.9 308.3L933.2 306.9L935.5 305.5L937.8 303.9L940.1 302.2L942.4 300.4L944.7 298.4L947.0 296.2L949.3 294.0L951.6 291.5L953.9 288.9L956.2 286.2L958.5 283.3L960.8 280.2L963.1 277.0L965.4 273.6L967.7 270.1L970.0 266.4L972.3 262.6L974.6 258.6L976.9 254.6L979.2 250.4L981.5 246.1L983.8 241.8L986.1 237.4L988.4 232.9L990.7 228.4L993.0 223.9L995.3 219.4L997.6 214.9L999.9 210.5L1002.2 206.1L1004.5 201.9L1006.8 197.8L1009.1 193.8L1011.4 190.0L1013.7 186.4L1016.0 183.0L1018.3 179.8L1020.6 176.9L1022.9 174.3L1025.2 172.0L1027.5 169.9L1029.8 168.2L1032.1 166.8L1034.4 165.8L1036.7 165.1L1039.0 164.8L1041.3 164.8L1043.6 165.2L1045.9 165.9L1048.2 167.0L1050.5 168.4L1052.8 170.2L1055.1 172.2L1057.4 174.6L1059.7 177.3L1062.0 180.2L1064.3 183.4L1066.6 186.8L1068.9 190.5L1071.2 194.3L1073.5 198.3L1075.8 202.4L1078.1 206.7L1080.4 211.1L1082.7 215.5L1085.0 220.0L1087.3 224.5L1089.6 229.0L1091.9 233.5L1094.2 237.9L1096.5 242.3L1098.8 246.7L1101.1 250.9L1103.4 255.1L1105.7 259.2L1108.0 263.1L1110.3 266.9L1112.6 270.5L1114.9 274.0L1117.2 277.4L1119.5 280.6L1121.8 283.7L1124.1 286.5L1126.4 289.3L1128.7 291.8L1131.0 294.3" fill="none" stroke="#0F766E" stroke-width="3" stroke-dasharray="8 5"/>
+<text x="870" y="118" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">P: two modes</text>
+<text x="1060" y="155" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">Q</text>
+<text x="830" y="380" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">KL(P||Q): P-weighted; missing P support is severe</text>
+<text x="830" y="420" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">KL(Q||P): Q-weighted; can prefer one mode</text>
+<text x="830" y="465" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">图示是优化倾向，不是普遍有限样本定理。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">交叉熵的 expectation 方向、KL 的参数顺序与支持覆盖必须在每次应用中显式核对。</text>
+</svg>

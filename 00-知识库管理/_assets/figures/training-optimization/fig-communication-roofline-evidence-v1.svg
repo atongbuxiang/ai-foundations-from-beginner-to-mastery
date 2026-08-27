@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Communication roofline and distributed evidence ladder</title>
+  <desc id="desc">A roofline-style performance model identifies compute, memory and communication ceilings, while an evidence ladder separates throughput observations from causal and decision-level reproducibility.</desc>
+  <rect width="1200" height="800" fill="#FFFEFB"/>
+  <text x="60" y="58" font-family="Arial,sans-serif" font-size="28" font-weight="700" fill="#172033">A speedup is credible only when its ceiling and evidence level are explicit</text>
+  <text x="60" y="91" font-family="Arial,sans-serif" font-size="17" fill="#52606D">Roofline locates the bottleneck; critical-path traces test overlap; matched learning curves determine whether the system change preserved training.</text>
+  <rect x="45" y="125" width="600" height="590" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+  <rect x="670" y="125" width="485" height="590" rx="18" fill="#FFFFFF" stroke="#D9E0E7" stroke-width="2"/>
+  <text x="70" y="166" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172033">A  Compute–memory–communication roofline</text>
+  <line x1="115" y1="625" x2="590" y2="625" stroke="#52606D" stroke-width="2"/>
+  <line x1="115" y1="625" x2="115" y2="210" stroke="#52606D" stroke-width="2"/>
+  <text x="355" y="680" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" fill="#52606D">arithmetic / communication intensity →</text>
+  <text x="78" y="420" text-anchor="middle" transform="rotate(-90 78 420)" font-family="Arial,sans-serif" font-size="17" fill="#52606D">attainable work rate</text>
+  <path d="M120 590 L410 285 H585" fill="none" stroke="#2563EB" stroke-width="4"/>
+  <path d="M120 610 L320 410 H585" fill="none" stroke="#0F766E" stroke-width="4"/>
+  <line x1="410" y1="285" x2="410" y2="625" stroke="#2563EB" stroke-width="2" stroke-dasharray="8 7"/>
+  <line x1="320" y1="410" x2="320" y2="625" stroke="#0F766E" stroke-width="2" stroke-dasharray="8 7"/>
+  <text x="575" y="270" text-anchor="end" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#2563EB">compute ceiling</text>
+  <text x="575" y="395" text-anchor="end" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#0F766E">exposed-communication ceiling</text>
+  <circle cx="245" cy="485" r="11" fill="#C0392B"/><text x="260" y="472" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#C0392B">measured step</text>
+  <path d="M245 485 L245 545 H385" fill="none" stroke="#C0392B" stroke-width="2"/>
+  <rect x="370" y="510" width="205" height="80" rx="12" fill="#FFF7F4"/>
+  <text x="472" y="540" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#C0392B">inspect uncovered tail:</text><text x="472" y="565" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#52606D">ready time + α + βM</text>
+  <rect x="145" y="205" width="240" height="58" rx="10" fill="#F1F3F5"/><text x="265" y="230" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#172033">ridge intensity = ceiling / bandwidth</text><text x="265" y="251" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#52606D">different links ⇒ different ridges</text>
+  <text x="695" y="166" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172033">B  Evidence ladder for a distributed claim</text>
+  <g font-family="Arial,sans-serif">
+    <rect x="715" y="585" width="390" height="58" rx="10" fill="#F1F3F5"/><text x="735" y="620" font-size="16" font-weight="700" fill="#172033">E0  configuration + software manifest</text>
+    <rect x="735" y="515" width="350" height="58" rx="10" fill="#EAF2FF"/><text x="755" y="550" font-size="16" font-weight="700" fill="#2563EB">E1  throughput and memory counters</text>
+    <rect x="755" y="445" width="310" height="58" rx="10" fill="#EAF2FF"/><text x="775" y="480" font-size="16" font-weight="700" fill="#2563EB">E2  profiler critical path</text>
+    <rect x="775" y="375" width="270" height="58" rx="10" fill="#E8F6F3"/><text x="795" y="410" font-size="16" font-weight="700" fill="#0F766E">E3  matched learning curve</text>
+    <rect x="795" y="305" width="230" height="58" rx="10" fill="#FFF3D6"/><text x="815" y="340" font-size="16" font-weight="700" fill="#B76E00">E4  paired repeats + CI</text>
+    <rect x="815" y="235" width="190" height="58" rx="10" fill="#FFF7F4"/><text x="835" y="270" font-size="16" font-weight="700" fill="#C0392B">E5  causal intervention</text>
+  </g>
+  <text x="910" y="680" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#52606D">Bitwise reproducibility is one target;</text><text x="910" y="702" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#52606D">decision reproducibility is the final contract.</text>
+  <text x="60" y="760" font-family="Arial,sans-serif" font-size="15" fill="#52606D">Do not infer quality from tokens/s, causality from one trace, or reproducibility from one seed. Each rung answers a different question.</text>
+</svg>

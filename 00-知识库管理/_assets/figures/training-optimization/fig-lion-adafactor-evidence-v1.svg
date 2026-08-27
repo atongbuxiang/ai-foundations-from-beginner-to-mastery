@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Adam、Lion、Adafactor 的状态结构与证据门</title>
+  <desc id="desc">比较三类优化器的持久状态，展示 Lion 的 sign 路径和 Adafactor 的行列因子重建，并列出算法、资源、调参与统计四道证据门。</desc>
+  <rect width="1200" height="720" fill="#FFFEFB"/>
+  <style>
+    text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}
+    .h{font-size:27px;font-weight:700}.sh{font-size:19px;font-weight:700}.b{font-size:16px}.s{font-size:15px;fill:#64748B}
+    .boxb{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.boxg{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.boxa{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.boxr{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}.line{stroke:#CBD5E1;stroke-width:2}.arr{stroke:#2563EB;stroke-width:3;fill:none}
+  </style>
+  <defs><marker id="ab" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#2563EB"/></marker></defs>
+  <text x="48" y="50" class="h" fill="#2563EB">A｜只算 persistent optimizer states</text>
+  <text x="70" y="92" class="sh">Adam / AdamW</text>
+  <rect x="70" y="112" width="210" height="46" rx="8" fill="#2563EB" opacity="0.84"/><text x="86" y="142" class="b" fill="#FFFEFB">m : P elements</text>
+  <rect x="70" y="164" width="210" height="46" rx="8" fill="#0F766E" opacity="0.84"/><text x="86" y="194" class="b" fill="#FFFEFB">v : P elements</text>
+  <text x="70" y="236" class="s">state ≈ 2P (AMSGrad: 3P)</text>
+  <text x="384" y="92" class="sh">Lion</text>
+  <rect x="384" y="112" width="210" height="46" rx="8" fill="#2563EB" opacity="0.84"/><text x="400" y="142" class="b" fill="#FFFEFB">momentum : P</text>
+  <text x="384" y="184" class="s">state ≈ P</text>
+  <text x="698" y="92" class="sh">Adafactor, W in R^(n×m)</text>
+  <rect x="698" y="112" width="260" height="32" rx="8" fill="#0F766E" opacity="0.84"/><text x="714" y="134" class="b" fill="#FFFEFB">row factors : n</text>
+  <rect x="698" y="150" width="150" height="32" rx="8" fill="#B76E00" opacity="0.84"/><text x="714" y="172" class="b" fill="#FFFEFB">col factors : m</text>
+  <text x="698" y="210" class="s">matrix second moment ≈ n+m; vectors need fallback</text>
+  <rect x="992" y="82" width="160" height="154" rx="14" class="boxr"/>
+  <text x="1014" y="116" class="sh" fill="#C0392B">没有计入</text>
+  <text x="1014" y="148" class="b">parameters</text><text x="1014" y="177" class="b">gradients / master</text><text x="1014" y="206" class="b">activations / temp</text>
+
+  <line x1="48" y1="272" x2="1152" y2="272" class="line"/>
+  <text x="48" y="314" class="h" fill="#0F766E">B｜省状态时，update rule 也在改变</text>
+  <rect x="48" y="346" width="476" height="162" rx="14" class="boxb"/>
+  <text x="76" y="382" class="sh">Lion</text>
+  <rect x="76" y="404" width="120" height="58" rx="10" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/><text x="98" y="439" class="b">g_t + m</text>
+  <line x1="196" y1="433" x2="252" y2="433" class="arr" marker-end="url(#ab)"/>
+  <rect x="262" y="404" width="104" height="58" rx="10" fill="#FFFEFB" stroke="#B76E00" stroke-width="2"/><text x="292" y="439" class="b">sign</text>
+  <line x1="366" y1="433" x2="422" y2="433" class="arr" marker-end="url(#ab)"/>
+  <text x="430" y="425" class="b">same coord</text><text x="430" y="452" class="s">direction magnitude</text>
+  <text x="76" y="491" class="s">two beta roles + decoupled decay; one stored state</text>
+  <rect x="558" y="346" width="594" height="162" rx="14" class="boxg"/>
+  <text x="586" y="382" class="sh">Adafactor</text>
+  <rect x="586" y="405" width="116" height="72" rx="10" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/><text x="617" y="436" class="b">G^2</text><text x="600" y="462" class="s">n × m</text>
+  <line x1="702" y1="441" x2="754" y2="441" class="arr" marker-end="url(#ab)"/>
+  <rect x="764" y="397" width="148" height="88" rx="10" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/><text x="786" y="430" class="b">row r, col c</text><text x="790" y="458" class="s">n + m stats</text>
+  <line x1="912" y1="441" x2="964" y2="441" class="arr" marker-end="url(#ab)"/>
+  <rect x="974" y="397" width="148" height="88" rx="10" fill="#FFFEFB" stroke="#B76E00" stroke-width="2"/><text x="998" y="430" class="b">r c^T / mean(r)</text><text x="1008" y="458" class="s">approx V</text>
+  <text x="586" y="498" class="s">factorization + relative step + update clipping + optional momentum change</text>
+
+  <text x="48" y="564" class="h" fill="#2563EB">C｜“更好”必须连续通过四道门</text>
+  <rect x="48" y="594" width="246" height="82" rx="12" class="boxb"/><text x="72" y="626" class="sh">1. 算法门</text><text x="72" y="654" class="s">exact equation / state / groups</text>
+  <rect x="322" y="594" width="246" height="82" rx="12" class="boxg"/><text x="346" y="626" class="sh">2. 资源门</text><text x="346" y="654" class="s">bytes / FLOPs / wall time / comm</text>
+  <rect x="596" y="594" width="246" height="82" rx="12" class="boxa"/><text x="620" y="626" class="sh">3. 调参门</text><text x="620" y="654" class="s">equal search budget / failures</text>
+  <rect x="870" y="594" width="282" height="82" rx="12" class="boxr"/><text x="894" y="626" class="sh" fill="#C0392B">4. 统计门</text><text x="894" y="654" class="s">paired seeds / CI / checkpoint rule</text>
+  <line x1="48" y1="704" x2="1152" y2="704" stroke="#0F766E" stroke-width="3"/>
+</svg>

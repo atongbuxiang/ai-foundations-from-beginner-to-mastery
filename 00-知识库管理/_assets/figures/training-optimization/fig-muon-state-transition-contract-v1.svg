@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="780" viewBox="0 0 1200 780" role="img" aria-labelledby="title desc">
+  <title id="title">Muon 优化器状态转移合同</title>
+  <desc id="desc">展示当前 PyTorch Muon 从参数分组、EMA momentum、Nesterov、有限步 Newton–Schulz、形状缩放、权重衰减到参数更新的有版本状态机。</desc>
+  <rect width="1200" height="780" fill="#FFFEFB"/>
+  <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}.h{font-size:27px;font-weight:700}.sh{font-size:17px;font-weight:700}.b{font-size:15px}.s{font-size:13px;fill:#64748B}.boxb{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.boxg{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.boxa{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.boxr{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}.arr{stroke:#2563EB;stroke-width:3;fill:none}.dash{stroke:#C0392B;stroke-width:2.5;stroke-dasharray:7 6;fill:none}</style>
+  <defs><marker id="ab" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#2563EB"/></marker><marker id="ar" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#C0392B"/></marker></defs>
+  <text x="48" y="48" class="h" fill="#2563EB">Muon 不是一个公式，而是一条必须版本化的状态机</text>
+  <text x="48" y="78" class="s">主路径按 2026-08-26 的 torch.optim.Muon；红色虚线表示常见但不等价的语义分叉。</text>
+
+  <rect x="42" y="118" width="146" height="92" rx="12" class="boxa"/>
+  <text x="62" y="151" class="sh">① 参数筛选</text><text x="62" y="180" class="s">2D hidden weights</text><text x="62" y="200" class="s">其他组 → AdamW</text>
+  <line x1="188" y1="164" x2="220" y2="164" class="arr" marker-end="url(#ab)"/>
+
+  <rect x="230" y="118" width="170" height="92" rx="12" class="boxb"/>
+  <text x="250" y="151" class="sh">② EMA buffer</text><text x="250" y="180" class="s">B←μB+(1−μ)G</text><text x="250" y="200" class="s">stateful</text>
+  <line x1="400" y1="164" x2="432" y2="164" class="arr" marker-end="url(#ab)"/>
+
+  <rect x="442" y="118" width="160" height="92" rx="12" class="boxb"/>
+  <text x="462" y="151" class="sh">③ Nesterov</text><text x="462" y="180" class="s">M←(1−μ)G+μB</text><text x="462" y="200" class="s">可关闭</text>
+  <line x1="602" y1="164" x2="634" y2="164" class="arr" marker-end="url(#ab)"/>
+
+  <rect x="644" y="118" width="176" height="92" rx="12" class="boxg"/>
+  <text x="664" y="151" class="sh">④ finite-step NS</text><text x="664" y="180" class="s">Q̂←NSₖ(M)</text><text x="664" y="200" class="s">coefficients + dtype</text>
+  <line x1="820" y1="164" x2="852" y2="164" class="arr" marker-end="url(#ab)"/>
+
+  <rect x="862" y="118" width="152" height="92" rx="12" class="boxa"/>
+  <text x="882" y="151" class="sh">⑤ shape scale</text><text x="882" y="180" class="s">ηadj=η·s(A,B)</text><text x="882" y="200" class="s">mode/version</text>
+  <line x1="1014" y1="164" x2="1046" y2="164" class="arr" marker-end="url(#ab)"/>
+
+  <rect x="1056" y="118" width="104" height="92" rx="12" class="boxg"/>
+  <text x="1074" y="151" class="sh">⑥ update</text><text x="1074" y="180" class="s">W−ηadjQ̂</text><text x="1074" y="200" class="s">after decay</text>
+
+  <rect x="760" y="258" width="400" height="88" rx="12" class="boxr"/>
+  <text x="784" y="290" class="sh">decoupled decay uses base LR</text>
+  <text x="784" y="319" class="b">W ← (1 − ηλ)W，随后才应用 ηadjQ̂</text>
+  <line x1="960" y1="258" x2="1028" y2="211" class="arr" marker-end="url(#ab)"/>
+
+  <text x="48" y="402" class="h" fill="#0F766E">三个最容易静默改变算法的分叉</text>
+  <rect x="48" y="438" width="338" height="132" rx="12" class="boxr"/>
+  <text x="72" y="471" class="sh">A｜momentum convention</text>
+  <text x="72" y="501" class="b">EMA：μB+(1−μ)G</text>
+  <text x="72" y="528" class="b">sum：μB+G</text>
+  <text x="72" y="554" class="s">buffer checkpoint 不可无元数据互载</text>
+
+  <rect x="431" y="438" width="338" height="132" rx="12" class="boxa"/>
+  <text x="455" y="471" class="sh">B｜matrix grouping</text>
+  <text x="455" y="501" class="b">joint QKV polar ≠ blockwise polar</text>
+  <text x="455" y="528" class="b">global shape ≠ shard shape</text>
+  <text x="455" y="554" class="s">reshape 本身定义了新的 geometry</text>
+
+  <rect x="814" y="438" width="338" height="132" rx="12" class="boxb"/>
+  <text x="838" y="471" class="sh">C｜communication order</text>
+  <text x="838" y="501" class="b">msign(ΣGⱼ) ≠ Σmsign(Gⱼ)</text>
+  <text x="838" y="528" class="b">local polar ≠ global polar</text>
+  <text x="838" y="554" class="s">记录 reduce、shard 与 workspace</text>
+
+  <path d="M315 210 L315 382 L217 428" class="dash" marker-end="url(#ar)"/>
+  <path d="M115 210 L115 382 L555 428" class="dash" marker-end="url(#ar)"/>
+  <path d="M938 210 L938 382 L983 428" class="dash" marker-end="url(#ar)"/>
+
+  <rect x="48" y="620" width="1104" height="112" rx="13" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
+  <text x="72" y="655" class="sh">最小复现字段</text>
+  <text x="72" y="686" class="b">implementation/version · parameter filter · buffer semantics · Nesterov · NS steps/coefficients/dtype</text>
+  <text x="72" y="714" class="b">shape mode · base LR · decay order · gradient accumulation · distributed layout · fallback optimizer</text>
+  <text x="48" y="762" class="s">原创机制图｜软件事实必须绑定访问日；状态图定义计算，不构成训练优势证据。</text>
+</svg>
+

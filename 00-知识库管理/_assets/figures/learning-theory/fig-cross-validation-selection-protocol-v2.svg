@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">交叉验证：估计 procedure、选择配置、独立验收</title>
+<desc id="desc">K-fold 在每一折用其余数据训练并在 held-out fold 评价；nested CV 把内层选择与外层评估分开。复用验证结果生成新候选会把固定候选比较变成自适应 transcript。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">K-fold 轮换训练与验证</text>
+<rect x="55" y="100" width="48" height="42" rx="5" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="79" y="127" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">V</text>
+<rect x="115" y="100" width="48" height="42" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="139" y="127" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">T</text>
+<rect x="175" y="100" width="48" height="42" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="199" y="127" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">T</text>
+<rect x="235" y="100" width="48" height="42" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="259" y="127" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">T</text>
+<rect x="295" y="100" width="48" height="42" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="319" y="127" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">T</text>
+<rect x="55" y="178" width="48" height="42" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="79" y="205" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">T</text>
+<rect x="115" y="178" width="48" height="42" rx="5" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="139" y="205" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">V</text>
+<rect x="175" y="178" width="48" height="42" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="199" y="205" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">T</text>
+<rect x="235" y="178" width="48" height="42" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="259" y="205" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">T</text>
+<rect x="295" y="178" width="48" height="42" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="319" y="205" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">T</text>
+<rect x="55" y="256" width="48" height="42" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="79" y="283" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">T</text>
+<rect x="115" y="256" width="48" height="42" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="139" y="283" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">T</text>
+<rect x="175" y="256" width="48" height="42" rx="5" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="199" y="283" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">V</text>
+<rect x="235" y="256" width="48" height="42" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="259" y="283" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">T</text>
+<rect x="295" y="256" width="48" height="42" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="319" y="283" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">T</text>
+<rect x="55" y="334" width="48" height="42" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="79" y="361" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">T</text>
+<rect x="115" y="334" width="48" height="42" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="139" y="361" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">T</text>
+<rect x="175" y="334" width="48" height="42" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="199" y="361" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">T</text>
+<rect x="235" y="334" width="48" height="42" rx="5" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="259" y="361" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">V</text>
+<rect x="295" y="334" width="48" height="42" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="319" y="361" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">T</text>
+<rect x="55" y="412" width="48" height="42" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="79" y="439" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">T</text>
+<rect x="115" y="412" width="48" height="42" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="139" y="439" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">T</text>
+<rect x="175" y="412" width="48" height="42" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="199" y="439" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">T</text>
+<rect x="235" y="412" width="48" height="42" rx="5" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="259" y="439" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">T</text>
+<rect x="295" y="412" width="48" height="42" rx="5" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="319" y="439" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">V</text>
+<text x="45" y="500" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">each row trains on 4 folds and validates on 1</text>
+<text x="45" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">fold errors share data and are correlated。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Nested CV 隔离选择与评估</text>
+<rect x="445" y="92" width="310" height="60" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600.0" y="128.0" font-size="16" font-weight="650" text-anchor="middle" fill="#2563EB">outer training split</text>
+<line x1="600" y1="157" x2="600" y2="187" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="445" y="197" width="310" height="70" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="600.0" y="238.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">inner CV chooses lambda and pipeline</text>
+<line x1="600" y1="272" x2="600" y2="302" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="445" y="312" width="310" height="60" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="600.0" y="348.0" font-size="16" font-weight="650" text-anchor="middle" fill="#2563EB">refit on outer training</text>
+<line x1="600" y1="377" x2="600" y2="407" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="445" y="417" width="310" height="55" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="600.0" y="450.5" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">outer test: evaluate once</text>
+<text x="430" y="505" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">outer scores estimate the whole selected procedure。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">选择与泄漏的两条风险</text>
+<rect x="845" y="100" width="285" height="64" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="987.5" y="138.0" font-size="16" font-weight="650" text-anchor="middle" fill="#2563EB">M fixed candidates</text>
+<line x1="987" y1="169" x2="987" y2="205" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="845" y="215" width="285" height="75" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="987.5" y="258.5" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">min validation error is optimistic</text>
+<text x="830" y="340" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">legal: simultaneous radius includes log M</text>
+<text x="830" y="390" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">leakage: fit scaler / features before splitting</text>
+<text x="830" y="435" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">adaptive search: transcript exceeds final model id</text>
+<text x="830" y="475" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">group and time data need structural folds</text>
+<text x="830" y="515" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">a final untouched test remains a separate role。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">CV 是一套数据使用协议：内层选择，外层评价，所有 preprocessing 都必须进入训练折。</text>
+</svg>

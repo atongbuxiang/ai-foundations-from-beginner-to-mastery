@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">边缘同分布、i.i.d. 联合律与有效样本单位</title>
+<desc id="desc">相同边缘分布不推出独立；i.i.d. 要求联合律分解为 P 的乘积。增强 views、同一用户记录与时间序列共享潜变量，浓缩与切分必须以真正独立的 sampling unit 为准。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">同边缘不等于独立联合律</text>
+<circle cx="85" cy="160" r="20" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="85" y="166" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">P</text>
+<circle cx="155" cy="160" r="20" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="155" y="166" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">P</text>
+<circle cx="225" cy="160" r="20" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="225" y="166" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">P</text>
+<circle cx="295" cy="160" r="20" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="295" y="166" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">P</text>
+<text x="45" y="220" font-size="16" font-weight="700" text-anchor="start" fill="#1F2937">each Z_i ~ P</text>
+<text x="45" y="258" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">but coupling may be arbitrary</text>
+<circle cx="200" cy="330" r="25" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="200" y="336" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">U</text>
+<line x1="200" y1="355" x2="90" y2="410" stroke="#D7DEE8" stroke-width="2"/>
+<circle cx="90" cy="420" r="8" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<line x1="200" y1="355" x2="165" y2="410" stroke="#D7DEE8" stroke-width="2"/>
+<circle cx="165" cy="420" r="8" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<line x1="200" y1="355" x2="235" y2="410" stroke="#D7DEE8" stroke-width="2"/>
+<circle cx="235" cy="420" r="8" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<line x1="200" y1="355" x2="310" y2="410" stroke="#D7DEE8" stroke-width="2"/>
+<circle cx="310" cy="420" r="8" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<text x="45" y="485" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">shared latent U creates dependence</text>
+<text x="45" y="512" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">identical marginals can be perfectly correlated。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">i.i.d. 是整个 joint law</text>
+<rect x="445" y="92" width="310" height="62" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="600.0" y="129.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">S=(Z1,...,Zm) ~ P^m</text>
+<text x="430" y="210" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">P(Z1 in B1,...,Zm in Bm)</text>
+<text x="430" y="246" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E" class="math">= product_i P(Z_i in B_i)</text>
+<circle cx="475" cy="330" r="18" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="475" y="336" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">Z1</text>
+<circle cx="555" cy="330" r="18" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="555" y="336" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">Z2</text>
+<circle cx="635" cy="330" r="18" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="635" y="336" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">Z3</text>
+<circle cx="715" cy="330" r="18" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="715" y="336" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">Z4</text>
+<text x="430" y="410" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">fresh draw for every sampling unit</text>
+<text x="430" y="448" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">exchangeable / without replacement / mixing</text>
+<text x="430" y="480" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">need different concentration tools</text>
+<text x="430" y="510" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">independence is an assumption, not a file format。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">增强与切分按父样本分组</text>
+<circle cx="875" cy="135" r="16" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<line x1="875" y1="153" x2="850" y2="220" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="875" y1="153" x2="900" y2="220" stroke="#D7DEE8" stroke-width="2"/>
+<circle cx="850" cy="230" r="8" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<circle cx="900" cy="230" r="8" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<circle cx="990" cy="135" r="16" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<line x1="990" y1="153" x2="965" y2="220" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="990" y1="153" x2="1015" y2="220" stroke="#D7DEE8" stroke-width="2"/>
+<circle cx="965" cy="230" r="8" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<circle cx="1015" cy="230" r="8" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<circle cx="1105" cy="135" r="16" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<line x1="1105" y1="153" x2="1080" y2="220" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="1105" y1="153" x2="1130" y2="220" stroke="#D7DEE8" stroke-width="2"/>
+<circle cx="1080" cy="230" r="8" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<circle cx="1130" cy="230" r="8" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<text x="830" y="290" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">two views share the same parent</text>
+<text x="830" y="328" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">split parents / users / time blocks first</text>
+<text x="830" y="372" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">duplicates do not multiply independent n</text>
+<text x="830" y="420" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">variance includes covariance terms</text>
+<text x="830" y="462" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">report nominal m and effective sample size</text>
+<text x="830" y="505" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">leakage invalidates the target experiment。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">泛化定理作用于联合采样合同；增强数量、文件行数与真正独立样本量是三种不同计数。</text>
+</svg>

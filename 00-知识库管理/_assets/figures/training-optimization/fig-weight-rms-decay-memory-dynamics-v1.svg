@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">AdamW 权重均方根的记忆动力学</title>
+  <desc id="desc">从解耦权重衰减更新展开权重历史核、二阶能量账，并比较尺度不变参数在不同方向归一化下的角学习率。</desc>
+  <rect width="1200" height="800" fill="#FFFEFB"/>
+  <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}.h{font-size:27px;font-weight:700}.sh{font-size:18px;font-weight:700}.b{font-size:14px}.s{font-size:12.5px;fill:#64748B}.bb{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.bg{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.ba{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.br{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}.line{stroke:#CBD5E1;stroke-width:2}.arr{stroke:#2563EB;stroke-width:3;fill:none}</style>
+  <defs><marker id="ab" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#2563EB"/></marker></defs>
+  <text x="48" y="48" class="h" fill="#2563EB">Weight RMS 是“衰减记忆 + 更新注入 + 对齐交叉项”的动态平衡</text>
+
+  <rect x="48" y="86" width="1104" height="132" rx="14" class="bb"/>
+  <text x="72" y="124" class="sh">一步更新与历史核</text>
+  <text x="72" y="161" class="b">θₜ₊₁ = aₜ θₜ − ηₜuₜ， aₜ = 1 − ηₜλₜ</text>
+  <line x1="480" y1="151" x2="526" y2="151" class="arr" marker-end="url(#ab)"/>
+  <text x="548" y="161" class="b">θₜ = (∏ aⱼ)θ₀ − Σₖ ηₖ(∏ⱼ₌ₖ₊₁ᵗ⁻¹ aⱼ)uₖ</text>
+  <text x="72" y="194" class="s">因此当前权重携带整个 LR×WD 历史；只看当前 η、λ 不能确定当前半径。</text>
+
+  <text x="48" y="272" class="h" fill="#0F766E">二阶能量账：令 qₜ = E||θₜ||²，rₜ = E||uₜ||²，cₜ = E⟨θₜ,uₜ⟩</text>
+  <rect x="48" y="310" width="338" height="156" rx="13" class="bg"/>
+  <text x="72" y="348" class="sh">保留旧能量</text>
+  <text x="72" y="386" class="b">aₜ² qₜ</text>
+  <text x="72" y="420" class="s">权重衰减形成指数型记忆核</text>
+  <text x="72" y="446" class="s">aₜ 随 schedule 改变时会产生滞后</text>
+  <rect x="431" y="310" width="338" height="156" rx="13" class="ba"/>
+  <text x="455" y="348" class="sh">注入新能量</text>
+  <text x="455" y="386" class="b">+ ηₜ² rₜ</text>
+  <text x="455" y="420" class="s">取决于预条件后方向的二阶矩</text>
+  <text x="455" y="446" class="s">不同 optimizer 的 rₜ 不可混同</text>
+  <rect x="814" y="310" width="338" height="156" rx="13" class="br"/>
+  <text x="838" y="348" class="sh">交叉对齐项</text>
+  <text x="838" y="386" class="b">− 2aₜηₜ cₜ</text>
+  <text x="838" y="420" class="s">方向与权重不正交时不可忽略</text>
+  <text x="838" y="446" class="s">省略它只是近似，不是恒等式</text>
+
+  <rect x="48" y="502" width="528" height="210" rx="14" class="bb"/>
+  <text x="72" y="540" class="sh">近似平衡不是普适定律</text>
+  <text x="72" y="576" class="b">若 a≈1−ηλ、c≈0、r 稳定，则</text>
+  <text x="72" y="612" class="sh" fill="#2563EB">RMS(θ) ∝ √(η/λ)</text>
+  <text x="72" y="648" class="s">成立前提：平稳、弱对齐、固定方向统计、足够混合</text>
+  <text x="72" y="678" class="s">LR/WD 快速变化时，qₜ 通过历史核缓慢追随</text>
+
+  <rect x="608" y="502" width="544" height="210" rx="14" class="bg"/>
+  <text x="632" y="540" class="sh">尺度不变参数：真正相关的是角更新</text>
+  <text x="632" y="578" class="b">若原始梯度 ||g|| ∝ 1/||w||：</text>
+  <rect x="632" y="600" width="230" height="74" rx="9" class="ba"/>
+  <text x="650" y="629" class="b">SGD 角 LR</text><text x="650" y="655" class="s">∝ η / ||w||²</text>
+  <rect x="890" y="600" width="230" height="74" rx="9" class="bb"/>
+  <text x="908" y="629" class="b">归一化方向角 LR</text><text x="908" y="655" class="s">∝ η / ||w||</text>
+  <text x="632" y="696" class="s">“半径相同”不推出“函数步长相同”。</text>
+  <rect x="48" y="752" width="1104" height="30" rx="8" fill="#FFF6E5" stroke="#D6A64F"/>
+  <text x="72" y="772" class="s">边界：√(η/λ) 是带假设的稳态近似；动态 schedule、相关更新与参数化都会改变结论。</text>
+</svg>

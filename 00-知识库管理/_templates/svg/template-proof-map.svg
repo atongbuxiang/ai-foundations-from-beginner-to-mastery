@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">证明结构模板：三个阶段与一条保持量</title>
+  <desc id="desc">图从左到右展示输入对象、关键变换和目标结论，底部单独标出贯穿证明的保持量或复杂度账本。</desc>
+  <rect width="1200" height="620" fill="#FFFEFB"/>
+  <style>
+    .sans{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}
+    .mono{font-family:"SFMono-Regular",Menlo,monospace}
+    .ink{fill:#1F2937}.muted{fill:#64748B}.blue{fill:#2563EB}.green{fill:#0F766E}.amber{fill:#B7791F}
+  </style>
+
+  <line x1="400" y1="54" x2="400" y2="472" stroke="#D7DEE8" stroke-width="2"/>
+  <line x1="800" y1="54" x2="800" y2="472" stroke="#D7DEE8" stroke-width="2"/>
+
+  <text x="64" y="66" class="sans blue" font-size="24" font-weight="700">① [输入对象]</text>
+  <text x="64" y="100" class="sans muted" font-size="17">[已知、条件或随机对象]</text>
+  <circle cx="200" cy="244" r="62" fill="#EEF3FF" stroke="#2563EB" stroke-width="3"/>
+  <text x="200" y="238" class="mono ink" font-size="20" text-anchor="middle">[X]</text>
+  <text x="200" y="270" class="sans muted" font-size="16" text-anchor="middle">[类型/维度]</text>
+  <text x="64" y="410" class="sans ink" font-size="18">[这一阶段建立的事实]</text>
+
+  <text x="448" y="66" class="sans amber" font-size="24" font-weight="700">② [关键变换]</text>
+  <text x="448" y="100" class="sans muted" font-size="17">[等价、上界、分解或随机化]</text>
+  <path d="M468 244 H706" stroke="#1F2937" stroke-width="3" fill="none"/>
+  <path d="M706 244 L682 230 L682 258 Z" fill="#1F2937"/>
+  <text x="587" y="214" class="mono amber" font-size="20" text-anchor="middle">[T]</text>
+  <text x="587" y="286" class="sans ink" font-size="18" text-anchor="middle">[变换究竟改变什么]</text>
+  <text x="448" y="410" class="sans muted" font-size="18">[最容易误用的条件]</text>
+
+  <text x="848" y="66" class="sans green" font-size="24" font-weight="700">③ [输出结论]</text>
+  <text x="848" y="100" class="sans muted" font-size="17">[定理目标或算法输出]</text>
+  <rect x="878" y="184" width="244" height="120" fill="#E8F5F1" stroke="#0F766E" stroke-width="3"/>
+  <text x="1000" y="238" class="mono green" font-size="21" text-anchor="middle">[result]</text>
+  <text x="1000" y="272" class="sans ink" font-size="17" text-anchor="middle">[成立条件]</text>
+  <text x="848" y="410" class="sans ink" font-size="18">[结论怎样回到主问题]</text>
+
+  <line x1="64" y1="500" x2="1136" y2="500" stroke="#0F766E" stroke-width="3"/>
+  <text x="64" y="546" class="sans green" font-size="19" font-weight="700">贯穿量｜[保持量、概率代价、维度或复杂度]</text>
+  <text x="64" y="580" class="sans muted" font-size="17">[只写一行账本；完整推导留在 Markdown]</text>
+</svg>

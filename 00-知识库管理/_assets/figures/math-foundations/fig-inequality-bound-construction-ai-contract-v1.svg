@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="760" viewBox="0 0 1440 760" role="img" aria-labelledby="title desc">
+  <title id="title">基本不等式、界的构造与 AI 理论接口</title>
+  <desc id="desc">三面板展示界的方向定义域和量词合同、从精确分解到不等式与松弛账本的构造过程，以及线性层、Attention、Jensen 和 log-sum-exp 中的 AI 应用与数值边界。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#071527"/><stop offset="1" stop-color="#10263e"/></linearGradient>
+    <linearGradient id="p1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#173754"/><stop offset="1" stop-color="#102a43"/></linearGradient>
+    <linearGradient id="p2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#173d3b"/><stop offset="1" stop-color="#102f31"/></linearGradient>
+    <linearGradient id="p3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#372d58"/><stop offset="1" stop-color="#282442"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="6" stdDeviation="9" flood-color="#000" flood-opacity=".28"/></filter>
+    <marker id="ab" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#66c7ff"/></marker>
+    <marker id="ag" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#70e0bf"/></marker>
+    <marker id="ap" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#b29cff"/></marker>
+    <style>
+      .title{font:700 30px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#f5f9ff}.sub{font:400 15px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#a9bfd4}.head{font:700 22px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#f8fbff}.body{font:500 16px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#dceaf7}.small{font:400 14px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#b8cada}.tiny{font:400 12px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#aebfd0}.math{font:500 17px Georgia,"Times New Roman",serif;fill:#f6fbff}.tag{font:700 13px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:.7px}.mono{font:600 14px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#dceaf7}
+    </style>
+  </defs>
+  <rect width="1440" height="760" fill="url(#bg)"/>
+  <circle cx="1290" cy="60" r="250" fill="#547ec7" opacity=".08"/><circle cx="120" cy="730" r="280" fill="#27a98b" opacity=".07"/>
+  <text x="70" y="59" class="title">先保留结构，再选择不等式；每一步都登记松弛</text>
+  <text x="70" y="88" class="sub">direction / domain / quantifier → exact decomposition → tool / equality / slack → AI bound / stable computation</text>
+
+  <g filter="url(#shadow)"><rect x="55" y="125" width="410" height="535" rx="24" fill="url(#p1)" stroke="#427ca6"/><rect x="515" y="125" width="410" height="535" rx="24" fill="url(#p2)" stroke="#438b7c"/><rect x="975" y="125" width="410" height="535" rx="24" fill="url(#p3)" stroke="#7b6cad"/></g>
+
+  <rect x="80" y="148" width="118" height="27" rx="13" fill="#13324d" stroke="#66c7ff"/><text x="139" y="166" text-anchor="middle" class="tag" fill="#7bd2ff">BOUND CONTRACT</text>
+  <text x="80" y="207" class="head">① 先问“界在说什么”</text>
+  <text x="80" y="240" class="body">方向、domain、量词与对象必须同时声明</text>
+
+  <rect x="85" y="272" width="345" height="96" rx="14" fill="#0d263d" stroke="#4e91ba"/>
+  <text x="106" y="302" class="math">L(z) ≤ Q(z) ≤ B(z),　z ∈ D</text>
+  <text x="106" y="332" class="small">pointwise / uniform / expectation / high probability</text>
+  <text x="106" y="356" class="tiny">乘负数翻向；倒数查正性；平方先查单调区间</text>
+  <rect x="85" y="387" width="345" height="105" rx="14" fill="#0c2338" stroke="#4e91ba"/>
+  <text x="106" y="417" class="small">Usefulness audit</text>
+  <text x="106" y="446" class="math">slack Δ(z) = B(z) − Q(z) ≥ 0</text>
+  <text x="106" y="474" class="tiny">比较trivial baseline、单位、维度与极端输入</text>
+  <rect x="85" y="511" width="345" height="110" rx="14" fill="#0c2338" stroke="#4e91ba"/>
+  <text x="106" y="540" class="small">Three ledgers</text>
+  <text x="106" y="568" class="small">formula valid　/　bound tight　/　code stable</text>
+  <text x="106" y="597" class="tiny">数学正确不保证常数有用，也不保证浮点不溢出</text>
+
+  <rect x="540" y="148" width="126" height="27" rx="13" fill="#123630" stroke="#70e0bf"/><text x="603" y="166" text-anchor="middle" class="tag" fill="#82e9cb">CONSTRUCTION</text>
+  <text x="540" y="207" class="head">② 从等式暴露唯一障碍</text>
+  <text x="540" y="240" class="body">分解 → 选工具 → 调参数 → 查等号</text>
+
+  <rect x="545" y="270" width="350" height="87" rx="14" fill="#102f31" stroke="#53ad98"/>
+  <text x="565" y="299" class="small">Exact decomposition</text>
+  <text x="565" y="329" class="math">‖e+δ‖² = ‖e‖² + 2⟨e,δ⟩ + ‖δ‖²</text>
+  <path d="M720 363 L720 389" stroke="#70e0bf" stroke-width="3" marker-end="url(#ag)"/>
+  <rect x="545" y="397" width="350" height="93" rx="14" fill="#102f31" stroke="#53ad98"/>
+  <text x="565" y="426" class="small">Cauchy + Young with ε &gt; 0</text>
+  <text x="565" y="456" class="math">2|⟨e,δ⟩| ≤ ε‖e‖² + ε⁻¹‖δ‖²</text>
+  <text x="565" y="480" class="tiny">ε分配预算；同向且 ε‖e‖ = ‖δ‖ 时取等</text>
+  <path d="M720 496 L720 522" stroke="#70e0bf" stroke-width="3" marker-end="url(#ag)"/>
+  <rect x="545" y="530" width="350" height="91" rx="14" fill="#102f31" stroke="#53ad98"/>
+  <text x="565" y="558" class="small">Slack ledger</text>
+  <text x="565" y="586" class="math">total gap = Σ stepwise gaps</text>
+  <text x="565" y="610" class="tiny">triangle / Hölder / Jensen各自删除了什么结构？</text>
+
+  <rect x="1000" y="148" width="126" height="27" rx="13" fill="#2c2645" stroke="#b29cff"/><text x="1063" y="166" text-anchor="middle" class="tag" fill="#c5b2ff">AI / NUMERICS</text>
+  <text x="1000" y="207" class="head">③ 把界落到真实张量</text>
+  <text x="1000" y="240" class="body">形状、调用位置、假设和失败模式一起写</text>
+
+  <rect x="1001" y="269" width="357" height="91" rx="14" fill="#24213c" stroke="#8a78c2"/>
+  <text x="1021" y="298" class="small">Linear layer / Attention</text>
+  <text x="1021" y="326" class="math">‖Wx‖₂ ≤ ‖W‖F‖x‖₂</text>
+  <text x="1021" y="350" class="tiny">qᵀk/√d：worst-case Cauchy ≠ variance argument</text>
+  <rect x="1001" y="376" width="357" height="109" rx="14" fill="#24213c" stroke="#8a78c2"/>
+  <text x="1021" y="404" class="small">Jensen / expectation</text>
+  <text x="1021" y="433" class="math">f(E[X]) ≤ E[f(X)]　for convex f</text>
+  <text x="1021" y="461" class="tiny">先查domain、integrability、曲率和equality region</text>
+  <rect x="1001" y="501" width="357" height="120" rx="14" fill="#211e38" stroke="#8a78c2"/>
+  <text x="1021" y="530" class="small">Softmax / stable log-sum-exp</text>
+  <text x="1021" y="558" class="math">max z ≤ LSE(z) ≤ max z + log C</text>
+  <text x="1021" y="586" class="small">LSE(z) = m + log Σ exp(zⱼ−m)</text>
+  <text x="1021" y="609" class="tiny">相同实数公式，naive实现仍可能overflow</text>
+
+  <path d="M472 392 L504 392" stroke="#66c7ff" stroke-width="3" marker-end="url(#ab)"/><path d="M932 392 L964 392" stroke="#70e0bf" stroke-width="3" marker-end="url(#ag)"/>
+  <rect x="177" y="689" width="1086" height="42" rx="21" fill="#0b1d30" stroke="#385b76"/><text x="720" y="716" text-anchor="middle" class="body">闭环：先保留等式结构 → 用最匹配的不等式替换障碍 → 优化自由参数 → 用等号、维度和稳定实现验收。</text>
+</svg>

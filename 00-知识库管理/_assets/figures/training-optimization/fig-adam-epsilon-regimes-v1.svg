@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Adam epsilon 的放置、响应区间与浮点风险</title>
+  <desc id="desc">比较根号外和根号内 epsilon 的增益曲线，展示 sign 到线性更新的三个区间，并区分表示范围、相加吸收和状态计算精度。</desc>
+  <rect width="1200" height="720" fill="#FFFEFB"/>
+  <style>
+    text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}
+    .h{font-size:27px;font-weight:700}.sh{font-size:19px;font-weight:700}.b{font-size:16px}.s{font-size:15px;fill:#64748B}
+    .axis{stroke:#0F172A;stroke-width:2}.blue{stroke:#2563EB;fill:none;stroke-width:4}.green{stroke:#0F766E;fill:none;stroke-width:4}.amber{stroke:#B76E00;fill:none;stroke-width:4}.red{stroke:#C0392B;fill:none;stroke-width:3}
+    .boxb{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.boxg{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.boxa{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.boxr{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}
+  </style>
+  <text x="48" y="50" class="h" fill="#2563EB">A｜相同 crossover，根号内外仍不是同一曲线</text>
+  <line x1="88" y1="292" x2="574" y2="292" class="axis"/>
+  <line x1="88" y1="292" x2="88" y2="88" class="axis"/>
+  <path d="M92 104 C116 112 142 133 178 168 S270 236 570 276" class="blue"/>
+  <path d="M92 104 C140 106 174 116 216 151 S300 236 570 278" class="green"/>
+  <line x1="220" y1="88" x2="220" y2="292" stroke="#B76E00" stroke-width="2" stroke-dasharray="8 6"/>
+  <text x="101" y="119" class="b" fill="#2563EB">1 / (r + eps)</text>
+  <text x="291" y="157" class="b" fill="#0F766E">1 / sqrt(r^2 + eps^2)</text>
+  <text x="207" y="317" class="s" fill="#B76E00">r = eps</text>
+  <text x="431" y="317" class="s">second-moment scale r</text>
+  <text x="35" y="205" class="s" transform="rotate(-90 35 205)">denominator gain</text>
+  <rect x="624" y="82" width="528" height="212" rx="14" class="boxa"/>
+  <text x="652" y="118" class="sh" fill="#B76E00">单位先行</text>
+  <text x="652" y="154" class="b">outside:  sqrt(v) + eps_out</text>
+  <text x="652" y="184" class="s">eps_out 与 gradient 同单位</text>
+  <text x="652" y="224" class="b">inside:   sqrt(v + eps_in)</text>
+  <text x="652" y="254" class="s">eps_in 与 gradient square 同单位</text>
+  <text x="652" y="282" class="b" fill="#C0392B">相同数值参数 ≠ 相同 floor</text>
+
+  <line x1="48" y1="336" x2="1152" y2="336" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="48" y="378" class="h" fill="#0F766E">B｜epsilon 也是优化 regime 开关</text>
+  <rect x="48" y="406" width="350" height="106" rx="12" class="boxb"/>
+  <text x="76" y="441" class="sh">|g| / eps  ≫ 1</text>
+  <text x="76" y="475" class="b">sign-like:  u ≈ sign(g)</text>
+  <text x="76" y="499" class="s">gradient magnitude mostly normalized away</text>
+  <rect x="425" y="406" width="350" height="106" rx="12" class="boxa"/>
+  <text x="453" y="441" class="sh">|g| / eps  ≈ 1</text>
+  <text x="453" y="475" class="b">transition: placement matters most</text>
+  <text x="453" y="499" class="s">framework formulas visibly diverge</text>
+  <rect x="802" y="406" width="350" height="106" rx="12" class="boxg"/>
+  <text x="830" y="441" class="sh">|g| / eps  ≪ 1</text>
+  <text x="830" y="475" class="b">linear-like:  u ≈ g / eps</text>
+  <text x="830" y="499" class="s">more SGD-like, with rescaled LR</text>
+  <path d="M398 458 L425 458" class="amber"/><path d="M775 458 L802 458" class="amber"/>
+
+  <text x="48" y="566" class="h" fill="#2563EB">C｜低精度要分三层，不要都叫 underflow</text>
+  <rect x="48" y="594" width="330" height="78" rx="12" class="boxb"/>
+  <text x="72" y="625" class="sh">1. representability</text><text x="72" y="652" class="s">eps 本身能否表示？看 exponent range</text>
+  <rect x="410" y="594" width="330" height="78" rx="12" class="boxr"/>
+  <text x="434" y="625" class="sh" fill="#C0392B">2. absorption</text><text x="434" y="652" class="s">fl(r + eps) 是否仍等于 r？看相对间距</text>
+  <rect x="772" y="594" width="380" height="78" rx="12" class="boxg"/>
+  <text x="796" y="625" class="sh">3. state / compute dtype</text><text x="796" y="652" class="s">m、v、sqrt、divide 各在哪个 dtype？</text>
+  <line x1="48" y1="700" x2="1152" y2="700" stroke="#0F766E" stroke-width="3"/>
+</svg>

@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="760" viewBox="0 0 1440 760" role="img" aria-labelledby="title desc">
+  <title id="title">数学归纳、递归、组合计数与 AI 搜索树</title>
+  <desc id="desc">三面板展示归纳法的起点和推进覆盖、递归定义的终止度量与成本递推，以及组合计数如何审计自回归完整搜索树、束搜索和动态规划。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#071527"/><stop offset="1" stop-color="#10263e"/></linearGradient>
+    <linearGradient id="p1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#173754"/><stop offset="1" stop-color="#102a43"/></linearGradient>
+    <linearGradient id="p2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#173d3b"/><stop offset="1" stop-color="#102f31"/></linearGradient>
+    <linearGradient id="p3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#372d58"/><stop offset="1" stop-color="#282442"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="6" stdDeviation="9" flood-color="#000" flood-opacity=".28"/></filter>
+    <marker id="ab" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#66c7ff"/></marker>
+    <marker id="ag" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#70e0bf"/></marker>
+    <marker id="ap" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#b29cff"/></marker>
+    <style>
+      .title{font:700 30px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#f5f9ff}.sub{font:400 15px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#a9bfd4}.head{font:700 22px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#f8fbff}.body{font:500 16px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#dceaf7}.small{font:400 14px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#b8cada}.tiny{font:400 12px -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#aebfd0}.math{font:500 17px Georgia,"Times New Roman",serif;fill:#f6fbff}.tag{font:700 13px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:.7px}.mono{font:600 14px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#dceaf7}
+    </style>
+  </defs>
+  <rect width="1440" height="760" fill="url(#bg)"/>
+  <circle cx="1290" cy="60" r="250" fill="#547ec7" opacity=".08"/><circle cx="120" cy="730" r="280" fill="#27a98b" opacity=".07"/>
+  <text x="70" y="59" class="title">归纳证明覆盖，递归构造对象，计数核对规模</text>
+  <text x="70" y="88" class="sub">base / step / closure、termination measure / recurrence 与 search-tree multiplicity 必须分别验收</text>
+
+  <g filter="url(#shadow)"><rect x="55" y="125" width="410" height="535" rx="24" fill="url(#p1)" stroke="#427ca6"/><rect x="515" y="125" width="410" height="535" rx="24" fill="url(#p2)" stroke="#438b7c"/><rect x="975" y="125" width="410" height="535" rx="24" fill="url(#p3)" stroke="#7b6cad"/></g>
+
+  <rect x="80" y="148" width="116" height="27" rx="13" fill="#13324d" stroke="#66c7ff"/><text x="138" y="166" text-anchor="middle" class="tag" fill="#7bd2ff">INDUCTION</text>
+  <text x="80" y="207" class="head">① 启动一条可达链</text>
+  <text x="80" y="240" class="body">Predicate、base、任意step、closure缺一不可</text>
+
+  <g fill="#66c7ff"><circle cx="111" cy="309" r="14"/><circle cx="190" cy="309" r="14"/><circle cx="269" cy="309" r="14"/><circle cx="348" cy="309" r="14"/><circle cx="420" cy="309" r="6" opacity=".55"/></g>
+  <g stroke="#66c7ff" stroke-width="3" fill="none" marker-end="url(#ab)"><path d="M127 309 L171 309"/><path d="M206 309 L250 309"/><path d="M285 309 L329 309"/><path d="M364 309 L403 309"/></g>
+  <text x="111" y="344" text-anchor="middle" class="small">P(n₀)</text><text x="190" y="344" text-anchor="middle" class="small">P(n₀+1)</text><text x="269" y="344" text-anchor="middle" class="small">P(n₀+2)</text><text x="348" y="344" text-anchor="middle" class="small">P(n₀+3)</text>
+  <rect x="86" y="381" width="342" height="94" rx="14" fill="#0d263d" stroke="#4e91ba"/>
+  <text x="106" y="410" class="math">base: P(n₀)</text>
+  <text x="106" y="438" class="math">step: ∀n≥n₀, P(n) ⇒ P(n+1)</text>
+  <text x="106" y="463" class="tiny">IH是局部假设；最后由归纳原理关闭全称命题</text>
+  <rect x="86" y="493" width="342" height="128" rx="14" fill="#0c2338" stroke="#4e91ba"/>
+  <text x="106" y="522" class="small">Strong: use every smaller case</text>
+  <text x="106" y="550" class="small">Structural: one case per constructor</text>
+  <text x="106" y="578" class="small">Stride d: cover every residue class</text>
+  <text x="106" y="605" class="tiny">加强不变量，常比保存过少信息更容易推进</text>
+
+  <rect x="540" y="148" width="109" height="27" rx="13" fill="#123630" stroke="#70e0bf"/><text x="594" y="166" text-anchor="middle" class="tag" fill="#82e9cb">RECURSION</text>
+  <text x="540" y="207" class="head">② 更小调用必须真的更小</text>
+  <text x="540" y="240" class="body">定义、终止、正确性与成本是四张账</text>
+
+  <circle cx="720" cy="293" r="25" fill="#1a665c" stroke="#70e0bf"/><text x="720" y="299" text-anchor="middle" class="small">n</text>
+  <circle cx="630" cy="374" r="23" fill="#245b58" stroke="#70e0bf"/><text x="630" y="380" text-anchor="middle" class="small">n−1</text>
+  <circle cx="810" cy="374" r="23" fill="#245b58" stroke="#70e0bf"/><text x="810" y="380" text-anchor="middle" class="small">n−2</text>
+  <circle cx="590" cy="448" r="18" fill="#1f4b4a" stroke="#53ad98"/><text x="590" y="454" text-anchor="middle" class="tiny">base</text>
+  <circle cx="670" cy="448" r="18" fill="#1f4b4a" stroke="#53ad98"/><text x="670" y="454" text-anchor="middle" class="tiny">...</text>
+  <circle cx="770" cy="448" r="18" fill="#1f4b4a" stroke="#53ad98"/><text x="770" y="454" text-anchor="middle" class="tiny">...</text>
+  <circle cx="850" cy="448" r="18" fill="#1f4b4a" stroke="#53ad98"/><text x="850" y="454" text-anchor="middle" class="tiny">base</text>
+  <g stroke="#70e0bf" stroke-width="2.4" fill="none" marker-end="url(#ag)"><path d="M701 311 L648 357"/><path d="M739 311 L792 357"/><path d="M618 395 L599 429"/><path d="M642 395 L661 429"/><path d="M798 395 L779 429"/><path d="M822 395 L841 429"/></g>
+  <text x="720" y="486" text-anchor="middle" class="tiny">measure μ strictly decreases on every recursive edge</text>
+  <rect x="546" y="506" width="348" height="115" rx="14" fill="#102f31" stroke="#53ad98"/>
+  <text x="566" y="536" class="math">C(n)=1+C(n−1)+C(n−2)</text>
+  <text x="566" y="564" class="small">recurrence records calls; memoization merges repeats</text>
+  <text x="566" y="592" class="small">termination + partial correctness = total correctness</text>
+  <text x="566" y="613" class="tiny">漂亮的成本递推不能替代algorithm correctness proof</text>
+
+  <rect x="1000" y="148" width="146" height="27" rx="13" fill="#2c2645" stroke="#b29cff"/><text x="1073" y="166" text-anchor="middle" class="tag" fill="#c5b2ff">COUNTING / AI</text>
+  <text x="1000" y="207" class="head">③ 先定义对象，再选计数法</text>
+  <text x="1000" y="240" class="body">Ordered？重复？互斥？每对象恰好数一次？</text>
+
+  <rect x="1001" y="269" width="357" height="91" rx="14" fill="#24213c" stroke="#8a78c2"/>
+  <text x="1021" y="298" class="small">Core rules</text>
+  <text x="1021" y="325" class="math">OR → sum　 AND → product　 overlap → IE</text>
+  <text x="1021" y="349" class="tiny">bijection and double counting audit representation multiplicity</text>
+  <rect x="1001" y="376" width="357" height="109" rx="14" fill="#24213c" stroke="#8a78c2"/>
+  <text x="1021" y="404" class="small">Autoregressive full tree</text>
+  <text x="1021" y="433" class="math">V choices × T positions ⇒ Vᵀ paths</text>
+  <text x="1021" y="461" class="tiny">EOS / grammar / masks make branching prefix-dependent</text>
+  <rect x="1001" y="501" width="357" height="120" rx="14" fill="#211e38" stroke="#8a78c2"/>
+  <text x="1021" y="530" class="small">Beam search vs dynamic programming</text>
+  <text x="1021" y="558" class="math">expand ≈ K·V / step; retain ≤ K</text>
+  <text x="1021" y="586" class="small">Pruning is heuristic unless exact state merging applies</text>
+  <text x="1021" y="609" class="tiny">更大beam ≠ task metric单调更好，也不自动保证终止</text>
+
+  <path d="M472 392 L504 392" stroke="#66c7ff" stroke-width="3" marker-end="url(#ab)"/><path d="M932 392 L964 392" stroke="#70e0bf" stroke-width="3" marker-end="url(#ag)"/>
+  <rect x="177" y="689" width="1086" height="42" rx="21" fill="#0b1d30" stroke="#385b76"/><text x="720" y="716" text-anchor="middle" class="body">闭环：用计数发现规模 → 用递归/递推建模 → 用归纳或不变量证明覆盖、正确性与终止。</text>
+</svg>

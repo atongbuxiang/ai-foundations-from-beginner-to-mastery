@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#26364a"/></marker><style>.t{font-family:Inter,'Noto Sans SC',sans-serif;fill:#172033}.h{font-size:26px;font-weight:700}.s{font-size:18px}.m{font-family:'IBM Plex Mono',monospace;font-size:16px;fill:#233a59}.mut{font-size:15px;fill:#647184}.box{fill:#fffdf7;stroke:#26364a;stroke-width:2}.arr{stroke:#26364a;stroke-width:2.2;fill:none;marker-end:url(#a)}</style></defs>
+  <rect width="1200" height="620" fill="#f4f0e6"/><text x="54" y="52" class="t h">MeanFlow：局部切线、有限弦与全导数恒等式</text><line x1="54" y1="72" x2="1146" y2="72" stroke="#c7bda9"/>
+  <rect x="54" y="105" width="600" height="390" rx="12" class="box"/><text x="78" y="142" class="t h" font-size="21">沿实际 trajectory 的平均</text>
+  <path d="M120 410 C180 185,410 175,585 355" fill="none" stroke="#426f9e" stroke-width="5"/>
+  <circle cx="132" cy="380" r="14" fill="#4f8051"/><text x="89" y="430" class="t s">z_r</text><circle cx="560" cy="330" r="14" fill="#d46b45"/><text x="558" y="365" class="t s">z_t</text>
+  <path d="M132 380 L560 330" stroke="#4f8051" stroke-width="4" marker-end="url(#a)"/><text x="280" y="388" class="t s" fill="#426c43">(t-r) u：有限弦</text>
+  <path d="M560 330 L628 395" stroke="#d46b45" stroke-width="4" marker-end="url(#a)"/><text x="478" y="435" class="t s" fill="#b65334">v(z_t,t)：切线</text>
+  <text x="94" y="185" class="m">u = 1/(t-r) ∫ v(z_s,s) ds</text><text x="94" y="218" class="t mut">不是固定 z_t 的时间平均，也不是端点速度算术平均</text>
+  <rect x="686" y="105" width="460" height="390" rx="12" class="box"/><text x="710" y="142" class="t h" font-size="21">Identity 与 JVP</text>
+  <rect x="720" y="180" width="392" height="82" rx="8" fill="#e7eef8" stroke="#56769a"/><text x="744" y="213" class="m">u = v - (t-r) D_t u</text><text x="744" y="242" class="t mut">固定 r，沿上端点 trajectory 求全导数</text>
+  <rect x="720" y="288" width="392" height="82" rx="8" fill="#e4f0e2" stroke="#608459"/><text x="744" y="321" class="m">D_t u = partial_t u + J_z u · v</text><text x="744" y="350" class="t mut">用 JVP，无需形成完整 Jacobian</text>
+  <rect x="720" y="396" width="392" height="62" rx="8" fill="#f8e6df" stroke="#b7654c"/><text x="744" y="432" class="m">z_r = z_t - (t-r) u_theta</text>
+  <rect x="54" y="528" width="1092" height="56" rx="8" fill="#fff8de" stroke="#c7a84d"/><text x="77" y="562" class="t s">验证：identity residual、r→t boundary、composition residual、unseen intervals；弦正确不决定中间轨迹。</text>
+</svg>

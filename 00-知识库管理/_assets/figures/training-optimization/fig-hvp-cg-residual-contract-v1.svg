@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">HVP oracle、Krylov CG 与停止证书</title>
+  <desc id="desc">展示 forward-over-reverse 与 reverse-over-reverse HVP，固定算子上的 Krylov 递推，以及 residual、negative curvature、boundary hit 三类出口。</desc>
+  <rect width="1200" height="720" fill="#FFFEFB"/>
+  <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}.h{font-size:27px;font-weight:700}.sh{font-size:19px;font-weight:700}.b{font-size:16px}.s{font-size:15px;fill:#64748B}.boxb{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.boxg{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.boxa{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.boxr{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}.line{stroke:#CBD5E1;stroke-width:2}.arr{stroke:#2563EB;stroke-width:3;fill:none}</style>
+  <defs><marker id="ab" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#2563EB"/></marker></defs>
+  <text x="48" y="50" class="h" fill="#2563EB">A｜不物化 Hessian：只实现 v ↦ H v</text>
+  <rect x="48" y="82" width="286" height="96" rx="12" class="boxb"/><text x="72" y="118" class="sh">forward-over-reverse</text><text x="72" y="151" class="s">JVP(grad L, v)</text>
+  <rect x="362" y="82" width="286" height="96" rx="12" class="boxg"/><text x="386" y="118" class="sh">reverse-over-reverse</text><text x="386" y="151" class="s">grad(grad L dot v)</text>
+  <path d="M334 130 L352 130" class="arr" marker-end="url(#ab)"/>
+  <path d="M648 130 L700 130" class="arr" marker-end="url(#ab)"/>
+  <rect x="710" y="82" width="442" height="96" rx="12" class="boxa"/><text x="734" y="118" class="sh">HVP oracle contract</text><text x="734" y="151" class="s">same batch / RNG / buffers / dtype / graph</text>
+
+  <line x1="48" y1="214" x2="1152" y2="214" class="line"/>
+  <text x="48" y="256" class="h" fill="#0F766E">B｜CG 只对同一个固定线性算子建立 Krylov 证书</text>
+  <rect x="48" y="288" width="242" height="112" rx="12" class="boxb"/><text x="72" y="324" class="sh">A = B + lambda I</text><text x="72" y="357" class="s">r0 = b - A p0</text><text x="72" y="383" class="s">require SPD for classic CG</text>
+  <line x1="290" y1="344" x2="342" y2="344" class="arr" marker-end="url(#ab)"/>
+  <rect x="352" y="288" width="380" height="112" rx="12" class="boxg"/><text x="376" y="324" class="sh">K_k(A,r0)</text><text x="376" y="357" class="b">span{r0, A r0, ..., A^(k-1) r0}</text><text x="376" y="383" class="s">one HVP + dot-product reductions per step</text>
+  <line x1="732" y1="344" x2="784" y2="344" class="arr" marker-end="url(#ab)"/>
+  <rect x="794" y="288" width="358" height="112" rx="12" class="boxr"/><text x="818" y="324" class="sh" fill="#C0392B">If A changes each HVP</text><text x="818" y="357" class="b">no single residual system</text><text x="818" y="383" class="s">conjugacy / Krylov meaning breaks</text>
+
+  <text x="48" y="458" class="h" fill="#2563EB">C｜三类出口，不合并为 “CG done”</text>
+  <rect x="48" y="490" width="326" height="118" rx="12" class="boxg"/><text x="72" y="526" class="sh">1. residual reached</text><text x="72" y="559" class="b">||r_k|| / ||b|| ≤ tol</text><text x="72" y="587" class="s">still condition-number dependent</text>
+  <rect x="406" y="490" width="326" height="118" rx="12" class="boxr"/><text x="430" y="526" class="sh" fill="#C0392B">2. negative curvature</text><text x="430" y="559" class="b">d^T B d ≤ 0</text><text x="430" y="587" class="s">Steihaug: move to boundary</text>
+  <rect x="764" y="490" width="388" height="118" rx="12" class="boxa"/><text x="788" y="526" class="sh">3. boundary hit</text><text x="788" y="559" class="b">||p + alpha d|| = Delta</text><text x="788" y="587" class="s">return constrained candidate</text>
+  <rect x="48" y="646" width="1104" height="54" rx="10" fill="#F8FAFC" stroke="#CBD5E1"/><text x="72" y="680" class="b">总账：HVP 次数 + preconditioner build/apply + global reductions + residual/model decrease + exit reason。</text>
+</svg>

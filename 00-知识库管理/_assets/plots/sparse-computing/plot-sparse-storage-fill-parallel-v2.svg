@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="610" viewBox="0 0 1440 610" role="img" aria-labelledby="title desc">
+<title id="title">Sparse storage, factorization fill, and parallel imbalance</title>
+<desc id="desc">Three panels compare dense, CSR, and COO memory; symbolic Cholesky fill under natural and minimum-degree orderings; and equal-row versus nonzero-balanced parallel assignments.</desc>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",Arial,sans-serif;font-size:15px;fill:#1f2937}.title{font-size:27px;font-weight:650}.panel{font-size:19px;font-weight:650}.axis{font-size:16px}.frame{fill:#fffefb;stroke:#d7dee8}.grid{stroke:#e2e8f0}.note{font-size:15px;fill:#64748b}.legend{font-size:15px}</style>
+<rect width="1440" height="610" fill="#ffffff"/>
+<text x="720" y="34" text-anchor="middle" class="title">稀疏不是一个百分比：格式、消元图与负载共同决定真实成本</text>
+<text x="75" y="67" class="panel">A  n=10⁴：索引开销与稠密交叉点</text>
+<text x="555" y="67" class="panel">B  二维网格 Cholesky 的排序 fill-in</text>
+<text x="1035" y="67" class="panel">C  同 nnz，不同并行行分配</text>
+<rect x="75" y="88" width="330" height="330" class="frame"/>
+<line x1="75.00" y1="88" x2="75.00" y2="418" class="grid"/>
+<text x="75.00" y="438" text-anchor="middle">10⁻⁵</text>
+<line x1="141.00" y1="88" x2="141.00" y2="418" class="grid"/>
+<text x="141.00" y="438" text-anchor="middle">10⁻⁴</text>
+<line x1="207.00" y1="88" x2="207.00" y2="418" class="grid"/>
+<text x="207.00" y="438" text-anchor="middle">10⁻³</text>
+<line x1="273.00" y1="88" x2="273.00" y2="418" class="grid"/>
+<text x="273.00" y="438" text-anchor="middle">10⁻²</text>
+<line x1="339.00" y1="88" x2="339.00" y2="418" class="grid"/>
+<text x="339.00" y="438" text-anchor="middle">10⁻¹</text>
+<line x1="405.00" y1="88" x2="405.00" y2="418" class="grid"/>
+<text x="405.00" y="438" text-anchor="middle">1</text>
+<line x1="75" y1="418.00" x2="405" y2="418.00" class="grid"/>
+<text x="66" y="422.00" text-anchor="end">.01</text>
+<line x1="75" y1="352.00" x2="405" y2="352.00" class="grid"/>
+<text x="66" y="356.00" text-anchor="end">.1</text>
+<line x1="75" y1="286.00" x2="405" y2="286.00" class="grid"/>
+<text x="66" y="290.00" text-anchor="end">1</text>
+<line x1="75" y1="220.00" x2="405" y2="220.00" class="grid"/>
+<text x="66" y="224.00" text-anchor="end">10</text>
+<line x1="75" y1="154.00" x2="405" y2="154.00" class="grid"/>
+<text x="66" y="158.00" text-anchor="end">100</text>
+<line x1="75" y1="88.00" x2="405" y2="88.00" class="grid"/>
+<text x="66" y="92.00" text-anchor="end">1000</text>
+<text x="240.0" y="463" text-anchor="middle" class="axis">密度 nnz/n²</text>
+<text x="20" y="253.0" text-anchor="middle" class="axis" transform="rotate(-90 20 253.0)">存储 MB（值 float64，索引 int32）</text>
+<polyline points="75.00,94.40 80.50,94.40 86.00,94.40 91.50,94.40 97.00,94.40 102.50,94.40 108.00,94.40 113.50,94.40 119.00,94.40 124.50,94.40 130.00,94.40 135.50,94.40 141.00,94.40 146.50,94.40 152.00,94.40 157.50,94.40 163.00,94.40 168.50,94.40 174.00,94.40 179.50,94.40 185.00,94.40 190.50,94.40 196.00,94.40 201.50,94.40 207.00,94.40 212.50,94.40 218.00,94.40 223.50,94.40 229.00,94.40 234.50,94.40 240.00,94.40 245.50,94.40 251.00,94.40 256.50,94.40 262.00,94.40 267.50,94.40 273.00,94.40 278.50,94.40 284.00,94.40 289.50,94.40 295.00,94.40 300.50,94.40 306.00,94.40 311.50,94.40 317.00,94.40 322.50,94.40 328.00,94.40 333.50,94.40 339.00,94.40 344.50,94.40 350.00,94.40 355.50,94.40 361.00,94.40 366.50,94.40 372.00,94.40 377.50,94.40 383.00,94.40 388.50,94.40 394.00,94.40 399.50,94.40 405.00,94.40" fill="none" stroke="#c43d3d" stroke-width="2.5"/>
+<rect x="71.80" y="91.20" width="6.4" height="6.4" fill="#c43d3d"/>
+<rect x="137.80" y="91.20" width="6.4" height="6.4" fill="#c43d3d"/>
+<rect x="203.80" y="91.20" width="6.4" height="6.4" fill="#c43d3d"/>
+<rect x="269.80" y="91.20" width="6.4" height="6.4" fill="#c43d3d"/>
+<rect x="335.80" y="91.20" width="6.4" height="6.4" fill="#c43d3d"/>
+<rect x="401.80" y="91.20" width="6.4" height="6.4" fill="#c43d3d"/>
+<polyline points="75.00,370.74 80.50,369.38 86.00,367.81 91.50,366.01 97.00,363.97 102.50,361.69 108.00,359.14 113.50,356.33 119.00,353.26 124.50,349.93 130.00,346.36 135.50,342.55 141.00,338.53 146.50,334.31 152.00,329.91 157.50,325.35 163.00,320.65 168.50,315.83 174.00,310.90 179.50,305.88 185.00,300.79 190.50,295.62 196.00,290.40 201.50,285.14 207.00,279.83 212.50,274.50 218.00,269.13 223.50,263.74 229.00,258.33 234.50,252.91 240.00,247.47 245.50,242.03 251.00,236.57 256.50,231.10 262.00,225.63 267.50,220.16 273.00,214.68 278.50,209.20 284.00,203.71 289.50,198.22 295.00,192.73 300.50,187.24 306.00,181.74 311.50,176.25 317.00,170.75 322.50,165.26 328.00,159.76 333.50,154.26 339.00,148.76 344.50,143.27 350.00,137.77 355.50,132.27 361.00,126.77 366.50,121.27 372.00,115.77 377.50,110.27 383.00,104.77 388.50,99.27 394.00,93.77 399.50,88.27 405.00,88.00" fill="none" stroke="#2f6fbd" stroke-width="2.5"/>
+<circle cx="75.00" cy="370.74" r="3.2" fill="#2f6fbd"/>
+<circle cx="141.00" cy="338.53" r="3.2" fill="#2f6fbd"/>
+<circle cx="207.00" cy="279.83" r="3.2" fill="#2f6fbd"/>
+<circle cx="273.00" cy="214.68" r="3.2" fill="#2f6fbd"/>
+<circle cx="339.00" cy="148.76" r="3.2" fill="#2f6fbd"/>
+<circle cx="405.00" cy="88.00" r="3.2" fill="#2f6fbd"/>
+<polyline points="75.00,404.53 80.50,399.04 86.00,393.54 91.50,388.03 97.00,382.53 102.50,377.03 108.00,371.53 113.50,366.03 119.00,360.53 124.50,355.03 130.00,349.53 135.50,344.03 141.00,338.53 146.50,333.03 152.00,327.53 157.50,322.03 163.00,316.53 168.50,311.03 174.00,305.53 179.50,300.03 185.00,294.53 190.50,289.03 196.00,283.53 201.50,278.03 207.00,272.53 212.50,267.03 218.00,261.53 223.50,256.03 229.00,250.53 234.50,245.03 240.00,239.53 245.50,234.03 251.00,228.53 256.50,223.03 262.00,217.53 267.50,212.03 273.00,206.53 278.50,201.03 284.00,195.53 289.50,190.03 295.00,184.53 300.50,179.03 306.00,173.53 311.50,168.03 317.00,162.53 322.50,157.03 328.00,151.53 333.50,146.03 339.00,140.53 344.50,135.03 350.00,129.53 355.50,124.03 361.00,118.53 366.50,113.03 372.00,107.53 377.50,102.03 383.00,96.53 388.50,91.03 394.00,88.00 399.50,88.00 405.00,88.00" fill="none" stroke="#c36a14" stroke-width="2.5" stroke-dasharray="6 4"/>
+<path d="M75.00,400.33 L79.20,404.53 L75.00,408.73 L70.80,404.53Z" fill="#c36a14"/>
+<path d="M141.00,334.33 L145.20,338.53 L141.00,342.73 L136.80,338.53Z" fill="#c36a14"/>
+<path d="M207.00,268.33 L211.20,272.53 L207.00,276.73 L202.80,272.53Z" fill="#c36a14"/>
+<path d="M273.00,202.33 L277.20,206.53 L273.00,210.73 L268.80,206.53Z" fill="#c36a14"/>
+<path d="M339.00,136.33 L343.20,140.53 L339.00,144.73 L334.80,140.53Z" fill="#c36a14"/>
+<path d="M405.00,83.80 L409.20,88.00 L405.00,92.20 L400.80,88.00Z" fill="#c36a14"/>
+<text x="90" y="112" class="note">CSR 约在密度 0.67 后不再比纯 dense 值数组省内存</text>
+<rect x="555" y="88" width="330" height="330" class="frame"/>
+<line x1="555.00" y1="88" x2="555.00" y2="418" class="grid"/>
+<text x="555.00" y="438" text-anchor="middle">4</text>
+<line x1="637.50" y1="88" x2="637.50" y2="418" class="grid"/>
+<text x="637.50" y="438" text-anchor="middle">7</text>
+<line x1="720.00" y1="88" x2="720.00" y2="418" class="grid"/>
+<text x="720.00" y="438" text-anchor="middle">10</text>
+<line x1="802.50" y1="88" x2="802.50" y2="418" class="grid"/>
+<text x="802.50" y="438" text-anchor="middle">13</text>
+<line x1="885.00" y1="88" x2="885.00" y2="418" class="grid"/>
+<text x="885.00" y="438" text-anchor="middle">16</text>
+<line x1="555" y1="418.00" x2="885" y2="418.00" class="grid"/>
+<text x="546" y="422.00" text-anchor="end">1</text>
+<line x1="555" y1="352.00" x2="885" y2="352.00" class="grid"/>
+<text x="546" y="356.00" text-anchor="end">2</text>
+<line x1="555" y1="286.00" x2="885" y2="286.00" class="grid"/>
+<text x="546" y="290.00" text-anchor="end">3</text>
+<line x1="555" y1="220.00" x2="885" y2="220.00" class="grid"/>
+<text x="546" y="224.00" text-anchor="end">4</text>
+<line x1="555" y1="154.00" x2="885" y2="154.00" class="grid"/>
+<text x="546" y="158.00" text-anchor="end">5</text>
+<line x1="555" y1="88.00" x2="885" y2="88.00" class="grid"/>
+<text x="546" y="92.00" text-anchor="end">6</text>
+<text x="720.0" y="463" text-anchor="middle" class="axis">网格边长 m（n=m²）</text>
+<text x="500" y="253.0" text-anchor="middle" class="axis" transform="rotate(-90 500 253.0)">nnz(L) / 原下三角 nnz</text>
+<polyline points="555.00,373.45 582.50,353.02 610.00,332.06 637.50,310.81 665.00,289.38 692.50,267.81 720.00,246.16 747.50,224.45 775.00,202.69 802.50,180.89 830.00,159.07 857.50,137.22 885.00,115.35" fill="none" stroke="#c43d3d" stroke-width="2.5"/>
+<rect x="551.80" y="370.25" width="6.4" height="6.4" fill="#c43d3d"/>
+<rect x="634.30" y="307.61" width="6.4" height="6.4" fill="#c43d3d"/>
+<rect x="716.80" y="242.96" width="6.4" height="6.4" fill="#c43d3d"/>
+<rect x="799.30" y="177.69" width="6.4" height="6.4" fill="#c43d3d"/>
+<rect x="881.80" y="112.15" width="6.4" height="6.4" fill="#c43d3d"/>
+<polyline points="555.00,388.30 582.50,380.43 610.00,369.19 637.50,358.95 665.00,349.38 692.50,339.39 720.00,329.37 747.50,325.48 775.00,318.03 802.50,307.95 830.00,302.97 857.50,296.44 885.00,288.60" fill="none" stroke="#248a57" stroke-width="2.5"/>
+<path d="M555.00,384.10 L559.20,388.30 L555.00,392.50 L550.80,388.30Z" fill="#248a57"/>
+<path d="M637.50,354.75 L641.70,358.95 L637.50,363.15 L633.30,358.95Z" fill="#248a57"/>
+<path d="M720.00,325.17 L724.20,329.37 L720.00,333.57 L715.80,329.37Z" fill="#248a57"/>
+<path d="M802.50,303.75 L806.70,307.95 L802.50,312.15 L798.30,307.95Z" fill="#248a57"/>
+<path d="M885.00,284.40 L889.20,288.60 L885.00,292.80 L880.80,288.60Z" fill="#248a57"/>
+<text x="570" y="112" class="note">同一 SPD 系统只做对称置换；因子非零数却显著改变</text>
+<rect x="1035" y="88" width="330" height="330" class="frame"/>
+<line x1="1035.00" y1="88" x2="1035.00" y2="418" class="grid"/>
+<text x="1035.00" y="438" text-anchor="middle">1</text>
+<line x1="1082.14" y1="88" x2="1082.14" y2="418" class="grid"/>
+<text x="1082.14" y="438" text-anchor="middle">2</text>
+<line x1="1129.29" y1="88" x2="1129.29" y2="418" class="grid"/>
+<text x="1129.29" y="438" text-anchor="middle">3</text>
+<line x1="1176.43" y1="88" x2="1176.43" y2="418" class="grid"/>
+<text x="1176.43" y="438" text-anchor="middle">4</text>
+<line x1="1223.57" y1="88" x2="1223.57" y2="418" class="grid"/>
+<text x="1223.57" y="438" text-anchor="middle">5</text>
+<line x1="1270.71" y1="88" x2="1270.71" y2="418" class="grid"/>
+<text x="1270.71" y="438" text-anchor="middle">6</text>
+<line x1="1317.86" y1="88" x2="1317.86" y2="418" class="grid"/>
+<text x="1317.86" y="438" text-anchor="middle">7</text>
+<line x1="1365.00" y1="88" x2="1365.00" y2="418" class="grid"/>
+<text x="1365.00" y="438" text-anchor="middle">8</text>
+<line x1="1035" y1="418.00" x2="1365" y2="418.00" class="grid"/>
+<text x="1026" y="422.00" text-anchor="end">0</text>
+<line x1="1035" y1="335.50" x2="1365" y2="335.50" class="grid"/>
+<text x="1026" y="339.50" text-anchor="end">1</text>
+<line x1="1035" y1="253.00" x2="1365" y2="253.00" class="grid"/>
+<text x="1026" y="257.00" text-anchor="end">2</text>
+<line x1="1035" y1="170.50" x2="1365" y2="170.50" class="grid"/>
+<text x="1026" y="174.50" text-anchor="end">3</text>
+<line x1="1035" y1="88.00" x2="1365" y2="88.00" class="grid"/>
+<text x="1026" y="92.00" text-anchor="end">4</text>
+<text x="1200.0" y="463" text-anchor="middle" class="axis">worker</text>
+<text x="980" y="253.0" text-anchor="middle" class="axis" transform="rotate(-90 980 253.0)">本地 nnz / 平均 nnz</text>
+<rect x="1020.00" y="137.35" width="13" height="280.65" fill="#c36a14"/>
+<rect x="1037.00" y="334.61" width="13" height="83.39" fill="#2f6fbd"/>
+<rect x="1067.14" y="321.02" width="13" height="96.98" fill="#c36a14"/>
+<rect x="1084.14" y="334.39" width="13" height="83.61" fill="#2f6fbd"/>
+<rect x="1114.29" y="348.44" width="13" height="69.56" fill="#c36a14"/>
+<rect x="1131.29" y="335.99" width="13" height="82.01" fill="#2f6fbd"/>
+<rect x="1161.43" y="363.74" width="13" height="54.26" fill="#c36a14"/>
+<rect x="1178.43" y="334.61" width="13" height="83.39" fill="#2f6fbd"/>
+<rect x="1208.57" y="371.05" width="13" height="46.95" fill="#c36a14"/>
+<rect x="1225.57" y="336.10" width="13" height="81.90" fill="#2f6fbd"/>
+<rect x="1255.71" y="377.34" width="13" height="40.66" fill="#c36a14"/>
+<rect x="1272.71" y="336.10" width="13" height="81.90" fill="#2f6fbd"/>
+<rect x="1302.86" y="381.22" width="13" height="36.78" fill="#c36a14"/>
+<rect x="1319.86" y="336.10" width="13" height="81.90" fill="#2f6fbd"/>
+<rect x="1350.00" y="383.85" width="13" height="34.15" fill="#c36a14"/>
+<rect x="1367.00" y="336.10" width="13" height="81.90" fill="#2f6fbd"/>
+<line x1="1035" y1="335.50" x2="1365" y2="335.50" stroke="#248a57" stroke-dasharray="5 4"/>
+<text x="1050" y="112" class="note">等行数最大负载=3.40×平均；按 nnz 分配=1.01×</text>
+<rect x="86.80" y="496.80" width="6.4" height="6.4" fill="#c43d3d"/>
+<text x="101" y="504" class="legend">dense</text>
+<circle cx="190.00" cy="500.00" r="3.2" fill="#2f6fbd"/>
+<text x="201" y="504" class="legend">CSR</text>
+<path d="M270.00,495.80 L274.20,500.00 L270.00,504.20 L265.80,500.00Z" fill="#c36a14"/>
+<text x="281" y="504" class="legend">COO</text>
+<rect x="571.80" y="496.80" width="6.4" height="6.4" fill="#c43d3d"/>
+<text x="586" y="504" class="legend">natural</text>
+<path d="M690.00,495.80 L694.20,500.00 L690.00,504.20 L685.80,500.00Z" fill="#248a57"/>
+<text x="701" y="504" class="legend">greedy min-degree</text>
+<rect x="1056.80" y="496.80" width="6.4" height="6.4" fill="#c36a14"/>
+<text x="1071" y="504" class="legend">equal rows</text>
+<rect x="1176.80" y="496.80" width="6.4" height="6.4" fill="#2f6fbd"/>
+<text x="1191" y="504" class="legend">nnz-balanced</text>
+<text x="720" y="555" text-anchor="middle" class="note">A 说明索引不是免费；B 说明 fill 由消元顺序决定；C 说明平均 nnz 不能预测并行关键路径。</text>
+<text x="720" y="580" text-anchor="middle" class="note">生成：plot_sparse_storage_fill_parallel.py · Python 标准库 · 确定性结构实验</text>
+</svg>

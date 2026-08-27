@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="570" viewBox="0 0 1200 570" role="img" aria-labelledby="title desc">
+  <title id="title">矩阵扰动中谱值、子空间与非正规谱的三层稳定性</title>
+  <desc id="desc">第一部分展示 Hermitian 特征值随扰动至多移动扰动范数，第二部分展示方向旋转还要除以谱间隙，第三部分展示非正规矩阵的小扰动特征值集合可能远大于普通圆盘。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
+    <style>
+      .sans{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}.blue{fill:#2563eb}.green{fill:#0f766e}.amber{fill:#b7791f}.head{font-size:23px;font-weight:600}.body{font-size:18px}.small{font-size:15px}.formula{font-size:20px}.axis{stroke:#64748b;stroke-width:1.7}.guide{stroke:#d7dee8;stroke-width:1.5}.arrow{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="570" fill="#fffefb"/>
+  <path d="M400 45V500M800 45V500" stroke="#d7dee8" stroke-width="1.5"/>
+
+  <text x="55" y="58" class="sans head blue">A　谱值：绝对移动量</text>
+  <path d="M72 260H363" class="axis"/>
+  <circle cx="120" cy="260" r="8" fill="#2563eb"/><circle cx="215" cy="260" r="8" fill="#2563eb"/><circle cx="325" cy="260" r="8" fill="#2563eb"/>
+  <path d="M102 205H138M197 205H233M307 205H343" stroke="#b7791f" stroke-width="8" stroke-linecap="round"/>
+  <path d="M120 248V216M215 248V216M325 248V216" class="arrow"/>
+  <text x="120" y="288" class="math small muted" text-anchor="middle">λ₃</text><text x="215" y="288" class="math small muted" text-anchor="middle">λ₂</text><text x="325" y="288" class="math small muted" text-anchor="middle">λ₁</text>
+  <text x="55" y="344" class="math formula ink">|λᵢ(A+E)−λᵢ(A)| ≤ ‖E‖₂</text>
+  <text x="55" y="382" class="sans body ink">Hermitian 特征值与奇异值是</text>
+  <text x="55" y="410" class="sans body ink">1-Lipschitz；不要求谱值互异。</text>
+  <text x="55" y="468" class="sans small amber">区间表示最坏允许移动，不是概率误差条。</text>
+
+  <text x="430" y="58" class="sans head green">B　方向：扰动还要除以 gap</text>
+  <path d="M595 315V128M465 315H748" class="guide"/>
+  <path d="M595 315V154" stroke="#2563eb" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M595 315L704 190" stroke="#0f766e" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M595 242A73 73 0 0 1 644 260" fill="none" stroke="#b7791f" stroke-width="3"/>
+  <text x="640" y="239" class="math body amber">θ</text>
+  <text x="570" y="145" class="math body blue">u</text><text x="706" y="184" class="math body green">û</text>
+  <text x="430" y="365" class="math formula ink">‖sin Θ‖ ≲ ‖E‖ / gap</text>
+  <text x="430" y="404" class="sans body ink">gap 大：方向稳定；gap 与噪声同阶：</text>
+  <text x="430" y="432" class="sans body ink">谱值仍可稳定，方向却可能大幅旋转。</text>
+  <text x="430" y="468" class="sans small green">重谱时比较整个投影 UU*，不逐列追基。</text>
+
+  <text x="830" y="58" class="sans head amber">C　非正规：谱值也会敏感</text>
+  <path d="M835 275H1150M990 112V438" class="guide"/>
+  <circle cx="945" cy="275" r="8" fill="#1f2937"/><circle cx="1035" cy="275" r="8" fill="#1f2937"/>
+  <circle cx="945" cy="275" r="30" fill="none" stroke="#2563eb" stroke-width="2"/><circle cx="1035" cy="275" r="30" fill="none" stroke="#2563eb" stroke-width="2"/>
+  <path d="M853 317C880 192 965 164 1061 202C1125 228 1135 339 1051 375C955 416 875 387 853 317Z" fill="none" stroke="#b7791f" stroke-width="3"/>
+  <text x="846" y="133" class="sans body blue">正规：ε 圆盘并集</text>
+  <text x="846" y="164" class="sans body amber">非正规：伪谱可能显著鼓出</text>
+  <text x="830" y="468" class="sans small ink">此时需检查预解式、伪谱或特征向量条件数。</text>
+
+  <path d="M70 520H1130" stroke="#d7dee8" stroke-width="1.5"/>
+  <text x="600" y="550" class="sans body ink" text-anchor="middle">同一个“矩阵变小”问题，必须先声明研究的是值、方向、子空间，还是非正规谱。</text>
+</svg>

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">散度家族的 density ratio、凸几何与样本空间几何</title>
+<desc id="desc">f-divergence 依赖 density ratio；Bregman divergence 是 convex tangent gap 并依赖坐标；IPM 与 optimal transport 通过 test functions 或 ground cost 感知样本空间。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">f-divergence：看 density ratio</text>
+<rect x="55" y="105" width="110" height="52" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="110.0" y="137.0" font-size="18" font-weight="650" text-anchor="middle" fill="#2563EB">P</text>
+<rect x="240" y="105" width="110" height="52" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="295.0" y="137.0" font-size="18" font-weight="650" text-anchor="middle" fill="#0F766E">Q</text>
+<line x1="168" y1="131" x2="235" y2="131" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<text x="201" y="112" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">dP/dQ</text>
+<text x="45" y="220" font-size="17" font-weight="650" text-anchor="start" fill="#1F2937" class="math">D_f(P||Q)=E_Q f(dP/dQ)</text>
+<text x="45" y="265" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">结构：共同测度 / Radon-Nikodym ratio</text>
+<text x="45" y="315" font-size="16" font-weight="650" text-anchor="start" fill="#2563EB">优点：Markov data processing</text>
+<text x="45" y="360" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">代价：常忽略样本空间 ground geometry</text>
+<text x="45" y="410" font-size="16" font-weight="400" text-anchor="start" fill="#C24135">support singularity 可令 KL 无穷。</text>
+<text x="45" y="458" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">TV 也同时属于 IPM；家族不是互斥标签。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Bregman：凸函数切线缺口</text>
+<line x1="445" y1="375" x2="770" y2="375" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="470" y1="405" x2="470" y2="95" stroke="#D7DEE8" stroke-width="2"/>
+<path d="M470.0 231.5L472.3 236.0L474.6 240.4L476.9 244.7L479.2 248.9L481.5 253.1L483.8 257.1L486.1 261.1L488.4 264.9L490.7 268.7L493.0 272.4L495.3 276.0L497.6 279.4L499.9 282.9L502.2 286.2L504.5 289.4L506.8 292.5L509.1 295.6L511.4 298.5L513.7 301.4L516.0 304.1L518.3 306.8L520.6 309.4L522.9 311.9L525.2 314.3L527.5 316.6L529.8 318.9L532.1 321.0L534.4 323.0L536.7 325.0L539.0 326.8L541.3 328.6L543.6 330.3L545.9 331.9L548.2 333.4L550.5 334.8L552.8 336.1L555.1 337.3L557.4 338.5L559.7 339.5L562.0 340.5L564.3 341.3L566.6 342.1L568.9 342.8L571.2 343.4L573.5 343.9L575.8 344.3L578.1 344.6L580.4 344.8L582.7 345.0L585.0 345.0L587.3 345.0L589.6 344.8L591.9 344.6L594.2 344.3L596.5 343.9L598.8 343.4L601.1 342.8L603.4 342.1L605.7 341.3L608.0 340.5L610.3 339.5L612.6 338.5L614.9 337.3L617.2 336.1L619.5 334.8L621.8 333.4L624.1 331.9L626.4 330.3L628.7 328.6L631.0 326.8L633.3 325.0L635.6 323.0L637.9 321.0L640.2 318.9L642.5 316.6L644.8 314.3L647.1 311.9L649.4 309.4L651.7 306.8L654.0 304.1L656.3 301.4L658.6 298.5L660.9 295.6L663.2 292.5L665.5 289.4L667.8 286.2L670.1 282.9L672.4 279.4L674.7 276.0L677.0 272.4L679.3 268.7L681.6 264.9L683.9 261.1L686.2 257.1L688.5 253.1L690.8 248.9L693.1 244.7L695.4 240.4L697.7 236.0L700.0 231.5L702.3 226.9L704.6 222.3L706.9 217.5L709.2 212.6L711.5 207.7L713.8 202.6L716.1 197.5L718.4 192.3L720.7 187.0L723.0 181.6L725.3 176.1L727.6 170.5L729.9 164.8L732.2 159.1L734.5 153.2L736.8 147.3L739.1 141.2L741.4 135.1L743.7 128.9L746.0 122.6" fill="none" stroke="#0F766E" stroke-width="3"/>
+<line x1="500" y1="304.4532871972319" x2="735" y2="445.6159169550173" stroke="#2563EB" stroke-width="2.5" stroke-dasharray="7 5"/>
+<circle cx="550" cy="334.4878892733564" r="6" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<circle cx="690" cy="250.39100346020763" r="6" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<line x1="690" y1="250.39100346020763" x2="690" y2="418.5847750865052" stroke="#C24135" stroke-width="3"/>
+<text x="550" y="318.4878892733564" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">q</text>
+<text x="690" y="234.39100346020763" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">p</text>
+<text x="704" y="334.4878892733564" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">gap</text>
+<text x="430" y="420" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">D_phi(p,q)=phi(p)-phi(q)</text>
+<text x="430" y="452" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">             - &lt;grad phi(q),p-q&gt;</text>
+<text x="430" y="490" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">一般不对称；依赖所选坐标与 potential。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">IPM / OT：函数类与 ground cost</text>
+<circle cx="850" cy="150" r="7" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<circle cx="885" cy="210" r="7" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<circle cx="920" cy="170" r="7" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<circle cx="1045" cy="135" r="7" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<circle cx="1090" cy="205" r="7" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<circle cx="1125" cy="160" r="7" fill="#C24135" stroke="#C24135" stroke-width="2"/>
+<line x1="858" y1="150" x2="1037" y2="135" stroke="#0F766E" stroke-width="2" stroke-dasharray="7 5"/>
+<line x1="893" y1="210" x2="1082" y2="205" stroke="#0F766E" stroke-width="2" stroke-dasharray="7 5"/>
+<line x1="928" y1="170" x2="1117" y2="160" stroke="#0F766E" stroke-width="2" stroke-dasharray="7 5"/>
+<text x="875" y="112" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">P samples</text>
+<text x="1090" y="112" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">Q samples</text>
+<text x="830" y="285" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937" class="math">IPM = sup_g |E_P g - E_Q g|</text>
+<text x="830" y="328" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937" class="math">OT = inf_coupling E[c(X,Y)]</text>
+<text x="830" y="375" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">Wasserstein: ground metric；MMD: RKHS kernel</text>
+<text x="830" y="420" font-size="15" font-weight="400" text-anchor="start" fill="#C24135">metric 还需 symmetry + triangle inequality。</text>
+<text x="830" y="465" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">population quantity != sample estimator != train loss</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">选择差异量时先问它依赖哪种结构，再审计拓扑、支持、可估性与训练 surrogate。</text>
+</svg>

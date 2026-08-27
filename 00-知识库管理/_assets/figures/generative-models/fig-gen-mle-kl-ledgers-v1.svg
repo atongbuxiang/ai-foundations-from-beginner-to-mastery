@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">经验负对数似然、总体交叉熵与前向KL</title>
+  <desc id="desc">由左到右的三阶段推导把样本平均提升为总体期望，再通过加减真实对数密度拆成熵常数和前向KL。</desc>
+  <rect width="1200" height="620" fill="#FFFEFB"/>
+  <style>.sans{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}.ink{fill:#1F2937}.muted{fill:#64748B}.blue{fill:#2563EB}.green{fill:#0F766E}.amber{fill:#B7791F}.red{fill:#C24135}</style>
+  <text x="54" y="62" class="sans blue" font-size="22" font-weight="700">① 代码计算：经验 NLL</text>
+  <rect x="54" y="96" width="310" height="168" rx="8" fill="#EEF3FF" stroke="#2563EB" stroke-width="3"/>
+  <text x="209" y="158" class="mono ink" font-size="20" text-anchor="middle">−(1/n) Σ log pθ(x⁽ⁱ⁾)</text>
+  <text x="209" y="204" class="sans muted" font-size="17" text-anchor="middle">有限数据上的随机估计量</text>
+  <path d="M364 180 H432" stroke="#1F2937" stroke-width="3"/><path d="M432 180 l-16 -10 v20 z" fill="#1F2937"/>
+  <text x="398" y="156" class="sans muted" font-size="16" text-anchor="middle">泛化</text>
+  <text x="445" y="62" class="sans amber" font-size="22" font-weight="700">② 理论目标：Cross-entropy</text>
+  <rect x="445" y="96" width="310" height="168" rx="8" fill="#FFF7E6" stroke="#B7791F" stroke-width="3"/>
+  <text x="600" y="158" class="mono ink" font-size="20" text-anchor="middle">Eₚ* [−log pθ(X)]</text>
+  <text x="600" y="204" class="sans muted" font-size="17" text-anchor="middle">同一 integrand，总体期望</text>
+  <path d="M755 180 H823" stroke="#1F2937" stroke-width="3"/><path d="M823 180 l-16 -10 v20 z" fill="#1F2937"/>
+  <text x="789" y="145" class="sans muted" font-size="16" text-anchor="middle">加减</text><text x="789" y="166" class="mono muted" font-size="16" text-anchor="middle">log p*</text>
+  <text x="836" y="62" class="sans green" font-size="22" font-weight="700">③ 恒等分解</text>
+  <rect x="836" y="96" width="310" height="168" rx="8" fill="#E8F5F1" stroke="#0F766E" stroke-width="3"/>
+  <text x="991" y="145" class="mono green" font-size="21" text-anchor="middle">H(P*)</text>
+  <text x="991" y="178" class="sans ink" font-size="19" text-anchor="middle">＋</text>
+  <text x="991" y="215" class="mono green" font-size="21" text-anchor="middle">KL(P* ‖ Pθ)</text>
+  <text x="991" y="247" class="sans muted" font-size="16" text-anchor="middle">第一项与 θ 无关</text>
+  <line x1="54" y1="320" x2="1146" y2="320" stroke="#D7DEE8" stroke-width="2"/>
+  <text x="54" y="365" class="sans ink" font-size="20" font-weight="700">不能被恒等式抹掉的四类误差</text>
+  <rect x="54" y="399" width="246" height="106" fill="#FFFEFB" stroke="#2563EB" stroke-width="3"/><text x="177" y="436" class="sans blue" font-size="18" font-weight="700" text-anchor="middle">Approximation</text><text x="177" y="473" class="sans muted" font-size="16" text-anchor="middle">模型族能否表示 P*</text>
+  <rect x="324" y="399" width="246" height="106" fill="#FFFEFB" stroke="#B7791F" stroke-width="3"/><text x="447" y="436" class="sans amber" font-size="18" font-weight="700" text-anchor="middle">Estimation</text><text x="447" y="473" class="sans muted" font-size="16" text-anchor="middle">P̂n 与 P* 的差</text>
+  <rect x="594" y="399" width="246" height="106" fill="#FFFEFB" stroke="#C24135" stroke-width="3"/><text x="717" y="436" class="sans red" font-size="18" font-weight="700" text-anchor="middle">Optimization</text><text x="717" y="473" class="sans muted" font-size="16" text-anchor="middle">是否找到近优参数</text>
+  <rect x="864" y="399" width="282" height="106" fill="#FFFEFB" stroke="#0F766E" stroke-width="3"/><text x="1005" y="436" class="sans green" font-size="18" font-weight="700" text-anchor="middle">Protocol</text><text x="1005" y="473" class="sans muted" font-size="16" text-anchor="middle">mask、缩放、dequantization</text>
+  <text x="54" y="565" class="sans red" font-size="17">边界｜相同 argmin 不等于有限样本值相等，也不等于样本质量与 likelihood 同义。</text>
+</svg>
+

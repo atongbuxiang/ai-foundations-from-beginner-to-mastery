@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">光滑性、强凸性与条件数的曲率夹逼</title>
+<desc id="desc">L 光滑性给切平面的二次上模型，mu 强凸性给二次下模型；在二次型上二者成为 Hessian 谱端点，条件数刻画各向异性的时间尺度；点、区域和全局曲率声明具有不同量词。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">同一点的二次上、下模型</text>
+<line x1="52" y1="410" x2="365" y2="410" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="82" y1="435" x2="82" y2="95" stroke="#D7DEE8" stroke-width="2"/>
+<path d="M78.0 321.9L80.2 324.3L82.5 326.6L84.8 328.9L87.0 331.0L89.2 333.1L91.5 335.1L93.8 337.1L96.0 338.9L98.2 340.7L100.5 342.4L102.8 344.0L105.0 345.5L107.2 347.0L109.5 348.4L111.8 349.7L114.0 350.9L116.2 352.0L118.5 353.1L120.8 354.1L123.0 355.0L125.2 355.8L127.5 356.6L129.8 357.3L132.0 357.9L134.2 358.4L136.5 358.8L138.8 359.2L141.0 359.5L143.2 359.7L145.5 359.8L147.8 359.9L150.0 359.9L152.2 359.8L154.5 359.6L156.8 359.3L159.0 359.0L161.2 358.6L163.5 358.1L165.8 357.5L168.0 356.9L170.2 356.1L172.5 355.3L174.8 354.4L177.0 353.5L179.2 352.4L181.5 351.3L183.8 350.1L186.0 348.9L188.2 347.5L190.5 346.1L192.8 344.6L195.0 343.0L197.2 341.3L199.5 339.6L201.8 337.8L204.0 335.9L206.2 333.9L208.5 331.8L210.8 329.7L213.0 327.5L215.2 325.2L217.5 322.8L219.8 320.4L222.0 317.9L224.2 315.3L226.5 312.6L228.8 309.8L231.0 307.0L233.2 304.1L235.5 301.1L237.8 298.0L240.0 294.9L242.2 291.7L244.5 288.4L246.8 285.0L249.0 281.5L251.2 278.0L253.5 274.4L255.8 270.7L258.0 266.9L260.2 263.1L262.5 259.1L264.8 255.1L267.0 251.0L269.2 246.9L271.5 242.6L273.8 238.3L276.0 233.9L278.2 229.5L280.5 224.9L282.8 220.3L285.0 215.6L287.2 210.8L289.5 205.9L291.8 201.0L294.0 196.0L296.2 190.9L298.5 185.7L300.8 180.4L303.0 175.1L305.2 169.7L307.5 164.2L309.8 158.6L312.0 153.0L314.2 147.3L316.5 141.5L318.8 135.6L321.0 129.6L323.2 123.6L325.5 117.5L327.8 111.3L330.0 105.0L332.2 98.7L334.5 92.2L336.8 85.7L339.0 79.2L341.2 72.5L343.5 65.8L345.8 58.9L348.0 52.0" fill="none" stroke="#C24135" stroke-width="2.4" stroke-dasharray="7 5"/>
+<path d="M78.0 343.9L80.2 345.5L82.5 347.1L84.8 348.6L87.0 350.0L89.2 351.4L91.5 352.7L93.8 353.9L96.0 355.1L98.2 356.2L100.5 357.2L102.8 358.2L105.0 359.1L107.2 360.0L109.5 360.8L111.8 361.5L114.0 362.2L116.2 362.8L118.5 363.3L120.8 363.8L123.0 364.2L125.2 364.5L127.5 364.8L129.8 365.0L132.0 365.1L134.2 365.2L136.5 365.2L138.8 365.2L141.0 365.1L143.2 364.9L145.5 364.7L147.8 364.4L150.0 364.0L152.2 363.6L154.5 363.1L156.8 362.5L159.0 361.9L161.2 361.2L163.5 360.4L165.8 359.6L168.0 358.7L170.2 357.8L172.5 356.8L174.8 355.7L177.0 354.6L179.2 353.4L181.5 352.1L183.8 350.8L186.0 349.4L188.2 347.9L190.5 346.4L192.8 344.8L195.0 343.1L197.2 341.4L199.5 339.6L201.8 337.8L204.0 335.9L206.2 333.9L208.5 331.9L210.8 329.8L213.0 327.6L215.2 325.4L217.5 323.1L219.8 320.7L222.0 318.3L224.2 315.8L226.5 313.2L228.8 310.6L231.0 307.9L233.2 305.2L235.5 302.4L237.8 299.5L240.0 296.6L242.2 293.6L244.5 290.5L246.8 287.4L249.0 284.2L251.2 280.9L253.5 277.6L255.8 274.2L258.0 270.7L260.2 267.2L262.5 263.6L264.8 260.0L267.0 256.3L269.2 252.5L271.5 248.7L273.8 244.8L276.0 240.8L278.2 236.8L280.5 232.7L282.8 228.5L285.0 224.3L287.2 220.0L289.5 215.6L291.8 211.2L294.0 206.7L296.2 202.2L298.5 197.6L300.8 192.9L303.0 188.2L305.2 183.4L307.5 178.5L309.8 173.6L312.0 168.6L314.2 163.5L316.5 158.4L318.8 153.2L321.0 147.9L323.2 142.6L325.5 137.2L327.8 131.8L330.0 126.3L332.2 120.7L334.5 115.1L336.8 109.4L339.0 103.6L341.2 97.8L343.5 91.9L345.8 85.9L348.0 79.9" fill="none" stroke="#2563EB" stroke-width="3.5"/>
+<path d="M78.0 380.4L80.2 380.8L82.5 381.1L84.8 381.3L87.0 381.6L89.2 381.7L91.5 381.9L93.8 382.0L96.0 382.0L98.2 382.0L100.5 382.0L102.8 381.9L105.0 381.8L107.2 381.6L109.5 381.5L111.8 381.2L114.0 380.9L116.2 380.6L118.5 380.3L120.8 379.8L123.0 379.4L125.2 378.9L127.5 378.4L129.8 377.8L132.0 377.2L134.2 376.6L136.5 375.9L138.8 375.1L141.0 374.4L143.2 373.5L145.5 372.7L147.8 371.8L150.0 370.8L152.2 369.9L154.5 368.8L156.8 367.8L159.0 366.7L161.2 365.5L163.5 364.3L165.8 363.1L168.0 361.8L170.2 360.5L172.5 359.2L174.8 357.8L177.0 356.3L179.2 354.9L181.5 353.3L183.8 351.8L186.0 350.2L188.2 348.5L190.5 346.8L192.8 345.1L195.0 343.4L197.2 341.5L199.5 339.7L201.8 337.8L204.0 335.9L206.2 333.9L208.5 331.9L210.8 329.8L213.0 327.7L215.2 325.6L217.5 323.4L219.8 321.2L222.0 318.9L224.2 316.6L226.5 314.3L228.8 311.9L231.0 309.5L233.2 307.0L235.5 304.5L237.8 301.9L240.0 299.3L242.2 296.7L244.5 294.0L246.8 291.3L249.0 288.5L251.2 285.7L253.5 282.9L255.8 280.0L258.0 277.1L260.2 274.1L262.5 271.1L264.8 268.1L267.0 265.0L269.2 261.9L271.5 258.7L273.8 255.5L276.0 252.2L278.2 248.9L280.5 245.6L282.8 242.2L285.0 238.8L287.2 235.3L289.5 231.8L291.8 228.3L294.0 224.7L296.2 221.1L298.5 217.4L300.8 213.7L303.0 209.9L305.2 206.1L307.5 202.3L309.8 198.4L312.0 194.5L314.2 190.6L316.5 186.6L318.8 182.5L321.0 178.4L323.2 174.3L325.5 170.2L327.8 165.9L330.0 161.7L332.2 157.4L334.5 153.1L336.8 148.7L339.0 144.3L341.2 139.8L343.5 135.4L345.8 130.8L348.0 126.2" fill="none" stroke="#0F766E" stroke-width="2.4" stroke-dasharray="7 5"/>
+<circle cx="205" cy="335" r="6" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<text x="292" y="128" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">L upper model</text>
+<text x="274" y="330" font-size="17" font-weight="700" text-anchor="start" fill="#2563EB">f</text>
+<text x="280" y="382" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">mu lower model</text>
+<text x="45" y="462" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">same value + same gradient at x</text>
+<text x="45" y="496" font-size="16" font-weight="400" text-anchor="start" fill="#64748B" class="math">lower &lt;= f(y) &lt;= upper</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">谱端点决定各向异性</text>
+<line x1="445" y1="405" x2="765" y2="405" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="605" y1="92" x2="605" y2="440" stroke="#D7DEE8" stroke-width="2"/>
+<ellipse cx="605" cy="260" rx="145" ry="92" fill="none" stroke="#2563EB" stroke-width="2"/>
+<ellipse cx="605" cy="260" rx="106" ry="65" fill="none" stroke="#2563EB" stroke-width="2"/>
+<ellipse cx="605" cy="260" rx="66" ry="39" fill="none" stroke="#2563EB" stroke-width="2"/>
+<circle cx="605" cy="260" r="6" fill="#0F766E" stroke="#0F766E" stroke-width="2"/>
+<line x1="605" y1="260" x2="740" y2="260" stroke="#C24135" stroke-width="3" marker-end="url(#a2)"/>
+<line x1="605" y1="260" x2="605" y2="170" stroke="#0F766E" stroke-width="3" marker-end="url(#a1)"/>
+<text x="625" y="292" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">lambda=mu (slow)</text>
+<text x="615" y="160" font-size="15" font-weight="650" text-anchor="start" fill="#0F766E">lambda=L (fast)</text>
+<text x="435" y="446" font-size="17" font-weight="650" text-anchor="start" fill="#1F2937" class="math">mu I &lt;= Hessian &lt;= L I</text>
+<text x="435" y="482" font-size="16" font-weight="400" text-anchor="start" fill="#64748B">kappa=L/mu；坐标或 metric 改变它。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">曲率结论的量词逐层增强</text>
+<circle cx="980" cy="185" r="35" fill="#FFF7F5" stroke="#C24135" stroke-width="2.5"/>
+<circle cx="980" cy="245" r="105" fill="none" stroke="#0F766E" stroke-width="2.5"/>
+<circle cx="980" cy="300" r="170" fill="none" stroke="#2563EB" stroke-width="2.5"/>
+<text x="980" y="190" font-size="16" font-weight="700" text-anchor="middle" fill="#C24135">point</text>
+<text x="1095" y="215" font-size="16" font-weight="700" text-anchor="start" fill="#0F766E">region</text>
+<text x="1095" y="345" font-size="16" font-weight="700" text-anchor="start" fill="#2563EB">global</text>
+<text x="825" y="400" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">H(x0) snapshot</text>
+<text x="825" y="432" font-size="15" font-weight="650" text-anchor="start" fill="#0F766E">all x on trajectory / sublevel set</text>
+<text x="825" y="464" font-size="15" font-weight="650" text-anchor="start" fill="#2563EB">all x in declared domain</text>
+<text x="825" y="497" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">还必须固定 norm 与 parameterization。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">L 与 mu 是带 domain、norm 和量词的曲率证书；kappa 只在这些对象固定后才有算法含义。</text>
+</svg>

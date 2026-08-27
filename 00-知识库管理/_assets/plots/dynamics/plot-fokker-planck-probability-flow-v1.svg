@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+<title id="title">DYN-11 Fokker–Planck 与概率流 ODE 审计</title>
+<desc id="desc">三面板展示守恒有限体积求解OU Fokker–Planck的收敛、同边缘SDE与概率流ODE的不同二次变差，以及score误差和有限步ODE误差的分账。</desc>
+<rect width="1200" height="430" fill="#ffffff"/>
+<text x="20" y="32" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="20" font-weight="700" fill="#0f172a">DYN-11 可复现实验：密度守恒 → 同边缘不同路径 → score/solver 分账</text>
+
+<rect x="20" y="55" width="370" height="355" rx="18" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="42" y="88" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="18.5" font-weight="700" fill="#0f172a">A　守恒通量推进 OU 密度</text>
+<line x1="75" y1="300" x2="350" y2="300" stroke="#94a3b8" stroke-width="1.2"/>
+<line x1="75" y1="130" x2="75" y2="300" stroke="#94a3b8" stroke-width="1.2"/>
+<polyline points="350.00,177.30 212.50,219.35 75.00,262.70" fill="none" stroke="#2563eb" stroke-width="2.3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="350.00" cy="177.30" r="3.5" fill="#2563eb"/>
+<circle cx="212.50" cy="219.35" r="3.5" fill="#2563eb"/>
+<circle cx="75.00" cy="262.70" r="3.5" fill="#2563eb"/>
+<text x="92" y="119" font-family="Georgia,'Times New Roman',serif" font-size="13" font-weight="600" fill="#2563eb">L1 density error vs cell width</text>
+<text x="92" y="327" font-family="Georgia,'Times New Roman',serif" font-size="12.5" fill="#475569">cell width dx (coarser →)</text>
+<text x="47" y="230" transform="rotate(-90 47 230)" font-family="Georgia,'Times New Roman',serif" font-size="12.5" fill="#475569">log error</text>
+<text x="74" y="355" font-family="Georgia,'Times New Roman',serif" font-size="13" font-weight="600" fill="#0f172a">observed order = 0.951</text>
+<text x="74" y="379" font-family="Georgia,'Times New Roman',serif" font-size="12.5" fill="#059669">max mass drift=2.2e-16; min p=1.3e-20</text>
+
+<rect x="410" y="55" width="370" height="355" rx="18" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="432" y="88" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="18.5" font-weight="700" fill="#0f172a">B　相同 marginals，不同 path law</text>
+<line x1="465" y1="300" x2="740" y2="300" stroke="#94a3b8" stroke-width="1.2"/>
+<line x1="465" y1="130" x2="465" y2="300" stroke="#94a3b8" stroke-width="1.2"/>
+<polyline points="465.00,150.79 520.00,150.71 575.00,150.73 630.00,150.64 685.00,150.68 740.00,150.68" fill="none" stroke="#ea580c" stroke-width="2.3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="465.00" cy="150.79" r="3.5" fill="#ea580c"/>
+<circle cx="520.00" cy="150.71" r="3.5" fill="#ea580c"/>
+<circle cx="575.00" cy="150.73" r="3.5" fill="#ea580c"/>
+<circle cx="630.00" cy="150.64" r="3.5" fill="#ea580c"/>
+<circle cx="685.00" cy="150.68" r="3.5" fill="#ea580c"/>
+<circle cx="740.00" cy="150.68" r="3.5" fill="#ea580c"/>
+<polyline points="465.00,225.29 520.00,238.10 575.00,250.92 630.00,263.73 685.00,276.54 740.00,289.36" fill="none" stroke="#059669" stroke-width="2.3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="465.00" cy="225.29" r="3.5" fill="#059669"/>
+<circle cx="520.00" cy="238.10" r="3.5" fill="#059669"/>
+<circle cx="575.00" cy="250.92" r="3.5" fill="#059669"/>
+<circle cx="630.00" cy="263.73" r="3.5" fill="#059669"/>
+<circle cx="685.00" cy="276.54" r="3.5" fill="#059669"/>
+<circle cx="740.00" cy="289.36" r="3.5" fill="#059669"/>
+<text x="482" y="118" font-family="Georgia,'Times New Roman',serif" font-size="12.8" font-weight="600" fill="#ea580c">SDE QV order=-0.002 (constant)</text>
+<text x="482" y="140" font-family="Georgia,'Times New Roman',serif" font-size="12.8" font-weight="600" fill="#059669">probability-flow QV order=1.000</text>
+<text x="482" y="327" font-family="Georgia,'Times New Roman',serif" font-size="12.5" fill="#475569">partition count N (finer →)</text>
+<text x="438" y="230" transform="rotate(-90 438 230)" font-family="Georgia,'Times New Roman',serif" font-size="12.5" fill="#475569">log realized QV</text>
+<text x="464" y="359" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="12.3" fill="#0f172a">两者 Var(X_T) 都接近 1.210</text>
+<text x="464" y="382" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="12.3" fill="#0f172a">但 cross-time covariance 与二次变差不同</text>
+
+<rect x="800" y="55" width="380" height="355" rx="18" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="822" y="88" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="18.5" font-weight="700" fill="#0f172a">C　score 误差不是 ODE 步长误差</text>
+<line x1="855" y1="210.61" x2="1130" y2="210.61" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 4"/>
+<line x1="855" y1="130" x2="855" y2="270" stroke="#94a3b8" stroke-width="1.2"/>
+<polyline points="855.00,255.88 923.75,234.50 958.12,222.88 992.50,210.61 1026.88,197.64 1061.25,183.93 1130.00,154.12" fill="none" stroke="#7c3aed" stroke-width="2.3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="855.00" cy="255.88" r="3.5" fill="#7c3aed"/>
+<circle cx="923.75" cy="234.50" r="3.5" fill="#7c3aed"/>
+<circle cx="958.12" cy="222.88" r="3.5" fill="#7c3aed"/>
+<circle cx="992.50" cy="210.61" r="3.5" fill="#7c3aed"/>
+<circle cx="1026.88" cy="197.64" r="3.5" fill="#7c3aed"/>
+<circle cx="1061.25" cy="183.93" r="3.5" fill="#7c3aed"/>
+<circle cx="1130.00" cy="154.12" r="3.5" fill="#7c3aed"/>
+<text x="872" y="119" font-family="Georgia,'Times New Roman',serif" font-size="12.8" font-weight="600" fill="#7c3aed">final variance error vs score scale error</text>
+<text x="872" y="294" font-family="Georgia,'Times New Roman',serif" font-size="12.5" fill="#475569">score multiplicative error epsilon</text>
+<text x="828" y="225" transform="rotate(-90 828 225)" font-family="Georgia,'Times New Roman',serif" font-size="12.5" fill="#475569">relative variance error</text>
+<rect x="842" y="316" width="306" height="67" rx="10" fill="#ffffff" stroke="#ddd6fe"/>
+<text x="995" y="340" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="13" font-weight="600" fill="#2563eb">exact-score Euler ODE order = 1.004</text>
+<text x="995" y="362" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="12.2" fill="#0f172a">h → 0 只能消除 solver bias</text>
+<text x="995" y="378" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif" font-size="12.2" fill="#0f172a">错误 score 的连续流仍到达错误密度</text>
+</svg>

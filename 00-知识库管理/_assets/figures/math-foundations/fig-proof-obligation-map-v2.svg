@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="580" viewBox="0 0 1200 580" role="img" aria-labelledby="title desc">
+  <title id="title">命题形状如何生成证明义务与方法选择</title>
+  <desc id="desc">四列分别展示蕴含、双条件、唯一存在和全称否证所需关闭的义务，底部强调先登记假设和随机性，再选择合法证明方法。</desc>
+  <defs>
+    <style>
+      .ink{fill:#1f2937}.muted{fill:#64748b}.line{stroke:#cbd5e1;stroke-width:1.5}.soft{fill:#f8fafc}.blue{fill:#2563eb}.blue-soft{fill:#eff6ff}.green{fill:#047857}.green-soft{fill:#ecfdf5}.amber{fill:#b45309}.amber-soft{fill:#fffbeb}
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.id{font-size:16px;font-weight:600}.h{font-size:18px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:22px}.result{font-size:19px;font-weight:600}
+    </style>
+  </defs>
+  <rect width="1200" height="580" fill="#ffffff"/>
+  <g>
+    <rect x="42" y="42" width="252" height="384" rx="12" class="blue-soft" stroke="#bfdbfe"/>
+    <rect x="330" y="42" width="252" height="384" rx="12" class="soft" stroke="#cbd5e1"/>
+    <rect x="618" y="42" width="252" height="384" rx="12" class="green-soft" stroke="#a7f3d0"/>
+    <rect x="906" y="42" width="252" height="384" rx="12" class="amber-soft" stroke="#fde68a"/>
+  </g>
+  <g class="sans h ink"><text x="68" y="80">蕴含</text><text x="356" y="80">双条件</text><text x="644" y="80">唯一存在</text><text x="932" y="80">否证全称命题</text></g>
+  <g class="math formula ink" text-anchor="middle"><text x="168" y="132">H ⇒ C</text><text x="456" y="132">A ⇔ B</text><text x="744" y="132">∃! y P(y)</text><text x="1032" y="132">¬∀x Q(x)</text></g>
+  <line x1="70" y1="154" x2="266" y2="154" class="line"/><line x1="358" y1="154" x2="554" y2="154" class="line"/><line x1="646" y1="154" x2="842" y2="154" class="line"/><line x1="934" y1="154" x2="1130" y2="154" class="line"/>
+  <g class="sans body ink">
+    <text x="70" y="194">义务：从 H 推到 C</text><text x="70" y="240">可选入口：</text><text x="70" y="270">· 直接证明</text><text x="70" y="300">· 逆否证明</text><text x="70" y="330">· 反证法</text>
+    <text x="358" y="194">义务必须分成两项：</text><text x="358" y="240">① A ⇒ B</text><text x="358" y="276">② B ⇒ A</text><text x="358" y="330">两个方向可用不同方法</text>
+    <text x="646" y="194">义务也必须分成两项：</text><text x="646" y="240">① 至少存在一个</text><text x="646" y="276">② 任意两个解相等</text><text x="646" y="330">“只找到一个”不证明唯一</text>
+    <text x="934" y="194">只需一个合法反例：</text><text x="934" y="240">· 满足原命题全部前提</text><text x="934" y="276">· 让结论 Q(x) 失败</text><text x="934" y="330">有限测试不能证明全称</text>
+  </g>
+  <g class="sans small muted" text-anchor="middle"><text x="168" y="394">方法必须最终回到 C</text><text x="456" y="394">缺一方向就不是 iff</text><text x="744" y="394">构造与唯一性是不同任务</text><text x="1032" y="394">反例不是“没算成功”</text></g>
+  <rect x="84" y="458" width="1032" height="82" rx="11" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="112" y="489" class="sans h blue">证明前的假设账本</text>
+  <text x="112" y="521" class="sans body ink">对象与定义域　｜　全部 hypotheses　｜　随机性和概率空间　｜　目标强度　｜　允许调用的定理</text>
+  <text x="1088" y="521" class="sans small muted" text-anchor="end">实验曲线不能替代条件定理</text>
+  <text x="600" y="570" class="sans result ink" text-anchor="middle">先由命题形状列义务，再选择入口；证明方法不是与目标脱离的技巧清单。</text>
+</svg>

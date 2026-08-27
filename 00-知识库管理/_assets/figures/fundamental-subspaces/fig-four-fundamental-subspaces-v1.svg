@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">矩阵的四个基本子空间</title>
+  <desc id="desc">输入空间分成行空间与零空间，矩阵在行空间上双射到列空间并把零空间压到零；输出空间分成列空间和左零空间。</desc>
+  <defs><marker id="fa" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#2563eb"/></marker><marker id="fz" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#64748b"/></marker><style>.box{stroke:#475569;stroke-width:1.8}.title{font:700 19px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#0f172a}.label{font:16px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#1e293b}.small{font:13px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#475569}.map{stroke:#2563eb;stroke-width:4;marker-end:url(#fa);fill:none}.zero{stroke:#64748b;stroke-width:3;stroke-dasharray:7 5;marker-end:url(#fz);fill:none}.orth{stroke:#7c3aed;stroke-width:2;stroke-dasharray:5 5}</style></defs><rect width="1200" height="430" fill="#fff"/>
+  <text class="title" x="90" y="36">输入空间 Fⁿ</text><text class="title" x="900" y="36">输出空间 Fᵐ</text>
+  <rect class="box" x="45" y="58" width="360" height="315" rx="16" fill="#f8fafc"/><rect class="box" x="795" y="58" width="360" height="315" rx="16" fill="#f8fafc"/>
+  <rect x="75" y="90" width="300" height="112" rx="12" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/><rect x="75" y="232" width="300" height="112" rx="12" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text class="label" x="122" y="132">行空间 R(A*)</text><text class="small" x="122" y="159">可见输入，维数 r</text><text class="label" x="128" y="273">零空间 N(A)</text><text class="small" x="116" y="301">不可见输入，维数 n−r</text>
+  <rect x="825" y="90" width="300" height="112" rx="12" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/><rect x="825" y="232" width="300" height="112" rx="12" fill="#ffedd5" stroke="#f97316" stroke-width="2"/>
+  <text class="label" x="874" y="132">列空间 R(A)</text><text class="small" x="878" y="159">可达输出，维数 r</text><text class="label" x="856" y="273">左零空间 N(A*)</text><text class="small" x="858" y="301">不可达残差，维数 m−r</text>
+  <path class="map" d="M375 145 C520 75 675 75 825 145"/><text class="label" x="546" y="90">A：限制后为同构</text>
+  <path class="zero" d="M375 286 C500 330 555 355 612 354"/><circle cx="630" cy="354" r="18" fill="#e2e8f0" stroke="#64748b"/><text class="label" x="624" y="360">0</text><text class="small" x="472" y="337">A 压到零</text>
+  <line class="orth" x1="225" y1="202" x2="225" y2="232"/><text class="small" x="238" y="222">⊥</text><line class="orth" x1="975" y1="202" x2="975" y2="232"/><text class="small" x="988" y="222">⊥</text>
+  <text class="small" x="310" y="407">Fⁿ=R(A*)⊕N(A)</text><text class="small" x="755" y="407">Fᵐ=R(A)⊕N(A*)</text>
+</svg>

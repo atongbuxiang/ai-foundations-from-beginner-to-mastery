@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Scaled Dot-Product Attention：从 logit 到稳定的行分布</title>
+<desc id="desc">缩放控制典型 logit 尺度；减去行最大值保持精确 softmax，却避免指数溢出。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#B7791F"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#B7791F">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">为什么除以 sqrt(d_k)</text>
+<text x="55" y="115" font-size="19" font-weight="750" text-anchor="start" fill="#1F2937" class="math">qᵀk = Σ q_r k_r</text>
+<text x="55" y="170" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">若坐标独立、中心化、Var=1：</text>
+<text x="55" y="220" font-size="22" font-weight="800" text-anchor="start" fill="#C24135" class="math">Var(qᵀk) = d_k</text>
+<line x1="70" y1="265" x2="320" y2="265" stroke="#D7DEE8" stroke-width="2"/>
+<text x="55" y="315" font-size="18" font-weight="750" text-anchor="start" fill="#0F766E" class="math">Var(qᵀk / sqrt(d_k)) = 1</text>
+<text x="55" y="385" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">这是条件化方差推导；</text>
+<text x="55" y="418" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">相关、非中心或重尾坐标需实测。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">一行 logits 的数值账</text>
+<text x="450" y="120" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">raw z</text>
+<rect x="565" y="90" width="220" height="48" rx="6" fill="#F8FAFC" stroke="#C24135" stroke-width="2"/>
+<text x="675" y="121" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">[1000, 1001, 999]</text>
+<text x="450" y="225" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">z − max(z)</text>
+<rect x="565" y="195" width="220" height="48" rx="6" fill="#F8FAFC" stroke="#2563EB" stroke-width="2"/>
+<text x="675" y="226" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">[−1, 0, −2]</text>
+<text x="450" y="330" font-size="15" font-weight="700" text-anchor="start" fill="#B7791F">exp</text>
+<rect x="565" y="300" width="220" height="48" rx="6" fill="#F8FAFC" stroke="#B7791F" stroke-width="2"/>
+<text x="675" y="331" font-size="15" font-weight="700" text-anchor="middle" fill="#B7791F">[0.368, 1, 0.135]</text>
+<text x="450" y="435" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">normalize</text>
+<rect x="565" y="405" width="220" height="48" rx="6" fill="#F8FAFC" stroke="#0F766E" stroke-width="2"/>
+<text x="675" y="436" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">[0.245, 0.665, 0.090]</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Softmax 的四条语义</text>
+<circle cx="860" cy="105" r="12" fill="#F8FAFC" stroke="#0F766E" stroke-width="2"/>
+<text x="860" y="110" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">1</text>
+<text x="890" y="103" font-size="15" font-weight="750" text-anchor="start" fill="#1F2937">平移不变</text>
+<text x="890" y="132" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">softmax(z+c1)=softmax(z)</text>
+<circle cx="860" cy="200" r="12" fill="#F8FAFC" stroke="#0F766E" stroke-width="2"/>
+<text x="860" y="205" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">2</text>
+<text x="890" y="198" font-size="15" font-weight="750" text-anchor="start" fill="#1F2937">行归一</text>
+<text x="890" y="227" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">a_j&gt;0, Σa_j=1</text>
+<circle cx="860" cy="295" r="12" fill="#F8FAFC" stroke="#C24135" stroke-width="2"/>
+<text x="860" y="300" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">3</text>
+<text x="890" y="293" font-size="15" font-weight="750" text-anchor="start" fill="#1F2937">温度敏感</text>
+<text x="890" y="322" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">scale changes entropy</text>
+<circle cx="860" cy="390" r="12" fill="#F8FAFC" stroke="#C24135" stroke-width="2"/>
+<text x="860" y="395" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">4</text>
+<text x="890" y="388" font-size="15" font-weight="750" text-anchor="start" fill="#1F2937">全遮蔽例外</text>
+<text x="890" y="417" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">undefined unless contract says how</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">缩放是统计尺度控制，减最大值是等价数值变换；两者的理由不能混写。</text>
+</svg>

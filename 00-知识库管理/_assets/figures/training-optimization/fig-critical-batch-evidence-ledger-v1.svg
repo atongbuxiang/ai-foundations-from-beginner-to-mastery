@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Critical batch 的效率面与 SGD 隐式偏置证据阶梯</title>
+  <desc id="desc">左侧曲线分开 optimizer steps、examples 与 wall time 的批量依赖；右侧把小批量到噪声、尖锐度和泛化的箭头标为精确结论、经验机制或受反例挑战的断点。</desc>
+  <rect width="1200" height="720" fill="#FFFEFB"/>
+  <style>.sans{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}.ink{fill:#1F2937}.muted{fill:#64748B}.blue{fill:#2563EB}.green{fill:#0F766E}.amber{fill:#B7791F}.red{fill:#C24135}.box{fill:#F8FAFC;stroke:#94A3B8;stroke-width:2.2}</style>
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#2563EB"/></marker><marker id="r" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#C24135"/></marker></defs>
+  <text x="52" y="58" class="sans blue" font-size="23" font-weight="700">A｜同一个 B，不同效率口径有不同最优点</text>
+  <g stroke="#1F2937" stroke-width="2"><line x1="84" y1="395" x2="552" y2="395"/><line x1="84" y1="395" x2="84" y2="110"/></g>
+  <text x="320" y="438" class="sans ink" font-size="17" text-anchor="middle">batch size B（log 方向）</text><text x="40" y="250" class="sans ink" font-size="17" text-anchor="middle" transform="rotate(-90 40 250)">归一化成本</text>
+  <path d="M105 122 C180 220 265 316 532 348" fill="none" stroke="#2563EB" stroke-width="4"/>
+  <path d="M105 352 C230 344 375 284 532 138" fill="none" stroke="#B7791F" stroke-width="4"/>
+  <path d="M105 170 C190 250 270 338 350 344 S470 300 532 210" fill="none" stroke="#0F766E" stroke-width="4"/>
+  <line x1="314" y1="110" x2="314" y2="395" stroke="#94A3B8" stroke-width="2" stroke-dasharray="8 7"/>
+  <text x="314" y="92" class="mono ink" font-size="16" text-anchor="middle">B_noise</text>
+  <text x="435" y="329" class="sans blue" font-size="17">steps</text><text x="447" y="172" class="sans amber" font-size="17">examples / FLOPs</text><text x="340" y="374" class="sans green" font-size="17">wall time</text>
+  <text x="52" y="486" class="sans muted" font-size="16">B_noise 是收益递减尺度；系统 optimum 还依赖 step time 与通信。</text>
+
+  <line x1="600" y1="48" x2="600" y2="640" stroke="#D7DEE8" stroke-width="2"/>
+  <text x="650" y="58" class="sans green" font-size="23" font-weight="700">B｜逐箭头证据审计</text>
+  <g class="sans ink" text-anchor="middle">
+    <rect x="660" y="112" width="180" height="70" rx="6" class="box"/><text x="750" y="154" font-size="18">small batch</text>
+    <rect x="945" y="112" width="180" height="70" rx="6" class="box"/><text x="1035" y="145" font-size="18">larger gradient</text><text x="1035" y="169" font-size="18">noise</text>
+    <rect x="660" y="286" width="180" height="70" rx="6" class="box"/><text x="750" y="328" font-size="18">flatter minimum?</text>
+    <rect x="945" y="286" width="180" height="70" rx="6" class="box"/><text x="1035" y="328" font-size="18">better test risk?</text>
+  </g>
+  <line x1="840" y1="147" x2="941" y2="147" stroke="#2563EB" stroke-width="3" marker-end="url(#a)"/><text x="890" y="128" class="sans blue" font-size="16" text-anchor="middle">Cov=C/B</text>
+  <path d="M1035 182 C1035 230 750 230 750 282" fill="none" stroke="#B7791F" stroke-width="3" stroke-dasharray="8 7" marker-end="url(#a)"/><text x="893" y="219" class="sans amber" font-size="16" text-anchor="middle">机制依赖 dynamics / metric</text>
+  <line x1="840" y1="321" x2="941" y2="321" stroke="#C24135" stroke-width="3" stroke-dasharray="8 7" marker-end="url(#r)"/>
+  <text x="890" y="300" class="sans red" font-size="16" text-anchor="middle">参数化反例与混杂</text>
+  <rect x="660" y="422" width="465" height="148" fill="#FFF6E5" stroke="#B7791F" stroke-width="2.5"/>
+  <text x="688" y="458" class="sans amber" font-size="18" font-weight="700">需要隔离的变量</text>
+  <text x="688" y="494" class="sans ink" font-size="17">update count　｜　LR / schedule　｜　BN statistics</text>
+  <text x="688" y="528" class="sans ink" font-size="17">调参预算　｜　data order　｜　parameterization</text>
+  <line x1="52" y1="654" x2="1148" y2="654" stroke="#0F766E" stroke-width="3"/>
+  <text x="52" y="694" class="sans green" font-size="17" font-weight="700">精确 1/B covariance law 不能跳过中间断点，直接推出 generalization。</text>
+</svg>

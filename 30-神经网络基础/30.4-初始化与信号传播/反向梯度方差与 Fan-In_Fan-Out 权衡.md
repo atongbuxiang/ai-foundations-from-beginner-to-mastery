@@ -1,0 +1,272 @@
+---
+type: derivation
+status: draft
+area: [neural-networks/initialization, backpropagation, gradient-propagation]
+aliases: [Backward Variance Propagation, Fan-In Fan-Out Tradeoff]
+node_id: NN-28
+prerequisites: ["[[方差传播与宽层均值场近似]]", "[[线性层与仿射层的反向传播]]", "[[Xavier、Glorot 初始化]]", "[[Kaiming、He 初始化]]"]
+related: ["[[相关传播、Edge of Chaos 与临界初始化]]", "[[正交初始化与 Dynamical Isometry]]", "[[残差块 Jacobian 与梯度直通]]"]
+sources: ["[[S-2010-Glorot-Bengio-Training-Difficulty]]", "[[S-2015-He-Delving-Rectifiers]]", "[[S-2017-Schoenholz-Deep-Information-Propagation]]", "[[S-2026-PyTorch-NN-Init]]", "[[S-2021-Su-8725-非方阵初始化]]", "[[S-2021-Su-8620-Transformer初始化参数化与标准化]]"]
+exercises: ["[[习题 - 反向梯度方差与 Fan-In_Fan-Out 权衡]]"]
+solutions: ["[[解答 - 反向梯度方差与 Fan-In_Fan-Out 权衡]]"]
+figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-forward-backward-fan-tradeoff-v2.svg]]"
+created: 2026-08-23
+updated: 2026-08-23
+---
+# 反向梯度方差与 Fan-In/Fan-Out 权衡
+
+> [!abstract] 本章主问题
+> 前向一坐标汇总 fan-in 个输入，反向一坐标却汇总 fan-out 个输出 cotangents。再乘 activation derivative 后，两条二阶递推一般需要不同的权重 variance。初始化要先声明守护前向、反向还是某种折中；标量 gradient variance 稳定仍不等于 Jacobian 各方向稳定。
+
+## 一、从一层反向公式开始
+
+一层写成
+
+$$
+z^{(\ell)}=W^{(\ell)}h^{(\ell-1)}+b^{(\ell)},
+\qquad
+h^{(\ell)}=\phi(z^{(\ell)}),
+$$
+
+其中
+
+$$
+W^{(\ell)}
+\in\mathbb R^{n_\ell\times n_{\ell-1}}.
+$$
+
+定义 preactivation cotangent
+
+$$
+\delta^{(\ell)}
+=\frac{\partial L}{\partial z^{(\ell)}}.
+$$
+
+则
+
+$$
+\frac{\partial L}{\partial h^{(\ell-1)}}
+=(W^{(\ell)})^T\delta^{(\ell)},
+$$
+
+$$
+\delta^{(\ell-1)}
+=\phi'(z^{(\ell-1)})
+\odot (W^{(\ell)})^T\delta^{(\ell)}.
+$$
+
+反向的一项也许看似与前向相同，但求和长度已经从 $n_{\ell-1}$ 变成 $n_\ell$。
+
+## 二、反向二阶矩逐项推导
+
+令单权重 variance 为 $v_\ell$，并作教学级近似：
+
+- 权重零均值且坐标独立；
+- 当前 $\delta_j^{(\ell)}$ 同尺度、交叉 covariance 可忽略；
+- 权重与 cotangent/derivative 的依赖暂时忽略。
+
+对
+
+$$
+u_i^{(\ell-1)}
+=\sum_{j=1}^{n_\ell}W_{ji}^{(\ell)}\delta_j^{(\ell)}
+$$
+
+有
+
+$$
+\mathbb E[(u_i^{(\ell-1)})^2]
+\approx
+n_\ell v_\ell\,
+\mathbb E[(\delta_j^{(\ell)})^2].
+$$
+
+再乘本层 activation derivative：
+
+$$
+\boxed{
+\mathbb E[(\delta_i^{(\ell-1)})^2]
+\approx
+n_\ell v_\ell\,
+d_{\ell-1}\,
+\mathbb E[(\delta_j^{(\ell)})^2],
+}
+$$
+
+其中
+
+$$
+d_{\ell-1}
+=\mathbb E[\phi'(z^{(\ell-1)})^2].
+$$
+
+## 三、与前向递推并排
+
+把前向 activation factor 记为
+
+$$
+c_{\ell-1}
+=\frac{\mathbb E[\phi(z^{(\ell-1)})^2]}
+{\mathbb E[(z^{(\ell-1)})^2]}.
+$$
+
+则忽略 bias 时，
+
+$$
+\chi_f^{(\ell)}
+=n_{\ell-1}v_\ell c_{\ell-1},
+$$
+
+$$
+\chi_b^{(\ell)}
+=n_\ell v_\ell d_{\ell-1}.
+$$
+
+它们分别是一层 forward 与 backward second-moment multiplier。理想标量守恒要求
+
+$$
+\chi_f^{(\ell)}=1,
+\qquad
+\chi_b^{(\ell)}=1.
+$$
+
+要同时成立，必须满足
+
+$$
+n_{\ell-1}c_{\ell-1}
+=n_\ell d_{\ell-1}.
+$$
+
+一般架构、activation 与工作区并不满足这个等式，所以一个 scalar variance 无法解决所有目标。
+
+## 四、Linear、Tanh 与 ReLU
+
+### Linear
+
+$c=d=1$，前向要求 $v=1/n_{\mathrm{in}}$，反向要求 $v=1/n_{\mathrm{out}}$。方阵时一致。
+
+### Tanh 的小信号区
+
+若 $z$ 集中在 0 附近，$\phi(z)\approx z$、$\phi'(z)\approx1$，近似回到 linear；一旦进入饱和区，$c$ 与 $d$ 都随 $q$ 改变，且不是同一个常数合同。
+
+### ReLU
+
+对 centered symmetric continuous preactivation，
+
+$$
+c=d=\frac12.
+$$
+
+前向要求 $v=2/n_{\mathrm{in}}$，反向要求 $v=2/n_{\mathrm{out}}$。等宽层两者一致，宽度突变时冲突仍在。
+
+## 五、深度把小偏差变成乘积
+
+忽略跨层相关时，
+
+$$
+\mathbb E[(\delta^{(0)})^2]
+\approx
+\left(\prod_{\ell=1}^L\chi_b^{(\ell)}\right)
+\mathbb E[(\delta^{(L)})^2].
+$$
+
+若每层 $\chi_b=0.95$，100 层后乘数约为
+
+$$
+0.95^{100}\approx5.9\times10^{-3}.
+$$
+
+若每层 $\chi_b=1.05$，则约为
+
+$$
+1.05^{100}\approx131.5.
+$$
+
+因此单层 5% 的偏差不能被“差不多是 1”轻易忽略。
+
+## 六、为什么独立梯度近似很危险
+
+$\delta^{(\ell)}$ 是由同一组权重参与的 forward activations 和后续网络共同生成的，所以它一般不与 $W^{(\ell)}$ 独立。严格 mean-field 分析需要更谨慎的极限、conditioning 或修正技巧。教学递推的用途是暴露尺度因子和实验假说，不是对有限训练网络的精确概率恒等式。
+
+## 七、Gradient Variance 不等于 Jacobian Spectrum
+
+总 Jacobian 为
+
+$$
+J=D_LW_L\cdots D_1W_1.
+$$
+
+平均平方梯度近似只看某种方向平均，例如 Frobenius-energy scale；训练还可能沿某些方向极度收缩、另一些方向放大。即便
+
+$$
+\frac1n\mathbb E\|Jv\|^2\approx\frac1n\|v\|^2,
+$$
+
+也不推出每个 singular value 都接近 1。[[正交初始化与 Dynamical Isometry]] 将处理这层更强要求。
+
+## 八、Loss Reduction 与 Optimizer Scale
+
+观测到的 parameter gradient 还受以下因素缩放：
+
+- batch loss 是 sum 还是 mean；
+- sequence/token mask 的有效元素数；
+- mixed-precision loss scaling；
+- gradient accumulation 与 distributed all-reduce；
+- optimizer preconditioner、clipping 与 weight decay。
+
+初始化理论里的 $\delta$ 递推只描述网络 Jacobian 的一部分。若实验忘记 reduction，宽度效应可能被 batch/token 因子伪装。
+
+## 九、Residual 与 Normalization 改写递推
+
+Residual block
+
+$$
+h_{\ell+1}=h_\ell+F_\ell(h_\ell)
+$$
+
+的 Jacobian 是 $I+J_F$，梯度包含 identity path 和 covariance/cross terms；LayerNorm/BatchNorm 的 derivative 还耦合同一 normalized group 的坐标。plain-chain fan 公式不能不加修改地覆盖它们。
+
+## 十、如何选择 Fan Mode
+
+一个可审计顺序是：
+
+1. 写出真实 forward 和 VJP shape；
+2. 决定首要守护 forward activation、backward cotangent 或二者折中；
+3. 计算 activation 的 $c(q)$ 与 $d(q)$；
+4. 对 width changes、residual/norm 单独改写；
+5. 在目标深度、dtype 与 loss reduction 下实测。
+
+框架的 fan-in/fan-out mode 是明确的目标选择，不是风格偏好。
+
+## 十一、图：两条相反方向的尺度账本
+
+先看图回答：为什么同一个扩宽层会让 Xavier 的 forward 收缩、backward 放大？
+
+![[00-知识库管理/_assets/figures/neural-networks/fig-forward-backward-fan-tradeoff-v2.svg|900]]
+
+> [!figure] 图 30.4-04　Forward/Backward fan tradeoff、深度乘积与证据边界
+> 左栏并排画 $W$ 与 $W^T$ 的求和方向；中栏用 aspect ratio 显示 $\chi_f,\chi_b$ 的对向变化和深度乘积；右栏给出从 scalar moment 到 Jacobian spectrum、residual/norm 与系统 reduction 的检查阶梯。来源：依据 Glorot–Bengio 2010、He et al. 2015、Schoenholz et al. 2017、PyTorch 官方文档与科学空间 8725/8620 独立绘制；由 [[00-知识库管理/_labs/code/plot_initialization_foundations_v2.py]] 确定性生成。
+
+**怎样读图**：先按箭头数清每个坐标汇总的项数，再乘 activation/derivative factor，最后看这些乘数如何沿深度相乘。
+
+**图没有证明什么**：图没有证明 gradient independence，没有证明 scalar variance 守恒足够训练，也没有把 plain feedforward 递推外推到 residual、normalization、attention 或 optimizer dynamics。
+
+## 十二、实验矩阵
+
+建立 width profile（等宽、逐层扩宽、逐层压窄、bottleneck）× initialization mode（fan-in、fan-out、Xavier）× activation 的实验矩阵。每层记录：
+
+$$
+\mathbb E[z^2],\quad
+\mathbb E[h^2],\quad
+\mathbb E[\delta_z^2],\quad
+\mathbb E[\delta_h^2],
+$$
+
+以及 Jacobian top/bottom singular-value estimate、gradient norm、NaN/Inf 与 wall-clock。用多 seed 区分初始化 ensemble variance，固定 loss reduction 并注明 normalization/residual。
+
+> [!summary]
+> fan-in 与 fan-out 来自同一矩阵在 forward 和 reverse 中不同的求和长度。初始化只能在明确的 activation、宽度、架构和统计目标下校准；标量二阶矩是起点，不是可训练性的最终证书。
+
+- [[习题 - 反向梯度方差与 Fan-In_Fan-Out 权衡]]
+- [[解答 - 反向梯度方差与 Fan-In_Fan-Out 权衡]]
+

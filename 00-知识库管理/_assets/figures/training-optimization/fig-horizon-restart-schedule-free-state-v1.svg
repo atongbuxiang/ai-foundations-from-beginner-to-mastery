@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">训练 Horizon、分支与 Schedule-Free 状态机</title>
+  <desc id="desc">比较 full-horizon decay、WSD/restart 和 schedule-free 在线平均在停止时刻、状态复制和评估点上的差异。</desc>
+  <rect width="1200" height="800" fill="#FFFEFB"/>
+  <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}.h{font-size:27px;font-weight:700}.sh{font-size:18px;font-weight:700}.b{font-size:14px}.s{font-size:12.5px;fill:#64748B}.bb{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.bg{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.ba{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.br{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}.line{stroke:#CBD5E1;stroke-width:2}.blue{stroke:#2563EB;stroke-width:4;fill:none}.green{stroke:#0F766E;stroke-width:4;fill:none}.red{stroke:#C0392B;stroke-width:4;fill:none}.arr{stroke:#2563EB;stroke-width:3;fill:none}</style>
+  <defs><marker id="ab" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#2563EB"/></marker></defs>
+  <text x="48" y="48" class="h" fill="#2563EB">未来停止时刻藏在哪里？三种训练时域合同</text>
+
+  <rect x="48" y="86" width="338" height="414" rx="14" class="bb"/>
+  <text x="72" y="124" class="sh">A Full-horizon decay</text>
+  <text x="72" y="152" class="s">T 直接进入 ηₜ(T)</text>
+  <line x1="84" y1="296" x2="348" y2="296" class="line"/>
+  <line x1="84" y1="296" x2="84" y2="188" class="line"/>
+  <path d="M84 190 C178 191 288 250 348 296" class="blue"/>
+  <path d="M84 190 C190 190 312 216 348 246" class="red"/>
+  <text x="96" y="218" class="s">T</text><text x="310" y="238" class="s">2T</text>
+  <text x="72" y="338" class="b">延长 horizon 会改变早期 LR</text>
+  <text x="72" y="370" class="s">历史轨迹无法事后重写</text>
+  <text x="72" y="402" class="s">必须从头跑严格 2T baseline</text>
+  <rect x="72" y="430" width="290" height="46" rx="8" fill="#FFF1F0" stroke="#C0392B"/>
+  <text x="90" y="458" class="s">停止规则 = 算法输入的一部分</text>
+
+  <rect x="431" y="86" width="338" height="414" rx="14" class="bg"/>
+  <text x="455" y="124" class="sh">B WSD trunk / Restart</text>
+  <text x="455" y="152" class="s">共同主干 + 显式 branch/reset</text>
+  <line x1="468" y1="226" x2="690" y2="226" class="green"/>
+  <circle cx="550" cy="226" r="6" fill="#0F766E"/>
+  <circle cx="620" cy="226" r="6" fill="#0F766E"/>
+  <path d="M550 226 C570 256 590 278 628 292" class="red"/>
+  <path d="M620 226 C642 250 670 266 716 274" class="blue"/>
+  <text x="470" y="208" class="s">stable trunk</text>
+  <text x="548" y="320" class="s">cooldown 1</text><text x="646" y="298" class="s">cooldown 2</text>
+  <text x="455" y="354" class="b">branch 时复制完整训练状态</text>
+  <text x="455" y="386" class="s">参数 · moments · counter · RNG</text>
+  <text x="455" y="418" class="b">restart 另写 reset mask</text>
+  <text x="455" y="450" class="s">只重启 LR ≠ 重置 optimizer</text>
+
+  <rect x="814" y="86" width="338" height="414" rx="14" class="ba"/>
+  <text x="838" y="124" class="sh">C Schedule-Free state</text>
+  <text x="838" y="152" class="s">在线平均，不预先输入 T</text>
+  <rect x="842" y="188" width="84" height="62" rx="10" class="bb"/>
+  <text x="875" y="226" class="sh">zₜ</text>
+  <rect x="948" y="188" width="84" height="62" rx="10" class="bg"/>
+  <text x="981" y="226" class="sh">xₜ</text>
+  <rect x="1054" y="188" width="70" height="62" rx="10" class="br"/>
+  <text x="1076" y="226" class="sh">yₜ</text>
+  <line x1="926" y1="219" x2="944" y2="219" class="arr" marker-end="url(#ab)"/>
+  <line x1="1032" y1="219" x2="1050" y2="219" class="arr" marker-end="url(#ab)"/>
+  <text x="838" y="286" class="b">z：快速/优化点</text>
+  <text x="838" y="316" class="b">x：在线平均点</text>
+  <text x="838" y="346" class="b">y：求梯度/插值点</text>
+  <text x="838" y="384" class="s">仍有 LR、warmup、moments、weights</text>
+  <text x="838" y="416" class="s">train/eval 可能选择不同组合</text>
+  <rect x="838" y="442" width="290" height="34" rx="8" fill="#FFF1F0" stroke="#C0392B"/>
+  <text x="858" y="464" class="s">horizon-free ≠ stateless</text>
+
+  <text x="48" y="558" class="h" fill="#0F766E">无论采用哪种方案，都要封存四份账</text>
+  <rect x="48" y="594" width="252" height="118" rx="12" class="bb"/>
+  <text x="72" y="630" class="sh">过去</text><text x="72" y="662" class="b">LR 是否依赖未来 T？</text><text x="72" y="688" class="s">历史能否保持不变</text>
+  <rect x="332" y="594" width="252" height="118" rx="12" class="bg"/>
+  <text x="356" y="630" class="sh">状态</text><text x="356" y="662" class="b">keep / reset / transform</text><text x="356" y="688" class="s">完整 checkpoint contract</text>
+  <rect x="616" y="594" width="252" height="118" rx="12" class="ba"/>
+  <text x="640" y="630" class="sh">未来</text><text x="640" y="662" class="b">branch / phase / averaging</text><text x="640" y="688" class="s">compute 与数据口径</text>
+  <rect x="900" y="594" width="252" height="118" rx="12" class="br"/>
+  <text x="924" y="630" class="sh">输出</text><text x="924" y="662" class="b">last / best / averaged</text><text x="924" y="688" class="s">选择预算与评估点</text>
+  <rect x="48" y="752" width="1104" height="30" rx="8" fill="#F8FAFC" stroke="#CBD5E1"/>
+  <text x="72" y="772" class="s">图没有证明 WSD、restart 或 Schedule-Free 普遍优于 full-horizon decay。</text>
+</svg>

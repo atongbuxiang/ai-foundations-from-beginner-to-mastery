@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">正交投影的最近点几何、算子性质与计算路径</title>
+  <desc id="desc">左侧展示向量分解为子空间最近点和垂直残差，右侧列出投影算子的幂等、自伴、值域与核，底部展示用标准正交基先分析再合成。</desc>
+  <defs>
+    <marker id="blue-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#2563eb"/></marker>
+    <marker id="green-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#0f766e"/></marker>
+    <style>
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}.blue{fill:#2563eb}.green{fill:#0f766e}.amber{fill:#b7791f}.h{font-size:19px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}.arrow{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#blue-arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <rect x="42" y="43" width="670" height="397" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="68" y="81" class="sans h blue">几何：唯一的垂直分解给出最近点</text>
+  <path d="M90 375L656 167" stroke="#2563eb" stroke-width="4"/><text x="625" y="155" class="math body blue">子空间 U</text>
+  <circle cx="542" cy="94" r="7" fill="#1f2937"/><text x="555" y="91" class="math body ink">x</text>
+  <circle cx="450" cy="243" r="7" fill="#0f766e"/><text x="422" y="269" class="math body green">p=Pᵁx</text>
+  <path d="M542 94L450 243" stroke="#0f766e" stroke-width="3" marker-end="url(#green-arrow)"/><text x="517" y="185" class="math body green">r=x−p</text>
+  <path d="M450 243L462 251L470 239" stroke="#64748b" stroke-width="1.5" fill="none"/>
+  <path d="M542 94L278 306" stroke="#b7791f" stroke-width="2" stroke-dasharray="8 6"/><circle cx="278" cy="306" r="5" fill="#b7791f"/><text x="160" y="326" class="sans small amber">其他 U 中点：距离更长</text>
+  <text x="84" y="407" class="math body ink">x = p + r，p∈U，r∈U⊥</text><text x="664" y="407" class="math body green" text-anchor="end">‖x−p‖ ≤ ‖x−u‖</text>
+
+  <rect x="752" y="43" width="406" height="397" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="778" y="81" class="sans h green">代数：同一个算子的身份证</text>
+  <text x="786" y="133" class="math formula blue">P²=P</text><text x="944" y="133" class="sans body ink">投两次等于投一次</text>
+  <text x="786" y="188" class="math formula blue">P*=P</text><text x="944" y="188" class="sans body ink">相对所选内积自伴</text>
+  <text x="786" y="243" class="math formula green">R(P)=U</text><text x="944" y="243" class="sans body ink">输出恰在目标空间</text>
+  <text x="786" y="298" class="math formula amber">N(P)=U⊥</text><text x="944" y="298" class="sans body ink">垂直分量被丢弃</text>
+  <line x1="778" y1="327" x2="1132" y2="327" stroke="#cbd5e1"/>
+  <text x="955" y="365" class="sans body ink" text-anchor="middle">只有幂等而不自伴时，通常是斜投影。</text><text x="955" y="399" class="sans small muted" text-anchor="middle">“正交”必须同时声明内积。</text>
+
+  <rect x="70" y="473" width="1060" height="83" rx="12" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="97" y="505" class="sans h ink">已有标准正交基 Q 时的投影 action</text><text x="400" y="534" class="math body blue">x</text><path d="M424 528H522" class="arrow"/><text x="473" y="513" class="math small muted" text-anchor="middle">分析 Q*x</text><text x="560" y="534" class="math body green">坐标 c</text><path d="M630 528H758" class="arrow"/><text x="694" y="513" class="math small muted" text-anchor="middle">合成 Qc</text><text x="800" y="534" class="math body blue">p=Q(Q*x)</text><text x="1098" y="534" class="sans small muted" text-anchor="end">通常无需显式形成 P=QQ*</text>
+  <text x="600" y="603" class="sans result ink" text-anchor="middle">正交投影把表达能力与残差分开：保留 U 分量，删除 U⊥ 分量，并给出唯一最近点。</text>
+</svg>

@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">因果序列模型：历史、状态与读出合同</title>
+<desc id="desc">状态 h_t 是历史的有限维摘要；同一递推同时定义信息可见性、流式接口与不可逆压缩。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">按时间展开：只能从过去流向未来</text>
+<circle cx="60" cy="150" r="14" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="60" y="156" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">x1</text>
+<rect x="33" y="235" width="54" height="48" rx="5" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="60" y="265" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">h1</text>
+<line x1="60" y1="166" x2="60" y2="230" stroke="#2563EB" stroke-width="2.2" marker-end="url(#a1)"/>
+<circle cx="148" cy="150" r="14" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="148" y="156" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">x2</text>
+<rect x="121" y="235" width="54" height="48" rx="5" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="148" y="265" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">h2</text>
+<line x1="148" y1="166" x2="148" y2="230" stroke="#2563EB" stroke-width="2.2" marker-end="url(#a1)"/>
+<line x1="88" y1="259" x2="117" y2="259" stroke="#0F766E" stroke-width="2.8" marker-end="url(#a1)"/>
+<circle cx="236" cy="150" r="14" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="236" y="156" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">x3</text>
+<rect x="209" y="235" width="54" height="48" rx="5" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="236" y="265" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">h3</text>
+<line x1="236" y1="166" x2="236" y2="230" stroke="#2563EB" stroke-width="2.2" marker-end="url(#a1)"/>
+<line x1="176" y1="259" x2="205" y2="259" stroke="#0F766E" stroke-width="2.8" marker-end="url(#a1)"/>
+<circle cx="324" cy="150" r="14" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="324" y="156" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">x4</text>
+<rect x="297" y="235" width="54" height="48" rx="5" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="324" y="265" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">h4</text>
+<line x1="324" y1="166" x2="324" y2="230" stroke="#2563EB" stroke-width="2.2" marker-end="url(#a1)"/>
+<line x1="264" y1="259" x2="293" y2="259" stroke="#0F766E" stroke-width="2.8" marker-end="url(#a1)"/>
+<text x="45" y="340" font-size="18" font-weight="700" text-anchor="start" fill="#0F766E" class="math">h_t = F(h_(t-1), x_t)</text>
+<text x="45" y="385" font-size="18" font-weight="700" text-anchor="start" fill="#2563EB" class="math">y_t = G(h_t)</text>
+<text x="45" y="452" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">因果：y_t 不应依赖 x_(t+1)。</text>
+<text x="45" y="485" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">共享 θ 让同一 cell 处理任意长度。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">有限状态是一种等价类</text>
+<rect x="450" y="130" width="135" height="44" rx="6" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="518" y="158" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">[a,b,c]</text>
+<line x1="590" y1="152" x2="658" y2="250" stroke="#0F766E" stroke-width="2" marker-end="url(#a1)"/>
+<rect x="450" y="215" width="135" height="44" rx="6" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="518" y="243" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">[u,v,w,…]</text>
+<line x1="590" y1="237" x2="658" y2="250" stroke="#0F766E" stroke-width="2" marker-end="url(#a1)"/>
+<circle cx="680" cy="250" r="42" fill="#ECFDF5" stroke="#0F766E" stroke-width="2.5"/>
+<text x="680" y="256" font-size="18" font-weight="700" text-anchor="middle" fill="#0F766E">h_t</text>
+<text x="445" y="335" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">若两个历史映到同一 h_t，</text>
+<text x="445" y="372" font-size="16" font-weight="700" text-anchor="start" fill="#C24135">后续 readout 无法再区分它们。</text>
+<text x="445" y="445" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">充分状态是任务相关命题，</text>
+<text x="445" y="477" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">不是固定维向量的自动性质。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">三种接口、三本资源账</text>
+<rect x="845" y="85" width="285" height="72" rx="6" fill="#F8FAFC" stroke="#2563EB" stroke-width="2"/>
+<text x="865" y="115" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">training</text>
+<text x="965" y="115" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">unroll / scan</text>
+<text x="965" y="140" font-size="15" font-weight="650" text-anchor="start" fill="#64748B">activations</text>
+<rect x="845" y="215" width="285" height="72" rx="6" fill="#F8FAFC" stroke="#2563EB" stroke-width="2"/>
+<text x="865" y="245" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">prefill</text>
+<text x="965" y="245" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">consume prefix</text>
+<text x="965" y="270" font-size="15" font-weight="650" text-anchor="start" fill="#64748B">throughput</text>
+<rect x="845" y="345" width="285" height="72" rx="6" fill="#F8FAFC" stroke="#0F766E" stroke-width="2"/>
+<text x="865" y="375" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">streaming</text>
+<text x="965" y="375" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">one-step update</text>
+<text x="965" y="400" font-size="15" font-weight="650" text-anchor="start" fill="#64748B">state bytes</text>
+<text x="842" y="490" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">O(T) 算术 ≠ 任意设备上的低延迟。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">先写清状态语义与因果可见性，再谈记忆长度和速度。</text>
+</svg>

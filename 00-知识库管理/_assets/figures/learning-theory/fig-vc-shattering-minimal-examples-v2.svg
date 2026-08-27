@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="580" viewBox="0 0 1200 580" role="img" aria-labelledby="title desc">
+  <title id="title">阈值类与区间类不能打散更大点集的最小阻碍</title>
+  <desc id="desc">右阈值在两个有序点上只能产生零零、零一和一一，缺失一零；闭区间在三个有序点上无法产生一零一。</desc>
+  <defs>
+    <style>
+      .ink{fill:#1f2937}.muted{fill:#64748b}.line{stroke:#cbd5e1;stroke-width:1.5}.axis{stroke:#475569;stroke-width:2}.soft{fill:#f8fafc}.blue{fill:#2563eb}.blue-soft{fill:#eff6ff}.red{fill:#b91c1c}.red-soft{fill:#fef2f2}
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.h{font-size:19px;font-weight:600}.body{font-size:17px}.small{font-size:15px}.pattern{font-size:22px;font-weight:600}.result{font-size:20px;font-weight:600}
+    </style>
+  </defs>
+  <rect width="1200" height="580" fill="#ffffff"/>
+  <rect x="42" y="40" width="532" height="442" rx="12" class="soft" stroke="#cbd5e1"/>
+  <rect x="626" y="40" width="532" height="442" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="70" y="80" class="sans h ink">右阈值：标签沿有序点只能从 0 变到 1</text>
+  <text x="654" y="80" class="sans h ink">闭区间：标签 1 必须形成一个连续块</text>
+  <text x="70" y="109" class="sans small muted">固定 x₁ &lt; x₂；逐一检查全部四种标签</text>
+  <text x="654" y="109" class="sans small muted">固定 x₁ &lt; x₂ &lt; x₃；检查最小不可实现模式</text>
+
+  <g class="axis">
+    <line x1="102" y1="164" x2="386" y2="164"/><line x1="102" y1="234" x2="386" y2="234"/>
+    <line x1="102" y1="304" x2="386" y2="304"/><line x1="102" y1="374" x2="386" y2="374"/>
+  </g>
+  <g fill="#ffffff" stroke="#64748b" stroke-width="2.5">
+    <circle cx="182" cy="164" r="12"/><circle cx="306" cy="164" r="12"/>
+    <circle cx="182" cy="234" r="12"/>
+    <circle cx="306" cy="374" r="12"/>
+  </g>
+  <g class="blue" stroke="#1d4ed8" stroke-width="2.5">
+    <circle cx="306" cy="234" r="12"/>
+    <circle cx="182" cy="304" r="12"/><circle cx="306" cy="304" r="12"/>
+    <circle cx="182" cy="374" r="12"/>
+  </g>
+  <g class="math pattern" text-anchor="middle">
+    <text x="462" y="171" class="blue">00　✓</text><text x="462" y="241" class="blue">01　✓</text><text x="462" y="311" class="blue">11　✓</text><text x="462" y="381" class="red">10　×</text>
+  </g>
+  <path d="M154 412 C226 447 331 447 403 412" fill="none" stroke="#b91c1c" stroke-width="2.2"/>
+  <text x="278" y="451" class="sans small red" text-anchor="middle">一旦 x₁ 为 1，较大的 x₂ 必然也为 1</text>
+
+  <line x1="682" y1="268" x2="1102" y2="268" class="axis"/>
+  <g class="blue" stroke="#1d4ed8" stroke-width="2.5"><circle cx="754" cy="268" r="14"/><circle cx="1030" cy="268" r="14"/></g>
+  <circle cx="892" cy="268" r="14" fill="#ffffff" stroke="#b91c1c" stroke-width="3"/>
+  <g class="sans small muted" text-anchor="middle"><text x="754" y="307">x₁</text><text x="892" y="307">x₂</text><text x="1030" y="307">x₃</text></g>
+  <g class="math pattern" text-anchor="middle"><text x="754" y="274" fill="#ffffff">1</text><text x="892" y="274" class="red">0</text><text x="1030" y="274" fill="#ffffff">1</text></g>
+  <path d="M736 237 L736 198 L1048 198 L1048 237" fill="none" stroke="#2563eb" stroke-width="3.5"/>
+  <text x="892" y="181" class="sans body blue" text-anchor="middle">包含两端点的区间同时包含中点</text>
+  <rect x="699" y="346" width="386" height="78" rx="10" class="red-soft" stroke="#fecaca"/>
+  <text x="892" y="380" class="math pattern red" text-anchor="middle">101　不可实现</text>
+  <text x="892" y="406" class="sans small muted" text-anchor="middle">所以任意三个有序点都不能被区间类打散</text>
+
+  <rect x="100" y="514" width="1000" height="46" rx="10" class="blue-soft"/>
+  <text x="600" y="544" class="sans result ink" text-anchor="middle">只缺一个 labeling 就足以否定打散；但 VC 下界仍须另给一个可被打散的点集。</text>
+</svg>

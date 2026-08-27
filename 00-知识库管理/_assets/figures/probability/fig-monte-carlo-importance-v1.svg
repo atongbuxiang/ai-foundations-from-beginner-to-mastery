@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">Monte Carlo 估计、重要性权重退化与方差缩减</title>
+  <desc id="desc">三面板展示样本平均的平方根误差、proposal 与 target 支持及权重退化、以及通过控制变量、分层和条件期望利用结构降低方差。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#EFF6FF"/><stop offset="0.5" stop-color="#F8FAFC"/><stop offset="1" stop-color="#FAF5FF"/></linearGradient>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#4F46E5"/></marker>
+    <style>.title{font:700 21px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#0F172A}.head{font:700 17px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#4F46E5}.small{font:12px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#64748B}.label{font:13px -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;fill:#334155}.math{font:15px Georgia,"Times New Roman",serif;fill:#0F172A}.card{fill:#fff;stroke:#CBD5E1;stroke-width:1.3}.axis{stroke:#64748B;stroke-width:1.2}.arrow{stroke:#4F46E5;stroke-width:2.2;fill:none;marker-end:url(#arr)}</style>
+  </defs>
+  <rect width="1200" height="430" rx="22" fill="url(#bg)"/>
+  <text x="40" y="38" class="title">随机计算的可信链：目标 → 采样分布 → 估计器 → 误差与退化诊断</text>
+  <rect x="28" y="58" width="368" height="342" rx="17" class="card"/><rect x="416" y="58" width="368" height="342" rx="17" class="card"/><rect x="804" y="58" width="368" height="342" rx="17" class="card"/>
+
+  <text x="50" y="88" class="head">A　Simple MC：平均换积分</text>
+  <rect x="53" y="116" width="103" height="54" rx="10" fill="#DBEAFE" stroke="#60A5FA"/>
+  <text x="68" y="139" class="math">X_i ~ p</text><text x="68" y="158" class="small">iid samples</text>
+  <path d="M160 143L208 143" class="arrow"/>
+  <rect x="214" y="116" width="153" height="54" rx="10" fill="#EEF2FF" stroke="#818CF8"/>
+  <text x="228" y="139" class="math">muhat = mean f(X_i)</text><text x="228" y="158" class="small">unbiased if integrable</text>
+  <line x1="68" y1="296" x2="360" y2="296" class="axis"/><line x1="72" y1="301" x2="72" y2="205" class="axis"/>
+  <path d="M78 215C129 235 169 254 213 268C260 282 311 290 358 293" stroke="#2563EB" stroke-width="3" fill="none"/>
+  <text x="85" y="210" class="small">MCSE</text><text x="323" y="316" class="small">n</text>
+  <text x="88" y="337" class="math">SE = s / sqrt(n)</text>
+  <text x="88" y="365" class="math">half error requires about 4x samples</text>
+  <text x="50" y="386" class="small">相关、重尾、稀有事件时不能机械套用</text>
+
+  <text x="438" y="88" class="head">B　Importance sampling：覆盖与权重</text>
+  <line x1="447" y1="246" x2="754" y2="246" class="axis"/>
+  <path d="M452 244C481 242 498 226 519 190C542 151 561 126 584 129C607 132 622 164 639 198C658 231 681 242 750 244" fill="#C7D2FE" stroke="#4F46E5" stroke-width="2.5"/>
+  <path d="M452 244C495 244 528 241 558 228C592 214 621 177 647 151C674 123 696 143 712 184C728 224 738 240 750 244" fill="none" stroke="#EA580C" stroke-width="2.8"/>
+  <text x="485" y="132" class="label" fill="#4F46E5">q(x): proposal</text><text x="654" y="119" class="label" fill="#EA580C">|f|p: relevant target</text>
+  <circle cx="667" cy="159" r="7" fill="#DC2626"/><circle cx="686" cy="139" r="5" fill="#DC2626"/><circle cx="616" cy="190" r="4" fill="#DC2626"/>
+  <text x="447" y="278" class="math">w = p/q ; muhat = mean(w f)</text>
+  <g transform="translate(452 304)"><rect width="245" height="22" rx="6" fill="#E2E8F0"/><rect width="132" height="22" rx="6" fill="#818CF8"/><rect x="132" width="53" height="22" rx="0" fill="#F59E0B"/><rect x="185" width="60" height="22" rx="6" fill="#DC2626"/></g>
+  <text x="707" y="319" class="small">max weight</text>
+  <text x="447" y="356" class="math">ESS_w = 1 / sum(normalized_w²)</text>
+  <text x="447" y="383" class="small">logsumexp 修数值；不能修 support mismatch</text>
+
+  <text x="826" y="88" class="head">C　Variance reduction：利用已知结构</text>
+  <rect x="836" y="116" width="142" height="62" rx="11" fill="#ECFDF5" stroke="#34D399"/>
+  <text x="849" y="140" class="label">control variate</text><text x="849" y="162" class="math">f − beta(h−Eh)</text>
+  <rect x="994" y="116" width="151" height="62" rx="11" fill="#FFF7ED" stroke="#FB923C"/>
+  <text x="1008" y="140" class="label">stratification</text><text x="1008" y="162" class="math">sum p_k muhat_k</text>
+  <rect x="836" y="203" width="142" height="62" rx="11" fill="#F5F3FF" stroke="#A78BFA"/>
+  <text x="849" y="227" class="label">antithetic / CRN</text><text x="849" y="249" class="math">engineer covariance</text>
+  <rect x="994" y="203" width="151" height="62" rx="11" fill="#EFF6FF" stroke="#60A5FA"/>
+  <text x="1008" y="227" class="label">Rao-Blackwell</text><text x="1008" y="249" class="math">E[Y | Z]</text>
+  <path d="M908 273L908 304L991 304" class="arrow"/><path d="M1068 273L1068 304L997 304" class="arrow"/>
+  <rect x="873" y="313" width="233" height="48" rx="12" fill="#EEF2FF" stroke="#818CF8"/>
+  <text x="894" y="336" class="math">same target, lower variance</text><text x="894" y="354" class="small">but count extra cost and bias</text>
+  <text x="832" y="386" class="small">先证明目标不变，再比较 variance × cost</text>
+</svg>

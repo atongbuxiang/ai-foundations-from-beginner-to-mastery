@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Shampoo 的 mode Gram、inverse roots 与更新时钟</title>
+  <desc id="desc">把 tensor gradient 沿各 mode 展开并累计 Gram，应用负一除以二 k 次方矩阵根，再分账 root refresh、grafting 和系统成本。</desc>
+  <rect width="1200" height="720" fill="#FFFEFB"/>
+  <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}.h{font-size:27px;font-weight:700}.sh{font-size:19px;font-weight:700}.b{font-size:16px}.s{font-size:15px;fill:#64748B}.boxb{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.boxg{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.boxa{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.boxr{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}.line{stroke:#CBD5E1;stroke-width:2}.arr{stroke:#2563EB;stroke-width:3;fill:none}</style>
+  <defs><marker id="ab" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#2563EB"/></marker></defs>
+  <text x="48" y="50" class="h" fill="#2563EB">A｜Tensor shape 决定每个 mode 的统计</text>
+  <rect x="48" y="82" width="232" height="118" rx="12" class="boxb"/><text x="72" y="118" class="sh">gradient tensor G</text><text x="72" y="151" class="b">d1 × d2 × ... × dk</text><text x="72" y="181" class="s">do not flatten yet</text>
+  <line x1="280" y1="141" x2="332" y2="141" class="arr" marker-end="url(#ab)"/>
+  <rect x="342" y="82" width="330" height="118" rx="12" class="boxg"/><text x="366" y="118" class="sh">mode-i matricization</text><text x="366" y="151" class="b">G_(i): d_i × (P / d_i)</text><text x="366" y="181" class="s">one view for each axis</text>
+  <line x1="672" y1="141" x2="724" y2="141" class="arr" marker-end="url(#ab)"/>
+  <rect x="734" y="82" width="418" height="118" rx="12" class="boxa"/><text x="758" y="118" class="sh">mode Gram state</text><text x="758" y="151" class="b">L_i += G_(i) G_(i)^T</text><text x="758" y="181" class="s">state elements sum_i d_i²</text>
+
+  <line x1="48" y1="236" x2="1152" y2="236" class="line"/>
+  <text x="48" y="278" class="h" fill="#0F766E">B｜为什么 matrix 两侧都是 inverse fourth root</text>
+  <rect x="48" y="310" width="300" height="124" rx="12" class="boxb"/><text x="72" y="346" class="sh">order k rule</text><text x="72" y="380" class="b">each mode: L_i^(-1/(2k))</text><text x="72" y="410" class="s">combined half-power geometry</text>
+  <line x1="348" y1="372" x2="400" y2="372" class="arr" marker-end="url(#ab)"/>
+  <rect x="410" y="310" width="366" height="124" rx="12" class="boxg"/><text x="434" y="346" class="sh">matrix k=2</text><text x="434" y="380" class="b">G_tilde = L^(-1/4) G R^(-1/4)</text><text x="434" y="410" class="s">row-space and column-space whitening</text>
+  <rect x="812" y="310" width="340" height="124" rx="12" class="boxr"/><text x="836" y="346" class="sh" fill="#C0392B">Root certificate</text><text x="836" y="380" class="b">||X^p A - I||；||XA-AX||</text><text x="836" y="410" class="s">damping + scale + dtype + solver</text>
+
+  <text x="48" y="492" class="h" fill="#2563EB">C｜成本不是 root FLOPs 一个数字</text>
+  <rect x="48" y="524" width="254" height="122" rx="12" class="boxb"/><text x="72" y="560" class="sh">stats clock</text><text x="72" y="593" class="b">each optimizer step</text><text x="72" y="621" class="s">Gram / EMA / reduction</text>
+  <rect x="326" y="524" width="254" height="122" rx="12" class="boxa"/><text x="350" y="560" class="sh">root clock</text><text x="350" y="593" class="b">every K steps</text><text x="350" y="621" class="s">EVD / iterative root</text>
+  <rect x="604" y="524" width="254" height="122" rx="12" class="boxg"/><text x="628" y="560" class="sh">apply clock</text><text x="628" y="593" class="b">mode products each step</text><text x="628" y="621" class="s">grafting / momentum / decay</text>
+  <rect x="882" y="524" width="270" height="122" rx="12" class="boxr"/><text x="906" y="560" class="sh" fill="#C0392B">system ledger</text><text x="906" y="593" class="b">state + peak + comm</text><text x="906" y="621" class="s">average and tail latency</text>
+  <text x="48" y="690" class="s">增大 refresh period 会降低 amortized root cost，也会增加 preconditioner staleness；二者必须同图报告。</text>
+</svg>

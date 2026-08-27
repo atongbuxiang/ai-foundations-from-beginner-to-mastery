@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Loss-Free 路由：反馈控制与平衡分配的两种视角</title>
+<desc id="desc">bias 不进入专家组合权重也可改变 Top-k 选择；全局配额则可写成带容量约束的 assignment。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#B7791F"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Bias Feedback Loop</text>
+<rect x="55" y="100" width="285" height="50" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="197.5" y="131.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">route by sᵢ + bᵢ</text>
+<rect x="55" y="210" width="285" height="54" rx="8" fill="#FEF2F2" stroke="#C24135" stroke-width="2"/>
+<text x="197.5" y="243.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">observe load nᵢ − target</text>
+<rect x="55" y="330" width="285" height="62" rx="8" fill="#FFF7ED" stroke="#B7791F" stroke-width="2"/>
+<text x="197.5" y="367.0" font-size="15" font-weight="650" text-anchor="middle" fill="#B7791F">bᵢ ← bᵢ − η·sign(error)</text>
+<line x1="198" y1="154" x2="198" y2="202" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<line x1="198" y1="268" x2="198" y2="322" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<line x1="52" y1="360" x2="25" y2="360" stroke="#2563EB" stroke-width="2"/>
+<line x1="25" y1="360" x2="25" y2="126" stroke="#2563EB" stroke-width="2"/>
+<line x1="25" y1="126" x2="48" y2="126" stroke="#2563EB" stroke-width="2" marker-end="url(#a0)"/>
+<text x="55" y="445" font-size="15" font-weight="800" text-anchor="start" fill="#C24135">无显式 L_aux ≠ 无训练干预。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#B7791F">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Capacity-constrained Assignment</text>
+<text x="455" y="104" font-size="17" font-weight="700" text-anchor="start" fill="#1F2937">max  Σᵢⱼ aᵢⱼ sᵢⱼ</text>
+<text x="455" y="148" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937">s.t. Σⱼaᵢⱼ=k,  Σᵢaᵢⱼ≤Cⱼ</text>
+<rect x="475" y="205" width="52" height="40" rx="4" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="501" y="231" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">9</text>
+<rect x="545" y="205" width="52" height="40" rx="4" fill="#F8FAFC" stroke="#D7DEE8" stroke-width="2"/>
+<text x="571" y="231" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">7</text>
+<rect x="615" y="205" width="52" height="40" rx="4" fill="#F8FAFC" stroke="#D7DEE8" stroke-width="2"/>
+<text x="641" y="231" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">2</text>
+<rect x="475" y="262" width="52" height="40" rx="4" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="501" y="288" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">8</text>
+<rect x="545" y="262" width="52" height="40" rx="4" fill="#F8FAFC" stroke="#D7DEE8" stroke-width="2"/>
+<text x="571" y="288" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">6</text>
+<rect x="615" y="262" width="52" height="40" rx="4" fill="#F8FAFC" stroke="#D7DEE8" stroke-width="2"/>
+<text x="641" y="288" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">5</text>
+<rect x="475" y="319" width="52" height="40" rx="4" fill="#F8FAFC" stroke="#D7DEE8" stroke-width="2"/>
+<text x="501" y="345" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">4</text>
+<rect x="545" y="319" width="52" height="40" rx="4" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="571" y="345" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">9</text>
+<rect x="615" y="319" width="52" height="40" rx="4" fill="#F8FAFC" stroke="#D7DEE8" stroke-width="2"/>
+<text x="641" y="345" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">7</text>
+<rect x="475" y="376" width="52" height="40" rx="4" fill="#F8FAFC" stroke="#D7DEE8" stroke-width="2"/>
+<text x="501" y="402" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">3</text>
+<rect x="545" y="376" width="52" height="40" rx="4" fill="#F8FAFC" stroke="#D7DEE8" stroke-width="2"/>
+<text x="571" y="402" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">8</text>
+<rect x="615" y="376" width="52" height="40" rx="4" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="641" y="402" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">9</text>
+<text x="455" y="460" font-size="15" font-weight="700" text-anchor="start" fill="#B7791F">dual price / quantile 可解释专家 bias。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">三条不可混写的主张</text>
+<circle cx="865" cy="108" r="20" fill="#F8FAFC" stroke="#2563EB" stroke-width="2"/>
+<text x="865" y="114" font-size="16" font-weight="800" text-anchor="middle" fill="#2563EB">I</text>
+<text x="900" y="114" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">bias 改变 arg-top-k</text>
+<circle cx="865" cy="210" r="20" fill="#F8FAFC" stroke="#B7791F" stroke-width="2"/>
+<text x="865" y="216" font-size="16" font-weight="800" text-anchor="middle" fill="#B7791F">T</text>
+<text x="900" y="216" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">assignment dual / quota</text>
+<circle cx="865" cy="312" r="20" fill="#F8FAFC" stroke="#0F766E" stroke-width="2"/>
+<text x="865" y="318" font-size="16" font-weight="800" text-anchor="middle" fill="#0F766E">E</text>
+<text x="900" y="318" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">训练质量与吞吐</text>
+<circle cx="865" cy="414" r="20" fill="#F8FAFC" stroke="#C24135" stroke-width="2"/>
+<text x="865" y="420" font-size="16" font-weight="800" text-anchor="middle" fill="#C24135">O</text>
+<text x="900" y="420" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">漂移下稳定性</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">loss-free 的精确含义是移除显式辅助目标；bias 状态、更新率、延迟和分布式统计仍须进入审计。</text>
+</svg>

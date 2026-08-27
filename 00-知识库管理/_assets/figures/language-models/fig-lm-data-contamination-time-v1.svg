@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">Benchmark 污染：时间、字符串重叠与模型利用是三条证据链</title><desc id="desc">时间轴区分 benchmark release、crawl 和训练；检测层区分 exact、n-gram、semantic；结果层区分 exposure 与 exploitation。</desc>
+<rect width="1200" height="700" fill="#FFFEFB"/>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#64748B"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#17324D" flood-opacity="0.12"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<text x="55" y="55" font-size="25" font-weight="700" fill="#2563EB">Benchmark 污染：时间、字符串重叠与模型利用是三条证据链</text>
+<text x="55" y="105" font-size="18" font-weight="700" fill="#17324D">1 · 时间轴</text>
+<line x1="90" y1="175" x2="1110" y2="175" stroke="#D7DEE8" stroke-width="5"/>
+<circle cx="160" cy="175" r="11" fill="#2563EB"/>
+<text x="160" y="145" text-anchor="middle" font-size="14" font-weight="700" fill="#2563EB">benchmark draft</text>
+<circle cx="390" cy="175" r="11" fill="#C24135"/>
+<text x="390" y="145" text-anchor="middle" font-size="14" font-weight="700" fill="#C24135">public release</text>
+<circle cx="635" cy="175" r="11" fill="#B7791F"/>
+<text x="635" y="145" text-anchor="middle" font-size="14" font-weight="700" fill="#B7791F">crawl snapshot</text>
+<circle cx="850" cy="175" r="11" fill="#7C3AED"/>
+<text x="850" y="145" text-anchor="middle" font-size="14" font-weight="700" fill="#7C3AED">train cutoff</text>
+<circle cx="1040" cy="175" r="11" fill="#0F766E"/>
+<text x="1040" y="145" text-anchor="middle" font-size="14" font-weight="700" fill="#0F766E">evaluation</text>
+<rect x="390" y="190" width="460" height="28" rx="6" fill="#FEE2E2" opacity="0.8"/><text x="620" y="210" text-anchor="middle" font-size="13" fill="#C24135">public benchmark can enter crawl / mirrors / tutorials / answers</text>
+<text x="55" y="275" font-size="18" font-weight="700" fill="#17324D">2 · Detector family 与盲点</text>
+<rect x="55" y="300" width="285" height="75" rx="12" fill="#FFFFFF" stroke="#2563EB" stroke-width="2" filter="url(#shadow)"/>
+<text x="73" y="331" font-size="17" font-weight="700" fill="#2563EB">exact hash</text>
+<text x="73" y="358" font-size="14" fill="#64748B">低假阳 / 漏格式变体</text>
+<rect x="375" y="300" width="285" height="75" rx="12" fill="#FFFFFF" stroke="#0F766E" stroke-width="2" filter="url(#shadow)"/>
+<text x="393" y="331" font-size="17" font-weight="700" fill="#0F766E">n-gram overlap</text>
+<text x="393" y="358" font-size="14" fill="#64748B">局部复制 / common phrase</text>
+<rect x="55" y="400" width="285" height="75" rx="12" fill="#FFFFFF" stroke="#7C3AED" stroke-width="2" filter="url(#shadow)"/>
+<text x="73" y="431" font-size="17" font-weight="700" fill="#7C3AED">semantic / paraphrase</text>
+<text x="73" y="458" font-size="14" fill="#64748B">覆盖改写 / 阈值不稳定</text>
+<rect x="375" y="400" width="285" height="75" rx="12" fill="#FFFFFF" stroke="#B7791F" stroke-width="2" filter="url(#shadow)"/>
+<text x="393" y="431" font-size="17" font-weight="700" fill="#B7791F">black-box probe</text>
+<text x="393" y="458" font-size="14" fill="#64748B">无语料访问 / 因果归因弱</text>
+<text x="710" y="275" font-size="18" font-weight="700" fill="#17324D">3 · exposure 与 score gain 不是同一事件</text>
+<rect x="710" y="310" width="195" height="100" rx="10" fill="#FFFFFF" stroke="#0F766E" stroke-width="2"/>
+<text x="725" y="343" font-size="15" font-weight="700" fill="#0F766E">未暴露 / 未利用</text>
+<text x="725" y="375" font-size="13" fill="#64748B">clean</text>
+<rect x="925" y="310" width="195" height="100" rx="10" fill="#FFFFFF" stroke="#B7791F" stroke-width="2"/>
+<text x="940" y="343" font-size="15" font-weight="700" fill="#B7791F">暴露 / 未利用</text>
+<text x="940" y="375" font-size="13" fill="#64748B">overlap only</text>
+<rect x="710" y="435" width="195" height="100" rx="10" fill="#FFFFFF" stroke="#7C3AED" stroke-width="2"/>
+<text x="725" y="468" font-size="15" font-weight="700" fill="#7C3AED">未证暴露 / 异常高分</text>
+<text x="725" y="500" font-size="13" fill="#64748B">investigate</text>
+<rect x="925" y="435" width="195" height="100" rx="10" fill="#FFFFFF" stroke="#C24135" stroke-width="2"/>
+<text x="940" y="468" font-size="15" font-weight="700" fill="#C24135">暴露 / 可利用</text>
+<text x="940" y="500" font-size="13" fill="#64748B">contaminated gain</text>
+<rect x="55" y="555" width="1090" height="72" rx="10" fill="#FFF7E8" stroke="#B7791F"/>
+<text x="75" y="583" font-size="15" font-weight="700" fill="#B7791F">报告：cutoff + detector operating point + clean/dirty split + confidence interval + removed examples</text>
+<text x="75" y="610" font-size="14" fill="#64748B">未命中 detector 只表示“在该检测器与阈值下未发现”，不是无污染证明。</text>
+<text x="55" y="670" font-size="14" fill="#64748B">污染审计是 measurement problem：先定义 exposure 单位，再谈模型是否记忆或利用。</text>
+</svg>

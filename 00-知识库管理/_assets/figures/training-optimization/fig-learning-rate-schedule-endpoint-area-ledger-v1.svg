@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">学习率调度的端点面积与时域账本</title>
+  <desc id="desc">比较 constant、linear、cosine、inverse square root 与 WSD 曲线，并列出 horizon 依赖、末端学习率、面积和分叉能力。</desc>
+  <rect width="1200" height="800" fill="#FFFEFB"/>
+  <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}.h{font-size:27px;font-weight:700}.sh{font-size:17px;font-weight:700}.b{font-size:14px}.s{font-size:12.5px;fill:#64748B}.axis{stroke:#64748B;stroke-width:2}.grid{stroke:#E2E8F0;stroke-width:1}.c1{stroke:#2563EB;stroke-width:4;fill:none}.c2{stroke:#0F766E;stroke-width:4;fill:none}.c3{stroke:#B76E00;stroke-width:4;fill:none}.c4{stroke:#7C3AED;stroke-width:4;fill:none}.c5{stroke:#C0392B;stroke-width:4;fill:none}.bb{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.bg{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.ba{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.br{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}</style>
+  <text x="48" y="48" class="h" fill="#2563EB">曲线名字必须连同端点、面积和 horizon 一起读</text>
+  <line x1="82" y1="342" x2="760" y2="342" class="axis"/>
+  <line x1="82" y1="342" x2="82" y2="90" class="axis"/>
+  <line x1="82" y1="216" x2="760" y2="216" class="grid"/>
+  <line x1="82" y1="90" x2="760" y2="90" class="grid"/>
+  <text x="44" y="96" class="s">ηp</text><text x="54" y="347" class="s">0</text><text x="730" y="365" class="s">horizon</text>
+  <path d="M82 90 L760 90" class="c1"/>
+  <path d="M82 90 L760 342" class="c2"/>
+  <path d="M82 90 C250 92 592 250 760 342" class="c3"/>
+  <path d="M82 342 L132 90 C250 154 470 212 760 252" class="c4"/>
+  <path d="M82 342 L132 90 L590 90 C650 94 720 244 760 342" class="c5"/>
+  <circle cx="590" cy="90" r="6" fill="#C0392B"/>
+  <text x="552" y="78" class="s">decay branch</text>
+
+  <rect x="802" y="84" width="350" height="258" rx="13" fill="#F8FAFC" stroke="#CBD5E1"/>
+  <line x1="828" y1="120" x2="880" y2="120" class="c1"/><text x="898" y="125" class="b">Constant：过去不依赖 T</text>
+  <line x1="828" y1="164" x2="880" y2="164" class="c2"/><text x="898" y="169" class="b">Linear：端点斜率非零</text>
+  <line x1="828" y1="208" x2="880" y2="208" class="c3"/><text x="898" y="213" class="b">Cosine：两端斜率为零</text>
+  <line x1="828" y1="252" x2="880" y2="252" class="c4"/><text x="898" y="257" class="b">Inverse-sqrt：长尾 ∝t⁻¹ᐟ²</text>
+  <line x1="828" y1="296" x2="880" y2="296" class="c5"/><text x="898" y="301" class="b">WSD：warmup / stable / decay</text>
+  <text x="828" y="328" class="s">示意曲线未按同一面积精确缩放。</text>
+
+  <text x="48" y="408" class="h" fill="#0F766E">四个审计维度比“哪条曲线好看”更重要</text>
+  <rect x="48" y="444" width="252" height="164" rx="13" class="bb"/>
+  <text x="72" y="480" class="sh">Horizon dependency</text>
+  <text x="72" y="514" class="b">Linear / cosine 预写 T</text>
+  <text x="72" y="542" class="b">Constant / stable trunk 可延长</text>
+  <text x="72" y="574" class="s">改变 T 是否重写过去 LR？</text>
+  <rect x="332" y="444" width="252" height="164" rx="13" class="bg"/>
+  <text x="356" y="480" class="sh">Endpoint / floor</text>
+  <text x="356" y="514" class="b">ηfinal 是否为 0？</text>
+  <text x="356" y="542" class="b">last iterate 噪声多大？</text>
+  <text x="356" y="574" class="s">末端温度是独立因子。</text>
+  <rect x="616" y="444" width="252" height="164" rx="13" class="ba"/>
+  <text x="640" y="480" class="sh">Area / squared area</text>
+  <text x="640" y="514" class="b">Σηₜ 与 Σηₜ²</text>
+  <text x="640" y="542" class="b">累计 drift 与 noise 不同</text>
+  <text x="640" y="574" class="s">同面积不等于同轨迹。</text>
+  <rect x="900" y="444" width="252" height="164" rx="13" class="br"/>
+  <text x="924" y="480" class="sh">Branch / restart</text>
+  <text x="924" y="514" class="b">复制哪些 optimizer state？</text>
+  <text x="924" y="542" class="b">cooldown compute 是否匹配？</text>
+  <text x="924" y="574" class="s">分支数量影响选择预算。</text>
+
+  <rect x="48" y="644" width="1104" height="94" rx="13" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="72" y="680" class="sh">与 AdamW 联动：累计 shrinkage ≈ exp(−Σ ηₜλₜ)</text>
+  <text x="72" y="712" class="b">只改 LR 曲线也会改变 weight decay 记忆核；schedule 对比必须联合分账。</text>
+  <text x="930" y="712" class="s">clock · endpoints · advance rule</text>
+  <rect x="48" y="758" width="1104" height="26" rx="7" fill="#FFF6E5" stroke="#D6A64F"/>
+  <text x="72" y="776" class="s">图没有证明任一 schedule 普遍最优。</text>
+</svg>

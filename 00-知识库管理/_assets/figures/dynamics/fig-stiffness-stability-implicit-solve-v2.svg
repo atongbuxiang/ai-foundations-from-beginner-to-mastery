@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">刚性时间尺度、绝对稳定与隐式代数合同</title>
+<desc id="desc">刚性系统的快衰减模态会约束显式稳定步长，即使目标轨迹变化缓慢；绝对稳定用 R(z) 判断 test equation 的数值放大，A 稳定与 L 稳定有不同 stiff damping；隐式步还需 nonlinear 和 linear solve 证书。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">快误差模态绑住慢目标的步长</text>
+<line x1="55" y1="370" x2="365" y2="370" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="75" y1="405" x2="75" y2="95" stroke="#D7DEE8" stroke-width="2"/>
+<path d="M75 175 C140 185 210 205 360 240" fill="none" stroke="#2563EB" stroke-width="3"/>
+<path d="M75 115 C90 320 110 260 130 238 C160 220 230 225 360 240" fill="none" stroke="#C24135" stroke-width="2.5"/>
+<text x="250" y="205" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">slow solution</text>
+<text x="100" y="120" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">fast decaying error</text>
+<text x="45" y="420" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">e&#x27;=lambda_fast e,  Re lambda_fast &lt;&lt;0</text>
+<text x="45" y="455" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">Forward Euler needs |1+h lambda|&lt;=1</text>
+<text x="45" y="489" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">step chosen for stability, not visible motion。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">R(z) 分开稳定与刚性阻尼</text>
+<line x1="450" y1="270" x2="770" y2="270" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="610" y1="405" x2="610" y2="105" stroke="#D7DEE8" stroke-width="2"/>
+<text x="748" y="295" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">Re z</text>
+<text x="620" y="120" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">Im z</text>
+<circle cx="530" cy="270" r="80" fill="none" stroke="#2563EB" stroke-width="3"/>
+<text x="470" y="180" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">FE disk</text>
+<text x="625" y="165" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">A-stable:</text>
+<text x="625" y="193" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">entire left half-plane</text>
+<text x="625" y="235" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">L-stable:</text>
+<text x="625" y="263" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">R(z)-&gt;0 as z-&gt;-infinity</text>
+<line x1="430" y1="430" x2="765" y2="430" stroke="#D7DEE8" stroke-width="2"/>
+<text x="430" y="461" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">stable large h can still be inaccurate</text>
+<text x="430" y="492" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">trapezoidal is A-, not L-stable。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">隐式一步引入嵌套求解</text>
+<rect x="840" y="90" width="300" height="58" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="990.0" y="125.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">F(y_(n+1))=0</text>
+<line x1="990" y1="151" x2="990" y2="187" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="840" y="199" width="300" height="65" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="990.0" y="237.5" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">Newton: (I-hJ) delta=-F</text>
+<line x1="990" y1="267" x2="990" y2="303" stroke="#1F2937" stroke-width="2.2" marker-end="url(#a3)"/>
+<rect x="840" y="315" width="300" height="70" rx="8" fill="#FFFEFB" stroke="#C24135" stroke-width="2"/>
+<text x="990.0" y="356.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">linear solve + preconditioner</text>
+<text x="830" y="425" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">separate time, nonlinear and linear tolerances</text>
+<text x="830" y="455" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">check residual, step error and Jacobian reuse</text>
+<text x="830" y="485" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">reverse sensitivity solves a transpose system</text>
+<text x="830" y="513" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">A-stability does not certify these layers。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">刚性首先是稳定成本问题；隐式方法扩大稳定域，却把一次时间步变成需要多层残差与线性代数验收的任务。</text>
+</svg>

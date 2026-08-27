@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">矩阵谱范数、Frobenius 范数与核范数的几何和对偶关系</title>
+  <desc id="desc">同一奇异值谱分别产生最坏方向放大、平方能量和总奇异质量三种度量，下方总结诱导范数、次乘性、秩界和谱核对偶。</desc>
+  <defs>
+    <style>
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.ink{fill:#1f2937}.muted{fill:#64748b}.blue{fill:#2563eb}.green{fill:#0f766e}.amber{fill:#b7791f}.h{font-size:19px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}
+    </style>
+  </defs>
+  <rect width="1200" height="620" fill="#ffffff"/>
+  <text x="600" y="42" class="sans h ink" text-anchor="middle">“矩阵有多大”不是单一问题：先声明输入/输出度量与任务语义</text>
+  <rect x="42" y="74" width="350" height="342" rx="12" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="68" y="111" class="sans h blue">谱范数：最坏方向</text><ellipse cx="217" cy="245" rx="132" ry="57" transform="rotate(-18 217 245)" fill="none" stroke="#2563eb" stroke-width="3"/><path d="M217 245L342 204" stroke="#2563eb" stroke-width="4"/><text x="318" y="190" class="math body blue">σ₁</text><text x="68" y="338" class="math formula ink">‖A‖₂=σ₁</text><text x="68" y="372" class="sans body ink">单位输入的最大放大率</text><text x="68" y="398" class="math small muted">sup ‖Ax‖₂ / ‖x‖₂</text>
+  <rect x="425" y="74" width="350" height="342" rx="12" fill="#ecfdf5" stroke="#6ee7b7"/>
+  <text x="451" y="111" class="sans h green">Frobenius：总体平方能量</text><g fill="#0f766e"><rect x="470" y="292" width="38" height="64"/><rect x="530" y="234" width="38" height="122"/><rect x="590" y="179" width="38" height="177"/><rect x="650" y="320" width="38" height="36"/></g><text x="470" y="383" class="math formula ink">‖A‖F=(Σᵢσᵢ²)¹ᐟ²</text><text x="470" y="408" class="sans small muted">也等于全部元素平方和开方</text>
+  <rect x="808" y="74" width="350" height="342" rx="12" fill="#fffbeb" stroke="#fcd34d"/>
+  <text x="834" y="111" class="sans h amber">核范数：奇异值总质量</text><g fill="#b7791f"><circle cx="868" cy="218" r="25"/><circle cx="934" cy="218" r="41"/><circle cx="1026" cy="218" r="58"/><circle cx="1110" cy="218" r="16"/></g><text x="834" y="338" class="math formula ink">‖A‖*=Σᵢσᵢ</text><text x="834" y="372" class="sans body ink">凸的低秩代理，但不等于 rank</text><text x="834" y="400" class="sans small muted">受尺度影响，需结合任务和正则化权重</text>
+  <rect x="70" y="452" width="1060" height="104" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="97" y="486" class="sans h blue">共同规则与边界</text><text x="97" y="520" class="math body ink">‖AB‖≤‖A‖‖B‖</text><text x="342" y="520" class="math body blue">‖A‖F≤√r‖A‖₂</text><text x="624" y="520" class="math body green">‖A‖*≤√r‖A‖F</text><text x="1098" y="520" class="math body amber" text-anchor="end">谱范数 ↔ 核范数互为对偶</text><text x="600" y="547" class="sans small muted" text-anchor="middle">元素范数、诱导算子范数与酉不变范数是不同层次；合法范数未必适合矩阵乘法误差传播。</text>
+  <text x="600" y="606" class="sans result ink" text-anchor="middle">最坏放大看谱范数，总体误差看 Frobenius，低秩偏好常用核范数；选择范数就是选择几何。</text>
+</svg>

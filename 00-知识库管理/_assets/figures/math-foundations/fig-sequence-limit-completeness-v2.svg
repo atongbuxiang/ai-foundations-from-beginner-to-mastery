@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="580" viewBox="0 0 1200 580" role="img" aria-labelledby="title desc">
+  <title id="title">数列的尾部收敛证书与完备性</title>
+  <desc id="desc">左栏在坐标图中显示数列从某个指标起进入任意误差带，右栏展示 Cauchy 尾部一致性只有在完备空间中才保证极限仍属于该空间。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#64748b"/></marker>
+    <style>
+      .ink{fill:#1f2937}.muted{fill:#64748b}.line{stroke:#cbd5e1;stroke-width:1.5}.axis{stroke:#475569;stroke-width:2}.arrow{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#arrow)}.soft{fill:#f8fafc}.blue{fill:#2563eb}.blue-soft{fill:#eff6ff}.green{fill:#047857}.green-soft{fill:#ecfdf5}.red{fill:#b91c1c}.red-soft{fill:#fef2f2}
+      .sans{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}.h{font-size:18px;font-weight:600}.body{font-size:16px}.small{font-size:15px}.formula{font-size:20px}.result{font-size:19px;font-weight:600}
+    </style>
+  </defs>
+  <rect width="1200" height="580" fill="#ffffff"/>
+  <rect x="42" y="42" width="656" height="420" rx="12" class="soft" stroke="#cbd5e1"/>
+  <rect x="742" y="42" width="416" height="420" rx="12" class="green-soft" stroke="#a7f3d0"/>
+  <text x="68" y="80" class="sans h blue">ε–N 定义控制整个无限尾部</text><text x="768" y="80" class="sans h green">Cauchy ＋ 完备性 ⇒ 极限存在于空间内</text>
+  <line x1="92" y1="378" x2="654" y2="378" class="axis"/><line x1="92" y1="112" x2="92" y2="378" class="axis"/>
+  <rect x="92" y="210" width="562" height="92" class="blue-soft"/>
+  <line x1="92" y1="256" x2="654" y2="256" stroke="#2563eb" stroke-width="2.3"/>
+  <line x1="92" y1="210" x2="654" y2="210" stroke="#93c5fd" stroke-width="1.5" stroke-dasharray="6 5"/><line x1="92" y1="302" x2="654" y2="302" stroke="#93c5fd" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <text x="104" y="203" class="math small blue">a+ε</text><text x="104" y="252" class="math small blue">a</text><text x="104" y="321" class="math small blue">a−ε</text>
+  <g class="red"><circle cx="142" cy="145" r="6"/><circle cx="190" cy="344" r="6"/><circle cx="238" cy="177" r="6"/></g>
+  <g class="blue"><circle cx="286" cy="289" r="6"/><circle cx="334" cy="228" r="6"/><circle cx="382" cy="277" r="6"/><circle cx="430" cy="239" r="6"/><circle cx="478" cy="269" r="6"/><circle cx="526" cy="246" r="6"/><circle cx="574" cy="263" r="6"/><circle cx="622" cy="251" r="6"/></g>
+  <line x1="270" y1="112" x2="270" y2="378" stroke="#047857" stroke-width="2" stroke-dasharray="7 6"/>
+  <text x="279" y="132" class="math body green">N(ε)</text>
+  <text x="373" y="420" class="math formula ink" text-anchor="middle">∀ε&gt;0　∃N　∀n≥N：d(x_n,a)&lt;ε</text>
+  <text x="373" y="446" class="sans small muted" text-anchor="middle">N 可以依赖 ε，但不能依赖未来的 n</text>
+
+  <rect x="775" y="118" width="350" height="76" rx="10" fill="#ffffff" stroke="#6ee7b7"/>
+  <text x="950" y="148" class="sans body ink" text-anchor="middle">尾部内部一致</text>
+  <text x="950" y="176" class="math body green" text-anchor="middle">∀ε&gt;0 ∃N ∀m,n≥N：d(x_m,x_n)&lt;ε</text>
+  <path d="M950 194 L950 236" class="arrow"/>
+  <rect x="775" y="236" width="350" height="70" rx="10" fill="#ffffff" stroke="#6ee7b7"/>
+  <text x="950" y="265" class="sans body ink" text-anchor="middle">空间 X 完备</text>
+  <text x="950" y="290" class="sans small muted" text-anchor="middle">候选极限不会掉出 X</text>
+  <path d="M950 306 L950 348" class="arrow"/>
+  <rect x="775" y="348" width="350" height="72" rx="10" fill="#ffffff" stroke="#6ee7b7"/>
+  <text x="950" y="378" class="math formula green" text-anchor="middle">∃a∈X：x_n→a</text>
+  <text x="950" y="405" class="sans small muted" text-anchor="middle">在 Q 中这一步可能失败</text>
+  <rect x="92" y="500" width="1016" height="46" rx="10" class="red-soft" stroke="#fecaca"/>
+  <text x="600" y="529" class="sans result ink" text-anchor="middle">对象收敛、目标值收敛、速度、停止判据和浮点停滞是五种不同声明。</text>
+</svg>

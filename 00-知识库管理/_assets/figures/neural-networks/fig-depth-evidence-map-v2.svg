@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Depth Evidence Map：六种深度，五级断言，六本稳定账</title>
+<desc id="desc">名义层数、路径长度、ODE 时间和系统串行深度不是同一个变量；结构恒等式、条件定理、机制、实验与系统证据也不能互相代替。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">先声明 depth 坐标</text>
+<rect x="52" y="88" width="310" height="46" rx="4" fill="#FFFEFB" stroke="#2563EB" stroke-width="1.8"/>
+<text x="68" y="117" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">1  nominal blocks</text>
+<rect x="52" y="152" width="310" height="46" rx="4" fill="#FFFEFB" stroke="#0F766E" stroke-width="1.8"/>
+<text x="68" y="181" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">2  nonlinear path length</text>
+<rect x="52" y="216" width="310" height="46" rx="4" fill="#FFFEFB" stroke="#B7791F" stroke-width="1.8"/>
+<text x="68" y="245" font-size="15" font-weight="700" text-anchor="start" fill="#B7791F">3  shortest graph distance</text>
+<rect x="52" y="280" width="310" height="46" rx="4" fill="#FFFEFB" stroke="#C24135" stroke-width="1.8"/>
+<text x="68" y="309" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">4  effective gradient path</text>
+<rect x="52" y="344" width="310" height="46" rx="4" fill="#FFFEFB" stroke="#2563EB" stroke-width="1.8"/>
+<text x="68" y="373" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">5  ODE horizon / step</text>
+<rect x="52" y="408" width="310" height="46" rx="4" fill="#FFFEFB" stroke="#0F766E" stroke-width="1.8"/>
+<text x="68" y="437" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">6  sequential latency</text>
+<text x="207" y="489" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">same L can imply different depth</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">toy path，不是独立集成</text>
+<rect x="445" y="94" width="315" height="78" rx="5" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="602" y="124" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">(1+a)^L = sum C(L,k) a^k</text>
+<text x="602" y="151" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">scalar / homogeneous calibration</text>
+<rect x="462" y="340" width="25" height="20" rx="3" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+<text x="474" y="383" font-size="15" font-weight="650" text-anchor="middle" fill="#64748B">0</text>
+<rect x="503" y="308" width="25" height="52" rx="3" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+<text x="515" y="383" font-size="15" font-weight="650" text-anchor="middle" fill="#64748B">1</text>
+<rect x="544" y="266" width="25" height="94" rx="3" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+<text x="556" y="383" font-size="15" font-weight="650" text-anchor="middle" fill="#64748B">2</text>
+<rect x="585" y="248" width="25" height="112" rx="3" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+<text x="597" y="383" font-size="15" font-weight="650" text-anchor="middle" fill="#64748B">3</text>
+<rect x="626" y="278" width="25" height="82" rx="3" fill="#EFF6FF" stroke="#B7791F" stroke-width="1.5"/>
+<text x="638" y="383" font-size="15" font-weight="650" text-anchor="middle" fill="#64748B">4</text>
+<rect x="667" y="318" width="25" height="42" rx="3" fill="#EFF6FF" stroke="#B7791F" stroke-width="1.5"/>
+<text x="679" y="383" font-size="15" font-weight="650" text-anchor="middle" fill="#64748B">5</text>
+<rect x="708" y="344" width="25" height="16" rx="3" fill="#EFF6FF" stroke="#B7791F" stroke-width="1.5"/>
+<text x="720" y="383" font-size="15" font-weight="650" text-anchor="middle" fill="#64748B">6</text>
+<line x1="455" y1="361" x2="747" y2="361" stroke="#D7DEE8" stroke-width="1.8"/>
+<text x="602" y="414" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">p=a/(1+a),  E[K]=Lp</text>
+<text x="602" y="444" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">a=c/L  =&gt;  E[K] approaches c</text>
+<text x="602" y="474" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">matrices / nonlinear gates</text>
+<text x="602" y="496" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">break this probability reading</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">证据层与稳定仪表</text>
+<rect x="845" y="88" width="285" height="40" rx="4" fill="#FFFEFB" stroke="#2563EB" stroke-width="1.6"/>
+<text x="860" y="114" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">1  exact structure</text>
+<rect x="845" y="145" width="285" height="40" rx="4" fill="#FFFEFB" stroke="#0F766E" stroke-width="1.6"/>
+<text x="860" y="171" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">2  conditional theorem</text>
+<rect x="845" y="202" width="285" height="40" rx="4" fill="#FFFEFB" stroke="#B7791F" stroke-width="1.6"/>
+<text x="860" y="228" font-size="15" font-weight="700" text-anchor="start" fill="#B7791F">3  mechanism</text>
+<rect x="845" y="259" width="285" height="40" rx="4" fill="#FFFEFB" stroke="#C24135" stroke-width="1.6"/>
+<text x="860" y="285" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">4  controlled experiment</text>
+<rect x="845" y="316" width="285" height="40" rx="4" fill="#FFFEFB" stroke="#2563EB" stroke-width="1.6"/>
+<text x="860" y="342" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">5  system evidence</text>
+<text x="845" y="407" font-size="16" font-weight="700" text-anchor="start" fill="#1F2937">audit together:</text>
+<text x="845" y="438" font-size="15" font-weight="650" text-anchor="start" fill="#0F766E">forward | backward | update</text>
+<text x="845" y="466" font-size="15" font-weight="650" text-anchor="start" fill="#C24135">numerical | statistical | system</text>
+<text x="1128" y="495" font-size="15" font-weight="600" text-anchor="end" fill="#64748B">correlation != norm</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">先固定 depth 与 stability 的对象，再把每条结论放回它真正拥有的证据层。</text>
+</svg>

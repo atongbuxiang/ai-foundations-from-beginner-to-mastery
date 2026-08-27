@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Normalization Axis Contract：统计组、参数轴与不变性</title>
+<desc id="desc">同一张量可按不同轴组成统计组；完整归一化合同还包括 affine 参数共享、状态规则和 epsilon 约定；共同平移与正尺度只在明确条件下被删除。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">同一张量，两种统计组</text>
+<text x="55" y="92" font-size="17" font-weight="700" text-anchor="start" fill="#1F2937">X [B,T,D]</text>
+<rect x="65" y="112" width="35" height="28" rx="3" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.7"/>
+<rect x="113" y="112" width="35" height="28" rx="3" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.7"/>
+<rect x="161" y="112" width="35" height="28" rx="3" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.7"/>
+<rect x="209" y="112" width="35" height="28" rx="3" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.7"/>
+<rect x="257" y="112" width="35" height="28" rx="3" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.7"/>
+<rect x="65" y="151" width="35" height="28" rx="3" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.7"/>
+<rect x="113" y="151" width="35" height="28" rx="3" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.7"/>
+<rect x="161" y="151" width="35" height="28" rx="3" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.7"/>
+<rect x="209" y="151" width="35" height="28" rx="3" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.7"/>
+<rect x="257" y="151" width="35" height="28" rx="3" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.7"/>
+<rect x="65" y="190" width="35" height="28" rx="3" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.7"/>
+<rect x="113" y="190" width="35" height="28" rx="3" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.7"/>
+<rect x="161" y="190" width="35" height="28" rx="3" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.7"/>
+<rect x="209" y="190" width="35" height="28" rx="3" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.7"/>
+<rect x="257" y="190" width="35" height="28" rx="3" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.7"/>
+<rect x="65" y="229" width="35" height="28" rx="3" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.7"/>
+<rect x="113" y="229" width="35" height="28" rx="3" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.7"/>
+<rect x="161" y="229" width="35" height="28" rx="3" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.7"/>
+<rect x="209" y="229" width="35" height="28" rx="3" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.7"/>
+<rect x="257" y="229" width="35" height="28" rx="3" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.7"/>
+<rect x="156" y="106" width="47" height="158" rx="5" fill="none" stroke="#2563EB" stroke-width="2.3"/>
+<text x="180" y="290" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">fixed feature</text>
+<text x="180" y="313" font-size="15" font-weight="500" text-anchor="middle" fill="#64748B">reduce B,T</text>
+<rect x="65" y="352" width="35" height="28" rx="3" fill="#ECFDF5" stroke="#0F766E" stroke-width="1.7"/>
+<rect x="113" y="352" width="35" height="28" rx="3" fill="#ECFDF5" stroke="#0F766E" stroke-width="1.7"/>
+<rect x="161" y="352" width="35" height="28" rx="3" fill="#ECFDF5" stroke="#0F766E" stroke-width="1.7"/>
+<rect x="209" y="352" width="35" height="28" rx="3" fill="#ECFDF5" stroke="#0F766E" stroke-width="1.7"/>
+<rect x="257" y="352" width="35" height="28" rx="3" fill="#ECFDF5" stroke="#0F766E" stroke-width="1.7"/>
+<rect x="65" y="391" width="35" height="28" rx="3" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.7"/>
+<rect x="113" y="391" width="35" height="28" rx="3" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.7"/>
+<rect x="161" y="391" width="35" height="28" rx="3" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.7"/>
+<rect x="209" y="391" width="35" height="28" rx="3" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.7"/>
+<rect x="257" y="391" width="35" height="28" rx="3" fill="#FFFEFB" stroke="#D7DEE8" stroke-width="1.7"/>
+<rect x="59" y="346" width="233" height="40" rx="5" fill="none" stroke="#0F766E" stroke-width="2.3"/>
+<text x="176" y="430" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">fixed token: reduce D</text>
+<text x="176" y="458" font-size="15" font-weight="500" text-anchor="middle" fill="#C24135">same shape, different function</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">四元组定义一个算子</text>
+<rect x="455" y="105" width="230" height="48" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="570.0" y="135.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">1  select group G</text>
+<line x1="570" y1="156" x2="570" y2="174" stroke="#1F2937" stroke-width="1.8" marker-end="url(#a3)"/>
+<rect x="455" y="178" width="230" height="48" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="570.0" y="208.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">2  center: x - mean</text>
+<line x1="570" y1="229" x2="570" y2="247" stroke="#1F2937" stroke-width="1.8" marker-end="url(#a3)"/>
+<rect x="455" y="251" width="230" height="48" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="570.0" y="281.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">3  scale: / sqrt(q+eps)</text>
+<line x1="570" y1="302" x2="570" y2="320" stroke="#1F2937" stroke-width="1.8" marker-end="url(#a3)"/>
+<rect x="455" y="324" width="230" height="48" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="570.0" y="354.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">4  affine: gamma, beta</text>
+<rect x="705" y="118" width="70" height="78" rx="5" fill="#FFF5F2" stroke="#C24135" stroke-width="2"/>
+<text x="740" y="147" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">state</text>
+<text x="740" y="172" font-size="15" font-weight="600" text-anchor="middle" fill="#64748B">mode</text>
+<line x1="688" y1="142" x2="701" y2="142" stroke="#C24135" stroke-width="1.8" marker-end="url(#a2)"/>
+<rect x="455" y="415" width="320" height="65" rx="5" fill="#FFF5F2" stroke="#C24135" stroke-width="2"/>
+<text x="615" y="441" font-size="15" font-weight="700" text-anchor="middle" fill="#C24135">axes + affine + state + epsilon</text>
+<text x="615" y="465" font-size="15" font-weight="500" text-anchor="middle" fill="#64748B">module name is only a preset</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">只删除声明过的方向</text>
+<line x1="850" y1="292" x2="1125" y2="292" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="975" y1="105" x2="975" y2="390" stroke="#D7DEE8" stroke-width="2"/>
+<path d="M865 360L1100 145" fill="none" stroke="#0F766E" stroke-width="2.5" stroke-dasharray="7 5"/>
+<text x="1090" y="132" font-size="15" font-weight="700" text-anchor="end" fill="#0F766E">1-perp</text>
+<circle cx="905" cy="170" r="7" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<circle cx="955" cy="220" r="7" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<line x1="905" y1="170" x2="951" y2="216" stroke="#2563EB" stroke-width="2.2" marker-end="url(#a0)"/>
+<text x="882" y="158" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">x</text>
+<text x="958" y="213" font-size="15" font-weight="600" text-anchor="start" fill="#2563EB">center</text>
+<circle cx="1035" cy="205" r="7" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<line x1="955" y1="220" x2="1031" y2="207" stroke="#0F766E" stroke-width="2.5" marker-end="url(#a1)"/>
+<text x="1043" y="203" font-size="15" font-weight="600" text-anchor="start" fill="#0F766E">normalize radius</text>
+<rect x="845" y="410" width="285" height="70" rx="5" fill="#FFF5F2" stroke="#C24135" stroke-width="2"/>
+<text x="987" y="436" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">shift: exact</text>
+<text x="987" y="459" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">scale: exact only if eps = 0</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">先锁定统计轴、参数轴与状态，再讨论被删除的方向；normalization 不是 whitening。</text>
+</svg>

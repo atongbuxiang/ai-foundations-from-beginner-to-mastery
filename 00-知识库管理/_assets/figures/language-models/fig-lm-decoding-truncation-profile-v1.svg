@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">四种截断：同一概率剖面的四把尺</title><desc id="desc">top-k、top-p、locally typical 与 min-p 的候选集合。</desc>
+<rect width="1200" height="700" fill="#FBF8F1"/>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#667784"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#183044" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<line x1="48" y1="70" x2="1152" y2="70" stroke="#C87922" stroke-width="4"/>
+<text x="52" y="49" font-size="24" font-weight="700" fill="#183044">四种截断：同一概率剖面的四把尺</text>
+<text x="75" y="110" text-anchor="start" font-size="16" font-weight="700" fill="#183044">原始分布 p(v) · 按概率降序</text>
+<rect x="75" y="176.39999999999998" width="42" height="268.6" rx="4" fill="#245AA8"/>
+<text x="96" y="467" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">v1</text>
+<text x="96" y="161.39999999999998" text-anchor="middle" font-size="11" font-weight="700" fill="#245AA8">0.34</text>
+<rect x="142" y="263.29999999999995" width="42" height="181.70000000000002" rx="4" fill="#17766E"/>
+<text x="163" y="467" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">v2</text>
+<text x="163" y="248.29999999999998" text-anchor="middle" font-size="11" font-weight="700" fill="#17766E">0.23</text>
+<rect x="209" y="318.6" width="42" height="126.4" rx="4" fill="#4F7B45"/>
+<text x="230" y="467" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">v3</text>
+<text x="230" y="303.6" text-anchor="middle" font-size="11" font-weight="700" fill="#4F7B45">0.16</text>
+<rect x="276" y="358.1" width="42" height="86.9" rx="4" fill="#C87922"/>
+<text x="297" y="467" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">v4</text>
+<text x="297" y="343.1" text-anchor="middle" font-size="11" font-weight="700" fill="#C87922">0.11</text>
+<rect x="343" y="389.7" width="42" height="55.300000000000004" rx="4" fill="#7054A3"/>
+<text x="364" y="467" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">v5</text>
+<text x="364" y="374.7" text-anchor="middle" font-size="11" font-weight="700" fill="#7054A3">0.07</text>
+<rect x="410" y="413.4" width="42" height="31.6" rx="4" fill="#B7443E"/>
+<text x="431" y="467" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">v6</text>
+<text x="431" y="398.4" text-anchor="middle" font-size="11" font-weight="700" fill="#B7443E">0.04</text>
+<rect x="477" y="421.3" width="42" height="23.7" rx="4" fill="#667784"/>
+<text x="498" y="467" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">v7</text>
+<text x="498" y="406.3" text-anchor="middle" font-size="11" font-weight="700" fill="#667784">0.03</text>
+<rect x="544" y="429.2" width="42" height="15.8" rx="4" fill="#D9D5CB"/>
+<text x="565" y="467" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">v8</text>
+<text x="565" y="414.2" text-anchor="middle" font-size="11" font-weight="700" fill="#D9D5CB">0.02</text>
+<rect x="660" y="115" width="220" height="145" rx="10" fill="#EEF4FC" stroke="#245AA8" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="675" y="143" text-anchor="start" font-size="15" font-weight="700" fill="#245AA8">top-k · k=3</text>
+<text x="675" y="168" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">固定保留 3 个最高概率 token</text>
+<text x="675" y="188" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784"></text>
+<text x="675" y="208" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">{v1,v2,v3}</text>
+<rect x="910" y="115" width="220" height="145" rx="10" fill="#EAF7F4" stroke="#17766E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="925" y="143" text-anchor="start" font-size="15" font-weight="700" fill="#17766E">top-p · p=.75</text>
+<text x="925" y="168" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">最小前缀累计质量 ≥ .75</text>
+<text x="925" y="188" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784"></text>
+<text x="925" y="208" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">{v1,v2,v3,v4}</text>
+<rect x="660" y="300" width="220" height="145" rx="10" fill="#F3EFFA" stroke="#7054A3" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="675" y="328" text-anchor="start" font-size="15" font-weight="700" fill="#7054A3">typical · ε</text>
+<text x="675" y="353" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">按 |−log p(v)−H(p)| 接近熵排序</text>
+<text x="675" y="373" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784"></text>
+<text x="675" y="393" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">不是概率排名前缀</text>
+<rect x="910" y="300" width="220" height="145" rx="10" fill="#FFF5E7" stroke="#C87922" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="925" y="328" text-anchor="start" font-size="15" font-weight="700" fill="#C87922">min-p · α=.2</text>
+<text x="925" y="353" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">保留 p(v) ≥ α·max p</text>
+<text x="925" y="373" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784"></text>
+<text x="925" y="393" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">threshold=.068</text>
+<rect x="75" y="520" width="1055" height="105" rx="10" fill="#FFF0ED" stroke="#B7443E" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="90" y="548" text-anchor="start" font-size="15" font-weight="700" fill="#B7443E">统一算子</text>
+<text x="90" y="573" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">S(p; λ) → q(v) = p(v)·1[v∈S] / Σu∈S p(u)     ·     support 会随 temperature 与 processor 顺序变化</text>
+<text x="90" y="593" text-anchor="start" font-size="12.5" font-weight="400" fill="#667784">方法定义可以精确复现；跨任务的经验优越性必须由预注册对照、足够样本和可靠统计单独支持。</text>
+<line x1="48" y1="650" x2="1152" y2="650" stroke="#D9D5CB"/>
+<text x="52" y="674" font-size="13" fill="#667784">截断删除尾部并重新归一化；它改变 rollout 分布，不是“只把低概率 token 忽略掉”而已。</text>
+</svg>

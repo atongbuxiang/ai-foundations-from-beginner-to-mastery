@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">成员推断的尾部与 Unlearning 的重训参照</title><desc id="desc">低 FPR 检验、似然比与删除后分布比较。</desc>
+<rect width="1200" height="700" fill="#FBF8F1"/>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="3.5" orient="auto"><path d="M0,0 L0,7 L8,3.5 z" fill="#667784"/></marker><filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#183044" flood-opacity="0.10"/></filter></defs>
+<style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}</style>
+<line x1="48" y1="70" x2="1152" y2="70" stroke="#7054A3" stroke-width="4"/>
+<text x="52" y="49" font-size="24" font-weight="700" fill="#183044">成员推断的尾部与 Unlearning 的重训参照</text>
+<text x="58" y="108" text-anchor="start" font-size="13" font-weight="700" fill="#7054A3">A · 固定极低 FPR，再读 TPR</text>
+<line x1="70" y1="400" x2="550" y2="400" stroke="#183044"/>
+<line x1="70" y1="400" x2="70" y2="165" stroke="#183044"/>
+<path d="M70.0,398.2 L74.8,397.8 L79.6,397.3 L84.4,396.7 L89.2,396.0 L94.0,395.2 L98.8,394.3 L103.6,393.2 L108.4,391.9 L113.2,390.5 L118.0,388.8 L122.8,386.9 L127.6,384.7 L132.4,382.2 L137.2,379.5 L142.0,376.4 L146.8,373.0 L151.6,369.2 L156.4,365.0 L161.2,360.5 L166.0,355.5 L170.8,350.2 L175.6,344.5 L180.4,338.3 L185.2,331.9 L190.0,325.0 L194.8,317.9 L199.6,310.4 L204.4,302.8 L209.2,294.9 L214.0,286.9 L218.8,278.8 L223.6,270.8 L228.4,262.8 L233.2,255.0 L238.0,247.3 L242.8,240.1 L247.6,233.2 L252.4,226.7 L257.2,220.9 L262.0,215.6 L266.8,211.0 L271.6,207.2 L276.4,204.2 L281.2,202.0 L286.0,200.7 L290.8,200.2 L295.6,200.7 L300.4,202.0 L305.2,204.2 L310.0,207.2 L314.8,211.0 L319.6,215.6 L324.4,220.9 L329.2,226.7 L334.0,233.2 L338.8,240.1 L343.6,247.3 L348.4,255.0 L353.2,262.8 L358.0,270.8 L362.8,278.8 L367.6,286.9 L372.4,294.9 L377.2,302.8 L382.0,310.4 L386.8,317.9 L391.6,325.0 L396.4,331.9 L401.2,338.3 L406.0,344.5 L410.8,350.2 L415.6,355.5 L420.4,360.5 L425.2,365.0 L430.0,369.2 L434.8,373.0 L439.6,376.4 L444.4,379.5 L449.2,382.2 L454.0,384.7 L458.8,386.9 L463.6,388.8 L468.4,390.5 L473.2,391.9 L478.0,393.2 L482.8,394.3 L487.6,395.2 L492.4,396.0 L497.2,396.7 L502.0,397.3 L506.8,397.8 L511.6,398.2 L516.4,398.5 L521.2,398.8 L526.0,399.0 L530.8,399.2 L535.6,399.4 L540.4,399.5 L545.2,399.6 L550.0,399.7" fill="none" stroke="#245AA8" stroke-width="3"/>
+<path d="M70.0,400.0 L74.8,400.0 L79.6,399.9 L84.4,399.9 L89.2,399.9 L94.0,399.9 L98.8,399.8 L103.6,399.8 L108.4,399.7 L113.2,399.7 L118.0,399.6 L122.8,399.5 L127.6,399.4 L132.4,399.3 L137.2,399.1 L142.0,398.9 L146.8,398.6 L151.6,398.3 L156.4,398.0 L161.2,397.6 L166.0,397.1 L170.8,396.6 L175.6,395.9 L180.4,395.1 L185.2,394.3 L190.0,393.3 L194.8,392.1 L199.6,390.8 L204.4,389.3 L209.2,387.6 L214.0,385.7 L218.8,383.6 L223.6,381.2 L228.4,378.6 L233.2,375.7 L238.0,372.5 L242.8,369.0 L247.6,365.2 L252.4,361.1 L257.2,356.7 L262.0,352.0 L266.8,347.0 L271.6,341.6 L276.4,336.0 L281.2,330.1 L286.0,324.0 L290.8,317.7 L295.6,311.2 L300.4,304.5 L305.2,297.8 L310.0,291.0 L314.8,284.2 L319.6,277.4 L324.4,270.8 L329.2,264.3 L334.0,258.1 L338.8,252.1 L343.6,246.5 L348.4,241.3 L353.2,236.6 L358.0,232.4 L362.8,228.8 L367.6,225.8 L372.4,223.4 L377.2,221.6 L382.0,220.6 L386.8,220.2 L391.6,220.6 L396.4,221.6 L401.2,223.4 L406.0,225.8 L410.8,228.8 L415.6,232.4 L420.4,236.6 L425.2,241.3 L430.0,246.5 L434.8,252.1 L439.6,258.1 L444.4,264.3 L449.2,270.8 L454.0,277.4 L458.8,284.2 L463.6,291.0 L468.4,297.8 L473.2,304.5 L478.0,311.2 L482.8,317.7 L487.6,324.0 L492.4,330.1 L497.2,336.0 L502.0,341.6 L506.8,347.0 L511.6,352.0 L516.4,356.7 L521.2,361.1 L526.0,365.2 L530.8,369.0 L535.6,372.5 L540.4,375.7 L545.2,378.6 L550.0,381.2" fill="none" stroke="#B7443E" stroke-width="3"/>
+<line x1="444.4" y1="400" x2="444.4" y2="165" stroke="#C87922" stroke-width="3" stroke-dasharray="7 5"/>
+<text x="452.4" y="183" text-anchor="start" font-size="11" font-weight="700" fill="#C87922">τ at FPR=α</text>
+<text x="160" y="155" text-anchor="start" font-size="11" font-weight="700" fill="#245AA8">non-member score</text>
+<text x="365" y="155" text-anchor="start" font-size="11" font-weight="700" fill="#B7443E">member score</text>
+<text x="310" y="430" text-anchor="middle" font-size="11" font-weight="400" fill="#667784">attack score →</text>
+<rect x="70" y="470" width="480" height="135" rx="10" fill="#FFF5E7" stroke="#C87922" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="85" y="498" text-anchor="start" font-size="15" font-weight="700" fill="#C87922">基率提醒</text>
+<text x="85" y="522" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">PPV = π·TPR / [π·TPR + (1−π)·FPR]</text>
+<text x="85" y="541" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">成员极罕见时，即使 ROC-AUC 尚可，阳性告警仍可能几乎全是假阳。</text>
+<text x="85" y="560" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">低 FPR 区域需要很大的 non-member 分母。</text>
+<text x="610" y="108" text-anchor="start" font-size="13" font-weight="700" fill="#4F7B45">B · 删除目标是接近“从未见过”</text>
+<ellipse cx="715" cy="235" rx="100" ry="65" fill="#B7443E" opacity=".14" stroke="#B7443E" stroke-width="3"/>
+<text x="715" y="230" text-anchor="middle" font-size="13" font-weight="700" fill="#B7443E">原模型</text>
+<text x="715" y="249" text-anchor="middle" font-size="13" font-weight="700" fill="#B7443E">A(D)</text>
+<ellipse cx="955" cy="235" rx="100" ry="65" fill="#4F7B45" opacity=".14" stroke="#4F7B45" stroke-width="3"/>
+<text x="955" y="230" text-anchor="middle" font-size="13" font-weight="700" fill="#4F7B45">重训参照</text>
+<text x="955" y="249" text-anchor="middle" font-size="13" font-weight="700" fill="#4F7B45">A(D∖R)</text>
+<ellipse cx="835" cy="430" rx="100" ry="65" fill="#7054A3" opacity=".14" stroke="#7054A3" stroke-width="3"/>
+<text x="835" y="425" text-anchor="middle" font-size="13" font-weight="700" fill="#7054A3">unlearned</text>
+<text x="835" y="444" text-anchor="middle" font-size="13" font-weight="700" fill="#7054A3">U(A(D),R)</text>
+<line x1="785" y1="280" x2="815" y2="382" stroke="#7054A3" stroke-width="2.1" marker-end="url(#arrow)"/>
+<line x1="900" y1="386" x2="936" y2="292" stroke="#4F7B45" stroke-width="2.1" marker-end="url(#arrow)" stroke-dasharray="7 5"/>
+<text x="1048" y="350" text-anchor="middle" font-size="13" font-weight="700" fill="#183044">d(L(U), L(retrain)) ≤ ε</text>
+<rect x="610" y="515" width="515" height="90" rx="10" fill="#EEF4FC" stroke="#245AA8" stroke-width="1.8" filter="url(#shadow)"/>
+<text x="625" y="543" text-anchor="start" font-size="15" font-weight="700" fill="#245AA8">删除 lineage</text>
+<text x="625" y="567" text-anchor="start" font-size="12.2" font-weight="400" fill="#667784">raw record → dedup cluster → token shard → checkpoint/adapter → embedding index/cache → served versions；旧副本可访问则删除闭环未完成。</text>
+<line x1="48" y1="650" x2="1152" y2="650" stroke="#D9D5CB"/>
+<text x="52" y="674" font-size="13" fill="#667784">一个攻击失效或 benchmark 效用不变都不是删除证明；声明参考重训分布、距离、观察族、失败概率和所有派生副本。</text>
+</svg>

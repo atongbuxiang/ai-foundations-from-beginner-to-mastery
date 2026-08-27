@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">μP Scale-up 证据与失败门</title>
+  <desc id="desc">从模型族和形状冻结，经过坐标、谱深度、代理超参数曲线、目标安全和预算门，逐级升级尺度迁移结论，并在失败时回退诊断。</desc>
+  <rect width="1200" height="800" fill="#FFFEFB"/>
+  <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}.h{font-size:27px;font-weight:700}.sh{font-size:17px;font-weight:700}.b{font-size:15px}.s{font-size:15px;fill:#64748B}.blue{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.teal{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.amber{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.red{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}.arr{stroke:#2563EB;stroke-width:3;fill:none}.back{stroke:#C0392B;stroke-width:2.5;stroke-dasharray:7 6;fill:none}</style>
+  <defs>
+    <marker id="ab" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#2563EB"/></marker>
+    <marker id="ar" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#C0392B"/></marker>
+  </defs>
+  <text x="48" y="48" class="h" fill="#2563EB">从“规则能运行”到“迁移成功”要穿过六道门</text>
+
+  <rect x="48" y="92" width="164" height="164" rx="14" class="blue"/>
+  <text x="68" y="126" class="sh">1 Family / Shape</text>
+  <text x="68" y="158" class="b">base · delta</text>
+  <text x="68" y="186" class="b">target · infshape</text>
+  <text x="68" y="214" class="b">orientation / groups</text>
+  <text x="68" y="242" class="s">未冻结，不准扩展</text>
+  <path d="M212 174 L232 174" class="arr" marker-end="url(#ab)"/>
+
+  <rect x="244" y="92" width="164" height="164" rx="14" class="teal"/>
+  <text x="264" y="126" class="sh">2 Coordinate</text>
+  <text x="264" y="158" class="b">activation · gradient</text>
+  <text x="264" y="186" class="b">update · feature</text>
+  <text x="264" y="214" class="b">logit · width / step</text>
+  <text x="264" y="242" class="s">E2：实现趋势</text>
+  <path d="M408 174 L428 174" class="arr" marker-end="url(#ab)"/>
+
+  <rect x="440" y="92" width="164" height="164" rx="14" class="amber"/>
+  <text x="460" y="126" class="sh">3 Spectral / Depth</text>
+  <text x="460" y="158" class="b">||W||₂ · ||ΔW||₂</text>
+  <text x="460" y="186" class="b">rank · residual</text>
+  <text x="460" y="214" class="b">J · width × depth</text>
+  <text x="460" y="242" class="s">抓低秩和累积风险</text>
+  <path d="M604 174 L624 174" class="arr" marker-end="url(#ab)"/>
+
+  <rect x="636" y="92" width="164" height="164" rx="14" class="blue"/>
+  <text x="656" y="126" class="sh">4 Proxy Curves</text>
+  <text x="656" y="158" class="b">full HP curves</text>
+  <text x="656" y="186" class="b">overlap · regret</text>
+  <text x="656" y="214" class="b">seeds · failures</text>
+  <text x="656" y="242" class="s">E3：选择稳定</text>
+  <path d="M800 174 L820 174" class="arr" marker-end="url(#ab)"/>
+
+  <rect x="832" y="92" width="164" height="164" rx="14" class="teal"/>
+  <text x="852" y="126" class="sh">5 Target Safety</text>
+  <text x="852" y="158" class="b">loss · NaN / OOM</text>
+  <text x="852" y="186" class="b">saturation</text>
+  <text x="852" y="214" class="b">throughput / budget</text>
+  <text x="852" y="242" class="s">E4：域内成功</text>
+  <path d="M996 174 L1016 174" class="arr" marker-end="url(#ab)"/>
+
+  <rect x="1028" y="92" width="124" height="164" rx="14" class="red"/>
+  <text x="1048" y="126" class="sh">6 Claim</text>
+  <text x="1048" y="158" class="b">family</text>
+  <text x="1048" y="186" class="b">axes</text>
+  <text x="1048" y="214" class="b">protocol</text>
+  <text x="1048" y="242" class="s">边界化措辞</text>
+
+  <path d="M1090 270 C1090 320 950 336 900 336 L156 336 C88 336 84 286 118 264" class="back" marker-end="url(#ar)"/>
+  <text x="430" y="326" class="s" fill="#C0392B">任一 gate 失败：保留运行，退回最近可诊断层；不要删除失败后继续升级 claim</text>
+
+  <text x="48" y="398" class="h" fill="#0F766E">三种迁移统计回答三种问题</text>
+  <rect x="48" y="432" width="336" height="148" rx="14" class="blue"/>
+  <text x="72" y="468" class="sh">Optimum drift</text>
+  <text x="72" y="502" class="b">D_opt = d(h_n*, h_n0*)</text>
+  <text x="72" y="534" class="s">直观；平谷/多峰/grid 下不稳定</text>
+  <text x="72" y="560" class="s">需要 target sweep 才能估</text>
+  <rect x="432" y="432" width="336" height="148" rx="14" class="teal"/>
+  <text x="456" y="468" class="sh">Transfer regret</text>
+  <text x="456" y="502" class="b">F_n(h_n0*) − min_h F_n(h)</text>
+  <text x="456" y="534" class="s">回答复制 proxy 选择损失多少</text>
+  <text x="456" y="560" class="s">仍需 target comparator / sweep</text>
+  <rect x="816" y="432" width="336" height="148" rx="14" class="amber"/>
+  <text x="840" y="468" class="sh">Near-optimal overlap</text>
+  <text x="840" y="502" class="b">H_n(tau) intersect H_n0(tau)</text>
+  <text x="840" y="534" class="s">适合平坦谷与稳健选择</text>
+  <text x="840" y="560" class="s">τ 与 uncertainty 必须预注册</text>
+
+  <text x="48" y="634" class="h" fill="#B76E00">预算账决定方法名称是否诚实</text>
+  <rect x="48" y="668" width="1104" height="84" rx="14" class="amber"/>
+  <text x="72" y="704" class="b">C_total = C_train + C_tune + C_select + C_eval + C_confirm + failed runs</text>
+  <text x="72" y="734" class="b">target 多次救援 / 邻域搜索 → few-shot 或 telescoping；不能继续称严格 zero-shot。</text>
+  <text x="48" y="788" class="s">边界：通过六门只支持锁定 family / axes / protocol 内的结论，不构成跨架构普适定理。</text>
+</svg>

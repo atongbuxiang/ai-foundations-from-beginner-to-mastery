@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">概率链式分解、顺序归纳偏置与祖先采样</title>
+  <desc id="desc">前两栏展示同一三变量联合分布的两个条件分解顺序，第三栏展示与第一个顺序相匹配的祖先采样步骤。</desc>
+  <rect width="1200" height="620" fill="#FFFEFB"/>
+  <style>.sans{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.mono{font-family:"SFMono-Regular",Menlo,monospace}.ink{fill:#1F2937}.muted{fill:#64748B}.blue{fill:#2563EB}.green{fill:#0F766E}.amber{fill:#B7791F}.red{fill:#C24135}</style>
+  <line x1="400" y1="48" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/><line x1="800" y1="48" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+  <text x="52" y="66" class="sans blue" font-size="23" font-weight="700">A｜顺序 1 → 2 → 3</text>
+  <text x="52" y="103" class="mono muted" font-size="17">p(x₁) p(x₂|x₁) p(x₃|x₁,x₂)</text>
+  <circle cx="105" cy="235" r="38" fill="#EEF3FF" stroke="#2563EB" stroke-width="3"/><circle cx="214" cy="235" r="38" fill="#EEF3FF" stroke="#2563EB" stroke-width="3"/><circle cx="323" cy="235" r="38" fill="#EEF3FF" stroke="#2563EB" stroke-width="3"/>
+  <text x="105" y="242" class="mono ink" font-size="22" text-anchor="middle">x₁</text><text x="214" y="242" class="mono ink" font-size="22" text-anchor="middle">x₂</text><text x="323" y="242" class="mono ink" font-size="22" text-anchor="middle">x₃</text>
+  <path d="M143 235 H176" stroke="#2563EB" stroke-width="3"/><path d="M176 235 l-13 -8 v16 z" fill="#2563EB"/><path d="M252 235 H285" stroke="#2563EB" stroke-width="3"/><path d="M285 235 l-13 -8 v16 z" fill="#2563EB"/><path d="M118 195 Q214 121 310 195" fill="none" stroke="#2563EB" stroke-width="2.5"/>
+  <text x="52" y="338" class="sans ink" font-size="18">每个条件任务沿此“过去”定义</text>
+  <text x="448" y="66" class="sans amber" font-size="23" font-weight="700">B｜顺序 2 → 3 → 1</text>
+  <text x="448" y="103" class="mono muted" font-size="17">p(x₂) p(x₃|x₂) p(x₁|x₂,x₃)</text>
+  <circle cx="505" cy="235" r="38" fill="#FFF7E6" stroke="#B7791F" stroke-width="3"/><circle cx="614" cy="235" r="38" fill="#FFF7E6" stroke="#B7791F" stroke-width="3"/><circle cx="723" cy="235" r="38" fill="#FFF7E6" stroke="#B7791F" stroke-width="3"/>
+  <text x="505" y="242" class="mono ink" font-size="22" text-anchor="middle">x₂</text><text x="614" y="242" class="mono ink" font-size="22" text-anchor="middle">x₃</text><text x="723" y="242" class="mono ink" font-size="22" text-anchor="middle">x₁</text>
+  <path d="M543 235 H576" stroke="#B7791F" stroke-width="3"/><path d="M576 235 l-13 -8 v16 z" fill="#B7791F"/><path d="M652 235 H685" stroke="#B7791F" stroke-width="3"/><path d="M685 235 l-13 -8 v16 z" fill="#B7791F"/><path d="M518 195 Q614 121 710 195" fill="none" stroke="#B7791F" stroke-width="2.5"/>
+  <text x="448" y="338" class="sans ink" font-size="18">joint 相同；有限网络难度可不同</text>
+  <text x="848" y="66" class="sans green" font-size="23" font-weight="700">C｜匹配的祖先采样</text>
+  <text x="848" y="103" class="sans muted" font-size="17">未知未来值必须逐步产生</text>
+  <rect x="864" y="153" width="260" height="68" rx="5" fill="#E8F5F1" stroke="#0F766E" stroke-width="3"/><text x="994" y="195" class="mono ink" font-size="18" text-anchor="middle">x₁ ~ pθ(x₁)</text>
+  <path d="M994 221 V250" stroke="#1F2937" stroke-width="3"/><path d="M994 250 l-8 -13 h16 z" fill="#1F2937"/>
+  <rect x="864" y="250" width="260" height="68" rx="5" fill="#E8F5F1" stroke="#0F766E" stroke-width="3"/><text x="994" y="292" class="mono ink" font-size="18" text-anchor="middle">x₂ ~ pθ(·|x₁)</text>
+  <path d="M994 318 V347" stroke="#1F2937" stroke-width="3"/><path d="M994 347 l-8 -13 h16 z" fill="#1F2937"/>
+  <rect x="864" y="347" width="260" height="68" rx="5" fill="#E8F5F1" stroke="#0F766E" stroke-width="3"/><text x="994" y="389" class="mono ink" font-size="18" text-anchor="middle">x₃ ~ pθ(·|x₁,x₂)</text>
+  <line x1="52" y1="472" x2="1148" y2="472" stroke="#0F766E" stroke-width="3"/>
+  <text x="52" y="516" class="sans green" font-size="18">归一化｜最后一个变量先求和为 1，再逐项消去，最终得到 1。</text>
+  <text x="52" y="554" class="sans red" font-size="17">边界｜箭头表示条件信息，不是从观测 joint 自动发现的因果方向。</text>
+</svg>
+

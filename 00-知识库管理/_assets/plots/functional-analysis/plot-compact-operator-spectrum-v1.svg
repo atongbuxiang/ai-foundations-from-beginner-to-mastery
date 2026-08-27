@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+<title id="title">紧性、谱截断与有限截面陷阱四轨实验</title>
+<desc id="desc">左上比较紧对角算子与恒等算子的低秩尾误差，右上比较Volterra离散奇异值与解析值，左下展示移位有限截面的零特征半径和单位算子范数，右下展示Gaussian核积分算子的特征值衰减。</desc>
+<defs><style>
+.bg{fill:#f8fafc}.panel{fill:#fff;stroke:#cbd5e1;stroke-width:1.4}.ttl{font:700 16px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#0f172a}.sub{font:500 11px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#475569}.axis{stroke:#64748b;stroke-width:1.2}.grid{stroke:#e2e8f0;stroke-width:1}.tick{font:500 10px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#64748b}.blue{fill:none;stroke:#2563eb;stroke-width:2.6}.teal{fill:none;stroke:#0f766e;stroke-width:2.6}.rose{fill:none;stroke:#e11d48;stroke-width:2.6}.amber{fill:none;stroke:#d97706;stroke-width:2.2;stroke-dasharray:6 4}.violet{fill:none;stroke:#7c3aed;stroke-width:2.6}.dotb{fill:#2563eb}.dott{fill:#0f766e}.dotr{fill:#e11d48}.dotv{fill:#7c3aed}.legend{font:600 10px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#334155}
+</style></defs>
+<rect class="bg" width="1200" height="560"/>
+<text class="ttl" x="30" y="32">GEO-06 reproducibility audit · exact operator facts vs finite matrices</text>
+<text class="sub" x="30" y="51">All curves are deterministic; matrix residuals do not certify continuum spectral convergence.</text>
+<rect class="panel" x="25" y="62" width="550" height="225" rx="14"/>
+<rect class="panel" x="625" y="62" width="550" height="225" rx="14"/>
+<rect class="panel" x="25" y="316" width="550" height="224" rx="14"/>
+<rect class="panel" x="625" y="316" width="550" height="224" rx="14"/>
+<text class="ttl" x="45" y="84">A  Compact diagonal tail vs identity tail</text>
+<text class="sub" x="45" y="101">best rank-N operator-norm error · log-log</text>
+<text class="ttl" x="645" y="84">B  Volterra: singular system survives zero spectrum</text>
+<text class="sub" x="645" y="101">strictly lower quadrature · first 24 singular values</text>
+<text class="ttl" x="45" y="338">C  Shift finite sections lose the continuum spectrum</text>
+<text class="sub" x="45" y="355">all finite eigenvalues are 0 while ||S_N||2 = 1</text>
+<text class="ttl" x="645" y="338">D  Gaussian-kernel Nyström spectrum</text>
+<text class="sub" x="645" y="355">weighted symmetric matrix · first 24 eigenvalues</text>
+<line class="axis" x1="65.0" y1="260.0" x2="545.0" y2="260.0"/>
+<line class="axis" x1="65.0" y1="116.0" x2="65.0" y2="260.0"/>
+<line class="axis" x1="665.0" y1="260.0" x2="1145.0" y2="260.0"/>
+<line class="axis" x1="665.0" y1="116.0" x2="665.0" y2="260.0"/>
+<line class="axis" x1="65.0" y1="500.0" x2="545.0" y2="500.0"/>
+<line class="axis" x1="65.0" y1="382.0" x2="65.0" y2="500.0"/>
+<line class="axis" x1="665.0" y1="500.0" x2="1145.0" y2="500.0"/>
+<line class="axis" x1="665.0" y1="382.0" x2="665.0" y2="500.0"/>
+<line class="grid" x1="65.0" y1="116.000" x2="545.0" y2="116.000"/>
+<text class="tick" x="57.0" y="119.000" text-anchor="end">1</text>
+<line class="grid" x1="65.0" y1="164.000" x2="545.0" y2="164.000"/>
+<text class="tick" x="57.0" y="167.000" text-anchor="end">0.1</text>
+<line class="grid" x1="65.0" y1="212.000" x2="545.0" y2="212.000"/>
+<text class="tick" x="57.0" y="215.000" text-anchor="end">0.01</text>
+<line class="grid" x1="65.0" y1="260.000" x2="545.0" y2="260.000"/>
+<text class="tick" x="57.0" y="263.000" text-anchor="end">0.001</text>
+<text class="tick" x="65.000" y="276.0" text-anchor="middle">4</text>
+<text class="tick" x="145.000" y="276.0" text-anchor="middle">8</text>
+<text class="tick" x="225.000" y="276.0" text-anchor="middle">16</text>
+<text class="tick" x="305.000" y="276.0" text-anchor="middle">32</text>
+<text class="tick" x="385.000" y="276.0" text-anchor="middle">64</text>
+<text class="tick" x="465.000" y="276.0" text-anchor="middle">128</text>
+<text class="tick" x="545.000" y="276.0" text-anchor="middle">256</text>
+<polyline class="blue" points="65.000,149.551 145.000,161.804 225.000,175.062 305.000,188.889 385.000,203.020 465.000,217.308 545.000,231.677"/>
+<polyline class="rose" points="65.000,116.000 145.000,116.000 225.000,116.000 305.000,116.000 385.000,116.000 465.000,116.000 545.000,116.000"/>
+<circle class="dotb" cx="65.000" cy="149.551" r="3.5"/>
+<circle class="dotb" cx="145.000" cy="161.804" r="3.5"/>
+<circle class="dotb" cx="225.000" cy="175.062" r="3.5"/>
+<circle class="dotb" cx="305.000" cy="188.889" r="3.5"/>
+<circle class="dotb" cx="385.000" cy="203.020" r="3.5"/>
+<circle class="dotb" cx="465.000" cy="217.308" r="3.5"/>
+<circle class="dotb" cx="545.000" cy="231.677" r="3.5"/>
+<text class="legend" x="365" y="134">D tail: 1/(N+1)</text>
+<text class="legend" x="365" y="150">identity tail: 1</text>
+<text class="tick" x="305.0" y="292.0" text-anchor="middle">rank N</text>
+<line class="grid" x1="665.0" y1="116.000" x2="1145.0" y2="116.000"/>
+<text class="tick" x="657.0" y="119.000" text-anchor="end">1</text>
+<line class="grid" x1="665.0" y1="188.000" x2="1145.0" y2="188.000"/>
+<text class="tick" x="657.0" y="191.000" text-anchor="end">0.1</text>
+<line class="grid" x1="665.0" y1="260.000" x2="1145.0" y2="260.000"/>
+<text class="tick" x="657.0" y="263.000" text-anchor="end">0.01</text>
+<polyline class="teal" points="665.000,130.202 685.870,164.554 706.739,180.526 727.609,191.045 748.478,198.901 769.348,205.172 790.217,210.391 811.087,214.861 831.957,218.769 852.826,222.241 873.696,225.363 894.565,228.200 915.435,230.799 936.304,233.196 957.174,235.421 978.043,237.496 998.913,239.440 1019.783,241.268 1040.652,242.993 1061.522,244.625 1082.391,246.175 1103.261,247.650 1124.130,249.056 1145.000,250.399"/>
+<polyline class="amber" points="665.000,130.121 685.870,164.473 706.739,180.446 727.609,190.968 748.478,198.826 769.348,205.101 790.217,210.325 811.087,214.799 831.957,218.713 852.826,222.191 873.696,225.320 894.565,228.165 915.435,230.772 936.304,233.179 957.174,235.413 978.043,237.499 998.913,239.454 1019.783,241.294 1040.652,243.031 1061.522,244.677 1082.391,246.241 1103.261,247.730 1124.130,249.152 1145.000,250.512"/>
+<circle class="dott" cx="665.000" cy="130.202" r="2.8"/>
+<circle class="dott" cx="685.870" cy="164.554" r="2.8"/>
+<circle class="dott" cx="706.739" cy="180.526" r="2.8"/>
+<circle class="dott" cx="727.609" cy="191.045" r="2.8"/>
+<circle class="dott" cx="748.478" cy="198.901" r="2.8"/>
+<circle class="dott" cx="769.348" cy="205.172" r="2.8"/>
+<circle class="dott" cx="790.217" cy="210.391" r="2.8"/>
+<circle class="dott" cx="811.087" cy="214.861" r="2.8"/>
+<circle class="dott" cx="831.957" cy="218.769" r="2.8"/>
+<circle class="dott" cx="852.826" cy="222.241" r="2.8"/>
+<circle class="dott" cx="873.696" cy="225.363" r="2.8"/>
+<circle class="dott" cx="894.565" cy="228.200" r="2.8"/>
+<circle class="dott" cx="915.435" cy="230.799" r="2.8"/>
+<circle class="dott" cx="936.304" cy="233.196" r="2.8"/>
+<circle class="dott" cx="957.174" cy="235.421" r="2.8"/>
+<circle class="dott" cx="978.043" cy="237.496" r="2.8"/>
+<circle class="dott" cx="998.913" cy="239.440" r="2.8"/>
+<circle class="dott" cx="1019.783" cy="241.268" r="2.8"/>
+<circle class="dott" cx="1040.652" cy="242.993" r="2.8"/>
+<circle class="dott" cx="1061.522" cy="244.625" r="2.8"/>
+<circle class="dott" cx="1082.391" cy="246.175" r="2.8"/>
+<circle class="dott" cx="1103.261" cy="247.650" r="2.8"/>
+<circle class="dott" cx="1124.130" cy="249.056" r="2.8"/>
+<circle class="dott" cx="1145.000" cy="250.399" r="2.8"/>
+<text class="legend" x="970" y="130">discrete singular</text>
+<text class="legend" x="970" y="146">exact 2/((2k-1)pi)</text>
+<text class="tick" x="905.0" y="292.0" text-anchor="middle">mode k</text>
+<line class="grid" x1="65.0" y1="500.000" x2="545.0" y2="500.000"/>
+<text class="tick" x="57.0" y="503.000" text-anchor="end">0.0</text>
+<line class="grid" x1="65.0" y1="446.364" x2="545.0" y2="446.364"/>
+<text class="tick" x="57.0" y="449.364" text-anchor="end">0.5</text>
+<line class="grid" x1="65.0" y1="392.727" x2="545.0" y2="392.727"/>
+<text class="tick" x="57.0" y="395.727" text-anchor="end">1.0</text>
+<polyline class="violet" points="65.000,392.727 72.619,392.727 87.857,392.727 118.333,392.727 179.286,392.727 301.190,392.727 545.000,392.727"/>
+<polyline class="rose" points="65.000,500.000 72.619,500.000 87.857,500.000 118.333,500.000 179.286,500.000 301.190,500.000 545.000,500.000"/>
+<circle class="dotv" cx="65.000" cy="392.727" r="3.5"/>
+<circle class="dotv" cx="72.619" cy="392.727" r="3.5"/>
+<circle class="dotv" cx="87.857" cy="392.727" r="3.5"/>
+<circle class="dotv" cx="118.333" cy="392.727" r="3.5"/>
+<circle class="dotv" cx="179.286" cy="392.727" r="3.5"/>
+<circle class="dotv" cx="301.190" cy="392.727" r="3.5"/>
+<circle class="dotv" cx="545.000" cy="392.727" r="3.5"/>
+<text class="tick" x="65.000" y="516.0" text-anchor="middle">4</text>
+<text class="tick" x="72.619" y="516.0" text-anchor="middle">8</text>
+<text class="tick" x="87.857" y="516.0" text-anchor="middle">16</text>
+<text class="tick" x="118.333" y="516.0" text-anchor="middle">32</text>
+<text class="tick" x="179.286" y="516.0" text-anchor="middle">64</text>
+<text class="tick" x="301.190" y="516.0" text-anchor="middle">128</text>
+<text class="tick" x="545.000" y="516.0" text-anchor="middle">256</text>
+<text class="legend" x="370" y="414">operator norm = 1</text>
+<text class="legend" x="370" y="430">eigen radius = 0</text>
+<text class="tick" x="305.0" y="532.0" text-anchor="middle">section size N</text>
+<line class="grid" x1="665.0" y1="382.000" x2="1145.0" y2="382.000"/>
+<text class="tick" x="657.0" y="385.000" text-anchor="end">1e+00</text>
+<line class="grid" x1="665.0" y1="405.600" x2="1145.0" y2="405.600"/>
+<text class="tick" x="657.0" y="408.600" text-anchor="end">1e-02</text>
+<line class="grid" x1="665.0" y1="429.200" x2="1145.0" y2="429.200"/>
+<text class="tick" x="657.0" y="432.200" text-anchor="end">1e-04</text>
+<line class="grid" x1="665.0" y1="452.800" x2="1145.0" y2="452.800"/>
+<text class="tick" x="657.0" y="455.800" text-anchor="end">1e-06</text>
+<line class="grid" x1="665.0" y1="476.400" x2="1145.0" y2="476.400"/>
+<text class="tick" x="657.0" y="479.400" text-anchor="end">1e-08</text>
+<line class="grid" x1="665.0" y1="500.000" x2="1145.0" y2="500.000"/>
+<text class="tick" x="657.0" y="503.000" text-anchor="end">1e-10</text>
+<polyline class="blue" points="665.000,388.436 685.870,389.275 706.739,390.664 727.609,392.595 748.478,395.051 769.348,398.013 790.217,401.458 811.087,405.361 831.957,409.697 852.826,414.442 873.696,419.571 894.565,425.064 915.435,430.901 936.304,437.066 957.174,443.542 978.043,450.315 998.913,457.372 1019.783,464.701 1040.652,472.291 1061.522,480.131 1082.391,488.212 1103.261,496.525 1124.130,505.062 1145.000,513.816"/>
+<circle class="dotb" cx="665.000" cy="388.436" r="2.8"/>
+<circle class="dotb" cx="685.870" cy="389.275" r="2.8"/>
+<circle class="dotb" cx="706.739" cy="390.664" r="2.8"/>
+<circle class="dotb" cx="727.609" cy="392.595" r="2.8"/>
+<circle class="dotb" cx="748.478" cy="395.051" r="2.8"/>
+<circle class="dotb" cx="769.348" cy="398.013" r="2.8"/>
+<circle class="dotb" cx="790.217" cy="401.458" r="2.8"/>
+<circle class="dotb" cx="811.087" cy="405.361" r="2.8"/>
+<circle class="dotb" cx="831.957" cy="409.697" r="2.8"/>
+<circle class="dotb" cx="852.826" cy="414.442" r="2.8"/>
+<circle class="dotb" cx="873.696" cy="419.571" r="2.8"/>
+<circle class="dotb" cx="894.565" cy="425.064" r="2.8"/>
+<circle class="dotb" cx="915.435" cy="430.901" r="2.8"/>
+<circle class="dotb" cx="936.304" cy="437.066" r="2.8"/>
+<circle class="dotb" cx="957.174" cy="443.542" r="2.8"/>
+<circle class="dotb" cx="978.043" cy="450.315" r="2.8"/>
+<circle class="dotb" cx="998.913" cy="457.372" r="2.8"/>
+<circle class="dotb" cx="1019.783" cy="464.701" r="2.8"/>
+<circle class="dotb" cx="1040.652" cy="472.291" r="2.8"/>
+<circle class="dotb" cx="1061.522" cy="480.131" r="2.8"/>
+<circle class="dotb" cx="1082.391" cy="488.212" r="2.8"/>
+<circle class="dotb" cx="1103.261" cy="496.525" r="2.8"/>
+<circle class="dotb" cx="1124.130" cy="505.062" r="2.8"/>
+<circle class="dotb" cx="1145.000" cy="513.816" r="2.8"/>
+<text class="legend" x="980" y="400">ell = 0.12</text>
+<text class="legend" x="980" y="416">HS-energy rank99 = 6</text>
+<text class="tick" x="905.0" y="532.0" text-anchor="middle">eigenvalue index k</text>
+<text class="sub" x="600" y="554" text-anchor="middle">Generated by compact_operator_spectrum_audit.py · NumPy eigvalsh/SVD · no random sampling</text>
+</svg>

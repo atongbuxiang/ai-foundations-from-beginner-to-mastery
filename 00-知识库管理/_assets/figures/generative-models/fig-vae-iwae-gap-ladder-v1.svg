@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">IWAE 估计层级与推断缺口</title>
+  <desc id="desc">左侧阶梯区分精确证据、期望IWAE下界和单次随机估计，右侧区分模型、近似族、摊销与优化蒙特卡洛缺口。</desc>
+  <rect width="1200" height="620" fill="#FFFEFB"/>
+  <style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}</style>
+  <g font-family="Inter, PingFang SC, Noto Sans CJK SC, sans-serif">
+    <text x="54" y="55" font-size="23" font-weight="700" fill="#1F2937">不要把所有“差一点”都叫 ELBO gap</text>
+    <text x="58" y="100" font-size="20" font-weight="700" fill="#2563EB">A　模型量、期望目标、随机实现</text>
+    <path d="M78 434 H242 V349 H404 V265 H566 V181 H638" fill="none" stroke="#334155" stroke-width="3"/>
+    <rect x="92" y="374" width="130" height="45" rx="6" fill="#FFF0EE" stroke="#C24135" stroke-width="2"/>
+    <text x="157" y="402" text-anchor="middle" font-size="16" fill="#C24135">单次 log p̂K</text>
+    <rect x="257" y="289" width="130" height="45" rx="6" fill="#FFF7E6" stroke="#B7791F" stroke-width="2"/>
+    <text x="322" y="317" text-anchor="middle" font-size="16" fill="#B7791F">L1 = ELBO</text>
+    <rect x="419" y="205" width="130" height="45" rx="6" fill="#E8F5F1" stroke="#0F766E" stroke-width="2"/>
+    <text x="484" y="233" text-anchor="middle" font-size="16" fill="#0F766E">LK，K 增大</text>
+    <rect x="500" y="116" width="138" height="48" rx="6" fill="#EEF3FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="569" y="146" text-anchor="middle" font-size="17" font-weight="700" fill="#2563EB">log pθ(x)</text>
+    <text x="78" y="478" font-size="15" fill="#64748B">p̂K 对 density 无偏；log p̂K 通常向下偏；一次运行不要求随 K 单调。</text>
+    <text x="78" y="513" font-size="15" fill="#64748B">ESS=(Σwk)²/Σwk² 揭示权重退化，但不是完整 posterior 诊断。</text>
+    <line x1="680" y1="90" x2="680" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+    <text x="720" y="100" font-size="20" font-weight="700" fill="#0F766E">B　固定 θ 后的四层责任</text>
+    <rect x="720" y="133" width="420" height="66" rx="7" fill="#EEF3FF" stroke="#2563EB" stroke-width="2"/>
+    <text x="744" y="161" font-size="17" font-weight="700" fill="#2563EB">Model gap</text>
+    <text x="744" y="185" font-size="15" fill="#64748B">模型族 pθ 与数据规律不匹配</text>
+    <rect x="750" y="222" width="390" height="66" rx="7" fill="#E8F5F1" stroke="#0F766E" stroke-width="2"/>
+    <text x="774" y="250" font-size="17" font-weight="700" fill="#0F766E">Family / approximation gap</text>
+    <text x="774" y="274" font-size="15" fill="#64748B">最佳 q∈Q 仍不能表示真 posterior</text>
+    <rect x="780" y="311" width="360" height="66" rx="7" fill="#FFF7E6" stroke="#B7791F" stroke-width="2"/>
+    <text x="804" y="339" font-size="17" font-weight="700" fill="#B7791F">Amortization gap</text>
+    <text x="804" y="363" font-size="15" fill="#64748B">共享 encoder 不及每样本局部最优 q*x</text>
+    <rect x="810" y="400" width="330" height="66" rx="7" fill="#FFF0EE" stroke="#C24135" stroke-width="2"/>
+    <text x="834" y="428" font-size="17" font-weight="700" fill="#C24135">Optimization / MC gap</text>
+    <text x="834" y="452" font-size="15" fill="#64748B">未收敛、有限 L/K 与数值误差</text>
+    <text x="720" y="513" font-size="15" fill="#64748B">隔离原则：固定模型 → 局部优化 → 增强 family → 提高采样精度。</text>
+    <line x1="54" y1="552" x2="1146" y2="552" stroke="#D7DEE8" stroke-width="2"/>
+    <text x="54" y="583" font-size="16" fill="#1F2937">训练 IWAE 改变 θ、φ；大 K 评价只估计固定模型。bound 变紧不等于有限预算训练必然更好。</text>
+  </g>
+</svg>

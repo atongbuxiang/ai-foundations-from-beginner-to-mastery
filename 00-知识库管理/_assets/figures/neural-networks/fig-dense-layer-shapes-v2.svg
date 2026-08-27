@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">Dense layer：矩阵形状、广播与资源账本</title>
+<desc id="desc">多个神经元的权重列组成矩阵；batch 与 sequence 轴被保留，最后 feature 轴被映射；参数、计算、激活存储和秩需要分别计数。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">矩阵块先核对 contracted axis</text>
+<rect x="55" y="125" width="105" height="230" rx="4" fill="#EFF6FF" stroke="#2563EB" stroke-width="2.5"/>
+<text x="107" y="105" font-size="22" font-weight="700" text-anchor="middle" fill="#2563EB">X</text>
+<line x1="65" y1="155" x2="150" y2="155" stroke="#D7DEE8" stroke-width="1.2"/>
+<line x1="65" y1="205" x2="150" y2="205" stroke="#D7DEE8" stroke-width="1.2"/>
+<line x1="65" y1="255" x2="150" y2="255" stroke="#D7DEE8" stroke-width="1.2"/>
+<line x1="65" y1="305" x2="150" y2="305" stroke="#D7DEE8" stroke-width="1.2"/>
+<text x="107" y="386" font-size="16" font-weight="650" text-anchor="middle" fill="#1F2937">[B, din]</text>
+<text x="181" y="245" font-size="25" font-weight="700" text-anchor="middle" fill="#1F2937">×</text>
+<rect x="210" y="155" width="130" height="170" rx="4" fill="#ECFDF5" stroke="#0F766E" stroke-width="2.5"/>
+<text x="275" y="135" font-size="22" font-weight="700" text-anchor="middle" fill="#0F766E">W</text>
+<line x1="242" y1="165" x2="242" y2="315" stroke="#D7DEE8" stroke-width="1.2"/>
+<line x1="275" y1="165" x2="275" y2="315" stroke="#D7DEE8" stroke-width="1.2"/>
+<line x1="308" y1="165" x2="308" y2="315" stroke="#D7DEE8" stroke-width="1.2"/>
+<text x="275" y="356" font-size="16" font-weight="650" text-anchor="middle" fill="#1F2937">[din, dout]</text>
+<text x="362" y="245" font-size="20" font-weight="700" text-anchor="middle" fill="#C24135">+ b</text>
+<text x="45" y="440" font-size="16" font-weight="700" text-anchor="start" fill="#2563EB">shared din must match</text>
+<text x="45" y="478" font-size="17" font-weight="650" text-anchor="start" fill="#1F2937" class="math">Z = XW + 1b  →  [B,dout]</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">保留位置轴，只替换 feature</text>
+<rect x="445" y="105" width="300" height="82" rx="4" fill="#EFF6FF" stroke="#2563EB" stroke-width="2.5"/>
+<text x="595" y="137" font-size="22" font-weight="700" text-anchor="middle" fill="#2563EB">B × T × din</text>
+<text x="595" y="166" font-size="15" font-weight="650" text-anchor="middle" fill="#64748B">batch · token · feature</text>
+<line x1="595" y1="190" x2="595" y2="235" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="500" y="247" width="190" height="66" rx="4" fill="#ECFDF5" stroke="#0F766E" stroke-width="2.5"/>
+<text x="595" y="276" font-size="18" font-weight="700" text-anchor="middle" fill="#0F766E">same W,b</text>
+<text x="595" y="301" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">at every (b,t)</text>
+<line x1="595" y1="316" x2="595" y2="361" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<rect x="445" y="373" width="300" height="82" rx="4" fill="#FFF5F2" stroke="#C24135" stroke-width="2.5"/>
+<text x="595" y="405" font-size="22" font-weight="700" text-anchor="middle" fill="#C24135">B × T × dout</text>
+<text x="595" y="434" font-size="15" font-weight="650" text-anchor="middle" fill="#64748B">B,T unchanged</text>
+<text x="430" y="501" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">bias shape [dout]；合法广播仍需轴语义审计。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">四本账不能相互替代</text>
+<text x="845" y="105" font-size="17" font-weight="700" text-anchor="start" fill="#2563EB">Parameters</text>
+<line x1="965" y1="99" x2="1000" y2="99" stroke="#D7DEE8" stroke-width="2"/>
+<text x="1012" y="105" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937" class="math">(din+1)dout</text>
+<text x="845" y="205" font-size="17" font-weight="700" text-anchor="start" fill="#0F766E">MACs</text>
+<line x1="965" y1="199" x2="1000" y2="199" stroke="#D7DEE8" stroke-width="2"/>
+<text x="1012" y="205" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937" class="math">BT din·dout</text>
+<text x="845" y="305" font-size="17" font-weight="700" text-anchor="start" fill="#C24135">Activations</text>
+<line x1="965" y1="299" x2="1000" y2="299" stroke="#D7DEE8" stroke-width="2"/>
+<text x="1012" y="305" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937" class="math">BT dout scalars</text>
+<text x="845" y="405" font-size="17" font-weight="700" text-anchor="start" fill="#2563EB">Rank ceiling</text>
+<line x1="965" y1="399" x2="1000" y2="399" stroke="#D7DEE8" stroke-width="2"/>
+<text x="1012" y="405" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937" class="math">≤ min(din,dout)</text>
+<text x="842" y="486" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">latency 还取决于 layout、bandwidth 与 kernel。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">先对形状和轴，再分别计算静态参数、动态工作量、缓存与信息瓶颈。</text>
+</svg>

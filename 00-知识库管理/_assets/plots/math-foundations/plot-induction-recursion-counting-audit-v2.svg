@@ -1,0 +1,192 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="760" viewBox="0 0 1440 760" role="img" aria-labelledby="title desc">
+<title id="title">MATH-05 induction reachability, recursion calls, exact counting, and beam pruning audit</title>
+<desc id="desc">Four proof-map panels show induction reachability under different bases and strides, recursive versus memoized Fibonacci cost, exact binary-string counts, and full-tree versus beam-search expansions.</desc>
+<style>
+.title{font-weight:700;font-size:24px;font-family:Inter,'PingFang SC','Noto Sans CJK SC',Arial,sans-serif;fill:#182236}
+.sub{font-size:15px;font-family:Inter,'PingFang SC','Noto Sans CJK SC',Arial,sans-serif;fill:#53627a}
+.paneltitle{font-weight:700;font-size:22px;font-family:Inter,'PingFang SC','Noto Sans CJK SC',Arial,sans-serif;fill:#182236}
+.label{font-size:17px;font-family:Inter,'PingFang SC','Noto Sans CJK SC',Arial,sans-serif;fill:#35445c}
+.small{font-size:15px;font-family:Inter,'PingFang SC','Noto Sans CJK SC',Arial,sans-serif;fill:#5e6d84}
+.metric{font:700 18px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#182236}
+.grid{stroke:#dce4ef;stroke-width:1}.axis{stroke:#8292aa;stroke-width:1.2}
+.blue{stroke:#2672dd;fill:none;stroke-width:2.8}.orange{stroke:#e77817;fill:none;stroke-width:2.8}
+</style>
+<rect width="1440" height="760" fill="#ffffff"/>
+<text x="36" y="38" class="title">MATH-05 audit · induction reachability, recursion calls, exact counting, and beam pruning</text>
+<text x="36" y="62" class="sub">Finite certificates expose missing bases and repeated states; general claims still require induction and representation proofs.</text>
+<rect x="24.00" y="82.00" width="688.00" height="300.00" rx="0.00" fill="#fffefb" stroke="#d6dee8"/>
+<text x="42.00" y="109.00" class="paneltitle" text-anchor="start">A · Induction coverage</text>
+<rect x="728.00" y="82.00" width="688.00" height="300.00" rx="0.00" fill="#fffefb" stroke="#d6dee8"/>
+<text x="746.00" y="109.00" class="paneltitle" text-anchor="start">B · Fibonacci recursion states</text>
+<rect x="24.00" y="398.00" width="688.00" height="330.00" rx="0.00" fill="#fffefb" stroke="#d6dee8"/>
+<text x="42.00" y="425.00" class="paneltitle" text-anchor="start">C · 4,096 binary strings</text>
+<rect x="728.00" y="398.00" width="688.00" height="330.00" rx="0.00" fill="#fffefb" stroke="#d6dee8"/>
+<text x="746.00" y="425.00" class="paneltitle" text-anchor="start">D · Full tree vs beam search</text>
+<text x="44.00" y="144.00" class="small" text-anchor="start">base {0}, step +1</text>
+<rect x="218.00" y="132.00" width="20.00" height="20.00" rx="3.00" fill="#07956d" stroke="none"/>
+<rect x="245.00" y="132.00" width="20.00" height="20.00" rx="3.00" fill="#07956d" stroke="none"/>
+<rect x="272.00" y="132.00" width="20.00" height="20.00" rx="3.00" fill="#07956d" stroke="none"/>
+<rect x="299.00" y="132.00" width="20.00" height="20.00" rx="3.00" fill="#07956d" stroke="none"/>
+<rect x="326.00" y="132.00" width="20.00" height="20.00" rx="3.00" fill="#07956d" stroke="none"/>
+<rect x="353.00" y="132.00" width="20.00" height="20.00" rx="3.00" fill="#07956d" stroke="none"/>
+<rect x="380.00" y="132.00" width="20.00" height="20.00" rx="3.00" fill="#07956d" stroke="none"/>
+<rect x="407.00" y="132.00" width="20.00" height="20.00" rx="3.00" fill="#07956d" stroke="none"/>
+<rect x="434.00" y="132.00" width="20.00" height="20.00" rx="3.00" fill="#07956d" stroke="none"/>
+<rect x="461.00" y="132.00" width="20.00" height="20.00" rx="3.00" fill="#07956d" stroke="none"/>
+<rect x="488.00" y="132.00" width="20.00" height="20.00" rx="3.00" fill="#07956d" stroke="none"/>
+<rect x="515.00" y="132.00" width="20.00" height="20.00" rx="3.00" fill="#07956d" stroke="none"/>
+<rect x="542.00" y="132.00" width="20.00" height="20.00" rx="3.00" fill="#07956d" stroke="none"/>
+<rect x="569.00" y="132.00" width="20.00" height="20.00" rx="3.00" fill="#07956d" stroke="none"/>
+<rect x="596.00" y="132.00" width="20.00" height="20.00" rx="3.00" fill="#07956d" stroke="none"/>
+<rect x="623.00" y="132.00" width="20.00" height="20.00" rx="3.00" fill="#07956d" stroke="none"/>
+<text x="673.00" y="146.00" class="small" text-anchor="end">16/16</text>
+<text x="44.00" y="199.00" class="small" text-anchor="start">base {0}, step +2</text>
+<rect x="218.00" y="187.00" width="20.00" height="20.00" rx="3.00" fill="#e77817" stroke="none"/>
+<rect x="245.00" y="187.00" width="20.00" height="20.00" rx="3.00" fill="#e8edf4" stroke="none"/>
+<rect x="272.00" y="187.00" width="20.00" height="20.00" rx="3.00" fill="#e77817" stroke="none"/>
+<rect x="299.00" y="187.00" width="20.00" height="20.00" rx="3.00" fill="#e8edf4" stroke="none"/>
+<rect x="326.00" y="187.00" width="20.00" height="20.00" rx="3.00" fill="#e77817" stroke="none"/>
+<rect x="353.00" y="187.00" width="20.00" height="20.00" rx="3.00" fill="#e8edf4" stroke="none"/>
+<rect x="380.00" y="187.00" width="20.00" height="20.00" rx="3.00" fill="#e77817" stroke="none"/>
+<rect x="407.00" y="187.00" width="20.00" height="20.00" rx="3.00" fill="#e8edf4" stroke="none"/>
+<rect x="434.00" y="187.00" width="20.00" height="20.00" rx="3.00" fill="#e77817" stroke="none"/>
+<rect x="461.00" y="187.00" width="20.00" height="20.00" rx="3.00" fill="#e8edf4" stroke="none"/>
+<rect x="488.00" y="187.00" width="20.00" height="20.00" rx="3.00" fill="#e77817" stroke="none"/>
+<rect x="515.00" y="187.00" width="20.00" height="20.00" rx="3.00" fill="#e8edf4" stroke="none"/>
+<rect x="542.00" y="187.00" width="20.00" height="20.00" rx="3.00" fill="#e77817" stroke="none"/>
+<rect x="569.00" y="187.00" width="20.00" height="20.00" rx="3.00" fill="#e8edf4" stroke="none"/>
+<rect x="596.00" y="187.00" width="20.00" height="20.00" rx="3.00" fill="#e77817" stroke="none"/>
+<rect x="623.00" y="187.00" width="20.00" height="20.00" rx="3.00" fill="#e8edf4" stroke="none"/>
+<text x="673.00" y="201.00" class="small" text-anchor="end">8/16</text>
+<text x="44.00" y="254.00" class="small" text-anchor="start">bases {0,1}, step +2</text>
+<rect x="218.00" y="242.00" width="20.00" height="20.00" rx="3.00" fill="#2672dd" stroke="none"/>
+<rect x="245.00" y="242.00" width="20.00" height="20.00" rx="3.00" fill="#2672dd" stroke="none"/>
+<rect x="272.00" y="242.00" width="20.00" height="20.00" rx="3.00" fill="#2672dd" stroke="none"/>
+<rect x="299.00" y="242.00" width="20.00" height="20.00" rx="3.00" fill="#2672dd" stroke="none"/>
+<rect x="326.00" y="242.00" width="20.00" height="20.00" rx="3.00" fill="#2672dd" stroke="none"/>
+<rect x="353.00" y="242.00" width="20.00" height="20.00" rx="3.00" fill="#2672dd" stroke="none"/>
+<rect x="380.00" y="242.00" width="20.00" height="20.00" rx="3.00" fill="#2672dd" stroke="none"/>
+<rect x="407.00" y="242.00" width="20.00" height="20.00" rx="3.00" fill="#2672dd" stroke="none"/>
+<rect x="434.00" y="242.00" width="20.00" height="20.00" rx="3.00" fill="#2672dd" stroke="none"/>
+<rect x="461.00" y="242.00" width="20.00" height="20.00" rx="3.00" fill="#2672dd" stroke="none"/>
+<rect x="488.00" y="242.00" width="20.00" height="20.00" rx="3.00" fill="#2672dd" stroke="none"/>
+<rect x="515.00" y="242.00" width="20.00" height="20.00" rx="3.00" fill="#2672dd" stroke="none"/>
+<rect x="542.00" y="242.00" width="20.00" height="20.00" rx="3.00" fill="#2672dd" stroke="none"/>
+<rect x="569.00" y="242.00" width="20.00" height="20.00" rx="3.00" fill="#2672dd" stroke="none"/>
+<rect x="596.00" y="242.00" width="20.00" height="20.00" rx="3.00" fill="#2672dd" stroke="none"/>
+<rect x="623.00" y="242.00" width="20.00" height="20.00" rx="3.00" fill="#2672dd" stroke="none"/>
+<text x="673.00" y="256.00" class="small" text-anchor="end">16/16</text>
+<text x="44.00" y="309.00" class="small" text-anchor="start">base {5}, step +1</text>
+<rect x="218.00" y="297.00" width="20.00" height="20.00" rx="3.00" fill="#e8edf4" stroke="none"/>
+<text x="228.00" y="336.00" class="small" text-anchor="middle">0</text>
+<rect x="245.00" y="297.00" width="20.00" height="20.00" rx="3.00" fill="#e8edf4" stroke="none"/>
+<text x="255.00" y="336.00" class="small" text-anchor="middle">1</text>
+<rect x="272.00" y="297.00" width="20.00" height="20.00" rx="3.00" fill="#e8edf4" stroke="none"/>
+<text x="282.00" y="336.00" class="small" text-anchor="middle">2</text>
+<rect x="299.00" y="297.00" width="20.00" height="20.00" rx="3.00" fill="#e8edf4" stroke="none"/>
+<text x="309.00" y="336.00" class="small" text-anchor="middle">3</text>
+<rect x="326.00" y="297.00" width="20.00" height="20.00" rx="3.00" fill="#e8edf4" stroke="none"/>
+<text x="336.00" y="336.00" class="small" text-anchor="middle">4</text>
+<rect x="353.00" y="297.00" width="20.00" height="20.00" rx="3.00" fill="#6f56c5" stroke="none"/>
+<text x="363.00" y="336.00" class="small" text-anchor="middle">5</text>
+<rect x="380.00" y="297.00" width="20.00" height="20.00" rx="3.00" fill="#6f56c5" stroke="none"/>
+<text x="390.00" y="336.00" class="small" text-anchor="middle">6</text>
+<rect x="407.00" y="297.00" width="20.00" height="20.00" rx="3.00" fill="#6f56c5" stroke="none"/>
+<text x="417.00" y="336.00" class="small" text-anchor="middle">7</text>
+<rect x="434.00" y="297.00" width="20.00" height="20.00" rx="3.00" fill="#6f56c5" stroke="none"/>
+<text x="444.00" y="336.00" class="small" text-anchor="middle">8</text>
+<rect x="461.00" y="297.00" width="20.00" height="20.00" rx="3.00" fill="#6f56c5" stroke="none"/>
+<text x="471.00" y="336.00" class="small" text-anchor="middle">9</text>
+<rect x="488.00" y="297.00" width="20.00" height="20.00" rx="3.00" fill="#6f56c5" stroke="none"/>
+<text x="498.00" y="336.00" class="small" text-anchor="middle">10</text>
+<rect x="515.00" y="297.00" width="20.00" height="20.00" rx="3.00" fill="#6f56c5" stroke="none"/>
+<text x="525.00" y="336.00" class="small" text-anchor="middle">11</text>
+<rect x="542.00" y="297.00" width="20.00" height="20.00" rx="3.00" fill="#6f56c5" stroke="none"/>
+<text x="552.00" y="336.00" class="small" text-anchor="middle">12</text>
+<rect x="569.00" y="297.00" width="20.00" height="20.00" rx="3.00" fill="#6f56c5" stroke="none"/>
+<text x="579.00" y="336.00" class="small" text-anchor="middle">13</text>
+<rect x="596.00" y="297.00" width="20.00" height="20.00" rx="3.00" fill="#6f56c5" stroke="none"/>
+<text x="606.00" y="336.00" class="small" text-anchor="middle">14</text>
+<rect x="623.00" y="297.00" width="20.00" height="20.00" rx="3.00" fill="#6f56c5" stroke="none"/>
+<text x="633.00" y="336.00" class="small" text-anchor="middle">15</text>
+<text x="673.00" y="311.00" class="small" text-anchor="end">11/16</text>
+<text x="44.00" y="352.00" class="sub" text-anchor="start">Stride +2 needs bases in both residue classes; base 5 correctly proves only n≥5.</text>
+<line x1="780.00" y1="132.00" x2="1340.00" y2="132.00" class="grid"/>
+<line x1="780.00" y1="177.50" x2="1340.00" y2="177.50" class="grid"/>
+<line x1="780.00" y1="223.00" x2="1340.00" y2="223.00" class="grid"/>
+<line x1="780.00" y1="268.50" x2="1340.00" y2="268.50" class="grid"/>
+<line x1="780.00" y1="314.00" x2="1340.00" y2="314.00" class="grid"/>
+<polyline points="780.00,314.00 808.00,314.00 836.00,293.99 864.00,284.69 892.00,273.99 920.00,264.68 948.00,255.38 976.00,246.37 1004.00,237.43 1032.00,228.56 1060.00,219.74 1088.00,210.93 1116.00,202.15 1144.00,193.37 1172.00,184.59 1200.00,175.83 1228.00,167.06 1256.00,158.29 1284.00,149.53 1312.00,140.76 1340.00,132.00" class="orange"/>
+<polyline points="780.00,314.00 808.00,301.38 836.00,293.99 864.00,288.75 892.00,284.69 920.00,281.37 948.00,278.56 976.00,276.13 1004.00,273.99 1032.00,272.07 1060.00,270.33 1088.00,268.75 1116.00,267.29 1144.00,265.94 1172.00,264.68 1200.00,263.51 1228.00,262.40 1256.00,261.36 1284.00,260.38 1312.00,259.44 1340.00,258.56" class="blue"/>
+<text x="780.00" y="336.00" class="sub" text-anchor="start">orange: recursive calls  C₂₀=21,891</text>
+<text x="1065.00" y="336.00" class="sub" text-anchor="start">blue: memo states  n+1=21</text>
+<text x="780.00" y="360.00" class="sub" text-anchor="start">Same value recurrence, different computation graph and cost.</text>
+<line x1="72.00" y1="461.00" x2="662.00" y2="461.00" class="grid"/>
+<line x1="72.00" y1="500.25" x2="662.00" y2="500.25" class="grid"/>
+<line x1="72.00" y1="539.50" x2="662.00" y2="539.50" class="grid"/>
+<line x1="72.00" y1="578.75" x2="662.00" y2="578.75" class="grid"/>
+<line x1="72.00" y1="618.00" x2="662.00" y2="618.00" class="grid"/>
+<rect x="78.35" y="617.83" width="32.68" height="0.17" rx="2.00" fill="#2672dd" stroke="none"/>
+<text x="94.69" y="636.00" class="small" text-anchor="middle">0</text>
+<rect x="123.74" y="615.96" width="32.68" height="2.04" rx="2.00" fill="#2672dd" stroke="none"/>
+<text x="140.08" y="636.00" class="small" text-anchor="middle">1</text>
+<rect x="169.12" y="606.79" width="32.68" height="11.21" rx="2.00" fill="#2672dd" stroke="none"/>
+<text x="185.46" y="636.00" class="small" text-anchor="middle">2</text>
+<rect x="214.51" y="580.62" width="32.68" height="37.38" rx="2.00" fill="#2672dd" stroke="none"/>
+<text x="230.85" y="636.00" class="small" text-anchor="middle">3</text>
+<rect x="259.89" y="533.89" width="32.68" height="84.11" rx="2.00" fill="#2672dd" stroke="none"/>
+<text x="276.23" y="636.00" class="small" text-anchor="middle">4</text>
+<rect x="305.28" y="483.43" width="32.68" height="134.57" rx="2.00" fill="#2672dd" stroke="none"/>
+<text x="321.62" y="636.00" class="small" text-anchor="middle">5</text>
+<rect x="350.66" y="461.00" width="32.68" height="157.00" rx="2.00" fill="#2672dd" stroke="none"/>
+<text x="367.00" y="636.00" class="small" text-anchor="middle">6</text>
+<rect x="396.05" y="483.43" width="32.68" height="134.57" rx="2.00" fill="#2672dd" stroke="none"/>
+<text x="412.38" y="636.00" class="small" text-anchor="middle">7</text>
+<rect x="441.43" y="533.89" width="32.68" height="84.11" rx="2.00" fill="#2672dd" stroke="none"/>
+<text x="457.77" y="636.00" class="small" text-anchor="middle">8</text>
+<rect x="486.82" y="580.62" width="32.68" height="37.38" rx="2.00" fill="#2672dd" stroke="none"/>
+<text x="503.15" y="636.00" class="small" text-anchor="middle">9</text>
+<rect x="532.20" y="606.79" width="32.68" height="11.21" rx="2.00" fill="#2672dd" stroke="none"/>
+<text x="548.54" y="636.00" class="small" text-anchor="middle">10</text>
+<rect x="577.58" y="615.96" width="32.68" height="2.04" rx="2.00" fill="#2672dd" stroke="none"/>
+<text x="593.92" y="636.00" class="small" text-anchor="middle">11</text>
+<rect x="622.97" y="617.83" width="32.68" height="0.17" rx="2.00" fill="#2672dd" stroke="none"/>
+<text x="639.31" y="636.00" class="small" text-anchor="middle">12</text>
+<text x="44.00" y="655.00" class="sub" text-anchor="start">Enumerated weight counts exactly match C(12,k); their sum is 2¹²=4,096.</text>
+<text x="44.00" y="681.00" class="sub" text-anchor="start">starts-1 + ends-1 = 4,096; subtract overlap 1,024 ⇒ union 3,072.</text>
+<text x="44.00" y="705.00" class="sub" text-anchor="start">Naive addition overcounts the intersection by exactly 1,024 strings.</text>
+<line x1="780.00" y1="461.00" x2="1340.00" y2="461.00" class="grid"/>
+<line x1="780.00" y1="502.50" x2="1340.00" y2="502.50" class="grid"/>
+<line x1="780.00" y1="544.00" x2="1340.00" y2="544.00" class="grid"/>
+<line x1="780.00" y1="585.50" x2="1340.00" y2="585.50" class="grid"/>
+<line x1="780.00" y1="627.00" x2="1340.00" y2="627.00" class="grid"/>
+<circle cx="780.00" cy="606.77" r="2.80" fill="#e77817"/>
+<circle cx="780.00" cy="606.77" r="2.80" fill="#2672dd"/>
+<text x="780.00" y="645.00" class="small" text-anchor="middle">1</text>
+<circle cx="860.00" cy="583.29" r="2.80" fill="#e77817"/>
+<circle cx="860.00" cy="586.55" r="2.80" fill="#2672dd"/>
+<text x="860.00" y="645.00" class="small" text-anchor="middle">2</text>
+<circle cx="940.00" cy="562.36" r="2.80" fill="#e77817"/>
+<circle cx="940.00" cy="578.38" r="2.80" fill="#2672dd"/>
+<text x="940.00" y="645.00" class="small" text-anchor="middle">3</text>
+<circle cx="1020.00" cy="541.96" r="2.80" fill="#e77817"/>
+<circle cx="1020.00" cy="573.18" r="2.80" fill="#2672dd"/>
+<text x="1020.00" y="645.00" class="small" text-anchor="middle">4</text>
+<circle cx="1100.00" cy="521.69" r="2.80" fill="#e77817"/>
+<circle cx="1100.00" cy="569.35" r="2.80" fill="#2672dd"/>
+<text x="1100.00" y="645.00" class="small" text-anchor="middle">5</text>
+<circle cx="1180.00" cy="501.45" r="2.80" fill="#e77817"/>
+<circle cx="1180.00" cy="566.32" r="2.80" fill="#2672dd"/>
+<text x="1180.00" y="645.00" class="small" text-anchor="middle">6</text>
+<circle cx="1260.00" cy="481.23" r="2.80" fill="#e77817"/>
+<circle cx="1260.00" cy="563.82" r="2.80" fill="#2672dd"/>
+<text x="1260.00" y="645.00" class="small" text-anchor="middle">7</text>
+<circle cx="1340.00" cy="461.00" r="2.80" fill="#e77817"/>
+<circle cx="1340.00" cy="561.68" r="2.80" fill="#2672dd"/>
+<text x="1340.00" y="645.00" class="small" text-anchor="middle">8</text>
+<polyline points="780.00,606.77 860.00,583.29 940.00,562.36 1020.00,541.96 1100.00,521.69 1180.00,501.45 1260.00,481.23 1340.00,461.00" class="orange"/>
+<polyline points="780.00,606.77 860.00,586.55 940.00,578.38 1020.00,573.18 1100.00,569.35 1180.00,566.32 1260.00,563.82 1340.00,561.68" class="blue"/>
+<text x="748.00" y="655.00" class="sub" text-anchor="start">depth 8: full 87,380 cumulative nodes; beam upper bound 88 expansions.</text>
+<text x="748.00" y="681.00" class="sub" text-anchor="start">Pruning controls visited states but does not certify global optimality.</text>
+<text x="748.00" y="705.00" class="sub" text-anchor="start">Both panels use log-scaled y coordinates; labels report exact counts.</text>
+</svg>

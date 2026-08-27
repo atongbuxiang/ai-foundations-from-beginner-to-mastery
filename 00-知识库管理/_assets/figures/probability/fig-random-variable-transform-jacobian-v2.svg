@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">随机变量变换与密度换元</title>
+<desc id="desc">推前概率通过原像守恒；非单射变换需要汇总所有逆分支；Jacobian 体积放大与密度缩小互为倒数。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">推前：输出事件取原像</text>
+<rect x="55" y="120" width="125" height="68" rx="8" fill="#FFFEFB" stroke="#0F766E" stroke-width="2"/>
+<text x="117.5" y="160.0" font-size="17" font-weight="650" text-anchor="middle" fill="#0F766E">T^-1(B)</text>
+<rect x="270" y="120" width="75" height="68" rx="8" fill="#FFFEFB" stroke="#2563EB" stroke-width="2"/>
+<text x="307.5" y="160.0" font-size="17" font-weight="650" text-anchor="middle" fill="#2563EB">B</text>
+<line x1="185" y1="154" x2="265" y2="154" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<text x="225" y="135" font-size="18" font-weight="700" text-anchor="middle" fill="#1F2937">T</text>
+<text x="45" y="250" font-size="18" font-weight="700" text-anchor="start" fill="#1F2937" class="math">P_Y(B)=P_X(T^-1(B))</text>
+<text x="45" y="300" font-size="16" font-weight="400" text-anchor="start" fill="#1F2937">T 不必可逆；原像始终是合法集合。</text>
+<text x="45" y="350" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">离散情形：把原像中所有点质量相加。</text>
+<text x="45" y="405" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">先写集合守恒，再选择 PMF/CDF/PDF 表示。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">非单射：Y=X^2 的两分支</text>
+<line x1="455" y1="360" x2="760" y2="360" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="605" y1="410" x2="605" y2="105" stroke="#D7DEE8" stroke-width="2"/>
+<path d="M480 120Q605 360 730 120" fill="none" stroke="#0F766E" stroke-width="3"/>
+<circle cx="530" cy="250" r="7" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<circle cx="680" cy="250" r="7" fill="#2563EB" stroke="#2563EB" stroke-width="2"/>
+<line x1="530" y1="250" x2="605" y2="250" stroke="#C24135" stroke-width="2" stroke-dasharray="6 5"/>
+<line x1="680" y1="250" x2="605" y2="250" stroke="#C24135" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="530" y="230" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">-sqrt(y)</text>
+<text x="680" y="230" font-size="15" font-weight="650" text-anchor="middle" fill="#1F2937">+sqrt(y)</text>
+<text x="430" y="425" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">f_Y(y) = [f_X(sqrt y)+f_X(-sqrt y)]/(2 sqrt y)</text>
+<text x="430" y="465" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">漏掉任一分支都会丢失质量；T&#x27;(0)=0 单独审计。</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">Jacobian：体积与密度互逆</text>
+<path d="M850 145H955V270H850Z" fill="#EFF6FF" stroke="#2563EB" stroke-width="3"/>
+<line x1="975" y1="210" x2="1030" y2="210" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
+<path d="M1060 130L1140 160L1120 300L1040 270Z" fill="#ECFDF5" stroke="#0F766E" stroke-width="3"/>
+<text x="902" y="315" font-size="16" font-weight="700" text-anchor="middle" fill="#1F2937">dx</text>
+<text x="1090" y="335" font-size="16" font-weight="700" text-anchor="middle" fill="#1F2937">dy</text>
+<text x="830" y="385" font-size="17" font-weight="650" text-anchor="start" fill="#1F2937" class="math">dy ≈ |det J_T(x)| dx</text>
+<text x="830" y="425" font-size="17" font-weight="650" text-anchor="start" fill="#1F2937" class="math">f_Y(y)=f_X(x)/|det J_T(x)|</text>
+<text x="830" y="465" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">绝对值去除定向翻转；det=0 表示密度奇异。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">变换分布的统一原则是质量守恒：原像求和与 Jacobian 换元只是不同坐标表达。</text>
+</svg>

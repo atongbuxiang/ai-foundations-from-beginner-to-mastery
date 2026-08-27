@@ -1,0 +1,230 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 800" role="img" aria-labelledby="title desc">
+<title id="title">Equivalent formulas can have unequal numerical stability</title>
+<desc id="desc">Two panels compare naive and stable formulas for a quadratic small root using forward and backward errors. A third panel compares naive and shifted log-sum-exp, marking overflow as unit failure.</desc>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<style>text{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#172033}.title{font-size:25px;font-weight:760}.subtitle{font-size:14px;fill:#596579}.panel{font-size:16px;font-weight:700}.axis{font-size:13px}.tick{font-size:11.5px;fill:#64748b}.legend{font-size:12.5px}.callout{font-size:12.5px;font-weight:650}</style>
+<text class="title" x="720.0" y="38" text-anchor="middle">同一个数学问题，不同执行路径：消去会失真，平移可避开溢出</text>
+<text class="subtitle" x="720.0" y="66" text-anchor="middle">二次方程小根使用 90 位 Decimal 参考；LSE 溢出点按失败误差 1 标记</text>
+<text class="panel" x="266.0" y="110" text-anchor="middle">A. 小根相对前向误差</text>
+<text class="panel" x="725.0" y="110" text-anchor="middle">B. 归一化多项式后向误差</text>
+<text class="panel" x="1184.0" y="110" text-anchor="middle">C. log-sum-exp 相对误差 / 溢出</text>
+<line x1="86" y1="674.00" x2="446" y2="674.00" stroke="#e5eaf0"/>
+<text class="tick" x="76" y="678.00" text-anchor="end">10^-18</text>
+<line x1="545" y1="674.00" x2="905" y2="674.00" stroke="#e5eaf0"/>
+<text class="tick" x="535" y="678.00" text-anchor="end">10^-18</text>
+<line x1="1004" y1="674.00" x2="1364" y2="674.00" stroke="#e5eaf0"/>
+<text class="tick" x="994" y="678.00" text-anchor="end">10^-18</text>
+<line x1="86" y1="589.27" x2="446" y2="589.27" stroke="#e5eaf0"/>
+<text class="tick" x="76" y="593.27" text-anchor="end">10^-15</text>
+<line x1="545" y1="589.27" x2="905" y2="589.27" stroke="#e5eaf0"/>
+<text class="tick" x="535" y="593.27" text-anchor="end">10^-15</text>
+<line x1="1004" y1="589.27" x2="1364" y2="589.27" stroke="#e5eaf0"/>
+<text class="tick" x="994" y="593.27" text-anchor="end">10^-15</text>
+<line x1="86" y1="504.55" x2="446" y2="504.55" stroke="#e5eaf0"/>
+<text class="tick" x="76" y="508.55" text-anchor="end">10^-12</text>
+<line x1="545" y1="504.55" x2="905" y2="504.55" stroke="#e5eaf0"/>
+<text class="tick" x="535" y="508.55" text-anchor="end">10^-12</text>
+<line x1="1004" y1="504.55" x2="1364" y2="504.55" stroke="#e5eaf0"/>
+<text class="tick" x="994" y="508.55" text-anchor="end">10^-12</text>
+<line x1="86" y1="419.82" x2="446" y2="419.82" stroke="#e5eaf0"/>
+<text class="tick" x="76" y="423.82" text-anchor="end">10^-9</text>
+<line x1="545" y1="419.82" x2="905" y2="419.82" stroke="#e5eaf0"/>
+<text class="tick" x="535" y="423.82" text-anchor="end">10^-9</text>
+<line x1="1004" y1="419.82" x2="1364" y2="419.82" stroke="#e5eaf0"/>
+<text class="tick" x="994" y="423.82" text-anchor="end">10^-9</text>
+<line x1="86" y1="335.10" x2="446" y2="335.10" stroke="#e5eaf0"/>
+<text class="tick" x="76" y="339.10" text-anchor="end">10^-6</text>
+<line x1="545" y1="335.10" x2="905" y2="335.10" stroke="#e5eaf0"/>
+<text class="tick" x="535" y="339.10" text-anchor="end">10^-6</text>
+<line x1="1004" y1="335.10" x2="1364" y2="335.10" stroke="#e5eaf0"/>
+<text class="tick" x="994" y="339.10" text-anchor="end">10^-6</text>
+<line x1="86" y1="250.37" x2="446" y2="250.37" stroke="#e5eaf0"/>
+<text class="tick" x="76" y="254.37" text-anchor="end">10^-3</text>
+<line x1="545" y1="250.37" x2="905" y2="250.37" stroke="#e5eaf0"/>
+<text class="tick" x="535" y="254.37" text-anchor="end">10^-3</text>
+<line x1="1004" y1="250.37" x2="1364" y2="250.37" stroke="#e5eaf0"/>
+<text class="tick" x="994" y="254.37" text-anchor="end">10^-3</text>
+<line x1="86" y1="165.65" x2="446" y2="165.65" stroke="#e5eaf0"/>
+<text class="tick" x="76" y="169.65" text-anchor="end">10^0</text>
+<line x1="545" y1="165.65" x2="905" y2="165.65" stroke="#e5eaf0"/>
+<text class="tick" x="535" y="169.65" text-anchor="end">10^0</text>
+<line x1="1004" y1="165.65" x2="1364" y2="165.65" stroke="#e5eaf0"/>
+<text class="tick" x="994" y="169.65" text-anchor="end">10^0</text>
+<line x1="86.00" y1="160" x2="86.00" y2="674" stroke="#f1f5f9"/>
+<text class="tick" x="86.00" y="697" text-anchor="middle">1</text>
+<line x1="158.00" y1="160" x2="158.00" y2="674" stroke="#f1f5f9"/>
+<text class="tick" x="158.00" y="697" text-anchor="middle">4</text>
+<line x1="230.00" y1="160" x2="230.00" y2="674" stroke="#f1f5f9"/>
+<text class="tick" x="230.00" y="697" text-anchor="middle">7</text>
+<line x1="302.00" y1="160" x2="302.00" y2="674" stroke="#f1f5f9"/>
+<text class="tick" x="302.00" y="697" text-anchor="middle">10</text>
+<line x1="374.00" y1="160" x2="374.00" y2="674" stroke="#f1f5f9"/>
+<text class="tick" x="374.00" y="697" text-anchor="middle">13</text>
+<line x1="446.00" y1="160" x2="446.00" y2="674" stroke="#f1f5f9"/>
+<text class="tick" x="446.00" y="697" text-anchor="middle">16</text>
+<line x1="545.00" y1="160" x2="545.00" y2="674" stroke="#f1f5f9"/>
+<text class="tick" x="545.00" y="697" text-anchor="middle">1</text>
+<line x1="617.00" y1="160" x2="617.00" y2="674" stroke="#f1f5f9"/>
+<text class="tick" x="617.00" y="697" text-anchor="middle">4</text>
+<line x1="689.00" y1="160" x2="689.00" y2="674" stroke="#f1f5f9"/>
+<text class="tick" x="689.00" y="697" text-anchor="middle">7</text>
+<line x1="761.00" y1="160" x2="761.00" y2="674" stroke="#f1f5f9"/>
+<text class="tick" x="761.00" y="697" text-anchor="middle">10</text>
+<line x1="833.00" y1="160" x2="833.00" y2="674" stroke="#f1f5f9"/>
+<text class="tick" x="833.00" y="697" text-anchor="middle">13</text>
+<line x1="905.00" y1="160" x2="905.00" y2="674" stroke="#f1f5f9"/>
+<text class="tick" x="905.00" y="697" text-anchor="middle">16</text>
+<line x1="1004.00" y1="160" x2="1004.00" y2="674" stroke="#f1f5f9"/>
+<text class="tick" x="1004.00" y="697" text-anchor="middle">0</text>
+<line x1="1076.00" y1="160" x2="1076.00" y2="674" stroke="#f1f5f9"/>
+<text class="tick" x="1076.00" y="697" text-anchor="middle">200</text>
+<line x1="1148.00" y1="160" x2="1148.00" y2="674" stroke="#f1f5f9"/>
+<text class="tick" x="1148.00" y="697" text-anchor="middle">400</text>
+<line x1="1220.00" y1="160" x2="1220.00" y2="674" stroke="#f1f5f9"/>
+<text class="tick" x="1220.00" y="697" text-anchor="middle">600</text>
+<line x1="1292.00" y1="160" x2="1292.00" y2="674" stroke="#f1f5f9"/>
+<text class="tick" x="1292.00" y="697" text-anchor="middle">800</text>
+<line x1="1364.00" y1="160" x2="1364.00" y2="674" stroke="#f1f5f9"/>
+<text class="tick" x="1364.00" y="697" text-anchor="middle">1000</text>
+<line x1="86" y1="674" x2="446" y2="674" stroke="#334155" stroke-width="1.4"/>
+<line x1="86" y1="160" x2="86" y2="674" stroke="#334155" stroke-width="1.4"/>
+<line x1="545" y1="674" x2="905" y2="674" stroke="#334155" stroke-width="1.4"/>
+<line x1="545" y1="160" x2="545" y2="674" stroke="#334155" stroke-width="1.4"/>
+<line x1="1004" y1="674" x2="1364" y2="674" stroke="#334155" stroke-width="1.4"/>
+<line x1="1004" y1="160" x2="1004" y2="674" stroke="#334155" stroke-width="1.4"/>
+<text class="axis" x="266.0" y="727" text-anchor="middle">k in B = 10ᵏ</text>
+<text class="axis" x="725.0" y="727" text-anchor="middle">k in B = 10ᵏ</text>
+<text class="axis" x="1184.0" y="727" text-anchor="middle">score s in (s, 0, −s)</text>
+<path d="M 86.00,578.78 L 110.00,513.16 L 134.00,449.74 L 158.00,393.41 L 182.00,333.75 L 206.00,310.20 L 230.00,228.75 L 254.00,165.65 L 278.00,165.65 L 302.00,165.65 L 326.00,165.65 L 350.00,165.65 L 374.00,165.65 L 398.00,165.65 L 422.00,165.65 L 446.00,165.65" fill="none" stroke="#dc2626" stroke-width="3.2"/>
+<path d="M 86.00,613.53 L 110.00,610.76 L 134.00,674.00 L 158.00,613.79 L 182.00,674.00 L 206.00,674.00 L 230.00,614.08 L 254.00,674.00 L 278.00,674.00 L 302.00,674.00 L 326.00,674.00 L 350.00,674.00 L 374.00,674.00 L 398.00,674.00 L 422.00,674.00 L 446.00,674.00" fill="none" stroke="#2563eb" stroke-width="3.2"/>
+<path d="M 545.00,586.85 L 569.00,521.66 L 593.00,458.24 L 617.00,401.91 L 641.00,342.25 L 665.00,318.70 L 689.00,237.29 L 713.00,165.65 L 737.00,165.65 L 761.00,165.65 L 785.00,165.65 L 809.00,165.65 L 833.00,165.65 L 857.00,165.65 L 881.00,165.65 L 905.00,165.65" fill="none" stroke="#dc2626" stroke-width="3.2"/>
+<path d="M 545.00,624.77 L 569.00,624.74 L 593.00,674.00 L 617.00,616.23 L 641.00,674.00 L 665.00,674.00 L 689.00,616.23 L 713.00,674.00 L 737.00,674.00 L 761.00,674.00 L 785.00,624.74 L 809.00,674.00 L 833.00,674.00 L 857.00,674.00 L 881.00,674.00 L 905.00,674.00" fill="none" stroke="#2563eb" stroke-width="3.2"/>
+<path d="M 1004.00,674.00 L 1022.00,674.00 L 1040.00,674.00 L 1058.00,674.00 L 1076.00,674.00 L 1094.00,674.00 L 1112.00,674.00 L 1130.00,674.00 L 1148.00,674.00 L 1166.00,674.00 L 1184.00,674.00 L 1202.00,674.00 L 1220.00,674.00 L 1238.00,674.00 L 1256.00,674.00 L 1259.60,165.65 L 1274.00,165.65 L 1292.00,165.65 L 1328.00,165.65 L 1364.00,165.65" fill="none" stroke="#7c3aed" stroke-width="3.2"/>
+<path d="M 1004.00,674.00 L 1022.00,674.00 L 1040.00,674.00 L 1058.00,674.00 L 1076.00,674.00 L 1094.00,674.00 L 1112.00,674.00 L 1130.00,674.00 L 1148.00,674.00 L 1166.00,674.00 L 1184.00,674.00 L 1202.00,674.00 L 1220.00,674.00 L 1238.00,674.00 L 1256.00,674.00 L 1259.60,674.00 L 1274.00,674.00 L 1292.00,674.00 L 1328.00,674.00 L 1364.00,674.00" fill="none" stroke="#059669" stroke-width="3.2"/>
+<circle cx="86.00" cy="578.78" r="3.1" fill="#dc2626"/>
+<circle cx="110.00" cy="513.16" r="3.1" fill="#dc2626"/>
+<circle cx="134.00" cy="449.74" r="3.1" fill="#dc2626"/>
+<circle cx="158.00" cy="393.41" r="3.1" fill="#dc2626"/>
+<circle cx="182.00" cy="333.75" r="3.1" fill="#dc2626"/>
+<circle cx="206.00" cy="310.20" r="3.1" fill="#dc2626"/>
+<circle cx="230.00" cy="228.75" r="3.1" fill="#dc2626"/>
+<circle cx="254.00" cy="165.65" r="3.1" fill="#dc2626"/>
+<circle cx="278.00" cy="165.65" r="3.1" fill="#dc2626"/>
+<circle cx="302.00" cy="165.65" r="3.1" fill="#dc2626"/>
+<circle cx="326.00" cy="165.65" r="3.1" fill="#dc2626"/>
+<circle cx="350.00" cy="165.65" r="3.1" fill="#dc2626"/>
+<circle cx="374.00" cy="165.65" r="3.1" fill="#dc2626"/>
+<circle cx="398.00" cy="165.65" r="3.1" fill="#dc2626"/>
+<circle cx="422.00" cy="165.65" r="3.1" fill="#dc2626"/>
+<circle cx="446.00" cy="165.65" r="3.1" fill="#dc2626"/>
+<circle cx="86.00" cy="613.53" r="3.1" fill="#2563eb"/>
+<circle cx="110.00" cy="610.76" r="3.1" fill="#2563eb"/>
+<circle cx="134.00" cy="674.00" r="3.1" fill="#2563eb"/>
+<circle cx="158.00" cy="613.79" r="3.1" fill="#2563eb"/>
+<circle cx="182.00" cy="674.00" r="3.1" fill="#2563eb"/>
+<circle cx="206.00" cy="674.00" r="3.1" fill="#2563eb"/>
+<circle cx="230.00" cy="614.08" r="3.1" fill="#2563eb"/>
+<circle cx="254.00" cy="674.00" r="3.1" fill="#2563eb"/>
+<circle cx="278.00" cy="674.00" r="3.1" fill="#2563eb"/>
+<circle cx="302.00" cy="674.00" r="3.1" fill="#2563eb"/>
+<circle cx="326.00" cy="674.00" r="3.1" fill="#2563eb"/>
+<circle cx="350.00" cy="674.00" r="3.1" fill="#2563eb"/>
+<circle cx="374.00" cy="674.00" r="3.1" fill="#2563eb"/>
+<circle cx="398.00" cy="674.00" r="3.1" fill="#2563eb"/>
+<circle cx="422.00" cy="674.00" r="3.1" fill="#2563eb"/>
+<circle cx="446.00" cy="674.00" r="3.1" fill="#2563eb"/>
+<circle cx="545.00" cy="586.85" r="3.1" fill="#dc2626"/>
+<circle cx="569.00" cy="521.66" r="3.1" fill="#dc2626"/>
+<circle cx="593.00" cy="458.24" r="3.1" fill="#dc2626"/>
+<circle cx="617.00" cy="401.91" r="3.1" fill="#dc2626"/>
+<circle cx="641.00" cy="342.25" r="3.1" fill="#dc2626"/>
+<circle cx="665.00" cy="318.70" r="3.1" fill="#dc2626"/>
+<circle cx="689.00" cy="237.29" r="3.1" fill="#dc2626"/>
+<circle cx="713.00" cy="165.65" r="3.1" fill="#dc2626"/>
+<circle cx="737.00" cy="165.65" r="3.1" fill="#dc2626"/>
+<circle cx="761.00" cy="165.65" r="3.1" fill="#dc2626"/>
+<circle cx="785.00" cy="165.65" r="3.1" fill="#dc2626"/>
+<circle cx="809.00" cy="165.65" r="3.1" fill="#dc2626"/>
+<circle cx="833.00" cy="165.65" r="3.1" fill="#dc2626"/>
+<circle cx="857.00" cy="165.65" r="3.1" fill="#dc2626"/>
+<circle cx="881.00" cy="165.65" r="3.1" fill="#dc2626"/>
+<circle cx="905.00" cy="165.65" r="3.1" fill="#dc2626"/>
+<circle cx="545.00" cy="624.77" r="3.1" fill="#2563eb"/>
+<circle cx="569.00" cy="624.74" r="3.1" fill="#2563eb"/>
+<circle cx="593.00" cy="674.00" r="3.1" fill="#2563eb"/>
+<circle cx="617.00" cy="616.23" r="3.1" fill="#2563eb"/>
+<circle cx="641.00" cy="674.00" r="3.1" fill="#2563eb"/>
+<circle cx="665.00" cy="674.00" r="3.1" fill="#2563eb"/>
+<circle cx="689.00" cy="616.23" r="3.1" fill="#2563eb"/>
+<circle cx="713.00" cy="674.00" r="3.1" fill="#2563eb"/>
+<circle cx="737.00" cy="674.00" r="3.1" fill="#2563eb"/>
+<circle cx="761.00" cy="674.00" r="3.1" fill="#2563eb"/>
+<circle cx="785.00" cy="624.74" r="3.1" fill="#2563eb"/>
+<circle cx="809.00" cy="674.00" r="3.1" fill="#2563eb"/>
+<circle cx="833.00" cy="674.00" r="3.1" fill="#2563eb"/>
+<circle cx="857.00" cy="674.00" r="3.1" fill="#2563eb"/>
+<circle cx="881.00" cy="674.00" r="3.1" fill="#2563eb"/>
+<circle cx="905.00" cy="674.00" r="3.1" fill="#2563eb"/>
+<circle cx="1004.00" cy="674.00" r="3.1" fill="#7c3aed"/>
+<circle cx="1022.00" cy="674.00" r="3.1" fill="#7c3aed"/>
+<circle cx="1040.00" cy="674.00" r="3.1" fill="#7c3aed"/>
+<circle cx="1058.00" cy="674.00" r="3.1" fill="#7c3aed"/>
+<circle cx="1076.00" cy="674.00" r="3.1" fill="#7c3aed"/>
+<circle cx="1094.00" cy="674.00" r="3.1" fill="#7c3aed"/>
+<circle cx="1112.00" cy="674.00" r="3.1" fill="#7c3aed"/>
+<circle cx="1130.00" cy="674.00" r="3.1" fill="#7c3aed"/>
+<circle cx="1148.00" cy="674.00" r="3.1" fill="#7c3aed"/>
+<circle cx="1166.00" cy="674.00" r="3.1" fill="#7c3aed"/>
+<circle cx="1184.00" cy="674.00" r="3.1" fill="#7c3aed"/>
+<circle cx="1202.00" cy="674.00" r="3.1" fill="#7c3aed"/>
+<circle cx="1220.00" cy="674.00" r="3.1" fill="#7c3aed"/>
+<circle cx="1238.00" cy="674.00" r="3.1" fill="#7c3aed"/>
+<circle cx="1256.00" cy="674.00" r="3.1" fill="#7c3aed"/>
+<circle cx="1259.60" cy="165.65" r="3.1" fill="#7c3aed"/>
+<circle cx="1274.00" cy="165.65" r="3.1" fill="#7c3aed"/>
+<circle cx="1292.00" cy="165.65" r="3.1" fill="#7c3aed"/>
+<circle cx="1328.00" cy="165.65" r="3.1" fill="#7c3aed"/>
+<circle cx="1364.00" cy="165.65" r="3.1" fill="#7c3aed"/>
+<circle cx="1004.00" cy="674.00" r="3.1" fill="#059669"/>
+<circle cx="1022.00" cy="674.00" r="3.1" fill="#059669"/>
+<circle cx="1040.00" cy="674.00" r="3.1" fill="#059669"/>
+<circle cx="1058.00" cy="674.00" r="3.1" fill="#059669"/>
+<circle cx="1076.00" cy="674.00" r="3.1" fill="#059669"/>
+<circle cx="1094.00" cy="674.00" r="3.1" fill="#059669"/>
+<circle cx="1112.00" cy="674.00" r="3.1" fill="#059669"/>
+<circle cx="1130.00" cy="674.00" r="3.1" fill="#059669"/>
+<circle cx="1148.00" cy="674.00" r="3.1" fill="#059669"/>
+<circle cx="1166.00" cy="674.00" r="3.1" fill="#059669"/>
+<circle cx="1184.00" cy="674.00" r="3.1" fill="#059669"/>
+<circle cx="1202.00" cy="674.00" r="3.1" fill="#059669"/>
+<circle cx="1220.00" cy="674.00" r="3.1" fill="#059669"/>
+<circle cx="1238.00" cy="674.00" r="3.1" fill="#059669"/>
+<circle cx="1256.00" cy="674.00" r="3.1" fill="#059669"/>
+<circle cx="1259.60" cy="674.00" r="3.1" fill="#059669"/>
+<circle cx="1274.00" cy="674.00" r="3.1" fill="#059669"/>
+<circle cx="1292.00" cy="674.00" r="3.1" fill="#059669"/>
+<circle cx="1328.00" cy="674.00" r="3.1" fill="#059669"/>
+<circle cx="1364.00" cy="674.00" r="3.1" fill="#059669"/>
+<rect x="101" y="176" width="177" height="62" rx="8" fill="#ffffff" fill-opacity="0.95" stroke="#cbd5e1"/>
+<line x1="115" y1="198" x2="145" y2="198" stroke="#dc2626" stroke-width="3"/>
+<text class="legend" x="155" y="202">直接相减</text>
+<line x1="115" y1="222" x2="145" y2="222" stroke="#2563eb" stroke-width="3"/>
+<text class="legend" x="155" y="226">根乘积改写</text>
+<rect x="560" y="176" width="177" height="62" rx="8" fill="#ffffff" fill-opacity="0.95" stroke="#cbd5e1"/>
+<line x1="574" y1="198" x2="604" y2="198" stroke="#dc2626" stroke-width="3"/>
+<text class="legend" x="614" y="202">直接相减</text>
+<line x1="574" y1="222" x2="604" y2="222" stroke="#2563eb" stroke-width="3"/>
+<text class="legend" x="614" y="226">根乘积改写</text>
+<rect x="1019" y="176" width="177" height="62" rx="8" fill="#ffffff" fill-opacity="0.95" stroke="#cbd5e1"/>
+<line x1="1033" y1="198" x2="1063" y2="198" stroke="#7c3aed" stroke-width="3"/>
+<text class="legend" x="1073" y="202">直接 exponentiate</text>
+<line x1="1033" y1="222" x2="1063" y2="222" stroke="#059669" stroke-width="3"/>
+<text class="legend" x="1073" y="226">减最大值</text>
+<rect x="291" y="178" width="139" height="58" rx="8" fill="#fff7ed" stroke="#f59e0b"/>
+<text class="callout" x="360" y="202" text-anchor="middle">B=10^8 起直接得到 0</text>
+<text class="tick" x="360" y="222" text-anchor="middle">相对误差变为 100%</text>
+<rect x="1209" y="178" width="139" height="58" rx="8" fill="#fef2f2" stroke="#ef4444"/>
+<text class="callout" x="1278" y="202" text-anchor="middle">s=710 起朴素溢出</text>
+<text class="tick" x="1278" y="222" text-anchor="middle">精确 LSE 仍可表示</text>
+<text class="subtitle" x="720.0" y="774" text-anchor="middle">读图：问题相同，稳定改写同时控制前向/后向误差并避免中间溢出；提高精度只会把失效点向右推。</text>
+</svg>

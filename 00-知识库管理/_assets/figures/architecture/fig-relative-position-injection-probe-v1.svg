@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+<title id="title">相对位置编码：注入点、距离压缩与常量输入反例</title>
+<desc id="desc">相对信息可进入 logits、relative keys 或 relative values；只改 row-stochastic 权重存在明确的常量输入盲区。</desc>
+<defs><marker id="a0" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#C24135"/></marker><marker id="a1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#2563EB"/></marker><marker id="a2" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#0F766E"/></marker><marker id="a3" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1F2937"/></marker><style>text{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}.math{font-family:STIX Two Text,"Times New Roman",serif}</style></defs>
+<rect width="1200" height="600" fill="#FFFEFB"/>
+<line x1="400" y1="36" x2="400" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
+<text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">A</text>
+<text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">三种注入位置</text>
+<text x="55" y="105" font-size="15" font-weight="800" text-anchor="start" fill="#C24135">logit bias</text>
+<rect x="55" y="123" width="285" height="48" rx="6" fill="#F8FAFC" stroke="#C24135" stroke-width="2"/>
+<text x="197" y="153" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">qᵢᵀkⱼ + b(i−j)</text>
+<text x="55" y="210" font-size="15" font-weight="800" text-anchor="start" fill="#2563EB">relative key</text>
+<rect x="55" y="228" width="285" height="48" rx="6" fill="#F8FAFC" stroke="#2563EB" stroke-width="2"/>
+<text x="197" y="258" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">qᵢᵀ[kⱼ+aᴷ(i−j)]</text>
+<text x="55" y="315" font-size="15" font-weight="800" text-anchor="start" fill="#0F766E">relative value</text>
+<rect x="55" y="333" width="285" height="48" rx="6" fill="#F8FAFC" stroke="#0F766E" stroke-width="2"/>
+<text x="197" y="363" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">Σ αᵢⱼ[vⱼ+aⱽ(i−j)]</text>
+<text x="55" y="455" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">注入点不同，表达与缓存成本也不同。</text>
+<text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">B</text>
+<text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">距离函数就是先验</text>
+<rect x="455" y="105" width="115" height="44" rx="8" fill="#F8FAFC" stroke="#C24135" stroke-width="2"/>
+<text x="512.5" y="133.0" font-size="15" font-weight="650" text-anchor="middle" fill="#C24135">clip</text>
+<text x="585" y="133" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">远于 K 的距离同一桶</text>
+<rect x="455" y="195" width="115" height="44" rx="8" fill="#F8FAFC" stroke="#B7791F" stroke-width="2"/>
+<text x="512.5" y="223.0" font-size="15" font-weight="650" text-anchor="middle" fill="#B7791F">log buckets</text>
+<text x="585" y="223" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">越远分辨率越粗</text>
+<rect x="455" y="285" width="115" height="44" rx="8" fill="#F8FAFC" stroke="#2563EB" stroke-width="2"/>
+<text x="512.5" y="313.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">linear bias</text>
+<text x="585" y="313" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">显式 recency slope</text>
+<rect x="455" y="375" width="115" height="44" rx="8" fill="#F8FAFC" stroke="#0F766E" stroke-width="2"/>
+<text x="512.5" y="403.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">2D / graph</text>
+<text x="585" y="403" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">距离不再只是一维差</text>
+<text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">C</text>
+<text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">全同 Values 探针</text>
+<rect x="845" y="105" width="280" height="52" rx="8" fill="#ECFDF5" stroke="#0F766E" stroke-width="2"/>
+<text x="985.0" y="137.0" font-size="15" font-weight="650" text-anchor="middle" fill="#0F766E">v₁ = v₂ = … = v</text>
+<line x1="985" y1="160" x2="985" y2="202" stroke="#1F2937" stroke-width="2" marker-end="url(#a3)"/>
+<rect x="845" y="215" width="280" height="66" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="985.0" y="254.0" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">oᵢ = Σⱼ αᵢⱼ v = v</text>
+<text x="845" y="335" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">即使 α 的每行不同，</text>
+<text x="845" y="365" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">row sum = 1 仍使输出相同。</text>
+<text x="845" y="425" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">特殊 token / V 位置项 / 非归一化</text>
+<text x="845" y="450" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">可打破前提，因此这是条件反例。</text>
+<line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
+<text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">相对位置不是一个单一公式：先记录注入点和距离压缩，再用常量输入探针检查表达边界。</text>
+</svg>

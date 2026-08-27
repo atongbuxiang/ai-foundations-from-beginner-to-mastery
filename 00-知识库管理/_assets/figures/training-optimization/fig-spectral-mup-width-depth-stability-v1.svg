@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">谱 μP 的宽度深度稳定账</title>
+  <desc id="desc">相同坐标均方尺度的低秩和随机矩阵可有不同谱范数，谱条件再经残差深度和雅可比累积形成最终稳定性。</desc>
+  <rect width="1200" height="800" fill="#FFFEFB"/>
+  <style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;fill:#0F172A}.h{font-size:27px;font-weight:700}.sh{font-size:18px;font-weight:700}.b{font-size:15px}.s{font-size:15px;fill:#64748B}.blue{fill:#EEF4FF;stroke:#2563EB;stroke-width:2}.teal{fill:#ECF7F4;stroke:#0F766E;stroke-width:2}.amber{fill:#FFF6E5;stroke:#B76E00;stroke-width:2}.red{fill:#FFF1F0;stroke:#C0392B;stroke-width:2}.arr{stroke:#2563EB;stroke-width:3;fill:none}.dash{stroke:#94A3B8;stroke-width:2;stroke-dasharray:7 6;fill:none}</style>
+  <defs><marker id="ab" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#2563EB"/></marker></defs>
+  <text x="48" y="48" class="h" fill="#2563EB">同样的 entry RMS，不同的最坏方向</text>
+
+  <rect x="48" y="84" width="340" height="220" rx="14" class="red"/>
+  <text x="72" y="120" class="sh">Rank-one aligned update</text>
+  <g fill="#FCA5A5">
+    <rect x="72" y="146" width="26" height="26"/><rect x="102" y="146" width="26" height="26"/><rect x="132" y="146" width="26" height="26"/><rect x="162" y="146" width="26" height="26"/>
+    <rect x="72" y="176" width="26" height="26"/><rect x="102" y="176" width="26" height="26"/><rect x="132" y="176" width="26" height="26"/><rect x="162" y="176" width="26" height="26"/>
+    <rect x="72" y="206" width="26" height="26"/><rect x="102" y="206" width="26" height="26"/><rect x="132" y="206" width="26" height="26"/><rect x="162" y="206" width="26" height="26"/>
+    <rect x="72" y="236" width="26" height="26"/><rect x="102" y="236" width="26" height="26"/><rect x="132" y="236" width="26" height="26"/><rect x="162" y="236" width="26" height="26"/>
+  </g>
+  <text x="216" y="170" class="b">A = 11ᵀ/n</text>
+  <text x="216" y="204" class="b">entry RMS = 1/n</text>
+  <text x="216" y="238" class="b">||A||₂ = 1</text>
+  <text x="216" y="276" class="s">能量集中在一个奇异方向</text>
+
+  <rect x="430" y="84" width="340" height="220" rx="14" class="blue"/>
+  <text x="454" y="120" class="sh">Random-sign update</text>
+  <g>
+    <rect x="454" y="146" width="26" height="26" fill="#93C5FD"/><rect x="484" y="146" width="26" height="26" fill="#FCA5A5"/><rect x="514" y="146" width="26" height="26" fill="#93C5FD"/><rect x="544" y="146" width="26" height="26" fill="#FCA5A5"/>
+    <rect x="454" y="176" width="26" height="26" fill="#FCA5A5"/><rect x="484" y="176" width="26" height="26" fill="#93C5FD"/><rect x="514" y="176" width="26" height="26" fill="#FCA5A5"/><rect x="544" y="176" width="26" height="26" fill="#93C5FD"/>
+    <rect x="454" y="206" width="26" height="26" fill="#93C5FD"/><rect x="484" y="206" width="26" height="26" fill="#93C5FD"/><rect x="514" y="206" width="26" height="26" fill="#FCA5A5"/><rect x="544" y="206" width="26" height="26" fill="#FCA5A5"/>
+    <rect x="454" y="236" width="26" height="26" fill="#FCA5A5"/><rect x="484" y="236" width="26" height="26" fill="#93C5FD"/><rect x="514" y="236" width="26" height="26" fill="#93C5FD"/><rect x="544" y="236" width="26" height="26" fill="#FCA5A5"/>
+  </g>
+  <text x="598" y="170" class="b">Bᵢⱼ = ±1/n</text>
+  <text x="598" y="204" class="b">entry RMS = 1/n</text>
+  <text x="598" y="238" class="b">||B||₂ ∼ 1/√n</text>
+  <text x="598" y="276" class="s">随机抵消分散奇异能量</text>
+
+  <rect x="812" y="84" width="340" height="220" rx="14" class="teal"/>
+  <text x="836" y="120" class="sh">Spectral width contract</text>
+  <text x="836" y="162" class="b">||W||₂ ∼ √(d_out / d_in)</text>
+  <text x="836" y="202" class="b">||ΔW||₂ ∼ √(d_out / d_in)</text>
+  <text x="836" y="242" class="b">S_W, S_Δ：除去 shape ratio</text>
+  <text x="836" y="278" class="s">同时报告 RMS、effective rank、top share</text>
+
+  <path d="M388 194 L430 194" class="arr" marker-end="url(#ab)"/>
+  <path d="M770 194 L812 194" class="arr" marker-end="url(#ab)"/>
+
+  <text x="48" y="358" class="h" fill="#0F766E">单层通过后，还要穿过 Depth 累积</text>
+  <rect x="48" y="392" width="1104" height="220" rx="14" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+  <rect x="76" y="430" width="182" height="90" rx="11" class="blue"/>
+  <text x="98" y="464" class="sh">Layer ℓ</text>
+  <text x="98" y="494" class="b">αL · ΔFℓ</text>
+  <path d="M258 475 L322 475" class="arr" marker-end="url(#ab)"/>
+  <rect x="334" y="430" width="212" height="90" rx="11" class="teal"/>
+  <text x="356" y="464" class="sh">Downstream Jacobian</text>
+  <text x="356" y="494" class="b">||Jℓ+1:L||₂</text>
+  <path d="M546 475 L610 475" class="arr" marker-end="url(#ab)"/>
+  <rect x="622" y="430" width="212" height="90" rx="11" class="amber"/>
+  <text x="644" y="464" class="sh">Layer correlation</text>
+  <text x="644" y="494" class="b">same direction / cancel</text>
+  <path d="M834 475 L898 475" class="arr" marker-end="url(#ab)"/>
+  <rect x="910" y="430" width="214" height="90" rx="11" class="red"/>
+  <text x="932" y="464" class="sh">Total ΔhL</text>
+  <text x="932" y="494" class="b">Σℓ αL J ΔFℓ</text>
+  <text x="76" y="562" class="b">最坏同向：LαL；近似不相关：√L αL；真实网络还受 normalization、training 与 residual path 约束。</text>
+  <text x="76" y="592" class="s">因此 fixed-width μP 表不能只把 n 替换成 nL。</text>
+
+  <text x="48" y="666" class="h" fill="#B76E00">训练轨迹还要约束参数本身</text>
+  <rect x="48" y="700" width="1104" height="64" rx="12" class="amber"/>
+  <text x="72" y="728" class="b">W_t = W_0 + Σ_s ΔW_s：单步谱有界不保证长期参数谱有界；clip / decay 是候选干预，不是性能定理。</text>
+  <text x="48" y="792" class="s">边界：2026 width–depth 谱扩展按前沿预印本处理；适用域必须列明架构、优化器与时域。</text>
+</svg>

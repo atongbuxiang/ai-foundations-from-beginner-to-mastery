@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">科学绘图模板：基准、方法与关键工作区</title>
+  <desc id="desc">白底坐标图比较一条蓝色基准曲线和一条绿色方法曲线，使用琥珀色虚线标出工作区；曲线同时使用直接标签。</desc>
+  <rect width="1200" height="680" fill="#FFFFFF"/>
+  <style>
+    .sans{font-family:Inter,"PingFang SC","Noto Sans CJK SC",sans-serif}
+    .mono{font-family:"SFMono-Regular",Menlo,monospace}
+    .ink{fill:#1F2937}.muted{fill:#64748B}.blue{fill:#2563EB}.green{fill:#0F766E}.amber{fill:#B7791F}
+  </style>
+
+  <!-- 正式数据必须由脚本生成；下列路径仅展示版式。 -->
+  <g stroke="#D7DEE8" stroke-width="1.5">
+    <line x1="120" y1="100" x2="1120" y2="100"/>
+    <line x1="120" y1="200" x2="1120" y2="200"/>
+    <line x1="120" y1="300" x2="1120" y2="300"/>
+    <line x1="120" y1="400" x2="1120" y2="400"/>
+    <line x1="120" y1="500" x2="1120" y2="500"/>
+    <line x1="120" y1="600" x2="1120" y2="600"/>
+    <line x1="320" y1="100" x2="320" y2="600" stroke-dasharray="5 7"/>
+    <line x1="520" y1="100" x2="520" y2="600" stroke-dasharray="5 7"/>
+    <line x1="720" y1="100" x2="720" y2="600" stroke-dasharray="5 7"/>
+    <line x1="920" y1="100" x2="920" y2="600" stroke-dasharray="5 7"/>
+  </g>
+
+  <rect x="120" y="100" width="1000" height="500" fill="none" stroke="#94A3B8" stroke-width="2"/>
+  <text x="620" y="654" class="sans ink" font-size="18" text-anchor="middle">[横轴变量、单位与尺度]</text>
+  <text x="34" y="350" class="sans ink" font-size="18" text-anchor="middle" transform="rotate(-90 34 350)">[纵轴指标与单位]</text>
+
+  <g class="sans muted" font-size="15">
+    <text x="120" y="626" text-anchor="middle">0</text>
+    <text x="320" y="626" text-anchor="middle">1</text>
+    <text x="520" y="626" text-anchor="middle">2</text>
+    <text x="720" y="626" text-anchor="middle">3</text>
+    <text x="920" y="626" text-anchor="middle">4</text>
+    <text x="1120" y="626" text-anchor="middle">5</text>
+    <text x="100" y="605" text-anchor="end">0</text>
+    <text x="100" y="505" text-anchor="end">1</text>
+    <text x="100" y="405" text-anchor="end">2</text>
+    <text x="100" y="305" text-anchor="end">3</text>
+    <text x="100" y="205" text-anchor="end">4</text>
+    <text x="100" y="105" text-anchor="end">5</text>
+  </g>
+
+  <path d="M120 540 C300 500 470 430 650 320 C820 220 970 170 1120 145" fill="none" stroke="#2563EB" stroke-width="4"/>
+  <path d="M120 555 C300 535 470 490 650 410 C820 340 970 315 1120 300" fill="none" stroke="#0F766E" stroke-width="4"/>
+  <line x1="720" y1="100" x2="720" y2="600" stroke="#B7791F" stroke-width="2.5" stroke-dasharray="9 7"/>
+
+  <text x="958" y="176" class="sans blue" font-size="17">[基准曲线]</text>
+  <text x="958" y="340" class="sans green" font-size="17">[方法/精确量]</text>
+  <text x="738" y="130" class="sans amber" font-size="16">[关键工作区或阈值]</text>
+</svg>
+
