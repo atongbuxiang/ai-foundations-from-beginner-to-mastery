@@ -9,7 +9,7 @@ sources: ["[[S-2023-Demmel-Krylov-Arnoldi-Lanczos]]", "[[S-2000-Netlib-Krylov-Ei
 exercises: ["[[习题 - Lanczos 方法]]"]
 solutions: ["[[解答 - Lanczos 方法]]"]
 created: 2026-08-15
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # Lanczos 方法
@@ -49,6 +49,198 @@ updated: 2026-08-23
 > 5. Residual 小到什么程度才可结合 spectral gap 解释向量准确性？
 > 6. Ghost Ritz value 怎样由有限精度正交性损失产生？
 > 7. 全/选择性重正交、locking 与 thick/implicit restart 分别解决什么问题？
+
+> [!note] 课程位置
+> NUM-11 用双侧正交相似把整张稠密矩阵约化并计算全部 Schur 谱；本章在只允许 matvec 的大规模情形中，从一个起点逐步建立 Krylov 正交基。对称性让 projected Hessenberg 自动三对角，因此 NUM-11 的 $T$ 会在这里由三项递推重新出现。
+
+> [!tip] 建议两遍阅读
+> 第一遍只手算统一 $3\times3$ Gram 矩阵的两步 Lanczos，得到 $\alpha_1,\beta_1,\alpha_2,\beta_2$、$T_2$ 和 Ritz residual；第二遍再进入交错定理、ghost、重正交、locking、restart 与矩阵函数。先分清高维 residual 与小矩阵 eigenproblem，才不会把 Ritz value 当成无条件真特征值。
+
+## 本章的推导问题链
+
+1. 幂法为什么最终只剩一个方向，而 Krylov 方法希望保留多个多项式方向？
+2. 怎样在不存储病态幂基的前提下张成同一子空间？
+3. 对称性为何让 $Gv_k$ 只需减去当前和前一个基向量？
+4. 两步递推产生的小矩阵 $T_2$ 怎样近似原矩阵谱？
+5. 小矩阵 eigenpair 如何提升成高维 Ritz pair？
+6. 为什么高维 residual 只需要最后一个 $\beta_k$ 和 eigenvector 的末分量？
+7. 精确算术中的三项递推为何在浮点中仍可能产生 ghost？
+
+## 贯穿算例：两次 matvec 得到什么谱信息
+
+沿用
+
+$$
+G=Q\operatorname{diag}\!\left(1,\frac14,\frac1{16}\right)Q^T.
+$$
+
+选择 NUM-11 中的起点
+
+$$
+v_1=Qc_1,
+\qquad
+c_1=\frac1{\sqrt3}(1,1,1)^T.
+$$
+
+这等价于在三个特征方向上放置相同初始分量，但实际 Lanczos 只调用 $v\mapsto Gv$，不需要知道 $Q$。
+
+### 符号与对象账本
+
+| 对象 | 定义 | 本例中的值/作用 |
+|---|---|---|
+| $\mathcal K_k$ | $\operatorname{span}\{v_1,Gv_1,\ldots,G^{k-1}v_1\}$ | 搜索子空间 |
+| $V_k$ | $[v_1,\ldots,v_k]$ | Krylov 标准正交基 |
+| $\alpha_k$ | $v_k^TGv_k$ | 三对角主对角 |
+| $\beta_k$ | 新 residual 的范数 | 三对角次对角/下一基向量尺度 |
+| $T_k$ | $V_k^TGV_k$ | 小型 Ritz 矩阵 |
+| $(\theta,y)$ | $T_ky=\theta y$ | 小空间 eigenpair |
+| $u=V_ky$ | Ritz vector | 提升回原空间的近似方向 |
+| $\|Gu-\theta u\|$ | Ritz residual | 近似特征对后验证书 |
+
+### 第一步：第一次 matvec 产生 $\alpha_1$ 与新方向
+
+$$
+\alpha_1=v_1^TGv_1
+=\frac13\left(1+\frac14+\frac1{16}\right)
+=\frac7{16}.
+$$
+
+减去当前方向：
+
+$$
+w_1=Gv_1-\alpha_1v_1.
+$$
+
+在特征坐标中归一化可得
+
+$$
+\beta_1=\|w_1\|_2=\frac{\sqrt{42}}{16},
+\qquad
+v_2=Qc_2,
+\qquad
+c_2=\frac1{\sqrt{14}}(3,-1,-2)^T.
+$$
+
+于是
+
+$$
+Gv_1=\alpha_1v_1+\beta_1v_2.
+$$
+
+### 第二步：对称性让第二次只需三项
+
+计算
+
+$$
+\alpha_2=v_2^TGv_2
+=\frac{19}{28},
+$$
+
+再令
+
+$$
+w_2=Gv_2-\beta_1v_1-\alpha_2v_2.
+$$
+
+可得
+
+$$
+\beta_2=\|w_2\|_2=\frac{5\sqrt3}{56},
+\qquad
+v_3=Qc_3,
+\qquad
+c_3=\frac1{\sqrt{42}}(1,-5,4)^T.
+$$
+
+对称性保证 $w_2$ 与更早基向量的内积在精确算术中自动为零；一般非对称矩阵没有这条短递推，要进入 Arnoldi。
+
+### 第三步：两次 matvec 得到一个 $2\times2$ Ritz 问题
+
+$$
+T_2=V_2^TGV_2
+=\begin{bmatrix}
+\frac7{16}&\frac{\sqrt{42}}{16}\\
+\frac{\sqrt{42}}{16}&\frac{19}{28}
+\end{bmatrix}.
+$$
+
+其两个 Ritz values 为
+
+$$
+\theta_\pm
+=\frac{125\pm\sqrt{8961}}{224},
+$$
+
+数值上约为
+
+$$
+\theta_+\approx0.980636,
+\qquad
+\theta_-\approx0.135435.
+$$
+
+它们分别向外侧特征值 $1$ 与内侧区间 $[1/16,1/4]$ 提供近似，并满足对称 Ritz 值的交错关系。
+
+### 第四步：不用再做高维 matvec也能算 Ritz residual
+
+Lanczos 关系为
+
+$$
+GV_2
+=V_2T_2+\beta_2v_3e_2^T.
+$$
+
+若 $T_2y=\theta y$ 且 $\|y\|=1$，令 $u=V_2y$，则
+
+$$
+\begin{aligned}
+Gu-\theta u
+&=GV_2y-V_2T_2y\\
+&=\beta_2v_3e_2^Ty.
+\end{aligned}
+$$
+
+因此
+
+$$
+\boxed{
+\|Gu-\theta u\|_2
+=\beta_2|e_2^Ty|
+}.
+$$
+
+对 $\theta_+$，取归一化 eigenvector 与 $(\beta_1,\theta_+-\alpha_1)^T$ 同向，得到 residual 约 $0.123970$；对 $\theta_-$ 则约 $0.092451$。Ritz value 已接近某个真特征值，并不意味着方向误差可以脱离 gap 单独认证。
+
+### 第五步：第三步为何出现 lucky breakdown
+
+加入 $v_3$ 后，$V_3=[v_1,v_2,v_3]$ 已是整个三维空间的正交基，且
+
+$$
+T_3=V_3^TGV_3
+=\begin{bmatrix}
+\frac7{16}&\frac{\sqrt{42}}{16}&0\\
+\frac{\sqrt{42}}{16}&\frac{19}{28}&\frac{5\sqrt3}{56}\\
+0&\frac{5\sqrt3}{56}&\frac{11}{56}
+\end{bmatrix}.
+$$
+
+下一 residual 为零，即 $\beta_3=0$；Krylov 子空间已经成为不变子空间，$T_3$ 的特征值精确等于 $1,1/4,1/16$。这叫 lucky breakdown，而不是故障。
+
+### 核心公式七问：$\|Gu-\theta u\|=\beta_k|e_k^Ty|$
+
+1. **从哪来？** 把小矩阵 eigenpair 代入 Lanczos 分解，$V_kT_ky$ 项完全抵消。
+2. **为何廉价？** $\beta_k$ 已由递推得到，$e_k^Ty$ 只是小 eigenvector 的最后分量。
+3. **Residual 小保证什么？** 至少存在真特征值靠近 $\theta$；方向误差还需谱隙。
+4. **聚簇时怎么办？** 认证整个不变子空间，而不是强行区分单个 eigenvector。
+5. **为什么会有 ghost？** 浮点中 $V_k^TV_k=I$ 会逐渐失效，已收敛方向重新进入 Krylov 基。
+6. **怎样处理？** 监测正交缺陷，按需 full/selective reorthogonalization，并对收敛方向 locking/restart。
+7. **AI 中如何用？** Hessian 极端谱、covariance PCA、图 Laplacian 和 matrix-function action 都可只用 matvec 建立 Ritz 证书。
+
+> [!warning] 教学模型边界
+> 三维模型在第三步必然耗尽空间，无法展示大规模 restart、通信成本或长期 ghost；给出的 residual 也不是“必须接受/拒绝”的统一阈值。实际停止应按矩阵尺度、目标 gap、任务预算和有限精度正交性共同决定。
+
+> [!success] 第一遍停靠线
+> 应能算出 $\alpha_1=7/16$、$\beta_1=\sqrt{42}/16$、$\alpha_2=19/28$、$\beta_2=5\sqrt3/56$，写出 $T_2$，再从 Lanczos 分解推出廉价 residual 公式；还要能解释为什么 $\beta_3=0$ 是不变子空间已经闭合，而不是算法崩溃。
 
 ## 二、前置检查
 

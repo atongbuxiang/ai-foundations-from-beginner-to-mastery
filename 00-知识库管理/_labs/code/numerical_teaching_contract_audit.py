@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit NUM-01--08 teaching contracts and their two shared exact models."""
+"""Audit NUM-01--12 teaching contracts and their shared exact models."""
 
 from __future__ import annotations
 
@@ -22,6 +22,7 @@ MOC = NUM / "数值线性代数 MOC.md"
 FIGURE_SCRIPTS = (
     LABS / "code" / "plot_numerical_error_foundations_v2.py",
     LABS / "code" / "plot_numerical_direct_methods_v2.py",
+    LABS / "code" / "plot_numerical_spectral_methods_v2.py",
 )
 FIGURE_DIR = ROOT / "00-知识库管理" / "_assets" / "figures" / "numerical-analysis"
 
@@ -34,6 +35,10 @@ CONCEPTS = (
     "稳定求解线性方程组.md",
     "迭代改进、混合精度与残差校正.md",
     "Householder 与 Givens 变换.md",
+    "稳定最小二乘与正规方程的风险.md",
+    "幂法、反幂法与 Rayleigh 商迭代.md",
+    "Hessenberg 化与 QR 特征值算法.md",
+    "Lanczos 方法.md",
 )
 
 CONTRACT_MARKERS = (
@@ -62,6 +67,14 @@ FIGURE_HASHES = {
         "722547f7da7a0d8b9b64fed9e89310eff94462272c4a94a328d3278f6fbfffe9",
     "fig-householder-givens-qr-v2.svg":
         "4615fa61a36cfbb3850b57162c329f792e289d1b77102d94354dae22b6ab1763",
+    "fig-least-squares-stability-v2.svg":
+        "5a002005fa09e4c644aec0887f2187c8dd197240beb6a1c004655fcfdc67ce8f",
+    "fig-power-inverse-rqi-v2.svg":
+        "48eba2f05d344f48ad9ed3b3e2b201731a9fbae5f243684dddf7df5b0cf31c83",
+    "fig-hessenberg-qr-v2.svg":
+        "7293cca54668a0fc602850b3cc14d3c82d75cd844bba06f3a7c0cf0278a847ed",
+    "fig-lanczos-ritz-orthogonality-v2.svg":
+        "e9acfc1589089c3247f741fd8e4ac03d228bd0e8cd569ba7041f662e571f8aa1",
 }
 
 EXPECTED_FIGURE_BY_CONCEPT = {
@@ -73,6 +86,10 @@ EXPECTED_FIGURE_BY_CONCEPT = {
     CONCEPTS[5]: "fig-pivoting-linear-solve-v2.svg",
     CONCEPTS[6]: "fig-mixed-precision-refinement-v2.svg",
     CONCEPTS[7]: "fig-householder-givens-qr-v2.svg",
+    CONCEPTS[8]: "fig-least-squares-stability-v2.svg",
+    CONCEPTS[9]: "fig-power-inverse-rqi-v2.svg",
+    CONCEPTS[10]: "fig-hessenberg-qr-v2.svg",
+    CONCEPTS[11]: "fig-lanczos-ritz-orthogonality-v2.svg",
 }
 
 KNOWN_EXTENSIONS = {".md", ".py", ".svg", ".png", ".jpg", ".jpeg", ".webp", ".pdf"}
@@ -132,6 +149,9 @@ def audit_route() -> None:
         "第二波的单一模型链",
         "如何学习第二波，而不是背算法名",
         "第二波材料证书",
+        "第三波的单一模型链",
+        "如何学习第三波，而不是把谱算法混成一类",
+        "第三波材料证书",
         "numerical_teaching_contract_audit.py",
         "`regression-passed`",
         "`draft / not-attempted`",
@@ -141,8 +161,12 @@ def audit_route() -> None:
         re.search(r"\| B \| NUM-05—08 .*`regression-passed`", text) is not None,
         "MOC second-wave material status is not regression-passed",
     )
+    require(
+        re.search(r"\| C \| NUM-09—12 .*`regression-passed`", text) is not None,
+        "MOC third-wave material status is not regression-passed",
+    )
     require("Gram-Schmidt 的数值稳定性" not in text, "MOC retains missing placeholder link")
-    print("PASS NUM route: five waves, two migrated model chains, three-pass learning contracts")
+    print("PASS NUM route: five waves, three migrated model chains, three-pass learning contracts")
 
 
 def audit_exact_scalar_model() -> None:
@@ -371,6 +395,158 @@ def audit_exact_qr_model() -> None:
     print("PASS QR model: exact Givens R/determinant, safe Householder, unsafe sign cancels in F_{10,4}")
 
 
+def transpose(matrix):
+    return tuple(tuple(matrix[row][column] for row in range(len(matrix))) for column in range(len(matrix[0])))
+
+
+def matmul(first, second):
+    return tuple(
+        tuple(
+            sum(first[row][index] * second[index][column] for index in range(len(second)))
+            for column in range(len(second[0]))
+        )
+        for row in range(len(first))
+    )
+
+
+def matvec(matrix, vector):
+    return tuple(sum(row[index] * vector[index] for index in range(len(vector))) for row in matrix)
+
+
+def vector_norm(vector) -> float:
+    return math.sqrt(sum(float(value) ** 2 for value in vector))
+
+
+def audit_exact_spectral_model() -> None:
+    q = tuple(
+        tuple(Fraction(value, 3) for value in row)
+        for row in ((1, 2, 2), (2, 1, -2), (-2, 2, -1))
+    )
+    identity = tuple(
+        tuple(Fraction(int(row == column)) for column in range(3))
+        for row in range(3)
+    )
+    require(matmul(transpose(q), q) == identity, "spectral Q is no longer orthogonal")
+
+    sigma = (Fraction(1), Fraction(1, 2), Fraction(1, 4))
+    lambdas = tuple(value**2 for value in sigma)
+    a_top = tuple(
+        tuple(sigma[row] * q[column][row] for column in range(3))
+        for row in range(3)
+    )
+    a = a_top + ((Fraction(0), Fraction(0), Fraction(0)),)
+    gram = matmul(transpose(a), a)
+    spectral_gram = matmul(
+        matmul(q, tuple(tuple(lambdas[row] if row == column else 0 for column in range(3)) for row in range(3))),
+        transpose(q),
+    )
+    require(gram == spectral_gram, "A^T A spectral factorization changed")
+
+    x_star = (Fraction(1), Fraction(-1), Fraction(2))
+    fitted = matvec(a, x_star)
+    b = fitted[:3] + (fitted[3] + 1,)
+    residual = tuple(b[index] - fitted[index] for index in range(4))
+    require(residual == (0, 0, 0, 1), "least-squares residual changed")
+    require(matvec(transpose(a), residual) == (0, 0, 0), "least-squares stationarity changed")
+    require(max(sigma) / min(sigma) == 4, "design condition number changed")
+    require(max(lambdas) / min(lambdas) == 16, "normal-equation condition number changed")
+
+    eigenvectors = tuple(tuple(q[row][column] for row in range(3)) for column in range(3))
+    for eigenvalue, eigenvector in zip(lambdas, eigenvectors):
+        require(
+            matvec(gram, eigenvector) == tuple(eigenvalue * value for value in eigenvector),
+            "Gram eigenpair changed",
+        )
+
+    # Power and shift-invert filters in exact spectral coordinates.
+    require((lambdas[1] / lambdas[0]) ** 2 == Fraction(1, 16), "power second-mode ratio changed")
+    require((lambdas[2] / lambdas[0]) ** 2 == Fraction(1, 256), "power third-mode ratio changed")
+    shift = Fraction(5, 16)
+    mapped = tuple(1 / (value - shift) for value in lambdas)
+    require(mapped == (Fraction(16, 11), Fraction(-16), Fraction(-4)), "shift-invert map changed")
+
+    tangent = Fraction(1, 3)
+    cos_squared = 1 / (1 + tangent**2)
+    sin_squared = tangent**2 / (1 + tangent**2)
+    rho = lambdas[0] * cos_squared + lambdas[1] * sin_squared
+    next_tangent = tangent * (lambdas[0] - rho) / (lambdas[1] - rho)
+    require(next_tangent == -(tangent**3), "RQI cubic tangent identity changed")
+
+    # The exact symmetric tridiagonal shared by Hessenberg and Lanczos.
+    q_float = tuple(tuple(float(value) for value in row) for row in q)
+    coefficient_basis = (
+        (1 / math.sqrt(3), 3 / math.sqrt(14), 1 / math.sqrt(42)),
+        (1 / math.sqrt(3), -1 / math.sqrt(14), -5 / math.sqrt(42)),
+        (1 / math.sqrt(3), -2 / math.sqrt(14), 4 / math.sqrt(42)),
+    )
+    v = matmul(q_float, coefficient_basis)
+    gram_float = tuple(tuple(float(value) for value in row) for row in gram)
+    tridiagonal = matmul(matmul(transpose(v), gram_float), v)
+    expected = (
+        (7 / 16, math.sqrt(42) / 16, 0.0),
+        (math.sqrt(42) / 16, 19 / 28, 5 * math.sqrt(3) / 56),
+        (0.0, 5 * math.sqrt(3) / 56, 11 / 56),
+    )
+    for row in range(3):
+        for column in range(3):
+            require(
+                math.isclose(tridiagonal[row][column], expected[row][column], rel_tol=0.0, abs_tol=4e-16),
+                f"tridiagonal entry changed at {(row, column)}",
+            )
+    require(math.isclose(sum(tridiagonal[i][i] for i in range(3)), 21 / 16, abs_tol=3e-16), "T trace changed")
+
+    # One exact-shift QR step on the invariant two-dimensional block.
+    active = ((5 / 8, 3 / 8), (3 / 8, 5 / 8))
+    z = ((1 / math.sqrt(2), -1 / math.sqrt(2)), (1 / math.sqrt(2), 1 / math.sqrt(2)))
+    r_shift = ((3 * math.sqrt(2) / 8, 3 * math.sqrt(2) / 8), (0.0, 0.0))
+    shifted = tuple(
+        tuple(active[row][column] - (1 / 4 if row == column else 0) for column in range(2))
+        for row in range(2)
+    )
+    reconstructed_shift = matmul(z, r_shift)
+    shifted_next = matmul(r_shift, z)
+    shifted_next = tuple(
+        tuple(shifted_next[row][column] + (1 / 4 if row == column else 0) for column in range(2))
+        for row in range(2)
+    )
+    for row in range(2):
+        for column in range(2):
+            require(math.isclose(reconstructed_shift[row][column], shifted[row][column], abs_tol=2e-16), "shifted QR factor changed")
+    require(math.isclose(shifted_next[0][0], 1.0, abs_tol=2e-16), "shifted QR dominant value changed")
+    require(math.isclose(shifted_next[1][1], 0.25, abs_tol=2e-16), "shifted QR deflated value changed")
+    require(abs(shifted_next[1][0]) < 2e-16 and abs(shifted_next[0][1]) < 2e-16, "shifted QR did not deflate")
+
+    # Two-step Ritz values and the inexpensive residual identity.
+    alpha1 = expected[0][0]
+    beta1 = expected[0][1]
+    alpha2 = expected[1][1]
+    beta2 = expected[1][2]
+    trace2 = alpha1 + alpha2
+    determinant2 = alpha1 * alpha2 - beta1**2
+    discriminant2 = math.sqrt(trace2**2 - 4 * determinant2)
+    theta_plus = (trace2 + discriminant2) / 2
+    theta_minus = (trace2 - discriminant2) / 2
+    require(math.isclose(theta_plus, (125 + math.sqrt(8961)) / 224, abs_tol=3e-16), "upper Ritz value changed")
+    require(math.isclose(theta_minus, (125 - math.sqrt(8961)) / 224, abs_tol=3e-16), "lower Ritz value changed")
+
+    y_raw = (beta1, theta_plus - alpha1)
+    y_norm = vector_norm(y_raw)
+    y = tuple(value / y_norm for value in y_raw)
+    v2 = tuple(tuple(v[row][column] for column in range(2)) for row in range(3))
+    ritz_vector = matvec(v2, y)
+    direct_residual = tuple(
+        value - theta_plus * ritz_vector[index]
+        for index, value in enumerate(matvec(gram_float, ritz_vector))
+    )
+    cheap_residual = beta2 * abs(y[1])
+    require(math.isclose(vector_norm(direct_residual), cheap_residual, abs_tol=4e-16), "Ritz residual identity changed")
+    require(math.isclose(cheap_residual, 0.12397010250529546, abs_tol=4e-16), "upper Ritz residual changed")
+    print(
+        "PASS spectral model: kappa 4 -> 16, power/shift/RQI filters, exact T3, "
+        "one-step shifted deflation and two-step Ritz residual"
+    )
+
+
 def audit_markdown_integrity() -> None:
     all_files = [path for path in ROOT.rglob("*") if path.is_file()]
     file_index: dict[str, list[Path]] = {}
@@ -460,9 +636,10 @@ def main() -> None:
     audit_exact_direct_model()
     audit_exact_refinement_model()
     audit_exact_qr_model()
+    audit_exact_spectral_model()
     audit_markdown_integrity()
     audit_figures(args.run_figures)
-    print("NUM-01—08 material regression: PASS; learning state: draft/not-attempted")
+    print("NUM-01—12 material regression: PASS; learning state: draft/not-attempted")
 
 
 if __name__ == "__main__":

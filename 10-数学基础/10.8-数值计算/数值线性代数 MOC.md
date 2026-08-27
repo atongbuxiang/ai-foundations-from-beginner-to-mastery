@@ -26,7 +26,7 @@ updated: 2026-08-27
 |---|---|---|---|---|---|
 | A | NUM-01—04 | 浮点网格 → 误差对象 → 算法稳定性 → 条件感知停止 | $\tau=10^{-4}$；$\mathbb F_{10,4}$ 与 $A_\tau=\operatorname{diag}(1,\tau)$ | `regression-passed` | `draft / not-attempted` |
 | B | NUM-05—08 | reduction 内核 → pivoted solve → mixed-precision refinement → 稳定正交变换 | $\varepsilon=10^{-8}$；$A_\varepsilon$、近似逆 $B$ 与 $PA_\varepsilon$ 的 QR | `regression-passed` | `draft / not-attempted` |
-| C | NUM-09—12 | 最小二乘 → 极端特征对 → 稠密 QR 流水线 → 对称 Krylov | 条件数平方、谱隙/移位、Hessenberg deflation、Ritz residual | `pending` | `draft / not-attempted` |
+| C | NUM-09—12 | 最小二乘 → 极端特征对 → 稠密 QR 流水线 → 对称 Krylov | $A=[\Sigma Q^\mathsf T;0]$、$G=A^\mathsf TA$ 与共享三对角 $T$ | `regression-passed` | `draft / not-attempted` |
 | D | NUM-13—16 | 一般 Krylov → SVD → 定常迭代 → 预条件 | Arnoldi 正交性、双侧残差、谱半径/暂态、广义谱重塑 | `pending` | `draft / not-attempted` |
 | E | NUM-17—20 | CG → GMRES/MINRES → 稀疏系统 → 随机低秩 | 能量误差、重启、fill/负载、概率证书 | `pending` | `draft / not-attempted` |
 | CUM | NUM-CUM | 卷级口试—闭卷—实验—延迟重做 | 20 节随机回链与三实验组合门 | `composed` | `not-attempted` |
@@ -79,6 +79,60 @@ $$
 2. **第二遍（约 240 分钟）：**进入 $\gamma_n$、pivot growth、三精度条件、blocked QR 与 BERR/FERR；
 3. **第三遍（约 150 分钟）：**把 $\varepsilon$ 改为 $10^{-4}$ 或换成 binary16 scale，预先判断哪些舍入结论改变、哪些代数恒等式保留；
 4. **验收：**依次复现[[实验 - 稳定归约、点积消去与混合精度累加]]、[[实验 - 选主元、后向误差与迭代改进]]与[[实验 - Householder 符号、Givens 缩放与 QR 正交性]]，并解释何时必须触发 precision/factorization fallback。
+
+### 第三波的单一模型链
+
+第三波固定一组可完全手算、又足以暴露谱算法本质的正交基与奇异值：
+
+$$
+Q=\frac13
+\begin{bmatrix}
+1&2&2\\
+2&1&-2\\
+-2&2&-1
+\end{bmatrix},
+\qquad
+\Sigma=\operatorname{diag}\!\left(1,\frac12,\frac14\right),
+\qquad
+A=
+\begin{bmatrix}
+\Sigma Q^\mathsf T\\
+0_{1\times3}
+\end{bmatrix}.
+$$
+
+令 $x_\star=(1,-1,2)^\mathsf T$、$b=Ax_\star+e_4$，再把最小二乘的 Gram 矩阵记为
+
+$$
+G=A^\mathsf TA
+=Q\operatorname{diag}\!\left(1,\frac14,\frac1{16}\right)Q^\mathsf T.
+$$
+
+于是四篇不再是四个孤立算法，而是同一个对象从“解系数”到“看全谱”、再到“只投影所需谱信息”的连续变焦：
+
+1. **NUM-09：最小二乘与条件数平方。** $r_\star=b-Ax_\star=e_4$ 且 $A^\mathsf Tr_\star=0$，所以 $x_\star$ 满足几何正交条件；$\kappa_2(A)=4$，但 $\kappa_2(G)=16$，正规方程把病态程度平方，而 Householder QR 不需要先形成 $G$；
+2. **NUM-10：同一 Gram 谱上的滤波。** 从 $x_0=(u_1+u_2+u_3)/\sqrt3$ 出发，幂法三方向系数按 $1:4^{-k}:16^{-k}$ 衰减；固定移位 $\sigma=5/16$ 后，反幂法的放大因子为 $16/11,-16,-4$，转而瞄准 $\lambda_2=1/4$；在 $\operatorname{span}(u_1,u_2)$ 中，Rayleigh 商迭代进一步满足 $\tan\theta_{k+1}=-\tan^3\theta_k$；
+3. **NUM-11：先约化，再做 QR 迭代。** 选定共享正交基 $V$ 后，$G$ 被正交相似地化为三对角
+   $$
+   T=V^\mathsf TGV=
+   \begin{bmatrix}
+   7/16&\sqrt{42}/16&0\\
+   \sqrt{42}/16&19/28&5\sqrt3/56\\
+   0&5\sqrt3/56&11/56
+   \end{bmatrix};
+   $$
+   它与 $G$ 有相同的 trace、determinant 和特征值。对一个 $2\times2$ active block 取精确移位 $\mu=1/4$，一步 shifted QR 就产生对角矩阵，具体展示“相似变换为何保谱、次对角元为何意味着 deflation”；
+4. **NUM-12：不形成完整相似变换也能取谱信息。** Lanczos 从同一个首向量生成 $\alpha_1=7/16$、$\beta_1=\sqrt{42}/16$、$\alpha_2=19/28$、$\beta_2=5\sqrt3/56$。二阶 $T_2$ 的 Ritz 值为 $(125\pm\sqrt{8961})/224$，残差只需末分量即可计算；三步后 $T_3=T$ 且 $\beta_3=0$，发生 exact-arithmetic lucky breakdown。
+
+> [!success] 第三波材料证书
+> [[numerical_teaching_contract_audit.py]]已扩展到 NUM-01—12：12/12 教学合同、369 条作用域内 Wiki 链接、12 个完整图文单元、三波精确数值断言和 12 幅正式 SVG 哈希全部通过。这里的 `regression-passed` 只说明正文结构、统一模型、链接与图像可重复；四篇仍是 `draft`，读者尚未完成的推导不能被材料回归代替。
+
+### 如何学习第三波，而不是把谱算法混成一类
+
+1. **第一遍（约 150 分钟）：**只沿 $A\to G\to T_2\to T_3$ 手算，分别说清“解最小二乘”“找单个特征对”“求稠密全谱”“取大规模对称矩阵少量 Ritz 对”四种任务；
+2. **第二遍（约 300 分钟）：**回到 QR/SVD 的舍入稳定性、谱隙、移位选择、隐式 QR、Krylov 投影和 Ritz residual，把每个定理的条件补齐；
+3. **第三遍（约 180 分钟）：**改变奇异值比例、起始向量或移位，先预测收敛方向与速度，再运行实验验证；尤其要构造“起始向量与目标特征向量正交”“移位碰到特征值”“Lanczos 丢失正交性”三个失败边界；
+4. **验收：**依次复现[[实验 - 正规方程、QR 与截断 SVD 的稳定性]]、[[实验 - 谱间隙、移位与 Rayleigh 商迭代收敛]]、[[实验 - Hessenberg 约化、移位与 QR deflation]]与[[实验 - Lanczos Ritz 收敛、残差与正交性]]；最后在不看正文时，从统一模型独立重建四篇的中心公式。
 
 ## 核心区别
 

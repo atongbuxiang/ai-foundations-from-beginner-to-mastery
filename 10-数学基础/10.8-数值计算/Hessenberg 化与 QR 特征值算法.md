@@ -9,7 +9,7 @@ sources: ["[[S-2023-Demmel-幂法反幂与QR迭代]]", "[[S-2025-LAPACK-Hessenbe
 exercises: ["[[习题 - Hessenberg 化与 QR 特征值算法]]"]
 solutions: ["[[解答 - Hessenberg 化与 QR 特征值算法]]"]
 created: 2026-08-15
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # Hessenberg 化与 QR 特征值算法
@@ -90,6 +90,179 @@ A=QTQ^*,
 $$
 
 其中 $Q$ 酉/正交，$T$ 为复上三角或实准上三角 Schur 形式。
+
+> [!note] 课程位置
+> NUM-10 只提取一个目标特征方向；本章转向“稠密矩阵的全部谱”，解释为什么必须先约化结构、再做移位 QR 和 deflation。对于对称矩阵，Hessenberg 会进一步缩成三对角，这恰好与 NUM-12 的 Lanczos 小矩阵相接。
+
+> [!tip] 建议两遍阅读
+> 第一遍只完成两件事：把统一 Gram 矩阵正交相似成给定三对角 $T$，再对一个 $2\times2$ 活跃块做一次精确移位 QR；第二遍再进入 Householder 约化、隐式 $Q$ 定理、bulge chasing、多重移位、AED 和实 Schur 块。先看清 similarity 与 deflation，再研究工业实现。
+
+## 本章的推导问题链
+
+1. 为什么 QR iteration 的每一步必须是相似变换，才能保持目标谱？
+2. 直接对稠密矩阵重复 QR 为什么可能达到 $O(n^4)$？
+3. 双侧正交变换怎样一次性把一般矩阵压成 Hessenberg？
+4. 对称性为什么迫使 Hessenberg 进一步成为三对角？
+5. 一个 shift 怎样改变收敛速度，却不改变特征值？
+6. 精确 shift 为什么能让一个小活跃块立即出现零次对角元？
+7. 浮点中何时才允许把“小”次对角元设为零并 deflate？
+
+## 贯穿算例：同一 Gram 谱的三对角化与一次精确 deflation
+
+沿用
+
+$$
+G=Q\operatorname{diag}\!\left(1,\frac14,\frac1{16}\right)Q^T.
+$$
+
+在特征坐标中取三个标准正交向量
+
+$$
+c_1=\frac1{\sqrt3}\begin{bmatrix}1\\1\\1\end{bmatrix},
+\quad
+c_2=\frac1{\sqrt{14}}\begin{bmatrix}3\\-1\\-2\end{bmatrix},
+\quad
+c_3=\frac1{\sqrt{42}}\begin{bmatrix}1\\-5\\4\end{bmatrix},
+$$
+
+并令 $V=Q[c_1,c_2,c_3]$。则 $V^TV=I$。
+
+### 符号与对象账本
+
+| 对象 | 定义 | 本例中的作用 |
+|---|---|---|
+| $G$ | $A^TA$ | 原始稠密对称谱问题 |
+| $V$ | 正交相似基 | 把 $G$ 变成对称三对角 |
+| $T$ | $V^TGV$ | Hessenberg 的对称特例 |
+| $\mu$ | QR shift | 加速选定活跃块收敛 |
+| $S$ | $2\times2$ 活跃块 | 隔离一次 shifted QR 机制 |
+| $Z,R_s$ | $S-\mu I=ZR_s$ | 当前移位分解 |
+| deflation | 次对角元可忽略时分块 | 缩小后续活跃问题 |
+
+### 第一步：对称 Hessenberg 必然三对角
+
+直接计算得到
+
+$$
+T=V^TGV
+=\begin{bmatrix}
+\frac7{16} & \frac{\sqrt{42}}{16} & 0\\
+\frac{\sqrt{42}}{16} & \frac{19}{28} & \frac{5\sqrt3}{56}\\
+0 & \frac{5\sqrt3}{56} & \frac{11}{56}
+\end{bmatrix}.
+$$
+
+这里的 $(3,1)$ 和 $(1,3)$ 同时为零：上 Hessenberg 只要求 $(3,1)=0$，对称性又强迫转置位置也为零。由于 $T=V^TGV$，它与 $G$ 有完全相同的特征值
+
+$$
+1,\quad\frac14,\quad\frac1{16}.
+$$
+
+两个独立不变量为
+
+$$
+\operatorname{tr}(T)
+=\frac7{16}+\frac{19}{28}+\frac{11}{56}
+=\frac{21}{16},
+$$
+
+以及
+
+$$
+\det(T)=1\cdot\frac14\cdot\frac1{16}=\frac1{64}.
+$$
+
+> [!warning] 证书不是算法
+> 本例用已知 $Q$ 写出 $V$，只是为了让三对角条目和谱不变量可精确回归；真实 Hessenberg reduction 不知道特征向量，而是用 Householder 从原矩阵逐列消元。不能把这里的构造当成求谱算法。
+
+### 第二步：用二维活跃块隔离一次 shifted QR
+
+在 $u_1,u_2$ 的不变平面中换一个 $45^\circ$ 正交基，可得到
+
+$$
+S=\begin{bmatrix}
+\frac58&\frac38\\
+\frac38&\frac58
+\end{bmatrix},
+$$
+
+其特征值仍为 $1$ 与 $1/4$。取精确 shift
+
+$$
+\mu=\frac14.
+$$
+
+则
+
+$$
+S-\mu I
+=\begin{bmatrix}\frac38&\frac38\\\frac38&\frac38\end{bmatrix}
+=ZR_s,
+$$
+
+其中
+
+$$
+Z=\frac1{\sqrt2}
+\begin{bmatrix}1&-1\\1&1\end{bmatrix},
+\qquad
+R_s=\begin{bmatrix}
+\frac{3\sqrt2}{8}&\frac{3\sqrt2}{8}\\
+0&0
+\end{bmatrix}.
+$$
+
+交换因子并加回 shift：
+
+$$
+S_+=R_sZ+\mu I
+=\begin{bmatrix}1&0\\0&\frac14\end{bmatrix}.
+$$
+
+一次精确移位便让次对角元成为零，两个特征值可以立即分块。这是 shift 加速与 deflation 的最小模型。
+
+### 第三步：为什么交换因子仍保持谱
+
+由 $S-\mu I=ZR_s$ 且 $Z^TZ=I$，
+
+$$
+\begin{aligned}
+S_+
+&=R_sZ+\mu I\\
+&=Z^T(S-\mu I)Z+\mu I\\
+&=Z^TSZ.
+\end{aligned}
+$$
+
+所以 shifted QR step 是正交相似变换。Shift 改变的是坐标更新路径和收敛速度，不改变精确特征值。
+
+### 第四步：浮点 deflation 不能只问“是不是零”
+
+真实计算中次对角元通常不会恰好等于零。对活跃 Hessenberg 块，典型尺度感知测试形如
+
+$$
+|h_{i+1,i}|
+\le \tau_{\rm defl}
+\bigl(|h_{ii}|+|h_{i+1,i+1}|\bigr),
+$$
+
+并还要考虑 safe minimum、邻近元素与实现精度。绝对阈值会把不同量级矩阵错误地一视同仁；过早 deflate 改变问题，过晚 deflate 浪费迭代并可能恶化相对精度。
+
+### 核心公式七问：$A_{k+1}=Q_k^TA_kQ_k$
+
+1. **怎样得到？** 从 $A_k-\mu I=Q_kR_k$ 和 $A_{k+1}=R_kQ_k+\mu I$ 消去 $R_k$。
+2. **保留什么？** 特征值、迹、行列式和二范数等正交相似不变量。
+3. **Shift 做什么？** 改变 QR 坐标选择，使目标谱块更快显现；不改变谱本身。
+4. **为何先 Hessenberg？** 稠密 QR 每步 $O(n^3)$；Hessenberg 带宽使隐式步降到 $O(n^2)$。
+5. **Bulge chasing 做什么？** 局部产生并追逐带外填充，恢复 Hessenberg 结构而不显式形成完整 $Q_k$。
+6. **Deflation 何时可信？** 次对角相对局部尺度和精度足够小，并通过 backward-error 语境解释。
+7. **AI 中如何用？** 小型 projected eigensolver、DMD、stability analysis 和矩阵函数常把高维问题压成 Hessenberg/Schur 子问题。
+
+> [!warning] 教学模型边界
+> $S$ 使用精确特征值作 shift，因此一步完全 deflate；工业算法通常只有近似 Wilkinson/Francis shift，还要处理多重特征值、实 $2\times2$ 共轭块、异常 shift 和 AED。对非正规矩阵，即使 Schur residual 很小，单个 eigenvector 仍可能高度敏感。
+
+> [!success] 第一遍停靠线
+> 应能核对 $T$ 的 trace $21/16$、determinant $1/64$ 和三对角结构；再验证 $S-\frac14I=ZR_s$、$R_sZ+\frac14I=\operatorname{diag}(1,1/4)$，并用三行代数证明 shifted QR 是正交相似变换。
 
 ## 一、为什么先约化、后迭代
 
