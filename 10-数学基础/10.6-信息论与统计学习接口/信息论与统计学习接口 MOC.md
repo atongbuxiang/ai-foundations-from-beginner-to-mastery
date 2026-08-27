@@ -7,13 +7,67 @@ prerequisites: ["[[概率论与数理统计 MOC]]", "[[期望、方差与矩]]",
 related: ["[[数学基础 MOC]]", "[[数学基础完整课程地图与掌握标准]]", "[[练习与测验 MOC]]", "[[推导与实验 MOC]]"]
 sources: ["Shannon-1948-Mathematical-Theory-Communication", "Shannon-1959-Coding-Theorems-Fidelity-Criterion", "Kullback-Leibler-1951-Information-Sufficiency", "Jaynes-1957-Information-Theory-Statistical-Mechanics", "Csiszar-1967-f-Divergence", "Tishby-Pereira-Bialek-1999-Information-Bottleneck", "Alemi-et-al-2017-Deep-Variational-Information-Bottleneck", "Rissanen-1978-Modeling-Shortest-Data-Description", "Grunwald-2007-MDL", "Honkela-Valpola-2004-Bits-Back", "MIT-6.441-Information-Theory", "Stanford-EE376A-Information-Theory", "Cover-Thomas-Elements-Information-Theory", "Wainwright-Jordan-2008-Exponential-Families-Variational-Inference", "Blei-Kucukelbir-McAuliffe-2017-Variational-Inference", "Kingma-Welling-2014-AEVB", "Nowozin-Cseke-Tomioka-2016-fGAN", "Gretton-et-al-2012-MMD", "Arjovsky-Chintala-Bottou-2017-WGAN", "Su-3534-Entropy-Part-I", "Su-3552-Maximum-Entropy", "Su-3567-Maximum-Entropy-Model", "Su-6016-fGAN", "Su-6088-VAE-Prior-MI", "Su-6181-Variational-Coding-Information-Bottleneck", "Su-7695-Embedding-Dimension-Entropy", "Su-8244-WGAN-Distance", "Su-8791-VAE-Density"]
 created: 2026-08-19
-updated: 2026-08-19
+updated: 2026-08-27
 ---
 
 # 信息论与统计学习接口 MOC
 
 > [!abstract] 本卷的核心任务
 > 把“惊讶、不确定性、依赖、分布失配与可压缩性”变成带条件、单位和操作含义的数学量。课程从离散自信息和平均码长出发，建立 joint/conditional entropy、cross-entropy、KL 与 mutual information；再用数据处理、典型集、最大熵、变分推断和率失真把它们接到语言模型、表示学习、生成模型与压缩。公式只有在随机对象、分布、对数底、支撑和归约尺度都写清时才有意义。
+
+### 当前教学迁移路线
+
+> [!important] 学习状态与材料迁移状态分开
+> 下表只记录“课程位置—两遍路线—问题链—贯穿例—对象账本—公式七问—停靠线”是否补齐。正文 frontmatter 与核心节点表中的 `draft` 仍表示学习者尚未完成闭卷、订正和延迟复做；`regression-passed` 只说明材料及静态检查通过，不能替代真实掌握。
+
+| 波次 | ID 范围 | 认知主线 | 材料迁移 |
+|---|---|---|---|
+| A | INFO-01—04 | 自信息/熵 → 联合/条件链 → cross-entropy/KL → 互信息 | `regression-passed` |
+| B | INFO-05—06 | 数据处理/充分性 → 无损编码/典型集/AEP | `pending` |
+| C | INFO-07—10 | 最大熵/指数族 → ELBO → 散度几何 → 率失真/IB/MDL | `pending` |
+| CUM | INFO-CUM | 卷级路线—口试—题解—实验—回归 | `pending` |
+
+第一波固定使用二元对称信道：
+
+$$
+X\sim\operatorname{Bernoulli}\!\left(\frac12\right),
+\qquad
+N\sim\operatorname{Bernoulli}\!\left(\frac14\right),
+\qquad
+Y=X\oplus N,
+\qquad
+N\perp X.
+$$
+
+它在同一个四格联合分布上把四章的核心量闭合为
+
+$$
+H_2(X)=H_2(Y)=1,
+\qquad
+H_2(Y\mid X)=h_2\!\left(\frac14\right)
+=2-\frac34\log_2 3
+\approx0.811278,
+$$
+
+$$
+H_2(X,Y)=1+h_2\!\left(\frac14\right)
+\approx1.811278,
+$$
+
+以及
+
+$$
+\underbrace{\mathbb E_{P_{XY}}[-\log_2p_Y(Y)]}_{\text{忽略输入时为 }1}
+-\underbrace{H_P(Y\mid X)}_{\text{知道输入时约 }0.811278}
+=\underbrace{I(X;Y)}_{\text{预测收益}}
+=\frac34\log_2 3-1
+\approx0.188722\ \text{bit}.
+$$
+
+这一等式是第一波的中心桥梁：自信息先被平均成 entropy，概率链把 entropy 拆成条件项，错误模型产生 KL gap，而“忽略 $X$ 的 marginal model”这一特殊错模的 gap 正好就是 mutual information。
+
+> [!tip] 第一波停靠线
+> 完成 INFO-01—04 后，应能从 joint table $(3/8,1/8;1/8,3/8)$ 出发，依次重建自信息、$H(X,Y)=H(X)+H(Y\mid X)$、conditional cross-entropy/KL gap、两类 PMI 与 $I(X;Y)=1-h_2(1/4)$；同时必须口头声明 log base、expectation 的分布、support 与“统计依赖不等于因果”。
 
 ## 一、范围与边界
 
@@ -172,9 +226,13 @@ flowchart LR
 - [[S-2022-Su-9039-GlobalPointer下的KL散度]]：提醒“模型输出不是概率分布时，普通 KL 可能没有定义”；
 - 科学空间文章不单独承担 Kraft inequality、source coding theorem、AEP、data processing 或 variational bound 的正式证据。
 
-## 九、下一步
+## 九、卷级完成度与下一步
 
-INFO-01—10 已完成正文、十幅机制图、150 道 A–E 题与独立详解，10.6 达到 **10/10 正文覆盖**。INFO-08 的[[实验 - ELBO 恒等式、变分族限制与摊销缺口]]分离 approximation 与 amortization gap；[[实验 - 信息论累计复现门]]把 Bernoulli–Hamming 前沿、task/nuisance bottleneck 与 prequential code 组成三轨计算验收。`INFO-CUM-01` 的[[阶段测验 - 信息论与统计学习接口（10.6）]]和[[阶段测验解答 - 信息论与统计学习接口（10.6）]]已经成稿，但当前仍为 `composed / not-attempted`。所有节点保持 `draft`；下一施工卷进入 10.7 优化与凸分析，首节点为[[优化问题、可行域与局部最优]]。
+INFO-01—10 已完成正文、十幅机制图、150 道 A–E 题与独立详解，10.6 达到 **10/10 正文覆盖**；这表示深层内容已经存在，不表示初学者入口已全部迁移，更不表示学习者已经掌握。
+
+截至 2026-08-27，INFO-01—04 已完成当前教学合同并通过静态回归，第一波材料状态为 `regression-passed`；INFO-05—10 与 INFO-CUM 仍待按同一标准迁移。下一施工波为 INFO-05—06：用同一 noisy-bit channel 追踪 $X\to Y\to Z$ 的信息损失，再从单符号不确定性进入长序列典型集与无损编码极限。
+
+INFO-08 的[[实验 - ELBO 恒等式、变分族限制与摊销缺口]]已经分离 approximation 与 amortization gap；[[实验 - 信息论累计复现门]]已把 Bernoulli–Hamming 前沿、task/nuisance bottleneck 与 prequential code 组成三轨计算验收。`INFO-CUM-01` 的[[阶段测验 - 信息论与统计学习接口（10.6）]]和[[阶段测验解答 - 信息论与统计学习接口（10.6）]]也已成稿，但当前仍为 `composed / not-attempted`。所有正文节点继续保持 `draft`，直到出现真实闭卷、订正与延迟复做证据。
 
 ### 2026-08-23 图像标准化进度
 

@@ -7,7 +7,7 @@ prerequisites: ["[[自信息、熵与编码长度]]", "[[联合熵、条件熵�
 related: ["[[信息论与统计学习接口 MOC]]", "[[互信息与依赖性]]", "[[变分推断、ELBO 与证据分解]]", "[[f-散度、Bregman 散度与概率度量]]", "[[多元高斯分布]]"]
 sources: ["Kullback-Leibler-1951-Information-Sufficiency", "MIT-6.441-Chapter-1-Information-Measures", "Stanford-EE376A-Lecture-Notes", "Cover-Thomas-Elements-Information-Theory", "Su-8512-Gaussian-Distances", "Su-9039-GlobalPointer-KL"]
 created: 2026-08-19
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # 交叉熵与 KL 散度
@@ -69,6 +69,114 @@ updated: 2026-08-23
 **怎样读图。** A 对每个类别用 $p_i$ 加权 $-\log q_i$；B 在固定 $P$ 时把 $H(P)$ 看成不可由 $Q$ 优化的常数；C 先读 KL 第一个参数决定 expectation，再检查第二个参数是否在第一参数的 support 上给出正概率。
 
 **适用边界（图没有证明什么）。** 柱形与曲线只示意离散权重和常见优化倾向，不构成所有模型族中的 mode-covering/mode-seeking 定理；KL 可以无穷且不满足对称与三角不等式；经验 NLL 下降不自动证明总体 KL、校准、OOD 表现或生成样本质量同步改善。
+
+## 进入正文前：真实世界按 $P$ 出题，模型却按 $Q$ 付码长
+
+> [!info] 课程位置
+> 前两章默认我们知道真实分布，并用它自己的概率计算信息量。本章第一次引入两个分布：$P$ 产生数据，$Q$ 给数据分配概率。两者不一致时，多付出的平均代价恰好是 KL；下一章[[互信息与依赖性]]会把“忽略输入的独立模型”作为特殊的 $Q$，把预测收益解释为依赖信息。
+
+> [!tip] 建议两遍阅读
+> - **第一遍：** 始终口述“外层样本来自 $P$，对数里评分的是 $Q$”，并在噪声信道上算出 cross-entropy、真实 entropy 与 KL gap。
+> - **第二遍：** 再读 Gibbs inequality、绝对连续、KL 方向、MLE/KL projection、softmax logits、Gaussian KL 和各种训练 surrogate。
+
+> [!question] 本章的推导问题链
+> 1. 若数据来自 $P$，为什么平均模型损失必须按 $P$ 加权？
+> 2. 模型 $Q$ 为结果给出的理想码长为什么是 $-\log q(x)$？
+> 3. 把 $\log(p/q)$ 加减进 cross-entropy 后，为什么恰好得到 entropy 加 KL？
+> 4. KL 非负说明了什么，又没有说明什么？
+> 5. 当 $Q$ 在真实可能事件上给零概率时，为什么理论代价必须是无穷？
+
+### 贯穿算例：一个完全忽略输入的信道模型
+
+真实信道仍是
+
+$$
+P:\quad
+X\sim\operatorname{Bernoulli}\!\left(\frac12\right),
+\qquad
+Y=X\oplus N,
+\qquad
+N\sim\operatorname{Bernoulli}\!\left(\frac14\right).
+$$
+
+真实条件分布知道“保持原值”更常见：
+
+$$
+p(y\mid x)=
+\begin{cases}
+3/4,&y=x,\\
+1/4,&y\ne x.
+\end{cases}
+$$
+
+现在故意使用一个坏模型 $Q$：无论输入是什么，都给两个输出各 $1/2$ 概率，
+
+$$
+q(y\mid x)=\frac12.
+$$
+
+它等价于完全忽略 $X$。为避免把 unconditional 与 conditional 对象混在一起，定义在 $P_X$ 下平均的条件 cross-entropy：
+
+$$
+H_{P_X}(P_{Y\mid X},Q_{Y\mid X})
+:=\mathbb E_{(X,Y)\sim P}
+[-\log_2q(Y\mid X)].
+$$
+
+因为 $Q$ 对每次真实输出都给 $1/2$，所以
+
+$$
+H_{P_X}(P_{Y\mid X},Q_{Y\mid X})=1\ \text{bit}.
+$$
+
+若使用真实 conditional distribution，平均不可约长度是
+
+$$
+H_P(Y\mid X)
+=h_2\!\left(\frac14\right)
+=2-\frac34\log_2 3
+\approx0.811278.
+$$
+
+两者的缺口为
+
+$$
+\begin{aligned}
+\mathbb E_{X\sim P_X}
+D_{\mathrm{KL}}^{(2)}
+\bigl(P_{Y\mid X}\Vert Q_{Y\mid X}\bigr)
+&=1-h_2\!\left(\frac14\right)\\
+&=\frac34\log_2 3-1\\
+&\approx0.188722\ \text{bit}.
+\end{aligned}
+$$
+
+因此坏模型每个样本平均多付约 $0.188722$ bit。这里的 gap 不是比喻，而是精确恒等式。若另一个模型武断地规定“绝不会翻转”，即 $q(y\ne x\mid x)=0$，真实信道仍以 $1/4$ 概率翻转，于是 conditional cross-entropy 与 forward KL 都变成 $+\infty$。
+
+> [!note] 符号与对象账本
+> | 符号 | 类型 | 在本例中的含义 |
+> |---|---|---|
+> | $P$ | 数据分布 | 真实的四分之一翻转信道 |
+> | $Q$ | 模型分布 | 模型用于评分/编码的条件分布 |
+> | $p(y\mid x)$ | 真实概率 | 产生输出的 conditional PMF |
+> | $q(y\mid x)$ | 模型概率 | 模型给同一输出的 conditional PMF |
+> | $-\log q(y\mid x)$ | 单样本 NLL | 一次真实 pair 在模型 $Q$ 下的码长/损失 |
+> | $H_{P_X}(P_{Y\mid X},Q_{Y\mid X})$ | 标量 | 对真实 joint 平均的条件 cross-entropy |
+> | $D_{\mathrm{KL}}(P\Vert Q)$ | 非负扩展实数 | 使用 $Q$ 相对使用 $P$ 的平均失配代价 |
+
+> [!analysis] Cross-entropy 分解的公式七问
+> | 问题 | 回答 |
+> |---|---|
+> | 核心公式是什么？ | $H(P,Q)=H(P)+D_{\mathrm{KL}}(P\Vert Q)$；条件版本再对 $P_X$ 平均。 |
+> | 哪个分布负责什么？ | $P$ 负责产生样本并提供 expectation 权重，$Q$ 只负责给这些样本分配被评价的概率。 |
+> | 怎样推出来？ | 在 $-\sum_xp(x)\log q(x)$ 中加减 $-\sum_xp(x)\log p(x)$，余项就是 $\sum_xp(x)\log[p(x)/q(x)]$。 |
+> | 固定 $P$ 时优化什么？ | $H(P)$ 与模型参数无关，所以最小化总体 cross-entropy 等价于最小化 forward KL。 |
+> | 非负性意味着什么？ | 错模型在 $P$ 平均下不能系统性优于真实分布自己的理想码；不表示每个单样本都更差。 |
+> | 何时为无穷或失去解释？ | $P\not\ll Q$ 时 forward KL 为无穷；非概率 score、clipping、class weights 等会改变原始概率/编码合同。 |
+> | AI 中在哪里调用？ | 分类 NLL、语言模型 token loss、蒸馏、VAE 和概率模型拟合都要先声明 $P/Q$、方向、支撑与 reduction。 |
+
+> [!success] 第一遍停靠线
+> 若你能不看答案重建“真实条件熵 $0.811278$、坏模型 cross-entropy $1$、KL gap $0.188722$”三层关系，并解释为什么零概率漏掉真实事件会产生无穷代价，就已掌握第一遍主干。KL 的严格非负证明、方向反例和 logits 实现留到第二遍。
 
 ## 一、交叉熵：用错误模型给真实数据编码
 
