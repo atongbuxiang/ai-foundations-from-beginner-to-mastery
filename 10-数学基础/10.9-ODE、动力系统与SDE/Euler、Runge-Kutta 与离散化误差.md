@@ -7,7 +7,7 @@ prerequisites: ["[[常微分方程、初值问题与解的存在唯一性]]", "[
 related: ["[[ODE、动力系统与 SDE MOC]]", "[[线性 ODE 与矩阵指数]]", "[[刚性系统、绝对稳定域与隐式方法]]", "[[自动微分：前向、反向与高阶模式]]", "[[一阶最优性条件与梯度下降]]", "[[实验 - ODE 阶数、自适应步长与离散梯度审计]]"]
 sources: ["MIT-18.330-2012-ODE-Numerics", "Hairer-Norsett-Wanner-Solving-ODE-I", "SciPy-solve_ivp", "Chen-et-al-2018-Neural-ODE", "Zhuang-et-al-2020-Adaptive-Checkpoint-Adjoint", "Su-6261-Optimization-Dynamics-Global", "Su-10958-Instant-Average-Velocity"]
 created: 2026-08-19
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # Euler、Runge–Kutta 与离散化误差
@@ -74,6 +74,145 @@ updated: 2026-08-23
 **怎样读图。** A 先从误差递推 $e_{n+1}\le(1+Lh)e_n+Ch^{p+1}$ 读起，consistency 给局部项，stability/Gronwall 控制传播；B 再把 RK 看成同一步内对 vector field 的结构化多点查询，而不是把 Euler 当作黑箱重复；C 最后用 atol/rtol 定义 componentwise scale，读取局部 embedded difference，接受或拒绝后再检查 true global state error、events、NFE 和梯度一致性。
 
 **适用边界（图没有证明什么）。** 图假设适合一步法的光滑 nonstiff 问题，不给 discontinuity、event、DAE 或 stiffness 下的完整结论。Embedded difference 不是 exact local error，controller 公式还受 safety factor、PI history 与 order convention 影响。小 tolerance 不保证全局任务损失、守恒、positivity 或 continuous-adjoint gradient 自动准确。
+
+> [!note] 课程位置
+> DYN-01—04 研究的是精确连续系统：解是否存在、传播子怎样写、轨道是否稳定、能量怎样下降。本章第一次承认计算机不能直接存取整条 exact flow，只能用有限次 vector-field evaluation 构造离散一步映射。核心任务不是背 Euler/RK 系数，而是建立“精确一步—数值一步—局部缺陷—误差传播—全局误差”的完整账本；DYN-06 随后会说明，高阶和收敛并不足以处理 stiff mode。
+
+> [!tip] 建议两遍阅读
+> **第一遍**只计算 $y'=-y$：写出 Euler、Heun、RK4 的 stability polynomial，在 $h=1/2$ 上走两步，并用步长减半观察误差斜率。**第二遍**再进入一般 one-step convergence、RK order conditions、embedded pair、自适应控制、dense output、roundoff 与 continuous/discrete adjoint。第一遍的目标是能逐项回答“误差从哪一步产生、怎样传播、为何少一阶”，而不是先记住几十个 solver 名称。
+
+## 本章的推导问题链
+
+1. Exact solution 满足积分方程，为什么数值方法可以理解成对一步轨迹积分的近似？
+2. Exact flow、numerical one-step map、stage state、grid state 与 dense output 分别是什么对象？
+3. 从 exact state 起步后的一步偏差为什么叫 local defect，它与 global grid error 为什么不能混用？
+4. Euler、Heun 与 RK4 怎样通过更多 stage/更精确的 Taylor matching 提高 local order？
+5. 为什么 $N\asymp1/h$ 个 $O(h^{p+1})$ local defects 在稳定传播后通常形成 $O(h^p)$ global error？
+6. 怎样通过 step halving 的误差比估计 observed order，而不把偶然的小误差当作高阶？
+7. 为什么高 order、absolute stability、自适应 tolerance、浮点可靠性和 gradient accuracy 必须分成五张账？
+
+## 贯穿算例：同一条衰减曲线上的三种离散传播子
+
+取最小线性问题
+
+$$
+y'=-y,
+\qquad y(0)=1,
+\qquad 0\le t\le1.
+$$
+
+精确解为 $y(t)=e^{-t}$。它没有刚性、事件或非线性求解，因而所有误差都可以明确归因于时间离散本身。
+
+### 符号与对象账本
+
+| 对象 | 类型 | 本例中的值/作用 | 不可直接称为 |
+|---|---|---|---|
+| $\Phi_h$ | exact one-step flow | $\Phi_h(y)=e^{-h}y$ | 数值更新公式 |
+| $F_h$ | numerical one-step map | $F_h(y)=R(-h)y$ | exact flow |
+| $R(z)$ | stability function/polynomial | 方法作用于 $y'=\lambda y$ 后的放大因子 | 一般非线性系统的完整稳定性定理 |
+| $d_{n+1}$ | exact-start local defect | $\Phi_h(y(t_n))-F_h(y(t_n))$ | 已传播到终点的 global error |
+| $e_n$ | global grid error | $y(t_n)-y_n$ | embedded local estimator |
+| $p$ | global order | Euler/Heun/RK4 分别为 $1,2,4$ | 单次实验自动证明的阶数 |
+| NFE | vector-field evaluation count | 每固定步通常为 $1,2,4$ | 总 wall time 或精度的充分统计量 |
+
+### 第一步：把三个方法都压成一个标量放大因子
+
+对 $y'=\lambda y$ 令 $z=h\lambda$。三种方法的一步更新分别是
+
+$$
+\begin{aligned}
+R_E(z)&=1+z,\\
+R_H(z)&=1+z+\frac{z^2}{2},\\
+R_4(z)&=1+z+\frac{z^2}{2}+\frac{z^3}{6}+\frac{z^4}{24}.
+\end{aligned}
+$$
+
+本例 $\lambda=-1$，所以 $z=-h$。这些多项式正好是 $e^z$ 在原点的不同阶截断，但这个巧合只直接适用于线性 test equation；一般非线性 RK order 仍要匹配 rooted-tree/Taylor 条件。
+
+### 第二步：先看一步 local defect
+
+若本步从精确值 $y(t_n)$ 起步，
+
+$$
+\boxed{
+d_{n+1}
+=\bigl[e^{-h}-R(-h)\bigr]y(t_n).
+}
+$$
+
+在 $h=1/2$ 时，括号中的三个系数为
+
+| 方法 | $e^{-h}-R(-h)$ | 首个未匹配项 | local defect 阶 |
+|---|---:|---:|---:|
+| Euler | $0.106530660$ | $h^2/2$ | $O(h^2)$ |
+| Heun | $-0.018469340$ | $-h^3/6$ | $O(h^3)$ |
+| RK4 | $-0.000240174$ | $-h^5/120$ | $O(h^5)$ |
+
+符号只表示数值一步落在精确终点的哪一侧；order 由 $h\to0$ 时的幂决定，不能由一次误差正负决定。
+
+### 第三步：固定 $T=1$ 走两步
+
+当 $h=1/2$、$N=2$ 时，
+
+$$
+y_N=R(-1/2)^2,
+\qquad y(1)=e^{-1}\approx0.367879441.
+$$
+
+| 方法 | 一步因子 $R(-1/2)$ | 两步结果 $y_2$ | 终点绝对误差 |
+|---|---:|---:|---:|
+| Euler | $0.5$ | $0.25$ | $0.117879441$ |
+| Heun | $0.625$ | $0.390625$ | $0.022745559$ |
+| RK4 | $0.606770833$ | $0.368170844$ | $0.000291403$ |
+
+这张表展示的是同一固定步长上的误差，不是“RK4 在任何成本预算下永远最好”。RK4 每步调用四次 $f$，还可能受 stability、memory、event 和硬件实现限制。
+
+### 第四步：用步长减半观察 global order
+
+定义终点误差
+
+$$
+E(h)=\left|e^{-1}-R(-h)^{1/h}\right|,
+$$
+
+这里仅取 $1/h$ 为整数。若 $E(h)\approx Ch^p$，则
+
+$$
+p_{\rm obs}(h)=\log_2\frac{E(h)}{E(h/2)}\longrightarrow p.
+$$
+
+| 方法 | $E(1/2)$ | $E(1/4)$ | $E(1/8)$ | 两次 $p_{\rm obs}$ |
+|---|---:|---:|---:|---:|
+| Euler | $1.1788\times10^{-1}$ | $5.1473\times10^{-2}$ | $2.4271\times10^{-2}$ | $1.195,\ 1.085$ |
+| Heun | $2.2746\times10^{-2}$ | $4.6496\times10^{-3}$ | $1.0538\times10^{-3}$ | $2.290,\ 2.141$ |
+| RK4 | $2.9140\times10^{-4}$ | $1.4758\times10^{-5}$ | $8.3075\times10^{-7}$ | $4.303,\ 4.151$ |
+
+Observed order 尚未恰好等于整数，是因为高阶余项仍存在；继续减半时才逐渐进入 asymptotic regime。步长过小时，roundoff 又会破坏斜率，所以“越小越好”也有边界。
+
+## 核心公式七问：local defect 怎样变成 global error
+
+对一般一步映射 $F_h$，把 $e_n=y(t_n)-y_n$ 插入并加减 $F_h(t_n,y(t_n))$：
+
+$$
+\boxed{
+e_{n+1}
+=\underbrace{\Phi_h(t_n,y(t_n))-F_h(t_n,y(t_n))}_{d_{n+1}}
++\underbrace{F_h(t_n,y(t_n))-F_h(t_n,y_n)}_{\text{旧误差的传播}}.
+}
+$$
+
+若 $\|d_{n+1}\|\le C_dh^{p+1}$ 且 $F_h$ 对 state 满足 $\|F_h(u)-F_h(v)\|\le(1+Lh)\|u-v\|$，离散 Grönwall 给固定时窗上的 $\max_n\|e_n\|=O(h^p)$。
+
+1. **解决什么问题？** 把“每一步从精确起点有多准”升级为“真实数值递推走很多步后有多准”。
+2. **对象与形状？** $e_n,d_{n+1}\in\mathbb R^d$；$\Phi_h,F_h:\mathbb R^d\to\mathbb R^d$；范数和常数必须在同一状态空间与时间区间声明。
+3. **从哪里来？** 对 exact update 和 numerical update 相减，再加减从 exact state 启动的 numerical update。
+4. **需要什么条件？** Local consistency、一步映射的 perturbation stability、有限时间窗和足够 regularity；variable step 还要控制 $h_{\max}$ 与步长序列。
+5. **怎样检查？** 分别做 one-step defect 测试与 fixed-$T$ step-halving；后者的 log-log slope 才对应 global order。
+6. **怎样误读？** $N\times O(h^{p+1})$ 只是直觉，若旧误差被强烈放大就不能直接相加；adaptive estimator 小也不是 global/task error 定理。
+7. **AI 中怎样调用？** Neural ODE 和 flow model 必须同时报告 tolerance、accepted steps/NFE、状态误差代理及 discrete/continuous gradient 审计；不能只写 solver 名称。
+
+> [!success] 第一遍停靠线
+> 合上正文后，应能从 $y'=-y$ 独立写出三个 $R(z)$，在 $h=1/2$ 上算出两步结果，并解释为什么 Euler/Heun/RK4 的 local defect 分别是 $O(h^2),O(h^3),O(h^5)$，global order 却是 $1,2,4$。若只能背“RK4 四阶”而无法写误差递推，请先不要进入 adaptive solver 与 adjoint 部分。
 
 ## 一、首先固定“求解的对象”
 

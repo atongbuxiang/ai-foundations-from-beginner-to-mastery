@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit the migrated teaching contract and exact model for DYN-01--04."""
+"""Audit the migrated teaching contracts and exact models for DYN-01--06."""
 
 from __future__ import annotations
 
@@ -18,7 +18,10 @@ ROOT = Path(__file__).resolve().parents[3]
 DYN = ROOT / "10-数学基础" / "10.9-ODE、动力系统与SDE"
 LABS = ROOT / "00-知识库管理" / "_labs"
 MOC = DYN / "ODE、动力系统与 SDE MOC.md"
-FIGURE_SCRIPT = LABS / "code" / "plot_dynamics_foundations_v2.py"
+FIGURE_SCRIPTS = (
+    LABS / "code" / "plot_dynamics_foundations_v2.py",
+    LABS / "code" / "plot_dynamics_numerics_transport_v2.py",
+)
 FIGURE_DIR = ROOT / "00-知识库管理" / "_assets" / "figures" / "dynamics"
 
 CONCEPTS = (
@@ -26,6 +29,8 @@ CONCEPTS = (
     "线性 ODE 与矩阵指数.md",
     "相图、平衡点与局部稳定性.md",
     "Lyapunov 稳定性与能量函数.md",
+    "Euler、Runge-Kutta 与离散化误差.md",
+    "刚性系统、绝对稳定域与隐式方法.md",
 )
 
 CONTRACT_MARKERS = (
@@ -42,6 +47,8 @@ EXPECTED_FIGURE_BY_CONCEPT = {
     CONCEPTS[1]: "fig-linear-ode-propagation-v2.svg",
     CONCEPTS[2]: "fig-phase-portrait-local-stability-v2.svg",
     CONCEPTS[3]: "fig-lyapunov-energy-certificate-v2.svg",
+    CONCEPTS[4]: "fig-runge-kutta-error-adaptivity-v2.svg",
+    CONCEPTS[5]: "fig-stiffness-stability-implicit-solve-v2.svg",
 }
 
 FIGURE_HASHES = {
@@ -53,6 +60,10 @@ FIGURE_HASHES = {
         "fea80b4c8a78187b2d22846a7ce51ff33e32e5fa3cedb13c6461d1b32ce421d1",
     "fig-lyapunov-energy-certificate-v2.svg":
         "3b3d2a92f04dc35aefdcc9dafc03cc96bcad9475b7d8240776288e59bc0fb4af",
+    "fig-runge-kutta-error-adaptivity-v2.svg":
+        "5d8f10777f4410787fc7f693c69025cec22bf70a9d47a84d6ee54a00d88bfa69",
+    "fig-stiffness-stability-implicit-solve-v2.svg":
+        "decfc0de6e38cabf8b4e0204c1283660bbe097cec9e0b9c21fb2cf67a866063e",
 }
 
 KNOWN_EXTENSIONS = {".md", ".py", ".svg", ".png", ".jpg", ".jpeg", ".webp", ".pdf"}
@@ -138,6 +149,10 @@ def audit_route() -> None:
         "第一波的单一模型链",
         "如何学习第一波，而不是把定理和图景分开背",
         "第一波材料证书",
+        "| B | DYN-05—06",
+        "第二波的离散化—稳定性模型链",
+        "如何学习第二波，而不是把 solver 排成排行榜",
+        "第二波材料证书",
         "dynamics_teaching_contract_audit.py",
         "`regression-passed`",
         "`draft / not-attempted`",
@@ -147,8 +162,12 @@ def audit_route() -> None:
         re.search(r"\| A \| DYN-01—04 .*`regression-passed`", content) is not None,
         "MOC first-wave material status is not regression-passed",
     )
-    require("下一教学迁移批次为 DYN-05—06" in content, "MOC next migration target is stale")
-    print("PASS DYN route: four-wave map, first shared model and three-pass learning contract")
+    require(
+        re.search(r"\| B \| DYN-05—06 .*`regression-passed`", content) is not None,
+        "MOC second-wave material status is not regression-passed",
+    )
+    require("下一教学迁移批次为 DYN-07—08" in content, "MOC next migration target is stale")
+    print("PASS DYN route: four-wave map, two migrated model chains and three-pass learning contracts")
 
 
 def audit_exact_first_wave_model() -> None:
@@ -221,6 +240,102 @@ def audit_exact_first_wave_model() -> None:
     )
 
 
+def audit_exact_second_wave_model() -> None:
+    def euler(z: float) -> float:
+        return 1 + z
+
+    def heun(z: float) -> float:
+        return 1 + z + z * z / 2
+
+    def rk4(z: float) -> float:
+        return 1 + z + z * z / 2 + z ** 3 / 6 + z ** 4 / 24
+
+    def backward_euler(z: float) -> float:
+        return 1 / (1 - z)
+
+    def trapezoidal(z: float) -> float:
+        return (1 + z / 2) / (1 - z / 2)
+
+    methods = (("Euler", euler, 1), ("Heun", heun, 2), ("RK4", rk4, 4))
+    half_step_expected = {
+        "Euler": Fraction(1, 2),
+        "Heun": Fraction(5, 8),
+        "RK4": Fraction(233, 384),
+    }
+    for name, method, _ in methods:
+        require(
+            math.isclose(method(-0.5), float(half_step_expected[name]), rel_tol=0.0, abs_tol=2e-16),
+            f"{name} half-step amplification changed",
+        )
+
+    exact_endpoint = math.exp(-1)
+    expected_endpoint_errors = {
+        "Euler": 0.11787944117144233,
+        "Heun": 0.022745558828557666,
+        "RK4": 0.00029140301258534507,
+    }
+    for name, method, order in methods:
+        errors = []
+        for steps in (2, 4, 8, 16):
+            step = 1 / steps
+            approximation = method(-step) ** steps
+            errors.append(abs(approximation - exact_endpoint))
+        require(
+            math.isclose(errors[0], expected_endpoint_errors[name], rel_tol=0.0, abs_tol=5e-16),
+            f"{name} two-step endpoint error changed",
+        )
+        observed = [math.log(errors[index] / errors[index + 1], 2) for index in range(3)]
+        require(abs(observed[-1] - order) < 0.08, f"{name} observed order does not approach {order}")
+        require(
+            abs(observed[-1] - order) < abs(observed[0] - order),
+            f"{name} step-halving order is not entering the asymptotic regime",
+        )
+
+    expected_local_defects = {
+        "Euler": 0.10653065971263342,
+        "Heun": -0.018469340287366576,
+        "RK4": -0.00024017362069983506,
+    }
+    for name, method, _ in methods:
+        defect = math.exp(-0.5) - method(-0.5)
+        require(
+            math.isclose(defect, expected_local_defects[name], rel_tol=0.0, abs_tol=5e-16),
+            f"{name} local defect changed",
+        )
+
+    slow_z = -0.05
+    fast_z = -5.0
+    extreme_z = -50.0
+    require(math.isclose(euler(slow_z), 19 / 20, abs_tol=1e-16), "slow FE factor changed")
+    require(math.isclose(backward_euler(slow_z), 20 / 21, abs_tol=1e-16), "slow BE factor changed")
+    require(math.isclose(trapezoidal(slow_z), 39 / 41, abs_tol=1e-16), "slow TR factor changed")
+    require(math.isclose(euler(fast_z), -4.0, rel_tol=0.0, abs_tol=0.0), "fast FE factor changed")
+    require(
+        math.isclose(backward_euler(fast_z), float(Fraction(1, 6)), rel_tol=0.0, abs_tol=1e-16),
+        "fast BE factor changed",
+    )
+    require(
+        math.isclose(trapezoidal(fast_z), float(Fraction(-3, 7)), rel_tol=0.0, abs_tol=1e-16),
+        "fast TR factor changed",
+    )
+    require(math.isclose(2 / 100, 0.02, rel_tol=0.0, abs_tol=0.0), "FE stiff step gate changed")
+    require(
+        math.isclose(backward_euler(extreme_z), float(Fraction(1, 51)), rel_tol=0.0, abs_tol=1e-16),
+        "extreme BE damping changed",
+    )
+    require(
+        math.isclose(trapezoidal(extreme_z), float(Fraction(-12, 13)), rel_tol=0.0, abs_tol=1e-16),
+        "extreme TR damping changed",
+    )
+    require(abs(backward_euler(-1e12)) < 2e-12, "BE lost L-stable limit")
+    require(abs(trapezoidal(-1e12) + 1) < 5e-12, "TR stiff limit is no longer -1")
+
+    print(
+        "PASS second-wave exact model: Euler/Heun/RK4 endpoint errors and orders; "
+        "slow-fast FE/BE/TR factors; h<=0.02 gate; A/L-stability limits"
+    )
+
+
 def audit_markdown_integrity() -> None:
     scoped = [DYN / filename for filename in CONCEPTS] + [MOC]
     all_files = [path for path in ROOT.rglob("*") if path.is_file()]
@@ -285,7 +400,8 @@ def audit_markdown_integrity() -> None:
 
 def audit_figures(run_figures: bool) -> None:
     if run_figures:
-        subprocess.run([sys.executable, str(FIGURE_SCRIPT)], cwd=ROOT, check=True)
+        for figure_script in FIGURE_SCRIPTS:
+            subprocess.run([sys.executable, str(figure_script)], cwd=ROOT, check=True)
     for filename, expected_hash in FIGURE_HASHES.items():
         path = FIGURE_DIR / filename
         require(path.is_file(), f"missing figure: {filename}")
@@ -305,9 +421,10 @@ def main() -> None:
     audit_contracts()
     audit_route()
     audit_exact_first_wave_model()
+    audit_exact_second_wave_model()
     audit_markdown_integrity()
     audit_figures(args.run_figures)
-    print("DYN-01—04 material regression: PASS; learning state: draft/not-attempted")
+    print("DYN-01—06 material regression: PASS; learning state: draft/not-attempted")
 
 
 if __name__ == "__main__":

@@ -22,7 +22,7 @@ updated: 2026-08-27
 | 波次 | 节点 | 主线 | 统一模型/证书 | 材料状态 | 学习状态 |
 |---|---|---|---|---|---|
 | A | DYN-01—04 | 适定性 → 线性传播 → 局部相图 → Lyapunov 证书 | 欠阻尼振子 $q''+q'+q=0$；$e^{tA}$、spiral sink、LaSalle 与 $A^TP+PA=-I$ | `regression-passed` | `draft / not-attempted` |
-| B | DYN-05—06 | consistency/order → absolute stability → stiffness/implicit solve | 待迁移：同一 test equation 与快慢线性系统 | `deep-draft / queued` | `draft / not-attempted` |
+| B | DYN-05—06 | consistency/order → absolute stability → stiffness/implicit solve | $y'=-y$ 的三种传播多项式；$\operatorname{diag}(-1,-100)$ 的快慢系统 | `regression-passed` | `draft / not-attempted` |
 | C | DYN-07—08 | unique flow → Jacobian/volume → density transport/conservation | 待迁移：同一 affine velocity 与 Gaussian density | `deep-draft / queued` | `draft / not-attempted` |
 | D | DYN-09—12 | Brownian variation → Itô/SDE → Fokker–Planck/PF-ODE → reverse score | 待迁移：同一 variance-preserving diffusion | `deep-draft / queued` | `draft / not-attempted` |
 | CUM | DYN-CUM | 口试—闭卷—三轨实验—延迟重做 | 12 节随机回链与累计计算门 | `composed` | `not-attempted` |
@@ -67,6 +67,49 @@ $$
 2. **第二遍（约 360 分钟）：**进入 continuity/Lipschitz/continuation、Peano–Baker/forcing、hyperbolic/nonhyperbolic、LaSalle/converse theorem，并为每条定理写出删条件反例；
 3. **第三遍（约 180 分钟）：**把阻尼系数改成 $c\in\{0,1,3\}$，运行前预测 eigenvalue 类型、energy derivative、稳定性与离散 Euler 限制；
 4. **验收：**完成四套节点习题和对应实验；无提示说明“存在唯一”“显式传播”“局部稳定”“Lyapunov 证书”为何是四个不能互相替代的结论。
+
+### 第二波的离散化—稳定性模型链
+
+第二波先固定标量衰减
+
+$$
+y'=-y,
+\qquad y(0)=1,
+\qquad 0\le t\le1,
+$$
+
+再把它提升为快慢系统
+
+$$
+\dot x=
+\begin{bmatrix}-1&0\\0&-100\end{bmatrix}x,
+\qquad x(0)=(1,1)^T.
+$$
+
+两篇围绕同一个 stability-function 接口 $y_{n+1}=R(h\lambda)y_n$ 分工：
+
+1. **DYN-05：近原点时匹配 exact flow。** Euler、Heun、RK4 分别使用
+   $$
+   R_E(z)=1+z,
+   \quad
+   R_H(z)=1+z+\frac{z^2}{2},
+   \quad
+   R_4(z)=\sum_{k=0}^4\frac{z^k}{k!}.
+   $$
+   在 $T=1,h=1/2$ 上，它们的终点误差约为 $1.1788\times10^{-1}$、$2.2746\times10^{-2}$、$2.9140\times10^{-4}$；step halving 让 observed order 依次趋于 $1,2,4$，把 local $O(h^{p+1})$ 与 global $O(h^p)$ 闭合；
+2. **DYN-06：远离原点时先通过稳定门。** 取 $h=0.05$，慢模态 $z_s=-0.05$ 对三种方法都合理，快模态却有 $z_f=-5$：Forward Euler、Backward Euler、trapezoidal 的因子分别为 $-4,1/6,-3/7$。前者不稳定；后二者 A-stable，但只有 Backward Euler 满足 $R(z)\to0$ 的 L-stability；
+3. **同一接口，不同问题。** Order 比较 $R(z)$ 与 $e^z$ 在 $z=0$ 附近匹配几阶；absolute stability 检查给定 $z$ 是否满足 $|R(z)|\le1$；L-stability 再检查极快衰减极限。高阶、稳定和强阻尼不能互相推出；
+4. **隐式成本必须显式登记。** Backward Euler 的纸面公式最终变成 $F(y_{n+1})=0$，再进入 Newton matrix $I-hJ$、linear/Krylov solve、preconditioner、nonlinear/linear tolerance 与 transpose gradient solve。
+
+> [!success] 第二波材料证书
+> [[dynamics_teaching_contract_audit.py]]检查 DYN-01—06 的教学标记，并对 DYN-05 的三组 stability polynomial、局部/终点误差和 observed order，以及 DYN-06 的快慢因子、Forward Euler 步长门、A/L-stability 极限进行数值断言；同时回归六个图文单元与正式 SVG 哈希。`regression-passed` 仍只表示教材材料可复现，不表示学习者已经通过任何验收。
+
+### 如何学习第二波，而不是把 solver 排成排行榜
+
+1. **第一遍（约 120 分钟）：**手算 $y'=-y$ 在 $h=1/2$ 上的三个 $R(-h)$、两步结果和 local defect，再算快慢系统在 $h=0.05$ 上的 FE/BE/TR 因子；
+2. **第二遍（约 300 分钟）：**完成一般 local-to-global 证明、RK 阶条件、adaptive estimator/controller、$\theta$-method A-stability、Dahlquist 屏障和 implicit Newton–Krylov 误差账；
+3. **第三遍（约 120 分钟）：**把 fast eigenvalue 改成 $-10,-100,-1000$，在运行前预测 FE 稳定步长、BE/TR 极限行为、工作量和需要解析的 transient；
+4. **验收：**完成[[实验 - ODE 阶数、自适应步长与离散梯度审计]]与[[实验 - 刚性稳定域、隐式追踪与梯度审计]]；无提示说明“convergent as $h\to0$”为什么不等于“当前 $h$ 稳定且准确”。
 
 ## 一、范围与边界
 
@@ -213,7 +256,7 @@ flowchart LR
 
 ## 八、当前进度
 
-DYN-01—12 已全部进入成稿闭环；10.9 当前为 **12/12 正文覆盖、180 道节点题，并已建立 DYN-CUM-01 卷末验收**。在最新初学者教学迁移中，第一波 DYN-01—04 已达到 `regression-passed`，其余八篇仍是深层正文待迁移。[[阶段测验 - ODE、动力系统与 SDE（10.9）]]以 240 分钟、100 分和 A—E 分区覆盖全卷，[[阶段测验解答 - ODE、动力系统与 SDE（10.9）]]逐项给出条件、推导、评分断点与回链。[[实验 - ODE、动力系统与 SDE 累计复现门]]用三轨串联 continuous/discrete stability、FPE–PF–CNF density ledger 与 Brownian/Itô/reverse-score coefficient。全卷所有节点仍为 `draft`，个人学习只记 `not-attempted`；下一教学迁移批次为 DYN-05—06 的数值求解与刚性。
+DYN-01—12 已全部进入成稿闭环；10.9 当前为 **12/12 正文覆盖、180 道节点题，并已建立 DYN-CUM-01 卷末验收**。在最新初学者教学迁移中，第一、二波 DYN-01—06 已达到 `regression-passed`，其余六篇仍是深层正文待迁移。[[阶段测验 - ODE、动力系统与 SDE（10.9）]]以 240 分钟、100 分和 A—E 分区覆盖全卷，[[阶段测验解答 - ODE、动力系统与 SDE（10.9）]]逐项给出条件、推导、评分断点与回链。[[实验 - ODE、动力系统与 SDE 累计复现门]]用三轨串联 continuous/discrete stability、FPE–PF–CNF density ledger 与 Brownian/Itô/reverse-score coefficient。全卷所有节点仍为 `draft`，个人学习只记 `not-attempted`；下一教学迁移批次为 DYN-07—08 的流映射、Liouville 与连续性方程。
 
 ## 九、2026-08-23 图像标准化结果
 
