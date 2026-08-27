@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit the OPT-01—04 teaching contract and its exact projection model."""
+"""Audit the migrated OPT teaching contracts and their exact teaching models."""
 
 from __future__ import annotations
 
@@ -16,13 +16,20 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[3]
 OPT = ROOT / "10-数学基础" / "10.7-优化与凸分析"
 LABS = ROOT / "00-知识库管理" / "_labs"
-FIGURE_SCRIPT = LABS / "code" / "plot_convex_foundations_v2.py"
+FIGURE_SCRIPTS = (
+    LABS / "code" / "plot_convex_foundations_v2.py",
+    LABS / "code" / "plot_first_order_optimization_v2.py",
+)
 
 CONCEPTS = (
     "优化问题、可行域与局部最优.md",
     "凸集、凸组合与分离超平面.md",
     "凸函数、Jensen 不等式与上图集.md",
     "次梯度、共轭函数与 Fenchel 对偶.md",
+    "光滑性、强凸性与条件数.md",
+    "一阶最优性条件与梯度下降.md",
+    "加速梯度、动量与下界.md",
+    "随机梯度与小批量估计.md",
 )
 
 CONTRACT_MARKERS = (
@@ -43,6 +50,14 @@ FIGURE_HASHES = {
         "e388c5488a2db17c96aa92826f66b463a32051d1d20852430c289617eca621c2",
     "fig-subgradient-conjugate-fenchel-v2.svg":
         "17dc468cd01e44c5b673b7606d774e8a3cba1646f082cac10aeb8a4ca95208fa",
+    "fig-smooth-strong-convex-condition-v2.svg":
+        "0cb0a46ff744303cab3565efa2f73bdf7c4a43a4c4f172e450cddb27cf47048b",
+    "fig-gradient-descent-rates-v2.svg":
+        "9d3ac4346896f708d7068bbd9e23792a6299dd6512c668ce42eb97114a7bff10",
+    "fig-acceleration-momentum-lower-bound-v2.svg":
+        "3c27f3f79ccdb9965da1f4041f326e0fcfd13169482d4f3f7b0f3876da623a31",
+    "fig-sgd-minibatch-noise-v2.svg":
+        "da3a41142507540659f64eb8253d3cdb045cf93388b4781e69eb12515363f80a",
 }
 
 FIGURE_DIR = ROOT / "00-知识库管理" / "_assets" / "figures" / "optimization"
@@ -163,6 +178,74 @@ def audit_exact_model() -> None:
     )
 
 
+def audit_exact_spectral_model() -> None:
+    hessian = (Fraction(1), Fraction(4))
+    initial = (Fraction(1), Fraction(1))
+
+    def spectral_q(point: tuple[Fraction, Fraction]) -> Fraction:
+        return Fraction(1, 2) * (
+            hessian[0] * point[0] ** 2 + hessian[1] * point[1] ** 2
+        )
+
+    gradient = (hessian[0] * initial[0], hessian[1] * initial[1])
+    require(spectral_q(initial) == Fraction(5, 2), "spectral initial objective changed")
+    require(squared_norm(gradient) == Fraction(17), "spectral initial gradient changed")
+    require(min(hessian) == 1 and max(hessian) == 4, "mu/L calibration changed")
+
+    safe_step = Fraction(1, 4)
+    safe_factors = tuple(Fraction(1) - safe_step * value for value in hessian)
+    safe_iterate = (safe_factors[0] * initial[0], safe_factors[1] * initial[1])
+    require(safe_factors == (Fraction(3, 4), Fraction(0)), "1/L factors changed")
+    require(safe_iterate == (Fraction(3, 4), Fraction(0)), "1/L iterate changed")
+    require(spectral_q(safe_iterate) == Fraction(9, 32), "1/L objective changed")
+    require(
+        spectral_q(safe_iterate) / spectral_q(initial) == Fraction(9, 80),
+        "1/L objective ratio changed",
+    )
+
+    balanced_step = Fraction(2, 5)
+    balanced_factors = tuple(Fraction(1) - balanced_step * value for value in hessian)
+    balanced_iterate = (
+        balanced_factors[0] * initial[0],
+        balanced_factors[1] * initial[1],
+    )
+    require(balanced_factors == (Fraction(3, 5), Fraction(-3, 5)), "balanced factors changed")
+    require(spectral_q(balanced_iterate) == Fraction(9, 10), "balanced objective changed")
+    require(
+        spectral_q(balanced_iterate) / spectral_q(initial) == Fraction(9, 25),
+        "balanced objective ratio changed",
+    )
+
+    hb_step = Fraction(4, 9)
+    hb_momentum = Fraction(1, 9)
+    hb_coefficients = tuple(Fraction(1) + hb_momentum - hb_step * value for value in hessian)
+    hb_roots = tuple(coefficient / 2 for coefficient in hb_coefficients)
+    for coefficient in hb_coefficients:
+        require(coefficient**2 - 4 * hb_momentum == 0, "heavy-ball endpoint is not a double root")
+    require(hb_coefficients == (Fraction(2, 3), Fraction(-2, 3)), "HB coefficients changed")
+    require(hb_roots == (Fraction(1, 3), Fraction(-1, 3)), "HB roots changed")
+
+    trace_h = sum(hessian)
+    noise_injection = safe_step**2 * trace_h / 2
+    stationary_variances = tuple(
+        safe_step / (value * (2 - safe_step * value)) for value in hessian
+    )
+    stationary_objective = Fraction(1, 2) * sum(
+        value * variance for value, variance in zip(hessian, stationary_variances)
+    )
+    require(noise_injection == Fraction(5, 32), "SGD injection coefficient changed")
+    require(
+        stationary_variances == (Fraction(1, 7), Fraction(1, 16)),
+        "SGD stationary variances changed",
+    )
+    require(stationary_objective == Fraction(11, 56), "SGD objective floor changed")
+
+    print(
+        "PASS exact spectral model: mu=1, L=4, GD factors, HB roots=±1/3, "
+        "SGD injection=5/32 and floor=11/56 (times sigma^2/B)"
+    )
+
+
 def audit_markdown_integrity() -> None:
     scoped = [OPT / filename for filename in CONCEPTS]
     all_files = [path for path in ROOT.rglob("*") if path.is_file()]
@@ -234,21 +317,25 @@ def audit_markdown_integrity() -> None:
 
 
 def audit_figures() -> None:
-    result = subprocess.run(
-        [sys.executable, str(FIGURE_SCRIPT)],
-        cwd=ROOT,
-        check=True,
-        text=True,
-        capture_output=True,
-    )
+    outputs: list[str] = []
+    for script in FIGURE_SCRIPTS:
+        result = subprocess.run(
+            [sys.executable, str(script)],
+            cwd=ROOT,
+            check=True,
+            text=True,
+            capture_output=True,
+        )
+        if result.stdout.strip():
+            outputs.append(result.stdout.strip())
     for filename, expected in FIGURE_HASHES.items():
         path = FIGURE_DIR / filename
         require(path.is_file(), f"figure script did not generate {filename}")
         digest = hashlib.sha256(path.read_bytes()).hexdigest()
         require(digest == expected, f"figure hash changed for {filename}: {digest}")
     print(f"PASS deterministic figures: {len(FIGURE_HASHES)}/{len(FIGURE_HASHES)} hashes stable")
-    if result.stdout.strip():
-        print(result.stdout.strip())
+    if outputs:
+        print("\n".join(outputs))
 
 
 def main() -> None:
@@ -256,17 +343,18 @@ def main() -> None:
     parser.add_argument(
         "--run-figures",
         action="store_true",
-        help="regenerate the four OPT-01—04 SVGs and verify their SHA-256 hashes",
+        help="regenerate the migrated OPT SVGs and verify their SHA-256 hashes",
     )
     args = parser.parse_args()
     audit_contracts()
     audit_exact_model()
+    audit_exact_spectral_model()
     audit_markdown_integrity()
     if args.run_figures:
         audit_figures()
     else:
         print("SKIP figure regeneration (pass --run-figures for the formal first-wave audit)")
-    print("OPT-01—04 material regression: PASS")
+    print(f"OPT-01—{len(CONCEPTS):02d} material regression: PASS")
 
 
 if __name__ == "__main__":

@@ -23,7 +23,7 @@ updated: 2026-08-27
 | 波次 | ID 范围 | 认知主线 | 材料迁移 |
 |---|---|---|---|
 | A | OPT-01—04 | 问题契约 → 凸集/投影/分离 → 凸函数/Jensen → 次梯度/共轭/Fenchel | `regression-passed` |
-| B | OPT-05—08 | 曲率上下界 → 梯度下降 → 加速/动量 → 随机梯度 | `pending` |
+| B | OPT-05—08 | 曲率上下界 → 梯度下降 → 加速/动量 → 随机梯度 | `regression-passed` |
 | C | OPT-09—12 | 自适应度量 → 二阶模型 → 投影方向 → KKT | `pending` |
 | D | OPT-13—16 | 强对偶 → proximal → mirror/Fisher → 非凸地形 | `pending` |
 | CUM | OPT-CUM | 卷级路线—口试—题解—实验—回归 | `pending` |
@@ -73,6 +73,61 @@ $$
 
 > [!success] 第一波停靠线
 > 合上四篇正文后，应能在一张纸上重建 $C,a,x^*,r$；分别解释 $p^*$、projection VI、Jensen gap、support function 与 duality gap 的对象类型；最后说明“目标对 mixture weights 凸”为什么不能推出“产生这些权重的深网参数问题凸”。做不到时，先回到第一个对象断点，不进入收敛率章节。
+
+第二波把问题换成可精确谱分解的椭圆 quadratic：
+
+$$
+f(x)=\frac12x^THx,
+\qquad
+H=\operatorname{diag}(1,4),
+\qquad
+x_0=(1,1)^T.
+$$
+
+OPT-05 从 Hessian 端点得到
+
+$$
+\mu=1,
+\qquad
+L=4,
+\qquad
+\kappa=4,
+$$
+
+并用
+
+$$
+\frac12\|y-x\|^2
+\le f(y)-f(x)-\nabla f(x)^T(y-x)
+\le2\|y-x\|^2
+$$
+
+把 strong-convex lower model 与 smooth upper model 夹在同一个一阶近似两侧。OPT-06 将 GD 分成 factors $1-\eta$ 与 $1-4\eta$：稳定区间是 $0<\eta<1/2$；$\eta=1/4$ 一步消去 stiff mode，而 $\eta=2/5$ 把两个端点平衡为 $\pm3/5$。OPT-07 再把一阶 factor 升级为 heavy-ball polynomial；取
+
+$$
+\eta=\frac49,
+\qquad
+\beta=\frac19
+$$
+
+时，两个谱端点分别成为 $(r-1/3)^2$ 与 $(r+1/3)^2$，从而明确区分 Hessian eigenvalue、recurrence root 与 function-value rate。OPT-08 最后令
+
+$$
+g_k=Hx_k+\bar\xi_k,
+\qquad
+\operatorname{Cov}(\bar\xi_k\mid\mathcal F_k)=\frac{\sigma^2}{B}I,
+$$
+
+在 $\eta=1/4$ 下得到单步 noise injection $5\sigma^2/(32B)$，并由两个 AR(1) modes 算出 stationary objective floor
+
+$$
+\mathbb E[f(x_\infty)]=\frac{11\sigma^2}{56B}.
+$$
+
+这条链把“曲率—确定性收缩—带记忆根—随机稳态”逐层增加新对象：后一个结论不能反过来抹掉前一个结论所需的 norm、谱、初始化、抽样与条件期望合同。
+
+> [!success] 第二波停靠线
+> 不看正文，能从 $H$ 写出 $\mu,L,\kappa$；分别算出 GD 在 $\eta=1/4,2/5,1/2$ 下的两个 factors；从 heavy-ball 更新重建两个双根 $\pm1/3$；最后推导 batch covariance、$5/(32B)$ 单步注入与 $11/(56B)$ 稳态平台。还必须能解释 spectral radius、function gap、oracle complexity 与 wall-clock 为什么不是同一种“更快”。
 
 ## 一、范围与边界
 
@@ -256,7 +311,7 @@ OPT-01—16 已形成完整教学卷：16 篇正文、16 幅机制图、240 道 
 | 独立详解 | 定义、手算、证明、反例和研究合同逐项评分 | 正式作答前不得打开；错题必须回链节点 |
 | 计算门 | strict-saddle escape、nonconvex PL、scale-sharpness 三轨 | canonical hash、随机手算轨、参数干预与 48 小时重建均通过 |
 
-截至 2026-08-27，OPT-01—04 已按当前初学者教学合同完成第一波静态迁移并通过精确计算与图像回归；正文学习状态保持 `draft`。下一施工点为 OPT-05—08：用同一个可精确谱分解的二次模型贯通 smoothness、strong convexity、梯度下降、加速/动量与 stochastic oracle，不用新的更新式切断前后逻辑。
+截至 2026-08-27，OPT-01—08 已按当前初学者教学合同完成前两波静态迁移并通过精确计算与图像回归；正文学习状态保持 `draft`。下一施工点为 OPT-09—12：从同一谱模型出发加入 adaptive metric、二阶局部模型、约束投影和 KKT residual，继续区分曲率对象、算法 state 与最优性证书。
 
 ### 2026-08-23 图像标准化进度
 
