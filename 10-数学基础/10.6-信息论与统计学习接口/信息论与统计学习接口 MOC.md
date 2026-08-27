@@ -25,7 +25,7 @@ updated: 2026-08-27
 | A | INFO-01—04 | 自信息/熵 → 联合/条件链 → cross-entropy/KL → 互信息 | `regression-passed` |
 | B | INFO-05—06 | 数据处理/充分性 → 无损编码/典型集/AEP | `regression-passed` |
 | C | INFO-07—10 | 最大熵/指数族 → ELBO → 散度几何 → 率失真/IB/MDL | `regression-passed` |
-| CUM | INFO-CUM | 卷级路线—口试—题解—实验—回归 | `pending` |
+| CUM | INFO-CUM | 卷级路线—口试—题解—实验—回归 | `regression-passed` |
 
 第一波固定使用二元对称信道：
 
@@ -186,6 +186,74 @@ $$
 
 > [!tip] 第三波停靠线
 > 完成 INFO-07—10 后，应能从 moment constraints 解出 $\eta=-\ln3$；枚举 evidence/posterior 并闭合 ELBO gap；对同一 posterior pair 算正反 KL、TV 与 $W_1$；最后分别写出 rate–distortion、IB 和 MDL 的随机对象、优化变量及不可移植边界。尤其要能解释：**“最大熵”“变分下界”“分布距离”和“压缩正则”不是四个可替换的 loss 名称。**
+
+## 零、怎样从零真正学完本卷
+
+> [!important] 卷级学习合同
+> 本卷已经完成的是**材料迁移与回归**，不是学习者的自动掌握。推荐路径是“对象与编码直觉 → 推导、反例与边界 → 无提示整合与计算复现”三遍循环。读者一旦说不清 expectation 在哪个分布下、log base、支撑或 code protocol，就回到第一个断点，不用后面更高级的术语掩盖它。
+
+### 0.1 进入门：最低前置不是完整测度论
+
+开始 INFO-01 前，只要求能够：
+
+1. 读写离散 PMF、joint/conditional probability 与 expectation；
+2. 熟练使用 $\log(ab)=\log a+\log b$、换底公式和基本求和；
+3. 理解独立、条件独立、大数定律与 KL 非负；
+4. 看懂 Lagrange multiplier、凸函数切线和矩阵/向量的基本记号。
+
+若前两项不能无提示完成，先回到[[条件概率、全概率与 Bayes 公式]]、[[联合分布、边缘分布与独立性]]和[[期望、方差与矩]]的第一遍停靠线。测度论 Radon–Nikodym derivative、一般平稳遍历源、convex duality 和最优传输会在需要时分层引入，不要求先学完完整专门课程。
+
+### 0.2 三波不是三套孤立术语，而是一族逐步改造的 noisy-bit 模型
+
+下图中的箭头表示**教学模型和问题合同的改变**。每次从“分布已知”改为“参数未知”、从“统计压缩”改为“序列无损恢复”、或从“真实信息量”改为“bound/estimator”时，都必须重新声明随机对象。
+
+```mermaid
+flowchart LR
+    A["A 已知 noisy bit\n信息量·链式法则·KL·MI"] --> B["B 处理与长序列\nDPI·充分性·AEP·无损编码"]
+    B --> C["C 建模与任务压缩\nMaxEnt·ELBO·散度·RD/IB/MDL"]
+```
+
+| 波次 | 核心随机对象 | 哪个合同发生变化 | 本波第一次能回答的问题 | 最容易犯的错 |
+|---|---|---|---|---|
+| A | $X\sim\operatorname{Ber}(1/2)$、$N\sim\operatorname{Ber}(1/4)$、$Y=X\oplus N$ | 分布完全已知，依次改变“用哪个模型评分”与“是否忽略输入” | surprise 怎样平均成 entropy，错模怎样产生 KL，依赖怎样成为 MI | 把 self-information、entropy、cross-entropy 和单样本 NLL 混成一个量 |
+| B | 级联 $X\to Y\to Z$；未知 $\theta$ 下的 $N_{1:m},K_m$ | 先加后处理；再把翻转率改为固定未知；最后把目标改成恢复完整序列 | 信息为何只减不增；哪些细节对参数充分；长 block 为何可压缩 | 把“对参数可丢顺序”误写成“无损编码也可丢顺序” |
+| C | MaxEnt $Z$、noisy observation $X$、variational $q$、representation $T$ | 分布不再预先给定；posterior 需近似；差异量和保留目标由任务选择 | 怎样建先验、算 evidence、审计 bound、选择几何并区分 RD/IB/MDL | 把 lower bound 当真值、把 latent KL 当 MI、把短 training loss 当完整码长 |
+
+三波共享一批数值不是偶然：$h_2(1/4)\approx0.811278$ 既是噪声 entropy，也是 AEP 的每符号 surprise 极限；$h_2(3/8)-h_2(1/4)\approx0.143156$ 既可表示级联中的信息差，也可表示 latent state 与 noisy observation 的 MI。但**数值相同不表示随机对象和操作语义相同**。
+
+### 0.3 三遍学习与每遍退出条件
+
+| 遍次 | 怎样读 | 必须产生的无提示输出 | 达不到时怎样回退 |
+|---|---|---|---|
+| 第一遍：对象与直觉 | 只读各章“课程位置—问题链—贯穿例—第一遍停靠线” | 对每个公式说清随机变量、分布、单位、一次/平均层级、一个 AI 接口和一个不能推出的结论 | 回到当前波模型表，重画 joint、channel 或 code protocol |
+| 第二遍：推导与边界 | 完成公式七问、正文证明、最小反例与 A—E 节点习题 | 无提示重建负对数、chain rule、Gibbs/DPI、AEP、MaxEnt、ELBO 和 RD/IB/MDL 中至少一条主证明 | 回到第一个缺失等号，补写使用的 support、independence、convexity 或 asymptotic 条件 |
+| 第三遍：整合与验收 | 冻结笔记，完成卷级口试、100 分闭卷题、随机计算轨道和延迟迁移 | 15 分钟画出三波对象链；A—E 各区过线；独立生成 SVG/hash；48 小时与 14 天复做 | 按错题第一个断点回链，查看解答后的订正不冒充首次独立通过 |
+
+### 0.4 五层证据与状态语义
+
+1. **复述证据**：能区分 probability/self-information/entropy/KL/MI，但不等于会推导；
+2. **推导证据**：能无提示完成公式与反例，但不等于会在新 AI 问题中选对象；
+3. **闭卷证据**：[[阶段测验 - 信息论与统计学习接口（10.6）|INFO-CUM-01]] 的口试、总分与 A—E 分区同时过线；
+4. **复现证据**：[[实验 - 信息论累计复现门]]的解析校准、随机轨道、手检、参数干预和 hash 通过；
+5. **保持与迁移证据**：48 小时重做，14 天后换 source、换 distortion 或换 AI 情境仍能独立完成。
+
+`regression-passed` 只说明仓库材料通过[[information_cumulative_contract_audit.py|信息论卷级静态与计算回归]]；正文 frontmatter 的 `draft` 和学习记录的 `not-attempted` 继续表示尚无个人掌握证据。
+
+### 0.5 卷级总图：三个“压缩更好”为何不是一个命题
+
+先遮住图注回答：A 的纵轴、B 的横纵轴与 C 的累计纵轴分别是什么对象？哪个来自 theorem-level information function，哪个来自给定 joint law，哪个依赖完整预测顺序？
+
+![[00-知识库管理/_assets/plots/information-theory/plot-information-cumulative-gate-v2.svg|920]]
+
+> [!figure] 图 10.6-CUM｜信息论卷级复现门：前沿、表示与顺序码长
+> A 复核公平 Bernoulli–Hamming 的解析 $R(D)$；B 在 task/nuisance joint law 上比较 input rate 与 task relevance；C 在固定 seed 的 Bernoulli sequence 上比较 fixed model 与 KT prequential codelength。来源：独立计算与绘制；生成脚本：[[plot_information_cumulative_gate.py]]；固定 seed `20260819`；正式 SVG SHA-256 为 `7153136c90817de71c11e407106c268c2b193098fa192b1bf66c87f359c2f540`。
+
+**怎样读图。** A 沿 distortion budget 读取一阶最小 rate，不把绘图采样点当 coding theorem 证明；B 先固定 target $Y$，比较 relevance 相同的表示是否无偿携带 nuisance；C 从第一个 symbol 起累计全部预测成本，不用看完整数据后的 plug-in NLL 偷掉学习开销。
+
+**适用边界。** A 只覆盖公平 binary source 与 Hamming distortion；B 是可精确枚举的 task/nuisance toy joint；C 只是一条固定序列和两种预设 predictor。三栏均不证明神经互信息 estimator 无偏、不证明更短描述必然泛化，也不提供因果、公平或部署保证。
+
+> [!success] 卷级第一遍停靠线
+> 合上笔记后，应能在 15 分钟内画出 A—C 三波，分别写出 $H(P,Q)=H(P)+D(P\Vert Q)$、DPI loss、AEP、evidence–ELBO identity 和 RD/IB/MDL 的一个核心公式；再为每式补上 expectation 分布、log base/support 或 code protocol。做不到时，暂不进入卷末闭卷题。
 
 ## 一、范围与边界
 
@@ -348,9 +416,9 @@ flowchart LR
 
 INFO-01—10 已完成正文、十幅机制图、150 道 A–E 题与独立详解，10.6 达到 **10/10 正文覆盖**；这表示深层内容已经存在，不表示初学者入口已全部迁移，更不表示学习者已经掌握。
 
-截至 2026-08-27，INFO-01—10 已完成当前教学合同并通过静态回归，三波正文材料状态均为 `regression-passed`；学习状态继续保持 `draft`。下一施工对象是 INFO-CUM：补齐从零进入门、三波模型账本、无提示口试、题解映射、累计实验与正式回归脚本，再判断 10.6 是否可以在材料层面整体收口。
+截至 2026-08-27，INFO-01—10 与 INFO-CUM 已完成当前教学合同并通过静态与确定性计算回归，三波正文和卷级材料状态均为 `regression-passed`；学习状态继续保持 `draft / not-attempted`。
 
-INFO-08 的[[实验 - ELBO 恒等式、变分族限制与摊销缺口]]已经分离 approximation 与 amortization gap；[[实验 - 信息论累计复现门]]已把 Bernoulli–Hamming 前沿、task/nuisance bottleneck 与 prequential code 组成三轨计算验收。`INFO-CUM-01` 的[[阶段测验 - 信息论与统计学习接口（10.6）]]和[[阶段测验解答 - 信息论与统计学习接口（10.6）]]也已成稿，但当前仍为 `composed / not-attempted`。所有正文节点继续保持 `draft`，直到出现真实闭卷、订正与延迟复做证据。
+INFO-CUM-01 由[[阶段测验 - 信息论与统计学习接口（10.6）|15 分钟卷级口试与 100 分闭卷题卷]]、[[阶段测验解答 - 信息论与统计学习接口（10.6）|独立详解与口试 rubric]]、[[实验 - 信息论累计复现门|解析校准与 RD—IB—prequential 三轨计算门]]以及[[information_cumulative_contract_audit.py|一键材料回归]]组成。INFO-08 的[[实验 - ELBO 恒等式、变分族限制与摊销缺口]]继续承担 approximation 与 amortization gap 的专项实验。所有正文节点仍保持 `draft`，直到出现真实口试、闭卷原稿、计算记录、订正与延迟复做证据。
 
 ### 2026-08-23 图像标准化进度
 
