@@ -23,7 +23,7 @@ updated: 2026-08-27
 | 波次 | ID 范围 | 认知主线 | 材料迁移 |
 |---|---|---|---|
 | A | INFO-01—04 | 自信息/熵 → 联合/条件链 → cross-entropy/KL → 互信息 | `regression-passed` |
-| B | INFO-05—06 | 数据处理/充分性 → 无损编码/典型集/AEP | `pending` |
+| B | INFO-05—06 | 数据处理/充分性 → 无损编码/典型集/AEP | `regression-passed` |
 | C | INFO-07—10 | 最大熵/指数族 → ELBO → 散度几何 → 率失真/IB/MDL | `pending` |
 | CUM | INFO-CUM | 卷级路线—口试—题解—实验—回归 | `pending` |
 
@@ -68,6 +68,57 @@ $$
 
 > [!tip] 第一波停靠线
 > 完成 INFO-01—04 后，应能从 joint table $(3/8,1/8;1/8,3/8)$ 出发，依次重建自信息、$H(X,Y)=H(X)+H(Y\mid X)$、conditional cross-entropy/KL gap、两类 PMI 与 $I(X;Y)=1-h_2(1/4)$；同时必须口头声明 log base、expectation 的分布、support 与“统计依赖不等于因果”。
+
+第二波先在 $Y$ 后叠加独立四分之一翻转噪声：
+
+$$
+Z=Y\oplus N_2,
+\qquad
+N_2\sim\operatorname{Bernoulli}\!\left(\frac14\right),
+\qquad
+N_2\perp(X,N_1).
+$$
+
+两级信道的有效翻转率为 $3/8$，因此
+
+$$
+I(X;Y)=1-h_2\!\left(\frac14\right)\approx0.188722,
+$$
+
+$$
+I(X;Z)=1-h_2\!\left(\frac38\right)\approx0.045566,
+$$
+
+而精确信息损失是
+
+$$
+I(X;Y\mid Z)
+=h_2\!\left(\frac38\right)-h_2\!\left(\frac14\right)
+\approx0.143156\ \text{bit}.
+$$
+
+随后把翻转率改成固定未知参数 $\theta$。在配对输入输出可观察的校准数据中，$N_i=X_i\oplus Y_i$ 且
+
+$$
+p_\theta(n_{1:m})
+=\theta^{K_m}(1-\theta)^{m-K_m},
+\qquad
+K_m=\sum_{i=1}^mN_i.
+$$
+
+因此 $K_m$ 对 $\theta$ sufficient；但若目标改为无损恢复完整序列，顺序仍必须编码。固定回 $\theta=1/4$ 后，大数定律给
+
+$$
+\frac{K_m}{m}\xrightarrow{P}\frac14
+\quad\Longrightarrow\quad
+-\frac1m\log_2p(N_{1:m})
+\xrightarrow{P}h_2\!\left(\frac14\right).
+$$
+
+于是典型集在指数阶上包含约 $2^{mH}$ 个成员，每个成员概率约 $2^{-mH}$，总概率趋近 $1$；这再推出 exact variable-length block code 的 $H\le L_m/m<H+1/m$，以及 fixed-length almost-lossless code 的一阶临界率 $R=H$。
+
+> [!tip] 第二波停靠线
+> 完成 INFO-05—06 后，应能验证级联 BSC 的 $1/4\star1/4=3/8$，用 MI chain rule 算出 $0.143156$ bit 的损失；从 Bernoulli likelihood 说明 $K_m$ 对翻转率充分；再从 $K_m/m\to1/4$ 推出 AEP、典型集三性质与 source-coding 阈值。还必须解释：**统计充分性允许丢掉与参数无关的顺序，而无损编码完整序列不能丢掉这些顺序。**
 
 ## 一、范围与边界
 
@@ -230,7 +281,7 @@ flowchart LR
 
 INFO-01—10 已完成正文、十幅机制图、150 道 A–E 题与独立详解，10.6 达到 **10/10 正文覆盖**；这表示深层内容已经存在，不表示初学者入口已全部迁移，更不表示学习者已经掌握。
 
-截至 2026-08-27，INFO-01—04 已完成当前教学合同并通过静态回归，第一波材料状态为 `regression-passed`；INFO-05—10 与 INFO-CUM 仍待按同一标准迁移。下一施工波为 INFO-05—06：用同一 noisy-bit channel 追踪 $X\to Y\to Z$ 的信息损失，再从单符号不确定性进入长序列典型集与无损编码极限。
+截至 2026-08-27，INFO-01—06 已完成当前教学合同并通过静态回归，第一、二波材料状态均为 `regression-passed`；INFO-07—10 与 INFO-CUM 仍待按同一标准迁移。下一施工波为 INFO-07—10：从“约束下选分布”进入 maximum entropy/exponential family，再由 latent-variable evidence 进入 ELBO，比较不同散度几何，最后在 rate–distortion、information bottleneck 与 MDL 汇合。
 
 INFO-08 的[[实验 - ELBO 恒等式、变分族限制与摊销缺口]]已经分离 approximation 与 amortization gap；[[实验 - 信息论累计复现门]]已把 Bernoulli–Hamming 前沿、task/nuisance bottleneck 与 prequential code 组成三轨计算验收。`INFO-CUM-01` 的[[阶段测验 - 信息论与统计学习接口（10.6）]]和[[阶段测验解答 - 信息论与统计学习接口（10.6）]]也已成稿，但当前仍为 `composed / not-attempted`。所有正文节点继续保持 `draft`，直到出现真实闭卷、订正与延迟复做证据。
 
