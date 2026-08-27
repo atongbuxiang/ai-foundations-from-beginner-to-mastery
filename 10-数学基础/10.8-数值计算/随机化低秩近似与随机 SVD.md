@@ -4,12 +4,12 @@ status: draft
 area: [math/numerical-linear-algebra, math/randomized-linear-algebra]
 aliases: [随机 SVD, Randomized SVD, 随机低秩近似]
 prerequisites: ["[[奇异值分解]]", "[[定理 - Eckart–Young–Mirsky]]", "[[SVD 算法与谱范数估计]]", "[[标准正交基与 Gram-Schmidt]]"]
-related: ["[[函数极限、连续性与收敛模式]]", "[[有效秩]]", "[[随机投影与 Johnson-Lindenstrauss 引理]]", "[[稀疏矩阵计算与存储复杂度]]", "[[实验 - 随机 SVD 的过采样、幂步与概率证书]]"]
+related: ["[[函数极限、连续性与收敛模式]]", "[[有效秩]]", "[[S-2020-Su-7921-Performer随机投影|随机投影与 Johnson–Lindenstrauss 接口]]", "[[稀疏矩阵计算与存储复杂度]]", "[[实验 - 随机 SVD 的过采样、幂步与概率证书]]"]
 sources: ["[[S-2011-Halko-Martinsson-Tropp-随机低秩]]", "[[S-2020-Martinsson-Tropp-随机数值线性代数]]", "[[S-2024-Su-10501-低秩近似之路四ID]]"]
 exercises: ["[[习题 - 随机化低秩近似与随机 SVD]]"]
 solutions: ["[[解答 - 随机化低秩近似与随机 SVD]]"]
 created: 2026-08-15
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # 随机化低秩近似与随机 SVD

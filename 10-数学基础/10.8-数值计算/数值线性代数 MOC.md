@@ -7,7 +7,7 @@ prerequisites: ["[[线性代数 MOC]]", "[[矩阵分析 MOC]]"]
 related: ["[[数学基础完整课程地图与掌握标准]]", "[[线性代数完整学习路线与掌握标准]]", "[[推导与实验 MOC]]", "[[练习与测验 MOC]]", "[[数学基础 MOC]]"]
 sources: ["Trefethen-Bau-NLA", "Golub-VanLoan-MatrixComputations", "MIT-18.335"]
 created: 2026-08-14
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # 数值线性代数 MOC
@@ -17,6 +17,38 @@ updated: 2026-08-23
 
 > [!info] 与全局课程地图的关系
 > 本分卷在[[数学基础完整课程地图与掌握标准]]中固定为 NUM-01 至 NUM-20 共 20 个核心节点。本 MOC 还会调用[[条件数]]、[[矩阵扰动]]、[[Cholesky 分解]]、[[Schur 分解]]等 10.2/10.3 节点，并列出实验与辅助专题；这些交叉调用不重复计入 20 个数值核心节点。
+
+## 全卷教学迁移路线
+
+现有 20 篇正文已经具备深层理论、实验和正式插图；当前工作不是扩张范围，而是按初学者认知顺序补齐“问题引入—贯穿算例—对象账本—逐步推导—公式七问—第一遍停靠线”，并为每波建立可重复的精确回归。材料通过与学习通过严格分离。
+
+| 波次 | 节点 | 主线 | 统一算例/证书 | 材料状态 | 学习状态 |
+|---|---|---|---|---|---|
+| A | NUM-01—04 | 浮点网格 → 误差对象 → 算法稳定性 → 条件感知停止 | $\tau=10^{-4}$；$\mathbb F_{10,4}$ 与 $A_\tau=\operatorname{diag}(1,\tau)$ | `regression-passed` | `draft / not-attempted` |
+| B | NUM-05—08 | reduction 内核 → pivoted solve → mixed-precision refinement → 稳定正交变换 | 动态范围、增长因子、三精度合同、Householder/Givens | `pending` | `draft / not-attempted` |
+| C | NUM-09—12 | 最小二乘 → 极端特征对 → 稠密 QR 流水线 → 对称 Krylov | 条件数平方、谱隙/移位、Hessenberg deflation、Ritz residual | `pending` | `draft / not-attempted` |
+| D | NUM-13—16 | 一般 Krylov → SVD → 定常迭代 → 预条件 | Arnoldi 正交性、双侧残差、谱半径/暂态、广义谱重塑 | `pending` | `draft / not-attempted` |
+| E | NUM-17—20 | CG → GMRES/MINRES → 稀疏系统 → 随机低秩 | 能量误差、重启、fill/负载、概率证书 | `pending` | `draft / not-attempted` |
+| CUM | NUM-CUM | 卷级口试—闭卷—实验—延迟重做 | 20 节随机回链与三实验组合门 | `composed` | `not-attempted` |
+
+### 第一波的单一模型链
+
+第一波故意不使用四个互不相关的例子，而让同一个小参数承担四个逐层加深的角色：
+
+1. **NUM-01：有限网格。** 在 $\mathbb F_{10,4}$ 中，$1$ 右侧 gap 为 $10^{-3}$，unit roundoff 为 $5\times10^{-4}$，故 $\operatorname{fl}(1+10^{-4})=1$；
+2. **NUM-02：误差对象。** 对 $A_\tau=\operatorname{diag}(1,\tau)$，候选解的相对残差约 $10^{-4}$，相对前向误差却为 $1/\sqrt2$；normwise 联合后向误差约 $5\times10^{-5}$，componentwise 后向误差为 $1$；
+3. **NUM-03：算法路径。** $g(\tau)=\sqrt{1+\tau}-1$ 的相对条件数趋近 $1$，朴素式的相对后向误差为 $1$，有理化式只有 $2.5\times10^{-5}$；
+4. **NUM-04：停止合同。** $\kappa_2(A_\tau)=10^4$ 将约 $10^{-4}$ 的残差放大成 $O(1)$ 风险；若任务只允许 $1\%$ 相对前向误差，条件感知阈值必须收紧到约 $10^{-6}$。
+
+> [!success] 第一波材料证书
+> [[numerical_teaching_contract_audit.py]]已经验证 4/4 教学合同、标量与对角系统精确关系、作用域内 Wiki 链接、数学块、4 个完整图文单元及正式 SVG 哈希。该结论只表示材料可重复、链接闭合和算例自洽，不表示读者已经独立完成推导或通过测验。
+
+### 如何学习第一波，而不是只把它读完
+
+1. **第一遍（约 90 分钟）：**只做每篇的贯穿算例和“第一遍停靠线”，不看后半篇一般理论；
+2. **第二遍（约 180 分钟）：**回到 IEEE 754、一般 backward error、stability 定义和 Jacobian/condition estimator；
+3. **第三遍（约 120 分钟）：**无提示重建 $\tau$ 模型，故意更换 norm、精度和任务预算，判断哪些结论保留；
+4. **验收：**完成节点习题并复现[[实验 - 条件估计、误差传播与可信停止]]；未提交独立作答前，四篇始终保持 `draft`。
 
 ## 核心区别
 
@@ -65,7 +97,7 @@ flowchart LR
 | [[线性方程组、消元与 LU 分解]] | 消元、$PA=LU$、三角求解与数值问题的理论桥梁是什么？ | draft |
 | [[稳定求解线性方程组]] | 选主元、增长因子、LU/三角求解后向误差、BERR/FERR、条件估计与迭代改进怎样形成完整验收链？ | draft |
 | [[迭代改进、混合精度与残差校正]] | 低精度分解、工作精度更新与高精度残差如何共同决定 classical/GMRES-IR 的区间？ | draft |
-| [[Gram-Schmidt 的数值稳定性]] | 经典与改进 Gram–Schmidt 为何表现不同？ | planned |
+| [[标准正交基与 Gram-Schmidt]] | 经典与改进 Gram–Schmidt 为何表现不同，为什么稳定实现还要进入 Householder/Givens？ | draft（10.2 交叉调用） |
 | [[Householder 与 Givens 变换]] | 反射符号、安全平面旋转、紧凑/分块存储和正交变换后向误差怎样组成稳定 QR？ | draft |
 | [[稳定最小二乘与正规方程的风险]] | 从投影几何、条件数平方、残差/参数误差分离到 QR、QRCP、SVD、TSVD 与 ridge，算法应怎样选择和验收？ | draft |
 | [[Cholesky 分解]] | SPD 结构怎样减少成本并保持稳定？ | draft |

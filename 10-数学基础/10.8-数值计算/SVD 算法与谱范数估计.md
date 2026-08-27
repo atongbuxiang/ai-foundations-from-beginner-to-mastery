@@ -4,12 +4,12 @@ status: draft
 area: [math/numerical-linear-algebra, math/low-rank-methods]
 aliases: [数值 SVD, Golub-Kahan 双对角化, 谱范数幂迭代, 随机 SVD]
 prerequisites: ["[[奇异值分解]]", "[[Householder 与 Givens 变换]]", "[[稳定最小二乘与正规方程的风险]]", "[[Lanczos 方法]]", "[[Arnoldi 方法]]", "[[矩阵扰动]]"]
-related: ["[[低秩近似]]", "[[Moore-Penrose 伪逆]]", "[[矩阵的秩]]", "[[有效秩]]", "[[数值线性代数 MOC]]", "[[实验 - SVD 双对角化、谱范数与随机子空间]]"]
+related: ["[[定理 - Eckart–Young–Mirsky]]", "[[Moore-Penrose 伪逆]]", "[[核、像与秩零化度定理]]", "[[有效秩]]", "[[数值线性代数 MOC]]", "[[实验 - SVD 双对角化、谱范数与随机子空间]]"]
 sources: ["[[S-1965-Golub-Kahan-SVD算法]]", "[[S-2025-LAPACK-SVD驱动与双对角化]]", "[[S-2011-Halko-Martinsson-Tropp-随机低秩]]", "[[S-2024-Su-10407-低秩近似之路（二）SVD]]", "[[S-2025-Su-10878-SVD的导数]]"]
 exercises: ["[[习题 - SVD 算法与谱范数估计]]"]
 solutions: ["[[解答 - SVD 算法与谱范数估计]]"]
 created: 2026-08-15
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # SVD 算法与谱范数估计
@@ -541,7 +541,7 @@ exceptions: unconverged、zero vector、ghost、NaN/overflow
 - 习题：[[习题 - SVD 算法与谱范数估计]]；
 - 独立解答：[[解答 - SVD 算法与谱范数估计]]；
 - 实验：[[实验 - SVD 双对角化、谱范数与随机子空间]]；
-- 理论基础：[[奇异值分解]]、[[低秩近似]]、[[Moore-Penrose 伪逆]]；
+- 理论基础：[[奇异值分解]]、[[定理 - Eckart–Young–Mirsky]]、[[Moore-Penrose 伪逆]]；
 - Krylov 基础：[[Lanczos 方法]]、[[Arnoldi 方法]]；
 - 后继：[[有效秩]]与随机化数值线性代数。
 

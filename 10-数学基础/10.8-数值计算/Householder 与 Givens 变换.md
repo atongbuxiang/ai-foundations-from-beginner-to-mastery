@@ -4,12 +4,12 @@ status: draft
 area: [math/numerical-analysis, math/numerical-linear-algebra, ai-systems]
 aliases: [Householder 反射, Givens 旋转, 稳定 QR, Orthogonal Transformations for QR]
 prerequisites: ["[[QR 分解]]", "[[内积空间]]", "[[矩阵范数]]", "[[浮点数与舍入误差]]", "[[数值稳定性]]"]
-related: ["[[标准正交基与 Gram-Schmidt]]", "[[Gram-Schmidt 的数值稳定性]]", "[[稳定求解线性方程组]]", "[[稳定最小二乘与正规方程的风险]]", "[[Hessenberg 化与 QR 特征值算法]]", "[[Lanczos 方法]]", "[[Arnoldi 方法]]", "[[数值线性代数 MOC]]", "[[实验 - Householder 符号、Givens 缩放与 QR 正交性]]"]
+related: ["[[标准正交基与 Gram-Schmidt]]", "[[实验 - Gram-Schmidt 与 QR 的正交性误差]]", "[[稳定求解线性方程组]]", "[[稳定最小二乘与正规方程的风险]]", "[[Hessenberg 化与 QR 特征值算法]]", "[[Lanczos 方法]]", "[[Arnoldi 方法]]", "[[数值线性代数 MOC]]", "[[实验 - Householder 符号、Givens 缩放与 QR 正交性]]"]
 sources: ["[[S-2024-Demmel-Householder-Givens稳定QR]]", "[[S-2025-LAPACK-QR反射与平面旋转]]", "[[S-2002-Higham-数值算法准确性与稳定性]]", "[[S-2026-Su-11654-流式幂迭代Muon初识]]", "[[S-2024-Su-10501-低秩近似之路四ID]]"]
 exercises: ["[[习题 - Householder 与 Givens 变换]]"]
 solutions: ["[[解答 - Householder 与 Givens 变换]]"]
 created: 2026-08-15
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # Householder 与 Givens 变换
