@@ -24,7 +24,7 @@ updated: 2026-08-27
 |---|---|---|---|
 | A | OPT-01—04 | 问题契约 → 凸集/投影/分离 → 凸函数/Jensen → 次梯度/共轭/Fenchel | `regression-passed` |
 | B | OPT-05—08 | 曲率上下界 → 梯度下降 → 加速/动量 → 随机梯度 | `regression-passed` |
-| C | OPT-09—12 | 自适应度量 → 二阶模型 → 投影方向 → KKT | `pending` |
+| C | OPT-09—12 | 自适应度量 → 二阶模型 → 投影方向 → KKT | `regression-passed` |
 | D | OPT-13—16 | 强对偶 → proximal → mirror/Fisher → 非凸地形 | `pending` |
 | CUM | OPT-CUM | 卷级路线—口试—题解—实验—回归 | `pending` |
 
@@ -128,6 +128,53 @@ $$
 
 > [!success] 第二波停靠线
 > 不看正文，能从 $H$ 写出 $\mu,L,\kappa$；分别算出 GD 在 $\eta=1/4,2/5,1/2$ 下的两个 factors；从 heavy-ball 更新重建两个双根 $\pm1/3$；最后推导 batch covariance、$5/(32B)$ 单步注入与 $11/(56B)$ 稳态平台。还必须能解释 spectral radius、function gap、oracle complexity 与 wall-clock 为什么不是同一种“更快”。
+
+第三波在同一个 $H$ 上加入线性项与第一波的三角形约束：
+
+$$
+f(x)=\frac12x^THx-b^Tx,
+\qquad
+H=\operatorname{diag}(1,4),
+\qquad
+b=(1,5/2)^T,
+$$
+
+$$
+C=\{x\in\mathbb R^2:x_1\ge0,\ x_2\ge0,\ x_1+x_2\le1\}.
+$$
+
+OPT-09 在 $x_0=0$ 比较 identity metric、exact $H$ metric 与首步 gradient-square metric，三者分别给出
+
+$$
+(1,5/2)^T,
+\qquad
+u=H^{-1}b=(1,5/8)^T,
+\qquad
+(1,1)^T,
+$$
+
+从最小反例说明 diagonal adaptivity 不等于 Newton curvature。OPT-10 进一步验证 exact Newton 从任意点一步到 $u$，Newton decrement square 为 $41/16$；再用 $A=\operatorname{diag}(1,2),c=(1,5/4)^T$ 把目标写成 affine least squares，使 Gauss–Newton 精确等于 $H$，并用 $s=(1,1)^T,y=(1,4)^T$ 闭合 secant curvature $s^Ty=5$。
+
+由于 $\mathbf1^Tu=13/8>1$，OPT-11 必须加入约束几何。Euclidean projection 与 $H$-metric projection 分别是
+
+$$
+\Pi_C^I(u)=(11/16,5/16)^T,
+\qquad
+\Pi_C^H(u)=x^*=(1/2,1/2)^T.
+$$
+
+在 $x^*$，$-\nabla f(x^*)=(1/2,1/2)^T$ 属于预算 face 的 normal cone，故 projected-gradient mapping 为零而原始 gradient 非零。OPT-12 最后把 normal 展开成三条 inequality 的 multipliers：
+
+$$
+\lambda^*=(1/2,0,0)^T,
+\qquad
+f(x^*)=-9/8,
+$$
+
+并逐项闭合 primal feasibility、dual feasibility、stationarity 与 complementary slackness；Slater point $(1/4,1/4)^T$ 又说明本例的 convex KKT 足以证明唯一 global optimum。预算 constraint 缩放 2 倍时 multiplier 缩为 $1/4$，提醒读者 multiplier 与 residual 都有 units/scale contract。
+
+> [!success] 第三波停靠线
+> 不看正文，能解释 movement metric、objective Hessian 与 gradient-square state 的区别；从任意点重建 Newton one-step；分别算出 $I$-metric 与 $H$-metric projection；写出 tangent/normal、gradient mapping 和 $\lambda^*=(1/2,0,0)$ 的四组 KKT。还必须能说明 inner solve residual、projection residual、KKT residual 与 deployment constraint violation 不是一个量。
 
 ## 一、范围与边界
 
@@ -311,7 +358,7 @@ OPT-01—16 已形成完整教学卷：16 篇正文、16 幅机制图、240 道 
 | 独立详解 | 定义、手算、证明、反例和研究合同逐项评分 | 正式作答前不得打开；错题必须回链节点 |
 | 计算门 | strict-saddle escape、nonconvex PL、scale-sharpness 三轨 | canonical hash、随机手算轨、参数干预与 48 小时重建均通过 |
 
-截至 2026-08-27，OPT-01—08 已按当前初学者教学合同完成前两波静态迁移并通过精确计算与图像回归；正文学习状态保持 `draft`。下一施工点为 OPT-09—12：从同一谱模型出发加入 adaptive metric、二阶局部模型、约束投影和 KKT residual，继续区分曲率对象、算法 state 与最优性证书。
+截至 2026-08-27，OPT-01—12 已按当前初学者教学合同完成前三波静态迁移并通过精确计算与图像回归；正文学习状态保持 `draft`。下一施工点为 OPT-13—16：从当前 KKT 证书进入 dual function/Slater，再用 composite prox、mirror/Fisher geometry 与非凸地形完成正文迁移收束。
 
 ### 2026-08-23 图像标准化进度
 

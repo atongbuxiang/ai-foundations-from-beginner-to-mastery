@@ -7,7 +7,7 @@ prerequisites: ["[[Hessian、二阶微分与曲率]]", "[[一阶最优性条件�
 related: ["[[优化与凸分析 MOC]]", "[[自适应优化方法]]", "[[投影、约束与可行方向]]", "[[Lagrange 乘子与 KKT 条件]]", "[[误差传播、条件估计与停止准则]]"]
 sources: ["Boyd-Vandenberghe-2004-Convex-Optimization", "Nocedal-Wright-2006-Numerical-Optimization", "Dennis-Schnabel-1996-Numerical-Methods", "Liu-Nocedal-1989-LBFGS", "Stanford-EE364A-Unconstrained", "Stanford-CS205L-Nonlinear-Least-Squares", "Su-10588-Hessian-Adaptive-LR"]
 created: 2026-08-19
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # Newton 法、Gauss-Newton 与拟 Newton 法
@@ -50,6 +50,170 @@ updated: 2026-08-23
 - smooth/strongly-convex 常数和 condition number 见[[光滑性、强凸性与条件数]]；
 - CG 的 Krylov 子空间与 SPD 条件见[[共轭梯度法]]；
 - 本章新增的是**一步怎样求、怎样全局化、何时加速、用什么 residual 验收**。
+
+> [!note] 课程位置
+> OPT-09 已把 $M_t$ 解释为算法选择的 movement metric；本章追问何时它真的来自 objective 的局部二次模型。Newton 使用 exact Hessian，Gauss–Newton 使用 residual Jacobian 结构，BFGS/L-BFGS 用 secant pairs 学习曲率。共同骨架是“选 curvature → 解线性/二次子问题 → 检查模型是否值得接受”，而不是显式求逆。
+
+> [!tip] 建议两遍阅读
+> **第一遍**在同一个 affine least-squares quadratic 上验证 Newton 一步到解、Gauss–Newton 等于 exact Hessian、BFGS secant pair 记录 $Hs$。**第二遍**再进入局部二次收敛、line search/trust region、inexact Newton–CG、negative curvature 和 noisy secant updates。每个“二阶”结论都要标出 curvature matrix、inner residual 与 outer acceptance。
+
+## 本章的推导问题链
+
+1. 二阶 Taylor model 与线性化 stationarity equation 为什么产生同一个 $H_kp=-g_k$？
+2. $H_k\succ0$、indefinite、singular 与 ill-conditioned 分别怎样改变子问题？
+3. 为什么数学上写 $H^{-1}g$，实现上却必须解 linear system？
+4. Gauss–Newton 的 $J^TJ$ 丢掉了 exact Hessian 中哪一项；何时该项恰为零？
+5. BFGS 的 $s_k,y_k$ 怎样编码 secant equation，$s_k^Ty_k>0$ 保护什么？
+6. inner solve 很准为什么仍不能替代 line-search/trust-region acceptance？
+
+## 贯穿算例续：Newton 一步到达的点为什么仍可能不可行
+
+继续使用
+
+$$
+f(x)=\frac12x^THx-b^Tx,
+\qquad
+H=\operatorname{diag}(1,4),
+\qquad
+b=(1,5/2)^T.
+$$
+
+在任意 $x$，
+
+$$
+g(x)=Hx-b,
+\qquad
+\nabla^2f(x)=H.
+$$
+
+unconstrained minimizer 是 $u=H^{-1}b=(1,5/8)^T$。后续加上 $C=\{x\ge0,\mathbf1^Tx\le1\}$ 时，$u$ 不可行；这会精确说明“Newton 把无约束一阶方程解对”与“原约束问题解对”不是同一个命题。
+
+### 符号与对象账本
+
+| 符号 | 层级 | 本例/含义 | 验收量 |
+|---|---|---|---|
+| $m_k(p)$ | local model | $f_k+g_k^Tp+\tfrac12p^TH_kp$ | predicted reduction |
+| $H_k$ | exact objective Hessian | 恒为 $H$ | inertia/conditioning |
+| $p_k$ | subproblem solution | solve $H_kp=-g_k$ | linear residual |
+| $J_k^TJ_k$ | Gauss–Newton matrix | 本例等于 $H$ | residual/Jacobian rank |
+| $(s_k,y_k)$ | secant data | $y_k=g_{k+1}-g_k$ | $s_k^Ty_k$ |
+| $B_k$ | approximate curvature | BFGS/SR1 构造 | SPD/approximation error |
+| $\rho_k$ | trust ratio | actual/predicted reduction | outer acceptance |
+
+### Newton step 的精确闭合
+
+从任意 $x_k$ 解
+
+$$
+Hp_k=-g_k=-(Hx_k-b),
+$$
+
+得到
+
+$$
+p_k=H^{-1}b-x_k=u-x_k,
+$$
+
+所以 full step
+
+$$
+x_{k+1}=x_k+p_k=u
+$$
+
+一次到达 unconstrained optimum。这里“一步”来自 objective 本身就是恒定 Hessian quadratic，不是 Newton 对一般非线性函数的全局承诺。
+
+在 $x_0=0$，
+
+$$
+g_0=-b,
+\qquad
+p_0=u=\begin{pmatrix}1\\5/8\end{pmatrix}.
+$$
+
+Newton decrement 为
+
+$$
+\lambda_N^2=g_0^TH^{-1}g_0
+=b^TH^{-1}b
+=\frac{41}{16}.
+$$
+
+模型预测下降
+
+$$
+\frac12\lambda_N^2=\frac{41}{32}
+$$
+
+也恰等于 $f(0)-f(u)$。一般非二次问题中 predicted 与 actual reduction 不会自动相同。
+
+### 把同一函数写成 affine least squares
+
+令
+
+$$
+A=\operatorname{diag}(1,2),
+\qquad
+c=\begin{pmatrix}1\\5/4\end{pmatrix}.
+$$
+
+则 $A^TA=H$、$A^Tc=b$，并且
+
+$$
+\frac12\|Ax-c\|^2
+=\frac12x^THx-b^Tx+\frac12\|c\|^2.
+$$
+
+常数不改变 optimizer。residual $r(x)=Ax-c$ 是 affine，二阶导数为零，所以 exact Hessian
+
+$$
+\nabla^2\!\left(\frac12\|r(x)\|^2\right)
+=J^TJ+\sum_i r_i(x)\nabla^2r_i(x)
+=A^TA=H.
+$$
+
+本例中 Gauss–Newton 不是近似而是精确；对 nonlinear residual，第二项一般不为零，small residual 或结构条件才可能使忽略合理。
+
+### 一个 secant pair 到底记录什么
+
+quadratic 上任取 displacement $s$，gradient difference 恒为
+
+$$
+y=g(x+s)-g(x)=Hs.
+$$
+
+例如 $s=(1,1)^T$ 时
+
+$$
+y=(1,4)^T,
+\qquad
+s^Ty=5>0.
+$$
+
+BFGS 用 $B_{k+1}s_k=y_k$ 让近似 curvature 在已观察方向上匹配 exact $H$；$s^Ty>0$ 在标准 BFGS 更新中保护 SPD。它没有凭一个 pair 恢复所有未观测方向，mini-batch 改变还会使 $y$ 同时含 sampling noise。
+
+### 核心公式七问：Newton linear solve
+
+对
+
+$$
+H_kp_k=-g_k,
+$$
+
+逐项回答：
+
+1. **目的：**最小化局部二次模型，或把 stationarity equation 线性化后归零；
+2. **对象：**$H_k$ 是 curvature operator，$g_k$ 是当前 residual，$p_k$ 是待求 displacement；
+3. **来路：**对 $m_k(p)=f_k+g_k^Tp+\tfrac12p^TH_kp$ 关于 $p$ 求导；
+4. **步骤：**通过 factorization/Krylov solve 求 $p$，不显式形成 $H_k^{-1}$；
+5. **读法：**寻找一个经 curvature 缩放后恰好抵消当前 gradient 的位移；
+6. **检查：**报告 $\|H_kp_k+g_k\|$、descent sign $g_k^Tp_k$、predicted reduction 与实际接受比例；
+7. **去路：**OPT-11 把 $x_k+p\in C$ 加入子问题，OPT-12 得到 saddle-point KKT system；large-scale AI 中则由 HVP–CG 近似 solve。
+
+> [!warning] 三层 residual 不能互换
+> $\|Hp+g\|$ 小只说明 inner linear system 解得准；若 Hessian indefinite，$p$ 仍可能不是 descent direction；即使 model subproblem 合理，full step 也可能因远离局部可信区而失败。必须分开记录 curvature/model、inner solve 与 line-search/trust acceptance。
+
+> [!success] 第一遍停靠线
+> 合上笔记后，能从任意 $x_k$ 推出 Newton full step 一次到 $u=(1,5/8)^T$，并在 $x_0=0$ 算出 $\lambda_N^2=41/16$ 与预测下降 $41/32$；能构造 $A,c$ 使 Gauss–Newton 精确等于 $H$，并用 $s=(1,1)$ 得到 $y=(1,4),s^Ty=5$。还必须指出 $u\notin C$，因此无约束 solve 尚未完成后续问题。
 
 ## 零、统一对象：局部模型、子问题、接受规则
 

@@ -19,6 +19,7 @@ LABS = ROOT / "00-知识库管理" / "_labs"
 FIGURE_SCRIPTS = (
     LABS / "code" / "plot_convex_foundations_v2.py",
     LABS / "code" / "plot_first_order_optimization_v2.py",
+    LABS / "code" / "plot_metric_constrained_optimization_v2.py",
 )
 
 CONCEPTS = (
@@ -30,6 +31,10 @@ CONCEPTS = (
     "一阶最优性条件与梯度下降.md",
     "加速梯度、动量与下界.md",
     "随机梯度与小批量估计.md",
+    "自适应优化方法.md",
+    "Newton 法、Gauss-Newton 与拟 Newton 法.md",
+    "投影、约束与可行方向.md",
+    "Lagrange 乘子与 KKT 条件.md",
 )
 
 CONTRACT_MARKERS = (
@@ -58,6 +63,14 @@ FIGURE_HASHES = {
         "3c27f3f79ccdb9965da1f4041f326e0fcfd13169482d4f3f7b0f3876da623a31",
     "fig-sgd-minibatch-noise-v2.svg":
         "da3a41142507540659f64eb8253d3cdb045cf93388b4781e69eb12515363f80a",
+    "fig-adaptive-optimizers-geometry-v2.svg":
+        "65703f1caf647ab7058c5faaaa0cd350f0fc6cbb886ec0fc647f751de6aae973",
+    "fig-newton-gn-quasinewton-v2.svg":
+        "36f334323e3269e38f6c28c1180dcd070d63e4b8fe9bf921f259573e7dbdccd2",
+    "fig-projection-feasible-directions-v2.svg":
+        "2f2f162a489999c94667905f7fe5ccbdb1449d286ce8bf078f7826b5d92482d6",
+    "fig-lagrange-kkt-v2.svg":
+        "044f9e3ed47598775205cb36d022db9408f0abd0d58983f4c894516d0b777aca",
 }
 
 FIGURE_DIR = ROOT / "00-知识库管理" / "_assets" / "figures" / "optimization"
@@ -246,6 +259,100 @@ def audit_exact_spectral_model() -> None:
     )
 
 
+def audit_exact_constrained_model() -> None:
+    hessian = (Fraction(1), Fraction(4))
+    linear = (Fraction(1), Fraction(5, 2))
+    zero = (Fraction(0), Fraction(0))
+    unconstrained = (linear[0] / hessian[0], linear[1] / hessian[1])
+    optimizer = (Fraction(1, 2), Fraction(1, 2))
+
+    def objective(point: tuple[Fraction, Fraction]) -> Fraction:
+        quadratic = hessian[0] * point[0] ** 2 + hessian[1] * point[1] ** 2
+        return Fraction(1, 2) * quadratic - dot(linear, point)
+
+    def gradient(point: tuple[Fraction, Fraction]) -> tuple[Fraction, Fraction]:
+        return hessian[0] * point[0] - linear[0], hessian[1] * point[1] - linear[1]
+
+    require(unconstrained == (Fraction(1), Fraction(5, 8)), "unconstrained Newton point changed")
+    require(sum(unconstrained) == Fraction(13, 8), "unconstrained feasibility audit changed")
+    require(objective(unconstrained) == Fraction(-41, 32), "unconstrained objective changed")
+    require(objective(optimizer) == Fraction(-9, 8), "constrained objective changed")
+    require(gradient(optimizer) == (Fraction(-1, 2), Fraction(-1, 2)), "boundary gradient changed")
+
+    euclidean_step = sub(zero, gradient(zero))
+    exact_metric_step = (
+        -gradient(zero)[0] / hessian[0],
+        -gradient(zero)[1] / hessian[1],
+    )
+    normalized_step = (
+        -gradient(zero)[0] / abs(gradient(zero)[0]),
+        -gradient(zero)[1] / abs(gradient(zero)[1]),
+    )
+    require(euclidean_step == linear, "Euclidean metric step changed")
+    require(exact_metric_step == unconstrained, "exact-H metric step changed")
+    require(normalized_step == (Fraction(1), Fraction(1)), "gradient normalization changed")
+
+    newton_decrement_sq = dot(linear, unconstrained)
+    require(newton_decrement_sq == Fraction(41, 16), "Newton decrement changed")
+    require(
+        Fraction(1, 2) * newton_decrement_sq == objective(zero) - objective(unconstrained),
+        "Newton predicted/actual reduction no longer matches",
+    )
+
+    least_squares_a = (Fraction(1), Fraction(2))
+    least_squares_c = (Fraction(1), Fraction(5, 4))
+    require(
+        (least_squares_a[0] ** 2, least_squares_a[1] ** 2) == hessian,
+        "Gauss-Newton matrix changed",
+    )
+    require(
+        (least_squares_a[0] * least_squares_c[0], least_squares_a[1] * least_squares_c[1])
+        == linear,
+        "least-squares linear term changed",
+    )
+    secant = (Fraction(1), Fraction(1))
+    secant_gradient = (hessian[0] * secant[0], hessian[1] * secant[1])
+    require(secant_gradient == (Fraction(1), Fraction(4)), "secant curvature changed")
+    require(dot(secant, secant_gradient) == Fraction(5), "BFGS curvature product changed")
+
+    euclidean_projection = (Fraction(11, 16), Fraction(5, 16))
+    require(sum(euclidean_projection) == 1, "Euclidean projection is not on active face")
+    metric_residual = sub(optimizer, unconstrained)
+    metric_normal = (
+        hessian[0] * metric_residual[0],
+        hessian[1] * metric_residual[1],
+    )
+    require(metric_normal == (Fraction(-1, 2), Fraction(-1, 2)), "H-projection normal changed")
+
+    step = Fraction(1, 4)
+    raw = sub(optimizer, scale(step, gradient(optimizer)))
+    require(raw == (Fraction(5, 8), Fraction(5, 8)), "projected-gradient raw point changed")
+    require(
+        sub(raw, optimizer) == (Fraction(1, 8), Fraction(1, 8)),
+        "projected-gradient normal offset changed",
+    )
+
+    constraints = (
+        optimizer[0] + optimizer[1] - 1,
+        -optimizer[0],
+        -optimizer[1],
+    )
+    multipliers = (Fraction(1, 2), Fraction(0), Fraction(0))
+    stationarity = add(gradient(optimizer), scale(multipliers[0], (Fraction(1), Fraction(1))))
+    complementarity = tuple(value * constraint for value, constraint in zip(multipliers, constraints))
+    require(constraints == (Fraction(0), Fraction(-1, 2), Fraction(-1, 2)), "KKT primal values changed")
+    require(stationarity == zero, "KKT stationarity changed")
+    require(complementarity == (0, 0, 0), "KKT complementarity changed")
+    slater = (Fraction(1, 4), Fraction(1, 4))
+    require(slater[0] + slater[1] < 1 and min(slater) > 0, "Slater point changed")
+    require(Fraction(1, 4) * 2 == multipliers[0], "scaled multiplier audit changed")
+
+    print(
+        "PASS exact constrained model: variable metrics, Newton/GN/secant, "
+        "I/H projections, projected stationarity, KKT lambda=(1/2,0,0)"
+    )
+
+
 def audit_markdown_integrity() -> None:
     scoped = [OPT / filename for filename in CONCEPTS]
     all_files = [path for path in ROOT.rglob("*") if path.is_file()]
@@ -349,6 +456,7 @@ def main() -> None:
     audit_contracts()
     audit_exact_model()
     audit_exact_spectral_model()
+    audit_exact_constrained_model()
     audit_markdown_integrity()
     if args.run_figures:
         audit_figures()

@@ -7,7 +7,7 @@ prerequisites: ["[[投影、约束与可行方向]]", "[[一阶最优性条件�
 related: ["[[优化与凸分析 MOC]]", "[[弱对偶、强对偶与 Slater 条件]]", "[[最大熵原理与指数族]]", "[[Newton 法、Gauss-Newton 与拟 Newton 法]]"]
 sources: ["Boyd-Vandenberghe-2004-Convex-Optimization", "Nocedal-Wright-2006-Numerical-Optimization", "Bertsekas-1999-Nonlinear-Programming", "MIT-6.253-Convex-Analysis-Optimization", "Stanford-EE364A-Duality", "Stanford-EE364A-Equality-Constrained", "Su-3552-Maximum-Entropy"]
 created: 2026-08-19
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # Lagrange 乘子与 KKT 条件
@@ -43,6 +43,205 @@ updated: 2026-08-23
 > 5. LICQ、MFCQ 与 Slater condition 分别在哪一类结论中使用？
 > 6. 为什么 KKT 在一般非凸问题中只是 CQ 下的必要条件，而在 convex problem 中可以成为全局充分条件？
 > 7. scale-aware KKT residual、critical-cone curvature、strong duality 与 multiplier sensitivity 为什么必须分别报告？
+
+> [!note] 课程位置
+> OPT-11 已把约束最优性写成 $-\nabla f(x^*)\in N_C(x^*)$；本章把抽象 normal cone 展开成 active constraint gradients 的非负组合，并加入 primal feasibility、dual feasibility 与 complementary slackness。KKT 因而不是一条“求导等于零”的公式，而是一份 primal–dual 证书。OPT-13 会再问这份证书怎样产生 dual lower bound 与何时 zero gap。
+
+> [!tip] 建议两遍阅读
+> **第一遍**固定 $g_i(x)\le0$ convention，在下方三角形 quadratic 上逐项核对四组 KKT、Slater 与 multiplier scaling。**第二遍**再进入 LICQ/MFCQ、CQ failure、critical-cone 二阶条件、KKT linear system 与 sensitivity。每写一个 multiplier，先标出它对应哪条 constraint 以及该 constraint 的缩放。
+
+## 本章的推导问题链
+
+1. equality feasible directions 为什么迫使 objective gradient 落入 equality-normal span？
+2. inequality 中为什么只有 active constraints 能贡献 nonzero normal multiplier？
+3. sign convention $g_i\le0$ 怎样决定 Lagrangian 中 $+\lambda_i g_i$ 与 $\lambda_i\ge0$？
+4. primal、dual、stationarity、complementarity 四组条件分别排除哪类错误？
+5. CQ 在“local optimum 推 KKT”中做什么，convexity 又在“KKT 推 global optimum”中做什么？
+6. constraint 缩放为何改变 multiplier 数值，却不应改变物理 normal force 与 optimizer？
+
+## 贯穿算例收束：四组 KKT 如何同时闭合
+
+考虑
+
+$$
+\min_x
+f(x)=\frac12x^THx-b^Tx,
+\qquad
+H=\operatorname{diag}(1,4),
+\qquad
+b=(1,5/2)^T,
+$$
+
+满足三条 inequalities
+
+$$
+g_0(x)=x_1+x_2-1\le0,
+$$
+
+$$
+g_1(x)=-x_1\le0,
+\qquad
+g_2(x)=-x_2\le0.
+$$
+
+OPT-11 已求得
+
+$$
+x^*=\begin{pmatrix}1/2\\1/2\end{pmatrix},
+\qquad
+f(x^*)=-\frac98.
+$$
+
+### 符号与对象账本
+
+| 符号 | 对象 | 本例值 | 检查层 |
+|---|---|---:|---|
+| $x$ | primal variable | $\mathbb R^2$ | feasibility/objective |
+| $g_0,g_1,g_2$ | inequality functions | budget、两条 nonnegativity | sign/scaling |
+| $\lambda_i$ | dual multipliers | $(1/2,0,0)$ | dual feasibility |
+| $\mathcal A(x^*)$ | active set | $\{0\}$ | 哪些法向能进入 stationarity |
+| $\mathcal L(x,\lambda)$ | Lagrangian | $f+\sum_i\lambda_i g_i$ | primal–dual coupling |
+| $r_{\mathrm{stat}}$ | stationarity residual | $\nabla_x\mathcal L$ | 一阶平衡 |
+| $r_{\mathrm{comp}}$ | complementarity residual | $\lambda\odot g(x)$ | active/slack 配对 |
+
+### 第一步：active set 与 gradient
+
+在 $x^*$，
+
+$$
+g_0(x^*)=0,
+\qquad
+g_1(x^*)=g_2(x^*)=-\frac12.
+$$
+
+所以只有预算 constraint active。objective gradient 是
+
+$$
+\nabla f(x^*)=Hx^*-b
+=\begin{pmatrix}-1/2\\-1/2\end{pmatrix}.
+$$
+
+active normal 为
+
+$$
+\nabla g_0=(1,1)^T.
+$$
+
+因此选择
+
+$$
+\lambda^*=\begin{pmatrix}1/2\\0\\0\end{pmatrix}
+$$
+
+即可用 active outward normal 平衡 objective gradient。
+
+### 第二步：四组 KKT 逐项验算
+
+1. **primal feasibility**
+
+$$
+g(x^*)=\begin{pmatrix}0\\-1/2\\-1/2\end{pmatrix}\le0.
+$$
+
+2. **dual feasibility**
+
+$$
+\lambda^*=\begin{pmatrix}1/2\\0\\0\end{pmatrix}\ge0.
+$$
+
+3. **stationarity**
+
+$$
+\begin{aligned}
+\nabla_x\mathcal L(x^*,\lambda^*)
+&=\nabla f(x^*)
++\frac12\nabla g_0(x^*)\\
+&=(-1/2,-1/2)^T+(1/2,1/2)^T\\
+&=0.
+\end{aligned}
+$$
+
+4. **complementary slackness**
+
+$$
+\lambda^*\odot g(x^*)
+=\begin{pmatrix}(1/2)0\\0(-1/2)\\0(-1/2)\end{pmatrix}
+=0.
+$$
+
+四项缺一不可：只满足 stationarity 可能不可行；只满足 primal feasibility 可能 objective 很差；乘子为负会把 outward normal 方向用反；active constraint 若与 multiplier product 不为零则没有互补。
+
+### 为什么本例的 KKT 足以证明 global optimum
+
+$H\succ0$，所以 $f$ strongly convex；三个 $g_i$ 都 affine，问题 convex。并且
+
+$$
+\bar x=(1/4,1/4)^T
+$$
+
+满足
+
+$$
+g_0(\bar x)=-1/2<0,
+\qquad
+g_1(\bar x)=g_2(\bar x)=-1/4<0,
+$$
+
+因此 Slater condition 成立。KKT 在这里既有 multiplier existence，也足以证明唯一 global optimizer。逻辑要按方向读：一般非凸问题中，即使四组 KKT 都成立，也仍可能是 maximum 或 saddle。
+
+### constraint scaling 会怎样改变 multiplier
+
+若把同一预算约束改写为
+
+$$
+\widetilde g_0(x)=2(x_1+x_2-1)\le0,
+$$
+
+其 gradient 变成 $2(1,1)^T$。为保持 stationarity，multiplier 变为
+
+$$
+\widetilde\lambda_0^*=\frac14.
+$$
+
+乘积保持不变：
+
+$$
+\widetilde\lambda_0^*\nabla\widetilde g_0
+=\lambda_0^*\nabla g_0
+=\frac12(1,1)^T.
+$$
+
+所以 multiplier 数值不能脱离 constraint units 直接比较；数值 residual 也应做 scale-aware normalization。
+
+### 核心公式七问：KKT 四组条件
+
+对 $g_i(x)\le0$ convention，
+
+$$
+g(x^*)\le0,
+\quad
+\lambda^*\ge0,
+\quad
+\nabla f(x^*)+J_g(x^*)^T\lambda^*=0,
+\quad
+\lambda^*\odot g(x^*)=0,
+$$
+
+逐项回答：
+
+1. **目的：**把约束一阶最优性拆成可分别计算的 primal–dual residuals；
+2. **对象：**$x^*$ 是 primal candidate，$\lambda^*$ 与每条 inequality 一一对应；
+3. **来路：**normal-cone condition 加上 active normals 的非负生成表示；
+4. **步骤：**先查 feasibility/active set，再解 stationarity multipliers，最后查 sign 与 complementarity；
+5. **读法：**objective gradient 被 active constraint normals 平衡，inactive constraints 不施加一阶法向力；
+6. **检查：**本例四组 residual 精确为零；缩放 constraint 后 multiplier 反向缩放；
+7. **去路：**OPT-13 将 $\inf_x\mathcal L(x,\lambda)$ 变成 dual function，数值 solver 则把四组量作为独立停止证书。
+
+> [!warning] 必要性、充分性和强对偶不可混写
+> “local optimum + CQ ⇒ KKT”是必要性方向；“convex problem + KKT ⇒ global optimum”是充分性方向；Slater 在 convex duality中还支持 zero gap/dual attainment 的相应结论。非凸 KKT 点仍需 critical-cone 二阶分析。不要因为本例三者同时成立，就省略任一假设。
+
+> [!success] 第一遍停靠线
+> 合上笔记后，能从 $x^*$ 算出 active set、gradient 与 $\lambda^*=(1/2,0,0)$，逐项写完四组 KKT 并验证 $f(x^*)=-9/8$；能给出 Slater point $(1/4,1/4)$，并解释预算约束乘 2 后 multiplier 为何变成 $1/4$。若只会写 stationarity 一行，尚未形成 KKT 证书。
 
 ## 零、统一问题与符号
 
