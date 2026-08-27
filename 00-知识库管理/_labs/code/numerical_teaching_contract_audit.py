@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit NUM-01--16 teaching contracts and their shared exact models."""
+"""Audit NUM-01--20 teaching contracts and their shared exact models."""
 
 from __future__ import annotations
 
@@ -24,6 +24,7 @@ FIGURE_SCRIPTS = (
     LABS / "code" / "plot_numerical_direct_methods_v2.py",
     LABS / "code" / "plot_numerical_spectral_methods_v2.py",
     LABS / "code" / "plot_numerical_iterative_methods_v2.py",
+    LABS / "code" / "plot_numerical_large_scale_v2.py",
 )
 FIGURE_DIR = ROOT / "00-知识库管理" / "_assets" / "figures" / "numerical-analysis"
 
@@ -44,6 +45,10 @@ CONCEPTS = (
     "SVD 算法与谱范数估计.md",
     "定常迭代法与谱半径.md",
     "Krylov 子空间与预条件.md",
+    "共轭梯度法.md",
+    "GMRES、MINRES 与残差最小化.md",
+    "稀疏矩阵计算与存储复杂度.md",
+    "随机化低秩近似与随机 SVD.md",
 )
 
 CONTRACT_MARKERS = (
@@ -88,6 +93,14 @@ FIGURE_HASHES = {
         "d6367268a954abbe1fd6e5826b81b3c9c8604a1832c7b370d056034ed0e27e60",
     "fig-krylov-preconditioning-v2.svg":
         "5be8d00a01ffafbe66554d11139e85d5eec644e00ee03f9fd2a5f1c87bacf025",
+    "fig-conjugate-gradient-contract-v2.svg":
+        "ff6b1e1ac447e3851b037b8f78a6040eef7c49fb644dcbdc15e221e31fe9a902",
+    "fig-gmres-minres-restart-v2.svg":
+        "66f4214a36c53eca304a8130687a612cf0a22cac8c0eba56660dc86fb76d116e",
+    "fig-sparse-computing-contract-v2.svg":
+        "9a17925a06039f1d1a3bbe1020c3d83479d2a237aaa32aa61d408474876e0e76",
+    "fig-randomized-svd-certificate-v2.svg":
+        "87eddd707fe2fc11cf44c77146937908a4fe420241fccc5f3667648c959cac5c",
 }
 
 EXPECTED_FIGURE_BY_CONCEPT = {
@@ -107,6 +120,10 @@ EXPECTED_FIGURE_BY_CONCEPT = {
     CONCEPTS[13]: "fig-svd-algorithms-certificates-v2.svg",
     CONCEPTS[14]: "fig-stationary-spectral-radius-v2.svg",
     CONCEPTS[15]: "fig-krylov-preconditioning-v2.svg",
+    CONCEPTS[16]: "fig-conjugate-gradient-contract-v2.svg",
+    CONCEPTS[17]: "fig-gmres-minres-restart-v2.svg",
+    CONCEPTS[18]: "fig-sparse-computing-contract-v2.svg",
+    CONCEPTS[19]: "fig-randomized-svd-certificate-v2.svg",
 }
 
 KNOWN_EXTENSIONS = {".md", ".py", ".svg", ".png", ".jpg", ".jpeg", ".webp", ".pdf"}
@@ -172,6 +189,10 @@ def audit_route() -> None:
         "第四波的单一模型链",
         "如何学习第四波，而不是把所有迭代都叫“幂法”",
         "第四波材料证书",
+        "第五波的单一模型链",
+        "如何学习第五波，而不是只比较算法名称",
+        "第五波材料证书",
+        "全卷静态迁移结论",
         "numerical_teaching_contract_audit.py",
         "`regression-passed`",
         "`draft / not-attempted`",
@@ -189,8 +210,12 @@ def audit_route() -> None:
         re.search(r"\| D \| NUM-13—16 .*`regression-passed`", text) is not None,
         "MOC fourth-wave material status is not regression-passed",
     )
+    require(
+        re.search(r"\| E \| NUM-17—20 .*`regression-passed`", text) is not None,
+        "MOC fifth-wave material status is not regression-passed",
+    )
     require("Gram-Schmidt 的数值稳定性" not in text, "MOC retains missing placeholder link")
-    print("PASS NUM route: five waves, four migrated model chains, three-pass learning contracts")
+    print("PASS NUM route: five waves, five migrated model chains, three-pass learning contracts")
 
 
 def audit_exact_scalar_model() -> None:
@@ -714,6 +739,159 @@ def audit_exact_iterative_model() -> None:
     )
 
 
+def audit_exact_large_scale_model() -> None:
+    """Check the final shared CG -> GMRES -> sparse -> randomized-range chain."""
+
+    def dot(first, second):
+        return sum(first[index] * second[index] for index in range(len(first)))
+
+    def add(first, second):
+        return tuple(first[index] + second[index] for index in range(len(first)))
+
+    def subtract(first, second):
+        return tuple(first[index] - second[index] for index in range(len(first)))
+
+    def scale(coefficient, vector):
+        return tuple(coefficient * value for value in vector)
+
+    def close(first, second, *, atol=3e-14):
+        return math.isclose(float(first), float(second), rel_tol=0.0, abs_tol=atol)
+
+    a = (
+        (Fraction(1), Fraction(2), Fraction(0)),
+        (Fraction(0), Fraction(1), Fraction(0)),
+        (Fraction(0), Fraction(0), Fraction(3)),
+    )
+    gram = matmul(transpose(a), a)
+    x_target = (Fraction(1), Fraction(-1), Fraction(0))
+    system_rhs = matvec(a, x_target)
+    gram_rhs = matvec(gram, x_target)
+    require(system_rhs == (Fraction(-1), Fraction(-1), Fraction(0)), "final-wave GMRES rhs changed")
+    require(gram_rhs == (Fraction(-1), Fraction(-3), Fraction(0)), "final-wave CG rhs changed")
+
+    # NUM-17: exact two-step CG on the active two-dimensional invariant subspace.
+    x = (Fraction(0), Fraction(0), Fraction(0))
+    residual = gram_rhs
+    direction = residual
+    gram_direction = matvec(gram, direction)
+    alpha0 = dot(residual, residual) / dot(direction, gram_direction)
+    x1 = add(x, scale(alpha0, direction))
+    residual1 = subtract(residual, scale(alpha0, gram_direction))
+    beta1 = dot(residual1, residual1) / dot(residual, residual)
+    direction1 = add(residual1, scale(beta1, direction))
+    require(alpha0 == Fraction(5, 29), "CG alpha0 changed")
+    require(x1 == (Fraction(-5, 29), Fraction(-15, 29), Fraction(0)), "CG x1 changed")
+    require(residual1 == (Fraction(6, 29), Fraction(-2, 29), Fraction(0)), "CG r1 changed")
+    require(beta1 == Fraction(4, 841), "CG beta1 changed")
+    require(direction1 == (Fraction(170, 841), Fraction(-70, 841), Fraction(0)), "CG p1 changed")
+    require(dot(residual, residual1) == 0, "CG residual orthogonality changed")
+    require(dot(direction, matvec(gram, direction1)) == 0, "CG conjugacy changed")
+    alpha1 = dot(residual1, residual1) / dot(direction1, matvec(gram, direction1))
+    x2 = add(x1, scale(alpha1, direction1))
+    residual2 = subtract(residual1, scale(alpha1, matvec(gram, direction1)))
+    require(alpha1 == Fraction(29, 5), "CG alpha1 changed")
+    require(x2 == x_target and residual2 == (Fraction(0),) * 3, "CG two-step closure changed")
+    error0 = subtract(x, x_target)
+    error1 = subtract(x1, x_target)
+    energy0 = dot(error0, matvec(gram, error0))
+    energy1 = dot(error1, matvec(gram, error1))
+    require((energy0, energy1) == (Fraction(2), Fraction(8, 29)), "CG energy sequence changed")
+
+    # NUM-18: two-step GMRES and the squared Jordan residual polynomial.
+    root_two = math.sqrt(2)
+    q1 = tuple(float(value) / root_two for value in system_rhs)
+    aq1 = matvec(a, q1)
+    h11 = dot(q1, aq1)
+    arnoldi_residual = subtract(aq1, scale(h11, q1))
+    h21 = vector_norm(arnoldi_residual)
+    q2 = tuple(value / h21 for value in arnoldi_residual)
+    require(close(h11, 2) and close(h21, 1), "GMRES first Arnoldi column changed")
+    y1 = root_two * h11 / (h11**2 + h21**2)
+    gmres_x1 = scale(y1, q1)
+    gmres_r1 = subtract(tuple(float(value) for value in system_rhs), matvec(a, gmres_x1))
+    require(all(close(gmres_x1[index], (-2 / 5, -2 / 5, 0)[index]) for index in range(3)), "GMRES x1 changed")
+    require(all(close(gmres_r1[index], (1 / 5, -3 / 5, 0)[index]) for index in range(3)), "GMRES r1 changed")
+    require(close(vector_norm(gmres_r1) ** 2, Fraction(2, 5)), "GMRES first residual norm changed")
+    aq2 = matvec(a, q2)
+    h12 = dot(q1, aq2)
+    after_q1 = subtract(aq2, scale(h12, q1))
+    h22 = dot(q2, after_q1)
+    final_arnoldi_residual = subtract(after_q1, scale(h22, q2))
+    require(close(h12, -1) and close(h22, 0), "GMRES second Hessenberg column changed")
+    require(vector_norm(final_arnoldi_residual) < 2e-15, "GMRES happy breakdown changed")
+    identity_minus_a = tuple(
+        tuple((Fraction(1) if row == column else Fraction(0)) - a[row][column] for column in range(3))
+        for row in range(3)
+    )
+    polynomial_residual = matvec(matmul(identity_minus_a, identity_minus_a), system_rhs)
+    require(polynomial_residual == (Fraction(0),) * 3, "GMRES Jordan polynomial no longer annihilates r0")
+
+    # NUM-19: exact CSR representation, SpMV, and metadata-aware byte counts.
+    nonzeros = tuple(
+        (row, column, a[row][column])
+        for row in range(3)
+        for column in range(3)
+        if a[row][column] != 0
+    )
+    require(nonzeros == ((0, 0, Fraction(1)), (0, 1, Fraction(2)), (1, 1, Fraction(1)), (2, 2, Fraction(3))), "sparse COO changed")
+    indptr = [0]
+    indices = []
+    data = []
+    for row in range(3):
+        for current_row, column, value in nonzeros:
+            if current_row == row:
+                indices.append(column)
+                data.append(value)
+        indptr.append(len(indices))
+    require(indptr == [0, 2, 3, 4], "CSR indptr changed")
+    require(indices == [0, 1, 1, 2] and data == [Fraction(1), Fraction(2), Fraction(1), Fraction(3)], "CSR payload changed")
+    require(matvec(a, x_target) == system_rhs, "CSR SpMV teaching output changed")
+    csr_bytes = (8 + 4) * len(data) + 4 * (3 + 1)
+    dense_bytes = 8 * 3 * 3
+    gram_nonzeros = sum(value != 0 for row in gram for value in row)
+    gram_csr_bytes = (8 + 4) * gram_nonzeros + 4 * (3 + 1)
+    require((csr_bytes, dense_bytes, gram_nonzeros, gram_csr_bytes) == (64, 72, 5, 76), "sparse byte model changed")
+
+    # NUM-20: fixed Rademacher realization, exact complement, and oversampling split.
+    omega0 = (
+        (Fraction(1), Fraction(1)),
+        (Fraction(1), Fraction(-1)),
+        (Fraction(1), Fraction(1)),
+    )
+    sample0 = matmul(a, omega0)
+    expected_sample0 = (
+        (Fraction(3), Fraction(-1)),
+        (Fraction(1), Fraction(-1)),
+        (Fraction(3), Fraction(3)),
+    )
+    require(sample0 == expected_sample0, "randomized range sample changed")
+    normal = (3 / math.sqrt(46), -6 / math.sqrt(46), -1 / math.sqrt(46))
+    require(all(close(dot(normal, tuple(float(value) for value in column)), 0) for column in transpose(sample0)), "range complement changed")
+    transpose_action = matvec(transpose(tuple(tuple(float(value) for value in row) for row in a)), normal)
+    range_error = vector_norm(transpose_action)
+    require(close(range_error, 3 / math.sqrt(23)), "randomized range residual changed")
+    optimal_rank2_error = math.sqrt(2) - 1
+    require(range_error > optimal_rank2_error, "fixed p=0 sketch unexpectedly beats the optimal rank-2 bound")
+    omega1 = (
+        (Fraction(1), Fraction(1), Fraction(1)),
+        (Fraction(1), Fraction(-1), Fraction(1)),
+        (Fraction(1), Fraction(1), Fraction(-1)),
+    )
+    determinant_omega1 = (
+        omega1[0][0] * (omega1[1][1] * omega1[2][2] - omega1[1][2] * omega1[2][1])
+        - omega1[0][1] * (omega1[1][0] * omega1[2][2] - omega1[1][2] * omega1[2][0])
+        + omega1[0][2] * (omega1[1][0] * omega1[2][1] - omega1[1][1] * omega1[2][0])
+    )
+    require(determinant_omega1 == 4, "oversampled Rademacher realization lost full rank")
+    tail_ratio = 3 - 2 * math.sqrt(2)
+    require(close(tail_ratio**3, 0.005050633883346584, atol=2e-16), "randomized power-step ratio changed")
+
+    print(
+        "PASS large-scale model: two-step CG/GMRES, CSR 64 vs dense 72 vs Gram CSR 76 bytes, "
+        "range error 3/sqrt(23) and oversampled full capture"
+    )
+
+
 def audit_markdown_integrity() -> None:
     all_files = [path for path in ROOT.rglob("*") if path.is_file()]
     file_index: dict[str, list[Path]] = {}
@@ -805,9 +983,10 @@ def main() -> None:
     audit_exact_qr_model()
     audit_exact_spectral_model()
     audit_exact_iterative_model()
+    audit_exact_large_scale_model()
     audit_markdown_integrity()
     audit_figures(args.run_figures)
-    print("NUM-01—16 material regression: PASS; learning state: draft/not-attempted")
+    print("NUM-01—20 material regression: PASS; learning state: draft/not-attempted")
 
 
 if __name__ == "__main__":

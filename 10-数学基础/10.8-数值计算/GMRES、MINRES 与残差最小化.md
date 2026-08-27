@@ -9,7 +9,7 @@ sources: ["[[S-1986-Saad-Schultz-GMRES]]", "[[S-2011-Choi-Paige-Saunders-MINRESQ
 exercises: ["[[习题 - GMRES、MINRES 与残差最小化]]"]
 solutions: ["[[解答 - GMRES、MINRES 与残差最小化]]"]
 created: 2026-08-15
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # GMRES、MINRES 与残差最小化
@@ -51,6 +51,224 @@ updated: 2026-08-23
 > 5. GMRES$(m)$ 重启节省哪些资源，又可能丢失哪些信息？
 > 6. MINRES 为什么可以处理对称不定系统，而 CG 可能曲率 breakdown？
 > 7. Left/right/flexible 预条件后，为什么仍必须重算原问题 true residual？
+
+> [!note] 课程位置
+> NUM-17 的 CG 依赖 SPD 能量几何；本章把方法选择拆成两条：一般非对称系统用 Arnoldi–GMRES 最小化二范数 residual，对称但不定系统用 Lanczos–MINRES 保留短递推。下一章会解释这些方法为何只有在稀疏 matvec、正交化、通信与存储都可承受时才真正“大规模”。
+
+> [!tip] 建议两遍阅读
+> 第一遍只在统一非正规 $A$ 上手算两步 GMRES，并用对称增广矩阵说明 MINRES 的合法位置；第二遍再进入 Givens 在线更新、GMRES$(m)$、left/right/flexible 预条件、奇异系统与 residual gap。第一遍始终问“当前最小化的是哪个方程、哪个范数下的 residual”。
+
+## 本章的推导问题链
+
+1. 为什么删除对称正定性后，CG 的能量最优与三项递推不再合法？
+2. Arnoldi 怎样把 $x_0+\mathcal K_k$ 中的高维 residual 压缩成小型最小二乘？
+3. 第一步 GMRES 的最优系数怎样由一维投影得到？
+4. 为什么第二步出现 happy breakdown，并与 Jordan block 的二次最小多项式一致？
+5. 完整 GMRES residual 单调不增，为何解误差仍未必单调？
+6. 如何从同一个 $A$ 构造对称不定增广系统，使 MINRES 合法而 CG 非法？
+7. Restart 与预条件为何会改变搜索信息或 residual 语义，却不能改变最终 true residual 合同？
+
+## 贯穿算例：同一个非正规 block 上的两步 GMRES
+
+取
+
+$$
+A=
+\begin{bmatrix}
+1&2&0\\
+0&1&0\\
+0&0&3
+\end{bmatrix},
+\qquad
+x_\dagger=(1,-1,0)^T,
+\qquad
+b=Ax_\dagger=(-1,-1,0)^T,
+\qquad
+x_0=0.
+$$
+
+$A$ 非对称，且被右端激活的左上 block 是特征值为 $1$ 的二阶 Jordan block。CG 没有合法的 SPD 能量解释；GMRES 则只要求一般方阵和可计算 matvec。
+
+### 符号与对象账本
+
+| 对象 | 定义 | 本例中的值/作用 |
+|---|---|---|
+| $r_0$ | $b-Ax_0$ | $(-1,-1,0)^T$，范数 $\beta=\sqrt2$ |
+| $Q_k$ | Arnoldi 标准正交基 | 张成 $\mathcal K_k(A,r_0)$ |
+| $\bar H_k$ | $AQ_k=Q_{k+1}\bar H_k$ | 小型上 Hessenberg |
+| $y_k$ | 小最小二乘变量 | 决定 $x_k=x_0+Q_ky_k$ |
+| $r_k$ | $b-Ax_k$ | GMRES 直接最小化其二范数 |
+| $p_k$ | residual polynomial | $r_k=p_k(A)r_0$，$p_k(0)=1$ |
+| $\mathcal J$ | $\left[\begin{smallmatrix}0&A\\A^T&0\end{smallmatrix}\right]$ | MINRES 的对称不定伴随例 |
+| GMRES$(m)$ | 每 $m$ 步重启 | 限制存储但丢弃部分多项式历史 |
+
+### 第一步：Arnoldi 给出一个一维最小二乘
+
+归一化初始 residual：
+
+$$
+q_1=\frac1{\sqrt2}(-1,-1,0)^T.
+$$
+
+计算
+
+$$
+Aq_1=\frac1{\sqrt2}(-3,-1,0)^T,
+\qquad
+h_{11}=q_1^TAq_1=2.
+$$
+
+正交余量为
+
+$$
+w=Aq_1-2q_1
+=\frac1{\sqrt2}(-1,1,0)^T,
+$$
+
+所以
+
+$$
+h_{21}=1,
+\qquad
+q_2=\frac1{\sqrt2}(-1,1,0)^T,
+\qquad
+\bar H_1=\begin{bmatrix}2\\1\end{bmatrix}.
+$$
+
+GMRES 的高维问题变成
+
+$$
+\min_y
+\left\|
+\begin{bmatrix}\sqrt2\\0\end{bmatrix}
+-
+\begin{bmatrix}2\\1\end{bmatrix}y
+\right\|_2.
+$$
+
+一维投影给出
+
+$$
+y_1=\frac{2\sqrt2}{5},
+\qquad
+x_1=q_1y_1=\left(-\frac25,-\frac25,0\right)^T.
+$$
+
+回到原方程重算：
+
+$$
+r_1=b-Ax_1=\left(\frac15,-\frac35,0\right)^T,
+\qquad
+\|r_1\|_2=\sqrt{\frac25}.
+$$
+
+它确实满足 $r_1\perp A\mathcal K_1$，但不要求 $r_1\perp\mathcal K_1$；后者是 FOM/CG 风格的另一种投影条件。
+
+### 第二步：happy breakdown 与二次最小多项式
+
+继续作用
+
+$$
+Aq_2=\frac1{\sqrt2}(1,1,0)^T.
+$$
+
+投影系数为
+
+$$
+h_{12}=q_1^TAq_2=-1,
+\qquad
+h_{22}=q_2^TAq_2=0,
+$$
+
+且余量为零，所以
+
+$$
+h_{32}=0,
+\qquad
+H_2=
+\begin{bmatrix}
+2&-1\\
+1&0
+\end{bmatrix}.
+$$
+
+解
+
+$$
+H_2y=\sqrt2e_1
+$$
+
+得到 $y=(0,-\sqrt2)^T$，从而
+
+$$
+x_2=Q_2y=(1,-1,0)^T=x_\dagger,
+\qquad
+r_2=0.
+$$
+
+在被激活的 Jordan block 上，最小多项式为 $(t-1)^2$，故合法 residual polynomial
+
+$$
+p_2(t)=(1-t)^2,
+\qquad
+p_2(0)=1
+$$
+
+满足 $p_2(A)r_0=0$。重复根很重要：只在 eigenvalue $1$ 放一个根不能消掉 Jordan 导数项。
+
+### 第三步：MINRES 不是“更省内存的 GMRES”
+
+由同一个 $A$ 构造对称增广矩阵
+
+$$
+\mathcal J=
+\begin{bmatrix}
+0&A\\
+A^T&0
+\end{bmatrix}.
+$$
+
+$\mathcal J=\mathcal J^T$，其 eigenvalues 是
+
+$$
+\pm3,
+\qquad
+\pm(1+\sqrt2),
+\qquad
+\pm(\sqrt2-1).
+$$
+
+因此它对称但不定：CG 的正曲率分母没有保证，MINRES 却可用 Lanczos 三对角关系最小化二范数 residual。MINRES 的短递推来自**对称性**，不是来自随意截断 Arnoldi 历史。
+
+### 第四步：单调 residual、重启与真误差必须分开
+
+本例完整 GMRES 有
+
+$$
+\|r_0\|_2=\sqrt2,
+\qquad
+\|r_1\|_2=\sqrt{2/5},
+\qquad
+\|r_2\|_2=0.
+$$
+
+完整 GMRES 的搜索空间逐步嵌套，所以 residual norm 单调不增；GMRES$(m)$ 重启后不再保留整条嵌套历史，可能停滞。即使 residual 单调，非正规 $A$ 上的解误差仍受 $A^{-1}$ 与方向影响，不能由同一曲线替代。
+
+### 核心公式七问：$\min_y\|\beta e_1-\bar H_ky\|_2$
+
+1. **从哪来？** 写 $x=x_0+Q_ky$，再用 Arnoldi 关系和 $r_0=\beta q_1$ 把高维 residual 提到 $Q_{k+1}$ 坐标。
+2. **为什么范数相等？** $Q_{k+1}$ 列正交，左乘它不改变小坐标向量的二范数。
+3. **为何不用小正规方程？** $\bar H_k^T\bar H_k$ 会平方小问题条件数；Givens/QR 可在线稳定维护最小二乘。
+4. **GMRES 最小化什么？** 只在当前 $x_0+\mathcal K_k$ 中最小化当前坐标定义的 residual，不声称全空间解误差最小。
+5. **MINRES 为什么更短？** 对称性使 Arnoldi 退化为 Lanczos 三对角；不定性不妨碍 residual 最小化，却会破坏 CG 能量几何。
+6. **Restart 丢什么？** 丢掉长 Krylov 基与已经形成的高次 residual polynomial 信息；省内存和正交化的代价可能是停滞。
+7. **AI 中如何验收？** 隐式层、KKT 与非对称 Jacobian 求解要报告 true residual、重启周期、预条件方向、matvec/归约和下游梯度误差。
+
+> [!warning] 教学模型边界
+> 右端特意只激活二阶 Jordan block，因此完整 GMRES 两步精确终止；一般右端还会激活第三个 eigenvalue，需要第三步。六维增广矩阵只用于说明 MINRES 的结构边界，不表示所有奇异值问题都应改写成增广系统求解。
+
+> [!success] 第一遍停靠线
+> 应能算出 $\bar H_1=(2,1)^T$、$y_1=2\sqrt2/5$、$r_1=(1,-3,0)^T/5$ 与 $H_2=\left[\begin{smallmatrix}2&-1\\1&0\end{smallmatrix}\right]$，解释 $p_2(t)=(1-t)^2$ 为何消掉 Jordan block，并说清 $\mathcal J$ 对称不定时 MINRES 合法而 CG 不合法。
 
 ## 二、先按矩阵结构选方法
 

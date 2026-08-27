@@ -28,7 +28,7 @@ updated: 2026-08-27
 | B | NUM-05—08 | reduction 内核 → pivoted solve → mixed-precision refinement → 稳定正交变换 | $\varepsilon=10^{-8}$；$A_\varepsilon$、近似逆 $B$ 与 $PA_\varepsilon$ 的 QR | `regression-passed` | `draft / not-attempted` |
 | C | NUM-09—12 | 最小二乘 → 极端特征对 → 稠密 QR 流水线 → 对称 Krylov | $A=[\Sigma Q^\mathsf T;0]$、$G=A^\mathsf TA$ 与共享三对角 $T$ | `regression-passed` | `draft / not-attempted` |
 | D | NUM-13—16 | 一般 Krylov → SVD → 定常迭代 → 预条件 | 非正规 $A$、$H=A^TA$、$B=I-A/2$ 与 $S=D^{-1/2}HD^{-1/2}$ | `regression-passed` | `draft / not-attempted` |
-| E | NUM-17—20 | CG → GMRES/MINRES → 稀疏系统 → 随机低秩 | 能量误差、重启、fill/负载、概率证书 | `pending` | `draft / not-attempted` |
+| E | NUM-17—20 | CG → GMRES/MINRES → 稀疏系统 → 随机低秩 | $H=A^TA$ 的 CG、$A$ 的 GMRES/CSR 与 $Q=\operatorname{orth}(A\Omega)$ | `regression-passed` | `draft / not-attempted` |
 | CUM | NUM-CUM | 卷级口试—闭卷—实验—延迟重做 | 20 节随机回链与三实验组合门 | `composed` | `not-attempted` |
 
 ### 第一波的单一模型链
@@ -167,6 +167,43 @@ $$
 2. **第二遍（约 360 分钟）：**进入非正规伪谱、双对角化/Golub–Kahan、Jordan 收敛证明、Petrov–Galerkin 与 left/right/symmetric preconditioning，补齐每个结论的结构条件；
 3. **第三遍（约 210 分钟）：**改变 Jordan 耦合、Richardson 步长、初始向量与预条件强度，先预测 Ritz residual、奇异方向比例、暂态峰值和总成本，再运行实验；
 4. **验收：**依次复现[[实验 - Arnoldi 非正规性、重正交与重启]]、[[实验 - SVD 双对角化、谱范数与随机子空间]]、[[实验 - 定常迭代的频率阻尼、谱半径与暂态]]与[[实验 - 预条件的谱重塑、PCG 收敛与成本权衡]]；最后在不看正文时解释 eigenvalue、singular value、iteration eigenvalue 与 generalized eigenvalue 为何不能混用。
+
+### 第五波的单一模型链
+
+第五波沿用第四波的非正规稀疏算子，但把右端限制到左上 Jordan block：
+
+$$
+A=
+\begin{bmatrix}
+1&2&0\\
+0&1&0\\
+0&0&3
+\end{bmatrix},
+\qquad
+x_\dagger=(1,-1,0)^T,
+\qquad
+b=Ax_\dagger=(-1,-1,0)^T.
+$$
+
+这一次不再只解释算法结构，而是把它们落实为完整求解、存储与概率证书：
+
+1. **NUM-17：SPD 能量求解。** 对 $H=A^TA$、$g=Hx_\dagger=(-1,-3,0)^T$，两轮 CG 精确得到 $\alpha_0=5/29$、$\beta_1=4/841$、$\alpha_1=29/5$；$r_1^Tr_0=0$、$p_0^THp_1=0$，能量误差平方按 $2\to8/29\to0$ 闭合；
+2. **NUM-18：一般/不定最小残差。** 对原 $A$，两步 Arnoldi 产生 $\bar H_1=(2,1)^T$ 与 $H_2=\left[\begin{smallmatrix}2&-1\\1&0\end{smallmatrix}\right]$，GMRES residual 按 $\sqrt2\to\sqrt{2/5}\to0$；$p_2(t)=(1-t)^2$ 显式消去二阶 Jordan block。对称增广 $\mathcal J=\left[\begin{smallmatrix}0&A\\A^T&0\end{smallmatrix}\right]$ 则用 $\pm\sigma_i$ 说明 MINRES 合法、CG 非法；
+3. **NUM-19：稀疏不是免费午餐。** $A$ 的 CSR 为 `indptr=[0,2,3,4]`、`indices=[0,1,1,2]`、`data=[1,2,1,3]`。float64/int32 下它占 $64$ bytes，dense 占 $72$ bytes；形成五个非零元的 Gram 后，CSR 反增至 $76$ bytes；
+4. **NUM-20：随机值域必须带证书。** 固定两列 Rademacher sketch 后，$Y=A\Omega$ 的单位补方向为 $w=(3,-6,-1)^T/\sqrt{46}$，range error 精确为 $3/\sqrt{23}\approx0.6255$，高于最佳 rank-$2$ 误差 $\sqrt2-1$。在三维中用 $p=1$ 捕获完整值域后，range error 为零，但最终 rank-$2$ 截断误差仍为 $\sqrt2-1$。
+
+> [!success] 第五波材料证书
+> [[numerical_teaching_contract_audit.py]]已扩展到 NUM-01—20：20/20 教学合同、571 条作用域内 Wiki 链接、20 个完整图文单元、五波精确数值断言和 20 幅正式 SVG 哈希全部通过。第五波的 `regression-passed` 只认证 CG/GMRES 算例、稀疏字节模型、随机值域证书和正文结构；学习状态仍为 `draft / not-attempted`。
+
+### 如何学习第五波，而不是只比较算法名称
+
+1. **第一遍（约 210 分钟）：**手算两步 CG、两步 GMRES、一次 CSR SpMV/字节核算和一次固定 random sketch，逐篇写下输出对象与最终证书；
+2. **第二遍（约 420 分钟）：**进入 CG/PCG 收敛界、GMRES restart/MINRES-QLP、ordering/fill/负载与 randomized tail bound/后验概率常数；
+3. **第三遍（约 240 分钟）：**改变右端以激活第三谱方向，改变 restart 长度、dtype/index width、$p/q$ 与 seed，先预测再实验，并用 time-to-true-residual 或独立 validation 统一验收；
+4. **验收：**依次复现[[实验 - CG 能量几何、谱聚集与递推残差漂移]]、[[实验 - GMRES 重启、MINRES 结构与残差最小化]]、[[实验 - 稀疏存储、消元填充与并行负载]]与[[实验 - 随机 SVD 的过采样、幂步与概率证书]]，再进入卷级闭卷、口试、实验组合和延迟重做。
+
+> [!success] 全卷静态迁移结论
+> NUM-01—20 的材料已全部达到同一教学合同并进入确定性回归；这表示课程正文、图像、链接、统一算例与审计脚本已完备，不表示读者已掌握。`CUM` 继续保持 `composed / not-attempted`，只有独立完成卷级题—解分离、实验复现和延迟重做后，学习状态才可升级。
 
 ## 核心区别
 
