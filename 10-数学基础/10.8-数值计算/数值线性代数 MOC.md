@@ -25,7 +25,7 @@ updated: 2026-08-27
 | 波次 | 节点 | 主线 | 统一算例/证书 | 材料状态 | 学习状态 |
 |---|---|---|---|---|---|
 | A | NUM-01—04 | 浮点网格 → 误差对象 → 算法稳定性 → 条件感知停止 | $\tau=10^{-4}$；$\mathbb F_{10,4}$ 与 $A_\tau=\operatorname{diag}(1,\tau)$ | `regression-passed` | `draft / not-attempted` |
-| B | NUM-05—08 | reduction 内核 → pivoted solve → mixed-precision refinement → 稳定正交变换 | 动态范围、增长因子、三精度合同、Householder/Givens | `pending` | `draft / not-attempted` |
+| B | NUM-05—08 | reduction 内核 → pivoted solve → mixed-precision refinement → 稳定正交变换 | $\varepsilon=10^{-8}$；$A_\varepsilon$、近似逆 $B$ 与 $PA_\varepsilon$ 的 QR | `regression-passed` | `draft / not-attempted` |
 | C | NUM-09—12 | 最小二乘 → 极端特征对 → 稠密 QR 流水线 → 对称 Krylov | 条件数平方、谱隙/移位、Hessenberg deflation、Ritz residual | `pending` | `draft / not-attempted` |
 | D | NUM-13—16 | 一般 Krylov → SVD → 定常迭代 → 预条件 | Arnoldi 正交性、双侧残差、谱半径/暂态、广义谱重塑 | `pending` | `draft / not-attempted` |
 | E | NUM-17—20 | CG → GMRES/MINRES → 稀疏系统 → 随机低秩 | 能量误差、重启、fill/负载、概率证书 | `pending` | `draft / not-attempted` |
@@ -49,6 +49,36 @@ updated: 2026-08-27
 2. **第二遍（约 180 分钟）：**回到 IEEE 754、一般 backward error、stability 定义和 Jacobian/condition estimator；
 3. **第三遍（约 120 分钟）：**无提示重建 $\tau$ 模型，故意更换 norm、精度和任务预算，判断哪些结论保留；
 4. **验收：**完成节点习题并复现[[实验 - 条件估计、误差传播与可信停止]]；未提交独立作答前，四篇始终保持 `draft`。
+
+### 第二波的单一模型链
+
+第二波固定
+
+$$
+\varepsilon=10^{-8},
+\qquad
+A_\varepsilon=
+\begin{bmatrix}\varepsilon&1\\1&1\end{bmatrix},
+\qquad
+b=(1,2)^\mathsf T,
+$$
+
+让同一个 small pivot 依次变成内核动态范围、消元失败、可修正误差和稳定 QR：
+
+1. **NUM-05：归约内核。** $(\varepsilon^{-1},1,-\varepsilon^{-1})$ 的精确和为 $1$，左结合在 $\mathbb F_{10,4}$ 中给 $0$，先消去或 Neumaier compensation 给 $1$；$\kappa_{\rm sum}=200000001$；
+2. **NUM-06：选主元求解。** $\kappa_\infty(A_\varepsilon)=4/(1-\varepsilon)\approx4$，问题本身条件良好；无主元 multiplier 为 $10^8$，输出相对前向误差为 $1$，partial pivoting 把 multiplier 降为 $10^{-8}$，前向误差降为 $10^{-8}$，BERR 为 $\varepsilon/(2+\varepsilon)$；
+3. **NUM-07：迭代改进。** 以 $B=(3/4)A_\varepsilon^{-1}$ 表示近似 inverse action，得到 $I-BA_\varepsilon=(1/4)I$ 与相对误差 $1/4,1/16,1/64,1/256$；加入 residual error 后显式出现 $e_{k+1}=e_k/4-B\xi_k$ 的停滞地板；
+4. **NUM-08：稳定正交变换。** 对 $PA_\varepsilon=\left[\begin{smallmatrix}1&1\\\varepsilon&1\end{smallmatrix}\right]$ 构造 $c=1/r,s=\varepsilon/r$ 的 Givens QR，并用 $v_{\rm safe}=(1+r,\varepsilon)^T$ 对比会让 $1-r$ 消去的 Householder 符号。
+
+> [!success] 第二波材料证书
+> [[numerical_teaching_contract_audit.py]]已扩展到 NUM-01—08：8/8 教学合同、231 条作用域内 Wiki 链接、8 个完整图文单元、两波精确数值断言和 8 幅正式 SVG 哈希全部通过。第二波的 `regression-passed` 只认证材料与模型，不认证读者已经掌握 direct methods。
+
+### 如何学习第二波，而不是背算法名
+
+1. **第一遍（约 120 分钟）：**只手算 reduction、两种 LU 路径、四步 refinement 比例与一次 Givens/Householder；
+2. **第二遍（约 240 分钟）：**进入 $\gamma_n$、pivot growth、三精度条件、blocked QR 与 BERR/FERR；
+3. **第三遍（约 150 分钟）：**把 $\varepsilon$ 改为 $10^{-4}$ 或换成 binary16 scale，预先判断哪些舍入结论改变、哪些代数恒等式保留；
+4. **验收：**依次复现[[实验 - 稳定归约、点积消去与混合精度累加]]、[[实验 - 选主元、后向误差与迭代改进]]与[[实验 - Householder 符号、Givens 缩放与 QR 正交性]]，并解释何时必须触发 precision/factorization fallback。
 
 ## 核心区别
 

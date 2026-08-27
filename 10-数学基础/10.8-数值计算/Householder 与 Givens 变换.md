@@ -96,6 +96,186 @@ $$
 
 [[标准正交基与 Gram-Schmidt]]回答“怎样从投影逐列理解 QR”；本章回答“在有限精度和真实硬件上，怎样用正交变换可靠地实现 QR”。
 
+> [!note] 课程位置
+> NUM-06 用 row pivoting 控制一般消元 multiplier，NUM-07 用近似逆修正解；本章展示另一条核心路线：用 condition number 为 $1$ 的正交变换制造零。它直接通向稳定 least squares、Hessenberg/QR eigensolver、Lanczos/Arnoldi 正交化和 randomized SVD。
+
+> [!tip] 建议两遍阅读
+> 第一遍只对下面的 $PA_\varepsilon$ 手算一个 Givens rotation 和一个 Householder reflector，确认二者怎样消掉同一个元素；第二遍再学习 reflector 序列、compact WY、blocked QR、稀疏更新、complex phase 与可微 QR。若还分不清“参数生成稳定”和“正交矩阵本身条件数为 1”，先停在本节。
+
+## 本章的推导问题链
+
+1. 为什么先用 NUM-06 的置换把首列改成 $(1,\varepsilon)^T$？
+2. 怎样从长度保持条件推导 Givens 的 $c,s,r$？
+3. 同一个二维变换作用到整张矩阵后，为什么自然产生上三角 $R$？
+4. Householder 怎样用一个向量 $v$ 表示反射，并一次消掉整段尾部？
+5. 两个数学等价的目标符号为何会给出完全不同的浮点参数质量？
+6. 为什么 QR 必须分别验收 reconstruction residual 和 orthogonality defect？
+
+## 贯穿算例：对 pivoted matrix 做一次完整 QR
+
+NUM-06 的行交换给出
+
+$$
+\widetilde A
+:=PA_\varepsilon
+=\begin{bmatrix}1&1\\\varepsilon&1\end{bmatrix},
+\qquad \varepsilon=10^{-8}.
+$$
+
+其第一列
+
+$$
+a=\begin{bmatrix}1\\\varepsilon\end{bmatrix}
+$$
+
+几乎平行于 $e_1$，这使安全/不安全 Householder 符号的差异可以直接看见。
+
+### 符号与对象账本
+
+| 对象 | 定义 | 本例中的值/作用 |
+|---|---|---|
+| $r$ | $\|a\|_2$ | $\sqrt{1+\varepsilon^2}$ |
+| $c,s$ | Givens 参数 | $c=1/r,\ s=\varepsilon/r$ |
+| $G$ | 左乘的二维旋转 | $\begin{bmatrix}c&s\\-s&c\end{bmatrix}$ |
+| $v_{\rm safe}$ | 安全 Householder 向量 | $a+r e_1=(1+r,\varepsilon)^T$ |
+| $v_{\rm bad}$ | 易消去的等价向量 | $a-r e_1=(1-r,\varepsilon)^T$ |
+| $Q,R$ | QR 因子 | $Q=G^T,\ R=G\widetilde A$ |
+| $\eta_{\rm rec}$ | reconstruction residual | $\|\widetilde A-QR\|/\|\widetilde A\|$ |
+| $\eta_{\rm orth}$ | orthogonality defect | $\|I-Q^TQ\|$ |
+
+### 第一步：从长度保持推导 Givens 参数
+
+取
+
+$$
+G=\begin{bmatrix}c&s\\-s&c\end{bmatrix},
+\qquad c^2+s^2=1.
+$$
+
+要求 $Ga=(r,0)^T$，即
+
+$$
+c+s\varepsilon=r,
+\qquad
+-s+c\varepsilon=0.
+$$
+
+解得
+
+$$
+r=\sqrt{1+\varepsilon^2},
+\qquad
+c=\frac1r,
+\qquad
+s=\frac{\varepsilon}{r}.
+$$
+
+实际实现应使用 scaled `hypot(1,\varepsilon)`，而不是先形成可能 overflow/underflow 的 $1+\varepsilon^2$。
+
+### 第二步：同一个旋转必须作用到所有列
+
+$$
+R=G\widetilde A
+=\begin{bmatrix}
+r & (1+\varepsilon)/r\\
+0 & (1-\varepsilon)/r
+\end{bmatrix}.
+$$
+
+令 $Q=G^T$，便有
+
+$$
+\widetilde A=QR,
+\qquad
+Q^TQ=GG^T=I.
+$$
+
+对角乘积也闭合：
+
+$$
+r\cdot\frac{1-\varepsilon}{r}=1-\varepsilon
+=\det(\widetilde A).
+$$
+
+这个等式是手算中的独立一致性检查，不替代浮点 residual。
+
+### 第三步：Householder 用反射完成同一消元
+
+选择目标 $\alpha=-r$，令
+
+$$
+v_{\rm safe}=a-\alpha e_1=a+r e_1
+=\begin{bmatrix}1+r\\\varepsilon\end{bmatrix},
+\qquad
+H=I-2\frac{v_{\rm safe}v_{\rm safe}^T}{v_{\rm safe}^Tv_{\rm safe}}.
+$$
+
+则
+
+$$
+Ha=-r e_1.
+$$
+
+因为 $1+r\approx2$，$v_{\rm safe}$ 的主分量没有消去。对稠密 $m\times n$ 矩阵，同一个 reflector 会一次消掉当前列的整个尾部，而非只消一个元素。
+
+### 第四步：数学等价的另一符号为什么危险
+
+若选择目标 $+r$，则
+
+$$
+v_{\rm bad}=a-r e_1
+=\begin{bmatrix}1-r\\\varepsilon\end{bmatrix}.
+$$
+
+利用
+
+$$
+1-r
+=\frac{1-r^2}{1+r}
+=-\frac{\varepsilon^2}{1+r}
+\approx-\frac{\varepsilon^2}{2},
+$$
+
+可见第一分量来自两个近 $1$ 数的相减。在 $\mathbb F_{10,4}$ 中，$r=\sqrt{1+10^{-16}}$ 会舍入为 $1$，直接让 $1-r$ 变成 $0$；随后构造出的 reflector 可能只翻转第二坐标，却没有把它可靠消成零。稳定符号的本质是让 $v$ 远离零并保留方向信息。
+
+### 第五步：两个证书回答不同问题
+
+精确算术中，本例有
+
+$$
+\eta_{\rm rec}=0,
+\qquad
+\eta_{\rm orth}=0.
+$$
+
+浮点实现必须分别计算
+
+$$
+\eta_{\rm rec}
+=\frac{\|\widetilde A-\widehat Q\widehat R\|}{\|\widetilde A\|},
+\qquad
+\eta_{\rm orth}
+=\|I-\widehat Q^T\widehat Q\|.
+$$
+
+小 reconstruction residual 只说明乘积接近；若 $\widehat Q$ 不正交，least squares 几何、Krylov 基和后续谱计算仍可能失效。
+
+### 核心公式七问：$H=I-2vv^T/(v^Tv)$
+
+1. **它是什么？** 关于法向量 $v$ 所定义超平面的正交反射。
+2. **为什么对称？** $vv^T$ 对称，所以 $H^T=H$。
+3. **为什么正交？** 令 $P_v=vv^T/(v^Tv)$，由 $P_v^2=P_v$ 得 $(I-2P_v)^2=I$。
+4. **为什么能消尾部？** 选 $v=x-\alpha e_1$ 且 $|\alpha|=\|x\|$，便有 $Hx=\alpha e_1$。
+5. **符号为何属于算法？** 两个 $\alpha$ 在实数中都合法，但一个会让 $x_1-\alpha$ 灾难性消去。
+6. **为何不显式形成 $H$？** 应以 rank-one update $y\leftarrow y-\tau v(v^Ty)$ 应用，节省存储和计算。
+7. **AI 中如何用？** 稳定 QR、orthogonal parameterization、Muon/流式正交化和 randomized range finder 都依赖安全 reflector/rotation kernel。
+
+> [!warning] 教学模型边界
+> 本例只有一个二维消元，不包含多列 reflector 的应用顺序、blocked WY、稀疏 fill 或 communication cost；exact $Q,R$ 也不代表浮点实现自动稳定。Complex QR 还需 phase convention，可微 QR 还需满秩与固定 diagonal sign。
+
+> [!success] 第一遍停靠线
+> 应能从 $a=(1,\varepsilon)^T$ 推出 $r,c,s$，算出完整 $R$，验证 $Q^TQ=I$ 与对角乘积 $1-\varepsilon$；还要能用 $1-r=-\varepsilon^2/(1+r)$ 解释为什么 $v_{\rm bad}$ 丢信息，而 $v_{\rm safe}=(1+r,\varepsilon)^T$ 不会。
+
 ## 一、为什么稳定 QR 从“变换行”而不是“修补列”开始
 
 Gaussian 消元使用一般初等行变换制造零；QR 希望制造零的同时不扭曲二范数。理想操作应满足：
