@@ -26,7 +26,7 @@ updated: 2026-08-27
 | B | OPT-05—08 | 曲率上下界 → 梯度下降 → 加速/动量 → 随机梯度 | `regression-passed` |
 | C | OPT-09—12 | 自适应度量 → 二阶模型 → 投影方向 → KKT | `regression-passed` |
 | D | OPT-13—16 | 强对偶 → proximal → mirror/Fisher → 非凸地形 | `regression-passed` |
-| CUM | OPT-CUM | 卷级路线—口试—题解—实验—回归 | `pending` |
+| CUM | OPT-CUM | 卷级路线—口试—题解—实验—回归 | `regression-passed` |
 
 第一波统一使用“把越界目标投回三角形”的问题：
 
@@ -235,6 +235,77 @@ $$
 > [!success] 第四波停靠线
 > 不看正文，能从 Lagrangian 重建 dual function 并算出 gap $5/32\to0$；从 scalar subgradient 推出 soft threshold 并手算第一步；从 entropy ratio 得到 $x^*$，再区分 Fisher direction $15/64$ 与 finite displacement $16/64$；最后分类 factorization 的 saddle/minimum manifold 并重建 GD factors。还必须能说明 dual gap、prox mapping、natural direction、Hessian eigenvalue 与 generalization 不是同一种证据。
 
+## 零、怎样从零真正学完本卷
+
+> [!important] 卷级学习合同
+> 当前完成的是**材料迁移与回归**，不是学习者的自动掌握。推荐路径不是从第一页顺读到最后一页就结束，而是“对象与直觉 → 推导、条件与反例 → 无提示输出、闭卷与复现”三遍循环。任何一遍出现断点，都回到最早说不清对象或条件的位置，不用背后续算法名掩盖断点。
+
+### 0.1 进入门：先确认四项最低前置
+
+开始 OPT-01 前，只要求能够：
+
+1. 用集合、函数与量词写出 domain、constraint 和 argmin；
+2. 计算二维向量内积、矩阵乘法、eigenvalue 与正定性；
+3. 求一元/多元函数的 gradient、Hessian，并读懂 Taylor quadratic；
+4. 理解随机变量、条件期望、方差与小批量平均。
+
+若四项中有两项不能无提示完成，先回到[[函数、映射、关系与等价类]]、[[向量空间]]、[[梯度、方向导数与最陡方向]]、[[Hessian、二阶微分与曲率]]和[[协方差、相关性与条件期望]]的第一遍停靠线。初次进入不要求先掌握 Fenchel 对偶、测度论、Krylov 或微分几何；这些工具在卷内按问题需要引入。
+
+### 0.2 四波不是四套孤立公式，而是一族逐步改造的模型
+
+下表中的箭头表示**教学模型被改造后，新问题和新证书才出现**。它不声称四波始终优化完全相同的 objective；每当线性项、constraint、regularizer、geometry 或 parameterization 改变，都必须重新写 problem contract。
+
+| 波次 | 核心模型 | 本波新增对象 | 第一次能够回答的问题 | 最常见越界 |
+|---|---|---|---|---|
+| A：问题—凸几何—Fenchel | $\min_{x\in C}\frac12\|x-a\|^2$，$C=\operatorname{conv}\{0,e_1,e_2\}$ | feasible set、projection residual、Jensen gap、support/conjugate | 一个点为什么是 global optimizer，几何与对偶证书怎样同值 | 把输出集合凸误读成深网参数问题凸 |
+| B：曲率—一阶动力学—噪声 | $\frac12x^T\operatorname{diag}(1,4)x$ | $\mu,L,\kappa$、GD factors、momentum roots、noise covariance/floor | 曲率怎样控制稳定步长、收缩与随机平台 | 把 spectral radius、function rate 与 wall-clock 混成一种快 |
+| C：线性项—约束—KKT | $\frac12x^THx-b^Tx$ 加三角形 $C$ | metric、Newton/GN/secant、tangent/normal、KKT residual | unconstrained step 为什么不可行，怎样形成约束最优性证书 | 把 adaptive state、Hessian、projection residual 与 KKT residual 混名 |
+| D：dual—prox—mirror—nonconvex | 同一 convex core 的 dual/composite/simplex 视图，再令 $w=ab$ | lower bound、prox mapping、Bregman/Fisher、saddle/symmetry | 结构和 geometry 怎样改变一步，凸 predictor 为什么可有非凸参数地形 | 从小 gradient/raw sharpness 跳到 global optimum 或 generalization |
+
+模型链可压缩为：
+
+~~~mermaid
+flowchart LR
+    A["A 投影问题\n对象·凸集·Fenchel"] --> B["B 谱二次型\n曲率·GD·HB·SGD"]
+    B --> C["C 带线性项与约束\nmetric·Newton·projection·KKT"]
+    C --> D1["D1 structured convex views\ndual·prox·mirror·Fisher"]
+    D1 --> D2["D2 nonconvex factorization\nsaddle·PL·symmetry"]
+~~~
+
+### 0.3 三遍学习与每遍退出条件
+
+| 遍次 | 怎样读 | 必须产生的无提示输出 | 达不到时怎样回退 |
+|---|---|---|---|
+| 第一遍：对象与直觉 | 只读每章课程位置、问题链、贯穿算例、图和第一遍停靠线 | 能画四波模型链；每波说清变量、objective/constraint、证书和一个不能推出的结论 | 回到本节模型账本，重写最早混淆的对象，不继续背 optimizer |
+| 第二遍：推导与边界 | 逐式完成公式七问、正文证明、最小反例与节点题 | 不看正文重建每波 3—5 条核心等式，给每个 theorem 写问题类、norm、oracle、步长和结论对象 | 回到第一个无依据等号或遗漏条件，订正过程与原答分开保存 |
+| 第三遍：整合与验收 | 冻结笔记，完成卷级口试、210 分钟闭卷题、解析校准、随机实验轨和延迟迁移 | 口试重建四波；闭卷各能力区过线；独立生成累计图和 hash；48 小时与 14 天复做 | 按错题第一个断点回链具体小节，不以看懂解答或脚本成功冒充通过 |
+
+### 0.4 五层证据与状态语义
+
+1. **复述证据**：能用自己的话说清问题和对象，但不等于会推导；
+2. **推导证据**：能无提示完成公式、条件和反例，但不等于会跨章选工具；
+3. **闭卷证据**：[[阶段测验 - 优化与凸分析（10.7）|OPT-CUM-01]] 的 15 分钟口试、总分和五个能力区同时过线；
+4. **复现证据**：[[实验 - 优化与凸分析累计复现门]]的四波解析校准、随机指定轨、参数干预和边界说明通过；
+5. **保持与迁移证据**：48 小时重做，14 天后换 constraint、condition number、regularizer 或 parameterization 仍能独立完成。
+
+`regression-passed` 只说明仓库材料通过静态与确定性计算回归；16 篇正文的 `draft` 继续表示尚无个人学习证据。只有真实答卷、口试记录、实验记录和延迟复做存在，才按[[数学基础完整课程地图与掌握标准]]升级学习状态。
+
+### 0.5 卷级总图：三个“优化看起来正常”的信号为何仍会失败
+
+先遮住图注回答：objective 不再变化、PL ratio 有正下界、raw Hessian 很尖分别是什么对象？它们各自能支持什么，又遗漏哪一层结论？
+
+![[00-知识库管理/_assets/plots/optimization/plot-optimization-cumulative-gate-v2.svg|920]]
+
+> [!figure] 图 10.7-CUM｜优化卷级复现门
+> A 对比 strict saddle 上的精确不动轨与微扰逃逸；B 并列 nonconvex Hessian 与全局 PL gradient domination；C 在 predictor/loss 不变的 scale orbit 上改变 raw Hessian sharpness。来源：独立计算与绘制；生成脚本：[[plot_optimization_cumulative_gate.py]]；默认参数无随机数；正式 SVG SHA-256 为 `6df184dc5a75e125d1cf2f1595574007538cdd1321efa8690dcf14cf0e6230b6`。
+
+**怎样读图。** A 先区分 exact stationary initialization 与 $10^{-3}$ perturbation；B 同时读 PL ratio 和 Hessian sign，理解“非凸”与“gradient domination”可并存；C 沿同一 $ab=1$ orbit 比较 $s=1$ 与 $s=0.1,10$，确认改变的是 parameter coordinates 下的 curvature，而不是 predictor 或 loss。
+
+**适用边界。** A 是一个二维 double-well 的固定步长 recurrence；B 是一个具有解析 PL 下界的一维函数；C 是标量 factorization 的 scale symmetry。三图不证明一般深网满足 PL、不保证任意噪声有限时间逃离鞍点，也不说明所有 normalization-aware sharpness 指标都无意义，更不提供 generalization 证书。
+
+> [!success] 卷级第一遍停靠线
+> 合上笔记后，应能在 15 分钟内画出 A—D 四波模型链，分别写出 projection/Fenchel、spectral contraction/noise floor、KKT/dual/prox 与 mirror/Fisher/saddle 的一个证书；再解释累计图三条轨道为何不能合并成“神经网络容易优化且一定泛化”的结论。做不到时，暂不进入闭卷题。
+
 ## 一、范围与边界
 
 ### 本卷包含
@@ -413,11 +484,13 @@ OPT-01—16 已形成完整教学卷：16 篇正文、16 幅机制图、240 道 
 
 | 组件 | 已组成内容 | 通过条件 |
 |---|---|---|
+| 15 分钟无提示口试 | 四波模型链、证书对象、几何分层与 AI claim ladder | 20 分中至少 14，四项均不得低于 2 分 |
 | `OPT-CUM-01` | 210 分钟、100 分，A—E 五区覆盖 OPT-01—16 | 总分至少 80 且各区达线，三道主证明不得为 0 |
 | 独立详解 | 定义、手算、证明、反例和研究合同逐项评分 | 正式作答前不得打开；错题必须回链节点 |
-| 计算门 | strict-saddle escape、nonconvex PL、scale-sharpness 三轨 | canonical hash、随机手算轨、参数干预与 48 小时重建均通过 |
+| 计算门 | 四波解析校准 + strict-saddle、nonconvex PL、scale-sharpness 三轨 | canonical hash、随机手算轨、参数干预与 48 小时重建均通过 |
+| 静态/计算回归 | [[optimization_cumulative_contract_audit.py]] | 16/16 合同、14/14 题解、卷级链接/图文、解析与 SVG hash 全部通过 |
 
-截至 2026-08-27，OPT-01—16 已按当前初学者教学合同完成四波静态迁移并通过精确计算与图像回归；正文学习状态保持 `draft`。下一施工点为 OPT-CUM：把四波统一模型账本、三遍学习路线、无提示口试、独立题解与累计计算实验闭合为卷级学习证书。
+截至 2026-08-27，OPT-01—16 与 OPT-CUM 已按当前初学者教学合同完成材料迁移并通过静态、解析、实验图与 hash 回归；正文学习状态保持 `draft`，个人卷级状态保持 **composed / not-attempted**。下一章转入 10.8 数值计算；优化卷只有在真实口试、闭卷、复现与延迟迁移证据存在后才升级学习状态。
 
 ### 2026-08-23 图像标准化进度
 
