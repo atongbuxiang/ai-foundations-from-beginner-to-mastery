@@ -24,7 +24,7 @@ updated: 2026-08-27
 |---|---|---|---|
 | A | INFO-01—04 | 自信息/熵 → 联合/条件链 → cross-entropy/KL → 互信息 | `regression-passed` |
 | B | INFO-05—06 | 数据处理/充分性 → 无损编码/典型集/AEP | `regression-passed` |
-| C | INFO-07—10 | 最大熵/指数族 → ELBO → 散度几何 → 率失真/IB/MDL | `pending` |
+| C | INFO-07—10 | 最大熵/指数族 → ELBO → 散度几何 → 率失真/IB/MDL | `regression-passed` |
 | CUM | INFO-CUM | 卷级路线—口试—题解—实验—回归 | `pending` |
 
 第一波固定使用二元对称信道：
@@ -119,6 +119,73 @@ $$
 
 > [!tip] 第二波停靠线
 > 完成 INFO-05—06 后，应能验证级联 BSC 的 $1/4\star1/4=3/8$，用 MI chain rule 算出 $0.143156$ bit 的损失；从 Bernoulli likelihood 说明 $K_m$ 对翻转率充分；再从 $K_m/m\to1/4$ 推出 AEP、典型集三性质与 source-coding 阈值。还必须解释：**统计充分性允许丢掉与参数无关的顺序，而无损编码完整序列不能丢掉这些顺序。**
+
+第三波把“已知分布”改成“先建模、再推断”。只知道两个 binary states 的 moments
+
+$$
+\mathbb E[Z_1]=\mathbb E[Z_2]=\frac14
+$$
+
+时，finite-support MaxEnt 给
+
+$$
+p^*(z_1,z_2)
+=\exp\{\eta_1z_1+\eta_2z_2-A(\eta)\},
+\qquad
+\eta_1=\eta_2=-\ln3,
+$$
+
+以及独立 joint probabilities $(9,3,3,1)/16$。取其中一个 coordinate 作 latent prior，并通过独立四分之一翻转噪声产生 observation：
+
+$$
+Z\sim\operatorname{Bernoulli}\!\left(\frac14\right),
+\qquad
+X=Z\oplus E,
+\qquad
+E\sim\operatorname{Bernoulli}\!\left(\frac14\right).
+$$
+
+当 $X=1$ 时，evidence 与 posterior 为
+
+$$
+p(X=1)=\frac38,
+\qquad
+p(Z=1\mid X=1)=\frac12.
+$$
+
+这一模型在四章中承担不同任务：
+
+| 节点 | 固定对象 | 核心可复算结果 | 不可混淆的边界 |
+|---|---|---|---|
+| INFO-07 | 支持、counting measure、moments | $\eta=-\ln3$，MaxEnt joint 独立 | MaxEnt 解不证明真实独立 |
+| INFO-08 | generative $p$、observation $X=1$、variational $q$ | $\ln p(x)=-0.980829=-1.111641+0.130812$ | gap 为零不证明模型正确 |
+| INFO-09 | $P=\operatorname{Ber}(1/2)$、$Q=\operatorname{Ber}(1/4)$ | forward/reverse KL 为 $0.143841/0.130812$ nats，TV 与单位距 $W_1$ 为 $1/4$ | ground metric、方向与 estimator 分层 |
+| INFO-10 | source $Z$、input $X$、representation $T$、code protocol | $R(1/8)=0.267714$ bit；$I(Z;X)=0.143156$ bit；naive latent/evidence code 为 $1.622556/0.954434$ bits | RD、IB 与 MDL 目标不可互换 |
+
+INFO-10 的 erasure representation 进一步给
+
+$$
+I(X;T)=0.954434\alpha,
+\qquad
+I(Z;T)=0.143156\alpha,
+$$
+
+说明“压缩输入”必须和“保留任务信息”同时报告。朴素先编码 latent 再编码 observation 的平均长度为
+
+$$
+H(Z)+H(X\mid Z)=1.622556\ \text{bits},
+$$
+
+反而长于直接 evidence/marginal code 的
+
+$$
+H(X)=0.954434\ \text{bit};
+$$
+
+多出的 $H(Z\mid X)=0.668122$ bit 只有在满足相应 posterior 与 bits-back 编码协议时才可能回收。
+
+> [!tip] 第三波停靠线
+> 完成 INFO-07—10 后，应能从 moment constraints 解出 $\eta=-\ln3$；枚举 evidence/posterior 并闭合 ELBO gap；对同一 posterior pair 算正反 KL、TV 与 $W_1$；最后分别写出 rate–distortion、IB 和 MDL 的随机对象、优化变量及不可移植边界。尤其要能解释：**“最大熵”“变分下界”“分布距离”和“压缩正则”不是四个可替换的 loss 名称。**
 
 ## 一、范围与边界
 
@@ -281,7 +348,7 @@ flowchart LR
 
 INFO-01—10 已完成正文、十幅机制图、150 道 A–E 题与独立详解，10.6 达到 **10/10 正文覆盖**；这表示深层内容已经存在，不表示初学者入口已全部迁移，更不表示学习者已经掌握。
 
-截至 2026-08-27，INFO-01—06 已完成当前教学合同并通过静态回归，第一、二波材料状态均为 `regression-passed`；INFO-07—10 与 INFO-CUM 仍待按同一标准迁移。下一施工波为 INFO-07—10：从“约束下选分布”进入 maximum entropy/exponential family，再由 latent-variable evidence 进入 ELBO，比较不同散度几何，最后在 rate–distortion、information bottleneck 与 MDL 汇合。
+截至 2026-08-27，INFO-01—10 已完成当前教学合同并通过静态回归，三波正文材料状态均为 `regression-passed`；学习状态继续保持 `draft`。下一施工对象是 INFO-CUM：补齐从零进入门、三波模型账本、无提示口试、题解映射、累计实验与正式回归脚本，再判断 10.6 是否可以在材料层面整体收口。
 
 INFO-08 的[[实验 - ELBO 恒等式、变分族限制与摊销缺口]]已经分离 approximation 与 amortization gap；[[实验 - 信息论累计复现门]]已把 Bernoulli–Hamming 前沿、task/nuisance bottleneck 与 prequential code 组成三轨计算验收。`INFO-CUM-01` 的[[阶段测验 - 信息论与统计学习接口（10.6）]]和[[阶段测验解答 - 信息论与统计学习接口（10.6）]]也已成稿，但当前仍为 `composed / not-attempted`。所有正文节点继续保持 `draft`，直到出现真实闭卷、订正与延迟复做证据。
 

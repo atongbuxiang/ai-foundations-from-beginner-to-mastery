@@ -7,7 +7,7 @@ prerequisites: ["[[交叉熵与 KL 散度]]", "[[Bayesian 推断与后验预测]
 related: ["[[信息论与统计学习接口 MOC]]", "[[最大熵原理与指数族]]", "[[MCMC 与随机模拟诊断]]", "[[率失真、信息瓶颈与最小描述长度]]"]
 sources: ["Blei-Kucukelbir-McAuliffe-2017-Variational-Inference", "Wainwright-Jordan-2008-Exponential-Families-Variational-Inference", "Kingma-Welling-2014-AEVB", "Rezende-Mohamed-Wierstra-2014-Stochastic-Backprop", "Burda-Grosse-Salakhutdinov-2016-IWAE", "Su-5253-VAE-I", "Su-5343-VAE-Bayesian", "Su-5383-VAE-Reparameterization", "Su-8791-VAE-Density"]
 created: 2026-08-19
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # 变分推断、ELBO 与证据分解
@@ -101,6 +101,152 @@ $$
 
 > [!warning] encoder 不是“真实后验的另一个名字”
 > $q_\phi$ 是近似对象。只有 gap 为零时，它才与 model posterior almost everywhere 相等；而 model posterior 本身也只相对于假设的 $p_\theta$，不等于自然界的绝对真相。
+
+## 进入正文前：先在可枚举模型里亲手看见 ELBO gap
+
+> [!info] 课程位置
+> [[最大熵原理与指数族]]构造了 Bernoulli$(1/4)$ 先验。本章把其中一个 bit 当作不可见 latent variable $Z$，只观察它经过噪声后的 $X$。小模型的 evidence 与 posterior 都能精确枚举，因此可以把 ELBO、reverse-KL gap 和 variational-family 限制逐项校准；下一章[[f-散度、Bregman 散度与概率度量]]会继续比较同一 posterior 与近似分布，但不再假装所有差异量具有同一几何。
+
+> [!tip] 建议两遍阅读
+> - **第一遍：** 固定一个观测 $X=1$，先算 joint、evidence、posterior，再让 $q_r(Z)=\operatorname{Bernoulli}(r)$ 分别取 $r=1/4$ 与 $1/2$，核对 ELBO identity。
+> - **第二遍：** 再读 Jensen 支撑条件、mean-field update、VAE likelihood、重参数化、family/amortization/optimization gap、posterior collapse 与 IWAE。
+
+> [!question] 本章的推导问题链
+> 1. prior、likelihood、joint、evidence、posterior 与 variational $q$ 分别由谁定义？
+> 2. 为什么 evidence 的求和/积分会让 posterior 难算，而 joint 往往仍可评价？
+> 3. 在 log evidence 中乘除 $q$ 后，Jensen 怎样产生 ELBO？
+> 4. 为什么 evidence 与 ELBO 的差不是模糊误差，而是精确的 $D(q\Vert p(z\mid x))$？
+> 5. variational family 包含真实 posterior、优化器找到它、Monte Carlo 精确这三件事为何必须分层？
+
+### 贯穿算例：稀有潜变量经过四分之一翻转噪声
+
+使用自然对数。生成模型为
+
+$$
+Z\sim\operatorname{Bernoulli}\!\left(\frac14\right),
+\qquad
+E\sim\operatorname{Bernoulli}\!\left(\frac14\right),
+\qquad
+X=Z\oplus E,
+\qquad
+E\perp Z.
+$$
+
+其中 $Z$ 是 latent bit，$X$ 是 observation。对观测 $X=1$，两条可能的 latent paths 为：
+
+| $Z$ | prior $p(z)$ | likelihood $p(X=1\mid z)$ | joint $p(X=1,z)$ |
+|---:|---:|---:|---:|
+| $0$ | $3/4$ | $1/4$ | $3/16$ |
+| $1$ | $1/4$ | $3/4$ | $3/16$ |
+
+先边缘化 latent variable：
+
+$$
+p(X=1)=\frac3{16}+\frac3{16}=\frac38,
+\qquad
+\ln p(X=1)=\ln\frac38\approx-0.980829.
+$$
+
+再用 Bayes 归一化：
+
+$$
+p(Z=1\mid X=1)
+=\frac{3/16}{3/8}
+=\frac12.
+$$
+
+所以本次观测把 latent success probability 从 prior 的 $1/4$ 更新到了 posterior 的 $1/2$。
+
+### 用一个 Bernoulli variational family 做精确校准
+
+令
+
+$$
+q_r(Z)=\operatorname{Bernoulli}(r).
+$$
+
+对当前观测，ELBO identity 可以直接写成
+
+$$
+\boxed{
+\mathcal L(r;X=1)
+=\ln\frac38
+-D_{\mathrm{KL}}
+\left(\operatorname{Ber}(r)\middle\Vert\operatorname{Ber}\!\left(\frac12\right)\right).}
+$$
+
+先故意取 $q$ 等于 prior，即 $r=1/4$。此时 reconstruction–prior-KL 形式中的 prior KL 为零，而
+
+$$
+\begin{aligned}
+\mathcal L\!\left(\frac14;X=1\right)
+&=\frac14\ln\frac34+\frac34\ln\frac14\\
+&\approx-1.111641.
+\end{aligned}
+$$
+
+gap 是
+
+$$
+\begin{aligned}
+D_{\mathrm{KL}}
+\left(\operatorname{Ber}\!\left(\frac14\right)
+\middle\Vert
+\operatorname{Ber}\!\left(\frac12\right)\right)
+&=\frac14\ln\frac12+\frac34\ln\frac32\\
+&\approx0.130812.
+\end{aligned}
+$$
+
+数值恰好闭合：
+
+$$
+-0.980829
+=-1.111641+0.130812.
+$$
+
+若取 $r=1/2$，$q_r$ 正好等于 model posterior，KL gap 为零，ELBO 等于 log evidence。这个例子把三种情形分开：
+
+- **family 能表示：** Bernoulli family 包含 $r=1/2$；
+- **optimization 找得到：** 仍需算法真正把 $r$ 优化到 $1/2$；
+- **amortization 做得到：** 若用共享网络 $r_\phi(x)$ 服务许多 $x$，它还需对每个输入输出正确参数。
+
+> [!note] 符号与对象账本
+> | 符号 | 类型 | 在本例中的角色 |
+> |---|---|---|
+> | $Z$ | latent random variable | 未直接观察的稀有状态 |
+> | $X$ | observed random variable | latent bit 经过噪声后的观测 |
+> | $p(z)$ | prior | 看见 $X$ 之前模型对 $Z$ 的分布 |
+> | $p(x\mid z)$ | likelihood | 给定 latent state 后产生观测的机制 |
+> | $p(x)$ | evidence | 对 $Z$ 边缘化后的观测概率 |
+> | $p(z\mid x)$ | model posterior | 由同一个生成模型和 Bayes 唯一决定 |
+> | $q_r(z)$ | variational distribution | 为可计算推断而人为选择的近似 |
+> | $\mathcal L(r;x)$ | 标量下界 | joint log-density 减 variational log-density 的 $q$-expectation |
+
+> [!analysis] Evidence–ELBO 恒等式的公式七问
+> | 问题 | 回答 |
+> |---|---|
+> | 核心公式是什么？ | $\ln p_\theta(x)=\mathcal L(q,\theta;x)+D_{\mathrm{KL}}(q(z)\Vert p_\theta(z\mid x))$。 |
+> | ELBO 怎样定义？ | $\mathcal L=\mathbb E_q[\ln p_\theta(x,z)-\ln q(z)]$。 |
+> | 为什么是下界？ | 余项是 nonnegative reverse KL；等价地，也可由 log 的 Jensen inequality 推出。 |
+> | 等号何时成立？ | $q(z)=p_\theta(z\mid x)$ almost everywhere，且相关支撑/期望定义良好。 |
+> | 为什么方向是 $D(q\Vert p)$？ | 恒等式在 tractable $q$ 下取 expectation；posterior 出现在分母，代数展开自然得到 reverse KL。 |
+> | gap 为零证明了什么？ | 只证明 $q$ 匹配当前假设模型的 posterior；不证明生成模型正确、预测可靠或样本质量好。 |
+> | AI 中在哪里调用？ | VAE、mean-field VI、Bayesian neural approximation 与 latent-variable learning；每次都要另报 family、amortization、optimization 与 Monte Carlo error。 |
+
+> [!analysis] Reconstruction–prior-KL 形式的公式七问
+> | 问题 | 回答 |
+> |---|---|
+> | 核心公式是什么？ | $\mathcal L=\mathbb E_q\ln p_\theta(x\mid z)-D_{\mathrm{KL}}(q(z\mid x)\Vert p_\theta(z))$。 |
+> | 第一项是什么？ | 模型 likelihood 的期望 log score；它由 Bernoulli、Gaussian、categorical 等 observation model 决定，不是无条件的 MSE。 |
+> | 第二项是什么？ | 每个 observation 的 approximate posterior 到 prior 的 KL，方向和归约尺度不能省略。 |
+> | 两项为何能相加？ | 把 joint 分解为 $p(z)p(x\mid z)$，再把 $\mathbb E_q[\ln p(z)-\ln q(z)]$ 识别为负 KL。 |
+> | 本例 $q=prior$ 时发生什么？ | prior KL 为零，但 posterior gap 不为零；“正则项为零”不表示推断正确。 |
+> | 修改系数会怎样？ | $\beta$-VAE、free bits 或 KL annealing 通常不再是原模型的标准 ELBO，必须重新命名目标。 |
+> | 怎样验收实现？ | 枚举小模型核对 evidence；再分别检查 per-sample/batch reduction、support、随机估计方差与 held-out evaluation。 |
+
+> [!success] 第一遍停靠线
+> 若你能从两条 latent paths 得到 evidence $3/8$ 与 posterior $1/2$，再分别用 $r=1/4$ 和 $r=1/2$ 得到“有 gap/零 gap”两种 ELBO，并复算 $-0.980829=-1.111641+0.130812$，就已掌握第一遍主干。VAE、重参数化、IWAE 和四类 inference gap 留到第二遍。
 
 ## 一、Jensen 推导 ELBO
 

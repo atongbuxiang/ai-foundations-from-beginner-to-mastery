@@ -7,7 +7,7 @@ prerequisites: ["[[交叉熵与 KL 散度]]", "[[互信息与依赖性]]", "[[�
 related: ["[[信息论与统计学习接口 MOC]]", "[[变分推断、ELBO 与证据分解]]", "[[多元高斯分布]]", "[[正定核、RKHS 与表示定理]]", "[[率失真、信息瓶颈与最小描述长度]]"]
 sources: ["Csiszar-1967-f-Divergence", "Nowozin-Cseke-Tomioka-2016-fGAN", "Bregman-1967-Relaxation-Method", "Sriperumbudur-et-al-2010-Kernel-Metrics", "Gretton-et-al-2012-MMD", "Arjovsky-Chintala-Bottou-2017-WGAN", "Su-6016-fGAN", "Su-6280-Wasserstein-WGAN", "Su-8244-WGAN-Distance", "Su-8512-Gaussian-Distances"]
 created: 2026-08-19
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # f-散度、Bregman 散度与概率度量
@@ -72,6 +72,156 @@ updated: 2026-08-23
 **适用边界（图没有证明什么）。** 三栏不是互斥分类：TV 同时是 $f$-divergence 与 IPM，KL 在适当坐标中也可呈 Bregman 结构；示意 coupling 不一定是最优 coupling；metric 仍需 symmetry 与 triangle inequality。任何 empirical critic/MMD/Sinkhorn 数值都不是无误差的 population quantity，也未必等于实际优化 surrogate。
 
 同一个对象可能属于多个视角：TV 同时是 $f$-divergence 和 IPM；KL 是 $f$-divergence，也是在 probability simplex/指数族坐标上的 Bregman divergence。家族分类描述结构，不是互斥标签。
+
+## 进入正文前：同一对分布，为什么会得到不同的“差异”
+
+> [!info] 课程位置
+> [[变分推断、ELBO 与证据分解]]得到 exact posterior $P=\operatorname{Bernoulli}(1/2)$ 与近似 $Q=\operatorname{Bernoulli}(1/4)$，并只使用了 reverse KL $D(Q\Vert P)$。本章保持这对分布不变，逐项比较方向、支撑、概率坐标与 ground geometry，回答“该用哪个差异量”；下一章[[率失真、信息瓶颈与最小描述长度]]会把这些差异放回具体的压缩、任务和编码目标。
+
+> [!tip] 建议两遍阅读
+> - **第一遍：** 在二点空间上手算 forward/reverse KL、TV、$W_1$ 与 negative-entropy Bregman gap，观察它们为什么数值和语义不同。
+> - **第二遍：** 再读一般 $f$-divergence、data processing、Fenchel critic、指数族双坐标、MMD、OT topology 与 finite-sample estimator。
+
+> [!question] 本章的推导问题链
+> 1. divergence、pseudometric 与 metric 分别要求哪些公理？
+> 2. 交换 KL 参数为什么会交换 expectation 权重和 support penalty？
+> 3. Bregman divergence 为什么必须先选 convex potential 和坐标？
+> 4. $W_1$ 为什么需要样本空间的 ground cost，而 KL/TV 不读取两点之间的物理距离？
+> 5. population distance、经验 estimator、variational lower bound 与训练 surrogate 为什么是四层对象？
+
+### 贯穿算例：exact posterior 与“仍停在 prior”的近似
+
+沿用上一章对观测 $X=1$ 的结果：
+
+$$
+P=\operatorname{Bernoulli}\!\left(\frac12\right)
+\quad\text{是 exact posterior},
+$$
+
+$$
+Q=\operatorname{Bernoulli}\!\left(\frac14\right)
+\quad\text{是未更新的 variational approximation}.
+$$
+
+二点概率表为
+
+| state $z$ | $P(z)$ | $Q(z)$ | $P(z)-Q(z)$ |
+|---:|---:|---:|---:|
+| $0$ | $1/2$ | $3/4$ | $-1/4$ |
+| $1$ | $1/2$ | $1/4$ | $+1/4$ |
+
+#### 方向一：forward KL
+
+$$
+\begin{aligned}
+D_{\mathrm{KL}}(P\Vert Q)
+&=\frac12\ln\frac{1/2}{3/4}
++\frac12\ln\frac{1/2}{1/4}\\
+&=\frac12\ln\frac43\\
+&\approx0.143841\ \text{nat}.
+\end{aligned}
+$$
+
+#### 方向二：reverse KL
+
+$$
+\begin{aligned}
+D_{\mathrm{KL}}(Q\Vert P)
+&=\frac34\ln\frac{3/4}{1/2}
++\frac14\ln\frac{1/4}{1/2}\\
+&=\frac34\ln\frac32+\frac14\ln\frac12\\
+&\approx0.130812\ \text{nat}.
+\end{aligned}
+$$
+
+第二个数正是上一章的 ELBO gap。两个 KL 都合法，却回答不同的平均问题；不能因为数值接近就交换方向。
+
+#### TV 与 Wasserstein：同为 $1/4$，原因不同
+
+total variation 是
+
+$$
+\operatorname{TV}(P,Q)
+=\frac12\sum_z|P(z)-Q(z)|
+=\frac14.
+$$
+
+若给状态空间规定 ground distance $d(0,1)=1$，需要把 $1/4$ probability mass 从 $0$ 移到 $1$，因此
+
+$$
+W_1(P,Q)=\frac14.
+$$
+
+这里两个数相同只是二点单位距离的巧合。若把 ground distance 改为 $d(0,1)=c$，则
+
+$$
+W_1(P,Q)=\frac c4,
+$$
+
+而 TV 与两个 KL 完全不变。Wasserstein 读取“质量搬多远”，TV 只读取“总共搬多少质量”。
+
+#### KL 还是一个 Bregman gap
+
+在 Bernoulli mean parameter $u\in(0,1)$ 上定义 negative entropy
+
+$$
+F(u)=u\ln u+(1-u)\ln(1-u).
+$$
+
+则
+
+$$
+B_F(p,q)
+=F(p)-F(q)-F'(q)(p-q)
+=D_{\mathrm{KL}}(\operatorname{Ber}(p)\Vert\operatorname{Ber}(q)).
+$$
+
+取 $p=1/2,q=1/4$，Bregman gap 就是 forward KL 的 $0.143841$ nat。这里依赖的是 probability-coordinate potential；换坐标或换 potential 会得到另一种几何。
+
+### 支撑失配校准：有限与无穷不是同一故障等级
+
+再把近似改成 $Q_0=\delta_0$，即坚称 $Z=1$ 不可能。则
+
+$$
+D(P\Vert Q_0)=+\infty,
+\qquad
+D(Q_0\Vert P)=\ln2,
+$$
+
+同时
+
+$$
+\operatorname{TV}(P,Q_0)=\frac12,
+\qquad
+W_1(P,Q_0)=\frac12
+$$
+
+（仍取单位 ground distance）。forward KL 对漏掉 $P$ 的真实 support 给无穷惩罚；reverse KL、TV 与 $W_1$ 仍有限。哪一种反应“正确”取决于任务：编码真实数据时漏 support 是灾难；允许几何移动的生成任务可能更关心搬运距离。
+
+> [!note] 符号与对象账本
+> | 符号 | 类型 | 在本例中的角色 |
+> |---|---|---|
+> | $P$ | target distribution | exact posterior Ber$(1/2)$ |
+> | $Q$ | approximation | 未更新的 Ber$(1/4)$ 近似 |
+> | $D_f(P\Vert Q)$ | divergence | 由 density ratio 与 convex generator 定义 |
+> | $B_F(p,q)$ | coordinate divergence | convex potential 在 $q$ 处切线的剩余量 |
+> | $\operatorname{TV}(P,Q)$ | metric/IPM | bounded events/tests 能区分的最大概率差 |
+> | $W_1(P,Q)$ | metric/OT cost | 在指定 ground metric 下搬运概率质量的最小成本 |
+> | $\widehat D$ | estimator | 从有限样本或受限 critic 得到的近似数，不自动等于 population quantity |
+
+> [!analysis] 分布差异量的公式七问
+> | 问题 | 回答 |
+> |---|---|
+> | 比较的概率对象是什么？ | 先声明是 joint、conditional、posterior、empirical measure 还是模型输出；非概率 score 不能直接代入。 |
+> | 方向由谁加权？ | KL/$f$-divergence 要写清 Radon–Nikodym ratio 和 expectation 的分布；交换参数通常改变数值与 support penalty。 |
+> | 是否需要坐标或 ground geometry？ | Bregman 需要 vector coordinates 与 potential；Wasserstein 需要 ground cost；普通 KL/TV 不读取点间距离。 |
+> | 它是 divergence 还是 metric？ | 检查 symmetry 与 triangle inequality；KL/Bregman 通常不是 metric，TV/$W_p$ 是适当空间上的 metric。 |
+> | 支撑不重叠时怎样反应？ | forward KL 可无穷，JS/TV/Hellinger 有界，Wasserstein 仍按搬运距离变化。 |
+> | 实际算到的是什么？ | empirical plug-in、neural critic lower bound、MMD U-statistic 或 Sinkhorn regularized cost 都带估计/近似误差。 |
+> | AI 中怎样选？ | VI 看 posterior expectation 可算性，GAN 看支撑与 critic，domain shift 看任务函数类，几何生成看 ground cost，两样本检验看 sample complexity。 |
+
+> [!success] 第一遍停靠线
+> 若你能对同一 $P=\operatorname{Ber}(1/2),Q=\operatorname{Ber}(1/4)$ 复算正反 KL、TV 与 $W_1$，解释 $W_1=c/4$ 为何随 ground distance 改变，并用 $Q_0=\delta_0$ 说明 forward KL 无穷而其他量仍有限，就已掌握第一遍主干。Fenchel critic、MMD、Gaussian 与 topology 留到第二遍。
 
 ## 一、divergence 与 metric 不是同义词
 
