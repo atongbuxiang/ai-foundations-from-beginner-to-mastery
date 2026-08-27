@@ -7,13 +7,72 @@ prerequisites: ["[[线性代数完整学习路线与掌握标准]]", "[[多元�
 related: ["[[数学基础 MOC]]", "[[数学基础完整课程地图与掌握标准]]", "[[练习与测验 MOC]]", "[[推导与实验 MOC]]"]
 sources: ["Boyd-Vandenberghe-2004-Convex-Optimization", "MIT-6.253-Convex-Analysis-Optimization", "Stanford-EE364A-Convex-Optimization", "Stanford-EE364B-Convex-Optimization-II", "Rockafellar-1970-Convex-Analysis", "Nesterov-2018-Lectures-Convex-Optimization", "Bubeck-2015-Convex-Optimization", "Beck-2017-First-Order-Methods", "Parikh-Boyd-2014-Proximal-Algorithms", "Beck-Teboulle-2009-FISTA", "Amari-1998-Natural-Gradient", "Martens-2020-Natural-Gradient", "Nocedal-Wright-2006-Numerical-Optimization", "Bertsekas-1999-Nonlinear-Programming", "Liu-Nocedal-1989-LBFGS", "Polyak-1964-Heavy-Ball", "Robbins-Monro-1951-Stochastic-Approximation", "Bottou-Curtis-Nocedal-2018-Large-Scale-ML", "Duchi-Hazan-Singer-2011-AdaGrad", "Kingma-Ba-2015-Adam", "Reddi-et-al-2018-AMSGrad", "Loshchilov-Hutter-2019-AdamW", "Lee-et-al-2016-Gradient-Descent-Saddles", "Jin-et-al-2017-Escape-Saddles", "Karimi-et-al-2016-PL", "Ge-Jin-Zheng-2017-Low-Rank-Landscape", "Laurent-von-Brecht-2018-Deep-Linear", "Dinh-et-al-2017-Sharpness", "Garipov-et-al-2018-Mode-Connectivity", "Su-9070-LogSumExp-Inequalities", "Su-5655-SGD-Momentum", "Su-7521-Sampling-Optimization", "Su-7787-Finite-Learning-Rate", "Su-10588-Hessian-Adaptive-LR", "Su-3552-Maximum-Entropy", "Su-10592-Muon", "Su-11215-Manifold-Steepest"]
 created: 2026-08-19
-updated: 2026-08-19
+updated: 2026-08-27
 ---
 
 # 优化与凸分析 MOC
 
 > [!abstract] 本卷的核心任务
 > 把“训练模型”还原成一个定义完整、几何清楚、证书可检查的数学问题：谁是变量，什么固定，哪些点可行，什么叫解，算法输出距离所需解概念还有多远。凸分析提供少数真正强大的结构——局部最优等于全局最优、分离超平面、对偶下界和可计算的一阶方法；深度学习通常非凸，因此本卷既学习这些定理，也学习它们在哪一层仍可调用、在哪一层已经失效。
+
+### 当前教学迁移路线
+
+> [!important] 材料状态与学习状态分开
+> 下表检查“课程位置—两遍路线—问题链—统一算例—对象账本—公式七问—停靠线”是否补齐。`regression-passed` 只表示仓库材料和确定性计算通过回归；16 篇正文 frontmatter 的 `draft` 与卷末 `not-attempted` 仍表示尚无个人口试、闭卷、订正和延迟复做证据。
+
+| 波次 | ID 范围 | 认知主线 | 材料迁移 |
+|---|---|---|---|
+| A | OPT-01—04 | 问题契约 → 凸集/投影/分离 → 凸函数/Jensen → 次梯度/共轭/Fenchel | `regression-passed` |
+| B | OPT-05—08 | 曲率上下界 → 梯度下降 → 加速/动量 → 随机梯度 | `pending` |
+| C | OPT-09—12 | 自适应度量 → 二阶模型 → 投影方向 → KKT | `pending` |
+| D | OPT-13—16 | 强对偶 → proximal → mirror/Fisher → 非凸地形 | `pending` |
+| CUM | OPT-CUM | 卷级路线—口试—题解—实验—回归 | `pending` |
+
+第一波统一使用“把越界目标投回三角形”的问题：
+
+$$
+a=\begin{pmatrix}1\\1\end{pmatrix},
+\qquad
+C=\operatorname{conv}\{0,e_1,e_2\},
+\qquad
+\min_{x\in C}\frac12\|x-a\|_2^2.
+$$
+
+OPT-01 先把 $a$、decision variable $x$、objective $q$、feasible set $C$、optimal value $p^*$ 与 solution set $X^*$ 分层，并用平方和下界得到
+
+$$
+x^*=\begin{pmatrix}1/2\\1/2\end{pmatrix},
+\qquad
+p^*=\frac14.
+$$
+
+OPT-02 把残差 $r=a-x^*=(1/2,1/2)^T$ 同时读作 projection residual、normal 与 separating-hyperplane 法向，并逐点闭合
+
+$$
+\langle r,z-x^*\rangle\le0,
+\qquad \forall z\in C.
+$$
+
+OPT-03 用精确恒等式
+
+$$
+\theta q(x)+(1-\theta)q(y)
+-q(\theta x+(1-\theta)y)
+=\frac{\theta(1-\theta)}2\|x-y\|^2
+$$
+
+贯通 chord、Jensen、一阶支撑和 Hessian；OPT-04 再把同一个 $r$ 写成 $r\in N_C(x^*)=\partial\delta_C(x^*)$，手算
+
+$$
+\delta_C^*(y)=\max\{0,y_1,y_2\},
+\qquad
+q^*(y)=a^Ty+\frac12\|y\|^2,
+$$
+
+并在 $y^*=r$ 处得到 primal value = dual value = $1/4$。这条链的作用不是让四章共享几个小数，而是让同一个对象依次获得建模、几何、曲率和证书四种解释。正式回归入口：[[optimization_teaching_contract_audit.py|OPT-01—04 教学合同与精确模型回归]]。
+
+> [!success] 第一波停靠线
+> 合上四篇正文后，应能在一张纸上重建 $C,a,x^*,r$；分别解释 $p^*$、projection VI、Jensen gap、support function 与 duality gap 的对象类型；最后说明“目标对 mixture weights 凸”为什么不能推出“产生这些权重的深网参数问题凸”。做不到时，先回到第一个对象断点，不进入收敛率章节。
 
 ## 一、范围与边界
 
@@ -197,7 +256,7 @@ OPT-01—16 已形成完整教学卷：16 篇正文、16 幅机制图、240 道 
 | 独立详解 | 定义、手算、证明、反例和研究合同逐项评分 | 正式作答前不得打开；错题必须回链节点 |
 | 计算门 | strict-saddle escape、nonconvex PL、scale-sharpness 三轨 | canonical hash、随机手算轨、参数干预与 48 小时重建均通过 |
 
-下一施工点转为 10.9 DYN-01 [[常微分方程、初值问题与解的存在唯一性]]；10.7 只在真实验收或下游调用暴露缺口时回补。
+截至 2026-08-27，OPT-01—04 已按当前初学者教学合同完成第一波静态迁移并通过精确计算与图像回归；正文学习状态保持 `draft`。下一施工点为 OPT-05—08：用同一个可精确谱分解的二次模型贯通 smoothness、strong convexity、梯度下降、加速/动量与 stochastic oracle，不用新的更新式切断前后逻辑。
 
 ### 2026-08-23 图像标准化进度
 

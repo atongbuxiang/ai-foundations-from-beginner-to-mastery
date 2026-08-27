@@ -7,7 +7,7 @@ prerequisites: ["[[凸集、凸组合与分离超平面]]", "[[多元函数、�
 related: ["[[优化与凸分析 MOC]]", "[[最大熵原理与指数族]]", "[[交叉熵与 KL 散度]]", "[[次梯度、共轭函数与 Fenchel 对偶]]"]
 sources: ["Boyd-Vandenberghe-2004-Ch3", "Stanford-EE364A-Convex-Functions", "MIT-6.253-Lectures-2-4", "MIT-18.125-Jensen", "Su-9070-LogSumExp-Inequalities"]
 created: 2026-08-19
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # 凸函数、Jensen 不等式与上图集
@@ -50,6 +50,149 @@ updated: 2026-08-23
 - [[多元函数、偏导数与方向导数]]：domain、gradient、directional slice；
 - [[Hessian、二阶微分与曲率]]：Hessian quadratic form；
 - [[期望、方差与矩]]：随机变量、expectation 与 Jensen 的概率语言。
+
+> [!note] 课程位置
+> OPT-02 研究“允许选择哪些点”的凸几何；本章研究“沿这些点之间的线段，目标值怎样弯曲”。凸函数把局部支撑线升级成全局下界，使局部极小不再是坏陷阱，并为 OPT-04 的次梯度、OPT-05 的曲率常数以及后续一阶复杂度证明提供共同语言。AI 中最关键的边界是：一个损失对 prediction/logits 凸，不代表它对生成这些量的深网参数凸。
+
+> [!tip] 建议两遍阅读
+> **第一遍**只在贯穿二次函数上往返 chord、epigraph、一阶支撑、Hessian 和 Jensen 五种语言。**第二遍**再系统学习 composition、perspective、logsumexp、strict/strong/quasiconvex 的区别。每次声称“凸”时，都要把变量和 domain 一起念出来。
+
+## 本章的推导问题链
+
+1. 集合的线段闭包怎样转化为函数值相对 chord 的不等式？
+2. 为什么 $f$ convex 等价于 epigraph convex？
+3. 可微时，局部 tangent 为什么会成为对所有 $y$ 成立的全局下界？
+4. 二次可微时，为什么沿每个方向的非负曲率等价于 Hessian PSD？
+5. finite convex combination 怎样递推成 Jensen，随机变量版本又多了哪些可积性条件？
+6. 把 convex objective 与 convex-set indicator 相加后，怎样得到统一的 extended-value problem？
+
+## 贯穿算例续：同一二次目标的五种凸性语言
+
+仍令
+
+$$
+q(x)=\frac12\|x-a\|_2^2,
+\qquad
+a=\begin{pmatrix}1\\1\end{pmatrix},
+\qquad
+C=\operatorname{conv}\{0,e_1,e_2\}.
+$$
+
+定义 extended-value objective
+
+$$
+F(x)=q(x)+\delta_C(x).
+$$
+
+那么 $\operatorname{dom}F=C$，且 $\min_xF(x)$ 与 $\min_{x\in C}q(x)$ 是同一个问题。这里的 $+\infty$ 是数学上禁止不可行点的编码，不是训练代码中应真的产生的浮点数。
+
+### 符号与对象账本
+
+| 符号 | 类型 | 本例含义 | 不可混淆对象 |
+|---|---|---|---|
+| $q(x)$ | finite-valued function | 平滑平方距离 | 单个样本 loss/部署 metric |
+| $\delta_C(x)$ | extended-value function | 可行域 indicator | 0–1 指示随机变量 |
+| $F=q+\delta_C$ | proper convex function | 合并目标和约束 | 数值程序直接计算的普通 loss |
+| $\operatorname{epi}F$ | $\mathbb R^3$ 中的集合 | $F$ 图像上方区域 | sublevel set |
+| $\nabla q(x)=x-a$ | primal gradient | 当前点的局部线性系数 | projection residual $a-x$ 的相反数 |
+| $\nabla^2q(x)=I$ | Hessian/线性算子 | 所有方向曲率均为 1 | 任意神经网络参数 Hessian |
+| $J_\theta(x,y)$ | Jensen gap | chord 高度减函数值 | optimization gap $F(x)-F^*$ |
+
+### 语言一：精确 chord identity
+
+令 $m=\theta x+(1-\theta)y$。平方范数恒等式给出
+
+$$
+\boxed{
+\theta q(x)+(1-\theta)q(y)-q(m)
+=\frac{\theta(1-\theta)}2\|x-y\|_2^2
+\ge0.
+}
+$$
+
+因此 $q$ convex；当 $x\ne y$ 且 $\theta\in(0,1)$ 时 gap 严格为正，所以它甚至 strictly convex。注意 strict convexity 的结论是对当前变量 $x$ 而言，不会穿过任意非线性 reparameterization 自动保留。
+
+### 语言二与三：一阶支撑和 Hessian
+
+直接求导：
+
+$$
+\nabla q(x)=x-a,
+\qquad
+\nabla^2q(x)=I\succeq0.
+$$
+
+而精确 Taylor 展开为
+
+$$
+q(y)=q(x)+\nabla q(x)^T(y-x)+\frac12\|y-x\|_2^2.
+$$
+
+删去最后一个非负项，就得到凸函数的一阶支撑条件
+
+$$
+q(y)\ge q(x)+\nabla q(x)^T(y-x).
+$$
+
+这里“tangent 在图像下方”不是视觉猜测，而是由一个明确的平方余项证明。
+
+### 语言四：epigraph 与 indicator
+
+$q$ 的 epigraph convex；OPT-02 已证明 $C$ convex，所以 $\delta_C$ convex，非负和规则进一步给 $F=q+\delta_C$ convex。于是对任意可行 $x,y$，其中间点仍可行且
+
+$$
+F(\theta x+(1-\theta)y)
+\le\theta F(x)+(1-\theta)F(y).
+$$
+
+若某个端点不可行，右侧含 $+\infty$，不等式仍在 extended-real 意义下成立；这正是 domain 信息没有被丢掉的好处。
+
+### 语言五：一个可手算的 Jensen gap
+
+取 $x=e_1$、$y=e_2$、$\theta=1/2$。两端都在 $C$，且
+
+$$
+q(e_1)=q(e_2)=\frac12,
+\qquad
+q\!\left(\frac{e_1+e_2}{2}\right)=\frac14.
+$$
+
+因此
+
+$$
+\frac12q(e_1)+\frac12q(e_2)
+-q\!\left(\frac{e_1+e_2}{2}\right)
+=\frac14.
+$$
+
+这里的 $1/4$ 是这两个端点与该混合权重下的 Jensen gap；它恰好等于本例最优值只是数值巧合，二者定义和参照对象不同。
+
+### 核心公式七问：精确 Jensen gap
+
+对
+
+$$
+J_\theta(x,y)
+=\theta q(x)+(1-\theta)q(y)
+-q(\theta x+(1-\theta)y)
+=\frac{\theta(1-\theta)}2\|x-y\|^2,
+$$
+
+逐项回答：
+
+1. **目的：**同时证明 convexity，并定量说明混合带来的 chord gap；
+2. **对象：**$x,y$ 是同一 domain 中的输入，$\theta$ 是 convex-combination 权重；
+3. **来路：**展开三个平方项，关于 $a$ 的一次项完全抵消；
+4. **步骤：**先合并 $\|\theta(x-a)+(1-\theta)(y-a)\|^2$，再收集成 $\|x-y\|^2$；
+5. **读法：**端点越远、混合越均衡，当前二次函数的 Jensen gap 越大；
+6. **检查：**$x=y$ 或 $\theta\in\{0,1\}$ 时 gap 必须为 0；交换 $x,y$ 并把 $\theta$ 换成 $1-\theta$ 不变；
+7. **去路：**OPT-05 会把右侧的精确系数推广为 strong-convexity 下界，OPT-06 会把同一曲率用于梯度下降速率。
+
+> [!warning] AI 中的变量边界
+> $q$ 对 mixture weights $x$ convex；若 $x=x_\theta$ 由深网产生，复合函数 $q(x_\theta)$ 对参数 $\theta$ 一般非凸。类似地，cross-entropy 对 logits convex，也不推出整网训练问题 convex。必须逐次声明“对谁凸”。
+
+> [!success] 第一遍停靠线
+> 合上笔记后，能从平方展开独立重建 chord identity、一阶支撑式与 Hessian $I$；能用 $e_1,e_2$ 手算 Jensen gap $1/4$；还能解释 $F=q+\delta_C$ 为什么把约束吸收到 domain 中，以及为什么这不等于程序应计算 `inf`。达不到时，先不要进入次梯度和共轭。
 
 ## 零、同一个函数的四张“身份证”
 

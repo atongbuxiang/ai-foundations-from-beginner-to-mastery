@@ -7,7 +7,7 @@ prerequisites: ["[[凸函数、Jensen 不等式与上图集]]", "[[凸集、凸�
 related: ["[[优化与凸分析 MOC]]", "[[f-散度、Bregman 散度与概率度量]]", "[[近端算子、复合优化与稀疏正则]]", "[[弱对偶、强对偶与 Slater 条件]]"]
 sources: ["MIT-6.253-Lectures-7-12", "Stanford-EE364B-Subgradients", "Boyd-Vandenberghe-2004-Ch3-Ch5", "Rockafellar-1970-Convex-Analysis", "Bubeck-2015-Convex-Optimization"]
 created: 2026-08-19
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # 次梯度、共轭函数与 Fenchel 对偶
@@ -50,6 +50,195 @@ updated: 2026-08-23
 - [[凸集、凸组合与分离超平面]]：supporting hyperplane、relative interior；
 - [[线性泛函与对偶空间]]：$y^Tx$ 是 primal–dual pairing，不应默认为“两个同型向量”；
 - [[f-散度、Bregman 散度与概率度量]]：已经见过一次 Fenchel variational representation，本章补齐通用机制。
+
+> [!note] 课程位置
+> OPT-03 用唯一梯度支撑可微凸函数，但真实 AI 目标常含 $\ell_1$、hinge、max、indicator 与 norm，这些函数在关键点恰好不可微。本章把“唯一切线”推广成“全部合法支撑斜率”，再把斜率搬到 dual space：subgradient 负责局部接触，conjugate 记录最佳仿射下界，Fenchel–Young equality 把 primal point 与 dual certificate 闭合。OPT-13 会在此基础上加入一般约束与强对偶条件。
+
+> [!tip] 建议两遍阅读
+> **第一遍**沿贯穿投影问题掌握 $\partial\delta_C=N_C$、Fermat rule、support function 与 Fenchel–Young equality。**第二遍**再系统计算 $|x|$、norm、entropy、biconjugate 与一般 Fenchel dual。第一次阅读只要能分清 primal variable $x$、dual slope $y$、supremum 中被消去的变量，就不要被符号淹没。
+
+## 本章的推导问题链
+
+1. 函数在 kink 处没有唯一 derivative 时，怎样用所有全局 affine lower bounds 保存一阶信息？
+2. 为什么 constraint indicator 的次微分恰好是 feasible set 的 normal cone？
+3. $0\in\partial F(x^*)$ 为什么是 convex minimization 的充要条件？
+4. 固定 slope $y$ 后，最高能把仿射下界推到哪里；为什么答案由 conjugate 编码？
+5. Fenchel–Young gap 为什么永远非负，等号怎样等价于双向 subgradient relation？
+6. 把两个 Fenchel–Young inequalities 相加，怎样得到 primal upper value、dual lower value与零 gap 证书？
+
+## 贯穿算例收束：normal cone 就是缺失的梯度
+
+沿用
+
+$$
+q(x)=\frac12\|x-a\|_2^2,
+\qquad
+C=\operatorname{conv}\{0,e_1,e_2\},
+\qquad
+F(x)=q(x)+\delta_C(x),
+$$
+
+其中
+
+$$
+a=\begin{pmatrix}1\\1\end{pmatrix},
+\qquad
+x^*=\begin{pmatrix}1/2\\1/2\end{pmatrix},
+\qquad
+r=a-x^*=\begin{pmatrix}1/2\\1/2\end{pmatrix}.
+$$
+
+OPT-02 已证明 $r^T(z-x^*)\le0$ 对所有 $z\in C$ 成立。这句话现在可以压缩成
+
+$$
+r\in N_C(x^*)=\partial\delta_C(x^*).
+$$
+
+### 符号与对象账本
+
+| 符号 | primal/dual 层 | 本例含义 | 类型检查 |
+|---|---|---|---|
+| $x$ | primal | 被选择的可行权重 | $\mathbb R^2$ 中的点 |
+| $y$ | dual | affine lower bound 的 slope/证书 | dual pairing 中的线性泛函坐标 |
+| $\partial F(x)$ | primal 点上的斜率集合 | 全部 convex subgradients | 集合，不是某个框架返回的单向量 |
+| $N_C(x)$ | 几何证书 | constraint indicator 的次微分 | boundary 上可能是一条锥 |
+| $q^*(y)$ | conjugate | 消去 primal $x$ 后的 slope cost | 关于 $y$ 的函数 |
+| $\delta_C^*(y)=\sigma_C(y)$ | support function | $y$ 方向上 $C$ 的最大 pairing | 不是 probability support |
+| $d(y)$ | dual objective | 对 primal optimum 的下界 | 与 primal objective 符号约定绑定 |
+
+### 第一步：用 convex Fermat rule 重证最优性
+
+在 $x^*$，
+
+$$
+\nabla q(x^*)=x^*-a=-r.
+$$
+
+又因为 $x^*$ 位于 active face $x_1+x_2=1$ 的相对内部，
+
+$$
+N_C(x^*)=\{\tau(1,1)^T:\tau\ge0\}.
+$$
+
+于是 $r\in N_C(x^*)$，从而
+
+$$
+\boxed{
+0\in\nabla q(x^*)+N_C(x^*)
+=\partial\bigl(q+\delta_C\bigr)(x^*)
+=\partial F(x^*).
+}
+$$
+
+对 proper convex $F$，这不是仅有必要性，而是 global optimality 的充要条件。这里的“0”是零向量；“$\in$”提醒我们右侧可能是一个集合。
+
+### 第二步：手算两个 conjugates
+
+对 indicator，
+
+$$
+\delta_C^*(y)
+=\sup_{x\in C}y^Tx
+=\sigma_C(y).
+$$
+
+因为 $C=\operatorname{conv}\{0,e_1,e_2\}$，线性函数最大值在顶点取得，所以
+
+$$
+\boxed{
+\sigma_C(y)=\max\{0,y_1,y_2\}.
+}
+$$
+
+对平方距离，令 supremum 中的一阶条件 $y-(x-a)=0$，得到 $x=a+y$，故
+
+$$
+\boxed{
+q^*(y)=a^Ty+\frac12\|y\|_2^2.
+}
+$$
+
+两式的输入都是 dual slope $y$，但一个编码 feasible geometry，另一个编码 quadratic curvature。
+
+### 第三步：从 Fenchel–Young 推出 dual lower bound
+
+Fenchel–Young 分别给
+
+$$
+q(x)+q^*(-y)\ge\langle -y,x\rangle,
+$$
+
+$$
+\delta_C(x)+\delta_C^*(y)\ge\langle y,x\rangle.
+$$
+
+相加后 pairing 抵消：
+
+$$
+F(x)
+\ge-q^*(-y)-\delta_C^*(y).
+$$
+
+因此一个合法 Fenchel dual 是
+
+$$
+\boxed{
+\max_y d(y),
+\qquad
+d(y)=a^Ty-\frac12\|y\|_2^2-\max\{0,y_1,y_2\}.
+}
+$$
+
+任意 $y$ 都给 $d(y)\le p^*$；这叫 weak duality，不需要先知道最优 $y$。
+
+### 第四步：同一残差闭合零 gap
+
+取 $y^*=r=(1/2,1/2)^T$。先算 support：
+
+$$
+\sigma_C(y^*)=\max\{0,1/2,1/2\}=\frac12
+=\langle y^*,x^*\rangle.
+$$
+
+这正是 $y^*\in\partial\delta_C(x^*)$ 的 Fenchel–Young 等号。再算 dual value：
+
+$$
+\begin{aligned}
+d(y^*)
+&=\langle a,y^*\rangle
+-\frac12\|y^*\|_2^2
+-\sigma_C(y^*)\\
+&=1-\frac14-\frac12\\
+&=\frac14
+=q(x^*)=p^*.
+\end{aligned}
+$$
+
+于是 $x^*$ 给 primal value $1/4$，$y^*$ 给与它相等的 dual lower bound；两边夹住同一个数，构成可检查的最优性证书，而不只是“算法看起来收敛”。
+
+### 核心公式七问：Fenchel–Young equality
+
+对
+
+$$
+f(x)+f^*(y)\ge\langle y,x\rangle,
+$$
+
+逐项回答：
+
+1. **目的：**把任意 primal point 与 dual slope 的差写成非负 certificate；
+2. **对象：**$f$ 是 proper convex function，$x$ 是 primal input，$y$ 是 dual slope；
+3. **来路：**由 $f^*(y)=\sup_z\{\langle y,z\rangle-f(z)\}$，把 $z=x$ 代入 supremum；
+4. **步骤：**先得 $f^*(y)\ge\langle y,x\rangle-f(x)$，再移项；
+5. **读法：**conjugate 至少要支付用 slope $y$ 在 $x$ 处接触 $f$ 所需的截距；
+6. **检查：**等号当且仅当 $y\in\partial f(x)$，等价于 $x\in\partial f^*(y)$（在相应 closed-convex 条件下）；
+7. **去路：**OPT-13 用它系统构造 Lagrange/Fenchel dual，OPT-14 用它解释 prox 与 resolvent，信息论中的 variational divergence 也依赖同一 supremum 结构。
+
+> [!warning] 两个不能越过的边界
+> 第一，autodiff 在 kink 处返回一个数，只是实现选择了某个 branch/subgradient convention，不等于函数经典可微。第二，写出一个 dual 只自动得到 weak duality；zero gap 和 primal/dual attainment 还需要 qualification。本例中 $q$ 连续且 full-domain、$\delta_C$ proper closed convex，条件足够好，所以 $y^*=r$ 能闭合 gap；不能把这个结论无条件复制到所有问题。
+
+> [!success] 第一遍停靠线
+> 不看正文，能写出 $N_C(x^*)$、验证 $0\in\nabla q(x^*)+N_C(x^*)$；能从顶点求出 $\sigma_C(y)=\max(0,y_1,y_2)$，从 completing the square 求出 $q^*(y)$，并用 $y^*=(1/2,1/2)^T$ 算出 primal value = dual value = $1/4$。若只会背 conjugate 表而说不清 supremum 中谁被优化，先回到对象账本。
 
 ## 零、从唯一切线到一束支撑线
 
