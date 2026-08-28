@@ -451,7 +451,7 @@ updated: 2026-08-28
 | MA-CUM-01 | MA-01—16：矩阵分析卷末累计验收 | regression-passed：[[阶段测验 - 矩阵分析（10.3）]]、[[阶段测验解答 - 矩阵分析（10.3）]]和[[实验 - 矩阵分析累计复现门]]已通过独立静态/计算回归；个人仍为 not-attempted |
 | CALC-CUM-01 | CALC-01—16：微积分、矩阵微分与自动微分卷末累计验收 | regression-passed：题卷、详解、[[实验 - 微积分、矩阵微分与自动微分累计复现门]]与[[calculus_ad_cumulative_contract_audit.py]]已通过独立静态/计算回归；个人仍为not-attempted |
 | NLA-CUM-01 | NUM-01—20：数值计算与数值线性代数卷末累计验收 | regression-passed：题卷、详解、[[实验 - 数值线性代数累计复现门]]与[[numerical_cumulative_contract_audit.py]]已通过独立静态/计算回归；个人仍为 not-attempted |
-| DYN-CUM-01 | DYN-01—12：ODE、动力系统与 SDE 卷末累计验收 | regression-passed：[[阶段测验 - ODE、动力系统与 SDE（10.9）]]、[[阶段测验解答 - ODE、动力系统与 SDE（10.9）]]和[[实验 - ODE、动力系统与 SDE 累计复现门]]已通过静态/计算回归；个人仍为 not-attempted |
+| DYN-CUM-01 | DYN-01—12：ODE、动力系统与 SDE 卷末累计验收 | regression-passed：题卷、详解、[[实验 - ODE、动力系统与 SDE 累计复现门]]与[[dynamics_cumulative_contract_audit.py]]已通过解析、canonical/盲参静态与计算回归；个人仍为 not-attempted |
 | NN-CUM-01 | NN-01—64：神经网络基础第三章累计验收 | composed：[[阶段测验 - 神经网络基础（第三章）]]、[[阶段测验解答 - 神经网络基础（第三章）]]和[[实验 - 神经网络基础累计复现门]]已建立；等待真实独立作答 |
 | ARCH-CAP-01 | ARCH-01—64：表示与模型架构第四章跨卷累计验收 | composed：[[阶段测验 - 表示与模型架构（第四章）]]、[[阶段测验解答 - 表示与模型架构（第四章）]]和[[实验 - 表示与模型架构跨卷累计复现门]]已建立；等待真实独立作答 |
 | MATH-FND-CAP-01 | 十卷150节点的跨卷理论、AI系统审计与研究合同总出口 | composed：[[数学基础十卷总验收 - 跨卷理论与 AI 迁移]]、[[数学基础十卷总验收解答 - 跨卷理论与 AI 迁移]]和[[实验 - 数学基础十卷跨章累计复现门]]已建立；必须先通过十份分卷验收 |
@@ -518,13 +518,14 @@ GEO-CUM-01是“20分钟口试 + 210分钟、100分闭卷 + nonce随机三轨实
 
 ### DYN-CUM-01 的状态边界
 
-DYN-CUM-01 是“20 分钟口试 + 240 分钟、100 分闭卷 + 随机三轨实验 + 48 小时/14 天延迟门”的卷末测验，覆盖 DYN-01—12，并设置 A—E 分区线、well-posedness / flow-density / Itô-Fokker–Planck-reversal 三道主链不得为零。材料状态是 **regression-passed**，个人状态是 **not-attempted**：
+DYN-CUM-01 是“20 分钟口试 → 240 分钟、100 分闭卷 → nonce 随机三轨 → 多参数盲测 → 订正 → 48 小时换机制 → 14 天陌生 AI 迁移”的卷末测验，覆盖 DYN-01—12，并设置 A—E 分区线、well-posedness / flow-density / Itô-Fokker–Planck-reversal 三道主链不得为零。材料状态是 **regression-passed**，个人状态是 **not-attempted**：
 
 - 十二套节点题共 180 题，累计题卷和逐题独立详解已经成稿；
-- 口试强制重建四波模型链、六层对象账本、reverse clock/full-half score 和连续生成模型合同；
+- 口试强制重建四波模型链、九层连续动力学对象账本、reverse clock/full-half score 和连续生成模型合同；
 - 计算门串联 continuous/discrete stability、FPE/PF/CNF density ledger 与 Brownian/Itô/reverse-score coefficient，先冻结预测再运行随机轨道；
-- [[dynamics_cumulative_contract_audit.py]]已通过题—解隔离、解析量、XML、canonical SHA-256 与确定性双跑；这只证明工具可执行；
-- 尚无首次口试、闭卷原稿、逐项评分、参数干预、48 小时重做和 14 天迁移证据；
+- 闭卷冻结后由 `scorer nonce` 指定手算轨和跨轨盲参数；必须先冻结预测，再保存个人新 output/SVG/hash；
+- [[dynamics_cumulative_contract_audit.py]]已通过题—解与 100 分、解析量、六个状态入口、XML、canonical 双跑、固定盲参 SHA-256 与图—数自描述；这只证明工具可执行；
+- 尚无首次口试、闭卷原稿、逐项评分、scorer nonce、个人未见参数 output/SVG/hash、48 小时换机制和 14 天陌生 AI 迁移证据；
 - 因而动力系统卷 12 个节点保持 `draft`；正式作答前不要打开[[阶段测验解答 - ODE、动力系统与 SDE（10.9）]]。
 
 ### NLA-CUM-01 的状态边界

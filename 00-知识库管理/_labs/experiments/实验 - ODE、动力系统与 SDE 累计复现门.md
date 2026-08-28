@@ -11,7 +11,7 @@ data: "完全合成：二维刚性线性系统、圆周上的单 Fourier 模态�
 seed: 20260819
 related: ["[[阶段测验 - ODE、动力系统与 SDE（10.9）]]", "[[ODE、动力系统与 SDE MOC]]", "[[刚性系统、绝对稳定域与隐式方法]]", "[[流映射、Liouville 公式与连续正规化流]]", "[[Fokker-Planck 方程与概率流 ODE]]", "[[时间反演、score 与扩散生成动力学]]"]
 created: 2026-08-19
-updated: 2026-08-27
+updated: 2026-08-28
 ---
 
 # 实验 - ODE、动力系统与 SDE 累计复现门
@@ -21,6 +21,20 @@ updated: 2026-08-27
 
 > [!warning] 材料状态不等于个人状态
 > Canonical 脚本、SVG、解析断言与哈希已经达到 `regression-passed`，这只说明实验工具可执行。学习者仍须在同一 `attempt_id` 下冻结预测、独立运行、接受随机轨道、手算和完成延迟复测；个人状态默认保持 `not-attempted`。
+
+## 零、执行顺序、答案隔离与 scorer nonce
+
+### 0.1 一条不能倒放的证据链
+
+1. 建立唯一 `attempt_id = DYN-CUM-01-YYYYMMDD-A`，冻结环境、口试与闭卷原稿；
+2. 隔离本页第六、七、九点二节、canonical SVG/stdout/hash、历史干预与[[阶段测验解答 - ODE、动力系统与 SDE（10.9）|详解]]，先完成三轨解析校准；
+3. 评分者在校准提交后公布带时间戳的 `scorer nonce`，指定 A/B/C 一条手算轨和至少横跨两轨的多参数盲测；
+4. 学习者先冻结方向、数量级、失败条件与解析目标，再运行到新文件；
+5. 保存完整命令、stdout、SVG、SHA-256、Python、commit 和 nonce；全部原始证据冻结后才打开结果节订正。
+
+### 0.2 防挑轨与输出隔离
+
+学习者不得重抽 nonce 直到命中熟悉轨，也不得先运行多组参数再挑一组“预测正确”的结果提交。评分者不得根据学习者现场表现临时换轨。Canonical run 只能验证环境；固定盲参 fixture 只能验证仓库接口，二者都不能成为学习者个人未见参数证据。
 
 ## 一、三轨总览
 
@@ -42,12 +56,12 @@ flowchart LR
 
 ## 二、进入实验前的解析校准门
 
-Canonical 数字写在本页是为了校准环境，不是盲测题。正式个人证据来自评分者在 A/B/C 中随机指定一轨，并改变至少一个控制参数。开始前先冻结以下内容：
+Canonical 数字写在本页是为了校准环境，不是盲测题。正式个人证据来自 scorer nonce 在 A/B/C 中指定一轨，并给出至少横跨两轨的多参数组合。开始前先冻结以下内容：
 
 | 字段 | 运行前记录 |
 |---|---|
 | `attempt_id` / Git commit / Python |  |
-| 随机指定轨道 | A / B / C |
+| scorer nonce / 指定轨道 | A / B / C |
 | canonical 输出路径与预期 hash |  |
 | 干预参数与新输出路径 |  |
 | 预测的符号、数量级和极限 |  |
@@ -449,11 +463,14 @@ shasum -a 256 \
 预期关键输出：
 
 ```text
-A z_fast=-3.200000 factors EE=-2.20000000 RK4=1.82773333 BE=0.23809524 Trap=-0.23076923
-A orders EE=1.00216894 RK4=3.92818205 BE=0.99784827 Trap=2.00000782
-B orders state=4.03145834 logp=4.04224788 mass_drift=4.441e-16 pde_residual=0.000e+00
-C qv=1.19888410 target=1.20000000 ito_order=0.49850219 full_m2=0.97673218 half_m2=2.14844674 half_target=2.20000000
-sha256 b03decf286243fdfd16051a04ec70e1afb7b35c3369c24bd0a5e2856b90957cc
+A_CONFIG stiffness=80 plot_steps=25
+A_DYNAMICS z_fast=-3.200000 factors EE=-2.20000000 RK4=1.82773333 BE=0.23809524 Trap=-0.23076923
+A_ORDERS EE=1.00216894 RK4=3.92818205 BE=0.99784827 Trap=2.00000782
+B_CONFIG density_a=0.65 density_sigma=1.1 density_time=0.8
+B_TRANSPORT state_order=4.03145834 logp_order=4.04224788 mass_drift=4.441e-16 pde_residual=0.000e+00
+C_CONFIG beta=2 stochastic_time=0.6 paths=2048 brownian_steps=512 seed=20260819
+C_STOCHASTIC qv=1.19888410 target=1.20000000 ito_order=0.49850219 full_m2=0.97673218 half_m2=2.14844674 half_target=2.20000000
+SHA256 b03decf286243fdfd16051a04ec70e1afb7b35c3369c24bd0a5e2856b90957cc
 ```
 
 确定性二次复跑必须写到其他路径，不覆盖 canonical artifact：
@@ -487,9 +504,11 @@ shasum -a 256 /tmp/plot-dynamics-cumulative-gate-v2.svg
 3. 用 Itô formula推出 $dX^2$ 与 QV target；
 4. 把 `--beta 2` 改为 `1` 前，预测 QV target 与 wrong half-score terminal moment。
 
-## 九、参数干预门
+## 九、盲参数干预门
 
-至少完成一项，且先写预测、输出到新文件。例如：
+正式门由 `scorer nonce` 指定至少横跨两轨的多参数组合；学习示例可以先完成单轨，且必须先写预测、输出到新文件。例如：
+
+脚本会拒绝“改变任一 canonical 参数但不写 `--output`”的命令，防止把正式 SVG 静默覆盖。正式尝试必须使用含 `attempt_id` 的新文件名。
 
 ```bash
 python3 "00-知识库管理/_labs/code/dynamics_cumulative_gate.py" \
@@ -535,31 +554,69 @@ Canonical 参数已经公开，只用于复现基准。正式评分时，评分�
 
 若运行结果与预测冲突，必须保留冲突记录，并按“参数未传入 → 对象/公式错误 → finite-step/MC 偏差 → 实现错误”的顺序排查；事后删除失败运行不通过。
 
+### 9.2 审计使用的固定多参数盲测 fixture
+
+这组参数只验收接口、图像自描述与确定性，不得用作学习者正式 nonce：
+
+```bash
+python3 "00-知识库管理/_labs/code/dynamics_cumulative_gate.py" \
+  --stiffness 50 --plot-steps 30 \
+  --density-a 0.8 --density-sigma 0.9 --density-time 1.0 \
+  --beta 1.5 --stochastic-time 0.75 \
+  --paths 1536 --brownian-steps 384 --seed 20260828 \
+  --output /tmp/dynamics-cumulative-blind-regression.svg
+```
+
+运行前的解析预测：
+
+- A 轨 $z=-50/30=-5/3$，Euler/BE/Trap factors 分别为 $-2/3,3/8,1/11$，RK4 约 $0.2721$，四法在当前 fast mode 均稳定；
+- B 轨 positivity margin 从 $0.35$ 变为 $0.2$，$a_T=0.8e^{-0.405}$，characteristic/PF 速度与 error constant 会变，但解析 continuity residual 仍为零；
+- C 轨 QV target 为 $\beta T=1.125$，误用 half-score 的 continuous second-moment target 为 $1+\beta T=2.125$；Monte Carlo realization 只应在容许波动内靠近它们。
+
+固定输出锚点：
+
+```text
+A_CONFIG stiffness=50 plot_steps=30
+A_DYNAMICS z_fast=-1.666667 factors EE=-0.66666667 RK4=0.27211934 BE=0.37500000 Trap=0.09090909
+A_ORDERS EE=1.00216894 RK4=3.92818205 BE=0.99784827 Trap=2.00000782
+B_CONFIG density_a=0.8 density_sigma=0.9 density_time=1
+B_TRANSPORT state_order=4.05597835 logp_order=4.05653516 mass_drift=4.441e-16 pde_residual=0.000e+00
+C_CONFIG beta=1.5 stochastic_time=0.75 paths=1536 brownian_steps=384 seed=20260828
+C_STOCHASTIC qv=1.12838453 target=1.12500000 ito_order=0.49776175 full_m2=0.99961395 half_m2=2.13623152 half_target=2.12500000
+SHA256 65c1d45c002169e354facffb355c483560288af8633c0c263943cefabc4636b2
+```
+
+盲参 SVG 本身必须显示 $y'=-50y,h\approx0.033$、$a_0=0.8,\sigma=0.9,T=1$ 以及 $\beta=1.5,T=0.75,\text{paths}=1536,N=384$；如果只有 stdout 改变而图仍陈述 canonical 协议，即使 hash 稳定也判图—数合同失败。
+
 ## 十、通过门槛
 
 必须同时满足：
 
-1. canonical full run 的五行摘要、XML 校验和 hash 匹配；
+1. canonical full run 的配置/三轨摘要、XML 校验和 hash 匹配；
 2. 随机指定轨道的关键公式与两个数值可不看代码重算；
 3. 完成一个不同输出文件的参数干预，包含事前预测、实际结果与偏差解释；
 4. A 轨能区分 continuous stability、absolute stability、accuracy 与 cost；
 5. B 轨能区分 density PDE、PF characteristic、CNF log ledger 与 finite solver；
 6. C 轨能区分 marginal、path law、QV、full/half score 与 Monte Carlo error；
-7. 48 小时后空白重建三轨核心式；
-8. 失败项回链正文，不因脚本成功把任何节点自动升级为 `verified`。
+7. 48 小时后换机制空白重建三轨核心式；
+8. 14 天后在陌生 neural ODE/CNF/flow-matching/diffusion 案例上重建对象、误差和证书；
+9. 失败项回链正文，不因脚本成功把任何节点自动升级为 `verified`。
 
 ```text
 日期：
 canonical hash：
+attempt_id / scorer nonce：
 随机指定轨道：A / B / C
 手算结果：
 干预参数与输出路径：
+blind SVG hash：
 事前预测：
 实际结果：
 偏差解释：
 每轨一条“能推出”：
 每轨一条“不能推出”：
 48 小时复测：
+14 天陌生 AI 迁移：
 评分者：
 状态：not-attempted / attempted / passed / retained
 ```
@@ -568,8 +625,8 @@ canonical hash：
 
 - `not-attempted`：只有仓库材料，没有个人运行；
 - `attempted`：已有原始记录，但手算、干预或解释尚未全部通过；
-- `passed`：当次 canonical、随机轨道、手算与盲干预全部通过；
-- `retained`：48 小时后能换参数空白重建核心式，并正确解释一次新偏差。
+- `passed`：当次 canonical、nonce 随机轨道、手算、盲干预与订正全部通过；
+- `retained`：`passed` 后完成 48 小时换机制空白重建与 14 天陌生 AI 连续动力学迁移。
 
 实验 `retained` 仍不自动把 DYN-01—12 改成 `verified`；它只是卷级计算证据的一部分。
 

@@ -437,10 +437,20 @@ def build_svg(
         text(40, 413, f"BE {a['orders']['BE']:.2f}, Trap {a['orders']['Trap']:.2f}", "small"),
     ]
 
+    canonical_b = density_a == 0.65 and density_sigma == 1.1 and density_time == 0.8
+    density_subtitle = (
+        "p=(1+a(t) cos x)/(2π)；a(t)=a₀ exp(−σ²t/2)"
+        if canonical_b
+        else (
+            f"a₀={density_a:g}, σ={density_sigma:g}, T={density_time:g}；"
+            "p=(1+a(t) cos x)/(2π)"
+        )
+    )
+
     # Panel B: density curves and probability-flow characteristics.
     parts += [
         text(435, 51, "B · 同一密度：FPE current 与 PF 特征线", "title"),
-        text(435, 75, "p=(1+a(t) cos x)/(2π)；a(t)=a₀ exp(−σ²t/2)", "sub"),
+        text(435, 75, density_subtitle, "sub"),
     ]
     bx_l, bx_r, bx_t, bx_b = 462.0, 765.0, 108.0, 320.0
     parts += [
@@ -465,10 +475,26 @@ def build_svg(
         text(435, 412, "finite change-of-variables 与 continuity ledger 同时通过", "small"),
     ]
 
+    canonical_c = (
+        beta == 2.0
+        and stochastic_time == 0.6
+        and paths_count == 2048
+        and brownian_steps == 512
+        and seed == 20260819
+    )
+    stochastic_subtitle = (
+        f"stationary OU；β={beta:g}, T={stochastic_time:g}, paths={paths_count}"
+        if canonical_c
+        else (
+            f"OU；β={beta:g}, T={stochastic_time:g}, paths={paths_count}, "
+            f"N={brownian_steps}"
+        )
+    )
+
     # Panel C: quadratic variation and reverse endpoint moments.
     parts += [
         text(830, 51, "C · Path 证书与 reverse-score 系数", "title"),
-        text(830, 75, f"stationary OU；β={beta:g}, T={stochastic_time:g}, paths={paths_count}", "sub"),
+        text(830, 75, stochastic_subtitle, "sub"),
     ]
     cx_l, cx_r, cx_t, cx_b = 842.0, 1004.0, 112.0, 292.0
     parts += [
@@ -523,7 +549,7 @@ def build_svg(
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--output", type=Path)
     parser.add_argument("--stiffness", type=float, default=80.0)
     parser.add_argument("--plot-steps", type=int, default=25)
     parser.add_argument("--density-a", type=float, default=0.65)
@@ -554,7 +580,21 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    output = args.output.expanduser().resolve()
+    canonical = (
+        args.stiffness == 80.0
+        and args.plot_steps == 25
+        and args.density_a == 0.65
+        and args.density_sigma == 1.1
+        and args.density_time == 0.8
+        and args.beta == 2.0
+        and args.stochastic_time == 0.6
+        and args.paths == 2048
+        and args.brownian_steps == 512
+        and args.seed == 20260819
+    )
+    if not canonical and args.output is None:
+        raise SystemExit("noncanonical runs require --output so the canonical SVG is not overwritten")
+    output = (args.output or DEFAULT_OUTPUT).expanduser().resolve()
     svg, metrics = build_svg(
         args.stiffness,
         args.plot_steps,
@@ -572,9 +612,9 @@ def main() -> None:
     digest = hashlib.sha256(svg.encode("utf-8")).hexdigest()
 
     a, b, c = metrics["A"], metrics["B"], metrics["C"]
-    print(f"wrote {output}")
+    print(f"A_CONFIG stiffness={args.stiffness:g} plot_steps={args.plot_steps}")
     print(
-        "A z_fast={:.6f} factors EE={:.8f} RK4={:.8f} BE={:.8f} Trap={:.8f}".format(
+        "A_DYNAMICS z_fast={:.6f} factors EE={:.8f} RK4={:.8f} BE={:.8f} Trap={:.8f}".format(
             a["z_fast"],
             a["factors"]["Euler"],
             a["factors"]["RK4"],
@@ -583,7 +623,7 @@ def main() -> None:
         )
     )
     print(
-        "A orders EE={:.8f} RK4={:.8f} BE={:.8f} Trap={:.8f}".format(
+        "A_ORDERS EE={:.8f} RK4={:.8f} BE={:.8f} Trap={:.8f}".format(
             a["orders"]["Euler"],
             a["orders"]["RK4"],
             a["orders"]["BE"],
@@ -591,12 +631,20 @@ def main() -> None:
         )
     )
     print(
-        "B orders state={:.8f} logp={:.8f} mass_drift={:.3e} pde_residual={:.3e}".format(
+        f"B_CONFIG density_a={args.density_a:g} density_sigma={args.density_sigma:g} "
+        f"density_time={args.density_time:g}"
+    )
+    print(
+        "B_TRANSPORT state_order={:.8f} logp_order={:.8f} mass_drift={:.3e} pde_residual={:.3e}".format(
             b["state_order"], b["logp_order"], b["mass_drift"], b["pde_residual"]
         )
     )
     print(
-        "C qv={:.8f} target={:.8f} ito_order={:.8f} full_m2={:.8f} half_m2={:.8f} half_target={:.8f}".format(
+        f"C_CONFIG beta={args.beta:g} stochastic_time={args.stochastic_time:g} "
+        f"paths={args.paths} brownian_steps={args.brownian_steps} seed={args.seed}"
+    )
+    print(
+        "C_STOCHASTIC qv={:.8f} target={:.8f} ito_order={:.8f} full_m2={:.8f} half_m2={:.8f} half_target={:.8f}".format(
             c["qv"][-1],
             c["qv_target"],
             c["ito_order"],
@@ -605,7 +653,8 @@ def main() -> None:
             c["analytic_half_m2"],
         )
     )
-    print(f"sha256 {digest}")
+    print(f"OUTPUT {output}")
+    print(f"SHA256 {digest}")
 
     if not (0.8 < a["orders"]["Euler"] < 1.2):
         raise SystemExit("Euler order gate failed")

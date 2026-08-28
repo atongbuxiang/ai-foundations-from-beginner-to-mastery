@@ -7,7 +7,7 @@ prerequisites: ["[[多元微积分、矩阵微分与自动微分 MOC]]", "[[概�
 related: ["[[数学基础 MOC]]", "[[数学基础完整课程地图与掌握标准]]", "[[练习与测验 MOC]]", "[[推导与实验 MOC]]"]
 sources: ["MIT-18.100B-2025-Picard-Lindelof", "MIT-18.330-2012-ODE-Numerics", "MIT-18.03SC-Matrix-Exponentials", "MIT-18.03SC-Phase-Portraits", "MIT-18.03SC-Linearization-Critical-Points", "MIT-18.306-2009-Conservation-Laws", "MIT-18.152-2011-Transport-Characteristics", "MIT-18.175-2016-Brownian-Motion", "MIT-15.070J-2013-Quadratic-Variation", "MIT-15.070J-2013-Ito-Integral", "MIT-18.S096-2013-Ito-Calculus", "MIT-18.642-2024-Stochastic-Processes-II", "MIT-8.592J-2011-Kolmogorov-Equations", "MIT-Underactuated-Lyapunov", "Stanford-EE263-Linear-Dynamical-Systems", "Hirsch-Smale-Devaney-Dynamical-Systems", "Teschl-ODE-Dynamical-Systems", "Teschl-PDE", "Pavliotis-Stochastic-Processes-Applications", "Risken-Fokker-Planck", "Durrett-PTE5-Brownian-Donsker", "Morters-Peres-Brownian-Motion", "DiPerna-Lions-1989-Transport", "Benamou-Brenier-2000-Dynamic-OT", "Hairer-Norsett-Wanner-Solving-ODE-I", "Hairer-Wanner-Solving-ODE-II", "Kloeden-Platen-Numerical-SDE", "SciPy-solve_ivp", "SUNDIALS-CVODES-Mathematics", "Oksendal-Stochastic-Differential-Equations", "Karatzas-Shreve-Brownian-Motion", "Anderson-1982-Reverse-Time-Diffusion", "Hyvarinen-2005-Score-Matching", "Vincent-2011-Denoising-Score", "Sohl-Dickstein-et-al-2015-Diffusion", "Ho-et-al-2020-DDPM", "Song-Meng-Ermon-2021-DDIM", "Nichol-Dhariwal-2021-Improved-DDPM", "Karras-et-al-2022-EDM", "Chen-et-al-2018-Neural-ODE", "Grathwohl-et-al-2019-FFJORD", "Hutchinson-1989-Trace-Estimator", "Rezende-Mohamed-2015-Normalizing-Flows", "Kim-et-al-2021-Stiff-Neural-ODE", "Zhuang-et-al-2020-Adaptive-Checkpoint-Adjoint", "Li-et-al-2020-Scalable-SDE-Gradients", "Kidger-et-al-2021-Neural-SDE-GAN", "Dupont-et-al-2019-Augmented-Neural-ODE", "Chang-et-al-2019-Neural-Lyapunov-Control", "Yang-et-al-2024-Lyapunov-Stable-Neural-Control", "Bai-et-al-2019-DEQ", "Gu-et-al-2020-HiPPO", "Gu-et-al-2022-S4", "Song-et-al-2021-Score-SDE", "Lipman-et-al-2023-Flow-Matching", "Albergo-et-al-2024-Stochastic-Interpolants", "Su-3750-Random-Walk", "Su-3762-Stochastic-Differential-Equation", "Su-9209-Diffusion-SDE", "Su-5655-Optimization-Dynamics", "Su-6261-Optimization-Dynamics-Global", "Su-6316-Energy-GAN", "Su-10114-SSM-Linear-HiPPO", "Su-9228-Probability-Flow-ODE", "Su-9262-Unified-Diffusion-Theory", "Su-9280-Diffusion-ODE", "Su-10958-Instant-Average-Velocity"]
 created: 2026-08-19
-updated: 2026-08-27
+updated: 2026-08-28
 ---
 
 # ODE、动力系统与 SDE MOC
@@ -25,7 +25,7 @@ updated: 2026-08-27
 | B | DYN-05—06 | consistency/order → absolute stability → stiffness/implicit solve | $y'=-y$ 的三种传播多项式；$\operatorname{diag}(-1,-100)$ 的快慢系统 | `regression-passed` | `draft / not-attempted` |
 | C | DYN-07—08 | unique flow → Jacobian/volume → density transport/conservation | $\operatorname{diag}(1,-2)x+(1,0)^T$ 与推前 Gaussian | `regression-passed` | `draft / not-attempted` |
 | D | DYN-09—12 | Brownian variation → Itô/SDE → Fokker–Planck/PF-ODE → reverse score | $dX=-Xdt+\sqrt2dW$ 与 Gaussian data law | `regression-passed` | `draft / not-attempted` |
-| CUM | DYN-CUM | 口试—闭卷—三轨实验—延迟重做 | 四波随机回链、三条主推导与 A/B/C 累计门 | `regression-passed` | `not-attempted` |
+| CUM | DYN-CUM-01 | 口试 → 闭卷 → nonce 随机轨 → 盲干预 → 订正 → 48 h / 14 d → 独立审计 | 四波回链、三条主推导与 A/B/C 累计门 | `regression-passed` | `not-attempted` |
 
 ### 第一波的单一模型链
 
@@ -202,39 +202,44 @@ $$
 3. **第三遍（约 180 分钟）：**改变 $X_0$ 的均值/方差、终止时间 $T$ 和 Euler 步长，在运行前预测 terminal KL、score slope、反向 drift、moment 与 solver bias；
 4. **验收：**完成四个节点实验，并无提示解释 conditional/marginal、path/density、forward/reverse clock、full/half score、exact/learned/finite-step 五组边界。
 
-### DYN-CUM：卷末综合验收闭环
+### DYN-CUM-01：卷末综合验收闭环
 
-DYN-CUM 不再增加第五套理论，而是检验四波能否在没有章节提示时重新连接。完整顺序固定为：
+DYN-CUM-01 不再增加第五套理论，而是检验四波能否在没有章节提示时重新连接。完整顺序固定为：
 
 $$
 \text{20 分钟口试}
 \longrightarrow
 \text{240 分钟闭卷}
 \longrightarrow
-\text{随机三轨实验}
+\text{attempt ID + scorer nonce 随机轨}
 \longrightarrow
-\text{48 小时重做}
+\text{盲参数预测与新 output/SVG/hash}
 \longrightarrow
-\text{14 天迁移}.
+\text{订正}
+\longrightarrow
+\text{48 小时换机制}
+\longrightarrow
+\text{14 天陌生 AI 迁移}.
 $$
 
 | 门 | 直接检查 | 不能由什么替代 |
 |---|---|---|
 | 口试 | 四波模型链、六层对象、reverse clock/full-half score、AI 合同 | 章节目录背诵或闭卷总分 |
 | 闭卷 | A—E 五区与三条主推导 | 只会看懂解答 |
-| A/B/C 实验 | continuous/discrete、density/current/characteristic、path/QV/reverse coefficient | canonical 脚本自行 `PASS` |
-| 48 小时 | 首个断点的换例空白重建 | 照抄旧答案 |
+| A/B/C 实验 | nonce 指定轨；continuous/discrete、density/current/characteristic、path/QV/reverse coefficient | canonical 脚本自行 `PASS` 或自选熟悉轨 |
+| 多参数盲测 | 运行前预测、个人新 output/SVG/hash、图—数一致 | 先看结果再解释或只改 seed |
+| 48 小时 | 首个断点的换机制空白重建 | 照抄旧答案或只换小数 |
 | 14 天 | 陌生连续生成模型审计 | 只替换原题符号 |
 
-[[阶段测验 - ODE、动力系统与 SDE（10.9）]]保留 100 分闭卷主体，并新增 20 分钟口试、逐题独立性和证据清单；[[阶段测验解答 - ODE、动力系统与 SDE（10.9）]]新增口试参考、实验判分红线与保持性状态边界；[[实验 - ODE、动力系统与 SDE 累计复现门]]先做解析校准和预测冻结，再随机深入 A/B/C 一轨。
+[[阶段测验 - ODE、动力系统与 SDE（10.9）]]保留 100 分闭卷主体，并用九层对象账本约束 20 分钟口试、逐题独立性和证据清单；[[阶段测验解答 - ODE、动力系统与 SDE（10.9）]]提供口试参考、卷级数值锚点、nonce/盲参判分红线与保持性状态边界；[[实验 - ODE、动力系统与 SDE 累计复现门]]先做解析校准和答案/输出隔离，再由 scorer nonce 指定 A/B/C 手算轨与跨轨盲参数。
 
-> [!success] DYN-CUM 材料证书
-> [[dynamics_cumulative_contract_audit.py]]检查 12/12 scope、14/14 题—解隔离、口试四问、三条主推导、盲干预协议、状态语义、作用域 Wiki 链接与公式边界；正式计算模式还会调用[[dynamics_teaching_contract_audit.py]]，双跑[[dynamics_cumulative_gate.py]]并核对 canonical SVG 的 XML 与 SHA-256。该证书只把 DYN-CUM 材料推进为 `regression-passed`；个人仍是 `not-attempted`。
+> [!success] DYN-CUM-01 材料证书
+> [[dynamics_cumulative_contract_audit.py]]独立复算连续流、solver factors、OU 与 A/B/C 解析锚点，检查 12/12 scope、14/14 题解与 100 分、答案隔离、口试四问、三条主推导、六个状态入口、canonical 确定性双跑、固定多参数盲测输出/hash 及 SVG 图—数自描述。该证书只把 DYN-CUM-01 材料推进为 `regression-passed`；个人仍是 `not-attempted`。
 
-### 从零如何执行 DYN-CUM
+### 从零如何执行 DYN-CUM-01
 
-1. 不打开详解，用唯一 `attempt_id` 冻结口试和闭卷原稿；
-2. 评分者随机指定实验轨，自学时也必须先写干预预测再运行；
+1. 隔离详解和 canonical 结果，用唯一 `attempt_id` 冻结口试、闭卷与解析校准；
+2. 评分者公布 `scorer nonce` 指定手算轨与跨轨盲参数；先写预测、数量级和失败条件，再运行到新文件；
 3. 打开详解后只定位首个断点，不把订正倒填成独立作答；
 4. 48 小时换例重建，14 天审计陌生 neural ODE/CNF/diffusion 情境；
 5. 只有延迟门通过才记 `retained`；是否升级单个节点仍需逐篇审查。
@@ -384,7 +389,7 @@ flowchart LR
 
 ## 八、当前进度
 
-DYN-01—12 与 DYN-CUM-01 的静态材料均已进入 `regression-passed`：正文保持 **12/12 覆盖、180 道节点题**；卷末以 20 分钟口试、240 分钟 100 分闭卷、随机三轨实验、48 小时换例和 14 天迁移形成闭环。[[dynamics_teaching_contract_audit.py]]负责四波正文与图像，[[dynamics_cumulative_contract_audit.py]]负责题—解—实验—路线的交叉合同和卷级确定性计算。全卷十二篇正文仍为 `draft`，个人学习仍为 `not-attempted`；下一步应产生真实口试、答卷、实验和延迟证据，而不是继续把材料 `PASS` 写成掌握。
+DYN-01—12 与 DYN-CUM-01 的静态材料均已进入 `regression-passed`：正文保持 **12/12 覆盖、180 道节点题**；卷末以 20 分钟口试、240 分钟 100 分闭卷、答案/输出隔离、`attempt_id + scorer nonce` 随机轨、多参数盲测、48 小时换机制和 14 天迁移形成闭环。[[dynamics_teaching_contract_audit.py]]负责四波正文与图像，[[dynamics_cumulative_contract_audit.py]]负责题—解—实验—路线、解析模型、canonical/盲参双 hash 与六个状态入口。全卷十二篇正文仍为 `draft`，个人学习仍为 `not-attempted`；下一步应产生真实口试、答卷、个人未见参数输出和延迟证据，而不是继续把材料 `PASS` 写成掌握。
 
 ## 九、2026-08-23 图像标准化结果
 

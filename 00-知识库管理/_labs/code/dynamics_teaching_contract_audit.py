@@ -198,8 +198,8 @@ def audit_route() -> None:
         "第四波的 Brownian—扩散—反演模型链",
         "如何学习第四波，而不是先背扩散模型配方",
         "第四波材料证书",
-        "DYN-CUM：卷末综合验收闭环",
-        "DYN-CUM 材料证书",
+        "DYN-CUM-01：卷末综合验收闭环",
+        "DYN-CUM-01 材料证书",
         "dynamics_teaching_contract_audit.py",
         "`regression-passed`",
         "`draft / not-attempted`",
@@ -222,10 +222,10 @@ def audit_route() -> None:
         "MOC fourth-wave material status is not regression-passed",
     )
     require(
-        re.search(r"\| CUM \| DYN-CUM .*`regression-passed`.*`not-attempted`", content) is not None,
+        re.search(r"\| CUM \| DYN-CUM-01 .*`regression-passed`.*`not-attempted`", content) is not None,
         "MOC cumulative material/personal state is stale",
     )
-    print("PASS DYN route: four-wave map plus DYN-CUM oral/written/experiment/retention contract")
+    print("PASS DYN route: four-wave map plus DYN-CUM-01 oral/written/experiment/retention contract")
 
 
 def audit_exact_first_wave_model() -> None:

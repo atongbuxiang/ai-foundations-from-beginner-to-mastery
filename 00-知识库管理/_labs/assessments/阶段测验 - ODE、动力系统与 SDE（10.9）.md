@@ -11,7 +11,7 @@ closed_notes: true
 solution: "[[阶段测验解答 - ODE、动力系统与 SDE（10.9）]]"
 related: ["[[ODE、动力系统与 SDE MOC]]", "[[数学基础完整课程地图与掌握标准]]", "[[练习与测验 MOC]]", "[[实验 - ODE、动力系统与 SDE 累计复现门]]"]
 created: 2026-08-19
-updated: 2026-08-27
+updated: 2026-08-28
 ---
 
 # 阶段测验 - ODE、动力系统与 SDE（10.9）
@@ -27,17 +27,47 @@ updated: 2026-08-27
 flowchart LR
     F["冻结 attempt ID 与空白记录"] --> O["20 分钟卷级口试"]
     O --> W["240 分钟闭卷"]
-    W --> E["评分者随机指定三轨实验"]
+    W --> N["scorer nonce 指定三轨与盲参数"]
+    N --> E["先预测，再保存新 output/SVG/hash"]
     E --> S["打开详解并定位首个断点"]
-    S --> R48["48 小时无提示换例重做"]
+    S --> R48["48 小时无提示换机制重建"]
     R48 --> R14["14 天陌生 AI 情境迁移"]
     R14 --> P["retained；再判断节点证据"]
 ```
 
-执行前复制文末“证据清单”，建立唯一 `attempt_id`，建议格式为 `DYN-CUM-01-YYYYMMDD-A`。同一次尝试的口试记录、闭卷原稿、评分表、终端输出、干预图与复测结果都使用同一 ID；不得在看过详解后覆盖第一次答案。
+执行前复制文末“证据清单”，建立唯一 `attempt_id`，建议格式为 `DYN-CUM-01-YYYYMMDD-A`。同一次尝试的口试记录、闭卷原稿、评分表、终端输出、干预图与复测结果都使用同一 ID；闭卷与解析校准冻结后，评分者才公布带时间戳的 `scorer nonce`，据此指定 A/B/C 手算轨和涉及至少两轨的盲参数。不得重抽 nonce，也不得在看过详解或 canonical 输出后覆盖第一次答案与预测。
+
+### 0.1 答案与输出隔离协议
+
+正式尝试开始后，[[阶段测验解答 - ODE、动力系统与 SDE（10.9）|详解]]、[[实验 - ODE、动力系统与 SDE 累计复现门|实验结果节]]、仓库中的 canonical SVG/stdout/hash、历史盲参运行和他人答卷都视为答案。口试与闭卷冻结前不得打开；盲参数公布后，必须先提交方向、数量级、失败条件和解析目标，再运行到新文件。Canonical run 只校准环境，不能冒充个人未见参数证据。
+
+### 0.2 九层连续动力学对象账本
+
+每题先定位层级，再写公式。跨层推断必须明确桥梁：
+
+| 层 | 要冻结的对象 | 典型偷换 |
+|---|---|---|
+| 1. 问题与时钟 | state space、domain、forward/reverse clock、time horizon | 换时钟只换符号不换 drift |
+| 2. 局部演化规则 | vector field 或 drift/diffusion、regularity、growth | 把网络定义当 existence theorem |
+| 3. 解与路径 | solution concept、trajectory/sample path、filtration | 把数值数组叫 exact path |
+| 4. 流与转移 | flow map、Jacobian、transition kernel、composition | 把同 marginal 当同 transition law |
+| 5. 分布与密度 | marginal law、density、current、boundary flux | 把 pathwise 结论直接写成 PDE 结论 |
+| 6. 数值离散 | method、step/tolerance、stability、strong/weak error | 把 continuous stability 当 solver stability |
+| 7. 学习对象 | learned field/score、conditional target、population optimum | 把低训练 loss 当 exact coefficient |
+| 8. 误差与成本 | model/terminal/solver/trace/MC/roundoff、NFE/linear solve | 把所有误差归因于步长 |
+| 9. 证书与 AI claim | residual/refinement/QV/mass/held-out、允许结论与 fallback | 从单 seed 图像越界到普遍定理 |
+
+### 0.3 四波统一模型族
+
+- A 波用欠阻尼振子连接 IVP、矩阵指数、相图与 Lyapunov/LaSalle；
+- B 波用标量衰减与快慢系统连接 order、stability function、stiffness 与 implicit damping；
+- C 波用仿射流与 Gaussian 推前连接 flow/Jacobian、Liouville、continuity 与 CNF ledger；
+- D 波用 VP–OU 连接 Brownian QV、Itô、Fokker–Planck、probability flow、reverse clock 与 full/half score。
+
+这四波不是同一个方程硬套到底，而是沿“轨迹定义 → 有限步实现 → 流与密度 → 随机路径与反演”逐次增加对象；改模处必须明说。
 
 > [!important] 四种状态不能混写
-> `regression-passed` 只表示题卷、详解、脚本、图和交叉审计自洽；`not-attempted / attempted / needs-remediation / passed-initial / retained` 才描述个人学习证据。即使本材料已经回归通过，第一次真实学习记录仍从 `not-attempted` 开始。
+> `regression-passed` 只表示题卷、详解、脚本、图和交叉审计自洽；`not-attempted / attempted / passed / retained` 才描述个人学习证据。失败项另记 `remediation_needed`，不另造一个与尝试阶段混杂的状态。即使本材料已经回归通过，第一次真实学习记录仍从 `not-attempted` 开始。
 
 ## 一、规则与允许常数
 
@@ -67,11 +97,11 @@ flowchart LR
 2. 第 9 题的 well-posedness 主证明、第 10 题的 flow–density 主推导、第 11 题的 Itô–Fokker–Planck–reversal 主推导均不得为 0；
 3. 第 12 题至少给出三个有效反例或明确失败机制；
 4. 卷级口试通过；
-5. 计算复现门通过；
-6. 48 小时后无提示重做错题，14 天后完成一道未见过的连续生成模型审计题。
+5. 计算复现门的 nonce 手算轨、盲参数预测与个人新 output/SVG/hash 均通过；
+6. 48 小时后无提示换机制重建，14 天后完成一道未见过的连续生成模型审计题。
 
 > [!warning] 状态语义
-> 题卷、解答、脚本和 SVG 存在，只证明验收工具已经 `composed`。没有真实答卷、逐项评分、参数干预与间隔复测时，12 个节点仍保持 `draft / not-attempted`，不得批量升级为 mastered。
+> 题卷、解答、脚本和 SVG 通过回归，只证明验收工具已经 `regression-passed`。没有真实答卷、逐项评分、scorer nonce、个人未见参数输出与间隔复测时，12 个节点仍保持 `draft / not-attempted`，不得批量升级为 mastered。
 
 ## 三、DYN-01—12 覆盖矩阵
 
@@ -343,9 +373,9 @@ $$
 
 每一波至少说出研究对象、一个核心等式、一个适用条件、一个不能推出的结论，以及它为什么自然把问题交给下一波。
 
-### 口试 2：六层对象账本
+### 口试 2：九层连续动力学对象账本
 
-区分并连接：vector field、exact solution/flow、finite-step solver map、stochastic sample path、marginal density 与 learned approximation。必须用一个具体例子说明“同 marginals 不等于同 path law”，并说明 exact flow 的可逆性或守恒性质为什么不能自动传给粗离散 map。
+按第零节区分并连接：问题/时钟、vector field 或 drift/diffusion、exact solution/flow 或 stochastic path、flow/transition、marginal density、finite-step solver map、learned approximation、误差/成本与 AI claim。必须用一个具体例子说明“同 marginals 不等于同 path law”，并说明 exact flow 的可逆性或守恒性质为什么不能自动传给粗离散 map。
 
 ### 口试 3：时钟与 full/half-score 系数（必答）
 
@@ -380,14 +410,14 @@ $$
 | 口试项 | 结果 | 第一个断点 | 回链节点 | 48 小时换例重做 |
 |---|---|---|---|---|
 | 四波模型链 |  |  |  |  |
-| 六层对象账本 |  |  |  |  |
+| 九层对象账本 |  |  |  |  |
 | 时钟与 full/half score |  |  |  |  |
 | 连续生成模型合同 |  |  |  |  |
-| **结论** | `passed / needs-remediation / not-attempted` |  |  |  |
+| **结论** | `passed / attempted / not-attempted` |  |  |  |
 
 ## 十、计算复现门（必须通过，不计入 100 分）
 
-评分者从[[实验 - ODE、动力系统与 SDE 累计复现门]]的三条轨道中随机指定一条，学习者不能自选：
+闭卷和解析校准冻结后，评分者用 `scorer nonce` 从[[实验 - ODE、动力系统与 SDE 累计复现门]]的三条轨道中指定一条，学习者不能自选或重抽：
 
 1. A 轨：稳定线性系统、连续能量与显式/隐式求解器边界；
 2. B 轨：解析密度路径、probability current、probability-flow characteristics 与 CNF ledger；
@@ -397,7 +427,8 @@ $$
 
 - 重新生成 canonical SVG，验证 XML 与 SHA-256；
 - 不看代码手算指定轨道的两个关键量；
-- 在运行前写出一次参数干预的方向性预测，再输出到不同文件；
+- 对评分者给出的多参数盲测，在运行前写出方向、数量级与失败条件，再输出到不同文件；
+- 保存带同一 `attempt_id` 的完整命令、stdout、SVG、SHA-256、Python 版本与 scorer nonce；
 - 从终端摘要手工复核表格，并解释与预测不符的结果；
 - 每轨分别写一条“能推出”和“一条不能推出”。
 
@@ -433,30 +464,30 @@ score / solver / terminal / Monte Carlo 误差混账：
 实验复现门：not-attempted / attempted / passed / retained
 ```
 
-## 十二、48 小时与 14 天保持性门
+## 十二、48 小时换机制重建门
 
-### 48 小时：先修首个断点，不重抄整份答案
+### 12.1 先修首个断点，不重抄整份答案
 
 关闭详解和原答卷，在空白纸上完成三件事：
 
 1. 重建首次答卷中最早失效的定义、等式或条件；
-2. 换一个数值或模型重做同型推导，不能只背原题数字；
+2. 至少更换 vector field/drift-diffusion、time clock/domain、solver/stability regime、density/boundary 或 score/terminal mechanism 中一类，不能只换原题小数；
 3. 写出一个最小反例或失败边界，说明修复后的结论不能再扩大到哪里。
 
 若首次没有失分，由评分者从三条主链随机抽一条换例重建：Picard–Gronwall–continuation、flow–Liouville–continuity 或 Itô–Fokker–Planck–reversal。
 
-### 14 天：陌生 AI 情境迁移
+## 十三、14 天陌生 AI 连续动力学迁移门
 
-评分者给出一份未见过的 neural ODE、CNF、flow-matching 或 diffusion 报告。学习者必须在 45 分钟内建立六层对象账本，定位至少三个缺失条件，写一条可计算的 refinement/残差门，区分至少四类误差，并把原结论改写成证据真正支持的范围。只更换题中字母、但推导结构完全相同，不算迁移题。
+评分者给出一份未见过的 neural ODE、CNF、flow-matching 或 diffusion 报告。学习者必须在 45 分钟内建立九层对象账本，定位至少三个缺失条件，写一条可计算的 refinement/残差门，区分至少四类误差，并把原结论改写成证据真正支持的范围。只更换题中字母、但推导结构完全相同，不算迁移题。
 
 保持性结论只能记录：
 
-- `needs-remediation`：任一关键对象或主链仍需提示；
-- `passed-initial`：口试、闭卷与实验通过，但尚未完成延迟门；
+- `attempted`：已有冻结原稿，但任一关键对象、主链、nonce 轨或盲干预尚未通过；失败项另记 `remediation_needed`；
+- `passed`：口试、闭卷、nonce 手算轨、盲干预与订正通过，但尚未完成全部延迟门；
 - `retained`：48 小时与 14 天均独立通过；
 - `verified-candidate`：仅表示可把证据送入逐节点审查，不能自动批量改写 12 篇正文状态。
 
-## 十三、证据清单
+## 十四、提交证据清单
 
 | 字段 | 记录 |
 |---|---|
@@ -465,13 +496,13 @@ score / solver / terminal / Monte Carlo 误差混账：
 | 闭卷原稿位置、开始/结束时间 |  |
 | A—E 分区分数与总分 |  |
 | 三条主推导是否非零 |  |
-| 随机实验轨道与 canonical hash |  |
-| 干预前预测、输出路径与偏差解释 |  |
+| scorer nonce、随机实验轨道与 canonical hash |  |
+| 盲参前预测、新 output/SVG/hash 与偏差解释 |  |
 | 第一个断点与正文回链 |  |
-| 48 小时换例重做 |  |
+| 48 小时换机制重建 |  |
 | 14 天陌生迁移题 |  |
-| 最终学习状态 | `not-attempted / attempted / needs-remediation / passed-initial / retained` |
+| 最终学习状态 | `not-attempted / attempted / passed / retained` |
 
-## 十四、解答入口
+## 十五、解答入口
 
 正式交卷、冻结原答案和完成计算门之前不要打开：[[阶段测验解答 - ODE、动力系统与 SDE（10.9）]]。

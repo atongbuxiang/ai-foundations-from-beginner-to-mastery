@@ -32,6 +32,7 @@ CUM_SVG = (
     / "plot-dynamics-cumulative-gate-v2.svg"
 )
 EXPECTED_CUM_SHA256 = "b03decf286243fdfd16051a04ec70e1afb7b35c3369c24bd0a5e2856b90957cc"
+EXPECTED_INTERVENTION_SHA256 = "65c1d45c002169e354facffb355c483560288af8633c0c263943cefabc4636b2"
 
 STATE_SURFACES = (
     ROOT / "10-数学基础" / "数学基础完整课程地图与掌握标准.md",
@@ -91,7 +92,7 @@ def audit_assessment_bundle() -> None:
                 f"{label}: material state is not regression-passed")
         require("learning_status: not-attempted" in content,
                 f"{label}: personal state is not not-attempted")
-        require("updated: 2026-08-27" in content, f"{label}: migration date missing")
+        require("updated: 2026-08-28" in content, f"{label}: migration date missing")
 
     require("time_limit_minutes: 240" in assessment, "assessment time limit changed")
     require("assessment_id: DYN-CUM-01" in assessment, "assessment ID changed")
@@ -106,17 +107,18 @@ def audit_assessment_bundle() -> None:
         "先看完整验收时间线",
         "20 分钟卷级口试",
         "四波模型链",
-        "六层对象账本",
+        "九层连续动力学对象账本",
         "时钟与 full/half-score 系数",
         "连续生成模型研究合同",
-        "48 小时与 14 天保持性门",
-        "证据清单",
+        "48 小时换机制重建门",
+        "14 天陌生 AI 连续动力学迁移门",
+        "提交证据清单",
     ):
         require(marker in assessment, f"assessment misses cumulative marker: {marker}")
     for marker in (
         "卷级口试参考要点",
         "四波模型链参考",
-        "六层对象账本参考",
+        "九层连续动力学对象账本参考",
         "时钟与 full/half-score 参考",
         "口试判分红线",
         "实验复现门的评分说明",
@@ -136,29 +138,54 @@ def audit_assessment_bundle() -> None:
         'solution: "[[阶段测验解答 - ODE、动力系统与 SDE（10.9）]]"' in assessment,
         "assessment lost its explicit solution pointer",
     )
-    require("冻结全部原始记录后再打开本解答" in solution,
+    require("才可打开本解答或 canonical 结果" in solution,
             "solution use-order warning is incomplete")
 
-    points = (5, 5, 5, 5, 8, 7, 8, 7, 8, 8, 9, 8, 7, 10)
-    require(sum(points) == 100, "question point allocation no longer totals 100")
-    print("PASS assessment bundle: scope 12/12, questions 14/14, oral/written/retention gates, answer isolation")
+    question_points = {
+        int(index): int(points)
+        for index, points in re.findall(r"^### 第 (\d+) 题：.*（(\d+) 分）$", assessment, re.M)
+    }
+    solution_points = {
+        int(index): int(points)
+        for index, points in re.findall(r"^### 第 (\d+) 题解答：.*（(\d+) 分）$", solution, re.M)
+    }
+    require(sorted(question_points) == list(range(1, 15)), "assessment point headers are incomplete")
+    require(sorted(solution_points) == list(range(1, 15)), "solution point headers are incomplete")
+    require(question_points == solution_points, "question/solution point allocations differ")
+    require(sum(question_points.values()) == 100, "question point allocation no longer totals 100")
+    for marker in (
+        "答案与输出隔离协议",
+        "九层连续动力学对象账本",
+        "scorer nonce",
+        "48 小时换机制重建门",
+        "14 天陌生 AI 连续动力学迁移门",
+        "提交证据清单",
+    ):
+        require(marker in assessment, f"assessment misses evidence marker: {marker}")
+    for marker in (
+        "四波统一模型的卷级数值锚点",
+        "nonce 与盲参数判分红线",
+        "最终状态边界",
+    ):
+        require(marker in solution, f"solution misses evidence marker: {marker}")
+    print("PASS assessment bundle: scope 12/12, questions/answers 14/14, points=100, isolation + nonce + delay gates")
 
 
 def audit_cumulative_route() -> None:
     moc = read(MOC)
     expected_row = (
-        "| CUM | DYN-CUM | 口试—闭卷—三轨实验—延迟重做 | "
-        "四波随机回链、三条主推导与 A/B/C 累计门 | `regression-passed` | `not-attempted` |"
+        "| CUM | DYN-CUM-01 | 口试 → 闭卷 → nonce 随机轨 → 盲干预 → 订正 → 48 h / 14 d → 独立审计 | "
+        "四波回链、三条主推导与 A/B/C 累计门 | `regression-passed` | `not-attempted` |"
     )
     require(expected_row in moc, "MOC cumulative status row is not regression-passed / not-attempted")
     for marker in (
-        "DYN-CUM：卷末综合验收闭环",
+        "DYN-CUM-01：卷末综合验收闭环",
         "20 分钟口试",
         "240 分钟闭卷",
-        "48 小时重做",
-        "14 天迁移",
-        "DYN-CUM 材料证书",
-        "从零如何执行 DYN-CUM",
+        "48 小时换机制",
+        "14 天陌生 AI 迁移",
+        "DYN-CUM-01 材料证书",
+        "从零如何执行 DYN-CUM-01",
         "dynamics_cumulative_contract_audit.py",
     ):
         require(marker in moc, f"MOC misses DYN-CUM marker: {marker}")
@@ -167,13 +194,11 @@ def audit_cumulative_route() -> None:
         content = read(path)
         require("DYN-CUM-01" in content or "DYN-CUM" in content,
                 f"state surface misses DYN-CUM: {path.relative_to(ROOT)}")
-        nearby = "\n".join(
-            line for line in content.splitlines()
-            if "DYN-CUM" in line or "10.9" in line or "dynamics_cumulative_contract_audit.py" in line
-        )
-        require("regression-passed" in nearby,
+        require("dynamics_cumulative_contract_audit.py" in content,
+                f"state surface misses independent audit: {path.relative_to(ROOT)}")
+        require("regression-passed" in content,
                 f"state surface does not report DYN-CUM material PASS: {path.relative_to(ROOT)}")
-        require("not-attempted" in nearby,
+        require("not-attempted" in content,
                 f"state surface lost personal not-attempted boundary: {path.relative_to(ROOT)}")
     print(f"PASS state surfaces: MOC plus {len(STATE_SURFACES)} curriculum/ledger views agree")
 
@@ -181,15 +206,21 @@ def audit_cumulative_route() -> None:
 def audit_experiment_contract() -> None:
     experiment = read(EXPERIMENT)
     for marker in (
+        "执行顺序、答案隔离与 scorer nonce",
         "进入实验前的解析校准门",
         "防止循环认证",
         "A 轨：连续稳定与离散稳定不是同一证书",
         "B 轨：解析密度、probability current 与 PF characteristics",
         "C 轨：Brownian path、Itô 与 reverse score 系数",
         "评分者随机指定的手工复核",
+        "盲参数干预门",
         "盲测干预怎样才算独立",
+        "审计使用的固定多参数盲测 fixture",
+        "--density-sigma",
+        "--brownian-steps",
         "证据状态机",
         EXPECTED_CUM_SHA256,
+        EXPECTED_INTERVENTION_SHA256,
     ):
         require(marker in experiment, f"experiment misses contract marker: {marker}")
     headings = [line.strip() for line in experiment.splitlines() if line.startswith("#")]
@@ -270,7 +301,38 @@ def audit_exact_models() -> None:
         require(reverse_sde == -0.5 * beta * state_value,
                 "stationary reverse-SDE full-score coefficient changed")
 
-    print("PASS exact cumulative models: nonnormal flow, solver factors, OU clock/score and A/B/C analytic gates")
+    # Fixed blind fixture: independently derive all mechanism-changing targets.
+    blind_z = -50.0 / 30.0
+    blind_euler = 1.0 + blind_z
+    blind_rk4 = 1.0 + blind_z + blind_z**2 / 2.0 + blind_z**3 / 6.0 + blind_z**4 / 24.0
+    blind_be = 1.0 / (1.0 - blind_z)
+    blind_trap = (1.0 + blind_z / 2.0) / (1.0 - blind_z / 2.0)
+    for value, target in zip(
+        (blind_euler, blind_rk4, blind_be, blind_trap),
+        (-2.0 / 3.0, 0.2721193415637861, 3.0 / 8.0, 1.0 / 11.0),
+    ):
+        require(math.isclose(value, target, abs_tol=2e-15), "blind A stability factor changed")
+    require(all(abs(value) < 1.0 for value in (blind_euler, blind_rk4, blind_be, blind_trap)),
+            "blind A stability classification changed")
+
+    blind_a0, blind_sigma, blind_time = 0.8, 0.9, 1.0
+    blind_amplitude = blind_a0 * math.exp(-0.5 * blind_sigma**2 * blind_time)
+    require(math.isclose(1.0 - blind_a0, 0.2, abs_tol=0.0), "blind B positivity margin changed")
+    require(math.isclose(blind_amplitude, 0.5335814486867795, abs_tol=2e-16),
+            "blind B terminal Fourier amplitude changed")
+    for state_value in (-2.0, 0.0, 1.25):
+        dt_density = -(blind_sigma**2 * blind_amplitude * math.cos(state_value)) / (4.0 * math.pi)
+        flux_divergence = -dt_density
+        require(math.isclose(dt_density + flux_divergence, 0.0, abs_tol=0.0),
+                "blind B continuity residual changed")
+
+    blind_beta, blind_stochastic_time = 1.5, 0.75
+    require(math.isclose(blind_beta * blind_stochastic_time, 1.125, abs_tol=0.0),
+            "blind C QV target changed")
+    require(math.isclose(1.0 + blind_beta * blind_stochastic_time, 2.125, abs_tol=0.0),
+            "blind C half-score moment target changed")
+
+    print("PASS exact cumulative models: written anchors, canonical A/B/C and fixed blind mechanisms")
 
 
 def audit_markdown_integrity() -> None:
@@ -349,33 +411,95 @@ def run(script: Path, *args: str) -> str:
     return result.stdout.strip()
 
 
+def normalized_output(output: str) -> str:
+    return "\n".join(line for line in output.splitlines() if not line.startswith("OUTPUT "))
+
+
 def audit_compute() -> None:
     teaching_output = run(TEACHING_AUDIT, "--run-figures")
     require("DYN-01—12 material regression: PASS" in teaching_output,
             "chapter teaching audit did not reach its material PASS")
 
     with tempfile.TemporaryDirectory(prefix="dyn-cum-audit-") as temporary_directory:
-        output_path = Path(temporary_directory) / CUM_SVG.name
-        first_output = run(CUM_SCRIPT, "--output", str(output_path))
-        require(
-            all(marker in first_output for marker in ("A z_fast=", "B orders", "C qv=", "sha256")),
-            "cumulative script did not report all three tracks",
-        )
-        first_digest = hashlib.sha256(output_path.read_bytes()).hexdigest()
-        require(first_digest == EXPECTED_CUM_SHA256,
-                f"fresh cumulative SVG hash changed: {first_digest}")
-        first_bytes = output_path.read_bytes()
-        second_output = run(CUM_SCRIPT, "--output", str(output_path))
-        second_digest = hashlib.sha256(output_path.read_bytes()).hexdigest()
-        require(first_output == second_output and first_digest == second_digest,
-                "cumulative compute gate is not deterministic across two runs")
-        require(first_bytes == output_path.read_bytes(), "cumulative SVG bytes changed across two runs")
-        root_element = ET.parse(output_path).getroot()
+        temporary = Path(temporary_directory)
+        canonical_a = temporary / "canonical-a.svg"
+        canonical_b = temporary / "canonical-b.svg"
+        first_output = run(CUM_SCRIPT, "--output", str(canonical_a))
+        second_output = run(CUM_SCRIPT, "--output", str(canonical_b))
+        require(normalized_output(first_output) == normalized_output(second_output),
+                "canonical stdout changed across two runs")
+        require(canonical_a.read_bytes() == canonical_b.read_bytes(),
+                "canonical SVG bytes changed across two runs")
+        first_digest = hashlib.sha256(canonical_a.read_bytes()).hexdigest()
+        require(first_digest == EXPECTED_CUM_SHA256, f"fresh canonical SVG hash changed: {first_digest}")
+        for marker in (
+            "A_CONFIG stiffness=80 plot_steps=25",
+            "A_DYNAMICS z_fast=-3.200000 factors EE=-2.20000000 RK4=1.82773333 BE=0.23809524 Trap=-0.23076923",
+            "A_ORDERS EE=1.00216894 RK4=3.92818205 BE=0.99784827 Trap=2.00000782",
+            "B_CONFIG density_a=0.65 density_sigma=1.1 density_time=0.8",
+            "B_TRANSPORT state_order=4.03145834 logp_order=4.04224788 mass_drift=4.441e-16 pde_residual=0.000e+00",
+            "C_CONFIG beta=2 stochastic_time=0.6 paths=2048 brownian_steps=512 seed=20260819",
+            "C_STOCHASTIC qv=1.19888410 target=1.20000000 ito_order=0.49850219 full_m2=0.97673218 half_m2=2.14844674 half_target=2.20000000",
+            f"SHA256 {EXPECTED_CUM_SHA256}",
+        ):
+            require(marker in first_output, f"canonical output misses: {marker}")
+        root_element = ET.parse(canonical_a).getroot()
         require(root_element.tag.endswith("svg") and "viewBox" in root_element.attrib,
                 "fresh cumulative SVG failed XML/viewBox validation")
 
+        unsafe_run = subprocess.run(
+            [sys.executable, str(CUM_SCRIPT), "--stiffness", "50"],
+            cwd=ROOT,
+            check=False,
+            text=True,
+            capture_output=True,
+        )
+        require(unsafe_run.returncode != 0, "noncanonical run without --output could overwrite canonical SVG")
+        require("noncanonical runs require --output" in unsafe_run.stderr,
+                "noncanonical output-protection error message drifted")
+
+        intervention = temporary / "blind.svg"
+        intervention_output = run(
+            CUM_SCRIPT,
+            "--stiffness", "50",
+            "--plot-steps", "30",
+            "--density-a", "0.8",
+            "--density-sigma", "0.9",
+            "--density-time", "1.0",
+            "--beta", "1.5",
+            "--stochastic-time", "0.75",
+            "--paths", "1536",
+            "--brownian-steps", "384",
+            "--seed", "20260828",
+            "--output", str(intervention),
+        )
+        intervention_digest = hashlib.sha256(intervention.read_bytes()).hexdigest()
+        require(intervention_digest == EXPECTED_INTERVENTION_SHA256,
+                f"blind intervention SVG hash changed: {intervention_digest}")
+        for marker in (
+            "A_CONFIG stiffness=50 plot_steps=30",
+            "A_DYNAMICS z_fast=-1.666667 factors EE=-0.66666667 RK4=0.27211934 BE=0.37500000 Trap=0.09090909",
+            "A_ORDERS EE=1.00216894 RK4=3.92818205 BE=0.99784827 Trap=2.00000782",
+            "B_CONFIG density_a=0.8 density_sigma=0.9 density_time=1",
+            "B_TRANSPORT state_order=4.05597835 logp_order=4.05653516 mass_drift=4.441e-16 pde_residual=0.000e+00",
+            "C_CONFIG beta=1.5 stochastic_time=0.75 paths=1536 brownian_steps=384 seed=20260828",
+            "C_STOCHASTIC qv=1.12838453 target=1.12500000 ito_order=0.49776175 full_m2=0.99961395 half_m2=2.13623152 half_target=2.12500000",
+            f"SHA256 {EXPECTED_INTERVENTION_SHA256}",
+        ):
+            require(marker in intervention_output, f"blind output misses: {marker}")
+        intervention_svg = intervention.read_text(encoding="utf-8")
+        for marker in (
+            "x′=−x, y′=−50y；V′≤−2V；h=0.033",
+            "a₀=0.8, σ=0.9, T=1；p=(1+a(t) cos x)/(2π)",
+            "OU；β=1.5, T=0.75, paths=1536, N=384",
+            "analytic half-score target=1+βT=2.1250",
+        ):
+            require(marker in intervention_svg, f"blind SVG does not self-describe: {marker}")
+        ET.parse(intervention)
+
     print("PASS chapter compute dependency: DYN-01—12 teaching/figure regression")
-    print(f"PASS cumulative compute gate: deterministic double-run; sha256={first_digest}")
+    print(f"PASS canonical double-run + stored SVG: sha256={first_digest}")
+    print(f"PASS blind-interface intervention: sha256={EXPECTED_INTERVENTION_SHA256}")
 
 
 def main() -> None:
@@ -383,7 +507,7 @@ def main() -> None:
     parser.add_argument(
         "--run-compute",
         action="store_true",
-        help="rerun DYN-01--12 figures and the deterministic DYN-CUM three-track gate",
+        help="rerun DYN-01--12 figures and the deterministic DYN-CUM-01 three-track gate",
     )
     args = parser.parse_args()
 
@@ -396,7 +520,7 @@ def main() -> None:
     if args.run_compute:
         audit_compute()
     else:
-        print(f"SKIP compute rerun (pass --run-compute for the formal DYN-CUM audit); stored sha256={digest}")
+        print(f"SKIP compute rerun (pass --run-compute for the formal DYN-CUM-01 audit); stored sha256={digest}")
     print("DYN-CUM-01 material regression: PASS; personal learning: not-attempted")
 
 

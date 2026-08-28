@@ -86,8 +86,8 @@ updated: 2026-08-28
 
 - 题卷：[[阶段测验 - ODE、动力系统与 SDE（10.9）]]；
 - 独立详解：[[阶段测验解答 - ODE、动力系统与 SDE（10.9）]]；
-- 计算门：[[实验 - ODE、动力系统与 SDE 累计复现门]]，覆盖 continuous/discrete stability、解析 FPE–PF–CNF density ledger 与 Brownian/Itô/reverse-score coefficient；
-- 覆盖：DYN-01—12；DYN-CUM-01 使用 20 分钟口试、100 分笔试、评分者随机计算轨道与 48 小时/14 天保持性门；
+- 计算门：[[实验 - ODE、动力系统与 SDE 累计复现门]]以 `attempt_id + scorer nonce` 指定 continuous/discrete stability、解析 FPE–PF–CNF density ledger 或 Brownian/Itô/reverse-score coefficient 手算轨，并要求跨轨盲参预测、新 output/SVG/hash、48 小时换机制与 14 天陌生 AI 迁移；
+- 覆盖：DYN-01—12；DYN-CUM-01 使用 20 分钟口试、240 分钟 100 分闭卷、nonce 随机轨、盲参数与延迟迁移门；
 - 当前语义：材料 `regression-passed`、个人 `not-attempted`，由[[dynamics_cumulative_contract_audit.py]]回归，不构成 verified 证据。
 
 - 题卷：[[阶段测验 - 优化与凸分析（10.7）]]；
@@ -157,7 +157,7 @@ updated: 2026-08-28
 39. [[实验 - Itô 和、SDE 强弱误差与离散梯度审计]]：用左端/对称随机和恢复quadratic-variation correction，在同一nested Brownian path上分离GBM Euler–Maruyama的strong/weak order，并区分同一离散目标的finite-difference门与continuous-gradient refinement gap。
 40. [[实验 - Fokker-Planck、概率流与score误差审计]]：用守恒有限体积验收OU FPE的质量与收敛；用Gaussian同边缘SDE/PF ODE分离cross-time law与quadratic variation；独立扫描score bias与exact-score finite-step solver bias。
 41. [[实验 - 反向时间、score恒等式与扩散采样误差审计]]：用Gaussian backward conditional验收reverse drift极限，用双峰mixture逐点验证DSM/Tweedie，并将exact-score solver convergence与score、terminal prior、half-coefficient误差地板分账。
-42. [[实验 - ODE、动力系统与 SDE 累计复现门]]：用刚性线性系统分离 continuous Lyapunov decay 与四种 finite-step stability/order，用圆周解析热流对齐 FPE current、PF characteristics 与 CNF log-density，再以 stationary OU 分离 Brownian QV、Itô identity、full-score reverse 与 half-score noisy error floor。
+42. [[实验 - ODE、动力系统与 SDE 累计复现门]]：用刚性线性系统分离 continuous Lyapunov decay 与四种 finite-step stability/order，用圆周解析热流对齐 FPE current、PF characteristics 与 CNF log-density，再以 stationary OU 分离 Brownian QV、Itô identity、full-score reverse 与 half-score noisy error floor；现已加入 nonce 防挑轨、跨三轨盲参数、canonical/干预双 hash、非默认图自描述与 48 h / 14 d 状态机。
 43. [[实验 - 度量、紧致性与连续映射审计]]：用 $d_1=|x-y|$ 与 $d_2=|\arctan x-\arctan y|$ 分离 topology 和 completeness，用区间 cover 与 $\ell^2$ basis packing 拆开 compactness 两条件，再以光滑同胚/jump 的最大样本间隙审计 graph-at-scale。
 44. [[实验 - 图册、切空间与解码器秩审计]]：用 stereographic transition 验收 chart cycle/导数互逆，用 clean/noisy parabola 分离 local-PCA curvature bias 与 noise floor，再以 regular/collapsed decoder 拆开 full rank、round trip 和 orthogonal projection。
 45. [[实验 - 坐标度量、测地能量与球面 Retraction 审计]]：用 polar metric 与 Cartesian polygon 验收同一圆周长度，用同像不同参数曲线分离 length 与 energy，再以 sphere Euler、normalization 和 exact Exp 拆开二阶约束残差、精确可行与三阶点差。

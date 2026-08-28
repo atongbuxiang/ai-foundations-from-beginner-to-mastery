@@ -9,13 +9,13 @@ assessment: "[[阶段测验 - ODE、动力系统与 SDE（10.9）]]"
 scope: [DYN-01, DYN-02, DYN-03, DYN-04, DYN-05, DYN-06, DYN-07, DYN-08, DYN-09, DYN-10, DYN-11, DYN-12]
 related: ["[[ODE、动力系统与 SDE MOC]]", "[[练习与测验 MOC]]", "[[推导与实验 MOC]]", "[[实验 - ODE、动力系统与 SDE 累计复现门]]"]
 created: 2026-08-19
-updated: 2026-08-27
+updated: 2026-08-28
 ---
 
 # 阶段测验解答 - ODE、动力系统与 SDE（10.9）
 
 > [!warning] 使用顺序
-> 先独立完成 20 分钟卷级口试、240 分钟[[阶段测验 - ODE、动力系统与 SDE（10.9）|闭卷测验]]和评分者指定的[[实验 - ODE、动力系统与 SDE 累计复现门|计算轨道]]，冻结全部原始记录后再打开本解答。读懂解答不等于会做；必须标出原答案中第一个无依据的等号、第一次对象偷换或第一个遗漏条件，并在 48 小时后空白重建。
+> 先独立完成 20 分钟卷级口试与 240 分钟[[阶段测验 - ODE、动力系统与 SDE（10.9）|闭卷测验]]并冻结原稿；评分者公布 `scorer nonce` 后，还必须先冻结指定轨的手算和多参数盲预测，保存个人新 output/SVG/hash，才可打开本解答或 canonical 结果。读懂解答不等于会做；必须标出原答案中第一个无依据的等号、第一次对象偷换或第一个遗漏条件，并在 48 小时后换机制空白重建。
 
 > [!abstract] 评分思想
 > 本卷最重要的不是最终数字，而是对象和结论边界。把 exact flow、solver map、SDE path、marginal density 与 learned score 混成一个对象，即使后续代数恰好正确，也不能得到对应的理论分。等价推导可以得分；但必须给出足以检查的假设、关键中间式和验收量。
@@ -999,16 +999,19 @@ $$
 > [!tip] 口试交接点
 > 合格回答不是四段百科，而是能说明为什么前一波留下的问题迫使下一波出现：唯一连续轨迹仍需离散；离散轨迹族仍需体积/密度；确定性密度搬运仍未解释扩散；扩散的正向边缘仍需 score 与反向动力学才能生成。
 
-### 7.2 六层对象账本参考
+### 7.2 九层连续动力学对象账本参考
 
 | 层 | 数学对象 | 代表关系 | 不能自动替代 |
 |---|---|---|---|
+| 问题 / 时钟 | state、domain、$t$ 或 $s=T-t$、horizon | 决定演化方向与边界 | 换时钟只换符号不换 drift |
 | vector field | $f(t,x)$ 或 drift/diffusion | 定义局部演化规则 | 解的全局存在与可逆性 |
-| exact solution / flow | $X_t,\phi_{s,t}$ | 满足积分方程和 composition | 某个 finite-step map |
-| solver map | $\Psi_h$、容差控制的数值轨迹 | 逼近 exact flow | exact injectivity、守恒、稳定证书 |
-| stochastic path | $\{X_t(\omega)\}_{t\le T}$ | 含 filtration、transition 与 QV | 仅由 one-time marginals 决定 |
+| solution / path | $X_t$ 或 $\{X_t(\omega)\}_{t\le T}$ | 满足积分方程；随机时含 filtration 与 QV | 某个 finite-step array 或 one-time marginal |
+| flow / transition | $\phi_{s,t}$ 或 $P_{s,t}(x,dy)$ | composition / Chapman–Kolmogorov | 仅由 marginal density 决定 |
 | marginal density | $p_t(x)$ | continuity/Fokker–Planck 演化 | sample-path coupling 或 transition law |
+| solver map | $\Psi_h$、容差控制的数值轨迹 | 逼近 exact flow/path 或 law functional | exact injectivity、守恒、稳定证书 |
 | learned approximation | $f_\theta,s_\theta,\widehat p_h$ | 有统计、优化和离散误差 | exact field、exact score 或 theorem |
+| error / cost | model、terminal、solver、trace、MC、roundoff、NFE | 决定误差预算与资源约束 | 单一 success flag 或 wall time |
+| certificate / AI claim | residual、refinement、mass/QV、held-out、fallback | 限定允许结论 | 从单 seed 经验值升级为普遍定理 |
 
 最小反例是 stationary OU 与其 PF ODE：二者在每个时刻都保持 $\mathcal N(0,1)$，但 OU path 的 quadratic variation 为 $2T$，PF path 恒定且 QV 为零。另一个离散反例是稳定 ODE $y'=-40y$ 在 $h=0.1$ 下的 Euler factor $-3$；exact decay 不会替 Euler map 提供稳定性。
 
@@ -1066,14 +1069,14 @@ $$
 | 口试项 | 结果 | 第一个断点 | 回链 | 48 小时换例重做 |
 |---|---|---|---|---|
 | 四波模型链 |  |  |  |  |
-| 六层对象账本 |  |  |  |  |
+| 九层对象账本 |  |  |  |  |
 | 时钟与 full/half score |  |  |  |  |
 | 连续生成模型合同 |  |  |  |  |
-| **结论** | `passed / needs-remediation / not-attempted` |  |  |  |
+| **结论** | `passed / attempted / not-attempted` |  |  |  |
 
 ## 八、实验复现门的评分说明
 
-[[实验 - ODE、动力系统与 SDE 累计复现门]]不计入 100 分，但关键证据缺失会让整卷保持未通过。Canonical run 只是环境与材料校准；个人证据来自随机指定轨道的手算、盲预测、参数干预和边界解释。
+[[实验 - ODE、动力系统与 SDE 累计复现门]]不计入 100 分，但关键证据缺失会让整卷保持未通过。Canonical run 只是环境与材料校准；个人证据来自 `attempt_id + scorer nonce` 指定轨的手算、未见参数预测、个人新 output/SVG/hash 和边界解释。
 
 | 验收项 | 通过证据 | 常见不通过 |
 |---|---|---|
@@ -1107,13 +1110,41 @@ $$
 
 ### 9.3 14 天迁移怎样判
 
-陌生 AI 情境至少应留下：六层对象账本、三项缺失条件、一条可运行 refinement/残差门、四类误差分账、两个 failure state 与一段收缩后的结论。把原题名词替换成 neural ODE 或 diffusion、但没有重新判断对象和条件，不算迁移。
+陌生 AI 情境至少应留下：九层对象账本、三项缺失条件、一条可运行 refinement/残差门、四类误差分账、两个 failure state 与一段收缩后的结论。把原题名词替换成 neural ODE 或 diffusion、但没有重新判断对象和条件，不算迁移。
 
 ### 9.4 从 `retained` 到逐节点证据
 
 卷末通过只给跨章整合证据。只有口试、闭卷原稿、逐项评分、48 小时重做、14 天迁移、随机实验轨和对应节点 A—E 习题都可追踪时，才可把材料送入逐节点 `verified` 审查；不得把 DYN-01—12 批量改成已掌握。
 
-## 十、阅卷与证据记录
+## 十、四波统一模型的卷级数值锚点
+
+这些数值用于评分者复核推导是否落到正确对象，不允许学习者在盲测前把本节当答案表：
+
+- **连续流与稳定性：** 非正规 $A=\left[\begin{smallmatrix}-1&10\\0&-3\end{smallmatrix}\right]$ 在 $t_*=\frac12\log3$ 给 $x(t_*)=(10,1)^T/(3\sqrt3)$、$\|x(t_*)\|_2=\sqrt{101/27}>1$，同时 $\det e^{t_*A}=1/9$；谱渐近稳定、方向暂态增长和总面积收缩可以同时成立。
+- **有限步求解器：** 对 $y'=-40y,h=0.1$，Euler 因子为 $-3$，BE 为 $1/5$，trapezoidal 为 $-1/3$；exact decay 不替 finite-step map 提供稳定证书。
+- **OU 密度与反向时钟：** 在题卷的 $t=\log2$，$m_t=1,v_t=7/4$，score 为 $-4(x-1)/7$；在 $x=m_t$ 处正向 PF velocity 为 $-1$，正常递增反向时钟的 noisy reverse drift 为 $1$。
+- **累计 A/B/C：** canonical 的 fast $z=-3.2$；周期热流满足 pointwise continuity residual 为零；stationary OU 的 QV target 为 $\beta T=1.2$，half-score noisy reverse 的 continuous target 为 $1+\beta T=2.2$。这些解析目标与 Monte Carlo realization 必须分栏。
+
+### 10.1 nonce 与盲参数判分红线
+
+- 没有唯一 `attempt_id` 或带时间戳的 `scorer nonce`，无法排除事后挑轨：最高记 `attempted`；
+- 只复现 canonical hash，没有未见参数的事前预测和个人新输出：计算门不通过；
+- 只改单一 seed、颜色或输出文件名，不改变 stability、density transport 或 stochastic mechanism：不算盲干预；
+- stdout 参数已变而 SVG 仍显示 canonical 协议，或 SVG/摘要/手算三者不一致：记图—数合同失败；
+- Monte Carlo 数字没有恰等于解析期望不自动失败；必须结合 paths、nested coupling、步长和允许波动解释。
+
+### 10.2 最终状态边界
+
+| 状态 | 必须存在的证据 | 不能替代 |
+|---|---|---|
+| `not-attempted` | 尚无本人冻结原稿 | 材料审计 PASS |
+| `attempted` | 至少有口试、闭卷或实验原始记录 | 查看详解后的临摹 |
+| `passed` | 口试、A—E 分区、三条主链、nonce 手算轨、盲干预与订正全部过线 | 只有总分或 SVG/hash |
+| `retained` | `passed` 加 48 小时换机制与 14 天陌生 AI 连续动力学迁移 | 同日重做或原题换数 |
+
+因此，本文与审计只能建立 `material_status: regression-passed`；没有本人延迟证据时，`learning_status` 仍是 `not-attempted`。
+
+## 十一、阅卷与证据记录
 
 | 题号 | 满分 | 得分 | 首个断点 | 回链 | 48 小时重做 |
 |---|---:|---:|---|---|---|
@@ -1138,9 +1169,9 @@ $$
 | `attempt_id` / commit / 日期 |  |
 | 口试结论 |  |
 | A—E 分区是否达线 |  |
-| 随机实验轨道 / hash / 干预 |  |
+| scorer nonce / 随机轨道 / canonical 与 blind hash |  |
 | 48 小时换例 |  |
 | 14 天陌生迁移 |  |
-| 最终结论 | `passed-initial / retained / needs-remediation / not-attempted` |
+| 最终结论 | `not-attempted / attempted / passed / retained` |
 
 文档成稿时默认个人状态为 `not-attempted`；`material_status: regression-passed` 不能填写到个人结论栏。

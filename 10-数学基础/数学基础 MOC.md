@@ -1379,7 +1379,7 @@ $$
 
 [[实验 - ODE、动力系统与 SDE 累计复现门]]建立三条评分者随机指定的独立轨道。A 轨在 $\lambda=80,h=0.04$ 下得到 Euler/RK4 fast factors $-2.2/1.827733$，并在共同稳定 refinement 中恢复 Euler/RK4/BE/Trap 阶 $1.0022/3.9282/0.9978/2.0000$；B 轨用圆周解析 Fourier density 得到 PF characteristic/log-density 阶 $4.0315/4.0422$、质量漂移 $4.44\times10^{-16}$；C 轨用 2048 条 nested OU paths 得到 QV $1.19888\approx1.2$、Itô residual 阶 $0.4985$，并展示 noisy reverse SDE 误用 half-score 后二阶矩由目标 1 漂向解析 2.2。standard-library SVG 的 canonical hash 为 `b03decf286243fdfd16051a04ec70e1afb7b35c3369c24bd0a5e2856b90957cc`，双跑、XML 与视觉复核均通过。
 
-本轮又把 DYN-CUM-01 升级为“20 分钟口试 → 240 分钟闭卷 → 随机三轨 → 48 小时换例 → 14 天迁移”，并由[[dynamics_cumulative_contract_audit.py]]检查题—解隔离、状态界面、解析量与 canonical 双跑。由此 10.9 达到 **12/12 正文、180 道节点题、卷末题卷、独立详解和三轨计算门全部回归通过**。材料状态为 `regression-passed`，个人仍为 `not-attempted`，因为尚无真实口试、闭卷原稿、评分、参数干预和间隔重做。
+这一初版把 DYN-CUM-01 升级为“20 分钟口试 → 240 分钟闭卷 → 随机三轨 → 48 小时换例 → 14 天迁移”，并由[[dynamics_cumulative_contract_audit.py]]检查题—解隔离、状态界面、解析量与 canonical 双跑；第九十七批又补齐 scorer nonce、跨轨盲参和图—数自描述。由此 10.9 达到 **12/12 正文、180 道节点题、卷末题卷、独立详解和三轨计算门全部回归通过**。材料状态为 `regression-passed`，个人仍为 `not-attempted`，因为尚无真实口试、闭卷原稿、评分、个人未见参数输出和间隔重做。
 
 ## 第七十二批：度量空间、拓扑与连续映射
 
@@ -1720,6 +1720,14 @@ AI迁移从Banach压缩映射的几何尾界推进到标量二次梯度下降的
 
 10.8当前为 **20篇正文、20组节点题解，累计材料 regression-passed / 个人 not-attempted**。[[numerical_cumulative_contract_audit.py]]独立复核20/20教学合同、14/14题解与100分、答案隔离、有限精度/condition、CG/GMRES/nonnormal solve、稀疏/随机低秩解析锚点、六个状态面、canonical双跑及盲参hash。材料通过不改变NUM-01—20的`draft`状态；下一步仍是真实口试、闭卷、nonce轨、个人未见参数运行与延迟迁移证据。
 
+## 第九十七批：10.9卷末累计验收与轨迹—密度—随机路径三轨门
+
+本批把[[阶段测验 - ODE、动力系统与 SDE（10.9）|DYN-CUM-01]]升级为完整证据链：20分钟无提示口试后进入240分钟、100分A—E闭卷；冻结原稿和三轨解析校准后，以`attempt_id + scorer nonce`指定A“连续/离散稳定”、B“FPE/PF/CNF密度输运”或C“Brownian/Itô/reverse-score”手算轨，并给出至少横跨两轨的盲参数；先冻结方向、数量级与失败条件，再保存个人新output/SVG/hash；订正后通过48小时换vector field/clock/solver/density/score机制和14天陌生neural ODE/CNF/flow-matching/diffusion报告检验保持与迁移。题卷新增九层连续动力学对象账本，将问题/时钟、局部规则、解/路径、流/转移、分布/密度、数值离散、学习对象、误差/成本与AI claim分开。
+
+[[实验 - ODE、动力系统与 SDE 累计复现门]]保留三轨解析模型和正式图，但禁止非默认参数在未指定`--output`时覆盖canonical文件，并让非默认SVG直接写出stiffness/step、density protocol与OU paths/steps。Canonical SVG哈希保持`b03decf286243fdfd16051a04ec70e1afb7b35c3369c24bd0a5e2856b90957cc`；固定fixture同时改变$\lambda/N$、$a_0/\sigma/T$和$\beta/T$/Monte Carlo协议，得到盲参哈希`65c1d45c002169e354facffb355c483560288af8633c0c263943cefabc4636b2`。
+
+10.9当前为 **12篇正文、12组节点题解，累计材料 regression-passed / 个人 not-attempted**。[[dynamics_cumulative_contract_audit.py]]独立复核12/12教学合同、14/14题解与100分、答案隔离、非正规流/solver/OU与三轨解析锚点、六个状态面、canonical双跑、盲参hash和SVG图—数自描述。材料通过不改变DYN-01—12的`draft`状态；下一步仍是真实口试、闭卷、nonce轨、个人未见参数运行与延迟迁移证据。
+
 ## 对接科学空间
 
 - “低秩近似之路”系列：伪逆、SVD、CR、ID、CUR
@@ -1739,7 +1747,7 @@ AI迁移从Banach压缩映射的几何尾界推进到标量二次梯度下降的
 7. **概率论与数理统计**：10.5 已完成 PROB-01—20 的正文、SVG、各 15 题与独立详解；`PROB-CUM-01` 已形成“口试—闭卷—scorer nonce随机轨—盲干预—48小时—14天”证据链，并由[[probability_cumulative_contract_audit.py]]复核为材料`regression-passed`、个人`not-attempted`。
 8. **信息论与统计学习接口**：10.6 已完成 INFO-01—10 的正文、十幅机制图、150 道 A–E 题和独立详解；`INFO-CUM-01` 已形成“口试—闭卷—scorer nonce随机轨—盲干预—48小时—14天”证据链，并由[[information_cumulative_contract_audit.py]]复核为材料`regression-passed`、个人`not-attempted`。
 9. **优化与凸分析**：10.7 已完成 OPT-01—16 的正文、十六幅机制图、240 道 A—E 题和独立详解；`OPT-CUM-01` 已形成“口试—闭卷—scorer nonce随机轨—盲干预—48小时换机制—14天陌生AI迁移”证据链，并由[[optimization_cumulative_contract_audit.py]]复核为材料`regression-passed`、个人`not-attempted`。
-10. **ODE、动力系统与 SDE**：10.9 已完成 DYN-01—12 的正文、机制图、180 道 A—E 题、独立详解，以及含口试—闭卷—三轨—延迟门的 `DYN-CUM-01`；当前材料 `regression-passed`，个人 `not-attempted`。
+10. **ODE、动力系统与 SDE**：10.9 已完成 DYN-01—12 的正文、机制图、180 道 A—E 题和独立详解；`DYN-CUM-01` 已形成“口试—闭卷—scorer nonce 随机轨—跨轨盲参—48 小时换机制—14 天陌生 AI 迁移”证据链，并由[[dynamics_cumulative_contract_audit.py]]复核为材料 `regression-passed`、个人 `not-attempted`。
 11. **几何、泛函分析、核与算子基础**：10.10 已完成GEO-01—08的正文、机制图、120道A—E题、独立详解、八套节点计算门以及含口试—闭卷—随机三轨—延迟门的`GEO-CUM-01`；当前材料`regression-passed`，个人`not-attempted`。
 12. **数学语言、逻辑与证明**：[[数学语言、逻辑与证明 MOC|10.1卷入口]]与MATH-01—08均已建立正文、深色机制图、各15题、独立详解与浅色计算审计，达到8/8；`MATH-CUM-01`题卷、详解与量词—递推—复杂度三轨计算门已成稿，当前`composed / not-attempted`。
 13. **全数学主线**：十卷150节已由[[数学基础完整课程地图与掌握标准]]锁定；当前150篇正文均为`draft`，正文覆盖率100.0%，尚无任何一卷通过课程验收。
