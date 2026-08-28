@@ -3,9 +3,9 @@ type: moc
 status: active
 area: [learning-theory/foundations]
 prerequisites: ["[[数学基础完整课程地图与掌握标准]]"]
-related: ["[[学习理论 MOC]]", "[[学习理论完整课程地图与掌握标准]]", "[[PAC 学习与有限假设类 MOC]]"]
+related: ["[[学习理论 MOC]]", "[[学习理论完整课程地图与掌握标准]]", "[[PAC 学习与有限假设类 MOC]]", "[[阶段测验 - 学习问题、决策与风险（20.1）]]", "[[实验 - 学习问题、决策与风险累计复现门]]"]
 created: 2026-08-20
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 学习问题、决策与风险 MOC
@@ -36,4 +36,37 @@ flowchart LR
 | LT-07 | [[可实现、不可知、相合性与可学习性]] | 四种理论状态不混用 | draft + A–E 闭环 |
 | LT-08 | [[训练集、验证集、测试集与自适应复用]] | leakage 与 reusable holdout 边界 | draft + A–E 闭环 |
 
-当前为 **8/8 正文，8/8 独立 v2 图文单元，8/8 具 A–E 习题与独立解答，0/8 经真实验收**。LT-01—08 的图示均由 [[plot_learning_problem_decision_v2.py]] 确定性生成，已补齐引图问题、正式图注、读图方法、适用边界和初学者自检，并通过 SVG 结构、XML、1200 px 渲染与人工视觉检查。第一卷已成稿但保持 `draft / not-attempted`；后继 20.2 也已完成同标准迁移，当前施工进入 20.3 的 VC 维主线。
+## 卷级累计验收
+
+| 材料 | 作用 | 当前状态 |
+|---|---|---|
+| [[阶段测验 - 学习问题、决策与风险（20.1）]] | `LT-CUM-01`：20 分钟口试 + 210 分钟、100 分 A—E 闭卷；覆盖 LT-01—08 | `regression-passed / not-attempted` |
+| [[阶段测验解答 - 学习问题、决策与风险（20.1）]] | 独立封存详解、口试红线、九层账本与错题回链 | `sealed until first attempt` |
+| [[实验 - 学习问题、决策与风险累计复现门]] | scorer nonce 指定对象—风险、Bayes 决策或 holdout 反馈主轨，并要求跨轨盲参 | `regression-passed / not-attempted` |
+| [[learning_problem_decision_cumulative_contract_audit.py]] | 双跑 canonical/盲参，复核 stdout、XML、hash、覆盖保护与六处状态面 | `PASS` |
+
+```mermaid
+flowchart LR
+    O["20 分钟无提示口试"] --> W["210 分钟闭卷"]
+    W --> F["冻结原稿与 hash"]
+    F --> N["scorer nonce 三轨"]
+    N --> B["跨轨盲参数"]
+    B --> R["48 小时换机制"]
+    R --> T["14 天陌生评价迁移"]
+```
+
+三轨把八章压缩成可调用的整合结构：A 轨在有限二元问题中分离 Bayes risk、类近似、有限样本 class excess 与 selection gap；B 轨从 conditional risk 推出 cost/reject Bayes action；C 轨用 holdout order statistic 与 simultaneous bound 分离验证选择乐观和 fresh evaluation。材料图由[[learning_problem_decision_cumulative_gate.py]]确定性生成；默认总图是[[00-知识库管理/_assets/plots/learning-theory/plot-learning-problem-decision-cumulative-gate-v2.svg]]。
+
+## 当前状态
+
+```text
+formal nodes: 8 / 8
+node exercises / solutions: 8 / 8
+volume evidence gate built: 1 / 1
+personal oral / closed-book / blind-run evidence: 0
+material state: regression-passed
+learning state: not-attempted
+next: build the 20.2 volume evidence gate for LT-09—16
+```
+
+LT-01—08 具备 **8/8 正文、8/8 独立 v2 图文单元、8/8 A—E 习题与独立解答，以及 1/1 卷级验收工具链**。这仍不是 8/8 真实掌握：在口试、闭卷、nonce 盲参、48 小时与 14 天证据未产生前，全部正文保持 `draft`，个人保持 `not-attempted`。

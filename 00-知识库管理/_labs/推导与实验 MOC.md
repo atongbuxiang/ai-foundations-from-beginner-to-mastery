@@ -31,9 +31,11 @@ updated: 2026-08-28
 ## 第二章学习理论静态材料审计
 
 - [[learning_theory_teaching_contract_audit.py]]：检查 LT-01—84 十卷 scope、84 组题—解双射、1260 个 A—E ID、实际调用来源卡、范围内链接、图文单元与课程地图映射；
-- `--run-compute`：将 18 个学习理论制图脚本运行两次，并要求 106 个 figure/plot 资产与仓库版本逐字节一致；
-- 当前语义：第 20 章静态材料为 `regression-passed`，84 篇正文仍为 `draft`，卷级证据门仍为 0/10，个人严格保持 `not-attempted`；
-- 下一施工点：为 LT-01—08 建立首个卷级口试、闭卷、答案/输出隔离、随机实验与延迟迁移门。
+- `--run-compute`：将 18 个节点制图脚本运行两次，并要求原有 106 个节点 figure/plot 资产与仓库版本逐字节一致；
+- 第一卷累计门：[[实验 - 学习问题、决策与风险累计复现门]]以 object-risk ERM 枚举、cost/reject Bayes decision 与 finite-candidate holdout feedback 组成三轨；配套[[阶段测验 - 学习问题、决策与风险（20.1）|LT-CUM-01]]和独立详解；
+- [[learning_problem_decision_cumulative_contract_audit.py]]：复核 8/8 scope、14/14 题解与 100 分、答案/输出隔离、解析锚点、canonical/盲参双跑、stdout/SVG/XML/hash、覆盖保护和状态面；
+- 当前语义：第 20 章静态材料为 `regression-passed`，卷级材料门 **1/10**，个人通过 **0/10 / `not-attempted`**；84 篇正文仍为 `draft`；
+- 下一施工点：为 LT-09—16 建立 20.2 的 PAC/有限假设类卷级证据门。
 
 ## 第四章确定性架构审计
 
