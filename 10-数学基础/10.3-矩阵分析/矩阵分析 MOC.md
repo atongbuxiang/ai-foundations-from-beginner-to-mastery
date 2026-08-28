@@ -82,7 +82,7 @@ $$
 > 完成 MA-13—16 后，应能区分 $L_f(A)$、$L_f(A,E)$ 与伴随 VJP；由 $T_K$ 写出 $e^{tT_K}$ 和 $R(z;T_K)$，复述伪谱四定义等价链；说明为什么 $\lambda=-1$ 的无结构条件数为 $\sqrt{1+K^2}$、上三角结构化条件数却为 $1$；最后由 $B_K^2=\tfrac14I$ 推出 $\operatorname{sign}(B_K)=2B_K$，并验收两个斜谱投影。
 
 > [!success] 10.3 静态课程材料已完成迁移
-> MA-01—16 已全部通过本轮教学合同和仓库回归，卷级题—解—实验也已组成。这里的状态是 `composed / regression-passed`：它证明材料可读、可算、可复现，不代表学习者已经完成闭卷作答、独立评分、错题订正与延迟迁移。
+> MA-01—16 已全部通过本轮教学合同和仓库回归，卷级题—解—实验也已组成。材料状态是`regression-passed`，个人状态是`not-attempted`：前者证明材料可读、可算、可复现，不代表学习者已经完成口试、闭卷、独立评分、错题订正与延迟迁移。
 
 ## 当前主线
 
@@ -159,11 +159,36 @@ flowchart LR
 
 | 验收件 | 覆盖与作用 | 当前状态 |
 |---|---|---|
-| [[阶段测验 - 矩阵分析（10.3）]] | 270分钟、100分，A—E分区覆盖MA-01—16 | composed / not-attempted |
-| [[阶段测验解答 - 矩阵分析（10.3）]] | 完整证明、反例、评分边界与AI研究合同 | sealed until first attempt |
-| [[实验 - 矩阵分析累计复现门]] | 正定变分、扰动/非正规、matrix-function/structure三轨 | composed / not-attempted |
+| [[阶段测验 - 矩阵分析（10.3）]] | 20分钟口试 + 270分钟、100分A—E闭卷，覆盖MA-01—16 | `regression-passed / not-attempted` |
+| [[阶段测验解答 - 矩阵分析（10.3）]] | 完整证明、口试红线、反例、评分边界与AI研究合同 | `sealed until first attempt` |
+| [[实验 - 矩阵分析累计复现门]] | `attempt_id + scorer nonce`随机指定正定、扰动/非正规或matrix-function/structure轨；含盲参数干预 | `regression-passed / not-attempted` |
+| [[matrix_analysis_cumulative_contract_audit.py]] | 题—解隔离、解析模型、状态表面、Wiki链接、累计SVG与canonical双跑 | `regression-passed` |
 
-本卷不重复10.2的基础空间与分解构造，也不替代10.8的浮点算法验收。它统一检查norm—gap—condition—pseudospectrum—structure之间的判断链。材料、脚本与SVG存在只证明验收工具可执行；在真实闭卷、随机轨道、48小时重做和14天迁移完成前，MA-01—16继续保持`draft`。
+### 卷末证据时间线
+
+```text
+20 分钟无提示口试
+  → 270 分钟闭卷（冻结原稿）
+  → scorer nonce 随机三轨 + 盲参数干预
+  → 才打开独立详解并逐项归因
+  → 48 小时换机制空白重建
+  → 14 天陌生 AI 算子报告迁移
+```
+
+前一阶段输出必须先冻结，后一阶段才开放；不能先看解答再补写“原始推导”。`passed-initial`需要口试、闭卷与随机实验全部通过，`retained`还需要两次延迟门。材料回归通过不会自动产生个人学习证据。
+
+### 四波统一模型族与三条证明主链
+
+| 波次 | 贯穿对象 | 从入口追到出口 |
+|---|---|---|
+| A | $A_\varepsilon=\operatorname{diag}(1,\varepsilon)$ | SVD → norm → condition → distance/perturbation |
+| B | $A_0$ 与 $M_\varepsilon=RA_\varepsilon$ | pseudoinverse → EYM → effective rank → polar uniqueness |
+| C | $H_\tau$ 与 $E_\eta$ | quadratic/PSD → Cholesky → Rayleigh/min–max → subspace rotation |
+| D | $T_K$ 与 $B_K$ | Fréchet → resolvent/pseudospectrum → structured condition → matrix sign/projectors |
+
+闭卷的三条主证明链分别是：Rayleigh—Courant–Fischer—Cholesky；Weyl—residual angle—Eckart–Young；Cauchy/Fréchet—block identity—sign/projector—structured supremum。口试检查能否先说清对象与分母，实验只核对有限构造；三者互补，任何一项都不能替代另两项。
+
+本卷不重复10.2的基础空间与分解构造，也不替代10.8的浮点算法验收。它统一检查norm—gap—condition—pseudospectrum—structure之间的判断链。材料、脚本与SVG存在只证明验收工具可执行；在真实口试、闭卷、nonce随机轨道、盲干预、48小时换机制和14天迁移完成前，MA-01—16继续保持`draft`。
 
 ## 必须同时保持的四种视角
 
@@ -202,7 +227,7 @@ flowchart LR
 6. D0-N 已升级 [[矩阵范数]]、[[条件数]]、[[矩阵扰动]]与[[有效秩]]：新增 60 道 A–E 题、四份独立详解和四幅结构化教学图；度量—敏感性—谱稳定—近似维数链已形成初学者闭环。
 7. 下一施工主线转入 10.4，从[[函数极限、连续性与收敛模式]]开始建立多元微积分、矩阵微分与自动微分先修链。
 8. 10.3 的后续工作不再扩充核心节点，而是闭卷证明、实验复现、跨章迁移和间隔复查；全部通过后才升级状态。
-9. 10.3卷级验收已建立：[[阶段测验 - 矩阵分析（10.3）]]、[[阶段测验解答 - 矩阵分析（10.3）]]与[[实验 - 矩阵分析累计复现门]]已覆盖MA-01—16；当前为`composed / not-attempted`。
+9. 10.3卷级验收已回归：[[阶段测验 - 矩阵分析（10.3）]]、[[阶段测验解答 - 矩阵分析（10.3）]]与[[实验 - 矩阵分析累计复现门]]已把MA-01—16接成“口试—闭卷—随机三轨—盲干预—48小时—14天”闭环；[[matrix_analysis_cumulative_contract_audit.py]]验证材料为`regression-passed`，个人仍为`not-attempted`。
 10. 2026-08-20 已完成首批导学与视觉升级：[[奇异值分解]]、[[矩阵范数]]、[[条件数]]、[[二次型与正定矩阵]]、[[Cholesky 分解]]和[[Rayleigh 商与极值表征]]统一加入“主问题—学习目标—自测问题—v2 总图—读图说明—适用边界”，旧概览图已从正文退出。
 11. 2026-08-21 已完成第二批伪逆—低秩—极分解链升级：[[Moore-Penrose 伪逆]]、[[定理 - Eckart–Young–Mirsky]]、[[有效秩]]、[[极分解]]和[[矩阵符号函数]]已加入差异化 v2 总图与定义域边界；有效秩和极分解的实验曲线继续保留。余下 5 个正文节点进入扰动—导数—非正规—结构化收尾批次。
 12. 2026-08-23 已完成 10.3 图像资源版本清零：最后五个扰动—导数—非正规—结构化节点已换用教材线稿、证明结构或脚本生成的 v2 图；两张保留实验曲线也已连同生成脚本升级。16 个正文共 18 个图文单元现均使用根目录稳定路径、明确宽度、图注、来源、读图说明与“图没有证明什么”。

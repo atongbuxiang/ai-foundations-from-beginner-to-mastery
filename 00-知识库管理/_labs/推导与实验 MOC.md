@@ -64,6 +64,13 @@ updated: 2026-08-27
 - 覆盖：LA-01—24，20分钟口试、240分钟100分闭卷、`attempt_id + scorer nonce`随机计算轨道、盲参数干预、48小时换例与14天迁移；
 - 当前语义：材料`regression-passed`、个人`not-attempted`，由[[linear_algebra_cumulative_contract_audit.py]]复核，不构成verified证据。
 
+- 题卷：[[阶段测验 - 矩阵分析（10.3）]]；
+- 独立详解：[[阶段测验解答 - 矩阵分析（10.3）]]；
+- 卷级 ID：`MA-CUM-01`；
+- 计算门：[[实验 - 矩阵分析累计复现门]]，覆盖positive margin/Cholesky/condition、gap/angle/pseudospectrum与sign/polar/Fréchet/structured condition；
+- 覆盖：MA-01—16，20分钟口试、270分钟100分闭卷、`attempt_id + scorer nonce`随机计算轨道、盲参数干预、48小时换机制与14天迁移；
+- 当前语义：材料`regression-passed`、个人`not-attempted`，由[[matrix_analysis_cumulative_contract_audit.py]]复核，不构成verified证据。
+
 - 题卷：[[阶段测验 - 数学语言、逻辑与证明（10.1）]]；
 - 独立详解：[[阶段测验解答 - 数学语言、逻辑与证明（10.1）]]；
 - 计算门：[[实验 - 数学语言、逻辑与证明累计复现门]]，覆盖量词换序的有限反模型、递推误差的闭式—界—极限—精度证书与Attention rank增长制度；
@@ -164,6 +171,7 @@ updated: 2026-08-27
 60. [[实验 - 几何、泛函与算子累计复现门]]：在sphere上恢复ambient constraint二阶、normalization retraction相对Exp三阶与rotation covariance；以$c_j=1/j$和$\mu_j=j^{-2}$分离Hilbert projection、compact tail与kernel effective dimension；用Poisson cutoff同时展示$L^2/H^1/strong$误差指数$-2/-1/0$。
 61. [[实验 - 数学基础十卷跨章累计复现门]]：用linear-Gaussian posterior/MI分离定理值与估计量，用quadratic flow/GD分离连续稳定与Euler步长域，再在$S^1$上把rotation/retraction、finite Gram/KRR approximation和condition增长纳入同一跨卷证据账。
 62. [[实验 - 线性代数累计复现门]]：用病态基分离抽象向量与坐标、以kernel/quotient/projector核对空间不变量，以Jordan/SVD分离谱值、暂态与低秩尾误差，再用attention-softmax与vec合同分离exact rank、numerical rank和非线性边界；canonical及盲参数接口由独立累计审计复核。
+63. [[实验 - 矩阵分析累计复现门]]：用SPD边界分离positive margin、condition与Cholesky pivot，以closing eigengap和nilpotent coupling分离谱值、方向与pseudospectrum，再用sign/polar、Fréchet remainder和structured tangent分离involution、isometry、一阶近似与允许扰动；canonical及盲参数接口由独立累计审计复核。
 
 ## 后续实验候选
 

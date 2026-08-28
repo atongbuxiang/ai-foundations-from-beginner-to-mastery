@@ -448,7 +448,7 @@ updated: 2026-08-27
 | INFO-CUM-01 | INFO-01—10：信息论与统计学习接口卷末累计验收 | composed：[[阶段测验 - 信息论与统计学习接口（10.6）]]、[[阶段测验解答 - 信息论与统计学习接口（10.6）]]和[[实验 - 信息论累计复现门]]已建立；等待真实独立作答 |
 | PROB-CUM-01 | PROB-01—20：概率论与数理统计卷末累计验收 | composed：[[阶段测验 - 概率论与数理统计（10.5）]]、[[阶段测验解答 - 概率论与数理统计（10.5）]]和[[实验 - 概率统计累计复现门]]已建立；等待真实独立作答 |
 | LA-CUM-01 | LA-01—24：线性代数卷末累计验收 | regression-passed：[[阶段测验 - 线性代数（10.2）]]、[[阶段测验解答 - 线性代数（10.2）]]和[[实验 - 线性代数累计复现门]]已通过独立静态/计算回归；个人仍为 not-attempted |
-| MA-CUM-01 | MA-01—16：矩阵分析卷末累计验收 | composed：[[阶段测验 - 矩阵分析（10.3）]]、[[阶段测验解答 - 矩阵分析（10.3）]]和[[实验 - 矩阵分析累计复现门]]已建立；等待真实独立作答 |
+| MA-CUM-01 | MA-01—16：矩阵分析卷末累计验收 | regression-passed：[[阶段测验 - 矩阵分析（10.3）]]、[[阶段测验解答 - 矩阵分析（10.3）]]和[[实验 - 矩阵分析累计复现门]]已通过独立静态/计算回归；个人仍为 not-attempted |
 | CALC-CUM-01 | CALC-01—16：微积分、矩阵微分与自动微分卷末累计验收 | composed：[[阶段测验 - 多元微积分、矩阵微分与自动微分（10.4）]]、[[阶段测验解答 - 多元微积分、矩阵微分与自动微分（10.4）]]和[[实验 - 微积分、矩阵微分与自动微分累计复现门]]已建立；等待真实独立作答 |
 | NLA-CUM-01 | NUM-01—20：数值计算与数值线性代数卷末累计验收 | regression-passed：[[阶段测验 - 数值计算与数值线性代数（10.8）]]、[[阶段测验解答 - 数值计算与数值线性代数（10.8）]]和[[实验 - 数值线性代数累计复现门]]已建立；等待真实独立作答 |
 | DYN-CUM-01 | DYN-01—12：ODE、动力系统与 SDE 卷末累计验收 | regression-passed：[[阶段测验 - ODE、动力系统与 SDE（10.9）]]、[[阶段测验解答 - ODE、动力系统与 SDE（10.9）]]和[[实验 - ODE、动力系统与 SDE 累计复现门]]已通过静态/计算回归；个人仍为 not-attempted |
@@ -476,12 +476,13 @@ LA-CUM-01已把“20分钟无提示口试 + 240分钟、100分闭卷 + 随机累
 
 ### MA-CUM-01 的状态边界
 
-MA-CUM-01是270分钟、100分的10.3卷末测验，覆盖MA-01—16，并设置A—E分区线、三道统一证明不得为零和随机三轨计算门。当前状态是 **composed / not-attempted**：
+MA-CUM-01已把“20分钟无提示口试 + 270分钟、100分闭卷 + 随机累计实验轨”组成10.3卷末验收，覆盖MA-01—16，并设置A—E分区线、三道统一证明不得为零、盲参数干预与延迟保持门。材料状态是 **regression-passed**，个人状态是 **not-attempted**：
 
-- 16套节点题之后的累计题卷与逐题独立详解已经成稿；
-- 计算门连接positive margin/Cholesky/condition、gap/angle/pseudospectrum与sign/polar/Fréchet/structured condition；
-- canonical SVG、XML、hash、确定性运行与实际渲染通过，只证明验收工具可执行；
-- 尚无首次闭卷原稿、逐项评分、参数干预、48小时重做和14天AI迁移证据；
+- 口试先检查object/norm/condition、rank-change、positive margin/gap、non-normality/Fréchet/structure和AI声明出口，不能用计算图替代；
+- 16套节点题之后的累计题卷与逐题独立详解已经成稿，并明确先冻结原稿再开解答；
+- 计算门连接positive margin/Cholesky/condition、gap/angle/pseudospectrum与sign/polar/Fréchet/structured condition，由`attempt_id + scorer nonce`防止挑轨；
+- canonical SVG、XML、hash、确定性双跑、参数接口与[[matrix_analysis_cumulative_contract_audit.py]]通过，只证明验收工具可执行；
+- 尚无首次口试、闭卷原稿、逐项评分、盲参数干预、48小时换机制和14天AI迁移证据；
 - 因而MA-01—16保持`draft`；正式作答前不要打开[[阶段测验解答 - 矩阵分析（10.3）]]。
 
 ### CALC-CUM-01 的状态边界

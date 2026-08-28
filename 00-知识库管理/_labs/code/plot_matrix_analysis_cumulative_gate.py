@@ -81,9 +81,9 @@ def matrix_exp_series(a: Matrix, terms: int = 80) -> Matrix:
     return total
 
 
-def positive_definite_experiment() -> list[dict[str, float]]:
+def positive_definite_experiment(min_delta: float = 0.003) -> list[dict[str, float]]:
     rows: list[dict[str, float]] = []
-    for delta in (1.0, 0.3, 0.1, 0.03, 0.01, 0.003):
+    for delta in (1.0, 0.3, 0.1, 0.03, 0.01, min_delta):
         rho = 1.0 - delta
         minimum = delta
         maximum = 2.0 - delta
@@ -105,10 +105,14 @@ def positive_definite_experiment() -> list[dict[str, float]]:
     return rows
 
 
-def perturbation_experiment() -> tuple[list[dict[str, float]], list[dict[str, float]]]:
-    eta = 0.02
+def perturbation_experiment(
+    eta: float = 0.02,
+    min_gap: float = 0.003,
+    pseudospectral_epsilon: float = 1e-3,
+    max_pseudo_coupling: float = 100.0,
+) -> tuple[list[dict[str, float]], list[dict[str, float]]]:
     gap_rows: list[dict[str, float]] = []
-    for gap in (1.0, 0.3, 0.1, 0.03, 0.01, 0.003):
+    for gap in (1.0, 0.3, 0.1, 0.03, 0.01, min_gap):
         theta = 0.5 * math.atan2(2.0 * eta, gap)
         eigen_shift = math.sqrt((0.5 * gap) ** 2 + eta * eta) - 0.5 * gap
         gap_rows.append(
@@ -123,9 +127,8 @@ def perturbation_experiment() -> tuple[list[dict[str, float]], list[dict[str, fl
             }
         )
 
-    pseudospectral_epsilon = 1e-3
     pseudo_rows: list[dict[str, float]] = []
-    for coupling in (1.0, 3.0, 10.0, 30.0, 100.0):
+    for coupling in (1.0, 3.0, 10.0, 30.0, max_pseudo_coupling):
         pseudo_rows.append(
             {
                 "coupling": coupling,
@@ -136,9 +139,12 @@ def perturbation_experiment() -> tuple[list[dict[str, float]], list[dict[str, fl
     return gap_rows, pseudo_rows
 
 
-def matrix_function_structure_experiment() -> dict[str, object]:
+def matrix_function_structure_experiment(
+    max_sign_coupling: float = 10.0,
+    min_step: float = 3e-4,
+) -> dict[str, object]:
     sign_rows: list[dict[str, float]] = []
-    for coupling in (0.0, 0.5, 1.0, 2.0, 5.0, 10.0):
+    for coupling in (0.0, 0.5, 1.0, 2.0, 5.0, max_sign_coupling):
         sign_matrix = [[1.0, coupling], [0.0, -1.0]]
         sign_square_residual = frobenius_norm(
             matrix_sub(matmul(sign_matrix, sign_matrix), identity(2))
@@ -158,7 +164,7 @@ def matrix_function_structure_experiment() -> dict[str, object]:
     derivative = [[1.0, 2.0 * divided_difference], [-divided_difference, 0.0]]
     exp_a = [[1.0, 0.0], [0.0, 4.0]]
     taylor_rows: list[dict[str, float]] = []
-    for step in (1e-1, 3e-2, 1e-2, 3e-3, 1e-3, 3e-4):
+    for step in (1e-1, 3e-2, 1e-2, 3e-3, 1e-3, min_step):
         perturbed = matrix_add(a, matrix_scale(e, step))
         exact = matrix_exp_series(perturbed)
         linear = matrix_add(exp_a, matrix_scale(derivative, step))
@@ -240,7 +246,7 @@ def make_svg(
         f'<line x1="{bx0}" y1="{by0+bh}" x2="{bx0+bw}" y2="{by0+bh}" class="axis"/>',
         f'<line x1="{bx0}" y1="{by0}" x2="{bx0}" y2="{by0+bh}" class="axis"/>',
         svg_text(bx0, by0 - 10, "top eigenvector rotation (degrees)", "small"),
-        svg_text(bx0 + bw / 2, by0 + bh + 24, "−log₁₀ gap（‖E‖₂=0.02）", "small", "middle"),
+        svg_text(bx0 + bw / 2, by0 + bh + 24, f'−log₁₀ gap（‖E‖₂={gaps[0]["eta"]:.2g}）', "small", "middle"),
     ]
     max_gap_x = max(-math.log10(row["gap"]) for row in gaps)
     angle_points: list[str] = []
@@ -303,11 +309,38 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--seed", type=int, default=DEFAULT_SEED)
+    parser.add_argument("--min-delta", type=float, default=0.003)
+    parser.add_argument("--eta", type=float, default=0.02)
+    parser.add_argument("--min-gap", type=float, default=0.003)
+    parser.add_argument("--pseudospectral-epsilon", type=float, default=1e-3)
+    parser.add_argument("--max-pseudo-coupling", type=float, default=100.0)
+    parser.add_argument("--max-sign-coupling", type=float, default=10.0)
+    parser.add_argument("--min-step", type=float, default=3e-4)
     args = parser.parse_args()
 
-    positive = positive_definite_experiment()
-    gaps, pseudo = perturbation_experiment()
-    functions = matrix_function_structure_experiment()
+    if not 0.0 < args.min_delta <= 0.01:
+        raise ValueError("--min-delta must lie in (0, 0.01]")
+    if not 0.0 < args.eta <= 0.2:
+        raise ValueError("--eta must lie in (0, 0.2]")
+    if not 0.0 < args.min_gap <= 0.01:
+        raise ValueError("--min-gap must lie in (0, 0.01]")
+    if not 0.0 < args.pseudospectral_epsilon <= 0.1:
+        raise ValueError("--pseudospectral-epsilon must lie in (0, 0.1]")
+    if not 30.0 <= args.max_pseudo_coupling <= 1e6:
+        raise ValueError("--max-pseudo-coupling must lie in [30, 1e6]")
+    if not 5.0 <= args.max_sign_coupling <= 1e4:
+        raise ValueError("--max-sign-coupling must lie in [5, 1e4]")
+    if not 0.0 < args.min_step <= 1e-3:
+        raise ValueError("--min-step must lie in (0, 1e-3]")
+
+    positive = positive_definite_experiment(args.min_delta)
+    gaps, pseudo = perturbation_experiment(
+        args.eta,
+        args.min_gap,
+        args.pseudospectral_epsilon,
+        args.max_pseudo_coupling,
+    )
+    functions = matrix_function_structure_experiment(args.max_sign_coupling, args.min_step)
     if not positive[-1]["condition"] > positive[0]["condition"]:
         raise AssertionError("conditioning should worsen as the positive-definite margin closes")
     if not gaps[-1]["angle_degrees"] > gaps[0]["angle_degrees"]:

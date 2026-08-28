@@ -1672,6 +1672,14 @@ AI迁移从Banach压缩映射的几何尾界推进到标量二次梯度下降的
 
 10.2当前为 **24篇正文、24组节点题解，累计材料 regression-passed / 个人 not-attempted**。[[linear_algebra_cumulative_contract_audit.py]]复核24/24 scope、14/14题解、题—解隔离、三轨解析量、七个状态表面、Wiki链接、累计SVG和canonical双跑。材料通过不改变LA-01—24的`draft`状态；下一步是产生真实口试、闭卷、随机实验和延迟保持证据。
 
+## 第九十一批：10.3卷末累计验收与条件—谱隙—结构三轨门
+
+本批把[[阶段测验 - 矩阵分析（10.3）|MA-CUM-01]]升级为完整证据链：先做20分钟无提示口试，再做270分钟、100分A—E闭卷；冻结原稿后由`attempt_id + scorer nonce`随机指定计算轨道，最后进入48小时换机制和14天陌生AI算子报告迁移。题卷新增八层矩阵分析账本，并以$A_\varepsilon$、$(A_0,M_\varepsilon)$、$H_\tau$和$(T_K,B_K)$四个模型族把MA-01—16接成“奇异值/范数/条件—秩亏/低秩/polar—正定/变分/gap—Fréchet/伪谱/structure/sign”连续路线。[[阶段测验解答 - 矩阵分析（10.3）]]补上卷级口试参考、判分红线、四模型族参考和逐节点证据升级规则，但继续与首次作答隔离。
+
+[[实验 - 矩阵分析累计复现门]]的A轨用SPD boundary分离positive margin、condition与Cholesky pivot；B轨用closing eigengap与nilpotent coupling分离eigenvalue shift、direction rotation和pseudospectral certificate；C轨用sign/polar、Fréchet Taylor remainder与structured tangent分离involution、isometry、一阶近似和allowed worst direction。Canonical SVG哈希为`3985e488b31217a6f2fffa2fda864a9b7a545a28bb7f4a0275d3575f78601ec6`；脚本现支持`--min-delta`、`--eta`、`--min-gap`、`--pseudospectral-epsilon`、两类coupling和`--min-step`盲干预，默认输出保持不变。
+
+10.3当前为 **16篇正文、16组节点题解，累计材料 regression-passed / 个人 not-attempted**。[[matrix_analysis_cumulative_contract_audit.py]]复核16/16 scope、14/14题解、题—解隔离、四波解析量、七个状态表面、Wiki链接、累计SVG和canonical双跑。材料通过不改变MA-01—16的`draft`状态；下一步是产生真实口试、闭卷、随机实验和延迟保持证据。
+
 ## 对接科学空间
 
 - “低秩近似之路”系列：伪逆、SVD、CR、ID、CUR
