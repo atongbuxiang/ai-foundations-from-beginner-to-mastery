@@ -22,7 +22,7 @@ updated: 2026-08-27
 | 波次 | 节点 | 主线 | 统一模型/证书 | 材料状态 | 学习状态 |
 |---|---|---|---|---|---|
 | A | GEO-01—04 | metric/topology → chart/tangent → Riemannian metric/optimization → Lie action/equivariance | $S^1$、induced geometry 与 $SO(2)$ | `regression-passed` | `draft / not-attempted` |
-| B | GEO-05—06 | norm/completion → Hilbert projection → bounded/compact operator → spectrum | 待迁移：$\ell^2$ sequence、projection 与 diagonal compact operator | `deep-draft / queued` | `draft / not-attempted` |
+| B | GEO-05—06 | norm/completion → Hilbert projection → bounded/compact operator → spectrum | $c_{00}\subset\ell^2$、$P_N$ 与 $K e_n=n^{-1}e_n$ | `regression-passed` | `draft / not-attempted` |
 | C | GEO-07—08 | PSD kernel → RKHS representation → weak derivative → variational/operator learning | 待迁移：一维 sine basis、Green/operator 与 kernel sections | `deep-draft / queued` | `draft / not-attempted` |
 | CUM | GEO-CUM | 口试—闭卷—三轨实验—延迟重做 | sphere/Hilbert/weak-PDE 随机回链 | `composed` | `not-attempted` |
 
@@ -72,6 +72,60 @@ $$
 2. **第二遍（约 720 分钟）：**回到四篇完整正文，扩展到 abstract topology、一般 manifold/connection、Stiefel/SPD 与 nonabelian groups；
 3. **第三遍（约 180 分钟）：**改变 circle radius、objective vector、chart pole与测试 angles，运行前预测 metric constant、tangent、retraction error与 equivariance residual；
 4. **验收：**完成 GEO-01—04 的四个节点实验，并无提示区分 point/coordinate/tangent/covector、metric/topology、Exp/retraction、invariance/equivariance。
+
+### 第二波的 \(\ell^2\)—对角紧算子单一模型链
+
+第二波固定
+
+$$
+H=\ell^2,
+\qquad
+M_N=\operatorname{span}\{e_1,\ldots,e_N\},
+\qquad
+P_Nx=\sum_{n=1}^{N}x_ne_n,
+$$
+
+并在同一标准正交基上定义
+
+$$
+Ke_n=\frac1n e_n,
+\qquad
+K_N=P_NK.
+$$
+
+同一组对象完成两次升级：
+
+1. **GEO-05：从有限表示升级到完备 Hilbert 空间。** \(x^{(N)}=\sum_{n\le N}n^{-1}e_n\) 在 \(\ell^2\) 范数中 Cauchy，却在 \(c_{00}\) 中没有极限；completion补出 \(x^\star=(1/n)_{n\ge1}\)。对任意 \(x\in\ell^2\)，正交分解
+   $$
+   \|x-y\|_2^2
+   =\|x-P_Nx\|_2^2+\|P_Nx-y\|_2^2,
+   \qquad y\in M_N,
+   $$
+   同时给出最佳逼近、唯一性和 tail energy；Riesz 将 \(L(x)=\sum_nx_n/n\) 表成 \(\langle x,x^\star\rangle\)，而 \(e_n\rightharpoonup0\) 但 \(\|e_n\|=1\) 分离 weak 与 strong convergence；
+2. **GEO-06：从空间升级到稳定作用与无限维谱。** \(K\) bounded、positive、self-adjoint，且
+   $$
+   \|K-K_N\|=\frac1{N+1}\to0,
+   \qquad
+   \sigma(K)=\{0\}\cup\{1/n:n\ge1\}.
+   $$
+   Finite-rank norm approximation证明 compactness；\(0\) 不是 eigenvalue却因 inverse 不满射且不 bounded 而属于 spectrum。Spectral cutoff 给
+   $$
+   \|x-K_N^\dagger y^\delta\|
+   \le \|(I-P_N)x\|+N\delta,
+   $$
+   把低秩 bias 与高频噪声放大放进同一账本。
+
+两篇各使用两种视觉语言：正式结构图解释 norm/completion/projection 与 bounded/compact/spectrum 的概念关系；确定性数据图复算 \(\ell^2\) tail、\(\ell^1\) 非 Cauchy、投影唯一性、compact tail、Volterra singular values、shift finite-section trap 与 kernel spectrum。
+
+> [!success] 第二波材料证书
+> [[geometry_functional_teaching_contract_audit.py]]现检查 GEO-01—06 的六项初学者教学标记、两波精确模型、189 条迁移范围 Wiki 链接、八个图文单元和八幅 SVG 哈希；并调用 [[banach_hilbert_projection_audit.py]] 与 [[compact_operator_spectrum_audit.py]]复算两张数据图。`regression-passed` 仍只表示材料回归通过，GEO-05—06 正文保持 `draft`，个人学习保持 `not-attempted`。
+
+### 如何学习第二波，而不是背泛函分析定理名
+
+1. **第一遍（约 210 分钟）：**只在 \(c_{00}\subset\ell^2\) 上重算 Cauchy tail、\(P_N\) 最佳逼近、Riesz functional、\(K_N\) operator tail 和 \(\sigma(K)\)；
+2. **第二遍（约 480 分钟）：**回到两篇完整正文，扩展到 \(L^p/C(K)\)、一般 projection/Riesz、Banach 三大定理、adjoint、Hilbert–Schmidt、Fredholm 与 compact self-adjoint spectral theorem；
+3. **第三遍（约 120 分钟）：**把 \(1/n\) 改成 \(1/n^\alpha\)，运行前预测 compactness、Hilbert–Schmidt threshold、rank-\(N\) tail 和 inverse amplification；
+4. **验收：**完成两篇节点实验，并无提示区分 pointwise/strong/operator-norm convergence、bounded/compact、eigenvalue/spectrum 与 low-rank approximation/inverse stability。
 
 ## 一、范围与边界
 
@@ -210,4 +264,4 @@ GEO-01—08 已建立完整节点闭环。GEO-08 从 test functions 与 distribu
 
 ## 九、当前状态
 
-10.10 当前为 **8/8 正文覆盖、120 道节点题**。第一波 GEO-01—04 已达到 `regression-passed`；第二波 GEO-05—06 与第三波 GEO-07—08 仍待迁移，累计验收保持 `composed / not-attempted`。Canonical累计图已通过 XML 与确定性双跑，但只证明工具可执行。GEO-01—08 全部继续保持 `draft`；下一教学施工点是 GEO-05—06 的 Banach/Hilbert、projection、compact operator 与 spectrum。
+10.10 当前为 **8/8 正文覆盖、120 道节点题**。第一波 GEO-01—04 与第二波 GEO-05—06 已达到 `regression-passed`；第三波 GEO-07—08 仍待迁移，累计验收保持 `composed / not-attempted`。Canonical累计图已通过 XML 与确定性双跑，但只证明工具可执行。GEO-01—08 全部继续保持 `draft`；下一教学施工点是 GEO-07—08 的 positive kernel、RKHS、weak derivative、Sobolev 与 neural operator。
