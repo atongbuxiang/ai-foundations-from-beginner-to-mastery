@@ -23,7 +23,7 @@ updated: 2026-08-27
 |---|---|---|---|---|---|
 | A | GEO-01—04 | metric/topology → chart/tangent → Riemannian metric/optimization → Lie action/equivariance | $S^1$、induced geometry 与 $SO(2)$ | `regression-passed` | `draft / not-attempted` |
 | B | GEO-05—06 | norm/completion → Hilbert projection → bounded/compact operator → spectrum | $c_{00}\subset\ell^2$、$P_N$ 与 $K e_n=n^{-1}e_n$ | `regression-passed` | `draft / not-attempted` |
-| C | GEO-07—08 | PSD kernel → RKHS representation → weak derivative → variational/operator learning | 待迁移：一维 sine basis、Green/operator 与 kernel sections | `deep-draft / queued` | `draft / not-attempted` |
+| C | GEO-07—08 | PSD kernel → RKHS representation → weak derivative → variational/operator learning | Brownian bridge/Green kernel、$H_0^1$ 与 sine solution spectrum | `regression-passed` | `draft / not-attempted` |
 | CUM | GEO-CUM | 口试—闭卷—三轨实验—延迟重做 | sphere/Hilbert/weak-PDE 随机回链 | `composed` | `not-attempted` |
 
 ### 第一波的 $S^1$—$SO(2)$ 单一模型链
@@ -126,6 +126,58 @@ $$
 2. **第二遍（约 480 分钟）：**回到两篇完整正文，扩展到 \(L^p/C(K)\)、一般 projection/Riesz、Banach 三大定理、adjoint、Hilbert–Schmidt、Fredholm 与 compact self-adjoint spectral theorem；
 3. **第三遍（约 120 分钟）：**把 \(1/n\) 改成 \(1/n^\alpha\)，运行前预测 compactness、Hilbert–Schmidt threshold、rank-\(N\) tail 和 inverse amplification；
 4. **验收：**完成两篇节点实验，并无提示区分 pointwise/strong/operator-norm convergence、bounded/compact、eigenvalue/spectrum 与 low-rank approximation/inverse stability。
+
+### 第三波的 Green kernel—弱 PDE—解算子单一模型链
+
+第三波固定区间 \([0,1]\) 和
+
+$$
+k(x,t)=\min(x,t)-xt.
+$$
+
+它同时承担三种角色：
+
+$$
+k(x,t)
+=\langle\psi_x,\psi_t\rangle_{L^2},
+\qquad
+f(x)=\langle f,k_x\rangle_{H_0^1},
+\qquad
+(\mathcal Gg)(x)=\int_0^1k(x,t)g(t)\,dt,
+$$
+
+其中 \(\psi_x(s)=\mathbf1_{\{s\le x\}}-x\)，而 \(\mathcal G=(-\partial_{xx})^{-1}\) 使用 homogeneous Dirichlet boundary。
+
+同一个 kernel 完成两次升级：
+
+1. **GEO-07：从两点函数升级到可计算的 Hilbert geometry。** Feature identity 对所有有限 coefficients 给 Gram PSD；折线 section
+   $$
+   k_x(t)=
+   \begin{cases}
+   t(1-x),&t\le x,\\
+   x(1-t),&t\ge x
+   \end{cases}
+   $$
+   满足 \(f(x)=\int_0^1f'(t)k_x'(t)\,dt\)，因此 point evaluation bounded。Hilbert projection把 empirical regularized minimizer压到 \(\operatorname{span}\{k_{x_i}\}\)，KRR 得 \((K+n\lambda I)\alpha=y\)；Mercer modes为 \(\phi_m=\sqrt2\sin(m\pi x)\)、\(\lambda_m=(m\pi)^{-2}\)；
+2. **GEO-08：从 kernel geometry 升级到 weak solution operator。** \(D_w|x|=\operatorname{sign}(x)\) 先建立 test-function identity；Poisson weak problem
+   $$
+   a(u,v)=\int_0^1u'v'
+   =\int_0^1fv
+   =F(v)
+   $$
+   由 Poincaré 与 Lax–Milgram闭合 existence、uniqueness、stability。Green superposition给 \(u=\mathcal Gf\)，sine gains仍为 \((m\pi)^{-2}\)；Galerkin orthogonality说明离散 weak residual 与 element-interior strong residual不能混写，八模态截断则给 unseen \(\phi_9\) 的 \(100\%\) relative operator error。
+
+两篇各保留教材结构图和确定性数据图：GEO-07 分开 Gram validity、representer projection、KRR–GP mean identity 与 RFF distribution；GEO-08 分开 distribution concentration、FEM solution error、residual topology 与 operator-distribution shift。
+
+> [!success] 第三波材料证书
+> [[geometry_functional_teaching_contract_audit.py]]现检查 GEO-01—08 的六项初学者教学标记、三波精确模型、234 条全卷 Wiki 链接、十二个图文单元和十二幅 SVG 哈希；并实际调用 [[rkhs_kernel_audit.py]] 与 [[sobolev_variational_operator_audit.py]]复算第三波两张数据图。`regression-passed` 只证明八篇正文材料静态自洽，所有正文继续保持 `draft`，个人学习继续保持 `not-attempted`。
+
+### 如何学习第三波，而不是背 kernel 与 PDE 名词
+
+1. **第一遍（约 240 分钟）：**只在 \(k(x,t)=\min(x,t)-xt\) 上重算 feature PSD、reproducing identity、representer projection、Poisson weak form、Green superposition 与 sine gains；
+2. **第二遍（约 540 分钟）：**回到两篇完整正文，扩展到 Moore–Aronszajn/Mercer、KRR/GP/MMD/HSIC、一般 Sobolev/trace/embedding/Rellich、Lax–Milgram/Céa、PINN/Deep Ritz 与 DeepONet/FNO；
+3. **第三遍（约 150 分钟）：**改变 sample points、regularization、forcing modes、Galerkin mesh 与 learned cutoff，运行前预测 Gram spectrum、projection norm、FEM order、weak residual 和 unseen-mode error；
+4. **验收：**完成两篇节点实验，并无提示区分 kernel/Gram/integral operator、classical/weak/distribution derivative、single-solution/function-to-function learning 与 training/resolution/operator generalization。
 
 ## 一、范围与边界
 
@@ -264,4 +316,4 @@ GEO-01—08 已建立完整节点闭环。GEO-08 从 test functions 与 distribu
 
 ## 九、当前状态
 
-10.10 当前为 **8/8 正文覆盖、120 道节点题**。第一波 GEO-01—04 与第二波 GEO-05—06 已达到 `regression-passed`；第三波 GEO-07—08 仍待迁移，累计验收保持 `composed / not-attempted`。Canonical累计图已通过 XML 与确定性双跑，但只证明工具可执行。GEO-01—08 全部继续保持 `draft`；下一教学施工点是 GEO-07—08 的 positive kernel、RKHS、weak derivative、Sobolev 与 neural operator。
+10.10 当前为 **8/8 正文覆盖、120 道节点题**。第一波 GEO-01—04、第二波 GEO-05—06 与第三波 GEO-07—08 均已达到 `regression-passed`，因此八篇正文完成静态教学迁移；累计验收仍保持 `composed / not-attempted`。Canonical累计图已通过 XML 与确定性双跑，但只证明工具可执行。GEO-01—08 全部继续保持 `draft`，个人学习仍为 `not-attempted`；下一教学施工点是 GEO-CUM 的卷级口试、闭卷、随机三轨和延迟保持性证据门。

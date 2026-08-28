@@ -7,10 +7,353 @@ prerequisites: ["[[Banach 空间、Hilbert 空间与正交投影]]", "[[有界�
 related: ["[[几何、泛函分析、核与算子基础 MOC]]", "[[弱导数、Sobolev 空间与神经算子接口]]", "[[f-散度、Bregman 散度与概率度量]]", "[[习题 - 正定核、RKHS 与表示定理]]", "[[解答 - 正定核、RKHS 与表示定理]]", "[[实验 - Gram 正定性、KRR 表示与随机特征近似审计]]", "[[S-2019-Su-6910-HSIC与RKHS接口]]", "[[S-2021-Su-8601-无限维线性Attention与核特征]]"]
 sources: ["Aronszajn-1950-RKHS", "MIT-9.520-Class-3-RKHS", "Scholkopf-Herbrich-Smola-2001-Representer", "Rasmussen-Williams-2006-GPML", "Rahimi-Recht-2007-Random-Features", "Sriperumbudur-et-al-2010-Probability-Measures", "Gretton-et-al-2012-Two-Sample", "Jacot-Gabriel-Hongler-2018-NTK", "Su-6910-HSIC", "Su-8601-Infinite-Linear-Attention"]
 created: 2026-08-19
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # 正定核、RKHS 与表示定理
+
+> [!info] 课程位置
+> 这是 10.10 的 GEO-07。GEO-05 已建立 Hilbert projection 与 Riesz representation，GEO-06 已建立 compact self-adjoint operator 的谱语言。本章把这两层结构放到 function space：一个 PSD kernel 先产生 canonical Hilbert geometry，bounded point evaluation 再产生 reproducing property，projection argument 最后把无限维 regularized optimization 压到有限 sample span。输出将直接进入 GEO-08 的 Green operator、Sobolev weak solution 与 neural operator。
+
+## 建议两遍阅读
+
+> [!tip] 第一遍：只追 Brownian bridge / Green kernel
+> 固定 \(\mathcal X=[0,1]\) 和
+> $$
+> k(x,t)=\min(x,t)-xt.
+> $$
+> 依次证明它 PSD、写出 kernel section \(k_x\)、验证 \(f(x)=\langle f,k_x\rangle\)、推出 representer form，并读出正弦 Mercer eigenpairs。第一遍不要求记住 universal、characteristic、MMD、HSIC、Nyström、RFF 与 NTK 的全部条件。
+
+> [!tip] 第二遍：再把单一模型推广
+> 回到正文完成 Moore–Aronszajn 的 quotient/completion、Mercer theorem 的 topology–measure 合同、一般 representer theorem、KRR/GP 对照、mean embedding 与各种 kernel approximation；每遇到一个抽象结论，都回到 \(k(x,t)=\min(x,t)-xt\) 检查对象、范数与量词。
+
+## 本章的推导问题链
+
+1. 一个 symmetric similarity 为什么还不是合法 kernel，PSD 的全称量词到底是什么？
+2. 怎样把两点函数写成 feature inner product，从而一次性证明所有有限 Gram matrices PSD？
+3. 为什么 RKHS 不是任意 Hilbert function space，point evaluation bounded 起什么作用？
+4. 对具体的 \(k(x,t)=\min(x,t)-xt\)，evaluation representer 为什么恰是一条折线？
+5. Reproducing identity 如何把“取函数值”变成 inner product？
+6. Empirical loss 为什么看不见 sample span 的正交补，norm regularizer 为什么会删掉它？
+7. Kernel ridge regression 怎样从无限维问题变成有限 Gram linear system？
+8. 同一个 kernel 怎样成为 compact integral operator，并与下一章的 Green solution operator 对齐？
+
+第一遍读完，应能复述
+
+$$
+k
+\xrightarrow{\text{all finite PSD tests}}
+\mathcal H_k
+\xrightarrow{\text{bounded evaluation}}
+f(x)=\langle f,k_x\rangle
+\xrightarrow{\text{projection}}
+f^\star\in\operatorname{span}\{k_{x_i}\}.
+$$
+
+## 初学者贯穿模型：一个核同时连接 RKHS 与 Poisson 方程
+
+### 符号与对象账本
+
+| 符号 | 类型 | 本章含义 | 不能误读成 |
+|---|---|---|---|
+| \(\mathcal X=[0,1]\) | set/domain | kernel 输入所在区间 | 训练样本集合 |
+| \(k(x,t)\) | scalar function | \(\min(x,t)-xt\) | 任意相似度或 smoothing window |
+| \(k_x=k(x,\cdot)\) | function/vector | 点 \(x\) 的 canonical kernel section | scalar \(k(x,x)\) |
+| \(K\in\mathbb R^{n\times n}\) | matrix | \(K_{ij}=k(x_i,x_j)\) | population integral operator |
+| \(\mathcal H_k\) | Hilbert function space | kernel 生成的 RKHS | 普通 \(L^2\) |
+| \(\delta_x\) | functional | \(f\mapsto f(x)\) | Dirac density |
+| \(M\) | subspace | \(\operatorname{span}\{k_{x_1},\ldots,k_{x_n}\}\) | 整个 RKHS |
+| \(T_k\) | operator | \(g\mapsto\int_0^1k(\cdot,t)g(t)\,dt\) | finite Gram matrix \(K\) |
+| \(\phi_m\) | function | \(\sqrt2\sin(m\pi x)\) | sampled eigenvector |
+| \(\lambda_m\) | scalar | \(1/(m\pi)^2\) | regularization parameter |
+
+### 第一步：用显式 feature map 证明 kernel PSD
+
+定义
+
+$$
+\psi_x(s)=\mathbf 1_{\{s\le x\}}-x,
+\qquad s\in[0,1].
+$$
+
+直接展开积分：
+
+$$
+\begin{aligned}
+\int_0^1\psi_x(s)\psi_t(s)\,ds
+&=\int_0^1
+\bigl(\mathbf1_{\{s\le x\}}-x\bigr)
+\bigl(\mathbf1_{\{s\le t\}}-t\bigr)\,ds\\
+&=\min(x,t)-xt\\
+&=k(x,t).
+\end{aligned}
+$$
+
+因此 \(x\mapsto\psi_x\in L^2(0,1)\) 是一个显式 feature map。对任意样本 \(x_1,\ldots,x_n\) 与系数 \(c_1,\ldots,c_n\)，
+
+$$
+\begin{aligned}
+\sum_{i,j=1}^{n}c_ic_jk(x_i,x_j)
+&=\int_0^1
+\left(\sum_{i=1}^{n}c_i\psi_{x_i}(s)\right)^2ds\\
+&\ge0.
+\end{aligned}
+$$
+
+这一步一次性覆盖了 PSD 定义中的所有 \(n\)、所有 points 与所有 coefficients，而不是只检查某一个 observed Gram matrix。
+
+> [!warning] Symmetric 远远不够
+> 在 \(\{0,1\}\) 上取 \(q(x,t)=-|x-t|^2\)，Gram matrix 为
+> $$
+> \begin{bmatrix}0&-1\\-1&0\end{bmatrix}.
+> $$
+> 它 symmetric，但对 \(c=(1,1)^T\) 有 \(c^TKc=-2<0\)，因此不是 PSD kernel。核的合法性是 quadratic-form 条件，不是“数值随距离变小”或“矩阵看起来对称”。
+
+### 第二步：先具体构造函数空间，再验证 reproducing
+
+先考虑边界为零、绝对连续且导数平方可积的函数：
+
+$$
+\mathcal H
+=\left\{
+f:[0,1]\to\mathbb R:
+f(0)=f(1)=0,
+f\text{ absolutely continuous},\
+f'\in L^2(0,1)
+\right\},
+$$
+
+配内积
+
+$$
+\langle f,g\rangle_{\mathcal H}
+=\int_0^1f'(t)g'(t)\,dt.
+$$
+
+GEO-08 会把它正式识别为 Sobolev space \(H_0^1(0,1)\)；这里先在可直接使用 fundamental theorem of calculus 的代表元上计算。
+
+固定 \(x\in(0,1)\)。Kernel section 是折线
+
+$$
+k_x(t)=k(x,t)
+=
+\begin{cases}
+t(1-x),&0\le t\le x,\\
+x(1-t),&x\le t\le1.
+\end{cases}
+$$
+
+它的导数几乎处处为
+
+$$
+k_x'(t)
+=
+\begin{cases}
+1-x,&t<x,\\
+-x,&t>x.
+\end{cases}
+$$
+
+于是
+
+$$
+\begin{aligned}
+\langle f,k_x\rangle_{\mathcal H}
+&=(1-x)\int_0^x f'(t)\,dt
+-x\int_x^1f'(t)\,dt\\
+&=(1-x)\bigl(f(x)-f(0)\bigr)
+-x\bigl(f(1)-f(x)\bigr)\\
+&=f(x).
+\end{aligned}
+$$
+
+这就是 reproducing property。它还立即给出 evaluation bound：
+
+$$
+|f(x)|
+=|\langle f,k_x\rangle_{\mathcal H}|
+\le \|f\|_{\mathcal H}\|k_x\|_{\mathcal H}.
+$$
+
+而
+
+$$
+\|k_x\|_{\mathcal H}^2
+=\langle k_x,k_x\rangle_{\mathcal H}
+=k(x,x)
+=x(1-x),
+$$
+
+所以
+
+$$
+\boxed{
+|f(x)|
+\le\sqrt{x(1-x)}\,\|f\|_{\mathcal H}.
+}
+$$
+
+Point evaluation 不只是“可以写”，而是 continuous linear functional；Riesz theorem 才保证它有唯一 representer \(k_x\)。
+
+> [!important] 为什么普通 \(L^2\) 不是这里的 RKHS
+> \(L^2\) 元素是 almost-everywhere equivalence classes，改动单点值不改变元素，因此 \(f(x)\) 通常不良定义；即使选代表元，窄高 spike 也可保持 \(L^2\) norm 有界而让点值发散。RKHS 比 Hilbert function space 多出的正是 bounded point evaluation。
+
+### 第三步：表示定理就是 Hilbert projection 的一次调用
+
+给定样本 \((x_i,y_i)_{i=1}^{n}\)，考虑
+
+$$
+\min_{f\in\mathcal H_k}
+\frac1n\sum_{i=1}^{n}\bigl(f(x_i)-y_i\bigr)^2
++\lambda\|f\|_{\mathcal H_k}^2,
+\qquad \lambda>0.
+$$
+
+令
+
+$$
+M=\operatorname{span}\{k_{x_1},\ldots,k_{x_n}\}.
+$$
+
+由 Hilbert projection，任意 \(f\in\mathcal H_k\) 唯一分解为
+
+$$
+f=f_\parallel+f_\perp,
+\qquad
+f_\parallel\in M,\quad f_\perp\in M^\perp.
+$$
+
+因为
+
+$$
+f_\perp(x_i)
+=\langle f_\perp,k_{x_i}\rangle_{\mathcal H_k}
+=0,
+$$
+
+所以 empirical loss 只看见 \(f_\parallel\)。另一方面，
+
+$$
+\|f\|_{\mathcal H_k}^2
+=\|f_\parallel\|_{\mathcal H_k}^2
++\|f_\perp\|_{\mathcal H_k}^2.
+$$
+
+任何非零 \(f_\perp\) 都不改变训练预测，却严格增加 regularizer。因此最优解必满足
+
+$$
+\boxed{
+f^\star
+=\sum_{i=1}^{n}\alpha_i k_{x_i}.
+}
+$$
+
+将 \(f^\star(x_j)=(K\alpha)_j\) 代回目标，得到 finite Gram system
+
+$$
+\boxed{
+(K+n\lambda I)\alpha=y.
+}
+$$
+
+\(\lambda>0\) 使 \(K+n\lambda I\) positive definite，即使 \(K\) singular 也可唯一求解系数。这里的“有限化”不是因为 RKHS 实际有限维，而是 loss 只观察有限 evaluations，strictly increasing norm penalty 删除了不可见的正交部分。
+
+> [!warning] 表示定理有合同
+> 若 loss 还观察 derivatives、integrals 或其他 functionals，相应 Riesz representers 也要进入 span；若 regularizer 不是 Hilbert norm 的单调函数，或 minimizer 不存在，经典 finite sample span 结论不能原样套用。
+
+### 第四步：同一个 kernel 也是 compact Green operator
+
+在 \(L^2(0,1)\) 上定义
+
+$$
+(T_kg)(x)
+=\int_0^1k(x,t)g(t)\,dt.
+$$
+
+令
+
+$$
+\phi_m(x)=\sqrt2\sin(m\pi x),
+\qquad m=1,2,\ldots
+$$
+
+则
+
+$$
+T_k\phi_m
+=\lambda_m\phi_m,
+\qquad
+\lambda_m=\frac1{(m\pi)^2}.
+$$
+
+因此
+
+$$
+k(x,t)
+=2\sum_{m=1}^{\infty}
+\frac{\sin(m\pi x)\sin(m\pi t)}{(m\pi)^2}.
+$$
+
+这条 Mercer expansion 同时揭示两种几何：
+
+1. \(T_k\) 的 eigenvalues 按 \(m^{-2}\) 衰减，所以它 compact、易低秩逼近；
+2. 若 \(f=\sum_ma_m\phi_m\)，则
+   $$
+   \|f\|_{\mathcal H_k}^2
+   =\sum_{m=1}^{\infty}\frac{a_m^2}{\lambda_m}
+   =\sum_{m=1}^{\infty}(m\pi)^2a_m^2,
+   $$
+   高频函数在 RKHS norm 中代价更高。
+
+GEO-08 会证明 \(T_k=(-\partial_{xx})^{-1}\) 是 homogeneous Dirichlet Poisson solution operator；这里先看见 kernel geometry 与 differential regularity 已经是同一个谱对象的正反两面。
+
+### 核心公式七问：从 PSD 到有限表示
+
+核心链是
+
+$$
+\boxed{
+k(x,t)=\langle\psi_x,\psi_t\rangle_{L^2},
+\qquad
+f(x)=\langle f,k_x\rangle_{\mathcal H_k},
+\qquad
+f^\star=\sum_{i=1}^{n}\alpha_i k_{x_i}.
+}
+$$
+
+1. **对象是什么？** \(x,t\) 是 input points，\(\psi_x\) 是 feature vector，\(k_x\) 是 RKHS function，\(f^\star\) 是优化变量。
+2. **第一式解决什么？** 它对任意有限组合给平方范数，从而证明全部 Gram tests PSD。
+3. **第二式为何成立？** Evaluation functional bounded，Riesz representer 恰为 \(k_x\)。
+4. **第三式为何有限？** Sample loss 看不见 \(M^\perp\)，norm regularizer 会删除它。
+5. **用了哪些条件？** PSD、Hilbert completion、bounded evaluations、有限 observations、适当单调 regularizer 和 minimizer existence。
+6. **怎样计算？** 只需形成 \(K_{ij}=k(x_i,x_j)\)，再解 regularized Gram system；这没有把 population RKHS 变成 finite-dimensional。
+7. **AI 中对应什么？** KRR/SVM、GP posterior mean、kernel PCA、MMD/HSIC 与部分 NTK 分析都在调用这条链的不同层；必须分别报告 kernel validity、Gram conditioning、statistical assumptions 与 approximation error。
+
+## 用数据图审计“合法、有限化、概率解释与近似”
+
+先问：**如何用数值证据区分 kernel PSD、representer projection、KRR–GP 均值等价和随机特征近似，而不把其中任何一项误当成其他三项？**
+
+![[00-知识库管理/_assets/plots/functional-analysis/plot-rkhs-krr-rff-v2.svg|880]]
+
+> [!figure] 图 10.10.7E｜Gram、表示投影、KRR–GP 与随机特征四轨审计
+> A 比较 RBF Gram 与 symmetric negative squared-distance matrix 的谱，后者出现约 \(-45.78\) 的负 eigenvalue；B 把 finite-feature weight 分成 sample row span 与正交补，投影后 predictions 最大变化约 \(2.9\times10^{-15}\)，而 norm 从 \(8.58\) 降到 \(3.66\)；C 在 \(\sigma^2=n\lambda\) 下验证 KRR prediction 与 zero-mean GP posterior mean 完全一致，同时保留 GP uncertainty band；D 用 48 条独立随机特征轨道显示平均 Gram error slope 约 \(-0.502\)，但约 \(48\%\) 的单 seed 路径并不逐点单调。来源：独立计算；生成脚本：[[rkhs_kernel_audit.py]]；根种子 20260819。
+
+**怎样读图。** A 只审计有限样本 Gram 合法性；B 是 representer projection 的有限维类比；C 的均值相同不表示 KRR 与 GP 拥有相同统计语义；D 应读 mean 与 quantile band，不能要求每条随机路径随 feature dimension 单调下降。
+
+**适用边界（图没有证明什么）。** 单个 RBF Gram PSD 不证明 kernel 在整个 domain 上 PSD；finite-feature projection 只是抽象 Hilbert proof 的可计算影子；KRR–GP mean identity 依赖 matched noise/regularization 和 zero prior mean；RFF slope 是该数据分布、带宽和误差范数下的实验结果，不是对所有 kernels 的统一常数。
+
+## 第一遍停靠线
+
+到这里先停下。若能无提示完成下列六项，再进入后面的 kernel taxonomy 与统计应用：
+
+- 用 \(\psi_x=\mathbf1_{\{\cdot\le x\}}-x\) 证明 \(k(x,t)=\min(x,t)-xt\) PSD；
+- 写出折线 \(k_x\)，并从导数积分推出 \(f(x)=\langle f,k_x\rangle\)；
+- 解释普通 \(L^2\) 为什么没有 bounded point evaluation；
+- 用 \(f=f_\parallel+f_\perp\) 证明 representer form；
+- 从 KRR 目标推出 \((K+n\lambda I)\alpha=y\)；
+- 写出正弦 eigenfunctions 和 \(1/(m\pi)^2\) eigenvalues，并说明它们将怎样成为 Poisson Green operator。
+
+后续正文是在扩展这六项的适用范围，不是另起一套 kernel 术语。
 
 > [!abstract] 本章主问题
 > 一个只接收两点并输出数值的函数 $k(x,z)$，凭什么能代表某个可能无限维空间中的内积？答案不是“看起来像相似度”，而是它对**每一组有限样本、每一组系数**都生成半正定二次型。Moore–Aronszajn 定理把这种正定核唯一地提升为一个 reproducing kernel Hilbert space（RKHS）；表示定理再说明，一大类无限维正则化问题的最优解实际上落在有限个 kernel sections 的张成空间中。由此，核岭回归、Gaussian process、MMD/HSIC、Kernel PCA、随机特征与部分宽网络极限获得同一条数学主线。

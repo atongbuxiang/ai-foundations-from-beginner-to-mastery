@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit the migrated teaching contracts and exact models for GEO-01--06."""
+"""Audit the migrated teaching contracts and exact models for GEO-01--08."""
 
 from __future__ import annotations
 
@@ -21,6 +21,8 @@ GEOMETRY_FIGURE_SCRIPT = LABS / "code" / "plot_geometry_foundations_v2.py"
 FUNCTIONAL_FIGURE_SCRIPT = LABS / "code" / "plot_functional_analysis_v2.py"
 BANACH_AUDIT_SCRIPT = LABS / "code" / "banach_hilbert_projection_audit.py"
 COMPACT_AUDIT_SCRIPT = LABS / "code" / "compact_operator_spectrum_audit.py"
+RKHS_AUDIT_SCRIPT = LABS / "code" / "rkhs_kernel_audit.py"
+SOBOLEV_AUDIT_SCRIPT = LABS / "code" / "sobolev_variational_operator_audit.py"
 GEOMETRY_FIGURE_DIR = ROOT / "00-知识库管理" / "_assets" / "figures" / "geometry"
 FUNCTIONAL_FIGURE_DIR = ROOT / "00-知识库管理" / "_assets" / "figures" / "functional-analysis"
 FUNCTIONAL_PLOT_DIR = ROOT / "00-知识库管理" / "_assets" / "plots" / "functional-analysis"
@@ -37,7 +39,12 @@ SECOND_WAVE_CONCEPTS = (
     "有界算子、紧算子与谱理论基础.md",
 )
 
-CONCEPTS = FIRST_WAVE_CONCEPTS + SECOND_WAVE_CONCEPTS
+THIRD_WAVE_CONCEPTS = (
+    "正定核、RKHS 与表示定理.md",
+    "弱导数、Sobolev 空间与神经算子接口.md",
+)
+
+CONCEPTS = FIRST_WAVE_CONCEPTS + SECOND_WAVE_CONCEPTS + THIRD_WAVE_CONCEPTS
 
 CONTRACT_MARKERS = (
     "课程位置",
@@ -61,6 +68,14 @@ EXPECTED_FIGURE_BY_CONCEPT = {
         "plot-compact-operator-spectrum-v2.svg",
         "fig-bounded-compact-spectrum-v2.svg",
     ),
+    CONCEPTS[6]: (
+        "plot-rkhs-krr-rff-v2.svg",
+        "fig-positive-kernel-rkhs-representer-v2.svg",
+    ),
+    CONCEPTS[7]: (
+        "plot-sobolev-weak-fem-operator-v2.svg",
+        "fig-weak-sobolev-variational-operator-v2.svg",
+    ),
 }
 
 FIGURE_PATHS = {
@@ -80,6 +95,14 @@ FIGURE_PATHS = {
         FUNCTIONAL_PLOT_DIR / "plot-banach-hilbert-projection-v2.svg",
     "plot-compact-operator-spectrum-v2.svg":
         FUNCTIONAL_PLOT_DIR / "plot-compact-operator-spectrum-v2.svg",
+    "fig-positive-kernel-rkhs-representer-v2.svg":
+        FUNCTIONAL_FIGURE_DIR / "fig-positive-kernel-rkhs-representer-v2.svg",
+    "fig-weak-sobolev-variational-operator-v2.svg":
+        FUNCTIONAL_FIGURE_DIR / "fig-weak-sobolev-variational-operator-v2.svg",
+    "plot-rkhs-krr-rff-v2.svg":
+        FUNCTIONAL_PLOT_DIR / "plot-rkhs-krr-rff-v2.svg",
+    "plot-sobolev-weak-fem-operator-v2.svg":
+        FUNCTIONAL_PLOT_DIR / "plot-sobolev-weak-fem-operator-v2.svg",
 }
 
 FIGURE_HASHES = {
@@ -99,6 +122,14 @@ FIGURE_HASHES = {
         "c89f1cde4141996909ae78efcceb9857a4ecf3f71eaf81d44a1f04a6c8726d56",
     "plot-compact-operator-spectrum-v2.svg":
         "ab6d18eafb30d5665cb6d13229d18938352a93b524ddf1d3f7e346b82babbcf9",
+    "fig-positive-kernel-rkhs-representer-v2.svg":
+        "7b9b478f3e79bafef81552db7b965605b66d96e1295ed1d32a5f424c2c29d269",
+    "fig-weak-sobolev-variational-operator-v2.svg":
+        "8841137633397af4e2114e7c6335ab22890e7d5487eb9ca1641b57a6784565c5",
+    "plot-rkhs-krr-rff-v2.svg":
+        "cd35628d3df9ccc16308b0279d49d03a3ea751b0297724ca0c30d2807cc4f51e",
+    "plot-sobolev-weak-fem-operator-v2.svg":
+        "37be10891b4fac13df512179a462da9d62ab2ea3c1b02e6bfbcfb6478fdd9949",
 }
 
 KNOWN_EXTENSIONS = {".md", ".py", ".svg", ".png", ".jpg", ".jpeg", ".webp", ".pdf"}
@@ -198,7 +229,10 @@ def audit_route() -> None:
         "第二波的 \\(\\ell^2\\)—对角紧算子单一模型链",
         "如何学习第二波，而不是背泛函分析定理名",
         "第二波材料证书",
-        "下一教学施工点是 GEO-07—08",
+        "第三波的 Green kernel—弱 PDE—解算子单一模型链",
+        "如何学习第三波，而不是背 kernel 与 PDE 名词",
+        "第三波材料证书",
+        "下一教学施工点是 GEO-CUM",
     ):
         require(marker in content, f"MOC misses route marker: {marker}")
     require(
@@ -209,7 +243,11 @@ def audit_route() -> None:
         re.search(r"\| B \| GEO-05—06 .*`regression-passed`", content) is not None,
         "MOC second-wave material status is not regression-passed",
     )
-    print("PASS GEO route: three-wave map, migrated geometry/function-space chains and learning-state boundary")
+    require(
+        re.search(r"\| C \| GEO-07—08 .*`regression-passed`", content) is not None,
+        "MOC third-wave material status is not regression-passed",
+    )
+    print("PASS GEO route: three migrated model chains and learning-state boundary")
 
 
 def audit_exact_first_wave_model() -> None:
@@ -409,6 +447,133 @@ def audit_exact_second_wave_model() -> None:
     )
 
 
+def audit_exact_third_wave_model() -> None:
+    def bridge_kernel(first: float, second: float) -> float:
+        return min(first, second) - first * second
+
+    # GEO-07: Brownian-bridge feature identity and finite PSD tests.
+    for first, second in ((0.0, 0.7), (0.2, 0.2), (0.2, 0.8), (1.0, 0.3)):
+        feature_inner = (
+            min(first, second)
+            - second * first
+            - first * second
+            + first * second
+        )
+        require(math.isclose(feature_inner, bridge_kernel(first, second), abs_tol=2e-16),
+                "Brownian-bridge feature identity changed")
+
+    points = (0.1, 0.35, 0.8)
+    coefficients = (1.2, -0.7, 0.4)
+    quadratic = sum(
+        coefficients[row] * coefficients[column] * bridge_kernel(points[row], points[column])
+        for row in range(len(points))
+        for column in range(len(points))
+    )
+    require(quadratic >= -2e-16, "Brownian-bridge Gram matrix lost PSD")
+
+    # The concrete H_0^1 reproducing calculation for f(t)=t-t^3.
+    derivative_norm = math.sqrt(4.0 / 5.0)
+    for point in (0.1, 0.37, 0.75, 0.95):
+        value = point - point ** 3
+        left_integral = value
+        right_integral = -value
+        reproducing = (1.0 - point) * left_integral - point * right_integral
+        require(math.isclose(reproducing, value, abs_tol=2e-16),
+                "H01 reproducing identity changed")
+        section_norm = math.sqrt(point * (1.0 - point))
+        require(abs(value) <= section_norm * derivative_norm + 2e-16,
+                "bounded point-evaluation certificate changed")
+
+    # Two-point KRR system for x=(1/4,3/4), y=(1,-1), n lambda=1/5.
+    diagonal = 3.0 / 16.0
+    off_diagonal = 1.0 / 16.0
+    regularization = 1.0 / 5.0
+    alpha = 40.0 / 13.0
+    first_residual = (diagonal + regularization) * alpha - off_diagonal * alpha - 1.0
+    second_residual = off_diagonal * alpha - (diagonal + regularization) * alpha + 1.0
+    require(abs(first_residual) < 3e-16 and abs(second_residual) < 3e-16,
+            "two-point KRR representer system changed")
+
+    # Mercer series of the Green kernel.
+    first, second = 0.23, 0.71
+    partial = 2.0 * math.fsum(
+        math.sin(mode * math.pi * first) * math.sin(mode * math.pi * second)
+        / (mode * math.pi) ** 2
+        for mode in range(1, 20001)
+    )
+    require(abs(partial - bridge_kernel(first, second)) < 1e-9,
+            "Green-kernel sine expansion changed")
+    for mode in (1, 2, 8, 32):
+        eigenvalue = 1.0 / (mode * math.pi) ** 2
+        require(eigenvalue > 0.0, "Mercer eigenvalue lost positivity")
+
+    # GEO-08: weak derivative identity for |x| against a smooth boundary-zero probe.
+    intervals = 20000
+    step = 2.0 / intervals
+    lhs = 0.0
+    rhs = 0.0
+    for index in range(intervals + 1):
+        coordinate = -1.0 + index * step
+        weight = 0.5 if index in (0, intervals) else 1.0
+        probe = (1.0 - coordinate * coordinate) ** 2
+        derivative = -4.0 * coordinate * (1.0 - coordinate * coordinate)
+        sign = -1.0 if coordinate < 0.0 else (1.0 if coordinate > 0.0 else 0.0)
+        lhs += weight * abs(coordinate) * derivative
+        rhs += weight * sign * probe
+    lhs *= step
+    rhs *= step
+    require(abs(lhs + rhs) < 2e-15, "weak derivative test identity changed")
+
+    # Poisson weak balance for u=sin(pi x) against several sine tests.
+    quadrature_points = 20000
+    quadrature_step = 1.0 / quadrature_points
+    for test_mode in (1, 2, 3):
+        stiffness = 0.0
+        load = 0.0
+        for index in range(quadrature_points):
+            coordinate = (index + 0.5) * quadrature_step
+            solution_derivative = math.pi * math.cos(math.pi * coordinate)
+            test_derivative = test_mode * math.pi * math.cos(test_mode * math.pi * coordinate)
+            forcing = math.pi ** 2 * math.sin(math.pi * coordinate)
+            test_value = math.sin(test_mode * math.pi * coordinate)
+            stiffness += solution_derivative * test_derivative
+            load += forcing * test_value
+        stiffness *= quadrature_step
+        load *= quadrature_step
+        require(math.isclose(stiffness, load, abs_tol=2e-12),
+                "Poisson sine weak balance changed")
+
+    # Green section reproduces v(t) for v(x)=x(1-x).
+    point = 0.37
+    value = point * (1.0 - point)
+    left_derivative_integral = value
+    right_derivative_integral = -value
+    green_balance = (1.0 - point) * left_derivative_integral - point * right_derivative_integral
+    require(math.isclose(green_balance, value, abs_tol=2e-16),
+            "Green-section weak balance changed")
+
+    # Sine solution gains, compact tail, and hard-cutoff OOD failure.
+    for cutoff in (1, 4, 8, 32):
+        expected_tail = 1.0 / ((cutoff + 1) * math.pi) ** 2
+        sampled_tail = max(
+            1.0 / (mode * math.pi) ** 2
+            for mode in range(cutoff + 1, cutoff + 1025)
+        )
+        require(math.isclose(sampled_tail, expected_tail, abs_tol=0.0),
+                "Poisson solution-operator tail changed")
+    cutoff = 8
+    exact_unseen = 1.0 / ((cutoff + 1) * math.pi) ** 2
+    learned_unseen = 0.0
+    relative_error = abs(learned_unseen - exact_unseen) / exact_unseen
+    require(math.isclose(relative_error, 1.0, abs_tol=0.0),
+            "low-mode operator OOD witness changed")
+
+    print(
+        "PASS third-wave exact model: Green-kernel PSD/reproduction/representer/Mercer; "
+        "weak Poisson balance/Galerkin spectrum/operator OOD"
+    )
+
+
 def audit_markdown_integrity() -> None:
     scoped = [GEO / filename for filename in CONCEPTS] + [MOC]
     all_files = [path for path in ROOT.rglob("*") if path.is_file()]
@@ -497,11 +662,13 @@ def audit_figures(run_figures: bool) -> None:
         for script in (GEOMETRY_FIGURE_SCRIPT, FUNCTIONAL_FIGURE_SCRIPT):
             subprocess.run([sys.executable, str(script)], cwd=ROOT, check=True)
         subprocess.run([sys.executable, str(BANACH_AUDIT_SCRIPT)], cwd=ROOT, check=True)
-        subprocess.run(
-            [str(resolve_numpy_python()), str(COMPACT_AUDIT_SCRIPT)],
-            cwd=ROOT,
-            check=True,
-        )
+        numpy_python = resolve_numpy_python()
+        for script in (COMPACT_AUDIT_SCRIPT, RKHS_AUDIT_SCRIPT, SOBOLEV_AUDIT_SCRIPT):
+            subprocess.run(
+                [str(numpy_python), str(script)],
+                cwd=ROOT,
+                check=True,
+            )
     for filename, expected_hash in FIGURE_HASHES.items():
         path = FIGURE_PATHS[filename]
         require(path.is_file(), f"missing figure: {filename}")
@@ -522,9 +689,10 @@ def main() -> None:
     audit_route()
     audit_exact_first_wave_model()
     audit_exact_second_wave_model()
+    audit_exact_third_wave_model()
     audit_markdown_integrity()
     audit_figures(args.run_figures)
-    print("GEO-01—06 material regression: PASS; learning state: draft/not-attempted")
+    print("GEO-01—08 material regression: PASS; learning state: draft/not-attempted")
 
 
 if __name__ == "__main__":

@@ -7,10 +7,422 @@ prerequisites: ["[[Banach 空间、Hilbert 空间与正交投影]]", "[[有界�
 related: ["[[几何、泛函分析、核与算子基础 MOC]]", "[[正定核、RKHS 与表示定理]]", "[[习题 - 弱导数、Sobolev 空间与神经算子接口]]", "[[解答 - 弱导数、Sobolev 空间与神经算子接口]]", "[[实验 - 弱导数、变分残差与解算子频谱审计]]", "[[S-2014-Su-3092-格林函数与线性响应]]"]
 sources: ["MIT-18.155-Sobolev", "MIT-18.102-Functional-Analysis", "Evans-2010-PDE", "Adams-Fournier-2003-Sobolev", "MIT-FE-Introduction", "Lu-et-al-2021-DeepONet", "Li-et-al-2021-FNO", "Kovachki-et-al-2023-Neural-Operator", "Raissi-et-al-2019-PINN", "E-Yu-2018-Deep-Ritz", "Khodayi-Mehr-Zavlanos-2020-VarNet", "Czarnecki-et-al-2017-Sobolev-Training", "Su-3092-Green-Function"]
 created: 2026-08-19
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # 弱导数、Sobolev 空间与神经算子接口
+
+> [!info] 课程位置
+> 这是 10.10 的 GEO-08，也是数学基础十卷正文的最后一个核心节点。GEO-05 提供 Hilbert projection，GEO-06 提供 compact operator spectrum，GEO-07 已构造 Brownian bridge / Green kernel \(k(x,t)=\min(x,t)-xt\)。本章证明它正是 homogeneous Dirichlet Poisson solution operator 的 kernel，并用同一对象贯通 weak derivative、\(H_0^1\)、variational well-posedness、Galerkin approximation 与 neural operator。这里结束的是最低理论闭包，不是 PDE、Sobolev 或 operator learning 的全部内容。
+
+## 建议两遍阅读
+
+> [!tip] 第一遍：只追一维 Poisson 链
+> 先用 \(u(x)=|x|\) 理解“把导数移给 test function”，再固定
+> $$
+> -u''=f\quad\text{in }(0,1),
+> \qquad u(0)=u(1)=0,
+> $$
+> 推出 weak form、energy minimization、Green operator 和 sine spectrum；最后比较 exact solution operator、Galerkin projection 与低模态 learned truncation。
+
+> [!tip] 第二遍：再推广条件与算法
+> 回到正文学习 distribution derivative、一般 \(W^{k,p}\)、trace/Poincaré/Sobolev embedding/Rellich、Lax–Milgram、Céa、FEM、PINN/Deep Ritz/VPINN，以及 DeepONet/FNO 的 operator-level approximation contract。每个 theorem 都要记录 dimension、domain、boundary、norm 和 convergence mode。
+
+## 本章的推导问题链
+
+1. 经典导数在折点失败时，为什么对所有测试函数成立的积分恒等式仍能唯一确定导数？
+2. Weak derivative 与 weak convergence、weak PDE formulation 为什么是三个不同概念？
+3. \(H^1\) 为什么同时控制函数和一阶弱导数，\(H_0^1\) 又怎样编码边界？
+4. Strong Poisson equation 怎样经 integration by parts 变成只要求一阶导数的 weak form？
+5. Coercivity 与 Poincaré inequality 怎样保证 weak solution 存在唯一？
+6. Energy minimization、weak form 与 Galerkin orthogonality 为什么是同一几何事实？
+7. GEO-07 的 kernel 怎样成为 Poisson Green operator，它的 sine eigenvalues 表示什么？
+8. 为什么一个模型能拟合若干 PDE solutions，不等于它学会了跨输入函数的 solution operator？
+
+第一遍读完，应能重建
+
+$$
+\text{weak derivative}
+\Longrightarrow
+H_0^1
+\Longrightarrow
+a(u,v)=F(v)
+\Longleftrightarrow
+u=\mathcal Gf
+\Longrightarrow
+\mathcal G_h\text{ / learned operator audit}.
+$$
+
+## 初学者贯穿模型：从一个折点到一个解算子
+
+### 符号与对象账本
+
+| 符号 | 类型 | 本章含义 | 不能误读成 |
+|---|---|---|---|
+| \(\Omega=(0,1)\) | domain | PDE 所在区间 | 训练点集合 |
+| \(\varphi\in C_c^\infty\) | test function | 光滑且 compactly supported 的 probe | 待求解的 \(u\) |
+| \(D_wu\) | function/distribution | weak derivative | weakly convergent sequence |
+| \(V=H_0^1(0,1)\) | Hilbert space | 带零 trace 的 energy space | 所有逐点可微函数 |
+| \(V^*=H^{-1}\) | dual space | load functional 所在空间 | \(L^2\) 的同义词 |
+| \(a(u,v)\) | bilinear form | \(\int_0^1u'v'\) | Euclidean dot product |
+| \(F(v)\) | functional | \(\int_0^1fv\) | pointwise forcing value |
+| \(\mathcal G\) | operator | \(f\mapsto u\) 的 Poisson solution map | 单个 solution \(u\) |
+| \(k(x,t)\) | scalar kernel | \(\min(x,t)-xt\) | arbitrary learned attention kernel |
+| \(V_h\) | finite subspace | Galerkin/FEM trial and test space | continuum \(V\) |
+| \(\phi_m\) | mode | \(\sqrt2\sin(m\pi x)\) | mesh eigenvector |
+
+### 第一步：把导数从粗糙函数移给光滑测试函数
+
+经典定义要求 difference quotient 在每一点收敛。对
+
+$$
+u(x)=|x|,
+\qquad x\in(-1,1),
+$$
+
+\(x=0\) 处 classical derivative 不存在。取任意 \(\varphi\in C_c^\infty(-1,1)\)，分段积分：
+
+$$
+\begin{aligned}
+\int_{-1}^{1}|x|\varphi'(x)\,dx
+&=\int_{-1}^{0}(-x)\varphi'(x)\,dx
++\int_{0}^{1}x\varphi'(x)\,dx\\
+&=\int_{-1}^{0}\varphi(x)\,dx
+-\int_{0}^{1}\varphi(x)\,dx\\
+&=-\int_{-1}^{1}\operatorname{sign}(x)\varphi(x)\,dx.
+\end{aligned}
+$$
+
+因此 \(\operatorname{sign}(x)\) 是 \(|x|\) 的 weak derivative：
+
+$$
+\boxed{
+\int u\,\varphi'
+=-\int D_wu\,\varphi
+\quad\text{for every }\varphi\in C_c^\infty.
+}
+$$
+
+“For every test”是关键量词。它保证 weak derivative 若存在则在 almost-everywhere 意义下唯一；只对有限 collocation points 验证恒等式不够。
+
+> [!warning] 三个 weak 不是一回事
+> Weak derivative 是用 test functions 定义微分；weak convergence 是用 continuous linear functionals 定义极限；weak PDE formulation 是把 differential equation 写成对所有 tests 的积分平衡。它们共享 duality 语言，但对象和量词不同。
+
+### 第二步：Sobolev 空间同时记录函数与弱导数
+
+在一维，
+
+$$
+H^1(0,1)
+=\{u\in L^2(0,1):D_wu\in L^2(0,1)\},
+$$
+
+配范数
+
+$$
+\|u\|_{H^1}^2
+=\|u\|_{L^2}^2+\|D_wu\|_{L^2}^2.
+$$
+
+\(H_0^1(0,1)\) 可定义为 \(C_c^\infty(0,1)\) 在 \(H^1\) norm 下的 closure；在一维规则区间上，它等价于 trace 满足 \(u(0)=u(1)=0\) 的 \(H^1\) functions。边界值在一般 Sobolev space 中依赖 trace theorem，不能把 equivalence class 随意逐点代入。
+
+对 \(v\in H_0^1(0,1)\)，Poincaré inequality 给
+
+$$
+\|v\|_{L^2}
+\le\frac1\pi\|v'\|_{L^2}.
+$$
+
+因此在 \(H_0^1\) 上，
+
+$$
+\|v\|_V:=\|v'\|_{L^2}
+$$
+
+已经是与完整 \(H^1\) norm equivalent 的范数。这正是 GEO-07 中 Brownian bridge RKHS 的 inner-product norm。
+
+### 第三步：从 strong Poisson equation 推出 weak form
+
+先假设 \(u\) 足够光滑，满足
+
+$$
+-u''=f,
+\qquad
+u(0)=u(1)=0.
+$$
+
+乘任意 \(v\in H_0^1(0,1)\) 并积分：
+
+$$
+\int_0^1(-u'')v\,dx
+=\int_0^1fv\,dx.
+$$
+
+Integration by parts 给
+
+$$
+\int_0^1u'v'\,dx
+-[u'v]_0^1
+=\int_0^1fv\,dx.
+$$
+
+因为 test function 的 boundary trace 为零，boundary term 消失。于是 weak problem 是：
+
+> [!definition] Dirichlet Poisson weak problem
+> 给定 \(f\in L^2(0,1)\)，求 \(u\in V=H_0^1(0,1)\)，使对所有 \(v\in V\)，
+> $$
+> \boxed{
+> a(u,v):=\int_0^1u'v'\,dx
+> =F(v):=\int_0^1fv\,dx.
+> }
+> $$
+
+这个公式只要求 \(u,v\) 有一阶 weak derivative，不要求 \(u''\) 逐点存在。
+
+### 第四步：为什么 weak solution 存在且唯一
+
+Bilinear form 满足
+
+$$
+|a(u,v)|
+\le\|u'\|_{L^2}\|v'\|_{L^2}
+=\|u\|_V\|v\|_V,
+$$
+
+并且
+
+$$
+a(v,v)=\|v'\|_{L^2}^2=\|v\|_V^2.
+$$
+
+所以 \(a\) continuous 且 coercive，coercivity constant 在此 norm 下就是 \(1\)。右端由 Cauchy–Schwarz 与 Poincaré 得
+
+$$
+|F(v)|
+\le\|f\|_{L^2}\|v\|_{L^2}
+\le\frac{\|f\|_{L^2}}{\pi}\|v\|_V.
+$$
+
+Lax–Milgram theorem 因而给出唯一 \(u\in V\)，并有 stability estimate
+
+$$
+\|u\|_V
+\le\frac1\pi\|f\|_{L^2}.
+$$
+
+> [!important] Well posed 不只等于“有解”
+> 一份完整合同包含 existence、uniqueness 和 continuous dependence。Neural operator 若要学习 \(f\mapsto u\)，首先需要 target solution map 在指定 input/output spaces 中良定义且稳定。
+
+同一 \(u\) 也是 energy
+
+$$
+J(w)
+=\frac12\int_0^1|w'|^2dx
+-\int_0^1fw\,dx
+$$
+
+在 \(V\) 上的唯一 minimizer，因为
+
+$$
+DJ(w)[v]=a(w,v)-F(v).
+$$
+
+所以 weak form、energy stationarity 与 convex minimization 是同一问题的三种语言。
+
+### 第五步：GEO-07 的 kernel 正是 Green solution operator
+
+令
+
+$$
+k(x,t)=\min(x,t)-xt,
+\qquad
+(\mathcal Gf)(x)
+=\int_0^1k(x,t)f(t)\,dt.
+$$
+
+GEO-07 已证明，对固定 \(t\)，kernel section \(k_t\in V\) 满足
+
+$$
+a(k_t,v)=v(t)
+\qquad\forall v\in V.
+$$
+
+因此令 \(u=\mathcal Gf=\int_0^1f(t)k_t\,dt\)，交换积分与 continuous bilinear form 后得到
+
+$$
+\begin{aligned}
+a(u,v)
+&=\int_0^1f(t)a(k_t,v)\,dt\\
+&=\int_0^1f(t)v(t)\,dt\\
+&=F(v).
+\end{aligned}
+$$
+
+所以
+
+$$
+\boxed{
+\mathcal G=(-\partial_{xx})^{-1}
+\quad\text{with homogeneous Dirichlet boundary}.
+}
+$$
+
+这里的 inverse 是从 load space 到 solution space 的 bounded solution operator；differential operator \(-\partial_{xx}\) 本身是带 domain 的 unbounded operator，不能与 GEO-06 的 everywhere-defined bounded operators 混写。
+
+### 第六步：正弦谱同时解释平滑、紧性和低模态偏置
+
+\(\{\phi_m(x)=\sqrt2\sin(m\pi x)\}_{m\ge1}\) 是 \(L^2(0,1)\) 的 orthonormal basis。若
+
+$$
+f=\sum_{m=1}^{\infty}f_m\phi_m,
+$$
+
+则
+
+$$
+u=\mathcal Gf
+=\sum_{m=1}^{\infty}
+\frac{f_m}{(m\pi)^2}\phi_m.
+$$
+
+每个高频 mode 被 \((m\pi)^{-2}\) 抑制，所以 \(\mathcal G:L^2\to L^2\) compact、self-adjoint、positive。保留前 \(N\) 个 modes 的 spectral truncation
+
+$$
+\mathcal G_Nf
+=\sum_{m=1}^{N}
+\frac{f_m}{(m\pi)^2}\phi_m
+$$
+
+满足精确 operator-norm tail
+
+$$
+\boxed{
+\|\mathcal G-\mathcal G_N\|_{L^2\to L^2}
+=\frac1{((N+1)\pi)^2}.
+}
+$$
+
+这解释了 Poisson forward solution operator 易低秩逼近；反向从 \(u\) 恢复 \(f\) 却要乘 \((m\pi)^2\)，仍是 ill-posed differentiation。
+
+### 第七步：Galerkin 方法是能量内积下的正交投影
+
+取 finite-dimensional \(V_h\subset V\)，求 \(u_h\in V_h\) 使
+
+$$
+a(u_h,v_h)=F(v_h)
+\qquad\forall v_h\in V_h.
+$$
+
+Exact weak solution 也满足同一等式，因此相减得到 Galerkin orthogonality：
+
+$$
+\boxed{
+a(u-u_h,v_h)=0
+\qquad\forall v_h\in V_h.
+}
+$$
+
+所以 \(u_h\) 是 \(u\) 在 energy inner product \(a(\cdot,\cdot)\) 下到 \(V_h\) 的 orthogonal projection，并有
+
+$$
+\|u-u_h\|_V
+=\inf_{w_h\in V_h}\|u-w_h\|_V.
+$$
+
+对一般 continuous/coercive form，这一结论推广为带常数的 Céa lemma。
+
+若 \(V_h\) 是 continuous piecewise-linear FEM space，则 \(u_h''=0\) 在每个 element interior 内成立。对非零 \(f\)，逐单元 strong residual \(-u_h''-f=-f\) 并不会趋零；但 weak residual 对所有 \(v_h\in V_h\) 恰为零。节点处 slope jumps 承担 distributional second derivative。强残差、弱残差和 solution error 是三种不同证据。
+
+### 核心公式七问：weak form 与 solution operator
+
+核心链是
+
+$$
+\boxed{
+a(u,v)=F(v)\quad\forall v\in V,
+\qquad
+u=\mathcal Gf,
+\qquad
+\mathcal G\phi_m=\frac1{(m\pi)^2}\phi_m.
+}
+$$
+
+1. **对象是什么？** \(u,v\) 属于 solution/test space \(V\)，\(F\in V^*\)，\(\mathcal G\) 是 function-to-function operator。
+2. **为什么降低导数要求？** Integration by parts 把二阶导数从 \(u\) 转成 \(u'\) 与 \(v'\) 的乘积。
+3. **为什么有唯一解？** \(a\) continuous/coercive，\(F\) bounded；Lax–Milgram 给 existence、uniqueness 与 stability。
+4. **Kernel 在哪里出现？** \(k_t\) 是 evaluation 的 Riesz representer，也是 point load 的 Green response；积分叠加得到一般 load 的 solution。
+5. **谱增益说明什么？** \((m\pi)^{-2}\) 表示 elliptic smoothing、compactness 与 inverse 高频放大。
+6. **离散后保留什么？** Galerkin 保留对 \(V_h\) 的 weak balance 与 energy projection，不保证逐点 strong residual 小。
+7. **AI 中怎样验收？** 必须在 input function distribution、output function norm、mesh/refinement、unseen modes 与 solver baseline 上评估 operator，而不能只报告单个解或 collocation loss。
+
+### 第八步：从拟合 solutions 到学习 solution operator
+
+一个 PINN \(u_\theta(x)\) 通常针对固定 \(f\) 近似单个 solution。Neural operator 的目标则是
+
+$$
+\mathcal N_\theta:
+f\longmapsto u,
+$$
+
+需要跨一族 input functions 共享 parameters。
+
+假设训练 loads 只来自
+
+$$
+\operatorname{span}\{\phi_1,\ldots,\phi_8\},
+$$
+
+并令模型恰好实现 \(\mathcal G_8\)。它在整个训练子空间上 operator error 为零；但对未见 \(\phi_9\)，
+
+$$
+\mathcal G_8\phi_9=0,
+\qquad
+\mathcal G\phi_9=\frac1{(9\pi)^2}\phi_9.
+$$
+
+所以 relative error 是 \(100\%\)，尽管 absolute output norm 只有 \(1/(9\pi)^2\)。这说明：
+
+- training interpolation 不证明跨 input spectrum generalization；
+- relative 与 absolute error 回答不同问题；
+- 在新 grid 上可运行不等于 resolution convergence；
+- shared parameters 不等于逼近了 continuum operator。
+
+一份完整 operator-learning error ledger 至少分开
+
+$$
+\text{data}
++\text{discretization}
++\text{model}
++\text{optimization}
++\text{solver/reference error}.
+$$
+
+## 用数据图审计弱对象、离散与 OOD
+
+先问：**弱导数的分布极限、FEM approximation order、Galerkin residual 和 operator OOD error 分别证明什么，为什么不能互相替代？**
+
+![[00-知识库管理/_assets/plots/functional-analysis/plot-sobolev-weak-fem-operator-v2.svg|880]]
+
+> [!figure] 图 10.10.8E｜弱导数、FEM、残差拓扑与解算子频谱四轨审计
+> A 用 \(u_\varepsilon=\sqrt{x^2+\varepsilon^2}\) 的二阶导数显示质量向 \(2\delta_0\) 集中，最小 \(\varepsilon\) 时积分质量约 \(1.999844\)；B 对 \(-u''=\pi^2\sin(\pi x)\) 的 P1 FEM 得到 \(L^2/H^1\) slopes 约 \(1.999/0.999\)；C 显示 element-interior strong residual 归一化后保持 \(1\)，而 algebraic weak residual 低至约 \(10^{-13}\)；D 对八模态 Poisson truncation 显示训练 modes 零 relative error、未见 modes \(100\%\) relative error，operator tail 为 \(1/(9\pi)^2\approx1.251\times10^{-3}\)。来源：独立计算；生成脚本：[[sobolev_variational_operator_audit.py]]；确定性 NumPy 计算。
+
+**怎样读图。** A 是 distribution concentration，不是普通函数 pointwise convergence；B 是 solution approximation error；C 比较两种 residual topology；D 才是跨 input modes 的 operator test。四个 panel 的纵轴、范数和量词不同，不能用某一条漂亮曲线替代其余证据。
+
+**适用边界（图没有证明什么）。** A 不覆盖任意 distribution singularity；B 的阶依赖一维 smooth solution、uniform mesh、P1 space 与 quadrature；C 的弱 residual 只对离散 test space 为零；D 的 OOD 反例来自硬 spectral cutoff，不代表所有 neural operators 必然失败。整图也不单独证明 Sobolev embedding、Lax–Milgram、Céa 或 neural-operator universality。
+
+## 第一遍停靠线
+
+到这里先停下。若能无提示完成下列七项，再进入正文的高维和模型扩展：
+
+- 用 test-function identity 证明 \(D_w|x|=\operatorname{sign}(x)\)；
+- 定义 \(H^1\) 与 \(H_0^1\)，说明 Poincaré 和 trace 各负责什么；
+- 从 strong Poisson equation 推出 \(a(u,v)=F(v)\)；
+- 用 boundedness、coercivity 和 bounded load 解释 Lax–Milgram；
+- 用 \(k(x,t)=\min(x,t)-xt\) 重建 Green solution operator；
+- 写出 sine gains \(1/(m\pi)^2\) 与 truncation tail；
+- 解释 Galerkin weak residual 为零为何不推出 element-interior strong residual 为零，并给出一个低模态 operator OOD 反例。
+
+后续正文是在更一般 domain、dimension、regularity 和 model class 中加固这七项。
 
 > [!abstract] 本章主问题
 > 经典微积分要求函数在每一点都足够光滑，但偏微分方程的真实解、有限元近似和 ReLU 网络经常在某些点不可微。**弱导数**把导数从“逐点极限”改写为“对所有测试函数成立的积分恒等式”；**Sobolev 空间**则用弱导数的可积性衡量函数的整体正则性。这样，Poisson 方程可在 $H_0^1$ 中写成良定的变分问题，Galerkin 方法、Deep Ritz、变分 PINN 与神经算子也能放进同一张对象—拓扑—误差地图。本章不把“残差很小”“训练损失很低”“换网格能运行”误写成“已经逼近真实解算子”。
