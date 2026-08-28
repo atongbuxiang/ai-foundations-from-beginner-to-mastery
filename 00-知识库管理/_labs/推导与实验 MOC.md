@@ -31,7 +31,7 @@ updated: 2026-08-28
 ## 第二章学习理论静态材料审计
 
 - [[learning_theory_teaching_contract_audit.py]]：检查 LT-01—84 十卷 scope、84 组题—解双射、1260 个 A—E ID、实际调用来源卡、范围内链接、图文单元与课程地图映射；
-- `--run-compute`：将 18 个节点制图脚本运行两次，并要求当前 110 个已存学习理论 figure/plot 资产与仓库版本逐字节一致；
+- `--run-compute`：将 18 个节点制图脚本运行两次，并要求当前 112 个已存学习理论 figure/plot 资产与仓库版本逐字节一致；
 - 第一卷累计门：[[实验 - 学习问题、决策与风险累计复现门]]以 object-risk ERM 枚举、cost/reject Bayes decision 与 finite-candidate holdout feedback 组成三轨；配套[[阶段测验 - 学习问题、决策与风险（20.1）|LT-CUM-01]]和独立详解；
 - [[learning_problem_decision_cumulative_contract_audit.py]]：复核 8/8 scope、14/14 题解与 100 分、答案/输出隔离、解析锚点、canonical/盲参双跑、stdout/SVG/XML/hash、覆盖保护和状态面；
 - 第二卷累计门：[[实验 - PAC 学习与有限假设类累计复现门]]以 realizable survival/Union/exp、agnostic lexicographic ERM/uniform event 与 Occam/Kraft—Le Cam testing 组成三轨；配套[[阶段测验 - PAC 学习与有限假设类（20.2）|PAC-CUM-01]]和独立详解；
@@ -42,8 +42,10 @@ updated: 2026-08-28
 - [[rademacher_margin_local_cumulative_contract_audit.py]]：复核 8/8 scope、14/14 题解与 100 分、exact/upper 锚点、canonical/盲参双跑、stdout/SVG/XML/hash、覆盖/输入保护和六处状态面；
 - 第五卷累计门：[[实验 - 稳定性、压缩、PAC-Bayes 与信息泛化累计复现门]]以 exact replace-one/Binomial gap/RERM-SGD—compression/PAC-Bayes-kl—binary-channel MI/证书选择组成三轨；配套[[阶段测验 - 稳定性、压缩、PAC-Bayes 与信息泛化（20.5）|ALG-CUM-01]]和独立详解；
 - [[algorithmic_generalization_cumulative_contract_audit.py]]：复核 8/8 scope、14/14 题解与 100 分、stability/description/information 锚点、canonical/盲参双跑、stdout/SVG/XML/hash、support/覆盖/输入保护和六处状态面；
-- 当前语义：第 20 章静态材料为 `regression-passed`，卷级材料门 **5/10**，个人通过 **0/10 / `not-attempted`**；84 篇正文仍为 `draft`；
-- 下一施工点：建立覆盖 20.1—20.5 的 LT-QUAL-01 跨卷资格考，再进入 20.6。
+- 第一资格考：[[实验 - 学习理论资格考 I 跨卷累计复现门]]以 all-sample/all-replacement exact learner、large-sample finite/compression/PAC-Bayes certificates 与 predictor/event route ledger 组成三轨；配套[[资格考 - 学习理论 I：从风险到算法依赖泛化（20.1—20.5）|LT-QUAL-01]]和独立详解；
+- [[learning_theory_qualification_01_contract_audit.py]]：不导入生成函数，独立复算 output law、ghost、stability、entropy/MI、finite/compression/PAC-Bayes canonical/盲参锚点，并复核双跑、SVG/XML/hash、非法合同、五卷前置和状态面；
+- 当前语义：第 20 章静态材料为 `regression-passed`，卷级材料门 **5/10**、资格考材料门 **1/2**；个人分卷 **0/10**、个人资格 **0/2 / `not-attempted`**；84 篇正文仍为 `draft`；
+- 下一施工点：进入 20.6 经典模型与模型选择的卷级证据门。
 
 ## 第四章确定性架构审计
 

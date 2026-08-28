@@ -440,7 +440,9 @@ updated: 2026-08-28
 
 ### 当前规划
 
-学习理论 LT-01—84 已完成全章静态材料门：[[learning_theory_teaching_contract_audit.py]]复核 84 组习题—解答双射、1260 个 A—E 题解 ID、来源卡、范围内链接、节点图文单元、18 个节点制图脚本与全部已存资产的双重复跑。前五卷分别由[[learning_problem_decision_cumulative_contract_audit.py]]、[[pac_finite_class_cumulative_contract_audit.py]]、[[vc_uniform_convergence_cumulative_contract_audit.py]]、[[rademacher_margin_local_cumulative_contract_audit.py]]和[[algorithmic_generalization_cumulative_contract_audit.py]]独立复核；第五卷配套[[阶段测验 - 稳定性、压缩、PAC-Bayes 与信息泛化（20.5）|ALG-CUM-01]]、[[阶段测验解答 - 稳定性、压缩、PAC-Bayes 与信息泛化（20.5）|独立封存详解]]与[[实验 - 稳定性、压缩、PAC-Bayes 与信息泛化累计复现门|三轨门]]。五卷均使用口试、210 分钟 100 分闭卷、scorer nonce、跨轨盲参、48 小时与 14 天证据链。卷级材料门现为 **5/10**，个人通过仍为 **0/10 / `not-attempted`**；不能把题卷存在写成分卷通过。
+学习理论 LT-01—84 已完成全章静态材料门：[[learning_theory_teaching_contract_audit.py]]复核 84 组习题—解答双射、1260 个 A—E 题解 ID、来源卡、范围内链接、节点图文单元、18 个节点制图脚本与全部已存资产的双重复跑。前五卷分别由[[learning_problem_decision_cumulative_contract_audit.py]]、[[pac_finite_class_cumulative_contract_audit.py]]、[[vc_uniform_convergence_cumulative_contract_audit.py]]、[[rademacher_margin_local_cumulative_contract_audit.py]]和[[algorithmic_generalization_cumulative_contract_audit.py]]独立复核。五卷均使用口试、210 分钟 100 分闭卷、scorer nonce、跨轨盲参、48 小时与 14 天证据链。卷级材料门现为 **5/10**，个人通过仍为 **0/10 / `not-attempted`**。
+
+前五卷另由[[资格考 - 学习理论 I：从风险到算法依赖泛化（20.1—20.5）|LT-QUAL-01]]做跨卷验收，并配有[[资格考解答 - 学习理论 I：从风险到算法依赖泛化（20.1—20.5）|独立详解]]、[[实验 - 学习理论资格考 I 跨卷累计复现门|三轨门]]与[[learning_theory_qualification_01_contract_audit.py|独立审计]]。资格考材料门现为 **1/2**，个人资格仍为 **0/2 / `not-attempted`**；不能把题卷或 canonical 图存在写成个人通过。
 
 | 学习理论卷级测验 | 覆盖范围 | 状态 |
 |---|---|---|
@@ -449,6 +451,10 @@ updated: 2026-08-28
 | VC-CUM-01 | LT-17—24：VC 维、增长函数与一致收敛 | regression-passed material / not-attempted learner |
 | RAD-CUM-01 | LT-25—32：数据依赖复杂度、间隔与快率 | regression-passed material / not-attempted learner |
 | ALG-CUM-01 | LT-33—40：稳定性、压缩、PAC-Bayes 与信息泛化 | regression-passed material / not-attempted learner |
+
+| 学习理论跨卷资格考 | 覆盖范围 | 状态 |
+|---|---|---|
+| LT-QUAL-01 | LT-01—40：risk/PAC/VC/Rademacher/algorithm-dependent generalization | regression-passed material（1/2）/ not-attempted learner（0/2） |
 
 | 测验 | 覆盖范围 | 状态 |
 |---|---|---|

@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1540" height="1010" viewBox="0 0 1540 1010">
+<rect x="0.0" y="0.0" width="1540.0" height="1010.0" rx="0.0" fill="#F5F8FC" stroke="#F5F8FC" stroke-width="0.0"/>
+<text x="70.0" y="62.0" font-family="Inter,Arial,sans-serif" font-size="27" font-weight="750" fill="#172033" text-anchor="start">Learning theory qualification I | one model, five proof routes</text>
+<text x="70.0" y="93.0" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="500" fill="#5E6B82" text-anchor="start">risk/object  -&gt;  PAC/VC  -&gt;  data-dependent complexity  -&gt;  algorithm/output-dependent generalization</text>
+<rect x="70.0" y="132.0" width="450.0" height="590.0" rx="16.0" fill="#FFFFFF" stroke="#CBD7E6" stroke-width="1.5"/>
+<rect x="70.0" y="132.0" width="450.0" height="7.0" rx="4.0" fill="#2F63E9" stroke="#2F63E9" stroke-width="0.0"/>
+<text x="94.0" y="180.0" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="740" fill="#172033" text-anchor="start">A | exact learning process</text>
+<text x="94.0" y="205.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="500" fill="#5E6B82" text-anchor="start">all samples, all replacements, no Monte Carlo</text>
+<rect x="545.0" y="132.0" width="450.0" height="590.0" rx="16.0" fill="#FFFFFF" stroke="#CBD7E6" stroke-width="1.5"/>
+<rect x="545.0" y="132.0" width="450.0" height="7.0" rx="4.0" fill="#BE7812" stroke="#BE7812" stroke-width="0.0"/>
+<text x="569.0" y="180.0" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="740" fill="#172033" text-anchor="start">B | larger-sample certificates</text>
+<text x="569.0" y="205.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="500" fill="#5E6B82" text-anchor="start">same threshold family; predictor identities separated</text>
+<rect x="1020.0" y="132.0" width="450.0" height="590.0" rx="16.0" fill="#FFFFFF" stroke="#CBD7E6" stroke-width="1.5"/>
+<rect x="1020.0" y="132.0" width="450.0" height="7.0" rx="4.0" fill="#0A9D88" stroke="#0A9D88" stroke-width="0.0"/>
+<text x="1044.0" y="180.0" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="740" fill="#172033" text-anchor="start">C | route before number</text>
+<text x="1044.0" y="205.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="500" fill="#5E6B82" text-anchor="start">validity, statement type, selection budget</text>
+<text x="94.0" y="244.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="650" fill="#172033" text-anchor="start">X={0,...,4}, target threshold=3</text>
+<text x="94.0" y="269.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="500" fill="#5E6B82" text-anchor="start">lexicographic consistent ERM, m=6</text>
+<line x1="112.0" y1="517.0" x2="482.0" y2="517.0" stroke="#CBD7E6" stroke-width="1.5"/>
+<rect x="120.0" y="515.9" width="45.7" height="1.1" rx="3.0" fill="#2F63E9" stroke="#2F63E9" stroke-width="0.0"/>
+<text x="142.8" y="539.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="600" fill="#5E6B82" text-anchor="middle">t=0</text>
+<text x="142.8" y="508.9" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="700" fill="#2F63E9" text-anchor="middle">0.004</text>
+<rect x="181.7" y="505.2" width="45.7" height="11.8" rx="3.0" fill="#2F63E9" stroke="#2F63E9" stroke-width="0.0"/>
+<text x="204.5" y="539.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="600" fill="#5E6B82" text-anchor="middle">t=1</text>
+<text x="204.5" y="498.2" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="700" fill="#2F63E9" text-anchor="middle">0.043</text>
+<rect x="243.3" y="457.1" width="45.7" height="59.9" rx="3.0" fill="#2F63E9" stroke="#2F63E9" stroke-width="0.0"/>
+<text x="266.2" y="539.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="600" fill="#5E6B82" text-anchor="middle">t=2</text>
+<text x="266.2" y="450.1" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="700" fill="#2F63E9" text-anchor="middle">0.215</text>
+<rect x="305.0" y="312.0" width="45.7" height="205.0" rx="3.0" fill="#0A9D88" stroke="#0A9D88" stroke-width="0.0"/>
+<text x="327.8" y="539.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="600" fill="#5E6B82" text-anchor="middle">t=3</text>
+<text x="327.8" y="305.0" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="700" fill="#0A9D88" text-anchor="middle">0.738</text>
+<rect x="366.7" y="517.0" width="45.7" height="0.0" rx="3.0" fill="#2F63E9" stroke="#2F63E9" stroke-width="0.0"/>
+<text x="389.5" y="539.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="600" fill="#5E6B82" text-anchor="middle">t=4</text>
+<rect x="428.3" y="517.0" width="45.7" height="0.0" rx="3.0" fill="#2F63E9" stroke="#2F63E9" stroke-width="0.0"/>
+<text x="451.2" y="539.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="600" fill="#5E6B82" text-anchor="middle">t=5</text>
+<text x="94.0" y="574.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="600" fill="#172033" text-anchor="start">E empirical risk = 0.000000</text>
+<text x="94.0" y="602.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="730" fill="#2F63E9" text-anchor="start">E population gap = 0.062579</text>
+<text x="94.0" y="630.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="730" fill="#0A9D88" text-anchor="start">ghost replacement = 0.062579</text>
+<text x="94.0" y="658.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="730" fill="#C84032" text-anchor="start">direct stability beta = 1.0</text>
+<text x="94.0" y="690.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="650" fill="#C84032" text-anchor="start">Exact gap = ghost identity; worst-case beta can be vacuous.</text>
+<text x="569.0" y="244.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="650" fill="#172033" text-anchor="start">balanced certificate sample m=200</text>
+<text x="569.0" y="296.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="620" fill="#5E6B82" text-anchor="start">true Gibbs risk Q</text>
+<rect x="750.0" y="281.0" width="61.0" height="17.0" rx="3.0" fill="#0A9D88" stroke="#0A9D88" stroke-width="0.0"/>
+<text x="969.0" y="296.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="730" fill="#0A9D88" text-anchor="end">0.0840</text>
+<text x="569.0" y="344.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="620" fill="#5E6B82" text-anchor="start">finite-class bound Q</text>
+<rect x="750.0" y="329.0" width="146.0" height="17.0" rx="3.0" fill="#2F63E9" stroke="#2F63E9" stroke-width="0.0"/>
+<text x="969.0" y="344.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="730" fill="#2F63E9" text-anchor="end">0.2011</text>
+<text x="569.0" y="392.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="620" fill="#5E6B82" text-anchor="start">PAC-Bayes-kl Q</text>
+<rect x="750.0" y="377.0" width="139.2" height="17.0" rx="3.0" fill="#7656C7" stroke="#7656C7" stroke-width="0.0"/>
+<text x="969.0" y="392.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="730" fill="#7656C7" text-anchor="end">0.1917</text>
+<text x="569.0" y="440.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="620" fill="#5E6B82" text-anchor="start">joint-budget PAC Q</text>
+<rect x="750.0" y="425.0" width="147.3" height="17.0" rx="3.0" fill="#C84032" stroke="#C84032" stroke-width="0.0"/>
+<text x="969.0" y="440.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="730" fill="#C84032" text-anchor="end">0.2029</text>
+<text x="569.0" y="488.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="620" fill="#5E6B82" text-anchor="start">compression ERM</text>
+<rect x="750.0" y="473.0" width="32.8" height="17.0" rx="3.0" fill="#BE7812" stroke="#BE7812" stroke-width="0.0"/>
+<text x="969.0" y="488.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="730" fill="#BE7812" text-anchor="end">0.0452</text>
+<rect x="569.0" y="552.0" width="402.0" height="112.0" rx="10.0" fill="#FFF9EE" stroke="#E8C98E" stroke-width="1.2"/>
+<text x="587.0" y="583.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="740" fill="#BE7812" text-anchor="start">certificate ledger</text>
+<text x="587.0" y="612.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="600" fill="#172033" text-anchor="start">Rhat(Q)=0.0840   KL(Q||P)=0.7483</text>
+<text x="587.0" y="640.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="600" fill="#172033" text-anchor="start">finite radius=0.1171   delta/J=0.010</text>
+<text x="569.0" y="690.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="650" fill="#C84032" text-anchor="start">Compression controls reconstructed ERM, not Gibbs Q.</text>
+<text x="1044.0" y="244.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="650" fill="#172033" text-anchor="start">Five routes on the shared threshold model</text>
+<rect x="1044.0" y="270.0" width="402.0" height="64.0" rx="8.0" fill="#F8FAFD" stroke="#CBD7E6" stroke-width="1.0"/>
+<text x="1060.0" y="293.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="740" fill="#2F63E9" text-anchor="start">capacity</text>
+<text x="1170.0" y="293.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="620" fill="#172033" text-anchor="start">Gibbs Q</text>
+<text x="1170.0" y="317.0" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="500" fill="#5E6B82" text-anchor="start">high probability</text>
+<text x="1422.0" y="305.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="740" fill="#2F63E9" text-anchor="end">0.201</text>
+<rect x="1044.0" y="348.0" width="402.0" height="64.0" rx="8.0" fill="#F8FAFD" stroke="#CBD7E6" stroke-width="1.0"/>
+<text x="1060.0" y="371.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="740" fill="#C84032" text-anchor="start">stability</text>
+<text x="1170.0" y="371.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="620" fill="#172033" text-anchor="start">small-m ERM</text>
+<text x="1170.0" y="395.0" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="500" fill="#5E6B82" text-anchor="start">expected</text>
+<text x="1422.0" y="383.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="740" fill="#C84032" text-anchor="end">1.0</text>
+<rect x="1044.0" y="426.0" width="402.0" height="64.0" rx="8.0" fill="#F8FAFD" stroke="#CBD7E6" stroke-width="1.0"/>
+<text x="1060.0" y="449.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="740" fill="#BE7812" text-anchor="start">compression</text>
+<text x="1170.0" y="449.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="620" fill="#172033" text-anchor="start">large-m ERM</text>
+<text x="1170.0" y="473.0" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="500" fill="#5E6B82" text-anchor="start">high probability</text>
+<text x="1422.0" y="461.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="740" fill="#BE7812" text-anchor="end">0.045</text>
+<rect x="1044.0" y="504.0" width="402.0" height="64.0" rx="8.0" fill="#F8FAFD" stroke="#CBD7E6" stroke-width="1.0"/>
+<text x="1060.0" y="527.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="740" fill="#7656C7" text-anchor="start">PAC-Bayes</text>
+<text x="1170.0" y="527.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="620" fill="#172033" text-anchor="start">Gibbs Q</text>
+<text x="1170.0" y="551.0" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="500" fill="#5E6B82" text-anchor="start">high probability</text>
+<text x="1422.0" y="539.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="740" fill="#7656C7" text-anchor="end">0.192</text>
+<rect x="1044.0" y="582.0" width="402.0" height="64.0" rx="8.0" fill="#F8FAFD" stroke="#CBD7E6" stroke-width="1.0"/>
+<text x="1060.0" y="605.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="740" fill="#0A9D88" text-anchor="start">information</text>
+<text x="1170.0" y="605.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="620" fill="#172033" text-anchor="start">small-m ERM</text>
+<text x="1170.0" y="629.0" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="500" fill="#5E6B82" text-anchor="start">expected gap</text>
+<text x="1422.0" y="617.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="740" fill="#0A9D88" text-anchor="end">0.244</text>
+<text x="1044.0" y="690.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="680" fill="#C84032" text-anchor="start">Filter by object/event first; compare numbers second.</text>
+<rect x="70.0" y="752.0" width="1400.0" height="188.0" rx="16.0" fill="#FFFFFF" stroke="#CBD7E6" stroke-width="1.5"/>
+<text x="94.0" y="792.0" font-family="Inter,Arial,sans-serif" font-size="19" font-weight="740" fill="#172033" text-anchor="start">The cross-volume proof spine</text>
+<text x="94.0" y="833.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="740" fill="#2F63E9" text-anchor="start">object / risk</text>
+<text x="94.0" y="861.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="600" fill="#172033" text-anchor="start">D, loss, Bayes, class, algorithm</text>
+<text x="404.0" y="848.0" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="700" fill="#5E6B82" text-anchor="middle">-&gt;</text>
+<text x="434.0" y="833.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="740" fill="#BE7812" text-anchor="start">capacity</text>
+<text x="434.0" y="861.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="600" fill="#172033" text-anchor="start">|H|, VC=1, growth=d+1</text>
+<text x="744.0" y="848.0" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="700" fill="#5E6B82" text-anchor="middle">-&gt;</text>
+<text x="774.0" y="833.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="740" fill="#7656C7" text-anchor="start">data-dependent</text>
+<text x="774.0" y="861.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="600" fill="#172033" text-anchor="start">empirical restriction / margin / local</text>
+<text x="1084.0" y="848.0" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="700" fill="#5E6B82" text-anchor="middle">-&gt;</text>
+<text x="1114.0" y="833.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="740" fill="#0A9D88" text-anchor="start">algorithm/output</text>
+<text x="1114.0" y="861.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="600" fill="#172033" text-anchor="start">beta, compression, KL, I(S;W)</text>
+<line x1="94.0" y1="885.0" x2="1445.0" y2="885.0" stroke="#CBD7E6" stroke-width="1.0"/>
+<text x="94.0" y="913.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#C84032" text-anchor="start">Qualification rule: a valid bound may be vacuous; a small number may be invalid; material pass is not learner pass.</text>
+<text x="1470.0" y="982.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="500" fill="#5E6B82" text-anchor="end">LT-QUAL-01 | deterministic exact-enumeration fixture</text>
+</svg>

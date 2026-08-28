@@ -72,8 +72,12 @@ solutions: 84 / 84
 static material audit: regression-passed
 volume evidence gates built: 5 / 10
 personally passed volumes: 0 / 10
+qualification evidence gates built: 1 / 2
+personally passed qualifications: 0 / 2
 state: draft nodes / regression-passed material / not-attempted learner
-next: build LT-QUAL-01 across 20.1—20.5, then continue with the 20.6 evidence gate
+next: continue with the 20.6 evidence gate
 ```
 
-LT-01—84 已成稿，共 84 套、1260 道 A—E 训练及独立详解；全量 YAML、双链、题解 ID、图片/XML、图文单元、课程映射与生成确定性通过独立审计。20.1 的[[阶段测验 - 学习问题、决策与风险（20.1）|LT-CUM-01]]、20.2 的[[阶段测验 - PAC 学习与有限假设类（20.2）|PAC-CUM-01]]、20.3 的[[阶段测验 - VC 维与一致收敛（20.3）|VC-CUM-01]]、20.4 的[[阶段测验 - 数据依赖复杂度、间隔与快率（20.4）|RAD-CUM-01]]与 20.5 的[[阶段测验 - 稳定性、压缩、PAC-Bayes 与信息泛化（20.5）|ALG-CUM-01]]现各自形成“口试—闭卷—答案/输出隔离—scorer nonce 三轨—盲参—48 小时—14 天”证据门，材料均为 `regression-passed`；尚无个人原稿，所以正文与个人状态继续保持 `draft / not-attempted`。下一施工点是覆盖 20.1—20.5 的 LT-QUAL-01 跨卷资格考。
+LT-01—84 已成稿，共 84 套、1260 道 A—E 训练及独立详解；全量 YAML、双链、题解 ID、图片/XML、图文单元、课程映射与生成确定性通过独立审计。20.1 的[[阶段测验 - 学习问题、决策与风险（20.1）|LT-CUM-01]]、20.2 的[[阶段测验 - PAC 学习与有限假设类（20.2）|PAC-CUM-01]]、20.3 的[[阶段测验 - VC 维与一致收敛（20.3）|VC-CUM-01]]、20.4 的[[阶段测验 - 数据依赖复杂度、间隔与快率（20.4）|RAD-CUM-01]]与 20.5 的[[阶段测验 - 稳定性、压缩、PAC-Bayes 与信息泛化（20.5）|ALG-CUM-01]]现各自形成“口试—闭卷—答案/输出隔离—scorer nonce 三轨—盲参—48 小时—14 天”证据门，材料均为 `regression-passed`。
+
+覆盖前五卷的[[资格考 - 学习理论 I：从风险到算法依赖泛化（20.1—20.5）|LT-QUAL-01]]、[[资格考解答 - 学习理论 I：从风险到算法依赖泛化（20.1—20.5）|独立详解]]与[[实验 - 学习理论资格考 I 跨卷累计复现门|三轨复现门]]也已建立，由[[learning_theory_qualification_01_contract_audit.py]]独立复核。资格考材料门为 **1/2**，个人通过仍为 **0/2 / `not-attempted`**；卷级材料仍为 5/10、个人分卷仍为 0/10。下一施工点进入 20.6。
