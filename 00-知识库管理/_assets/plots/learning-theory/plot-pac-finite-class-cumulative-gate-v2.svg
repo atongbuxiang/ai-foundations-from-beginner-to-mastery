@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 680" role="img" aria-labelledby="title desc">
+<title id="title">PAC 与有限假设类累计证据门</title>
+<desc id="desc">可实现生存概率、不可知 ERM 选择和 Occam 编码与 Le Cam 下界的三轨解析总图。</desc>
+<rect x="0.0" y="0.0" width="1440.0" height="680.0" rx="0.0" fill="#F8FAFC" stroke="#F8FAFC" stroke-width="0.0"/>
+<text x="40.0" y="48.0" font-family="Inter,Arial,sans-serif" font-size="27" font-weight="800" fill="#172033" text-anchor="start">PAC 与有限假设类：上界、选择与下界</text>
+<text x="40.0" y="78.0" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="500" fill="#5B667A" text-anchor="start">同一张图分清：零错排除、双侧均值比较、非均匀预算和统计不可区分性。</text>
+<rect x="35.0" y="112.0" width="420.0" height="505.0" rx="12.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+<text x="57.0" y="148.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="750" fill="#2563EB" text-anchor="start">A</text>
+<text x="95.0" y="148.0" font-family="Inter,Arial,sans-serif" font-size="19" font-weight="750" fill="#172033" text-anchor="start">可实现：坏假设生存</text>
+<text x="57.0" y="177.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="500" fill="#5B667A" text-anchor="start">exact model → union bound → exp certificate</text>
+<text x="60.0" y="211.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="650" fill="#172033" text-anchor="start">|H|-1=31, r=0.180, m=28</text>
+<text x="60.0" y="220.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="600" fill="#5B667A" text-anchor="start">one bad h survives</text>
+<rect x="70.0" y="230.0" width="340.0" height="18.0" rx="4.0" fill="#EEF2F7" stroke="#EEF2F7" stroke-width="0.0"/>
+<rect x="70.0" y="230.0" width="2.0" height="18.0" rx="4.0" fill="#0F9D8A" stroke="#0F9D8A" stroke-width="0.0"/>
+<text x="420.0" y="245.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#0F9D8A" text-anchor="end">0.003862</text>
+<text x="60.0" y="284.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="600" fill="#5B667A" text-anchor="start">exact any-bad failure</text>
+<rect x="70.0" y="294.0" width="340.0" height="18.0" rx="4.0" fill="#EEF2F7" stroke="#EEF2F7" stroke-width="0.0"/>
+<rect x="70.0" y="294.0" width="38.4" height="18.0" rx="4.0" fill="#2563EB" stroke="#2563EB" stroke-width="0.0"/>
+<text x="420.0" y="309.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#2563EB" text-anchor="end">0.113033</text>
+<text x="60.0" y="348.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="600" fill="#5B667A" text-anchor="start">union bound</text>
+<rect x="70.0" y="358.0" width="340.0" height="18.0" rx="4.0" fill="#EEF2F7" stroke="#EEF2F7" stroke-width="0.0"/>
+<rect x="70.0" y="358.0" width="40.7" height="18.0" rx="4.0" fill="#B7791F" stroke="#B7791F" stroke-width="0.0"/>
+<text x="420.0" y="373.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#B7791F" text-anchor="end">0.119715</text>
+<text x="60.0" y="412.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="600" fill="#5B667A" text-anchor="start">M exp(-mr)</text>
+<rect x="70.0" y="422.0" width="340.0" height="18.0" rx="4.0" fill="#EEF2F7" stroke="#EEF2F7" stroke-width="0.0"/>
+<rect x="70.0" y="422.0" width="68.2" height="18.0" rx="4.0" fill="#C24135" stroke="#C24135" stroke-width="0.0"/>
+<text x="420.0" y="437.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#C24135" text-anchor="end">0.200686</text>
+<line x1="60.0" y1="490.0" x2="430.0" y2="490.0" stroke="#CBD5E1" stroke-width="2.0"/>
+<text x="60.0" y="520.0" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="700" fill="#0F9D8A" text-anchor="start">exact minimal m for δ: 33</text>
+<text x="60.0" y="548.0" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="700" fill="#C24135" text-anchor="start">exp sufficient m: 36</text>
+<text x="60.0" y="580.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="500" fill="#5B667A" text-anchor="start">mechanism: every sample must miss E_h</text>
+<rect x="510.0" y="112.0" width="420.0" height="505.0" rx="12.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+<text x="532.0" y="148.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="750" fill="#0F9D8A" text-anchor="start">B</text>
+<text x="570.0" y="148.0" font-family="Inter,Arial,sans-serif" font-size="19" font-weight="750" fill="#172033" text-anchor="start">不可知：共同事件覆盖 ERM</text>
+<text x="532.0" y="177.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="500" fill="#5B667A" text-anchor="start">exact binomial sums + lexicographic selection</text>
+<text x="535.0" y="211.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="650" fill="#172033" text-anchor="start">K=4, m=40, δ=0.050</text>
+<text x="535.0" y="241.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="600" fill="#5B667A" text-anchor="start">true risks q_j</text>
+<line x1="545.0" y1="350.0" x2="545.0" y2="293.2" stroke="#CBD5E1" stroke-width="1.5"/>
+<circle cx="545.0" cy="293.2" r="7" fill="#0F9D8A"/>
+<text x="545.0" y="372.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="600" fill="#5B667A" text-anchor="middle">h1</text>
+<text x="545.0" y="281.2" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="700" fill="#0F9D8A" text-anchor="middle">0.18</text>
+<line x1="651.7" y1="350.0" x2="651.7" y2="282.8" stroke="#CBD5E1" stroke-width="1.5"/>
+<circle cx="651.7" cy="282.8" r="7" fill="#0F9D8A"/>
+<text x="651.7" y="372.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="600" fill="#5B667A" text-anchor="middle">h2</text>
+<text x="651.7" y="270.8" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="700" fill="#0F9D8A" text-anchor="middle">0.22</text>
+<line x1="758.3" y1="350.0" x2="758.3" y2="264.6" stroke="#CBD5E1" stroke-width="1.5"/>
+<circle cx="758.3" cy="264.6" r="7" fill="#0F9D8A"/>
+<text x="758.3" y="372.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="600" fill="#5B667A" text-anchor="middle">h3</text>
+<text x="758.3" y="252.6" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="700" fill="#0F9D8A" text-anchor="middle">0.29</text>
+<line x1="865.0" y1="350.0" x2="865.0" y2="246.4" stroke="#CBD5E1" stroke-width="1.5"/>
+<circle cx="865.0" cy="246.4" r="7" fill="#0F9D8A"/>
+<text x="865.0" y="372.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="600" fill="#5B667A" text-anchor="middle">h4</text>
+<text x="865.0" y="234.4" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="700" fill="#0F9D8A" text-anchor="middle">0.36</text>
+<line x1="540.0" y1="350.0" x2="880.0" y2="350.0" stroke="#172033" stroke-width="1.5"/>
+<text x="535.0" y="412.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" fill="#2563EB" text-anchor="start">Hoeffding radius α = 0.251872</text>
+<text x="535.0" y="442.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" fill="#C24135" text-anchor="start">exact P(uniform event fails) = 0.001707</text>
+<text x="535.0" y="482.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="650" fill="#172033" text-anchor="start">E[R_P(h_ERM)] = 0.197298</text>
+<text x="535.0" y="510.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="650" fill="#172033" text-anchor="start">E[R_S(h_ERM)] = 0.158298</text>
+<text x="535.0" y="538.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" fill="#C24135" text-anchor="start">selection gap = 0.039000</text>
+<text x="535.0" y="566.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" fill="#0F9D8A" text-anchor="start">class excess = 0.017298</text>
+<text x="535.0" y="594.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="500" fill="#5B667A" text-anchor="start">proof bridge spends α twice: excess ≤ 2α</text>
+<rect x="985.0" y="112.0" width="420.0" height="505.0" rx="12.0" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+<text x="1007.0" y="148.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="750" fill="#C24135" text-anchor="start">C</text>
+<text x="1045.0" y="148.0" font-family="Inter,Arial,sans-serif" font-size="19" font-weight="750" fill="#172033" text-anchor="start">编码上界 × 测试下界</text>
+<text x="1007.0" y="177.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="500" fill="#5B667A" text-anchor="start">Kraft-weighted confidence + exact Le Cam TV</text>
+<text x="1010.0" y="211.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="650" fill="#172033" text-anchor="start">code L=1,2,4,4,5; Kraft=0.90625</text>
+<text x="1010.0" y="241.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="600" fill="#5B667A" text-anchor="start">Occam m=80, δ=0.050</text>
+<text x="1010.0" y="278.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="650" fill="#5B667A" text-anchor="start">L=1</text>
+<rect x="1055.0" y="262.0" width="245.0" height="18.0" rx="4.0" fill="#EEF2F7" stroke="#EEF2F7" stroke-width="0.0"/>
+<rect x="1055.0" y="262.0" width="191.7" height="18.0" rx="4.0" fill="#2563EB" stroke="#2563EB" stroke-width="0.0"/>
+<text x="1325.0" y="277.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="700" fill="#2563EB" text-anchor="end">α=0.1655</text>
+<text x="1010.0" y="316.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="650" fill="#5B667A" text-anchor="start">L=2</text>
+<rect x="1055.0" y="300.0" width="245.0" height="18.0" rx="4.0" fill="#EEF2F7" stroke="#EEF2F7" stroke-width="0.0"/>
+<rect x="1055.0" y="300.0" width="206.3" height="18.0" rx="4.0" fill="#2563EB" stroke="#2563EB" stroke-width="0.0"/>
+<text x="1325.0" y="315.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="700" fill="#2563EB" text-anchor="end">α=0.1781</text>
+<text x="1010.0" y="354.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="650" fill="#5B667A" text-anchor="start">L=4</text>
+<rect x="1055.0" y="338.0" width="245.0" height="18.0" rx="4.0" fill="#EEF2F7" stroke="#EEF2F7" stroke-width="0.0"/>
+<rect x="1055.0" y="338.0" width="232.8" height="18.0" rx="4.0" fill="#2563EB" stroke="#2563EB" stroke-width="0.0"/>
+<text x="1325.0" y="353.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="700" fill="#2563EB" text-anchor="end">α=0.2010</text>
+<text x="1010.0" y="392.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="650" fill="#5B667A" text-anchor="start">L=4</text>
+<rect x="1055.0" y="376.0" width="245.0" height="18.0" rx="4.0" fill="#EEF2F7" stroke="#EEF2F7" stroke-width="0.0"/>
+<rect x="1055.0" y="376.0" width="232.8" height="18.0" rx="4.0" fill="#2563EB" stroke="#2563EB" stroke-width="0.0"/>
+<text x="1325.0" y="391.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="700" fill="#2563EB" text-anchor="end">α=0.2010</text>
+<text x="1010.0" y="430.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="650" fill="#5B667A" text-anchor="start">L=5</text>
+<rect x="1055.0" y="414.0" width="245.0" height="18.0" rx="4.0" fill="#EEF2F7" stroke="#EEF2F7" stroke-width="0.0"/>
+<rect x="1055.0" y="414.0" width="245.0" height="18.0" rx="4.0" fill="#2563EB" stroke="#2563EB" stroke-width="0.0"/>
+<text x="1325.0" y="429.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="700" fill="#2563EB" text-anchor="end">α=0.2115</text>
+<line x1="1010.0" y1="455.0" x2="1380.0" y2="455.0" stroke="#CBD5E1" stroke-width="2.0"/>
+<text x="1010.0" y="487.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="650" fill="#172033" text-anchor="start">P−=Bern(0.46), P+=Bern(0.54), m=40</text>
+<text x="1010.0" y="517.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" fill="#0F9D8A" text-anchor="start">exact TV(P−^m,P+^m) = 0.385473</text>
+<text x="1010.0" y="546.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" fill="#C24135" text-anchor="start">min testing error = (1-TV)/2 = 0.307264</text>
+<text x="1010.0" y="575.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#B7791F" text-anchor="start">Pinsker-certified lower bound = 0.246747</text>
+<text x="1010.0" y="603.0" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="500" fill="#5B667A" text-anchor="start">upper: exists success · lower: every algorithm can face failure</text>
+<text x="720.0" y="657.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="600" fill="#5B667A" text-anchor="middle">教材式读图顺序：先核事件和量词，再比较数值；图像不替代证明。</text>
+</svg>

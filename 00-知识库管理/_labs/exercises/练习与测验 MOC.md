@@ -440,7 +440,12 @@ updated: 2026-08-28
 
 ### 当前规划
 
-学习理论 LT-01—84 已完成全章静态材料门：[[learning_theory_teaching_contract_audit.py]]复核 84 组习题—解答双射、1260 个 A—E 题解 ID、144 张来源卡、1997 条范围内链接、97 个节点图文单元和 18 个节点制图脚本的双重复跑。第一卷现新增[[阶段测验 - 学习问题、决策与风险（20.1）|LT-CUM-01]]与[[阶段测验解答 - 学习问题、决策与风险（20.1）|独立封存详解]]：20 分钟口试、210 分钟 100 分闭卷、scorer nonce 三轨、跨轨盲参、48 小时与 14 天证据链由[[learning_problem_decision_cumulative_contract_audit.py]]复核。卷级材料门现为 **1/10**，个人通过仍为 **0/10 / `not-attempted`**；不能把题卷存在写成分卷通过。
+学习理论 LT-01—84 已完成全章静态材料门：[[learning_theory_teaching_contract_audit.py]]复核 84 组习题—解答双射、1260 个 A—E 题解 ID、144 张来源卡、2012 条范围内链接、96 个节点嵌图/97 个章节图文单元和 18 个节点制图脚本、108 个已存资产的双重复跑。第一卷的[[阶段测验 - 学习问题、决策与风险（20.1）|LT-CUM-01]]由[[learning_problem_decision_cumulative_contract_audit.py]]复核；第二卷的[[阶段测验 - PAC 学习与有限假设类（20.2）|PAC-CUM-01]]、[[阶段测验解答 - PAC 学习与有限假设类（20.2）|独立封存详解]]与[[实验 - PAC 学习与有限假设类累计复现门|三轨门]]由[[pac_finite_class_cumulative_contract_audit.py]]复核。两卷均使用口试、210 分钟 100 分闭卷、scorer nonce、跨轨盲参、48 小时与 14 天证据链。卷级材料门现为 **2/10**，个人通过仍为 **0/10 / `not-attempted`**；不能把题卷存在写成分卷通过。
+
+| 学习理论卷级测验 | 覆盖范围 | 状态 |
+|---|---|---|
+| LT-CUM-01 | LT-01—08：学习问题、决策与风险 | regression-passed material / not-attempted learner |
+| PAC-CUM-01 | LT-09—16：PAC 学习与有限假设类 | regression-passed material / not-attempted learner |
 
 | 测验 | 覆盖范围 | 状态 |
 |---|---|---|

@@ -34,8 +34,10 @@ updated: 2026-08-28
 - `--run-compute`：将 18 个节点制图脚本运行两次，并要求原有 106 个节点 figure/plot 资产与仓库版本逐字节一致；
 - 第一卷累计门：[[实验 - 学习问题、决策与风险累计复现门]]以 object-risk ERM 枚举、cost/reject Bayes decision 与 finite-candidate holdout feedback 组成三轨；配套[[阶段测验 - 学习问题、决策与风险（20.1）|LT-CUM-01]]和独立详解；
 - [[learning_problem_decision_cumulative_contract_audit.py]]：复核 8/8 scope、14/14 题解与 100 分、答案/输出隔离、解析锚点、canonical/盲参双跑、stdout/SVG/XML/hash、覆盖保护和状态面；
-- 当前语义：第 20 章静态材料为 `regression-passed`，卷级材料门 **1/10**，个人通过 **0/10 / `not-attempted`**；84 篇正文仍为 `draft`；
-- 下一施工点：为 LT-09—16 建立 20.2 的 PAC/有限假设类卷级证据门。
+- 第二卷累计门：[[实验 - PAC 学习与有限假设类累计复现门]]以 realizable survival/Union/exp、agnostic lexicographic ERM/uniform event 与 Occam/Kraft—Le Cam testing 组成三轨；配套[[阶段测验 - PAC 学习与有限假设类（20.2）|PAC-CUM-01]]和独立详解；
+- [[pac_finite_class_cumulative_contract_audit.py]]：复核 8/8 scope、14/14 题解与 100 分、解析锚点、canonical/盲参双跑、stdout/SVG/XML/hash、Kraft/覆盖保护和六处状态面；
+- 当前语义：第 20 章静态材料为 `regression-passed`，卷级材料门 **2/10**，个人通过 **0/10 / `not-attempted`**；84 篇正文仍为 `draft`；
+- 下一施工点：为 LT-17—24 建立 20.3 的 VC 维/增长函数/一致收敛卷级证据门。
 
 ## 第四章确定性架构审计
 
