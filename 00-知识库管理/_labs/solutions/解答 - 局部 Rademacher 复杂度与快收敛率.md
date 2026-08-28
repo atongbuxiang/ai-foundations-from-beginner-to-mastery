@@ -2,11 +2,12 @@
 type: solution
 status: draft
 area: [learning-theory/local-complexity, statistical-rates]
-topic: "[[习题 - 局部 Rademacher 复杂度与快收敛率]]"
+topic: "[[局部 Rademacher 复杂度与快收敛率]]"
+exercise: "[[习题 - 局部 Rademacher 复杂度与快收敛率]]"
 prerequisites: ["[[局部 Rademacher 复杂度与快收敛率]]"]
 related: ["[[正则化 ERM 的稳定性]]", "[[核岭回归与 Gaussian Process 接口]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 解答 - 局部 Rademacher 复杂度与快收敛率

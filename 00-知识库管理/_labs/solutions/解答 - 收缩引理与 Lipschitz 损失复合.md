@@ -2,11 +2,12 @@
 type: solution
 status: draft
 area: [learning-theory/empirical-process, learning-theory/loss-composition]
-topic: "[[习题 - 收缩引理与 Lipschitz 损失复合]]"
+topic: "[[收缩引理与 Lipschitz 损失复合]]"
+exercise: "[[习题 - 收缩引理与 Lipschitz 损失复合]]"
 prerequisites: ["[[收缩引理与 Lipschitz 损失复合]]", "[[Rademacher 复杂度与经验复杂度]]"]
 related: ["[[范数约束线性类的复杂度]]", "[[分类间隔、Margin Bound 与 SVM 接口]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 解答 - 收缩引理与 Lipschitz 损失复合

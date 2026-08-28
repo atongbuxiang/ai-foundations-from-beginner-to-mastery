@@ -1,9 +1,10 @@
 ---
 type: solution
 status: draft
-topic: "[[习题 - 过参数化与 Benign Overfitting]]"
+topic: "[[过参数化与 Benign Overfitting]]"
+exercise: "[[习题 - 过参数化与 Benign Overfitting]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 # 解答 - 过参数化与 Benign Overfitting
 ## A

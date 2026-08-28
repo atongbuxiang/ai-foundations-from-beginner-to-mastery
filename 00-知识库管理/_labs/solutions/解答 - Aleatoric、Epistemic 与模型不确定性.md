@@ -2,11 +2,12 @@
 type: solution
 status: draft
 area: [learning-theory/uncertainty, aleatoric, epistemic]
-topic: "[[习题 - Aleatoric、Epistemic 与模型不确定性]]"
+topic: "[[Aleatoric、Epistemic 与模型不确定性]]"
+exercise: "[[习题 - Aleatoric、Epistemic 与模型不确定性]]"
 prerequisites: ["[[Aleatoric、Epistemic 与模型不确定性]]"]
 related: ["[[Bayesian Posterior Predictive、Ensemble 与近似边界]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 解答 - Aleatoric、Epistemic 与模型不确定性

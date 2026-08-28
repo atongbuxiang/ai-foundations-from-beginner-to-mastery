@@ -2,11 +2,12 @@
 type: solution
 status: draft
 area: [learning-theory/kernel-ridge, gaussian-processes]
-topic: "[[习题 - 核岭回归与 Gaussian Process 接口]]"
+topic: "[[核岭回归与 Gaussian Process 接口]]"
+exercise: "[[习题 - 核岭回归与 Gaussian Process 接口]]"
 prerequisites: ["[[核岭回归与 Gaussian Process 接口]]"]
 related: ["[[正定核、RKHS 与表示定理]]", "[[多元高斯分布]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 解答 - 核岭回归与 Gaussian Process 接口

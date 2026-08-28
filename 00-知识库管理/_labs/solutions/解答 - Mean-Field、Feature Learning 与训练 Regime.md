@@ -1,9 +1,10 @@
 ---
 type: solution
 status: draft
-topic: "[[习题 - Mean-Field、Feature Learning 与训练 Regime]]"
+topic: "[[Mean-Field、Feature Learning 与训练 Regime]]"
+exercise: "[[习题 - Mean-Field、Feature Learning 与训练 Regime]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 # 解答 - Mean-Field、Feature Learning 与训练 Regime
 ## A
@@ -41,4 +42,3 @@ raw movement 不具参数化不变性，也可能是无用漂移或噪声拟合�
 在 source task 预训练后冻结表示，用低样本 target linear probe；对照随机初始化 feature、NTK predictor、同 training loss 但不同 feature movement 的 scaling，并做 label/augmentation干预。若只 source fit 改善而 transfer 不改善，不能称任务有用的 feature learning。
 ### LT-MF-E03
 claim card：网络/前因子/init/learning-rate/time scaling；经验测度与势函数；PDE解的存在/唯一/收敛对象；$m\to\infty,t\to\infty,n\to\infty$ 顺序；propagation-of-chaos误差和时间窗；population/empirical risk；两层到深层外推等级；可证伪 observable。
-

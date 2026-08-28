@@ -2,11 +2,12 @@
 type: solution
 status: draft
 area: [learning-theory/algorithmic-stability, regularization, convex-optimization]
-topic: "[[习题 - 正则化 ERM 的稳定性]]"
+topic: "[[正则化 ERM 的稳定性]]"
+exercise: "[[习题 - 正则化 ERM 的稳定性]]"
 prerequisites: ["[[正则化 ERM 的稳定性]]"]
 related: ["[[算法稳定性与替换一个样本]]", "[[随机梯度算法的稳定性接口]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 解答 - 正则化 ERM 的稳定性
@@ -316,4 +317,3 @@ $$
 - validation selection protocol 与总置信预算。
 
 这样才能看出 fit、stability、bias 与 optimization 中哪一项主导。
-

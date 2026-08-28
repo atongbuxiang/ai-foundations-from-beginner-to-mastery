@@ -2,11 +2,12 @@
 type: solution
 status: draft
 area: [learning-theory/conformal-prediction, coverage, exchangeability]
-topic: "[[习题 - Conformal Prediction 与有限样本 Coverage]]"
+topic: "[[Conformal Prediction 与有限样本 Coverage]]"
+exercise: "[[习题 - Conformal Prediction 与有限样本 Coverage]]"
 prerequisites: ["[[Conformal Prediction 与有限样本 Coverage]]"]
 related: ["[[Covariate、Label 与 Concept Shift]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 解答 - Conformal Prediction 与有限样本 Coverage

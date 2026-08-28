@@ -2,11 +2,12 @@
 type: solution
 status: draft
 area: [learning-theory/empirical-process, probability/symmetrization]
-topic: "[[习题 - Ghost Sample、对称化与经验过程入口]]"
+topic: "[[Ghost Sample、对称化与经验过程入口]]"
+exercise: "[[习题 - Ghost Sample、对称化与经验过程入口]]"
 prerequisites: ["[[Ghost Sample、对称化与经验过程入口]]"]
 related: ["[[Rademacher 复杂度与经验复杂度]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 解答 - Ghost Sample、对称化与经验过程入口

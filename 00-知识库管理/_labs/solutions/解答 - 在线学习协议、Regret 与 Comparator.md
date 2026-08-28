@@ -1,9 +1,10 @@
 ---
 type: solution
 status: draft
-topic: "[[习题 - 在线学习协议、Regret 与 Comparator]]"
+topic: "[[在线学习协议、Regret 与 Comparator]]"
+exercise: "[[习题 - 在线学习协议、Regret 与 Comparator]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 # 解答 - 在线学习协议、Regret 与 Comparator
 

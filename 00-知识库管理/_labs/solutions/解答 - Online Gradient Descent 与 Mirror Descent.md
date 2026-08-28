@@ -1,9 +1,10 @@
 ---
 type: solution
 status: draft
-topic: "[[习题 - Online Gradient Descent 与 Mirror Descent]]"
+topic: "[[Online Gradient Descent 与 Mirror Descent]]"
+exercise: "[[习题 - Online Gradient Descent 与 Mirror Descent]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 # 解答 - Online Gradient Descent 与 Mirror Descent
 

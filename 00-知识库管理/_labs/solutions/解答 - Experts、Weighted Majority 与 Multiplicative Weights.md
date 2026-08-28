@@ -1,9 +1,10 @@
 ---
 type: solution
 status: draft
-topic: "[[习题 - Experts、Weighted Majority 与 Multiplicative Weights]]"
+topic: "[[Experts、Weighted Majority 与 Multiplicative Weights]]"
+exercise: "[[习题 - Experts、Weighted Majority 与 Multiplicative Weights]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 # 解答 - Experts、Weighted Majority 与 Multiplicative Weights
 

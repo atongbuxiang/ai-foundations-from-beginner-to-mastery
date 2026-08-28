@@ -2,11 +2,12 @@
 type: solution
 status: draft
 area: [learning-theory/empirical-process, learning-theory/complexity]
-topic: "[[习题 - Rademacher 复杂度与经验复杂度]]"
+topic: "[[Rademacher 复杂度与经验复杂度]]"
+exercise: "[[习题 - Rademacher 复杂度与经验复杂度]]"
 prerequisites: ["[[Rademacher 复杂度与经验复杂度]]"]
 related: ["[[收缩引理与 Lipschitz 损失复合]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 解答 - Rademacher 复杂度与经验复杂度

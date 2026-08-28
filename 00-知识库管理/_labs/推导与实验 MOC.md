@@ -28,6 +28,13 @@ updated: 2026-08-28
 
 练习入口：[[练习与测验 MOC]]。
 
+## 第二章学习理论静态材料审计
+
+- [[learning_theory_teaching_contract_audit.py]]：检查 LT-01—84 十卷 scope、84 组题—解双射、1260 个 A—E ID、实际调用来源卡、范围内链接、图文单元与课程地图映射；
+- `--run-compute`：将 18 个学习理论制图脚本运行两次，并要求 106 个 figure/plot 资产与仓库版本逐字节一致；
+- 当前语义：第 20 章静态材料为 `regression-passed`，84 篇正文仍为 `draft`，卷级证据门仍为 0/10，个人严格保持 `not-attempted`；
+- 下一施工点：为 LT-01—08 建立首个卷级口试、闭卷、答案/输出隔离、随机实验与延迟迁移门。
+
 ## 第四章确定性架构审计
 
 - [[00-知识库管理/_labs/code/architecture_sequence_ssm_audit.py]]：ARCH-09—16 的递推、BPTT、门控、ZOH、卷积/scan 与 selective retention；

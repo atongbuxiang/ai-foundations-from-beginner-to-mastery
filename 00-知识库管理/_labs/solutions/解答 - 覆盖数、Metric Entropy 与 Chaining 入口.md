@@ -2,11 +2,12 @@
 type: solution
 status: draft
 area: [learning-theory/metric-entropy, empirical-process/chaining]
-topic: "[[习题 - 覆盖数、Metric Entropy 与 Chaining 入口]]"
+topic: "[[覆盖数、Metric Entropy 与 Chaining 入口]]"
+exercise: "[[习题 - 覆盖数、Metric Entropy 与 Chaining 入口]]"
 prerequisites: ["[[覆盖数、Metric Entropy 与 Chaining 入口]]"]
 related: ["[[局部 Rademacher 复杂度与快收敛率]]", "[[Fat-Shattering、回归与 Lipschitz 风险]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 解答 - 覆盖数、Metric Entropy 与 Chaining 入口

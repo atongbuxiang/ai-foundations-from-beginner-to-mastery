@@ -2,11 +2,12 @@
 type: solution
 status: draft
 area: [learning-theory/vc, learning-theory/multiclass]
-topic: "[[习题 - 多分类的 Natarajan 维与 Graph 维]]"
+topic: "[[多分类的 Natarajan 维与 Graph 维]]"
+exercise: "[[习题 - 多分类的 Natarajan 维与 Graph 维]]"
 prerequisites: ["[[多分类的 Natarajan 维与 Graph 维]]"]
 related: ["[[实值函数类、伪维与阈值化]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 解答 - 多分类的 Natarajan 维与 Graph 维

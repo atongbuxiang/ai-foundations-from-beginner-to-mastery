@@ -1,9 +1,10 @@
 ---
 type: solution
 status: draft
-topic: "[[习题 - Online-to-Batch Conversion]]"
+topic: "[[Online-to-Batch Conversion]]"
+exercise: "[[习题 - Online-to-Batch Conversion]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 # 解答 - Online-to-Batch Conversion
 ## A

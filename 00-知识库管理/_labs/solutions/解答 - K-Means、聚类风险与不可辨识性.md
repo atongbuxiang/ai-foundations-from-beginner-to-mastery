@@ -2,11 +2,12 @@
 type: solution
 status: draft
 area: [learning-theory/k-means, clustering, unsupervised-learning]
-topic: "[[习题 - K-Means、聚类风险与不可辨识性]]"
+topic: "[[K-Means、聚类风险与不可辨识性]]"
+exercise: "[[习题 - K-Means、聚类风险与不可辨识性]]"
 prerequisites: ["[[K-Means、聚类风险与不可辨识性]]"]
 related: ["[[潜变量模型、混合模型与 EM]]", "[[PCA 的统计估计与主子空间风险]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 解答 - K-Means、聚类风险与不可辨识性

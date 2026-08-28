@@ -1,9 +1,10 @@
 ---
 type: solution
 status: draft
-topic: "[[习题 - 范数、平坦性、Sharpness 与参数化不变性]]"
+topic: "[[范数、平坦性、Sharpness 与参数化不变性]]"
+exercise: "[[习题 - 范数、平坦性、Sharpness 与参数化不变性]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 # 解答 - 范数、平坦性、Sharpness 与参数化不变性
 ## A

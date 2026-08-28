@@ -2,11 +2,12 @@
 type: solution
 status: draft
 area: [learning-theory/pca, spectral-estimation, representation-learning]
-topic: "[[习题 - PCA 的统计估计与主子空间风险]]"
+topic: "[[PCA 的统计估计与主子空间风险]]"
+exercise: "[[习题 - PCA 的统计估计与主子空间风险]]"
 prerequisites: ["[[PCA 的统计估计与主子空间风险]]"]
 related: ["[[奇异值分解]]", "[[协方差、相关性与条件期望]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 解答 - PCA 的统计估计与主子空间风险

@@ -1,9 +1,10 @@
 ---
 type: solution
 status: draft
-topic: "[[习题 - OOD、鲁棒性与因果不变性的边界]]"
+topic: "[[OOD、鲁棒性与因果不变性的边界]]"
+exercise: "[[习题 - OOD、鲁棒性与因果不变性的边界]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 # 解答 - OOD、鲁棒性与因果不变性的边界
 ## A

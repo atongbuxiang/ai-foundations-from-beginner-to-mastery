@@ -2,11 +2,12 @@
 type: solution
 status: draft
 area: [learning-theory/ensembles, random-forests, boosting]
-topic: "[[习题 - Bagging、Random Forest 与 Boosting]]"
+topic: "[[Bagging、Random Forest 与 Boosting]]"
+exercise: "[[习题 - Bagging、Random Forest 与 Boosting]]"
 prerequisites: ["[[Bagging、Random Forest 与 Boosting]]"]
 related: ["[[决策树、分裂准则与剪枝]]", "[[在线学习、Boosting 与序列预测 MOC]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 解答 - Bagging、Random Forest 与 Boosting

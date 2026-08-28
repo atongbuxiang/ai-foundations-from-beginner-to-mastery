@@ -2,11 +2,12 @@
 type: solution
 status: draft
 area: [learning-theory/latent-variable-models, mixture-models, em]
-topic: "[[习题 - 潜变量模型、混合模型与 EM]]"
+topic: "[[潜变量模型、混合模型与 EM]]"
+exercise: "[[习题 - 潜变量模型、混合模型与 EM]]"
 prerequisites: ["[[潜变量模型、混合模型与 EM]]"]
 related: ["[[模型可辨识性、选择与 Misspecification]]", "[[K-Means、聚类风险与不可辨识性]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 解答 - 潜变量模型、混合模型与 EM

@@ -1,9 +1,10 @@
 ---
 type: solution
 status: draft
-topic: "[[习题 - 神经网络容量与 Norm-Based Bound]]"
+topic: "[[神经网络容量与 Norm-Based Bound]]"
+exercise: "[[习题 - 神经网络容量与 Norm-Based Bound]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 # 解答 - 神经网络容量与 Norm-Based Bound
 ## A
@@ -41,4 +42,3 @@ predictor 因 ReLU 正齐次性不变。相邻两层 spectral norms 分别乘 $c
 选 ReLU 网络，对相邻层施加一组 $c,c^{-1}$，保持函数与 predictions 数值一致；测 raw Hessian sharpness、raw norm 和 spectral complexity。若前两者大幅变化而后者/风险稳定，说明前者含坐标伪影；再做非等价干预检验指标是否预测真实 risk 变化。
 ### LT-NNB-E03
 claim card：data/algorithm/network/margin 定义；准确 theorem 与概率空间；输入/层 norm 上界和估计误差；复杂度及 confidence/union correction；超参数/指标 post-selection 处理；数值 nonvacuity；尺度与参数化 stress test；ID/OOD 适用域；可推翻 prediction。
-

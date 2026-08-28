@@ -2,11 +2,12 @@
 type: solution
 status: draft
 area: [learning-theory/identifiability, misspecification, model-selection]
-topic: "[[习题 - 模型可辨识性、选择与 Misspecification]]"
+topic: "[[模型可辨识性、选择与 Misspecification]]"
+exercise: "[[习题 - 模型可辨识性、选择与 Misspecification]]"
 prerequisites: ["[[模型可辨识性、选择与 Misspecification]]"]
 related: ["[[正则化、交叉验证与模型选择]]", "[[潜变量模型、混合模型与 EM]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 解答 - 模型可辨识性、选择与 Misspecification

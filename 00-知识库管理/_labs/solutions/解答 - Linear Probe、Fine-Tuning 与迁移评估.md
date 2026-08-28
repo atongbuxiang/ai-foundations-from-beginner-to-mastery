@@ -2,11 +2,12 @@
 type: solution
 status: draft
 area: [learning-theory/transfer-learning, linear-probe, fine-tuning, evaluation]
-topic: "[[习题 - Linear Probe、Fine-Tuning 与迁移评估]]"
+topic: "[[Linear Probe、Fine-Tuning 与迁移评估]]"
+exercise: "[[习题 - Linear Probe、Fine-Tuning 与迁移评估]]"
 prerequisites: ["[[Linear Probe、Fine-Tuning 与迁移评估]]"]
 related: ["[[概率校准、Proper Scoring Rule 与可靠性图]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 解答 - Linear Probe、Fine-Tuning 与迁移评估

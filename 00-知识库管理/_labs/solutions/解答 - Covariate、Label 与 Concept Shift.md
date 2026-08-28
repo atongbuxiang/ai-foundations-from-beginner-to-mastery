@@ -1,9 +1,10 @@
 ---
 type: solution
 status: draft
-topic: "[[习题 - Covariate、Label 与 Concept Shift]]"
+topic: "[[Covariate、Label 与 Concept Shift]]"
+exercise: "[[习题 - Covariate、Label 与 Concept Shift]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 # 解答 - Covariate、Label 与 Concept Shift
 ## A

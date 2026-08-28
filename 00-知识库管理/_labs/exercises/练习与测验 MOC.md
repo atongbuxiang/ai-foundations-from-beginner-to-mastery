@@ -440,6 +440,8 @@ updated: 2026-08-28
 
 ### 当前规划
 
+学习理论 LT-01—84 已先完成全章静态材料门：[[learning_theory_teaching_contract_audit.py]]复核 84 组习题—解答双射、1260 个 A—E 题解 ID、144 张来源卡、1984 条范围内链接、97 个图文单元和 18 个制图脚本的双重复跑。当前仅材料为 `regression-passed`；十份卷级题卷仍为 0/10，个人状态仍为 `not-attempted`，不能把节点题库存在写成分卷通过。
+
 | 测验 | 覆盖范围 | 状态 |
 |---|---|---|
 | MATH-CUM-01 | MATH-01—08：数学语言、逻辑与证明卷末累计验收 | regression-passed：题卷、详解、[[实验 - 数学语言、逻辑与证明累计复现门]]与[[math_foundations_cumulative_contract_audit.py]]已通过答案/输出隔离、canonical/跨轨盲参静态与计算回归；个人仍为 not-attempted |

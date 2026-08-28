@@ -2,11 +2,12 @@
 type: solution
 status: draft
 area: [learning-theory/scale-sensitive-dimension, regression/generalization]
-topic: "[[习题 - Fat-Shattering、回归与 Lipschitz 风险]]"
+topic: "[[Fat-Shattering、回归与 Lipschitz 风险]]"
+exercise: "[[习题 - Fat-Shattering、回归与 Lipschitz 风险]]"
 prerequisites: ["[[Fat-Shattering、回归与 Lipschitz 风险]]"]
 related: ["[[分类间隔、Margin Bound 与 SVM 接口]]", "[[覆盖数、Metric Entropy 与 Chaining 入口]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 解答 - Fat-Shattering、回归与 Lipschitz 风险

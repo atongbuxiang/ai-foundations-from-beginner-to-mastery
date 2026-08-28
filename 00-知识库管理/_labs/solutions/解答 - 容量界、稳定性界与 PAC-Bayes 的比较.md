@@ -2,11 +2,12 @@
 type: solution
 status: draft
 area: [learning-theory/generalization-certificates, comparison]
-topic: "[[习题 - 容量界、稳定性界与 PAC-Bayes 的比较]]"
+topic: "[[容量界、稳定性界与 PAC-Bayes 的比较]]"
+exercise: "[[习题 - 容量界、稳定性界与 PAC-Bayes 的比较]]"
 prerequisites: ["[[容量界、稳定性界与 PAC-Bayes 的比较]]"]
 related: ["[[VC 一致收敛与泛化界]]", "[[深度泛化理论的解释对象与证据等级]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 解答 - 容量界、稳定性界与 PAC-Bayes 的比较

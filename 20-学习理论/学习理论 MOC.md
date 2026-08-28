@@ -6,7 +6,7 @@ aliases: [统计学习理论总入口, 第20章总入口]
 prerequisites: ["[[数学基础完整课程地图与掌握标准]]"]
 related: ["[[学习理论完整课程地图与掌握标准]]", "[[学习问题、决策与风险 MOC]]", "[[PAC 学习与有限假设类 MOC]]", "[[VC 维与一致收敛 MOC]]", "[[数据依赖复杂度、间隔与快率 MOC]]", "[[稳定性、压缩、PAC-Bayes 与信息泛化 MOC]]", "[[经典模型与模型选择 MOC]]", "[[表示学习、度量学习与自监督 MOC]]", "[[校准、不确定性与分布偏移 MOC]]", "[[在线学习、Boosting 与序列预测 MOC]]", "[[深度泛化理论接口与开放边界 MOC]]"]
 created: 2026-08-14
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 学习理论 MOC
@@ -61,14 +61,19 @@ flowchart LR
 
 ## 当前状态
 
+> [!success] 全章静态材料门已经回归通过
+> [[learning_theory_teaching_contract_audit.py]]现独立检查 LT-01—84 的十卷 ID/目录合同、84 组习题—解答双射、1260 个 A—E 题解 ID、144 张实际调用来源卡、1984 条作用域内 Wiki 链接、97 个图文单元、84 个课程地图映射，以及 18 个制图脚本对 106 个图资产的双重复跑字节一致性。该证书只说明材料结构与生成证据可复现；84 篇正文仍为 `draft`，十份卷级题卷尚未建立，个人学习仍为 `not-attempted`。
+
 ```text
 locked scope: 84 / 84
 formal nodes: 84 / 84
 exercise sets: 84 / 84
 solutions: 84 / 84
-passed volumes: 0 / 10
-state: drafting / not-attempted
-next: LT-01—84 final static audit + learner assessment
+static material audit: regression-passed
+volume evidence gates built: 0 / 10
+personally passed volumes: 0 / 10
+state: draft nodes / regression-passed material / not-attempted learner
+next: build the 20.1 volume evidence gate, then LT-QUAL-01 / LT-QUAL-02
 ```
 
-LT-01—84 已成稿，共 84 套、1260 道 A—E 训练及独立详解；当前仍无真实作答证据，故状态保持 `draft / not-attempted`。正文范围已经封顶，下一步是全量 YAML、链接、题解 ID、图像/渲染/确定性审计，然后才进入闭卷证明、48 小时重做与迁移验收。
+LT-01—84 已成稿，共 84 套、1260 道 A—E 训练及独立详解；全量 YAML、双链、题解 ID、图片/XML、图文单元、课程映射与生成确定性现已通过独立审计。当前仍无卷级题卷、口试、nonce 盲测或真实作答证据，故正文与个人状态继续保持 `draft / not-attempted`。下一步从 20.1 开始建立“口试—闭卷—答案/输出隔离—盲参—48 小时—14 天”的卷级证据门。

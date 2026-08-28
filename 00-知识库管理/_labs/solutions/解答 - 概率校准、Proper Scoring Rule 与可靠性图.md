@@ -2,11 +2,12 @@
 type: solution
 status: draft
 area: [learning-theory/calibration, proper-scoring-rules, reliability]
-topic: "[[习题 - 概率校准、Proper Scoring Rule 与可靠性图]]"
+topic: "[[概率校准、Proper Scoring Rule 与可靠性图]]"
+exercise: "[[习题 - 概率校准、Proper Scoring Rule 与可靠性图]]"
 prerequisites: ["[[概率校准、Proper Scoring Rule 与可靠性图]]"]
 related: ["[[Aleatoric、Epistemic 与模型不确定性]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 解答 - 概率校准、Proper Scoring Rule 与可靠性图

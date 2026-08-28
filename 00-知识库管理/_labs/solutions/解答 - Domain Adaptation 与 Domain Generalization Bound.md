@@ -1,9 +1,10 @@
 ---
 type: solution
 status: draft
-topic: "[[习题 - Domain Adaptation 与 Domain Generalization Bound]]"
+topic: "[[Domain Adaptation 与 Domain Generalization Bound]]"
+exercise: "[[习题 - Domain Adaptation 与 Domain Generalization Bound]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 # 解答 - Domain Adaptation 与 Domain Generalization Bound
 ## A

@@ -2,11 +2,12 @@
 type: solution
 status: draft
 area: [learning-theory/contrastive-learning, infonce, mutual-information]
-topic: "[[习题 - 对比学习、InfoNCE 与密度比]]"
+topic: "[[对比学习、InfoNCE 与密度比]]"
+exercise: "[[习题 - 对比学习、InfoNCE 与密度比]]"
 prerequisites: ["[[对比学习、InfoNCE 与密度比]]"]
 related: ["[[正负样本、Batch 依赖与梯度估计]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 解答 - 对比学习、InfoNCE 与密度比

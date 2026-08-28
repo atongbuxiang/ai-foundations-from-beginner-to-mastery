@@ -2,11 +2,12 @@
 type: solution
 status: draft
 area: [learning-theory/contrastive-learning, batch-dependence, gradients]
-topic: "[[习题 - 正负样本、Batch 依赖与梯度估计]]"
+topic: "[[正负样本、Batch 依赖与梯度估计]]"
+exercise: "[[习题 - 正负样本、Batch 依赖与梯度估计]]"
 prerequisites: ["[[正负样本、Batch 依赖与梯度估计]]"]
 related: ["[[数据增强、不变性、等变性与任务充分性]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 解答 - 正负样本、Batch 依赖与梯度估计

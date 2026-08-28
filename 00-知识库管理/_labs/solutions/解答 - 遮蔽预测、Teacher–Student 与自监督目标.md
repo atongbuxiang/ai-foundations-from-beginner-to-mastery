@@ -2,11 +2,12 @@
 type: solution
 status: draft
 area: [learning-theory/masked-prediction, teacher-student, self-supervision]
-topic: "[[习题 - 遮蔽预测、Teacher–Student 与自监督目标]]"
+topic: "[[遮蔽预测、Teacher–Student 与自监督目标]]"
+exercise: "[[习题 - 遮蔽预测、Teacher–Student 与自监督目标]]"
 prerequisites: ["[[遮蔽预测、Teacher–Student 与自监督目标]]"]
 related: ["[[Linear Probe、Fine-Tuning 与迁移评估]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 解答 - 遮蔽预测、Teacher–Student 与自监督目标
@@ -149,4 +150,3 @@ $$
 ### LT-TGT-E03
 
 事故报告字段：时间线与影响；clean/mask/target lineage；发现的不可用信息路径；teacher/center/EMA/temperature历史；collapse面板；pretext与downstream曲线分歧；受污染splits/checkpoints；selection次数；最小复现；停止训练与隔离资产；修复、重新split/训练/outer test证据；未解决边界与回滚点。恢复条件必须由锁定测试与独立审计通过，而非原test继续调参。
-

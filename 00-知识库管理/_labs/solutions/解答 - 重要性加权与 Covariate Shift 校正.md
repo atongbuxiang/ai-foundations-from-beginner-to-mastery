@@ -1,9 +1,10 @@
 ---
 type: solution
 status: draft
-topic: "[[习题 - 重要性加权与 Covariate Shift 校正]]"
+topic: "[[重要性加权与 Covariate Shift 校正]]"
+exercise: "[[习题 - 重要性加权与 Covariate Shift 校正]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 # 解答 - 重要性加权与 Covariate Shift 校正
 ## A

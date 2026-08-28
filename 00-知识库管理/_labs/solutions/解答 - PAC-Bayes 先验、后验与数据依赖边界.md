@@ -2,11 +2,12 @@
 type: solution
 status: draft
 area: [learning-theory/pac-bayes, data-dependent-priors]
-topic: "[[习题 - PAC-Bayes 先验、后验与数据依赖边界]]"
+topic: "[[PAC-Bayes 先验、后验与数据依赖边界]]"
+exercise: "[[习题 - PAC-Bayes 先验、后验与数据依赖边界]]"
 prerequisites: ["[[PAC-Bayes 先验、后验与数据依赖边界]]"]
 related: ["[[PAC-Bayes Bound 的测度变换主线]]", "[[训练集、验证集、测试集与自适应复用]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 解答 - PAC-Bayes 先验、后验与数据依赖边界

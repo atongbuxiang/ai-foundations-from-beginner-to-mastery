@@ -1,9 +1,10 @@
 ---
 type: solution
 status: draft
-topic: "[[习题 - Perceptron Mistake Bound 与 Margin]]"
+topic: "[[Perceptron Mistake Bound 与 Margin]]"
+exercise: "[[习题 - Perceptron Mistake Bound 与 Margin]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 # 解答 - Perceptron Mistake Bound 与 Margin
 ## A

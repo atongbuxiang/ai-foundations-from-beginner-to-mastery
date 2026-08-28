@@ -2,11 +2,12 @@
 type: solution
 status: draft
 area: [learning-theory/pac-bayes, measure-change]
-topic: "[[习题 - PAC-Bayes Bound 的测度变换主线]]"
+topic: "[[PAC-Bayes Bound 的测度变换主线]]"
+exercise: "[[习题 - PAC-Bayes Bound 的测度变换主线]]"
 prerequisites: ["[[PAC-Bayes Bound 的测度变换主线]]"]
 related: ["[[PAC-Bayes 先验、后验与数据依赖边界]]", "[[Occam 界、编码长度与先验权重]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 解答 - PAC-Bayes Bound 的测度变换主线

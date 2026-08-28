@@ -1,9 +1,10 @@
 ---
 type: solution
 status: draft
-topic: "[[习题 - NTK、Lazy Training 与 Kernel Regime]]"
+topic: "[[NTK、Lazy Training 与 Kernel Regime]]"
+exercise: "[[习题 - NTK、Lazy Training 与 Kernel Regime]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 # 解答 - NTK、Lazy Training 与 Kernel Regime
 ## A
@@ -41,4 +42,3 @@ $\dot f_t(x)=-k_0(x,X)r_t$。积分 $0$ 到 $\infty$：$f_\infty(x)-f_0(x)=-k_0\
 采用 pretrain–transfer 任务，使 downstream label 依赖预训练中需形成的新语义 partition；比较 analytical/empirical NTK、frozen random features、finite network 与 frozen learned features。若有限网络形成可迁移表示而 NTK/随机 features 失败，则支持 rich feature mechanism。
 ### LT-NTK-E03
 claim card：architecture/parameterization/init；width、time、step 的极限顺序；$K_0$ concentration 与最小特征值；训练期 kernel drift/Taylor remainder；finite-width/time error；优化收敛结论；单独的 kernel risk assumptions；NNGP/NTK 区分；可证伪阈值。
-

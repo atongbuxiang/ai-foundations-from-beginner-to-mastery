@@ -2,11 +2,12 @@
 type: solution
 status: draft
 area: [learning-theory/posterior-predictive, ensembles, approximate-bayes]
-topic: "[[习题 - Bayesian Posterior Predictive、Ensemble 与近似边界]]"
+topic: "[[Bayesian Posterior Predictive、Ensemble 与近似边界]]"
+exercise: "[[习题 - Bayesian Posterior Predictive、Ensemble 与近似边界]]"
 prerequisites: ["[[Bayesian Posterior Predictive、Ensemble 与近似边界]]"]
 related: ["[[Conformal Prediction 与有限样本 Coverage]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 解答 - Bayesian Posterior Predictive、Ensemble 与近似边界

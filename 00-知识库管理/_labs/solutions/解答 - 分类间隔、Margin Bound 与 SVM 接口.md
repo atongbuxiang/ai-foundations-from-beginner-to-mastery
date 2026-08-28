@@ -2,11 +2,12 @@
 type: solution
 status: draft
 area: [learning-theory/margin, classification/svm]
-topic: "[[习题 - 分类间隔、Margin Bound 与 SVM 接口]]"
+topic: "[[分类间隔、Margin Bound 与 SVM 接口]]"
+exercise: "[[习题 - 分类间隔、Margin Bound 与 SVM 接口]]"
 prerequisites: ["[[分类间隔、Margin Bound 与 SVM 接口]]"]
 related: ["[[支持向量机、最大间隔与核方法]]", "[[覆盖数、Metric Entropy 与 Chaining 入口]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 解答 - 分类间隔、Margin Bound 与 SVM 接口

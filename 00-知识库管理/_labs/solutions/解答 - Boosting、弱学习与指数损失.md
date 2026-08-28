@@ -1,9 +1,10 @@
 ---
 type: solution
 status: draft
-topic: "[[习题 - Boosting、弱学习与指数损失]]"
+topic: "[[Boosting、弱学习与指数损失]]"
+exercise: "[[习题 - Boosting、弱学习与指数损失]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 # 解答 - Boosting、弱学习与指数损失
 ## A
