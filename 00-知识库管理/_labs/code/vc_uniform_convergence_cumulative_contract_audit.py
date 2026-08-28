@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independent material and reproducibility audit for PAC-CUM-01."""
+"""Independent material and reproducibility audit for VC-CUM-01."""
 
 from __future__ import annotations
 
@@ -15,38 +15,40 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 LABS = ROOT / "00-知识库管理" / "_labs"
-CHAPTER = ROOT / "20-学习理论" / "20.2-PAC学习与有限假设类"
-MOC = CHAPTER / "PAC 学习与有限假设类 MOC.md"
-ASSESSMENT = LABS / "assessments" / "阶段测验 - PAC 学习与有限假设类（20.2）.md"
-SOLUTION = LABS / "assessments" / "阶段测验解答 - PAC 学习与有限假设类（20.2）.md"
-EXPERIMENT = LABS / "experiments" / "实验 - PAC 学习与有限假设类累计复现门.md"
-GATE_SCRIPT = LABS / "code" / "pac_finite_class_cumulative_gate.py"
+CHAPTER = ROOT / "20-学习理论" / "20.3-VC维与一致收敛"
+MOC = CHAPTER / "VC 维与一致收敛 MOC.md"
+ASSESSMENT = LABS / "assessments" / "阶段测验 - VC 维与一致收敛（20.3）.md"
+SOLUTION = LABS / "assessments" / "阶段测验解答 - VC 维与一致收敛（20.3）.md"
+EXPERIMENT = LABS / "experiments" / "实验 - VC 维与一致收敛累计复现门.md"
+GATE_SCRIPT = LABS / "code" / "vc_uniform_convergence_cumulative_gate.py"
 CANONICAL_SVG = (
     ROOT
     / "00-知识库管理/_assets/plots/learning-theory"
-    / "plot-pac-finite-class-cumulative-gate-v2.svg"
+    / "plot-vc-uniform-convergence-cumulative-gate-v2.svg"
 )
 
-CANONICAL_SHA256 = "7dda45017be1cf60331afeebc506c727be597c4d40b8ea4bebbcee7d0099ab80"
-BLIND_SHA256 = "f5bdaabff75caafbd2ebfefe3505fc5ec003caa6fd9331236dd9d81c9c0b9536"
+CANONICAL_SHA256 = "94a22793710901fde04a3e4e6ea89ad94e0954a2abba9041f4cf1819a76afd31"
+BLIND_SHA256 = "16c35bb8c37c47fc401e6112809015cde6c721a2ac475d7522255a01658e64ad"
 
 BLIND_ARGS = (
-    "--bad-count", "17",
-    "--bad-risk", "0.23",
-    "--realizable-size", "19",
-    "--risk-grid", "0.15,0.21,0.28,0.41",
-    "--agnostic-size", "31",
-    "--code-lengths", "2,2,3,3",
-    "--occam-size", "70",
-    "--testing-size", "33",
-    "--gamma", "0.055",
+    "--max-size", "12",
+    "--interval-runs", "3",
+    "--domain-size", "5",
+    "--uniform-size", "32",
     "--delta", "0.08",
+    "--layer-dims", "1,3,6",
+    "--layer-weights", "0.5,0.25,0.125",
+    "--empirical-risks", "0.24,0.15,0.11",
+    "--true-risks", "0.23,0.16,0.12",
+    "--srm-size", "2500",
+    "--multiclass-points", "4",
+    "--label-count", "3",
 )
 
 EXPECTED_BLIND_LINES = (
-    "TRACK A bad=17 survival=0.006971 exact_failure=0.112130 union=0.118515 exponential=0.215071 exact_m=21 sufficient_m=24",
-    "TRACK B radius=0.272538 exact_uniform_failure=0.002593 expected_population=0.168544 expected_train=0.131799 selection_gap=0.036745 class_excess=0.018544 mass=1.000000000000",
-    "TRACK C kraft=0.750000 radii=0.181367,0.181367,0.194538,0.194538 tv=0.476949 testing_error=0.261525 pinsker_lower=0.183408",
+    "TRACK A runs=3 vc=6 tau_d=64 tau_d1=127 tau_max=2510 sauer_max=2510",
+    "TRACK B exact_radius=0.181250 exact_success=0.938561 dkw_radius=0.224265 finite_radius=0.279806 vc_radius_raw=1.421831 failure_at_finite=0.002331",
+    "TRACK C selected=1 oracle_layer=1 penalties=0.212583,0.312687,0.409269 scores=0.452583,0.462687,0.519269 multiclass_functions=81 natarajan_patterns=16 graph_patterns=16 pseudo_patterns=4",
 )
 
 STATE_SURFACES = (
@@ -87,7 +89,7 @@ def run(*args: str, expect_success: bool = True) -> subprocess.CompletedProcess[
             f"gate failed: {' '.join(args)}\nstdout:\n{result.stdout}\nstderr:\n{result.stderr}",
         )
     else:
-        require(result.returncode != 0, "gate unexpectedly accepted unsafe output contract")
+        require(result.returncode != 0, "gate unexpectedly accepted an invalid contract")
     return result
 
 
@@ -103,44 +105,40 @@ def parse_frontmatter(content: str) -> dict[str, str]:
     return output
 
 
-def binomial_pmf(n: int, q: float, count: int) -> float:
-    return math.comb(n, count) * q**count * (1 - q) ** (n - count)
+def independent_run_count(m: int, runs: int) -> int:
+    return sum(math.comb(m + 1, 2 * k) for k in range(runs + 1) if 2 * k <= m + 1)
 
 
-def binomial_cdf(n: int, q: float, count: int) -> float:
-    if count < 0:
-        return 0.0
-    if count >= n:
-        return 1.0
-    return sum(binomial_pmf(n, q, k) for k in range(count + 1))
+def independent_cdf_success(domain_size: int, sample_size: int, radius: float) -> float:
+    inverse_factorials = tuple(1.0 / math.factorial(count) for count in range(sample_size + 1))
+    states: dict[int, float] = {0: 1.0}
+    for category in range(1, domain_size + 1):
+        following: dict[int, float] = {}
+        for allocated, weight in states.items():
+            for count in range(sample_size - allocated + 1):
+                total = allocated + count
+                if category < domain_size and abs(total / sample_size - category / domain_size) > radius + 1e-14:
+                    continue
+                following[total] = following.get(total, 0.0) + weight * inverse_factorials[count]
+        states = following
+    return math.factorial(sample_size) * states.get(sample_size, 0.0) / domain_size**sample_size
 
 
-def independent_agnostic_anchor(risks: tuple[float, ...], m: int, delta: float) -> tuple[float, ...]:
-    radius = math.sqrt(math.log(2 * len(risks) / delta) / (2 * m))
-    uniform_success = 1.0
-    for risk in risks:
-        uniform_success *= sum(
-            binomial_pmf(m, risk, count)
-            for count in range(m + 1)
-            if abs(count / m - risk) <= radius + 1e-15
-        )
-    expected_population = expected_train = mass = 0.0
-    for index, risk in enumerate(risks):
-        for count in range(m + 1):
-            probability = binomial_pmf(m, risk, count)
-            for earlier in risks[:index]:
-                probability *= 1 - binomial_cdf(m, earlier, count)
-            for later in risks[index + 1 :]:
-                probability *= 1 - binomial_cdf(m, later, count - 1)
-            mass += probability
-            expected_population += probability * risk
-            expected_train += probability * count / m
-    return radius, 1 - uniform_success, expected_population, expected_train, mass
+def exact_radius(domain_size: int, sample_size: int, delta: float) -> tuple[float, float]:
+    candidates = {0.0}
+    for category in range(1, domain_size):
+        for count in range(sample_size + 1):
+            candidates.add(abs(count / sample_size - category / domain_size))
+    for radius in sorted(candidates):
+        success = independent_cdf_success(domain_size, sample_size, radius)
+        if success >= 1 - delta - 1e-12:
+            return radius, success
+    raise AssertionError("no exact radius found")
 
 
 def audit_node_bundle() -> None:
     files = sorted(path for path in CHAPTER.glob("*.md") if path != MOC)
-    require(len(files) == 8, f"expected 8 LT-09--16 nodes, found {len(files)}")
+    require(len(files) == 8, f"expected 8 LT-17--24 nodes, found {len(files)}")
     found: dict[int, Path] = {}
     for path in files:
         content = read(path)
@@ -151,12 +149,12 @@ def audit_node_bundle() -> None:
         found[node_id] = path
         require("status: draft" in content, f"node state changed: {path.name}")
         require("exercises:" in content and "solutions:" in content, f"learning loop incomplete: {path.name}")
-        require("![[" in content, f"embedded figure contract missing: {path.name}")
-    require(sorted(found) == list(range(9, 17)), f"scope changed: {sorted(found)}")
+        require("![[" in content, f"embedded visual missing: {path.name}")
+    require(sorted(found) == list(range(17, 25)), f"scope changed: {sorted(found)}")
     moc = read(MOC)
-    for node_id in range(9, 17):
+    for node_id in range(17, 25):
         require(re.search(rf"^\| LT-{node_id:02d} \|", moc, re.M) is not None, f"MOC misses LT-{node_id:02d}")
-    print("PASS LT-09--16 node bundle: 8/8 unique draft nodes, figures and MOC mappings")
+    print("PASS LT-17--24 node bundle: 8/8 unique draft nodes, visuals and MOC mappings")
 
 
 def audit_assessment_bundle() -> None:
@@ -168,11 +166,10 @@ def audit_assessment_bundle() -> None:
         require(frontmatter.get("status") == "draft", f"{label}: status must remain draft")
         require(frontmatter.get("material_status") == "regression-passed", f"{label}: material status changed")
         require(frontmatter.get("learning_status") == "not-attempted", f"{label}: personal status changed")
-        require(frontmatter.get("assessment_id") == "PAC-CUM-01", f"{label}: assessment ID changed")
+        require(frontmatter.get("assessment_id") == "VC-CUM-01", f"{label}: assessment ID changed")
         require(frontmatter.get("updated") == "2026-08-28", f"{label}: date changed")
-
     require("time_limit_minutes: 210" in assessment, "assessment duration changed")
-    for node_id in range(9, 17):
+    for node_id in range(17, 25):
         require(f"LT-{node_id:02d}" in assessment, f"assessment scope misses LT-{node_id:02d}")
     for question in range(1, 15):
         require(re.search(rf"^### 第\s*{question}\s*题：.*（(\d+)\s*分）$", assessment, re.M) is not None,
@@ -189,27 +186,16 @@ def audit_assessment_bundle() -> None:
     }
     require(question_points == solution_points, "question/solution points differ")
     require(sum(question_points.values()) == 100, "assessment does not total 100 points")
-
     for marker in (
-        "20 分钟卷级口试",
-        "210 分钟闭卷",
-        "三轨参数化模型族",
-        "八层 PAC 证明账本",
-        "答案与输出隔离协议",
-        "scorer nonce",
-        "48 小时与 14 天复测",
-        "提交证据清单",
+        "20 分钟卷级口试", "210 分钟闭卷", "三轨参数化模型族", "八层 VC 证明账本",
+        "答案与输出隔离协议", "scorer nonce", "48 小时与 14 天复测", "提交证据清单",
     ):
-        require(marker in assessment, f"assessment misses cumulative marker: {marker}")
+        require(marker in assessment, f"assessment misses marker: {marker}")
     for marker in (
-        "卷级口试参考要点",
-        "实验复现门的评分说明",
-        "Nonce 与盲参数判分红线",
-        "48 小时与 14 天复测说明",
-        "从 `retained` 到逐节点证据",
-        "最终状态边界",
+        "卷级口试参考要点", "实验复现门的评分说明", "Nonce 与盲参数判分红线",
+        "48 小时与 14 天复测说明", "从 `retained` 到逐节点证据", "最终状态边界",
     ):
-        require(marker in solution, f"solution misses rubric marker: {marker}")
+        require(marker in solution, f"solution misses marker: {marker}")
     require("第 1 题解答" not in assessment, "answer leaked into question sheet")
     require("才可打开本页或 canonical stdout" in solution, "solution isolation warning missing")
     print("PASS assessment bundle: scope=8/8, questions/solutions=14/14, points=100, isolation + delay gates")
@@ -221,9 +207,9 @@ def audit_experiment_contract() -> None:
         "执行顺序、答案隔离与 scorer nonce",
         "进入实验前的解析校准门",
         "三轨统一对象合同",
-        "轨道 A：可实现版本空间的生存证书",
-        "轨道 B：不可知 ERM、双侧共同事件与选择偏差",
-        "轨道 C：Occam 失败预算与 Le Cam 难分辨性",
+        "轨道 A：从连续 1 段到 Sauer 极值类",
+        "轨道 B：精确 uniform deviation 与通用证书",
+        "轨道 C：SRM 与扩展见证的责任边界",
         "评分者随机指定、跨轨盲参与防挑题协议",
         "独立审计固定 fixture",
         "盲参数干预怎样才算独立",
@@ -235,34 +221,37 @@ def audit_experiment_contract() -> None:
     headings = [line.strip() for line in experiment.splitlines() if line.startswith("#")]
     duplicate = sorted({heading for heading in headings if headings.count(heading) > 1})
     require(not duplicate, f"experiment duplicate headings: {duplicate}")
-    print("PASS experiment contract: analytic calibration, three tracks, blind fixture and evidence state machine")
+    print("PASS experiment contract: analytic calibration, three tracks, exact DP and evidence state machine")
 
 
 def audit_analytic_anchors() -> None:
-    survival = 0.82**28
-    exact_failure = 1 - (1 - survival) ** 31
-    require(abs(survival - 0.0038617830030521247) < 1e-15, "track A survival anchor changed")
-    require(abs(exact_failure - 0.11303257933192612) < 1e-14, "track A exact failure changed")
-    require(math.ceil(math.log(31 / 0.05) / 0.18) == 36, "track A sufficient m changed")
+    require(independent_run_count(4, 2) == 16, "Track A tau(d) changed")
+    require(independent_run_count(5, 2) == 31, "Track A tau(d+1) changed")
+    require(independent_run_count(10, 2) == 386, "Track A maximum-class count changed")
+    require(sum(math.comb(10, index) for index in range(5)) == 386, "Sauer sum changed")
 
-    radius, uniform_failure, expected_population, expected_train, mass = independent_agnostic_anchor(
-        (0.18, 0.22, 0.29, 0.36), 40, 0.05
+    radius, success = exact_radius(6, 40, 0.05)
+    require(abs(radius - 0.175) < 1e-15, "Track B exact radius changed")
+    require(abs(success - 0.953254466758426) < 1e-14, "Track B exact success changed")
+    dkw = math.sqrt(math.log(40) / 80)
+    finite = math.sqrt(math.log(280) / 80)
+    vc = math.sqrt(8 / 40 * (math.log(81) + math.log(80)))
+    require(abs(dkw - 0.2147347041733688) < 1e-14, "DKW radius changed")
+    require(abs(finite - 0.26539568579691647) < 1e-14, "finite-class radius changed")
+    require(abs(vc - 1.3248755254246583) < 1e-14, "VC radius changed")
+
+    dims = (1, 2, 4, 8)
+    weights = (0.5, 0.25, 0.125, 0.0625)
+    penalties = tuple(
+        math.sqrt(8 / 3000 * (d * math.log(2 * math.e * 3000 / d) + math.log(4 / (0.05 * weight))))
+        for d, weight in zip(dims, weights)
     )
-    require(abs(radius - 0.25187233411080073) < 1e-14, "track B radius changed")
-    require(abs(uniform_failure - 0.0017069197836533379) < 1e-14, "track B uniform event changed")
-    require(abs(expected_population - 0.19729831883873342) < 1e-14, "track B selected risk changed")
-    require(abs(expected_train - 0.15829838200021823) < 1e-14, "track B selected train risk changed")
-    require(abs(mass - 1.0) < 1e-12, "track B selection probabilities do not sum to one")
-
-    lengths = (1, 2, 4, 4, 5)
-    kraft = sum(2.0 ** (-length) for length in lengths)
-    require(abs(kraft - 0.90625) < 1e-15, "track C Kraft sum changed")
-    gamma, n = 0.04, 40
-    p_minus, p_plus = 0.5 - gamma, 0.5 + gamma
-    tv = 0.5 * sum(abs(binomial_pmf(n, p_minus, k) - binomial_pmf(n, p_plus, k)) for k in range(n + 1))
-    require(abs(tv - 0.38547250790429427) < 1e-14, "track C exact TV changed")
-    require(abs((1 - tv) / 2 - 0.3072637460478529) < 1e-14, "track C testing error changed")
-    print("PASS analytic anchors: realizable survival, agnostic exact selection, Kraft and two-point testing")
+    expected = (0.19849224040883154, 0.2518256334905524, 0.3254303805720047, 0.4261930736466952)
+    require(all(abs(left - right) < 1e-14 for left, right in zip(penalties, expected)), "SRM penalties changed")
+    scores = tuple(risk + penalty for risk, penalty in zip((0.26, 0.18, 0.115, 0.09), penalties))
+    require(min(range(4), key=lambda index: scores[index]) == 1, "SRM selected layer changed")
+    require(4**3 == 64 and 2**3 == 8, "multiclass witness counts changed")
+    print("PASS analytic anchors: interval growth, exact CDF law, certificate radii, SRM and witnesses")
 
 
 def audit_svg(path: Path, expected_hash: str, required_text: tuple[str, ...]) -> None:
@@ -270,7 +259,7 @@ def audit_svg(path: Path, expected_hash: str, required_text: tuple[str, ...]) ->
     require(sha256(path) == expected_hash, f"SVG hash changed: {path.name}")
     root = ET.parse(path).getroot()
     require(root.tag.endswith("svg"), f"not an SVG root: {path.name}")
-    require(root.attrib.get("viewBox") == "0 0 1440 680", f"SVG viewBox changed: {path.name}")
+    require(root.attrib.get("viewBox") == "0 0 1440 700", f"SVG viewBox changed: {path.name}")
     text_content = " ".join("".join(element.itertext()) for element in root.iter() if element.tag.endswith("text"))
     for marker in required_text:
         require(marker in text_content, f"SVG is not self-describing; misses {marker!r}")
@@ -285,13 +274,13 @@ def audit_reproducibility() -> None:
     second = run()
     second_bytes = CANONICAL_SVG.read_bytes()
     require(stored_before == first_bytes == second_bytes, "canonical output is not byte deterministic")
-    require("exact_failure=0.113033" in first.stdout, "canonical track A anchor missing")
-    require("class_excess=0.017298" in first.stdout, "canonical track B anchor missing")
-    require("testing_error=0.307264" in first.stdout, "canonical track C anchor missing")
+    require("tau_max=386" in first.stdout, "canonical Track A anchor missing")
+    require("exact_radius=0.175000" in first.stdout, "canonical Track B anchor missing")
+    require("selected=2 oracle_layer=1" in first.stdout, "canonical Track C anchor missing")
     audit_svg(
         CANONICAL_SVG,
         CANONICAL_SHA256,
-        ("可实现：坏假设生存", "不可知：共同事件覆盖 ERM", "编码上界 × 测试下界"),
+        ("增长函数 × Sauer 包络", "阈值类的精确共同偏差", "SRM 选择 × 推广见证"),
     )
 
     with tempfile.TemporaryDirectory() as temporary:
@@ -302,37 +291,36 @@ def audit_reproducibility() -> None:
         require(first_path.read_bytes() == second_path.read_bytes(), "blind output is not byte deterministic")
         for line in EXPECTED_BLIND_LINES:
             require(line in first_blind.stdout and line in second_blind.stdout, f"blind stdout changed: {line}")
-        audit_svg(first_path, BLIND_SHA256, ("|H|-1=17", "K=4, m=31", "Kraft=0.75000"))
+        audit_svg(first_path, BLIND_SHA256, ("runs=3", "D=5, m=32", "|Y|^q=81"))
 
     unsafe = run(*BLIND_ARGS, expect_success=False)
-    require("require --output" in (unsafe.stdout + unsafe.stderr), "unsafe refusal message changed")
-    require(CANONICAL_SVG.read_bytes() == stored_before, "noncanonical failure changed canonical asset")
+    require("require --output" in (unsafe.stdout + unsafe.stderr), "unsafe refusal changed")
+    explicit = run(*BLIND_ARGS, "--output", str(CANONICAL_SVG), expect_success=False)
+    require("may not target" in (explicit.stdout + explicit.stderr), "explicit canonical overwrite was accepted")
+    require(CANONICAL_SVG.read_bytes() == stored_before, "overwrite tests changed canonical asset")
 
-    explicit_overwrite = run(*BLIND_ARGS, "--output", str(CANONICAL_SVG), expect_success=False)
-    require("may not target" in (explicit_overwrite.stdout + explicit_overwrite.stderr),
-            "explicit canonical overwrite was not rejected")
-    require(CANONICAL_SVG.read_bytes() == stored_before, "explicit overwrite refusal changed canonical asset")
-
-    invalid = run("--code-lengths", "1,1,1", "--output", str(ROOT / ".pac-invalid.svg"), expect_success=False)
-    require("Kraft" in (invalid.stdout + invalid.stderr), "Kraft violation was not rejected")
-    require(not (ROOT / ".pac-invalid.svg").exists(), "invalid input created an output")
-    print("PASS deterministic compute: canonical + blind double-run, XML/hash and overwrite/Kraft protection")
+    with tempfile.TemporaryDirectory() as temporary:
+        invalid_path = Path(temporary) / "invalid.svg"
+        invalid = run("--layer-weights", "0.7,0.4,0.1,0.1", "--output", str(invalid_path), expect_success=False)
+        require("sum to at most one" in (invalid.stdout + invalid.stderr), "invalid SRM weights were not rejected")
+        require(not invalid_path.exists(), "invalid input created output")
+    print("PASS deterministic compute: canonical + blind double-run, XML/hash and overwrite/weight protection")
 
 
 def audit_state_surfaces() -> None:
     audit_name = Path(__file__).name
     for path in STATE_SURFACES:
         content = read(path)
-        require("PAC-CUM-01" in content, f"state surface misses volume ID: {path.relative_to(ROOT)}")
+        require("VC-CUM-01" in content, f"state surface misses volume ID: {path.relative_to(ROOT)}")
         require(audit_name in content, f"state surface misses audit link: {path.relative_to(ROOT)}")
         require("regression-passed" in content, f"state surface misses material state: {path.relative_to(ROOT)}")
-        require("not-attempted" in content, f"state surface misses personal state: {path.relative_to(ROOT)}")
+        require("not-attempted" in content, f"state surface misses learner state: {path.relative_to(ROOT)}")
     root_moc = read(ROOT / "20-学习理论" / "学习理论 MOC.md")
     curriculum = read(ROOT / "20-学习理论" / "学习理论完整课程地图与掌握标准.md")
     for content, label in ((root_moc, "root MOC"), (curriculum, "curriculum map")):
         require(re.search(r"3\s*/\s*10", content) is not None, f"{label}: volume-gate count not synchronized")
-        require(re.search(r"0\s*/\s*10", content) is not None, f"{label}: personal volume count changed")
-    print(f"PASS state surfaces: {len(STATE_SURFACES)} views preserve PAC-CUM-01 and agree on 3/10 material gates, 0/10 personal passes")
+        require(re.search(r"0\s*/\s*10", content) is not None, f"{label}: personal count changed")
+    print(f"PASS state surfaces: {len(STATE_SURFACES)} views agree on 3/10 material gates and 0/10 personal passes")
 
 
 def main() -> None:
@@ -342,7 +330,7 @@ def main() -> None:
     audit_analytic_anchors()
     audit_reproducibility()
     audit_state_surfaces()
-    print("PAC-CUM-01 material regression: PASS")
+    print("VC-CUM-01 material regression: PASS")
     print("PERSONAL LEARNING STATUS: not-attempted")
 
 

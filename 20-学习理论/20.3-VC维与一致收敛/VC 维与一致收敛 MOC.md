@@ -3,9 +3,9 @@ type: moc
 status: active
 area: [learning-theory/vc]
 prerequisites: ["[[PAC 学习与有限假设类 MOC]]", "[[数学归纳、递归与组合计数]]"]
-related: ["[[学习理论完整课程地图与掌握标准]]", "[[数据依赖复杂度、间隔与快率 MOC]]"]
+related: ["[[学习理论完整课程地图与掌握标准]]", "[[数据依赖复杂度、间隔与快率 MOC]]", "[[阶段测验 - VC 维与一致收敛（20.3）]]", "[[实验 - VC 维与一致收敛累计复现门]]"]
 created: 2026-08-20
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # VC 维与一致收敛 MOC
@@ -42,3 +42,17 @@ updated: 2026-08-23
 | LT-24 | [[实值函数类、伪维与阈值化]] | regression capacity entry | draft + A–E 闭环 |
 
 当前为 **8/8 正文、8/8 A—E 习题与独立详解、0/8 经真实验收**。LT-17—24 共使用 15 张独立自绘/程序生成 v2 图，并保留杨辉三角、VC 几何图库与 D2L 容量示意三组已登记外部来源；全部节点均有引图问题、正式图注、读图方法和适用边界。LT-21—24 已补齐基本定理的必要/充分证明、SRM oracle inequality、多分类 Natarajan/Graph 维与实值 pseudo-dimension，并完成 SVG 结构、XML 与 1200 px 渲染复核。下一施工批次进入 20.4 的 LT-25—32。`draft` 只表示课程材料成稿，不替代闭卷证明、延迟复测与迁移证据。
+
+## 卷级累计证据门
+
+- 题卷：[[阶段测验 - VC 维与一致收敛（20.3）|VC-CUM-01]]，20 分钟口试加 210 分钟闭卷；
+- 独立详解：[[阶段测验解答 - VC 维与一致收敛（20.3）]]，只在原稿、nonce 和运行前预测冻结后开放；
+- 三轨实验：[[实验 - VC 维与一致收敛累计复现门]]，贯通 interval-run growth/Sauer、有限域 threshold exact uniform law 与 SRM/extension witnesses；
+- 确定性总图：[[plot-vc-uniform-convergence-cumulative-gate-v2.svg]]，由[[vc_uniform_convergence_cumulative_gate.py]]生成；
+- 独立回归：[[vc_uniform_convergence_cumulative_contract_audit.py]]复核 8/8 scope、14/14 题解与 100 分、exact dynamic program、canonical/盲参双跑、SVG/XML/hash、非法权重与覆盖保护、六处状态面；
+- 延迟门：48 小时换类/机制与 14 天陌生容量迁移。
+
+> [!success] 材料门已建立，个人状态未改变
+> VC-CUM-01 为 `regression-passed material / not-attempted learner`。八篇正文继续保持 `draft`，0/8 经真实验收；总图与脚本不能充当个人 shattering、Sauer 或对称化证明。
+
+下一卷：[[数据依赖复杂度、间隔与快率 MOC]]。20.4 将从 worst-case growth 进入 sample-dependent complexity、contraction、margin、localization 与 fast-rate conditions。

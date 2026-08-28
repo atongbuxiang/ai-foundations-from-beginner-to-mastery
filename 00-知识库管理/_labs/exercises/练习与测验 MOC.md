@@ -440,12 +440,13 @@ updated: 2026-08-28
 
 ### 当前规划
 
-学习理论 LT-01—84 已完成全章静态材料门：[[learning_theory_teaching_contract_audit.py]]复核 84 组习题—解答双射、1260 个 A—E 题解 ID、144 张来源卡、2012 条范围内链接、96 个节点嵌图/97 个章节图文单元和 18 个节点制图脚本、108 个已存资产的双重复跑。第一卷的[[阶段测验 - 学习问题、决策与风险（20.1）|LT-CUM-01]]由[[learning_problem_decision_cumulative_contract_audit.py]]复核；第二卷的[[阶段测验 - PAC 学习与有限假设类（20.2）|PAC-CUM-01]]、[[阶段测验解答 - PAC 学习与有限假设类（20.2）|独立封存详解]]与[[实验 - PAC 学习与有限假设类累计复现门|三轨门]]由[[pac_finite_class_cumulative_contract_audit.py]]复核。两卷均使用口试、210 分钟 100 分闭卷、scorer nonce、跨轨盲参、48 小时与 14 天证据链。卷级材料门现为 **2/10**，个人通过仍为 **0/10 / `not-attempted`**；不能把题卷存在写成分卷通过。
+学习理论 LT-01—84 已完成全章静态材料门：[[learning_theory_teaching_contract_audit.py]]复核 84 组习题—解答双射、1260 个 A—E 题解 ID、来源卡、范围内链接、节点图文单元、18 个节点制图脚本与全部已存资产的双重复跑。前三卷分别由[[learning_problem_decision_cumulative_contract_audit.py]]、[[pac_finite_class_cumulative_contract_audit.py]]和[[vc_uniform_convergence_cumulative_contract_audit.py]]独立复核；第三卷配套[[阶段测验 - VC 维与一致收敛（20.3）|VC-CUM-01]]、[[阶段测验解答 - VC 维与一致收敛（20.3）|独立封存详解]]与[[实验 - VC 维与一致收敛累计复现门|三轨门]]。三卷均使用口试、210 分钟 100 分闭卷、scorer nonce、跨轨盲参、48 小时与 14 天证据链。卷级材料门现为 **3/10**，个人通过仍为 **0/10 / `not-attempted`**；不能把题卷存在写成分卷通过。
 
 | 学习理论卷级测验 | 覆盖范围 | 状态 |
 |---|---|---|
 | LT-CUM-01 | LT-01—08：学习问题、决策与风险 | regression-passed material / not-attempted learner |
 | PAC-CUM-01 | LT-09—16：PAC 学习与有限假设类 | regression-passed material / not-attempted learner |
+| VC-CUM-01 | LT-17—24：VC 维、增长函数与一致收敛 | regression-passed material / not-attempted learner |
 
 | 测验 | 覆盖范围 | 状态 |
 |---|---|---|
