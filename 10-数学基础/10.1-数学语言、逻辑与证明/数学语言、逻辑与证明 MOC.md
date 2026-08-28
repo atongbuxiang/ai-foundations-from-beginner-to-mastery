@@ -7,7 +7,7 @@ prerequisites: ["[[数学基础 MOC]]"]
 related: ["[[数学基础完整课程地图与掌握标准]]", "[[线性代数 MOC]]", "[[多元微积分、矩阵微分与自动微分 MOC]]", "[[概率论与数理统计 MOC]]", "[[优化与凸分析 MOC]]", "[[练习与测验 MOC]]", "[[推导与实验 MOC]]"]
 sources: ["MIT-6.1200J-2024-Mathematics-for-CS", "MIT-18.100A-2020-Real-Analysis", "Lehman-Leighton-Meyer-MCS", "Velleman-How-to-Prove-It", "Hammack-Book-of-Proof", "CLRS-Algorithms", "Su-1420-Jensen-Proof", "Su-9607-Scaling-Law", "Su-7546-Linear-Attention"]
 created: 2026-08-19
-updated: 2026-08-27
+updated: 2026-08-28
 ---
 
 # 数学语言、逻辑与证明 MOC
@@ -68,7 +68,7 @@ updated: 2026-08-27
 | MATH-07 | [[数列、极限与完备性的直觉]] | 无限过程怎样收敛，何时可以交换极限或保证极限仍在空间中？ | calculus、optimization convergence、function spaces | `regression-passed` |
 | MATH-08 | [[渐近记号、增长率与复杂度]] | 如何比较时间、空间、样本与误差随规模变化的主导量级？ | attention、training cost、scaling law、sample complexity | `regression-passed` |
 
-本页只登记唯一正文，不创建重复概念页。MATH-01—08 已完成课程位置、问题链、贯穿例、符号账本、核心公式拆解、机制图、各 15 道 A–E 题、独立详解和确定性实验，并通过公式、链接、图文与累计实验回归。学习者状态仍保持 `draft / composed / not-attempted`；8/8 材料迁移完成不表示学习者已通过本卷。
+本页只登记唯一正文，不创建重复概念页。MATH-01—08 已完成课程位置、问题链、贯穿例、符号账本、核心公式拆解、机制图、各 15 道 A–E 题、独立详解和确定性实验，并通过公式、链接、图文与累计实验回归。节点正文仍保留 `draft` 写作状态，卷级材料为 `regression-passed`，学习者为 `not-attempted`；8/8 材料迁移完成不表示学习者已通过本卷。
 
 ## 三、认知依赖图
 
@@ -251,17 +251,34 @@ MATH-08使用MIT 6.1200J Lectures 06–07承担渐近定义、递推与Master th
 
 ### 10.2 卷级累计验收
 
-八节点完成后已经建立`MATH-CUM-01`：
+#### MATH-CUM-01：卷末综合验收闭环
 
-- [[阶段测验 - 数学语言、逻辑与证明（10.1）|100分、180分钟闭卷题]]与[[阶段测验解答 - 数学语言、逻辑与证明（10.1）|逐题独立详解]]；
+| 层级 | ID | 验收路径 | 核心对象 | 材料状态 | 个人状态 |
+|---|---|---|---|---|---|
+| CUM | MATH-CUM-01 | 口试 → 闭卷 → nonce 随机轨 → 跨轨盲干预 → 订正 → 48 h / 14 d → 独立审计 | 量词关系、受迫递推与 rank 增长制度三轨门 | `regression-passed` | `not-attempted` |
+
+八节点完成后，`MATH-CUM-01` 已形成以下不可跳步的证据链：
+
+- 15 分钟口试先检查对象、量词、证明义务、极限证书与复杂度制度；
+- [[阶段测验 - 数学语言、逻辑与证明（10.1）|100分、180分钟闭卷题]]与[[阶段测验解答 - 数学语言、逻辑与证明（10.1）|逐题独立详解]]严格隔离；
 - definition/quantifier最低分区线；
 - 至少两份完整proof和一份counterexample construction；
 - 一条inequality bound chain与一条asymptotic complexity audit；
-- [[实验 - 数学语言、逻辑与证明累计复现门]]以量词有限反模型、递推误差证书和Attention复杂度制度组成随机三轨；
-- 评分者随机指定一个错误证明、量词模型或复杂度声明进行口头诊断；
-- 48小时重做与14天迁移题。
+- [[实验 - 数学语言、逻辑与证明累计复现门]]把三波参数化为 $m$ 阶量词关系、$(q,r,c)$ 受迫收缩递推、$r(T)=T^\gamma/a$ 的 Attention work 制度；
+- 冻结原稿后由 scorer nonce 指定主手推轨，并给出至少横跨两轨的盲参数；非默认参数必须写入独立文件，不能覆盖 canonical 图；
+- 48 小时换机制重建，14 天审计陌生 AI 理论声明。
 
-只有真实作答、评分和复现存在后，才能讨论`verified`；MOC、正文和标准答案的存在本身不证明掌握。
+#### MATH-CUM 材料证书
+
+- canonical SHA-256：`c635f3c63df194b79e53cd7ccf99f7c523b52158a66dd64df8d0896456960f25`；
+- 固定跨轨盲测 SHA-256：`132a8211dfdbcce391c94f4a2e0ba5b8b8abc318c1eefc5cd030d38ac2d7da03`；
+- [[math_foundations_cumulative_contract_audit.py]]独立复核8/8 scope、14/14题解与100分、答案/输出隔离、解析锚点、状态表面、canonical 双跑、覆盖保护及盲参 stdout/SVG/hash。
+
+#### 从零如何执行 MATH-CUM
+
+先按 MATH-01 → 02 → 04 → 03 → 05 → 06 → 07 → 08 完成节点练习；随后进行15分钟口试和180分钟闭卷。冻结原稿、hash与解析校准后，由评分者生成 nonce；保存盲测命令、stdout、SVG和hash后才打开详解。48小时换 $m$、递推参数或 rank exponent 重建，14天再把同一账本迁移到陌生 AI theorem。任何材料文件的存在都不能跳过这条路径。
+
+只有真实口试、作答、评分和盲复现存在后，个人状态才能进入 `passed`；延迟门通过后才进入 `retained`。MOC、正文和标准答案的存在本身不证明掌握。
 
 ## 十一、当前进度与下一施工点
 
@@ -269,10 +286,10 @@ MATH-08使用MIT 6.1200J Lectures 06–07承担渐近定义、递推与Master th
 - 核心节点：**8/8 教学迁移并通过回归**；
 - 图文标准：8/8 主图均使用根目录稳定 v2 路径、正式图注、读图说明与显式“图没有证明什么”；8 幅图已重新通过结构、XML、实际渲染和人工视觉检查，极限/完备性图中的缺字下标已修复；
 - 节点题：120；
-- 计算审计：MATH-01—08八套节点实验均已成稿；卷末新增[[实验 - 数学语言、逻辑与证明累计复现门]]并完成确定性双跑、XML与实际渲染检查；
-- 卷末验收：[[阶段测验 - 数学语言、逻辑与证明（10.1）|MATH-CUM-01题卷]]、[[阶段测验解答 - 数学语言、逻辑与证明（10.1）|独立详解]]和三轨计算门均已成稿；
-- 材料状态：MATH-01—08 均为 `regression-passed`；学习者状态仍为 `draft / composed / not-attempted`；
-- 下一施工点：学习者真实闭卷作答、随机轨道复现与延迟重测；课程施工队列转向`GEO-CUM-01`；
+- 计算审计：MATH-01—08 八套节点实验及卷末三轨门均成稿；累计脚本通过 canonical 双跑、XML、实际渲染、覆盖保护与固定跨轨盲参检查；
+- 卷末验收：题卷、详解、三轨计算门和[[math_foundations_cumulative_contract_audit.py|独立累计审计]]均已成稿；
+- 状态：MATH-CUM-01 材料 `regression-passed` / 学习者 `not-attempted`；节点正文保留 `draft`，不能被卷级材料状态冒充掌握；
+- 下一步：学习者真实口试、闭卷、nonce 主轨、个人未见跨轨盲参、48 小时换机制与14天陌生迁移；
 - 已闭合主线：对象—量词—证明—映射—离散递推—界构造—无限尾部—渐近与复杂度。
 
 > [!warning] 初学顺序不等于施工顺序

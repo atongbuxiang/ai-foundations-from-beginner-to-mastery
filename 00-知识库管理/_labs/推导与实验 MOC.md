@@ -80,9 +80,10 @@ updated: 2026-08-28
 
 - 题卷：[[阶段测验 - 数学语言、逻辑与证明（10.1）]]；
 - 独立详解：[[阶段测验解答 - 数学语言、逻辑与证明（10.1）]]；
+- 卷级 ID：`MATH-CUM-01`；
 - 计算门：[[实验 - 数学语言、逻辑与证明累计复现门]]，覆盖量词换序的有限反模型、递推误差的闭式—界—极限—精度证书与Attention rank增长制度；
-- 覆盖：MATH-01—08，100分笔试加一个评分者随机指定计算轨道；
-- 当前语义：`composed / not-attempted`，不构成verified证据。
+- 覆盖：MATH-01—08，15分钟口试、180分钟100分闭卷、`attempt_id + scorer nonce`主轨、至少跨两轨盲参、48小时换机制与14天陌生迁移；
+- 当前语义：材料`regression-passed`、个人`not-attempted`，由[[math_foundations_cumulative_contract_audit.py]]复核，不构成verified证据。
 
 - 题卷：[[阶段测验 - ODE、动力系统与 SDE（10.9）]]；
 - 独立详解：[[阶段测验解答 - ODE、动力系统与 SDE（10.9）]]；
@@ -174,7 +175,7 @@ updated: 2026-08-28
 56. [[实验 - 不等式松弛、等号与数值稳定性审计]]：以Young参数曲线、Cauchy角度、两点指数Jensen gap与LSE dimension/temperature/margin四轨登记slack；完整检查15500个LSE finite-grid pairs，并复现naive exp(1000) overflow与stable 1000.407606。
 57. [[实验 - 极限证书、完备性与浮点停滞审计]]：比较$q=.5/.8/.99$达到$10^{-6}$的严格见证20/62/1375，用精确有理Newton列暴露$\mathbb Q$缺失$\sqrt2$，以$x^n$分离固定网格与连续域supremum，并确认binary64在$n=53$把$1+2^{-n}$首次存成1。
 58. [[实验 - 增长率、有限窗口与 Attention 成本审计]]：比较log/linear/$n\log n$/quadratic/exponential增长，精确枚举线性与三角循环并恢复1.000000/1.966996斜率，以解析local slope暴露低阶项与loss地板，再在$d=512$下分离projection、pairwise work与score memory，交叉proxy为$T=1024$。
-59. [[实验 - 数学语言、逻辑与证明累计复现门]]：穷举65536个$4\times4$ relations得到50625个pointwise、14911个uniform与35714个换序反例；把递推闭式、几何上界、epsilon证书和$O(\log1/\varepsilon)$串联；以fixed $r$与$r=T/4$分离Attention的一次/二次增长制度。
+59. [[实验 - 数学语言、逻辑与证明累计复现门]]：以有限域$m$、受迫递推$(q,r,c)$和adaptive rank exponent参数化三轨；canonical锚定65536/50625/14911/35714、证书27/47/68/89与slope 1/2，nonce跨轨盲参与[[math_foundations_cumulative_contract_audit.py]]继续复核覆盖保护、stdout/SVG/hash和图—数自描述。
 60. [[实验 - 几何、泛函与算子累计复现门]]：在radius-sphere上恢复ambient constraint二阶、normalization retraction相对Exp三阶与rotation covariance；以$c_j=j^{-\alpha}$和$\mu_j=j^{-\beta}$分离Hilbert projection、compact tail与kernel effective dimension；在长度$L$区间上用Poisson cutoff同时展示$L^2/H^1/strong$误差指数$-2/-1/0$；支持nonce跨轨盲参和独立图—数审计。
 61. [[实验 - 数学基础十卷跨章累计复现门]]：用linear-Gaussian posterior/MI分离定理值与估计量，用quadratic flow/GD分离连续稳定与Euler步长域，再在$S^1$上把rotation/retraction、finite Gram/KRR approximation和condition增长纳入同一跨卷证据账。
 62. [[实验 - 线性代数累计复现门]]：用病态基分离抽象向量与坐标、以kernel/quotient/projector核对空间不变量，以Jordan/SVD分离谱值、暂态与低秩尾误差，再用attention-softmax与vec合同分离exact rank、numerical rank和非线性边界；canonical及盲参数接口由独立累计审计复核。

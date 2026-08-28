@@ -1652,9 +1652,9 @@ AI迁移从Banach压缩映射的几何尾界推进到标量二次梯度下降的
 
 本批建立[[阶段测验 - 数学语言、逻辑与证明（10.1）|MATH-CUM-01]]：180分钟、100分闭卷，以20/30/25/15/10五区覆盖MATH-01—08，另设definition/quantifier最低线。题卷不是八套节点题拼接，而以对象—量词—映射—证明—递推—界—极限—复杂度组织跨章调用；第9—11题分别验收image/preimage证明、分类计数与strong induction、递推误差到epsilon witness和accuracy complexity，D区要求五个合法最小反例，E区要求构造可审计的Attention理论合同。[[阶段测验解答 - 数学语言、逻辑与证明（10.1）]]逐题展开对象、量词、等号/松弛、严格阈值与评分回链，不用“见正文”代替证明。
 
-[[实验 - 数学语言、逻辑与证明累计复现门]]建立三轨确定性证据：A轨穷举全部65536个$4\times4$ Boolean relations，得到50625个$\forall x\exists y$、14911个$\exists y\forall x$与35714个量词换序反例；B轨把$e_{k+1}=0.8e_k+0.5(0.6)^k$的闭式、归纳、$3.5(0.8)^k$上界、epsilon证书与$O(\log1/\varepsilon)$串联；C轨在$d=512$下分离dense finite-window slope 1.378561、fixed-rank slope 1与$r=T/4$ slope 2，并将score memory另列。脚本通过解析断言、XML、确定性双跑和实际PNG渲染，canonical hash为`3215711825686b14928354c54d6e7b1148354bee3bc21312a9bec9eabe8360f3`。
+[[实验 - 数学语言、逻辑与证明累计复现门]]建立三轨确定性证据：A轨穷举全部65536个$4\times4$ Boolean relations，得到50625个$\forall x\exists y$、14911个$\exists y\forall x$与35714个量词换序反例；B轨把$e_{k+1}=0.8e_k+0.5(0.6)^k$的闭式、归纳、$3.5(0.8)^k$上界、epsilon证书与$O(\log1/\varepsilon)$串联；C轨在$d=512$下分离dense finite-window slope 1.378561、fixed-rank slope 1与$r=T/4$ slope 2，并将score memory另列。脚本通过解析断言、XML、确定性双跑和实际PNG渲染，canonical hash为`c635f3c63df194b79e53cd7ccf99f7c523b52158a66dd64df8d0896456960f25`。
 
-10.1当前为 **8篇正文、8幅机制图、120道节点题，累计验收 composed / not-attempted**。题卷、详解、脚本和图的存在不改变MATH-01—08的`draft`状态；下一步是学习者真实闭卷原稿、随机轨道手推、参数干预、48小时重做和14天迁移。课程材料施工队列转向`GEO-CUM-01`。
+10.1当前为 **8篇正文、8幅机制图、120道节点题**；本批首次成稿时累计验收为`composed / not-attempted`，后续已在第九十九批升级为材料`regression-passed`。题卷、详解、脚本和图的存在不改变MATH-01—08的`draft`状态。
 
 ## 第八十九批：10.10卷末累计验收与几何—泛函—弱PDE三轨门
 
@@ -1736,6 +1736,14 @@ AI迁移从Banach压缩映射的几何尾界推进到标量二次梯度下降的
 
 10.10当前仍为 **8篇正文、8组节点题解，累计材料 regression-passed / 个人 not-attempted**。[[geometry_functional_cumulative_contract_audit.py]]现独立复核8/8 scope、14/14题解与100分、答案/输出隔离、canonical与盲参解析锚点、六个状态面、canonical双跑、覆盖保护、盲参stdout/SVG/hash和图—数自描述。材料通过不改变GEO-01—08的`draft`状态；下一步仍是真实口试、闭卷、nonce轨、个人未见参数运行与延迟迁移证据。
 
+## 第九十九批：10.1卷末累计验收升级与量词—递推—复杂度跨轨盲参门
+
+本批把[[阶段测验 - 数学语言、逻辑与证明（10.1）|MATH-CUM-01]]升级为统一证据链：15分钟口试和180分钟、100分闭卷之后，先冻结九层数学语言—证明对象账本与三轨解析校准，再由`attempt_id + scorer nonce`指定主手算轨，并给出至少横跨两轨的盲参数；保存stdout/SVG/hash后才打开详解订正，最后进入48小时换机制与14天陌生AI theorem-audit迁移。三波模型族明确参数化为$|X|=|Y|=m$的Boolean relations、$e_{k+1}=qe_k+cr^k$与$r(T)=T^\gamma/a$的Attention operation regime。
+
+[[实验 - 数学语言、逻辑与证明累计复现门]]保留canonical SVG哈希`c635f3c63df194b79e53cd7ccf99f7c523b52158a66dd64df8d0896456960f25`，但禁止非默认参数在未指定`--output`时覆盖标准图；非默认SVG直接写出$m,q,r,c,d,r_{\rm fixed},\gamma,a$与实际slope。固定fixture同时改变三轨机制，得到盲参哈希`132a8211dfdbcce391c94f4a2e0ba5b8b8abc318c1eefc5cd030d38ac2d7da03`。
+
+10.1当前为 **8篇正文、8组节点题解，累计材料 regression-passed / 个人 not-attempted**。[[math_foundations_cumulative_contract_audit.py]]独立复核8/8 scope、14/14题解与100分、答案/输出隔离、canonical与盲参解析锚点、六个状态面、canonical双跑、覆盖保护、盲参stdout/SVG/hash和图—数自描述。材料通过不改变MATH-01—08的`draft`状态；下一步仍是真实口试、闭卷、nonce轨、个人未见参数运行与延迟迁移证据。
+
 ## 对接科学空间
 
 - “低秩近似之路”系列：伪逆、SVD、CR、ID、CUR
@@ -1757,6 +1765,6 @@ AI迁移从Banach压缩映射的几何尾界推进到标量二次梯度下降的
 9. **优化与凸分析**：10.7 已完成 OPT-01—16 的正文、十六幅机制图、240 道 A—E 题和独立详解；`OPT-CUM-01` 已形成“口试—闭卷—scorer nonce随机轨—盲干预—48小时换机制—14天陌生AI迁移”证据链，并由[[optimization_cumulative_contract_audit.py]]复核为材料`regression-passed`、个人`not-attempted`。
 10. **ODE、动力系统与 SDE**：10.9 已完成 DYN-01—12 的正文、机制图、180 道 A—E 题和独立详解；`DYN-CUM-01` 已形成“口试—闭卷—scorer nonce 随机轨—跨轨盲参—48 小时换机制—14 天陌生 AI 迁移”证据链，并由[[dynamics_cumulative_contract_audit.py]]复核为材料 `regression-passed`、个人 `not-attempted`。
 11. **几何、泛函分析、核与算子基础**：10.10 已完成GEO-01—08的正文、机制图、120道A—E题、独立详解、八套节点计算门；`GEO-CUM-01`已形成“口试—闭卷—scorer nonce主轨—跨轨盲参—48小时换机制—14天陌生AI迁移”证据链，并由[[geometry_functional_cumulative_contract_audit.py]]复核为材料`regression-passed`、个人`not-attempted`。
-12. **数学语言、逻辑与证明**：[[数学语言、逻辑与证明 MOC|10.1卷入口]]与MATH-01—08均已建立正文、深色机制图、各15题、独立详解与浅色计算审计，达到8/8；`MATH-CUM-01`题卷、详解与量词—递推—复杂度三轨计算门已成稿，当前`composed / not-attempted`。
+12. **数学语言、逻辑与证明**：[[数学语言、逻辑与证明 MOC|10.1卷入口]]与MATH-01—08均已建立正文、深色机制图、各15题、独立详解与浅色计算审计，达到8/8；`MATH-CUM-01`已形成“口试—闭卷—scorer nonce主轨—跨轨盲参—48小时换机制—14天陌生AI迁移”证据链，并由[[math_foundations_cumulative_contract_audit.py]]复核为材料`regression-passed`、个人`not-attempted`。
 13. **全数学主线**：十卷150节已由[[数学基础完整课程地图与掌握标准]]锁定；当前150篇正文均为`draft`，正文覆盖率100.0%，尚无任何一卷通过课程验收。
 14. **十卷总收束**：[[数学基础十卷完备性审计与学习状态总表]]确认150个ID、正文、习题和解答均唯一可定位；[[数学基础十卷总验收 - 跨卷理论与 AI 迁移]]、独立详解与[[实验 - 数学基础十卷跨章累计复现门]]已经成稿。材料状态为`composed / not-attempted`；下一步是按先修顺序产生真实学习证据，而不是继续宣称新增正文等于掌握。

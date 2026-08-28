@@ -8,6 +8,7 @@ from analytic/enumerated quantities so a second run is byte-for-byte identical.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import html
 import math
 from pathlib import Path
@@ -40,7 +41,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--forcing", type=float, default=0.5)
     parser.add_argument("--dimension", type=int, default=512)
     parser.add_argument("--feature-rank", type=int, default=64)
-    parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--adaptive-rank-exponent", type=float, default=1.0)
+    parser.add_argument("--adaptive-rank-divisor", type=float, default=4.0)
+    parser.add_argument("--output", type=Path)
     return parser.parse_args()
 
 
@@ -169,7 +172,12 @@ def panel_shell(parts: list[str], x: float, title_label: str, subtitle: str) -> 
 
 def draw_panel_a(parts: list[str], x: float, total: int, pointwise: int,
                  uniform: int, gap: int, m: int) -> None:
-    panel_shell(parts, x, "A  量词换序的有限反模型", "枚举全部 Boolean relations；计数是有限定理")
+    subtitle = (
+        "枚举全部 Boolean relations；计数是有限定理"
+        if m == 4
+        else f"|X|=|Y|={m}；枚举 {total:,} 个 Boolean relations"
+    )
+    panel_shell(parts, x, "A  量词换序的有限反模型", subtitle)
     chart_x = x + 30
     chart_y = 170
     chart_w = 250
@@ -180,7 +188,12 @@ def draw_panel_a(parts: list[str], x: float, total: int, pointwise: int,
     for tick in [0, 0.25, 0.5, 0.75, 1.0]:
         yy = chart_y + chart_h * (1.0 - tick)
         parts.append(line(chart_x, yy, chart_x + chart_w, yy, GRID, 1))
-        parts.append(text(chart_x - 7, yy + 4, f"{int(total * tick / 1000)}k", 10, MUTED, 400, "end"))
+        tick_label = (
+            f"{int(total * tick / 1000)}k"
+            if m == 4
+            else f"{int(total * tick)}"
+        )
+        parts.append(text(chart_x - 7, yy + 4, tick_label, 10, MUTED, 400, "end"))
     bar_w = 52
     for idx, (label, value, color) in enumerate(zip(labels, values, colors)):
         bx = chart_x + 28 + idx * 75
@@ -205,15 +218,27 @@ def draw_panel_a(parts: list[str], x: float, total: int, pointwise: int,
     parts.append(text(mx + cell * 2, my + m * cell + 19, "每行有 1；没有全 1 列", 10, MUTED, 400, "middle"))
     parts.append(rect(x + 24, 397, 392, 88, "#f2f6ff", radius=8))
     parts.append(text(x + 38, 422, "能推出", 11, BLUE, 700))
-    parts.append(text(x + 103, 422, "在 4×4 有限域中，uniform ⇒ pointwise", 11, INK))
+    finite_claim = (
+        "在 4×4 有限域中，uniform ⇒ pointwise"
+        if m == 4
+        else f"在 {m}×{m} 有限域中，uniform ⇒ pointwise"
+    )
+    parts.append(text(x + 103, 422, finite_claim, 11, INK))
     parts.append(text(x + 38, 450, "不能推出", 11, RED, 700))
     parts.append(text(x + 103, 450, "任意无穷域上的量词定理；真实模型的性质", 11, INK))
     parts.append(text(x + 38, 477, f"全部关系 {total:,}；换序反例 {gap:,}", 11, MUTED))
 
 
 def draw_panel_b(parts: list[str], x: float, values: list[float], envelope: list[float],
-                 certificates: list[tuple[float, int, int]]) -> None:
-    panel_shell(parts, x, "B  递推 → 界 → 极限 → 步数", "同一 proof certificate 串联 MATH-05—08")
+                 certificates: list[tuple[float, int, int]], q: float,
+                 forcing_rate: float, forcing: float, coefficient: float) -> None:
+    canonical = q == 0.8 and forcing_rate == 0.6 and forcing == 0.5
+    subtitle = (
+        "同一 proof certificate 串联 MATH-05—08"
+        if canonical
+        else f"eₖ₊₁={q:g}eₖ+{forcing:g}·{forcing_rate:g}ᵏ；envelope C={coefficient:g}"
+    )
+    panel_shell(parts, x, "B  递推 → 界 → 极限 → 步数", subtitle)
     px0, px1 = x + 54, x + 410
     py0, py1 = 170, 360
     k_max = 95
@@ -237,7 +262,12 @@ def draw_panel_b(parts: list[str], x: float, values: list[float], envelope: list
     parts.append(line(x + 72, 382, x + 100, 382, BLUE, 2.8))
     parts.append(text(x + 108, 386, "exact eₖ", 11, INK))
     parts.append(line(x + 201, 382, x + 229, 382, ORANGE, 2.2, "7 5"))
-    parts.append(text(x + 237, 386, "3.5·0.8ᵏ envelope", 11, INK))
+    envelope_label = (
+        "3.5·0.8ᵏ envelope"
+        if canonical
+        else f"{coefficient:g}·{q:g}ᵏ envelope"
+    )
+    parts.append(text(x + 237, 386, envelope_label, 11, INK))
     parts.append(rect(x + 24, 404, 392, 82, "#fff8ec", radius=8))
     parts.append(text(x + 38, 426, "ε", 10, MUTED, 700))
     parts.append(text(x + 110, 426, "证书 N", 10, MUTED, 700))
@@ -247,13 +277,22 @@ def draw_panel_b(parts: list[str], x: float, values: list[float], envelope: list
         parts.append(text(x + 38, yy, f"{eps:.0e}", 10, INK))
         parts.append(text(x + 123, yy, cert, 10, ORANGE, 700, "middle"))
         parts.append(text(x + 224, yy, exact, 10, BLUE, 700, "middle"))
-    parts.append(text(x + 300, 453, "固定 q=0.8", 10, MUTED))
+    q_label = "固定 q=0.8" if canonical else f"固定 q={q:g}"
+    parts.append(text(x + 300, 453, q_label, 10, MUTED))
     parts.append(text(x + 300, 470, "N(ε)=Θ(log 1/ε)", 10, GREEN, 700))
 
 
 def draw_panel_c(parts: list[str], x: float, lengths: list[float], curves: list[tuple[str, list[float], str]],
-                 slopes: dict[str, float], d: int, rank: int) -> None:
-    panel_shell(parts, x, "C  Attention 复杂度制度", "解析 operation proxy；不是 GPU wall-time")
+                 slopes: dict[str, float], d: int, rank: int,
+                 adaptive_exponent: float, adaptive_divisor: float,
+                 adaptive_label: str) -> None:
+    canonical = d == 512 and rank == 64 and adaptive_exponent == 1.0 and adaptive_divisor == 4.0
+    subtitle = (
+        "解析 operation proxy；不是 GPU wall-time"
+        if canonical
+        else f"d={d}, fixed r={rank}；adaptive r=T^{adaptive_exponent:g}/{adaptive_divisor:g}"
+    )
+    panel_shell(parts, x, "C  Attention 复杂度制度", subtitle)
     px0, px1 = x + 58, x + 414
     py0, py1 = 170, 365
     lx0, lx1 = math.log2(min(lengths)), math.log2(max(lengths))
@@ -285,14 +324,21 @@ def draw_panel_c(parts: list[str], x: float, lengths: list[float], curves: list[
         parts.append(line(xx, yy, xx + 24, yy, color, 2.6))
         parts.append(text(xx + 31, yy + 4, f"{label}: p={slopes[label]:.3f}", 10, INK))
     parts.append(rect(x + 24, 440, 392, 47, "#f0fbf7", radius=8))
-    parts.append(text(x + 38, 461, f"d={d}, fixed r={rank}: linear；r=T/4: quadratic", 10, GREEN, 700))
+    regime_label = (
+        f"d={d}, fixed r={rank}: linear；r=T/4: quadratic"
+        if canonical
+        else f"fixed-r: p=1；adaptive-r: p={slopes[adaptive_label]:.3f}"
+    )
+    parts.append(text(x + 38, 461, regime_label, 10, GREEN, 700))
     parts.append(text(x + 38, 478, "改变 r(T) 就改变 theorem；memory 与 work 分账", 10, MUTED))
 
 
 def build_svg(total: int, pointwise: int, uniform: int, gap: int, m: int,
               values: list[float], envelope: list[float], certificates: list[tuple[float, int, int]],
               lengths: list[float], curves: list[tuple[str, list[float], str]], slopes: dict[str, float],
-              d: int, rank: int) -> str:
+              d: int, rank: int, q: float, forcing_rate: float, forcing: float,
+              coefficient: float, adaptive_exponent: float, adaptive_divisor: float,
+              adaptive_label: str) -> str:
     parts = [
         '<?xml version="1.0" encoding="UTF-8"?>',
         '<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="540" viewBox="0 0 1440 540" role="img" aria-labelledby="title desc">',
@@ -304,8 +350,11 @@ def build_svg(total: int, pointwise: int, uniform: int, gap: int, m: int,
         text(40, 66, "有限枚举负责找反例，解析界负责无限结论，复杂度曲线必须绑定增长制度", 13, MUTED),
     ]
     draw_panel_a(parts, 30, total, pointwise, uniform, gap, m)
-    draw_panel_b(parts, 500, values, envelope, certificates)
-    draw_panel_c(parts, 970, lengths, curves, slopes, d, rank)
+    draw_panel_b(parts, 500, values, envelope, certificates, q, forcing_rate, forcing, coefficient)
+    draw_panel_c(
+        parts, 970, lengths, curves, slopes, d, rank,
+        adaptive_exponent, adaptive_divisor, adaptive_label,
+    )
     parts.append(text(720, 531, "Generated deterministically with Python standard library · composed ≠ mastered", 10, MUTED, 400, "middle"))
     parts.append("</svg>")
     return "\n".join(parts) + "\n"
@@ -313,16 +362,46 @@ def build_svg(total: int, pointwise: int, uniform: int, gap: int, m: int,
 
 def main() -> None:
     args = parse_args()
+    if args.dimension <= 0 or args.feature_rank <= 0:
+        raise ValueError("--dimension and --feature-rank must be positive")
+    if not (0.0 < args.forcing_rate < args.contraction < 1.0):
+        raise ValueError("require 0 < forcing-rate < contraction < 1")
+    if args.forcing <= 0.0:
+        raise ValueError("--forcing must be positive")
+    if args.adaptive_rank_exponent < 0.0:
+        raise ValueError("--adaptive-rank-exponent must be nonnegative")
+    if args.adaptive_rank_divisor <= 0.0:
+        raise ValueError("--adaptive-rank-divisor must be positive")
+
+    canonical = (
+        args.domain_size == 4
+        and args.contraction == 0.8
+        and args.forcing_rate == 0.6
+        and args.forcing == 0.5
+        and args.dimension == 512
+        and args.feature_rank == 64
+        and args.adaptive_rank_exponent == 1.0
+        and args.adaptive_rank_divisor == 4.0
+    )
+    if not canonical and args.output is None:
+        raise SystemExit(
+            "noncanonical runs require --output so the canonical SVG is not overwritten"
+        )
+
     total, pointwise, uniform, gap = enumerate_relations(args.domain_size)
     expected_pointwise = ((1 << args.domain_size) - 1) ** args.domain_size
     if pointwise != expected_pointwise:
         raise AssertionError("row-wise count disagrees with product rule")
 
-    values, envelope, maximum_error = recurrence_values(
-        args.contraction, args.forcing_rate, args.forcing, steps=120
-    )
     coefficient = 1.0 + args.forcing / (args.contraction - args.forcing_rate)
     epsilons = [1e-2, 1e-4, 1e-6, 1e-8]
+    provisional_certificates = [
+        strict_certificate(eps, args.contraction, coefficient) for eps in epsilons
+    ]
+    steps = max(120, max(provisional_certificates) + 10)
+    values, envelope, maximum_error = recurrence_values(
+        args.contraction, args.forcing_rate, args.forcing, steps=steps
+    )
     certificates = [
         (eps, strict_certificate(eps, args.contraction, coefficient), exact_first_below(values, eps))
         for eps in epsilons
@@ -331,19 +410,28 @@ def main() -> None:
     lengths = [float(32 * (2 ** i)) for i in range(9)]
     dense = [4.0 * t * args.dimension ** 2 + 2.0 * t ** 2 * args.dimension for t in lengths]
     fixed = [4.0 * t * args.dimension * args.feature_rank for t in lengths]
-    adaptive = [4.0 * t * args.dimension * (t / 4.0) for t in lengths]
+    adaptive = [
+        4.0 * t * args.dimension
+        * (t ** args.adaptive_rank_exponent / args.adaptive_rank_divisor)
+        for t in lengths
+    ]
     memory = [t ** 2 for t in lengths]
+    adaptive_label = (
+        "r=T/4 work"
+        if args.adaptive_rank_exponent == 1.0 and args.adaptive_rank_divisor == 4.0
+        else f"r=T^{args.adaptive_rank_exponent:g}/{args.adaptive_rank_divisor:g} work"
+    )
     curves = [
         ("dense work", dense, BLUE),
         ("fixed-r work", fixed, GREEN),
-        ("r=T/4 work", adaptive, RED),
+        (adaptive_label, adaptive, RED),
         ("score elements", memory, PURPLE),
     ]
     slopes = {label: ols_slope(lengths, ys) for label, ys, _ in curves}
     if abs(slopes["fixed-r work"] - 1.0) > 1e-12:
         raise AssertionError("fixed-r work should be exactly linear")
-    if abs(slopes["r=T/4 work"] - 2.0) > 1e-12:
-        raise AssertionError("adaptive rank should be exactly quadratic")
+    if abs(slopes[adaptive_label] - (1.0 + args.adaptive_rank_exponent)) > 1e-12:
+        raise AssertionError("adaptive-rank work slope disagrees with 1 + exponent")
     if abs(slopes["score elements"] - 2.0) > 1e-12:
         raise AssertionError("dense score elements should be quadratic")
 
@@ -351,26 +439,43 @@ def main() -> None:
         total, pointwise, uniform, gap, args.domain_size,
         values, envelope, certificates,
         lengths, curves, slopes, args.dimension, args.feature_rank,
+        args.contraction, args.forcing_rate, args.forcing, coefficient,
+        args.adaptive_rank_exponent, args.adaptive_rank_divisor, adaptive_label,
     )
-    output = args.output.expanduser().resolve()
+    output = (args.output or DEFAULT_OUTPUT).expanduser().resolve()
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(svg, encoding="utf-8")
+    digest = hashlib.sha256(output.read_bytes()).hexdigest()
 
     cert_summary = ",".join(f"{eps:.0e}:{cert}/{exact}" for eps, cert, exact in certificates)
+    print(f"A_CONFIG domain_size={args.domain_size}")
     print(
-        f"relations total={total} pointwise={pointwise} uniform={uniform} swap_gap={gap}"
+        f"A_COUNTS total={total} pointwise={pointwise} "
+        f"uniform={uniform} swap_gap={gap}"
     )
     print(
-        f"recurrence max_closed_form_error={maximum_error:.3e} certificates={cert_summary}"
+        f"B_CONFIG contraction={args.contraction:g} "
+        f"forcing_rate={args.forcing_rate:g} forcing={args.forcing:g} "
+        f"envelope_coefficient={coefficient:g}"
     )
     print(
-        "complexity "
+        f"B_RECURRENCE max_closed_form_error={maximum_error:.3e} "
+        f"certificates={cert_summary}"
+    )
+    print(
+        f"C_CONFIG dimension={args.dimension} feature_rank={args.feature_rank} "
+        f"adaptive_rank_exponent={args.adaptive_rank_exponent:g} "
+        f"adaptive_rank_divisor={args.adaptive_rank_divisor:g}"
+    )
+    print(
+        "C_COMPLEXITY "
         f"dense_slope={slopes['dense work']:.6f} "
         f"fixed_rank_slope={slopes['fixed-r work']:.6f} "
-        f"adaptive_rank_slope={slopes['r=T/4 work']:.6f} "
+        f"adaptive_rank_slope={slopes[adaptive_label]:.6f} "
         f"score_slope={slopes['score elements']:.6f}"
     )
-    print(f"wrote {output}")
+    print(f"OUTPUT {output}")
+    print(f"SHA256 {digest}")
 
 
 if __name__ == "__main__":

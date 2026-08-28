@@ -442,7 +442,7 @@ updated: 2026-08-28
 
 | 测验 | 覆盖范围 | 状态 |
 |---|---|---|
-| MATH-CUM-01 | MATH-01—08：数学语言、逻辑与证明卷末累计验收 | composed：[[阶段测验 - 数学语言、逻辑与证明（10.1）]]、[[阶段测验解答 - 数学语言、逻辑与证明（10.1）]]和[[实验 - 数学语言、逻辑与证明累计复现门]]已建立；等待真实独立作答 |
+| MATH-CUM-01 | MATH-01—08：数学语言、逻辑与证明卷末累计验收 | regression-passed：题卷、详解、[[实验 - 数学语言、逻辑与证明累计复现门]]与[[math_foundations_cumulative_contract_audit.py]]已通过答案/输出隔离、canonical/跨轨盲参静态与计算回归；个人仍为 not-attempted |
 | GEO-CUM-01 | GEO-01—08：几何、泛函分析、核与算子基础卷末累计验收 | regression-passed：题卷、详解、[[实验 - 几何、泛函与算子累计复现门]]与[[geometry_functional_cumulative_contract_audit.py]]已通过答案/输出隔离、canonical/跨轨盲参静态与计算回归；个人仍为 not-attempted |
 | OPT-CUM-01 | OPT-01—16：优化与凸分析卷末累计验收 | regression-passed：题卷、详解、[[实验 - 优化与凸分析累计复现门]]与[[optimization_cumulative_contract_audit.py]]已通过独立静态/计算回归；个人仍为 not-attempted |
 | INFO-CUM-01 | INFO-01—10：信息论与统计学习接口卷末累计验收 | regression-passed：题卷、详解、[[实验 - 信息论累计复现门]]与[[information_cumulative_contract_audit.py]]已通过独立静态/计算回归；个人仍为 not-attempted |
@@ -497,12 +497,12 @@ CALC-CUM-01是“20分钟口试 + 270分钟、100分闭卷 + nonce随机三轨 +
 
 ### MATH-CUM-01 的状态边界
 
-MATH-CUM-01 是180分钟、100分闭卷卷末测验，覆盖MATH-01—08，并设置A—E分区线、definition/quantifier最低线、完整证明不得为零和量词—递推—复杂度随机三轨计算门。当前状态为 **composed / not-attempted**：
+MATH-CUM-01 是15分钟口试加180分钟、100分闭卷卷末测验，覆盖MATH-01—08，并设置A—E分区线、definition/quantifier最低线、完整证明不得为零和量词—递推—复杂度三轨计算门。当前状态为材料 **regression-passed** / 个人 **not-attempted**：
 
 - 八套节点题共120题，累计题卷与逐题独立详解已经成稿；
-- 计算门穷举量词换序反模型，把递推闭式连接到epsilon证书，并分离fixed/adaptive rank的Attention增长制度；
-- canonical SVG、XML、hash、确定性双跑与实际渲染通过，只证明验收工具可执行；
-- 尚无首次闭卷原稿、逐项评分、参数干预、48小时重做和14天AI迁移证据；
+- 计算门参数化有限关系、受迫收缩递推与fixed/adaptive rank制度，并由scorer nonce指定主轨及跨轨盲参数；
+- [[math_foundations_cumulative_contract_audit.py]]已通过题—解和答案—输出隔离、解析锚点、六个状态面、XML、canonical双跑、非标准覆盖保护与固定盲参stdout/SVG/hash，只证明工具可执行；
+- 尚无首次口试、闭卷原稿、逐项评分、个人未见跨轨盲参数、48小时换机制和14天陌生AI迁移证据；
 - 因而MATH-01—08保持`draft`；正式作答前不要打开[[阶段测验解答 - 数学语言、逻辑与证明（10.1）]]。
 
 ### GEO-CUM-01 的状态边界
