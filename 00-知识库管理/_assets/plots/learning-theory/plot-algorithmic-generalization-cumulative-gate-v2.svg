@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1540" height="990" viewBox="0 0 1540 990">
+<rect x="0.0" y="0.0" width="1540.0" height="990.0" rx="0.0" fill="#F5F8FC" stroke="#F5F8FC" stroke-width="0.0"/>
+<text x="70.0" y="64.0" font-family="Inter,Arial,sans-serif" font-size="27" font-weight="750" fill="#172033" text-anchor="start">Algorithm-dependent generalization | three-track evidence gate</text>
+<text x="70.0" y="94.0" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="500" fill="#5E6B82" text-anchor="start">replace-one stability  →  compressed/randomized description  →  information leakage</text>
+<rect x="70.0" y="132.0" width="450.0" height="570.0" rx="16.0" fill="#FFFFFF" stroke="#CBD7E6" stroke-width="1.5"/>
+<rect x="70.0" y="132.0" width="450.0" height="7.0" rx="4.0" fill="#2F63E9" stroke="#2F63E9" stroke-width="0.0"/>
+<text x="94.0" y="180.0" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="740" fill="#172033" text-anchor="start">A | one sample changes</text>
+<text x="94.0" y="205.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="500" fill="#5E6B82" text-anchor="start">expected guarantee; exact finite audit</text>
+<rect x="545.0" y="132.0" width="450.0" height="570.0" rx="16.0" fill="#FFFFFF" stroke="#CBD7E6" stroke-width="1.5"/>
+<rect x="545.0" y="132.0" width="450.0" height="7.0" rx="4.0" fill="#BE7812" stroke="#BE7812" stroke-width="0.0"/>
+<text x="569.0" y="180.0" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="740" fill="#172033" text-anchor="start">B | short / nearby description</text>
+<text x="569.0" y="205.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="500" fill="#5E6B82" text-anchor="start">high-probability compression + PAC-Bayes-kl</text>
+<rect x="1020.0" y="132.0" width="450.0" height="570.0" rx="16.0" fill="#FFFFFF" stroke="#CBD7E6" stroke-width="1.5"/>
+<rect x="1020.0" y="132.0" width="450.0" height="7.0" rx="4.0" fill="#0A9D88" stroke="#0A9D88" stroke-width="0.0"/>
+<text x="1044.0" y="180.0" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="740" fill="#172033" text-anchor="start">C | how much sample information</text>
+<text x="1044.0" y="205.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="500" fill="#5E6B82" text-anchor="start">expected signed gap; binary learning channel</text>
+<text x="94.0" y="246.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="650" fill="#172033" text-anchor="start">Bernoulli mean learner: m=20, p=0.5</text>
+<text x="94.0" y="272.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="500" fill="#5E6B82" text-anchor="start">loss=(w-z)²; all adjacent counts + z∈{0,1}</text>
+<line x1="98.0" y1="467.0" x2="496.0" y2="467.0" stroke="#CBD7E6" stroke-width="1.5"/>
+<rect x="118.0" y="301.8" width="52.0" height="165.2" rx="3.0" fill="#C84032" stroke="#C84032" stroke-width="0.0"/>
+<text x="144.0" y="293.8" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#C84032" text-anchor="middle">0.0975</text>
+<text x="144.0" y="491.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="600" fill="#5E6B82" text-anchor="middle">exact β</text>
+<rect x="214.0" y="424.6" width="52.0" height="42.4" rx="3.0" fill="#2F63E9" stroke="#2F63E9" stroke-width="0.0"/>
+<text x="240.0" y="416.6" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#2F63E9" text-anchor="middle">0.0250</text>
+<text x="240.0" y="491.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="600" fill="#5E6B82" text-anchor="middle">E gen</text>
+<rect x="310.0" y="382.3" width="52.0" height="84.7" rx="3.0" fill="#7656C7" stroke="#7656C7" stroke-width="0.0"/>
+<text x="336.0" y="374.3" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#7656C7" text-anchor="middle">0.0500</text>
+<text x="336.0" y="491.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="600" fill="#5E6B82" text-anchor="middle">RERM</text>
+<rect x="406.0" y="382.3" width="52.0" height="84.7" rx="3.0" fill="#0A9D88" stroke="#0A9D88" stroke-width="0.0"/>
+<text x="432.0" y="374.3" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#0A9D88" text-anchor="middle">0.0500</text>
+<text x="432.0" y="491.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="600" fill="#5E6B82" text-anchor="middle">SGD</text>
+<text x="94.0" y="532.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#5E6B82" text-anchor="start">interfaces</text>
+<text x="94.0" y="558.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="600" fill="#172033" text-anchor="start">RERM: 2L²/(λm)</text>
+<text x="305.0" y="558.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="720" fill="#7656C7" text-anchor="start">=0.0500</text>
+<text x="94.0" y="584.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="600" fill="#172033" text-anchor="start">SGD: 2 L^2 sum(eta_t) / m</text>
+<text x="305.0" y="584.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="720" fill="#0A9D88" text-anchor="start">=0.0500</text>
+<text x="94.0" y="632.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="650" fill="#C84032" text-anchor="start">β controls sensitivity; it need not equal E gen.</text>
+<text x="94.0" y="657.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="500" fill="#5E6B82" text-anchor="start">SGD certificate is convex/smooth synchronous coupling.</text>
+<text x="569.0" y="246.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="650" fill="#172033" text-anchor="start">m=200, δ=0.05</text>
+<text x="569.0" y="289.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="600" fill="#5E6B82" text-anchor="start">compression k=5, b=3</text>
+<rect x="755.0" y="274.0" width="115.3" height="17.0" rx="3.0" fill="#2F63E9" stroke="#2F63E9" stroke-width="0.0"/>
+<text x="970.0" y="289.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="720" fill="#2F63E9" text-anchor="end">0.1371</text>
+<text x="569.0" y="334.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="600" fill="#5E6B82" text-anchor="start">PAC-Bayes inverse-kl</text>
+<rect x="755.0" y="319.0" width="107.6" height="17.0" rx="3.0" fill="#0A9D88" stroke="#0A9D88" stroke-width="0.0"/>
+<text x="970.0" y="334.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="720" fill="#0A9D88" text-anchor="end">0.1280</text>
+<text x="569.0" y="379.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="600" fill="#5E6B82" text-anchor="start">PAC-Bayes Pinsker</text>
+<rect x="755.0" y="364.0" width="158.1" height="17.0" rx="3.0" fill="#C84032" stroke="#C84032" stroke-width="0.0"/>
+<text x="970.0" y="379.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="720" fill="#C84032" text-anchor="end">0.1880</text>
+<text x="569.0" y="424.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="600" fill="#5E6B82" text-anchor="start">δ/5 inverse-kl</text>
+<rect x="755.0" y="409.0" width="116.3" height="17.0" rx="3.0" fill="#7656C7" stroke="#7656C7" stroke-width="0.0"/>
+<text x="970.0" y="424.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="720" fill="#7656C7" text-anchor="end">0.1383</text>
+<rect x="569.0" y="482.0" width="402.0" height="130.0" rx="10.0" fill="#FFF9EE" stroke="#E8C98E" stroke-width="1.2"/>
+<text x="587.0" y="512.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="740" fill="#BE7812" text-anchor="start">PAC-Bayes ledger</text>
+<text x="587.0" y="540.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="600" fill="#172033" text-anchor="start">R̂(Q) = 0.0430</text>
+<text x="765.0" y="540.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="600" fill="#172033" text-anchor="start">KL(Q||P) = 0.1163</text>
+<text x="587.0" y="570.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="600" fill="#172033" text-anchor="start">kl budget = 0.0421</text>
+<text x="587.0" y="598.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="520" fill="#5E6B82" text-anchor="start">P fixed before certificate data; Q may depend on it.</text>
+<text x="569.0" y="650.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="650" fill="#C84032" text-anchor="start">Object: reconstructed h vs Gibbs predictor are different.</text>
+<text x="1044.0" y="246.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="650" fill="#172033" text-anchor="start">X~Bernoulli(1/2)  →  randomized response W</text>
+<rect x="1056.0" y="286.0" width="90.0" height="58.0" rx="12.0" fill="#EEF3FF" stroke="#2F63E9" stroke-width="1.5"/>
+<text x="1101.0" y="322.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#2F63E9" text-anchor="middle">sample bit X</text>
+<line x1="1148.0" y1="315.0" x2="1318.0" y2="315.0" stroke="#0A9D88" stroke-width="3.0"/>
+<text x="1233.0" y="297.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="650" fill="#0A9D88" text-anchor="middle">correct with q=0.8</text>
+<rect x="1322.0" y="286.0" width="105.0" height="58.0" rx="12.0" fill="#ECFBF7" stroke="#0A9D88" stroke-width="1.5"/>
+<text x="1374.0" y="322.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#0A9D88" text-anchor="middle">output W</text>
+<rect x="1044.0" y="384.0" width="402.0" height="174.0" rx="10.0" fill="#F4FBF9" stroke="#A8D9CE" stroke-width="1.2"/>
+<text x="1062.0" y="417.0" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="740" fill="#0A9D88" text-anchor="start">exact I(X;W) = 0.192745 nats</text>
+<text x="1062.0" y="451.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="600" fill="#172033" text-anchor="start">one-bit ceiling = ln 2 = 0.693147</text>
+<text x="1062.0" y="487.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="720" fill="#2F63E9" text-anchor="start">exact radius = 0.021951</text>
+<text x="1062.0" y="517.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="720" fill="#7656C7" text-anchor="start">bit-budget radius = 0.041628</text>
+<text x="1044.0" y="600.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="650" fill="#C84032" text-anchor="start">The theorem bounds |E gen|, not E|gen| or a tail.</text>
+<text x="1044.0" y="632.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="650" fill="#172033" text-anchor="start">Selecting 5 certificates: pay ln 5=1.6094</text>
+<text x="1044.0" y="657.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="500" fill="#5E6B82" text-anchor="start">A simple union ledger uses δ/5=0.010 per route.</text>
+<rect x="70.0" y="732.0" width="1400.0" height="190.0" rx="16.0" fill="#FFFFFF" stroke="#CBD7E6" stroke-width="1.5"/>
+<text x="94.0" y="773.0" font-family="Inter,Arial,sans-serif" font-size="19" font-weight="740" fill="#172033" text-anchor="start">Read across the tracks only after matching the contract</text>
+<text x="94.0" y="813.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="740" fill="#2F63E9" text-anchor="start">stability</text>
+<text x="94.0" y="840.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="600" fill="#172033" text-anchor="start">algorithm + adjacent samples</text>
+<text x="94.0" y="866.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="500" fill="#5E6B82" text-anchor="start">expected / bounded-loss tail</text>
+<text x="437.0" y="813.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="740" fill="#BE7812" text-anchor="start">compression</text>
+<text x="437.0" y="840.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="600" fill="#172033" text-anchor="start">fixed encoder/message/decoder</text>
+<text x="437.0" y="866.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="500" fill="#5E6B82" text-anchor="start">high probability; realizable</text>
+<text x="780.0" y="813.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="740" fill="#0A9D88" text-anchor="start">PAC-Bayes</text>
+<text x="780.0" y="840.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="600" fill="#172033" text-anchor="start">fixed prior P + data posterior Q</text>
+<text x="780.0" y="866.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="500" fill="#5E6B82" text-anchor="start">high probability; Gibbs risk</text>
+<text x="1123.0" y="813.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="740" fill="#2F63E9" text-anchor="start">information</text>
+<text x="1123.0" y="840.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="600" fill="#172033" text-anchor="start">joint law P(S,W)</text>
+<text x="1123.0" y="866.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="500" fill="#5E6B82" text-anchor="start">expected signed gap</text>
+<line x1="94.0" y1="886.0" x2="1445.0" y2="886.0" stroke="#CBD7E6" stroke-width="1.0"/>
+<text x="94.0" y="910.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#C84032" text-anchor="start">Do not take a post-hoc minimum: align predictor, loss, sample, randomness and confidence event first.</text>
+<text x="1470.0" y="964.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="500" fill="#5E6B82" text-anchor="end">ALG-CUM-01 | deterministic finite/analytic fixture</text>
+</svg>

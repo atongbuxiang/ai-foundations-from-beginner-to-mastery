@@ -440,7 +440,7 @@ updated: 2026-08-28
 
 ### 当前规划
 
-学习理论 LT-01—84 已完成全章静态材料门：[[learning_theory_teaching_contract_audit.py]]复核 84 组习题—解答双射、1260 个 A—E 题解 ID、来源卡、范围内链接、节点图文单元、18 个节点制图脚本与全部已存资产的双重复跑。前四卷分别由[[learning_problem_decision_cumulative_contract_audit.py]]、[[pac_finite_class_cumulative_contract_audit.py]]、[[vc_uniform_convergence_cumulative_contract_audit.py]]和[[rademacher_margin_local_cumulative_contract_audit.py]]独立复核；第四卷配套[[阶段测验 - 数据依赖复杂度、间隔与快率（20.4）|RAD-CUM-01]]、[[阶段测验解答 - 数据依赖复杂度、间隔与快率（20.4）|独立封存详解]]与[[实验 - 数据依赖复杂度、间隔与快率累计复现门|三轨门]]。四卷均使用口试、210 分钟 100 分闭卷、scorer nonce、跨轨盲参、48 小时与 14 天证据链。卷级材料门现为 **4/10**，个人通过仍为 **0/10 / `not-attempted`**；不能把题卷存在写成分卷通过。
+学习理论 LT-01—84 已完成全章静态材料门：[[learning_theory_teaching_contract_audit.py]]复核 84 组习题—解答双射、1260 个 A—E 题解 ID、来源卡、范围内链接、节点图文单元、18 个节点制图脚本与全部已存资产的双重复跑。前五卷分别由[[learning_problem_decision_cumulative_contract_audit.py]]、[[pac_finite_class_cumulative_contract_audit.py]]、[[vc_uniform_convergence_cumulative_contract_audit.py]]、[[rademacher_margin_local_cumulative_contract_audit.py]]和[[algorithmic_generalization_cumulative_contract_audit.py]]独立复核；第五卷配套[[阶段测验 - 稳定性、压缩、PAC-Bayes 与信息泛化（20.5）|ALG-CUM-01]]、[[阶段测验解答 - 稳定性、压缩、PAC-Bayes 与信息泛化（20.5）|独立封存详解]]与[[实验 - 稳定性、压缩、PAC-Bayes 与信息泛化累计复现门|三轨门]]。五卷均使用口试、210 分钟 100 分闭卷、scorer nonce、跨轨盲参、48 小时与 14 天证据链。卷级材料门现为 **5/10**，个人通过仍为 **0/10 / `not-attempted`**；不能把题卷存在写成分卷通过。
 
 | 学习理论卷级测验 | 覆盖范围 | 状态 |
 |---|---|---|
@@ -448,6 +448,7 @@ updated: 2026-08-28
 | PAC-CUM-01 | LT-09—16：PAC 学习与有限假设类 | regression-passed material / not-attempted learner |
 | VC-CUM-01 | LT-17—24：VC 维、增长函数与一致收敛 | regression-passed material / not-attempted learner |
 | RAD-CUM-01 | LT-25—32：数据依赖复杂度、间隔与快率 | regression-passed material / not-attempted learner |
+| ALG-CUM-01 | LT-33—40：稳定性、压缩、PAC-Bayes 与信息泛化 | regression-passed material / not-attempted learner |
 
 | 测验 | 覆盖范围 | 状态 |
 |---|---|---|

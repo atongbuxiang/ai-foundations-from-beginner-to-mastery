@@ -3,9 +3,12 @@ type: moc
 status: active
 area: [learning-theory/algorithm-dependent]
 prerequisites: ["[[PAC 学习与有限假设类 MOC]]", "[[交叉熵与 KL 散度]]", "[[互信息与依赖性]]"]
-related: ["[[学习理论完整课程地图与掌握标准]]", "[[数据依赖复杂度、间隔与快率 MOC]]"]
+assessment: "[[阶段测验 - 稳定性、压缩、PAC-Bayes 与信息泛化（20.5）]]"
+solution: "[[阶段测验解答 - 稳定性、压缩、PAC-Bayes 与信息泛化（20.5）]]"
+experiment: "[[实验 - 稳定性、压缩、PAC-Bayes 与信息泛化累计复现门]]"
+related: ["[[学习理论完整课程地图与掌握标准]]", "[[数据依赖复杂度、间隔与快率 MOC]]", "[[推导与实验 MOC]]"]
 created: 2026-08-20
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 稳定性、压缩、PAC-Bayes 与信息泛化 MOC
@@ -24,4 +27,10 @@ updated: 2026-08-23
 | LT-39 | [[互信息与信息论泛化界]] | sample-output information | draft + A–E 闭环 |
 | LT-40 | [[容量界、稳定性界与 PAC-Bayes 的比较]] | bound-selection audit | draft + A–E 闭环 |
 
-当前为 **8/8 正文、8/8 习题与独立详解，0/8 经真实作答验收**。20.5 已完成 draft 闭环：从 stability、sample compression 延伸到 PAC-Bayes 与 information-theoretic generalization，并以五类证书比较收束。下一批进入 20.6 的 LT-41—44：偏差—方差、正则化与交叉验证、线性回归、逻辑回归。
+当前为 **8/8 正文、8/8 习题与独立详解，0/8 经真实作答验收**。20.5 已完成 draft 闭环：从 stability、sample compression 延伸到 PAC-Bayes 与 information-theoretic generalization，并以五类证书比较收束。
+
+## 卷级材料门：ALG-CUM-01
+
+本卷现已建立[[阶段测验 - 稳定性、压缩、PAC-Bayes 与信息泛化（20.5）|ALG-CUM-01]]、[[阶段测验解答 - 稳定性、压缩、PAC-Bayes 与信息泛化（20.5）|独立封存详解]]与[[实验 - 稳定性、压缩、PAC-Bayes 与信息泛化累计复现门|三轨累计复现门]]。三轨分别核对 replace-one/mean/RERM/SGD、compression/PAC-Bayes-kl、binary-channel MI/证书选择；题卷以 20 分钟口试、210 分钟闭卷、scorer nonce、跨轨盲参、48 小时与 14 天迁移防止照图复述。[[algorithmic_generalization_cumulative_contract_audit.py]]独立重算数值锚点并检查 canonical/盲参双跑、SVG/XML/hash、support 与覆盖保护。
+
+因此本卷的**验收材料**为 `regression-passed`，但学习者仍为 `not-attempted`，不得把 8/8 材料闭环写成个人通过。全章卷级材料门现为 **5/10**；下一步先建立 20.1—20.5 的 LT-QUAL-01 跨卷资格考，再推进 20.6。

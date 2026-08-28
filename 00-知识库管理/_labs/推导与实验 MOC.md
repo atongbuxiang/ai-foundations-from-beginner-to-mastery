@@ -40,8 +40,10 @@ updated: 2026-08-28
 - [[vc_uniform_convergence_cumulative_contract_audit.py]]：复核 8/8 scope、14/14 题解与 100 分、解析锚点、canonical/盲参双跑、stdout/SVG/XML/hash、非法权重/覆盖保护和六处状态面；
 - 第四卷累计门：[[实验 - 数据依赖复杂度、间隔与快率累计复现门]]以 exact signs/双范数—预注册 margin 共同选择—cover/local/fat 组成三轨；配套[[阶段测验 - 数据依赖复杂度、间隔与快率（20.4）|RAD-CUM-01]]和独立详解；
 - [[rademacher_margin_local_cumulative_contract_audit.py]]：复核 8/8 scope、14/14 题解与 100 分、exact/upper 锚点、canonical/盲参双跑、stdout/SVG/XML/hash、覆盖/输入保护和六处状态面；
-- 当前语义：第 20 章静态材料为 `regression-passed`，卷级材料门 **4/10**，个人通过 **0/10 / `not-attempted`**；84 篇正文仍为 `draft`；
-- 下一施工点：为 LT-33—40 建立 20.5 的稳定性/压缩/PAC-Bayes/信息泛化卷级证据门。
+- 第五卷累计门：[[实验 - 稳定性、压缩、PAC-Bayes 与信息泛化累计复现门]]以 exact replace-one/Binomial gap/RERM-SGD—compression/PAC-Bayes-kl—binary-channel MI/证书选择组成三轨；配套[[阶段测验 - 稳定性、压缩、PAC-Bayes 与信息泛化（20.5）|ALG-CUM-01]]和独立详解；
+- [[algorithmic_generalization_cumulative_contract_audit.py]]：复核 8/8 scope、14/14 题解与 100 分、stability/description/information 锚点、canonical/盲参双跑、stdout/SVG/XML/hash、support/覆盖/输入保护和六处状态面；
+- 当前语义：第 20 章静态材料为 `regression-passed`，卷级材料门 **5/10**，个人通过 **0/10 / `not-attempted`**；84 篇正文仍为 `draft`；
+- 下一施工点：建立覆盖 20.1—20.5 的 LT-QUAL-01 跨卷资格考，再进入 20.6。
 
 ## 第四章确定性架构审计
 
