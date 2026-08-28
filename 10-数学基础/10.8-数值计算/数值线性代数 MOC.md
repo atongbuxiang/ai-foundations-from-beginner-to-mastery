@@ -7,7 +7,7 @@ prerequisites: ["[[线性代数 MOC]]", "[[矩阵分析 MOC]]"]
 related: ["[[数学基础完整课程地图与掌握标准]]", "[[线性代数完整学习路线与掌握标准]]", "[[推导与实验 MOC]]", "[[练习与测验 MOC]]", "[[数学基础 MOC]]"]
 sources: ["Trefethen-Bau-NLA", "Golub-VanLoan-MatrixComputations", "MIT-18.335"]
 created: 2026-08-14
-updated: 2026-08-27
+updated: 2026-08-28
 ---
 
 # 数值线性代数 MOC
@@ -29,7 +29,7 @@ updated: 2026-08-27
 | C | NUM-09—12 | 最小二乘 → 极端特征对 → 稠密 QR 流水线 → 对称 Krylov | $A=[\Sigma Q^\mathsf T;0]$、$G=A^\mathsf TA$ 与共享三对角 $T$ | `regression-passed` | `draft / not-attempted` |
 | D | NUM-13—16 | 一般 Krylov → SVD → 定常迭代 → 预条件 | 非正规 $A$、$H=A^TA$、$B=I-A/2$ 与 $S=D^{-1/2}HD^{-1/2}$ | `regression-passed` | `draft / not-attempted` |
 | E | NUM-17—20 | CG → GMRES/MINRES → 稀疏系统 → 随机低秩 | $H=A^TA$ 的 CG、$A$ 的 GMRES/CSR 与 $Q=\operatorname{orth}(A\Omega)$ | `regression-passed` | `draft / not-attempted` |
-| CUM | NUM-CUM | 卷级路线—口试—题解—实验—回归 | 五波随机回链与 A/B/C 累计三轨 | `regression-passed` | `not-attempted` |
+| CUM | NLA-CUM-01 | 口试 → 闭卷 → nonce 随机轨 → 盲干预 → 订正 → 48 h / 14 d → 独立审计 | 五波回链与 A/B/C 累计三轨 | `regression-passed` | `not-attempted` |
 
 ### 第一波的单一模型链
 
@@ -203,7 +203,7 @@ $$
 4. **验收：**依次复现[[实验 - CG 能量几何、谱聚集与递推残差漂移]]、[[实验 - GMRES 重启、MINRES 结构与残差最小化]]、[[实验 - 稀疏存储、消元填充与并行负载]]与[[实验 - 随机 SVD 的过采样、幂步与概率证书]]，再进入卷级闭卷、口试、实验组合和延迟重做。
 
 > [!success] 全卷静态迁移结论
-> NUM-01—20 的正文与 `NUM-CUM` 卷级材料已全部进入确定性回归；这表示课程正文、图像、链接、统一算例、口试/闭卷/实验入口与审计脚本已完备，不表示读者已掌握。个人学习状态继续保持 `not-attempted`，只有独立完成卷级题—解分离、实验复现和延迟重做后才可升级。
+> NUM-01—20 的正文与 `NLA-CUM-01` 卷级材料已全部进入确定性回归；这表示课程正文、图像、链接、统一算例、口试/闭卷/实验入口与审计脚本已完备，不表示读者已掌握。个人学习状态继续保持 `not-attempted`，只有独立完成答案/输出隔离、nonce 随机轨、盲干预、48 小时换机制和 14 天陌生 AI 数值迁移后才可升级。
 
 ## 核心区别
 
@@ -395,7 +395,7 @@ flowchart LR
 
 ![[00-知识库管理/_assets/figures/numerical-analysis/fig-numerical-cumulative-gate-v2.svg|880]]
 
-> [!figure] NUM-CUM 卷级总图｜从数值观测到可部署证书
+> [!figure] NLA-CUM-01 卷级总图｜从数值观测到可部署证书
 > A 把舍入、relative residual、condition amplification 与 task gate 连成可靠性链；B 在同一非正规算子及 Gram 系统上按结构分流 CG、GMRES、stationary iteration 与 preconditioning；C 把 dense/CSR 字节和 randomized range/truncation error 分账。生成脚本：[[plot_numerical_cumulative_gate.py]]；同一入口还包含精确断言。
 
 **怎样读图。** 左栏先读“观测 residual 为什么还要 condition”；中栏先读每个算法左侧的结构前提，再读右侧的迭代证据；右栏先比较 value/index/pointer 的存储账，再比较 range 与 rank-$k$ truncation 两种误差。底部箭头给出新问题的固定审计顺序，而不是宣称任何一条算法总是最优。
@@ -408,8 +408,8 @@ NUM-01—20 的累计验收由三个互不替代的入口组成：
 
 - [[阶段测验 - 数值计算与数值线性代数（10.8）]]：先做 15 分钟无提示口试，再做 180 分钟、100 分闭卷；按定义/手算/推导/失败诊断/AI 迁移五区评分；
 - [[阶段测验解答 - 数值计算与数值线性代数（10.8）]]：冻结原答后才打开；含逐步推导、卷级口试参考、评分断点、诊断回链与 AI 求解器合同；
-- [[实验 - 数值线性代数累计复现门]]：先运行三轨总图，再随机指定 A 可靠性、B 结构求解或 C 稀疏随机一轨，完成两项手算和一次预注册干预；
-- [[numerical_cumulative_contract_audit.py]]：检查 20 节教学合同、14 题题—解隔离、累计入口、图文单元、精确模型、SVG XML/hash 与材料状态。
+- [[实验 - 数值线性代数累计复现门]]：冻结 `attempt_id`、环境与答案/输出隔离后，由 `scorer nonce` 指定 A 可靠性、B 结构求解或 C 稀疏随机轨；先交两项手算和盲参数预测，再保存新 output/SVG/hash，不能用 canonical 输出冒充个人证据；
+- [[numerical_cumulative_contract_audit.py]]：独立复算 A/B/C 解析锚点，检查 20 节教学合同、14/14 题解与 100 分、题—解隔离、六个状态入口、canonical 确定性双跑、固定盲参数输出/hash 与 SVG XML。
 
 ### 五层证据
 
@@ -417,19 +417,19 @@ NUM-01—20 的累计验收由三个互不替代的入口组成：
 |---|---|---|---|
 | 1. 无提示口试 | 录音/提纲、四问结果、第一个断点 | 五波主线能否从记忆中调用 | 复杂计算是否正确 |
 | 2. 闭卷手算与推导 | 原始答卷、A—E 分区分、关键题非零 | 对象、公式、证明和诊断能否独立落地 | 代码与环境能否复现 |
-| 3. 累计实验 | 命令、环境、canonical hash、两项手算、干预预测 | 理论是否能约束实现和结论边界 | 新情境中是否仍会调用 |
-| 4. 48 小时纠错 | 空白重做、首个错误断点、换参数结果 | 错误是否真正修复，而非短时记答案 | 长期保持与迁移 |
-| 5. 14 天 AI 迁移 | 新算子合同、任务容差、成本与 fallback | 能否把数值理论用于未见系统 | 真实部署的全部外部风险 |
+| 3. nonce 累计实验 | `attempt_id`、scorer nonce、轨道、环境、两项手算、盲预测、新 output/SVG/hash | 理论是否在答案与输出隔离下约束实现和结论边界 | 新情境中是否仍会调用 |
+| 4. 48 小时换机制重建 | 空白重做、首个错误断点、换算术/结构/预条件/存储/随机机制后的结果 | 错误是否真正修复，而非短时记答案或记固定参数 | 长期保持与迁移 |
+| 5. 14 天陌生 AI 数值迁移 | 新算子与 dtype 合同、误差预算、证书、成本与 fallback | 能否在未见 AI 系统中选择数值对象并限制 claim | 真实部署的全部外部风险 |
 
 五层必须分别记录。材料脚本的 `PASS` 属于课程资产证书，不占用任何个人证据层；看过题解后的正确答案只能记 `corrected`，不能倒填为 `independent`。
 
 ### 当前状态边界
 
-当前材料状态是 **NUM-01—20 正文 20/20 `regression-passed`，NUM-CUM `regression-passed`；个人学习 0/20 经真实累计测验认证**。
+当前材料状态是 **NUM-01—20 正文 20/20 `regression-passed`，NLA-CUM-01 `regression-passed`；个人学习 0/20 经真实累计测验认证**。
 
-- 题卷、题解、累计实验和总图已经成稿并通过确定性回归，只证明验收工具可执行；
+- 题卷、题解、累计实验和总图已经成稿；独立审计已通过解析复算、canonical 双跑、固定盲参数 fixture 与六个状态入口，只证明验收工具可执行；
 - 题卷与题解保持独立文件，正式作答前不得打开题解；
-- 尚无学习者口试、闭卷、随机轨道、48 小时重做或 14 天迁移证据；
+- 尚无学习者口试、闭卷原稿、nonce 随机轨与个人未见参数输出、48 小时换机制或 14 天陌生 AI 迁移证据；
 - 因此 NUM-01—20 继续保持 `draft`，个人累计状态保持 `not-attempted`；
 - 只有某个节点自己的 A—E 练习、卷级证据与延迟迁移都满足，才逐项讨论从 `draft` 升到 `verified`。
 

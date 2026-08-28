@@ -5,10 +5,14 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import math
 import re
 import subprocess
 import sys
+import tempfile
 import xml.etree.ElementTree as ET
+from decimal import Context, Decimal, ROUND_HALF_EVEN, localcontext
+from fractions import Fraction
 from pathlib import Path
 
 
@@ -30,6 +34,16 @@ CUM_SVG = (
     / "fig-numerical-cumulative-gate-v2.svg"
 )
 EXPECTED_CUM_SHA256 = "895af1e191506d2ada074b104eea71820af2063bc5abc522e6dce17d9b506682"
+EXPECTED_INTERVENTION_SHA256 = "5b7757faa73347b469647a0fae5970e356fad39567f241e414c2ef5fbd50c706"
+
+STATE_SURFACES = (
+    ROOT / "10-数学基础" / "数学基础完整课程地图与掌握标准.md",
+    ROOT / "10-数学基础" / "数学基础 MOC.md",
+    ROOT / "00-知识库管理" / "00-总览" / "全库教学重写审计与迁移台账.md",
+    ROOT / "00-知识库管理" / "00-总览" / "数学基础十卷完备性审计与学习状态总表.md",
+    ROOT / "00-知识库管理" / "_labs" / "exercises" / "练习与测验 MOC.md",
+    ROOT / "00-知识库管理" / "_labs" / "推导与实验 MOC.md",
+)
 
 CONCEPTS = (
     "浮点数与舍入误差.md",
@@ -71,6 +85,13 @@ def require(condition: bool, message: str) -> None:
         raise AssertionError(message)
 
 
+def close(actual: float, expected: float, label: str, tolerance: float = 5e-9) -> None:
+    require(
+        math.isclose(actual, expected, rel_tol=0.0, abs_tol=tolerance),
+        f"{label}: expected {expected:.10f}, got {actual:.10f}",
+    )
+
+
 def read(path: Path) -> str:
     require(path.is_file(), f"missing file: {path.relative_to(ROOT)}")
     return path.read_text(encoding="utf-8")
@@ -110,6 +131,12 @@ def audit_concepts() -> None:
 def audit_assessment_bundle() -> None:
     assessment = read(ASSESSMENT)
     solution = read(SOLUTION)
+    experiment = read(EXPERIMENT)
+
+    for path, content in ((ASSESSMENT, assessment), (SOLUTION, solution), (EXPERIMENT, experiment)):
+        require("material_status: regression-passed" in content, f"{path.name}: material status drift")
+        require("learning_status: not-attempted" in content, f"{path.name}: learning status drift")
+        require("updated: 2026-08-28" in content, f"{path.name}: update date drift")
 
     for index in range(1, 21):
         require(f"NUM-{index:02d}" in assessment, f"assessment scope misses NUM-{index:02d}")
@@ -136,7 +163,85 @@ def audit_assessment_bundle() -> None:
     require("正式作答前" not in solution or "冻结" in solution,
             "solution use-order warning is incomplete")
 
-    print("PASS assessment bundle: scope 20/20, questions 14/14, oral gate present, answer markers isolated")
+    question_points = {
+        int(index): int(points)
+        for index, points in re.findall(r"^### 第 (\d+) 题：.*（(\d+) 分）$", assessment, re.M)
+    }
+    solution_points = {
+        int(index): int(points)
+        for index, points in re.findall(r"^### 第 (\d+) 题解答：.*（(\d+) 分）$", solution, re.M)
+    }
+    require(sorted(question_points) == list(range(1, 15)), "assessment point headers are incomplete")
+    require(sorted(solution_points) == list(range(1, 15)), "solution point headers are incomplete")
+    require(question_points == solution_points, "question/solution point allocations differ")
+    require(sum(question_points.values()) == 100, "assessment points do not total 100")
+    for marker in (
+        "答案与输出隔离协议",
+        "attempt_id",
+        "scorer nonce",
+        "48 小时换机制重建门",
+        "14 天陌生 AI 数值迁移门",
+        "提交证据清单",
+    ):
+        require(marker in assessment, f"assessment misses evidence marker: {marker}")
+    for marker in ("五波统一模型的卷级数值锚点", "口试与盲干预判分红线", "最终状态边界"):
+        require(marker in solution, f"solution misses evidence marker: {marker}")
+
+    print("PASS assessment bundle: scope 20/20, questions/answers 14/14, points=100, isolation + delay gates")
+
+
+def audit_analytic_calibration() -> None:
+    # Track A: finite precision, residual, conditioning and task tolerance.
+    tau = Fraction(1, 10_000)
+    with localcontext(Context(prec=4, rounding=ROUND_HALF_EVEN, Emin=-999, Emax=999)):
+        rounded = +(Decimal(1) + Decimal("0.0001"))
+        lost_sum = +(+(Decimal("1e8") + Decimal(1)) - Decimal("1e8"))
+        reordered_sum = +(+(Decimal("1e8") - Decimal("1e8")) + Decimal(1))
+    require(str(rounded) == "1.000", "Track A decimal absorption drift")
+    require(lost_sum == 0 and reordered_sum == 1, "Track A summation path drift")
+    close(1.0 / math.sqrt(2.0), 0.7071067811865476, "Track A forward error")
+    residual = float(tau) / math.sqrt(1.0 + float(tau) ** 2)
+    condition = float(1 / tau)
+    close(residual, 0.0000999999995, "Track A residual", tolerance=1e-12)
+    close(condition * residual, 0.999999995, "Track A condition-amplified risk")
+    close(0.01 / condition, 1e-6, "Track A task gate", tolerance=1e-15)
+
+    # Track B: exact CG, GMRES, nonnormal Richardson and preconditioning.
+    h = ((Fraction(1), Fraction(2)), (Fraction(2), Fraction(5)))
+    r0 = (Fraction(-1), Fraction(-3))
+    hp0 = tuple(sum(h[row][column] * r0[column] for column in range(2)) for row in range(2))
+    alpha0 = sum(value * value for value in r0) / sum(r0[index] * hp0[index] for index in range(2))
+    r1 = tuple(r0[index] - alpha0 * hp0[index] for index in range(2))
+    relative_residual = math.sqrt(float(sum(value * value for value in r1) / sum(value * value for value in r0)))
+    error1 = (Fraction(34, 29), Fraction(-14, 29))
+    h_error1 = tuple(sum(h[row][column] * error1[column] for column in range(2)) for row in range(2))
+    energy1 = sum(error1[index] * h_error1[index] for index in range(2))
+    require(alpha0 == Fraction(5, 29), "Track B CG alpha drift")
+    close(relative_residual, 2.0 / 29.0, "Track B CG relative residual")
+    require(energy1 == Fraction(8, 29), "Track B CG energy error drift")
+    close(math.sqrt(2.0 / 5.0), 0.6324555320336759, "Track B GMRES one-step residual")
+    richardson_step = Fraction(1, 2)
+    richardson_factors = (1 - richardson_step, 1 - 3 * richardson_step)
+    require(richardson_factors == (Fraction(1, 2), Fraction(-1, 2)), "Track B Richardson spectrum drift")
+    close(math.sqrt(5.0 / 4.0), 1.118033988749895, "Track B transient peak")
+    close(27.0 + 18.0 * math.sqrt(2.0), 52.45584412271571, "Track B Gram condition")
+    close(9.0 + 4.0 * math.sqrt(5.0), 17.94427190999916, "Track B scaled condition")
+
+    # Track C: exact byte ledger and range/truncation/power separation.
+    n, nnz_a, nnz_gram = 3, 4, 5
+    value_bytes, index_bytes = 8, 4
+    csr_a = nnz_a * (value_bytes + index_bytes) + (n + 1) * index_bytes
+    dense_a = n * n * value_bytes
+    csr_gram = nnz_gram * (value_bytes + index_bytes) + (n + 1) * index_bytes
+    require((csr_a, dense_a, csr_gram) == (64, 72, 76), "Track C byte ledger drift")
+    range_error = 3.0 / math.sqrt(23.0)
+    best_rank2 = math.sqrt(2.0) - 1.0
+    power_tail = (3.0 - 2.0 * math.sqrt(2.0)) ** 3
+    close(range_error, 0.6255432421712244, "Track C range error")
+    close(best_rank2, 0.41421356237309515, "Track C rank-2 error")
+    close(power_tail, 0.005050633883346584, "Track C power-tail ratio")
+    require(range_error > best_rank2 > power_tail > 0.0, "Track C error ordering drift")
+    print("PASS analytic calibration: finite precision/condition, CG/GMRES/nonnormal solve, sparse/randomized ledger")
 
 
 def audit_cumulative_artifacts() -> None:
@@ -144,7 +249,7 @@ def audit_cumulative_artifacts() -> None:
     experiment = read(EXPERIMENT)
 
     require(
-        "| CUM | NUM-CUM | 卷级路线—口试—题解—实验—回归 | 五波随机回链与 A/B/C 累计三轨 | `regression-passed` | `not-attempted` |"
+        "| CUM | NLA-CUM-01 | 口试 → 闭卷 → nonce 随机轨 → 盲干预 → 订正 → 48 h / 14 d → 独立审计 | 五波回链与 A/B/C 累计三轨 | `regression-passed` | `not-attempted` |"
         in moc,
         "MOC cumulative status row is not regression-passed / not-attempted",
     )
@@ -159,11 +264,16 @@ def audit_cumulative_artifacts() -> None:
         require(marker in moc, f"MOC misses cumulative marker: {marker}")
 
     for marker in (
-        "进入实验前的解析校准门",
+        "执行顺序、答案隔离与 scorer nonce",
         "A 轨：有限精度—误差—稳定—停止",
         "B 轨：结构—投影—预条件—真 residual",
         "C 轨：稀疏成本—随机值域—独立证书",
-        "随机指定轨道的复核协议",
+        "盲参数干预门",
+        "--task-budget",
+        "--richardson-step",
+        "--value-bytes",
+        "--power-iterations",
+        "证据状态机与延迟迁移",
         EXPECTED_CUM_SHA256,
     ):
         require(marker in experiment, f"experiment misses cumulative marker: {marker}")
@@ -172,7 +282,12 @@ def audit_cumulative_artifacts() -> None:
     duplicates = sorted({heading for heading in headings if headings.count(heading) > 1})
     require(not duplicates, f"experiment has duplicate headings: {duplicates}")
     require(TEACHING_AUDIT.is_file() and CUM_SCRIPT.is_file(), "required audit/compute scripts missing")
-    print("PASS cumulative artifacts: zero-entry route, oral/written gate, evidence ladder and A/B/C experiment")
+    for path in STATE_SURFACES:
+        state_content = read(path)
+        require("numerical_cumulative_contract_audit.py" in state_content, f"state surface misses audit: {path.name}")
+        require("regression-passed" in state_content, f"state surface misses material pass: {path.name}")
+        require("not-attempted" in state_content, f"state surface misses personal boundary: {path.name}")
+    print("PASS cumulative artifacts: oral/closed/nonce/blind/delay route + 6 synchronized state surfaces")
 
 
 def audit_markdown_integrity() -> None:
@@ -252,11 +367,19 @@ def run(script: Path, *args: str) -> str:
     result = subprocess.run(
         [sys.executable, str(script), *args],
         cwd=ROOT,
-        check=True,
+        check=False,
         text=True,
         capture_output=True,
     )
+    require(
+        result.returncode == 0,
+        f"compute failed ({script.name} {' '.join(args)}):\nSTDOUT:\n{result.stdout}\nSTDERR:\n{result.stderr}",
+    )
     return result.stdout.strip()
+
+
+def normalized_output(output: str) -> str:
+    return "\n".join(line for line in output.splitlines() if not line.startswith("OUTPUT "))
 
 
 def audit_compute() -> None:
@@ -264,23 +387,68 @@ def audit_compute() -> None:
     require("NUM-01—20 material regression: PASS" in teaching_output,
             "chapter teaching audit did not reach its material PASS")
 
-    first_output = run(CUM_SCRIPT)
-    require("A reliability:" in first_output and "B solver:" in first_output and "C scale:" in first_output,
-            "cumulative script did not report all three tracks")
-    require(CUM_SVG.is_file(), "cumulative SVG was not generated")
-    first_digest = hashlib.sha256(CUM_SVG.read_bytes()).hexdigest()
-    require(first_digest == EXPECTED_CUM_SHA256, f"cumulative SVG hash changed: {first_digest}")
+    require(CUM_SVG.is_file(), "stored cumulative SVG is missing")
+    stored_digest = hashlib.sha256(CUM_SVG.read_bytes()).hexdigest()
+    require(stored_digest == EXPECTED_CUM_SHA256, f"stored cumulative SVG hash changed: {stored_digest}")
+    with tempfile.TemporaryDirectory(prefix="nla-cum-audit-") as temp_dir:
+        temp = Path(temp_dir)
+        canonical_a = temp / "canonical-a.svg"
+        canonical_b = temp / "canonical-b.svg"
+        output_a = run(CUM_SCRIPT, "--output", str(canonical_a))
+        output_b = run(CUM_SCRIPT, "--output", str(canonical_b))
+        require(normalized_output(output_a) == normalized_output(output_b), "canonical stdout is not deterministic")
+        require(canonical_a.read_bytes() == canonical_b.read_bytes(), "canonical SVG double-run differs")
+        canonical_digest = hashlib.sha256(canonical_a.read_bytes()).hexdigest()
+        require(canonical_digest == EXPECTED_CUM_SHA256, f"canonical SVG hash changed: {canonical_digest}")
+        for marker in (
+            "A_CONFIG tau=0.0001 task_budget=0.01",
+            "A_RELIABILITY fl(1+tau)=1.000 forward=0.707107 rho=0.00010000 kappa=10000.0 kappa*rho=1.00000000 task_gate=1.00e-06",
+            "B_CONFIG richardson_step=0.5",
+            "B_SOLVER CG_rel_r1=0.06896552 GMRES=1.41421356->0.63245553->0.0 Richardson_rho=0.5000 kappa=52.45584->17.94427",
+            "C_CONFIG index_bytes=4 value_bytes=8 power_iterations=1",
+            "C_SCALE index=4B CSR(A)=64B dense=72B CSR(AtA)=76B range=0.62554324 best_rank2=0.41421356 power_tail=0.00505063",
+        ):
+            require(marker in output_a, f"canonical output misses: {marker}")
+        ET.parse(canonical_a)
 
-    second_output = run(CUM_SCRIPT)
-    second_digest = hashlib.sha256(CUM_SVG.read_bytes()).hexdigest()
-    require(first_output == second_output and first_digest == second_digest,
-            "cumulative compute gate is not deterministic across two runs")
-    root_element = ET.parse(CUM_SVG).getroot()
-    require(root_element.tag.endswith("svg") and "viewBox" in root_element.attrib,
-            "cumulative SVG failed XML/viewBox validation")
+        intervention = temp / "intervention.svg"
+        intervention_output = run(
+            CUM_SCRIPT,
+            "--tau", "0.002",
+            "--task-budget", "0.005",
+            "--richardson-step", "0.7",
+            "--index-bytes", "8",
+            "--value-bytes", "4",
+            "--power-iterations", "2",
+            "--output", str(intervention),
+        )
+        intervention_digest = hashlib.sha256(intervention.read_bytes()).hexdigest()
+        require(intervention_digest == EXPECTED_INTERVENTION_SHA256, f"intervention SVG hash changed: {intervention_digest}")
+        for marker in (
+            "A_CONFIG tau=0.002 task_budget=0.005",
+            "A_RELIABILITY fl(1+tau)=1.002 forward=0.707107 rho=0.00200000 kappa=500.0 kappa*rho=0.99999800 task_gate=1.00e-05",
+            "B_CONFIG richardson_step=0.7",
+            "B_SOLVER CG_rel_r1=0.06896552 GMRES=1.41421356->0.63245553->0.0 Richardson_rho=1.1000 kappa=52.45584->17.94427",
+            "C_CONFIG index_bytes=8 value_bytes=4 power_iterations=2",
+            "C_SCALE index=8B CSR(A)=80B dense=36B CSR(AtA)=92B range=0.62554324 best_rank2=0.41421356 power_tail=0.00014868",
+        ):
+            require(marker in intervention_output, f"intervention output misses: {marker}")
+        intervention_svg = intervention.read_text(encoding="utf-8")
+        for marker in (
+            "F10,4: fl(1+0.002)=1.002",
+            "rho ~= 2.00e-03",
+            "kappa=500",
+            "0.5% task gate requires rho &lt;= 1e-05",
+            "rho=1.10, transient=1.43",
+            "q=2: tail ratio=0.0001487",
+            "protocol: index=8B, value=4B; 另记 p/q/seed。",
+        ):
+            require(marker in intervention_svg, f"intervention SVG does not self-describe: {marker}")
+        ET.parse(intervention)
 
     print("PASS chapter compute dependency: NUM-01—20 teaching/figure regression")
-    print(f"PASS cumulative compute gate: deterministic double-run; sha256={first_digest}")
+    print(f"PASS canonical double-run + stored SVG: sha256={stored_digest}")
+    print(f"PASS blind-interface intervention: sha256={EXPECTED_INTERVENTION_SHA256}")
 
 
 def main() -> None:
@@ -288,12 +456,13 @@ def main() -> None:
     parser.add_argument(
         "--run-compute",
         action="store_true",
-        help="rerun all 20 chapter figures and the deterministic NUM-CUM three-track gate",
+        help="rerun all 20 chapter figures and the deterministic NLA-CUM-01 three-track gate",
     )
     args = parser.parse_args()
 
     audit_concepts()
     audit_assessment_bundle()
+    audit_analytic_calibration()
     audit_cumulative_artifacts()
     audit_markdown_integrity()
     if args.run_compute:
