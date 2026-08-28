@@ -1,6 +1,8 @@
 ---
 type: experiment
 status: draft
+material_status: regression-passed
+learning_status: not-attempted
 area: [math/ode, math/dynamical-systems, math/sde, ai/generative-modeling]
 question: "连续动力系统的稳定性、守恒密度的概率流表示与随机路径的二次变差，如何在同一累计实验中被分别认证；half-score、有限步长和错误对象又怎样留下不同失败信号？"
 hypothesis: "刚性对角系统在 h=0.04 下 exact/implicit 方法衰减而 Euler、RK4 因 fast amplification 大于 1 发散；解析周期密度的 probability-flow RK4 state/logp 均恢复四阶且守恒到机器精度；stationary OU 的 SDE quadratic variation 接近 beta*T=1.2、PF ODE 为 0，noisy reverse SDE 误用 half-score 后 E[X^2] 接近 2.2 而非 1。"
@@ -9,13 +11,16 @@ data: "完全合成：二维刚性线性系统、圆周上的单 Fourier 模态�
 seed: 20260819
 related: ["[[阶段测验 - ODE、动力系统与 SDE（10.9）]]", "[[ODE、动力系统与 SDE MOC]]", "[[刚性系统、绝对稳定域与隐式方法]]", "[[流映射、Liouville 公式与连续正规化流]]", "[[Fokker-Planck 方程与概率流 ODE]]", "[[时间反演、score 与扩散生成动力学]]"]
 created: 2026-08-19
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # 实验 - ODE、动力系统与 SDE 累计复现门
 
 > [!abstract] 实验定位
 > 这是 `DYN-CUM-01` 的计算复现门。三条轨道有意选择不同证据对象：A 检查 exact continuous system 与 finite-step solver map；B 检查 density、current、characteristics 与 log-density ledger；C 检查 stochastic path、Itô identity、marginal 和 reverse drift。三轨共同阻止三种常见偷换：“连续稳定所以任意求解器稳定”“同 marginal 所以是同一个过程”“把步长减小便能消除 score 错误”。脚本成功只是最低门槛；正式通过还要求手算、参数干预和边界解释。
+
+> [!warning] 材料状态不等于个人状态
+> Canonical 脚本、SVG、解析断言与哈希已经达到 `regression-passed`，这只说明实验工具可执行。学习者仍须在同一 `attempt_id` 下冻结预测、独立运行、接受随机轨道、手算和完成延迟复测；个人状态默认保持 `not-attempted`。
 
 ## 一、三轨总览
 
@@ -35,9 +40,34 @@ flowchart LR
 | B | 已知解析密度的圆周扩散与 PF ODE | mass、PDE residual、characteristic/CNF order | 粗步长改变 finite flow/logp | 所有 learned CNF/score 都有四阶 accuracy |
 | C | stationary OU paths 与 reverse samplers | QV、Itô residual、endpoint second moment | noisy reverse SDE 误用 half-score | 一时刻二阶矩等于完整 path-law 认证 |
 
-## 二、A 轨：连续稳定与离散稳定不是同一证书
+## 二、进入实验前的解析校准门
 
-### 2.1 对象与解析基线
+Canonical 数字写在本页是为了校准环境，不是盲测题。正式个人证据来自评分者在 A/B/C 中随机指定一轨，并改变至少一个控制参数。开始前先冻结以下内容：
+
+| 字段 | 运行前记录 |
+|---|---|
+| `attempt_id` / Git commit / Python |  |
+| 随机指定轨道 | A / B / C |
+| canonical 输出路径与预期 hash |  |
+| 干预参数与新输出路径 |  |
+| 预测的符号、数量级和极限 |  |
+| 直接观测量 |  |
+| 需要调用的理论桥梁 |  |
+| 最多允许推出的结论 |  |
+| 明确不能推出的结论 |  |
+
+在运行代码前，必须能完成所选轨道的最小解析校准：
+
+- **A 轨：** 从 $z=-\lambda h$ 手算四个 $R(z)$，先判 $|R(z)|$ 是否小于 1，再谈 endpoint order；
+- **B 轨：** 从 heat equation 推出 $a_t$，再由 score 得 current/PF velocity，最后用 $F_t(x_t)=F_0(x_0)$ 给独立 characteristic reference；
+- **C 轨：** 从 diffusion coefficient 推出 $[X]_T=\beta T$，用 Itô formula写 $dX^2$，再区分 noisy reverse 的 full-score 与 deterministic PF 的 half-score。
+
+> [!important] 防止循环认证
+> 不允许用同一个数值 recurrence 既产生 reference 又验证自身。A 轨用 exact exponential和解析 stability function；B 轨用 analytic PDE 与 CDF inversion；C 轨用 QV/Itô/second-moment解析目标。看到图“形状正确”只能算辅助证据。
+
+## 三、A 轨：连续稳定与离散稳定不是同一证书
+
+### 3.1 对象与解析基线
 
 研究
 
@@ -79,7 +109,7 @@ $$
 
 该问题的 slow component 按时间尺度 1 变化，fast component 按时间尺度 $1/80$ 消失；若只看 $t=O(1)$ 的目标轨迹，accuracy 未必需要很小步，但 explicit stability 会受 fast mode 限制。这正是本轨使用的 operational stiffness。
 
-### 2.2 四种 finite-step map
+### 3.2 四种 finite-step map
 
 对 $u'=\mu u$、$z=h\mu$：
 
@@ -115,7 +145,7 @@ $$
 > [!hypothesis]
 > exact energy 单调下降；Euler/RK4 即使连续模型稳定也会在该步长下增长；BE/Trap保持 absolute stability。进入共同稳定细网格后，endpoint errors 应分别恢复约 $1,4,1,2$ 阶。
 
-### 2.3 为什么同时看 stability 与 order
+### 3.3 为什么同时看 stability 与 order
 
 “发散/不发散”只检查某步长下 amplification；“order”检查 $h\to0$ 时误差如何衰减。一个方法可在当前步长 stable 但不够 accurate，也可具有高 formal order 却因当前 $z$ 落出 stability region而完全不可用。实验用两套网格：
 
@@ -124,9 +154,9 @@ $$
 
 隐式方法这里只用解析 diagonal recurrence，不测 Newton/Krylov 成本。因此本轨不能支持“BE 在真实大型 neural ODE 上总是更快”；production comparison 必须另记 Jacobian、factorization、linear iterations、preconditioner reuse 与 wall time。
 
-## 三、B 轨：解析密度、probability current 与 PF characteristics
+## 四、B 轨：解析密度、probability current 与 PF characteristics
 
-### 3.1 圆周扩散的解析 density path
+### 4.1 圆周扩散的解析 density path
 
 在 $x\in[-\pi,\pi)$ 的周期域上考虑
 
@@ -171,7 +201,7 @@ $$
 
 这给 pointwise analytic PDE certificate，不依赖网格图“看起来像”。
 
-### 3.2 Current、score 与 probability-flow velocity
+### 4.2 Current、score 与 probability-flow velocity
 
 score 为
 
@@ -226,7 +256,7 @@ $$
 \frac d{dt}\log p_t(x_t)=-\partial_xv_t(x_t).
 $$
 
-### 3.3 独立的 exact characteristic 证书
+### 4.3 独立的 exact characteristic 证书
 
 圆周上从 $-\pi$ 起算的 CDF 为
 
@@ -245,9 +275,9 @@ $$
 > [!hypothesis]
 > 对 $T=0.8$ 和 $N=5,10,20,40$，RK4 characteristic 与 CNF log-density maximum error 都应约四阶收敛；周期中点求积的 mass drift 接近机器精度，analytic continuity residual 为零。
 
-## 四、C 轨：Brownian path、Itô 与 reverse score 系数
+## 五、C 轨：Brownian path、Itô 与 reverse score 系数
 
-### 4.1 Stationary OU 的三个动力学
+### 5.1 Stationary OU 的三个动力学
 
 考虑
 
@@ -307,7 +337,7 @@ $$
 
 而正确 stationary target 是 1。这是 score coefficient error，不会因 Euler step 趋零而消失。
 
-### 4.2 Quadratic variation 与 Itô identity
+### 5.2 Quadratic variation 与 Itô identity
 
 OU 的 quadratic variation 为
 
@@ -342,7 +372,7 @@ $$
 > [!hypothesis]
 > 2048 条 nested paths、最细 512 步时，SDE quadratic variation mean 应接近 1.2，PF ODE 为零；Itô residual RMSE 的 log–log order 应接近 $1/2$；full-score noisy reverse 的二阶矩接近 1，而 half-score noisy reverse 接近 2.2。
 
-## 五、canonical 结果
+## 六、canonical 结果
 
 先看图判断：连续流的稳定性、密度方程的守恒和随机路径的二次变差分别属于哪一种对象？减小步长能修复哪些失败，又不能修复哪些失败？
 
@@ -360,7 +390,7 @@ $$
 
 图注：A 在同一 $h=0.04$ 下展示 exact energy 与四种 finite-step energy；B 显示 PF characteristics 把高低密度差异逐渐摊平；C 左侧分开 SDE/PF ODE 的 quadratic variation，右侧比较 noisy reverse 中 full-score 与误用 half-score 的 terminal second moment。
 
-### 5.1 A 轨数值摘要
+### 6.1 A 轨数值摘要
 
 | quantity | result |
 |---|---:|
@@ -374,7 +404,7 @@ $$
 
 RK4 order稍低于 4 是有限 refinement interval 与 slow-mode endpoint error 的结果；继续细化最终会遇到 roundoff floor，不能无限拟合 formal order。
 
-### 5.2 B 轨数值摘要
+### 6.2 B 轨数值摘要
 
 | quantity | result |
 |---|---:|
@@ -385,7 +415,7 @@ RK4 order稍低于 4 是有限 refinement interval 与 slow-mode endpoint error 
 
 PDE residual 为零主要验证 analytic expression 与代码 transcription；mass 近机器精度来自 periodic Fourier mode 与中点规则的匹配。它不代表任意 finite-volume discretization 都精确守恒，更不代表 learned score 没有 approximation error。
 
-### 5.3 C 轨数值摘要
+### 6.3 C 轨数值摘要
 
 | quantity | result |
 |---|---:|
@@ -398,7 +428,7 @@ PDE residual 为零主要验证 analytic expression 与代码 transcription；ma
 
 Monte Carlo values不必等于解析期望到机器精度；这里 2048 paths 下的偏差属于 sampling variability 加有限步误差。关键是 full-score 围绕 1，而 half-score 明确趋向另一个 continuous process 的 2.2。
 
-## 六、代码、环境与确定性产物
+## 七、代码、环境与确定性产物
 
 - 代码：[dynamics_cumulative_gate.py](</Users/tong/Nodes/basic/00-知识库管理/_labs/code/dynamics_cumulative_gate.py>)；
 - 图形：[plot-dynamics-cumulative-gate-v2.svg](</Users/tong/Nodes/basic/00-知识库管理/_assets/plots/dynamics/plot-dynamics-cumulative-gate-v2.svg>)；
@@ -434,7 +464,7 @@ python3 "00-知识库管理/_labs/code/dynamics_cumulative_gate.py" \
 shasum -a 256 /tmp/plot-dynamics-cumulative-gate-v2.svg
 ```
 
-## 七、评分者随机指定的手工复核
+## 八、评分者随机指定的手工复核
 
 ### A 轨手工门
 
@@ -457,7 +487,7 @@ shasum -a 256 /tmp/plot-dynamics-cumulative-gate-v2.svg
 3. 用 Itô formula推出 $dX^2$ 与 QV target；
 4. 把 `--beta 2` 改为 `1` 前，预测 QV target 与 wrong half-score terminal moment。
 
-## 八、参数干预门
+## 九、参数干预门
 
 至少完成一项，且先写预测、输出到新文件。例如：
 
@@ -493,7 +523,19 @@ $$
 
 Monte Carlo 实现不会恰等于 0.6/1.6；应比较其相对 MC fluctuation，而非要求 hash 与 canonical 相同。
 
-## 九、通过门槛
+### 9.1 盲测干预怎样才算独立
+
+Canonical 参数已经公开，只用于复现基准。正式评分时，评分者应在学习者冻结预测后才给出一组未运行参数；自学时则先选参数并写入纸面记录，再向下滚动或执行命令。干预至少改变一个机制量，而不只是改颜色、文件名或随机种子。
+
+推荐的三类有效干预：
+
+1. **A：改变 $\lambda$ 或 plot steps。** 先算新的 $z=-\lambda/N$，预测每个 method 的 stability 与 fast damping；
+2. **B：改变 $a_0,\sigma$ 或 $T$。** 先预测 positivity margin、Fourier amplitude、PF velocity scale 与 error constant；
+3. **C：改变 $\beta,T$ 或 steps。** 先预测 QV、wrong half-score second moment、Itô residual与 Monte Carlo fluctuation方向。
+
+若运行结果与预测冲突，必须保留冲突记录，并按“参数未传入 → 对象/公式错误 → finite-step/MC 偏差 → 实现错误”的顺序排查；事后删除失败运行不通过。
+
+## 十、通过门槛
 
 必须同时满足：
 
@@ -522,7 +564,16 @@ canonical hash：
 状态：not-attempted / attempted / passed / retained
 ```
 
-## 十、与 DYN-01—12 的连接
+### 10.1 证据状态机
+
+- `not-attempted`：只有仓库材料，没有个人运行；
+- `attempted`：已有原始记录，但手算、干预或解释尚未全部通过；
+- `passed`：当次 canonical、随机轨道、手算与盲干预全部通过；
+- `retained`：48 小时后能换参数空白重建核心式，并正确解释一次新偏差。
+
+实验 `retained` 仍不自动把 DYN-01—12 改成 `verified`；它只是卷级计算证据的一部分。
+
+## 十一、与 DYN-01—12 的连接
 
 - A 轨调用[[常微分方程、初值问题与解的存在唯一性]]、[[线性 ODE 与矩阵指数]]、[[相图、平衡点与局部稳定性]]、[[Lyapunov 稳定性与能量函数]]、[[Euler、Runge-Kutta 与离散化误差]]与[[刚性系统、绝对稳定域与隐式方法]]；
 - B 轨调用[[流映射、Liouville 公式与连续正规化流]]、[[连续性方程与守恒律]]和[[Fokker-Planck 方程与概率流 ODE]]，并把 finite change-of-variables 与 PDE/current 两条证据对齐；

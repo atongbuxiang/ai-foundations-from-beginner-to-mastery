@@ -4,7 +4,7 @@ status: active
 area: [labs]
 related: ["[[数学基础完整课程地图与掌握标准]]", "[[练习与测验 MOC]]", "[[数学基础 MOC]]"]
 created: 2026-08-14
-updated: 2026-08-20
+updated: 2026-08-27
 ---
 
 # 推导与实验 MOC
@@ -65,8 +65,8 @@ updated: 2026-08-20
 - 题卷：[[阶段测验 - ODE、动力系统与 SDE（10.9）]]；
 - 独立详解：[[阶段测验解答 - ODE、动力系统与 SDE（10.9）]]；
 - 计算门：[[实验 - ODE、动力系统与 SDE 累计复现门]]，覆盖 continuous/discrete stability、解析 FPE–PF–CNF density ledger 与 Brownian/Itô/reverse-score coefficient；
-- 覆盖：DYN-01—12，100 分笔试加一个评分者随机指定计算轨道；
-- 当前语义：`composed / not-attempted`，不构成 verified 证据。
+- 覆盖：DYN-01—12；DYN-CUM-01 使用 20 分钟口试、100 分笔试、评分者随机计算轨道与 48 小时/14 天保持性门；
+- 当前语义：材料 `regression-passed`、个人 `not-attempted`，由[[dynamics_cumulative_contract_audit.py]]回归，不构成 verified 证据。
 
 - 题卷：[[阶段测验 - 优化与凸分析（10.7）]]；
 - 独立详解：[[阶段测验解答 - 优化与凸分析（10.7）]]；

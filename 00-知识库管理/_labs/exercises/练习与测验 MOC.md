@@ -7,7 +7,7 @@ prerequisites: []
 related: ["[[数学基础完整课程地图与掌握标准]]", "[[线性代数完整学习路线与掌握标准]]", "[[推导与实验 MOC]]", "[[数学基础 MOC]]"]
 sources: []
 created: 2026-08-14
-updated: 2026-08-24
+updated: 2026-08-27
 ---
 
 # 练习与测验 MOC
@@ -451,7 +451,7 @@ updated: 2026-08-24
 | MA-CUM-01 | MA-01—16：矩阵分析卷末累计验收 | composed：[[阶段测验 - 矩阵分析（10.3）]]、[[阶段测验解答 - 矩阵分析（10.3）]]和[[实验 - 矩阵分析累计复现门]]已建立；等待真实独立作答 |
 | CALC-CUM-01 | CALC-01—16：微积分、矩阵微分与自动微分卷末累计验收 | composed：[[阶段测验 - 多元微积分、矩阵微分与自动微分（10.4）]]、[[阶段测验解答 - 多元微积分、矩阵微分与自动微分（10.4）]]和[[实验 - 微积分、矩阵微分与自动微分累计复现门]]已建立；等待真实独立作答 |
 | NLA-CUM-01 | NUM-01—20：数值计算与数值线性代数卷末累计验收 | regression-passed：[[阶段测验 - 数值计算与数值线性代数（10.8）]]、[[阶段测验解答 - 数值计算与数值线性代数（10.8）]]和[[实验 - 数值线性代数累计复现门]]已建立；等待真实独立作答 |
-| DYN-CUM-01 | DYN-01—12：ODE、动力系统与 SDE 卷末累计验收 | composed：[[阶段测验 - ODE、动力系统与 SDE（10.9）]]、[[阶段测验解答 - ODE、动力系统与 SDE（10.9）]]和[[实验 - ODE、动力系统与 SDE 累计复现门]]已建立；等待真实独立作答 |
+| DYN-CUM-01 | DYN-01—12：ODE、动力系统与 SDE 卷末累计验收 | regression-passed：[[阶段测验 - ODE、动力系统与 SDE（10.9）]]、[[阶段测验解答 - ODE、动力系统与 SDE（10.9）]]和[[实验 - ODE、动力系统与 SDE 累计复现门]]已通过静态/计算回归；个人仍为 not-attempted |
 | NN-CUM-01 | NN-01—64：神经网络基础第三章累计验收 | composed：[[阶段测验 - 神经网络基础（第三章）]]、[[阶段测验解答 - 神经网络基础（第三章）]]和[[实验 - 神经网络基础累计复现门]]已建立；等待真实独立作答 |
 | ARCH-CAP-01 | ARCH-01—64：表示与模型架构第四章跨卷累计验收 | composed：[[阶段测验 - 表示与模型架构（第四章）]]、[[阶段测验解答 - 表示与模型架构（第四章）]]和[[实验 - 表示与模型架构跨卷累计复现门]]已建立；等待真实独立作答 |
 | MATH-FND-CAP-01 | 十卷150节点的跨卷理论、AI系统审计与研究合同总出口 | composed：[[数学基础十卷总验收 - 跨卷理论与 AI 迁移]]、[[数学基础十卷总验收解答 - 跨卷理论与 AI 迁移]]和[[实验 - 数学基础十卷跨章累计复现门]]已建立；必须先通过十份分卷验收 |
@@ -515,12 +515,13 @@ GEO-CUM-01是210分钟、100分闭卷卷末测验，覆盖GEO-01—08，并设�
 
 ### DYN-CUM-01 的状态边界
 
-DYN-CUM-01 是 240 分钟、100 分的闭卷卷末测验，覆盖 DYN-01—12，并设置 A—E 分区线、well-posedness / flow-density / Itô-Fokker–Planck-reversal 三道主链不得为零和随机三轨计算门。当前状态是 **composed / not-attempted**：
+DYN-CUM-01 是“20 分钟口试 + 240 分钟、100 分闭卷 + 随机三轨实验 + 48 小时/14 天延迟门”的卷末测验，覆盖 DYN-01—12，并设置 A—E 分区线、well-posedness / flow-density / Itô-Fokker–Planck-reversal 三道主链不得为零。材料状态是 **regression-passed**，个人状态是 **not-attempted**：
 
 - 十二套节点题共 180 题，累计题卷和逐题独立详解已经成稿；
-- 计算门串联 continuous/discrete stability、FPE/PF/CNF density ledger 与 Brownian/Itô/reverse-score coefficient，canonical SVG 已双跑并完成实际渲染检查；
-- 脚本、XML 与 hash 通过只证明验收工具可执行，不证明学习者掌握；
-- 尚无首次闭卷原稿、逐项评分、参数干预、48 小时重做和 14 天迁移证据；
+- 口试强制重建四波模型链、六层对象账本、reverse clock/full-half score 和连续生成模型合同；
+- 计算门串联 continuous/discrete stability、FPE/PF/CNF density ledger 与 Brownian/Itô/reverse-score coefficient，先冻结预测再运行随机轨道；
+- [[dynamics_cumulative_contract_audit.py]]已通过题—解隔离、解析量、XML、canonical SHA-256 与确定性双跑；这只证明工具可执行；
+- 尚无首次口试、闭卷原稿、逐项评分、参数干预、48 小时重做和 14 天迁移证据；
 - 因而动力系统卷 12 个节点保持 `draft`；正式作答前不要打开[[阶段测验解答 - ODE、动力系统与 SDE（10.9）]]。
 
 ### NLA-CUM-01 的状态边界

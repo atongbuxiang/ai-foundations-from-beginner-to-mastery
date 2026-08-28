@@ -5,7 +5,7 @@ area: [math]
 aliases: [数学基础总入口]
 related: ["[[数学基础完整课程地图与掌握标准]]", "[[数学基础十卷完备性审计与学习状态总表]]", "[[数学基础十卷总验收 - 跨卷理论与 AI 迁移]]", "[[数学语言、逻辑与证明 MOC]]", "[[线性代数完整学习路线与掌握标准]]", "[[多元微积分、矩阵微分与自动微分 MOC]]", "[[概率论与数理统计 MOC]]", "[[信息论与统计学习接口 MOC]]", "[[优化与凸分析 MOC]]", "[[ODE、动力系统与 SDE MOC]]", "[[几何、泛函分析、核与算子基础 MOC]]", "[[练习与测验 MOC]]", "[[推导与实验 MOC]]"]
 created: 2026-08-14
-updated: 2026-08-20
+updated: 2026-08-27
 ---
 
 # 数学基础 MOC
@@ -1377,9 +1377,9 @@ $$
 
 本批完成 `DYN-CUM-01`。[[阶段测验 - ODE、动力系统与 SDE（10.9）]]以 240 分钟、100 分和 A—E 五区覆盖 DYN-01—12：A 区强制区分 well-posedness、stability、solver 与 density/path 对象，B 区手算非正规流、LaSalle、刚性方法和 OU score/current，C 区重建 Picard–Gronwall–continuation、flow–Liouville–continuity 与 Itô–Fokker–Planck–probability-flow–reverse-time 三条主链，D/E 区用反例和端到端生成模型合同限制结论边界。[[阶段测验解答 - ODE、动力系统与 SDE（10.9）]]逐题提供关键条件、完整中间式、评分断点与错题回链。
 
-[[实验 - ODE、动力系统与 SDE 累计复现门]]建立三条评分者随机指定的独立轨道。A 轨在 $\lambda=80,h=0.04$ 下得到 Euler/RK4 fast factors $-2.2/1.827733$，并在共同稳定 refinement 中恢复 Euler/RK4/BE/Trap 阶 $1.0022/3.9282/0.9978/2.0000$；B 轨用圆周解析 Fourier density 得到 PF characteristic/log-density 阶 $4.0315/4.0422$、质量漂移 $4.44\times10^{-16}$；C 轨用 2048 条 nested OU paths 得到 QV $1.19888\approx1.2$、Itô residual 阶 $0.4985$，并展示 noisy reverse SDE 误用 half-score 后二阶矩由目标 1 漂向解析 2.2。standard-library SVG 的 canonical hash 为 `965f43d4653a105613ae9c87678f14d3a50ac49ca1e4e166933ea249ab7b145f`，双跑、XML、Sharp PNG 渲染和视觉复核均通过。
+[[实验 - ODE、动力系统与 SDE 累计复现门]]建立三条评分者随机指定的独立轨道。A 轨在 $\lambda=80,h=0.04$ 下得到 Euler/RK4 fast factors $-2.2/1.827733$，并在共同稳定 refinement 中恢复 Euler/RK4/BE/Trap 阶 $1.0022/3.9282/0.9978/2.0000$；B 轨用圆周解析 Fourier density 得到 PF characteristic/log-density 阶 $4.0315/4.0422$、质量漂移 $4.44\times10^{-16}$；C 轨用 2048 条 nested OU paths 得到 QV $1.19888\approx1.2$、Itô residual 阶 $0.4985$，并展示 noisy reverse SDE 误用 half-score 后二阶矩由目标 1 漂向解析 2.2。standard-library SVG 的 canonical hash 为 `b03decf286243fdfd16051a04ec70e1afb7b35c3369c24bd0a5e2856b90957cc`，双跑、XML 与视觉复核均通过。
 
-由此 10.9 达到 **12/12 正文、180 道节点题、卷末题卷、独立详解和三轨计算门全部成稿**。状态仍为 `composed / not-attempted`，因为尚无学习者闭卷原稿、真实评分、参数干预和间隔重做；下一施工卷进入 10.10，首节点为 GEO-01 [[度量空间、拓扑与连续映射]]。
+本轮又把 DYN-CUM-01 升级为“20 分钟口试 → 240 分钟闭卷 → 随机三轨 → 48 小时换例 → 14 天迁移”，并由[[dynamics_cumulative_contract_audit.py]]检查题—解隔离、状态界面、解析量与 canonical 双跑。由此 10.9 达到 **12/12 正文、180 道节点题、卷末题卷、独立详解和三轨计算门全部回归通过**。材料状态为 `regression-passed`，个人仍为 `not-attempted`，因为尚无真实口试、闭卷原稿、评分、参数干预和间隔重做。
 
 ## 第七十二批：度量空间、拓扑与连续映射
 
@@ -1683,7 +1683,7 @@ AI迁移从Banach压缩映射的几何尾界推进到标量二次梯度下降的
 7. **概率论与数理统计**：10.5 已完成 PROB-01—20 的正文、SVG、各 15 题与独立详解；`PROB-CUM-01` 题卷、详解和三轨计算门也已成稿，当前 `composed / not-attempted`。
 8. **信息论与统计学习接口**：10.6 已完成 INFO-01—10 的正文、十幅机制图、150 道 A–E 题和独立详解；`INFO-CUM-01` 题卷、详解与三轨计算门已成稿，当前 `composed / not-attempted`。
 9. **优化与凸分析**：10.7 已完成 OPT-01—16 的正文、十六幅机制图、240 道 A—E 题、独立详解、`OPT-CUM-01` 与三轨计算门，达到 16/16；状态为 `composed / not-attempted`。
-10. **ODE、动力系统与 SDE**：10.9 已完成 DYN-01—12 的正文、机制图、180 道 A—E 题、独立详解、`DYN-CUM-01` 100 分题卷与三轨累计计算门，达到12/12；当前 `composed / not-attempted`。
+10. **ODE、动力系统与 SDE**：10.9 已完成 DYN-01—12 的正文、机制图、180 道 A—E 题、独立详解，以及含口试—闭卷—三轨—延迟门的 `DYN-CUM-01`；当前材料 `regression-passed`，个人 `not-attempted`。
 11. **几何、泛函分析、核与算子基础**：10.10 已完成GEO-01—08的正文、机制图、120道A—E题、独立详解、八套节点计算门以及`GEO-CUM-01`题卷、详解与三轨累计门；当前`composed / not-attempted`。
 12. **数学语言、逻辑与证明**：[[数学语言、逻辑与证明 MOC|10.1卷入口]]与MATH-01—08均已建立正文、深色机制图、各15题、独立详解与浅色计算审计，达到8/8；`MATH-CUM-01`题卷、详解与量词—递推—复杂度三轨计算门已成稿，当前`composed / not-attempted`。
 13. **全数学主线**：十卷150节已由[[数学基础完整课程地图与掌握标准]]锁定；当前150篇正文均为`draft`，正文覆盖率100.0%，尚无任何一卷通过课程验收。

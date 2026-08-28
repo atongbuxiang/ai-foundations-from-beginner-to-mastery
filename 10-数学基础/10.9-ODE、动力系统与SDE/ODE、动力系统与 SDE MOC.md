@@ -25,7 +25,7 @@ updated: 2026-08-27
 | B | DYN-05—06 | consistency/order → absolute stability → stiffness/implicit solve | $y'=-y$ 的三种传播多项式；$\operatorname{diag}(-1,-100)$ 的快慢系统 | `regression-passed` | `draft / not-attempted` |
 | C | DYN-07—08 | unique flow → Jacobian/volume → density transport/conservation | $\operatorname{diag}(1,-2)x+(1,0)^T$ 与推前 Gaussian | `regression-passed` | `draft / not-attempted` |
 | D | DYN-09—12 | Brownian variation → Itô/SDE → Fokker–Planck/PF-ODE → reverse score | $dX=-Xdt+\sqrt2dW$ 与 Gaussian data law | `regression-passed` | `draft / not-attempted` |
-| CUM | DYN-CUM | 口试—闭卷—三轨实验—延迟重做 | 12 节随机回链与累计计算门 | `composed` | `not-attempted` |
+| CUM | DYN-CUM | 口试—闭卷—三轨实验—延迟重做 | 四波随机回链、三条主推导与 A/B/C 累计门 | `regression-passed` | `not-attempted` |
 
 ### 第一波的单一模型链
 
@@ -202,6 +202,43 @@ $$
 3. **第三遍（约 180 分钟）：**改变 $X_0$ 的均值/方差、终止时间 $T$ 和 Euler 步长，在运行前预测 terminal KL、score slope、反向 drift、moment 与 solver bias；
 4. **验收：**完成四个节点实验，并无提示解释 conditional/marginal、path/density、forward/reverse clock、full/half score、exact/learned/finite-step 五组边界。
 
+### DYN-CUM：卷末综合验收闭环
+
+DYN-CUM 不再增加第五套理论，而是检验四波能否在没有章节提示时重新连接。完整顺序固定为：
+
+$$
+\text{20 分钟口试}
+\longrightarrow
+\text{240 分钟闭卷}
+\longrightarrow
+\text{随机三轨实验}
+\longrightarrow
+\text{48 小时重做}
+\longrightarrow
+\text{14 天迁移}.
+$$
+
+| 门 | 直接检查 | 不能由什么替代 |
+|---|---|---|
+| 口试 | 四波模型链、六层对象、reverse clock/full-half score、AI 合同 | 章节目录背诵或闭卷总分 |
+| 闭卷 | A—E 五区与三条主推导 | 只会看懂解答 |
+| A/B/C 实验 | continuous/discrete、density/current/characteristic、path/QV/reverse coefficient | canonical 脚本自行 `PASS` |
+| 48 小时 | 首个断点的换例空白重建 | 照抄旧答案 |
+| 14 天 | 陌生连续生成模型审计 | 只替换原题符号 |
+
+[[阶段测验 - ODE、动力系统与 SDE（10.9）]]保留 100 分闭卷主体，并新增 20 分钟口试、逐题独立性和证据清单；[[阶段测验解答 - ODE、动力系统与 SDE（10.9）]]新增口试参考、实验判分红线与保持性状态边界；[[实验 - ODE、动力系统与 SDE 累计复现门]]先做解析校准和预测冻结，再随机深入 A/B/C 一轨。
+
+> [!success] DYN-CUM 材料证书
+> [[dynamics_cumulative_contract_audit.py]]检查 12/12 scope、14/14 题—解隔离、口试四问、三条主推导、盲干预协议、状态语义、作用域 Wiki 链接与公式边界；正式计算模式还会调用[[dynamics_teaching_contract_audit.py]]，双跑[[dynamics_cumulative_gate.py]]并核对 canonical SVG 的 XML 与 SHA-256。该证书只把 DYN-CUM 材料推进为 `regression-passed`；个人仍是 `not-attempted`。
+
+### 从零如何执行 DYN-CUM
+
+1. 不打开详解，用唯一 `attempt_id` 冻结口试和闭卷原稿；
+2. 评分者随机指定实验轨，自学时也必须先写干预预测再运行；
+3. 打开详解后只定位首个断点，不把订正倒填成独立作答；
+4. 48 小时换例重建，14 天审计陌生 neural ODE/CNF/diffusion 情境；
+5. 只有延迟门通过才记 `retained`；是否升级单个节点仍需逐篇审查。
+
 ## 一、范围与边界
 
 ### 本卷包含
@@ -347,7 +384,7 @@ flowchart LR
 
 ## 八、当前进度
 
-DYN-01—12 已全部进入成稿闭环；10.9 当前为 **12/12 正文覆盖、180 道节点题，并已建立 DYN-CUM-01 卷末验收**。四波 DYN-01—12 的初学者教学迁移均已达到 `regression-passed`。[[阶段测验 - ODE、动力系统与 SDE（10.9）]]以 240 分钟、100 分和 A—E 分区覆盖全卷，[[阶段测验解答 - ODE、动力系统与 SDE（10.9）]]逐项给出条件、推导、评分断点与回链。[[实验 - ODE、动力系统与 SDE 累计复现门]]用三轨串联 continuous/discrete stability、FPE–PF–CNF density ledger 与 Brownian/Itô/reverse-score coefficient。全卷所有正文仍为 `draft`，个人学习只记 `not-attempted`；下一教学施工是将 DYN-CUM 的口试、闭卷、三轨实验与延迟重做合同升级为 `regression-passed`。
+DYN-01—12 与 DYN-CUM-01 的静态材料均已进入 `regression-passed`：正文保持 **12/12 覆盖、180 道节点题**；卷末以 20 分钟口试、240 分钟 100 分闭卷、随机三轨实验、48 小时换例和 14 天迁移形成闭环。[[dynamics_teaching_contract_audit.py]]负责四波正文与图像，[[dynamics_cumulative_contract_audit.py]]负责题—解—实验—路线的交叉合同和卷级确定性计算。全卷十二篇正文仍为 `draft`，个人学习仍为 `not-attempted`；下一步应产生真实口试、答卷、实验和延迟证据，而不是继续把材料 `PASS` 写成掌握。
 
 ## 九、2026-08-23 图像标准化结果
 
