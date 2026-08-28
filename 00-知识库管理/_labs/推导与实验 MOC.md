@@ -98,9 +98,9 @@ updated: 2026-08-28
 
 - 题卷：[[阶段测验 - 信息论与统计学习接口（10.6）]]；
 - 独立详解：[[阶段测验解答 - 信息论与统计学习接口（10.6）]]；
-- 计算门：[[实验 - 信息论累计复现门]]，覆盖 Bernoulli–Hamming rate–distortion、task/nuisance bottleneck 与 KT prequential code；
-- 覆盖：INFO-01—10，100 分笔试加一个随机指定计算轨道；
-- 当前语义：`composed / not-attempted`，不构成 verified 证据。
+- 计算门：[[实验 - 信息论累计复现门]]，以 scorer nonce 指定 Bernoulli–Hamming rate–distortion、task/nuisance bottleneck 或 KT prequential 深入轨，并要求未见参数预测、output/SVG/hash、48 h 与 14 d 证据；独立回归见[[information_cumulative_contract_audit.py]]；
+- 覆盖：INFO-01—10，15 分钟口试、100 分闭卷、盲参数轨与延迟迁移门；
+- 当前语义：材料 `regression-passed`、个人 `not-attempted`，不构成 verified 证据。
 
 - 题卷：[[阶段测验 - 概率论与数理统计（10.5）]]；
 - 独立详解：[[阶段测验解答 - 概率论与数理统计（10.5）]]；
@@ -145,7 +145,7 @@ updated: 2026-08-28
 27. [[实验 - 三精度迭代改进与 GMRES-IR 边界]]：展示低精度因子、残差地板、GMRES 校正与奇异回退。
 28. [[实验 - 概率统计累计复现门]]：分离 Wald interval 的重复抽样 coverage、rare-event IS 的 functional-specific ESS/尾部边界，以及同一 mode 初始化导致的低 R-hat 盲区；现已加入 nonce 防挑轨、盲参数 CLI、canonical/干预双 hash 与延迟迁移状态机。
 29. [[实验 - ELBO 恒等式、变分族限制与摊销缺口]]：在可枚举二元 latent model 中把 evidence identity 验证到机器精度，并分离 restricted variational family 与 shared encoder 的不同 gap。
-30. [[实验 - 信息论累计复现门]]：把解析 rate–distortion frontier、任务相关压缩与 sequence-level prequential codelength 分为三条可复现、不可越界解释的轨道。
+30. [[实验 - 信息论累计复现门]]：把解析 rate–distortion frontier、任务相关压缩与 sequence-level prequential codelength 分为三条可复现、不可越界解释的轨道；现已加入 nonce 防挑轨、source/IB/code 盲参数 CLI、canonical/干预 hash 与延迟迁移状态机。
 31. [[实验 - 优化与凸分析累计复现门]]：用同一确定性产物分离 strict-saddle 的 exact stable initialization 与扰动逃逸、非凸 PL 解析下界，以及同一 predictor 下的 scale-dependent raw Hessian sharpness。
 32. [[实验 - 双曲线性化与非双曲失效]]：以固定时窗二阶轨道误差验收双曲局部线性化，再用同一 pure-imaginary Jacobian 下的向内、中心与向外半径分离证明非双曲一阶证据不足。
 33. [[实验 - Lyapunov 度量、LaSalle 与离散能量边界]]：用非正规暂态与定制度量、阻尼振子零导数非静止点，以及 Euler 在 $h=2$ 的能量翻转分离 metric、invariant set 与 continuous/discrete 证书。

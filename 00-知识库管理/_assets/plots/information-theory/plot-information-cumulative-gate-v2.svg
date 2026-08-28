@@ -22,10 +22,10 @@
 <circle cx="360.00" cy="330.00" r="5.00" fill="#059669"/>
 <text class="tiny" x="360.00" y="350.00" text-anchor="middle">0.5</text>
 <text class="tiny" x="54.00" y="118.00" text-anchor="start">1</text>
-<text class="small" x="205.00" y="354.00" text-anchor="middle">distortion D</text>
+<text class="small" x="215.00" y="373.00" text-anchor="middle">distortion D</text>
 <text class="small" x="47.00" y="220.00" text-anchor="middle">rate</text>
 <text class="small" x="47.00" y="235.00" text-anchor="middle">bits</text>
-<text class="small" x="40.00" y="385.00" text-anchor="start">D=0.1: R=0.5310 bits；D=0.5: R=0</text>
+<text class="small" x="40.00" y="398.00" text-anchor="start">D=0.1: R=0.5310 bits；D=0.5: R=0</text>
 <text class="title" x="435.00" y="53.00" text-anchor="start">B · task bit Y 与 nuisance bit N</text>
 <text class="sub" x="435.00" y="78.00" text-anchor="start">X=(Y,N)；理想表示保留 relevance、删除 nuisance</text>
 <line x1="468.00" y1="330.00" x2="755.00" y2="330.00" stroke="#64748b" stroke-width="1.5"/>

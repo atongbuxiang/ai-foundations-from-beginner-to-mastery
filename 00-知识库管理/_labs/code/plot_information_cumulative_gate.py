@@ -9,8 +9,11 @@ Only the Python standard library is used.  The panels separate:
 
 from __future__ import annotations
 
+import argparse
+import hashlib
 import math
 import random
+import sys
 from pathlib import Path
 
 
@@ -23,9 +26,9 @@ OUTPUT = (
     / "information-theory"
     / "plot-information-cumulative-gate-v2.svg"
 )
-SEED = 20260819
-N = 400
-TRUE_P = 0.8
+DEFAULT_SEED = 20260819
+DEFAULT_N = 400
+DEFAULT_TRUE_P = 0.8
 
 
 def h2(p: float) -> float:
@@ -34,8 +37,9 @@ def h2(p: float) -> float:
     return -p * math.log2(p) - (1.0 - p) * math.log2(1.0 - p)
 
 
-def rd(d: float) -> float:
-    return max(0.0, 1.0 - h2(d)) if d <= 0.5 else 0.0
+def rd(d: float, source_probability: float = 0.5) -> float:
+    maximum_distortion = min(source_probability, 1.0 - source_probability)
+    return max(0.0, h2(source_probability) - h2(d)) if d <= maximum_distortion else 0.0
 
 
 def esc(text: object) -> str:
@@ -66,12 +70,16 @@ def circle(x: float, y: float, radius: float, color: str) -> str:
     return f'<circle cx="{x:.2f}" cy="{y:.2f}" r="{radius:.2f}" fill="{color}"/>'
 
 
-def seeded_sequence() -> list[int]:
-    rng = random.Random(SEED)
-    return [1 if rng.random() < TRUE_P else 0 for _ in range(N)]
+def seeded_sequence(seed: int, length: int, probability: float) -> list[int]:
+    rng = random.Random(seed)
+    return [1 if rng.random() < probability else 0 for _ in range(length)]
 
 
-def prequential_lengths(xs: list[int]) -> tuple[list[float], list[float], int | None]:
+def prequential_lengths(
+    xs: list[int],
+    fixed_probability: float = 0.5,
+    kt_alpha: float = 0.5,
+) -> tuple[list[float], list[float], int | None]:
     fixed: list[float] = []
     kt: list[float] = []
     fixed_total = 0.0
@@ -79,9 +87,10 @@ def prequential_lengths(xs: list[int]) -> tuple[list[float], list[float], int | 
     successes = 0
     crossing: int | None = None
     for i, x in enumerate(xs, start=1):
-        fixed_total += 1.0  # -log2 0.5
+        fixed_mass = fixed_probability if x == 1 else 1.0 - fixed_probability
+        fixed_total += -math.log2(fixed_mass)
         previous = i - 1
-        prob_one = (successes + 0.5) / (previous + 1.0)
+        prob_one = (successes + kt_alpha) / (previous + 2.0 * kt_alpha)
         probability = prob_one if x == 1 else 1.0 - prob_one
         kt_total += -math.log2(probability)
         successes += x
@@ -92,7 +101,18 @@ def prequential_lengths(xs: list[int]) -> tuple[list[float], list[float], int | 
     return fixed, kt, crossing
 
 
-def build_svg() -> tuple[str, dict[str, float | int | None]]:
+def build_svg(
+    source_probability: float = 0.5,
+    rd_probe: float = 0.1,
+    ib_noise: float = 0.1,
+    nuisance_probability: float = 0.5,
+    ib_beta: float = 2.0,
+    sequence_probability: float = DEFAULT_TRUE_P,
+    sequence_length: int = DEFAULT_N,
+    fixed_probability: float = 0.5,
+    kt_alpha: float = 0.5,
+    seed: int = DEFAULT_SEED,
+) -> tuple[str, dict[str, float | int | None]]:
     width, height = 1200, 430
     panel_x = [20, 415, 810]
     panel_w = 370
@@ -109,26 +129,35 @@ def build_svg() -> tuple[str, dict[str, float | int | None]]:
         parts.append(f'<rect class="panel" x="{x}" y="20" width="{panel_w}" height="390"/>')
 
     # Panel A: Bernoulli-Hamming R(D).
+    source_label = "1/2" if source_probability == 0.5 else f"{source_probability:g}"
     parts += [
         text(40, 53, "A · Bernoulli–Hamming 的理论 R(D)", "title"),
-        text(40, 78, "X~Ber(1/2)；蓝线是 information-theoretic frontier", "sub"),
+        text(40, 78, f"X~Ber({source_label})；蓝线是 information-theoretic frontier", "sub"),
     ]
     ax_l, ax_r, ax_t, ax_b = 73.0, 360.0, 112.0, 330.0
     parts += [line(ax_l, ax_b, ax_r, ax_b, stroke="#64748b", stroke_width="1.5"), line(ax_l, ax_t, ax_l, ax_b, stroke="#64748b", stroke_width="1.5")]
     rd_points = []
+    maximum_distortion = min(source_probability, 1.0 - source_probability)
+    source_entropy = h2(source_probability)
     for k in range(101):
-        d = 0.5 * k / 100.0
-        x = ax_l + (d / 0.5) * (ax_r - ax_l)
-        y = ax_b - rd(d) * (ax_b - ax_t)
+        d = maximum_distortion * k / 100.0
+        x = ax_l + (d / maximum_distortion) * (ax_r - ax_l)
+        y = ax_b - rd(d, source_probability) / source_entropy * (ax_b - ax_t)
         rd_points.append((x, y))
     parts.append(path(rd_points, "#2563eb", 4.0))
-    for d in [0.0, 0.1, 0.25, 0.5]:
-        x = ax_l + (d / 0.5) * (ax_r - ax_l)
-        y = ax_b - rd(d) * (ax_b - ax_t)
-        parts.append(circle(x, y, 5.0, "#7c3aed" if d < 0.5 else "#059669"))
+    marker_distortions = [0.0, rd_probe, maximum_distortion / 2.0, maximum_distortion]
+    for d in marker_distortions:
+        x = ax_l + (d / maximum_distortion) * (ax_r - ax_l)
+        y = ax_b - rd(d, source_probability) / source_entropy * (ax_b - ax_t)
+        parts.append(circle(x, y, 5.0, "#7c3aed" if d < maximum_distortion else "#059669"))
         parts.append(text(x, ax_b + 20, f"{d:g}", "tiny", "middle"))
-    parts += [text(54, 118, "1", "tiny"), text(205, 354, "distortion D", "small", "middle"), text(47, 220, "rate", "small", "middle"), text(47, 235, "bits", "small", "middle")]
-    parts.append(text(40, 385, "D=0.1: R=0.5310 bits；D=0.5: R=0", "small"))
+    rate_probe = rd(rd_probe, source_probability)
+    parts += [text(54, 118, f"{source_entropy:g}", "tiny"), text(215, 373, "distortion D", "small", "middle"), text(47, 220, "rate", "small", "middle"), text(47, 235, "bits", "small", "middle")]
+    if source_probability == 0.5 and rd_probe == 0.1:
+        rd_summary = "D=0.1: R=0.5310 bits；D=0.5: R=0"
+    else:
+        rd_summary = f"D={rd_probe:g}: R={rate_probe:.4f} bits；D={maximum_distortion:g}: R=0"
+    parts.append(text(40, 398, rd_summary, "small"))
 
     # Panel B: information bottleneck candidates.
     parts += [
@@ -139,8 +168,12 @@ def build_svg() -> tuple[str, dict[str, float | int | None]]:
     parts += [line(bx_l, bx_b, bx_r, bx_b, stroke="#64748b", stroke_width="1.5"), line(bx_l, bx_t, bx_l, bx_b, stroke="#64748b", stroke_width="1.5")]
     parts.append(line(bx_l, bx_t, bx_r, bx_t, stroke="#cbd5e1", stroke_width="1.2", stroke_dasharray="5 5"))
 
+    nuisance_entropy = h2(nuisance_probability)
+    full_rate = 1.0 + nuisance_entropy
+    rate_axis_max = max(2.0, full_rate)
+
     def ib_xy(rate: float, relevance: float) -> tuple[float, float]:
-        return bx_l + rate / 2.0 * (bx_r - bx_l), bx_b - relevance * (bx_b - bx_t)
+        return bx_l + rate / rate_axis_max * (bx_r - bx_l), bx_b - relevance * (bx_b - bx_t)
 
     noise_curve = []
     for k in range(101):
@@ -149,9 +182,9 @@ def build_svg() -> tuple[str, dict[str, float | int | None]]:
         noise_curve.append(ib_xy(information, information))
     parts.append(path(noise_curve, "#059669", 3.5))
     candidates = [
-        (2.0, 1.0, "keep X", "#dc2626"),
+        (full_rate, 1.0, "keep X", "#dc2626"),
         (1.0, 1.0, "keep Y", "#2563eb"),
-        (1.0 - h2(0.1), 1.0 - h2(0.1), "noisy Y", "#d97706"),
+        (1.0 - h2(ib_noise), 1.0 - h2(ib_noise), "noisy Y", "#d97706"),
         (0.0, 0.0, "constant", "#7c3aed"),
     ]
     for rate, relevance, label, color in candidates:
@@ -160,14 +193,19 @@ def build_svg() -> tuple[str, dict[str, float | int | None]]:
         dx = -8 if label == "keep X" else 8
         anchor = "end" if label == "keep X" else "start"
         parts.append(text(x + dx, y - 10, label, "tiny", anchor))
-    parts += [text(610, 354, "I(X;Z) bits", "small", "middle"), text(444, 220, "I(Z;Y)", "small", "middle"), text(444, 235, "bits", "small", "middle"), text(435, 385, "keep X 多花 1 bit 记 N，却不增加 I(Z;Y)", "small")]
+    nuisance_summary = (
+        "keep X 多花 1 bit 记 N，却不增加 I(Z;Y)"
+        if nuisance_probability == 0.5
+        else f"keep X 多花 {nuisance_entropy:.3f} bit 记 N，不增加 relevance"
+    )
+    parts += [text(610, 354, "I(X;Z) bits", "small", "middle"), text(444, 220, "I(Z;Y)", "small", "middle"), text(444, 235, "bits", "small", "middle"), text(435, 385, nuisance_summary, "small")]
 
     # Panel C: prequential MDL.
-    xs = seeded_sequence()
-    fixed, kt, crossing = prequential_lengths(xs)
+    xs = seeded_sequence(seed, sequence_length, sequence_probability)
+    fixed, kt, crossing = prequential_lengths(xs, fixed_probability, kt_alpha)
     parts += [
         text(830, 53, "C · prequential code 会为学习速度付费", "title"),
-        text(830, 78, "seeded Ber(0.8) sequence；fixed p=0.5 vs KT", "sub"),
+        text(830, 78, f"seeded Ber({sequence_probability:g}) sequence；fixed p={fixed_probability:g} vs KT", "sub"),
     ]
     cx_l, cx_r, cx_t, cx_b = 850.0, 1150.0, 112.0, 330.0
     y_max = max(fixed[-1], kt[-1]) * 1.03
@@ -176,7 +214,7 @@ def build_svg() -> tuple[str, dict[str, float | int | None]]:
     def code_points(values: list[float]) -> list[tuple[float, float]]:
         return [
             (
-                cx_l + i / (N - 1) * (cx_r - cx_l),
+                cx_l + i / (sequence_length - 1) * (cx_r - cx_l),
                 cx_b - value / y_max * (cx_b - cx_t),
             )
             for i, value in enumerate(values)
@@ -186,17 +224,21 @@ def build_svg() -> tuple[str, dict[str, float | int | None]]:
     parts.append(path(code_points(kt), "#2563eb", 3.5))
     parts += [text(1040, 134, "fixed p=0.5", "tiny"), text(1040, 184, "KT adaptive", "tiny"), text(1000, 354, "observations", "small", "middle"), text(824, 220, "bits", "small", "middle")]
     if crossing is not None:
-        x_cross = cx_l + (crossing - 1) / (N - 1) * (cx_r - cx_l)
+        x_cross = cx_l + (crossing - 1) / (sequence_length - 1) * (cx_r - cx_l)
         parts.append(line(x_cross, cx_t, x_cross, cx_b, stroke="#d97706", stroke_width="1.2", stroke_dasharray="4 4"))
         parts.append(text(x_cross + 5, 312, f"cross n={crossing}", "tiny"))
-    empirical_p = sum(xs) / N
+    empirical_p = sum(xs) / sequence_length
     saving = fixed[-1] - kt[-1]
     parts.append(text(830, 385, f"p-hat={empirical_p:.3f}；KT 节省 {saving:.2f} bits（含学习开销）", "small"))
 
     parts.append("</svg>")
     metrics: dict[str, float | int | None] = {
-        "rd_d01": rd(0.1),
-        "ib_noisy": 1.0 - h2(0.1),
+        "rd_probe": rate_probe,
+        "ib_noisy": 1.0 - h2(ib_noise),
+        "ib_keep_x": full_rate - ib_beta,
+        "ib_keep_y": 1.0 - ib_beta,
+        "ib_noisy_objective": (1.0 - ib_beta) * (1.0 - h2(ib_noise)),
+        "ib_constant": 0.0,
         "empirical_p": empirical_p,
         "fixed_bits": fixed[-1],
         "kt_bits": kt[-1],
@@ -207,21 +249,98 @@ def build_svg() -> tuple[str, dict[str, float | int | None]]:
 
 
 def main() -> None:
-    svg, metrics = build_svg()
-    if abs(float(metrics["rd_d01"]) - float(metrics["ib_noisy"])) > 1e-12:
-        raise AssertionError("the matched binary examples should meet at 1-h2(0.1)")
-    if not float(metrics["saving_bits"]) > 0.0:
-        raise AssertionError("KT coding should beat the mismatched fixed code on this sequence")
-    if metrics["crossing"] != 2:
-        raise AssertionError("the deterministic crossover audit changed unexpectedly")
-    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT.write_text(svg, encoding="utf-8")
-    print(f"wrote {OUTPUT}")
-    print(f"rd_D0.1={metrics['rd_d01']:.8f} ib_noisy={metrics['ib_noisy']:.8f}")
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output", type=Path, default=OUTPUT)
+    parser.add_argument("--seed", type=int, default=DEFAULT_SEED)
+    parser.add_argument("--source-p", type=float, default=0.5)
+    parser.add_argument("--rd-probe", type=float, default=0.1)
+    parser.add_argument("--ib-noise", type=float, default=0.1)
+    parser.add_argument("--nuisance-p", type=float, default=0.5)
+    parser.add_argument("--ib-beta", type=float, default=2.0)
+    parser.add_argument("--sequence-p", type=float, default=DEFAULT_TRUE_P)
+    parser.add_argument("--sequence-length", type=int, default=DEFAULT_N)
+    parser.add_argument("--fixed-p", type=float, default=0.5)
+    parser.add_argument("--kt-alpha", type=float, default=0.5)
+    args = parser.parse_args()
+
+    for value, label in (
+        (args.source_p, "--source-p"),
+        (args.ib_noise, "--ib-noise"),
+        (args.nuisance_p, "--nuisance-p"),
+        (args.sequence_p, "--sequence-p"),
+        (args.fixed_p, "--fixed-p"),
+    ):
+        if not 0.01 <= value <= 0.99:
+            raise ValueError(f"{label} must lie in [0.01, 0.99]")
+    maximum_distortion = min(args.source_p, 1.0 - args.source_p)
+    if not 0.0 < args.rd_probe < maximum_distortion:
+        raise ValueError("--rd-probe must lie strictly between 0 and min(source-p, 1-source-p)")
+    if not 0.05 <= args.kt_alpha <= 5.0:
+        raise ValueError("--kt-alpha must lie in [0.05, 5]")
+    if not 0.1 <= args.ib_beta <= 10.0:
+        raise ValueError("--ib-beta must lie in [0.1, 10]")
+    if args.sequence_length < 20:
+        raise ValueError("--sequence-length must be at least 20")
+
+    svg, metrics = build_svg(
+        source_probability=args.source_p,
+        rd_probe=args.rd_probe,
+        ib_noise=args.ib_noise,
+        nuisance_probability=args.nuisance_p,
+        ib_beta=args.ib_beta,
+        sequence_probability=args.sequence_p,
+        sequence_length=args.sequence_length,
+        fixed_probability=args.fixed_p,
+        kt_alpha=args.kt_alpha,
+        seed=args.seed,
+    )
+    canonical_configuration = (
+        args.seed == DEFAULT_SEED
+        and args.source_p == 0.5
+        and args.rd_probe == 0.1
+        and args.ib_noise == 0.1
+        and args.nuisance_p == 0.5
+        and args.ib_beta == 2.0
+        and args.sequence_p == DEFAULT_TRUE_P
+        and args.sequence_length == DEFAULT_N
+        and args.fixed_p == 0.5
+        and args.kt_alpha == 0.5
+    )
+    if canonical_configuration:
+        if abs(float(metrics["rd_probe"]) - float(metrics["ib_noisy"])) > 1e-12:
+            raise AssertionError("the canonical binary examples should meet at 1-h2(0.1)")
+        if not float(metrics["saving_bits"]) > 0.0:
+            raise AssertionError("canonical KT coding should beat the mismatched fixed code")
+        if metrics["crossing"] != 2:
+            raise AssertionError("the canonical deterministic crossover audit changed")
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.output.write_text(svg, encoding="utf-8")
+    digest = hashlib.sha256(svg.encode("utf-8")).hexdigest()
     print(
-        "empirical_p={empirical_p:.5f} fixed_bits={fixed_bits:.5f} "
+        f"A_CONFIG source_p={args.source_p:g} probe_D={args.rd_probe:g} "
+        f"max_D={maximum_distortion:g}"
+    )
+    print(f"A_RD probe_rate={metrics['rd_probe']:.8f} source_entropy={h2(args.source_p):.8f}")
+    print(
+        f"B_CONFIG noise={args.ib_noise:g} nuisance_p={args.nuisance_p:g} beta={args.ib_beta:g}"
+    )
+    print(
+        "B_IB keep_x={ib_keep_x:.8f} keep_y={ib_keep_y:.8f} "
+        "noisy_y={ib_noisy_objective:.8f} constant={ib_constant:.8f} "
+        "noisy_information={ib_noisy:.8f}".format(**metrics)
+    )
+    print(
+        f"C_CONFIG true_p={args.sequence_p:g} length={args.sequence_length} "
+        f"fixed_p={args.fixed_p:g} kt_alpha={args.kt_alpha:g}"
+    )
+    print(
+        "C_CODE empirical_p={empirical_p:.5f} fixed_bits={fixed_bits:.5f} "
         "kt_bits={kt_bits:.5f} saving_bits={saving_bits:.5f} crossing={crossing}".format(**metrics)
     )
+    print(f"OUTPUT {args.output}")
+    print(f"SHA256 {digest}")
+    print(f"PYTHON {sys.version.split()[0]}")
+    print(f"SEED {args.seed}")
 
 
 if __name__ == "__main__":

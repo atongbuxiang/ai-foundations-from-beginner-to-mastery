@@ -7,7 +7,7 @@ prerequisites: ["[[概率论与数理统计 MOC]]", "[[期望、方差与矩]]",
 related: ["[[数学基础 MOC]]", "[[数学基础完整课程地图与掌握标准]]", "[[练习与测验 MOC]]", "[[推导与实验 MOC]]"]
 sources: ["Shannon-1948-Mathematical-Theory-Communication", "Shannon-1959-Coding-Theorems-Fidelity-Criterion", "Kullback-Leibler-1951-Information-Sufficiency", "Jaynes-1957-Information-Theory-Statistical-Mechanics", "Csiszar-1967-f-Divergence", "Tishby-Pereira-Bialek-1999-Information-Bottleneck", "Alemi-et-al-2017-Deep-Variational-Information-Bottleneck", "Rissanen-1978-Modeling-Shortest-Data-Description", "Grunwald-2007-MDL", "Honkela-Valpola-2004-Bits-Back", "MIT-6.441-Information-Theory", "Stanford-EE376A-Information-Theory", "Cover-Thomas-Elements-Information-Theory", "Wainwright-Jordan-2008-Exponential-Families-Variational-Inference", "Blei-Kucukelbir-McAuliffe-2017-Variational-Inference", "Kingma-Welling-2014-AEVB", "Nowozin-Cseke-Tomioka-2016-fGAN", "Gretton-et-al-2012-MMD", "Arjovsky-Chintala-Bottou-2017-WGAN", "Su-3534-Entropy-Part-I", "Su-3552-Maximum-Entropy", "Su-3567-Maximum-Entropy-Model", "Su-6016-fGAN", "Su-6088-VAE-Prior-MI", "Su-6181-Variational-Coding-Information-Bottleneck", "Su-7695-Embedding-Dimension-Entropy", "Su-8244-WGAN-Distance", "Su-8791-VAE-Density"]
 created: 2026-08-19
-updated: 2026-08-27
+updated: 2026-08-28
 ---
 
 # 信息论与统计学习接口 MOC
@@ -25,7 +25,7 @@ updated: 2026-08-27
 | A | INFO-01—04 | 自信息/熵 → 联合/条件链 → cross-entropy/KL → 互信息 | `regression-passed` |
 | B | INFO-05—06 | 数据处理/充分性 → 无损编码/典型集/AEP | `regression-passed` |
 | C | INFO-07—10 | 最大熵/指数族 → ELBO → 散度几何 → 率失真/IB/MDL | `regression-passed` |
-| CUM | INFO-CUM | 卷级路线—口试—题解—实验—回归 | `regression-passed` |
+| CUM | INFO-CUM-01 | 口试 → 闭卷 → nonce 随机轨 → 盲干预 → 订正 → 48 h / 14 d → 独立审计 | `regression-passed / not-attempted` |
 
 第一波固定使用二元对称信道：
 
@@ -234,7 +234,7 @@ flowchart LR
 1. **复述证据**：能区分 probability/self-information/entropy/KL/MI，但不等于会推导；
 2. **推导证据**：能无提示完成公式与反例，但不等于会在新 AI 问题中选对象；
 3. **闭卷证据**：[[阶段测验 - 信息论与统计学习接口（10.6）|INFO-CUM-01]] 的口试、总分与 A—E 分区同时过线；
-4. **复现证据**：[[实验 - 信息论累计复现门]]的解析校准、随机轨道、手检、参数干预和 hash 通过；
+4. **复现证据**：[[实验 - 信息论累计复现门]]用 attempt_id 与 scorer nonce 唯一指定深入轨，解析校准后先冻结未见参数预测，再保存新 output/SVG/hash 与手检；
 5. **保持与迁移证据**：48 小时重做，14 天后换 source、换 distortion 或换 AI 情境仍能独立完成。
 
 `regression-passed` 只说明仓库材料通过[[information_cumulative_contract_audit.py|信息论卷级静态与计算回归]]；正文 frontmatter 的 `draft` 和学习记录的 `not-attempted` 继续表示尚无个人掌握证据。
@@ -246,7 +246,7 @@ flowchart LR
 ![[00-知识库管理/_assets/plots/information-theory/plot-information-cumulative-gate-v2.svg|920]]
 
 > [!figure] 图 10.6-CUM｜信息论卷级复现门：前沿、表示与顺序码长
-> A 复核公平 Bernoulli–Hamming 的解析 $R(D)$；B 在 task/nuisance joint law 上比较 input rate 与 task relevance；C 在固定 seed 的 Bernoulli sequence 上比较 fixed model 与 KT prequential codelength。来源：独立计算与绘制；生成脚本：[[plot_information_cumulative_gate.py]]；固定 seed `20260819`；正式 SVG SHA-256 为 `7153136c90817de71c11e407106c268c2b193098fa192b1bf66c87f359c2f540`。
+> A 复核公平 Bernoulli–Hamming 的解析 $R(D)$；B 在 task/nuisance joint law 上比较 input rate 与 task relevance；C 在固定 seed 的 Bernoulli sequence 上比较 fixed model 与 KT prequential codelength。来源：独立计算与绘制；生成脚本：[[plot_information_cumulative_gate.py]]；固定 seed `20260819`；正式 SVG SHA-256 为 `29fce27e85639837d2e8265f2f8fa9a3c6412680b39559a9e3c0f4db8fcdde47`。
 
 **怎样读图。** A 沿 distortion budget 读取一阶最小 rate，不把绘图采样点当 coding theorem 证明；B 先固定 target $Y$，比较 relevance 相同的表示是否无偿携带 nuisance；C 从第一个 symbol 起累计全部预测成本，不用看完整数据后的 plug-in NLL 偷掉学习开销。
 
@@ -416,9 +416,16 @@ flowchart LR
 
 INFO-01—10 已完成正文、十幅机制图、150 道 A–E 题与独立详解，10.6 达到 **10/10 正文覆盖**；这表示深层内容已经存在，不表示初学者入口已全部迁移，更不表示学习者已经掌握。
 
-截至 2026-08-27，INFO-01—10 与 INFO-CUM 已完成当前教学合同并通过静态与确定性计算回归，三波正文和卷级材料状态均为 `regression-passed`；学习状态继续保持 `draft / not-attempted`。
+截至 2026-08-28，INFO-01—10 与 INFO-CUM-01 已完成当前教学合同并通过静态与确定性计算回归，三波正文和卷级材料状态均为 `regression-passed`；个人学习状态继续保持 `draft / not-attempted`。
 
-INFO-CUM-01 由[[阶段测验 - 信息论与统计学习接口（10.6）|15 分钟卷级口试与 100 分闭卷题卷]]、[[阶段测验解答 - 信息论与统计学习接口（10.6）|独立详解与口试 rubric]]、[[实验 - 信息论累计复现门|解析校准与 RD—IB—prequential 三轨计算门]]以及[[information_cumulative_contract_audit.py|一键材料回归]]组成。INFO-08 的[[实验 - ELBO 恒等式、变分族限制与摊销缺口]]继续承担 approximation 与 amortization gap 的专项实验。所有正文节点仍保持 `draft`，直到出现真实口试、闭卷原稿、计算记录、订正与延迟复做证据。
+| 验收 artifact | 材料层作用 | 个人证据状态 |
+|---|---|---|
+| [[阶段测验 - 信息论与统计学习接口（10.6）]] | 15 分钟口试、100 分闭卷、答案隔离、48 h / 14 d 延迟门 | `not-attempted` |
+| [[阶段测验解答 - 信息论与统计学习接口（10.6）]] | 14/14 逐题评分、三波数值锚点与判分红线 | `not-attempted` |
+| [[实验 - 信息论累计复现门]] | 解析校准、scorer nonce、RD/IB/prequential 盲参数接口与 output/hash | `not-attempted` |
+| [[information_cumulative_contract_audit.py]] | 独立解析模型、canonical 双跑、干预 hash 与状态面回归 | 不产生个人证据 |
+
+INFO-08 的[[实验 - ELBO 恒等式、变分族限制与摊销缺口]]继续承担 approximation 与 amortization gap 的专项实验。所有正文节点仍保持 `draft`，直到出现真实口试、闭卷原稿、nonce 随机轨、未见参数运行、订正与延迟复做证据。
 
 ### 2026-08-23 图像标准化进度
 
