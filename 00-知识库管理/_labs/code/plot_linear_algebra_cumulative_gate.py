@@ -126,9 +126,11 @@ def numerical_rank(singulars: Vector, relative_tolerance: float = 1e-6) -> int:
     return sum(value > threshold for value in singulars)
 
 
-def coordinate_and_subspace_experiment() -> tuple[list[dict[str, float]], dict[str, float]]:
+def coordinate_and_subspace_experiment(
+    min_epsilon: float = 0.003,
+) -> tuple[list[dict[str, float]], dict[str, float]]:
     rows: list[dict[str, float]] = []
-    for epsilon in (1.0, 0.3, 0.1, 0.03, 0.01, 0.003):
+    for epsilon in (1.0, 0.3, 0.1, 0.03, 0.01, min_epsilon):
         basis = [[1.0, 1.0], [0.0, epsilon]]
         singulars = singular_values(basis)
         coordinates = [-1.0 / epsilon, 1.0 / epsilon]  # basis @ coords = (0, 1)
@@ -174,8 +176,7 @@ def operator_norm_upper_triangular(a: float, b: float) -> float:
     return math.sqrt(0.5 * (trace + math.sqrt(discriminant)))
 
 
-def spectral_experiment() -> tuple[list[dict[str, float]], dict[str, object]]:
-    rho = 0.9
+def spectral_experiment(rho: float = 0.9) -> tuple[list[dict[str, float]], dict[str, object]]:
     powers: list[dict[str, float]] = []
     for k in range(61):
         diagonal = rho**k
@@ -232,13 +233,16 @@ def column_vec(a: Matrix) -> Vector:
     return [a[i][j] for j in range(len(a[0])) for i in range(len(a))]
 
 
-def attention_and_vec_experiment() -> dict[str, object]:
+def attention_and_vec_experiment(
+    score_scale: float = 2.0,
+    rank_tolerance: float = 1e-6,
+) -> dict[str, object]:
     token_count = 8
     theta = [-1.2 + i * 2.5 / (token_count - 1) for i in range(token_count)]
     phi = [-0.9 + i * 2.4 / (token_count - 1) for i in range(token_count)]
     q = [[math.cos(value), math.sin(value)] for value in theta]
     k = [[math.cos(value), math.sin(value)] for value in phi]
-    score = [[2.0 * value for value in row] for row in matmul(q, transpose(k))]
+    score = [[score_scale * value for value in row] for row in matmul(q, transpose(k))]
     attention = row_softmax(score)
     score_singulars = singular_values(score)
     attention_singulars = singular_values(attention)
@@ -253,9 +257,9 @@ def attention_and_vec_experiment() -> dict[str, object]:
     return {
         "score_singulars": score_singulars,
         "attention_singulars": attention_singulars,
-        "score_rank": numerical_rank(score_singulars),
-        "attention_rank": numerical_rank(attention_singulars),
-        "rank_tolerance": 1e-6,
+        "score_rank": numerical_rank(score_singulars, rank_tolerance),
+        "attention_rank": numerical_rank(attention_singulars, rank_tolerance),
+        "rank_tolerance": rank_tolerance,
         "vec_error": vec_error,
         "direct_vec": direct,
     }
@@ -263,6 +267,14 @@ def attention_and_vec_experiment() -> dict[str, object]:
 
 def svg_text(x: float, y: float, value: str, cls: str = "small", anchor: str = "start") -> str:
     return f'<text x="{x:.1f}" y="{y:.1f}" class="{cls}" text-anchor="{anchor}">{value}</text>'
+
+
+def tolerance_label(value: float) -> str:
+    superscript = str.maketrans("-0123456789", "⁻⁰¹²³⁴⁵⁶⁷⁸⁹")
+    exponent = round(math.log10(value))
+    if math.isclose(value, 10.0**exponent, rel_tol=1e-12):
+        return "10" + str(exponent).translate(superscript)
+    return f"{value:.1e}"
 
 
 def make_svg(
@@ -392,7 +404,7 @@ def make_svg(
     parts += [
         '<rect x="850" y="325" width="10" height="10" fill="#2563EB"/><text x="867" y="335" class="label">S=QKᵀ</text>',
         '<rect x="965" y="325" width="10" height="10" fill="#DB2777"/><text x="982" y="335" class="label">row-softmax(S)</text>',
-        svg_text(826, 365, f'numerical rank: {int(attention["score_rank"])} → {int(attention["attention_rank"])}  (relative tol 10⁻⁶)', "label"),
+        svg_text(826, 365, f'numerical rank: {int(attention["score_rank"])} → {int(attention["attention_rank"])}  (relative tol {tolerance_label(float(attention["rank_tolerance"]))})', "label"),
         svg_text(826, 391, f'vec(AXB) identity residual = {float(attention["vec_error"]):.1e}', "small"),
         svg_text(826, 414, "线性 rank 上界不能无条件穿过非线性", "small"),
         '</svg>',
@@ -404,17 +416,33 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--seed", type=int, default=DEFAULT_SEED)
+    parser.add_argument("--min-epsilon", type=float, default=0.003)
+    parser.add_argument("--rho", type=float, default=0.9)
+    parser.add_argument("--score-scale", type=float, default=2.0)
+    parser.add_argument("--rank-tolerance", type=float, default=1e-6)
     args = parser.parse_args()
 
-    coordinates, subspace_checks = coordinate_and_subspace_experiment()
-    powers, spectral = spectral_experiment()
-    attention = attention_and_vec_experiment()
+    if not 0.0 < args.min_epsilon <= 0.01:
+        raise ValueError("--min-epsilon must lie in (0, 0.01]")
+    if not 0.0 < args.rho < 1.0:
+        raise ValueError("--rho must lie in (0, 1)")
+    if args.score_scale < 0.0:
+        raise ValueError("--score-scale must be nonnegative")
+    if not 0.0 < args.rank_tolerance < 1.0:
+        raise ValueError("--rank-tolerance must lie in (0, 1)")
+
+    coordinates, subspace_checks = coordinate_and_subspace_experiment(args.min_epsilon)
+    powers, spectral = spectral_experiment(args.rho)
+    attention = attention_and_vec_experiment(args.score_scale, args.rank_tolerance)
     if not coordinates[-1]["coordinate_norm"] > coordinates[0]["coordinate_norm"]:
         raise AssertionError("coordinates should amplify as the basis becomes nearly dependent")
     if not float(spectral["peak_norm"]) > 1.0:
         raise AssertionError("the Jordan block should exhibit transient amplification")
-    if not int(attention["attention_rank"]) > int(attention["score_rank"]):
-        raise AssertionError("row-wise softmax should increase numerical rank in this example")
+    canonical_rank_report = math.isclose(args.score_scale, 2.0) and math.isclose(
+        args.rank_tolerance, 1e-6
+    )
+    if canonical_rank_report and not int(attention["attention_rank"]) > int(attention["score_rank"]):
+        raise AssertionError("canonical row-wise softmax example should increase numerical rank")
     if float(attention["vec_error"]) > 1e-12:
         raise AssertionError("the vec/Kronecker identity failed")
     svg = make_svg(coordinates, subspace_checks, powers, spectral, attention)

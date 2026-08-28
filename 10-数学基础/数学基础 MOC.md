@@ -37,7 +37,7 @@ updated: 2026-08-27
 - 独立详解：[[数学基础十卷总验收解答 - 跨卷理论与 AI 迁移]]；
 - 跨卷计算门：[[实验 - 数学基础十卷跨章累计复现门]]。
 
-150 个正文、150 份 A—E 习题、150 份独立解答和十份分卷验收链均已建立；这只表示 `composed`。尚无真实闭卷、评分、参数干预和间隔迁移证据，因此全课程仍是 `not-attempted`，已完成分卷数为 0。下文“批次”保留为建设史与局部路线，不再代表当前施工进度。
+150 个正文、150 份 A—E 习题、150 份独立解答和十份分卷验收链均已建立；其中部分分卷材料已达到 `regression-passed`，其余仍为 `composed`。这两种材料状态都不等于学习通过：尚无真实口试、闭卷、评分、参数干预和间隔迁移证据，因此全课程个人状态仍是 `not-attempted`，已完成分卷数为 0。下文“批次”保留为建设史与局部路线，不再代表当前施工进度。
 
 ## 第一批节点
 
@@ -1663,6 +1663,14 @@ AI迁移从Banach压缩映射的几何尾界推进到标量二次梯度下降的
 [[实验 - 几何、泛函与算子累计复现门]]建立三轨确定性证据：A轨恢复sphere ambient constraint slope 2.000000、normalization retraction相对Exp order 2.997004，并将rotation covariance误差压到$3.140\times10^{-16}$；B轨以$c_j=1/j$和$\mu_j=j^{-2}$得到projection slope $-0.495225$、compact tail slope $-1.951949$与effective-dimension slope $0.506725$；C轨用八模态Poisson cutoff恢复$L^2/H^1/strong$指数$-2/-1/0$，并在$j=64$同时保留$2.47\times10^{-5}$ absolute error与100% relative failure。脚本通过XML、不同输出路径双跑和1440×580实际渲染，canonical hash为`d0ff3852b11f8a82af5feff469fa3ef4e1adde7836cf292b4911dec043c59bd1`。
 
 10.10当前为 **8篇正文、8幅机制图、120道节点题，累计材料 regression-passed / 个人 not-attempted**。GEO-CUM现含20分钟口试、210分钟闭卷、scorer nonce随机三轨、盲干预、48小时换例与14天迁移；[[geometry_functional_cumulative_contract_audit.py]]复核题—解隔离、解析量、状态表面和canonical双跑。材料通过不改变GEO-01—08的`draft`状态；下一步是产生真实学习证据。
+
+## 第九十批：10.2卷末累计验收与空间—谱—结构化 AI 三轨门
+
+本批把[[阶段测验 - 线性代数（10.2）|LA-CUM-01]]从一次闭卷升级为完整证据链：先做20分钟无提示口试，再做240分钟、100分A—E闭卷；冻结原稿后由`attempt_id + scorer nonce`随机指定计算轨道，最后进入48小时换例和14天陌生AI报告迁移。题卷新增八层对象账本，并以秩亏映射、设计矩阵、$S/B/J/M$谱对照族和$AXB$—attention四个模型族把LA-01—24接成连续路线。[[阶段测验解答 - 线性代数（10.2）]]补上卷级口试参考、判分红线、四模型族参考和逐题证据升级规则，但继续与首次作答隔离。
+
+[[实验 - 线性代数累计复现门]]的A轨用病态basis、kernel/quotient与orthogonal projector区分对象和坐标；B轨用Jordan powers与SVD tail区分eigenvalues、transient和低秩误差；C轨用attention-softmax与vec identity区分exact rank、numerical threshold与非线性。Canonical SVG哈希为`35dec5ba56a5727c4cd3d08e36e77ffe5dd23aeb6092f20788b7c6a4bf54345e`；脚本现支持`--min-epsilon`、`--rho`、`--score-scale`和`--rank-tolerance`盲干预，默认输出保持不变。
+
+10.2当前为 **24篇正文、24组节点题解，累计材料 regression-passed / 个人 not-attempted**。[[linear_algebra_cumulative_contract_audit.py]]复核24/24 scope、14/14题解、题—解隔离、三轨解析量、七个状态表面、Wiki链接、累计SVG和canonical双跑。材料通过不改变LA-01—24的`draft`状态；下一步是产生真实口试、闭卷、随机实验和延迟保持证据。
 
 ## 对接科学空间
 
