@@ -1680,6 +1680,14 @@ AI迁移从Banach压缩映射的几何尾界推进到标量二次梯度下降的
 
 10.3当前为 **16篇正文、16组节点题解，累计材料 regression-passed / 个人 not-attempted**。[[matrix_analysis_cumulative_contract_audit.py]]复核16/16 scope、14/14题解、题—解隔离、四波解析量、七个状态表面、Wiki链接、累计SVG和canonical双跑。材料通过不改变MA-01—16的`draft`状态；下一步是产生真实口试、闭卷、随机实验和延迟保持证据。
 
+## 第九十二批：10.4卷末累计验收与局部线性化—程序语义三轨门
+
+本批把[[阶段测验 - 多元微积分、矩阵微分与自动微分（10.4）|CALC-CUM-01]]升级为完整证据链：20分钟无提示口试之后进入270分钟、100分A—E闭卷；冻结原稿后以`attempt_id + scorer nonce`随机指定Taylor/finite-difference、JVP/VJP/HVP或implicit/spectral轨，最后通过48小时换机制与14天陌生可微程序报告检验保持和迁移。题卷新增八层微分与程序账本，并以$(\phi,F)$、$(F,p)$、$(A,x,L)$和$(T_\tau,A_\tau,\ell)$四个模型族把CALC-01—16接成“量词/余项—算子/几何—计算图/隐式—谱/换元/AD语义”连续路线。[[阶段测验解答 - 多元微积分、矩阵微分与自动微分（10.4）]]补上卷级口试参考、两个相邻solve program的导数分账、判分红线和逐节点证据升级规则，并继续与首次作答隔离。
+
+[[实验 - 微积分、矩阵微分与自动微分累计复现门]]的A轨以方向Taylor阶和centered difference地板分离数学余项与浮点diagnostic；B轨以adjoint pairing、matrix-free HVP和checkpoint代理分离算子合同与time-memory调度；C轨以rhs-dependent implicit solve和closing eigengap分离program dependence与basis sensitivity。Canonical SVG哈希保持`434dd29d2cc35e189010100365114f58f328682e5d793243da631be848ad6975`；脚本新增direction、step range、pairing trials、HVP direction、chain length、rhs slope和gap等盲参数接口，默认输出不变。
+
+10.4当前为 **16篇正文、16组节点题解，累计材料 regression-passed / 个人 not-attempted**。[[calculus_ad_cumulative_contract_audit.py]]复核16/16 scope、14/14题解、题—解隔离、四波解析量、六个状态表面、Wiki链接、累计SVG和canonical双跑。材料通过不改变CALC-01—16的`draft`状态；下一步是产生真实口试、闭卷、随机实验和延迟保持证据。
+
 ## 对接科学空间
 
 - “低秩近似之路”系列：伪逆、SVD、CR、ID、CUR
@@ -1695,7 +1703,7 @@ AI迁移从Banach压缩映射的几何尾界推进到标量二次梯度下降的
 3. **第二补全批次已完成十个节点**：消元/LU、trace/determinant/体积、对偶空间、伴随、特征多项式与重数、广义特征向量与 Jordan 结构、Schur 分解、矩阵函数与矩阵指数、极分解、矩阵符号函数均已成稿并具有习题/解答闭环。
 4. **数值阶段**：NUM-01—20 全部建立 `draft` 正文、A–E 习题/解答、三面板图和实验闭环；NLA-CUM-01 题卷与详解已成稿，但仍需学习者真实闭卷作答、实验复现与间隔复查才能升级。
 5. **D 批次**：D1—D4 的十个断点已经全部成稿；D4 由[[矩阵函数的 Fréchet 导数]]、[[非正规矩阵、预解式与伪谱]]与[[结构化矩阵与结构化扰动]]构成，10.3 已达到 16/16 正文覆盖。
-6. **微积分与自动微分**：10.4 的 CALC-01—16 均已完成正文、SVG、15 题与独立详解，达到 16/16 正文覆盖；所有节点仍待真实作答、实验复现和间隔复查。
+6. **微积分与自动微分**：10.4 的CALC-01—16均已完成正文、SVG、15题与独立详解；CALC-CUM-01已形成“口试—闭卷—scorer nonce随机三轨—盲干预—48小时—14天”证据链，并由[[calculus_ad_cumulative_contract_audit.py]]复核为材料`regression-passed`、个人`not-attempted`。
 7. **概率论与数理统计**：10.5 已完成 PROB-01—20 的正文、SVG、各 15 题与独立详解；`PROB-CUM-01` 题卷、详解和三轨计算门也已成稿，当前 `composed / not-attempted`。
 8. **信息论与统计学习接口**：10.6 已完成 INFO-01—10 的正文、十幅机制图、150 道 A–E 题和独立详解；`INFO-CUM-01` 题卷、详解与三轨计算门已成稿，当前 `composed / not-attempted`。
 9. **优化与凸分析**：10.7 已完成 OPT-01—16 的正文、十六幅机制图、240 道 A—E 题、独立详解、`OPT-CUM-01` 与三轨计算门，达到 16/16；状态为 `composed / not-attempted`。

@@ -20,17 +20,21 @@ def norm2(x: list[float]) -> float:
     return math.sqrt(sum(v * v for v in x))
 
 
-def local_experiment() -> tuple[list[dict[str, float]], list[dict[str, float]]]:
-    a, b = 1.0, 0.7
+def local_experiment(
+    direction_y: float = 0.7,
+    min_local_step: float = 3e-5,
+    max_fd_exponent: int = 15,
+) -> tuple[list[dict[str, float]], list[dict[str, float]]]:
+    a, b = 1.0, direction_y
     taylor = []
-    for h in (1e-1, 3e-2, 1e-2, 3e-3, 1e-3, 3e-4, 1e-4, 3e-5):
+    for h in (1e-1, 3e-2, 1e-2, 3e-3, 1e-3, 3e-4, 1e-4, min_local_step):
         x, y = h * a, h * b
         value = math.exp(x * y) + 0.5 * x * x + y ** 3
         linear = 1.0
         quadratic = 1.0 + x * y + 0.5 * x * x
         taylor.append({"h": h, "linear_error": abs(value - linear), "quadratic_error": abs(value - quadratic)})
     finite_difference = []
-    for exponent in range(1, 16):
+    for exponent in range(1, max_fd_exponent + 1):
         h = 10.0 ** (-exponent)
         estimate = (math.exp(h) - math.exp(-h)) / (2.0 * h)
         finite_difference.append({"h": h, "error": abs(estimate - 1.0)})
@@ -73,10 +77,16 @@ def loss_hvp(x: list[float], p: list[float]) -> list[float]:
     return [grad_w[i] * dot + w * sum(h_w[i][j] * p[j] for j in range(2)) for i in range(2)]
 
 
-def ad_experiment(seed: int) -> tuple[float, list[dict[str, float]], dict[str, float]]:
+def ad_experiment(
+    seed: int,
+    pairing_trials: int = 100,
+    hvp_direction_y: float = -1.0,
+    chain_length: int = 1024,
+    min_hvp_step: float = 1e-5,
+) -> tuple[float, list[dict[str, float]], dict[str, float]]:
     rng = random.Random(seed)
     max_pairing = 0.0
-    for _ in range(100):
+    for _ in range(pairing_trials):
         x = [rng.uniform(-1.5, 1.5), rng.uniform(-1.5, 1.5)]
         p = [rng.uniform(-1.0, 1.0), rng.uniform(-1.0, 1.0)]
         q = [rng.uniform(-1.0, 1.0) for _ in range(3)]
@@ -85,34 +95,43 @@ def ad_experiment(seed: int) -> tuple[float, list[dict[str, float]], dict[str, f
         right = sum(pi * vi for pi, vi in zip(p, transpose_matvec(j, q)))
         max_pairing = max(max_pairing, abs(left - right))
 
-    x, p = [1.0, 2.0], [1.0, -1.0]
+    x, p = [1.0, 2.0], [1.0, hvp_direction_y]
     exact = loss_hvp(x, p)
     hvp_rows = []
-    for h in (1e-1, 3e-2, 1e-2, 3e-3, 1e-3, 3e-4, 1e-4, 3e-5, 1e-5):
+    for h in (1e-1, 3e-2, 1e-2, 3e-3, 1e-3, 3e-4, 1e-4, 3e-5, min_hvp_step):
         plus = loss_gradient([x[i] + h * p[i] for i in range(2)])
         minus = loss_gradient([x[i] - h * p[i] for i in range(2)])
         estimate = [(plus[i] - minus[i]) / (2.0 * h) for i in range(2)]
         hvp_rows.append({"h": h, "error": norm2([estimate[i] - exact[i] for i in range(2)])})
-    checkpoint = {"chain_length": 1024.0, "full_tape": 1024.0, "sqrt_checkpoint_memory": 64.0}
+    checkpoint = {
+        "chain_length": float(chain_length),
+        "full_tape": float(chain_length),
+        "sqrt_checkpoint_memory": float(2 * math.ceil(math.sqrt(chain_length))),
+        "pairing_trials": float(pairing_trials),
+    }
     return max_pairing, hvp_rows, checkpoint
 
 
-def solve_x(theta: float) -> list[float]:
+def solve_x(theta: float, rhs_slope: float = 1.0) -> list[float]:
     a, d, off = 2.0 + theta, 2.0, 1.0
     det = a * d - off * off
-    b1, b2 = 1.0, theta
+    b1, b2 = 1.0, rhs_slope * theta
     return [(d * b1 - off * b2) / det, (-off * b1 + a * b2) / det]
 
 
-def implicit_spectral_experiment() -> tuple[list[dict[str, float]], list[dict[str, float]], float]:
-    exact = [-7.0 / 9.0, 8.0 / 9.0]
+def implicit_spectral_experiment(
+    rhs_slope: float = 1.0,
+    min_implicit_step: float = 3e-5,
+    min_gap: float = 0.003,
+) -> tuple[list[dict[str, float]], list[dict[str, float]], float]:
+    exact = [-(4.0 + 3.0 * rhs_slope) / 9.0, (2.0 + 6.0 * rhs_slope) / 9.0]
     implicit = []
-    for h in (1e-1, 3e-2, 1e-2, 3e-3, 1e-3, 3e-4, 1e-4, 3e-5):
-        plus, minus = solve_x(h), solve_x(-h)
+    for h in (1e-1, 3e-2, 1e-2, 3e-3, 1e-3, 3e-4, 1e-4, min_implicit_step):
+        plus, minus = solve_x(h, rhs_slope), solve_x(-h, rhs_slope)
         estimate = [(plus[i] - minus[i]) / (2.0 * h) for i in range(2)]
         implicit.append({"h": h, "error": norm2([estimate[i] - exact[i] for i in range(2)])})
     spectral = []
-    for gap in (1.0, 0.3, 0.1, 0.03, 0.01, 0.003):
+    for gap in (1.0, 0.3, 0.1, 0.03, 0.01, min_gap):
         spectral.append({"gap": gap, "eigenvector_derivative_norm": 1.0 / gap})
     logdet_direct = 2.0 / 3.0
     return implicit, spectral, logdet_direct
@@ -170,7 +189,7 @@ def make_svg(taylor, finite_difference, pairing, hvp, checkpoint, implicit, spec
     x0, y0 = 458.0, 126.0
     parts += [f'<line x1="{x0}" y1="{y0+hgt}" x2="{x0+w}" y2="{y0+hgt}" class="axis"/>', f'<line x1="{x0}" y1="{y0}" x2="{x0}" y2="{y0+hgt}" class="axis"/>']
     lh, ch = log_curve(hvp, "error", x0, y0, w, hgt, "#7C3AED")
-    parts += [lh, *ch, svg_text(458, 302, "centered gradient difference → analytic HVP", "label"), svg_text(438, 337, f'100 random adjoint tests: max residual={pairing:.1e}', "small"), svg_text(438, 365, f'chain N={int(checkpoint["chain_length"])}: full tape≈{int(checkpoint["full_tape"])} states', "small"), svg_text(438, 391, f'√N checkpoint schedule≈{int(checkpoint["sqrt_checkpoint_memory"])} live states', "small"), svg_text(438, 418, "Checkpoint换time/memory，不改同一程序导数", "small")]
+    parts += [lh, *ch, svg_text(458, 302, "centered gradient difference → analytic HVP", "label"), svg_text(438, 337, f'{int(checkpoint["pairing_trials"])} random adjoint tests: max residual={pairing:.1e}', "small"), svg_text(438, 365, f'chain N={int(checkpoint["chain_length"])}: full tape≈{int(checkpoint["full_tape"])} states', "small"), svg_text(438, 391, f'√N checkpoint schedule≈{int(checkpoint["sqrt_checkpoint_memory"])} live states', "small"), svg_text(438, 418, "Checkpoint换time/memory，不改同一程序导数", "small")]
 
     # C: two curves normalized to their own logs.
     x0, y0 = 844.0, 126.0
@@ -192,10 +211,51 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--seed", type=int, default=DEFAULT_SEED)
+    parser.add_argument("--direction-y", type=float, default=0.7)
+    parser.add_argument("--min-local-step", type=float, default=3e-5)
+    parser.add_argument("--max-fd-exponent", type=int, default=15)
+    parser.add_argument("--pairing-trials", type=int, default=100)
+    parser.add_argument("--hvp-direction-y", type=float, default=-1.0)
+    parser.add_argument("--chain-length", type=int, default=1024)
+    parser.add_argument("--min-hvp-step", type=float, default=1e-5)
+    parser.add_argument("--implicit-rhs-slope", type=float, default=1.0)
+    parser.add_argument("--min-implicit-step", type=float, default=3e-5)
+    parser.add_argument("--min-gap", type=float, default=0.003)
     args = parser.parse_args()
-    taylor, fd = local_experiment()
-    pairing, hvp, checkpoint = ad_experiment(args.seed)
-    implicit, spectral, logdet = implicit_spectral_experiment()
+    if not -2.0 <= args.direction_y <= 2.0:
+        raise ValueError("--direction-y must lie in [-2, 2]")
+    if not 0.0 < args.min_local_step < 1e-4:
+        raise ValueError("--min-local-step must lie in (0, 1e-4)")
+    if not 12 <= args.max_fd_exponent <= 17:
+        raise ValueError("--max-fd-exponent must lie in [12, 17]")
+    if not 20 <= args.pairing_trials <= 10000:
+        raise ValueError("--pairing-trials must lie in [20, 10000]")
+    if not -2.0 <= args.hvp_direction_y <= 2.0:
+        raise ValueError("--hvp-direction-y must lie in [-2, 2]")
+    if not 64 <= args.chain_length <= 1_000_000:
+        raise ValueError("--chain-length must lie in [64, 1e6]")
+    if not 0.0 < args.min_hvp_step <= 1e-5:
+        raise ValueError("--min-hvp-step must lie in (0, 1e-5]")
+    if not -2.0 <= args.implicit_rhs_slope <= 2.0:
+        raise ValueError("--implicit-rhs-slope must lie in [-2, 2]")
+    if not 0.0 < args.min_implicit_step < 1e-4:
+        raise ValueError("--min-implicit-step must lie in (0, 1e-4)")
+    if not 0.0 < args.min_gap < 0.01:
+        raise ValueError("--min-gap must lie in (0, 0.01)")
+
+    taylor, fd = local_experiment(args.direction_y, args.min_local_step, args.max_fd_exponent)
+    pairing, hvp, checkpoint = ad_experiment(
+        args.seed,
+        args.pairing_trials,
+        args.hvp_direction_y,
+        args.chain_length,
+        args.min_hvp_step,
+    )
+    implicit, spectral, logdet = implicit_spectral_experiment(
+        args.implicit_rhs_slope,
+        args.min_implicit_step,
+        args.min_gap,
+    )
     if pairing > 1e-12:
         raise AssertionError("Jacobian/adjoint pairing identity failed")
     if not taylor[-1]["quadratic_error"] < taylor[0]["quadratic_error"]:

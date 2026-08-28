@@ -71,6 +71,13 @@ updated: 2026-08-27
 - 覆盖：MA-01—16，20分钟口试、270分钟100分闭卷、`attempt_id + scorer nonce`随机计算轨道、盲参数干预、48小时换机制与14天迁移；
 - 当前语义：材料`regression-passed`、个人`not-attempted`，由[[matrix_analysis_cumulative_contract_audit.py]]复核，不构成verified证据。
 
+- 题卷：[[阶段测验 - 多元微积分、矩阵微分与自动微分（10.4）]]；
+- 独立详解：[[阶段测验解答 - 多元微积分、矩阵微分与自动微分（10.4）]]；
+- 卷级 ID：`CALC-CUM-01`；
+- 计算门：[[实验 - 微积分、矩阵微分与自动微分累计复现门]]，覆盖Taylor/finite difference、JVP/VJP/HVP、implicit solve与spectral gap；
+- 覆盖：CALC-01—16，20分钟口试、270分钟100分闭卷、`attempt_id + scorer nonce`随机轨道、盲参数干预、48小时换机制与14天迁移；
+- 当前语义：材料`regression-passed`、个人`not-attempted`，由[[calculus_ad_cumulative_contract_audit.py]]复核，不构成verified证据。
+
 - 题卷：[[阶段测验 - 数学语言、逻辑与证明（10.1）]]；
 - 独立详解：[[阶段测验解答 - 数学语言、逻辑与证明（10.1）]]；
 - 计算门：[[实验 - 数学语言、逻辑与证明累计复现门]]，覆盖量词换序的有限反模型、递推误差的闭式—界—极限—精度证书与Attention rank增长制度；
@@ -172,6 +179,7 @@ updated: 2026-08-27
 61. [[实验 - 数学基础十卷跨章累计复现门]]：用linear-Gaussian posterior/MI分离定理值与估计量，用quadratic flow/GD分离连续稳定与Euler步长域，再在$S^1$上把rotation/retraction、finite Gram/KRR approximation和condition增长纳入同一跨卷证据账。
 62. [[实验 - 线性代数累计复现门]]：用病态基分离抽象向量与坐标、以kernel/quotient/projector核对空间不变量，以Jordan/SVD分离谱值、暂态与低秩尾误差，再用attention-softmax与vec合同分离exact rank、numerical rank和非线性边界；canonical及盲参数接口由独立累计审计复核。
 63. [[实验 - 矩阵分析累计复现门]]：用SPD边界分离positive margin、condition与Cholesky pivot，以closing eigengap和nilpotent coupling分离谱值、方向与pseudospectrum，再用sign/polar、Fréchet remainder和structured tangent分离involution、isometry、一阶近似与允许扰动；canonical及盲参数接口由独立累计审计复核。
+64. [[实验 - 微积分、矩阵微分与自动微分累计复现门]]：以Taylor/finite-difference分离解析余项与浮点地板，用JVP/VJP pairing、HVP和checkpoint代理分离算子相容与程序调度，再以implicit rhs与closing spectral gap分离program dependence、local solve derivative和basis sensitivity；canonical及盲参数接口由独立累计审计复核。
 
 ## 后续实验候选
 

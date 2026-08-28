@@ -44,7 +44,7 @@ updated: 2026-08-27
 | B | CALC-05—08 | 全微分 → 梯度几何 → Jacobian/JVP/VJP → Hessian 曲率 | `regression-passed` |
 | C | CALC-09—12 | 链式法则/计算图 → 矩阵微分 → solve/隐式微分 → log-det | `regression-passed` |
 | D | CALC-13—16 | 谱导数 → 逆/隐函数定理 → 换元积分 → 自动微分系统 | `regression-passed` |
-| CUM | CALC-CUM | 卷级题—解—实验 | `regression-passed` |
+| CUM | CALC-CUM-01 | 卷级口试—闭卷—随机三轨—盲干预—延迟门 | `regression-passed / not-attempted` |
 
 首波固定使用
 
@@ -306,11 +306,36 @@ flowchart LR
 
 | 验收件 | 覆盖与作用 | 当前状态 |
 |---|---|---|
-| [[阶段测验 - 多元微积分、矩阵微分与自动微分（10.4）]] | 270分钟、100分，覆盖CALC-01—16 | composed / not-attempted |
-| [[阶段测验解答 - 多元微积分、矩阵微分与自动微分（10.4）]] | 完整证明、传播手算、反例与程序审计 | sealed until first attempt |
-| [[实验 - 微积分、矩阵微分与自动微分累计复现门]] | Taylor/FD、JVP/VJP/HVP、implicit/spectral三轨 | composed / not-attempted |
+| [[阶段测验 - 多元微积分、矩阵微分与自动微分（10.4）]] | 20分钟口试 + 270分钟、100分A—E闭卷，覆盖CALC-01—16 | `regression-passed / not-attempted` |
+| [[阶段测验解答 - 多元微积分、矩阵微分与自动微分（10.4）]] | 完整证明、口试红线、传播手算、反例与程序审计 | `sealed until first attempt` |
+| [[实验 - 微积分、矩阵微分与自动微分累计复现门]] | `attempt_id + scorer nonce`随机指定Taylor/FD、JVP/VJP/HVP或implicit/spectral轨；含盲参数干预 | `regression-passed / not-attempted` |
+| [[calculus_ad_cumulative_contract_audit.py]] | 题—解隔离、四波解析模型、状态表面、Wiki链接、累计SVG与canonical双跑 | `regression-passed` |
 
-累计卷不以框架API记忆代替数学对象，也不以finite difference代替证明。材料通过QA只表示验收链可执行；在闭卷、随机轨道、48小时重做和14天迁移完成前，CALC-01—16保持`draft`。
+### 卷末证据时间线
+
+```mermaid
+flowchart LR
+    O["20分钟无提示口试"] --> W["270分钟闭卷"]
+    W --> F["冻结原稿与首错"]
+    F --> N["scorer nonce随机轨"]
+    N --> B["盲参数预测/干预"]
+    B --> S["详解订正"]
+    S --> R48["48小时换机制"]
+    R48 --> R14["14天陌生程序迁移"]
+```
+
+累计卷不以框架API记忆代替数学对象，也不以finite difference代替证明。材料回归通过只表示验收链可执行；在口试、闭卷、随机轨、盲干预、48小时重建和14天迁移全部完成前，CALC-01—16保持`draft / not-attempted`。
+
+### 四波统一模型族与三条证明主链
+
+| 四波模型族 | 贯穿节点 | 必须反复重建的链 |
+|---|---|---|
+| $\phi(t)=\log(1+e^t)$、$F(x,y)=\log(e^x+e^y)$ | CALC-01—04 | 量词极限→一元导数→Taylor余项→多元方向/统一可微 |
+| $F$与$p=\nabla F=\operatorname{softmax}$ | CALC-05—08 | Fréchet算子→metric表示→JVP/VJP→Hessian方向曲率 |
+| 共享$A(\theta)$的solve/log-det图 | CALC-09—12 | primal DAG→matrix differential→tangent/adjoint→共享cotangent累加 |
+| $T_\tau$、$A_\tau=T_\tau T_\tau^T$与Gaussian换元 | CALC-13—16 | simple谱→local/global可逆→density change→逐原语AD语义 |
+
+三条跨波证明主链是：`统一局部余项`决定可微性与Taylor；`operator composition / adjoint`决定JVP、VJP与HVP；`invertibility / gap / branch`决定隐式、谱和换元公式的适用域。任何实验曲线都只能审计这些合同，不能替代它们。
 
 ## 九、来源与证据分工
 
@@ -341,7 +366,7 @@ flowchart LR
 
 ## 十、下一步
 
-CALC-01—16 已全部建立正文、视觉与 A–E 训练材料，10.4 因而达到 **16/16 正文覆盖**。[[阶段测验 - 多元微积分、矩阵微分与自动微分（10.4）]]、独立详解与累计复现门也已建立。所有节点仍保持 `draft`：下一阶段进入[[概率论与数理统计 MOC]]；本卷等待真实闭卷、实验、迁移和间隔复查，不能因文件齐全直接升级状态。
+CALC-01—16 已全部建立正文、视觉与 A–E 训练材料，10.4 因而达到 **16/16 正文覆盖**。卷级题卷、独立详解、随机三轨累计复现门和[[calculus_ad_cumulative_contract_audit.py]]已组成“口试—闭卷—随机轨—盲干预—48小时—14天”闭环，材料状态为`regression-passed`。所有节点仍保持`draft / not-attempted`：下一阶段进入[[概率论与数理统计 MOC]]；不能因文件齐全直接升级个人状态。
 
 ### 2026-08-23 图像标准化验收
 
