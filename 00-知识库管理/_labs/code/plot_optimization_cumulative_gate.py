@@ -15,7 +15,9 @@ Only the Python standard library is used.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import math
+import sys
 from pathlib import Path
 
 
@@ -98,9 +100,17 @@ def pl_values(x: float, a: float) -> tuple[float, float, float]:
     return ratio, hessian, gradient
 
 
-def build_svg(perturbation: float, pl_a: float, eta: float, steps: int) -> tuple[str, dict[str, float]]:
-    exact, exact_x, exact_y = saddle_run(0.0, 0.0, eta, steps)
-    perturbed, final_x, final_y = saddle_run(perturbation, 0.0, eta, steps)
+def build_svg(
+    perturbation: float,
+    stable_y0: float,
+    pl_a: float,
+    pl_x_max: float,
+    scale_span: float,
+    eta: float,
+    steps: int,
+) -> tuple[str, dict[str, float]]:
+    exact, exact_x, exact_y = saddle_run(0.0, stable_y0, eta, steps)
+    perturbed, final_x, final_y = saddle_run(perturbation, stable_y0, eta, steps)
 
     width, height = 1200, 430
     panel_x = [20, 415, 810]
@@ -158,7 +168,7 @@ def build_svg(perturbation: float, pl_a: float, eta: float, steps: int) -> tuple
         line(bx_l, bx_b, bx_r, bx_b, stroke="#64748b", stroke_width="1.5"),
         line(bx_l, bx_t, bx_l, bx_b, stroke="#64748b", stroke_width="1.5"),
     ]
-    x_min, x_max = -8.0, 8.0
+    x_min, x_max = -pl_x_max, pl_x_max
     y_min, y_max = -4.0, 3.0
 
     def bxy(x: float, y: float) -> tuple[float, float]:
@@ -193,7 +203,7 @@ def build_svg(perturbation: float, pl_a: float, eta: float, steps: int) -> tuple
     parts += [
         text(662, 125, "PL ratio = h′²", "tiny"),
         text(662, 175, "Hessian f″", "tiny"),
-        text(612, 354, "x ∈ [−8,8]", "small", "middle"),
+        text(612, 354, f"x ∈ [−{pl_x_max:g},{pl_x_max:g}]", "small", "middle"),
         text(442, zero_y + 4, "0", "tiny", "middle"),
         text(435, 385, f"min f″={hessian_min:.3f} < 0；min ratio≈{ratio_min:.3f}", "small"),
     ]
@@ -209,21 +219,25 @@ def build_svg(perturbation: float, pl_a: float, eta: float, steps: int) -> tuple
         line(cx_l, cx_t, cx_l, cx_b, stroke="#64748b", stroke_width="1.5"),
     ]
 
+    sharpness_extreme = 10.0 ** (2.0 * scale_span) + 10.0 ** (-2.0 * scale_span)
+
     def cxy(s: float, sharpness: float) -> tuple[float, float]:
         log_s = math.log10(s)
         return (
-            cx_l + (log_s + 1.0) / 2.0 * (cx_r - cx_l),
-            cx_b - (sharpness - 2.0) / (100.01 - 2.0) * (cx_b - cx_t),
+            cx_l + (log_s + scale_span) / (2.0 * scale_span) * (cx_r - cx_l),
+            cx_b - (sharpness - 2.0) / (sharpness_extreme - 2.0) * (cx_b - cx_t),
         )
 
     curve: list[tuple[float, float]] = []
     for i in range(401):
-        log_s = -1.0 + 2.0 * i / 400.0
+        log_s = -scale_span + 2.0 * scale_span * i / 400.0
         s = 10.0**log_s
         sharpness = s * s + 1.0 / (s * s)
         curve.append(cxy(s, sharpness))
     parts.append(path(curve, "#2563eb", 3.5))
-    for s, color in [(0.1, "#dc2626"), (1.0, "#059669"), (10.0, "#dc2626")]:
+    scale_low = 10.0 ** (-scale_span)
+    scale_high = 10.0**scale_span
+    for s, color in [(scale_low, "#dc2626"), (1.0, "#059669"), (scale_high, "#dc2626")]:
         sharpness = s * s + 1.0 / (s * s)
         x, y = cxy(s, sharpness)
         parts.append(circle(x, y, 5.5, color))
@@ -231,7 +245,12 @@ def build_svg(perturbation: float, pl_a: float, eta: float, steps: int) -> tuple
     parts += [
         text(997, 342, "log scale s", "small", "middle"),
         text(825, 210, "λmax(H)", "small", "middle"),
-        text(830, 372, "s=1: λmax=2；s=0.1 或 10: λmax=100.01", "small"),
+        text(
+            830,
+            372,
+            f"s=1: λmax=2；s={scale_low:g} 或 {scale_high:g}: λmax={sharpness_extreme:g}",
+            "small",
+        ),
         text(830, 391, "训练函数与 loss 恒定；坐标曲率不是泛化不变量", "small"),
     ]
 
@@ -246,7 +265,7 @@ def build_svg(perturbation: float, pl_a: float, eta: float, steps: int) -> tuple
         "pl_hessian_min": hessian_min,
         "pl_hessian_min_x": hessian_min_x,
         "sharpness_balanced": 2.0,
-        "sharpness_extreme": 100.01,
+        "sharpness_extreme": sharpness_extreme,
     }
     return "\n".join(parts) + "\n", metrics
 
@@ -255,12 +274,23 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--perturbation", type=float, default=1e-3)
+    parser.add_argument("--stable-y0", type=float, default=0.0)
     parser.add_argument("--pl-a", type=float, default=0.5)
+    parser.add_argument("--pl-x-max", type=float, default=8.0)
+    parser.add_argument("--scale-span", type=float, default=1.0)
     parser.add_argument("--eta", type=float, default=0.1)
     parser.add_argument("--steps", type=int, default=160)
     args = parser.parse_args()
     if not 0.0 < args.pl_a < 1.0:
         parser.error("--pl-a must lie in (0, 1)")
+    if not 0.0 < abs(args.perturbation) <= 0.1:
+        parser.error("--perturbation must be nonzero with absolute value at most 0.1")
+    if not abs(args.stable_y0) <= 2.0:
+        parser.error("--stable-y0 must have absolute value at most 2")
+    if not 4.0 <= args.pl_x_max <= 20.0:
+        parser.error("--pl-x-max must lie in [4, 20]")
+    if not 0.25 <= args.scale_span <= 2.0:
+        parser.error("--scale-span must lie in [0.25, 2]")
     if not 0.0 < args.eta < 1.0:
         parser.error("--eta must lie in (0, 1) for this demonstration")
     if args.steps < 2:
@@ -271,31 +301,61 @@ def parse_args() -> argparse.Namespace:
 def main() -> None:
     args = parse_args()
     output = args.output.expanduser().resolve()
-    svg, metrics = build_svg(args.perturbation, args.pl_a, args.eta, args.steps)
-    if abs(metrics["exact_final_f"] - 0.25) > 1e-12:
-        raise AssertionError("the invariant saddle trajectory should stay at f=1/4")
+    svg, metrics = build_svg(
+        args.perturbation,
+        args.stable_y0,
+        args.pl_a,
+        args.pl_x_max,
+        args.scale_span,
+        args.eta,
+        args.steps,
+    )
+    if not all(math.isfinite(value) for value in metrics.values()):
+        raise AssertionError("trajectory or calibration produced a non-finite value")
     if not metrics["perturbed_final_f"] < metrics["exact_final_f"]:
         raise AssertionError("the perturbed trajectory should escape toward a lower objective")
     if metrics["pl_ratio_min"] + 1e-10 < metrics["pl_mu"]:
         raise AssertionError("sampled PL ratios must respect the analytic constant")
     if not metrics["sharpness_extreme"] > metrics["sharpness_balanced"]:
         raise AssertionError("the rescaled coordinates should have larger coordinate sharpness")
+    canonical = (
+        args.perturbation == 1e-3
+        and args.stable_y0 == 0.0
+        and args.pl_a == 0.5
+        and args.pl_x_max == 8.0
+        and args.scale_span == 1.0
+        and args.eta == 0.1
+        and args.steps == 160
+    )
+    if canonical and abs(metrics["exact_final_f"] - 0.25) > 1e-12:
+        raise AssertionError("the canonical saddle trajectory should stay at f=1/4")
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(svg, encoding="utf-8")
-    print(f"wrote {output}")
+    digest = hashlib.sha256(output.read_bytes()).hexdigest()
     print(
-        "saddle exact_f={exact_final_f:.8f} perturbed_f={perturbed_final_f:.8e} "
+        f"A_CONFIG perturbation={args.perturbation:g} stable_y0={args.stable_y0:g} "
+        f"eta={args.eta:g} steps={args.steps}"
+    )
+    print(
+        "A_SADDLE exact_f={exact_final_f:.8f} perturbed_f={perturbed_final_f:.8e} "
         "final_x={perturbed_final_x:.8f}".format(**metrics)
     )
     print(
-        "pl mu={pl_mu:.8f} sampled_min_ratio={pl_ratio_min:.8f} "
-        "sampled_min_hessian={pl_hessian_min:.8f} at_x={pl_hessian_min_x:.5f}".format(**metrics)
+        f"B_CONFIG a={args.pl_a:g} x_max={args.pl_x_max:g}"
     )
     print(
-        "sharpness balanced={sharpness_balanced:.5f} extreme={sharpness_extreme:.5f}".format(
+        "B_PL mu={pl_mu:.8f} sampled_min_ratio={pl_ratio_min:.8f} "
+        "sampled_min_hessian={pl_hessian_min:.8f} at_x={pl_hessian_min_x:.5f}".format(**metrics)
+    )
+    print(f"C_CONFIG scale_span={args.scale_span:g}")
+    print(
+        "C_SHARPNESS balanced={sharpness_balanced:.5f} extreme={sharpness_extreme:.5f}".format(
             **metrics
         )
     )
+    print(f"OUTPUT {output}")
+    print(f"SHA256 {digest}")
+    print(f"PYTHON {sys.version.split()[0]}")
 
 
 if __name__ == "__main__":

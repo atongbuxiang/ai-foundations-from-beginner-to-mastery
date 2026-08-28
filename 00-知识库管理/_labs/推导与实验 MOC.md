@@ -92,9 +92,9 @@ updated: 2026-08-28
 
 - 题卷：[[阶段测验 - 优化与凸分析（10.7）]]；
 - 独立详解：[[阶段测验解答 - 优化与凸分析（10.7）]]；
-- 计算门：[[实验 - 优化与凸分析累计复现门]]，覆盖 strict-saddle stable manifold/perturb escape、nonconvex PL 与 scale-symmetry raw sharpness；
-- 覆盖：OPT-01—16，100 分笔试加一个随机指定计算轨道；
-- 当前语义：`composed / not-attempted`，不构成 verified 证据。
+- 计算门：[[实验 - 优化与凸分析累计复现门]]，以 `scorer nonce` 指定 strict-saddle stable manifold/perturb escape、nonconvex PL 或 scale-symmetry raw sharpness 深入轨，并要求盲参预测、新 output/SVG/hash、48 h 换机制与 14 d 陌生 AI 迁移；独立回归见[[optimization_cumulative_contract_audit.py]]；
+- 覆盖：OPT-01—16，15 分钟口试、100 分闭卷、nonce 随机轨、盲参轨与延迟迁移门；
+- 当前语义：材料 `regression-passed`、个人 `not-attempted`，不构成 verified 证据。
 
 - 题卷：[[阶段测验 - 信息论与统计学习接口（10.6）]]；
 - 独立详解：[[阶段测验解答 - 信息论与统计学习接口（10.6）]]；

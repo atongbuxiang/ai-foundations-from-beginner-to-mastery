@@ -7,7 +7,7 @@ prerequisites: ["[[线性代数完整学习路线与掌握标准]]", "[[多元�
 related: ["[[数学基础 MOC]]", "[[数学基础完整课程地图与掌握标准]]", "[[练习与测验 MOC]]", "[[推导与实验 MOC]]"]
 sources: ["Boyd-Vandenberghe-2004-Convex-Optimization", "MIT-6.253-Convex-Analysis-Optimization", "Stanford-EE364A-Convex-Optimization", "Stanford-EE364B-Convex-Optimization-II", "Rockafellar-1970-Convex-Analysis", "Nesterov-2018-Lectures-Convex-Optimization", "Bubeck-2015-Convex-Optimization", "Beck-2017-First-Order-Methods", "Parikh-Boyd-2014-Proximal-Algorithms", "Beck-Teboulle-2009-FISTA", "Amari-1998-Natural-Gradient", "Martens-2020-Natural-Gradient", "Nocedal-Wright-2006-Numerical-Optimization", "Bertsekas-1999-Nonlinear-Programming", "Liu-Nocedal-1989-LBFGS", "Polyak-1964-Heavy-Ball", "Robbins-Monro-1951-Stochastic-Approximation", "Bottou-Curtis-Nocedal-2018-Large-Scale-ML", "Duchi-Hazan-Singer-2011-AdaGrad", "Kingma-Ba-2015-Adam", "Reddi-et-al-2018-AMSGrad", "Loshchilov-Hutter-2019-AdamW", "Lee-et-al-2016-Gradient-Descent-Saddles", "Jin-et-al-2017-Escape-Saddles", "Karimi-et-al-2016-PL", "Ge-Jin-Zheng-2017-Low-Rank-Landscape", "Laurent-von-Brecht-2018-Deep-Linear", "Dinh-et-al-2017-Sharpness", "Garipov-et-al-2018-Mode-Connectivity", "Su-9070-LogSumExp-Inequalities", "Su-5655-SGD-Momentum", "Su-7521-Sampling-Optimization", "Su-7787-Finite-Learning-Rate", "Su-10588-Hessian-Adaptive-LR", "Su-3552-Maximum-Entropy", "Su-10592-Muon", "Su-11215-Manifold-Steepest"]
 created: 2026-08-19
-updated: 2026-08-27
+updated: 2026-08-28
 ---
 
 # 优化与凸分析 MOC
@@ -26,7 +26,7 @@ updated: 2026-08-27
 | B | OPT-05—08 | 曲率上下界 → 梯度下降 → 加速/动量 → 随机梯度 | `regression-passed` |
 | C | OPT-09—12 | 自适应度量 → 二阶模型 → 投影方向 → KKT | `regression-passed` |
 | D | OPT-13—16 | 强对偶 → proximal → mirror/Fisher → 非凸地形 | `regression-passed` |
-| CUM | OPT-CUM | 卷级路线—口试—题解—实验—回归 | `regression-passed` |
+| CUM | OPT-CUM-01 | 口试 → 闭卷 → nonce 随机轨 → 盲干预 → 订正 → 48 h / 14 d → 独立审计 | `regression-passed / not-attempted` |
 
 第一波统一使用“把越界目标投回三角形”的问题：
 
@@ -278,15 +278,15 @@ flowchart LR
 |---|---|---|---|
 | 第一遍：对象与直觉 | 只读每章课程位置、问题链、贯穿算例、图和第一遍停靠线 | 能画四波模型链；每波说清变量、objective/constraint、证书和一个不能推出的结论 | 回到本节模型账本，重写最早混淆的对象，不继续背 optimizer |
 | 第二遍：推导与边界 | 逐式完成公式七问、正文证明、最小反例与节点题 | 不看正文重建每波 3—5 条核心等式，给每个 theorem 写问题类、norm、oracle、步长和结论对象 | 回到第一个无依据等号或遗漏条件，订正过程与原答分开保存 |
-| 第三遍：整合与验收 | 冻结笔记，完成卷级口试、210 分钟闭卷题、解析校准、随机实验轨和延迟迁移 | 口试重建四波；闭卷各能力区过线；独立生成累计图和 hash；48 小时与 14 天复做 | 按错题第一个断点回链具体小节，不以看懂解答或脚本成功冒充通过 |
+| 第三遍：整合与验收 | 冻结笔记，完成卷级口试、210 分钟闭卷题、解析校准、nonce 随机轨、盲参干预和延迟迁移 | 口试重建四波；闭卷各能力区过线；独立生成 canonical/blind 图和 hash；48 小时换机制与 14 天陌生迁移 | 按错题第一个断点回链具体小节，不以看懂解答或脚本成功冒充通过 |
 
 ### 0.4 五层证据与状态语义
 
 1. **复述证据**：能用自己的话说清问题和对象，但不等于会推导；
 2. **推导证据**：能无提示完成公式、条件和反例，但不等于会跨章选工具；
 3. **闭卷证据**：[[阶段测验 - 优化与凸分析（10.7）|OPT-CUM-01]] 的 15 分钟口试、总分和五个能力区同时过线；
-4. **复现证据**：[[实验 - 优化与凸分析累计复现门]]的四波解析校准、随机指定轨、参数干预和边界说明通过；
-5. **保持与迁移证据**：48 小时重做，14 天后换 constraint、condition number、regularizer 或 parameterization 仍能独立完成。
+4. **复现证据**：[[实验 - 优化与凸分析累计复现门]]的四波解析校准、`scorer nonce` 随机指定轨、答案/输出隔离、盲参干预和边界说明通过；
+5. **保持与迁移证据**：48 小时换 objective/geometry/oracle/algorithm/certificate 中一类机制重建，14 天后面对陌生 AI 优化摘要仍能独立完成。
 
 `regression-passed` 只说明仓库材料通过静态与确定性计算回归；16 篇正文的 `draft` 继续表示尚无个人学习证据。只有真实答卷、口试记录、实验记录和延迟复做存在，才按[[数学基础完整课程地图与掌握标准]]升级学习状态。
 
@@ -478,7 +478,7 @@ flowchart LR
 
 ## 九、当前进度与下一步
 
-OPT-01—16 已形成完整教学卷：16 篇正文、16 幅机制图、240 道 A—E 节点题与独立详解，正文覆盖为 **16/16**。卷末另有[[阶段测验 - 优化与凸分析（10.7）|OPT-CUM-01 100 分闭卷题卷]]、[[阶段测验解答 - 优化与凸分析（10.7）|逐题评分详解]]和[[实验 - 优化与凸分析累计复现门|三轨计算复现门]]。当前语义为 **composed / not-attempted**：所有节点仍为 `draft`，因为尚无真实闭卷原稿、参数干预、评分和间隔复测证据。
+OPT-01—16 已形成完整教学卷：16 篇正文、16 幅机制图、240 道 A—E 节点题与独立详解，正文覆盖为 **16/16**。卷末另有[[阶段测验 - 优化与凸分析（10.7）|OPT-CUM-01 100 分闭卷题卷]]、[[阶段测验解答 - 优化与凸分析（10.7）|逐题评分详解]]和[[实验 - 优化与凸分析累计复现门|三轨计算复现门]]。当前语义为 **regression-passed / not-attempted**：教学材料已通过答案隔离、nonce 随机轨、固定盲参、延迟门与独立审计的回归；所有节点仍为 `draft`，因为尚无真实闭卷原稿、参数干预、评分和间隔复测证据。
 
 ### 卷末累计验收
 
@@ -487,10 +487,11 @@ OPT-01—16 已形成完整教学卷：16 篇正文、16 幅机制图、240 道 
 | 15 分钟无提示口试 | 四波模型链、证书对象、几何分层与 AI claim ladder | 20 分中至少 14，四项均不得低于 2 分 |
 | `OPT-CUM-01` | 210 分钟、100 分，A—E 五区覆盖 OPT-01—16 | 总分至少 80 且各区达线，三道主证明不得为 0 |
 | 独立详解 | 定义、手算、证明、反例和研究合同逐项评分 | 正式作答前不得打开；错题必须回链节点 |
-| 计算门 | 四波解析校准 + strict-saddle、nonconvex PL、scale-sharpness 三轨 | canonical hash、随机手算轨、参数干预与 48 小时重建均通过 |
-| 静态/计算回归 | [[optimization_cumulative_contract_audit.py]] | 16/16 合同、14/14 题解、卷级链接/图文、解析与 SVG hash 全部通过 |
+| 计算门 | 四波解析校准 + strict-saddle、nonconvex PL、scale-sharpness 三轨 | scorer nonce 随机手算轨、canonical 双跑、盲参 hash、事前预测与边界均通过 |
+| 延迟门 | 48 小时换机制 + 14 天陌生 AI 优化迁移 | 新 problem contract、至少一条重新推导、失败边界和 deployment 证据完整 |
+| 静态/计算回归 | [[optimization_cumulative_contract_audit.py]] | 16/16 合同、14/14 题解、100 分、四波独立解析、canonical/盲参 hash 与六个状态入口全部通过 |
 
-截至 2026-08-27，OPT-01—16 与 OPT-CUM 已按当前初学者教学合同完成材料迁移并通过静态、解析、实验图与 hash 回归；正文学习状态保持 `draft`，个人卷级状态保持 **composed / not-attempted**。下一章转入 10.8 数值计算；优化卷只有在真实口试、闭卷、复现与延迟迁移证据存在后才升级学习状态。
+截至 2026-08-28，OPT-01—16 与 OPT-CUM-01 已按当前初学者教学合同完成材料迁移，并通过静态、解析、canonical 双跑、盲参 SVG/hash 与状态同步回归；正文学习状态保持 `draft`，个人卷级状态保持 **not-attempted**。下一章转入 10.8 数值计算；优化卷只有在真实口试、闭卷、nonce 随机轨、盲干预、48 小时换机制与 14 天陌生迁移证据存在后才升级学习状态。
 
 ### 2026-08-23 图像标准化进度
 

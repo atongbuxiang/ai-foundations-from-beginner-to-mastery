@@ -1704,6 +1704,14 @@ AI迁移从Banach压缩映射的几何尾界推进到标量二次梯度下降的
 
 10.6当前为 **10篇正文、10组节点题解，累计材料 regression-passed / 个人 not-attempted**。[[information_cumulative_contract_audit.py]]独立复核10/10教学合同、14/14题解与100分、答案隔离、三波解析entropy/MI/DPI/ELBO/RD/MDL量、六个状态面、累计SVG canonical双跑及盲干预hash。材料通过不改变INFO-01—10的`draft`状态；下一步仍是真实口试、闭卷、nonce轨、未见参数运行和延迟保持证据。
 
+## 第九十五批：10.7卷末累计验收与优化对象—动力学—参数化三轨门
+
+本批把[[阶段测验 - 优化与凸分析（10.7）|OPT-CUM-01]]升级为完整证据链：15分钟无提示口试后进入210分钟、100分A—E闭卷；冻结首次原稿后，以`attempt_id + scorer nonce`指定strict-saddle、nonconvex PL或scale-sharpness手算轨，并先冻结多参数盲干预的方向、数值范围与失败标准；打开详解订正后，再通过48小时换objective/geometry/oracle/algorithm/certificate机制和14天陌生AI优化报告检验保持与迁移。题卷新增九层优化对象账本，将problem、geometry、regularity、oracle、dynamics、operator/constraint、certificate、parameterization和deployment分层。
+
+[[实验 - 优化与凸分析累计复现门]]保留四波解析校准和三轨图，但新增`--stable-y0`、`--pl-x-max`、`--scale-span`等盲参接口与配置/stdout/hash自描述。Canonical SVG哈希保持`6df184dc5a75e125d1cf2f1595574007538cdd1321efa8690dcf14cf0e6230b6`；固定回归夹具以非零stable-manifold初值、改变的PL函数/采样区间和更宽scale orbit得到盲参哈希`e991ef5318f95ba6422c0b72d2c9b9e9e04ec91cbe6c82c4eb9d310a0fec21aa`。
+
+10.7当前为 **16篇正文、16组节点题解，累计材料 regression-passed / 个人 not-attempted**。[[optimization_cumulative_contract_audit.py]]独立复核16/16教学合同、14/14题解与100分、答案隔离、四波精确投影/谱/噪声/KKT/dual/prox/Fisher/symmetry锚点、六个状态面、canonical双跑及盲干预hash。材料通过不改变OPT-01—16的`draft`状态；下一步仍是真实口试、闭卷、nonce轨、个人未见参数运行和延迟保持证据。
+
 ## 对接科学空间
 
 - “低秩近似之路”系列：伪逆、SVD、CR、ID、CUR
@@ -1722,7 +1730,7 @@ AI迁移从Banach压缩映射的几何尾界推进到标量二次梯度下降的
 6. **微积分与自动微分**：10.4 的CALC-01—16均已完成正文、SVG、15题与独立详解；CALC-CUM-01已形成“口试—闭卷—scorer nonce随机三轨—盲干预—48小时—14天”证据链，并由[[calculus_ad_cumulative_contract_audit.py]]复核为材料`regression-passed`、个人`not-attempted`。
 7. **概率论与数理统计**：10.5 已完成 PROB-01—20 的正文、SVG、各 15 题与独立详解；`PROB-CUM-01` 已形成“口试—闭卷—scorer nonce随机轨—盲干预—48小时—14天”证据链，并由[[probability_cumulative_contract_audit.py]]复核为材料`regression-passed`、个人`not-attempted`。
 8. **信息论与统计学习接口**：10.6 已完成 INFO-01—10 的正文、十幅机制图、150 道 A–E 题和独立详解；`INFO-CUM-01` 已形成“口试—闭卷—scorer nonce随机轨—盲干预—48小时—14天”证据链，并由[[information_cumulative_contract_audit.py]]复核为材料`regression-passed`、个人`not-attempted`。
-9. **优化与凸分析**：10.7 已完成 OPT-01—16 的正文、十六幅机制图、240 道 A—E 题、独立详解、`OPT-CUM-01` 与三轨计算门，达到 16/16；状态为 `composed / not-attempted`。
+9. **优化与凸分析**：10.7 已完成 OPT-01—16 的正文、十六幅机制图、240 道 A—E 题和独立详解；`OPT-CUM-01` 已形成“口试—闭卷—scorer nonce随机轨—盲干预—48小时换机制—14天陌生AI迁移”证据链，并由[[optimization_cumulative_contract_audit.py]]复核为材料`regression-passed`、个人`not-attempted`。
 10. **ODE、动力系统与 SDE**：10.9 已完成 DYN-01—12 的正文、机制图、180 道 A—E 题、独立详解，以及含口试—闭卷—三轨—延迟门的 `DYN-CUM-01`；当前材料 `regression-passed`，个人 `not-attempted`。
 11. **几何、泛函分析、核与算子基础**：10.10 已完成GEO-01—08的正文、机制图、120道A—E题、独立详解、八套节点计算门以及含口试—闭卷—随机三轨—延迟门的`GEO-CUM-01`；当前材料`regression-passed`，个人`not-attempted`。
 12. **数学语言、逻辑与证明**：[[数学语言、逻辑与证明 MOC|10.1卷入口]]与MATH-01—08均已建立正文、深色机制图、各15题、独立详解与浅色计算审计，达到8/8；`MATH-CUM-01`题卷、详解与量词—递推—复杂度三轨计算门已成稿，当前`composed / not-attempted`。

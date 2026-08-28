@@ -444,7 +444,7 @@ updated: 2026-08-28
 |---|---|---|
 | MATH-CUM-01 | MATH-01—08：数学语言、逻辑与证明卷末累计验收 | composed：[[阶段测验 - 数学语言、逻辑与证明（10.1）]]、[[阶段测验解答 - 数学语言、逻辑与证明（10.1）]]和[[实验 - 数学语言、逻辑与证明累计复现门]]已建立；等待真实独立作答 |
 | GEO-CUM-01 | GEO-01—08：几何、泛函分析、核与算子基础卷末累计验收 | regression-passed：[[阶段测验 - 几何、泛函分析、核与算子基础（10.10）]]、[[阶段测验解答 - 几何、泛函分析、核与算子基础（10.10）]]和[[实验 - 几何、泛函与算子累计复现门]]已通过静态/计算回归；个人仍为 not-attempted |
-| OPT-CUM-01 | OPT-01—16：优化与凸分析卷末累计验收 | composed：[[阶段测验 - 优化与凸分析（10.7）]]、[[阶段测验解答 - 优化与凸分析（10.7）]]和[[实验 - 优化与凸分析累计复现门]]已建立；等待真实独立作答 |
+| OPT-CUM-01 | OPT-01—16：优化与凸分析卷末累计验收 | regression-passed：题卷、详解、[[实验 - 优化与凸分析累计复现门]]与[[optimization_cumulative_contract_audit.py]]已通过独立静态/计算回归；个人仍为 not-attempted |
 | INFO-CUM-01 | INFO-01—10：信息论与统计学习接口卷末累计验收 | regression-passed：题卷、详解、[[实验 - 信息论累计复现门]]与[[information_cumulative_contract_audit.py]]已通过独立静态/计算回归；个人仍为 not-attempted |
 | PROB-CUM-01 | PROB-01—20：概率论与数理统计卷末累计验收 | regression-passed：题卷、详解、[[实验 - 概率统计累计复现门]]与[[probability_cumulative_contract_audit.py]]已通过独立静态/计算回归；个人仍为 not-attempted |
 | LA-CUM-01 | LA-01—24：线性代数卷末累计验收 | regression-passed：[[阶段测验 - 线性代数（10.2）]]、[[阶段测验解答 - 线性代数（10.2）]]和[[实验 - 线性代数累计复现门]]已通过独立静态/计算回归；个人仍为 not-attempted |
@@ -558,11 +558,11 @@ INFO-CUM-01 以 15 分钟口试和 180 分钟、100 分闭卷覆盖 INFO-01—10
 
 ### OPT-CUM-01 的状态边界
 
-OPT-CUM-01 是 210 分钟、100 分的闭卷卷末测验，覆盖 OPT-01—16，并设置 A—E 分区线、三道主证明不得为零和 strict-saddle–PL–sharpness 三轨计算门。当前状态为 **composed / not-attempted**：
+OPT-CUM-01 是 210 分钟、100 分的闭卷卷末测验，覆盖 OPT-01—16，并设置 A—E 分区线、三道主证明不得为零和 strict-saddle–PL–sharpness 三轨计算门。当前状态为 **regression-passed / not-attempted**：
 
-- 十六套节点题共 240 题，题卷、逐题详解与确定性计算门已经成稿；
-- canonical SVG、数值摘要和 hash 通过只证明工具可执行，不证明学习者能独立推导；
-- 尚无首次闭卷原稿、逐题评分、参数干预、48 小时重做和 14 天迁移证据；
+- 十六套节点题共 240 题，题卷、逐题详解、答案/输出隔离与状态机已成稿；
+- 四波独立解析、canonical 双跑、盲参 SVG/hash 与六个状态入口已由[[optimization_cumulative_contract_audit.py]]回归，但只证明工具可执行；
+- 尚无首次口试/闭卷原稿、`scorer nonce` 随机轨、个人新 output/hash、48 小时换机制和 14 天陌生 AI 迁移证据；
 - 因而优化卷 16 个节点全部保持 `draft`；正式作答前不要打开[[阶段测验解答 - 优化与凸分析（10.7）]]。
 
 ### MATH-FND-CAP-01 的状态边界
