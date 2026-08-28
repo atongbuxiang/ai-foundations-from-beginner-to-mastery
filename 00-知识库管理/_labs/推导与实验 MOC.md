@@ -53,9 +53,9 @@ updated: 2026-08-28
 - 题卷：[[阶段测验 - 几何、泛函分析、核与算子基础（10.10）]]；
 - 独立详解：[[阶段测验解答 - 几何、泛函分析、核与算子基础（10.10）]]；
 - 卷级 ID：`GEO-CUM-01`；
-- 计算门：[[实验 - 几何、泛函与算子累计复现门]]，覆盖sphere retraction/rotation covariance、Hilbert projection/compact spectrum/kernel effective dimension与Poisson cutoff的多topology误差；
-- 覆盖：GEO-01—08，20分钟口试、210分钟100分闭卷、评分者nonce随机计算轨道、48小时换例与14天迁移；
-- 当前语义：材料`regression-passed`、个人`not-attempted`，由[[geometry_functional_cumulative_contract_audit.py]]复核，不构成verified证据。
+- 计算门：[[实验 - 几何、泛函与算子累计复现门]]，覆盖radius-sphere retraction/rotation covariance、Hilbert target/compact/kernel幂律谱与length-$L$ Poisson cutoff的多topology误差；
+- 覆盖：GEO-01—08，20分钟口试、210分钟100分闭卷、评分者nonce主轨、至少跨两轨盲参、48小时换机制与14天迁移；
+- 当前语义：材料`regression-passed`、个人`not-attempted`；[[geometry_functional_cumulative_contract_audit.py]]复核canonical双跑、非标准覆盖保护和固定盲参stdout/SVG/hash，不构成verified证据。
 
 - 题卷：[[阶段测验 - 线性代数（10.2）]]；
 - 独立详解：[[阶段测验解答 - 线性代数（10.2）]]；
@@ -175,7 +175,7 @@ updated: 2026-08-28
 57. [[实验 - 极限证书、完备性与浮点停滞审计]]：比较$q=.5/.8/.99$达到$10^{-6}$的严格见证20/62/1375，用精确有理Newton列暴露$\mathbb Q$缺失$\sqrt2$，以$x^n$分离固定网格与连续域supremum，并确认binary64在$n=53$把$1+2^{-n}$首次存成1。
 58. [[实验 - 增长率、有限窗口与 Attention 成本审计]]：比较log/linear/$n\log n$/quadratic/exponential增长，精确枚举线性与三角循环并恢复1.000000/1.966996斜率，以解析local slope暴露低阶项与loss地板，再在$d=512$下分离projection、pairwise work与score memory，交叉proxy为$T=1024$。
 59. [[实验 - 数学语言、逻辑与证明累计复现门]]：穷举65536个$4\times4$ relations得到50625个pointwise、14911个uniform与35714个换序反例；把递推闭式、几何上界、epsilon证书和$O(\log1/\varepsilon)$串联；以fixed $r$与$r=T/4$分离Attention的一次/二次增长制度。
-60. [[实验 - 几何、泛函与算子累计复现门]]：在sphere上恢复ambient constraint二阶、normalization retraction相对Exp三阶与rotation covariance；以$c_j=1/j$和$\mu_j=j^{-2}$分离Hilbert projection、compact tail与kernel effective dimension；用Poisson cutoff同时展示$L^2/H^1/strong$误差指数$-2/-1/0$。
+60. [[实验 - 几何、泛函与算子累计复现门]]：在radius-sphere上恢复ambient constraint二阶、normalization retraction相对Exp三阶与rotation covariance；以$c_j=j^{-\alpha}$和$\mu_j=j^{-\beta}$分离Hilbert projection、compact tail与kernel effective dimension；在长度$L$区间上用Poisson cutoff同时展示$L^2/H^1/strong$误差指数$-2/-1/0$；支持nonce跨轨盲参和独立图—数审计。
 61. [[实验 - 数学基础十卷跨章累计复现门]]：用linear-Gaussian posterior/MI分离定理值与估计量，用quadratic flow/GD分离连续稳定与Euler步长域，再在$S^1$上把rotation/retraction、finite Gram/KRR approximation和condition增长纳入同一跨卷证据账。
 62. [[实验 - 线性代数累计复现门]]：用病态基分离抽象向量与坐标、以kernel/quotient/projector核对空间不变量，以Jordan/SVD分离谱值、暂态与低秩尾误差，再用attention-softmax与vec合同分离exact rank、numerical rank和非线性边界；canonical及盲参数接口由独立累计审计复核。
 63. [[实验 - 矩阵分析累计复现门]]：用SPD边界分离positive margin、condition与Cholesky pivot，以closing eigengap和nilpotent coupling分离谱值、方向与pseudospectrum，再用sign/polar、Fréchet remainder和structured tangent分离involution、isometry、一阶近似与允许扰动；canonical及盲参数接口由独立累计审计复核。

@@ -10,6 +10,7 @@ L2, energy/H^-1, relative, and strong-residual topologies.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import html
 import math
 from pathlib import Path
@@ -36,11 +37,17 @@ PURPLE = "#7c3aed"
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--sphere-radius", type=float, default=1.0)
+    parser.add_argument("--objective-y", type=float, default=2.0)
+    parser.add_argument("--objective-z", type=float, default=-1.0)
     parser.add_argument("--rotation-angle", type=float, default=0.7)
     parser.add_argument("--spectral-size", type=int, default=131072)
+    parser.add_argument("--coefficient-exponent", type=float, default=1.0)
+    parser.add_argument("--eigen-exponent", type=float, default=2.0)
+    parser.add_argument("--domain-length", type=float, default=1.0)
     parser.add_argument("--train-cutoff", type=int, default=8)
     parser.add_argument("--max-mode", type=int, default=64)
-    parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--output", type=Path)
     return parser.parse_args()
 
 
@@ -116,7 +123,10 @@ def matvec(matrix: list[list[float]], vector: list[float]) -> list[float]:
 
 
 def sphere_gradient(point: list[float], parameter: list[float]) -> list[float]:
-    return sub(parameter, scale(dot(point, parameter), point))
+    radius_squared = dot(point, point)
+    if radius_squared <= 0.0:
+        raise ValueError("sphere point must be nonzero")
+    return sub(parameter, scale(dot(point, parameter) / radius_squared, point))
 
 
 def ols_slope(xs: list[float], ys: list[float]) -> float:
@@ -134,21 +144,34 @@ def map_linear(value: float, lo: float, hi: float, out_lo: float, out_hi: float)
     return out_lo + (value - lo) * (out_hi - out_lo) / (hi - lo)
 
 
-def geometry_track(angle: float) -> dict[str, object]:
-    point = [1.0, 0.0, 0.0]
-    parameter = [1.0, 2.0, -1.0]
+def geometry_track(
+    radius: float,
+    parameter_y: float,
+    parameter_z: float,
+    angle: float,
+) -> dict[str, object]:
+    if radius <= 0.0:
+        raise ValueError("--sphere-radius must be positive")
+    point = [radius, 0.0, 0.0]
+    parameter = [1.0, parameter_y, parameter_z]
     gradient = sphere_gradient(point, parameter)
-    tangent = scale(1.0 / norm(gradient), gradient)
+    gradient_norm = norm(gradient)
+    if gradient_norm == 0.0:
+        raise ValueError("--objective-y and --objective-z cannot both be zero")
+    tangent = scale(1.0 / gradient_norm, gradient)
     hs = [2.0 ** (-k) for k in range(12, 1, -1)]
     ambient_residuals = []
     retraction_errors = []
     for h in hs:
         ambient = add(point, scale(h, tangent))
-        ambient_residuals.append(abs(dot(ambient, ambient) - 1.0))
-        exponential = add(scale(math.cos(h), point), scale(math.sin(h), tangent))
-        retraction = scale(1.0 / norm(ambient), ambient)
+        ambient_residuals.append(abs(dot(ambient, ambient) - radius * radius))
+        exponential = add(
+            scale(math.cos(h / radius), point),
+            scale(radius * math.sin(h / radius), tangent),
+        )
+        retraction = scale(radius / norm(ambient), ambient)
         retraction_errors.append(norm(sub(retraction, exponential)))
-        if abs(norm(retraction) - 1.0) > 3e-16:
+        if abs(norm(retraction) - radius) > 5e-16 * max(1.0, radius):
             raise AssertionError("normalization retraction left the sphere")
 
     cosine = math.cos(angle)
@@ -169,25 +192,57 @@ def geometry_track(angle: float) -> dict[str, object]:
         "constraint_slope": ols_slope(hs, ambient_residuals),
         "retraction_slope": ols_slope(hs, retraction_errors),
         "equivariance_error": equivariance_error,
+        "radius": radius,
+        "parameter_y": parameter_y,
+        "parameter_z": parameter_z,
+        "angle": angle,
     }
 
 
-def functional_track(size: int) -> dict[str, object]:
+def functional_track(
+    size: int,
+    coefficient_exponent: float,
+    eigen_exponent: float,
+) -> dict[str, object]:
     if size < 8192:
         raise ValueError("--spectral-size must be at least 8192")
+    if coefficient_exponent <= 0.5:
+        raise ValueError("--coefficient-exponent must exceed 0.5 for an l2 target")
+    if eigen_exponent <= 0.0:
+        raise ValueError("--eigen-exponent must be positive")
     ms = [2 ** k for k in range(2, 13)]
     prefix = [0.0]
     for j in range(1, size + 1):
-        prefix.append(prefix[-1] + 1.0 / (j * j))
+        coefficient_square = (
+            1.0 / (j * j)
+            if coefficient_exponent == 1.0
+            else j ** (-2.0 * coefficient_exponent)
+        )
+        prefix.append(prefix[-1] + coefficient_square)
     total = prefix[-1]
     projection_errors = [math.sqrt(total - prefix[m]) for m in ms]
-    compact_tails = [1.0 / ((m + 1) ** 2) for m in ms]
+    compact_tails = [
+        1.0 / ((m + 1) ** 2)
+        if eigen_exponent == 2.0
+        else (m + 1) ** (-eigen_exponent)
+        for m in ms
+    ]
 
     lambdas = [10.0 ** (-exponent / 2.0) for exponent in range(2, 13)]
     effective_dimensions = []
     for regularization in lambdas:
         effective_dimensions.append(
-            sum(1.0 / (1.0 + regularization * j * j) for j in range(1, size + 1))
+            sum(
+                1.0 / (
+                    1.0
+                    + (
+                        regularization * j * j
+                        if eigen_exponent == 2.0
+                        else regularization * j ** eigen_exponent
+                    )
+                )
+                for j in range(1, size + 1)
+            )
         )
     effective_slope = ols_slope([1.0 / value for value in lambdas], effective_dimensions)
     return {
@@ -200,15 +255,24 @@ def functional_track(size: int) -> dict[str, object]:
         "effective": effective_dimensions,
         "effective_slope": effective_slope,
         "effective_last": effective_dimensions[-1],
+        "coefficient_exponent": coefficient_exponent,
+        "eigen_exponent": eigen_exponent,
+        "size": size,
     }
 
 
-def pde_track(train_cutoff: int, max_mode: int) -> dict[str, object]:
+def pde_track(domain_length: float, train_cutoff: int, max_mode: int) -> dict[str, object]:
+    if domain_length <= 0.0:
+        raise ValueError("--domain-length must be positive")
     if train_cutoff < 1 or max_mode <= train_cutoff + 4:
         raise ValueError("require 1 <= train-cutoff < max-mode-4")
     modes = list(range(train_cutoff + 1, max_mode + 1))
-    l2_errors = [1.0 / ((math.pi * mode) ** 2) for mode in modes]
-    energy_errors = [1.0 / (math.pi * mode) for mode in modes]
+    if domain_length == 1.0:
+        l2_errors = [1.0 / ((math.pi * mode) ** 2) for mode in modes]
+        energy_errors = [1.0 / (math.pi * mode) for mode in modes]
+    else:
+        l2_errors = [(domain_length / (math.pi * mode)) ** 2 for mode in modes]
+        energy_errors = [domain_length / (math.pi * mode) for mode in modes]
     strong_residuals = [1.0 for _ in modes]
     return {
         "modes": modes,
@@ -220,6 +284,7 @@ def pde_track(train_cutoff: int, max_mode: int) -> dict[str, object]:
         "strong_slope": ols_slope(modes, strong_residuals),
         "last_l2": l2_errors[-1],
         "last_energy": energy_errors[-1],
+        "domain_length": domain_length,
     }
 
 
@@ -248,7 +313,21 @@ def draw_loglog(parts: list[str], xs: list[float], series: list[tuple[str, list[
 
 
 def draw_panel_a(parts: list[str], x: float, data: dict[str, object]) -> None:
-    panel_shell(parts, x, "A  球面几何与对称", "ambient step、retraction、Exp 与 SO(3) covariance")
+    canonical = (
+        data["radius"] == 1.0
+        and data["parameter_y"] == 2.0
+        and data["parameter_z"] == -1.0
+        and data["angle"] == 0.7
+    )
+    subtitle = (
+        "ambient step、retraction、Exp 与 SO(3) covariance"
+        if canonical
+        else (
+            f"S² radius={data['radius']:g}；c=(1,{data['parameter_y']:g},{data['parameter_z']:g})；"
+            f"θ={data['angle']:g}"
+        )
+    )
+    panel_shell(parts, x, "A  球面几何与对称", subtitle)
     xs = data["hs"]
     x0, x1, y0, y1 = x + 62, x + 412, 170, 315
     lx0, lx1 = math.log10(min(xs)), math.log10(max(xs))
@@ -276,7 +355,20 @@ def draw_panel_a(parts: list[str], x: float, data: dict[str, object]) -> None:
 
 
 def draw_panel_b(parts: list[str], x: float, data: dict[str, object]) -> None:
-    panel_shell(parts, x, "B  Hilbert投影、紧谱与RKHS", "同一谱中分离approximation tail与regularization capacity")
+    canonical = (
+        data["size"] == 131072
+        and data["coefficient_exponent"] == 1.0
+        and data["eigen_exponent"] == 2.0
+    )
+    subtitle = (
+        "同一谱中分离approximation tail与regularization capacity"
+        if canonical
+        else (
+            f"N={data['size']}；cⱼ=j⁻{data['coefficient_exponent']:g}；"
+            f"μⱼ=j⁻{data['eigen_exponent']:g}"
+        )
+    )
+    panel_shell(parts, x, "B  Hilbert投影、紧谱与RKHS", subtitle)
     xs = data["ms"]
     x0, x1, y0, y1 = x + 62, x + 412, 170, 315
     lx0, lx1 = math.log10(min(xs)), math.log10(max(xs))
@@ -297,14 +389,25 @@ def draw_panel_b(parts: list[str], x: float, data: dict[str, object]) -> None:
     parts.append(text(x + 111, 384, f"∥K−Kₘ∥: p={data['compact_slope']:.3f}", 10, INK))
     parts.append(rect(x + 24, 410, 392, 113, "#f0fbf7", radius=8))
     parts.append(text(x + 38, 437, "Kernel谱", 10, GREEN, 700))
-    parts.append(text(x + 111, 437, "μⱼ=j⁻²；N_eff(λ)=Σ μ/(μ+λ)", 10, INK))
+    kernel_label = (
+        "μⱼ=j⁻²；N_eff(λ)=Σ μ/(μ+λ)"
+        if data["eigen_exponent"] == 2.0
+        else f"μⱼ=j⁻{data['eigen_exponent']:g}；N_eff(λ)=Σ μ/(μ+λ)"
+    )
+    parts.append(text(x + 111, 437, kernel_label, 10, INK))
     parts.append(text(x + 38, 465, "容量斜率", 10, ORANGE, 700))
     parts.append(text(x + 111, 465, f"log N_eff vs log(1/λ): {data['effective_slope']:.3f}", 10, INK))
     parts.append(text(x + 38, 496, "边界：有限谱尾不是连续紧性的解析证明", 10, MUTED))
 
 
 def draw_panel_c(parts: list[str], x: float, data: dict[str, object], cutoff: int, max_mode: int) -> None:
-    panel_shell(parts, x, "C  弱PDE与算子泛化", "cutoff model在不同function-space norms下并非同一误差")
+    canonical = data["domain_length"] == 1.0 and cutoff == 8 and max_mode == 64
+    subtitle = (
+        "cutoff model在不同function-space norms下并非同一误差"
+        if canonical
+        else f"(0,L), L={data['domain_length']:g}；train 1…{cutoff}；OOD {cutoff + 1}…{max_mode}"
+    )
+    panel_shell(parts, x, "C  弱PDE与算子泛化", subtitle)
     xs = data["modes"]
     x0, x1, y0, y1 = x + 62, x + 412, 170, 315
     lx0, lx1 = math.log10(min(xs)), math.log10(max(xs))
@@ -357,47 +460,84 @@ def build_svg(geometry: dict[str, object], functional: dict[str, object],
 
 def main() -> None:
     args = parse_args()
-    geometry = geometry_track(args.rotation_angle)
-    functional = functional_track(args.spectral_size)
-    pde = pde_track(args.train_cutoff, args.max_mode)
+    canonical = (
+        args.sphere_radius == 1.0
+        and args.objective_y == 2.0
+        and args.objective_z == -1.0
+        and args.rotation_angle == 0.7
+        and args.spectral_size == 131072
+        and args.coefficient_exponent == 1.0
+        and args.eigen_exponent == 2.0
+        and args.domain_length == 1.0
+        and args.train_cutoff == 8
+        and args.max_mode == 64
+    )
+    if not canonical and args.output is None:
+        raise SystemExit("noncanonical runs require --output so the canonical SVG is not overwritten")
+    geometry = geometry_track(
+        args.sphere_radius,
+        args.objective_y,
+        args.objective_z,
+        args.rotation_angle,
+    )
+    functional = functional_track(
+        args.spectral_size,
+        args.coefficient_exponent,
+        args.eigen_exponent,
+    )
+    pde = pde_track(args.domain_length, args.train_cutoff, args.max_mode)
 
     if abs(geometry["constraint_slope"] - 2.0) > 1e-12:
         raise AssertionError("ambient sphere residual should be exactly second order")
     if not (2.98 < geometry["retraction_slope"] < 3.01):
         raise AssertionError("normalization retraction should differ from Exp at third order")
-    if not (-0.53 < functional["projection_slope"] < -0.47):
-        raise AssertionError("Hilbert projection tail should scale near m^-1/2")
-    if not (-2.02 < functional["compact_slope"] < -1.90):
-        raise AssertionError("compact tail should scale near m^-2")
+    expected_projection_order = 0.5 - args.coefficient_exponent
+    if abs(functional["projection_slope"] - expected_projection_order) > 0.08:
+        raise AssertionError("Hilbert projection tail left its analytic finite-window order")
+    if abs(functional["compact_slope"] + args.eigen_exponent) > 0.10:
+        raise AssertionError("compact tail left its analytic finite-window order")
     if abs(pde["l2_slope"] + 2.0) > 1e-12 or abs(pde["energy_slope"] + 1.0) > 1e-12:
         raise AssertionError("Poisson modal norms have incorrect orders")
 
     svg = build_svg(geometry, functional, pde, args.train_cutoff, args.max_mode)
-    output = args.output.expanduser().resolve()
+    output = (args.output or DEFAULT_OUTPUT).expanduser().resolve()
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(svg, encoding="utf-8")
+    digest = hashlib.sha256(svg.encode("utf-8")).hexdigest()
 
     print(
-        "geometry "
+        f"A_CONFIG sphere_radius={args.sphere_radius:g} objective_y={args.objective_y:g} "
+        f"objective_z={args.objective_z:g} rotation_angle={args.rotation_angle:g}"
+    )
+    print(
+        "A_GEOMETRY "
         f"constraint_slope={geometry['constraint_slope']:.6f} "
         f"retraction_order={geometry['retraction_slope']:.6f} "
         f"equivariance_error={geometry['equivariance_error']:.3e}"
     )
     print(
-        "functional "
+        f"B_CONFIG spectral_size={args.spectral_size} "
+        f"coefficient_exponent={args.coefficient_exponent:g} eigen_exponent={args.eigen_exponent:g}"
+    )
+    print(
+        "B_SPECTRAL "
         f"projection_slope={functional['projection_slope']:.6f} "
         f"compact_tail_slope={functional['compact_slope']:.6f} "
         f"effective_dimension_slope={functional['effective_slope']:.6f} "
         f"neff_at_1e-6={functional['effective_last']:.6f}"
     )
     print(
-        "pde "
-        f"train_cutoff={args.train_cutoff} max_mode={args.max_mode} "
+        f"C_CONFIG domain_length={args.domain_length:g} train_cutoff={args.train_cutoff} "
+        f"max_mode={args.max_mode}"
+    )
+    print(
+        "C_OPERATOR "
         f"l2_slope={pde['l2_slope']:.6f} energy_slope={pde['energy_slope']:.6f} "
         f"strong_slope={pde['strong_slope']:.6f} "
         f"last_l2={pde['last_l2']:.8e} last_energy={pde['last_energy']:.8e}"
     )
-    print(f"wrote {output}")
+    print(f"OUTPUT {output}")
+    print(f"SHA256 {digest}")
 
 
 if __name__ == "__main__":

@@ -32,6 +32,7 @@ CUM_SVG = (
     / "plot-geometry-functional-cumulative-gate-v2.svg"
 )
 EXPECTED_CUM_SHA256 = "d0ff3852b11f8a82af5feff469fa3ef4e1adde7836cf292b4911dec043c59bd1"
+EXPECTED_INTERVENTION_SHA256 = "7b5aac02d74e0fd90053dee51ad1d17d0911454592730b486fb23e4ec12cd9bc"
 
 STATE_SURFACES = (
     ROOT / "10-数学基础" / "数学基础完整课程地图与掌握标准.md",
@@ -95,7 +96,7 @@ def audit_assessment_bundle() -> None:
             "learning_status: not-attempted" in content,
             f"{label}: personal state is not not-attempted",
         )
-        require("updated: 2026-08-27" in content, f"{label}: migration date missing")
+        require("updated: 2026-08-28" in content, f"{label}: migration date missing")
 
     require("time_limit_minutes: 210" in assessment, "assessment time limit changed")
     require("assessment_id: GEO-CUM-01" in assessment, "assessment ID changed")
@@ -109,26 +110,32 @@ def audit_assessment_bundle() -> None:
     for marker in (
         "先看完整验收时间线",
         "20 分钟卷级口试",
-        "三波统一对象账本",
-        "答案隔离协议",
+        "三波参数化模型族",
+        "九层几何—泛函—算子对象账本",
+        "答案与输出隔离协议",
+        "scorer nonce",
         "连续—离散证据边界",
-        "48 小时与 14 天保持性门",
-        "证据清单",
+        "48 小时换机制重建门",
+        "14 天陌生 AI 几何—算子迁移门",
+        "提交证据清单",
     ):
         require(marker in assessment, f"assessment misses cumulative marker: {marker}")
     for marker in (
         "卷级口试参考要点",
-        "三波统一对象账本参考",
+        "九层几何—泛函—算子对象账本参考",
+        "三波参数化模型族的卷级数值锚点",
         "口试判分红线",
         "实验复现门的评分说明",
+        "nonce 与盲参数判分红线",
         "从 `retained` 到逐节点证据",
+        "最终状态边界",
     ):
         require(marker in solution, f"solution misses oral/rubric marker: {marker}")
 
     forbidden_in_questions = (
         "### 第1题解答：",
         "## 七、卷级口试参考要点",
-        "## 八、三波统一对象账本参考",
+        "## 八、九层几何—泛函—算子对象账本参考",
         "## 九、口试判分红线",
     )
     leaked = [marker for marker in forbidden_in_questions if marker in assessment]
@@ -139,27 +146,37 @@ def audit_assessment_bundle() -> None:
         "assessment lost its explicit solution pointer",
     )
     require(
-        "冻结全部原始记录后再打开本解答" in solution,
+        "才可打开本解答或 canonical 结果" in solution,
         "solution use-order warning is incomplete",
     )
 
-    points = (5, 5, 5, 5, 8, 8, 7, 7, 8, 8, 9, 10, 5, 10)
-    require(sum(points) == 100, "question point allocation no longer totals 100")
+    question_points = {
+        int(index): int(points)
+        for index, points in re.findall(r"^### 第\s*(\d+)题：.*（(\d+)分）$", assessment, re.M)
+    }
+    solution_points = {
+        int(index): int(points)
+        for index, points in re.findall(r"^### 第\s*(\d+)题解答：.*（(\d+)分）$", solution, re.M)
+    }
+    require(sorted(question_points) == list(range(1, 15)), "assessment point headers are incomplete")
+    require(sorted(solution_points) == list(range(1, 15)), "solution point headers are incomplete")
+    require(question_points == solution_points, "question/solution point allocations differ")
+    require(sum(question_points.values()) == 100, "question point allocation no longer totals 100")
     print(
-        "PASS assessment bundle: scope 8/8, questions 14/14, "
-        "oral/written/retention gates, answer isolation"
+        "PASS assessment bundle: scope 8/8, questions/answers 14/14, "
+        "points=100, isolation + nonce + delay gates"
     )
 
 
 def audit_cumulative_route() -> None:
     moc = read(MOC)
     expected_row = (
-        "| CUM | GEO-CUM | 口试—闭卷—三轨实验—延迟重做 | "
-        "三波随机回链、三条证明主链与 A/B/C 累计门 | `regression-passed` | `not-attempted` |"
+        "| CUM | GEO-CUM-01 | 口试 → 闭卷 → nonce 随机轨 → 跨轨盲干预 → 订正 → 48 h / 14 d → 独立审计 | "
+        "三波参数化模型族、三条证明主链与 A/B/C 累计门 | `regression-passed` | `not-attempted` |"
     )
     require(expected_row in moc, "MOC cumulative status row is not regression-passed / not-attempted")
     for marker in (
-        "GEO-CUM：卷末综合验收闭环",
+        "GEO-CUM-01：卷末综合验收闭环",
         "20 分钟口试",
         "210 分钟闭卷",
         "48 小时换例",
@@ -191,30 +208,41 @@ def audit_cumulative_route() -> None:
             "not-attempted" in nearby,
             f"state surface lost personal not-attempted boundary: {path.relative_to(ROOT)}",
         )
+        require(
+            "geometry_functional_cumulative_contract_audit.py" in content,
+            f"state surface misses independent audit: {path.relative_to(ROOT)}",
+        )
     print(f"PASS state surfaces: MOC plus {len(STATE_SURFACES)} curriculum/ledger views agree")
 
 
 def audit_experiment_contract() -> None:
     experiment = read(EXPERIMENT)
     for marker in (
+        "执行顺序、答案隔离与 scorer nonce",
         "进入实验前的解析校准门",
-        "评分者随机指定与防挑题协议",
+        "评分者随机指定、跨轨盲参与防挑题协议",
         "防止循环认证",
         "轨道A：球面几何、retraction与rotation covariance",
         "轨道B：Hilbert projection、compact spectrum与RKHS容量",
         "轨道C：Poisson smoothing与operator cutoff盲区",
         "评分者随机指定的盲手工复核",
         "盲参数干预门",
+        "盲测干预怎样才算独立",
+        "审计使用的固定多参数盲测 fixture",
+        "--sphere-radius",
+        "--coefficient-exponent",
+        "--domain-length",
         "证据状态机",
         "48 小时换例与 14 天迁移",
         EXPECTED_CUM_SHA256,
+        EXPECTED_INTERVENTION_SHA256,
     ):
         require(marker in experiment, f"experiment misses contract marker: {marker}")
     headings = [line.strip() for line in experiment.splitlines() if line.startswith("#")]
     duplicates = sorted({heading for heading in headings if headings.count(heading) > 1})
     require(not duplicates, f"experiment has duplicate headings: {duplicates}")
     require(TEACHING_AUDIT.is_file() and CUM_SCRIPT.is_file(), "required audit/compute scripts missing")
-    print("PASS experiment contract: analytic calibration, blind A/B/C route, intervention and evidence states")
+    print("PASS experiment contract: analytic calibration, A/B/C tracks, blind intervention and evidence states")
 
 
 def audit_exact_models() -> None:
@@ -293,7 +321,61 @@ def audit_exact_models() -> None:
     require(math.isclose(l2_error, 2.47366171e-5, abs_tol=5e-14), "Poisson L2 error changed")
     require(math.isclose(energy_error, 4.97359197e-3, abs_tol=5e-12), "Poisson energy error changed")
     require(l2_error / l2_error == 1.0, "Poisson relative error changed")
-    print("PASS exact cumulative models: sphere covariance, Hilbert/compact/RKHS spectrum and Poisson norm ledger")
+
+    # Fixed blind fixture: derive its mechanism-changing anchors independently.
+    blind_radius = 1.5
+    blind_step = 2 ** -10
+    blind_parameter = (1.0, 1.4, -0.6)
+    blind_point = (blind_radius, 0.0, 0.0)
+    blind_inner = sum(a * b for a, b in zip(blind_point, blind_parameter))
+    blind_gradient = tuple(
+        c - blind_inner * p / (blind_radius * blind_radius)
+        for p, c in zip(blind_point, blind_parameter)
+    )
+    blind_gradient_norm = math.sqrt(sum(value * value for value in blind_gradient))
+    blind_tangent = tuple(value / blind_gradient_norm for value in blind_gradient)
+    blind_ambient = tuple(p + blind_step * v for p, v in zip(blind_point, blind_tangent))
+    require(
+        math.isclose(
+            sum(value * value for value in blind_ambient) - blind_radius**2,
+            blind_step**2,
+            abs_tol=5e-16,
+        ),
+        "blind sphere constraint changed",
+    )
+    blind_retraction = tuple(
+        blind_radius * value / math.sqrt(sum(item * item for item in blind_ambient))
+        for value in blind_ambient
+    )
+    blind_exponential = tuple(
+        math.cos(blind_step / blind_radius) * p
+        + blind_radius * math.sin(blind_step / blind_radius) * v
+        for p, v in zip(blind_point, blind_tangent)
+    )
+    blind_leading_ratio = math.dist(blind_retraction, blind_exponential) / blind_step**3
+    require(
+        math.isclose(blind_leading_ratio, 1 / (3 * blind_radius**2), rel_tol=2e-3),
+        "blind retraction coefficient changed",
+    )
+
+    blind_alpha, blind_beta = 1.25, 1.5
+    require(math.isclose(0.5 - blind_alpha, -0.75, abs_tol=0.0),
+            "blind projection exponent changed")
+    require(math.isclose(-blind_beta, -1.5, abs_tol=0.0),
+            "blind compact exponent changed")
+    require(math.isclose(1 / blind_beta, 2 / 3, abs_tol=0.0),
+            "blind effective-dimension exponent changed")
+    blind_operator_tail = (4096 + 1) ** (-blind_beta)
+    require(3.8e-6 < blind_operator_tail < 3.9e-6, "blind compact tail changed")
+
+    blind_length, blind_mode = 1.5, 80
+    blind_l2 = (blind_length / (math.pi * blind_mode)) ** 2
+    blind_energy = blind_length / (math.pi * blind_mode)
+    require(math.isclose(blind_l2, 3.56207286e-5, abs_tol=5e-14),
+            "blind Poisson L2 anchor changed")
+    require(math.isclose(blind_energy, 5.96831037e-3, abs_tol=5e-12),
+            "blind Poisson energy anchor changed")
+    print("PASS exact cumulative models: canonical A/B/C plus fixed blind sphere/spectrum/Poisson anchors")
 
 
 def audit_markdown_integrity() -> None:
@@ -373,6 +455,10 @@ def run(script: Path, *args: str) -> str:
     return result.stdout.strip()
 
 
+def normalized_output(output: str) -> str:
+    return "\n".join(line for line in output.splitlines() if not line.startswith("OUTPUT "))
+
+
 def audit_compute() -> None:
     teaching_output = run(TEACHING_AUDIT, "--run-figures")
     require(
@@ -381,27 +467,88 @@ def audit_compute() -> None:
     )
 
     with tempfile.TemporaryDirectory(prefix="geo-cum-audit-") as temporary_directory:
-        output_path = Path(temporary_directory) / CUM_SVG.name
-        first_output = run(CUM_SCRIPT, "--output", str(output_path))
-        require(
-            all(marker in first_output for marker in ("geometry ", "functional ", "pde ", "wrote ")),
-            "cumulative script did not report all three tracks",
-        )
-        first_digest = hashlib.sha256(output_path.read_bytes()).hexdigest()
+        temporary = Path(temporary_directory)
+        canonical_a = temporary / "canonical-a.svg"
+        canonical_b = temporary / "canonical-b.svg"
+        first_output = run(CUM_SCRIPT, "--output", str(canonical_a))
+        second_output = run(CUM_SCRIPT, "--output", str(canonical_b))
+        for marker in (
+            "A_CONFIG sphere_radius=1 objective_y=2 objective_z=-1 rotation_angle=0.7",
+            "A_GEOMETRY constraint_slope=2.000000 retraction_order=2.997004 equivariance_error=3.140e-16",
+            "B_CONFIG spectral_size=131072 coefficient_exponent=1 eigen_exponent=2",
+            "B_SPECTRAL projection_slope=-0.495225 compact_tail_slope=-1.951949 effective_dimension_slope=0.506725 neff_at_1e-6=1562.667109",
+            "C_CONFIG domain_length=1 train_cutoff=8 max_mode=64",
+            "C_OPERATOR l2_slope=-2.000000 energy_slope=-1.000000 strong_slope=0.000000 last_l2=2.47366171e-05 last_energy=4.97359197e-03",
+            f"SHA256 {EXPECTED_CUM_SHA256}",
+        ):
+            require(marker in first_output, f"canonical output misses: {marker}")
+        first_digest = hashlib.sha256(canonical_a.read_bytes()).hexdigest()
         require(first_digest == EXPECTED_CUM_SHA256, f"fresh cumulative SVG hash changed: {first_digest}")
-        first_bytes = output_path.read_bytes()
-        second_output = run(CUM_SCRIPT, "--output", str(output_path))
-        second_digest = hashlib.sha256(output_path.read_bytes()).hexdigest()
-        require(first_output == second_output and first_digest == second_digest, "cumulative gate is not deterministic")
-        require(first_bytes == output_path.read_bytes(), "cumulative SVG bytes changed across two runs")
-        root_element = ET.parse(output_path).getroot()
+        second_digest = hashlib.sha256(canonical_b.read_bytes()).hexdigest()
+        require(normalized_output(first_output) == normalized_output(second_output),
+                "canonical stdout changed across output paths")
+        require(first_digest == second_digest, "canonical digest changed across output paths")
+        require(canonical_a.read_bytes() == canonical_b.read_bytes() == CUM_SVG.read_bytes(),
+                "canonical SVG bytes differ from stored artifact")
+        root_element = ET.parse(canonical_a).getroot()
         require(
             root_element.tag.endswith("svg") and "viewBox" in root_element.attrib,
             "fresh cumulative SVG failed XML/viewBox validation",
         )
 
+        unsafe_run = subprocess.run(
+            [sys.executable, str(CUM_SCRIPT), "--sphere-radius", "1.5"],
+            cwd=ROOT,
+            check=False,
+            text=True,
+            capture_output=True,
+        )
+        require(unsafe_run.returncode != 0,
+                "noncanonical run without --output could overwrite canonical SVG")
+        require("noncanonical runs require --output" in unsafe_run.stderr,
+                "noncanonical output-protection error message drifted")
+
+        intervention = temporary / "blind.svg"
+        intervention_output = run(
+            CUM_SCRIPT,
+            "--sphere-radius", "1.5",
+            "--objective-y", "1.4",
+            "--objective-z", "-0.6",
+            "--rotation-angle", "1.1",
+            "--spectral-size", "65536",
+            "--coefficient-exponent", "1.25",
+            "--eigen-exponent", "1.5",
+            "--domain-length", "1.5",
+            "--train-cutoff", "12",
+            "--max-mode", "80",
+            "--output", str(intervention),
+        )
+        intervention_digest = hashlib.sha256(intervention.read_bytes()).hexdigest()
+        require(intervention_digest == EXPECTED_INTERVENTION_SHA256,
+                f"blind intervention SVG hash changed: {intervention_digest}")
+        for marker in (
+            "A_CONFIG sphere_radius=1.5 objective_y=1.4 objective_z=-0.6 rotation_angle=1.1",
+            "A_GEOMETRY constraint_slope=2.000000 retraction_order=2.998653 equivariance_error=3.140e-16",
+            "B_CONFIG spectral_size=65536 coefficient_exponent=1.25 eigen_exponent=1.5",
+            "B_SPECTRAL projection_slope=-0.740993 compact_tail_slope=-1.463961 effective_dimension_slope=0.641956 neff_at_1e-6=16483.628089",
+            "C_CONFIG domain_length=1.5 train_cutoff=12 max_mode=80",
+            "C_OPERATOR l2_slope=-2.000000 energy_slope=-1.000000 strong_slope=0.000000 last_l2=3.56207286e-05 last_energy=5.96831037e-03",
+            f"SHA256 {EXPECTED_INTERVENTION_SHA256}",
+        ):
+            require(marker in intervention_output, f"blind output misses: {marker}")
+        intervention_svg = intervention.read_text(encoding="utf-8")
+        for marker in (
+            "S² radius=1.5；c=(1,1.4,-0.6)；θ=1.1",
+            "N=65536；cⱼ=j⁻1.25；μⱼ=j⁻1.5",
+            "(0,L), L=1.5；train 1…12；OOD 13…80",
+            "j=80: L²=3.56e-05, relative=100%",
+        ):
+            require(marker in intervention_svg, f"blind SVG does not self-describe: {marker}")
+        ET.parse(intervention)
+
     print("PASS chapter compute dependency: GEO-01—08 teaching/figure regression")
-    print(f"PASS cumulative compute gate: deterministic double-run; sha256={first_digest}")
+    print(f"PASS canonical double-run + stored SVG: sha256={first_digest}")
+    print(f"PASS blind-interface intervention: sha256={EXPECTED_INTERVENTION_SHA256}")
 
 
 def main() -> None:

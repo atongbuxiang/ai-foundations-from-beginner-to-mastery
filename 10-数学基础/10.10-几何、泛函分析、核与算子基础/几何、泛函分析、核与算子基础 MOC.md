@@ -7,7 +7,7 @@ prerequisites: ["[[数学基础 MOC]]", "[[多元微积分、矩阵微分与自�
 related: ["[[数学基础完整课程地图与掌握标准]]", "[[练习与测验 MOC]]", "[[推导与实验 MOC]]"]
 sources: ["MIT-18.S190-2023-Metric-Spaces", "MIT-18.965-2014-Differential-Topology", "MIT-Dyatlov-18.155-Manifolds", "Munkres-Topology", "Lee-Topological-Manifolds", "Lee-Smooth-Manifolds", "Lee-Riemannian-Manifolds", "Boumal-2023-Optimization-Smooth-Manifolds", "Edelman-Arias-Smith-1998", "Amari-1998-Natural-Gradient", "Arvanitidis-et-al-2018-Latent-Space-Oddity", "Etingof-MIT-Lie-Groups", "Cohen-Welling-2016-GCNN", "Zaheer-et-al-2017-Deep-Sets", "Finzi-et-al-2020-LieConv", "Bronstein-et-al-2021-GDL", "MIT-18.102-Functional-Analysis", "MIT-18.125-Measure-Analysis", "Conway-Functional-Analysis", "Brezis-Functional-Analysis", "Gu-et-al-2020-HiPPO", "Kovachki-et-al-2023-Neural-Operator", "Berlinet-Thomas-Agnan-RKHS", "Aronszajn-1950-RKHS", "MIT-9.520-RKHS", "Scholkopf-Herbrich-Smola-2001-Representer", "Rasmussen-Williams-2006-GPML", "Rahimi-Recht-2007-Random-Features", "Jacot-Gabriel-Hongler-2018-NTK", "Raissi-et-al-2019-PINN", "E-Yu-2018-Deep-Ritz", "Lu-et-al-2021-DeepONet", "Li-et-al-2021-FNO", "Khodayi-Mehr-Zavlanos-2020-VarNet", "Czarnecki-et-al-2017-Sobolev-Training", "Arjovsky-et-al-2017-WGAN", "Dupont-et-al-2019-Augmented-Neural-ODE", "Esmaeili-et-al-2023-Topological-Obstructions", "Su-3963-Riemannian-Geometry", "Su-3969-Riemannian-Metric", "Su-3977-Geodesic", "Su-3998-Connection", "Su-11196-Sphere-Descent", "Su-4062-Exterior-Differential", "Su-5776-NICE-Flow", "Su-6280-Wasserstein-WGAN", "Su-8397-2D-RoPE", "Su-10347-Position-Encoding", "Su-7681-Scale-Symmetry", "Su-10114-HiPPO", "Su-6910-HSIC", "Su-8601-Infinite-Linear-Attention", "Su-3092-Green-Function"]
 created: 2026-08-19
-updated: 2026-08-27
+updated: 2026-08-28
 ---
 
 # 几何、泛函分析、核与算子基础 MOC
@@ -24,7 +24,7 @@ updated: 2026-08-27
 | A | GEO-01—04 | metric/topology → chart/tangent → Riemannian metric/optimization → Lie action/equivariance | $S^1$、induced geometry 与 $SO(2)$ | `regression-passed` | `draft / not-attempted` |
 | B | GEO-05—06 | norm/completion → Hilbert projection → bounded/compact operator → spectrum | $c_{00}\subset\ell^2$、$P_N$ 与 $K e_n=n^{-1}e_n$ | `regression-passed` | `draft / not-attempted` |
 | C | GEO-07—08 | PSD kernel → RKHS representation → weak derivative → variational/operator learning | Brownian bridge/Green kernel、$H_0^1$ 与 sine solution spectrum | `regression-passed` | `draft / not-attempted` |
-| CUM | GEO-CUM | 口试—闭卷—三轨实验—延迟重做 | 三波随机回链、三条证明主链与 A/B/C 累计门 | `regression-passed` | `not-attempted` |
+| CUM | GEO-CUM-01 | 口试 → 闭卷 → nonce 随机轨 → 跨轨盲干预 → 订正 → 48 h / 14 d → 独立审计 | 三波参数化模型族、三条证明主链与 A/B/C 累计门 | `regression-passed` | `not-attempted` |
 
 ### 第一波的 $S^1$—$SO(2)$ 单一模型链
 
@@ -304,15 +304,17 @@ GEO-01—08 已建立完整节点闭环。GEO-08 从 test functions 与 distribu
 
 全卷八套实验覆盖 topology、manifold、Riemannian geometry、Lie symmetry、Banach/Hilbert projection、compact spectrum、RKHS与weak PDE/operator。新增[[实验 - 弱导数、变分残差与解算子频谱审计]]：delta approximation mass为 $1.9998438$；P1 FEM 的 $L^2/H^1$ slopes为 $1.99892/0.99917$；algebraic weak residual低于 $2.73\times10^{-13}$ 而element-interior strong residual固定为 $6.97886$；八模态截断算子在训练子空间为零误差、对未见模态relative error为100%。两幅SVG均已实际PNG渲染目检。
 
-## 八、GEO-CUM：卷末综合验收闭环
+## 八、GEO-CUM-01：卷末综合验收闭环
 
 `GEO-CUM-01` 不把八套节点题简单拼接，而是检查三波知识能否在陌生声明中重新组成一条对象正确、量词完整的链：
 
 ```mermaid
 flowchart LR
     O["20 分钟口试：即时建立对象账本"] --> W["210 分钟闭卷：定义—手算—证明—反例—迁移"]
-    W --> E["A/B/C 随机实验：解析 reference + 盲干预"]
-    E --> R48["48 小时换例：修复首个断点"]
+    W --> N["冻结解析预测 → scorer nonce"]
+    N --> E["A/B/C 主轨 + 跨轨盲参：stdout/SVG/hash"]
+    E --> C["打开详解：评分与订正"]
+    C --> R48["48 小时换机制：修复首个断点"]
     R48 --> R14["14 天迁移：陌生 AI 声明审计"]
     R14 --> V["retained → 逐节点证据审查"]
 ```
@@ -322,7 +324,7 @@ flowchart LR
 1. 建立唯一 `attempt_id`，关闭反向链接/悬浮预览，冻结空白口试与闭卷记录；
 2. 完成[[阶段测验 - 几何、泛函分析、核与算子基础（10.10）|20 分钟口试 + 210 分钟、100 分闭卷]]；口试先验收 point/tangent/covector/function/operator 的类型链和 continuous-to-discrete 边界；
 3. 冻结第一次答案后，才打开[[阶段测验解答 - 几何、泛函分析、核与算子基础（10.10）|逐题独立详解]]，按原答案第一个断点评分，不用最终数值覆盖过程错误；
-4. 进入[[实验 - 几何、泛函与算子累计复现门]]，先冻结预测，再由 `attempt_id + scorer nonce` 指定 sphere/Hilbert/weak-PDE 一轨；canonical 只校准环境，正式证据来自手推和盲参数干预；
+4. 进入[[实验 - 几何、泛函与算子累计复现门]]，先冻结三轨解析预测、canonical预期与新输出路径，再由 `attempt_id + scorer nonce` 指定 sphere/Hilbert/weak-PDE 主轨；评分者另给至少跨两轨的未见参数，canonical 只校准环境，正式证据来自手推、盲参数预测、stdout/SVG与hash；
 5. 48 小时换 sphere radius/谱指数/forcing mode 重建，14 天对未见 manifold/kernel/PINN/neural-operator 报告建立六层对象账本；
 6. 只有口试、闭卷、随机实验、48 小时换例与 14 天迁移均有原始证据，才记 `retained`；随后仍要逐节点审查，不批量改写 GEO-01—08 状态。
 
@@ -339,11 +341,11 @@ flowchart LR
 - GEO-01—08 scope 8/8、闭卷第1—14题与100分配额；
 - 口试/闭卷/答案隔离、错误回链、48小时换例与14天迁移门；
 - 题卷、详解、实验、课程地图和台账的 `regression-passed / not-attempted` 双状态一致；
-- A轨 sphere constraint/rotation covariance，B轨 Hilbert/compact/RKHS 谱账本，C轨 Poisson 多 norm 账本；
-- 全卷教学审计实际复跑、累计脚本不同临时路径确定性双跑、SVG XML 与 SHA-256。
+- A轨 radius-sphere constraint/Exp/retraction/rotation covariance，B轨 target/compact/RKHS 三本幂律谱账，C轨 length-$L$ Poisson 多 norm 账本；
+- 全卷教学审计实际复跑、累计脚本不同临时路径确定性双跑、非canonical覆盖保护、固定跨轨盲参stdout/SVG/hash、SVG XML 与 SHA-256。
 
-Canonical 累计图为 [[00-知识库管理/_assets/plots/geometry-functional/plot-geometry-functional-cumulative-gate-v2.svg]]，SHA-256 为 `d0ff3852b11f8a82af5feff469fa3ef4e1adde7836cf292b4911dec043c59bd1`。这一证书只说明材料可执行、自洽且答案隔离，没有替学习者完成任何口试、闭卷或复现。
+Canonical 累计图为 [[00-知识库管理/_assets/plots/geometry-functional/plot-geometry-functional-cumulative-gate-v2.svg]]，SHA-256 为 `d0ff3852b11f8a82af5feff469fa3ef4e1adde7836cf292b4911dec043c59bd1`；固定多参数盲测图SHA-256为`7b5aac02d74e0fd90053dee51ad1d17d0911454592730b486fb23e4ec12cd9bc`。这一证书只说明材料可执行、自洽且答案/输出隔离，没有替学习者完成任何口试、闭卷或复现。
 
 ## 九、当前状态
 
-10.10 当前为 **8/8 正文覆盖、120 道节点题**。第一波 GEO-01—04、第二波 GEO-05—06、第三波 GEO-07—08 与 GEO-CUM 材料均为 `regression-passed`；个人证据仍为 `not-attempted`，八篇正文继续保持 `draft`。下一步不是继续补累计材料，而是按本页流程产生真实口试、闭卷、随机三轨、48小时换例与14天迁移证据。
+10.10 当前为 **8/8 正文覆盖、120 道节点题**。第一波 GEO-01—04、第二波 GEO-05—06、第三波 GEO-07—08 与 GEO-CUM-01 材料均为 `regression-passed`；个人证据仍为 `not-attempted`，八篇正文继续保持 `draft`。下一步不是继续补累计材料，而是按本页流程产生真实口试、闭卷、nonce主轨、跨轨盲参、48小时换机制与14天迁移证据。

@@ -1662,7 +1662,7 @@ AI迁移从Banach压缩映射的几何尾界推进到标量二次梯度下降的
 
 [[实验 - 几何、泛函与算子累计复现门]]建立三轨确定性证据：A轨恢复sphere ambient constraint slope 2.000000、normalization retraction相对Exp order 2.997004，并将rotation covariance误差压到$3.140\times10^{-16}$；B轨以$c_j=1/j$和$\mu_j=j^{-2}$得到projection slope $-0.495225$、compact tail slope $-1.951949$与effective-dimension slope $0.506725$；C轨用八模态Poisson cutoff恢复$L^2/H^1/strong$指数$-2/-1/0$，并在$j=64$同时保留$2.47\times10^{-5}$ absolute error与100% relative failure。脚本通过XML、不同输出路径双跑和1440×580实际渲染，canonical hash为`d0ff3852b11f8a82af5feff469fa3ef4e1adde7836cf292b4911dec043c59bd1`。
 
-10.10当前为 **8篇正文、8幅机制图、120道节点题，累计材料 regression-passed / 个人 not-attempted**。GEO-CUM现含20分钟口试、210分钟闭卷、scorer nonce随机三轨、盲干预、48小时换例与14天迁移；[[geometry_functional_cumulative_contract_audit.py]]复核题—解隔离、解析量、状态表面和canonical双跑。材料通过不改变GEO-01—08的`draft`状态；下一步是产生真实学习证据。
+10.10当前为 **8篇正文、8幅机制图、120道节点题，累计材料 regression-passed / 个人 not-attempted**。GEO-CUM-01现含20分钟口试、210分钟闭卷、scorer nonce主轨、跨轨盲干预、48小时换机制与14天迁移；[[geometry_functional_cumulative_contract_audit.py]]复核题—解隔离、解析量、状态表面、canonical双跑、覆盖保护和固定盲参图—数合同。材料通过不改变GEO-01—08的`draft`状态；下一步是产生真实学习证据。
 
 ## 第九十批：10.2卷末累计验收与空间—谱—结构化 AI 三轨门
 
@@ -1728,6 +1728,14 @@ AI迁移从Banach压缩映射的几何尾界推进到标量二次梯度下降的
 
 10.9当前为 **12篇正文、12组节点题解，累计材料 regression-passed / 个人 not-attempted**。[[dynamics_cumulative_contract_audit.py]]独立复核12/12教学合同、14/14题解与100分、答案隔离、非正规流/solver/OU与三轨解析锚点、六个状态面、canonical双跑、盲参hash和SVG图—数自描述。材料通过不改变DYN-01—12的`draft`状态；下一步仍是真实口试、闭卷、nonce轨、个人未见参数运行与延迟迁移证据。
 
+## 第九十八批：10.10卷末累计验收升级与几何—谱—弱PDE跨轨盲参门
+
+本批把[[阶段测验 - 几何、泛函分析、核与算子基础（10.10）|GEO-CUM-01]]从“随机一轨 + 一次参数干预”升级为统一证据链：20分钟口试和210分钟、100分闭卷之后，先冻结九层对象账本与三轨解析校准，再由`attempt_id + scorer nonce`指定主手算轨，并给出至少横跨两轨的盲参数；保存stdout/SVG/hash后才打开详解订正，最后进入48小时换机制与14天陌生几何/核/PDE/operator-learning报告迁移。三波模型族明确参数化为半径$r$的sphere与$O(3)$ action、$c_j=j^{-\alpha}$与$Ke_j=j^{-\beta}e_j$、长度$L$区间上的Dirichlet Poisson solution operator。
+
+[[实验 - 几何、泛函与算子累计复现门]]保留canonical SVG哈希`d0ff3852b11f8a82af5feff469fa3ef4e1adde7836cf292b4911dec043c59bd1`，但禁止非默认参数在未指定`--output`时覆盖标准图；非默认SVG直接写出sphere半径/目标/角度、coefficient/eigen exponents、finite size、domain length与cutoff/OOD范围。固定fixture同时改变三轨机制，得到盲参哈希`7b5aac02d74e0fd90053dee51ad1d17d0911454592730b486fb23e4ec12cd9bc`。
+
+10.10当前仍为 **8篇正文、8组节点题解，累计材料 regression-passed / 个人 not-attempted**。[[geometry_functional_cumulative_contract_audit.py]]现独立复核8/8 scope、14/14题解与100分、答案/输出隔离、canonical与盲参解析锚点、六个状态面、canonical双跑、覆盖保护、盲参stdout/SVG/hash和图—数自描述。材料通过不改变GEO-01—08的`draft`状态；下一步仍是真实口试、闭卷、nonce轨、个人未见参数运行与延迟迁移证据。
+
 ## 对接科学空间
 
 - “低秩近似之路”系列：伪逆、SVD、CR、ID、CUR
@@ -1748,7 +1756,7 @@ AI迁移从Banach压缩映射的几何尾界推进到标量二次梯度下降的
 8. **信息论与统计学习接口**：10.6 已完成 INFO-01—10 的正文、十幅机制图、150 道 A–E 题和独立详解；`INFO-CUM-01` 已形成“口试—闭卷—scorer nonce随机轨—盲干预—48小时—14天”证据链，并由[[information_cumulative_contract_audit.py]]复核为材料`regression-passed`、个人`not-attempted`。
 9. **优化与凸分析**：10.7 已完成 OPT-01—16 的正文、十六幅机制图、240 道 A—E 题和独立详解；`OPT-CUM-01` 已形成“口试—闭卷—scorer nonce随机轨—盲干预—48小时换机制—14天陌生AI迁移”证据链，并由[[optimization_cumulative_contract_audit.py]]复核为材料`regression-passed`、个人`not-attempted`。
 10. **ODE、动力系统与 SDE**：10.9 已完成 DYN-01—12 的正文、机制图、180 道 A—E 题和独立详解；`DYN-CUM-01` 已形成“口试—闭卷—scorer nonce 随机轨—跨轨盲参—48 小时换机制—14 天陌生 AI 迁移”证据链，并由[[dynamics_cumulative_contract_audit.py]]复核为材料 `regression-passed`、个人 `not-attempted`。
-11. **几何、泛函分析、核与算子基础**：10.10 已完成GEO-01—08的正文、机制图、120道A—E题、独立详解、八套节点计算门以及含口试—闭卷—随机三轨—延迟门的`GEO-CUM-01`；当前材料`regression-passed`，个人`not-attempted`。
+11. **几何、泛函分析、核与算子基础**：10.10 已完成GEO-01—08的正文、机制图、120道A—E题、独立详解、八套节点计算门；`GEO-CUM-01`已形成“口试—闭卷—scorer nonce主轨—跨轨盲参—48小时换机制—14天陌生AI迁移”证据链，并由[[geometry_functional_cumulative_contract_audit.py]]复核为材料`regression-passed`、个人`not-attempted`。
 12. **数学语言、逻辑与证明**：[[数学语言、逻辑与证明 MOC|10.1卷入口]]与MATH-01—08均已建立正文、深色机制图、各15题、独立详解与浅色计算审计，达到8/8；`MATH-CUM-01`题卷、详解与量词—递推—复杂度三轨计算门已成稿，当前`composed / not-attempted`。
 13. **全数学主线**：十卷150节已由[[数学基础完整课程地图与掌握标准]]锁定；当前150篇正文均为`draft`，正文覆盖率100.0%，尚无任何一卷通过课程验收。
 14. **十卷总收束**：[[数学基础十卷完备性审计与学习状态总表]]确认150个ID、正文、习题和解答均唯一可定位；[[数学基础十卷总验收 - 跨卷理论与 AI 迁移]]、独立详解与[[实验 - 数学基础十卷跨章累计复现门]]已经成稿。材料状态为`composed / not-attempted`；下一步是按先修顺序产生真实学习证据，而不是继续宣称新增正文等于掌握。

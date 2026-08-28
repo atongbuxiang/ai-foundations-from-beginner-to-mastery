@@ -232,7 +232,7 @@ def audit_route() -> None:
         "第三波的 Green kernel—弱 PDE—解算子单一模型链",
         "如何学习第三波，而不是背 kernel 与 PDE 名词",
         "第三波材料证书",
-        "GEO-CUM：卷末综合验收闭环",
+        "GEO-CUM-01：卷末综合验收闭环",
         "下一步不是继续补累计材料",
     ):
         require(marker in content, f"MOC misses route marker: {marker}")
@@ -249,7 +249,7 @@ def audit_route() -> None:
         "MOC third-wave material status is not regression-passed",
     )
     require(
-        re.search(r"\| CUM \| GEO-CUM .*`regression-passed`.*`not-attempted`", content)
+        re.search(r"\| CUM \| GEO-CUM-01 .*`regression-passed`.*`not-attempted`", content)
         is not None,
         "MOC cumulative material/personal states are not separated",
     )
