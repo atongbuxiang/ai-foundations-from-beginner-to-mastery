@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit the migrated teaching contracts and exact models for DYN-01--08."""
+"""Audit the migrated teaching contracts and exact models for DYN-01--12."""
 
 from __future__ import annotations
 
@@ -21,6 +21,7 @@ MOC = DYN / "ODE、动力系统与 SDE MOC.md"
 FIGURE_SCRIPTS = (
     LABS / "code" / "plot_dynamics_foundations_v2.py",
     LABS / "code" / "plot_dynamics_numerics_transport_v2.py",
+    LABS / "code" / "plot_stochastic_dynamics_v2.py",
 )
 FIGURE_DIR = ROOT / "00-知识库管理" / "_assets" / "figures" / "dynamics"
 
@@ -33,6 +34,10 @@ CONCEPTS = (
     "刚性系统、绝对稳定域与隐式方法.md",
     "流映射、Liouville 公式与连续正规化流.md",
     "连续性方程与守恒律.md",
+    "随机过程、Brownian 运动与二次变差.md",
+    "Itô 引理与随机微分方程.md",
+    "Fokker-Planck 方程与概率流 ODE.md",
+    "时间反演、score 与扩散生成动力学.md",
 )
 
 CONTRACT_MARKERS = (
@@ -53,6 +58,15 @@ EXPECTED_FIGURE_BY_CONCEPT = {
     CONCEPTS[5]: "fig-stiffness-stability-implicit-solve-v2.svg",
     CONCEPTS[6]: "fig-flow-liouville-cnf-v2.svg",
     CONCEPTS[7]: "fig-continuity-conservation-flow-matching-v2.svg",
+    CONCEPTS[8]: "fig-brownian-process-quadratic-variation-v2.svg",
+    CONCEPTS[9]: "fig-ito-integral-sde-contract-v2.svg",
+    CONCEPTS[10]: "fig-fokker-planck-probability-flow-v2.svg",
+    CONCEPTS[11]: "fig-reverse-time-score-diffusion-v2.svg",
+}
+
+ADDITIONAL_FIGURES_BY_CONCEPT = {
+    CONCEPTS[9]: ("plot-ito-sde-numerics-gradient-v2.svg",),
+    CONCEPTS[10]: ("plot-fokker-planck-probability-flow-v2.svg",),
 }
 
 FIGURE_HASHES = {
@@ -72,6 +86,21 @@ FIGURE_HASHES = {
         "2a4aa49b8eea774fbbd0cc00aa94ad4dbcfb13b849320fa77fecba590e087062",
     "fig-continuity-conservation-flow-matching-v2.svg":
         "abeab675e68f9f35dd663e4415ecf762981e93d5efb9bb0ba19035a41c4a2329",
+    "fig-brownian-process-quadratic-variation-v2.svg":
+        "23c1fc4263e365a029ddb35f8cf2459dcb4926ca193fb96879de806844ac51d5",
+    "fig-ito-integral-sde-contract-v2.svg":
+        "c68a89b5b546e60da0cf85b93878bd1ad4b786080f75ce3bea7f40e71257f1be",
+    "fig-fokker-planck-probability-flow-v2.svg":
+        "8e30772a4ed999df9af47461ed3681831ff8df937959bb43006ab7976934d716",
+    "fig-reverse-time-score-diffusion-v2.svg":
+        "7e48178a2f71f3798f8b07f07f15002cfcc5382c02285da1e079d4a3b21aae96",
+}
+
+ADDITIONAL_FIGURE_HASHES = {
+    "00-知识库管理/_assets/plots/dynamics/plot-ito-sde-numerics-gradient-v2.svg":
+        "67165c8a06da0210d5de7c64ccd385794c62aafba23c3b2c89bfffde29bda5ee",
+    "00-知识库管理/_assets/plots/dynamics/plot-fokker-planck-probability-flow-v2.svg":
+        "0751975ea07b4ba7481fdd97608e4f4a33142656d0eb85d19ef460ff85d18013",
 }
 
 KNOWN_EXTENSIONS = {".md", ".py", ".svg", ".png", ".jpg", ".jpeg", ".webp", ".pdf"}
@@ -165,6 +194,10 @@ def audit_route() -> None:
         "第三波的流—密度守恒模型链",
         "如何学习第三波，而不是把粒子图和密度图分开看",
         "第三波材料证书",
+        "| D | DYN-09—12",
+        "第四波的 Brownian—扩散—反演模型链",
+        "如何学习第四波，而不是先背扩散模型配方",
+        "第四波材料证书",
         "dynamics_teaching_contract_audit.py",
         "`regression-passed`",
         "`draft / not-attempted`",
@@ -182,8 +215,12 @@ def audit_route() -> None:
         re.search(r"\| C \| DYN-07—08 .*`regression-passed`", content) is not None,
         "MOC third-wave material status is not regression-passed",
     )
-    require("下一教学迁移批次为 DYN-09—12" in content, "MOC next migration target is stale")
-    print("PASS DYN route: four-wave map, three migrated model chains and three-pass learning contracts")
+    require(
+        re.search(r"\| D \| DYN-09—12 .*`regression-passed`", content) is not None,
+        "MOC fourth-wave material status is not regression-passed",
+    )
+    require("下一教学施工是将 DYN-CUM" in content, "MOC next migration target is stale")
+    print("PASS DYN route: four-wave map, four migrated model chains and three-pass learning contracts")
 
 
 def audit_exact_first_wave_model() -> None:
@@ -464,6 +501,146 @@ def audit_exact_third_wave_model() -> None:
     )
 
 
+def audit_exact_fourth_wave_model() -> None:
+    initial_mean = 2.0
+    initial_variance = 0.25
+
+    def marginal(time: float) -> tuple[float, float]:
+        alpha = math.exp(-time)
+        return initial_mean * alpha, 1 - 0.75 * alpha * alpha
+
+    def score(time: float, state: float) -> float:
+        mean, variance = marginal(time)
+        return -(state - mean) / variance
+
+    # DYN-09: Brownian increments and quadratic variation on [0,1].
+    for steps in (4, 16, 64, 256):
+        increment_variance = 1 / steps
+        qv_mean = steps * increment_variance
+        qv_variance = steps * 2 * increment_variance ** 2
+        require(math.isclose(qv_mean, 1.0, rel_tol=0.0, abs_tol=0.0), "Brownian QV mean changed")
+        require(
+            math.isclose(qv_variance, 2 / steps, rel_tol=0.0, abs_tol=2e-18),
+            "Brownian QV variance changed",
+        )
+    require(math.isclose(math.sqrt(2 * 256 / math.pi), 12.766152972845846, abs_tol=2e-15), "TV scale changed")
+
+    # DYN-10: exact OU conditional/marginal laws, Itô moment and EM calibration.
+    for time in (0.0, 0.1, 1.0, 3.0):
+        alpha = math.exp(-time)
+        conditional_variance = 1 - alpha * alpha
+        mean, variance = marginal(time)
+        require(
+            math.isclose(variance, alpha * alpha * initial_variance + conditional_variance, abs_tol=2e-16),
+            "OU marginal variance decomposition changed",
+        )
+        second_moment = mean * mean + variance
+        expected_second_moment = 1 + 13 / 4 * alpha * alpha
+        require(
+            math.isclose(second_moment, expected_second_moment, rel_tol=0.0, abs_tol=5e-16),
+            "OU second moment changed",
+        )
+        moment_derivative = -13 / 2 * alpha * alpha
+        generator_rhs = -2 * second_moment + 2
+        require(
+            math.isclose(moment_derivative, generator_rhs, rel_tol=0.0, abs_tol=1e-15),
+            "OU Itô moment equation changed",
+        )
+
+    step = 0.1
+    require(math.isclose(1 - step, 0.9, abs_tol=0.0), "EM mean factor changed")
+    require(math.isclose(2 * step, 0.2, abs_tol=0.0), "EM variance changed")
+    require(math.isclose(math.exp(-step), 0.9048374180359595, abs_tol=1e-16), "exact OU mean factor changed")
+    require(
+        math.isclose(1 - math.exp(-2 * step), 0.18126924692201818, abs_tol=1e-16),
+        "exact OU transition variance changed",
+    )
+
+    # DYN-11: Fokker-Planck pointwise residual and PF moment equations.
+    for time in (0.0, 0.3, 1.0, 3.0):
+        mean, variance = marginal(time)
+        mean_derivative = -mean
+        variance_derivative = 2 * (1 - variance)
+        require(math.isclose(-mean, mean_derivative, abs_tol=0.0), "PF mean equation changed")
+        require(math.isclose(2 * (1 - variance), variance_derivative, abs_tol=0.0), "PF variance equation changed")
+        for state in (-2.0, 0.0, 1.25, 3.0):
+            centered = state - mean
+            density_score = score(time, state)
+            dt_log_density = (
+                -0.5 * variance_derivative / variance
+                + centered * mean_derivative / variance
+                + 0.5 * centered ** 2 * variance_derivative / variance ** 2
+            )
+            score_derivative = -1 / variance
+            fpe_over_density = 1 + state * density_score + density_score ** 2 + score_derivative
+            require(
+                math.isclose(dt_log_density, fpe_over_density, rel_tol=0.0, abs_tol=3e-13),
+                "OU Fokker-Planck pointwise residual changed",
+            )
+        # Gaussian score identities used by the PF moment proof.
+        expected_score = 0.0
+        expected_centered_score = -1.0
+        pf_mean_rhs = -mean - expected_score
+        pf_variance_rhs = 2 * (-variance - expected_centered_score)
+        require(math.isclose(pf_mean_rhs, mean_derivative, abs_tol=2e-16), "PF mean score identity changed")
+        require(
+            math.isclose(pf_variance_rhs, variance_derivative, abs_tol=5e-16),
+            "PF variance score identity changed",
+        )
+
+    # DYN-12: DSM conditional-to-marginal identity and terminal mismatch.
+    for time in (0.1, 1.0, 3.0):
+        alpha = math.exp(-time)
+        noise_variance = 1 - alpha * alpha
+        mean, variance = marginal(time)
+        for observed in (-1.0, 0.0, 2.5):
+            posterior_initial_mean = initial_mean + alpha * initial_variance / variance * (observed - mean)
+            expected_conditional_score = -(observed - alpha * posterior_initial_mean) / noise_variance
+            require(
+                math.isclose(expected_conditional_score, score(time, observed), rel_tol=0.0, abs_tol=2e-14),
+                "DSM conditional-to-marginal score identity changed",
+            )
+
+    terminal_time = 3.0
+    terminal_mean, terminal_variance = marginal(terminal_time)
+    terminal_kl = 0.5 * (
+        terminal_mean ** 2 + terminal_variance - 1 - math.log(terminal_variance)
+    )
+    require(
+        math.isclose(terminal_kl, 0.00495836945554821, rel_tol=0.0, abs_tol=2e-16),
+        "terminal Gaussian KL changed",
+    )
+
+    # Reverse-clock full/half score and stationary sanity checks.
+    for time in (0.0, 1.0, 3.0):
+        mean, variance = marginal(time)
+        reverse_sde_mean_rhs = mean  # E[X + 2 score] and E[score]=0.
+        reverse_pf_mean_rhs = mean   # E[X + score] and E[score]=0.
+        reverse_variance_rhs_sde = 2 * (variance - 2) + 2
+        reverse_variance_rhs_pf = 2 * (variance - 1)
+        expected_reverse_variance = 2 * (variance - 1)
+        require(reverse_sde_mean_rhs == reverse_pf_mean_rhs == mean, "reverse mean drift changed")
+        require(
+            math.isclose(reverse_variance_rhs_sde, expected_reverse_variance, abs_tol=2e-16),
+            "reverse SDE variance drift changed",
+        )
+        require(
+            math.isclose(reverse_variance_rhs_pf, expected_reverse_variance, abs_tol=0.0),
+            "reverse PF variance drift changed",
+        )
+    for state in (-2.0, 0.0, 1.5):
+        stationary_score = -state
+        reverse_sde_drift = state + 2 * stationary_score
+        reverse_pf_drift = state + stationary_score
+        require(reverse_sde_drift == -state, "stationary reverse SDE drift changed")
+        require(reverse_pf_drift == 0.0, "stationary reverse PF drift changed")
+
+    print(
+        "PASS fourth-wave exact model: Brownian QV; OU/Itô/EM; Fokker-Planck/PF moments; "
+        "DSM, terminal KL and reverse full/half score"
+    )
+
+
 def audit_markdown_integrity() -> None:
     scoped = [DYN / filename for filename in CONCEPTS] + [MOC]
     all_files = [path for path in ROOT.rglob("*") if path.is_file()]
@@ -513,15 +690,18 @@ def audit_markdown_integrity() -> None:
         lines = read(path).splitlines()
         images = [(index, image_pattern.search(line)) for index, line in enumerate(lines)]
         images = [(index, match) for index, match in images if match is not None]
-        require(len(images) == 1, f"{filename}: expected one textbook figure, found {len(images)}")
-        position, match = images[0]
-        require(match is not None, "internal image parser failure")
-        expected = EXPECTED_FIGURE_BY_CONCEPT[filename]
-        require(Path(match.group(1)).name == expected, f"{filename}: unexpected figure")
-        block = "\n".join(lines[position : min(len(lines), position + 45)])
-        for marker in ("[!figure]", "怎样读图", "适用边界"):
-            require(marker in block, f"{filename}: figure unit misses {marker}")
-        figure_count += 1
+        expected = (
+            EXPECTED_FIGURE_BY_CONCEPT[filename],
+            *ADDITIONAL_FIGURES_BY_CONCEPT.get(filename, ()),
+        )
+        actual = tuple(Path(match.group(1)).name for _, match in images if match is not None)
+        require(actual == expected, f"{filename}: expected figures {expected}, found {actual}")
+        for position, match in images:
+            require(match is not None, "internal image parser failure")
+            block = "\n".join(lines[position : min(len(lines), position + 45)])
+            for marker in ("[!figure]", "怎样读图", "适用边界"):
+                require(marker in block, f"{filename}: figure unit {Path(match.group(1)).name} misses {marker}")
+            figure_count += 1
 
     print(f"PASS Markdown integrity: Wiki links={link_count}; display math balanced; figure units={figure_count}")
 
@@ -538,7 +718,16 @@ def audit_figures(run_figures: bool) -> None:
         root_element = ET.parse(path).getroot()
         require(root_element.tag.endswith("svg"), f"invalid SVG root: {filename}")
         require("viewBox" in root_element.attrib, f"SVG missing viewBox: {filename}")
-    print(f"PASS deterministic figures: {len(FIGURE_HASHES)}/{len(FIGURE_HASHES)} hashes and SVG XML")
+    for relative_path, expected_hash in ADDITIONAL_FIGURE_HASHES.items():
+        path = ROOT / relative_path
+        require(path.is_file(), f"missing additional figure: {relative_path}")
+        digest = hashlib.sha256(path.read_bytes()).hexdigest()
+        require(digest == expected_hash, f"additional figure hash changed: {relative_path} -> {digest}")
+        root_element = ET.parse(path).getroot()
+        require(root_element.tag.endswith("svg"), f"invalid SVG root: {relative_path}")
+        require("viewBox" in root_element.attrib, f"SVG missing viewBox: {relative_path}")
+    figure_total = len(FIGURE_HASHES) + len(ADDITIONAL_FIGURE_HASHES)
+    print(f"PASS deterministic figures: {figure_total}/{figure_total} hashes and SVG XML")
 
 
 def main() -> None:
@@ -551,9 +740,10 @@ def main() -> None:
     audit_exact_first_wave_model()
     audit_exact_second_wave_model()
     audit_exact_third_wave_model()
+    audit_exact_fourth_wave_model()
     audit_markdown_integrity()
     audit_figures(args.run_figures)
-    print("DYN-01—08 material regression: PASS; learning state: draft/not-attempted")
+    print("DYN-01—12 material regression: PASS; learning state: draft/not-attempted")
 
 
 if __name__ == "__main__":

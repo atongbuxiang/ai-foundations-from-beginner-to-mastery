@@ -7,7 +7,7 @@ prerequisites: ["[[样本空间、事件与概率公理]]", "[[随机变量、�
 related: ["[[ODE、动力系统与 SDE MOC]]", "[[Itô 引理与随机微分方程]]", "[[Fokker-Planck 方程与概率流 ODE]]", "[[连续性方程与守恒律]]", "[[实验 - Brownian 增量、路径粗糙性与时间耦合审计]]"]
 sources: ["MIT-18.175-2016-Brownian-Motion", "MIT-15.070J-2013-Quadratic-Variation", "Durrett-PTE5-Brownian-Donsker", "Morters-Peres-Brownian-Motion", "Oksendal-Stochastic-Differential-Equations", "Song-et-al-2021-Score-SDE", "Su-3750-Random-Walk", "Su-9209-Diffusion-SDE"]
 created: 2026-08-19
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # 随机过程、Brownian 运动与二次变差
@@ -43,6 +43,171 @@ updated: 2026-08-23
 **怎样读图。** A 先固定一条样本 $\omega$ 看整条 path，再固定 $t$ 看 marginal random variable，二者不可交换；B 用方差 $\operatorname{Var}(\Delta W)=\Delta t$ 读出 typical increment 尺度和 nowhere-differentiable 直觉；C 最后把大量 $O(\Delta t)$ 的平方增量相加，得到 $O(1)$ 时间极限，并把 $(dW)^2=dt$ 解释为分割极限记账而非普通代数。
 
 **适用边界（图没有证明什么）。** 两条曲线不是模拟证据，也不证明 a.s. nowhere differentiability 或 quadratic variation 的完整定理；严谨结论需指定 partition 与收敛模式。相同 marginals 也可能通过许多不同 coupling 形成 process。Fractional Brownian、jump process 与 semimartingale 的 variation 结构不同，不能直接套用 Brownian 规则。
+
+> [!note] 课程位置
+> DYN-01—08 的路径由确定性初值和 vector field 唯一决定；概率只出现在“随机抽一个初值”时。本章第一次把随机性放进时间演化本身：同一初值也会因不同 $\omega$ 产生不同连续路径。这里先建立 Brownian 的时间耦合、filtration 与 quadratic variation；DYN-10 才把它作为 SDE 驱动源。若没有本章，后续的 $dW_t$、Itô 二阶项和 reverse diffusion 都只是无法审计的符号。
+
+> [!tip] 建议两遍阅读
+> **第一遍**只看 $[0,1]$ 的等距分割：写出独立增量分布，计算平方增量和的均值与方差，并解释为何差商爆炸而 quadratic variation 收敛。**第二遍**再进入 process law、filtration、martingale、Brownian bridge、scaling、Donsker、total variation、cross variation 与 white noise。第一遍要掌握的是“同一条 path 的跨时间 coupling”，不是每个时刻各自的 Gaussian histogram。
+
+## 本章的推导问题链
+
+1. 随机变量、stochastic process、finite-dimensional distributions、sample path 与 path law 分别固定了什么？
+2. 为什么只知道 $W_t\sim\mathcal N(0,t)$ 不能推出 Brownian 的独立增量与连续路径？
+3. Filtration 怎样表达“到 $t$ 时刻可用的信息”，adaptedness 为什么禁止偷看未来噪声？
+4. $\operatorname{Var}(W_{t+h}-W_t)=h$ 怎样给出 $\Delta W=O_{\mathbb P}(\sqrt h)$？
+5. 为什么 $\Delta W/h$ 随 $h\downarrow0$ 变得更大，而 $(\Delta W)^2$ 的累积却留下有限极限？
+6. 平方增量和以哪种收敛模式趋于时间长度，$(dW)^2=dt$ 应如何解读？
+7. 这条二次变差怎样在下一章产生 Itô formula 的 $\frac12b^2f_{xx}$？
+
+## 贯穿算例：单位时间上的 Brownian 网格账本
+
+在 $[0,1]$ 上取等距网格
+
+$$
+t_k=\frac{k}{N},
+\qquad
+\Delta W_k=W_{(k+1)/N}-W_{k/N},
+\qquad k=0,\ldots,N-1.
+$$
+
+由 Brownian 定义，
+
+$$
+\Delta W_k\overset{\mathrm{iid}}{\sim}\mathcal N\!\left(0,\frac1N\right).
+$$
+
+### 符号与对象账本
+
+| 对象 | 类型 | 本例中的值/作用 | 不可直接称为 |
+|---|---|---|---|
+| $W_t$ | random variable at time $t$ | $W_t\sim\mathcal N(0,t)$ | 整条 path law |
+| $t\mapsto W_t(\omega)$ | sample path | 固定 $\omega$ 后的连续函数 | ordinary differentiable curve |
+| $\mathcal F_t$ | information set | 到 $t$ 为止的事件 | 单个观测向量 |
+| $\Delta W_k$ | Brownian increment | 方差 $1/N$ 的独立 Gaussian | 方差固定的每步噪声 |
+| $Q_N$ | discrete quadratic variation | $\sum_k(\Delta W_k)^2$ | ordinary total variation |
+| $V_N$ | discrete total variation | $\sum_k|\Delta W_k|$ | quadratic variation |
+| $\xi_t$ | white-noise notation | $dW_t/dt$ 的 generalized sense | pointwise random function |
+
+### 第一步：增量尺度不是 $dt$，而是 $\sqrt{dt}$
+
+写成
+
+$$
+\Delta W_k=\frac1{\sqrt N}Z_k,
+\qquad Z_k\overset{\mathrm{iid}}{\sim}\mathcal N(0,1).
+$$
+
+因此典型增量大小为 $N^{-1/2}=\sqrt{\Delta t}$。对应差商是
+
+$$
+\frac{\Delta W_k}{\Delta t}
+=\sqrt N,Z_k,
+$$
+
+其方差为 $N$，网格越细反而越不稳定。这是 Brownian path 不应使用普通导数语言的最小尺度证据；完整 nowhere-differentiability 仍需更强的 almost-sure 论证。
+
+### 第二步：平方增量恰好留下有限量
+
+定义
+
+$$
+Q_N=\sum_{k=0}^{N-1}(\Delta W_k)^2
+=\frac1N\sum_{k=0}^{N-1}Z_k^2.
+$$
+
+因为 $\mathbb E[Z_k^2]=1$、$\operatorname{Var}(Z_k^2)=2$，
+
+$$
+\boxed{
+\mathbb E[Q_N]=1,
+\qquad
+\operatorname{Var}(Q_N)=\frac2N.
+}
+$$
+
+于是
+
+$$
+\mathbb E[(Q_N-1)^2]=\frac2N\longrightarrow0,
+$$
+
+即 $Q_N\to1$ in $L^2$，从而也依概率收敛。对一般区间 $[0,T]$，相同计算给 $[W]_T=T$。
+
+### 第三步：绝对增量和却发散
+
+同一网格上的 total-variation proxy 为
+
+$$
+V_N=\sum_{k=0}^{N-1}|\Delta W_k|.
+$$
+
+利用 $\mathbb E|Z|=\sqrt{2/\pi}$，
+
+$$
+\mathbb E[V_N]
+=N\frac1{\sqrt N}\sqrt{\frac2\pi}
+=\sqrt{\frac{2N}{\pi}}\longrightarrow\infty.
+$$
+
+因此“连续”不等于“有限变差”或“光滑”。Brownian 的一阶绝对增量累积发散，二阶增量累积却有限，这正是 stochastic calculus 使用 quadratic variation 的原因。
+
+### 第四步：时间 coupling 不能由边缘分布替代
+
+若错误地令 $\widetilde W_t=\sqrt t,Z$ 并在所有时刻共享同一个 $Z$，仍有
+
+$$
+\widetilde W_t\sim\mathcal N(0,t),
+$$
+
+但
+
+$$
+\widetilde W_{t+h}-\widetilde W_t
+=(\sqrt{t+h}-\sqrt t)Z
+=O_{\mathbb P}(h)
+$$
+
+对 $t>0$ 过于平滑，quadratic variation 为零。相同 one-time marginals 并没有给出相同 SDE 驱动源。
+
+### 第五步：预告 VP–OU 中真正使用的噪声
+
+第四波后续统一模型会出现
+
+$$
+\eta_t=\sqrt2\int_0^t e^{-(t-s)}dW_s.
+$$
+
+Itô isometry 将给
+
+$$
+\operatorname{Var}(\eta_t)
+=2\int_0^t e^{-2(t-s)}ds
+=1-e^{-2t}.
+$$
+
+这里不能在每个 $t$ 独立重抽 $\eta_t$；一条 SDE path 的所有 $\eta_t$ 由同一 Brownian path 耦合。DYN-10 会正式定义这个随机积分。
+
+## 核心公式七问：Brownian quadratic variation
+
+$$
+\boxed{
+[W]_T
+=\lim_{|\Pi|\to0}\sum_i(W_{t_{i+1}}-W_{t_i})^2
+=T.
+}
+$$
+
+1. **解决什么问题？** 描述连续粗糙路径在平方尺度上留下的累计变化，替代普通导数无法提供的信息。
+2. **对象与形状？** 对一维 Brownian 是随机标量极限；多维情形还有 matrix-valued cross variation $[W^i,W^j]_t=\delta_{ij}t$。
+3. **从哪里来？** 每个增量平方的期望为 $\Delta t_i$，独立 Gaussian 四阶矩控制总方差随 mesh 消失。
+4. **需要什么条件？** 必须声明 partition 类与收敛模式；本算例证明的是确定性等距分割上的 $L^2$ 收敛。
+5. **怎样检查？** 对等距网格核对 $\mathbb E Q_N=T$、$\operatorname{Var}Q_N=2T^2/N$，并与 finite-variation path 的零 QV 比较。
+6. **怎样误读？** $(dW)^2=dt$ 不是每个无穷小样本上的代数恒等式，也不能推出 $|dW|=\sqrt{dt}$ 的确定值。
+7. **AI 中怎样调用？** 扩散/SDE 模拟必须让噪声方差随 $h$ 缩放并在网格细化时复用同一 Brownian coupling；独立重抽整条路径会破坏 strong-error 与反向过程语义。
+
+> [!success] 第一遍停靠线
+> 合上正文后，应能从 $\Delta W_k=N^{-1/2}Z_k$ 推出差商方差 $N$、$\mathbb E Q_N=1$ 与 $\operatorname{Var}Q_N=2/N$，并用 shared-noise 反例说明逐时 Gaussian 边缘不定义 Brownian motion。若仍把 $(dW)^2=dt$ 当作普通微分乘法，请先重做平方增量和。
 
 ## 学习目标
 

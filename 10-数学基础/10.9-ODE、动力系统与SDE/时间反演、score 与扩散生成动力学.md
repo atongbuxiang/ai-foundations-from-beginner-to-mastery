@@ -7,7 +7,7 @@ prerequisites: ["[[Fokker-Planck 方程与概率流 ODE]]", "[[Itô 引理与随
 related: ["[[ODE、动力系统与 SDE MOC]]", "[[实验 - 反向时间、score恒等式与扩散采样误差审计]]", "[[S-2022-Su-9209-扩散模型SDE篇]]", "[[S-2022-Su-9228-概率流ODE]]", "[[S-2022-Su-9262-统一扩散模型理论篇]]"]
 sources: ["Anderson-1982-Reverse-Time-Diffusion", "Hyvarinen-2005-Score-Matching", "Vincent-2011-Denoising-Score", "Sohl-Dickstein-et-al-2015-Diffusion", "Ho-et-al-2020-DDPM", "Song-Meng-Ermon-2021-DDIM", "Song-et-al-2021-Score-SDE", "Nichol-Dhariwal-2021-Improved-DDPM", "Karras-et-al-2022-EDM", "Su-9209-Diffusion-SDE", "Su-9228-Probability-Flow-ODE", "Su-9262-Unified-Diffusion-Theory", "Su-9280-Diffusion-ODE"]
 created: 2026-08-19
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # 时间反演、score 与扩散生成动力学
@@ -51,6 +51,216 @@ updated: 2026-08-23
 **怎样读图。** A 先把 forward conditional law 与 terminal prior design 固定，不能只画“数据变噪声”的插图；B 再在明确的反向时钟 $s=T-t$ 下写 drift，full/half score coefficient 分别属于 reverse SDE/PF ODE，不能从“$dt<0$”直觉猜符号；C 最后逐门验收，减小 sampler step 只能减少 solver bias，不能消除 terminal、score 或 guidance bias。
 
 **适用边界（图没有证明什么）。** 图主要显示 spatially constant isotropic diffusion 的简式；state-dependent/degenerate $D$、density zeros 和 boundary conditions 需使用一般时间反演定理。Exact reverse theorem 假设 exact score 与足够 regularity，不等于 neural approximation 或有限数据训练保证。样本指标、likelihood 与 perceptual quality 也不是同一验收量。
+
+> [!note] 课程位置
+> DYN-09—11 已依次建立 Brownian path、Itô SDE、Fokker–Planck 与正向 probability-flow ODE。本章把物理时间 $t$ 换成正常递增的反向时钟 $s=T-t$，推导 reverse SDE/PF ODE，并解释为什么未知 marginal score 是唯一需要学习的统计接口。这是 10.9 的理论收官：连续模型正确、score 学得准确、terminal prior 足够接近和 finite-step sampler 可靠仍是四道不同的门。
+
+> [!tip] 建议两遍阅读
+> **第一遍**继续使用 VP–OU Gaussian：写出 $p_t$ 与 score，在反向时钟中分别计算 reverse SDE 的 full-score drift 和 PF ODE 的 half-score drift，并核对 stationary limit。**第二遍**再进入一般时间反演、state-dependent $D$、小时间 Bayes、DSM/Tweedie、score/noise/$x_0$/$v$ 参数化、DDPM/DDIM、guidance 与误差分解。第一遍禁止使用含糊的“令 $dt<0$”跳过符号推导。
+
+## 本章的推导问题链
+
+1. Forward noising 为什么设计的是 transition law，而中间 marginal $p_t$ 仍依赖未知数据分布？
+2. 为什么要定义 $Y_s=X_{T-s}$，反向 Brownian 又必须相对于 reverse filtration？
+3. 小时间 Bayes 怎样让 backward conditional mean 出现 $\nabla\log p_t$？
+4. Reverse SDE 的 full $g^2s_t$ 与 PF ODE 的 half $\frac12g^2s_t$ 分别从哪条 current 方程来？
+5. Gaussian corruption 的 conditional score 怎样通过条件期望恢复 marginal score？
+6. 从近似 prior 出发、使用 learned score 和有限步 sampler 分别引入什么误差？
+7. 为什么减小 sampler 步长只能减少 solver bias，不能修复 terminal、score 或 guidance bias？
+
+## 贯穿算例：把 VP–OU 从近 Gaussian 终点搬回数据分布
+
+前向过程仍为
+
+$$
+dX_t=-X_tdt+\sqrt2dW_t,
+\qquad
+X_0\sim\mathcal N\!\left(2,\frac14\right),
+$$
+
+且
+
+$$
+p_t=\mathcal N(m_t,v_t),
+\qquad
+m_t=2e^{-t},
+\qquad
+v_t=1-\frac34e^{-2t}.
+$$
+
+### 符号与对象账本
+
+| 对象 | 类型 | 本例中的值/作用 | 不可直接称为 |
+|---|---|---|---|
+| $q_{t|0}$ | known forward conditional | $\mathcal N(e^{-t}x_0,1-e^{-2t})$ | unknown marginal $p_t$ |
+| $p_t$ | population marginal | 对 data $X_0$ 混合后的 Gaussian | empirical minibatch density |
+| $s_t$ | exact population score | $-(x-m_t)/v_t$ | learned $s_\theta$ |
+| $s=T-t$ | reverse clock | 从 $0$ 正常增加到 $T$ | “负的时间变量” |
+| $b_{\rm rev}$ | reverse-SDE drift | $x+2s_t(x)$ | reverse PF velocity |
+| $u_{\rm rev}$ | reverse PF velocity | $x+s_t(x)$ | reverse-SDE drift |
+| $\pi$ | deployed terminal prior | 常取 $\mathcal N(0,1)$ | exact $p_T$ |
+| $\widehat p_0$ | finite-model output | terminal/score/solver 共同结果 | 自动等于 data law |
+
+### 第一步：forward conditional 与 marginal score
+
+已知
+
+$$
+X_t=e^{-t}X_0+\sqrt{1-e^{-2t}}\,\varepsilon,
+\qquad \varepsilon\sim\mathcal N(0,1).
+$$
+
+固定 $X_0=x_0$ 时，conditional score 是
+
+$$
+\boxed{
+\partial_x\log q_{t|0}(x\mid x_0)
+=-\frac{x-e^{-t}x_0}{1-e^{-2t}}
+=-\frac{\varepsilon}{\sqrt{1-e^{-2t}}}.
+}
+$$
+
+而当前 Gaussian 数据边缘的 population score 为
+
+$$
+\boxed{
+s_t(x)=\partial_x\log p_t(x)
+=-\frac{x-m_t}{v_t}.
+}
+$$
+
+两者不逐样本相等；denoising score matching 使用恒等式
+
+$$
+\mathbb E\!\left[
+\partial_x\log q_{t|0}(X_t\mid X_0)
+\mid X_t=x
+\right]
+=s_t(x)
+$$
+
+把可采样的 conditional target 转成 marginal-score regression。
+
+### 第二步：先量化 terminal prior 近似
+
+若取 $T=3$，
+
+$$
+m_T=2e^{-3}\approx0.099574,
+\qquad
+v_T=1-\frac34e^{-6}\approx0.998141.
+$$
+
+它已经接近但不等于 $\pi=\mathcal N(0,1)$。精确 Gaussian KL 为
+
+$$
+\boxed{
+D_{\rm KL}(p_T\|\pi)
+=\frac12\left(m_T^2+v_T-1-\log v_T\right)
+\approx0.00495837.
+}
+$$
+
+从 $p_T$ 启动 exact reverse theorem 与从 $\pi$ 启动部署 sampler 是两件事；后者在 score 和 solver 都完美时仍保留 terminal mismatch。
+
+### 第三步：反向时钟中的 reverse SDE
+
+定义
+
+$$
+Y_s=X_{T-s},
+\qquad t=T-s.
+$$
+
+一般 spatially constant diffusion 的反向漂移是 $-f+g^2s_t$。本例 $f(x)=-x,g^2=2$，所以
+
+$$
+\boxed{
+dY_s
+=\left[Y_s+2s_{T-s}(Y_s)\right]ds
++\sqrt2d\overline W_s.
+}
+$$
+
+代入 Gaussian score：
+
+$$
+b_{\rm rev}(s,x)
+=x-2\frac{x-m_{T-s}}{v_{T-s}}.
+$$
+
+这里的 $\overline W_s$ 是相对于 reverse filtration 的 Brownian motion，不是简单把 forward 噪声数组倒放。
+
+### 第四步：反向 probability-flow ODE 只有 half score
+
+Forward PF velocity 是
+
+$$
+u_t(x)=-x-s_t(x).
+$$
+
+反向时钟使速度取负：
+
+$$
+\boxed{
+\frac{dY_s}{ds}
+=Y_s+s_{T-s}(Y_s)
+=Y_s-\frac{Y_s-m_{T-s}}{v_{T-s}}.
+}
+$$
+
+Reverse SDE 中 score coefficient 为 $2=g^2$；reverse PF ODE 中为 $1=g^2/2$。二者的 path law 不同，但在 exact score/terminal/solver 条件下都沿 $p_{T-s}$ 回到 $p_0$。
+
+### 第五步：stationary limit 是最清楚的系数审计
+
+当 $p_t=\mathcal N(0,1)$ 时，$s_t(x)=-x$。于是
+
+$$
+b_{\rm rev}(x)=x+2(-x)=-x,
+$$
+
+reverse SDE 仍是 stationary OU；而
+
+$$
+u_{\rm rev}(x)=x+(-x)=0,
+$$
+
+reverse PF 粒子保持不动。两者都保持 $\mathcal N(0,1)$。若把 full/half coefficient 写反，这个 stationary sanity check 会立即失败。
+
+### 第六步：五道误差门不能由一个 sample metric 代替
+
+| 门 | 理想对象 | 本例中的可检查量 |
+|---|---|---|
+| terminal | exact $p_T$ vs chosen $\pi$ | $D_{\rm KL}(p_T\|\pi)\approx0.004958$ |
+| score | $s_\theta$ vs $s_t$ | Gaussian 解析 score residual |
+| continuous dynamics | exact reverse theorem/PF ODE | full/half coefficient与时钟 |
+| solver | finite-step sampler vs continuous model | step refinement、strong/weak 或 distribution error |
+| evaluation | generated law vs $p_0$ | mean/variance/KL 只是本 Gaussian 例的最低门 |
+
+真实数据不是 Gaussian，低阶矩正确不代表分布正确；单一 FID、likelihood 或视觉样本也不能覆盖全部五门。
+
+## 核心公式七问：反向 SDE 为什么使用 full score
+
+对 $Y_s=X_{T-s}$ 和 spatially constant $D=g^2I$，
+
+$$
+\boxed{
+dY_s
+=\left[-f(T-s,Y_s)+g(T-s)^2\nabla\log p_{T-s}(Y_s)\right]ds
++g(T-s)d\overline W_s.
+}
+$$
+
+1. **解决什么问题？** 构造一个正向运行的反时钟随机过程，使其 marginal path 从 $p_T$ 返回 $p_0$。
+2. **对象与形状？** $f,s,Y\in\mathbb R^d$，$D=BB^T$；一般 state-dependent $D$ 还需 $p^{-1}\nabla\cdot(Dp)$ 的完整 correction。
+3. **从哪里来？** 小时间 Bayes 给局部条件均值直觉；严格系数可由反向 probability current 与相同 diffusion matrix 配平。
+4. **需要什么条件？** Positive/regular densities、相应非退化性、边界和正反向适定性；learned score 不自动满足定理条件。
+5. **怎样检查？** 明确 $s=T-t$，验证 Gaussian 解析 drift、stationary limit 和正反向 marginal；不要只凭“$dt<0$”猜符号。
+6. **怎样误读？** Reverse SDE 用 full $g^2s$，PF ODE 用 half；从近似 $\pi$、近似 score 或有限步出发都已不是 exact theorem。
+7. **AI 中怎样调用？** Diffusion model 训练用 DSM/参数化近似 score，部署时再选 reverse SDE、PF ODE 或离散 sampler；必须分别报告 terminal、model、guidance 与 numerical error。
+
+> [!success] 第一遍停靠线
+> 合上正文后，应能写出 $q_{t|0}$、$p_t$、conditional score 与 marginal score，计算 $T=3$ 的 terminal KL，并在反向时钟中分别得到 $x+2s_t(x)$ 与 $x+s_t(x)$。若无法用 stationary $s=-x$ 检查两条动力学，请先不要进入 DDPM/DDIM 和 guidance 部分。
 
 ## 学习目标
 

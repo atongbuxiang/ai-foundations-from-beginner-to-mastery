@@ -7,7 +7,7 @@ prerequisites: ["[[Itô 引理与随机微分方程]]", "[[连续性方程与守
 related: ["[[ODE、动力系统与 SDE MOC]]", "[[时间反演、score 与扩散生成动力学]]", "[[随机过程、Brownian 运动与二次变差]]", "[[实验 - Fokker-Planck、概率流与score误差审计]]"]
 sources: ["MIT-8.592J-2011-Kolmogorov-Equations", "MIT-18.642-2024-Stochastic-Processes-II", "Pavliotis-Stochastic-Processes-Applications", "Risken-Fokker-Planck", "Oksendal-Stochastic-Differential-Equations", "Song-et-al-2021-Score-SDE", "Albergo-et-al-2024-Stochastic-Interpolants", "Su-3762-Stochastic-Differential-Equation", "Su-9209-Diffusion-SDE", "Su-9228-Probability-Flow-ODE", "Su-9280-Diffusion-ODE"]
 created: 2026-08-19
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # Fokker-Planck 方程与概率流 ODE
@@ -57,6 +57,211 @@ updated: 2026-08-23
 **怎样读图。** A 先明确 $\mathcal L$ 作用在 observables，$\mathcal L^*$ 作用在 density，分部积分的边界项决定 PDE domain；B 再把 drift/diffusion current 合并成 $J=vp$，在 $p>0$ 区域定义 velocity，isotropic spatially constant diffusion 才简化为 $a-\frac12g^2\nabla\log p$；C 最后只比较 one-time marginals，不能把它外推到 transition kernel、cross-time covariance、QV 或 hitting-time law。
 
 **适用边界（图没有证明什么）。** 图省略退化 diffusion、弱 density、boundary singularities 与 probability-current nonuniqueness 的技术条件。State-dependent $D$ 不能漏掉 product-rule/$\nabla\cdot D$ 项；$p=0$ 处的 velocity 需要谨慎定义。Exact same-marginal theorem 依赖 exact score/coefficients 与 well-posed PDE/ODE，不包含 learned score 或 finite-step solver error。
+
+> [!note] 课程位置
+> DYN-10 在给定 Brownian realization 时描述单条 SDE path，并用 generator 控制 test-function 期望。本章把 generator 的导数通过分部积分转移到 density，得到 Fokker–Planck；随后把 diffusion current 改写为 deterministic velocity，构造与 SDE 共享 one-time marginals 的 probability-flow ODE。DYN-12 将把物理时间反向，并用同一个 score 写出生成方向的 SDE/ODE。
+
+> [!tip] 建议两遍阅读
+> **第一遍**继续计算 VP–OU：从 generator 推出 Fokker–Planck，写出显式 Gaussian score、probability current 和 probability-flow velocity，再用均值/方差 ODE 核对同 marginals。**第二遍**再进入 semigroup、Dynkin、backward/forward Kolmogorov、state-dependent diffusion、边界、stationary law、Langevin 与 learned-score 误差。第一遍必须能解释“同边缘分布”为什么没有保留 Brownian quadratic variation。
+
+## 本章的推导问题链
+
+1. Sample path、transition kernel、marginal law 与 density 分别回答什么问题？
+2. Generator $\mathcal L$ 为什么作用在 observable 上，formal adjoint $\mathcal L^*$ 为什么作用在 density 上？
+3. Itô/Dynkin 的 test-function identity 怎样通过一次/两次分部积分产生 drift 与 diffusion PDE 项？
+4. Fokker–Planck 怎样写成 $\partial_tp=-\nabla\cdot J$，boundary current 为什么是问题合同的一部分？
+5. 在 $p>0$ 处令 $v=J/p$，为什么能得到同一 continuity equation？
+6. Isotropic constant diffusion 时的 half-score coefficient 从哪里来，为什么不是 reverse SDE 的 full coefficient？
+7. SDE 与 probability-flow ODE 共享 marginals 后，transition、cross-time covariance、QV 与 hitting time 为什么仍不同？
+
+## 贯穿算例：同一个 VP–OU 的随机路径与确定性概率流
+
+继续使用
+
+$$
+dX_t=-X_tdt+\sqrt2dW_t,
+\qquad
+p_t=\mathcal N(m_t,v_t),
+$$
+
+其中
+
+$$
+m_t=2e^{-t},
+\qquad
+v_t=1-\frac34e^{-2t}.
+$$
+
+### 符号与对象账本
+
+| 对象 | 类型 | 本例中的值/作用 | 不可直接称为 |
+|---|---|---|---|
+| $P_t$ | Markov semigroup | 把 observable 向未来平均 | marginal density |
+| $\mathcal L$ | generator on observables | $-x\partial_x+\partial_{xx}$ | Fokker–Planck operator 本身 |
+| $\mathcal L^*$ | adjoint on density | $\partial_x(x\cdot)+\partial_{xx}$ | ordinary transpose matrix |
+| $p_t$ | marginal density | $\mathcal N(m_t,v_t)$ | transition density $q_{t|0}$ |
+| $s_t$ | population score | $\partial_x\log p_t$ | learned score network |
+| $J_t$ | probability current | drift current + diffusion current | velocity |
+| $u_t=J_t/p_t$ | PF-ODE velocity | deterministic same-marginal flow | reverse-time drift |
+
+### 第一步：generator 先作用在测试函数
+
+对 $a(x)=-x$、$b=\sqrt2$，Itô generator 是
+
+$$
+\boxed{
+(\mathcal L\varphi)(x)
+=-x\varphi'(x)+\varphi''(x).
+}
+$$
+
+因此
+
+$$
+\frac d{dt}\mathbb E[\varphi(X_t)]
+=\mathbb E[-X_t\varphi'(X_t)+\varphi''(X_t)].
+$$
+
+这条式子不要求先显式写出 $p_t$；但若有足够光滑且边界项消失的 density，就可把导数转移给 $p_t$。
+
+### 第二步：adjoint 给出 Fokker–Planck
+
+一次分部积分处理 drift、两次分部积分处理 diffusion：
+
+$$
+\boxed{
+\partial_t p_t(x)
+=\partial_x\bigl(xp_t(x)\bigr)
++\partial_{xx}p_t(x).
+}
+$$
+
+这与一般公式
+
+$$
+\partial_t p=-\partial_x(ap)+\frac12\partial_{xx}(b^2p)
+$$
+
+一致，因为 $a=-x,b^2=2$。归一化、尾部衰减或其他 boundary condition 不能省略；否则分部积分可能留下边界概率流。
+
+### 第三步：显式 Gaussian 给出 score
+
+写
+
+$$
+p_t(x)
+=\frac1{\sqrt{2\pi v_t}}
+\exp\left[-\frac{(x-m_t)^2}{2v_t}\right].
+$$
+
+其 score 为
+
+$$
+\boxed{
+s_t(x)
+:=\partial_x\log p_t(x)
+=-\frac{x-m_t}{v_t}.
+}
+$$
+
+Score 是 density 的空间对数导数，不是 time derivative，也不是某条随机 path 的 velocity。对于 Gaussian，它指向当前均值且按 inverse variance 缩放。
+
+### 第四步：从 current 构造 probability-flow velocity
+
+Fokker–Planck 可写成
+
+$$
+\partial_tp_t=-\partial_xJ_t,
+$$
+
+其中
+
+$$
+J_t
+=a p_t-\frac12b^2\partial_xp_t
+=-xp_t-\partial_xp_t.
+$$
+
+在 $p_t>0$ 处，定义
+
+$$
+\boxed{
+u_t(x)=\frac{J_t(x)}{p_t(x)}
+=-x-s_t(x)
+=-x+\frac{x-m_t}{v_t}.
+}
+$$
+
+于是 deterministic ODE
+
+$$
+\dot Z_t=u_t(Z_t)
+$$
+
+的 continuity equation 与 SDE 的 Fokker–Planck 完全相同；在适定条件和相同初始 law 下，它们共享每个 $p_t$。
+
+### 第五步：用均值和方差核对 same-marginal claim
+
+Gaussian score 满足
+
+$$
+\mathbb E[s_t(X_t)]=0,
+\qquad
+\mathbb E[(X_t-m_t)s_t(X_t)]=-1.
+$$
+
+因此 PF ODE 的均值满足
+
+$$
+\dot m_t
+=\mathbb E[u_t(X_t)]
+=-m_t,
+$$
+
+与 $m_t=2e^{-t}$ 一致。方差满足
+
+$$
+\begin{aligned}
+\dot v_t
+&=2\mathbb E[(X_t-m_t)u_t(X_t)]\\
+&=2(-v_t+1)
+=2(1-v_t),
+\end{aligned}
+$$
+
+与 $v_t=1-\frac34e^{-2t}$ 一致。这里 diffusion 的方差注入被 score-dependent deterministic expansion 精确替代。
+
+### 第六步：同 marginals 不等于同 process
+
+当 $t\to\infty$ 时，$p_t\to\mathcal N(0,1)$，score 趋于 $s(x)=-x$。于是
+
+$$
+u(x)=-x-(-x)=0.
+$$
+
+Stationary PF ODE 的粒子保持不动；stationary OU SDE 却继续随机波动并有 nonzero quadratic variation。二者固定时刻都服从 $\mathcal N(0,1)$，但 transition law、path law、QV 与 hitting events 完全不同。
+
+## 核心公式七问：从 Fokker–Planck 到 probability-flow ODE
+
+对 spatially constant isotropic diffusion $g(t)$，
+
+$$
+\boxed{
+u_t(x)
+=f(t,x)-\frac12g(t)^2\nabla_x\log p_t(x).
+}
+$$
+
+1. **解决什么问题？** 把 diffusion density PDE 改写为 deterministic continuity equation，从而构造共享 one-time marginals 的 ODE。
+2. **对象与形状？** $f,u,s\in\mathbb R^d$，$g^2$ 为标量或 $D$ 为矩阵，$p_t$ 为 density；一般 state-dependent $D$ 还含 $\nabla\cdot D$ correction。
+3. **从哪里来？** 先将 Fokker–Planck 写成 probability current $J$，再在 $p>0$ 处令 $u=J/p$。
+4. **需要什么条件？** Density/coefficients 足够 regular、边界项受控、score 可定义且 ODE/PDE 适定；density zeros 需谨慎。
+5. **怎样检查？** 比较完整 continuity PDE，并至少核对 mass、mean、variance；本例的两组 moment ODE 完全一致。
+6. **怎样误读？** Half-score coefficient属于 PF ODE，不是 reverse SDE；same marginals 也不提供 same transition 或 QV。
+7. **AI 中怎样调用？** Score-based model 可用 PF ODE 采样/likelihood，但 learned-score error、ODE solver error 和 terminal mismatch 仍需独立登记。
+
+> [!success] 第一遍停靠线
+> 合上正文后，应能从 $\mathcal L=-x\partial_x+\partial_{xx}$ 推出 Fokker–Planck，计算 Gaussian score，并由 current 得到 $u_t=-x-s_t$；随后用均值和方差证明它与 OU SDE 同 marginals，再用 stationary 情形解释为什么 path law 不同。若在 PF ODE 中写成 $-x-2s_t$，说明把 reverse SDE 的 full coefficient 混进来了。
 
 ## 学习目标
 

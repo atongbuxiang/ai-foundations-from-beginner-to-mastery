@@ -7,7 +7,7 @@ prerequisites: ["[[随机过程、Brownian 运动与二次变差]]", "[[期望�
 related: ["[[ODE、动力系统与 SDE MOC]]", "[[Fokker-Planck 方程与概率流 ODE]]", "[[时间反演、score 与扩散生成动力学]]", "[[实验 - Itô 和、SDE 强弱误差与离散梯度审计]]"]
 sources: ["MIT-15.070J-2013-Ito-Integral", "MIT-18.S096-2013-Ito-Calculus", "Oksendal-Stochastic-Differential-Equations", "Kloeden-Platen-Numerical-SDE", "Li-et-al-2020-Scalable-SDE-Gradients", "Kidger-et-al-2021-Neural-SDE-GAN", "Song-et-al-2021-Score-SDE", "Su-3762-Stochastic-Differential-Equation", "Su-9209-Diffusion-SDE"]
 created: 2026-08-19
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # Itô 引理与随机微分方程
@@ -28,7 +28,7 @@ updated: 2026-08-23
 > \left(
 > f_t+af_x+\frac12b^2f_{xx}
 > \right)dt
-> bf_x\,dW_t.
+> +bf_x\,dW_t.
 > $$
 > 这不是符号修饰，而是决定 exact solution、drift conversion、density evolution、数值阶与神经 SDE 训练梯度的核心结构。
 
@@ -45,6 +45,211 @@ updated: 2026-08-23
 **怎样读图。** A 先在 simple adapted process 上定义随机积分，利用 isometry 在 $L^2$ 中闭包；B 再按 $dt,dW,(dW)^2$ 尺度保留 Taylor 项，不能从 ordinary chain rule 猜结论；C 最后把微分记号还原为带 filtration 的 integral equation，数值细化必须复用/嵌套同一 Brownian path 才能测 strong error，weak error 则比较 law functional/expectation。
 
 **适用边界（图没有证明什么）。** 图不覆盖 anticipating integrals、local time、jump SDE 或 rough paths；adaptedness 也不是一般积分存在的全部技术条件。Global Lipschitz/linear growth 是常用充分条件而非最弱条件。Euler–Maruyama 的 $1/2$ strong order 不是任意非光滑/非全局 Lipschitz SDE 的普适保证，positivity 和 invariant preservation需另查。
+
+> [!note] 课程位置
+> DYN-09 建立了 Brownian 的 $\sqrt{dt}$ 增量与非零 quadratic variation。本章把这些路径事实组织成随机积分和 SDE：先说明 $dX=a\,dt+b\,dW$ 是积分方程，再用 Itô formula 修正普通链式法则，最后区分 exact SDE、数值离散和梯度对象。DYN-11 将把本章的 generator 取 adjoint，得到 density 的 Fokker–Planck 方程。
+
+> [!tip] 建议两遍阅读
+> **第一遍**只解常系数 VP–OU：用 integrating factor 得到 conditional Gaussian，加入 Gaussian 初值求 marginal，再对 $X_t^2$ 用 Itô formula 核对二阶矩。**第二遍**再进入 Itô integral/isometry、强弱解、Itô–Stratonovich、一般多维 formula、Euler–Maruyama/Milstein、strong/weak convergence 与 neural-SDE gradient。第一遍必须能指出 ordinary chain rule 漏掉了哪一项。
+
+## 本章的推导问题链
+
+1. 为什么 $dX_t=a\,dt+b\,dW_t$ 必须还原为带 filtration 的积分方程？
+2. Itô integral 为什么使用 adapted left sums，Itô isometry 控制什么收敛？
+3. Brownian quadratic variation 怎样让 Taylor 展开中的 $(dX)^2$ 保留为 $b^2dt$？
+4. Itô formula 的 generator 项如何同时控制期望、矩与下一章的 density PDE？
+5. Linear SDE 怎样用 integrating factor 精确求解，条件分布与边缘分布为什么是两张账？
+6. Euler–Maruyama 的一步均值/方差怎样与精确 transition 比较？
+7. Strong error、weak error、distributional error 与 gradient error 为什么不能用同一个曲线替代？
+
+## 贯穿算例：可解析的 variance-preserving OU 扩散
+
+取
+
+$$
+\boxed{
+dX_t=-X_t\,dt+\sqrt2\,dW_t,
+\qquad
+X_0\sim\mathcal N\!\left(2,\frac14\right),
+}
+$$
+
+并令 $X_0$ 与 Brownian motion 独立。这是标准 VP SDE 在常数 $\beta=2$ 时的形式：drift 为 $-\frac12\beta X_t=-X_t$，diffusion scale 为 $\sqrt\beta=\sqrt2$。
+
+### 符号与对象账本
+
+| 对象 | 类型 | 本例中的值/作用 | 不可直接称为 |
+|---|---|---|---|
+| $X_0$ | random initial state | $\mathcal N(2,1/4)$ | 固定条件初值 $x_0$ |
+| $W_t$ | Brownian driver | 与 $X_0$ 独立 | 每时刻独立 Gaussian |
+| $a(x)$ | Itô drift | $-x$ | sample-path ordinary derivative |
+| $b$ | diffusion coefficient | $\sqrt2$ | noise variance；后者为 $b^2dt$ |
+| $q_{t|0}(\cdot|x_0)$ | conditional transition law | 固定 $X_0=x_0$ | marginal $p_t$ |
+| $p_t$ | marginal law | 对 $X_0$ 再平均 | 单条 path distribution |
+| $\mathcal L$ | generator | $-x\partial_x+\partial_{xx}$ | density 上的 adjoint $\mathcal L^*$ |
+| $\widehat X_n$ | numerical state | Euler–Maruyama 网格值 | exact $X_{t_n}$ |
+
+### 第一步：先把微分记号还原为积分方程
+
+本例的定义是
+
+$$
+X_t
+=X_0-\int_0^tX_s\,ds+\sqrt2\int_0^t dW_s.
+$$
+
+更有用的是乘 integrating factor $e^t$。Itô product rule 中 $e^t$ 是 finite variation，所以没有 cross-variation 项：
+
+$$
+d(e^tX_t)
+=e^tX_tdt+e^tdX_t
+=\sqrt2e^t dW_t.
+$$
+
+积分得到
+
+$$
+\boxed{
+X_t=e^{-t}X_0+\sqrt2\int_0^t e^{-(t-s)}dW_s.
+}
+$$
+
+### 第二步：区分 conditional law 与 marginal law
+
+固定 $X_0=x_0$，Itô integral 是均值零 Gaussian，且由 isometry
+
+$$
+2\int_0^t e^{-2(t-s)}ds=1-e^{-2t}.
+$$
+
+因此
+
+$$
+\boxed{
+X_t\mid X_0=x_0
+\sim\mathcal N\!\left(e^{-t}x_0,\,1-e^{-2t}\right).
+}
+$$
+
+也可重参数化为
+
+$$
+X_t=e^{-t}X_0+\sqrt{1-e^{-2t}}\,\varepsilon,
+\qquad \varepsilon\sim\mathcal N(0,1).
+$$
+
+再对随机 $X_0\sim\mathcal N(2,1/4)$ 平均，得到
+
+$$
+\boxed{
+p_t
+=\mathcal N(m_t,v_t),
+\qquad
+m_t=2e^{-t},
+\qquad
+v_t=1-\frac34e^{-2t}.
+}
+$$
+
+Conditional variance 从 $0$ 增到 $1$；marginal variance 从 $1/4$ 增到 $1$。两者不同，不能把训练时已知的 $q_{t|0}$ 当成未知数据边缘 $p_t$。
+
+### 第三步：Itô formula 核对二阶矩
+
+对 $f(x)=x^2$，ordinary chain rule 会写 $d(X_t^2)=2X_tdX_t$，但 Itô formula 还保留 $(dX_t)^2=2dt$：
+
+$$
+\boxed{
+d(X_t^2)
+=(-2X_t^2+2)dt
++2\sqrt2X_t\,dW_t.
+}
+$$
+
+在可积条件下 stochastic integral 的期望为零，故
+
+$$
+\frac d{dt}\mathbb E[X_t^2]
+=-2\mathbb E[X_t^2]+2.
+$$
+
+由显式 marginal，
+
+$$
+\mathbb E[X_t^2]
+=m_t^2+v_t
+=1+\frac{13}{4}e^{-2t}.
+$$
+
+其导数为 $-\frac{13}{2}e^{-2t}$，而右边
+
+$$
+-2\left(1+\frac{13}{4}e^{-2t}\right)+2
+=-\frac{13}{2}e^{-2t},
+$$
+
+完全一致。若漏掉 Itô 的 $+2dt$，方差就不会趋向正确的 stationary value $1$。
+
+### 第四步：Euler–Maruyama 先比较一步 transition
+
+步长 $h$ 的 Euler–Maruyama 是
+
+$$
+\widehat X_{n+1}
+=(1-h)\widehat X_n+\sqrt{2h}\,\xi_n,
+\qquad \xi_n\overset{\mathrm{iid}}{\sim}\mathcal N(0,1).
+$$
+
+从固定 $x$ 出发，一步 numerical conditional mean/variance 为
+
+$$
+(1-h)x,
+\qquad 2h,
+$$
+
+而 exact transition 是
+
+$$
+e^{-h}x,
+\qquad1-e^{-2h}.
+$$
+
+在 $h=0.1$ 时：
+
+| 对象 | EM | exact |
+|---|---:|---:|
+| mean factor | $0.9$ | $0.904837418$ |
+| conditional variance | $0.2$ | $0.181269247$ |
+
+这只是一步 distributional calibration。测 strong error 时必须让 coarse/fine 方法共享同一 Brownian path；各自重抽噪声只会测两个独立样本的差。
+
+## 核心公式七问：Itô formula 为什么多出二阶项
+
+对
+
+$$
+dX_t=a(t,X_t)dt+b(t,X_t)dW_t,
+$$
+
+有
+
+$$
+\boxed{
+df(t,X_t)
+=\left(f_t+af_x+\frac12b^2f_{xx}\right)dt
++bf_xdW_t.
+}
+$$
+
+1. **解决什么问题？** 给 Brownian-driven process 上的复合函数提供正确链式法则，并定义 generator。
+2. **对象与形状？** 一维时 $a,b,X$ 为标量；多维时 diffusion matrix 通过 $D=BB^T$ 与 Hessian contraction 进入。
+3. **从哪里来？** Taylor 展开保留一阶 $dX$ 和二阶 $(dX)^2$；$dW=O_{\mathbb P}(\sqrt{dt})$ 使 $b^2(dW)^2$ 累积为 $b^2dt$。
+4. **需要什么条件？** $f$ 至少具有相应 $C^{1,2}$ regularity，SDE/积分满足适应性与可积条件；更弱版本需另述。
+5. **怎样检查？** 对 $f(x)=x,x^2,e^x$ 逐项核对；本例 $f=x^2$ 必须产生 $+2dt$ 并恢复正确 moment ODE。
+6. **怎样误读？** $(dW)^2=dt$ 不是普通代数，$dt\,dW$ 和 $(dt)^2$ 的忽略也来自分割尺度，而非形式删除规则。
+7. **AI 中怎样调用？** Neural SDE、diffusion 与 stochastic control 的 loss/gradient 必须匹配 Itô/Stratonovich 解释、连续模型和实际离散器；换解释会改变 drift。
+
+> [!success] 第一遍停靠线
+> 合上正文后，应能用 integrating factor 推出 OU 条件均值与方差，再从随机 Gaussian 初值得到 $m_t=2e^{-t}$、$v_t=1-\frac34e^{-2t}$；随后对 $X_t^2$ 写出完整 Itô differential 并解释 $+2dt$ 的来源。若把 $q_{t|0}$ 与 $p_t$ 写成同一对象，请先回到条件/边缘两步。
 
 ## 学习目标
 

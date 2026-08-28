@@ -24,7 +24,7 @@ updated: 2026-08-27
 | A | DYN-01—04 | 适定性 → 线性传播 → 局部相图 → Lyapunov 证书 | 欠阻尼振子 $q''+q'+q=0$；$e^{tA}$、spiral sink、LaSalle 与 $A^TP+PA=-I$ | `regression-passed` | `draft / not-attempted` |
 | B | DYN-05—06 | consistency/order → absolute stability → stiffness/implicit solve | $y'=-y$ 的三种传播多项式；$\operatorname{diag}(-1,-100)$ 的快慢系统 | `regression-passed` | `draft / not-attempted` |
 | C | DYN-07—08 | unique flow → Jacobian/volume → density transport/conservation | $\operatorname{diag}(1,-2)x+(1,0)^T$ 与推前 Gaussian | `regression-passed` | `draft / not-attempted` |
-| D | DYN-09—12 | Brownian variation → Itô/SDE → Fokker–Planck/PF-ODE → reverse score | 待迁移：同一 variance-preserving diffusion | `deep-draft / queued` | `draft / not-attempted` |
+| D | DYN-09—12 | Brownian variation → Itô/SDE → Fokker–Planck/PF-ODE → reverse score | $dX=-Xdt+\sqrt2dW$ 与 Gaussian data law | `regression-passed` | `draft / not-attempted` |
 | CUM | DYN-CUM | 口试—闭卷—三轨实验—延迟重做 | 12 节随机回链与累计计算门 | `composed` | `not-attempted` |
 
 ### 第一波的单一模型链
@@ -155,6 +155,52 @@ $$
 2. **第二遍（约 300 分钟）：**学习一般两参数流、变分方程、Liouville/CNF、trace estimator、控制体/弱形式、边界、finite volume、Flow Matching 与 OT 接口；
 3. **第三遍（约 120 分钟）：**把 $A$ 改成 $\operatorname{diag}(2,-1)$、skew rotation 和非正规上三角矩阵，运行前预测 determinant、shape、density height、entropy 与 trace-estimator variance；
 4. **验收：**完成[[实验 - 流映射、Liouville 与随机迹审计]]与[[实验 - 守恒通量、压缩密度与边缘速度审计]]；无提示解释 injectivity、local diffeomorphism、global onto、mass conservation 和 likelihood accuracy 为何不能互相替代。
+
+### 第四波的 Brownian—扩散—反演模型链
+
+第四波固定常系数 VP–OU 和一个非平稳 Gaussian 数据分布：
+
+$$
+dX_t=-X_tdt+\sqrt2dW_t,
+\qquad
+X_0\sim\mathcal N\!\left(2,\frac14\right).
+$$
+
+它既保留 Brownian path 的随机性，又有完整解析 transition、marginal、score、Fokker–Planck、probability flow 和 reverse dynamics：
+
+1. **DYN-09：先校准随机时间耦合。** 在 $[0,1]$ 的 $N$ 等分网格上，$\Delta W_k=N^{-1/2}Z_k$，差商方差为 $N$；quadratic variation proxy $Q_N=N^{-1}\sum Z_k^2$ 满足 $\mathbb EQ_N=1$、$\operatorname{Var}Q_N=2/N$，而 absolute-increment sum 的期望按 $\sqrt N$ 发散。Shared-noise coupling 虽保持 $\mathcal N(0,t)$ 边缘，却有零 QV，证明 one-time marginals 不定义 process；
+2. **DYN-10：Itô calculus 把 Brownian 驱动变成可解 SDE。** Integrating factor 给
+   $$
+   X_t=e^{-t}X_0+\sqrt2\int_0^te^{-(t-s)}dW_s,
+   $$
+   因而 $q_{t|0}=\mathcal N(e^{-t}x_0,1-e^{-2t})$，而
+   $$
+   p_t=\mathcal N\!\left(2e^{-t},1-\frac34e^{-2t}\right).
+   $$
+   对 $X^2$ 的 Itô formula 产生 $+2dt$，闭合 $d\mathbb E X^2/dt=-2\mathbb E X^2+2$；$h=0.1$ 的 EM conditional mean/variance $0.9x,0.2$ 与 exact $0.904837x,0.181269$ 分账；
+3. **DYN-11：从 path generator 升级到 density。** $\mathcal L=-x\partial_x+\partial_{xx}$ 的 adjoint 给 $\partial_tp=\partial_x(xp)+\partial_{xx}p$；Gaussian score 为 $s_t(x)=-(x-m_t)/v_t$，current 给正向 PF velocity
+   $$
+   u_t(x)=-x-s_t(x).
+   $$
+   其均值/方差满足 $\dot m=-m,\dot v=2(1-v)$，与 SDE 同 marginals；stationary 时 PF 粒子不动而 OU path 继续有 QV；
+4. **DYN-12：反向时钟分离 full/half score。** 令 $Y_s=X_{T-s}$，则
+   $$
+   dY_s=[Y_s+2s_{T-s}(Y_s)]ds+\sqrt2d\overline W_s,
+   \qquad
+   \frac{dY_s}{ds}=Y_s+s_{T-s}(Y_s)
+   \qquad\text{(reverse PF)}.
+   $$
+   Conditional score 经 $\mathbb E[\cdot\mid X_t]$ 恢复 marginal score；$T=3$ 时 $D_{\rm KL}(p_T\|\mathcal N(0,1))\approx0.00495837$，把 terminal mismatch 与 score/solver error 分开。
+
+> [!success] 第四波材料证书
+> [[dynamics_teaching_contract_audit.py]]检查 DYN-01—12 的教学标记，并对 Brownian QV、OU conditional/marginal、Itô moment、EM transition、Fokker–Planck/PF moments、DSM identity、terminal KL、reverse full/half score 与 stationary sanity check 做确定性断言；同时回归十四个图文单元和正式 SVG 哈希。`regression-passed` 仍只表示材料自洽，全卷学习状态继续为 `draft / not-attempted`。
+
+### 如何学习第四波，而不是先背扩散模型配方
+
+1. **第一遍（约 240 分钟）：**在一张连续账本上从 $\Delta W$ 推到 $[W]_t$、Itô $X^2$、OU transition/marginal、score、Fokker–Planck、PF velocity 与两条反向动力学；
+2. **第二遍（约 480 分钟）：**进入 filtration/martingale、Itô integral/强弱解、Kolmogorov adjoint、一般 time reversal、DSM/Tweedie、参数化、DDPM/DDIM 与数值 SDE；
+3. **第三遍（约 180 分钟）：**改变 $X_0$ 的均值/方差、终止时间 $T$ 和 Euler 步长，在运行前预测 terminal KL、score slope、反向 drift、moment 与 solver bias；
+4. **验收：**完成四个节点实验，并无提示解释 conditional/marginal、path/density、forward/reverse clock、full/half score、exact/learned/finite-step 五组边界。
 
 ## 一、范围与边界
 
@@ -301,7 +347,7 @@ flowchart LR
 
 ## 八、当前进度
 
-DYN-01—12 已全部进入成稿闭环；10.9 当前为 **12/12 正文覆盖、180 道节点题，并已建立 DYN-CUM-01 卷末验收**。在最新初学者教学迁移中，前三波 DYN-01—08 已达到 `regression-passed`，其余四篇仍是深层正文待迁移。[[阶段测验 - ODE、动力系统与 SDE（10.9）]]以 240 分钟、100 分和 A—E 分区覆盖全卷，[[阶段测验解答 - ODE、动力系统与 SDE（10.9）]]逐项给出条件、推导、评分断点与回链。[[实验 - ODE、动力系统与 SDE 累计复现门]]用三轨串联 continuous/discrete stability、FPE–PF–CNF density ledger 与 Brownian/Itô/reverse-score coefficient。全卷所有节点仍为 `draft`，个人学习只记 `not-attempted`；下一教学迁移批次为 DYN-09—12 的 Brownian、Itô、Fokker–Planck 与反向 score 动力学。
+DYN-01—12 已全部进入成稿闭环；10.9 当前为 **12/12 正文覆盖、180 道节点题，并已建立 DYN-CUM-01 卷末验收**。四波 DYN-01—12 的初学者教学迁移均已达到 `regression-passed`。[[阶段测验 - ODE、动力系统与 SDE（10.9）]]以 240 分钟、100 分和 A—E 分区覆盖全卷，[[阶段测验解答 - ODE、动力系统与 SDE（10.9）]]逐项给出条件、推导、评分断点与回链。[[实验 - ODE、动力系统与 SDE 累计复现门]]用三轨串联 continuous/discrete stability、FPE–PF–CNF density ledger 与 Brownian/Itô/reverse-score coefficient。全卷所有正文仍为 `draft`，个人学习只记 `not-attempted`；下一教学施工是将 DYN-CUM 的口试、闭卷、三轨实验与延迟重做合同升级为 `regression-passed`。
 
 ## 九、2026-08-23 图像标准化结果
 
