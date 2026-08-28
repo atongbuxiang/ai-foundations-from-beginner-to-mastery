@@ -1,18 +1,20 @@
 ---
 type: assessment-solution
 status: draft
+material_status: regression-passed
+learning_status: not-attempted
 area: [math/foundations, ai/theory, curriculum/capstone]
-assessment_id: MATH-FND-CAP-01-SOL
+assessment_id: MATH-FND-CAP-01
 solves: "[[数学基础十卷总验收 - 跨卷理论与 AI 迁移]]"
 related: ["[[数学基础完整课程地图与掌握标准]]", "[[数学基础十卷完备性审计与学习状态总表]]", "[[实验 - 数学基础十卷跨章累计复现门]]", "[[练习与测验 MOC]]"]
 created: 2026-08-20
-updated: 2026-08-20
+updated: 2026-08-28
 ---
 
 # 数学基础十卷总验收解答 - 跨卷理论与 AI 迁移
 
 > [!warning] 使用顺序
-> 先冻结[[数学基础十卷总验收 - 跨卷理论与 AI 迁移|两场原卷]]、随机实验轨和事前预测。能读懂这份解答，只说明答案可读；只有在陌生对象上独立重建对象合同、证明与证据边界，才接近课程出口能力。
+> 先核验十份分卷个人 `retained` 证据，完成30分钟口试与两场180分钟闭卷，冻结两场原卷、`attempt_id`、hash和三轨解析校准；再由评分者生成scorer nonce并给出跨轨盲参数。只有命令、stdout、SVG与hash均已保存，才可打开本解答或canonical结果。能读懂本页只说明答案可读，不构成课程出口能力。
 
 ## 0. 评分总则
 
@@ -24,7 +26,7 @@ updated: 2026-08-20
 
 ## 1. A 区：对象、量词与证据分层
 
-### 第 1 题
+### 第 1 题解答：十个理论声明的最小修正（5 分）
 
 1. **错误。** 有限随机测试只能提供所测试分布与实现下的经验反例搜索。要证明全称命题需解析证明；一个未抽到的输入就是可能反例。
 2. **错误。** intrinsic object 是 differential $df_x$。若 metric matrix 为 $G\succ0$，同一 $df$ 的 gradient 为 $G^{-1}\nabla_{\rm Euclid}f$。
@@ -37,7 +39,7 @@ updated: 2026-08-20
 9. **错误。** kernel PSD 要求对任意 $n$、任意样本点和任意系数都非负。一张 finite Gram matrix 只能验证一个有限实例。
 10. **错误。** AD 对实际 program 应用局部 rule，并以浮点执行；custom VJP、控制流、overflow、condition 和 nondifferentiable convention 都可能出错，需 Taylor/adjoint/reference tests。
 
-### 第 2 题
+### 第 2 题解答：隐式概率模型的对象合同（10 分）
 
 一份合格合同可写成：
 
@@ -71,7 +73,7 @@ scalar loss 的 adjoint 则解 $(I-DW)^T\lambda=\nabla_zL$，shape 均为 $m$。
 
 ## 2. B 区：跨卷手算与尺度追踪
 
-### 第 3 题
+### 第 3 题解答：线性—Gaussian—信息—微分（10 分）
 
 因为 $c^T\Sigma c=5$ 且 noise variance 为 1，
 
@@ -125,7 +127,7 @@ $$
 
 接近奇异时 $\Sigma^{-1}$ 放大扰动，显式 inverse 和直接 determinant 都不可靠；应使用 Cholesky/solve、condition estimate 与稳定 log-det。
 
-### 第 4 题
+### 第 4 题解答：优化—离散动力—条件性（10 分）
 
 $\nabla f=Hx-b$，所以 $x_*=H^{-1}b=(1,1)^T$。$H$ 的 eigenvalues 为 1 和 9，因此 $\mu=1,L=9,\kappa_2(H)=9$。
 
@@ -162,7 +164,7 @@ $A=\operatorname{diag}(1,3)$ 时 $\kappa_2(A)=3$，而 normal-equation Hessian $
 
 ## 3. C 区：统一证明链
 
-### 第 5 题
+### 第 5 题解答：数据处理、不丢任务信息与证据边界（8 分）
 
 对三变量 mutual information 使用两种 chain-rule 展开：
 
@@ -187,7 +189,7 @@ $$
 
 InfoNCE 常只是指定 sampling/proposal/class 下的 lower bound；finite-sample MI estimator 有 bias/variance 和 dimension dependence；classification accuracy 只对应一个 task、hypothesis class 与 decision threshold。可做的敏感性检查包括：加入与任务无关但高熵 nuisance，比较 MI proxy 与 task accuracy；改变 negative count；用已知 Gaussian MI 的 synthetic truth 做 sample-size/seed sweep。任何有限实验都不能单独证明普遍 DPI 或表示充分性。
 
-### 第 6 题
+### 第 6 题解答：不动点—隐式微分—伴随—残差证书（9 分）
 
 定义 $T_\theta(z)=\phi(Wz+b\theta)$。逐坐标 1-Lipschitz 与 $\|W\|_2\le q$ 给出
 
@@ -238,7 +240,7 @@ $$
 
 相对界还要带 $\kappa(A)$ 与恰当 scaling。误差账必须分开：$z_K-z^*$ 的 primal truncation；$\widehat u-u$ 的 linear-solve error；每个 matvec/reduction 的 floating error；以及 fixed-point model 本身与真实机制之间的 misspecification。小 linear residual 不修复其他三层。
 
-### 第 7 题
+### 第 7 题解答：RKHS 表示定理的有限样本骨架（8 分）
 
 令 $S=\operatorname{span}\{k(x_i,\cdot)\}_{i=1}^n$。任意 $f=f_S+f_\perp$，且 $f_\perp\perp S$。reproducing property 给
 
@@ -272,7 +274,7 @@ $$
 
 ## 4. D 区：AI 系统审计与迁移
 
-### 第 8 题
+### 第 8 题解答：Transformer、低秩适配与混合精度（9 分）
 
 单 head 可写 $Q,K\in\mathbb R^{n\times d_k}$、$V\in\mathbb R^{n\times d_v}$，logits $L=QK^T/\sqrt{d_k}\in\mathbb R^{n\times n}$，故 $\operatorname{rank}L\le d_k$。mask 后 row-softmax $A\in\mathbb R^{n\times n}$，output $AV\in\mathbb R^{n\times d_v}$。LoRA 对某 weight $W_0\in\mathbb R^{d_{out}\times d_{in}}$ 用 $\Delta W=BA$，$B\in\mathbb R^{d_{out}\times r}$、$A\in\mathbb R^{r\times d_{in}}$，只保证 update rank 至多 $r$。
 
@@ -286,7 +288,7 @@ $$
 
 覆盖 causal/padding masks、shared parameters、batch/head broadcast、sum-vs-mean reduction 与 all-masked rows。联合报告 logits/attention/update 的 spectra、rank-$r$ approximation residual、held-out loss/calibration、softmax max shift、non-finite/underflow counts、accumulator dtype 与 seed interval。当前最多可说“在指定任务、预算、dtype 和 seeds 下，rank-$r$ update 达到给定误差/性能”；不能推出无损等价 full fine-tuning，也不能由 loss 下降推出 VJP 正确或所有部署输入数值稳定。
 
-### 第 9 题
+### 第 9 题解答：扩散、概率流与有限步采样（8 分）
 
 sample path 是一次 $t\mapsto X_t(\omega)$；marginal law 是固定 $t$ 的 $p_t$；path law 是整个轨迹空间上的概率律；current 描述密度通量；deterministic flow map 把初值映到状态。probability-flow ODE 可与 SDE 共享每个时间的 marginals，但没有 Brownian quadratic variation，通常 path law 与单条路径均不同。
 
@@ -312,7 +314,7 @@ $$
 
 实验账可分为：固定 exact score/解析 marginal 改 terminal prior；固定 terminal 与 solver 扫 score bias；固定 exact score 扫 step/tolerance/order；固定数学算法扫 dtype/tolerance/true residual；固定生成器用 independent samples 报 Monte Carlo interval/ESS。单条 FID/quality curve 混合了这些来源，既不证明 reverse formula，也不证明 likelihood 或 path-law 等价。
 
-### 第 10 题
+### 第 10 题解答：流形上的神经算子与网格外推（8 分）
 
 至少应声明：输入空间如 $H^s(M)$ 或 $L^2(M,\mu)$；输出/solution space 和 norm；目标 operator $\mathcal G$ 的 continuity topology；PDE 是 strong/weak/variational 哪种 solution；$M$ 的 metric、measure、charts/boundary；mesh-to-function 与 function-to-grid maps；训练/测试 population law。
 
@@ -324,7 +326,9 @@ $$
 
 第 11 题没有唯一措辞，但满分答案必须形成以下闭环。
 
-### 5.1 以 preconditioned implicit layer 为例
+### 第 11 题解答：陌生 AI 主张的完整研究协议（15 分）
+
+#### 5.1 以 preconditioned implicit layer 为例
 
 **对象。** 声明 $F(z,\theta,x)=0$、state/parameter spaces、data law、Euclidean或加权 metric、forward/adjoint operators、baseline solver、FLOP/byte/NFE budget 和随机性。
 
@@ -356,8 +360,101 @@ $$
 
 ## 7. 完成判据
 
-本详解不会改变任何状态。只有十份分卷成绩、本卷原稿、[[实验 - 数学基础十卷跨章累计复现门]]、参数干预、48 小时重做、14 天迁移和口头答辩均留下真实证据，才可把课程状态从 `composed / not-attempted` 改为相应学习状态。课程总出口不是“公式都见过”，而是面对陌生 AI 论证时能主动建立：
+本详解不会改变个人状态。题卷、解答与实验通过独立回归后，材料可记为 `regression-passed`；只有十份分卷 `retained` 证据、本卷原稿、[[实验 - 数学基础十卷跨章累计复现门]]、跨轨盲参、48 小时重做、14 天迁移和口头答辩均留下真实证据，个人状态才可升级。课程总出口不是“公式都见过”，而是面对陌生 AI 论证时能主动建立：
 
 $$
 \boxed{\text{object}\to\text{hypothesis}\to\text{claim}\to\text{proof/algorithm}\to\text{evidence}\to\text{boundary}}.
 $$
+
+## 8. 十卷前置证据判分
+
+总卷的100分不包含“十份分卷是否通过”的替代分。评分者必须逐项核对 MATH/LA/MA/CALC/PROB/INFO/OPT/NLA/DYN/GEO 十份个人 `retained` 证据，包括首次原稿、盲测和延迟门；仓库中的材料 `regression-passed` 只能证明验收工具可用。缺任一分卷时，本卷仍可按100分诊断，但最终状态最高只能记 `attempted`。
+
+## 9. 30 分钟跨卷口试参考要点
+
+1. **fixed-point 微分链：** $dL$ 是 covector；gradient 依赖 metric；JVP 推 tangent，VJP 拉回 cotangent；adjoint solve 是利用 $(I-DW)^T\lambda=\nabla_zL$ 避免逐参数 tangent，不能把四者叫作“同一个梯度”。
+2. **Gaussian—information 链：** posterior 与 MI 必须来自同一个 joint Gaussian；$c^T\Sigma c$ 同时控制 observation signal 和 information。finite estimator 只能在指定采样/估计器下核对数值，DPI 是解析 Markov 定理。
+3. **flow—Euler—condition 链：** $e(t)=e^{-Ht}e_0$ 连续衰减，而 Euler/GD 需 $0<\eta<2/L$；residual 到 forward error 还要乘 inverse/condition，task error又需单独 map。
+4. **geometry—kernel—operator 链：** rotation defect是一个有限实现检查；finite Gram PSD是给定点集证书；kernel PSD是对所有有限点集的全量词；continuum operator convergence还要 topology、consistency、stability与approximation density。
+5. **AI系统审计：** 合法结论必须绑定对象、制度、误差和证据层；Transformer loss、diffusion sample quality、operator mesh MSE均不能单独升级成全局数学定理。
+6. **研究合同：** 最弱定理、countermodel、误差账、negative control、资源预算和deployment boundary必须共同指向同一个对象。
+
+口试判分红线与题卷一致。特别是“marginal相同所以path相同”“小residual所以解一定准”“finite Gram通过所以kernel已证明”三类错误，经一次追问仍不改正即不通过。
+
+## 10. 十二层跨卷对象—证据账本参考
+
+| 层 | 合格记录 | 典型越界 |
+|---|---|---|
+| 1 逻辑 | 量词、依赖、假设、结论、否定 | finite tests替代universal proof |
+| 2 空间—映射 | domain/codomain、shape、basis、metric | 把同一differential的不同gradient混同 |
+| 3 矩阵结构 | rank/spectrum/gap/condition/nonnormality | 低rank logits推出低rank softmax |
+| 4 微分 | JVP/VJP/adjoint/implicit与program derivative | exact derivative替代inexact solve gradient |
+| 5 概率 | law、conditioning、population/sample、随机性 | covariance零无条件推出独立 |
+| 6 信息 | true MI、bound、estimator与reference law | InfoNCE数值当MI真值 |
+| 7 优化 | objective、constraint、curvature、algorithm | stationarity当局部最优 |
+| 8 数值 | discretization、precision、residual、condition | 小残差当小forward/task error |
+| 9 动力 | clock、flow/map、stability、path/marginal | continuous稳定替代离散稳定域 |
+| 10 几何—算子 | group、manifold、function space、topology | fixed mesh性能当operator norm定理 |
+| 11 误差分解 | approximation/statistical/optimization/discretization/rounding | 把全部差异称model error |
+| 12 证据边界 | theorem/simulation/benchmark/case study | benchmark升级为任意部署保证 |
+
+## 11. 三波参数化系统族的数值锚点
+
+### 11.1 A 轨：Gaussian–posterior–information
+
+对 $\Sigma=\operatorname{diag}(s_1,s_2)$、$c=(c_1,c_2)^T$，令 $v=c^T\Sigma c$。则
+
+$$
+I(X;Z)=\frac12\log\left(1+\frac vR\right),\qquad
+\Sigma_{X\mid Z}=\Sigma-\frac{\Sigma cc^T\Sigma}{v+R},
+$$
+
+$$
+\det\Sigma_{X\mid Z}=\det(\Sigma)\frac{R}{v+R}.
+$$
+
+canonical $(s_1,s_2,c,R)=(4,1,(1,1),1)$ 给 $v=5$、MI $0.8958797346$、posterior trace $13/6$、det $2/3$。固定盲参 $(3,1.5,(1,0.5),3)$ 给 $v=3.375$、MI $0.3768859012$、trace $3$、det $2.117647059$。两组必须先从同一 joint law 推出，不能从图倒填。
+
+### 11.2 B 轨：quadratic–flow–Euler
+
+对 $H=\operatorname{diag}(\mu,L)$，$0<\mu<L$，Euler/GD 稳定域、最优固定步长和最坏收缩为
+
+$$
+0<\eta<\frac2L,\qquad
+\eta_*=\frac2{\mu+L},\qquad
+\rho_*=\frac{L-\mu}{L+\mu}.
+$$
+
+canonical $(\mu,L)=(1,9)$ 给阈值 $2/9$、$\eta_*=0.2$、$\rho_*=0.8$。固定盲参 $(2,12)$ 给阈值 $1/6$、$\eta_*=1/7$、$\rho_*=5/7$；$\eta=0.14$ 的 $k=25$ error 为 $2.788878486\times10^{-4}$，$\eta=0.18$ 已跨稳定边界并增长到 $40.87424377$。
+
+### 11.3 C 轨：circle–kernel–finite solve
+
+半径 $\rho$ 的圆上 chordal RBF 使用
+
+$$
+k(\theta,\phi)=\exp\left[-\frac{2\rho^2(1-\cos(\theta-\phi))}{2\ell^2}\right].
+$$
+
+共同旋转保持角差，但KRR误差与condition还依赖 $\ell,\lambda$、采样点和目标频率。canonical在$n=48$给RMSE $1.884871635\times10^{-4}$、condition $1.33885707\times10^4$。固定盲参 $\rho=1.5,\ell=0.8,\lambda=0.005$、目标 $\cos\theta+0.25\sin4\theta$ 给RMSE $9.451668782\times10^{-4}$、condition $2134.613179$、rotation defect $7.2164\times10^{-16}$。condition下降与RMSE变化是该有限制度的联合事实，不是任意流形上的operator定理。
+
+## 12. 实验复现门与 nonce 判分红线
+
+合格顺序是解析校准、冻结原稿、scorer nonce主轨、跨轨盲参、独立output、stdout/SVG/hash、最后订正。以下任一项使实验门不通过：nonce在看输出后生成；学习者自选熟悉轨；只改输出名或seed；参数只移动曲线截距却声称改变theorem；非默认运行覆盖canonical；没有事前预测；盲图仍显示canonical标签；用固定审计fixture冒充个人未见参数。
+
+## 13. 48 小时与 14 天延迟门判分
+
+48小时门要求三轨至少两轨换机制，并把首次失败题迁移到另一表面系统；原分区线、三条主证明和三项系统案例底线仍然有效。14天门要求陌生claim至少实质调用四卷，其中必须含数值/离散与概率统计或几何算子之一；十二层账本、countermodel、误差分解和实验边界缺一不可。
+
+## 14. 从总卷 `retained` 到课程证据
+
+总卷 `retained` 表示在这一次跨卷任务中能协同调用十卷，并不抹去分卷证据的有效期。若后续抽检暴露某卷主链无法重建，应把该分卷及总卷退回 `attempted`，按“第一个错误对象”补修；不能用总分掩盖局部失效。
+
+## 15. 最终状态边界
+
+- 材料 `regression-passed`：题卷、详解、实验、脚本、图、状态面和独立审计一致；
+- 个人 `not-attempted`：没有十卷前置与本卷首次证据；
+- `attempted`：存在原稿，但前置、口试、分区线、主证明、系统案例或盲测有缺口；
+- `passed`：十卷前置有效，口试、两场闭卷和盲复现全部通过；
+- `retained`：48小时换系统和14天陌生综合迁移也通过。
+
+因此当前仓库应报告 `MATH-FND-CAP-01 material regression-passed / personal not-attempted`。

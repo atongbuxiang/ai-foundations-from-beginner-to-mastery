@@ -35,9 +35,10 @@ updated: 2026-08-28
 - 完备性审计：[[数学基础十卷完备性审计与学习状态总表]]；
 - 十卷总题：[[数学基础十卷总验收 - 跨卷理论与 AI 迁移]]；
 - 独立详解：[[数学基础十卷总验收解答 - 跨卷理论与 AI 迁移]]；
-- 跨卷计算门：[[实验 - 数学基础十卷跨章累计复现门]]。
+- 跨卷计算门：[[实验 - 数学基础十卷跨章累计复现门]]；
+- 独立总出口审计：[[math_foundations_capstone_contract_audit.py]]。
 
-150 个正文、150 份 A—E 习题、150 份独立解答和十份分卷验收链均已建立；其中部分分卷材料已达到 `regression-passed`，其余仍为 `composed`。这两种材料状态都不等于学习通过：尚无真实口试、闭卷、评分、参数干预和间隔迁移证据，因此全课程个人状态仍是 `not-attempted`，已完成分卷数为 0。下文“批次”保留为建设史与局部路线，不再代表当前施工进度。
+150 个正文、150 份 A—E 习题、150 份独立解答、十份分卷验收链和 `MATH-FND-CAP-01` 总出口均已建立并达到材料 `regression-passed`。材料状态不等于学习通过：尚无十份个人 `retained` 前置、真实总卷口试、闭卷、scorer nonce盲测和间隔迁移证据，因此全课程个人状态仍是 `not-attempted`，已完成分卷数为 0。下文“批次”保留为建设史与局部路线，不再代表当前施工进度。
 
 ## 第一批节点
 
@@ -1744,6 +1745,14 @@ AI迁移从Banach压缩映射的几何尾界推进到标量二次梯度下降的
 
 10.1当前为 **8篇正文、8组节点题解，累计材料 regression-passed / 个人 not-attempted**。[[math_foundations_cumulative_contract_audit.py]]独立复核8/8 scope、14/14题解与100分、答案/输出隔离、canonical与盲参解析锚点、六个状态面、canonical双跑、覆盖保护、盲参stdout/SVG/hash和图—数自描述。材料通过不改变MATH-01—08的`draft`状态；下一步仍是真实口试、闭卷、nonce轨、个人未见参数运行与延迟迁移证据。
 
+## 第一百批：十卷跨章总出口升级与三系统跨轨盲参门
+
+本批把[[数学基础十卷总验收 - 跨卷理论与 AI 迁移|MATH-FND-CAP-01]]升级为真正的课程总出口：先核验十份分卷个人`retained`证据，再完成30分钟跨卷口试与两个180分钟、100分A—E闭卷session；冻结两场原稿、十二层跨卷对象—证据账本和三轨解析校准后，由`attempt_id + scorer nonce`指定主轨，并给出至少跨两轨、总认证建议三轨全改的盲参数。保存stdout/SVG/hash后才开放详解，最后进入48小时换系统与14天陌生AI四卷以上综合迁移。
+
+[[实验 - 数学基础十卷跨章累计复现门]]把三波系统族参数化为$(\Sigma,c,R)$ Gaussian posterior/MI、$(\mu,L,\eta)$ quadratic flow/Euler、$(\rho,\ell,\lambda)$ circle geometry/KRR；保留canonical hash`d5e79545ee9820bcbf18e1444890e8e462bd186b1720f2d0fd262508404ac18c`，禁止非默认参数无`--output`覆盖标准图，并让盲图自描述实际概率、谱稳定域与几何核参数。固定三轨fixture hash为`697c860c0b94fbb7660199ffc1503b862d47ce14b04ea317d39235abc8223e53`。
+
+总出口材料现为 **regression-passed / 个人 not-attempted**。[[math_foundations_capstone_contract_audit.py]]独立复核十卷scope、11/11题解与100分、十份分卷材料审计、答案/输出隔离、六个状态面、canonical双跑、覆盖保护、盲参stdout/SVG/hash与图—数自描述。材料通过不代表十份个人前置或课程总认证通过。
+
 ## 对接科学空间
 
 - “低秩近似之路”系列：伪逆、SVD、CR、ID、CUR
@@ -1767,4 +1776,4 @@ AI迁移从Banach压缩映射的几何尾界推进到标量二次梯度下降的
 11. **几何、泛函分析、核与算子基础**：10.10 已完成GEO-01—08的正文、机制图、120道A—E题、独立详解、八套节点计算门；`GEO-CUM-01`已形成“口试—闭卷—scorer nonce主轨—跨轨盲参—48小时换机制—14天陌生AI迁移”证据链，并由[[geometry_functional_cumulative_contract_audit.py]]复核为材料`regression-passed`、个人`not-attempted`。
 12. **数学语言、逻辑与证明**：[[数学语言、逻辑与证明 MOC|10.1卷入口]]与MATH-01—08均已建立正文、深色机制图、各15题、独立详解与浅色计算审计，达到8/8；`MATH-CUM-01`已形成“口试—闭卷—scorer nonce主轨—跨轨盲参—48小时换机制—14天陌生AI迁移”证据链，并由[[math_foundations_cumulative_contract_audit.py]]复核为材料`regression-passed`、个人`not-attempted`。
 13. **全数学主线**：十卷150节已由[[数学基础完整课程地图与掌握标准]]锁定；当前150篇正文均为`draft`，正文覆盖率100.0%，尚无任何一卷通过课程验收。
-14. **十卷总收束**：[[数学基础十卷完备性审计与学习状态总表]]确认150个ID、正文、习题和解答均唯一可定位；[[数学基础十卷总验收 - 跨卷理论与 AI 迁移]]、独立详解与[[实验 - 数学基础十卷跨章累计复现门]]已经成稿。材料状态为`composed / not-attempted`；下一步是按先修顺序产生真实学习证据，而不是继续宣称新增正文等于掌握。
+14. **十卷总收束**：[[数学基础十卷完备性审计与学习状态总表]]确认150个ID、正文、习题和解答均唯一可定位；`MATH-FND-CAP-01`已形成“十卷retained前置—30分钟口试—双session闭卷—scorer nonce主轨—三系统盲参—48小时—14天”证据链，并由[[math_foundations_capstone_contract_audit.py]]复核为材料`regression-passed`、个人`not-attempted`。

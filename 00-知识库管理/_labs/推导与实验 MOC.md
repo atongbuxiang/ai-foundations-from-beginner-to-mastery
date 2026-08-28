@@ -46,9 +46,10 @@ updated: 2026-08-28
 
 - 总题卷：[[数学基础十卷总验收 - 跨卷理论与 AI 迁移]]；
 - 独立详解：[[数学基础十卷总验收解答 - 跨卷理论与 AI 迁移]]；
+- 总出口 ID：`MATH-FND-CAP-01`；
 - 跨卷计算门：[[实验 - 数学基础十卷跨章累计复现门]]，覆盖 linear-Gaussian-information、quadratic optimization/discrete dynamics 与 circle geometry/RKHS/numerical conditioning；
-- 覆盖：十卷 150 节点的跨卷接缝；只有十份分卷验收均通过后才可用于总认证；
-- 当前语义：`composed / not-attempted`，不构成 verified 证据。
+- 覆盖：十卷150节点的跨卷接缝；十份分卷个人retained前置、30分钟口试、双session闭卷、`attempt_id + scorer nonce`主轨、三系统盲参、48小时换系统与14天陌生迁移；
+- 当前语义：材料`regression-passed`、个人`not-attempted`，由[[math_foundations_capstone_contract_audit.py]]复核，不构成verified证据。
 
 - 题卷：[[阶段测验 - 几何、泛函分析、核与算子基础（10.10）]]；
 - 独立详解：[[阶段测验解答 - 几何、泛函分析、核与算子基础（10.10）]]；
@@ -177,7 +178,7 @@ updated: 2026-08-28
 58. [[实验 - 增长率、有限窗口与 Attention 成本审计]]：比较log/linear/$n\log n$/quadratic/exponential增长，精确枚举线性与三角循环并恢复1.000000/1.966996斜率，以解析local slope暴露低阶项与loss地板，再在$d=512$下分离projection、pairwise work与score memory，交叉proxy为$T=1024$。
 59. [[实验 - 数学语言、逻辑与证明累计复现门]]：以有限域$m$、受迫递推$(q,r,c)$和adaptive rank exponent参数化三轨；canonical锚定65536/50625/14911/35714、证书27/47/68/89与slope 1/2，nonce跨轨盲参与[[math_foundations_cumulative_contract_audit.py]]继续复核覆盖保护、stdout/SVG/hash和图—数自描述。
 60. [[实验 - 几何、泛函与算子累计复现门]]：在radius-sphere上恢复ambient constraint二阶、normalization retraction相对Exp三阶与rotation covariance；以$c_j=j^{-\alpha}$和$\mu_j=j^{-\beta}$分离Hilbert projection、compact tail与kernel effective dimension；在长度$L$区间上用Poisson cutoff同时展示$L^2/H^1/strong$误差指数$-2/-1/0$；支持nonce跨轨盲参和独立图—数审计。
-61. [[实验 - 数学基础十卷跨章累计复现门]]：用linear-Gaussian posterior/MI分离定理值与估计量，用quadratic flow/GD分离连续稳定与Euler步长域，再在$S^1$上把rotation/retraction、finite Gram/KRR approximation和condition增长纳入同一跨卷证据账。
+61. [[实验 - 数学基础十卷跨章累计复现门]]：以$(\Sigma,c,R)$、$(\mu,L,\eta)$与$(\rho,\ell,\lambda)$参数化三系统；nonce盲参跨Gaussian posterior/MI、flow/Euler稳定域与circle rotation/retraction/KRR condition，并由[[math_foundations_capstone_contract_audit.py]]复核覆盖保护、stdout/SVG/hash和图—数自描述。
 62. [[实验 - 线性代数累计复现门]]：用病态基分离抽象向量与坐标、以kernel/quotient/projector核对空间不变量，以Jordan/SVD分离谱值、暂态与低秩尾误差，再用attention-softmax与vec合同分离exact rank、numerical rank和非线性边界；canonical及盲参数接口由独立累计审计复核。
 63. [[实验 - 矩阵分析累计复现门]]：用SPD边界分离positive margin、condition与Cholesky pivot，以closing eigengap和nilpotent coupling分离谱值、方向与pseudospectrum，再用sign/polar、Fréchet remainder和structured tangent分离involution、isometry、一阶近似与允许扰动；canonical及盲参数接口由独立累计审计复核。
 64. [[实验 - 微积分、矩阵微分与自动微分累计复现门]]：以Taylor/finite-difference分离解析余项与浮点地板，用JVP/VJP pairing、HVP和checkpoint代理分离算子相容与程序调度，再以implicit rhs与closing spectral gap分离program dependence、local solve derivative和basis sensitivity；canonical及盲参数接口由独立累计审计复核。

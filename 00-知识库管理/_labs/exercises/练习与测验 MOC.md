@@ -454,7 +454,7 @@ updated: 2026-08-28
 | DYN-CUM-01 | DYN-01—12：ODE、动力系统与 SDE 卷末累计验收 | regression-passed：题卷、详解、[[实验 - ODE、动力系统与 SDE 累计复现门]]与[[dynamics_cumulative_contract_audit.py]]已通过解析、canonical/盲参静态与计算回归；个人仍为 not-attempted |
 | NN-CUM-01 | NN-01—64：神经网络基础第三章累计验收 | composed：[[阶段测验 - 神经网络基础（第三章）]]、[[阶段测验解答 - 神经网络基础（第三章）]]和[[实验 - 神经网络基础累计复现门]]已建立；等待真实独立作答 |
 | ARCH-CAP-01 | ARCH-01—64：表示与模型架构第四章跨卷累计验收 | composed：[[阶段测验 - 表示与模型架构（第四章）]]、[[阶段测验解答 - 表示与模型架构（第四章）]]和[[实验 - 表示与模型架构跨卷累计复现门]]已建立；等待真实独立作答 |
-| MATH-FND-CAP-01 | 十卷150节点的跨卷理论、AI系统审计与研究合同总出口 | composed：[[数学基础十卷总验收 - 跨卷理论与 AI 迁移]]、[[数学基础十卷总验收解答 - 跨卷理论与 AI 迁移]]和[[实验 - 数学基础十卷跨章累计复现门]]已建立；必须先通过十份分卷验收 |
+| MATH-FND-CAP-01 | 十卷150节点的跨卷理论、AI系统审计与研究合同总出口 | regression-passed：题卷、详解、[[实验 - 数学基础十卷跨章累计复现门]]与[[math_foundations_capstone_contract_audit.py]]已通过十卷材料前置、答案/输出隔离、canonical/三轨盲参回归；个人仍为not-attempted |
 | `L2-A` | Gram–Schmidt、QR、消元/LU、trace/determinant、正定、Cholesky | incorporated：10.2部分已纳入LA-CUM-01，其余由10.3承接 |
 | `L2-B` | 对偶、伴随、重数、Jordan、Schur、矩阵函数 | incorporated：LA-15—20已纳入LA-CUM-01，高级谱迁移由10.3承接 |
 | `L2-C` | 极分解、矩阵符号函数、SVD/极分解微分与矩阵优化 | incorporated/bridged：SVD与伪逆进入LA-CUM-01，其余属于10.3 |
@@ -568,11 +568,12 @@ OPT-CUM-01 是 210 分钟、100 分的闭卷卷末测验，覆盖 OPT-01—16，
 
 ### MATH-FND-CAP-01 的状态边界
 
-MATH-FND-CAP-01 是两个 180 分钟 session、100 分的十卷总出口，只检查跨卷接缝，不替代 150 节点的分卷覆盖。当前状态为 **composed / not-attempted**：
+MATH-FND-CAP-01 是30分钟口试加两个180分钟session、100分的十卷总出口，只检查跨卷接缝，不替代150节点的分卷覆盖。当前状态为材料 **regression-passed** / 个人 **not-attempted**：
 
 - [[数学基础十卷总验收 - 跨卷理论与 AI 迁移]]按 object/evidence、跨卷手算、统一证明、AI 系统审计与研究合同五区评分；
 - [[数学基础十卷总验收解答 - 跨卷理论与 AI 迁移]]提供完整推导和跨卷错题路由；
-- [[实验 - 数学基础十卷跨章累计复现门]]连接 linear-Gaussian-information、quadratic optimization/discrete dynamics 与 circle geometry/RKHS/numerics；
+- [[实验 - 数学基础十卷跨章累计复现门]]参数化连接linear-Gaussian-information、quadratic optimization/discrete dynamics与circle geometry/RKHS/numerics，并由scorer nonce指定主轨与三系统盲参；
+- [[math_foundations_capstone_contract_audit.py]]已复核11/11题解与100分、十份分卷材料审计、六个状态面、canonical双跑、覆盖保护、固定三轨盲参stdout/SVG/hash与图—数自描述；
 - 三条主证明、三个系统案例、随机实验轨、48 小时重做、14 天迁移与口头答辩均有独立底线；
 - 十份分卷累计测验未全部通过前，本卷只能用于诊断，不能用于总认证。
 

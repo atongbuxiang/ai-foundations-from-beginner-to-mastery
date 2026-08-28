@@ -1,6 +1,8 @@
 ---
 type: assessment
 status: draft
+material_status: regression-passed
+learning_status: not-attempted
 area: [math/foundations, ai/theory, curriculum/capstone]
 assessment_id: MATH-FND-CAP-01
 scope: [MATH-01—08, LA-01—24, MA-01—16, CALC-01—16, PROB-01—20, INFO-01—10, OPT-01—16, NUM-01—20, DYN-01—12, GEO-01—08]
@@ -11,7 +13,7 @@ closed_notes: true
 solution: "[[数学基础十卷总验收解答 - 跨卷理论与 AI 迁移]]"
 related: ["[[数学基础完整课程地图与掌握标准]]", "[[数学基础十卷完备性审计与学习状态总表]]", "[[练习与测验 MOC]]", "[[推导与实验 MOC]]", "[[实验 - 数学基础十卷跨章累计复现门]]"]
 created: 2026-08-20
-updated: 2026-08-20
+updated: 2026-08-28
 ---
 
 # 数学基础十卷总验收 - 跨卷理论与 AI 迁移
@@ -22,8 +24,45 @@ updated: 2026-08-20
 > [!warning] 它不能替代分卷验收
 > `MATH-FND-CAP-01` 是课程总出口，不是覆盖 150 个节点的抽样捷径。只有十份分卷累计测验均通过后，本卷成绩才可用于总认证；在此之前可以诊断性作答，但不得把结果写成“数学基础已掌握”。
 
+## 零、先看完整验收时间线
+
+```mermaid
+flowchart LR
+    P["核验十份分卷 retained 证据"] --> O["30 分钟跨卷口试"]
+    O --> S1["Session I · 180 分钟"]
+    S1 --> F1["冻结原稿与 hash"]
+    F1 --> S2["Session II · 180 分钟"]
+    S2 --> F2["冻结总卷与解析校准"]
+    F2 --> N["scorer nonce 指定主轨"]
+    N --> B["至少横跨三轨的盲参数"]
+    B --> E["保存 stdout / SVG / SHA-256"]
+    E --> C["才可打开详解订正"]
+    C --> R["48 小时换系统重建"]
+    R --> T["14 天陌生 AI 综合迁移"]
+```
+
+这条链把“课程材料完备”“十卷分别保持”“陌生问题中跨卷调用”分成三种证据。若十份分卷尚未真实达到 `retained`，本卷只能作为诊断；若先看详解或 canonical 输出，随后补写的推导只能算订正；若盲测只改变常数而不改变概率对象、谱稳定域或几何离散机制，则不算跨卷迁移。
+
+### 十卷前置证据矩阵
+
+正式总认证前，评分者须填写十份分卷证据位置，而不是把下表的材料状态当个人成绩：
+
+| 分卷 | 卷级 ID | 个人前置要求 | 证据位置 / hash |
+|---|---|---|---|
+| 10.1 数学语言与证明 | MATH-CUM-01 | `retained` |  |
+| 10.2 线性代数 | LA-CUM-01 | `retained` |  |
+| 10.3 矩阵分析 | MA-CUM-01 | `retained` |  |
+| 10.4 微积分与自动微分 | CALC-CUM-01 | `retained` |  |
+| 10.5 概率统计 | PROB-CUM-01 | `retained` |  |
+| 10.6 信息论 | INFO-CUM-01 | `retained` |  |
+| 10.7 优化 | OPT-CUM-01 | `retained` |  |
+| 10.8 数值计算 | NLA-CUM-01 | `retained` |  |
+| 10.9 动力系统 | DYN-CUM-01 | `retained` |  |
+| 10.10 几何、泛函与算子 | GEO-CUM-01 | `retained` |  |
+
 ## 一、考试协议
 
+- 先完成 30 分钟跨卷口试；未通过仍可诊断性参加两场闭卷，但不得进入总认证 `passed`；
 - Session I：180 分钟，完成 A—C 区；Session II：180 分钟，完成 D—E 区；两次均闭卷；
 - 两个 session 间可以休息，但不得查看笔记、解答、代码或 AI 助手；第一场答卷须先冻结；
 - 可使用只含四则、平方根、三角函数、对数和指数的基础计算器；
@@ -32,6 +71,33 @@ updated: 2026-08-20
 - 证明不得用数值图替代；实验设计不得把解析真值、离散误差、浮点误差和统计误差合成一个未定义的 `error`。
 
 允许直接使用：Gaussian conditioning 公式、Banach 不动点定理、有限维谱定理、KL 非负性和 Riesz 表示定理；但必须核对它们的条件。
+
+### 三波参数化系统族
+
+总卷计算门不是三组固定数字，而是三个可以改变 theorem 的系统族：
+
+| 轨道 | 参数化系统族 | 主要接缝 | 机制改变时必须重写 |
+|---|---|---|---|
+| A Gaussian–information | $\Sigma=\operatorname{diag}(s_1,s_2)$，$Z=c^TX+\varepsilon$，$\operatorname{Var}\varepsilon=R$ | LA + CALC + PROB + INFO | signal variance、posterior、MI、conditioning 与证据层 |
+| B optimization–dynamics | $H=\operatorname{diag}(\mu,L)$，flow 与三组 Euler/GD 步长 | LA + OPT + NUM + DYN | stability interval、最优步长、收缩/振荡/发散制度 |
+| C geometry–kernel | 半径 $\rho$ 的 $S^1$、chordal RBF $(\ell,\lambda)$、频率目标 | NUM + GEO + RKHS/operator 接口 | rotation/retraction、Gram spectrum、bias–condition 与 mesh 边界 |
+
+### 十二层跨卷对象—证据账本
+
+每道综合题先填写下面十二层。后一层不得悄悄改变前一层对象：
+
+1. **逻辑层：** proposition、量词依赖、假设、结论、否定和 failure witness；
+2. **空间—映射层：** domain/codomain、shape、basis、quotient 与 adjoint 所依赖的 metric；
+3. **矩阵结构层：** rank、spectrum、normality、gap、condition 和 perturbation 对象；
+4. **微分层：** differential、gradient、JVP/VJP、implicit derivative 与离散 program derivative；
+5. **概率层：** sample space、law、conditioning、随机性来源与 population/sample 区分；
+6. **信息层：** entropy/MI/divergence 的 reference law、估计量与 variational bound；
+7. **优化层：** objective、constraint、stationarity、curvature、算法与 convergence claim；
+8. **数值层：** discretization、precision、residual、backward/forward error、stopping 与 failure state；
+9. **动力层：** continuous/discrete clock、flow、stability region、path/marginal law 与 solver；
+10. **几何—算子层：** manifold/group action、function space、topology、weak solution、kernel/operator；
+11. **误差分解层：** approximation、statistical、optimization、discretization、rounding 与 deployment gap；
+12. **证据边界层：** theorem、enumeration、simulation、benchmark、case study 分别能与不能推出什么。
 
 ## 二、评分与总认证门槛
 
@@ -53,6 +119,9 @@ updated: 2026-08-20
 5. [[实验 - 数学基础十卷跨章累计复现门]]由评分者随机指定一轨并通过；
 6. 48 小时后无提示重做首个失败题，14 天后完成一个换模型迁移题；
 7. 进行 30 分钟口头答辩：随机解释一条证明、一个失败边界和一个实验不能推出的结论。
+
+> [!warning] 状态语义
+> 题卷、详解、实验、脚本、图和独立审计通过，只能把总出口材料记为 `regression-passed`。当前没有十份个人 `retained` 前置证据，也没有本卷首次原稿，因此个人状态仍是 `not-attempted`；材料通过绝不等于课程总认证通过。
 
 ## 三、十卷—题目覆盖矩阵
 
@@ -242,18 +311,76 @@ $$
 6. **证据边界**：分别写出 theorem、simulation、benchmark 和案例研究能够与不能够支持的结论；（2 分）
 7. **来源与复现**：教材/原论文/二手线索分级，environment、data license、code/hash 与 artifact retention。（1 分）
 
-## 九、答题后证据记录
+## 九、答案与输出隔离协议
+
+1. 两场闭卷期间只允许题卷、空白纸与基础计算器；不得打开详解、实验正文的 canonical 数值、脚本或审计；
+2. Session I 结束立即保存原稿、时间和 SHA-256；Session II 不得回写第一场；第二场结束再冻结总卷；
+3. 提交 `attempt_id`、两场 hash 与解析校准后，评分者才生成 `scorer nonce`；nonce 指定 A/B/C 主手推轨；
+4. 盲参数必须同时改变 A、B、C 三轨中至少两轨，并至少改变一个 theorem 机制；总认证建议三轨全改；
+5. 非默认运行只能写入 `artifacts/<attempt_id>/` 或独立临时路径，不能覆盖 canonical SVG；
+6. 命令、environment、stdout、SVG、hash、运行前预测和偏差解释冻结后，才可打开[[数学基础十卷总验收解答 - 跨卷理论与 AI 迁移|详解]]；
+7. 订正另页保存，必须保留“第一个错误对象”和“第一个越界声明”，不得覆盖首次答案。
+
+## 十、30 分钟跨卷口试
+
+评分者从六组各抽一问，每问约 4 分钟，最后 6 分钟沿一个错误连续追问。回答必须按十二层账本选出真正相关的层，而不是机械背出十二项。
+
+1. **对象转换：** 同一 fixed-point 模型中，differential、Euclidean gradient、VJP 与 adjoint solve 为什么不是同一对象？
+2. **概率—信息：** Gaussian posterior covariance 与 MI 如何共享同一 joint law？有限 MI estimator 能否验证 DPI？
+3. **优化—动力—数值：** 连续 flow 稳定为什么不保证 Euler/GD 任意步长稳定？condition 如何进入停止证书？
+4. **几何—核—算子：** rotation-invariant finite Gram 测试、RKHS kernel 定理与 continuum operator convergence 有何量词差别？
+5. **AI 系统：** 从 Transformer、diffusion、neural operator 三类中随机抽一类，给出一个合法最强声明和两个越界声明；
+6. **研究合同：** 给一个陌生 claim，现场写最弱可证伪定理、主要误差账、negative control 与 deployment 边界。
+
+红线：把有限实验当全称证明；把 marginal law 当 path law；把小 residual 当小 forward/task error；把一张 finite Gram PSD 当 kernel 全量词证明；把 wall-time 当 arithmetic theorem；经一次追问仍无法纠正任一项，则口试不通过。通过要求至少四问首答完整，其余两问经追问能关闭关键缺口。
+
+## 十一、48 小时换系统重建门
+
+48 小时后，评分者提供一组未见参数，并把至少一道首次失败题换成同构但不同表面的系统。学习者须闭卷完成：
+
+1. A 轨改变 $\Sigma,c,R$ 后重建 posterior/MI/condition 账；
+2. B 轨改变 $(\mu,L)$ 与步长后重建 continuous/discrete stability、最优步长和 residual-to-task 边界；
+3. C 轨改变 $\rho,\ell,\lambda$ 或目标频率后重建 symmetry、retraction、Gram/condition 与 mesh 边界；
+4. 将首次失败题的“第一个错误对象”映射到至少两个分卷节点；
+5. 冻结运行前预测，再生成独立 stdout/SVG/hash。
+
+达到原 A—E 分区线、主证明无零分且不重复口试红线，才保持 `passed`。
+
+## 十二、14 天陌生 AI 综合迁移门
+
+选取一个未在本卷出现的 AI 理论主张，至少调用四卷数学且必须包含一项数值/离散层与一项概率/统计或几何/算子层。提交内容包括：原 claim 与来源；十二层账本；最弱定理及 proof dependency graph；一个能真正否定结论的 countermodel；完整误差分解；跨硬件/数据/网格或分布的实验合同；三个不能推出的结论。只换模型名复述第 11 题，或只罗列术语而没有共同对象，不计迁移通过。
+
+## 十三、提交证据清单
+
+- 十份分卷 `retained` 证据位置、评分者与 hash；
+- 30 分钟口试抽题、摘要/录音、红线与评分；
+- Session I / II 原稿、起止时间、`attempt_id` 与两个 SHA-256；
+- A—E 分区分数、Q5—Q7 主证明、Q8—Q10 系统案例评分；
+- 十二层账本、第一处对象错误、第一处证据越界及跨卷回链；
+- scorer nonce、盲参数、运行前预测；
+- environment、命令、stdout、SVG、SHA-256 与偏差解释；
+- 订正、48 小时换系统原稿、14 天陌生综合迁移报告；
+- 最终状态只能取 `not-attempted / attempted / passed / retained`。
+
+## 十四、答题后证据记录
 
 ```text
 Session I 日期 / 用时：
+Session I SHA-256：
 Session II 日期 / 用时：
+Session II SHA-256：
+attempt_id：
 A / B / C / D / E：
 总分：
 三条主证明：Q5 / Q6 / Q7
 首个错误对象：
 首个越界声明：
+十二层账本位置：
+scorer nonce：
 随机实验轨：A / B / C
-参数干预与事前预测：
+跨轨盲参数与给出时间：
+运行前解析预测：
+stdout / SVG SHA-256：
 48小时重做：
 14天迁移：
 口头答辩：
@@ -261,4 +388,4 @@ A / B / C / D / E：
 状态：not-attempted / attempted / passed / retained
 ```
 
-打开详解前必须冻结两场原稿与实验预测：[[数学基础十卷总验收解答 - 跨卷理论与 AI 迁移]]。
+本总卷材料当前为 `regression-passed`，个人仍为 `not-attempted`。只有十份分卷前置、口试、两场闭卷与盲复现全部通过，个人才进入 `passed`；48 小时和 14 天两门也通过后才进入 `retained`。
