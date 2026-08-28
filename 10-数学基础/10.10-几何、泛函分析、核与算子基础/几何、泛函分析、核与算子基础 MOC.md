@@ -24,7 +24,7 @@ updated: 2026-08-27
 | A | GEO-01—04 | metric/topology → chart/tangent → Riemannian metric/optimization → Lie action/equivariance | $S^1$、induced geometry 与 $SO(2)$ | `regression-passed` | `draft / not-attempted` |
 | B | GEO-05—06 | norm/completion → Hilbert projection → bounded/compact operator → spectrum | $c_{00}\subset\ell^2$、$P_N$ 与 $K e_n=n^{-1}e_n$ | `regression-passed` | `draft / not-attempted` |
 | C | GEO-07—08 | PSD kernel → RKHS representation → weak derivative → variational/operator learning | Brownian bridge/Green kernel、$H_0^1$ 与 sine solution spectrum | `regression-passed` | `draft / not-attempted` |
-| CUM | GEO-CUM | 口试—闭卷—三轨实验—延迟重做 | sphere/Hilbert/weak-PDE 随机回链 | `composed` | `not-attempted` |
+| CUM | GEO-CUM | 口试—闭卷—三轨实验—延迟重做 | 三波随机回链、三条证明主链与 A/B/C 累计门 | `regression-passed` | `not-attempted` |
 
 ### 第一波的 $S^1$—$SO(2)$ 单一模型链
 
@@ -304,16 +304,46 @@ GEO-01—08 已建立完整节点闭环。GEO-08 从 test functions 与 distribu
 
 全卷八套实验覆盖 topology、manifold、Riemannian geometry、Lie symmetry、Banach/Hilbert projection、compact spectrum、RKHS与weak PDE/operator。新增[[实验 - 弱导数、变分残差与解算子频谱审计]]：delta approximation mass为 $1.9998438$；P1 FEM 的 $L^2/H^1$ slopes为 $1.99892/0.99917$；algebraic weak residual低于 $2.73\times10^{-13}$ 而element-interior strong residual固定为 $6.97886$；八模态截断算子在训练子空间为零误差、对未见模态relative error为100%。两幅SVG均已实际PNG渲染目检。
 
-## 八、卷末累计验收
+## 八、GEO-CUM：卷末综合验收闭环
 
-`GEO-CUM-01`已经建立：
+`GEO-CUM-01` 不把八套节点题简单拼接，而是检查三波知识能否在陌生声明中重新组成一条对象正确、量词完整的链：
 
-- [[阶段测验 - 几何、泛函分析、核与算子基础（10.10）|210分钟、100分闭卷题卷]]，按20/30/25/15/10五区覆盖GEO-01—08；
-- [[阶段测验解答 - 几何、泛函分析、核与算子基础（10.10）|逐题独立详解]]，完整展开sphere geometry、RKHS representer与Poisson weak/Galerkin三道主证明；
-- [[实验 - 几何、泛函与算子累计复现门]]，以球面几何—对称、Hilbert—compact—RKHS和弱PDE—operator三轨随机验收；
-- definition/theorem-contract、完整证明、反例和continuous-to-discrete研究合同均设独立门槛；
-- 48小时重做与14天迁移是状态升级的必要证据。
+```mermaid
+flowchart LR
+    O["20 分钟口试：即时建立对象账本"] --> W["210 分钟闭卷：定义—手算—证明—反例—迁移"]
+    W --> E["A/B/C 随机实验：解析 reference + 盲干预"]
+    E --> R48["48 小时换例：修复首个断点"]
+    R48 --> R14["14 天迁移：陌生 AI 声明审计"]
+    R14 --> V["retained → 逐节点证据审查"]
+```
+
+### 从零如何执行 GEO-CUM
+
+1. 建立唯一 `attempt_id`，关闭反向链接/悬浮预览，冻结空白口试与闭卷记录；
+2. 完成[[阶段测验 - 几何、泛函分析、核与算子基础（10.10）|20 分钟口试 + 210 分钟、100 分闭卷]]；口试先验收 point/tangent/covector/function/operator 的类型链和 continuous-to-discrete 边界；
+3. 冻结第一次答案后，才打开[[阶段测验解答 - 几何、泛函分析、核与算子基础（10.10）|逐题独立详解]]，按原答案第一个断点评分，不用最终数值覆盖过程错误；
+4. 进入[[实验 - 几何、泛函与算子累计复现门]]，先冻结预测，再由 `attempt_id + scorer nonce` 指定 sphere/Hilbert/weak-PDE 一轨；canonical 只校准环境，正式证据来自手推和盲参数干预；
+5. 48 小时换 sphere radius/谱指数/forcing mode 重建，14 天对未见 manifold/kernel/PINN/neural-operator 报告建立六层对象账本；
+6. 只有口试、闭卷、随机实验、48 小时换例与 14 天迁移均有原始证据，才记 `retained`；随后仍要逐节点审查，不批量改写 GEO-01—08 状态。
+
+### 三条累计证明主链
+
+- **几何—对称：**regular level set $\to T_pS^{d-1}\to$ metric representation $\to$ Riemannian gradient $\to O(d)$ covariance，并区分 local immersion、global embedding 与 sampled symmetry tests；
+- **Hilbert—kernel：**completion/orthogonal decomposition $\to$ compact spectral tail $\to$ RKHS evaluation representer $\to$ finite KRR system，并区分 continuum theorem 与 finite Gram evidence；
+- **弱PDE—算子：**weak derivative $\to H_0^1/H^{-1}\to$ Lax–Milgram $\to$ energy/Galerkin/Céa $\to$ solution operator 与 multi-norm benchmark。
+
+### GEO-CUM 材料证书
+
+[[geometry_functional_cumulative_contract_audit.py]]独立检查：
+
+- GEO-01—08 scope 8/8、闭卷第1—14题与100分配额；
+- 口试/闭卷/答案隔离、错误回链、48小时换例与14天迁移门；
+- 题卷、详解、实验、课程地图和台账的 `regression-passed / not-attempted` 双状态一致；
+- A轨 sphere constraint/rotation covariance，B轨 Hilbert/compact/RKHS 谱账本，C轨 Poisson 多 norm 账本；
+- 全卷教学审计实际复跑、累计脚本不同临时路径确定性双跑、SVG XML 与 SHA-256。
+
+Canonical 累计图为 [[00-知识库管理/_assets/plots/geometry-functional/plot-geometry-functional-cumulative-gate-v2.svg]]，SHA-256 为 `d0ff3852b11f8a82af5feff469fa3ef4e1adde7836cf292b4911dec043c59bd1`。这一证书只说明材料可执行、自洽且答案隔离，没有替学习者完成任何口试、闭卷或复现。
 
 ## 九、当前状态
 
-10.10 当前为 **8/8 正文覆盖、120 道节点题**。第一波 GEO-01—04、第二波 GEO-05—06 与第三波 GEO-07—08 均已达到 `regression-passed`，因此八篇正文完成静态教学迁移；累计验收仍保持 `composed / not-attempted`。Canonical累计图已通过 XML 与确定性双跑，但只证明工具可执行。GEO-01—08 全部继续保持 `draft`，个人学习仍为 `not-attempted`；下一教学施工点是 GEO-CUM 的卷级口试、闭卷、随机三轨和延迟保持性证据门。
+10.10 当前为 **8/8 正文覆盖、120 道节点题**。第一波 GEO-01—04、第二波 GEO-05—06、第三波 GEO-07—08 与 GEO-CUM 材料均为 `regression-passed`；个人证据仍为 `not-attempted`，八篇正文继续保持 `draft`。下一步不是继续补累计材料，而是按本页流程产生真实口试、闭卷、随机三轨、48小时换例与14天迁移证据。

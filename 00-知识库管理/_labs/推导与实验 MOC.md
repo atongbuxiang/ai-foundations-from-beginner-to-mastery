@@ -52,9 +52,10 @@ updated: 2026-08-27
 
 - 题卷：[[阶段测验 - 几何、泛函分析、核与算子基础（10.10）]]；
 - 独立详解：[[阶段测验解答 - 几何、泛函分析、核与算子基础（10.10）]]；
+- 卷级 ID：`GEO-CUM-01`；
 - 计算门：[[实验 - 几何、泛函与算子累计复现门]]，覆盖sphere retraction/rotation covariance、Hilbert projection/compact spectrum/kernel effective dimension与Poisson cutoff的多topology误差；
-- 覆盖：GEO-01—08，100分笔试加一个评分者随机指定计算轨道；
-- 当前语义：`composed / not-attempted`，不构成verified证据。
+- 覆盖：GEO-01—08，20分钟口试、210分钟100分闭卷、评分者nonce随机计算轨道、48小时换例与14天迁移；
+- 当前语义：材料`regression-passed`、个人`not-attempted`，由[[geometry_functional_cumulative_contract_audit.py]]复核，不构成verified证据。
 
 - 题卷：[[阶段测验 - 数学语言、逻辑与证明（10.1）]]；
 - 独立详解：[[阶段测验解答 - 数学语言、逻辑与证明（10.1）]]；

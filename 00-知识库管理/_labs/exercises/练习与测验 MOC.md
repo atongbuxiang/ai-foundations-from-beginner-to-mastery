@@ -443,7 +443,7 @@ updated: 2026-08-27
 | 测验 | 覆盖范围 | 状态 |
 |---|---|---|
 | MATH-CUM-01 | MATH-01—08：数学语言、逻辑与证明卷末累计验收 | composed：[[阶段测验 - 数学语言、逻辑与证明（10.1）]]、[[阶段测验解答 - 数学语言、逻辑与证明（10.1）]]和[[实验 - 数学语言、逻辑与证明累计复现门]]已建立；等待真实独立作答 |
-| GEO-CUM-01 | GEO-01—08：几何、泛函分析、核与算子基础卷末累计验收 | composed：[[阶段测验 - 几何、泛函分析、核与算子基础（10.10）]]、[[阶段测验解答 - 几何、泛函分析、核与算子基础（10.10）]]和[[实验 - 几何、泛函与算子累计复现门]]已建立；等待真实独立作答 |
+| GEO-CUM-01 | GEO-01—08：几何、泛函分析、核与算子基础卷末累计验收 | regression-passed：[[阶段测验 - 几何、泛函分析、核与算子基础（10.10）]]、[[阶段测验解答 - 几何、泛函分析、核与算子基础（10.10）]]和[[实验 - 几何、泛函与算子累计复现门]]已通过静态/计算回归；个人仍为 not-attempted |
 | OPT-CUM-01 | OPT-01—16：优化与凸分析卷末累计验收 | composed：[[阶段测验 - 优化与凸分析（10.7）]]、[[阶段测验解答 - 优化与凸分析（10.7）]]和[[实验 - 优化与凸分析累计复现门]]已建立；等待真实独立作答 |
 | INFO-CUM-01 | INFO-01—10：信息论与统计学习接口卷末累计验收 | composed：[[阶段测验 - 信息论与统计学习接口（10.6）]]、[[阶段测验解答 - 信息论与统计学习接口（10.6）]]和[[实验 - 信息论累计复现门]]已建立；等待真实独立作答 |
 | PROB-CUM-01 | PROB-01—20：概率论与数理统计卷末累计验收 | composed：[[阶段测验 - 概率论与数理统计（10.5）]]、[[阶段测验解答 - 概率论与数理统计（10.5）]]和[[实验 - 概率统计累计复现门]]已建立；等待真实独立作答 |
@@ -505,12 +505,13 @@ MATH-CUM-01 是180分钟、100分闭卷卷末测验，覆盖MATH-01—08，并�
 
 ### GEO-CUM-01 的状态边界
 
-GEO-CUM-01是210分钟、100分闭卷卷末测验，覆盖GEO-01—08，并设置A—E分区线、流形/RKHS/弱PDE对象合同最低线、三道主证明不得为零和几何—泛函—弱PDE随机三轨计算门。当前状态为 **composed / not-attempted**：
+GEO-CUM-01是“20分钟口试 + 210分钟、100分闭卷 + nonce随机三轨实验 + 48小时/14天延迟门”的卷末测验，覆盖GEO-01—08，并设置A—E分区线、流形/RKHS/弱PDE对象合同最低线和三道主证明门。材料状态为 **regression-passed**，个人状态为 **not-attempted**：
 
 - 八套节点题共120题，累计题卷与逐题独立详解已经成稿；
-- 计算门连接sphere tangent/retraction/symmetry、Hilbert projection/compact spectrum/kernel capacity与Poisson operator的多norm误差；
-- canonical SVG、XML、hash、确定性双跑和1440×540实际渲染通过，只证明工具可执行；
-- 尚无首次闭卷原稿、逐项评分、参数干预、48小时重做和14天operator-learning迁移证据；
+- 口试强制建立point/tangent/covector/function/operator对象链与continuous-to-discrete边界；
+- 计算门连接sphere tangent/retraction/symmetry、Hilbert projection/compact spectrum/kernel capacity与Poisson operator多norm误差，先冻结预测再公开scorer nonce；
+- [[geometry_functional_cumulative_contract_audit.py]]已通过题—解隔离、解析量、状态表面、XML、canonical SHA-256与确定性双跑，只证明工具可执行；
+- 尚无首次口试、闭卷原稿、逐项评分、盲参数干预、48小时换例和14天operator-learning迁移证据；
 - 因而GEO-01—08保持`draft`；正式作答前不要打开[[阶段测验解答 - 几何、泛函分析、核与算子基础（10.10）]]。
 
 ### DYN-CUM-01 的状态边界

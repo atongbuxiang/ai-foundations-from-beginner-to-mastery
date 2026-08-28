@@ -1562,7 +1562,7 @@ AI部分将strong PINN、Deep Ritz与VPINN/VarNet按loss对象、导数阶数、
 
 章节配一幅1440×760机制图、15道`GEO-SOB` A—E题与439行逐题独立详解。[[实验 - 弱导数、变分残差与解算子频谱审计]]得到smoothed $|x|$二阶导数mass $1.9998438$；P1 FEM $L^2/H^1$ slopes为$1.998919/0.999175$；algebraic weak residual最大$2.73\times10^{-13}$，而element-interior strong residual固定为$6.978864$；八模态Poisson truncation在训练模态误差为0、未见模态relative error为100%，operator tail为$1.250879\times10^{-3}$。实验SVG hash为`8c8084055adf2dac7b9130e79bab329563f4fb651d081518ab7591d4a59c4e2e`，两幅SVG均已实际PNG渲染目检。
 
-MIT 18.102/18.155、Evans、Adams–Fournier与MIT FEM讲义承担formal Sobolev/variational主线；PINN、Deep Ritz、VarNet/VPINN、DeepONet、FNO、Neural Operator与Sobolev Training原论文承担AI方法对象和声明边界；[[S-2014-Su-3092-格林函数与线性响应]]只承担Green response到solution operator的中文直觉桥。10.10 达到 **8/8 正文覆盖、120 道节点题**；状态仍是`draft / composed / not-attempted`，下一施工点为`GEO-CUM-01`卷末累计验收。
+MIT 18.102/18.155、Evans、Adams–Fournier与MIT FEM讲义承担formal Sobolev/variational主线；PINN、Deep Ritz、VarNet/VPINN、DeepONet、FNO、Neural Operator与Sobolev Training原论文承担AI方法对象和声明边界；[[S-2014-Su-3092-格林函数与线性响应]]只承担Green response到solution operator的中文直觉桥。10.10 达到 **8/8 正文覆盖、120 道节点题**；本批完成时GEO-CUM尚待迁移，现已由第八十九批升级为材料`regression-passed`、个人`not-attempted`。
 
 ## 第八十批：集合语言、对象容器与数据切分审计
 
@@ -1660,9 +1660,9 @@ AI迁移从Banach压缩映射的几何尾界推进到标量二次梯度下降的
 
 本批建立[[阶段测验 - 几何、泛函分析、核与算子基础（10.10）|GEO-CUM-01]]：210分钟、100分闭卷，以20/30/25/15/10五区覆盖GEO-01—08，并设置流形/RKHS/弱PDE对象合同最低线。题卷以same-topology/different-completeness、sphere gradient/retraction/rotation、compact diagonal spectrum、KRR与Poisson weak form串联手算；第9—11题完整验收sphere tangent与orthogonal covariance、Hilbert分解下的representer theorem、Lax–Milgram—energy—Galerkin—Céa主链；D区要求五个无限维/全局反例，E区要求建立球面PDE的rotation-equivariant neural-operator合同。[[阶段测验解答 - 几何、泛函分析、核与算子基础（10.10）]]逐项写出topology、metric、function space、norm与continuous-to-discrete边界。
 
-[[实验 - 几何、泛函与算子累计复现门]]建立三轨确定性证据：A轨恢复sphere ambient constraint slope 2.000000、normalization retraction相对Exp order 2.997004，并将rotation covariance误差压到$3.140\times10^{-16}$；B轨以$c_j=1/j$和$\mu_j=j^{-2}$得到projection slope $-0.495225$、compact tail slope $-1.951949$与effective-dimension slope $0.506725$；C轨用八模态Poisson cutoff恢复$L^2/H^1/strong$指数$-2/-1/0$，并在$j=64$同时保留$2.47\times10^{-5}$ absolute error与100% relative failure。脚本通过XML、不同输出路径双跑和1440×540实际渲染，canonical hash为`87ea1b1f5abc592dadf0657e187e7ac94508470f7f56eea117315c9321d18ea8`。
+[[实验 - 几何、泛函与算子累计复现门]]建立三轨确定性证据：A轨恢复sphere ambient constraint slope 2.000000、normalization retraction相对Exp order 2.997004，并将rotation covariance误差压到$3.140\times10^{-16}$；B轨以$c_j=1/j$和$\mu_j=j^{-2}$得到projection slope $-0.495225$、compact tail slope $-1.951949$与effective-dimension slope $0.506725$；C轨用八模态Poisson cutoff恢复$L^2/H^1/strong$指数$-2/-1/0$，并在$j=64$同时保留$2.47\times10^{-5}$ absolute error与100% relative failure。脚本通过XML、不同输出路径双跑和1440×580实际渲染，canonical hash为`d0ff3852b11f8a82af5feff469fa3ef4e1adde7836cf292b4911dec043c59bd1`。
 
-10.10当前为 **8篇正文、8幅机制图、120道节点题，累计验收 composed / not-attempted**。材料存在不改变GEO-01—08的`draft`状态；下一步是实际闭卷、随机轨道手推、参数干预和延迟复测。课程材料下一施工点转向10.2线性代数卷级累计验收。
+10.10当前为 **8篇正文、8幅机制图、120道节点题，累计材料 regression-passed / 个人 not-attempted**。GEO-CUM现含20分钟口试、210分钟闭卷、scorer nonce随机三轨、盲干预、48小时换例与14天迁移；[[geometry_functional_cumulative_contract_audit.py]]复核题—解隔离、解析量、状态表面和canonical双跑。材料通过不改变GEO-01—08的`draft`状态；下一步是产生真实学习证据。
 
 ## 对接科学空间
 
@@ -1684,7 +1684,7 @@ AI迁移从Banach压缩映射的几何尾界推进到标量二次梯度下降的
 8. **信息论与统计学习接口**：10.6 已完成 INFO-01—10 的正文、十幅机制图、150 道 A–E 题和独立详解；`INFO-CUM-01` 题卷、详解与三轨计算门已成稿，当前 `composed / not-attempted`。
 9. **优化与凸分析**：10.7 已完成 OPT-01—16 的正文、十六幅机制图、240 道 A—E 题、独立详解、`OPT-CUM-01` 与三轨计算门，达到 16/16；状态为 `composed / not-attempted`。
 10. **ODE、动力系统与 SDE**：10.9 已完成 DYN-01—12 的正文、机制图、180 道 A—E 题、独立详解，以及含口试—闭卷—三轨—延迟门的 `DYN-CUM-01`；当前材料 `regression-passed`，个人 `not-attempted`。
-11. **几何、泛函分析、核与算子基础**：10.10 已完成GEO-01—08的正文、机制图、120道A—E题、独立详解、八套节点计算门以及`GEO-CUM-01`题卷、详解与三轨累计门；当前`composed / not-attempted`。
+11. **几何、泛函分析、核与算子基础**：10.10 已完成GEO-01—08的正文、机制图、120道A—E题、独立详解、八套节点计算门以及含口试—闭卷—随机三轨—延迟门的`GEO-CUM-01`；当前材料`regression-passed`，个人`not-attempted`。
 12. **数学语言、逻辑与证明**：[[数学语言、逻辑与证明 MOC|10.1卷入口]]与MATH-01—08均已建立正文、深色机制图、各15题、独立详解与浅色计算审计，达到8/8；`MATH-CUM-01`题卷、详解与量词—递推—复杂度三轨计算门已成稿，当前`composed / not-attempted`。
 13. **全数学主线**：十卷150节已由[[数学基础完整课程地图与掌握标准]]锁定；当前150篇正文均为`draft`，正文覆盖率100.0%，尚无任何一卷通过课程验收。
 14. **十卷总收束**：[[数学基础十卷完备性审计与学习状态总表]]确认150个ID、正文、习题和解答均唯一可定位；[[数学基础十卷总验收 - 跨卷理论与 AI 迁移]]、独立详解与[[实验 - 数学基础十卷跨章累计复现门]]已经成稿。材料状态为`composed / not-attempted`；下一步是按先修顺序产生真实学习证据，而不是继续宣称新增正文等于掌握。
