@@ -4,7 +4,7 @@ status: active
 area: [labs]
 related: ["[[数学基础完整课程地图与掌握标准]]", "[[练习与测验 MOC]]", "[[数学基础 MOC]]"]
 created: 2026-08-14
-updated: 2026-08-27
+updated: 2026-08-28
 ---
 
 # 推导与实验 MOC
@@ -104,7 +104,7 @@ updated: 2026-08-27
 
 - 题卷：[[阶段测验 - 概率论与数理统计（10.5）]]；
 - 独立详解：[[阶段测验解答 - 概率论与数理统计（10.5）]]；
-- 计算门：[[实验 - 概率统计累计复现门]]，覆盖 repeated-sampling coverage、rare-event IS 与双峰 MCMC 多链盲区；
+- 计算门：[[实验 - 概率统计累计复现门]]，以 scorer nonce 指定 repeated-sampling coverage、rare-event IS 或双峰 MCMC 深入轨，并要求未见参数预测、output/hash、48 h 与 14 d 证据；独立回归见[[probability_cumulative_contract_audit.py]]；
 - 覆盖：PROB-01—20，100 分笔试加一个随机指定计算轨道；
 - 当前语义：`composed / not-attempted`，不构成 verified 证据。
 
@@ -143,7 +143,7 @@ updated: 2026-08-27
 25. [[实验 - 条件估计、误差传播与可信停止]]：分离 Jacobian 乘积、一范数条件估计与弱方向的 residual-only 误停。
 26. [[实验 - 稳定归约、点积消去与混合精度累加]]：比较顺序/pairwise/补偿归约与 FP16/FP32 accumulator 的误差层。
 27. [[实验 - 三精度迭代改进与 GMRES-IR 边界]]：展示低精度因子、残差地板、GMRES 校正与奇异回退。
-28. [[实验 - 概率统计累计复现门]]：分离 Wald interval 的重复抽样 coverage、rare-event IS 的 functional-specific ESS/尾部边界，以及同一 mode 初始化导致的低 R-hat 盲区。
+28. [[实验 - 概率统计累计复现门]]：分离 Wald interval 的重复抽样 coverage、rare-event IS 的 functional-specific ESS/尾部边界，以及同一 mode 初始化导致的低 R-hat 盲区；现已加入 nonce 防挑轨、盲参数 CLI、canonical/干预双 hash 与延迟迁移状态机。
 29. [[实验 - ELBO 恒等式、变分族限制与摊销缺口]]：在可枚举二元 latent model 中把 evidence identity 验证到机器精度，并分离 restricted variational family 与 shared encoder 的不同 gap。
 30. [[实验 - 信息论累计复现门]]：把解析 rate–distortion frontier、任务相关压缩与 sequence-level prequential codelength 分为三条可复现、不可越界解释的轨道。
 31. [[实验 - 优化与凸分析累计复现门]]：用同一确定性产物分离 strict-saddle 的 exact stable initialization 与扰动逃逸、非凸 PL 解析下界，以及同一 predictor 下的 scale-dependent raw Hessian sharpness。

@@ -7,7 +7,7 @@ prerequisites: ["[[数学基础 MOC]]", "[[函数极限、连续性与收敛模�
 related: ["[[数学基础完整课程地图与掌握标准]]", "[[练习与测验 MOC]]", "[[推导与实验 MOC]]", "[[阶段测验 - 概率论与数理统计（10.5）]]", "[[实验 - 概率统计累计复现门]]", "[[多元微积分、矩阵微分与自动微分 MOC]]"]
 sources: ["MIT-6.041SC-Probability", "MIT-6.436J-Fundamentals-Probability", "MIT-18.465-Hoeffding-Chernoff", "MIT-18.655-Mathematical-Statistics", "MIT-18.650-Statistics-Applications", "Stanford-Stats311-Exponential-Families", "Harvard-Stat110", "Blitzstein-Hwang-Introduction-Probability", "Bertsekas-Tsitsiklis-Introduction-Probability", "Wasserman-All-of-Statistics", "Casella-Berger-Statistical-Inference", "Gelman-Bayesian-Data-Analysis", "ASA-2016-p-values", "Benjamini-Hochberg-1995", "Hastings-1970", "Vehtari-et-al-2021-Rhat-ESS", "Stan-Reference-Manual-MCMC", "Owen-Monte-Carlo-Theory-Methods-Examples", "Rezende-Mohamed-2015-Normalizing-Flows", "Su-5239-MLE-to-EM", "Su-7681-L2-Scale-Invariance", "Su-7521-Importance-Sampling-Optimization", "Su-8062-Search-Sampling", "Su-8084-MCMC-Annealing", "Su-8791-VAE-Importance-Sampling", "Su-9262-Diffusion-Conditional-Probability", "Su-5253-VAE-Posterior", "Su-5343-VAE-Bayesian", "Su-5383-VAE-Reparameterization", "Su-5776-NICE-Flow", "Su-11390-Maximum-Gaussian-CDF", "Su-6280-Wasserstein-Coupling", "Su-4669-PMI-Joint-Product", "Su-2550-Characteristic-Function", "Su-8620-Transformer-Variance", "Su-9509-Conditional-Score", "Su-9245-Diffusion-Variance", "Su-6705-Reparameterization", "Su-5617-NCE-Partition", "Su-8512-Multivariate-Gaussian-Distances", "Su-9085-Discrete-Reparameterization"]
 created: 2026-08-18
-updated: 2026-08-27
+updated: 2026-08-28
 ---
 
 # 概率论与数理统计 MOC
@@ -27,7 +27,7 @@ updated: 2026-08-27
 | C | PROB-09—12 | 多元 Gaussian → 随机变量变换 → 收敛/LLN → CLT/Delta | `regression-passed` |
 | D | PROB-13—16 | 浓缩 → Monte Carlo → 估计量/风险 → MLE/MAP | `regression-passed` |
 | E | PROB-17—20 | Fisher/渐近 → Bayesian → 检验/区间 → MCMC | `regression-passed` |
-| CUM | PROB-CUM | 卷级路线—口试—题解—实验—回归 | `regression-passed` |
+| CUM | PROB-CUM-01 | 口试 → 闭卷 → nonce 随机轨 → 盲干预 → 订正 → 48 h / 14 d → 独立审计 | `regression-passed / not-attempted` |
 
 第一波固定使用隐藏硬币模型：以 $2/3$ 选择公平硬币 $F$，以 $1/3$ 选择正面率 $3/4$ 的偏置硬币 $B$，随后给定来源条件独立地抛两次。
 
@@ -351,7 +351,7 @@ flowchart LR
 1. **复述证据**：能用自己的话解释对象与问题，但不等于会推导；
 2. **推导证据**：能无提示完成公式和反例，但不等于会跨章选工具；
 3. **闭卷证据**：[[阶段测验 - 概率论与数理统计（10.5）|PROB-CUM-01]] 总分与分区同时过线；
-4. **复现证据**：[[实验 - 概率统计累计复现门]]的解析校准、随机指定轨道、手检和干预预测通过；
+4. **复现证据**：[[实验 - 概率统计累计复现门]]用 attempt_id 与 scorer nonce 唯一指定轨道，解析校准后先冻结盲参数预测，再保存新 output/SVG/hash 与手检；
 5. **保持与迁移证据**：48 小时重做、14 天换分布/换 AI 情境仍能独立完成。
 
 `regression-passed` 只说明仓库材料通过静态与计算回归；节点 frontmatter 的 `draft` 继续表示尚无个人学习证据。只有真实证据链存在，才按[[数学基础完整课程地图与掌握标准]]升级学习状态。
@@ -550,7 +550,16 @@ flowchart LR
 
 ## 九、卷级验收与后续接口
 
-PROB-01—20 已完成正文、图示和 A–E 训练链，概率论与数理统计在材料层达到 **20/20 正文覆盖与 PROB-CUM 回归通过**。`PROB-CUM-01` 由[[阶段测验 - 概率论与数理统计（10.5）|15 分钟卷级口试与 100 分闭卷题卷]]、[[阶段测验解答 - 概率论与数理统计（10.5）|独立详解]]、[[实验 - 概率统计累计复现门|解析校准与 coverage–IS–MCMC 计算门]]及[[probability_cumulative_contract_audit.py|静态教学合同审计]]组成。材料状态为 `regression-passed`，个人学习状态仍是 **composed / not-attempted**。10.6 已承接完成[[自信息、熵与编码长度]]、[[联合熵、条件熵与链式法则]]和[[交叉熵与 KL 散度]]，当前继续到[[互信息与依赖性]]；概率卷所有节点在真实口试、闭卷作答、计算复现和间隔复查前继续保持 `draft`，不以验收文档存在冒充掌握。
+PROB-01—20 已完成正文、图示和 A–E 训练链，概率论与数理统计在材料层达到 **20/20 正文覆盖与 PROB-CUM-01 回归通过**。
+
+| 验收 artifact | 材料层作用 | 个人证据状态 |
+|---|---|---|
+| [[阶段测验 - 概率论与数理统计（10.5）]] | 15 分钟口试、100 分闭卷、答案隔离、48 h / 14 d 延迟门 | `not-attempted` |
+| [[阶段测验解答 - 概率论与数理统计（10.5）]] | 14/14 逐题评分、五波数值锚点、判分红线 | `not-attempted` |
+| [[实验 - 概率统计累计复现门]] | 解析校准、scorer nonce、A/B/C 盲干预接口、output/hash 证据 | `not-attempted` |
+| [[probability_cumulative_contract_audit.py]] | 独立精确模型、双次确定性复跑、状态面与全卷合同回归 | 不产生个人证据 |
+
+材料状态为 `regression-passed`，个人学习状态严格保持 **`not-attempted`**。10.6 已承接完成[[自信息、熵与编码长度]]、[[联合熵、条件熵与链式法则]]和[[交叉熵与 KL 散度]]，当前继续到[[互信息与依赖性]]；概率卷所有节点在真实口试、闭卷作答、nonce 随机轨、个人未见参数运行、48 小时换机制和 14 天陌生 AI 迁移前继续保持 `draft`，不以验收文档存在冒充掌握。
 
 ### 2026-08-23 图像标准化进度
 

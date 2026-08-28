@@ -5,7 +5,7 @@ area: [math]
 aliases: [数学基础总入口]
 related: ["[[数学基础完整课程地图与掌握标准]]", "[[数学基础十卷完备性审计与学习状态总表]]", "[[数学基础十卷总验收 - 跨卷理论与 AI 迁移]]", "[[数学语言、逻辑与证明 MOC]]", "[[线性代数完整学习路线与掌握标准]]", "[[多元微积分、矩阵微分与自动微分 MOC]]", "[[概率论与数理统计 MOC]]", "[[信息论与统计学习接口 MOC]]", "[[优化与凸分析 MOC]]", "[[ODE、动力系统与 SDE MOC]]", "[[几何、泛函分析、核与算子基础 MOC]]", "[[练习与测验 MOC]]", "[[推导与实验 MOC]]"]
 created: 2026-08-14
-updated: 2026-08-27
+updated: 2026-08-28
 ---
 
 # 数学基础 MOC
@@ -1688,6 +1688,14 @@ AI迁移从Banach压缩映射的几何尾界推进到标量二次梯度下降的
 
 10.4当前为 **16篇正文、16组节点题解，累计材料 regression-passed / 个人 not-attempted**。[[calculus_ad_cumulative_contract_audit.py]]复核16/16 scope、14/14题解、题—解隔离、四波解析量、六个状态表面、Wiki链接、累计SVG和canonical双跑。材料通过不改变CALC-01—16的`draft`状态；下一步是产生真实口试、闭卷、随机实验和延迟保持证据。
 
+## 第九十三批：10.5卷末累计验收与概率—统计—随机计算三层门
+
+本批把[[阶段测验 - 概率论与数理统计（10.5）|PROB-CUM-01]]升级为完整证据链：15分钟无提示口试后进入180分钟、100分A—E闭卷；冻结首次原稿后，用`attempt_id + scorer nonce`通过SHA-256唯一指定coverage、rare-event importance sampling或双峰MCMC深入轨；解析校准和canonical run之后，必须先冻结未见参数的方向预测，再保存新output/SVG/hash；打开详解订正后，继续通过48小时换DGP/functional/inference/sampler机制重建和14天陌生AI研究报告检验保持与迁移。题卷的八层对象账本把概率空间、joint/coupling、条件与推前、functional、极限/界、频率推断、Bayesian条件化、随机计算/决策分开；A—E五波模型则把PROB-01—20接成连续但明确改模的教学路线。
+
+[[实验 - 概率统计累计复现门]]保留正式SVG哈希`69ebc90f4b09cc85829b3a642840f0a0dced9d71f7f6b76a755e66b204bea896`，并新增`--coverage-p`、tail threshold/proposal、mode location/proposal step、repetitions/draws等盲参数接口。仓库回归夹具以near-boundary Wald coverage、threshold 3.5的Gaussian tail和$\pm7$双峰目标验证三种机制：coverage可能偏离名义值；weight ESS不能代替functional精度；同峰链低$\widehat R$仍可共同困在错误mode。[[概率论与数理统计 MOC]]、题卷、详解、实验和六个全库状态入口均明确分离材料与个人状态。
+
+10.5当前为 **20篇正文、20组节点题解，累计材料 regression-passed / 个人 not-attempted**。[[probability_cumulative_contract_audit.py]]独立复核20/20教学合同、14/14题解与100分、答案隔离、五波精确分数/方差/信息量、六个状态面、累计SVG canonical双跑及盲干预hash。材料通过不改变PROB-01—20的`draft`状态；下一步仍是真实口试、闭卷、nonce轨、未见参数运行和延迟保持证据。
+
 ## 对接科学空间
 
 - “低秩近似之路”系列：伪逆、SVD、CR、ID、CUR
@@ -1704,7 +1712,7 @@ AI迁移从Banach压缩映射的几何尾界推进到标量二次梯度下降的
 4. **数值阶段**：NUM-01—20 全部建立 `draft` 正文、A–E 习题/解答、三面板图和实验闭环；NLA-CUM-01 题卷与详解已成稿，但仍需学习者真实闭卷作答、实验复现与间隔复查才能升级。
 5. **D 批次**：D1—D4 的十个断点已经全部成稿；D4 由[[矩阵函数的 Fréchet 导数]]、[[非正规矩阵、预解式与伪谱]]与[[结构化矩阵与结构化扰动]]构成，10.3 已达到 16/16 正文覆盖。
 6. **微积分与自动微分**：10.4 的CALC-01—16均已完成正文、SVG、15题与独立详解；CALC-CUM-01已形成“口试—闭卷—scorer nonce随机三轨—盲干预—48小时—14天”证据链，并由[[calculus_ad_cumulative_contract_audit.py]]复核为材料`regression-passed`、个人`not-attempted`。
-7. **概率论与数理统计**：10.5 已完成 PROB-01—20 的正文、SVG、各 15 题与独立详解；`PROB-CUM-01` 题卷、详解和三轨计算门也已成稿，当前 `composed / not-attempted`。
+7. **概率论与数理统计**：10.5 已完成 PROB-01—20 的正文、SVG、各 15 题与独立详解；`PROB-CUM-01` 已形成“口试—闭卷—scorer nonce随机轨—盲干预—48小时—14天”证据链，并由[[probability_cumulative_contract_audit.py]]复核为材料`regression-passed`、个人`not-attempted`。
 8. **信息论与统计学习接口**：10.6 已完成 INFO-01—10 的正文、十幅机制图、150 道 A–E 题和独立详解；`INFO-CUM-01` 题卷、详解与三轨计算门已成稿，当前 `composed / not-attempted`。
 9. **优化与凸分析**：10.7 已完成 OPT-01—16 的正文、十六幅机制图、240 道 A—E 题、独立详解、`OPT-CUM-01` 与三轨计算门，达到 16/16；状态为 `composed / not-attempted`。
 10. **ODE、动力系统与 SDE**：10.9 已完成 DYN-01—12 的正文、机制图、180 道 A—E 题、独立详解，以及含口试—闭卷—三轨—延迟门的 `DYN-CUM-01`；当前材料 `regression-passed`，个人 `not-attempted`。
