@@ -7,7 +7,7 @@ prerequisites: ["[[光滑流形、切空间与余切空间]]", "[[Riemann 几何
 related: ["[[几何、泛函分析、核与算子基础 MOC]]", "[[实验 - Lie 指数、BCH 与群平均等变审计]]", "[[习题 - Lie 群、Lie 代数与对称性]]", "[[S-2021-Su-8397-二维RoPE与旋转表示]]", "[[S-2024-Su-10347-位置编码与置换对称]]", "[[S-2020-Su-7681-L2正则与尺度不变性]]", "[[RoPE 的旋转推导、群表示与内积]]", "[[二维、多轴与多模态位置编码]]"]
 sources: ["Etingof-18.755-Lie-Groups", "Hall-Lie-Groups-Lie-Algebras-Representations", "Lee-Introduction-to-Smooth-Manifolds", "Cohen-Welling-2016-GCNN", "Zaheer-et-al-2017-Deep-Sets", "Finzi-et-al-2020-LieConv", "Bronstein-et-al-2021-GDL", "Su-8397-2D-RoPE", "Su-10347-Position-Encoding", "Su-7681-Scale-Symmetry"]
 created: 2026-08-19
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # Lie 群、Lie 代数与对称性
@@ -24,6 +24,277 @@ updated: 2026-08-23
 > 6. invariant 与 equivariant 的 domain/codomain 条件是什么？CNN、Deep Sets、Transformer 各是哪一种？
 > 7. 为什么 Lie algebra 看不见 reflection？为什么数据增强不等于严格等变？
 > 8. 网络参数重标度对称与输入空间旋转对称为什么不是同一件事？
+
+> [!note] 课程位置
+> GEO-01—03 已把 $S^1$ 依次看成 topological space、smooth manifold 与 Riemannian manifold。本章改看“让圆旋转的变换集合”：$SO(2)$ 同时是 smooth manifold 和 group。单位元 tangent给 Lie algebra，matrix exponential生成 finite rotation，group action再把对称要求写成 model commuting diagram。
+
+> [!tip] 建议两遍阅读
+> **第一遍**只掌握 $SO(2)$：group law、$\mathfrak{so}(2)=\{\omega J\}$、$e^{\theta J}=R_\theta$、作用轨道、invariance/equivariance 与 group averaging。**第二遍**再进入一般 Lie group、noncommutative bracket/BCH、$SO(3)/SE(3)$、representation、Haar measure、convolution、RoPE、parameter quotient 与 Noether接口。第一遍必须能说清主动旋转、被动换坐标和模型等变不是同一句话。
+
+## 本章的推导问题链
+
+1. $S^1$ 上所有 rotation为什么对复合与逆封闭，从而形成 group？
+2. 这个 group 怎样同时成为一维 smooth manifold？
+3. 对 orthogonality constraint求导，为什么单位元 tangent恰是 skew-symmetric matrices？
+4. $J^2=-I$ 怎样让 matrix exponential化成普通三角函数？
+5. Lie algebra bracket 在 $SO(2)$ 中为什么为零，又为何不能据此推断所有 rotation group都交换？
+6. Group action、orbit、stabilizer、invariant 与 equivariant分别是什么类型？
+7. 怎样把任意函数平均成 invariant/equivariant map，有限测试又为何不是 exact certificate？
+
+## 第一遍统一算例：从 circle rotation 到 exact equivariance
+
+定义
+
+$$
+R_\theta
+=
+\begin{bmatrix}
+\cos\theta&-\sin\theta\\
+\sin\theta&\cos\theta
+\end{bmatrix},
+\qquad
+SO(2)=\{R_\theta:\theta\in\mathbb R\}.
+$$
+
+### 符号与对象账本
+
+| 符号 | 类型 | 本节角色 | 不能误写成 |
+|---|---|---|---|
+| $SO(2)$ | Lie group | finite rotations | circle data points本身 |
+| $I$ | group identity | zero rotation | scalar 1 |
+| $\mathfrak{so}(2)=T_I SO(2)$ | vector space / Lie algebra | infinitesimal rotations | entire group |
+| $J$ | $2\times2$ generator | unit angular velocity | finite rotation $R_1$ |
+| $\exp$ | algebra $\to$ group | integrate generator | 一般 Riemannian Exp |
+| $R_\theta x$ | group action | rotation of state $x$ | passive coordinate tuple change |
+| $F(R_\theta x)=R_\theta F(x)$ | equivariance contract | 两条路径交换 | invariance $F(R_\theta x)=F(x)$ |
+
+### 第一步：finite rotations构成 group
+
+三角恒等式或矩阵乘法给
+
+$$
+R_\theta R_\phi=R_{\theta+\phi}.
+$$
+
+因此
+
+$$
+R_0=I,
+\qquad
+R_\theta^{-1}=R_{-\theta},
+$$
+
+矩阵乘法本身 associative。于是 $SO(2)$ 对复合封闭、含 identity、每个元素可逆，是 group。又因为 $\theta$ 周期为 $2\pi$，它作为 manifold与 $S^1$ 同胚/微分同胚；但 group element是“变换”，$S^1$ point是“被作用的状态”，二者即使可一一对应也不能在对象账中混用。
+
+### 第二步：从 constraint derivative得到 Lie algebra
+
+一般写
+
+$$
+SO(2)=\{Q\in\mathbb R^{2\times2}:Q^TQ=I,\ \det Q=1\}.
+$$
+
+令 smooth curve $Q(t)\in SO(2)$ 满足 $Q(0)=I$，记
+
+$$
+\Omega=Q'(0).
+$$
+
+对 $Q(t)^TQ(t)=I$ 求导：
+
+$$
+\Omega^T+\Omega=0.
+$$
+
+所以 $\Omega$ 必须 skew-symmetric。在二维，所有这类矩阵都形如
+
+$$
+\boxed{
+\mathfrak{so}(2)
+=T_I SO(2)
+=\{\omega J:\omega\in\mathbb R\},
+\qquad
+J=
+\begin{bmatrix}0&-1\\1&0\end{bmatrix}
+}.
+$$
+
+$\omega$ 是 angular velocity；$\omega J$ 是 identity处的 tangent direction，不是已经旋转了 $\omega$ radians 的 finite group element。
+
+### 第三步：matrix exponential把 generator积分成 rotation
+
+因为
+
+$$
+J^2=-I,
+\qquad
+J^{2k}=(-1)^kI,
+\qquad
+J^{2k+1}=(-1)^kJ,
+$$
+
+matrix exponential的 power series分成偶数与奇数项：
+
+$$
+\begin{aligned}
+e^{\theta J}
+&=\sum_{n=0}^{\infty}\frac{\theta^nJ^n}{n!}\\
+&=\left(\sum_{k=0}^{\infty}\frac{(-1)^k\theta^{2k}}{(2k)!}\right)I
++\left(\sum_{k=0}^{\infty}\frac{(-1)^k\theta^{2k+1}}{(2k+1)!}\right)J\\
+&=\cos\theta\,I+\sin\theta\,J\\
+&=R_\theta.
+\end{aligned}
+$$
+
+于是 $t\mapsto e^{t\omega J}=R_{t\omega}$ 是 one-parameter subgroup，并满足
+
+$$
+R_{(t+s)\omega}=R_{t\omega}R_{s\omega}.
+$$
+
+### 第四步：$SO(2)$ 的 bracket为零，但非交换性没有消失在一般理论中
+
+Matrix Lie bracket是 commutator：
+
+$$
+[A,B]=AB-BA.
+$$
+
+任取 $A=aJ,B=bJ$，
+
+$$
+[aJ,bJ]=ab(J^2-J^2)=0.
+$$
+
+所以 $\mathfrak{so}(2)$ abelian，且 $SO(2)$ finite rotations也 commute。这是二维 rotation的特殊性；$SO(3)$ 中不同轴生成元通常 bracket非零，BCH correction不能删除。
+
+Lie algebra还只看 identity component。Reflection属于 $O(2)$ 的另一个 disconnected component，不可能由 $e^{\theta J}$ 生成。因此“知道 Lie algebra”不等于“知道 group 的全部 global components”。
+
+### 第五步：固定 action 后，orbit 与 stabilizer才有意义
+
+$SO(2)$ 对 $S^1$ 的标准 action是
+
+$$
+a:SO(2)\times S^1\to S^1,
+\qquad
+a(R_\theta,p)=R_\theta p.
+$$
+
+它满足
+
+$$
+I\cdot p=p,
+\qquad
+(R_\theta R_\phi)\cdot p
+=R_\theta\cdot(R_\phi\cdot p).
+$$
+
+对任意 $p\in S^1$，orbit
+
+$$
+SO(2)\cdot p=S^1,
+$$
+
+因为任何 circle point都能由某次 rotation到达。Stabilizer
+
+$$
+SO(2)_p=\{Q:Qp=p\}
+$$
+
+只有 $I$。若换成 group作用于图像、features或参数，orbit/stabilizer都会改变；它们不是 group脱离 action后的固有标签。
+
+### 第六步：invariance 与 equivariance 的 codomain action不同
+
+Scalar function $h:\mathbb R^2\to\mathbb R$ rotation-invariant是
+
+$$
+h(R_\theta x)=h(x),
+$$
+
+其中 scalar codomain使用 trivial action。Vector map $F:\mathbb R^2\to\mathbb R^2$ rotation-equivariant是
+
+$$
+\boxed{
+F(R_\theta x)=R_\theta F(x)
+}.
+$$
+
+例如 $h(x)=\|x\|^2$ invariant，而 $F(x)=x$ equivariant但不 invariant。只说“模型保持旋转”不够；必须同时声明 input action、output action和 equality类型。
+
+### 第七步：所有 linear $SO(2)$-equivariant maps长什么样
+
+若 $F(x)=Ax$，exact equivariance要求
+
+$$
+AR_\theta=R_\theta A
+\qquad\forall\theta.
+$$
+
+在 $\theta=0$ 处求导可得必要条件
+
+$$
+AJ=JA.
+$$
+
+令 $A=\begin{bmatrix}\alpha&\beta\\\gamma&\delta\end{bmatrix}$，逐项比较得到
+
+$$
+\delta=\alpha,
+\qquad
+\gamma=-\beta.
+$$
+
+因此
+
+$$
+A=aI+bJ.
+$$
+
+反向代入可验证它与每个 $R_\theta$ commute，所以也是充分条件。这里有一个常被漏掉的细节：对 $SO(2)$，$bJ$ 也合法；若 symmetry扩大到含 reflection 的 $O(2)$，与 reflection commute会进一步迫使 $b=0$，只剩 scalar $aI$。
+
+### 第八步：Haar averaging把任意 map投到对称子空间
+
+对 integrable scalar $h$，定义
+
+$$
+\bar h(x)
+=\frac1{2\pi}\int_0^{2\pi}h(R_\theta x)d\theta.
+$$
+
+变量平移 $\theta\mapsto\theta+\alpha$ 给
+
+$$
+\bar h(R_\alpha x)=\bar h(x),
+$$
+
+所以 $\bar h$ invariant。对 vector map $F$，定义
+
+$$
+\bar F(x)
+=\frac1{2\pi}\int_0^{2\pi}
+R_{-\theta}F(R_\theta x)d\theta.
+$$
+
+同样换元得到
+
+$$
+\bar F(R_\alpha x)=R_\alpha\bar F(x),
+$$
+
+所以 $\bar F$ equivariant。实际 Monte Carlo只抽有限 angles 时，只得到近似积分；有限测试 residual小不等于 architecture对连续群 exact equivariant。
+
+### 核心公式七问：$e^{\theta J}=R_\theta$
+
+1. **对象是什么？** Lie algebra element $\theta J$ 的 matrix exponential，一个 finite group element；
+2. **怎样得到？** 用 $J^2=-I$ 把 power series分成 cosine/sine；
+3. **条件是什么？** 这里是 matrix Lie group $SO(2)$；一般 Lie exponential不必用同一闭式；
+4. **几何意义是什么？** Constant infinitesimal angular velocity积分成 finite rotation；
+5. **怎样检查？** $\theta=0$ 得 $I$，derivative at 0得 $J$，且 determinant为 1；
+6. **怎样误读？** 它不生成 reflection，也不应与任意 manifold上的 Riemannian Exp无条件等同；
+7. **AI 中在哪里用？** RoPE block、rotation-equivariant features、pose updates和 continuous symmetry tests。
+
+> [!success] 第一遍停靠线
+> 你现在应能从 $Q^TQ=I$ 推出 $\mathfrak{so}(2)$，从 power series推出 $e^{\theta J}=R_\theta$，并写出 action、orbit、stabilizer、invariance、equivariance和 averaging projection。若仍把有限 augmentation测试当作 exact equivariance证明，或认为 $SO(2)$-equivariant linear map只能是 scalar identity，请先停在本例。
 
 ## 0. 学习合同、符号与总路线
 

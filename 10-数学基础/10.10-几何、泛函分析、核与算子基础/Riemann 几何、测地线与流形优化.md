@@ -7,7 +7,7 @@ prerequisites: ["[[度量空间、拓扑与连续映射]]", "[[光滑流形、�
 related: ["[[几何、泛函分析、核与算子基础 MOC]]", "[[镜像下降、Bregman 几何与自然梯度]]", "[[结构化矩阵与结构化扰动]]", "[[实验 - 坐标度量、测地能量与球面 Retraction 审计]]", "[[Lie 群、Lie 代数与对称性]]"]
 sources: ["Lee-Introduction-to-Riemannian-Manifolds", "do-Carmo-Riemannian-Geometry", "Boumal-2023-Optimization-Smooth-Manifolds", "Absil-Mahony-Sepulchre-2008", "Edelman-Arias-Smith-1998", "Amari-1998-Natural-Gradient", "Arvanitidis-et-al-2018-Latent-Space-Oddity", "Su-3969-Riemannian-Metric", "Su-3977-Geodesic", "Su-3998-Connection", "Su-11196-Sphere-Descent"]
 created: 2026-08-19
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # Riemann 几何、测地线与流形优化
@@ -22,6 +22,284 @@ updated: 2026-08-23
 > 4. geodesic、局部最短曲线、全局最短曲线和直线插值有何关系？
 > 5. exponential map、projection、normalization 和 retraction 各是什么，能否互换？
 > 6. decoder pullback metric、natural gradient 和 orthogonality-constrained optimization 各自在哪个空间上做几何？
+
+> [!note] 课程位置
+> GEO-02 已在 $S^1$ 上得到 $T_pS^1=\{v:p^Tv=0\}$，但还不能比较 tangent vectors 的长度，也不能把 $df_p$ 识别为 gradient。本章给同一 tangent bundle 配 induced inner product，逐步得到 curve length、geodesic、Exp、Riemannian gradient 与 retraction。GEO-04 将把 circle rotation提升为 $SO(2)$ Lie group与 equivariance。
+
+> [!tip] 建议两遍阅读
+> **第一遍**只计算 unit circle：$g_p(u,v)=u^Tv$、length/energy、$\operatorname{Exp}_p$、projected gradient 与 normalization retraction。**第二遍**再进入 general coordinates、Christoffel symbols、Levi–Civita connection、curvature、Hopf–Rinow、Stiefel/SPD geometry 与 convergence theorem。第一遍必须能解释 $df$、gradient、ambient step 和 manifold point为何是四种对象。
+
+## 本章的推导问题链
+
+1. Smooth manifold 已有 tangent space，为什么还不能谈最陡方向和最短路？
+2. $S^1$ 的 induced metric 怎样把 angular coordinate 的速度变成 curve length？
+3. Length 与 energy 为什么相关，却对 reparametrization表现不同？
+4. Circle geodesic怎样从 constant angular velocity得到，何时是最短且唯一？
+5. $\operatorname{Exp}_p(v)$ 怎样把 tangent displacement送回圆，$\operatorname{Log}_p(q)$ 为什么只局部单值？
+6. Ambient differential怎样经 tangent projection成为 Riemannian gradient？
+7. Normalization retraction 与 exact Exp差多少，rotation covariance怎样验收实现？
+
+## 第一遍统一算例：给 $S^1$ 加长度、梯度与有限步
+
+设
+
+$$
+S^1=\{p\in\mathbb R^2:\|p\|_2=1\},
+\qquad
+T_pS^1=\{v:p^Tv=0\}.
+$$
+
+对 $p=\gamma(\theta)=(\cos\theta,\sin\theta)$，记单位 tangent
+
+$$
+e_\theta=(-\sin\theta,\cos\theta).
+$$
+
+### 符号与对象账本
+
+| 符号 | 类型 | 本节角色 | 不能误写成 |
+|---|---|---|---|
+| $g_p$ | inner product on $T_pS^1$ | 测 tangent length/angle | point distance $d_g$ |
+| $df_p$ | cotangent vector | 方向变化率 | gradient vector |
+| $\operatorname{grad}f(p)$ | tangent vector | $df_p$ 的 metric representation | ambient $\nabla\bar f$ |
+| $\operatorname{Exp}_p(v)$ | manifold point | exact geodesic endpoint | vector $p+v$ |
+| $R_p(v)$ | manifold point | local retraction endpoint | 一般情形下的 exact Exp |
+| $d_g(p,q)$ | scalar metric | curve length的 infimum | ambient chord |
+| $Q\in SO(2)$ | isometry | rotation covariance test | passive coordinate change |
+
+### 第一步：induced metric 只作用在同一 tangent fiber
+
+从 ambient Euclidean inner product限制得到
+
+$$
+g_p(u,v)=u^Tv,
+\qquad
+u,v\in T_pS^1.
+$$
+
+若 $u=a e_\theta$、$v=b e_\theta$，则
+
+$$
+g_p(u,v)=ab.
+$$
+
+在 local angular coordinate 中，这等价于 metric coefficient
+
+$$
+g_{\theta\theta}=1.
+$$
+
+注意 $g_p$ 的两个输入必须来自同一个 $T_pS^1$；未给 connection 或 transport 时，不能直接拿 $u\in T_pS^1$ 与 $w\in T_qS^1$ 做内积。
+
+### 第二步：metric 先定义 speed，再定义 length
+
+令 curve
+
+$$
+c(t)=\gamma(\theta(t)).
+$$
+
+则
+
+$$
+\dot c(t)=\dot\theta(t)e_{\theta(t)},
+$$
+
+所以 speed 是
+
+$$
+\|\dot c(t)\|_{g}
+=\sqrt{g_{c(t)}(\dot c(t),\dot c(t))}
+=|\dot\theta(t)|.
+$$
+
+Curve length 与 energy 分别为
+
+$$
+L[c]=\int_0^1|\dot\theta(t)|dt,
+$$
+
+$$
+E[c]=\frac12\int_0^1\dot\theta(t)^2dt.
+$$
+
+Length 对 orientation-preserving reparametrization 不变；energy一般会改变。Cauchy–Schwarz 给
+
+$$
+L[c]^2
+\le
+2E[c],
+$$
+
+等号当 speed constant。这解释了为什么 fixed endpoints下的 energy minimizer自然选 affine parameter，但不能把 length 与 energy 当成同一个 functional。
+
+### 第三步：circle geodesic 是 constant angular velocity
+
+因为 angular coordinate 下 $g_{\theta\theta}=1$ 是常数，Christoffel symbol为 0，geodesic equation简化为
+
+$$
+\ddot\theta(t)=0.
+$$
+
+于是
+
+$$
+\theta(t)=\theta_0+at,
+\qquad
+c(t)=\gamma(\theta_0+at).
+$$
+
+这是沿圆以 constant speed $|a|$ 运动。对 $p=\gamma(\theta)$、$q=\gamma(\phi)$，令 wrapped difference $\delta\in(-\pi,\pi]$，则
+
+$$
+d_g(p,q)=|\delta|.
+$$
+
+当 $q\ne-p$ 时，$|\delta|<\pi$，最短 geodesic唯一；当 $q=-p$ 时，顺时针和逆时针半圆都长 $\pi$，global minimizer不唯一。Geodesic equation 是局部动力条件，不自动承诺任意长区间上的全局最短唯一性。
+
+### 第四步：exact exponential 与 local logarithm
+
+对 $v\in T_pS^1$，令 $a=\|v\|_2$。Circle exponential有闭式
+
+$$
+\boxed{
+\operatorname{Exp}_p(v)
+=
+\begin{cases}
+p,&a=0,\\[3pt]
+\cos a\,p+\sin a\,\dfrac{v}{a},&a>0.
+\end{cases}
+}
+$$
+
+它满足 $\operatorname{Exp}_p(0)=p$，初速度为 $v$，并始终位于 circle，因为 $p\perp v$。若 $q\ne-p$，wrapped angle $\delta\in(-\pi,\pi)$ 给
+
+$$
+\operatorname{Log}_p(q)=\delta e_\theta.
+$$
+
+在 antipode处有两条等长最短方向，Log 不能保持全局单值 smooth；这就是 cut-locus现象的最小模型。
+
+### 第五步：metric 把 $df$ 转成 tangent gradient
+
+取 fixed $c\in\mathbb R^2$，考虑 circle objective
+
+$$
+f(p)=-c^Tp.
+$$
+
+Ambient extension $\bar f(x)=-c^Tx$ 的 Euclidean gradient为 $-c$。对 $v\in T_pS^1$，
+
+$$
+df_p(v)=-c^Tv.
+$$
+
+Riemannian gradient由
+
+$$
+g_p(\operatorname{grad}f(p),v)=df_p(v)
+\quad\forall v\in T_pS^1
+$$
+
+定义。把 $-c$ 正交投影到 tangent：
+
+$$
+\boxed{
+\operatorname{grad}f(p)
+=(I-pp^T)(-c)
+=-c+(c^Tp)p
+}.
+$$
+
+它确实 tangent，因为 $p^T\operatorname{grad}f(p)=0$。Stationary points是 $p=\pm c/\|c\|$；其中与 $c$ 同向者最小化 $-c^Tp$，反向者最大化。
+
+### 第六步：normalization retraction 是可行近似，不是定义上的 Exp
+
+对 $v\in T_pS^1$，定义
+
+$$
+R_p(v)=\frac{p+v}{\|p+v\|_2}.
+$$
+
+由于 $p^Tv=0$，
+
+$$
+\|p+v\|_2^2=1+\|v\|_2^2>0,
+$$
+
+所以 $R_p(v)$ well-defined且位于 $S^1$。Taylor展开给
+
+$$
+R_p(v)
+=p+v-\frac12\|v\|^2p+O(\|v\|^3),
+$$
+
+而 $\operatorname{Exp}_p(v)$ 有相同二阶展开，因此 circle normalization是 second-order retraction：
+
+$$
+R_p(v)-\operatorname{Exp}_p(v)=O(\|v\|^3).
+$$
+
+有限步 Riemannian gradient descent可写为
+
+$$
+p_+=R_p\!\left(-\eta\operatorname{grad}f(p)\right).
+$$
+
+“输出仍满足 constraint”只验收 feasibility；还要另查 objective decrease、gradient norm、step-size 与 Exp/retraction error。
+
+### 第七步：rotation covariance 是几何实现的单元测试
+
+令 $Q\in SO(2)$，同时旋转 state 与 objective vector：
+
+$$
+p'=Qp,
+\qquad
+c'=Qc.
+$$
+
+因为 $Q^TQ=I$，
+
+$$
+f_{c'}(p')=-(Qc)^T(Qp)=-c^Tp=f_c(p).
+$$
+
+并且
+
+$$
+\operatorname{grad}f_{c'}(Qp)
+=Q\operatorname{grad}f_c(p),
+$$
+
+$$
+R_{Qp}(Qv)=Q R_p(v),
+\qquad
+\operatorname{Exp}_{Qp}(Qv)=Q\operatorname{Exp}_p(v).
+$$
+
+因此同一步算法在 rotation 后应给 rotation 后的输出。Constraint residual很小不代表 covariance正确；二者是两条独立测试。
+
+### 核心公式七问：projected Riemannian gradient
+
+围绕
+
+$$
+\operatorname{grad}f(p)
+=(I-pp^T)\nabla\bar f(p)
+$$
+
+回答：
+
+1. **对象是什么？** Ambient gradient 的 tangent projection，输出属于 $T_pS^1$；
+2. **怎样得到？** 用 induced metric的 Riesz relation $g_p(\operatorname{grad}f,v)=df(v)$；
+3. **条件是什么？** $S^1$ 使用 Euclidean induced metric，$\bar f$ 是 local ambient extension；
+4. **几何意义是什么？** 删除会立刻违反 constraint 的 normal component；
+5. **怎样检查？** $p^T\operatorname{grad}f=0$，并对任意 tangent $v$ 核对 inner product等于 $df(v)$；
+6. **怎样误读？** Projected gradient是 tangent vector，$p-\eta\operatorname{grad}f$ 的 finite step仍不在 circle；
+7. **AI 中在哪里用？** Unit-norm embeddings、sphere-constrained parameters 与 rotation-covariant optimization的最小内核。
+
+> [!success] 第一遍停靠线
+> 你现在应能从 induced metric推导 $S^1$ 的 speed、length、distance、Exp 与 projected gradient，说明 antipode处 Log为何不唯一，并比较 normalization retraction 与 exact Exp。若仍用“projection后可行”替代收敛或 covariance 证据，请先停在本例。
 
 ## 0. 学习合同、符号与路线
 

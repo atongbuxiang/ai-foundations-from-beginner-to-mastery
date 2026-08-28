@@ -7,13 +7,71 @@ prerequisites: ["[[数学基础 MOC]]", "[[多元微积分、矩阵微分与自�
 related: ["[[数学基础完整课程地图与掌握标准]]", "[[练习与测验 MOC]]", "[[推导与实验 MOC]]"]
 sources: ["MIT-18.S190-2023-Metric-Spaces", "MIT-18.965-2014-Differential-Topology", "MIT-Dyatlov-18.155-Manifolds", "Munkres-Topology", "Lee-Topological-Manifolds", "Lee-Smooth-Manifolds", "Lee-Riemannian-Manifolds", "Boumal-2023-Optimization-Smooth-Manifolds", "Edelman-Arias-Smith-1998", "Amari-1998-Natural-Gradient", "Arvanitidis-et-al-2018-Latent-Space-Oddity", "Etingof-MIT-Lie-Groups", "Cohen-Welling-2016-GCNN", "Zaheer-et-al-2017-Deep-Sets", "Finzi-et-al-2020-LieConv", "Bronstein-et-al-2021-GDL", "MIT-18.102-Functional-Analysis", "MIT-18.125-Measure-Analysis", "Conway-Functional-Analysis", "Brezis-Functional-Analysis", "Gu-et-al-2020-HiPPO", "Kovachki-et-al-2023-Neural-Operator", "Berlinet-Thomas-Agnan-RKHS", "Aronszajn-1950-RKHS", "MIT-9.520-RKHS", "Scholkopf-Herbrich-Smola-2001-Representer", "Rasmussen-Williams-2006-GPML", "Rahimi-Recht-2007-Random-Features", "Jacot-Gabriel-Hongler-2018-NTK", "Raissi-et-al-2019-PINN", "E-Yu-2018-Deep-Ritz", "Lu-et-al-2021-DeepONet", "Li-et-al-2021-FNO", "Khodayi-Mehr-Zavlanos-2020-VarNet", "Czarnecki-et-al-2017-Sobolev-Training", "Arjovsky-et-al-2017-WGAN", "Dupont-et-al-2019-Augmented-Neural-ODE", "Esmaeili-et-al-2023-Topological-Obstructions", "Su-3963-Riemannian-Geometry", "Su-3969-Riemannian-Metric", "Su-3977-Geodesic", "Su-3998-Connection", "Su-11196-Sphere-Descent", "Su-4062-Exterior-Differential", "Su-5776-NICE-Flow", "Su-6280-Wasserstein-WGAN", "Su-8397-2D-RoPE", "Su-10347-Position-Encoding", "Su-7681-Scale-Symmetry", "Su-10114-HiPPO", "Su-6910-HSIC", "Su-8601-Infinite-Linear-Attention", "Su-3092-Green-Function"]
 created: 2026-08-19
-updated: 2026-08-23
+updated: 2026-08-27
 ---
 
 # 几何、泛函分析、核与算子基础 MOC
 
 > [!abstract] 本卷的核心任务
 > 把有限维线性代数、微积分和概率中的“空间直觉”升级为可迁移的抽象语言：先只用距离与开集定义附近、收敛和连续；再在局部 Euclidean 空间上建立 manifold/tangent/cotangent；随后加入 Riemannian metric 与 continuous symmetry；最后把向量空间推广到 Banach/Hilbert function spaces，用 operator、spectrum、kernel、weak derivative 与 Sobolev regularity进入 Gaussian process、kernel method、equivariant network、PINN 和 neural operator。
+
+## 全卷教学迁移路线
+
+10.10 的八篇深层正文、节点练习、图像、实验与累计验收已经存在；当前迁移任务是把它们重排成初学者能连续调用的三波模型链，而不是扩张成 topology 或 functional analysis百科。
+
+| 波次 | 节点 | 主线 | 统一模型/证书 | 材料状态 | 学习状态 |
+|---|---|---|---|---|---|
+| A | GEO-01—04 | metric/topology → chart/tangent → Riemannian metric/optimization → Lie action/equivariance | $S^1$、induced geometry 与 $SO(2)$ | `regression-passed` | `draft / not-attempted` |
+| B | GEO-05—06 | norm/completion → Hilbert projection → bounded/compact operator → spectrum | 待迁移：$\ell^2$ sequence、projection 与 diagonal compact operator | `deep-draft / queued` | `draft / not-attempted` |
+| C | GEO-07—08 | PSD kernel → RKHS representation → weak derivative → variational/operator learning | 待迁移：一维 sine basis、Green/operator 与 kernel sections | `deep-draft / queued` | `draft / not-attempted` |
+| CUM | GEO-CUM | 口试—闭卷—三轨实验—延迟重做 | sphere/Hilbert/weak-PDE 随机回链 | `composed` | `not-attempted` |
+
+### 第一波的 $S^1$—$SO(2)$ 单一模型链
+
+第一波固定
+
+$$
+S^1=\{p\in\mathbb R^2:\|p\|_2=1\},
+\qquad
+R_\theta=
+\begin{bmatrix}
+\cos\theta&-\sin\theta\\
+\sin\theta&\cos\theta
+\end{bmatrix}.
+$$
+
+同一个对象完成四次升级：
+
+1. **GEO-01：先决定什么叫附近。** 对 $p=\gamma(\theta),q=\gamma(\phi)$，chord 与 wrapped angular metrics满足
+   $$
+   \frac{2}{\pi}d_{\rm ang}(p,q)
+   \le d_{\rm ch}(p,q)
+   \le d_{\rm ang}(p,q),
+   $$
+   所以同 topology但不等 metric；continuous image给 compact/connected，单一角参数因 periodic seam 不能作 global chart；
+2. **GEO-02：从附近升级到可微。** 两张 stereographic charts 的 transition为 $s=1/t$，constraint $F(p)=\|p\|^2-1$ 给
+   $$
+   T_pS^1=\ker DF_p=\{v:p^Tv=0\};
+   $$
+   curve velocity、chart basis、cotangent与 decoder Jacobian在同一对象账中对齐；
+3. **GEO-03：给 tangent 加 measurement。** Induced metric给 speed/length，circle Exp为
+   $$
+   \operatorname{Exp}_p(v)
+   =\cos\|v\|\,p
+   +\sin\|v\|\frac{v}{\|v\|},
+   $$
+   而 $\operatorname{grad}f=(I-pp^T)\nabla\bar f$；normalization只是一种 second-order retraction；
+4. **GEO-04：把状态几何升级为变换结构。** $\mathfrak{so}(2)=\{\omega J\}$、$J^2=-I$ 给 $e^{\theta J}=R_\theta$；group action产生 orbit/stabilizer，$F(R_\theta x)=R_\theta F(x)$ 才是 equivariance，$SO(2)$-equivariant linear maps恰为 $aI+bJ$。
+
+> [!success] 第一波材料证书
+> [[geometry_functional_teaching_contract_audit.py]]检查 GEO-01—04 的六项初学者教学标记、$S^1/SO(2)$ 精确模型、作用域 Wiki 链接、四个图文单元与四幅正式 SVG 哈希。`regression-passed` 只证明材料自洽，四篇正文仍为 `draft`，个人学习仍为 `not-attempted`。
+
+### 如何学习第一波，而不是背四套几何术语
+
+1. **第一遍（约 360 分钟）：**只在 $S^1$ 上重算 chord/angular、stereographic transition、tangent kernel、Exp/gradient 与 Lie exponential；
+2. **第二遍（约 720 分钟）：**回到四篇完整正文，扩展到 abstract topology、一般 manifold/connection、Stiefel/SPD 与 nonabelian groups；
+3. **第三遍（约 180 分钟）：**改变 circle radius、objective vector、chart pole与测试 angles，运行前预测 metric constant、tangent、retraction error与 equivariance residual；
+4. **验收：**完成 GEO-01—04 的四个节点实验，并无提示区分 point/coordinate/tangent/covector、metric/topology、Exp/retraction、invariance/equivariance。
 
 ## 一、范围与边界
 
@@ -136,7 +194,7 @@ flowchart LR
 
 GEO-01—08 已建立完整节点闭环。GEO-08 从 test functions 与 distribution derivative进入 $W^{k,p}$、$H_0^1$、$H^{-1}$；trace、Poincaré、Sobolev embedding 与 Rellich compactness均保留 domain/指数条件。Poisson 主线完整连接 weak form、Lax–Milgram、energy、Galerkin orthogonality与Céa，并把 strong PINN、Deep Ritz、VPINN/VarNet、DeepONet/FNO放在不同对象和 residual topology上审计。
 
-八个核心节点的主图已于 2026-08-23 统一迁移为 v2 教材式图文单元：每篇均含可判定引图问题、对象/结论/来源图注、`怎样读图`与`图没有证明什么`，并使用根目录稳定路径和 `880 px` 显示宽度。两套确定性脚本 [[plot_geometry_foundations_v2.py]]、[[plot_functional_analysis_v2.py]] 生成八幅图；全部通过 SVG 结构、XML、1200 px 渲染与人工视觉检查。该状态只说明课程材料和视觉证据完整，不代表学习者已掌握。
+八个核心节点的主图已于 2026-08-23 统一迁移为 v2 教材式图文单元：每篇均含可判定引图问题、对象/结论/来源图注、`怎样读图`与`图没有证明什么`，并使用根目录稳定路径和 `880 px` 显示宽度。两套确定性脚本 [[plot_geometry_foundations_v2.py]]、[[plot_functional_analysis_v2.py]] 生成八幅图；全部通过 SVG 结构、XML、1200 px 渲染与人工视觉检查。2026-08-27 又完成 GEO-01—04 的第一波初学者迁移，以 $S^1/SO(2)$ 闭合 topology、manifold、Riemannian geometry 与 symmetry；该材料状态为 `regression-passed`，不代表学习者已掌握。
 
 全卷八套实验覆盖 topology、manifold、Riemannian geometry、Lie symmetry、Banach/Hilbert projection、compact spectrum、RKHS与weak PDE/operator。新增[[实验 - 弱导数、变分残差与解算子频谱审计]]：delta approximation mass为 $1.9998438$；P1 FEM 的 $L^2/H^1$ slopes为 $1.99892/0.99917$；algebraic weak residual低于 $2.73\times10^{-13}$ 而element-interior strong residual固定为 $6.97886$；八模态截断算子在训练子空间为零误差、对未见模态relative error为100%。两幅SVG均已实际PNG渲染目检。
 
@@ -152,4 +210,4 @@ GEO-01—08 已建立完整节点闭环。GEO-08 从 test functions 与 distribu
 
 ## 九、当前状态
 
-10.10 当前为 **8/8 正文覆盖、120道节点题，累计验收 composed / not-attempted**。Canonical累计图已通过XML、确定性双跑与实际PNG渲染，但这只证明验收工具可执行。GEO-01—08继续保持`draft`；下一步是学习者真实闭卷、随机轨道手推、参数干预与间隔重做。课程材料下一施工点转向10.2线性代数卷级累计验收。
+10.10 当前为 **8/8 正文覆盖、120 道节点题**。第一波 GEO-01—04 已达到 `regression-passed`；第二波 GEO-05—06 与第三波 GEO-07—08 仍待迁移，累计验收保持 `composed / not-attempted`。Canonical累计图已通过 XML 与确定性双跑，但只证明工具可执行。GEO-01—08 全部继续保持 `draft`；下一教学施工点是 GEO-05—06 的 Banach/Hilbert、projection、compact operator 与 spectrum。
