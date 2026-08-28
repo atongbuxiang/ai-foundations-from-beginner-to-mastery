@@ -3,9 +3,12 @@ type: moc
 status: active
 area: [learning-theory/classical-models]
 prerequisites: ["[[学习问题、决策与风险 MOC]]", "[[数据依赖复杂度、间隔与快率 MOC]]"]
-related: ["[[学习理论完整课程地图与掌握标准]]", "[[正定核、RKHS 与表示定理]]"]
+assessment: "[[阶段测验 - 经典模型与模型选择（20.6）]]"
+solution: "[[阶段测验解答 - 经典模型与模型选择（20.6）]]"
+experiment: "[[实验 - 经典模型与模型选择累计复现门]]"
+related: ["[[学习理论完整课程地图与掌握标准]]", "[[正定核、RKHS 与表示定理]]", "[[资格考 - 学习理论 I：从风险到算法依赖泛化（20.1—20.5）]]", "[[表示学习、度量学习与自监督 MOC]]"]
 created: 2026-08-20
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 经典模型与模型选择 MOC
@@ -28,4 +31,12 @@ updated: 2026-08-23
 | LT-51 | [[潜变量模型、混合模型与 EM]] | draft + A–E 闭环 |
 | LT-52 | [[模型可辨识性、选择与 Misspecification]] | draft + A–E 闭环 |
 
-当前为 **12/12 正文，12/12 习题与独立详解，0/12 经真实作答验收**。本卷、20.7 与 20.8 全卷 LT-61—68 已完成 draft 闭环；当前施工点为 LT-69—72。
+当前为 **12/12 正文，12/12 习题与独立详解，0/12 经真实作答验收**。
+
+## 卷级材料门：MODEL-CUM-01
+
+本卷现已建立[[阶段测验 - 经典模型与模型选择（20.6）|MODEL-CUM-01]]、[[阶段测验解答 - 经典模型与模型选择（20.6）|独立封存详解]]与[[实验 - 经典模型与模型选择累计复现门|三轨累计复现门]]。三轨分别以 diagonal fixed-design ridge 与 exact validation selection、六点 logistic/SVM/tree/bootstrap/boosting、对称 PCA/K-Means/mixture-EM/AIC-BIC 贯通十二节点；25 分钟口试、240 分钟闭卷、scorer nonce、跨轨 blind、非法合同、48 小时与 14 天迁移防止只背算法列表。
+
+[[classical_models_cumulative_contract_audit.py]]不导入生成函数，独立复算谱 risk/selection、margin/tree/bootstrap/boost、PCA/K-Means/EM/selection arithmetic，并检查 canonical/固定 blind 双跑、SVG/XML/hash、输入保护与状态面。
+
+本卷材料为 `regression-passed`，全章卷级材料门达到 **6/10**；个人通过仍为 **0/10 / `not-attempted`**。正式认证还要求 `LT-QUAL-01 retained`，当前该个人前置未满足。资格考材料仍为 **1/2**、个人资格 **0/2**。下一施工点进入 20.7。

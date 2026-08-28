@@ -444,6 +444,8 @@ updated: 2026-08-28
 
 前五卷另由[[资格考 - 学习理论 I：从风险到算法依赖泛化（20.1—20.5）|LT-QUAL-01]]做跨卷验收，并配有[[资格考解答 - 学习理论 I：从风险到算法依赖泛化（20.1—20.5）|独立详解]]、[[实验 - 学习理论资格考 I 跨卷累计复现门|三轨门]]与[[learning_theory_qualification_01_contract_audit.py|独立审计]]。资格考材料门现为 **1/2**，个人资格仍为 **0/2 / `not-attempted`**；不能把题卷或 canonical 图存在写成个人通过。
 
+第六卷[[阶段测验 - 经典模型与模型选择（20.6）|MODEL-CUM-01]]、独立详解与[[实验 - 经典模型与模型选择累计复现门|三轨门]]也已由[[classical_models_cumulative_contract_audit.py]]回归。卷级材料现为 **6/10**，个人仍为 **0/10 / `not-attempted`**；正式认证前置为 `LT-QUAL-01 retained`，当前未满足。
+
 | 学习理论卷级测验 | 覆盖范围 | 状态 |
 |---|---|---|
 | LT-CUM-01 | LT-01—08：学习问题、决策与风险 | regression-passed material / not-attempted learner |
@@ -451,6 +453,7 @@ updated: 2026-08-28
 | VC-CUM-01 | LT-17—24：VC 维、增长函数与一致收敛 | regression-passed material / not-attempted learner |
 | RAD-CUM-01 | LT-25—32：数据依赖复杂度、间隔与快率 | regression-passed material / not-attempted learner |
 | ALG-CUM-01 | LT-33—40：稳定性、压缩、PAC-Bayes 与信息泛化 | regression-passed material / not-attempted learner |
+| MODEL-CUM-01 | LT-41—52：经典模型与模型选择 | regression-passed material（6/10）/ not-attempted learner（0/10；LT-QUAL-01 retained 前置未满足） |
 
 | 学习理论跨卷资格考 | 覆盖范围 | 状态 |
 |---|---|---|

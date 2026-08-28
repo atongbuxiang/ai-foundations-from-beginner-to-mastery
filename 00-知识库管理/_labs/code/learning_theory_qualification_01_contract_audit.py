@@ -372,7 +372,7 @@ def audit_prerequisites_and_state() -> None:
         require("1/2" in content or "1 / 2" in content, f"state surface misses qualification material 1/2: {surface.relative_to(ROOT)}")
         require("0/2" in content or "0 / 2" in content, f"state surface misses personal qualification 0/2: {surface.relative_to(ROOT)}")
         require("not-attempted" in content, f"state surface overclaims learner status: {surface.relative_to(ROOT)}")
-    print("PASS state surfaces: LT-QUAL-01 material=1/2, personal qualifications=0/2/not-attempted, volume gates remain 5/10")
+    print("PASS state surfaces: LT-QUAL-01 material=1/2, personal qualifications=0/2/not-attempted, volume gates tracked separately")
 
 
 def main() -> None:
