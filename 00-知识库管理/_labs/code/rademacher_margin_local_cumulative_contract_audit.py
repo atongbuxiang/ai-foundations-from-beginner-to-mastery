@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Independent material and reproducibility audit for VC-CUM-01."""
+"""Independent material and reproducibility audit for RAD-CUM-01."""
 
 from __future__ import annotations
 
 import hashlib
+import itertools
 import math
 import re
 import subprocess
@@ -15,40 +16,45 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 LABS = ROOT / "00-知识库管理" / "_labs"
-CHAPTER = ROOT / "20-学习理论" / "20.3-VC维与一致收敛"
-MOC = CHAPTER / "VC 维与一致收敛 MOC.md"
-ASSESSMENT = LABS / "assessments" / "阶段测验 - VC 维与一致收敛（20.3）.md"
-SOLUTION = LABS / "assessments" / "阶段测验解答 - VC 维与一致收敛（20.3）.md"
-EXPERIMENT = LABS / "experiments" / "实验 - VC 维与一致收敛累计复现门.md"
-GATE_SCRIPT = LABS / "code" / "vc_uniform_convergence_cumulative_gate.py"
+CHAPTER = ROOT / "20-学习理论" / "20.4-数据依赖复杂度、间隔与快率"
+MOC = CHAPTER / "数据依赖复杂度、间隔与快率 MOC.md"
+ASSESSMENT = LABS / "assessments" / "阶段测验 - 数据依赖复杂度、间隔与快率（20.4）.md"
+SOLUTION = LABS / "assessments" / "阶段测验解答 - 数据依赖复杂度、间隔与快率（20.4）.md"
+EXPERIMENT = LABS / "experiments" / "实验 - 数据依赖复杂度、间隔与快率累计复现门.md"
+GATE_SCRIPT = LABS / "code" / "rademacher_margin_local_cumulative_gate.py"
 CANONICAL_SVG = (
     ROOT
     / "00-知识库管理/_assets/plots/learning-theory"
-    / "plot-vc-uniform-convergence-cumulative-gate-v2.svg"
+    / "plot-rademacher-margin-local-cumulative-gate-v2.svg"
 )
 
-CANONICAL_SHA256 = "94a22793710901fde04a3e4e6ea89ad94e0954a2abba9041f4cf1819a76afd31"
-BLIND_SHA256 = "16c35bb8c37c47fc401e6112809015cde6c721a2ac475d7522255a01658e64ad"
+CANONICAL_SHA256 = "0927973a4f96cc973ad5729358c41c681296485dee651ffbbd9ab86cebf72ed0"
+BLIND_SHA256 = "3e7d928f4d83629cae72e9c6a3c58403a78a50c9beca4f93e48f095843358781"
 
 BLIND_ARGS = (
-    "--max-size", "12",
-    "--interval-runs", "3",
-    "--domain-size", "5",
-    "--uniform-size", "32",
+    "--linear-norm", "1.2",
+    "--ramp-gamma", "1.0",
+    "--margin-levels=-0.3,0.1,0.3,0.6,1.1",
+    "--margin-counts", "30,70,150,350,600",
+    "--gamma-grid", "0.25,0.5,0.75,1.0",
+    "--margin-norm", "1.25",
+    "--data-radius", "0.9",
     "--delta", "0.08",
-    "--layer-dims", "1,3,6",
-    "--layer-weights", "0.5,0.25,0.125",
-    "--empirical-risks", "0.24,0.15,0.11",
-    "--true-risks", "0.23,0.16,0.12",
-    "--srm-size", "2500",
-    "--multiclass-points", "4",
-    "--label-count", "3",
+    "--cover-dim", "3",
+    "--local-dim", "6",
+    "--local-size", "600",
+    "--local-a", "1.1",
+    "--local-b", "0.7",
+    "--fat-ambient", "6",
+    "--fat-norm", "1.2",
+    "--fat-radius", "0.8",
+    "--fat-gammas", "0.3,0.4,0.6,0.9",
 )
 
 EXPECTED_BLIND_LINES = (
-    "TRACK A runs=3 vc=6 tau_d=64 tau_d1=127 tau_max=2510 sauer_max=2510",
-    "TRACK B exact_radius=0.181250 exact_success=0.938561 dkw_radius=0.224265 finite_radius=0.279806 vc_radius_raw=1.421831 failure_at_finite=0.002331",
-    "TRACK C selected=1 oracle_layer=1 penalties=0.212583,0.312687,0.409269 scores=0.452583,0.462687,0.519269 multiclass_functions=81 natarajan_patterns=16 graph_patterns=16 pseudo_patterns=4",
+    "TRACK A l2_exact=0.686474 energy_bound=0.734847 finite_score=0.600000 finite_margin=0.600000 ramp=0.296875 contraction_bound=1.200000",
+    "TRACK B m=1200 selected_gamma=0.5 selected_raw=0.599554 confidence=0.131413 rad_bound=0.032476 bounds=0.25:0.734362,0.5:0.599554,0.75:0.804618,1:0.761317",
+    "TRACK C cover=0:8,1:2,2:2,3:1 fixed=0.024064 slow=0.117000 improvement=4.862087 fat=0.3:6,0.4:5,0.6:2,0.9:1",
 )
 
 STATE_SURFACES = (
@@ -105,40 +111,78 @@ def parse_frontmatter(content: str) -> dict[str, str]:
     return output
 
 
-def independent_run_count(m: int, runs: int) -> int:
-    return sum(math.comb(m + 1, 2 * k) for k in range(runs + 1) if 2 * k <= m + 1)
+def independent_finite_rademacher(vectors: tuple[tuple[float, ...], ...]) -> float:
+    sample_size = len(vectors[0])
+    values = []
+    for signs in itertools.product((-1.0, 1.0), repeat=sample_size):
+        values.append(max(sum(sign * value for sign, value in zip(signs, vector)) for vector in vectors) / sample_size)
+    return sum(values) / len(values)
 
 
-def independent_cdf_success(domain_size: int, sample_size: int, radius: float) -> float:
-    inverse_factorials = tuple(1.0 / math.factorial(count) for count in range(sample_size + 1))
-    states: dict[int, float] = {0: 1.0}
-    for category in range(1, domain_size + 1):
-        following: dict[int, float] = {}
-        for allocated, weight in states.items():
-            for count in range(sample_size - allocated + 1):
-                total = allocated + count
-                if category < domain_size and abs(total / sample_size - category / domain_size) > radius + 1e-14:
-                    continue
-                following[total] = following.get(total, 0.0) + weight * inverse_factorials[count]
-        states = following
-    return math.factorial(sample_size) * states.get(sample_size, 0.0) / domain_size**sample_size
+def independent_sign_anchors(linear_norm: float, ramp_gamma: float) -> tuple[float, float, float, float, float]:
+    sample = ((1.0, 0.0), (0.0, 1.0), (1.0, 1.0), (1.0, -1.0))
+    labels = (1.0, 1.0, -1.0, 1.0)
+    norms = []
+    for signs in itertools.product((-1.0, 1.0), repeat=4):
+        first = sum(sign * point[0] for sign, point in zip(signs, sample))
+        second = sum(sign * point[1] for sign, point in zip(signs, sample))
+        norms.append(math.sqrt(first * first + second * second))
+    exact = linear_norm * sum(norms) / len(norms) / 4
+    energy = linear_norm * math.sqrt(sum(x * x + y * y for x, y in sample)) / 4
+    weights = ((0.0, 0.0), (linear_norm, 0.0), (-linear_norm, 0.0), (0.0, linear_norm), (0.0, -linear_norm))
+    scores = tuple(tuple(w[0] * x[0] + w[1] * x[1] for x in sample) for w in weights)
+    margins = tuple(tuple(label * value for label, value in zip(labels, vector)) for vector in scores)
+
+    def centered(value: float) -> float:
+        if value <= 0:
+            loss = 1.0
+        elif value >= ramp_gamma:
+            loss = 0.0
+        else:
+            loss = 1.0 - value / ramp_gamma
+        return loss - 1.0
+
+    ramps = tuple(tuple(centered(value) for value in vector) for vector in margins)
+    return (
+        exact,
+        energy,
+        independent_finite_rademacher(scores),
+        independent_finite_rademacher(margins),
+        independent_finite_rademacher(ramps),
+    )
 
 
-def exact_radius(domain_size: int, sample_size: int, delta: float) -> tuple[float, float]:
-    candidates = {0.0}
-    for category in range(1, domain_size):
-        for count in range(sample_size + 1):
-            candidates.add(abs(count / sample_size - category / domain_size))
-    for radius in sorted(candidates):
-        success = independent_cdf_success(domain_size, sample_size, radius)
-        if success >= 1 - delta - 1e-12:
-            return radius, success
-    raise AssertionError("no exact radius found")
+def independent_margin_anchors(
+    levels: tuple[float, ...], counts: tuple[int, ...], gammas: tuple[float, ...],
+    norm_bound: float, data_radius: float, delta: float,
+) -> tuple[float, float, tuple[float, ...], int]:
+    sample_size = sum(counts)
+    radius = norm_bound * data_radius / math.sqrt(sample_size)
+    confidence = 3 * math.sqrt(math.log(2 * len(gammas) / delta) / (2 * sample_size))
+    raw = []
+    for gamma in gammas:
+        empirical = sum(count for level, count in zip(levels, counts) if level <= gamma) / sample_size
+        raw.append(empirical + 4 * radius / gamma + confidence)
+    selected = min(range(len(gammas)), key=lambda index: (raw[index], index))
+    return radius, confidence, tuple(raw), selected
+
+
+def hamming(left: int, right: int) -> int:
+    return bin(left ^ right).count("1")
+
+
+def independent_cover(cube_dim: int, radius: int) -> int:
+    points = tuple(range(2**cube_dim))
+    for size in range(1, len(points) + 1):
+        for centers in itertools.combinations(points, size):
+            if all(any(hamming(point, center) <= radius for center in centers) for point in points):
+                return size
+    raise AssertionError("finite cube must be coverable")
 
 
 def audit_node_bundle() -> None:
     files = sorted(path for path in CHAPTER.glob("*.md") if path != MOC)
-    require(len(files) == 8, f"expected 8 LT-17--24 nodes, found {len(files)}")
+    require(len(files) == 8, f"expected 8 LT-25--32 nodes, found {len(files)}")
     found: dict[int, Path] = {}
     for path in files:
         content = read(path)
@@ -149,12 +193,12 @@ def audit_node_bundle() -> None:
         found[node_id] = path
         require("status: draft" in content, f"node state changed: {path.name}")
         require("exercises:" in content and "solutions:" in content, f"learning loop incomplete: {path.name}")
-        require("![[" in content, f"embedded visual missing: {path.name}")
-    require(sorted(found) == list(range(17, 25)), f"scope changed: {sorted(found)}")
+        require("![[" in content and "> [!figure]" in content, f"visual contract missing: {path.name}")
+    require(sorted(found) == list(range(25, 33)), f"scope changed: {sorted(found)}")
     moc = read(MOC)
-    for node_id in range(17, 25):
+    for node_id in range(25, 33):
         require(re.search(rf"^\| LT-{node_id:02d} \|", moc, re.M) is not None, f"MOC misses LT-{node_id:02d}")
-    print("PASS LT-17--24 node bundle: 8/8 unique draft nodes, visuals and MOC mappings")
+    print("PASS LT-25--32 node bundle: 8/8 unique draft nodes, visuals and MOC mappings")
 
 
 def audit_assessment_bundle() -> None:
@@ -166,10 +210,10 @@ def audit_assessment_bundle() -> None:
         require(frontmatter.get("status") == "draft", f"{label}: status must remain draft")
         require(frontmatter.get("material_status") == "regression-passed", f"{label}: material status changed")
         require(frontmatter.get("learning_status") == "not-attempted", f"{label}: personal status changed")
-        require(frontmatter.get("assessment_id") == "VC-CUM-01", f"{label}: assessment ID changed")
+        require(frontmatter.get("assessment_id") == "RAD-CUM-01", f"{label}: assessment ID changed")
         require(frontmatter.get("updated") == "2026-08-28", f"{label}: date changed")
     require("time_limit_minutes: 210" in assessment, "assessment duration changed")
-    for node_id in range(17, 25):
+    for node_id in range(25, 33):
         require(f"LT-{node_id:02d}" in assessment, f"assessment scope misses LT-{node_id:02d}")
     for question in range(1, 15):
         require(re.search(rf"^### 第\s*{question}\s*题：.*（(\d+)\s*分）$", assessment, re.M) is not None,
@@ -187,14 +231,11 @@ def audit_assessment_bundle() -> None:
     require(question_points == solution_points, "question/solution points differ")
     require(sum(question_points.values()) == 100, "assessment does not total 100 points")
     for marker in (
-        "20 分钟卷级口试", "210 分钟闭卷", "三轨参数化模型族", "八层 VC 证明账本",
+        "20 分钟卷级口试", "210 分钟闭卷", "三轨参数化模型族", "八层数据依赖复杂度证明账本",
         "答案与输出隔离协议", "scorer nonce", "48 小时与 14 天复测", "提交证据清单",
     ):
         require(marker in assessment, f"assessment misses marker: {marker}")
-    for marker in (
-        "卷级口试参考要点", "实验复现门的评分说明", "Nonce 与盲参数判分红线",
-        "48 小时与 14 天复测说明", "从 `retained` 到逐节点证据", "最终状态边界",
-    ):
+    for marker in ("口试评分参考", "实验复现与延迟门参考", "状态边界"):
         require(marker in solution, f"solution misses marker: {marker}")
     require("第 1 题解答" not in assessment, "answer leaked into question sheet")
     require("才可打开本页或 canonical stdout" in solution, "solution isolation warning missing")
@@ -207,9 +248,9 @@ def audit_experiment_contract() -> None:
         "执行顺序、答案隔离与 scorer nonce",
         "进入实验前的解析校准门",
         "三轨统一对象合同",
-        "轨道 A：从连续 1 段到 Sauer 极值类",
-        "轨道 B：精确 uniform deviation 与通用证书",
-        "轨道 C：SRM 与扩展见证的责任边界",
+        "轨道 A：精确 signs、双范数与收缩",
+        "轨道 B：预注册 margin 选择",
+        "轨道 C：cover、local 与 fat 的责任边界",
         "评分者随机指定、跨轨盲参与防挑题协议",
         "独立审计固定 fixture",
         "盲参数干预怎样才算独立",
@@ -221,37 +262,36 @@ def audit_experiment_contract() -> None:
     headings = [line.strip() for line in experiment.splitlines() if line.startswith("#")]
     duplicate = sorted({heading for heading in headings if headings.count(heading) > 1})
     require(not duplicate, f"experiment duplicate headings: {duplicate}")
-    print("PASS experiment contract: analytic calibration, three tracks, exact DP and evidence state machine")
+    print("PASS experiment contract: analytic calibration, three tracks, selection/localization boundaries")
 
 
 def audit_analytic_anchors() -> None:
-    require(independent_run_count(4, 2) == 16, "Track A tau(d) changed")
-    require(independent_run_count(5, 2) == 31, "Track A tau(d+1) changed")
-    require(independent_run_count(10, 2) == 386, "Track A maximum-class count changed")
-    require(sum(math.comb(10, index) for index in range(5)) == 386, "Sauer sum changed")
+    exact, energy, score, margin, ramp = independent_sign_anchors(1.0, 0.75)
+    require(abs(exact - 0.5720614028176844) < 1e-14, "Track A exact dual-norm value changed")
+    require(abs(energy - 0.6123724356957945) < 1e-14, "Track A energy bound changed")
+    require(abs(score - 0.5) < 1e-15 and abs(margin - 0.5) < 1e-15, "label invariance changed")
+    require(abs(ramp - 0.296875) < 1e-15, "centered ramp complexity changed")
 
-    radius, success = exact_radius(6, 40, 0.05)
-    require(abs(radius - 0.175) < 1e-15, "Track B exact radius changed")
-    require(abs(success - 0.953254466758426) < 1e-14, "Track B exact success changed")
-    dkw = math.sqrt(math.log(40) / 80)
-    finite = math.sqrt(math.log(280) / 80)
-    vc = math.sqrt(8 / 40 * (math.log(81) + math.log(80)))
-    require(abs(dkw - 0.2147347041733688) < 1e-14, "DKW radius changed")
-    require(abs(finite - 0.26539568579691647) < 1e-14, "finite-class radius changed")
-    require(abs(vc - 1.3248755254246583) < 1e-14, "VC radius changed")
-
-    dims = (1, 2, 4, 8)
-    weights = (0.5, 0.25, 0.125, 0.0625)
-    penalties = tuple(
-        math.sqrt(8 / 3000 * (d * math.log(2 * math.e * 3000 / d) + math.log(4 / (0.05 * weight))))
-        for d, weight in zip(dims, weights)
+    radius, confidence, raw, selected = independent_margin_anchors(
+        (-0.2, 0.15, 0.35, 0.7, 1.2), (40, 80, 160, 440, 880), (0.2, 0.4, 0.8, 1.0),
+        1.25, 1.0, 0.05,
     )
-    expected = (0.19849224040883154, 0.2518256334905524, 0.3254303805720047, 0.4261930736466952)
-    require(all(abs(left - right) < 1e-14 for left, right in zip(penalties, expected)), "SRM penalties changed")
-    scores = tuple(risk + penalty for risk, penalty in zip((0.26, 0.18, 0.115, 0.09), penalties))
-    require(min(range(4), key=lambda index: scores[index]) == 1, "SRM selected layer changed")
-    require(4**3 == 64 and 2**3 == 8, "multiclass witness counts changed")
-    print("PASS analytic anchors: interval growth, exact CDF law, certificate radii, SRM and witnesses")
+    require(abs(radius - 0.03125) < 1e-15, "Track B linear radius changed")
+    require(abs(confidence - 0.11947353830595767) < 1e-14, "Track B confidence changed")
+    expected_raw = (0.8194735383059577, 0.6069735383059577, 0.7257235383059577, 0.6944735383059576)
+    require(all(abs(left - right) < 1e-14 for left, right in zip(raw, expected_raw)), "Track B raw bounds changed")
+    require(selected == 1, "Track B selected gamma changed")
+
+    covers = tuple(independent_cover(4, radius_value) for radius_value in (0, 1, 2, 4))
+    require(covers == (16, 4, 2, 1), "Track C exact covers changed")
+    coefficient = 1.2 * math.sqrt(8 / 800)
+    offset = 0.5 * 8 / 800
+    root_t = (coefficient + math.sqrt(coefficient**2 + 4 * offset)) / 2
+    fixed = root_t**2
+    require(abs(fixed - 0.02332834219459485) < 1e-14, "Track C fixed point changed")
+    require(tuple(min(8, int(math.floor((1 / gamma) ** 2 + 1e-12))) for gamma in (0.25, 0.35, 0.5, 0.75)) == (8, 8, 4, 1),
+            "Track C fat profile changed")
+    print("PASS analytic anchors: exact signs, margin budget, internal covers, fixed point and fat profile")
 
 
 def audit_svg(path: Path, expected_hash: str, required_text: tuple[str, ...]) -> None:
@@ -263,7 +303,7 @@ def audit_svg(path: Path, expected_hash: str, required_text: tuple[str, ...]) ->
     text_content = " ".join("".join(element.itertext()) for element in root.iter() if element.tag.endswith("text"))
     for marker in required_text:
         require(marker in text_content, f"SVG is not self-describing; misses {marker!r}")
-    require(sum(1 for element in root.iter() if element.tag.endswith("text")) >= 55,
+    require(sum(1 for element in root.iter() if element.tag.endswith("text")) >= 50,
             f"SVG text density too low: {path.name}")
 
 
@@ -274,13 +314,13 @@ def audit_reproducibility() -> None:
     second = run()
     second_bytes = CANONICAL_SVG.read_bytes()
     require(stored_before == first_bytes == second_bytes, "canonical output is not byte deterministic")
-    require("tau_max=386" in first.stdout, "canonical Track A anchor missing")
-    require("exact_radius=0.175000" in first.stdout, "canonical Track B anchor missing")
-    require("selected=2 oracle_layer=1" in first.stdout, "canonical Track C anchor missing")
+    require("l2_exact=0.572061" in first.stdout, "canonical Track A anchor missing")
+    require("selected_gamma=0.4" in first.stdout, "canonical Track B anchor missing")
+    require("cover=0:16,1:4,2:2,4:1" in first.stdout, "canonical Track C anchor missing")
     audit_svg(
         CANONICAL_SVG,
         CANONICAL_SHA256,
-        ("增长函数 × Sauer 包络", "阈值类的精确共同偏差", "SRM 选择 × 推广见证"),
+        ("精确 signs × 收缩", "预注册 margin 选择", "尺度梯 × 局部 fixed point"),
     )
 
     with tempfile.TemporaryDirectory() as temporary:
@@ -289,9 +329,10 @@ def audit_reproducibility() -> None:
         first_blind = run(*BLIND_ARGS, "--output", str(first_path))
         second_blind = run(*BLIND_ARGS, "--output", str(second_path))
         require(first_path.read_bytes() == second_path.read_bytes(), "blind output is not byte deterministic")
-        for line in EXPECTED_BLIND_LINES:
-            require(line in first_blind.stdout and line in second_blind.stdout, f"blind stdout changed: {line}")
-        audit_svg(first_path, BLIND_SHA256, ("runs=3", "D=5, m=32", "|Y|^q=81"))
+        for line_value in EXPECTED_BLIND_LINES:
+            require(line_value in first_blind.stdout and line_value in second_blind.stdout,
+                    f"blind stdout changed: {line_value}")
+        audit_svg(first_path, BLIND_SHA256, ("m=1200", "Hamming cube q=3", "γ=0.3 → 6"))
 
     unsafe = run(*BLIND_ARGS, expect_success=False)
     require("require --output" in (unsafe.stdout + unsafe.stderr), "unsafe refusal changed")
@@ -301,17 +342,20 @@ def audit_reproducibility() -> None:
 
     with tempfile.TemporaryDirectory() as temporary:
         invalid_path = Path(temporary) / "invalid.svg"
-        invalid = run("--layer-weights", "0.7,0.4,0.1,0.1", "--output", str(invalid_path), expect_success=False)
-        require("sum to at most one" in (invalid.stdout + invalid.stderr), "invalid SRM weights were not rejected")
+        invalid = run("--cover-dim", "5", "--output", str(invalid_path), expect_success=False)
+        require("must lie in 1..4" in (invalid.stdout + invalid.stderr), "invalid cover dimension was accepted")
         require(not invalid_path.exists(), "invalid input created output")
-    print("PASS deterministic compute: canonical + blind double-run, XML/hash and overwrite/weight protection")
+        mismatch = run("--margin-counts", "1,2", "--output", str(invalid_path), expect_success=False)
+        require("equal lengths" in (mismatch.stdout + mismatch.stderr), "mismatched margin contract was accepted")
+        require(not invalid_path.exists(), "mismatched input created output")
+    print("PASS deterministic compute: canonical + blind double-run, XML/hash and overwrite/input protection")
 
 
 def audit_state_surfaces() -> None:
     audit_name = Path(__file__).name
     for path in STATE_SURFACES:
         content = read(path)
-        require("VC-CUM-01" in content, f"state surface misses volume ID: {path.relative_to(ROOT)}")
+        require("RAD-CUM-01" in content, f"state surface misses volume ID: {path.relative_to(ROOT)}")
         require(audit_name in content, f"state surface misses audit link: {path.relative_to(ROOT)}")
         require("regression-passed" in content, f"state surface misses material state: {path.relative_to(ROOT)}")
         require("not-attempted" in content, f"state surface misses learner state: {path.relative_to(ROOT)}")
@@ -330,7 +374,7 @@ def main() -> None:
     audit_analytic_anchors()
     audit_reproducibility()
     audit_state_surfaces()
-    print("VC-CUM-01 material regression: PASS")
+    print("RAD-CUM-01 material regression: PASS")
     print("PERSONAL LEARNING STATUS: not-attempted")
 
 

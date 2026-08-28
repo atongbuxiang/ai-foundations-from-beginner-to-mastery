@@ -11,7 +11,7 @@ exercises: ["[[习题 - 覆盖数、Metric Entropy 与 Chaining 入口]]"]
 solutions: ["[[解答 - 覆盖数、Metric Entropy 与 Chaining 入口]]"]
 figure: "[[00-知识库管理/_assets/figures/learning-theory/fig-covering-entropy-chaining-v2.svg]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 覆盖数、Metric Entropy 与 Chaining 入口
@@ -30,7 +30,7 @@ updated: 2026-08-23
 > 4\alpha+
 > \frac{12}{\sqrt m}
 > \int_\alpha^{D/2}
-> \sqrt{\log N(\varepsilon,\mathcal A,d_S)},d\varepsilon
+> \sqrt{\log N(\varepsilon,\mathcal A,d_S)}\,d\varepsilon
 > \right],
 > $$
 > 其中 $\mathcal A=\mathcal F\cup(-\mathcal F)\cup\{0\}$，$D=\operatorname{diam}(\mathcal A,d_S)$。常数依 convention；核心是“每个尺度的几何”而非单一参数个数。
@@ -132,7 +132,7 @@ $$
 
 ## 四、函数类在样本上的经验 Pseudometric
 
-固定样本 $S_X=(X_1,ldots,X_m)$，定义
+固定样本 $S_X=(X_1,\ldots,X_m)$，定义
 
 $$
 d_S(f,g)
@@ -292,7 +292,7 @@ $$
 
 $$
 \varepsilon_k=2^{-k}D,
-\qquad k=0,1,ldots,K,
+\qquad k=0,1,\ldots,K,
 $$
 
 并在每层取 net $C_k$。令 $\pi_k(f)$ 是 $f$ 的最近 net point。则
@@ -370,7 +370,7 @@ $$
 4\alpha
 +\frac{12}{\sqrt m}
 \int_\alpha^{D/2}
-\sqrt{\log N(\varepsilon,\mathcal A,d_S)},d\varepsilon
+\sqrt{\log N(\varepsilon,\mathcal A,d_S)}\,d\varepsilon
 \right].}
 $$
 
@@ -385,7 +385,7 @@ $$
 极细尺度的 entropy 可能增长过快，使
 
 $$
-\int_0^{D/2}\sqrt{\log N(\varepsilon)},d\varepsilon
+\int_0^{D/2}\sqrt{\log N(\varepsilon)}\,d\varepsilon
 $$
 
 发散。但有限样本上的 Rademacher complexity 仍可能有限。停止 chaining 于 $\alpha$，用 $4\alpha$ 粗控最后 residual，再优化 cutoff。

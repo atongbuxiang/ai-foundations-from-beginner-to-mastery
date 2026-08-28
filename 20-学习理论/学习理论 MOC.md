@@ -62,7 +62,7 @@ flowchart LR
 ## 当前状态
 
 > [!success] 全章静态材料门已经回归通过
-> [[learning_theory_teaching_contract_audit.py]]独立检查 LT-01—84 的十卷 ID/目录、84 组习题—解答、1260 个 A—E 题解 ID、144 张来源卡、作用域链接、节点图文单元、84 个课程映射和 18 个节点制图脚本的确定性。20.1 由[[learning_problem_decision_cumulative_contract_audit.py]]复核对象—风险—选择门；20.2 由[[pac_finite_class_cumulative_contract_audit.py]]复核 PAC/有限类门；20.3 由[[vc_uniform_convergence_cumulative_contract_audit.py]]复核增长—一致收敛—SRM 门。证书只说明材料结构与生成证据可复现；84 篇正文仍为 `draft`，个人学习仍为 `not-attempted`。
+> [[learning_theory_teaching_contract_audit.py]]独立检查 LT-01—84 的十卷 ID/目录、84 组习题—解答、1260 个 A—E 题解 ID、144 张来源卡、作用域链接、节点图文单元、84 个课程映射和 18 个节点制图脚本的确定性。20.1 由[[learning_problem_decision_cumulative_contract_audit.py]]复核对象—风险—选择门；20.2 由[[pac_finite_class_cumulative_contract_audit.py]]复核 PAC/有限类门；20.3 由[[vc_uniform_convergence_cumulative_contract_audit.py]]复核增长—一致收敛—SRM 门；20.4 由[[rademacher_margin_local_cumulative_contract_audit.py]]复核 signs—margin—local/fat 门。证书只说明材料结构与生成证据可复现；84 篇正文仍为 `draft`，个人学习仍为 `not-attempted`。
 
 ```text
 locked scope: 84 / 84
@@ -70,10 +70,10 @@ formal nodes: 84 / 84
 exercise sets: 84 / 84
 solutions: 84 / 84
 static material audit: regression-passed
-volume evidence gates built: 3 / 10
+volume evidence gates built: 4 / 10
 personally passed volumes: 0 / 10
 state: draft nodes / regression-passed material / not-attempted learner
-next: build the 20.4 data-dependent complexity evidence gate, then continue toward LT-QUAL-01 / LT-QUAL-02
+next: build the 20.5 stability / compression / PAC-Bayes evidence gate, then continue toward LT-QUAL-01 / LT-QUAL-02
 ```
 
-LT-01—84 已成稿，共 84 套、1260 道 A—E 训练及独立详解；全量 YAML、双链、题解 ID、图片/XML、图文单元、课程映射与生成确定性通过独立审计。20.1 的[[阶段测验 - 学习问题、决策与风险（20.1）|LT-CUM-01]]、20.2 的[[阶段测验 - PAC 学习与有限假设类（20.2）|PAC-CUM-01]]与 20.3 的[[阶段测验 - VC 维与一致收敛（20.3）|VC-CUM-01]]现各自形成“口试—闭卷—答案/输出隔离—scorer nonce 三轨—盲参—48 小时—14 天”证据门，材料均为 `regression-passed`；尚无个人原稿，所以正文与个人状态继续保持 `draft / not-attempted`。下一施工点是 20.4（LT-25—32）。
+LT-01—84 已成稿，共 84 套、1260 道 A—E 训练及独立详解；全量 YAML、双链、题解 ID、图片/XML、图文单元、课程映射与生成确定性通过独立审计。20.1 的[[阶段测验 - 学习问题、决策与风险（20.1）|LT-CUM-01]]、20.2 的[[阶段测验 - PAC 学习与有限假设类（20.2）|PAC-CUM-01]]、20.3 的[[阶段测验 - VC 维与一致收敛（20.3）|VC-CUM-01]]与 20.4 的[[阶段测验 - 数据依赖复杂度、间隔与快率（20.4）|RAD-CUM-01]]现各自形成“口试—闭卷—答案/输出隔离—scorer nonce 三轨—盲参—48 小时—14 天”证据门，材料均为 `regression-passed`；尚无个人原稿，所以正文与个人状态继续保持 `draft / not-attempted`。下一施工点是 20.5（LT-33—40）。

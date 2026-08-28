@@ -11,16 +11,16 @@ exercises: ["[[习题 - Fat-Shattering、回归与 Lipschitz 风险]]"]
 solutions: ["[[解答 - Fat-Shattering、回归与 Lipschitz 风险]]"]
 figure: "[[00-知识库管理/_assets/figures/learning-theory/fig-fat-shattering-regression-bridge-v2.svg]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # Fat-Shattering、回归与 Lipschitz 风险
 
 > [!abstract] 本章主问题
-> VC dimension 只问 binary patterns 能否实现；pseudo-dimension 允许逐点 thresholds，却没有记录实现模式时离阈值多远。对实值类 $\mathcal F$ 与尺度 $\gamma>0$，若存在 $x_1,ldots,x_d$ 和 thresholds $r_1,ldots,r_d$，使每个 sign pattern $s\in\{-1,+1\}^d$ 都有 $f_s\in\mathcal F$ 满足
+> VC dimension 只问 binary patterns 能否实现；pseudo-dimension 允许逐点 thresholds，却没有记录实现模式时离阈值多远。对实值类 $\mathcal F$ 与尺度 $\gamma>0$，若存在 $x_1,\ldots,x_d$ 和 thresholds $r_1,\ldots,r_d$，使每个 sign pattern $s\in\{-1,+1\}^d$ 都有 $f_s\in\mathcal F$ 满足
 > $$
 > s_i(f_s(x_i)-r_i)\ge\gamma,
-> \quad i=1,ldots,d,
+> \quad i=1,\ldots,d,
 > $$
 > 就称这些点被 $\gamma$-fat-shattered。本课程采用“每侧 margin 为 $\gamma$”的 convention；有些文献把总 gap $\gamma$ 分成两侧 $\gamma/2$。fat-shattering function $\operatorname{fat}_\gamma(\mathcal F)$ 是实值类在分辨率 $\gamma$ 下的容量。它经 packing/covering 与 entropy integral 控制 Rademacher complexity，再经 Lipschitz loss contraction 进入回归风险。
 
@@ -50,16 +50,16 @@ $$
 \mathcal F\subseteq\mathbb R^{\mathcal X}.
 $$
 
-点集 $\{x_1,ldots,x_d\}$ 被 $\gamma$-fat-shattered，如果存在一组固定 thresholds
+点集 $\{x_1,\ldots,x_d\}$ 被 $\gamma$-fat-shattered，如果存在一组固定 thresholds
 
 $$
-r_1,ldots,r_d\in\mathbb R
+r_1,\ldots,r_d\in\mathbb R
 $$
 
 使得：对每个 sign vector
 
 $$
-s=(s_1,ldots,s_d)\in\{-1,+1\}^d,
+s=(s_1,\ldots,s_d)\in\{-1,+1\}^d,
 $$
 
 都存在一个函数 $f_s\in\mathcal F$，满足所有坐标
@@ -242,7 +242,7 @@ $$
 
 ## 八、Fat-Shattering 蕴含 Rademacher Lower Bound
 
-假设 $x_1,ldots,x_d$ 被 $\gamma$-fat-shattered，witness thresholds 为 $r_i$。对每组 signs $\sigma\in\{-1,+1\}^d$，选 $f_\sigma$ 使
+假设 $x_1,\ldots,x_d$ 被 $\gamma$-fat-shattered，witness thresholds 为 $r_i$。对每组 signs $\sigma\in\{-1,+1\}^d$，选 $f_\sigma$ 使
 
 $$
 \sigma_i(f_\sigma(x_i)-r_i)\ge\gamma.

@@ -31,15 +31,17 @@ updated: 2026-08-28
 ## 第二章学习理论静态材料审计
 
 - [[learning_theory_teaching_contract_audit.py]]：检查 LT-01—84 十卷 scope、84 组题—解双射、1260 个 A—E ID、实际调用来源卡、范围内链接、图文单元与课程地图映射；
-- `--run-compute`：将 18 个节点制图脚本运行两次，并要求当前 109 个已存学习理论 figure/plot 资产与仓库版本逐字节一致；
+- `--run-compute`：将 18 个节点制图脚本运行两次，并要求当前 110 个已存学习理论 figure/plot 资产与仓库版本逐字节一致；
 - 第一卷累计门：[[实验 - 学习问题、决策与风险累计复现门]]以 object-risk ERM 枚举、cost/reject Bayes decision 与 finite-candidate holdout feedback 组成三轨；配套[[阶段测验 - 学习问题、决策与风险（20.1）|LT-CUM-01]]和独立详解；
 - [[learning_problem_decision_cumulative_contract_audit.py]]：复核 8/8 scope、14/14 题解与 100 分、答案/输出隔离、解析锚点、canonical/盲参双跑、stdout/SVG/XML/hash、覆盖保护和状态面；
 - 第二卷累计门：[[实验 - PAC 学习与有限假设类累计复现门]]以 realizable survival/Union/exp、agnostic lexicographic ERM/uniform event 与 Occam/Kraft—Le Cam testing 组成三轨；配套[[阶段测验 - PAC 学习与有限假设类（20.2）|PAC-CUM-01]]和独立详解；
 - [[pac_finite_class_cumulative_contract_audit.py]]：复核 8/8 scope、14/14 题解与 100 分、解析锚点、canonical/盲参双跑、stdout/SVG/XML/hash、Kraft/覆盖保护和六处状态面；
 - 第三卷累计门：[[实验 - VC 维与一致收敛累计复现门]]以有界正区间增长函数/Sauer 等号、有限阈值类 exact-DP/四种一致收敛半径与加权 SRM—多分类/伪维 witness 组成三轨；配套[[阶段测验 - VC 维与一致收敛（20.3）|VC-CUM-01]]和独立详解；
 - [[vc_uniform_convergence_cumulative_contract_audit.py]]：复核 8/8 scope、14/14 题解与 100 分、解析锚点、canonical/盲参双跑、stdout/SVG/XML/hash、非法权重/覆盖保护和六处状态面；
-- 当前语义：第 20 章静态材料为 `regression-passed`，卷级材料门 **3/10**，个人通过 **0/10 / `not-attempted`**；84 篇正文仍为 `draft`；
-- 下一施工点：为 LT-25—32 建立 20.4 的复杂度/Rademacher/收缩与 margin 卷级证据门。
+- 第四卷累计门：[[实验 - 数据依赖复杂度、间隔与快率累计复现门]]以 exact signs/双范数—预注册 margin 共同选择—cover/local/fat 组成三轨；配套[[阶段测验 - 数据依赖复杂度、间隔与快率（20.4）|RAD-CUM-01]]和独立详解；
+- [[rademacher_margin_local_cumulative_contract_audit.py]]：复核 8/8 scope、14/14 题解与 100 分、exact/upper 锚点、canonical/盲参双跑、stdout/SVG/XML/hash、覆盖/输入保护和六处状态面；
+- 当前语义：第 20 章静态材料为 `regression-passed`，卷级材料门 **4/10**，个人通过 **0/10 / `not-attempted`**；84 篇正文仍为 `draft`；
+- 下一施工点：为 LT-33—40 建立 20.5 的稳定性/压缩/PAC-Bayes/信息泛化卷级证据门。
 
 ## 第四章确定性架构审计
 
