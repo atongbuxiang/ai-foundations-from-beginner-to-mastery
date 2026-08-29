@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, gradient-penalty, wgan, lipschitz]
 source_type: paper
 title: "Improved Training of Wasserstein GANs"
@@ -15,7 +15,7 @@ scope_role: task-specific-gradient-penalty
 temporal_role: foundational
 related: ["[[Jacobian、Gradient Penalty 与 Lipschitz 正则接口]]"]
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Gulrajani et al.：WGAN Gradient Penalty

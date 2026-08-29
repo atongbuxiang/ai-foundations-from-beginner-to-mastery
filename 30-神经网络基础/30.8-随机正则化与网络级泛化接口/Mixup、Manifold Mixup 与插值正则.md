@@ -11,13 +11,114 @@ exercises: ["[[习题 - Mixup、Manifold Mixup 与插值正则]]"]
 solutions: ["[[解答 - Mixup、Manifold Mixup 与插值正则]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-mixup-vicinal-geometry-v2.svg]]"
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Mixup、Manifold Mixup 与插值正则
 
 > [!abstract] 本章主问题
 > Mixup 不只是“把两张图平均”。它先定义 pairing 和 $\lambda$ 的随机机制，再用同一个 $\lambda$ 对输入与监督 target 做凸组合，从 empirical distribution 改到一族 vicinal distributions。Manifold Mixup 把插值位置移到随机 hidden layer。两者都对样本间行为施加线性/平滑归纳偏置，但 input chord、hidden chord 与真实语义路径并不自动相同；Beta 参数、增强顺序、mask、normalization、distributed pairing 与评估协议都是方法合同的一部分。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-61 只在 simplex 内改变单个样本的监督 target；
+- **本页解决什么：** 同时在输入空间与 target 空间构造两点凸组合，并把训练分布从 empirical atoms 扩展到 vicinal chords；
+- **后续为何需要：** NN-63 会把“沿弦平滑”的有限差分直觉改写成导数控制，NN-64 再检验这些归纳偏置是否真正互补。
+
+**第一遍只做一条弦。** 固定两个端点与 $\lambda=1/4$，手算 mixed input、mixed target，并验证 Mixup 与固定先验 Label Smoothing 在 target 层可交换。
+
+**第二遍再研究随机邻域。** 引入 Beta 分布、pairing law、vicinal risk、hidden-layer placement 和 semantic validity，分清“数学上是凸组合”与“任务语义上合理”。
+
+### 问题链
+
+1. Mixup 的随机性来自样本配对、$\lambda$，还是网络本身？
+2. 为什么输入和 target 必须使用同一个 $\lambda$？
+3. soft-target cross-entropy 的线性发生在哪个参数上？
+4. input chord、hidden chord 和真实 data manifold 为什么不是同一个对象？
+5. target-level 可交换为何不能推出完整训练 pipeline 可交换？
+
+> [!check] 第一遍停靠线
+> 若你能在 $\mathcal D_\square$ 上得到 $\widetilde x=(-1,1)$、$\widetilde y=(1/4,3/4,0)$，再算出平滑后的 $(31/120,85/120,4/120)$ 并从两条次序都得到同一结果，就已掌握本页精确主干。
+
+## 符号与对象账本
+
+| 层级 | 对象 | 直接改变什么 | 主要边界 |
+|---|---|---|---|
+| pairing | $(i,j)\sim\Pi$ | 哪些端点相连 | batch 内配对不等于总体独立抽样 |
+| mixture | $\lambda\sim\operatorname{Beta}(\alpha,\alpha)$ | 弦上位置分布 | $\mathbb E\lambda=1/2$ 不足以描述强度 |
+| input | $\widetilde x$ 或 $\widetilde h$ | 训练支持/表示位置 | 凸组合不保证语义有效 |
+| target | $\widetilde y$ | 条件监督分布 | 不是 logits 的线性约束 |
+| objective | $R_{\mathrm{mix}}$ | vicinal risk | benchmark gain 仍是经验结论 |
+
+### 贯穿算例 $\mathcal D_\square$：一条可完全审计的 Mixup Chord
+
+取本卷端点
+
+$$
+x_a=(2,1)^{\mathsf T},qquad
+x_b=(-2,1)^{\mathsf T},qquad
+y_a=e_1,\quad y_b=e_2,\quad \lambda=\frac14.
+$$
+
+于是
+
+$$
+\boxed{
+\widetilde x
+=\frac14x_a+\frac34x_b
+=(-1,1)^{\mathsf T}
+},
+$$
+
+$$
+\boxed{
+\widetilde y
+=\frac14e_1+\frac34e_2
+=\left(\frac14,\frac34,0\right)
+}.
+$$
+
+现在沿用 NN-61 的 uniform prior $u=(1/3,1/3,1/3)$ 与 $\epsilon=0.1$。先 Mixup 后 smoothing：
+
+$$
+S_{0.1}(\widetilde y)
+=0.9\left(\frac14,\frac34,0\right)
++0.1\left(\frac13,\frac13,\frac13\right)
+=\boxed{\left(\frac{31}{120},\frac{85}{120},\frac4{120}\right)}.
+$$
+
+先 smoothing 两个端点后再 Mixup：
+
+$$
+\frac14S_{0.1}(e_1)+\frac34S_{0.1}(e_2)
+=\left(\frac{31}{120},\frac{85}{120},\frac4{120}\right).
+$$
+
+相等来自两个 target operators 都是 affine maps。输入分布、BatchNorm statistics、pairing、增强次序和 optimization trajectory 并没有因此被证明相同。
+
+## 核心公式七问：Vicinal Interpolation
+
+$$
+\boxed{
+(\widetilde x,\widetilde y)
+=\big(\lambda x_i+(1-\lambda)x_j,\;
+\lambda y_i+(1-\lambda)y_j\big)
+}.
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 规定训练点之间的函数行为，而不只拟合离散 atoms |
+| 对象 | 输入/hidden point 与 probability target 的联合变换 |
+| 来路 | pairing law、Beta mixing law 与凸组合 |
+| 步骤 | 采 pair→采 $\lambda$→同权混合输入和 target→在混合点求 loss |
+| 读法 | 这是新的 vicinal training distribution，不是简单扩充 iid 样本数 |
+| 检查 | $\lambda\in[0,1]$、target 和为 1、端点极限、同一 $\lambda$、mask 对齐 |
+| 去路 | Manifold Mixup、consistency regularization、Jacobian/局部平滑接口 |
+
+### AI / 系统对应
+
+图像 Mixup 可在连续像素上直接实现；token ID、padding、语音长度和多模态对齐通常不能未经定义就做算术平均。分布式训练还需记录 global/local pairing、RNG、augmentation before/after mixing、BatchNorm statistics 与额外通信成本。
 
 ## 一、学习目标
 

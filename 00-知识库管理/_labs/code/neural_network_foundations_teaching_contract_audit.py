@@ -23,7 +23,7 @@ SOLUTIONS = LABS / "solutions"
 CODE = LABS / "code"
 FIGURE_AUDITOR = CODE / "audit-markdown-figure-units.mjs"
 ASSET_DIR = ROOT / "00-知识库管理" / "_assets" / "figures" / "neural-networks"
-MIGRATED_IDS = tuple(range(1, 61))
+MIGRATED_IDS = tuple(range(1, 65))
 
 STATE_SURFACES = (
     CHAPTER / "神经网络基础 MOC.md",
@@ -216,7 +216,7 @@ def audit_migrated_contract(nodes: list[tuple[int, Path, str]]) -> None:
         require(fixture in content, f"{relative}: shared teaching fixture missing: {fixture}")
         require("AI" in content, f"{relative}: AI object mapping missing")
         require(len(content.splitlines()) >= 180, f"{relative}: derivation depth unexpectedly short")
-    print("PASS NN teaching migration waves A--O: NN-01--60 course position/two-pass/problem/object/formula contracts=60/60")
+    print("PASS NN teaching migration waves A--P: NN-01--64 course position/two-pass/problem/object/formula contracts=64/64")
 
 
 def audit_wave_c_fixture(nodes: list[tuple[int, Path, str]]) -> None:
@@ -1001,6 +1001,69 @@ def audit_wave_o_fixture(nodes: list[tuple[int, Path, str]]) -> None:
     print("PASS NN wave-O independent math: Dropout moments/VJP; score covariance/risk; DropConnect joint-law contrast; DropPath state/Jacobian/depth exact")
 
 
+def audit_wave_p_fixture(nodes: list[tuple[int, Path, str]]) -> None:
+    """Recompute the NN-61--64 target/interpolation/derivative/interaction chain."""
+    epsilon = 0.1
+    classes = 3
+    prediction = (0.8, 0.1, 0.1)
+    hard_target = (1.0, 0.0, 0.0)
+    prior = (1.0 / classes,) * classes
+    smooth_target = tuple((1.0 - epsilon) * hard_target[i] + epsilon * prior[i] for i in range(classes))
+    expected_target = (14.0 / 15.0, 1.0 / 30.0, 1.0 / 30.0)
+    require(all(abs(actual - expected) < 1e-15 for actual, expected in zip(smooth_target, expected_target)), "NN wave-P smoothed target drifted")
+    gradient = tuple(prediction[i] - smooth_target[i] for i in range(classes))
+    expected_gradient = (-2.0 / 15.0, 1.0 / 15.0, 1.0 / 15.0)
+    require(all(abs(actual - expected) < 1e-15 for actual, expected in zip(gradient, expected_gradient)), "NN wave-P smoothed gradient drifted")
+    require(abs(sum(gradient)) < 1e-15 and abs(math.log(smooth_target[0] / smooth_target[1]) - math.log(28.0)) < 1e-15, "NN wave-P gradient gauge/margin drifted")
+
+    x_a = (2.0, 1.0)
+    x_b = (-2.0, 1.0)
+    y_a = (1.0, 0.0, 0.0)
+    y_b = (0.0, 1.0, 0.0)
+    mixture = 0.25
+    mixed_x = tuple(mixture * x_a[i] + (1.0 - mixture) * x_b[i] for i in range(2))
+    mixed_y = tuple(mixture * y_a[i] + (1.0 - mixture) * y_b[i] for i in range(classes))
+    smooth_after_mix = tuple((1.0 - epsilon) * mixed_y[i] + epsilon * prior[i] for i in range(classes))
+    smooth_a = tuple((1.0 - epsilon) * y_a[i] + epsilon * prior[i] for i in range(classes))
+    smooth_b = tuple((1.0 - epsilon) * y_b[i] + epsilon * prior[i] for i in range(classes))
+    mix_after_smooth = tuple(mixture * smooth_a[i] + (1.0 - mixture) * smooth_b[i] for i in range(classes))
+    expected_mixed_smooth = (31.0 / 120.0, 85.0 / 120.0, 4.0 / 120.0)
+    require(mixed_x == (-1.0, 1.0) and mixed_y == (0.25, 0.75, 0.0), "NN wave-P Mixup chord drifted")
+    require(all(abs(actual - expected) < 1e-15 for actual, expected in zip(smooth_after_mix, expected_mixed_smooth)), "NN wave-P smoothed Mixup target drifted")
+    require(all(abs(left - right) < 1e-15 for left, right in zip(smooth_after_mix, mix_after_smooth)), "NN wave-P target affine commutation drifted")
+
+    weight = ((1.0, 2.0), (-1.0, 1.0))
+    gram = (
+        (sum(weight[k][0] * weight[k][0] for k in range(2)), sum(weight[k][0] * weight[k][1] for k in range(2))),
+        (sum(weight[k][1] * weight[k][0] for k in range(2)), sum(weight[k][1] * weight[k][1] for k in range(2))),
+    )
+    require(gram == ((2.0, 1.0), (1.0, 5.0)), f"NN wave-P Jacobian Gram drifted: {gram}")
+    eigenvalues = ((7.0 + math.sqrt(13.0)) / 2.0, (7.0 - math.sqrt(13.0)) / 2.0)
+    operator_squared = eigenvalues[0]
+    frobenius_squared = sum(value * value for row in weight for value in row)
+    require(abs(operator_squared - 5.302775637731995) < 1e-15 and frobenius_squared == 7.0, "NN wave-P Jacobian norms drifted")
+    probes = ((1.0, 1.0), (1.0, -1.0))
+    vjps = tuple(tuple(sum(weight[i][j] * probe[i] for i in range(2)) for j in range(2)) for probe in probes)
+    probe_energies = tuple(sum(value * value for value in vjp) for vjp in vjps)
+    require(vjps == ((0.0, 3.0), (2.0, 1.0)) and probe_energies == (9.0, 5.0), "NN wave-P Hutchinson probes drifted")
+    require(sum(probe_energies) / 2.0 == frobenius_squared, "NN wave-P Hutchinson expectation drifted")
+
+    risks = {(0, 0): 0.30, (1, 0): 0.26, (0, 1): 0.27, (1, 1): 0.20}
+    interaction = (risks[1, 1] - risks[1, 0]) - (risks[0, 1] - risks[0, 0])
+    require(abs(interaction + 0.03) < 1e-15, f"NN wave-P factorial interaction drifted: {interaction}")
+
+    wave = {node_id: content for node_id, _, content in nodes if 61 <= node_id <= 64}
+    expected_markers = {
+        61: ("\\left(-\\frac2{15},\\frac1{15},\\frac1{15}\\right)", "\\log28"),
+        62: ("\\widetilde x=(-1,1)", "\\frac{31}{120}"),
+        63: ("\\frac{7+\\sqrt{13}}2", "\\frac{9+5}{2}=7"),
+        64: ("\\Delta_{AB}", "-0.06-(-0.03)=-0.03"),
+    }
+    for node_id, markers in expected_markers.items():
+        require(all(marker in wave[node_id] for marker in markers), f"NN-{node_id:02d}: wave-P target/interpolation/derivative/interaction closure missing")
+    print("PASS NN wave-P independent math: smoothed target/gradient/margin; affine target commutation; Jacobian norms/probes; factorial interaction exact")
+
+
 def question_ids(content: str) -> list[str]:
     return re.findall(r"^###\s+([^\s]+-[A-E]\d{2})\s*$", content, re.M)
 
@@ -1158,12 +1221,12 @@ def audit_state_surfaces() -> None:
     for path in STATE_SURFACES:
         content = read(path)
         require(audit_name in content, f"state surface misses NN audit: {path.relative_to(ROOT)}")
-        migrated_mentions = content.count("60/64") + content.count("60 / 64")
-        pending_mentions = content.count("4/64") + content.count("4 / 64")
+        migrated_mentions = content.count("64/64") + content.count("64 / 64")
+        pending_mentions = content.count("0/64") + content.count("0 / 64")
         require(migrated_mentions >= 1 and pending_mentions >= 1, f"state surface misses NN migrated/pending counts: {path.relative_to(ROOT)}")
-        require("7/8" in content or "7 / 8" in content, f"state surface misses NN material-gate count: {path.relative_to(ROOT)}")
+        require("8/8" in content or "8 / 8" in content, f"state surface misses NN material-gate count: {path.relative_to(ROOT)}")
         require("not-attempted" in content, f"state surface overclaims NN learner: {path.relative_to(ROOT)}")
-    print("PASS NN state surfaces: 5 global + 8 volume views agree on migrated=60/64, pending=4/64, material gates=7/8, learner=not-attempted")
+    print("PASS NN state surfaces: 5 global + 8 volume views agree on migrated=64/64, pending=0/64, material gates=8/8, learner=not-attempted")
 
 
 def main() -> None:
@@ -1187,6 +1250,7 @@ def main() -> None:
     audit_wave_m_fixture(nodes)
     audit_wave_n_fixture(nodes)
     audit_wave_o_fixture(nodes)
+    audit_wave_p_fixture(nodes)
     audit_exercises(nodes, index)
     audit_sources_and_links(nodes, index)
     audit_figures(nodes, index)
@@ -1194,8 +1258,8 @@ def main() -> None:
     audit_state_surfaces()
     if args.run_figures:
         audit_deterministic_figures()
-    print("NN-01--60 teaching migration regression: PASS; 30.1--30.7 material gates=7/8; 30.8 front half=in-progress")
-    print("NN-61--64 teaching migration: pending (4/64)")
+    print("NN-01--64 teaching migration regression: PASS; 30.1--30.8 material gates=8/8")
+    print("NN-61--64 teaching migration: PASS; cumulative NN-CUM-01 remains legacy composed pending a separate re-audit")
     print("PERSONAL LEARNING STATUS: not-attempted")
 
 

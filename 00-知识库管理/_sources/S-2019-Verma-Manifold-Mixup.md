@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, manifold-mixup, representation-geometry]
 source_type: paper
 title: "Manifold Mixup: Better Representations by Interpolating Hidden States"
@@ -15,7 +15,7 @@ scope_role: hidden-space-extension
 temporal_role: foundational
 related: ["[[Mixup、Manifold Mixup 与插值正则]]", "[[Embedding 几何、相似度与各向异性]]"]
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Verma et al.：Manifold Mixup

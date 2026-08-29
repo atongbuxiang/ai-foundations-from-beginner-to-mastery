@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, r-drop, dropout, consistency-regularization]
 source_type: paper
 title: "R-Drop: Regularized Dropout for Neural Networks"
@@ -15,7 +15,7 @@ scope_role: interaction-case-study
 temporal_role: modern-method
 related: ["[[网络级正则化的交互、消融与证据地图]]", "[[Dropout 的方差、共适应解释与 Bayesian 边界]]"]
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Liang et al.：R-Drop

@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, pytorch, cross-entropy, label-smoothing]
 source_type: official-docs
 title: "PyTorch CrossEntropyLoss"
@@ -14,7 +14,7 @@ scope_role: implementation-contract
 temporal_role: current-api
 related: ["[[Label Smoothing、置信度与目标偏置]]", "[[Softmax 输出层、Logit 尺度与概率参数化]]"]
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # PyTorch：CrossEntropyLoss 与 Label Smoothing 当前接口

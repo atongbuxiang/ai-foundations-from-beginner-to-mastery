@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, mixup, vicinal-risk]
 source_type: paper
 title: "mixup: Beyond Empirical Risk Minimization"
@@ -15,7 +15,7 @@ scope_role: original-method
 temporal_role: foundational
 related: ["[[Mixup、Manifold Mixup 与插值正则]]"]
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Zhang et al.：Mixup

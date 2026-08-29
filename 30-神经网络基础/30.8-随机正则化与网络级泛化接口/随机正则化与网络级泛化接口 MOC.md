@@ -21,8 +21,8 @@ updated: 2026-08-29
 
 ## 当前迁移与学习状态
 
-- [[neural_network_foundations_teaching_contract_audit.py]]已复核 NN-57—60 的两遍路线、问题链、对象账本、$\mathcal D_\square$ 共享输入/线性映射、Dropout moments、风险证据层、noise-location covariance 与 DropPath 深度账；
-- 当前为 **4/8 现行教学迁移、8/8 正文、8/8 A—E 题解、8/8 正式图，30.8 材料门 `in-progress`**；
-- 全章为 **60/64 已迁移、4/64 pending、分卷材料门 7/8**，个人仍为 **0/8 / `not-attempted`**；下一批 NN-61—64。
+- [[neural_network_foundations_teaching_contract_audit.py]]已复核 NN-57—64 的两遍路线、问题链、对象账本与 $\mathcal D_\square$；前半闭合 Dropout/DropConnect/DropPath 的随机位置账，后半闭合 target smoothing、vicinal interpolation、Jacobian norm/probe 与 factorial interaction；
+- 当前为 **8/8 现行教学迁移、8/8 正文、8/8 A—E 题解、8/8 正式图，30.8 材料门 `regression-passed`**；
+- 全章为 **64/64 已迁移、0/64 pending、分卷材料门 8/8 `regression-passed`**，个人仍为 **0/8 / `not-attempted`**；下一材料施工点为 NN-CUM-01 现行合同重审。
 
 NN-57—64 共 120 道节点题及逐题独立详解已经形成静态闭环，并已纳入[[阶段测验 - 神经网络基础（第三章）|NN-CUM-01]]与[[实验 - 神经网络基础累计复现门]]。`draft` 只表示材料组成，学习者仍需闭卷、重做与迁移验收。

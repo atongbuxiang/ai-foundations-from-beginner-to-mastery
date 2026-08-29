@@ -11,13 +11,111 @@ exercises: ["[[习题 - Label Smoothing、置信度与目标偏置]]"]
 solutions: ["[[解答 - Label Smoothing、置信度与目标偏置]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-label-smoothing-target-bias-v2.svg]]"
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Label Smoothing、置信度与目标偏置
 
 > [!abstract] 本章主问题
 > Label Smoothing 不是“让模型谦虚一点”的口号，而是直接替换监督 target。对 uniform smoothing，soft target 为 $t_\epsilon=(1-\epsilon)e_y+\epsilon u$；交叉熵精确分解为 hard-label fit 与 prior cross-entropy。它让 logit optimum 从无限 margin 变为有限 margin，同时把 population optimum 从真实条件分布 $\eta(x)$ 推向 $(1-\epsilon)\eta(x)+\epsilon u$。经验上它可能抵消过度置信，但“置信度下降”“概率校准”“抗标签噪声”“不确定性更可靠”是四个不同命题。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-52 已说明 Softmax 只由 logit 差决定；NN-58 又说明随机网络的低置信度不能自动解释成可靠不确定性；
+- **本页解决什么：** 固定模型输出对象，单独改变监督 target，追踪它怎样改变 loss、logit gradient、有限 margin 与 population optimum；
+- **后续为何需要：** NN-62 会同时改变输入与 target，NN-64 会判断多个正则器是在重复施力、互补施力，还是只在某个实验协议下看似协同。
+
+**第一遍只掌握有限样本的代数。** 从 $t_\epsilon=(1-\epsilon)e_y+\epsilon u$ 出发，计算三分类 target、梯度和有限 margin。
+
+**第二遍再讨论统计含义。** 把单样本 target 提升到 $Y\mid X=x$ 的条件期望，理解为什么 class argmax 可能保持不变而 probability estimation 已经有偏。
+
+### 问题链
+
+1. Label Smoothing 究竟改变 logits、模型结构，还是训练时的监督目标？
+2. 为什么交叉熵对 target 的线性会带来精确分解，而不是近似分解？
+3. 为什么 hard target 倾向无限拉大可分样本的 logit margin，而 smoothed target 有有限驻点？
+4. “置信度降低”为什么不能直接推出 calibration 改善？
+5. 训练目标的 population optimum 改变后，部署时应验收 accuracy、NLL、ECE 还是全部？
+
+> [!check] 第一遍停靠线
+> 若你能在 $\mathcal D_\square$ 上算出 $t_{0.1}=(14/15,1/30,1/30)$、当前梯度 $(-2/15,1/15,1/15)$，并解释最优 margin 为什么是 $\log 28$，就已掌握本页的精确主干。
+
+## 符号与对象账本
+
+| 层级 | 对象 | 本页能得到什么 | 不能自动推出什么 |
+|---|---|---|---|
+| target | $e_y,u,t_\epsilon$ | simplex 上的 affine mixture | label 本身更可靠 |
+| prediction | logits $z$、概率 $p$ | $\nabla_zH=p-t_\epsilon$ | 模型结构被正则 |
+| sample optimum | $p=t_\epsilon$ | 有限 logit difference | 未见样本也达到该点 |
+| population optimum | $\eta(x),r_\epsilon(x)$ | $r_\epsilon=(1-\epsilon)\eta+\epsilon u$ | 原始条件概率无偏估计 |
+| evaluation | accuracy/NLL/ECE/Brier | 多账本经验比较 | 低 confidence 等于可靠 uncertainty |
+
+### 贯穿算例 $\mathcal D_\square$：从随机 Score 到监督 Target
+
+沿用本卷输入与线性映射
+
+$$
+x=(2,1)^{\mathsf T},qquad
+W=\begin{bmatrix}1&2\\-1&1\end{bmatrix},qquad
+Wx=(4,-1)^{\mathsf T}.
+$$
+
+把这两个 scores 与一个 reference-class logit 组成三分类模型。为了把重点放在 target 而非指数近似上，本页直接在一个训练时刻观察到
+
+$$
+p=(0.8,0.1,0.1),\qquad y=1,\qquad K=3.
+$$
+
+采用 inclusive uniform smoothing，$\epsilon=0.1$：
+
+$$
+t_{0.1}
+=0.9(1,0,0)+0.1\left(\frac13,\frac13,\frac13\right)
+=\left(\frac{14}{15},\frac1{30},\frac1{30}\right).
+$$
+
+因此当前 logit gradient 为
+
+$$
+\boxed{
+p-t_{0.1}
+=\left(-\frac2{15},\frac1{15},\frac1{15}\right)
+},
+$$
+
+而 hard target 给 $(-1/5,1/10,1/10)$。两者元素和都为 0，符合 Softmax 的常数平移不变性；但 smoothing 不是把 hard gradient 整体乘常数，而是改变每一类的 target offset。精确拟合时 true-vs-wrong margin 为
+
+$$
+\boxed{
+z_y-z_k=\log\frac{14/15}{1/30}=\log28
+}.
+$$
+
+这个有限值回答的是**训练 target 的驻点**，不是部署校准保证。
+
+## 核心公式七问：Target 替换
+
+$$
+\boxed{
+t_\epsilon=(1-\epsilon)e_y+\epsilon u,
+\qquad
+\nabla_zH(t_\epsilon,p)=p-t_\epsilon
+}.
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 阻止 one-hot 目标持续要求无限置信度 |
+| 对象 | 监督 target 与由它产生的 logit 误差信号 |
+| 来路 | simplex 上 affine mixture，加上 Softmax–CE 导数 |
+| 步骤 | 先定 convention/prior→写 target→分解 loss→求 gradient→求 optimum |
+| 读法 | $\epsilon$ 直接改变估计目标，不只是优化噪声强度 |
+| 检查 | target 和为 1、gradient 和为 0、$\epsilon\to0$ 回到 hard label |
+| 去路 | Mixup 的 soft target、distillation、calibration 与 label-shift 审计 |
+
+### AI / 系统对应
+
+分类器、视觉模型和大词表语言模型中，同名 `label_smoothing` 可能采用不同 convention，并与 class weights、ignore index、padding mask 和 reduction 顺序交互。系统验收应保存实际 target 生成代码或最小张量例，分别报告 accuracy、NLL、Brier/ECE、蒸馏兼容性及分布偏移结果。
 
 ## 一、学习目标
 

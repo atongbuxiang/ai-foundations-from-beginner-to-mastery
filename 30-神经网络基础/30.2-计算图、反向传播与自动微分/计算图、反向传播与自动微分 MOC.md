@@ -24,4 +24,4 @@ updated: 2026-08-29
 - [[neural_network_foundations_teaching_contract_audit.py]] 已复核 NN-09—16 的课程位置、两遍路线、问题链、对象账本、共享 $X_\diamond$ fixture 与公式七问；
 - 前半卷闭合 affine-regression 的 forward $L=5.25$、JVP/VJP $2.5$ 与参数梯度；后半卷继续闭合 ReLU residual/broadcast VJP、stable CE $0.0255315$、logit directional derivative $-0.00123631$ 与 HVP $0.00123325$；
 - 当前为 **8/8 现行教学迁移、8/8 正文、8/8 A—E 题解、8/8 正式图，30.2 材料门 `regression-passed`**；
-- 全章状态为 **60/64 已迁移、4/64 pending、分卷材料门 7/8**；30.8 前半卷 `in-progress`，个人仍为 **0/8 / `not-attempted`**；下一批 NN-61—64。
+- 全章状态为 **64/64 已迁移、0/64 pending、分卷材料门 8/8 `regression-passed`**；个人仍为 **0/8 / `not-attempted`**；下一材料施工点为 NN-CUM-01 现行合同重审。

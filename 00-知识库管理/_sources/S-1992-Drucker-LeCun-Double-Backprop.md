@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, jacobian-regularization, double-backprop]
 source_type: paper
 title: "Improving Generalization Performance Using Double Backpropagation"
@@ -15,7 +15,7 @@ scope_role: historical-jacobian-penalty
 temporal_role: foundational
 related: ["[[Jacobian、Gradient Penalty 与 Lipschitz 正则接口]]"]
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Drucker、LeCun：Double Backpropagation

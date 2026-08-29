@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, spectral-normalization, lipschitz, gan]
 source_type: paper
 title: "Spectral Normalization for Generative Adversarial Networks"
@@ -15,7 +15,7 @@ scope_role: operator-norm-control
 temporal_role: foundational
 related: ["[[Jacobian、Gradient Penalty 与 Lipschitz 正则接口]]", "[[正交初始化与 Dynamical Isometry]]"]
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Miyato et al.：Spectral Normalization

@@ -11,13 +11,128 @@ exercises: ["[[习题 - Jacobian、Gradient Penalty 与 Lipschitz 正则接口]]
 solutions: ["[[解答 - Jacobian、Gradient Penalty 与 Lipschitz 正则接口]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-jacobian-gradient-lipschitz-v2.svg]]"
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Jacobian、Gradient Penalty 与 Lipschitz 正则接口
 
 > [!abstract] 本章主问题
 > “加一个梯度惩罚”不是完整数学对象。可以惩罚 loss 对 input 的 gradient、model logits/probabilities 对 input 的 Jacobian、critic gradient 距离 1 的偏差、parameter gradient，或每层 weight 的 spectral norm。这些方法控制不同坐标、不同 norm、不同采样点与不同方向。对可微函数，定义域上的统一 Jacobian operator-norm bound 可推出 Lipschitz bound；有限 training points 上的小梯度、Frobenius norm 或一步 power iteration 都不能自动升级为 global certificate，更不能单独推出鲁棒泛化。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-62 用两点弦上的插值约束函数；矩阵分析与自动微分章节已经提供 operator norm、JVP 与 VJP；
+- **本页解决什么：** 把“输入变化不应造成过大输出变化”拆成 domain、norm、output object、采样点和导数 estimator 五个可审计字段；
+- **后续为何需要：** NN-64 会把 derivative control 与 target、data、path、parameter interventions 分账，避免把所有正则器都称作“更平滑”。
+
+**第一遍只做线性函数。** 对共享矩阵 $W$ 精确计算 $\|W\|_2$、$\|W\|_F$、两个坐标方向增益和 Hutchinson 两探针平均。
+
+**第二遍再进入非线性网络。** 学习 Jacobian supremum、局部 sample penalty、谱乘积上界、WGAN-GP 与 double backward 的适用条件。
+
+### 问题链
+
+1. 说一个函数“Lipschitz”时，输入 norm、输出 norm 和 domain 分别是什么？
+2. scalar loss gradient、vector-output Jacobian 与 parameter gradient 为什么不能混用？
+3. Frobenius norm、operator norm 和随机方向增益分别回答什么问题？
+4. 有限训练点上的小 Jacobian 为什么不是全局 certificate？
+5. derivative penalty 的计算图、mixed precision 与 second-order cost 怎样进入系统合同？
+
+> [!check] 第一遍停靠线
+> 若你能在 $\mathcal D_\square$ 上得到 $W^{\mathsf T}W=\left[\begin{smallmatrix}2&1\\1&5\end{smallmatrix}\right]$、$\|W\|_2^2=(7+\sqrt{13})/2$、$\|W\|_F^2=7$，并用两个 Rademacher probe 的 $9$ 与 $5$ 平均回到 $7$，就已掌握本页精确主干。
+
+## 符号与对象账本
+
+| 层级 | 对象 | 常用量 | 结论边界 |
+|---|---|---|---|
+| finite difference | $f(x')-f(x)$ | ratio / adversarial loss | 只覆盖指定点对或威胁集 |
+| local derivative | $J_f(x)$ | JVP、VJP、$\|J\|_F$ | 只在采样点与方向成立 |
+| local worst direction | $\|J_f(x)\|_{X\to Y}$ | top singular value | 仍不是 domain supremum |
+| global/domain bound | $\sup_{x\in\Omega}\|J_f(x)\|$ | Lipschitz certificate | 依赖 domain、norm 与上界松弛 |
+| parameter proxy | layer spectral norms | product/sum bound | 可能远松于实际 network gain |
+
+### 贯穿算例 $\mathcal D_\square$：同一矩阵的四种“大小”
+
+对线性网络
+
+$$
+f(x)=Wx,qquad
+W=\begin{bmatrix}1&2\\-1&1\end{bmatrix},
+$$
+
+Jacobian 在所有点都等于 $W$。先算
+
+$$
+W^{\mathsf T}W
+=\begin{bmatrix}2&1\\1&5\end{bmatrix}.
+$$
+
+它的 characteristic polynomial 是 $\lambda^2-7\lambda+9$，所以 squared singular values 为
+
+$$
+\lambda_{\pm}=\frac{7\pm\sqrt{13}}2.
+$$
+
+因此
+
+$$
+\boxed{
+\|W\|_2=\sqrt{\frac{7+\sqrt{13}}2}\approx2.30278,
+\qquad
+\|W\|_F=\sqrt7\approx2.64575
+}.
+$$
+
+两个坐标方向只给
+
+$$
+\|We_1\|_2=\sqrt2,\qquad \|We_2\|_2=\sqrt5,
+$$
+
+都没有精确命中 worst singular direction。再取 output-side Rademacher probes。由于 $v$ 与 $-v$ 给同一平方值，只需枚举
+
+$$
+v_+=(1,1)^{\mathsf T},\qquad v_-=(1,-1)^{\mathsf T}.
+$$
+
+则
+
+$$
+W^{\mathsf T}v_+=(0,3)^{\mathsf T},quad
+W^{\mathsf T}v_-=(2,1)^{\mathsf T},
+$$
+
+$$
+\boxed{
+\frac12\left(\|W^{\mathsf T}v_+\|_2^2+
+\|W^{\mathsf T}v_-\|_2^2\right)
+=\frac{9+5}{2}=7=\|W\|_F^2
+}.
+$$
+
+这验证了 trace estimator 的期望，却也显示单 probe 可取 9 或 5；“无偏”不等于“每次精确”，更不等于 operator-norm certificate。
+
+## 核心公式七问：从 Jacobian 到 Lipschitz
+
+$$
+\boxed{
+\operatorname{Lip}_{\Omega}(f)
+\le \sup_{x\in\Omega}\|J_f(x)\|_{X\to Y}
+}.
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 用所有路径点上的局部导数上界控制有限差分 |
+| 对象 | 指定 domain 与输入/输出 norm 下的函数 |
+| 来路 | 线段积分、triangle inequality 与 induced norm |
+| 步骤 | 参数化线段→积分 Jacobian action→取 norm→取 domain supremum |
+| 读法 | 统一的 Jacobian operator bound 足以给 Lipschitz 上界 |
+| 检查 | domain 是否凸、norm 是否声明、output 是 logits/概率/loss、supremum 是否真实覆盖 |
+| 去路 | 谱归一化、gradient penalty、certified robustness 与稳定性分析 |
+
+### AI / 系统对应
+
+自动微分中的 JVP/VJP 能避免物化大 Jacobian，但 derivative regularization 常需要 double backward，带来显存、精度和算子支持问题。训练日志应记录 probe 数、采样位置、output object、norm、target norm、power-iteration 次数和 mixed-precision policy；否则“梯度惩罚系数相同”没有可比性。
 
 ## 一、学习目标
 

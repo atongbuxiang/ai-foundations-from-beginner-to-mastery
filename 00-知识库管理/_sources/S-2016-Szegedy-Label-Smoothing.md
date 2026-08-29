@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, label-smoothing, classification]
 source_type: paper
 title: "Rethinking the Inception Architecture for Computer Vision"
@@ -15,7 +15,7 @@ scope_role: original-method
 temporal_role: foundational
 related: ["[[Label Smoothing、置信度与目标偏置]]"]
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Szegedy et al.：Label Smoothing 原始合同

@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, label-smoothing, calibration, distillation]
 source_type: paper
 title: "When Does Label Smoothing Help?"
@@ -15,7 +15,7 @@ scope_role: mechanism-and-boundary
 temporal_role: empirical-study
 related: ["[[Label Smoothing、置信度与目标偏置]]", "[[概率校准、Proper Scoring Rule 与可靠性图]]"]
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Müller、Kornblith、Hinton：Label Smoothing 的帮助与代价
