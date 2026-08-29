@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1080" viewBox="0 0 1500 1080">
+<rect width="1500" height="1080" fill="#F7F4EE"/>
+<rect x="54" y="40" width="1392" height="90" rx="22" fill="#172033"/>
+<text x="82.0" y="79.0" font-family="Inter,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF" text-anchor="start">LT-QUAL-02 · one service, three ledgers, five theory interfaces</text>
+<text x="82.0" y="111.0" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="500" fill="#CBD5E1" text-anchor="start">model/representation selection · reliable interactive deployment · deep-mechanism audit</text>
+<rect x="54" y="154" width="1392" height="250" rx="20" fill="#FFFFFF" stroke="#D7DCE5" stroke-width="2"/>
+<circle cx="92" cy="192" r="22" fill="#2563EB"/>
+<text x="92.0" y="199.0" font-family="Inter,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF" text-anchor="middle">A</text>
+<text x="130.0" y="199.0" font-family="Inter,Arial,sans-serif" font-size="22" font-weight="700" fill="#172033" text-anchor="start">source selection -&gt; target risk and representation audit</text>
+<rect x="54" y="432" width="1392" height="250" rx="20" fill="#FFFFFF" stroke="#D7DCE5" stroke-width="2"/>
+<circle cx="92" cy="470" r="22" fill="#7C3AED"/>
+<text x="92.0" y="477.0" font-family="Inter,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF" text-anchor="middle">B</text>
+<text x="130.0" y="477.0" font-family="Inter,Arial,sans-serif" font-size="22" font-weight="700" fill="#172033" text-anchor="start">online routing -&gt; off-policy deployment evidence</text>
+<rect x="54" y="710" width="1392" height="250" rx="20" fill="#FFFFFF" stroke="#D7DCE5" stroke-width="2"/>
+<circle cx="92" cy="748" r="22" fill="#059669"/>
+<text x="92.0" y="755.0" font-family="Inter,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF" text-anchor="middle">C</text>
+<text x="130.0" y="755.0" font-family="Inter,Arial,sans-serif" font-size="22" font-weight="700" fill="#172033" text-anchor="start">training fit -&gt; invariant mechanism and regime boundary</text>
+<rect x="105" y="280.4" width="56" height="79.6" rx="7" fill="#2563EB" opacity="0.38"/>
+<rect x="171" y="213.9" width="56" height="146.1" rx="7" fill="#2563EB"/>
+<text x="166.0" y="384.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="650" fill="#2563EB" text-anchor="middle">M0: S / T</text>
+<rect x="295" y="255.1" width="56" height="104.9" rx="7" fill="#7C3AED" opacity="0.38"/>
+<rect x="361" y="293.9" width="56" height="66.1" rx="7" fill="#7C3AED"/>
+<text x="356.0" y="384.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="650" fill="#7C3AED" text-anchor="middle">M1: S / T</text>
+<rect x="485" y="197.6" width="56" height="162.4" rx="7" fill="#D97706" opacity="0.38"/>
+<rect x="551" y="220.6" width="56" height="139.4" rx="7" fill="#D97706"/>
+<text x="546.0" y="384.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="650" fill="#D97706" text-anchor="middle">M2: S / T</text>
+<text x="744.0" y="226.0" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="700" fill="#1D4ED8" text-anchor="start">source winner M0; target winner M1</text>
+<text x="744.0" y="262.0" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="500" fill="#172033" text-anchor="start">density ratios = (0.250000,0.666667,1.500000,4.000000)</text>
+<text x="744.0" y="294.0" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="500" fill="#172033" text-anchor="start">population ESS fraction = 0.453</text>
+<text x="744.0" y="326.0" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="500" fill="#172033" text-anchor="start">representation effective ranks = (1.275000,1.750000,1.020000)</text>
+<text x="744.0" y="358.0" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="700" fill="#9A3412" text-anchor="start">source winner != target winner; non-collapse != transfer</text>
+<rect x="92" y="507" width="620" height="140" rx="14" fill="#F5F3FF"/>
+<text x="118.0" y="540.0" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="700" fill="#6D28D9" text-anchor="start">Hedge loss 0.858</text>
+<text x="118.0" y="576.0" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="500" fill="#172033" text-anchor="start">best fixed 0.542  -&gt; regret 0.315</text>
+<text x="118.0" y="612.0" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="500" fill="#172033" text-anchor="start">final mixture (0.297629,0.421512,0.280858)</text>
+<rect x="430" y="629.5" width="24" height="0.5" rx="4" fill="#7C3AED" opacity="0.72"/>
+<rect x="472" y="538.0" width="24" height="92.0" rx="4" fill="#7C3AED" opacity="0.72"/>
+<rect x="514" y="628.4" width="24" height="1.6" rx="4" fill="#7C3AED" opacity="0.72"/>
+<rect x="556" y="586.9" width="24" height="43.1" rx="4" fill="#7C3AED" opacity="0.72"/>
+<rect x="598" y="610.8" width="24" height="19.2" rx="4" fill="#7C3AED" opacity="0.72"/>
+<rect x="640" y="617.4" width="24" height="12.6" rx="4" fill="#7C3AED" opacity="0.72"/>
+<text x="744.0" y="504.0" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="700" fill="#6D28D9" text-anchor="start">target policy risk = 0.073</text>
+<text x="744.0" y="540.0" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="500" fill="#172033" text-anchor="start">one observed IPS mean = 0.033</text>
+<text x="744.0" y="574.0" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="500" fill="#172033" text-anchor="start">max context-action ratio = 6.400</text>
+<text x="744.0" y="608.0" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="500" fill="#172033" text-anchor="start">observed weight ESS = 2.631 / 6</text>
+<text x="744.0" y="642.0" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="700" fill="#9A3412" text-anchor="start">regret != target risk; unbiasedness != safe deployment</text>
+<rect x="92" y="792" width="262" height="105" rx="14" fill="#ECFDF5" stroke="#A7F3D0"/>
+<text x="110.0" y="827.0" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="700" fill="#047857" text-anchor="start">same fit</text>
+<text x="110.0" y="864.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="500" fill="#172033" text-anchor="start">||w_min|| 0.816 -&gt; shifted 2.160</text>
+<rect x="390" y="792" width="262" height="105" rx="14" fill="#ECFDF5" stroke="#A7F3D0"/>
+<text x="408.0" y="827.0" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="700" fill="#047857" text-anchor="start">same function</text>
+<text x="408.0" y="864.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="500" fill="#172033" text-anchor="start">sharpness 2.0 -&gt; 16.062</text>
+<rect x="688" y="792" width="262" height="105" rx="14" fill="#ECFDF5" stroke="#A7F3D0"/>
+<text x="706.0" y="827.0" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="700" fill="#047857" text-anchor="start">fixed kernel</text>
+<text x="706.0" y="864.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="500" fill="#172033" text-anchor="start">lambda (1.600000,0.400000), ||r_t|| 0.213</text>
+<rect x="986" y="792" width="262" height="105" rx="14" fill="#ECFDF5" stroke="#A7F3D0"/>
+<text x="1004.0" y="827.0" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="700" fill="#047857" text-anchor="start">finite particles</text>
+<text x="1004.0" y="864.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="500" fill="#172033" text-anchor="start">feature 0.325; NTK 0.085</text>
+<text x="92.0" y="928.0" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="700" fill="#047857" text-anchor="start">null test gap=2.00; path=1.00; regime=feature-moving</text>
+<text x="820.0" y="928.0" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="700" fill="#9A3412" text-anchor="start">fit/dynamics/proxy != population explanation</text>
+<rect x="54" y="996" width="1392" height="56" rx="17" fill="#172033"/>
+<text x="750.0" y="1020.0" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="600" fill="#E2E8F0" text-anchor="middle">task · data · representation · model · selection · calibration · shift · protocol · feedback · comparator · invariance · regime · deployment</text>
+<text x="750.0" y="1043.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="500" fill="#94A3B8" text-anchor="middle">A valid cross-volume claim preserves predictor, sample, event and quantifier across every arrow.</text>
+</svg>

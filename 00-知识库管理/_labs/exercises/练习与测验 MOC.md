@@ -440,19 +440,21 @@ updated: 2026-08-29
 
 ### 当前规划
 
-学习理论 LT-01—84 已完成全章静态材料门：[[learning_theory_teaching_contract_audit.py]]复核 84 组习题—解答双射、1260 个 A—E 题解 ID、来源卡、范围内链接、节点图文单元、18 个节点制图脚本与全部已存资产的双重复跑。前五卷分别由[[learning_problem_decision_cumulative_contract_audit.py]]、[[pac_finite_class_cumulative_contract_audit.py]]、[[vc_uniform_convergence_cumulative_contract_audit.py]]、[[rademacher_margin_local_cumulative_contract_audit.py]]和[[algorithmic_generalization_cumulative_contract_audit.py]]独立复核。五卷均使用口试、210 分钟 100 分闭卷、scorer nonce、跨轨盲参、48 小时与 14 天证据链。卷级材料门现为 **5/10**，个人通过仍为 **0/10 / `not-attempted`**。
+学习理论 LT-01—84 已完成全章静态材料门：[[learning_theory_teaching_contract_audit.py]]复核 84 组习题—解答双射、1260 个 A—E 题解 ID、来源卡、范围内链接、节点图文单元、18 个节点制图脚本与全部已存资产的双重复跑。前五卷分别由[[learning_problem_decision_cumulative_contract_audit.py]]、[[pac_finite_class_cumulative_contract_audit.py]]、[[vc_uniform_convergence_cumulative_contract_audit.py]]、[[rademacher_margin_local_cumulative_contract_audit.py]]和[[algorithmic_generalization_cumulative_contract_audit.py]]独立复核。五卷均使用口试、210 分钟 100 分闭卷、scorer nonce、跨轨盲参、48 小时与 14 天证据链；它们完成时把卷级材料门推进到 **5/10**，个人通过仍为 **0/10 / `not-attempted`**。
 
-前五卷另由[[资格考 - 学习理论 I：从风险到算法依赖泛化（20.1—20.5）|LT-QUAL-01]]做跨卷验收，并配有[[资格考解答 - 学习理论 I：从风险到算法依赖泛化（20.1—20.5）|独立详解]]、[[实验 - 学习理论资格考 I 跨卷累计复现门|三轨门]]与[[learning_theory_qualification_01_contract_audit.py|独立审计]]。资格考材料门现为 **1/2**，个人资格仍为 **0/2 / `not-attempted`**；不能把题卷或 canonical 图存在写成个人通过。
+前五卷另由[[资格考 - 学习理论 I：从风险到算法依赖泛化（20.1—20.5）|LT-QUAL-01]]做跨卷验收，并配有[[资格考解答 - 学习理论 I：从风险到算法依赖泛化（20.1—20.5）|独立详解]]、[[实验 - 学习理论资格考 I 跨卷累计复现门|三轨门]]与[[learning_theory_qualification_01_contract_audit.py|独立审计]]。它构成第一份跨卷资格考材料；不能把题卷或 canonical 图存在写成个人通过。
 
-第六卷[[阶段测验 - 经典模型与模型选择（20.6）|MODEL-CUM-01]]、独立详解与[[实验 - 经典模型与模型选择累计复现门|三轨门]]也已由[[classical_models_cumulative_contract_audit.py]]回归。卷级材料现为 **6/10**，个人仍为 **0/10 / `not-attempted`**；正式认证前置为 `LT-QUAL-01 retained`，当前未满足。
+第六卷[[阶段测验 - 经典模型与模型选择（20.6）|MODEL-CUM-01]]、独立详解与[[实验 - 经典模型与模型选择累计复现门|三轨门]]也已由[[classical_models_cumulative_contract_audit.py]]回归；它把卷级材料门推进到 **6/10**。个人仍为 **0/10 / `not-attempted`**；正式认证前置为 `LT-QUAL-01 retained`，当前未满足。
 
-第七卷[[阶段测验 - 表示学习、度量学习与自监督（20.7）|REPR-CUM-01]]、独立详解与[[实验 - 表示学习、度量学习与自监督累计复现门|三轨门]]已由[[representation_selfsupervised_cumulative_contract_audit.py]]回归。卷级材料现为 **7/10**，个人仍为 **0/10 / `not-attempted`**；正式认证前置为 `MODEL-CUM-01 retained`，当前未满足。
+第七卷[[阶段测验 - 表示学习、度量学习与自监督（20.7）|REPR-CUM-01]]、独立详解与[[实验 - 表示学习、度量学习与自监督累计复现门|三轨门]]已由[[representation_selfsupervised_cumulative_contract_audit.py]]回归；它把卷级材料门推进到 **7/10**。个人仍为 **0/10 / `not-attempted`**；正式认证前置为 `MODEL-CUM-01 retained`，当前未满足。
 
-第八卷[[阶段测验 - 校准、不确定性与分布偏移（20.8）|REL-CUM-01]]、独立详解与[[实验 - 校准、不确定性与分布偏移累计复现门|三轨门]]已由[[calibration_shift_cumulative_contract_audit.py]]回归。卷级材料现为 **8/10**，个人仍为 **0/10 / `not-attempted`**；正式认证前置为 `REPR-CUM-01 retained`，当前未满足。
+第八卷[[阶段测验 - 校准、不确定性与分布偏移（20.8）|REL-CUM-01]]、独立详解与[[实验 - 校准、不确定性与分布偏移累计复现门|三轨门]]已由[[calibration_shift_cumulative_contract_audit.py]]回归；它把卷级材料门推进到 **8/10**。个人仍为 **0/10 / `not-attempted`**；正式认证前置为 `REPR-CUM-01 retained`，当前未满足。
 
-第九卷[[阶段测验 - 在线学习、Boosting 与序列预测（20.9）|ONLINE-CUM-01]]、独立详解与[[实验 - 在线学习、Boosting 与序列预测累计复现门|三轨门]]已由[[online_boosting_cumulative_contract_audit.py]]回归。卷级材料现为 **9/10**，个人仍为 **0/10 / `not-attempted`**；正式认证前置为 `REL-CUM-01 retained`，当前未满足。
+第九卷[[阶段测验 - 在线学习、Boosting 与序列预测（20.9）|ONLINE-CUM-01]]、独立详解与[[实验 - 在线学习、Boosting 与序列预测累计复现门|三轨门]]已由[[online_boosting_cumulative_contract_audit.py]]回归；它把卷级材料门推进到 **9/10**。个人仍为 **0/10 / `not-attempted`**；正式认证前置为 `REL-CUM-01 retained`，当前未满足。
 
-第十卷[[阶段测验 - 深度泛化理论接口与开放边界（20.10）|DEEP-CUM-01]]、独立详解与[[实验 - 深度泛化理论接口与开放边界累计复现门|三轨门]]已由[[deep_generalization_cumulative_contract_audit.py]]回归。卷级材料现为 **10/10**，个人仍为 **0/10 / `not-attempted`**；正式认证前置为 `ONLINE-CUM-01 retained`，当前未满足。下一材料施工点为 `LT-QUAL-02`。
+第十卷[[阶段测验 - 深度泛化理论接口与开放边界（20.10）|DEEP-CUM-01]]、独立详解与[[实验 - 深度泛化理论接口与开放边界累计复现门|三轨门]]已由[[deep_generalization_cumulative_contract_audit.py]]回归；至此卷级材料达到 **10/10**。个人仍为 **0/10 / `not-attempted`**；正式认证前置为 `ONLINE-CUM-01 retained`，当前未满足。
+
+后五卷现由[[资格考 - 学习理论 II：从模型选择到深度泛化证据（20.6—20.10）|LT-QUAL-02]]统一验收，并配有[[资格考解答 - 学习理论 II：从模型选择到深度泛化证据（20.6—20.10）|独立详解]]、[[实验 - 学习理论资格考 II 跨卷累计复现门|三轨门]]与[[learning_theory_qualification_02_contract_audit.py|独立审计]]。至此跨卷资格考材料为 **2/2 `regression-passed`**；个人资格仍为 **0/2 / `not-attempted`**，正式参加须先满足 `LT-QUAL-01 + MODEL/REPR/REL/ONLINE/DEEP retained`。
 
 | 学习理论卷级测验 | 覆盖范围 | 状态 |
 |---|---|---|
@@ -470,6 +472,7 @@ updated: 2026-08-29
 | 学习理论跨卷资格考 | 覆盖范围 | 状态 |
 |---|---|---|
 | LT-QUAL-01 | LT-01—40：risk/PAC/VC/Rademacher/algorithm-dependent generalization | regression-passed material（1/2）/ not-attempted learner（0/2） |
+| LT-QUAL-02 | LT-41—84：模型/表示/可靠性/序列学习/深度泛化证据 | regression-passed material（2/2）/ not-attempted learner（0/2；LT-QUAL-01 与后五卷 retained 前置未满足） |
 
 | 测验 | 覆盖范围 | 状态 |
 |---|---|---|

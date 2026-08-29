@@ -72,15 +72,15 @@ solutions: 84 / 84
 static material audit: regression-passed
 volume evidence gates built: 10 / 10
 personally passed volumes: 0 / 10
-qualification evidence gates built: 1 / 2
+qualification evidence gates built: 2 / 2
 personally passed qualifications: 0 / 2
 state: draft nodes / regression-passed material / not-attempted learner
-next: build LT-QUAL-02 for 20.6--20.10
+next: execute personal volume and qualification evidence in prerequisite order
 ```
 
 LT-01—84 已成稿，共 84 套、1260 道 A—E 训练及独立详解；全量 YAML、双链、题解 ID、图片/XML、图文单元、课程映射与生成确定性通过独立审计。20.1 的[[阶段测验 - 学习问题、决策与风险（20.1）|LT-CUM-01]]、20.2 的[[阶段测验 - PAC 学习与有限假设类（20.2）|PAC-CUM-01]]、20.3 的[[阶段测验 - VC 维与一致收敛（20.3）|VC-CUM-01]]、20.4 的[[阶段测验 - 数据依赖复杂度、间隔与快率（20.4）|RAD-CUM-01]]与 20.5 的[[阶段测验 - 稳定性、压缩、PAC-Bayes 与信息泛化（20.5）|ALG-CUM-01]]现各自形成“口试—闭卷—答案/输出隔离—scorer nonce 三轨—盲参—48 小时—14 天”证据门，材料均为 `regression-passed`。
 
-覆盖前五卷的[[资格考 - 学习理论 I：从风险到算法依赖泛化（20.1—20.5）|LT-QUAL-01]]、[[资格考解答 - 学习理论 I：从风险到算法依赖泛化（20.1—20.5）|独立详解]]与[[实验 - 学习理论资格考 I 跨卷累计复现门|三轨复现门]]也已建立，由[[learning_theory_qualification_01_contract_audit.py]]独立复核。它在卷级材料 **5/10** 时建立；资格考材料门为 **1/2**，个人通过仍为 **0/2 / `not-attempted`**。
+覆盖前五卷的[[资格考 - 学习理论 I：从风险到算法依赖泛化（20.1—20.5）|LT-QUAL-01]]、[[资格考解答 - 学习理论 I：从风险到算法依赖泛化（20.1—20.5）|独立详解]]与[[实验 - 学习理论资格考 I 跨卷累计复现门|三轨复现门]]也已建立，由[[learning_theory_qualification_01_contract_audit.py]]独立复核。它在卷级材料 **5/10** 时作为第一份资格考材料门建立；个人通过仍为 **0/2 / `not-attempted`**。
 
 20.6 的[[阶段测验 - 经典模型与模型选择（20.6）|MODEL-CUM-01]]、[[阶段测验解答 - 经典模型与模型选择（20.6）|独立详解]]与[[实验 - 经典模型与模型选择累计复现门|三轨门]]现由[[classical_models_cumulative_contract_audit.py]]独立复核；该门是在全章卷级材料为 **6/10** 时建立，个人仍未通过。
 
@@ -90,4 +90,6 @@ LT-01—84 已成稿，共 84 套、1260 道 A—E 训练及独立详解；全�
 
 20.9 的[[阶段测验 - 在线学习、Boosting 与序列预测（20.9）|ONLINE-CUM-01]]、[[阶段测验解答 - 在线学习、Boosting 与序列预测（20.9）|独立详解]]与[[实验 - 在线学习、Boosting 与序列预测累计复现门|三轨门]]现由[[online_boosting_cumulative_contract_audit.py]]独立复核，卷级材料达到 **9/10**，个人仍为 **0/10 / `not-attempted`**。正式参加本卷认证要求 `REL-CUM-01 retained`；当前只建立材料，未满足个人前置。下一施工点进入 20.10。
 
-20.10 的[[阶段测验 - 深度泛化理论接口与开放边界（20.10）|DEEP-CUM-01]]、[[阶段测验解答 - 深度泛化理论接口与开放边界（20.10）|独立详解]]与[[实验 - 深度泛化理论接口与开放边界累计复现门|三轨门]]现由[[deep_generalization_cumulative_contract_audit.py]]独立复核，卷级材料达到 **10/10**，个人仍为 **0/10 / `not-attempted`**。正式参加本卷认证要求 `ONLINE-CUM-01 retained`；当前只建立材料，未满足个人前置。下一施工点进入覆盖 20.6—20.10 的 `LT-QUAL-02`。
+20.10 的[[阶段测验 - 深度泛化理论接口与开放边界（20.10）|DEEP-CUM-01]]、[[阶段测验解答 - 深度泛化理论接口与开放边界（20.10）|独立详解]]与[[实验 - 深度泛化理论接口与开放边界累计复现门|三轨门]]现由[[deep_generalization_cumulative_contract_audit.py]]独立复核，卷级材料达到 **10/10**，个人仍为 **0/10 / `not-attempted`**。正式参加本卷认证要求 `ONLINE-CUM-01 retained`；当前只建立材料，未满足个人前置。
+
+覆盖后五卷的[[资格考 - 学习理论 II：从模型选择到深度泛化证据（20.6—20.10）|LT-QUAL-02]]、[[资格考解答 - 学习理论 II：从模型选择到深度泛化证据（20.6—20.10）|独立详解]]与[[实验 - 学习理论资格考 II 跨卷累计复现门|三轨复现门]]现由[[learning_theory_qualification_02_contract_audit.py]]独立复核。它以同一个 source→target→online AI 服务贯通模型/表示选择、校准与 shift、regret/OPE、插值/不变性/kernel-feature regime；资格考材料门达到 **2/2 `regression-passed`**，个人仍为 **0/2 / `not-attempted`**。正式参加要求 `LT-QUAL-01 + MODEL/REPR/REL/ONLINE/DEEP` 全部 retained；当前未满足。
