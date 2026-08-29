@@ -4,7 +4,7 @@ status: active
 area: [architecture, graph-neural-networks]
 related: ["[[表示与模型架构完整课程地图与掌握标准]]"]
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # 图表示与消息传递神经网络 MOC
@@ -12,12 +12,15 @@ updated: 2026-08-24
 > [!abstract] 分卷出口
 > 从“图是节点重标号等价类”出发，能推导等变 MPNN、谱—空间 GCN、GIN/GAT 与 invariant readout；能严格区分 over-smoothing、over-squashing 和 1-WL 表达边界，并把模型定义、构图、split、实验和系统证据分层。
 
+> [!info] 当前教学迁移
+> ARCH-17—20 已以三节点路径 $\mathcal G_\square$ 完成第一半迁移：从重标号矩阵、同步消息传递，走到归一化 GCN 与多重集聚合碰撞。本卷为 **4/8 迁移中**，尚未达到分卷材料门；全章为 **ARCH-01—20（20/64）**、材料门 **2/8**，个人仍为 `not-attempted`。
+
 | ID | 节点 | 学习出口 | 状态 |
 |---|---|---|---|
-| ARCH-17 | [[图数据、节点重标号与置换对称性]] | graph symmetry contract | draft + A–E 闭环 |
-| ARCH-18 | [[消息传递神经网络的统一形式]] | message-passing derivation | draft + A–E 闭环 |
-| ARCH-19 | [[谱图卷积、空间图卷积与归一化邻接]] | spectral/spatial bridge | draft + A–E 闭环 |
-| ARCH-20 | [[聚合器、可辨识性与 Graph Isomorphism Network]] | multiset injectivity | draft + A–E 闭环 |
+| ARCH-17 | [[图数据、节点重标号与置换对称性]] | graph symmetry contract | `regression-passed` material / learner `not-attempted` |
+| ARCH-18 | [[消息传递神经网络的统一形式]] | message-passing derivation | `regression-passed` material / learner `not-attempted` |
+| ARCH-19 | [[谱图卷积、空间图卷积与归一化邻接]] | spectral/spatial bridge | `regression-passed` material / learner `not-attempted` |
+| ARCH-20 | [[聚合器、可辨识性与 Graph Isomorphism Network]] | multiset injectivity | `regression-passed` material / learner `not-attempted` |
 | ARCH-21 | [[图网络深度、过平滑与过挤压]] | depth failure audit | draft + A–E 闭环 |
 | ARCH-22 | [[图注意力与结构偏置]] | graph attention | draft + A–E 闭环 |
 | ARCH-23 | [[图级读出、异构图与任务接口]] | invariant readout | draft + A–E 闭环 |
@@ -37,3 +40,9 @@ updated: 2026-08-24
 - 正式图：8 / 8；
 - 数值/组合审计：[[00-知识库管理/_labs/code/architecture_gnn_audit.py]]；
 - 真实学习验收：尚未作答或评分。
+
+## 当前施工边界
+
+- 已迁移：ARCH-17—20，4/8；
+- 待迁移：ARCH-21—24，将用同一 $\mathcal G_\square$ 与必要的反例图贯通过平滑、过挤压、GAT、readout 与 1-WL；
+- 分卷材料门：完成 ARCH-21—24 并通过八图、精确算例和链接回归后，才能从“4/8 迁移中”升级。

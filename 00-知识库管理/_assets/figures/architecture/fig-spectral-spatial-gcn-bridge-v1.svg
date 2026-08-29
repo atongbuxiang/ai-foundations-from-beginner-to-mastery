@@ -31,7 +31,8 @@
 <line x1="990" y1="304" x2="990" y2="339" stroke="#1F2937" stroke-width="2.5" marker-end="url(#a3)"/>
 <rect x="840" y="354" width="300" height="62" rx="8" fill="#FFF7ED" stroke="#C24135" stroke-width="2"/>
 <text x="990.0" y="391.0" font-size="17" font-weight="650" text-anchor="middle" fill="#C24135">H&#x27; = sigma(S H W)</text>
-<text x="840" y="470" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">谱动机 != 任意图上的平移卷积。</text>
+<text x="840" y="455" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">G□：D_tilde=diag(2,3,2)</text>
+<text x="840" y="485" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">SX≈(1.3165,2.7079,2.8165)</text>
 <line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
 <text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">多项式把频域函数变成局部算子；GCN 再把它压缩为规范化的一阶邻域混合。</text>
 </svg>

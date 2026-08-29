@@ -11,13 +11,140 @@ exercises: ["[[习题 - 聚合器、可辨识性与 Graph Isomorphism Network]]"
 solutions: ["[[解答 - 聚合器、可辨识性与 Graph Isomorphism Network]]"]
 figure: "[[00-知识库管理/_assets/figures/architecture/fig-multiset-aggregation-gin-v1.svg]]"
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # 聚合器、可辨识性与 Graph Isomorphism Network
 
 > [!abstract] 本节主问题
 > 聚合器把任意大小、无固定顺序的邻居多重集压成定长向量。若两个不同多重集在这一步碰撞，后续任何 MLP 都无法恢复差异。mean 丢失整体倍数，max 丢失计数与非最大元素；sum 在受限可数域和合适映射下可做 injective 编码，GIN 据此达到标准消息传递类中的 1-WL 表达上界。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** ARCH-18 说明 AGG 必须对邻居顺序不变，ARCH-19 给出一种归一化线性聚合；现在追问“不变压缩究竟丢掉了哪些邻域信息”；
+- **本页解决什么：** 用同一组邻域多重集构造 mean、max 与裸 sum 的三类碰撞，再解释 GIN 为什么要求合适的 injective 映射、中心角色和图级 readout；
+- **后续为何需要：** ARCH-21—24 的深度失效、图注意力、readout 和 1-WL 边界都要建立在“局部碰撞不可逆”这一事实之上。
+
+**第一遍只追踪碰撞发生在哪一步。** 比较 $\{\!\{1,4\}\!\}$、其重复版本与 $\{\!\{2,3\}\!\}$；一旦 AGG 输出相同，后面的 MLP 再复杂也不能知道输入是哪一个。
+
+**第二遍再读表达定理。** 明确可数定义域、有界 multiset size、injective $\phi$/update/readout 与有限实现之间的差距，并严格限定 GIN 达到的是标准 MPNN 的 1-WL 上界。
+
+### 问题链
+
+1. 为什么邻居必须建模为保留重复次数的 multiset？
+2. mean 对整体复制不敏感，具体丢失了什么？
+3. max 为什么看不见非最大元素与最大值 multiplicity？
+4. 裸 sum 为什么保留数量尺度却仍可能碰撞？
+5. $\sum_x\phi(x)$ 在什么受限条件下才可能成为 injective multiset encoding？
+6. GIN 为什么要把中心节点以 $(1+\epsilon)h_i$ 单独加入？
+7. “达到 1-WL”为什么既是表达能力结论，又不是一般图同构保证？
+
+> [!check] 第一遍停靠线
+> 若你能复算 mean/max 对 $\{\!\{1,4\}\!\}$ 与 $\{\!\{1,1,4,4\}\!\}$ 的碰撞，指出 sum 分别为 5 与 10；再说明裸 sum 又让 $\{\!\{1,4\}\!\}$ 与 $\{\!\{2,3\}\!\}$ 在 5 处碰撞，就完成了本页首遍。
+
+## 符号与对象账本
+
+| 对象 | 数学身份 | AI 中的身份 | 不能偷换成 |
+|---|---|---|---|
+| $X=\{\!\{x_1,\ldots,x_m\}\!\}$ | 邻域多重集 | unordered neighbor features | 去重集合 |
+| $a(X)$ | 固定维聚合摘要 | AGG output | 原邻域的无损副本 |
+| injective | 不同输入必得不同输出 | distinguishability condition | 训练后自动成立 |
+| $\phi(x)$ | 聚合前元素映射 | neighbor encoder | 裸 identity 的必然增强 |
+| cardinality | 多重集元素总数 | degree/count information | mean 自动保留的量 |
+| $(1+\epsilon)h_i$ | 单独编码的中心贡献 | GIN self term | attention 概率 |
+| 1-WL | 颜色细化辨识基准 | standard MPNN expressivity ceiling | 完整 graph-isomorphism oracle |
+
+### 贯穿算例 $\mathcal G_\square$：三种摘要、三种信息边界
+
+路径图中心节点的邻居特征为
+
+$$
+X=\{\!\{1,4\}\!\}.
+$$
+
+构造把每个邻居复制一次的
+
+$$
+Y=\{\!\{1,1,4,4\}\!\}.
+$$
+
+Mean 完全看不见整体倍数：
+
+$$
+\operatorname{mean}(X)=\frac52
+=\operatorname{mean}(Y).
+$$
+
+Max 也碰撞：
+
+$$
+\max(X)=4=\max(Y),
+$$
+
+并且连“4 出现一次还是两次”都不知道。Sum 在这对输入上能区分 multiplicity：
+
+$$
+\sum X=5,\qquad \sum Y=10.
+$$
+
+但裸 sum 仍不是无条件 injective。令
+
+$$
+Z=\{\!\{2,3\}\!\},
+$$
+
+则
+
+$$
+\sum X=5=\sum Z.
+$$
+
+后续任意 $f$ 都满足 $f(\sum X)=f(\sum Z)$。要分开这一个具体碰撞，可先映射
+
+$$
+\phi(x)=(1,x,x^2).
+$$
+
+于是
+
+$$
+\sum_{x\in X}\phi(x)=(2,5,17),
+\qquad
+\sum_{z\in Z}\phi(z)=(2,5,13).
+$$
+
+第一坐标显式记录 cardinality，第二坐标是和，第三坐标增加二阶统计。本例说明“合适 $\phi$ 可以解除某个碰撞”，并不证明三维矩特征对任意连续多重集 injective。
+
+对中心状态 $h_i=2$、$\epsilon=0$，GIN 在 MLP 前的输入为
+
+$$
+(1+\epsilon)h_i+\sum_{j\in\mathcal N(i)}h_j=2+5=7.
+$$
+
+若邻居整体复制，得到 $2+10=12$，所以 sum 路径保留了这次 degree 变化；若换成 $Z$，裸 sum 仍给 7，必须依赖更合适的前置编码才能分开。
+
+## 核心公式七问：GIN 的局部更新
+
+$$
+\boxed{
+h_i^{(k)}
+=\operatorname{MLP}^{(k)}
+\left(
+(1+\epsilon^{(k)})h_i^{(k-1)}
++\sum_{j\in\mathcal N(i)}h_j^{(k-1)}
+\right).
+}
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 在保留邻居 multiplicity 的同时，区分中心角色并学习局部 multiset 编码 |
+| 对象 | self term 与 neighbor sum 先组合，MLP 再做共享非线性更新 |
+| 来路 | 1-WL 每轮把中心颜色与邻居颜色 multiset 一起做 injective hash 的神经对应 |
+| 步骤 | 编码邻居、求和、加入加权中心状态，再经足够表达的 MLP |
+| 读法 | “我原来是谁”和“我的邻居有哪些且各出现几次”共同决定新颜色 |
+| 检查 | 打乱邻居顺序应不变；复制邻居应改变 sum；中心与同色邻居不能因无角色标记而混淆 |
+| 去路 | ARCH-24 会说明即使局部步骤都理想 injective，1-WL 仍有全局非同构反例 |
 
 ## 一、为什么要讨论“可辨识性”
 
@@ -145,4 +272,3 @@ $$
 - [[S-2019-Xu-GIN]]
 - [[S-2017-Zaheer-Deep-Sets]]
 - [[S-2017-Hamilton-GraphSAGE]]
-

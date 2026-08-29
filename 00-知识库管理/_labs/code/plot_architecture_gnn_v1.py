@@ -30,20 +30,22 @@ def relabeling_symmetry():
         (BLUE, TEAL, RED),
     )
     heading(out, 42, "A", "同一图的两种编号", BLUE)
-    coords = {0: (90, 120), 1: (250, 120), 2: (170, 225)}
-    edges = ((0, 1), (1, 2), (2, 0))
+    coords = {0: (80, 180), 1: (180, 110), 2: (300, 180)}
+    edges = ((0, 1), (1, 2))
     graph(out, coords, edges, {0: "1", 1: "2", 2: "3"})
     out += [text(170, 265, "A, X", 17, 700, "middle", BLUE), line(65, 285, 335, 285, GRID, 2)]
-    lower = {0: (90, 335), 1: (250, 335), 2: (170, 440)}
+    lower = {0: (80, 405), 1: (180, 335), 2: (300, 405)}
     graph(out, lower, edges, {0: "3", 1: "1", 2: "2"}, color=TEAL)
-    out += [text(170, 490, "P A P^T, P X", 17, 700, "middle", TEAL)]
+    out += [text(170, 475, "P A P^T, P X", 17, 700, "middle", TEAL),
+            text(45, 505, "X'=(4,1,2)", 13, 650, fill=MUTED)]
 
     heading(out, 430, "B", "节点输出必须共同重排", TEAL)
     node(out, 455, 115, 295, 70, "F(P A P^T, P X)", BLUE, "#EFF6FF", 17)
     out += [line(602, 188, 602, 235, TEAL, 3, marker="a1")]
     node(out, 455, 250, 295, 70, "= P F(A, X)", TEAL, "#ECFDF5", 18)
     out += [text(455, 385, "预测跟着节点走，", 17, 650), text(455, 420, "而不是粘在行号上。", 17, 700, fill=TEAL)]
-    out += [text(455, 470, "边方向、self-loop、edge type", 15, fill=MUTED), text(455, 498, "必须先写入数据合同。", 15, fill=MUTED)]
+    out += [text(455, 470, "G□：A'X'=PAX=(2,2,5)。", 14, 700, fill=TEAL),
+            text(455, 498, "输出跟节点走，不粘在行号上。", 13, fill=MUTED)]
 
     heading(out, 830, "C", "图级读出必须不变", RED)
     for y, lab in ((120, "node states H"), (230, "sum / invariant readout"), (340, "graph prediction")):
@@ -84,7 +86,8 @@ def mpnn_pipeline():
                                      ("fan-out s", "about s^K tree"), ("sparse full", "O(|E|d) / layer"))):
         y = 105 + i * 90
         out += [text(845, y, lab, 15, 700, fill=RED), text(955, y, val, 16, 650)]
-    out += [text(845, 470, "感受野存在，不等于远程信息可恢复。", 15, fill=MUTED)]
+    out += [text(845, 455, "G□：h¹=(3,7,6)", 14, 700, fill=BLUE),
+            text(845, 485, "h²=(10,16,13)", 14, 700, fill=RED)]
     return finish(out, "MPNN 的最小合同是局部消息、无序聚合、同步更新与任务读出。")
 
 
@@ -113,7 +116,8 @@ def spectral_spatial():
     node(out, 840, 225, 300, 76, "S = D_tilde^(-1/2) A_tilde D_tilde^(-1/2)", TEAL, "#ECFDF5", 14)
     out += [line(990, 304, 990, 339, INK, 2.5, marker="a3")]
     node(out, 840, 354, 300, 62, "H' = sigma(S H W)", RED, "#FFF7ED", 17)
-    out += [text(840, 470, "谱动机 != 任意图上的平移卷积。", 15, fill=MUTED)]
+    out += [text(840, 455, "G□：D_tilde=diag(2,3,2)", 13, 700, fill=TEAL),
+            text(840, 485, "SX≈(1.3165,2.7079,2.8165)", 13, fill=MUTED)]
     return finish(out, "多项式把频域函数变成局部算子；GCN 再把它压缩为规范化的一阶邻域混合。")
 
 
@@ -124,17 +128,17 @@ def multiset_gin():
         (RED, BLUE, TEAL),
     )
     heading(out, 42, "A", "mean 丢失倍数", RED)
-    for y, vals in ((145, (1, 3)), (305, (1, 1, 3, 3))):
+    for y, vals in ((145, (1, 4)), (305, (1, 1, 4, 4))):
         for i, v in enumerate(vals):
             out += [circle(75 + i * 65, y, 22, BLUE, "#EFF6FF", 2), text(75 + i * 65, y + 6, v, 15, 700, "middle", BLUE)]
-        out += [text(335, y + 6, "mean = 2", 17, 700, "end", RED)]
+        out += [text(350, y + 55, "mean = 2.5", 16, 700, "end", RED)]
     out += [text(45, 430, "不同 cardinality，同一输出。", 16, fill=MUTED)]
 
     heading(out, 430, "B", "max 丢失计数与次大值", BLUE)
-    for y, vals in ((145, (1, 3)), (305, (2, 3, 3))):
+    for y, vals in ((145, (1, 4)), (305, (1, 1, 4, 4))):
         for i, v in enumerate(vals):
             out += [rect(455 + i * 65, y - 22, 44, 44, BLUE, "#EFF6FF", 5, 2), text(477 + i * 65, y + 6, v, 15, 700, "middle", BLUE)]
-        out += [text(755, y + 6, "max = 3", 17, 700, "end", RED)]
+        out += [text(755, y + 55, "max = 4", 17, 700, "end", RED)]
     out += [text(445, 430, "未进入最大值的元素不可恢复。", 16, fill=MUTED)]
 
     heading(out, 830, "C", "sum + injective maps 的条件", TEAL)
@@ -143,8 +147,9 @@ def multiset_gin():
     node(out, 845, 215, 280, 58, "combine self with (1+eps)", BLUE, "#EFF6FF", 15)
     out += [line(985, 276, 985, 310, BLUE, 2.5, marker="a0")]
     node(out, 845, 325, 280, 58, "MLP update + invariant readout", RED, "#FFF7ED", 15)
-    out += [text(845, 430, "结论依可数域、injectivity 与容量。", 15, fill=MUTED),
-            text(845, 465, "GIN 达到 1-WL，不超越 1-WL。", 15, 700, fill=RED)]
+    out += [text(845, 425, "sum: 5 vs 10；但 {1,4} 与 {2,3} 均为 5。", 12, fill=MUTED),
+            text(845, 458, "phi=(1,x,x²): (2,5,17) vs (2,5,13)", 12, 700, fill=TEAL),
+            text(845, 490, "GIN 达到 1-WL，不超越 1-WL。", 13, 700, fill=RED)]
     return finish(out, "聚合后的碰撞无法被后续 MLP 修复；先审计保留了哪些多重集统计。")
 
 

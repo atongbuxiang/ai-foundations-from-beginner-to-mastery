@@ -6,7 +6,7 @@ The audit keeps three claims separate:
 2. only the declared migration wave satisfies the current beginner-first contract;
 3. personal learning evidence remains not-attempted.
 
-Waves A--D (ARCH-01--16) are recomputed here without importing the figure generators.
+Waves A--E (ARCH-01--20) are recomputed here without importing the figure generators.
 """
 
 from __future__ import annotations
@@ -28,7 +28,7 @@ EXERCISES = LABS / "exercises"
 SOLUTIONS = LABS / "solutions"
 CODE = LABS / "code"
 ASSETS = ROOT / "00-知识库管理" / "_assets" / "figures" / "architecture"
-MIGRATED_IDS = tuple(range(1, 17))
+MIGRATED_IDS = tuple(range(1, 21))
 
 EXPECTED_FIGURES = {
     "fig-architecture-comparison-contract-v1.svg": "28f2e18521dc3e2c885b98bf528740b7010aad60b610e83990ab9cd6f234139e",
@@ -47,6 +47,10 @@ EXPECTED_FIGURES = {
     "fig-ssm-recurrence-convolution-scan-v1.svg": "bfa55d11052fd253425d6a956cf1c4938a29f469d5d2befd34ae61f610a81ed5",
     "fig-hippo-s4-projection-structure-v1.svg": "64a970e734ef8e674abf5c179897e00184b2cbded05cbdeeeeb0d11645455abe",
     "fig-mamba-selectivity-evidence-v1.svg": "d3b9af1ffcac98c652197d1ce038247485ba155d094efc72d78de43503e6a395",
+    "fig-graph-relabeling-equivariance-v1.svg": "73739435d25bc4ee2b745c17a1a7137f9a97234d8a5f19d42882f2b2a24689de",
+    "fig-mpnn-message-aggregate-update-v1.svg": "ae83d1c4c8951078cb29a597867aff2971690320e4ffb45d93056233ec27e448",
+    "fig-spectral-spatial-gcn-bridge-v1.svg": "144d67aa127db39546c2cadc561f2de9955f0b6f1e598faff468f39dbd367cc6",
+    "fig-multiset-aggregation-gin-v1.svg": "856ced2098187018130498bd778fcb5bc2c4347de78ac8140fec94819e559d76",
 }
 
 STATE_SURFACES = (
@@ -54,6 +58,7 @@ STATE_SURFACES = (
     CHAPTER / "表示与模型架构完整课程地图与掌握标准.md",
     CHAPTER / "40.1-卷积、空间结构与等变性" / "卷积、空间结构与等变性 MOC.md",
     CHAPTER / "40.2-循环网络、记忆与状态空间模型" / "循环网络、记忆与状态空间模型 MOC.md",
+    CHAPTER / "40.3-图表示与消息传递神经网络" / "图表示与消息传递神经网络 MOC.md",
     EXERCISES / "练习与测验 MOC.md",
     LABS / "推导与实验 MOC.md",
     ROOT / "00-知识库管理" / "00-总览" / "全库教学重写审计与迁移台账.md",
@@ -192,12 +197,17 @@ def audit_migrated_contract(nodes: list[tuple[int, Path, str]]) -> None:
         relative = path.relative_to(ROOT)
         for marker in markers:
             require(marker in content, f"{relative}: teaching marker missing: {marker}")
-        fixture = "\\mathcal C_\\square" if node_id <= 8 else "\\mathcal S_\\square"
+        if node_id <= 8:
+            fixture = "\\mathcal C_\\square"
+        elif node_id <= 16:
+            fixture = "\\mathcal S_\\square"
+        else:
+            fixture = "\\mathcal G_\\square"
         require(fixture in content, f"{relative}: shared fixture missing: {fixture}")
         require("AI" in content, f"{relative}: AI object mapping missing")
         require(frontmatter_line(content, "updated") == "2026-08-29", f"{relative}: migration date mismatch")
         require(len(content.splitlines()) >= 230, f"{relative}: derivation depth unexpectedly short")
-    print("PASS ARCH waves A--D: ARCH-01--16 course/two-pass/problem/object/formula contracts=16/16")
+    print("PASS ARCH waves A--E: ARCH-01--20 course/two-pass/problem/object/formula contracts=20/20")
 
 
 def audit_exercises(nodes: list[tuple[int, Path, str]], index: dict[str, list[Path]]) -> None:
@@ -240,7 +250,7 @@ def audit_links_and_figures(nodes: list[tuple[int, Path, str]], index: dict[str,
         ET.parse(asset)
         digest = hashlib.sha256(asset.read_bytes()).hexdigest()
         require(digest == expected_hash, f"{filename}: hash changed: {digest}")
-    print(f"PASS ARCH waves A--D links/figures: Wiki links={link_count}; SVG/XML/hash=16/16")
+    print(f"PASS ARCH waves A--E links/figures: Wiki links={link_count}; SVG/XML/hash=20/20")
 
 
 def correlation_valid(x: list[float], w: list[float]) -> list[float]:
@@ -467,6 +477,92 @@ def audit_migrated_math(nodes: list[tuple[int, Path, str]]) -> None:
     require(boundary_path == (0.0625, 0.25), f"selective boundary path mismatch: {boundary_path}")
     require(plain_path[1] != boundary_path[1], "selective fixed-kernel counterexample collapsed")
 
+    def transpose(matrix: list[list[float]]) -> list[list[float]]:
+        return [list(column) for column in zip(*matrix)]
+
+    def matmul(left: list[list[float]], right: list[list[float]]) -> list[list[float]]:
+        return [
+            [
+                sum(left[row][inner] * right[inner][column] for inner in range(len(right)))
+                for column in range(len(right[0]))
+            ]
+            for row in range(len(left))
+        ]
+
+    def matvec(matrix: list[list[float]], vector: list[float]) -> list[float]:
+        return [sum(row[column] * vector[column] for column in range(len(vector))) for row in matrix]
+
+    adjacency = [[0.0, 1.0, 0.0], [1.0, 0.0, 1.0], [0.0, 1.0, 0.0]]
+    features = [1.0, 2.0, 4.0]
+    permutation = [[0.0, 0.0, 1.0], [1.0, 0.0, 0.0], [0.0, 1.0, 0.0]]
+    relabeled_adjacency = matmul(matmul(permutation, adjacency), transpose(permutation))
+    relabeled_features = matvec(permutation, features)
+    neighbor_sum = matvec(adjacency, features)
+    relabeled_neighbor_sum = matvec(relabeled_adjacency, relabeled_features)
+    require(
+        relabeled_adjacency == [[0.0, 0.0, 1.0], [0.0, 0.0, 1.0], [1.0, 1.0, 0.0]],
+        f"graph relabeling adjacency mismatch: {relabeled_adjacency}",
+    )
+    require(relabeled_features == [4.0, 1.0, 2.0], f"graph relabeling features mismatch: {relabeled_features}")
+    require(neighbor_sum == [2.0, 5.0, 2.0], f"graph neighbor sum mismatch: {neighbor_sum}")
+    require(
+        relabeled_neighbor_sum == matvec(permutation, neighbor_sum) == [2.0, 2.0, 5.0],
+        f"graph permutation equivariance mismatch: {relabeled_neighbor_sum}",
+    )
+    require(sum(features) == sum(relabeled_features) == 7.0, "graph invariant readout mismatch")
+
+    first_mpnn = [value + message for value, message in zip(features, neighbor_sum)]
+    second_messages = matvec(adjacency, first_mpnn)
+    second_mpnn = [value + message for value, message in zip(first_mpnn, second_messages)]
+    require(first_mpnn == [3.0, 7.0, 6.0], f"first MPNN layer mismatch: {first_mpnn}")
+    require(second_mpnn == [10.0, 16.0, 13.0], f"second MPNN layer mismatch: {second_mpnn}")
+    asynchronous = features.copy()
+    asynchronous[0] = features[0] + features[1]
+    asynchronous[1] = features[1] + asynchronous[0] + features[2]
+    require(asynchronous[1] == 9.0 != first_mpnn[1], "synchronous/asynchronous counterexample collapsed")
+
+    sqrt_six = math.sqrt(6.0)
+    normalized_adjacency = [
+        [0.5, 1.0 / sqrt_six, 0.0],
+        [1.0 / sqrt_six, 1.0 / 3.0, 1.0 / sqrt_six],
+        [0.0, 1.0 / sqrt_six, 0.5],
+    ]
+    propagated = matvec(normalized_adjacency, features)
+    expected_propagated = [0.5 + 2.0 / sqrt_six, 2.0 / 3.0 + 5.0 / sqrt_six, 2.0 + 2.0 / sqrt_six]
+    require(
+        all(math.isclose(value, expected) for value, expected in zip(propagated, expected_propagated)),
+        f"GCN normalized propagation mismatch: {propagated}",
+    )
+    relabeled_normalized = matmul(matmul(permutation, normalized_adjacency), transpose(permutation))
+    require(
+        all(
+            math.isclose(value, expected)
+            for value, expected in zip(
+                matvec(relabeled_normalized, relabeled_features),
+                matvec(permutation, propagated),
+            )
+        ),
+        "GCN normalized propagation lost permutation equivariance",
+    )
+    dirichlet_energy = (features[0] - features[1]) ** 2 + (features[1] - features[2]) ** 2
+    require(dirichlet_energy == 5.0, f"graph Dirichlet energy mismatch: {dirichlet_energy}")
+
+    multiset_x = [1.0, 4.0]
+    multiset_y = [1.0, 1.0, 4.0, 4.0]
+    multiset_z = [2.0, 3.0]
+    require(
+        sum(multiset_x) / len(multiset_x) == sum(multiset_y) / len(multiset_y) == 2.5,
+        "mean aggregation collision mismatch",
+    )
+    require(max(multiset_x) == max(multiset_y) == 4.0, "max aggregation collision mismatch")
+    require(sum(multiset_x) == sum(multiset_z) == 5.0, "raw sum aggregation collision mismatch")
+    phi = lambda value: (1.0, value, value * value)
+    phi_sum_x = tuple(sum(phi(value)[index] for value in multiset_x) for index in range(3))
+    phi_sum_z = tuple(sum(phi(value)[index] for value in multiset_z) for index in range(3))
+    require(phi_sum_x == (2.0, 5.0, 17.0), f"injective feature sum X mismatch: {phi_sum_x}")
+    require(phi_sum_z == (2.0, 5.0, 13.0), f"injective feature sum Z mismatch: {phi_sum_z}")
+    require(phi_sum_x != phi_sum_z, "injective feature map failed to separate the multisets")
+
     migrated_text = "\n".join(content for node_id, _, content in nodes if node_id in MIGRATED_IDS)
     for anchor in (
         "(-1,-1,2)", "(-1,-1,2,-2,2)", "14", "36",
@@ -474,12 +570,14 @@ def audit_migrated_math(nodes: list[tuple[int, Path, str]]) -> None:
         "(1,5/2,1/4)", "1/32", "3/4", "(1,1/4,9/20)", "3/10", "(1/2,1)", "128", "96",
         "(2,3,3/2,-5/4)", "(2,1,1/2,1/4)", "(1/16,-5/4)", "(2,1/\\sqrt3)",
         "\\frac13", "\\frac1{11}", "h_3=\\frac12", "h'_3=\\frac14",
+        "(4,1,2)", "(2,2,5)", "(3,7,6)", "(10,16,13)",
+        "1.3165", "2.7079", "2.8165", "(2,5,17)", "(2,5,13)",
     ):
-        require(anchor in migrated_text, f"wave-A teaching anchor missing: {anchor}")
+        require(anchor in migrated_text, f"migrated teaching anchor missing: {anchor}")
     print(
-        "PASS ARCH waves A--D independent math: convolution/equivariance, aliasing, RF, "
+        "PASS ARCH waves A--E independent math: convolution/equivariance, aliasing, RF, "
         "CNN budget, C4 lifting, recurrence/BPTT, LSTM/GRU, ZOH/scan, projection/DPLR "
-        "and selective paths exact"
+        "selective paths, graph relabeling/MPNN/GCN and multiset aggregation exact"
     )
 
 
@@ -487,13 +585,13 @@ def audit_state_surfaces() -> None:
     for path in STATE_SURFACES:
         content = read(path)
         relative = path.relative_to(ROOT)
-        require("ARCH-01—16" in content, f"{relative}: migrated range missing")
-        require("16/64" in content, f"{relative}: migrated count missing")
+        require("ARCH-01—20" in content, f"{relative}: migrated range missing")
+        require("20/64" in content, f"{relative}: migrated count missing")
         require("2/8" in content, f"{relative}: material-gate count missing")
         require("not-attempted" in content, f"{relative}: personal state missing")
     print(
         f"PASS ARCH state surfaces: {len(STATE_SURFACES)} views agree on "
-        "migrated=16/64, material gates=2/8, personal=not-attempted"
+        "migrated=20/64, material gates=2/8, personal=not-attempted"
     )
 
 
@@ -503,6 +601,7 @@ def audit_compute() -> None:
         (CODE / "plot_architecture_convolution_foundations_v1.py", 4),
         (CODE / "plot_architecture_convolution_advanced_v1.py", 4),
         (CODE / "plot_architecture_sequence_ssm_v1.py", 8),
+        (CODE / "plot_architecture_gnn_v1.py", 8),
     )
     for _ in range(2):
         for script, expected_count in scripts:
@@ -516,7 +615,7 @@ def audit_compute() -> None:
             require(result.stdout.count("fig-") == expected_count, f"unexpected generator stdout: {result.stdout}")
     after = {name: hashlib.sha256((ASSETS / name).read_bytes()).hexdigest() for name in EXPECTED_FIGURES}
     require(before == after == EXPECTED_FIGURES, f"deterministic figure replay changed assets: {after}")
-    print("PASS ARCH waves A--D deterministic figure replay: 16 migrated SVGs, two runs, byte-identical")
+    print("PASS ARCH waves A--E deterministic figure replay: 20 migrated SVGs, two runs, byte-identical")
 
 
 def main() -> None:
@@ -533,7 +632,7 @@ def main() -> None:
     audit_state_surfaces()
     if args.run_compute:
         audit_compute()
-    print("ARCH-01--16 teaching migration regression: PASS; chapter material gates=2/8")
+    print("ARCH-01--20 teaching migration regression: PASS; chapter material gates=2/8")
     print("PERSONAL LEARNING STATUS: not-attempted")
 
 
