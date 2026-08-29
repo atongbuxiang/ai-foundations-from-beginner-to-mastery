@@ -11,13 +11,154 @@ exercises: ["[[习题 - Pre-Norm、Post-Norm 与归一化放置]]"]
 solutions: ["[[解答 - Pre-Norm、Post-Norm 与归一化放置]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-pre-post-norm-jacobian-v2.svg]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # Pre-Norm、Post-Norm 与归一化放置
 
 > [!abstract] 本章主问题
 > “Norm 放在残差前还是后”改变的不是排版，而是恒等路径是否被 normalization Jacobian 过滤。Pre-Norm 的单层 Jacobian 显式含 $I$；Post-Norm 把 $I+J_F$ 整体左乘 $J_N$。这解释训练路径差异，却仍不能单独推出深层稳定、最终精度或“有效深度”；这些更强结论需要初始化、残差尺度、相关性与实验协议。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-35—37 已给出 LN/RMSNorm 的局部 Jacobian 与 null directions；NN-39 不再改变 norm 本身，而是改变它在 residual graph 中的求值位置；
+- **本页解决什么：** 从计算图逐步推出 $I+J_FJ_N$ 与 $J_N(I+J_F)$，再用同一扰动展示 identity rail 是否被 norm 过滤；
+- **后续为何需要：** 深层 Transformer 的初始化、残差缩放、warm-up 与最终性能讨论，都必须建立在正确的单层 Jacobian 和证据等级上。
+
+**第一遍先画两张计算图。** 沿箭头写 differential，始终记住矩阵乘法顺序表示扰动实际经过算子的先后。
+
+**第二遍再分析深层乘积。** 研究 eigendirections、层间相关性、final norm、dropout、双子层、residual scaling 和 mean-field 假设；不从单层公式直接跳到任务胜负。
+
+### 问题链
+
+1. Pre-Norm 的 identity path 为什么产生显式 $I$？
+2. Post-Norm 中哪一步使 residual sum 的所有方向都先经过 $J_N$？
+3. 一个共同平移扰动在 LN 的 null space 中时，两种放置分别怎样传播？
+4. “每层含 $I$”为什么不等于整个网络 Jacobian 接近等距？
+5. 哪些结论是 exact algebra，哪些只在初始化分布或具体实验协议下成立？
+
+> [!check] 第一遍停靠线
+> 若你能在 $\mathcal N_\square$ 第一行上写出 $J_N=(a/6)vv^{\mathsf T}$、$v=(1,-2,1)$，并证明共同平移扰动 $\boldsymbol1$ 经 Pre-Norm 保留、经 Post-Norm 被删除，就已掌握本页主干。
+
+## 符号与对象账本
+
+| 对象 | 定义 | 在 residual block 中的角色 | 易错点 |
+|---|---|---|---|
+| $N$ | LN、RMSNorm 等 normalization map | 改变 branch 输入或 residual sum | 忽略其求值点 |
+| $F$ | attention/MLP 等子层 | residual update | 把整个多子层 block 压成同一 $F$ |
+| $J_N,J_F$ | 各自在指定点的局部 Jacobian | 传播输入扰动 | 颠倒乘法顺序 |
+| $I$ | identity differential | Pre-Norm 的显式直达 rail | 误读成全网 isometry 证书 |
+| $\delta\boldsymbol x$ | 局部输入扰动 | 用于比较方向增益 | 只看标量 norm，不看方向 |
+
+### 贯穿算例 $\mathcal N_\square$：共同平移能否走过一层
+
+取共享张量第一行
+
+$$
+\boldsymbol x=(1,2,3),
+\qquad
+a=\sqrt{\frac32},
+\qquad
+N(\boldsymbol x)=a(-1,0,1),
+$$
+
+并取无 affine、$\varepsilon=0$ 的 LayerNorm。令
+
+$$
+\boldsymbol v=(1,-2,1)^{\mathsf T}.
+$$
+
+由 NN-36 的 Jacobian 公式可化为
+
+$$
+\boxed{
+J_N(\boldsymbol x)
+=\frac a6\boldsymbol v\boldsymbol v^{\mathsf T}
+}
+$$
+
+它是 rank-1 operator，满足
+
+$$
+J_N\boldsymbol1=0,
+\qquad
+J_N\boldsymbol v=a\boldsymbol v.
+$$
+
+为隔离 placement，选择最简单的线性 branch
+
+$$
+F(\boldsymbol z)=\frac12\boldsymbol z,
+\qquad
+J_F=\frac12I.
+$$
+
+于是前向分别为
+
+$$
+\boldsymbol x_{\mathrm{pre}}^+
+=\boldsymbol x+\frac12N(\boldsymbol x),
+$$
+
+$$
+\boldsymbol x_{\mathrm{post}}^+
+=N\!\left(\frac32\boldsymbol x\right)
+=N(\boldsymbol x),
+$$
+
+最后一个等号使用 LN 在 $\varepsilon=0$ 下对正共同尺度的不变性。局部 Jacobian 则是
+
+$$
+J_{\mathrm{pre}}=I+\frac12J_N,
+\qquad
+J_{\mathrm{post}}=\frac32J_N.
+$$
+
+对共同平移扰动 $\delta\boldsymbol x=\boldsymbol1$：
+
+$$
+J_{\mathrm{pre}}\boldsymbol1=\boldsymbol1,
+\qquad
+J_{\mathrm{post}}\boldsymbol1=0.
+$$
+
+这就是“Pre-Norm 有未被 normalization 过滤的 identity rail”的精确含义。再对唯一切向方向 $\boldsymbol v$：
+
+$$
+J_{\mathrm{pre}}\boldsymbol v
+=\left(1+\frac a2\right)\boldsymbol v,
+\qquad
+J_{\mathrm{post}}\boldsymbol v
+=\frac{3a}{2}\boldsymbol v.
+$$
+
+两者都可能放大某些方向；显式 $I$ 不等于所有 singular values 都接近 1。
+
+## 核心公式七问：Pre/Post-Norm Jacobian
+
+$$
+\boxed{
+J_{\mathrm{pre}}
+=I+J_F(N(x))J_N(x),
+\qquad
+J_{\mathrm{post}}
+=J_N(x+F(x))[I+J_F(x)]
+}.
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 精确描述 norm placement 如何改写一层 residual perturbation map |
+| 对象 | 固定输入点、固定 mask/dropout realization 下的局部 Jacobian |
+| 来路 | 对两张不同计算图分别使用 chain rule 与 residual addition rule |
+| 步骤 | 标求值点→沿前向写 differential→按经过顺序右乘输入扰动→合并 identity branch |
+| 读法 | Pre 的 $I$ 绕过 $J_N$；Post 的整个 $I+J_F$ 被 $J_N$ 左乘 |
+| 检查 | 用 constant branch 或 norm-null direction 验证两式不能互换；用 finite difference 检查顺序 |
+| 去路 | Transformer depth stability、warm-up、DeepNorm/ReZero/Fixup、final norm 与 placement ablation |
+
+### AI / 系统对应
+
+真实 Transformer block 含 attention、MLP、dropout、两个或更多 norms，有时还有 residual scaling 与 final norm。比较 Pre/Post 时必须固定这些共同变量，并同时记录 step-0 Jacobian/gradient、训练稳定性、最终验证指标和计算预算。Xiong et al. 的初始化期 mean-field 结论与苏剑林的 residual expansion 提供机制线索，但都不能替代跨架构受控实验。
 
 ## 一、学习目标
 

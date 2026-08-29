@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks/normalization, transformers, systems]
 source_type: paper
 title: "PowerNorm: Rethinking Batch Normalization in Transformers"
@@ -16,7 +16,7 @@ scope_role: core
 temporal_role: method-aged
 related: ["[[小批量、混合精度、分布式与因果归一化边界]]", "[[RMSNorm、均值移除与缩放不变性]]", "[[BatchNorm 前向统计与训练—推理差异]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # Shen et al.：PowerNorm
@@ -50,4 +50,3 @@ updated: 2026-08-23
 - approximate backward 不等于 forward 的精确导数；
 - 论文的 Lipschitz/gradient 结论有模型假设，不能只引用摘要外推；
 - 在因果/流式模型中，任何跨 token 或跨样本统计仍需做 prefix 与数据边界审计。
-

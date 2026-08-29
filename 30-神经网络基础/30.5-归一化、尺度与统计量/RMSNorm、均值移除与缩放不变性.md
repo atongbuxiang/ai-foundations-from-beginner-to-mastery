@@ -11,13 +11,155 @@ exercises: ["[[习题 - RMSNorm、均值移除与缩放不变性]]"]
 solutions: ["[[解答 - RMSNorm、均值移除与缩放不变性]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-rmsnorm-centering-invariance-v2.svg]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # RMSNorm、均值移除与缩放不变性
 
 > [!abstract] 本章主问题
 > RMSNorm 不是“近似 LayerNorm”或“少一次减法的同一算子”。它直接按原点半径归一化，删除正尺度方向，却保留共同平移与输入均值信息；因此 Jacobian 比 LayerNorm 少一个 centering projection。这个差异会改变自由度、梯度和、小宽度退化、epsilon 默认值与模型参数化。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-36 已把 LayerNorm 写成“先减均值、再除 centered RMS”的逐 token 几何，并得到两项投影的 VJP；
+- **本页解决什么：** 删除 centering 这一步，逐项检查前向保留了什么、反向少删了哪个方向，而不是把 RMSNorm 当成 LayerNorm 的性能缩写；
+- **后续为何需要：** 现代 Transformer 常在 RMSNorm、LayerNorm 与 residual placement 之间选择，NN-38—40 必须以精确对象和 Jacobian 差异为基础。
+
+**第一遍只比较一条向量。** 对 $(1,2,3)$ 分别计算 LN 与 RMSNorm：前者落到 $\boldsymbol1^\perp$，后者保留正均值；再比较两个输入梯度的和。
+
+**第二遍再研究球面几何。** 推导 vector gain VJP、径向/切向 eigenvalues、$\varepsilon$ 对尺度不变性的破坏，以及 partial RMS 与 fused kernel 的统计—系统合同。
+
+### 问题链
+
+1. LayerNorm 的 mean subtraction 删除了哪个一维方向？
+2. RMSNorm 不减均值时，输入的共同 offset 如何进入输出？
+3. 两者都具有正尺度不变性时，为什么 Jacobian 的 null space 仍不同？
+4. 为什么 RMSNorm 的输入梯度通常不满足坐标和为 0？
+5. “少一次 reduction”何时真能转化为端到端速度收益？
+
+> [!check] 第一遍停靠线
+> 若你能在 $\mathcal N_\square$ 第一行上得到 $\widehat x_{\mathrm{RMS}}=b(1,2,3)$、$b=\sqrt{3/14}$，并从 $g=(1,0,0)$ 算出 $dx=b(13/14,-1/7,-3/14)$，就已掌握本页主干。
+
+## 符号与对象账本
+
+| 对象 | 定义 | 几何身份 | 与 LayerNorm 的差别 |
+|---|---|---|---|
+| $q_0=D^{-1}\|\boldsymbol x\|_2^2$ | 关于原点的二阶矩 | squared radius / $D$ | 不是 centered variance |
+| $r_0=\sqrt{q_0+\varepsilon}$ | RMS divisor | radial scale | 不依赖 sample mean 的显式 subtraction |
+| $\widehat{\boldsymbol x}=\boldsymbol x/r_0$ | RMS-normalized core | 原点球面上的方向 | 不必位于 $\boldsymbol1^\perp$ |
+| $\boldsymbol\gamma$ | 逐 feature gain | 输出坐标重缩放 | 标准 RMSNorm 通常无 additive bias |
+| $\boldsymbol u=\boldsymbol\gamma\odot\boldsymbol g$ | 穿过 gain 的 VJP seed | 待删除径向分量的 covector | 不再先删除常数方向 |
+
+### 贯穿算例 $\mathcal N_\square$：保留均值会留下可观测差异
+
+继续使用
+
+$$
+X=
+\begin{bmatrix}
+1&2&3\\
+2&4&6\\
+3&6&9
+\end{bmatrix},
+\qquad
+b=\sqrt{\frac3{14}},
+\qquad
+\varepsilon=0.
+$$
+
+三行都是 $(1,2,3)$ 的正倍数。它们的 RMS square moments 为
+
+$$
+\left(\frac{14}{3},\frac{56}{3},42\right),
+$$
+
+所以 RMSNorm 删除这三个正尺度，得到
+
+$$
+\widehat X_{\mathrm{RMS}}
+=b
+\begin{bmatrix}
+1&2&3\\
+1&2&3\\
+1&2&3
+\end{bmatrix}.
+$$
+
+NN-36 的 LayerNorm 对同一张量给出
+
+$$
+\widehat X_{\mathrm{LN}}
+=a
+\begin{bmatrix}
+-1&0&1\\
+-1&0&1\\
+-1&0&1
+\end{bmatrix},
+\qquad a=\sqrt{\frac32}.
+$$
+
+两者都把三行的正尺度差异删除，但只有 LN 把每行共同 offset 删除。第一行 RMSNorm 输出的坐标和是 $6b\ne0$，LN 输出的坐标和严格为 0。
+
+再令第一行的 gain 为 1、上游 seed 为 $\boldsymbol g=(1,0,0)$。此时
+
+$$
+\widehat{\boldsymbol x}=b(1,2,3),
+\qquad
+\overline{g\widehat x}=\frac b3,
+\qquad
+r_0=\frac1b.
+$$
+
+RMSNorm VJP 为
+
+$$
+\begin{aligned}
+d\boldsymbol x
+&=b\left[\boldsymbol g-\widehat{\boldsymbol x}\,\overline{g\widehat x}\right]\\
+&=b\left(\frac{13}{14},-\frac17,-\frac3{14}\right).
+\end{aligned}
+$$
+
+它满足径向验算
+
+$$
+\widehat{\boldsymbol x}^{\mathsf T}d\boldsymbol x=0,
+$$
+
+却有
+
+$$
+\boldsymbol1^{\mathsf T}d\boldsymbol x=\frac{4b}{7}\ne0.
+$$
+
+这正是“少一个 centering projection”在反向中的可测后果。
+
+## 核心公式七问：RMSNorm VJP
+
+$$
+\boxed{
+\nabla_{\boldsymbol x}L
+=\frac1{r_0}\left[
+\boldsymbol u-\widehat{\boldsymbol x}\,\overline{u\widehat x}
+\right],
+\qquad
+\boldsymbol u=\boldsymbol\gamma\odot\boldsymbol g
+}.
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 把输出 seed 拉回原点半径归一化的输入，同时删除无效径向变化 |
+| 对象 | 单个 token/normalized-shape group，不跨 batch 或 token |
+| 来路 | 对 $x/r_0$ 微分；$dr_0$ 只产生沿 $\widehat x$ 的反馈项 |
+| 步骤 | 穿过 gain→算 $\overline{u\widehat x}$→删径向分量→除以 $r_0$ |
+| 读法 | 与 LN 相比没有 $-\overline u\boldsymbol1$，因此共同平移方向仍可传梯度 |
+| 检查 | $\varepsilon=0$ 时 $\widehat x^{\mathsf T}dx=0$；但 $\boldsymbol1^{\mathsf T}dx$ 一般不为 0 |
+| 去路 | LLM normalization choice、Pre/Post-Norm Jacobian、partial RMS 与 fused kernels |
+
+### AI / 系统对应
+
+RMSNorm 常用于 decoder-only Transformer，但“LLM 常用”不是理论证明。选择时应分别记录：任务是否需要保留 feature mean、residual stream 的尺度参数化、$\varepsilon$ 与 accumulation dtype、是否有 bias、kernel 是否真的减少 memory traffic，以及替换 LN 后 initialization/learning-rate 是否仍可比。
 
 ## 一、学习目标
 

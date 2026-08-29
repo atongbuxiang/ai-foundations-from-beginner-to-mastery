@@ -11,13 +11,153 @@ exercises: ["[[习题 - InstanceNorm、GroupNorm 与 WeightNorm]]"]
 solutions: ["[[解答 - InstanceNorm、GroupNorm 与 WeightNorm]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-normalization-family-axis-lattice-v2.svg]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # InstanceNorm、GroupNorm 与 WeightNorm
 
 > [!abstract] 本章主问题
 > InstanceNorm 与 GroupNorm 改变 activation statistics 的分组轴；WeightNorm 则根本不估计 activation statistics，而是把权重向量重参数化为长度与方向。只有同时写出统计组、affine sharing、state 和参数对象，才能避免把三个同名为“Norm”的方法误当成一条连续刻度。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-33—37 已把 BN、LN、RMSNorm 统一为“先声明对象与归约组，再谈不变性和 VJP”；
+- **本页解决什么：** 在卷积张量上比较 InstanceNorm 与 GroupNorm 的 activation groups，并明确 WeightNorm 已把对象从 activation 换成 parameter；
+- **后续为何需要：** 归一化放置和系统选择不能只看模块名字，必须知道它是否依赖 batch、空间、channel group、运行状态或权重重参数化。
+
+**第一遍先做轴分类。** 把同一个 $1\times3\times1\times3$ 张量分别按 $(H,W)$ 和 $(C,H,W)$ 归约，亲手看到 IN 与 $G=1$ GN 的输出不同。
+
+**第二遍再做参数几何。** 推导 WeightNorm 的 length/direction VJP，区分统计核心等价、affine sharing 等价、state 等价和整个模块等价。
+
+### 问题链
+
+1. IN 固定哪些索引、归约哪些索引？
+2. GN 的 group count 改变的是统计组数量还是 affine 参数数量？
+3. 为什么 $G=C$ 与 IN、$G=1$ 与 LN 只能在附加条件下说“等价”？
+4. WeightNorm 为什么没有 activation mean、variance 或 train/eval 双路径？
+5. 对一个任务而言，应根据删除的信息、batch 依赖还是模块名称选择 norm？
+
+> [!check] 第一遍停靠线
+> 若你能在 $\mathcal N_\square$ 的卷积视图中算出 IN 的三行均为 $a(-1,0,1)$，再算出 $G=1$ GN 的全局均值 4、variance $52/9$，并说明 WeightNorm 不读取这九个 activation，就已掌握本页主干。
+
+## 符号与对象账本
+
+| 方法 | 被变换对象 | 统计组/参数组 | state 与 batch 依赖 |
+|---|---|---|---|
+| InstanceNorm | activation $X_{nchw}$ | 固定 $(n,c)$，归约 $(h,w)$ | 通常不跨 batch；running state 依实现选项 |
+| GroupNorm | activation $X_{nchw}$ | 固定 $(n,g)$，归约组内 $(c,h,w)$ | 不跨 batch；通常无 running state |
+| LayerNorm | activation 的 normalized tail | 固定外部索引，归约尾轴 | 不跨 batch；无 running state |
+| WeightNorm | weight vector $\boldsymbol w$ | $g$ 控长度、$\boldsymbol v$ 控方向 | 不读取 activation statistics |
+| $G$ | GN group count | 要求 $G\mid C$ | 不等于 group size $C/G$ |
+
+### 贯穿算例 $\mathcal N_\square$：先换轴，再换对象
+
+把共享矩阵解释为一个卷积样本：
+
+$$
+Z\in\mathbb R^{1\times3\times1\times3},
+\qquad
+Z_{1,:,1,:}=
+\begin{bmatrix}
+1&2&3\\
+2&4&6\\
+3&6&9
+\end{bmatrix}.
+$$
+
+**InstanceNorm。** 每个 channel 的三个空间值是 $(1,2,3)$ 的正倍数，故在 $\varepsilon=0$、无 affine 时
+
+$$
+\widehat Z_{\mathrm{IN}}
+=a
+\begin{bmatrix}
+-1&0&1\\
+-1&0&1\\
+-1&0&1
+\end{bmatrix},
+\qquad a=\sqrt{\frac32}.
+$$
+
+**GroupNorm，$G=1$。** 九个元素共享统计量。由
+
+$$
+\mu=\frac{36}{9}=4,
+\qquad
+\frac19\sum Z_i^2=\frac{196}{9},
+$$
+
+得到
+
+$$
+q=\frac{196}{9}-16=\frac{52}{9},
+\qquad
+r=\frac{2\sqrt{13}}3.
+$$
+
+因此
+
+$$
+\widehat Z_{\mathrm{GN}(1)}=
+\begin{bmatrix}
+-\frac9{2\sqrt{13}}&-\frac3{\sqrt{13}}&-\frac3{2\sqrt{13}}\\
+-\frac3{\sqrt{13}}&0&\frac3{\sqrt{13}}\\
+-\frac3{2\sqrt{13}}&\frac3{\sqrt{13}}&\frac{15}{2\sqrt{13}}
+\end{bmatrix}.
+$$
+
+IN 删除每个 channel 自己的空间 shift/scale；$G=1$ GN 只删除整个样本的一个共同 shift/scale，所以保留 channel 之间的相对强弱。
+
+**WeightNorm。** 现在不再处理 $Z$，而取一个权重向量
+
+$$
+\boldsymbol v=(1,2,3),
+\qquad
+g=\sqrt{14},
+\qquad
+\boldsymbol w=g\frac{\boldsymbol v}{\|\boldsymbol v\|}=\boldsymbol v.
+$$
+
+若 $\nabla_{\boldsymbol w}L=\boldsymbol h=(1,0,0)$，则
+
+$$
+d g=\boldsymbol h^{\mathsf T}\frac{\boldsymbol v}{\|\boldsymbol v\|}=\frac1{\sqrt{14}},
+$$
+
+$$
+d\boldsymbol v
+=\frac g{\|\boldsymbol v\|}
+\left(I-\frac{\boldsymbol v\boldsymbol v^{\mathsf T}}{\|\boldsymbol v\|^2}\right)\boldsymbol h
+=\left(\frac{13}{14},-\frac17,-\frac3{14}\right).
+$$
+
+验算 $\boldsymbol v^{\mathsf T}d\boldsymbol v=0$：direction parameter 的一阶更新位于球面切空间；这与 activation 是否按某组均值方差标准化无关。
+
+## 核心公式七问：WeightNorm 的长度—方向 VJP
+
+$$
+\boxed{
+\boldsymbol w=g\frac{\boldsymbol v}{\|\boldsymbol v\|},
+\quad
+d g=\boldsymbol h^{\mathsf T}\widehat{\boldsymbol v},
+\quad
+d\boldsymbol v=\frac g{\|\boldsymbol v\|}
+(I-\widehat{\boldsymbol v}\widehat{\boldsymbol v}^{\mathsf T})\boldsymbol h
+}.
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 把 weight magnitude 与 direction 参数化分离 |
+| 对象 | 一条 weight vector，不是当前 mini-batch activation |
+| 来路 | 对 $g\boldsymbol v/\|\boldsymbol v\|$ 使用乘积法则与单位向量微分 |
+| 步骤 | 投影 seed 到方向得 $dg$；删除径向分量、再乘 $g/\|v\|$ 得 $dv$ |
+| 读法 | $dg$ 改长度，$dv\perp v$ 在一阶上只转方向 |
+| 检查 | $v^{\mathsf T}dv=0$；改变 companion batch 不应改变该参数化映射 |
+| 去路 | parameter gauge、effective learning rate、spectral/weight constraints 与 deployment materialization |
+
+### AI / 系统对应
+
+小 batch vision 常把 BN 换成 GN，但应保持 optimizer、augmentation、affine 和 compute budget 可比；风格化中 IN 删除的强度信息可能正是其他任务的标签。WeightNorm 则可能改变 optimizer 的坐标与有效步长，却不会解决 activation overflow、sequence causality 或 distributed statistics 问题。
 
 ## 一、学习目标
 

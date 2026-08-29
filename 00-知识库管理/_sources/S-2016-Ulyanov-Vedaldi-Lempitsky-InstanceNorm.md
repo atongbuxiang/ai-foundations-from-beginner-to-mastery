@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks/normalization, vision]
 source_type: paper
 title: "Instance Normalization: The Missing Ingredient for Fast Stylization"
@@ -15,7 +15,7 @@ scope_role: core
 temporal_role: foundational
 related: ["[[InstanceNorm、GroupNorm 与 WeightNorm]]", "[[归一化的对象、轴与不变性]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # Ulyanov–Vedaldi–Lempitsky：Instance Normalization
@@ -51,4 +51,3 @@ $$
 - $HW=1$ 时 centered normalization 退化；
 - 若归约轴含时间，离线计算可能读取未来位置；
 - framework 的 affine/state 默认值不是论文数学定义的一部分。
-

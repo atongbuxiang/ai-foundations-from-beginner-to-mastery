@@ -24,4 +24,4 @@ updated: 2026-08-29
 - [[neural_network_foundations_teaching_contract_audit.py]] 已复核 NN-01—08 的课程位置、两遍路线、问题链、对象账本、共享 fixture 与公式七问；
 - 第一链 $X_\star$ 贯通 affine score、batch dense、perceptron 与 paired ReLU；第二链 $X_\oplus$ 贯通 XOR、triangular hat、UAT、depth separation 与 parameter quotient；
 - 当前为 **8/8 现行教学迁移、8/8 正文、8/8 A—E 题解、8/8 正式图，30.1 材料门 `regression-passed`**；
-- 全章状态同步为 **36/64 已迁移、28/64 pending、分卷材料门 4/8**；30.5 前半卷 `in-progress`，个人仍为 **0/8 / `not-attempted`**；下一批 NN-37—40。
+- 全章状态同步为 **40/64 已迁移、24/64 pending、分卷材料门 5/8**；30.5 已 `regression-passed`，个人仍为 **0/8 / `not-attempted`**；下一批 NN-41—44。

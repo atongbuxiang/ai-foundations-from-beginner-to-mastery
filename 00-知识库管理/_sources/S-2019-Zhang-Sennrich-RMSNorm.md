@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks/normalization, rmsnorm]
 source_type: paper
 title: "Root Mean Square Layer Normalization"
@@ -16,7 +16,7 @@ scope_role: core
 temporal_role: foundational
 related: ["[[RMSNorm、均值移除与缩放不变性]]", "[[LayerNorm 的逐样本几何与反向传播]]", "[[小批量、混合精度、分布式与因果归一化边界]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # Zhang–Sennrich：RMSNorm
@@ -63,4 +63,3 @@ $$
 - pRMSNorm 的 subset 估计引入统计误差，不能只按计算量评价；
 - 当前库不复述论文的百分比加速为现代 GPU 结论；
 - 实现默认 epsilon、是否含 bias 和 accumulation dtype 必须另查框架版本。
-

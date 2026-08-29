@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks/normalization, parameterization]
 source_type: paper
 title: "Weight Normalization: A Simple Reparameterization to Accelerate Training of Deep Neural Networks"
@@ -16,7 +16,7 @@ scope_role: core
 temporal_role: foundational
 related: ["[[InstanceNorm、GroupNorm 与 WeightNorm]]", "[[参数对称性、等价表示与可辨识边界]]", "[[正交初始化与 Dynamical Isometry]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # Salimans–Kingma：Weight Normalization
@@ -62,4 +62,3 @@ $$
 - $\boldsymbol v\mapsto a\boldsymbol v$（$a>0$）不改变权重，形成 gauge；
 - WeightNorm 不固定完整矩阵谱范数，也不保证层的 Lipschitz 常数；
 - 与 optimizer state、weight decay、parametrization removal 的交互属于实现语义。
-

@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks/normalization, vision]
 source_type: paper
 title: "Group Normalization"
@@ -15,7 +15,7 @@ scope_role: core
 temporal_role: foundational
 related: ["[[InstanceNorm、GroupNorm 与 WeightNorm]]", "[[小批量、混合精度、分布式与因果归一化边界]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # Wu–He：Group Normalization
@@ -54,4 +54,3 @@ $$
 - “$G=C$ 等于 InstanceNorm”也要核对 affine 默认值与 running-state 选项；
 - group count 是离散超参数，$C$ 必须可整除；
 - 卷积通道排序决定哪些 features 共享统计量，分组本身是一种归纳偏置。
-

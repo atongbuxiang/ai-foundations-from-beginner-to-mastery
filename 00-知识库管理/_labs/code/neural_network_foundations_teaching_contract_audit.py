@@ -23,7 +23,7 @@ SOLUTIONS = LABS / "solutions"
 CODE = LABS / "code"
 FIGURE_AUDITOR = CODE / "audit-markdown-figure-units.mjs"
 ASSET_DIR = ROOT / "00-知识库管理" / "_assets" / "figures" / "neural-networks"
-MIGRATED_IDS = tuple(range(1, 37))
+MIGRATED_IDS = tuple(range(1, 41))
 
 STATE_SURFACES = (
     CHAPTER / "神经网络基础 MOC.md",
@@ -210,7 +210,7 @@ def audit_migrated_contract(nodes: list[tuple[int, Path, str]]) -> None:
         require(fixture in content, f"{relative}: shared teaching fixture missing: {fixture}")
         require("AI" in content, f"{relative}: AI object mapping missing")
         require(len(content.splitlines()) >= 180, f"{relative}: derivation depth unexpectedly short")
-    print("PASS NN teaching migration waves A--I: NN-01--36 course position/two-pass/problem/object/formula contracts=36/36")
+    print("PASS NN teaching migration waves A--J: NN-01--40 course position/two-pass/problem/object/formula contracts=40/40")
 
 
 def audit_wave_c_fixture(nodes: list[tuple[int, Path, str]]) -> None:
@@ -574,6 +574,83 @@ def audit_wave_i_fixture(nodes: list[tuple[int, Path, str]]) -> None:
     print("PASS NN wave-I independent math: BN/LN axes; biased/unbiased state; train/eval split; dense normalization VJP exact")
 
 
+def audit_wave_j_fixture(nodes: list[tuple[int, Path, str]]) -> None:
+    """Recompute the NN-37--40 RMS/group/placement/distributed continuation."""
+    x = (
+        (1.0, 2.0, 3.0),
+        (2.0, 4.0, 6.0),
+        (3.0, 6.0, 9.0),
+    )
+    a = math.sqrt(3.0 / 2.0)
+    b = math.sqrt(3.0 / 14.0)
+
+    rms_rows = tuple(
+        tuple(value / math.sqrt(sum(entry * entry for entry in row) / 3.0) for value in row)
+        for row in x
+    )
+    expected_rms = tuple((b, 2.0 * b, 3.0 * b) for _ in range(3))
+    require(all(abs(rms_rows[i][j] - expected_rms[i][j]) < 1e-15 for i in range(3) for j in range(3)), "NN wave-J RMS forward drifted")
+    xhat = rms_rows[0]
+    seed = (1.0, 0.0, 0.0)
+    radial_mean = sum(g * value for g, value in zip(seed, xhat)) / 3.0
+    rms_dx = tuple(b * (g - value * radial_mean) for g, value in zip(seed, xhat))
+    expected_rms_dx = (13.0 * b / 14.0, -b / 7.0, -3.0 * b / 14.0)
+    require(all(abs(actual - expected) < 1e-15 for actual, expected in zip(rms_dx, expected_rms_dx)), f"NN wave-J RMS VJP drifted: {rms_dx}")
+    require(abs(sum(value * grad for value, grad in zip(xhat, rms_dx))) < 1e-15, "NN wave-J RMS radial invariant drifted")
+    require(abs(sum(rms_dx) - 4.0 * b / 7.0) < 1e-15, "NN wave-J RMS gradient-sum contrast drifted")
+
+    flat = tuple(value for row in x for value in row)
+    gn_mean = sum(flat) / 9.0
+    gn_variance = sum((value - gn_mean) ** 2 for value in flat) / 9.0
+    require(gn_mean == 4.0 and abs(gn_variance - 52.0 / 9.0) < 1e-15, "NN wave-J GN statistics drifted")
+    gn = tuple((value - gn_mean) / math.sqrt(gn_variance) for value in flat)
+    require(abs(sum(gn)) < 1e-15 and abs(sum(value * value for value in gn) / 9.0 - 1.0) < 1e-15, "NN wave-J GN normalization drifted")
+    v = (1.0, 2.0, 3.0)
+    v_norm = math.sqrt(14.0)
+    h = (1.0, 0.0, 0.0)
+    dg = sum(h_i * v_i / v_norm for h_i, v_i in zip(h, v))
+    dv = tuple(h_i - v_i / 14.0 for h_i, v_i in zip(h, v))
+    require(abs(dg - 1.0 / v_norm) < 1e-15 and dv == (13.0 / 14.0, -1.0 / 7.0, -3.0 / 14.0), "NN wave-J WeightNorm VJP drifted")
+    require(abs(sum(v_i * dv_i for v_i, dv_i in zip(v, dv))) < 1e-15, "NN wave-J WeightNorm tangent invariant drifted")
+
+    tangent = (1.0, -2.0, 1.0)
+    jn = tuple(tuple(a * tangent[i] * tangent[j] / 6.0 for j in range(3)) for i in range(3))
+
+    def mv(matrix: tuple[tuple[float, ...], ...], vector: tuple[float, ...]) -> tuple[float, ...]:
+        return tuple(sum(matrix[i][j] * vector[j] for j in range(3)) for i in range(3))
+
+    ones = (1.0, 1.0, 1.0)
+    require(all(abs(value) < 1e-15 for value in mv(jn, ones)), "NN wave-J LayerNorm shift null direction drifted")
+    require(all(abs(actual - a * expected) < 1e-15 for actual, expected in zip(mv(jn, tangent), tangent)), "NN wave-J LayerNorm tangent gain drifted")
+    pre_shift = tuple(ones[i] + 0.5 * mv(jn, ones)[i] for i in range(3))
+    post_shift = tuple(1.5 * value for value in mv(jn, ones))
+    require(pre_shift == ones and all(abs(value) < 1e-15 for value in post_shift), "NN wave-J Pre/Post identity-rail contrast drifted")
+
+    mean_a = (1.5, 3.0, 4.5)
+    m2_a = (0.5, 2.0, 4.5)
+    mean_b = (3.0, 6.0, 9.0)
+    delta = tuple(mean_b[i] - mean_a[i] for i in range(3))
+    merged_mean = tuple(mean_a[i] + delta[i] / 3.0 for i in range(3))
+    merged_m2 = tuple(m2_a[i] + delta[i] * delta[i] * 2.0 / 3.0 for i in range(3))
+    merged_variance = tuple(value / 3.0 for value in merged_m2)
+    require(merged_mean == (2.0, 4.0, 6.0), f"NN wave-J distributed mean drifted: {merged_mean}")
+    require(merged_m2 == (2.0, 8.0, 18.0), f"NN wave-J distributed M2 drifted: {merged_m2}")
+    require(all(abs(actual - expected) < 1e-15 for actual, expected in zip(merged_variance, (2.0 / 3.0, 8.0 / 3.0, 6.0))), "NN wave-J distributed variance drifted")
+    sync_first = tuple((x[0][j] - merged_mean[j]) / math.sqrt(merged_variance[j]) for j in range(3))
+    require(all(abs(value + a) < 1e-15 for value in sync_first), "NN wave-J suffix-dependent first-token output drifted")
+
+    wave = {node_id: content for node_id, _, content in nodes if 37 <= node_id <= 40}
+    expected_markers = {
+        37: ("\\frac{4b}{7}\\ne0", "\\widehat X_{\\mathrm{RMS}}"),
+        38: ("\\frac{52}{9}", "\\boldsymbol v^{\\mathsf T}d\\boldsymbol v=0"),
+        39: ("J_{\\mathrm{pre}}\\boldsymbol1=\\boldsymbol1", "(1,-2,1)"),
+        40: ("(2,8,18)", "prefix invariance"),
+    }
+    for node_id, markers in expected_markers.items():
+        require(all(marker in wave[node_id] for marker in markers), f"NN-{node_id:02d}: wave-J numeric/system closure missing")
+    print("PASS NN wave-J independent math: RMS VJP; IN/GN/WN objects; Pre/Post rails; distributed M2 and causal-axis contrast exact")
+
+
 def question_ids(content: str) -> list[str]:
     return re.findall(r"^###\s+([^\s]+-[A-E]\d{2})\s*$", content, re.M)
 
@@ -731,12 +808,12 @@ def audit_state_surfaces() -> None:
     for path in STATE_SURFACES:
         content = read(path)
         require(audit_name in content, f"state surface misses NN audit: {path.relative_to(ROOT)}")
-        migrated_mentions = content.count("36/64") + content.count("36 / 64")
-        pending_mentions = content.count("28/64") + content.count("28 / 64")
+        migrated_mentions = content.count("40/64") + content.count("40 / 64")
+        pending_mentions = content.count("24/64") + content.count("24 / 64")
         require(migrated_mentions >= 1 and pending_mentions >= 1, f"state surface misses NN migrated/pending counts: {path.relative_to(ROOT)}")
-        require("4/8" in content or "4 / 8" in content, f"state surface misses NN material-gate count: {path.relative_to(ROOT)}")
+        require("5/8" in content or "5 / 8" in content, f"state surface misses NN material-gate count: {path.relative_to(ROOT)}")
         require("not-attempted" in content, f"state surface overclaims NN learner: {path.relative_to(ROOT)}")
-    print("PASS NN state surfaces: 5 global + 5 volume views agree on migrated=36/64, pending=28/64, learner=not-attempted")
+    print("PASS NN state surfaces: 5 global + 5 volume views agree on migrated=40/64, pending=24/64, material gates=5/8, learner=not-attempted")
 
 
 def main() -> None:
@@ -754,6 +831,7 @@ def main() -> None:
     audit_wave_g_fixture(nodes)
     audit_wave_h_fixture(nodes)
     audit_wave_i_fixture(nodes)
+    audit_wave_j_fixture(nodes)
     audit_exercises(nodes, index)
     audit_sources_and_links(nodes, index)
     audit_figures(nodes, index)
@@ -761,8 +839,8 @@ def main() -> None:
     audit_state_surfaces()
     if args.run_figures:
         audit_deterministic_figures()
-    print("NN-01--36 teaching migration regression: PASS; 30.1--30.4 material gates=4/8; 30.5 front half=in-progress")
-    print("NN-37--64 teaching migration: pending (28/64)")
+    print("NN-01--40 teaching migration regression: PASS; 30.1--30.5 material gates=5/8")
+    print("NN-41--64 teaching migration: pending (24/64)")
     print("PERSONAL LEARNING STATUS: not-attempted")
 
 

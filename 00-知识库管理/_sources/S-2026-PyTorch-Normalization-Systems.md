@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks/normalization, implementation, distributed, mixed-precision]
 source_type: documentation
 title: "PyTorch normalization families, SyncBatchNorm and AMP semantics"
@@ -14,7 +14,7 @@ scope_role: core
 temporal_role: implementation-aged
 related: ["[[RMSNorm、均值移除与缩放不变性]]", "[[InstanceNorm、GroupNorm 与 WeightNorm]]", "[[小批量、混合精度、分布式与因果归一化边界]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # PyTorch：归一化谱系、同步统计与混合精度语义
@@ -49,4 +49,3 @@ updated: 2026-08-23
 3. SyncBatchNorm 改变统计组、通信与反向耦合，不是“只同步 buffers”；
 4. loss scaling 只缩放 backward 信号，不能修复 forward statistic 的 overflow/cancellation；
 5. autocast 列表是版本与设备相关的 dispatcher 语义，自定义 kernel 必须检查 accumulation dtype。
-
