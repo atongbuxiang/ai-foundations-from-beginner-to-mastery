@@ -41,7 +41,7 @@ updated: 2026-08-28
 | LT-23 | [[多分类的 Natarajan 维与 Graph 维]] | multiclass capacity | draft + A–E 闭环 |
 | LT-24 | [[实值函数类、伪维与阈值化]] | regression capacity entry | draft + A–E 闭环 |
 
-当前为 **8/8 正文、8/8 A—E 习题与独立详解、0/8 经真实验收**。LT-17—24 共使用 15 张独立自绘/程序生成 v2 图，并保留杨辉三角、VC 几何图库与 D2L 容量示意三组已登记外部来源；全部节点均有引图问题、正式图注、读图方法和适用边界。LT-21—24 已补齐基本定理的必要/充分证明、SRM oracle inequality、多分类 Natarajan/Graph 维与实值 pseudo-dimension，并完成 SVG 结构、XML 与 1200 px 渲染复核。下一施工批次进入 20.4 的 LT-25—32。`draft` 只表示课程材料成稿，不替代闭卷证明、延迟复测与迁移证据。
+当前为 **8/8 正文、8/8 A—E 习题与独立详解、0/8 经真实验收**。LT-17—24 共使用 15 张独立自绘/程序生成 v2 图，并保留杨辉三角、VC 几何图库与 D2L 容量示意三组已登记外部来源；全部节点均有引图问题、正式图注、读图方法和适用边界。LT-21—24 已补齐基本定理的必要/充分证明、SRM oracle inequality、多分类 Natarajan/Graph 维与实值 pseudo-dimension，并完成 SVG 结构、XML 与 1200 px 渲染复核。课程顺序随后进入 20.4；`draft` 只表示课程材料成稿，不替代闭卷证明、延迟复测与迁移证据。
 
 ## 卷级累计证据门
 
@@ -55,4 +55,4 @@ updated: 2026-08-28
 > [!success] 材料门已建立，个人状态未改变
 > VC-CUM-01 为 `regression-passed material / not-attempted learner`。八篇正文继续保持 `draft`，0/8 经真实验收；总图与脚本不能充当个人 shattering、Sauer 或对称化证明。
 
-下一卷：[[数据依赖复杂度、间隔与快率 MOC]]。20.4 将从 worst-case growth 进入 sample-dependent complexity、contraction、margin、localization 与 fast-rate conditions。
+课程顺序上的下一卷是[[数据依赖复杂度、间隔与快率 MOC]]，它从 worst-case growth 进入 sample-dependent complexity、contraction、margin、localization 与 fast-rate conditions。当前全章已形成 **10/10 卷级材料门与 2/2 资格考材料门（LT-QUAL-01 / LT-QUAL-02）**，个人仍为 **0/10、0/2 / `not-attempted`**；下一步是按前置顺序执行个人证据。

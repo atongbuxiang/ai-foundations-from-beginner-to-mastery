@@ -38,4 +38,4 @@ updated: 2026-08-28
 > [!success] 材料门已建立，学习状态未改变
 > PAC-CUM-01 的题卷、详解、实验、脚本与总图为 `regression-passed`；个人仍是 `0/8 经真实验收 / not-attempted`，八篇正文继续保持 `draft`。不能把 canonical 图或审计通过写成个人掌握。
 
-下一卷：[[VC 维与一致收敛 MOC]]。20.3 将把有限类的 $\log|\mathcal H|$ 替换为样本上的 labeling growth、shattering 与 capacity control。
+课程顺序上的下一卷是[[VC 维与一致收敛 MOC]]，它把有限类的 $\log|\mathcal H|$ 替换为样本上的 labeling growth、shattering 与 capacity control。当前全章已形成 **10/10 卷级材料门与 2/2 资格考材料门（LT-QUAL-01 / LT-QUAL-02）**，个人仍为 **0/10、0/2 / `not-attempted`**；下一步是按前置顺序执行个人证据，而不是继续把历史施工顺序写成当前待办。

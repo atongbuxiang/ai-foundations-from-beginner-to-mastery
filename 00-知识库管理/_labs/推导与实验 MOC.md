@@ -59,6 +59,14 @@ updated: 2026-08-29
 - 当前语义：第 20 章静态材料为 `regression-passed`，卷级材料门 **10/10**、资格考材料门 **2/2**；个人分卷 **0/10**、个人资格 **0/2 / `not-attempted`**；正式 retained 前置未满足；84 篇正文仍为 `draft`；
 - 下一施工点：按前置顺序执行个人分卷与资格考证据。
 
+## 第三章神经网络基础教学迁移
+
+- [[neural_network_foundations_teaching_contract_audit.py]]：固定 NN-01—64 八卷 scope，复核 64 组题—解双射、960 个 A—E ID、来源卡、范围内链接、64 个图文单元、16 个节点制图脚本与课程地图；
+- 第一波 NN-01—04 使用同一个四点二分类 fixture 贯通 affine neuron、batch dense、perceptron update 与两层 ReLU composition，并补齐课程位置、两遍路线、问题链、对象账本、第一遍停靠线和核心公式七问；
+- 当前语义：现行教学迁移 **4/64 `regression-passed`**，NN-05—64 **60/64 pending**，个人仍为 `not-attempted`；
+- 旧[[实验 - 神经网络基础累计复现门]]和 `NN-CUM-01` 保留为 `composed` 历史材料，待 64 节迁移与分卷证据门建成后重新升级；
+- 下一施工点：NN-05—08，完成 30.1 后半卷并建立第一份分卷材料门。
+
 ## 第四章确定性架构审计
 
 - [[00-知识库管理/_labs/code/architecture_sequence_ssm_audit.py]]：ARCH-09—16 的递推、BPTT、门控、ZOH、卷积/scan 与 selective retention；

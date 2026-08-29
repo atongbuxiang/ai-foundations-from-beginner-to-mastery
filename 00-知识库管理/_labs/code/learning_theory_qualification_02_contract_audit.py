@@ -64,6 +64,19 @@ STATE_SURFACES = (
     ROOT / "00-知识库管理" / "00-总览" / "全库教学重写审计与迁移台账.md",
 )
 
+VOLUME_STATE_SURFACES = (
+    ROOT / "20-学习理论" / "20.1-学习问题、决策与风险" / "学习问题、决策与风险 MOC.md",
+    ROOT / "20-学习理论" / "20.2-PAC学习与有限假设类" / "PAC 学习与有限假设类 MOC.md",
+    ROOT / "20-学习理论" / "20.3-VC维与一致收敛" / "VC 维与一致收敛 MOC.md",
+    ROOT / "20-学习理论" / "20.4-数据依赖复杂度、间隔与快率" / "数据依赖复杂度、间隔与快率 MOC.md",
+    ROOT / "20-学习理论" / "20.5-稳定性、压缩、PAC-Bayes与信息泛化" / "稳定性、压缩、PAC-Bayes 与信息泛化 MOC.md",
+    ROOT / "20-学习理论" / "20.6-经典模型与模型选择" / "经典模型与模型选择 MOC.md",
+    ROOT / "20-学习理论" / "20.7-表示学习、度量学习与自监督" / "表示学习、度量学习与自监督 MOC.md",
+    ROOT / "20-学习理论" / "20.8-校准、不确定性与分布偏移" / "校准、不确定性与分布偏移 MOC.md",
+    ROOT / "20-学习理论" / "20.9-在线学习、Boosting与序列预测" / "在线学习、Boosting 与序列预测 MOC.md",
+    ROOT / "20-学习理论" / "20.10-深度泛化理论接口与开放边界" / "深度泛化理论接口与开放边界 MOC.md",
+)
+
 
 def require(condition: bool, message: str) -> None:
     if not condition:
@@ -244,14 +257,15 @@ def audit_prerequisites_and_state() -> None:
     print("PASS prerequisites: LT-QUAL-01 and 20.6--20.10 material chains regressed; personal retained remains unmet")
     assessment = read(ASSESSMENT)
     require("LT-QUAL-01-and-five-volume-retained" in assessment, "personal prerequisite boundary missing")
-    for surface in STATE_SURFACES:
+    require(len(VOLUME_STATE_SURFACES) == 10, "volume state surface count mismatch")
+    for surface in STATE_SURFACES + VOLUME_STATE_SURFACES:
         content = read(surface)
         require("LT-QUAL-02" in content, f"state surface misses LT-QUAL-02: {surface.relative_to(ROOT)}")
         require("2/2" in content or "2 / 2" in content, f"state surface misses qualification material 2/2: {surface.relative_to(ROOT)}")
         require("0/2" in content or "0 / 2" in content, f"state surface misses personal qualification 0/2: {surface.relative_to(ROOT)}")
         require("10/10" in content or "10 / 10" in content, f"state surface misses volume material 10/10: {surface.relative_to(ROOT)}")
         require("not-attempted" in content, f"state surface overclaims learner: {surface.relative_to(ROOT)}")
-    print("PASS state surfaces: qualifications material=2/2, volume material=10/10, learner=0/2 and 0/10/not-attempted")
+    print("PASS state surfaces: 5 global + 10 volume MOCs agree on qualifications=2/2, volumes=10/10, learner=0/2 and 0/10/not-attempted")
 
 
 def main() -> None:

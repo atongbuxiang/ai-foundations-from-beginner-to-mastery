@@ -33,4 +33,4 @@ updated: 2026-08-29
 - 三轨实验：[[实验 - 深度泛化理论接口与开放边界累计复现门]]；
 - 独立审计：[[deep_generalization_cumulative_contract_audit.py]]。
 
-三轨分别核对 interpolation risk/min-norm/null-space selection、parameterization stress/norm capacity、fixed-kernel modes/finite-particle feature drift；canonical 与跨轨 blind 的 stdout、SVG/XML/hash、非法合同、20.9 前置和六处状态面均由独立脚本复核。至此学习理论卷级材料门为 **10/10 `regression-passed`**，个人仍为 **0/10 / `not-attempted`**；正式参加本卷认证要求 `ONLINE-CUM-01 retained`，当前未满足。下一施工点是覆盖 20.6—20.10 的 `LT-QUAL-02`，而不是把十卷材料建成写成已经掌握。
+三轨分别核对 interpolation risk/min-norm/null-space selection、parameterization stress/norm capacity、fixed-kernel modes/finite-particle feature drift；canonical 与跨轨 blind 的 stdout、SVG/XML/hash、非法合同、20.9 前置和六处状态面均由独立脚本复核。至此学习理论卷级材料门为 **10/10 `regression-passed`**；覆盖后五卷的[[资格考 - 学习理论 II：从模型选择到深度泛化证据（20.6—20.10）|LT-QUAL-02]]也已回归，使资格考材料门达到 **2/2**。个人仍为 **0/10、0/2 / `not-attempted`**；正式参加本卷认证要求 `ONLINE-CUM-01 retained`，当前未满足。下一步是按前置顺序执行个人证据，而不是把材料建成写成已经掌握。

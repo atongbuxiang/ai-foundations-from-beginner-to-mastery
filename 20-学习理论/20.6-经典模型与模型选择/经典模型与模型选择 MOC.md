@@ -39,4 +39,4 @@ updated: 2026-08-28
 
 [[classical_models_cumulative_contract_audit.py]]不导入生成函数，独立复算谱 risk/selection、margin/tree/bootstrap/boost、PCA/K-Means/EM/selection arithmetic，并检查 canonical/固定 blind 双跑、SVG/XML/hash、输入保护与状态面。
 
-本卷材料为 `regression-passed`，全章卷级材料门达到 **6/10**；个人通过仍为 **0/10 / `not-attempted`**。正式认证还要求 `LT-QUAL-01 retained`，当前该个人前置未满足。资格考材料仍为 **1/2**、个人资格 **0/2**。下一施工点进入 20.7。
+本卷材料为 `regression-passed`；它建成时把全章卷级材料门推进到 **6/10**。全章当前已经是 **10/10 卷级材料门与 2/2 资格考材料门（LT-QUAL-01 / LT-QUAL-02）**；个人仍为 **0/10、0/2 / `not-attempted`**。正式认证还要求 `LT-QUAL-01 retained`，当前该个人前置未满足；下一步是按前置顺序执行个人证据。

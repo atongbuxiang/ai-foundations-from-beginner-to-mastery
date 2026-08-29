@@ -24,7 +24,7 @@ updated: 2026-08-28
 | LT-31 | [[局部 Rademacher 复杂度与快收敛率]] | localized fixed point | draft + A–E 闭环 |
 | LT-32 | [[Fat-Shattering、回归与 Lipschitz 风险]] | scale-sensitive real-valued capacity | draft + A–E 闭环 |
 
-当前为 **8/8 正文、8/8 A—E 习题与独立详解、0/8 经真实验收**。LT-25—32 共配置 8 张独立 paper-ink v2 图，全部通过 SVG 结构、XML、1200×600 实际渲染与逐图视觉检查；两套生成器连续复跑哈希 8/8 稳定。本卷已形成 ghost sample → symmetrization → Rademacher → contraction → norm/margin → entropy/chaining → local fixed point → fat-scale regression 的闭环。下一施工批次进入 20.5 的 LT-33—40；`draft` 不替代闭卷证明、延迟复测与迁移证据。
+当前为 **8/8 正文、8/8 A—E 习题与独立详解、0/8 经真实验收**。LT-25—32 共配置 8 张独立 paper-ink v2 图，全部通过 SVG 结构、XML、1200×600 实际渲染与逐图视觉检查；两套生成器连续复跑哈希 8/8 稳定。本卷已形成 ghost sample → symmetrization → Rademacher → contraction → norm/margin → entropy/chaining → local fixed point → fat-scale regression 的闭环。课程顺序随后进入 20.5；`draft` 不替代闭卷证明、延迟复测与迁移证据。
 
 ## 卷级累计证据门
 
@@ -33,4 +33,4 @@ updated: 2026-08-28
 - 三轨复现：[[实验 - 数据依赖复杂度、间隔与快率累计复现门]]；
 - 独立审计：[[rademacher_margin_local_cumulative_contract_audit.py]]。
 
-材料门以 exact signs/双范数—margin 共同选择—cover/local/fat 三轨把八节点压成一条证据链，并含 20 分钟口试、210 分钟 100 分闭卷、`attempt_id + scorer nonce`、跨轨盲参、48 小时换机制与 14 天陌生迁移。当前仅是 `regression-passed` 材料；个人仍为 `not-attempted`，八篇正文仍为 `draft`。全章已建立 **4/10** 卷级材料门，个人通过 **0/10**；下一施工点为 20.5 的 LT-33—40。
+材料门以 exact signs/双范数—margin 共同选择—cover/local/fat 三轨把八节点压成一条证据链，并含 20 分钟口试、210 分钟 100 分闭卷、`attempt_id + scorer nonce`、跨轨盲参、48 小时换机制与 14 天陌生迁移。当前仅是 `regression-passed` 材料；个人仍为 `not-attempted`，八篇正文仍为 `draft`。本门建成时把全章卷级材料推进到 **4/10**；全章当前已经是 **10/10 卷级材料门、2/2 资格考材料门（LT-QUAL-01 / LT-QUAL-02）、个人 0/10 与 0/2**。

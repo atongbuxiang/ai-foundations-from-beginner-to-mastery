@@ -66,7 +66,8 @@ volume evidence gate built: 1 / 1
 personal oral / closed-book / blind-run evidence: 0
 material state: regression-passed
 learning state: not-attempted
-next: build the 20.2 volume evidence gate for LT-09—16
+chapter material: 10 / 10 volume gates + 2 / 2 qualification gates
+next: execute personal evidence in prerequisite order
 ```
 
-LT-01—08 具备 **8/8 正文、8/8 独立 v2 图文单元、8/8 A—E 习题与独立解答，以及 1/1 卷级验收工具链**。这仍不是 8/8 真实掌握：在口试、闭卷、nonce 盲参、48 小时与 14 天证据未产生前，全部正文保持 `draft`，个人保持 `not-attempted`。
+LT-01—08 具备 **8/8 正文、8/8 独立 v2 图文单元、8/8 A—E 习题与独立解答，以及 1/1 卷级验收工具链**。全章当前已形成 **10/10 卷级材料门与 2/2 资格考材料门（LT-QUAL-01 / LT-QUAL-02）**，个人仍为 **0/10、0/2 / `not-attempted`**；这仍不是 8/8 真实掌握：在口试、闭卷、nonce 盲参、48 小时与 14 天证据未产生前，全部正文保持 `draft`。
