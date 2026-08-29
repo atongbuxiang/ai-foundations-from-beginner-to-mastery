@@ -450,6 +450,8 @@ updated: 2026-08-29
 
 第八卷[[阶段测验 - 校准、不确定性与分布偏移（20.8）|REL-CUM-01]]、独立详解与[[实验 - 校准、不确定性与分布偏移累计复现门|三轨门]]已由[[calibration_shift_cumulative_contract_audit.py]]回归。卷级材料现为 **8/10**，个人仍为 **0/10 / `not-attempted`**；正式认证前置为 `REPR-CUM-01 retained`，当前未满足。
 
+第九卷[[阶段测验 - 在线学习、Boosting 与序列预测（20.9）|ONLINE-CUM-01]]、独立详解与[[实验 - 在线学习、Boosting 与序列预测累计复现门|三轨门]]已由[[online_boosting_cumulative_contract_audit.py]]回归。卷级材料现为 **9/10**，个人仍为 **0/10 / `not-attempted`**；正式认证前置为 `REL-CUM-01 retained`，当前未满足。
+
 | 学习理论卷级测验 | 覆盖范围 | 状态 |
 |---|---|---|
 | LT-CUM-01 | LT-01—08：学习问题、决策与风险 | regression-passed material / not-attempted learner |
@@ -460,6 +462,7 @@ updated: 2026-08-29
 | MODEL-CUM-01 | LT-41—52：经典模型与模型选择 | regression-passed material（6/10）/ not-attempted learner（0/10；LT-QUAL-01 retained 前置未满足） |
 | REPR-CUM-01 | LT-53—60：表示学习、度量学习与自监督 | regression-passed material（7/10）/ not-attempted learner（0/10；MODEL-CUM-01 retained 前置未满足） |
 | REL-CUM-01 | LT-61—68：校准、不确定性与分布偏移 | regression-passed material（8/10）/ not-attempted learner（0/10；REPR-CUM-01 retained 前置未满足） |
+| ONLINE-CUM-01 | LT-69—76：在线学习、Boosting 与序列预测 | regression-passed material（9/10）/ not-attempted learner（0/10；REL-CUM-01 retained 前置未满足） |
 
 | 学习理论跨卷资格考 | 覆盖范围 | 状态 |
 |---|---|---|

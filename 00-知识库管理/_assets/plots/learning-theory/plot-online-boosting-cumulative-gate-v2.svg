@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1040" viewBox="0 0 1500 1040">
+<style>text{font-family:Inter,"Noto Sans SC","PingFang SC",Arial,sans-serif}.math{font-family:"STIX Two Math","Times New Roman",serif}</style>
+<rect x="0" y="0" width="1500" height="1040" rx="0" fill="#F7F9FC" stroke="#F7F9FC" stroke-width="0"/>
+<text x="55" y="60" font-size="28" fill="#172033" font-weight="760" text-anchor="start">20.9 cumulative evidence gate</text>
+<text x="55" y="90" font-size="15" fill="#5F6B7A" font-weight="550" text-anchor="start">protocol and regret  ·  margin and boosting  ·  risk bridge and partial feedback</text>
+<rect x="45" y="125" width="440" height="650" rx="18" fill="#FFFFFF" stroke="#D9E1EA" stroke-width="1.5"/>
+<rect x="530" y="125" width="440" height="650" rx="18" fill="#FFFFFF" stroke="#D9E1EA" stroke-width="1.5"/>
+<rect x="1015" y="125" width="440" height="650" rx="18" fill="#FFFFFF" stroke="#D9E1EA" stroke-width="1.5"/>
+<text x="69" y="164" font-size="18" fill="#2563EB" font-weight="750" text-anchor="start">A  |  full-information sequence</text>
+<text x="69" y="192" font-size="13" fill="#5F6B7A" font-weight="550" text-anchor="start">Hedge potential → OGD geometry → visibility</text>
+<text x="69" y="230" font-size="14" fill="#172033" font-weight="650" text-anchor="start">Hedge: T=4, N=3, eta=0.693</text>
+<text x="69" y="269" font-size="12" fill="#5F6B7A" font-weight="600" text-anchor="start">expert 1</text>
+<rect x="141" y="258" width="238" height="13" rx="6" fill="#EEF2F7" stroke="#EEF2F7" stroke-width="0"/>
+<rect x="141" y="258" width="95.2" height="13" rx="6" fill="#2563EB" stroke="#2563EB" stroke-width="0"/>
+<text x="389" y="269" font-size="12" fill="#2563EB" font-weight="700" text-anchor="start">p=0.400</text>
+<text x="69" y="298" font-size="12" fill="#5F6B7A" font-weight="600" text-anchor="start">expert 2</text>
+<rect x="141" y="287" width="238" height="13" rx="6" fill="#EEF2F7" stroke="#EEF2F7" stroke-width="0"/>
+<rect x="141" y="287" width="47.6" height="13" rx="6" fill="#2563EB" stroke="#2563EB" stroke-width="0"/>
+<text x="389" y="298" font-size="12" fill="#2563EB" font-weight="700" text-anchor="start">p=0.200</text>
+<text x="69" y="327" font-size="12" fill="#5F6B7A" font-weight="600" text-anchor="start">expert 3</text>
+<rect x="141" y="316" width="238" height="13" rx="6" fill="#EEF2F7" stroke="#EEF2F7" stroke-width="0"/>
+<rect x="141" y="316" width="95.2" height="13" rx="6" fill="#2563EB" stroke="#2563EB" stroke-width="0"/>
+<text x="389" y="327" font-size="12" fill="#2563EB" font-weight="700" text-anchor="start">p=0.400</text>
+<text x="69" y="355" font-size="12" fill="#5F6B7A" font-weight="600" text-anchor="start">realized external regret</text>
+<rect x="69" y="363" width="215" height="13" rx="6" fill="#EEF2F7" stroke="#EEF2F7" stroke-width="0"/>
+<rect x="69" y="363" width="63.0759" height="13" rx="6" fill="#2563EB" stroke="#2563EB" stroke-width="0"/>
+<text x="292" y="374" font-size="12" fill="#2563EB" font-weight="700" text-anchor="start">0.567</text>
+<text x="367" y="376" font-size="12" fill="#5F6B7A" font-weight="650" text-anchor="start">≤ 1.932</text>
+<line x1="69" y1="407" x2="461" y2="407" stroke="#D9E1EA" stroke-width="2"/>
+<text x="69" y="438" font-size="14" fill="#172033" font-weight="700" text-anchor="start">Projected OGD on [-R,R]</text>
+<text x="69" y="462" font-size="12" fill="#5F6B7A" font-weight="550" text-anchor="start">decision before each gradient</text>
+<line x1="81" y1="505" x2="431" y2="505" stroke="#D9E1EA" stroke-width="3"/>
+<line x1="81" y1="447" x2="81" y2="563" stroke="#EEF2F7" stroke-width="1"/>
+<circle cx="81" cy="505" r="6" fill="#0F8B8D" stroke="#FFFFFF" stroke-width="2"/>
+<text x="81" y="585" font-size="11" fill="#5F6B7A" font-weight="600" text-anchor="middle">t1</text>
+<line x1="168.5" y1="447" x2="168.5" y2="563" stroke="#EEF2F7" stroke-width="1"/>
+<circle cx="168.5" cy="532.5" r="6" fill="#0F8B8D" stroke="#FFFFFF" stroke-width="2"/>
+<text x="168.5" y="585" font-size="11" fill="#5F6B7A" font-weight="600" text-anchor="middle">t2</text>
+<line x1="256" y1="447" x2="256" y2="563" stroke="#EEF2F7" stroke-width="1"/>
+<circle cx="256" cy="477.5" r="6" fill="#0F8B8D" stroke="#FFFFFF" stroke-width="2"/>
+<text x="256" y="585" font-size="11" fill="#5F6B7A" font-weight="600" text-anchor="middle">t3</text>
+<line x1="343.5" y1="447" x2="343.5" y2="563" stroke="#EEF2F7" stroke-width="1"/>
+<circle cx="343.5" cy="505" r="6" fill="#0F8B8D" stroke="#FFFFFF" stroke-width="2"/>
+<text x="343.5" y="585" font-size="11" fill="#5F6B7A" font-weight="600" text-anchor="middle">t4</text>
+<line x1="431" y1="447" x2="431" y2="563" stroke="#EEF2F7" stroke-width="1"/>
+<circle cx="431" cy="560" r="6" fill="#0F8B8D" stroke="#FFFFFF" stroke-width="2"/>
+<text x="431" y="585" font-size="11" fill="#5F6B7A" font-weight="600" text-anchor="middle">t5</text>
+<text x="69" y="609" font-size="12" fill="#5F6B7A" font-weight="600" text-anchor="start">OGD regret / comparator</text>
+<rect x="69" y="617" width="215" height="13" rx="6" fill="#EEF2F7" stroke="#EEF2F7" stroke-width="0"/>
+<rect x="69" y="617" width="200.667" height="13" rx="6" fill="#0F8B8D" stroke="#0F8B8D" stroke-width="0"/>
+<text x="292" y="628" font-size="12" fill="#0F8B8D" font-weight="700" text-anchor="start">3.500</text>
+<text x="367" y="630" font-size="12" fill="#5F6B7A" font-weight="650" text-anchor="start">≤ 3.750</text>
+<rect x="69" y="666" width="392" height="72" rx="12" fill="#FFF5F2" stroke="#F2C7C0" stroke-width="1.2"/>
+<text x="85" y="692" font-size="13" fill="#C2413B" font-weight="700" text-anchor="start">current-action-aware adversary</text>
+<text x="85" y="716" font-size="13" fill="#C2413B" font-weight="650" text-anchor="start">T=6: linear regret = 3.0</text>
+<text x="554" y="164" font-size="18" fill="#7656C9" font-weight="750" text-anchor="start">B  |  margin to exponential potential</text>
+<text x="554" y="192" font-size="13" fill="#5F6B7A" font-weight="550" text-anchor="start">Perceptron double ledger → AdaBoost product</text>
+<text x="554" y="230" font-size="14" fill="#172033" font-weight="700" text-anchor="start">Perceptron mistakes M = 2</text>
+<rect x="554" y="254" width="392" height="126" rx="12" fill="#F7F4FF" stroke="#D9CEF5" stroke-width="1.2"/>
+<text x="572" y="282" font-size="12" fill="#5F6B7A" font-weight="650" text-anchor="start">progress</text>
+<text x="572" y="311" font-size="15" fill="#7656C9" font-weight="700" text-anchor="start" class="math">&lt;w,u&gt; = 1.414  &gt;=  M gamma</text>
+<text x="572" y="342" font-size="12" fill="#5F6B7A" font-weight="650" text-anchor="start">norm growth</text>
+<text x="572" y="369" font-size="15" fill="#7656C9" font-weight="700" text-anchor="start" class="math">||w|| = 1.414  &lt;=  R sqrt(M)</text>
+<text x="554" y="416" font-size="14" fill="#7656C9" font-weight="700" text-anchor="start">certificate: M=2 &lt;= (R/gamma)^2=4.000</text>
+<line x1="554" y1="443" x2="946" y2="443" stroke="#D9E1EA" stroke-width="2"/>
+<text x="554" y="476" font-size="14" fill="#172033" font-weight="700" text-anchor="start">AdaBoost exact two-ledger identity</text>
+<circle cx="572" cy="504" r="15" fill="#D97706" stroke="#FFFFFF" stroke-width="2"/>
+<text x="572" y="509" font-size="12" fill="#FFFFFF" font-weight="750" text-anchor="middle">1</text>
+<text x="598" y="502" font-size="13" fill="#172033" font-weight="650" text-anchor="start">epsilon=0.250   alpha=0.549</text>
+<text x="598" y="524" font-size="12" fill="#5F6B7A" font-weight="650" text-anchor="start">Z=0.866</text>
+<circle cx="572" cy="558" r="15" fill="#D97706" stroke="#FFFFFF" stroke-width="2"/>
+<text x="572" y="563" font-size="12" fill="#FFFFFF" font-weight="750" text-anchor="middle">2</text>
+<text x="598" y="556" font-size="13" fill="#172033" font-weight="650" text-anchor="start">epsilon=0.333   alpha=0.347</text>
+<text x="598" y="578" font-size="12" fill="#5F6B7A" font-weight="650" text-anchor="start">Z=0.943</text>
+<rect x="554" y="632" width="392" height="106" rx="12" fill="#FFF9EC" stroke="#F0D49A" stroke-width="1.2"/>
+<text x="572" y="660" font-size="14" fill="#D97706" font-weight="750" text-anchor="start" class="math">product Z_t = 0.816497</text>
+<text x="572" y="687" font-size="13" fill="#172033" font-weight="650" text-anchor="start">training error = 0.250</text>
+<text x="572" y="714" font-size="13" fill="#C2413B" font-weight="650" text-anchor="start">minimum ensemble margin = -0.203</text>
+<text x="1039" y="164" font-size="18" fill="#238B57" font-weight="750" text-anchor="start">C  |  risk bridge and partial feedback</text>
+<text x="1039" y="192" font-size="13" fill="#5F6B7A" font-weight="550" text-anchor="start">online-to-batch → UCB / IPS → RL boundary</text>
+<rect x="1039" y="222" width="392" height="135" rx="12" fill="#EFFAF4" stroke="#BFE5CF" stroke-width="1.2"/>
+<text x="1057" y="252" font-size="13" fill="#238B57" font-weight="700" text-anchor="start">past-measurable predictors + fresh iid point</text>
+<text x="1057" y="282" font-size="15" fill="#172033" font-weight="700" text-anchor="start">random iterate risk = 0.250</text>
+<text x="1057" y="310" font-size="14" fill="#238B57" font-weight="700" text-anchor="start">regret / T = excess = 0.150</text>
+<text x="1057" y="337" font-size="12" fill="#5F6B7A" font-weight="600" text-anchor="start">illustrative deviation radius = 0.612</text>
+<text x="1039" y="398" font-size="14" fill="#172033" font-weight="700" text-anchor="start">Stochastic UCB index</text>
+<text x="1039" y="435" font-size="12" fill="#5F6B7A" font-weight="650" text-anchor="start">arm 1</text>
+<rect x="1091" y="423" width="250" height="14" rx="7" fill="#EEF2F7" stroke="#EEF2F7" stroke-width="0"/>
+<rect x="1091" y="423" width="199.361" height="14" rx="7" fill="#8CA0B3" stroke="#8CA0B3" stroke-width="0"/>
+<text x="1352" y="435" font-size="12" fill="#8CA0B3" font-weight="750" text-anchor="start">1.183</text>
+<text x="1039" y="472" font-size="12" fill="#5F6B7A" font-weight="650" text-anchor="start">arm 2</text>
+<rect x="1091" y="460" width="250" height="14" rx="7" fill="#EEF2F7" stroke="#EEF2F7" stroke-width="0"/>
+<rect x="1091" y="460" width="223.214" height="14" rx="7" fill="#238B57" stroke="#238B57" stroke-width="0"/>
+<text x="1352" y="472" font-size="12" fill="#238B57" font-weight="750" text-anchor="start">1.325</text>
+<text x="1039" y="524" font-size="13" fill="#238B57" font-weight="750" text-anchor="start">choose arm 2</text>
+<line x1="1039" y1="549" x2="1431" y2="549" stroke="#D9E1EA" stroke-width="2"/>
+<text x="1039" y="580" font-size="14" fill="#172033" font-weight="700" text-anchor="start">Bandit IPS: unbiased, potentially explosive</text>
+<text x="1039" y="608" font-size="13" fill="#C2413B" font-weight="650" text-anchor="start">one observed target estimate = 2.700</text>
+<text x="1039" y="634" font-size="13" fill="#238B57" font-weight="700" text-anchor="start">true target risk = 0.700</text>
+<text x="1039" y="660" font-size="13" fill="#5F6B7A" font-weight="650" text-anchor="start">variance = 1.019   max ratio = 3.0</text>
+<rect x="1039" y="686" width="392" height="52" rx="12" fill="#FFF5F2" stroke="#F2C7C0" stroke-width="1.2"/>
+<text x="1057" y="718" font-size="12" fill="#C2413B" font-weight="700" text-anchor="start">bandit != RL: actions do not yet alter future states</text>
+<rect x="45" y="805" width="1410" height="172" rx="18" fill="#FFFFFF" stroke="#D9E1EA" stroke-width="1.5"/>
+<text x="70" y="840" font-size="17" fill="#172033" font-weight="760" text-anchor="start">eight-layer sequential audit</text>
+<rect x="70" y="862" width="154" height="58" rx="10" fill="#F7F9FC" stroke="#D9E1EA" stroke-width="1"/>
+<text x="82" y="885" font-size="12" fill="#2563EB" font-weight="700" text-anchor="start">1 protocol</text>
+<text x="82" y="907" font-size="11" fill="#5F6B7A" font-weight="550" text-anchor="start">move order</text>
+<rect x="240" y="862" width="154" height="58" rx="10" fill="#F7F9FC" stroke="#D9E1EA" stroke-width="1"/>
+<text x="252" y="885" font-size="12" fill="#2563EB" font-weight="700" text-anchor="start">2 filtration</text>
+<text x="252" y="907" font-size="11" fill="#5F6B7A" font-weight="550" text-anchor="start">who sees fresh coin</text>
+<rect x="410" y="862" width="154" height="58" rx="10" fill="#F7F9FC" stroke="#D9E1EA" stroke-width="1"/>
+<text x="422" y="885" font-size="12" fill="#2563EB" font-weight="700" text-anchor="start">3 feedback</text>
+<text x="422" y="907" font-size="11" fill="#5F6B7A" font-weight="550" text-anchor="start">full / bandit</text>
+<rect x="580" y="862" width="154" height="58" rx="10" fill="#F7F9FC" stroke="#D9E1EA" stroke-width="1"/>
+<text x="592" y="885" font-size="12" fill="#2563EB" font-weight="700" text-anchor="start">4 comparator</text>
+<text x="592" y="907" font-size="11" fill="#5F6B7A" font-weight="550" text-anchor="start">fixed / policy</text>
+<rect x="750" y="862" width="154" height="58" rx="10" fill="#F7F9FC" stroke="#D9E1EA" stroke-width="1"/>
+<text x="762" y="885" font-size="12" fill="#0F8B8D" font-weight="700" text-anchor="start">5 potential</text>
+<text x="762" y="907" font-size="11" fill="#5F6B7A" font-weight="550" text-anchor="start">log-W / distance</text>
+<rect x="920" y="862" width="154" height="58" rx="10" fill="#F7F9FC" stroke="#D9E1EA" stroke-width="1"/>
+<text x="932" y="885" font-size="12" fill="#0F8B8D" font-weight="700" text-anchor="start">6 probability</text>
+<text x="932" y="907" font-size="11" fill="#5F6B7A" font-weight="550" text-anchor="start">path / expectation</text>
+<rect x="1090" y="862" width="154" height="58" rx="10" fill="#F7F9FC" stroke="#D9E1EA" stroke-width="1"/>
+<text x="1102" y="885" font-size="12" fill="#0F8B8D" font-weight="700" text-anchor="start">7 conversion</text>
+<text x="1102" y="907" font-size="11" fill="#5F6B7A" font-weight="550" text-anchor="start">regret -&gt; risk</text>
+<rect x="1260" y="862" width="154" height="58" rx="10" fill="#F7F9FC" stroke="#D9E1EA" stroke-width="1"/>
+<text x="1272" y="885" font-size="12" fill="#0F8B8D" font-weight="700" text-anchor="start">8 boundary</text>
+<text x="1272" y="907" font-size="11" fill="#5F6B7A" font-weight="550" text-anchor="start">deployment / RL</text>
+<text x="70" y="949" font-size="13" fill="#C2413B" font-weight="700" text-anchor="start">No-regret != iid generalization   ·   small training error != test guarantee   ·   unbiased IPS != safe deployment</text>
+<text x="1430" y="1009" font-size="11" fill="#5F6B7A" font-weight="500" text-anchor="end">ONLINE-CUM-01 | deterministic finite fixtures</text>
+</svg>
