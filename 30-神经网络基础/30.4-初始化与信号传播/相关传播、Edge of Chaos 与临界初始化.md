@@ -11,12 +11,89 @@ exercises: ["[[习题 - 相关传播、Edge of Chaos 与临界初始化]]"]
 solutions: ["[[解答 - 相关传播、Edge of Chaos 与临界初始化]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-correlation-edge-of-chaos-v2.svg]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 # 相关传播、Edge of Chaos 与临界初始化
 
 > [!abstract] 本章主问题
 > 两个不同输入经过很多随机层以后，是仍能彼此区分，还是表示逐渐变成几乎同一个方向？单输入 variance 稳定只守住每个点的长度尺度；两输入 correlation map 才描述相对几何。Edge of Chaos 是该动力系统在 $c=1$ 附近的局部临界条件，不是“模型位于混沌边缘就必然最好”的经验口号。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-25—28 已把单个输入的 second moment 和 cotangent moment 压缩成标量递推；它们还没有问两个输入是否仍可区分；
+- **本页解决什么：** 从共享权重的二元 Gaussian 出发，推出 covariance/correlation map、$c=1$ 局部斜率和 ordered/critical/chaotic 制度；
+- **后续为何需要：** NN-30 会说明 pairwise correlation 稳定仍不控制 Jacobian 的极端方向，因而需要 singular spectrum。
+
+**第一遍只看一张函数图。** 给定 $c_\ell$，算 $\mathcal C(c_\ell)$，再比较它与对角线 $c$；只在 $c=1$ 附近才用斜率 $\chi_1$。
+
+**第二遍再检查极限对象。** 分清共享/独立 bias、population/empirical correlation、有限宽/无限宽、局部/全局 map，并将 MLP 标量相关递推与 convolution、residual、normalization、attention 分开。
+
+### 问题链
+
+1. 为什么两条输入路径必须共享同一组权重和 bias？
+2. 怎样用两个独立标准正态生成 correlation 为 $c$ 的 $(U,V)$？
+3. $q_*=2$ 稳定为什么仍允许 $c_\ell$ 逐层变化？
+4. $\mathcal C'(1)=1$ 只是什么意义下的“临界”？
+5. 为什么 edge of chaos 不能直接升级为训练收敛或任务最优的证明？
+
+> [!check] 第一遍停靠线
+> 若你能在 $\mathcal I_\square$ 的 ReLU 均值场镜头中，从 $c_0=1/2$ 算出 $\mathcal C(c_0)=1/3+\sqrt3/(2\pi)\approx0.608998$ 和 $\mathcal C'(c_0)=2/3$，并说明 $\mathcal C'(1)=1$ 才是临界判据，就可以进入谱页。
+
+## 符号与对象账本
+
+| 对象 | 定义 | AI 表示中的身份 | 边界 |
+|---|---|---|---|
+| $q_{11},q_{22}$ | 两个输入的 marginal second moments | 各自表示长度尺度 | 不描述相对角度 |
+| $q_{12}$ | 共享随机网络下的 cross moment | kernel/covariance entry | 不是独立网络之间的 covariance |
+| $c=q_{12}/\sqrt{q_{11}q_{22}}$ | normalized correlation | pairwise representation geometry | 不控制所有方向 |
+| $\mathcal C$ | 一层 correlation map | depth dynamics | 依赖 activation/架构/初始化 |
+| $\chi_1=\mathcal C'(1)$ | 完全相关点的局部斜率 | 相近输入的局部 separation gain | 不是全 Jacobian condition number |
+
+### 贯穿算例 $\mathcal I_\square$：从相关 $1/2$ 走一步
+
+沿用前半卷的 zero-bias He–ReLU 均值场：$q_*=2$、$\sigma_w^2=2$。现在放入两个输入，令它们在某层的 preactivation correlation 为
+
+$$
+c_0=\frac12.
+$$
+
+因为 $\arccos(1/2)=\pi/3$且 $\sqrt{1-(1/2)^2}=\sqrt3/2$，ReLU correlation map 给出
+
+$$
+c_1
+=\frac1\pi\left[
+\frac{\sqrt3}{2}
++\left(\pi-\frac\pi3\right)\frac12
+\right]
+=\frac13+\frac{\sqrt3}{2\pi}
+\approx0.608998.
+$$
+
+它比 $c_0$ 大，说明这一步使两个表示更相似。但局部斜率在这个点为
+
+$$
+\mathcal C'(1/2)
+=1-\frac{\arccos(1/2)}\pi
+=\frac23,
+$$
+
+而临界声明使用的是 $\mathcal C'(1)=1$。这两句不矛盾：前者是 map 在 $1/2$ 的局部斜率，后者是“两输入几乎相同”时的边界判据。
+
+## 核心公式七问：$\chi_1=\mathcal C'(1)=\sigma_w^2\mathbb E[\phi'(\sqrt{q_*}Z)^2]$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 判断几乎相同的两个输入差异在一层后如何变化 |
+| 对象 | equal-variance fixed point 上 correlation map 在 $c=1$ 的导数 |
+| 来路 | 二元 Gaussian expectation 对 correlation 微分与 Price/Gaussian integration-by-parts identity |
+| 步骤 | 先解 $q_*$→建 $\mathcal C(c)$→验 $\mathcal C(1)=1$→求 $\mathcal C'(1)$ |
+| 读法 | 小于 1 局部 ordered，等于 1 一阶 critical，大于 1 局部 chaotic |
+| 检查 | zero-bias He–ReLU 应得 1；bias 是共享随机变量时 covariance 项不得丢失 |
+| 去路 | correlation depth、NTK/GP kernel、Jacobian spectrum 与 residual critical scaling |
+
+### AI / 系统对应
+
+这个 map 对应的是不同 token、图像、语音帧或扰动样本在随机特征中的可分辨性。工程实验应同时记录理论 Gaussian integral、有限宽 empirical correlation、seed 波动与训练后 drift；只画 activation variance 不能告诉我们表示是否已经坍缩到同一方向。
 
 ## 一、为什么只看一个输入不够
 

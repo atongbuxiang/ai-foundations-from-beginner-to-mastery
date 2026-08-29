@@ -11,12 +11,86 @@ exercises: ["[[习题 - LSUV、Fixup 与现代初始化诊断]]"]
 solutions: ["[[解答 - LSUV、Fixup 与现代初始化诊断]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-lsuv-fixup-diagnostic-loop-v2.svg]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 # LSUV、Fixup 与现代初始化诊断
 
 > [!abstract] 本章主问题
 > Xavier/He 用解析近似预先选择尺度；LSUV 用校准数据逐层测量并修正 activation variance；Fixup 用 residual depth 与 branch length 预先缩小更新尺度。现代初始化不应停在“调用哪个 API”，而应形成一个可证伪闭环：声明计算图与随机对象，选初值，测前向/反向/相关/谱/更新，定位第一处失效，再只修改对应机制。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-25—31 已提供 moment、correlation、spectrum 和 symmetry 四种不可互换的诊断对象；
+- **本页解决什么：** 把 LSUV 的数据依赖 feedback 和 Fixup 的深度依赖 recipe 放入同一个“先验—dry run—局部修正—训练验证”闭环；
+- **后续为何需要：** 30.5 normalization 会持续修改训练中的统计量；要比较它与 LSUV/Fixup，必须先分清一次性 initialization 与运行期 operator。
+
+**第一遍只记两个算法。** LSUV：测 $\widehat v$、除以 $\sqrt{\widehat v}$、重算；Fixup：算 $\alpha$、缩放 branch 内非零层、末层置零并保留 skip。
+
+**第二遍再建仪表盘。** 明确 LSUV axes/batch/mode，检查 Fixup recipe 是否完整，再同时记录 forward、correlation、backward、spectrum、update ratio 和 low-precision system events。
+
+### 问题链
+
+1. LSUV 直接校准的是哪个统计量，在哪些 axes 上计算？
+2. 为什么除以 $\sqrt{\widehat v}$ 只在局部 homogeneous 近似下一步到位？
+3. Fixup 的 $L^{-1/(2m-2)}$ 为什么使 branch amplitude 约为 $L^{-1/2}$？
+4. zero-last 为什么必须与 identity skip、scalar bias/multiplier 和 depth scaling 一起理解？
+5. 如何用“第一处失效”阻止对整个模型盲目缩放？
+
+> [!check] 第一遍停靠线
+> 若你能在 $\mathcal I_\square$ 的 dry run 中把 $\widehat v=4$ 用缩放 $1/2$ 校准到 1，并在 $L=16,m=3$ 的 Fixup branch 中算出 $\alpha=1/2$、branch amplitude $1/4$、branch squared scale $1/16$，就掌握了两种方法的直接目标。
+
+## 符号与对象账本
+
+| 对象 | 定义 | AI 工程中的身份 | 不保证 |
+|---|---|---|---|
+| $\widehat v_\ell$ | calibration batch 上的 layer-output variance | LSUV feedback signal | population/训练后 variance |
+| $\tau,\varepsilon$ | tolerance/numerical floor | 停止与稳定参数 | 统计估计无偏 |
+| $L,m$ | residual branch 数/每 branch weight 层数 | Fixup depth contract | 任意架构都可直接套用 |
+| $\alpha=L^{-1/(2m-2)}$ | 非零 branch weights 的额外 amplitude scale | depth-aware prior | normalization 的全部效果 |
+| $\rho_\ell=\|\Delta W_\ell\|/(\|W_\ell\|+\epsilon)$ | update/parameter ratio | optimizer-aware diagnostic | Jacobian spectrum |
+
+### 贯穿算例 $\mathcal I_\square$：两种“一半”的来路完全不同
+
+**LSUV 镜头。** 假设同一 $4\to8$ 层在声明好 axes 的 calibration batch 上测得 $\widehat v=4$。第一次局部校准用
+
+$$
+W\leftarrow\frac{W}{\sqrt4}=\frac12W.
+$$
+
+若当前工作区近似 homogeneous，输出 amplitude 减半、variance 乘 $1/4$，新估计约为 $4\times1/4=1$。若处于 saturation 或有 normalization/branch coupling，必须重算，不能宣布精确一步收敛。
+
+**Fixup 镜头。** 取 $L=16$ 个 residual branches，每个 branch 有 $m=3$ 个 weight layers。则
+
+$$
+\alpha
+=16^{-1/(2\times3-2)}
+=16^{-1/4}
+=\frac12.
+$$
+
+末层置零，其余 $m-1=2$ 个权重层各乘 $1/2$，所以 branch chain amplitude 约为
+
+$$
+\alpha^{m-1}=\left(\frac12\right)^2=\frac14=L^{-1/2},
+$$
+
+其平方尺度约为 $1/16$；16 个近不相关 branch contributions 累加仍在 $O(1)$ 量级。两处 $1/2$ 一个来自数据测得的 variance，一个来自架构深度；它们不是同一条初始化定律。
+
+## 核心公式七问：$W_\ell\leftarrow W_\ell/\sqrt{\widehat v_\ell}$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 用 calibration data 把当前层输出 variance 局部拉回目标 1 |
+| 对象 | 声明 axes/batch/mode 下的经验 variance，不是无下标 population law |
+| 来路 | 局部 homogeneous 区间中 output amplitude 随 weight 线性缩放、variance 随其平方缩放 |
+| 步骤 | 前向测量→计算 scale→修改 weight→重算→达 tolerance 或停止 |
+| 读法 | $\widehat v>1$ 时缩小 weight，$\widehat v<1$ 时放大；每次都是 feedback 而非理论证书 |
+| 检查 | 更换 calibration batch、axes、train/eval mode 应暴露 sensitivity；饱和时要多次迭代 |
+| 去路 | normalization、data-dependent calibration、quantization calibration 与初始化诊断闭环 |
+
+### AI / 系统对应
+
+现代 Transformer/LLM 的问题往往不是单层 variance，而是 residual depth、normalization placement、attention/MLP branch scale、optimizer update ratio 与 mixed-precision overflow 共同作用。可靠流程应定位第一个偏离理论的 layer/metric，再做局部修正；一次性全网缩放只会同时改动多个机制，使归因更困难。
 
 ## 一、从公式选择升级为诊断流程
 

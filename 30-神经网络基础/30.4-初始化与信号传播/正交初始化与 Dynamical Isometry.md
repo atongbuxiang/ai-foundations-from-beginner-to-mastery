@@ -11,12 +11,94 @@ exercises: ["[[习题 - 正交初始化与 Dynamical Isometry]]"]
 solutions: ["[[解答 - 正交初始化与 Dynamical Isometry]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-orthogonal-dynamical-isometry-v2.svg]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 # 正交初始化与 Dynamical Isometry
 
 > [!abstract] 本章主问题
 > 方差递推只控制随机方向的平均平方长度；最坏方向仍可能被压到几乎 0 或放大很多倍。正交初始化把单个线性层的非零 singular values 精确设成同一 gain，提供最干净的校准基线；dynamical isometry 则要求整个输入—输出 Jacobian 的全部 relevant singular values 集中在 1 附近。两者相关，但在非线性、矩形、卷积和残差网络中绝不等价。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-28 的 $\chi_f,\chi_b$ 只给方向平均的二阶尺度，NN-29 的 $\mathcal C$ 只给 pairwise geometry；
+- **本页解决什么：** 用 SVD 把“平均不变”升级为最小/最大方向、rank、condition number 与全谱集中；
+- **后续为何需要：** NN-32 的 LSUV 只校准 activation variance，必须用本页的层级说明它为什么不等于 dynamical isometry。
+
+**第一遍只做三步。** 先看 $Q^TQ$ 或 $QQ^T$ 究竟等于哪个单位阵；再算 weight singular values；最后插入 activation derivative $D$ 重算 local Jacobian。
+
+**第二遍再区分四个断点。** 矩形 partial isometry、nonlinear mask、真实 convolution operator 和训练后离开 orthogonal manifold 都需要重新证明，不能靠 initializer 名称跨过。
+
+### 问题链
+
+1. $8\times4$ 的 tall matrix 为什么可以保住所有输入方向，却不能保住所有输出方向？
+2. gain $g$ 对 singular spectrum 做了什么？
+3. ReLU derivative mask 为什么能在权重半正交时仍制造 null directions？
+4. 平均平方 singular value 为 1 为什么允许 condition number 无穷大？
+5. kernel reshape 正交为什么不是真实 convolution operator 等距的证明？
+
+> [!check] 第一遍停靠线
+> 若你能在 $\mathcal I_\square$ 的具体矩阵上证明 $Q^TQ=I_4$，再算出 ReLU local Jacobian 的 singular values 为 $(\sqrt2,\sqrt2,0,0)$，且平均平方值仍为 1，就掌握了本页最关键的反例。
+
+## 符号与对象账本
+
+| 对象 | Shape/定义 | AI 系统中的身份 | 边界 |
+|---|---|---|---|
+| $Q\in\mathbb R^{8\times4}$ | $Q^TQ=I_4$ | tall semi-orthogonal projection | 只证明输入空间保长 |
+| $W=gQ$ | weight map | orthogonal initializer + gain | singular values 是 $|g|$ 而非 1 |
+| $D=\operatorname{diag}(\phi'(z))$ | activation local derivative | gating/mask | 可降 rank |
+| $J=DW$ | local layer Jacobian | JVP/VJP 真正经过的映射 | 不由 $W$ 的谱单独决定 |
+| $s_i(J),\kappa(J)$ | singular values/condition number | 方向性传播证据 | mean norm 无法替代 extremes |
+
+### 贯穿算例 $\mathcal I_\square$：平均正常，两个方向已死
+
+对同一个 $4\to8$ 形状，取
+
+$$
+Q=\frac1{\sqrt2}
+\begin{bmatrix}
+I_4\\ I_4
+\end{bmatrix},qquad
+W=\sqrt2Q=
+\begin{bmatrix}
+I_4\\ I_4
+\end{bmatrix}.
+$$
+
+直接乘法给出 $Q^TQ=(I_4+I_4)/2=I_4$，所以 $Q$ 的四个非零 singular values 都是 1，$W$ 的则都是 $\sqrt2$。现取
+
+$$
+x=(1,-1,2,-2)^T.
+$$
+
+$Wx$ 就是两份 $x$。ReLU 只保留第 1、3 个输入方向在两份 copy 中的正值，因而该点局部 Jacobian 满足
+
+$$
+J^TJ=\operatorname{diag}(2,0,2,0).
+$$
+
+其四个 input-space singular values 为
+
+$$
+(\sqrt2,\sqrt2,0,0).
+$$
+
+它们的平均平方是 $(2+2+0+0)/4=1$，但 rank 只有 2，condition number 为无穷大。这个反例把“平均梯度尺度正常”与“所有方向都可传播”完全分开。
+
+## 核心公式七问：$J=D_LW_L\cdots D_1W_1$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 显式展示端到端方向传播同时受 weights 与 activation derivatives 控制 |
+| 对象 | 特定输入/数据点上的 local input–output Jacobian |
+| 来路 | chain rule 对每层 affine map 与 pointwise nonlinearity 的交替乘积 |
+| 步骤 | 确认 shape/rank→建 $D_\ell$→用 JVP/VJP 实现乘积→估计 spectrum/extremes |
+| 读法 | 任一 $D_\ell$ 的零方向、bottleneck 或谱展宽都可以沿深度累积 |
+| 检查 | deep linear + square orthogonal + gain 1 应精确得 $J^TJ=I$ |
+| 去路 | dynamical isometry、residual Jacobian、spectral regularization 与 matrix-free diagnostics |
+
+### AI / 系统对应
+
+在大模型中通常不显式形成 $J$，而是用 JVP/VJP、power iteration、Lanczos 和 randomized trace 估计方向增益。需要同时报告 rank/effective rank、quantiles 和 extremes；单个 average gradient norm 可能像上述反例一样，完全掩盖已消失的表示方向。
 
 ## 一、先从有限维 Isometry 定义开始
 

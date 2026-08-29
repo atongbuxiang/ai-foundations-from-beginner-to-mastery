@@ -9,10 +9,12 @@ year: 2016
 url: "https://proceedings.neurips.cc/paper/2016/hash/148510031349642de5ca0c544f31b2ef-Abstract.html"
 accessed: 2026-08-23
 source_tier: A
+scope_role: primary
+temporal_role: mean-field-foundation
 venue: "NeurIPS 2016"
 related: ["[[相关传播、Edge of Chaos 与临界初始化]]", "[[方差传播与宽层均值场近似]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 # Poole et al. 2016：Transient Chaos 与相关传播
 

@@ -68,9 +68,10 @@ updated: 2026-08-29
 - 第五波 NN-17—20 以 $s_\triangle=(-2,0,2)$ 统一比较 activation 选择、sigmoid/tanh 饱和、ReLU/Leaky kink 与 ELU/SELU 分布接口；
 - 第六波 NN-21—24 沿用 $s_\triangle$，独立复算 Softplus/GELU/SiLU 一阶导、GLU/SwiGLU 两路 VJP、Maxout winner/tie，并建立激活选择的数学—浮点—传播—系统—统计五道门；
 - 第七波 NN-25—28 以 $\mathcal I_\square$ 的 $4\to8$ 非方层贯通宽层 moment recursion、Xavier/He normal-uniform 尺度、ReLU mean/second-moment/variance 分账与 forward/backward fan 深度乘积；
-- 当前语义：现行迁移 **28/64**，材料门 **3/8**，30.4 为 4/8 in-progress，NN-29—64 **36/64 pending**，个人 `not-attempted`；
+- 第八波 NN-29—32 延伸 $\mathcal I_\square$：从 ReLU correlation map 走到半正交局部 Jacobian 的 rank-2 反例，再用同一 hidden slice 闭合 zero-head/skip 梯度、LSUV 数据校准与 Fixup 深度缩放；
+- 当前语义：现行迁移 **32/64**，材料门 **4/8**，30.4 `regression-passed`，NN-33—64 **32/64 pending**，个人 `not-attempted`；
 - 旧[[实验 - 神经网络基础累计复现门]]和 `NN-CUM-01` 保留为 `composed` 历史材料，待 64 节迁移与分卷证据门建成后重新升级；
-- 下一施工点：NN-29—32，完成 30.4 相关传播、谱与现代初始化诊断。
+- 下一施工点：NN-33—36，开始 30.5 归一化、BatchNorm 与 LayerNorm 前半卷。
 
 ## 第四章确定性架构审计
 

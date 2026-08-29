@@ -9,10 +9,12 @@ year: 2019
 url: "https://openreview.net/forum?id=H1gsz30cKX"
 accessed: 2026-08-23
 source_tier: A
+scope_role: primary
+temporal_role: original-method-paper
 venue: "ICLR 2019"
 related: ["[[LSUV、Fixup 与现代初始化诊断]]", "[[偏置、输出层与零初始化的对称性边界]]", "[[ReZero、Fixup、DeepNorm 与深网缩放]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 # Zhang、Dauphin、Ma 2019：Fixup Initialization
 

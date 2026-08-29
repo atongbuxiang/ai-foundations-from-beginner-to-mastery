@@ -9,10 +9,12 @@ year: 2017
 url: "https://proceedings.neurips.cc/paper/7064-resurrecting-the-sigmoid-in-deep-learning-through-dynamical-isometry-theory-and-practice"
 accessed: 2026-08-23
 source_tier: A
+scope_role: primary
+temporal_role: dynamical-isometry-foundation
 venue: "NeurIPS 2017"
 related: ["[[正交初始化与 Dynamical Isometry]]", "[[相关传播、Edge of Chaos 与临界初始化]]", "[[反向梯度方差与 Fan-In_Fan-Out 权衡|反向梯度方差与 Fan-In/Fan-Out 权衡]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 # Pennington、Schoenholz、Ganguli 2017：Dynamical Isometry
 

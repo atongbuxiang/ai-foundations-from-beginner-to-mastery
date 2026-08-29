@@ -9,10 +9,12 @@ year: 2014
 url: "https://arxiv.org/abs/1312.6120"
 accessed: 2026-08-23
 source_tier: A
+scope_role: primary
+temporal_role: deep-linear-foundation
 venue: "ICLR 2014"
 related: ["[[正交初始化与 Dynamical Isometry]]", "[[LSUV、Fixup 与现代初始化诊断]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 # Saxe et al. 2014：深线性网络动力学与正交初始化
 

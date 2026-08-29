@@ -9,10 +9,12 @@ year: 2016
 url: "https://arxiv.org/abs/1511.06422"
 accessed: 2026-08-23
 source_tier: A
+scope_role: primary
+temporal_role: original-method-paper
 venue: "ICLR 2016"
 related: ["[[LSUV、Fixup 与现代初始化诊断]]", "[[正交初始化与 Dynamical Isometry]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 # Mishkin、Matas 2016：LSUV Initialization
 

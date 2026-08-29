@@ -23,7 +23,7 @@ SOLUTIONS = LABS / "solutions"
 CODE = LABS / "code"
 FIGURE_AUDITOR = CODE / "audit-markdown-figure-units.mjs"
 ASSET_DIR = ROOT / "00-知识库管理" / "_assets" / "figures" / "neural-networks"
-MIGRATED_IDS = tuple(range(1, 29))
+MIGRATED_IDS = tuple(range(1, 33))
 
 STATE_SURFACES = (
     CHAPTER / "神经网络基础 MOC.md",
@@ -208,7 +208,7 @@ def audit_migrated_contract(nodes: list[tuple[int, Path, str]]) -> None:
         require(fixture in content, f"{relative}: shared teaching fixture missing: {fixture}")
         require("AI" in content, f"{relative}: AI object mapping missing")
         require(len(content.splitlines()) >= 180, f"{relative}: derivation depth unexpectedly short")
-    print("PASS NN teaching migration waves A--G: NN-01--28 course position/two-pass/problem/object/formula contracts=28/28")
+    print("PASS NN teaching migration waves A--H: NN-01--32 course position/two-pass/problem/object/formula contracts=32/32")
 
 
 def audit_wave_c_fixture(nodes: list[tuple[int, Path, str]]) -> None:
@@ -437,6 +437,68 @@ def audit_wave_g_fixture(nodes: list[tuple[int, Path, str]]) -> None:
     print("PASS NN wave-G independent math: 4-to-8 moment recursion; Xavier/He scales; fan-in/out tradeoff; six-layer products exact")
 
 
+def audit_wave_h_fixture(nodes: list[tuple[int, Path, str]]) -> None:
+    """Recompute the NN-29--32 correlation, spectrum, symmetry, and calibration chain."""
+    correlation = 0.5
+    relu_correlation = (
+        math.sqrt(1.0 - correlation * correlation)
+        + (math.pi - math.acos(correlation)) * correlation
+    ) / math.pi
+    relu_correlation_exact = 1.0 / 3.0 + math.sqrt(3.0) / (2.0 * math.pi)
+    relu_map_derivative = 1.0 - math.acos(correlation) / math.pi
+    require(abs(relu_correlation - relu_correlation_exact) < 1e-15, "NN wave-H ReLU correlation map drifted")
+    require(abs(relu_correlation - 0.6089977810442294) < 1e-15, "NN wave-H ReLU correlation numeric drifted")
+    require(abs(relu_map_derivative - 2.0 / 3.0) < 1e-15, "NN wave-H ReLU correlation derivative drifted")
+
+    # Q=(1/sqrt(2))[I; I], W=sqrt(2)Q=[I; I].
+    q_gram_diagonal = tuple(0.5 + 0.5 for _ in range(4))
+    q_gram_off_diagonal = 0.0
+    require(q_gram_diagonal == (1.0, 1.0, 1.0, 1.0) and q_gram_off_diagonal == 0.0, "NN wave-H semi-orthogonal Gram drifted")
+    x = (1.0, -1.0, 2.0, -2.0)
+    preactivation = x + x
+    active = tuple(value > 0.0 for value in preactivation)
+    jtj_diagonal = tuple(2.0 if x[index] > 0.0 else 0.0 for index in range(4))
+    singular_values = tuple(sorted((math.sqrt(value) for value in jtj_diagonal), reverse=True))
+    mean_square_singular = sum(value * value for value in singular_values) / 4.0
+    require(preactivation == (1.0, -1.0, 2.0, -2.0, 1.0, -1.0, 2.0, -2.0), "NN wave-H orthogonal probe forward drifted")
+    require(active == (True, False, True, False, True, False, True, False), "NN wave-H ReLU mask drifted")
+    require(jtj_diagonal == (2.0, 0.0, 2.0, 0.0), "NN wave-H local Gram drifted")
+    require(singular_values == (math.sqrt(2.0), math.sqrt(2.0), 0.0, 0.0), "NN wave-H local singular values drifted")
+    require(abs(mean_square_singular - 1.0) < 1e-15 and sum(value > 0.0 for value in singular_values) == 2, "NN wave-H rank/mean-square contrast drifted")
+
+    hidden = (1.0, -1.0)
+    output_weight = (0.0, 0.0)
+    upstream = 1.0
+    output_weight_gradient = tuple(upstream * value for value in hidden)
+    hidden_gradient = tuple(upstream * value for value in output_weight)
+    learning_rate = 0.1
+    updated_output_weight = tuple(weight - learning_rate * gradient for weight, gradient in zip(output_weight, output_weight_gradient))
+    require(output_weight_gradient == (1.0, -1.0), "NN wave-H zero-head parameter gradient drifted")
+    require(hidden_gradient == (0.0, 0.0) and updated_output_weight == (-0.1, 0.1), "NN wave-H zero-head staged update drifted")
+    require(upstream == 1.0, "NN wave-H residual skip gradient drifted")
+
+    measured_variance = 4.0
+    lsuv_scale = 1.0 / math.sqrt(measured_variance)
+    calibrated_variance = measured_variance * lsuv_scale * lsuv_scale
+    branches, branch_layers = 16.0, 3.0
+    fixup_scale = branches ** (-1.0 / (2.0 * branch_layers - 2.0))
+    branch_amplitude = fixup_scale ** (branch_layers - 1.0)
+    branch_squared_scale = branch_amplitude * branch_amplitude
+    require(lsuv_scale == 0.5 and calibrated_variance == 1.0, "NN wave-H LSUV calibration drifted")
+    require(fixup_scale == 0.5 and branch_amplitude == 0.25 and branch_squared_scale == 1.0 / 16.0, "NN wave-H Fixup depth scale drifted")
+
+    wave = {node_id: content for node_id, _, content in nodes if 29 <= node_id <= 32}
+    expected = {
+        29: ("0.608998", "\\mathcal C'(c_0)=2/3"),
+        30: ("(\\sqrt2,\\sqrt2,0,0)", "\\operatorname{diag}(2,0,2,0)"),
+        31: ("(-0.1,0.1)^T", "\\nabla h=(0,0)"),
+        32: ("16^{-1/4}", "branch squared scale $1/16$"),
+    }
+    for node_id, markers in expected.items():
+        require(all(marker in wave[node_id] for marker in markers), f"NN-{node_id:02d}: wave-H numeric closure missing")
+    print("PASS NN wave-H independent math: ReLU correlation; semi-orthogonal rank collapse; zero-head gradients; LSUV/Fixup scales exact")
+
+
 def question_ids(content: str) -> list[str]:
     return re.findall(r"^###\s+([^\s]+-[A-E]\d{2})\s*$", content, re.M)
 
@@ -594,10 +656,11 @@ def audit_state_surfaces() -> None:
     for path in STATE_SURFACES:
         content = read(path)
         require(audit_name in content, f"state surface misses NN audit: {path.relative_to(ROOT)}")
-        require("28/64" in content or "28 / 64" in content, f"state surface misses NN migrated count: {path.relative_to(ROOT)}")
-        require("36/64" in content or "36 / 64" in content, f"state surface misses NN pending count: {path.relative_to(ROOT)}")
+        equal_count_mentions = content.count("32/64") + content.count("32 / 64")
+        require(equal_count_mentions >= 2, f"state surface misses distinct NN migrated/pending counts: {path.relative_to(ROOT)}")
+        require("4/8" in content or "4 / 8" in content, f"state surface misses NN material-gate count: {path.relative_to(ROOT)}")
         require("not-attempted" in content, f"state surface overclaims NN learner: {path.relative_to(ROOT)}")
-    print("PASS NN state surfaces: 5 global + 4 volume views agree on migrated=28/64, pending=36/64, learner=not-attempted")
+    print("PASS NN state surfaces: 5 global + 4 volume views agree on migrated=32/64, pending=32/64, learner=not-attempted")
 
 
 def main() -> None:
@@ -613,6 +676,7 @@ def main() -> None:
     audit_wave_e_fixture(nodes)
     audit_wave_f_fixture(nodes)
     audit_wave_g_fixture(nodes)
+    audit_wave_h_fixture(nodes)
     audit_exercises(nodes, index)
     audit_sources_and_links(nodes, index)
     audit_figures(nodes, index)
@@ -620,8 +684,8 @@ def main() -> None:
     audit_state_surfaces()
     if args.run_figures:
         audit_deterministic_figures()
-    print("NN-01--28 teaching migration regression: PASS; 30.1--30.3 material gates=3/8; 30.4=4/8")
-    print("NN-29--64 teaching migration: pending (36/64)")
+    print("NN-01--32 teaching migration regression: PASS; 30.1--30.4 material gates=4/8")
+    print("NN-33--64 teaching migration: pending (32/64)")
     print("PERSONAL LEARNING STATUS: not-attempted")
 
 

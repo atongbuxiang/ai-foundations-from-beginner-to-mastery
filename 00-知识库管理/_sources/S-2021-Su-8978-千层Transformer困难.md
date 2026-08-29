@@ -9,10 +9,12 @@ year: 2022
 url: "https://spaces.ac.cn/archives/8978"
 accessed: 2026-08-23
 source_tier: C
+scope_role: supplementary
+temporal_role: blog-architecture-analysis
 venue: "科学空间"
 related: ["[[LSUV、Fixup 与现代初始化诊断]]", "[[反向梯度方差与 Fan-In_Fan-Out 权衡|反向梯度方差与 Fan-In/Fan-Out 权衡]]", "[[ReZero、Fixup、DeepNorm 与深网缩放]]", "[[Transformer Block、残差、归一化与 FFN]]", "[[Transformer 表达、稳定性与证据边界]]", "[[S-2022-Wang-DeepNet]]"]
 created: 2026-08-23
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 # 苏剑林 2022：千层 Transformer 的尺度困难
 

@@ -21,7 +21,7 @@ updated: 2026-08-29
 
 ## 当前迁移与学习状态
 
-- [[neural_network_foundations_teaching_contract_audit.py]]已复核 NN-25—28 的两遍路线、问题链、对象账本、$\mathcal I_\square$ 共享 $4\to8$ fixture 与公式七问；
-- 共享链闭合 ReLU $q=2\to r=1$、Xavier $(\chi_f,\chi_b)=(2/3,4/3)$、He mean/second-moment/variance 分账与 fan 折中的六层乘积；
-- 当前为 **4/8 现行教学迁移、8/8 正文、8/8 A—E 题解、8/8 正式图**；30.4 仍为 `in-progress`；
-- 全章为 **28/64 已迁移、36/64 pending、分卷材料门 3/8**，个人仍为 **0/8 / `not-attempted`**；下一批 NN-29—32。
+- [[neural_network_foundations_teaching_contract_audit.py]]已复核 NN-25—32 的两遍路线、问题链、对象账本、$\mathcal I_\square$ 共享 $4\to8$ fixture 与公式七问；
+- 前半卷闭合 ReLU $q=2\to r=1$、Xavier/He 和 fan 乘积；后半卷闭合 $c_0=1/2\to0.608998$、半正交 ReLU 的 rank-2 反例、zero-head/skip 梯度与 LSUV/Fixup 两类校准；
+- 当前为 **8/8 现行教学迁移、8/8 正文、8/8 A—E 题解、8/8 正式图，30.4 材料门 `regression-passed`**；
+- 全章为 **32/64 已迁移、32/64 pending、分卷材料门 4/8**，个人仍为 **0/8 / `not-attempted`**；下一批 NN-33—36。
