@@ -415,12 +415,12 @@ def audit_prerequisite_and_state() -> None:
     for path in STATE_SURFACES:
         content = read(path)
         require("MODEL-CUM-01" in content, f"state surface misses MODEL-CUM-01: {path.relative_to(ROOT)}")
-        require(re.search(r"7\s*/\s*10", content) is not None or path == MOC,
-                f"state surface misses 7/10 material count: {path.relative_to(ROOT)}")
+        require(re.search(r"8\s*/\s*10", content) is not None or path == MOC,
+                f"state surface misses 8/10 material count: {path.relative_to(ROOT)}")
         require(re.search(r"0\s*/\s*10", content) is not None,
                 f"state surface misses 0/10 learner count: {path.relative_to(ROOT)}")
         require("not-attempted" in content, f"state surface overclaims learner status: {path.relative_to(ROOT)}")
-    print("PASS state surfaces: MODEL-CUM-01 retained as prerequisite, current material=7/10, learner=0/10/not-attempted")
+    print("PASS state surfaces: MODEL-CUM-01 retained as prerequisite, current material=8/10, learner=0/10/not-attempted")
 
 
 def main() -> None:

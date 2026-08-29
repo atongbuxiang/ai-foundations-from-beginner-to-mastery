@@ -6,7 +6,7 @@ aliases: [统计学习理论总入口, 第20章总入口]
 prerequisites: ["[[数学基础完整课程地图与掌握标准]]"]
 related: ["[[学习理论完整课程地图与掌握标准]]", "[[学习问题、决策与风险 MOC]]", "[[PAC 学习与有限假设类 MOC]]", "[[VC 维与一致收敛 MOC]]", "[[数据依赖复杂度、间隔与快率 MOC]]", "[[稳定性、压缩、PAC-Bayes 与信息泛化 MOC]]", "[[经典模型与模型选择 MOC]]", "[[表示学习、度量学习与自监督 MOC]]", "[[校准、不确定性与分布偏移 MOC]]", "[[在线学习、Boosting 与序列预测 MOC]]", "[[深度泛化理论接口与开放边界 MOC]]"]
 created: 2026-08-14
-updated: 2026-08-28
+updated: 2026-08-29
 ---
 
 # 学习理论 MOC
@@ -62,7 +62,7 @@ flowchart LR
 ## 当前状态
 
 > [!success] 全章静态材料门已经回归通过
-> [[learning_theory_teaching_contract_audit.py]]独立检查 LT-01—84 的十卷 ID/目录、84 组习题—解答、1260 个 A—E 题解 ID、144 张来源卡、作用域链接、节点图文单元、84 个课程映射和 18 个节点制图脚本的确定性。20.1 由[[learning_problem_decision_cumulative_contract_audit.py]]复核对象—风险—选择门；20.2 由[[pac_finite_class_cumulative_contract_audit.py]]复核 PAC/有限类门；20.3 由[[vc_uniform_convergence_cumulative_contract_audit.py]]复核增长—一致收敛—SRM 门；20.4 由[[rademacher_margin_local_cumulative_contract_audit.py]]复核 signs—margin—local/fat 门；20.5 由[[algorithmic_generalization_cumulative_contract_audit.py]]复核 stability—compression/PAC-Bayes—information 门；20.6 由[[classical_models_cumulative_contract_audit.py]]复核 spectral selection—boundary/ensemble—latent geometry 门；20.7 由[[representation_selfsupervised_cumulative_contract_audit.py]]复核 task risk—candidate batch—non-collapse/target 门。证书只说明材料结构与生成证据可复现；84 篇正文仍为 `draft`，个人学习仍为 `not-attempted`。
+> [[learning_theory_teaching_contract_audit.py]]独立检查 LT-01—84 的十卷 ID/目录、84 组习题—解答、1260 个 A—E 题解 ID、144 张来源卡、作用域链接、节点图文单元、84 个课程映射和 18 个节点制图脚本的确定性。20.1 由[[learning_problem_decision_cumulative_contract_audit.py]]复核对象—风险—选择门；20.2 由[[pac_finite_class_cumulative_contract_audit.py]]复核 PAC/有限类门；20.3 由[[vc_uniform_convergence_cumulative_contract_audit.py]]复核增长—一致收敛—SRM 门；20.4 由[[rademacher_margin_local_cumulative_contract_audit.py]]复核 signs—margin—local/fat 门；20.5 由[[algorithmic_generalization_cumulative_contract_audit.py]]复核 stability—compression/PAC-Bayes—information 门；20.6 由[[classical_models_cumulative_contract_audit.py]]复核 spectral selection—boundary/ensemble—latent geometry 门；20.7 由[[representation_selfsupervised_cumulative_contract_audit.py]]复核 task risk—candidate batch—non-collapse/target 门；20.8 由[[calibration_shift_cumulative_contract_audit.py]]复核 probability—coverage/overlap—adaptation/OOD 门。证书只说明材料结构与生成证据可复现；84 篇正文仍为 `draft`，个人学习仍为 `not-attempted`。
 
 ```text
 locked scope: 84 / 84
@@ -70,12 +70,12 @@ formal nodes: 84 / 84
 exercise sets: 84 / 84
 solutions: 84 / 84
 static material audit: regression-passed
-volume evidence gates built: 7 / 10
+volume evidence gates built: 8 / 10
 personally passed volumes: 0 / 10
 qualification evidence gates built: 1 / 2
 personally passed qualifications: 0 / 2
 state: draft nodes / regression-passed material / not-attempted learner
-next: continue with the 20.8 evidence gate
+next: continue with the 20.9 evidence gate
 ```
 
 LT-01—84 已成稿，共 84 套、1260 道 A—E 训练及独立详解；全量 YAML、双链、题解 ID、图片/XML、图文单元、课程映射与生成确定性通过独立审计。20.1 的[[阶段测验 - 学习问题、决策与风险（20.1）|LT-CUM-01]]、20.2 的[[阶段测验 - PAC 学习与有限假设类（20.2）|PAC-CUM-01]]、20.3 的[[阶段测验 - VC 维与一致收敛（20.3）|VC-CUM-01]]、20.4 的[[阶段测验 - 数据依赖复杂度、间隔与快率（20.4）|RAD-CUM-01]]与 20.5 的[[阶段测验 - 稳定性、压缩、PAC-Bayes 与信息泛化（20.5）|ALG-CUM-01]]现各自形成“口试—闭卷—答案/输出隔离—scorer nonce 三轨—盲参—48 小时—14 天”证据门，材料均为 `regression-passed`。
@@ -85,3 +85,5 @@ LT-01—84 已成稿，共 84 套、1260 道 A—E 训练及独立详解；全�
 20.6 的[[阶段测验 - 经典模型与模型选择（20.6）|MODEL-CUM-01]]、[[阶段测验解答 - 经典模型与模型选择（20.6）|独立详解]]与[[实验 - 经典模型与模型选择累计复现门|三轨门]]现由[[classical_models_cumulative_contract_audit.py]]独立复核；该门是在全章卷级材料为 **6/10** 时建立，个人仍未通过。
 
 20.7 的[[阶段测验 - 表示学习、度量学习与自监督（20.7）|REPR-CUM-01]]、[[阶段测验解答 - 表示学习、度量学习与自监督（20.7）|独立详解]]与[[实验 - 表示学习、度量学习与自监督累计复现门|三轨门]]现由[[representation_selfsupervised_cumulative_contract_audit.py]]独立复核，卷级材料达到 **7/10**，个人仍为 **0/10 / `not-attempted`**。正式参加本卷认证要求 `MODEL-CUM-01 retained`；当前只建立材料，未满足个人前置。下一施工点进入 20.8。
+
+20.8 的[[阶段测验 - 校准、不确定性与分布偏移（20.8）|REL-CUM-01]]、[[阶段测验解答 - 校准、不确定性与分布偏移（20.8）|独立详解]]与[[实验 - 校准、不确定性与分布偏移累计复现门|三轨门]]现由[[calibration_shift_cumulative_contract_audit.py]]独立复核，卷级材料达到 **8/10**，个人仍为 **0/10 / `not-attempted`**。正式参加本卷认证要求 `REPR-CUM-01 retained`；当前只建立材料，未满足个人前置。下一施工点进入 20.9。

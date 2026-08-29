@@ -7,7 +7,7 @@ prerequisites: []
 related: ["[[数学基础完整课程地图与掌握标准]]", "[[线性代数完整学习路线与掌握标准]]", "[[推导与实验 MOC]]", "[[数学基础 MOC]]"]
 sources: []
 created: 2026-08-14
-updated: 2026-08-28
+updated: 2026-08-29
 ---
 
 # 练习与测验 MOC
@@ -448,6 +448,8 @@ updated: 2026-08-28
 
 第七卷[[阶段测验 - 表示学习、度量学习与自监督（20.7）|REPR-CUM-01]]、独立详解与[[实验 - 表示学习、度量学习与自监督累计复现门|三轨门]]已由[[representation_selfsupervised_cumulative_contract_audit.py]]回归。卷级材料现为 **7/10**，个人仍为 **0/10 / `not-attempted`**；正式认证前置为 `MODEL-CUM-01 retained`，当前未满足。
 
+第八卷[[阶段测验 - 校准、不确定性与分布偏移（20.8）|REL-CUM-01]]、独立详解与[[实验 - 校准、不确定性与分布偏移累计复现门|三轨门]]已由[[calibration_shift_cumulative_contract_audit.py]]回归。卷级材料现为 **8/10**，个人仍为 **0/10 / `not-attempted`**；正式认证前置为 `REPR-CUM-01 retained`，当前未满足。
+
 | 学习理论卷级测验 | 覆盖范围 | 状态 |
 |---|---|---|
 | LT-CUM-01 | LT-01—08：学习问题、决策与风险 | regression-passed material / not-attempted learner |
@@ -457,6 +459,7 @@ updated: 2026-08-28
 | ALG-CUM-01 | LT-33—40：稳定性、压缩、PAC-Bayes 与信息泛化 | regression-passed material / not-attempted learner |
 | MODEL-CUM-01 | LT-41—52：经典模型与模型选择 | regression-passed material（6/10）/ not-attempted learner（0/10；LT-QUAL-01 retained 前置未满足） |
 | REPR-CUM-01 | LT-53—60：表示学习、度量学习与自监督 | regression-passed material（7/10）/ not-attempted learner（0/10；MODEL-CUM-01 retained 前置未满足） |
+| REL-CUM-01 | LT-61—68：校准、不确定性与分布偏移 | regression-passed material（8/10）/ not-attempted learner（0/10；REPR-CUM-01 retained 前置未满足） |
 
 | 学习理论跨卷资格考 | 覆盖范围 | 状态 |
 |---|---|---|

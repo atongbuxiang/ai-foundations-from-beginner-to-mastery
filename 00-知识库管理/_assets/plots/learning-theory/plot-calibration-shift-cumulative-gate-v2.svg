@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1540" height="1000" viewBox="0 0 1540 1000">
+<rect width="1540" height="1000" fill="#F5F8FC"/>
+<text x="70" y="60" font-family="Inter,Arial,sans-serif" font-size="27" fill="#172033" font-weight="650">Reliable prediction | probability, coverage, shift and robustness ledgers</text>
+<text x="70" y="91" font-family="Inter,Arial,sans-serif" font-size="15" fill="#5E6B82" font-weight="500">proper probability quality  -&gt;  finite-rank coverage / overlap  -&gt;  adaptation / OOD / group utility</text>
+<rect x="70" y="130" width="450" height="600" rx="10" fill="#FFFFFF" stroke="#CBD7E6" stroke-width="1.2"/>
+<line x1="70" y1="132" x2="520" y2="132" stroke="#2F63E9" stroke-width="7"/>
+<rect x="545" y="130" width="450" height="600" rx="10" fill="#FFFFFF" stroke="#CBD7E6" stroke-width="1.2"/>
+<line x1="545" y1="132" x2="995" y2="132" stroke="#BE7812" stroke-width="7"/>
+<rect x="1020" y="130" width="450" height="600" rx="10" fill="#FFFFFF" stroke="#CBD7E6" stroke-width="1.2"/>
+<line x1="1020" y1="132" x2="1470" y2="132" stroke="#0A9D88" stroke-width="7"/>
+<text x="94" y="177" font-family="Inter,Arial,sans-serif" font-size="21" fill="#172033" font-weight="650">A | calibration and uncertainty</text>
+<text x="94" y="202" font-family="Inter,Arial,sans-serif" font-size="13" fill="#5E6B82" font-weight="500">equal-mass reliability bins + predictive mixture</text>
+<text x="94" y="238" font-family="Inter,Arial,sans-serif" font-size="13" fill="#172033" font-weight="600">forecast p  -&gt;  empirical event rate</text>
+<rect x="94" y="246" width="402" height="43" rx="10" fill="#FAFCFF" stroke="#CBD7E6" stroke-width="1.2"/>
+<text x="112" y="272" font-family="Inter,Arial,sans-serif" font-size="12" fill="#5E6B82" font-weight="600">bin 1</text>
+<text x="200" y="272" font-family="Inter,Arial,sans-serif" font-size="12" fill="#2F63E9" font-weight="600">p=0.10</text>
+<text x="295" y="272" font-family="Inter,Arial,sans-serif" font-size="12" fill="#0A9D88" font-weight="600">freq=0.20</text>
+<text x="404" y="272" font-family="Inter,Arial,sans-serif" font-size="12" fill="#C84032" font-weight="400">gap=-0.10</text>
+<rect x="94" y="301" width="402" height="43" rx="10" fill="#FAFCFF" stroke="#CBD7E6" stroke-width="1.2"/>
+<text x="112" y="327" font-family="Inter,Arial,sans-serif" font-size="12" fill="#5E6B82" font-weight="600">bin 2</text>
+<text x="200" y="327" font-family="Inter,Arial,sans-serif" font-size="12" fill="#2F63E9" font-weight="600">p=0.40</text>
+<text x="295" y="327" font-family="Inter,Arial,sans-serif" font-size="12" fill="#0A9D88" font-weight="600">freq=0.40</text>
+<text x="404" y="327" font-family="Inter,Arial,sans-serif" font-size="12" fill="#C84032" font-weight="400">gap=+0.00</text>
+<rect x="94" y="356" width="402" height="43" rx="10" fill="#FAFCFF" stroke="#CBD7E6" stroke-width="1.2"/>
+<text x="112" y="382" font-family="Inter,Arial,sans-serif" font-size="12" fill="#5E6B82" font-weight="600">bin 3</text>
+<text x="200" y="382" font-family="Inter,Arial,sans-serif" font-size="12" fill="#2F63E9" font-weight="600">p=0.70</text>
+<text x="295" y="382" font-family="Inter,Arial,sans-serif" font-size="12" fill="#0A9D88" font-weight="600">freq=0.60</text>
+<text x="404" y="382" font-family="Inter,Arial,sans-serif" font-size="12" fill="#C84032" font-weight="400">gap=+0.10</text>
+<rect x="94" y="411" width="402" height="43" rx="10" fill="#FAFCFF" stroke="#CBD7E6" stroke-width="1.2"/>
+<text x="112" y="437" font-family="Inter,Arial,sans-serif" font-size="12" fill="#5E6B82" font-weight="600">bin 4</text>
+<text x="200" y="437" font-family="Inter,Arial,sans-serif" font-size="12" fill="#2F63E9" font-weight="600">p=0.90</text>
+<text x="295" y="437" font-family="Inter,Arial,sans-serif" font-size="12" fill="#0A9D88" font-weight="600">freq=0.80</text>
+<text x="404" y="437" font-family="Inter,Arial,sans-serif" font-size="12" fill="#C84032" font-weight="400">gap=+0.10</text>
+<rect x="94" y="490" width="402" height="92" rx="10" fill="#F7FAFF" stroke="#2F63E9" stroke-width="1.2"/>
+<text x="110" y="519" font-family="Inter,Arial,sans-serif" font-size="13" fill="#2F63E9" font-weight="650">accuracy=0.700; ECE=0.075</text>
+<text x="110" y="547" font-family="Inter,Arial,sans-serif" font-size="13" fill="#172033" font-weight="400">Brier=0.2075; log loss=0.6146</text>
+<text x="110" y="571" font-family="Inter,Arial,sans-serif" font-size="12" fill="#5E6B82" font-weight="400">U-R+Rel=0.250-0.050+0.0075</text>
+<rect x="94" y="602" width="402" height="82" rx="10" fill="#F8F6FF" stroke="#7656C7" stroke-width="1.2"/>
+<text x="110" y="631" font-family="Inter,Arial,sans-serif" font-size="13" fill="#7656C7" font-weight="650">mixture mean=0.800</text>
+<text x="110" y="659" font-family="Inter,Arial,sans-serif" font-size="12" fill="#172033" font-weight="400">aleatoric=1.100; epistemic=2.160; total=3.260</text>
+<text x="94" y="714" font-family="Inter,Arial,sans-serif" font-size="11" fill="#5E6B82" font-weight="400">Accuracy, calibration and uncertainty answer different questions.</text>
+<text x="569" y="177" font-family="Inter,Arial,sans-serif" font-size="21" fill="#172033" font-weight="650">B | coverage and overlap</text>
+<text x="569" y="202" font-family="Inter,Arial,sans-serif" font-size="13" fill="#5E6B82" font-weight="500">split-conformal rank + exact covariate reweighting</text>
+<rect x="569" y="228" width="402" height="122" rx="10" fill="#FFF9EF" stroke="#BE7812" stroke-width="1.2"/>
+<text x="585" y="257" font-family="Inter,Arial,sans-serif" font-size="13" fill="#BE7812" font-weight="650">m=7; alpha=0.25; k=6</text>
+<text x="585" y="285" font-family="Inter,Arial,sans-serif" font-size="13" fill="#172033" font-weight="400">qhat=0.700; finite rank coverage=0.750</text>
+<text x="585" y="313" font-family="Inter,Arial,sans-serif" font-size="13" fill="#0A9D88" font-weight="600">prediction interval=[2.500, 3.900]</text>
+<text x="585" y="337" font-family="Inter,Arial,sans-serif" font-size="12" fill="#C84032" font-weight="500">guarantee: exchangeable marginal coverage</text>
+<text x="569" y="390" font-family="Inter,Arial,sans-serif" font-size="13" fill="#172033" font-weight="600">importance weights=(0.4, 0.75, 5.0)</text>
+<rect x="569" y="410" width="402" height="124" rx="10" fill="#F1FBF8" stroke="#0A9D88" stroke-width="1.2"/>
+<text x="585" y="439" font-family="Inter,Arial,sans-serif" font-size="13" fill="#172033" font-weight="400">source risk=0.250</text>
+<text x="585" y="467" font-family="Inter,Arial,sans-serif" font-size="13" fill="#0A9D88" font-weight="650">target = weighted risk=0.510</text>
+<text x="585" y="495" font-family="Inter,Arial,sans-serif" font-size="13" fill="#172033" font-weight="400">E_s[w^2]=2.805; ESS=35.651</text>
+<text x="585" y="521" font-family="Inter,Arial,sans-serif" font-size="12" fill="#C84032" font-weight="500">large weights expose weak overlap</text>
+<rect x="569" y="560" width="402" height="110" rx="10" fill="#FAFCFF" stroke="#CBD7E6" stroke-width="1.2"/>
+<text x="585" y="590" font-family="Inter,Arial,sans-serif" font-size="13" fill="#C84032" font-weight="600">clipped unnormalized risk=0.270</text>
+<text x="585" y="618" font-family="Inter,Arial,sans-serif" font-size="13" fill="#172033" font-weight="400">clipped self-normalized=0.386</text>
+<text x="585" y="646" font-family="Inter,Arial,sans-serif" font-size="12" fill="#5E6B82" font-weight="400">clipping trades variance for estimand bias</text>
+<text x="569" y="714" font-family="Inter,Arial,sans-serif" font-size="11" fill="#5E6B82" font-weight="400">Exchangeability and overlap are different, non-interchangeable gates.</text>
+<text x="1044" y="177" font-family="Inter,Arial,sans-serif" font-size="21" fill="#172033" font-weight="650">C | adaptation, OOD and groups</text>
+<text x="1044" y="202" font-family="Inter,Arial,sans-serif" font-size="13" fill="#5E6B82" font-weight="500">finite HΔH audit + ranking/threshold + group risk</text>
+<rect x="1044" y="228" width="402" height="142" rx="10" fill="#F1FBF8" stroke="#0A9D88" stroke-width="1.2"/>
+<text x="1060" y="257" font-family="Inter,Arial,sans-serif" font-size="13" fill="#0A9D88" font-weight="650">HΔH divergence=0.800</text>
+<text x="1060" y="285" font-family="Inter,Arial,sans-serif" font-size="13" fill="#172033" font-weight="400">source risk=0.000; target risk=0.300</text>
+<text x="1060" y="313" font-family="Inter,Arial,sans-serif" font-size="13" fill="#C84032" font-weight="600">joint ideal error lambda=0.300</text>
+<text x="1060" y="341" font-family="Inter,Arial,sans-serif" font-size="13" fill="#BE7812" font-weight="650">bound RHS=0.700</text>
+<text x="1060" y="362" font-family="Inter,Arial,sans-serif" font-size="12" fill="#5E6B82" font-weight="400">small discrepancy cannot delete lambda</text>
+<rect x="1044" y="398" width="402" height="116" rx="10" fill="#F7FAFF" stroke="#2F63E9" stroke-width="1.2"/>
+<text x="1060" y="427" font-family="Inter,Arial,sans-serif" font-size="13" fill="#2F63E9" font-weight="650">OOD AUROC=0.889</text>
+<text x="1060" y="455" font-family="Inter,Arial,sans-serif" font-size="13" fill="#172033" font-weight="400">ID acceptance=0.667</text>
+<text x="1060" y="483" font-family="Inter,Arial,sans-serif" font-size="13" fill="#C84032" font-weight="600">OOD false acceptance=0.333</text>
+<rect x="1044" y="548" width="402" height="112" rx="10" fill="#F8F6FF" stroke="#7656C7" stroke-width="1.2"/>
+<text x="1060" y="578" font-family="Inter,Arial,sans-serif" font-size="13" fill="#7656C7" font-weight="650">average group risk=0.160</text>
+<text x="1060" y="606" font-family="Inter,Arial,sans-serif" font-size="13" fill="#C84032" font-weight="650">worst-group risk=0.500</text>
+<text x="1060" y="634" font-family="Inter,Arial,sans-serif" font-size="12" fill="#5E6B82" font-weight="400">robustness needs a declared denominator/set</text>
+<text x="1044" y="714" font-family="Inter,Arial,sans-serif" font-size="11" fill="#5E6B82" font-weight="400">OOD ranking, threshold utility and causal invariance are not synonyms.</text>
+<rect x="70" y="760" width="1400" height="177" rx="16" fill="#FFFFFF" stroke="#CBD7E6" stroke-width="1.2"/>
+<text x="94" y="803" font-family="Inter,Arial,sans-serif" font-size="20" fill="#172033" font-weight="650">The eight-layer reliability audit</text>
+<text x="94" y="840" font-family="Inter,Arial,sans-serif" font-size="13" fill="#2F63E9" font-weight="650">joint law</text>
+<text x="215" y="840" font-family="Inter,Arial,sans-serif" font-size="18" fill="#5E6B82" font-weight="600">-&gt;</text>
+<text x="255" y="840" font-family="Inter,Arial,sans-serif" font-size="13" fill="#7656C7" font-weight="650">predictive object</text>
+<text x="435" y="840" font-family="Inter,Arial,sans-serif" font-size="18" fill="#5E6B82" font-weight="600">-&gt;</text>
+<text x="475" y="840" font-family="Inter,Arial,sans-serif" font-size="13" fill="#BE7812" font-weight="650">assumption</text>
+<text x="605" y="840" font-family="Inter,Arial,sans-serif" font-size="18" fill="#5E6B82" font-weight="600">-&gt;</text>
+<text x="645" y="840" font-family="Inter,Arial,sans-serif" font-size="13" fill="#0A9D88" font-weight="650">certificate</text>
+<text x="775" y="840" font-family="Inter,Arial,sans-serif" font-size="18" fill="#5E6B82" font-weight="600">-&gt;</text>
+<text x="815" y="840" font-family="Inter,Arial,sans-serif" font-size="13" fill="#C84032" font-weight="650">selection</text>
+<text x="930" y="840" font-family="Inter,Arial,sans-serif" font-size="18" fill="#5E6B82" font-weight="600">-&gt;</text>
+<text x="970" y="840" font-family="Inter,Arial,sans-serif" font-size="13" fill="#172033" font-weight="650">decision utility / shift set</text>
+<line x1="94" y1="872" x2="1445" y2="872" stroke="#CBD7E6" stroke-width="1.0"/>
+<text x="94" y="911" font-family="Inter,Arial,sans-serif" font-size="13" fill="#C84032" font-weight="500">Evidence rule: calibrated != accurate; marginal coverage != conditional coverage; OOD score != robustness or causality.</text>
+<text x="1245" y="979" font-family="Inter,Arial,sans-serif" font-size="11" fill="#5E6B82" font-weight="500">REL-CUM-01 | deterministic finite fixtures</text>
+</svg>

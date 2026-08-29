@@ -435,9 +435,9 @@ def audit_state_surfaces() -> None:
         require(audit_name in content, f"state surface misses LT audit: {path.relative_to(ROOT)}")
         require("regression-passed" in content, f"state surface misses material state: {path.relative_to(ROOT)}")
         require("not-attempted" in content, f"state surface misses personal state: {path.relative_to(ROOT)}")
-        require(re.search(r"7\s*/\s*10", content) is not None, f"state surface misses seven built volume gates: {path.relative_to(ROOT)}")
+        require(re.search(r"8\s*/\s*10", content) is not None, f"state surface misses eight built volume gates: {path.relative_to(ROOT)}")
         require(re.search(r"0\s*/\s*10", content) is not None, f"state surface misses zero personally passed volumes: {path.relative_to(ROOT)}")
-    print(f"PASS LT state surfaces: {len(STATE_SURFACES)} views agree on 7/10 material gates and 0/10 personal passes")
+    print(f"PASS LT state surfaces: {len(STATE_SURFACES)} views agree on 8/10 material gates and 0/10 personal passes")
 
 
 def main() -> None:
