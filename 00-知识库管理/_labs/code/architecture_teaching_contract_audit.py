@@ -6,7 +6,7 @@ The audit keeps three claims separate:
 2. only the declared migration wave satisfies the current beginner-first contract;
 3. personal learning evidence remains not-attempted.
 
-Waves A--C (ARCH-01--12) are recomputed here without importing the figure generators.
+Waves A--D (ARCH-01--16) are recomputed here without importing the figure generators.
 """
 
 from __future__ import annotations
@@ -28,7 +28,7 @@ EXERCISES = LABS / "exercises"
 SOLUTIONS = LABS / "solutions"
 CODE = LABS / "code"
 ASSETS = ROOT / "00-知识库管理" / "_assets" / "figures" / "architecture"
-MIGRATED_IDS = tuple(range(1, 13))
+MIGRATED_IDS = tuple(range(1, 17))
 
 EXPECTED_FIGURES = {
     "fig-architecture-comparison-contract-v1.svg": "28f2e18521dc3e2c885b98bf528740b7010aad60b610e83990ab9cd6f234139e",
@@ -43,6 +43,10 @@ EXPECTED_FIGURES = {
     "fig-rnn-bptt-jacobian-product-v1.svg": "23153b6004d623a0a4c135c9325a51df888971d581600ab703c09353d04ca5b1",
     "fig-lstm-cell-gradient-highway-v1.svg": "6ee8c40bce570091442668677a74f98f508aced9796c91904425bd45a58bd759",
     "fig-gru-gate-conventions-v1.svg": "903d535cf953eafd8db57aa7592a1fadc5dd7e860e0f208973ba0aa17749abb8",
+    "fig-continuous-discrete-ssm-v1.svg": "43edf6f55ed65c9b36c8a3ef70197b2e0baf6072333b11dd52c2878e39594142",
+    "fig-ssm-recurrence-convolution-scan-v1.svg": "bfa55d11052fd253425d6a956cf1c4938a29f469d5d2befd34ae61f610a81ed5",
+    "fig-hippo-s4-projection-structure-v1.svg": "64a970e734ef8e674abf5c179897e00184b2cbded05cbdeeeeb0d11645455abe",
+    "fig-mamba-selectivity-evidence-v1.svg": "d3b9af1ffcac98c652197d1ce038247485ba155d094efc72d78de43503e6a395",
 }
 
 STATE_SURFACES = (
@@ -193,7 +197,7 @@ def audit_migrated_contract(nodes: list[tuple[int, Path, str]]) -> None:
         require("AI" in content, f"{relative}: AI object mapping missing")
         require(frontmatter_line(content, "updated") == "2026-08-29", f"{relative}: migration date mismatch")
         require(len(content.splitlines()) >= 230, f"{relative}: derivation depth unexpectedly short")
-    print("PASS ARCH waves A--C: ARCH-01--12 course/two-pass/problem/object/formula contracts=12/12")
+    print("PASS ARCH waves A--D: ARCH-01--16 course/two-pass/problem/object/formula contracts=16/16")
 
 
 def audit_exercises(nodes: list[tuple[int, Path, str]], index: dict[str, list[Path]]) -> None:
@@ -236,7 +240,7 @@ def audit_links_and_figures(nodes: list[tuple[int, Path, str]], index: dict[str,
         ET.parse(asset)
         digest = hashlib.sha256(asset.read_bytes()).hexdigest()
         require(digest == expected_hash, f"{filename}: hash changed: {digest}")
-    print(f"PASS ARCH waves A--C links/figures: Wiki links={link_count}; SVG/XML/hash=12/12")
+    print(f"PASS ARCH waves A--D links/figures: Wiki links={link_count}; SVG/XML/hash=16/16")
 
 
 def correlation_valid(x: list[float], w: list[float]) -> list[float]:
@@ -390,18 +394,92 @@ def audit_migrated_math(nodes: list[tuple[int, Path, str]]) -> None:
     reset_after = [gate * value for gate, value in zip(reset, mixed_probe)]
     require(reset_before == [1.0, 0.0] and reset_after == [2.0, 0.0], "GRU reset placement mismatch")
     gru_parameters = 3 * 4 * (3 + 4) + 3 * 4
-    require(gru_parameters == 96 and 4 == 4, "GRU parameter/state ledger mismatch")
+    gru_state_scalars = 4
+    require(gru_parameters == 96 and gru_state_scalars == 4, "GRU parameter/state ledger mismatch")
+
+    delta = math.log(2.0) / 2.0
+    zoh_transition = math.exp(-2.0 * delta)
+    zoh_input = 4.0 * (1.0 - zoh_transition)
+    require(math.isclose(zoh_transition, 0.5), "half-life ZOH transition mismatch")
+    require(math.isclose(zoh_input, 2.0), "half-life ZOH input mismatch")
+    ssm_inputs = [1.0, 1.0, 0.0, -1.0]
+    ssm_states: list[float] = []
+    state = 0.0
+    for value in ssm_inputs:
+        state = zoh_transition * state + zoh_input * value
+        ssm_states.append(state)
+    require(ssm_states == [2.0, 3.0, 1.5, -1.25], f"ZOH recurrence mismatch: {ssm_states}")
+    require(math.isclose(zoh_input / (1.0 - zoh_transition), 4.0), "ZOH steady state mismatch")
+
+    kernel = [zoh_input * zoh_transition**lag for lag in range(len(ssm_inputs))]
+    convolution = [
+        sum(kernel[step - source] * ssm_inputs[source] for source in range(step + 1))
+        for step in range(len(ssm_inputs))
+    ]
+    require(kernel == [2.0, 1.0, 0.5, 0.25], f"SSM kernel mismatch: {kernel}")
+    require(convolution == ssm_states, f"recurrence/convolution mismatch: {convolution}")
+
+    def compose_pair(
+        later: tuple[float, float],
+        earlier: tuple[float, float],
+    ) -> tuple[float, float]:
+        a_later, b_later = later
+        a_earlier, b_earlier = earlier
+        return a_later * a_earlier, a_later * b_earlier + b_later
+
+    pairs = [(0.5, 2.0 * value) for value in ssm_inputs]
+    first_three_left = compose_pair(pairs[2], compose_pair(pairs[1], pairs[0]))
+    first_three_right = compose_pair(compose_pair(pairs[2], pairs[1]), pairs[0])
+    total_pair = compose_pair(pairs[3], first_three_left)
+    require(first_three_left == first_three_right == (0.125, 1.5), "affine scan associativity mismatch")
+    require(total_pair == (0.0625, -1.25), f"affine scan total mismatch: {total_pair}")
+
+    projection_c0 = 2.0
+    projection_c1 = 1.0 / math.sqrt(3.0)
+    for time in (0.0, 0.2, 0.5, 0.9, 1.0):
+        reconstruction = projection_c0 + projection_c1 * math.sqrt(3.0) * (2.0 * time - 1.0)
+        require(math.isclose(reconstruction, 1.0 + 2.0 * time), "two-basis projection mismatch")
+    one_basis_projection_error = 4.0 / 3.0 - 2.0 + 1.0
+    require(math.isclose(one_basis_projection_error, 1.0 / 3.0), "one-basis projection error mismatch")
+    rank_one_matrix = ((3.0, 1.0), (1.0, 4.0))
+    rank_one_inverse = ((4.0 / 11.0, -1.0 / 11.0), (-1.0 / 11.0, 3.0 / 11.0))
+    rank_one_product = tuple(
+        tuple(
+            sum(rank_one_matrix[row][inner] * rank_one_inverse[inner][column] for inner in range(2))
+            for column in range(2)
+        )
+        for row in range(2)
+    )
+    for row in range(2):
+        for column in range(2):
+            require(
+                math.isclose(rank_one_product[row][column], 1.0 if row == column else 0.0),
+                "rank-one inverse mismatch",
+            )
+
+    write_pair = (0.5, 2.0)
+    plain_middle = (0.5, 0.0)
+    boundary_middle = (0.25, 0.0)
+    final_pair = (0.5, 0.0)
+    plain_path = compose_pair(final_pair, compose_pair(plain_middle, write_pair))
+    boundary_path = compose_pair(final_pair, compose_pair(boundary_middle, write_pair))
+    require(plain_path == (0.125, 0.5), f"selective plain path mismatch: {plain_path}")
+    require(boundary_path == (0.0625, 0.25), f"selective boundary path mismatch: {boundary_path}")
+    require(plain_path[1] != boundary_path[1], "selective fixed-kernel counterexample collapsed")
 
     migrated_text = "\n".join(content for node_id, _, content in nodes if node_id in MIGRATED_IDS)
     for anchor in (
         "(-1,-1,2)", "(-1,-1,2,-2,2)", "14", "36",
         "(3,5,13)", "9,216", "7,225,344", "(1,1,4,-2)",
         "(1,5/2,1/4)", "1/32", "3/4", "(1,1/4,9/20)", "3/10", "(1/2,1)", "128", "96",
+        "(2,3,3/2,-5/4)", "(2,1,1/2,1/4)", "(1/16,-5/4)", "(2,1/\\sqrt3)",
+        "\\frac13", "\\frac1{11}", "h_3=\\frac12", "h'_3=\\frac14",
     ):
         require(anchor in migrated_text, f"wave-A teaching anchor missing: {anchor}")
     print(
-        "PASS ARCH waves A--C independent math: convolution/equivariance, aliasing, RF, "
-        "CNN budget, C4 lifting, recurrence/BPTT and LSTM/GRU gates exact"
+        "PASS ARCH waves A--D independent math: convolution/equivariance, aliasing, RF, "
+        "CNN budget, C4 lifting, recurrence/BPTT, LSTM/GRU, ZOH/scan, projection/DPLR "
+        "and selective paths exact"
     )
 
 
@@ -409,13 +487,13 @@ def audit_state_surfaces() -> None:
     for path in STATE_SURFACES:
         content = read(path)
         relative = path.relative_to(ROOT)
-        require("ARCH-01—12" in content, f"{relative}: migrated range missing")
-        require("12/64" in content, f"{relative}: migrated count missing")
-        require("1/8" in content, f"{relative}: material-gate count missing")
+        require("ARCH-01—16" in content, f"{relative}: migrated range missing")
+        require("16/64" in content, f"{relative}: migrated count missing")
+        require("2/8" in content, f"{relative}: material-gate count missing")
         require("not-attempted" in content, f"{relative}: personal state missing")
     print(
         f"PASS ARCH state surfaces: {len(STATE_SURFACES)} views agree on "
-        "migrated=12/64, material gates=1/8, personal=not-attempted"
+        "migrated=16/64, material gates=2/8, personal=not-attempted"
     )
 
 
@@ -438,7 +516,7 @@ def audit_compute() -> None:
             require(result.stdout.count("fig-") == expected_count, f"unexpected generator stdout: {result.stdout}")
     after = {name: hashlib.sha256((ASSETS / name).read_bytes()).hexdigest() for name in EXPECTED_FIGURES}
     require(before == after == EXPECTED_FIGURES, f"deterministic figure replay changed assets: {after}")
-    print("PASS ARCH waves A--C deterministic figure replay: 12 migrated SVGs, two runs, byte-identical")
+    print("PASS ARCH waves A--D deterministic figure replay: 16 migrated SVGs, two runs, byte-identical")
 
 
 def main() -> None:
@@ -455,7 +533,7 @@ def main() -> None:
     audit_state_surfaces()
     if args.run_compute:
         audit_compute()
-    print("ARCH-01--12 teaching migration regression: PASS; chapter material gates=1/8")
+    print("ARCH-01--16 teaching migration regression: PASS; chapter material gates=2/8")
     print("PERSONAL LEARNING STATUS: not-attempted")
 
 

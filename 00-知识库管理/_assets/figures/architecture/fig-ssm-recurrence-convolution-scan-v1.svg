@@ -21,7 +21,7 @@
 <text x="45" y="280" font-size="16" font-weight="700" text-anchor="start" fill="#1F2937" class="math">x_(k+1) = Abar x_k + Bbar u_k</text>
 <text x="45" y="350" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">stream: O(N) state</text>
 <text x="45" y="390" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937">time span: O(L)</text>
-<text x="45" y="475" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">最适合逐 token 推进。</text>
+<text x="45" y="475" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">S□：z=(2,3,3/2,−5/4)。</text>
 <text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
 <text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">卷积：固定 impulse response</text>
 <text x="445" y="115" font-size="17" font-weight="700" text-anchor="start" fill="#0F766E" class="math">K_j = C Abar^j Bbar</text>
@@ -31,8 +31,9 @@
 <rect x="595" y="314" width="25" height="76" rx="2" fill="#ECFDF5" stroke="#0F766E" stroke-width="1.5"/>
 <rect x="640" y="338" width="25" height="52" rx="2" fill="#ECFDF5" stroke="#0F766E" stroke-width="1.5"/>
 <rect x="685" y="360" width="25" height="30" rx="2" fill="#ECFDF5" stroke="#0F766E" stroke-width="1.5"/>
-<text x="445" y="430" font-size="18" font-weight="700" text-anchor="start" fill="#1F2937" class="math">y=K*u</text>
-<text x="445" y="475" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">只在 A,B,C 固定且 time-invariant 时是单一核。</text>
+<text x="445" y="425" font-size="18" font-weight="700" text-anchor="start" fill="#1F2937" class="math">y=K*u</text>
+<text x="445" y="458" font-size="15" font-weight="700" text-anchor="start" fill="#0F766E">S□：K=(2,1,1/2,1/4)。</text>
+<text x="445" y="488" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">仅在 A,B,C 固定且 time-invariant 时是单一核。</text>
 <text x="830" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">C</text>
 <text x="868" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">scan：仿射变换的结合律</text>
 <text x="845" y="115" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">pair p=(A,b)</text>
@@ -50,7 +51,7 @@
 <path d="M888 202 Q963 125 1038 202" fill="none" stroke="#2563EB" stroke-width="2.5"/>
 <text x="842" y="370" font-size="15" font-weight="700" text-anchor="start" fill="#2563EB">work O(L), span O(log L)</text>
 <text x="842" y="420" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">但 kernel fusion、IO 与数值顺序决定墙钟表现。</text>
-<text x="842" y="480" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">input-dependent A_t：可 scan，不再是固定卷积。</text>
+<text x="842" y="480" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">S□：total pair=(1/16,−5/4)。</text>
 <line x1="60" y1="535" x2="1140" y2="535" stroke="#D7DEE8" stroke-width="2"/>
 <text x="600" y="570" font-size="18" font-weight="650" text-anchor="middle" fill="#1F2937">recurrence、convolution 与 scan 是条件化的等价接口，不是可无条件互换的口号。</text>
 </svg>

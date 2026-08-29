@@ -11,13 +11,155 @@ exercises: ["[[习题 - HiPPO、S4 与结构化长记忆]]"]
 solutions: ["[[解答 - HiPPO、S4 与结构化长记忆]]"]
 figure: "[[00-知识库管理/_assets/figures/architecture/fig-hippo-s4-projection-structure-v1.svg]]"
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # HiPPO、S4 与结构化长记忆
 
 > [!abstract] 本节主问题
 > HiPPO 先把“记忆历史”定义成指定测度下对过去函数的在线最优投影，投影系数恰可满足线性动力学；S4 再利用 HiPPO 矩阵的 normal-plus-low-rank / diagonal-plus-low-rank 结构，高效生成长卷积核。这里的“最优”“长记忆”“高效”分别属于投影定理、架构参数化和条件化实验，不能合并成一个口号。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** ARCH-13—14 已说明固定 LTI 状态既能递推也能生成卷积；现在要回答“状态究竟应该压缩历史的什么信息”，以及长核怎样在结构上算得动；
+- **本页解决什么：** 先把历史记忆定义成 Hilbert 空间投影，再说明投影系数为何可能形成 ODE，最后用 diagonal-plus-low-rank resolvent 解释 S4 的结构化计算路线；
+- **后续为何需要：** ARCH-16 会放弃固定 LTI kernel，引入输入依赖选择性；因此本页必须先把 S4 的固定结构、正式保证和经验结果分层。
+
+**第一遍只做二维投影。** 在 $[0,1]$ 上把线性历史 $u(t)=1+2t$ 投到两个正交基，手算系数并精确重构；由此理解“状态是系数”而不是隐喻。
+
+**第二遍再进入结构化矩阵。** 区分投影误差、系数 ODE、离散化误差与学习误差，再用一个 $2\times2$ rank-one inverse 手算 Woodbury，理解 S4 为何关心 DPLR/Cauchy 结构。
+
+### 问题链
+
+1. 若说状态“记住历史”，必须先声明用什么函数空间、测度、范数和有限子空间吗？
+2. 正交投影的“最优”究竟和哪些候选比较？
+3. 为什么投影系数随当前时间变化时可能满足线性 ODE？
+4. 有限阶系数能低误差重构，为什么仍不等于逐 token 无损检索？
+5. 一般稠密 $A$ 的 resolvent 为什么难以长序列高效求值？
+6. diagonal-plus-low-rank 怎样把大逆问题降成逐元素逆与小矩阵逆？
+7. 投影定理、S4 结构效率和论文 benchmark 为什么必须属于三层证据？
+
+> [!check] 第一遍停靠线
+> 若你能复算 $u(t)=1+2t$ 在 $\phi_0=1,\phi_1=\sqrt3(2t-1)$ 下的系数 $(2,1/\sqrt3)$，说明一维截断误差为 $1/3$、二维重构误差为 0，再复核 rank-one inverse 为 $\frac1{11}\left[\begin{smallmatrix}4&-1\\-1&3\end{smallmatrix}\right]$，就完成了本页首遍。
+
+## 符号与对象账本
+
+| 对象 | 数学身份 | AI 中的身份 | 不能偷换成 |
+|---|---|---|---|
+| $u|_{[0,t]}$ | 截至当前的历史函数 | 连续化序列历史 | 单个 token $u_t$ |
+| $\mu_t$ | 历史区间上的测度 | 远近记忆权重 | 无关归一化常数 |
+| $\phi_n^{(t)}$ | $L^2(\mu_t)$ 正交基 | memory coordinates | 学得的任意 hidden basis |
+| $c_n(t)$ | 投影系数 | HiPPO state component | 原历史样本本身 |
+| $\hat u_t$ | 有限维投影重构 | state 可表达的历史摘要 | 无损 replay |
+| $A=\Lambda-PQ^*$ | diagonal-plus-low-rank 结构 | S4 structured state matrix | 纯对角 SSM |
+| $(I-z\bar A)^{-1}$ | resolvent | kernel/frequency generation 核心 | 任意下游非线性层 |
+
+### 贯穿算例 $\mathcal S_\square$：先把“记忆”做成一个可验算投影
+
+在 $[0,1]$ 上使用均匀测度和前两个正交归一基
+
+$$
+\phi_0(t)=1,\qquad
+\phi_1(t)=\sqrt3(2t-1).
+$$
+
+它们满足
+
+$$
+\langle\phi_0,\phi_1\rangle=0,\qquad
+\|\phi_0\|_2=\|\phi_1\|_2=1.
+$$
+
+选择一段最简单但非恒定的历史
+
+$$
+u(t)=1+2t.
+$$
+
+第一个投影系数是历史平均：
+
+$$
+c_0=\int_0^1(1+2t)\,dt=2.
+$$
+
+第二个系数记录线性趋势：
+
+$$
+\begin{aligned}
+c_1
+&=\int_0^1(1+2t)\sqrt3(2t-1)\,dt\\
+&=\sqrt3\int_0^1(4t^2-1)\,dt\\
+&=\frac{\sqrt3}{3}=\frac1{\sqrt3}.
+\end{aligned}
+$$
+
+二维重构为
+
+$$
+\hat u(t)
+=c_0\phi_0(t)+c_1\phi_1(t)
+=2+(2t-1)
+=1+2t,
+$$
+
+因此这个特定线性历史的二维投影误差为 0。若只保留常数基，则 $\hat u_1(t)=2$，平方误差为
+
+$$
+\int_0^1\left[(1+2t)-2\right]^2dt
+=\int_0^1(2t-1)^2dt
+=\frac13.
+$$
+
+这展示“增加一个状态坐标消除了本例的一阶趋势误差”，并不证明两个状态足以保存任意历史。
+
+再看 S4 结构计算的最小代数原型。令
+
+$$
+M=\operatorname{diag}(2,3),\qquad
+u=v=(1,1)^{\mathsf T}.
+$$
+
+则
+
+$$
+M+uv^{\mathsf T}
+=\begin{bmatrix}3&1\\1&4\end{bmatrix}.
+$$
+
+Woodbury/Sherman–Morrison 给
+
+$$
+\begin{aligned}
+(M+uv^{\mathsf T})^{-1}
+&=M^{-1}
+-\frac{M^{-1}uv^{\mathsf T}M^{-1}}
+{1+v^{\mathsf T}M^{-1}u}\\
+&=\frac1{11}
+\begin{bmatrix}4&-1\\-1&3\end{bmatrix}.
+\end{aligned}
+$$
+
+直接相乘可得单位阵。这个实数 $2\times2$ 例子只解释“对角逆＋低秩修正”的代数机制；S4 实际 resolvent 还涉及复数频点、离散化、共轭对称和 Cauchy-like kernel。
+
+## 核心公式七问：有限维正交投影
+
+$$
+\boxed{
+c_n(t)=\langle u,\phi_n^{(t)}\rangle_{L^2(\mu_t)},
+\qquad
+\hat u_t=\sum_{n=0}^{N-1}c_n(t)\phi_n^{(t)}.
+}
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 用 $N$ 个坐标表示历史函数在指定子空间中的最佳近似 |
+| 对象 | $\mu_t$ 定义权重，$\phi_n^{(t)}$ 定义坐标，$c_n(t)$ 是状态，$\hat u_t$ 是重构 |
+| 来路 | Hilbert 空间正交投影定理：残差与整个候选子空间正交 |
+| 步骤 | 先固定测度和正交基，再计算内积系数，最后线性组合重构 |
+| 读法 | 状态的每一维记录历史沿一个基函数方向的分量 |
+| 检查 | 基必须按声明的测度归一；投影残差应与各基正交；增大嵌套子空间不能增大最佳 $L^2$ 误差 |
+| 去路 | HiPPO 寻找能在线更新这些系数的动力学；S4 利用相应矩阵结构高效生成长 kernel |
 
 ## 一、先把“记忆”变成数学问题
 
@@ -31,7 +173,7 @@ $$
 
 $$
 c_n(t)=\left\langle u,g_n^{(t)}\right\rangle_{L^2(\mu_t)},\qquad
-c(t)=(c_0,ldots,c_{N-1})^\top.
+c(t)=(c_0,\ldots,c_{N-1})^\top.
 $$
 
 重构

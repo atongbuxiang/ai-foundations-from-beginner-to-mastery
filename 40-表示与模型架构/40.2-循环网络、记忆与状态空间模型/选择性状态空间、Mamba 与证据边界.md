@@ -11,13 +11,136 @@ exercises: ["[[习题 - 选择性状态空间、Mamba 与证据边界]]"]
 solutions: ["[[解答 - 选择性状态空间、Mamba 与证据边界]]"]
 figure: "[[00-知识库管理/_assets/figures/architecture/fig-mamba-selectivity-evidence-v1.svg]]"
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # 选择性状态空间、Mamba 与证据边界
 
 > [!abstract] 本节主问题
 > 固定 LTI SSM 对所有 token 使用同一动力学，缺少显式的内容条件化。Mamba 让离散步长及输入/读出相关参数依赖当前输入，使状态能按内容选择传播、写入或读出；固定 convolution kernel 因而消失，论文以 hardware-aware selective scan 恢复高效整段计算。线性序列复杂度不等于无限记忆，也不等于所有设备上恒胜 Attention。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** ARCH-14—15 的卷积接口依赖固定 LTI 参数；本页只改变一个关键条件——让当前 token 决定离散步长、写入和读出；
+- **本页解决什么：** 用同 lag、不同中间 token 的精确反例证明固定 kernel 失效，同时说明状态更新仍是仿射映射，因此 associative scan 仍可成立；
+- **后续为何需要：** 本页完成 RNN—SSM 主线，并把固定状态压缩与 Attention 显式 token memory 的差异交给 40.4、40.7 继续比较。
+
+**第一遍只看两条路径。** 同一个早期写入经过“普通 token”或“边界 token”后，在相同时间距离上得到 $1/2$ 或 $1/4$ 的最终状态；由此看见系数依赖沿途内容，而不只依赖 lag。
+
+**第二遍再审计完整 Mamba block。** 将 selective SSM core 与 local convolution、projection、gate、residual 分账，并分开算法 work、scan span、HBM IO、流式 state bytes、论文实验和硬件版本。
+
+### 问题链
+
+1. 固定 LTI kernel 为什么只能按距离加权，不能显式读取 token 内容？
+2. 输入依赖 $\Delta_t$ 怎样改变 retention，$B_t,C_t$ 又分别控制什么？
+3. 同一早期 token、相同 lag 的系数为何能因中间 token 而不同？
+4. 固定 convolution 失效后，为什么关于 state 的仿射结构还在？
+5. selective scan 的 associativity 与 hardware-aware kernel 分别是哪一层主张？
+6. 固定大小状态与随长度增长的 KV cache 各自交换了什么能力和成本？
+7. “线性时间”“更快”“记得更长”“任务更强”为什么必须分别取证？
+
+> [!check] 第一遍停靠线
+> 若你能复算普通路径 $h_3=1/2$、边界路径 $h'_3=1/4$，并解释同一个 lag-2 写入为何不可能由唯一固定 $K_2$ 同时表示，却仍能把两条路径各自写成仿射 pair scan，就完成了 40.2 的第一遍主线。
+
+## 符号与对象账本
+
+| 对象 | 数学身份 | AI 中的身份 | 不能偷换成 |
+|---|---|---|---|
+| $\Delta_t$ | 输入依赖离散步长 | token-conditioned timescale | 普通位置编码 |
+| $\bar A_t=e^{\Delta_tA}$ | 时变 retention | selective state transition | 固定 LTI $\bar A$ |
+| $B_t$ | 时变输入映射 | selective write | readout 权重 |
+| $C_t$ | 时变输出映射 | selective read | 写入门 |
+| $p_t=(\bar A_t,b_t)$ | 一步 state-affine 映射 | selective scan element | 固定 convolution tap |
+| recurrent state | 历史的固定维压缩 | streaming cache | 可逐 token 回看的数据库 |
+| evidence tuple | model/task/interface/hardware 条件 | 性能结论适用域 | 无条件排行榜 |
+
+### 贯穿算例 $\mathcal S_\square$：同一 lag，却有两种传播系数
+
+继续使用连续基动力学 $A=-2$。普通 token 选择
+
+$$
+\Delta_{\mathrm{plain}}=\frac{\log2}{2}
+\quad\Longrightarrow\quad
+a_{\mathrm{plain}}=e^{-2\Delta_{\mathrm{plain}}}=\frac12,
+$$
+
+边界 token 选择更大的步长
+
+$$
+\Delta_{\mathrm{boundary}}=\log2
+\quad\Longrightarrow\quad
+a_{\mathrm{boundary}}=e^{-2\Delta_{\mathrm{boundary}}}=\frac14.
+$$
+
+设第 1 步把重要内容写成 $b_1=2$，后两步没有新写入。普通路径的三个仿射元素是
+
+$$
+p_1=\left(\frac12,2\right),\qquad
+p_2=\left(\frac12,0\right),\qquad
+p_3=\left(\frac12,0\right).
+$$
+
+从 $h_0=0$ 出发：
+
+$$
+h_1=2,\qquad h_2=1,\qquad h_3=\frac12.
+$$
+
+若只把中间 token 换成边界 token，则
+
+$$
+p'_2=\left(\frac14,0\right),
+$$
+
+得到
+
+$$
+h'_1=2,\qquad h'_2=\frac12,\qquad h'_3=\frac14.
+$$
+
+两条路径中第一次写入到最终读出的时间距离都为 2，但它的传播系数分别为
+
+$$
+\frac12\cdot\frac12=\frac14,
+\qquad
+\frac12\cdot\frac14=\frac18.
+$$
+
+若存在只依赖 lag 的固定 tap $K_2$，它必须同时等于 $1/4$ 和 $1/8$，矛盾。因此输入依赖中间转移破坏了单一固定 convolution kernel。
+
+但是每一步仍是 $h_t=a_th_{t-1}+b_t$。普通路径与边界路径的总 pair 分别为
+
+$$
+p_3\otimes p_2\otimes p_1
+=\left(\frac18,\frac12\right),
+$$
+
+$$
+p_3\otimes p'_2\otimes p_1
+=\left(\frac1{16},\frac14\right).
+$$
+
+所以“不能预生成一个固定卷积核”并不等于“不能 parallel scan”；失去的是 time invariance，不是 state-affine composition 的 associativity。
+
+## 核心公式七问：选择性状态路径
+
+$$
+\boxed{
+h_t=\bar A_t h_{t-1}+\bar B_t x_t,\qquad
+y_t=C_t h_t,\qquad
+(\Delta_t,B_t,C_t)=S(x_t).
+}
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 让当前内容调节旧状态保留、当前写入与当前读出 |
+| 对象 | $S(x_t)$ 产生时变参数；状态更新对 $h_{t-1}$ 仍仿射，但对整条输入序列不再是固定 LTI |
+| 来路 | 在结构化连续 $A$ 上引入 input-dependent discretization/write/read，并保留可扫描状态接口 |
+| 步骤 | 先由 token 生成 $\Delta_t,B_t,C_t$，离散化得到 $\bar A_t,\bar B_t$，再更新 state 与读出 |
+| 读法 | 不同 token 可以让同一记忆方向慢衰减、快遗忘、强写入或弱读出 |
+| 检查 | 改变中间 token 应能改变早期输入系数；相同参数冻结后应退化为 LTI；full 与 chunked state passing 应数值对齐 |
+| 去路 | 40.4 用显式内容寻址比较状态压缩，40.7 再比较 selective state 与 KV cache 的推理资源 |
 
 ## 一、固定 LTI 的内容无关边界
 

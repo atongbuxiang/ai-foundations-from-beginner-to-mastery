@@ -18,7 +18,7 @@
 <text x="45" y="330" font-size="18" font-weight="700" text-anchor="start" fill="#2563EB" class="math">Abar = exp(A Delta)</text>
 <text x="45" y="380" font-size="15" font-weight="700" text-anchor="start" fill="#C24135" class="math">Bbar = integral exp(A tau) B d tau</text>
 <text x="45" y="447" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">A 可逆时才可简写 A⁻¹(Ā−I)B。</text>
-<text x="45" y="480" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">奇异 A 应保留积分或用增广矩阵指数。</text>
+<text x="45" y="480" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">S□：A=−2,B=8,Δ=ln2/2 → Ā=1/2,B̄=2。</text>
 <text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">B</text>
 <text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">极点映射 z = exp(lambda Delta)</text>
 <line x1="445" y1="285" x2="755" y2="285" stroke="#D7DEE8" stroke-width="1.5"/>

@@ -17,7 +17,7 @@ updated: 2026-08-29
 
 - **第一遍：** ARCH-01 → 02 → 03 → 04，只要求能从结构任务写出窗口算术、解释共享与等变、算对 tensor shape；
 - **第二遍：** 回到 boundary/stride/dilation/groups、反例与资源口径，再沿 ARCH-05—08 完成 sampling—RF—stage—group 证明链；
-- **状态边界：** 本卷 ARCH-01—08 为 8/8 `regression-passed`；全章现行教学迁移已推进至 ARCH-01—12（12/64），40.1 材料门占全章 1/8，个人仍为 `not-attempted`。
+- **状态边界：** 本卷 ARCH-01—08 为 8/8 `regression-passed`；全章现行教学迁移已推进至 ARCH-01—16（16/64），40.1—40.2 材料门占全章 2/8，个人仍为 `not-attempted`。
 
 | ID | 节点 | 学习出口 | 状态 |
 |---|---|---|---|
@@ -30,4 +30,4 @@ updated: 2026-08-29
 | ARCH-07 | [[CNN 阶段、残差块与深度可分离卷积]] | backbone budget audit | `regression-passed` material / `not-attempted` learner |
 | ARCH-08 | [[群卷积、等变网络与 CNN 证据地图]] | symmetry/evidence audit | `regression-passed` material / `not-attempted` learner |
 
-当前本卷为 **8/8 现行教学迁移、1/8 分卷材料门、0/8 个人学习验收**；全章为 **ARCH-01—12（12/64）**。ARCH-01—08 已通过[[architecture_teaching_contract_audit.py]]的结构、题解、链接、独立数值与八图双跑回归；40.1 材料为 `regression-passed`，下一施工点为 ARCH-13—16，个人保持 `not-attempted`。
+当前本卷为 **8/8 现行教学迁移、全章 2/8 分卷材料门、0/8 个人学习验收**；全章为 **ARCH-01—16（16/64）**。ARCH-01—08 已通过[[architecture_teaching_contract_audit.py]]的结构、题解、链接、独立数值与八图双跑回归；40.1 材料为 `regression-passed`，下一施工点为 ARCH-17—20，个人保持 `not-attempted`。

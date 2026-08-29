@@ -170,7 +170,7 @@ def continuous_discrete_ssm():
     out += [text(45, 330, "Abar = exp(A Delta)", 18, 700, cls="math", fill=BLUE)]
     out += [text(45, 380, "Bbar = integral exp(A tau) B d tau", 15, 700, cls="math", fill=RED)]
     out += [text(45, 447, "A 可逆时才可简写 A⁻¹(Ā−I)B。", 14, 700, fill=RED)]
-    out += [text(45, 480, "奇异 A 应保留积分或用增广矩阵指数。", 14, fill=MUTED)]
+    out += [text(45, 480, "S□：A=−2,B=8,Δ=ln2/2 → Ā=1/2,B̄=2。", 12, fill=MUTED)]
 
     heading(out, 430, "B", "极点映射 z = exp(lambda Delta)", RED)
     out += [line(445, 285, 755, 285, GRID, 1.5), line(600, 100, 600, 470, GRID, 1.5)]
@@ -200,15 +200,16 @@ def recurrence_convolution_scan():
             out += [line(x + 53, 187, x + 78, 187, BLUE, 2.5, marker="a1")]
     out += [text(45, 280, "x_(k+1) = Abar x_k + Bbar u_k", 16, 700, cls="math")]
     out += [text(45, 350, "stream: O(N) state", 15, 700, fill=BLUE), text(45, 390, "time span: O(L)", 15, 650)]
-    out += [text(45, 475, "最适合逐 token 推进。", 15, fill=MUTED)]
+    out += [text(45, 475, "S□：z=(2,3,3/2,−5/4)。", 15, fill=MUTED)]
 
     heading(out, 430, "B", "卷积：固定 impulse response", TEAL)
     out += [text(445, 115, "K_j = C Abar^j Bbar", 17, 700, cls="math", fill=TEAL)]
     for i, h in enumerate((38, 70, 100, 76, 52, 30)):
         x = 460 + i * 45
         out += [rect(x, 390 - h, 25, h, TEAL, "#ECFDF5", 2, 1.5)]
-    out += [text(445, 430, "y=K*u", 18, 700, cls="math")]
-    out += [text(445, 475, "只在 A,B,C 固定且 time-invariant 时是单一核。", 13, fill=MUTED)]
+    out += [text(445, 425, "y=K*u", 18, 700, cls="math")]
+    out += [text(445, 458, "S□：K=(2,1,1/2,1/4)。", 14, 700, fill=TEAL)]
+    out += [text(445, 488, "仅在 A,B,C 固定且 time-invariant 时是单一核。", 12, fill=MUTED)]
 
     heading(out, 830, "C", "scan：仿射变换的结合律", RED)
     out += [text(845, 115, "pair p=(A,b)", 15, 700, fill=RED), text(845, 155, "p2 o p1=(A2 A1, A2 b1+b2)", 14, 650, cls="math")]
@@ -219,7 +220,7 @@ def recurrence_convolution_scan():
     out += [path("M850 245 Q887 205 925 245", RED, 2), path("M1000 245 Q1037 205 1075 245", RED, 2), path("M888 202 Q963 125 1038 202", BLUE, 2.5)]
     out += [text(842, 370, "work O(L), span O(log L)", 15, 700, fill=BLUE)]
     out += [text(842, 420, "但 kernel fusion、IO 与数值顺序决定墙钟表现。", 13, fill=MUTED)]
-    out += [text(842, 480, "input-dependent A_t：可 scan，不再是固定卷积。", 13, 700, fill=RED)]
+    out += [text(842, 480, "S□：total pair=(1/16,−5/4)。", 13, 700, fill=RED)]
     return finish(out, "recurrence、convolution 与 scan 是条件化的等价接口，不是可无条件互换的口号。")
 
 
@@ -232,9 +233,10 @@ def hippo_s4():
     heading(out, 42, "A", "历史函数投影", TEAL)
     pts = [(50 + i * 28, 235 - 55 * __import__('math').sin(i * .55) * (1 - i / 15)) for i in range(12)]
     out += [path("M" + " L".join(f"{x:.1f} {y:.1f}" for x, y in pts), BLUE, 2.5)]
-    for n, y in enumerate((330, 370, 410)):
+    for n, y in enumerate((320, 355, 390)):
         out += [text(45, y, f"c{n}(t)=⟨u≤t,g{n}^(t)⟩", 15, 650, cls="math", fill=TEAL)]
-    out += [text(45, 475, "measure mu_t 决定近史/全史的权重。", 14, fill=MUTED)]
+    out += [text(45, 445, "S□：u=1+2t → c=(2,1/√3)。", 14, 700, fill=TEAL)]
+    out += [text(45, 480, "1 维误差 1/3；2 维误差 0。", 13, fill=MUTED)]
 
     heading(out, 430, "B", "系数 ODE → HiPPO matrix", BLUE)
     out += [rect(460, 120, 95, 80, TEAL, "#ECFDF5", 5, 2), text(508, 153, "basis", 15, 700, "middle", TEAL), text(508, 179, "+ measure", 13, 650, "middle")]
@@ -243,7 +245,7 @@ def hippo_s4():
     out += [text(445, 270, "ċ(t)=A(t)c(t)+B(t)u(t)", 17, 700, cls="math")]
     out += [text(445, 348, "optimality 属于指定 weighted L² projection", 14, 700, fill=RED)]
     out += [text(445, 392, "≠ 任意 downstream loss 最优", 14, 650, fill=RED)]
-    out += [text(445, 475, "连续投影、离散误差、学习误差分账。", 14, fill=MUTED)]
+    out += [text(445, 475, "rank-1 inverse=[[4,−1],[−1,3]]/11。", 13, fill=MUTED)]
 
     heading(out, 830, "C", "S4 的结构化计算路线", RED)
     stages = ((105, "HiPPO A"), (195, "NPLR / DPLR"), (285, "resolvent"), (375, "Cauchy kernel"), (465, "FFT convolution"))
@@ -270,8 +272,8 @@ def mamba_evidence():
         x = 60 + 76 * i
         out += [rect(x, 285, 55, 42, color, "#F8FAFC", 5, 2), text(x + 27, 311, f"A{i+1}", 13, 700, "middle", color)]
     out += [text(45, 390, "Delta_t, B_t, C_t = functions of x_t", 15, 700, cls="math")]
-    out += [text(45, 445, "可按内容调节写入/遗忘/读出。", 15, 650)]
-    out += [text(45, 480, "但不再存在单一 K_j = C Abar^j Bbar。", 14, 700, fill=RED)]
+    out += [text(45, 445, "S□：plain path h₃=1/2；boundary h₃=1/4。", 13, 650)]
+    out += [text(45, 480, "同一 lag、不同系数 ⇒ 不存在单一固定 K₂。", 13, 700, fill=RED)]
 
     heading(out, 430, "B", "selective scan 的系统账", TEAL)
     rows = ((115, "arithmetic", "O(LN)"), (195, "parallel span", "tree scan"), (275, "IO", "fused / recompute"), (355, "stream state", "O(N) per layer"), (435, "precision", "long product audit"))
