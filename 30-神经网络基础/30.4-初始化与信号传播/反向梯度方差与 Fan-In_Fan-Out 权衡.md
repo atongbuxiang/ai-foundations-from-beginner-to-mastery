@@ -11,12 +11,95 @@ exercises: ["[[习题 - 反向梯度方差与 Fan-In_Fan-Out 权衡]]"]
 solutions: ["[[解答 - 反向梯度方差与 Fan-In_Fan-Out 权衡]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-forward-backward-fan-tradeoff-v2.svg]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 # 反向梯度方差与 Fan-In/Fan-Out 权衡
 
 > [!abstract] 本章主问题
 > 前向一坐标汇总 fan-in 个输入，反向一坐标却汇总 fan-out 个输出 cotangents。再乘 activation derivative 后，两条二阶递推一般需要不同的权重 variance。初始化要先声明守护前向、反向还是某种折中；标量 gradient variance 稳定仍不等于 Jacobian 各方向稳定。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-25 给出 forward moment operator，NN-26/27 分别给出近线性与 rectifier 的候选 weight scale；
+- **本页解决什么：** 把 $W$ 与 $W^T$ 的求和方向并排，显式推出 $\chi_f,\chi_b$ 以及宽度变化下的不可兼得；
+- **后续为何需要：** NN-29 会从单输入二阶矩走向两输入 correlation，NN-30 则从方向平均走向全 Jacobian singular spectrum。
+
+**第一遍只画两支箭头。** Forward 从 $n_{\mathrm{in}}$ 个坐标汇总到一个输出；reverse 从 $n_{\mathrm{out}}$ 个 cotangents 汇总回一个输入。分别乘 $c$ 和 $d$，不要先背 mode 名字。
+
+**第二遍再追踪深度与边界。** 将单层乘数连乘，然后逐一拆除 gradient independence、plain chain、loss reduction 和 scalar-moment 假设，看它们在 residual/norm/optimizer 系统中如何改写。
+
+### 问题链
+
+1. forward 与 reverse 中每个坐标各累加多少个独立项？
+2. activation output factor $c$ 和 derivative factor $d$ 为什么是两个对象？
+3. 对 $4\to8$ ReLU 层，fan-in He 为什么会使 backward second moment 翻倍？
+4. Glorot-style rectifier 折中为什么仍会沿深度产生指数累积？
+5. $\mathbb E\|Jv\|^2$ 守恒为什么不足以推出 $\sigma_{\min}(J)$ 与 $\sigma_{\max}(J)$ 都接近 1？
+
+> [!check] 第一遍停靠线
+> 若你能在 $\mathcal I_\square$ 上分别算出 fan-in He 的 $(\chi_f,\chi_b)=(1,2)$、fan-out He 的 $(1/2,1)$ 与 fan-average rectifier 折中的 $(2/3,4/3)$，就已掌握本页的方向账本。
+
+## 符号与对象账本
+
+| 对象 | 定义 | AI 计算中的身份 | 不包含什么 |
+|---|---|---|---|
+| $c=\mathbb E[\phi(Z)^2]/\mathbb E[Z^2]$ | forward activation factor | activation 前后平均平方比 | correlation 与非高斯效应 |
+| $d=\mathbb E[\phi'(Z)^2]$ | backward mask/gain factor | VJP 局部平方增益 | $\phi'(\mathbb E Z)^2$ |
+| $\chi_f=n_{\mathrm{in}}vc$ | forward multiplier | 单层 activation scale 诊断 | 整个向量总 norm 比 |
+| $\chi_b=n_{\mathrm{out}}vd$ | backward multiplier | 单层 cotangent scale 诊断 | optimizer update scale |
+| $J=D_LW_L\cdots D_1W_1$ | 端到端 Jacobian | 真正的方向性传播对象 | 不由一个 $\chi$ 完整描述 |
+
+### 贯穿算例 $\mathcal I_\square$：三种 mode 的得与失
+
+对 $4\to8$ ReLU 层，$c=d=1/2$。三个候选 weight variances 为
+
+$$
+v_{\mathrm{in}}=\frac12,qquad
+v_{\mathrm{out}}=\frac14,qquad
+v_{\mathrm{avg}}=\frac{2}{4c+8d}=\frac13.
+$$
+
+代入两条乘数：
+
+| mode | $v$ | $\chi_f=4v/2$ | $\chi_b=8v/2$ | 真正优先项 |
+|---|---:|---:|---:|---|
+| fan-in He | $1/2$ | $1$ | $2$ | forward |
+| fan-out He | $1/4$ | $1/2$ | $1$ | backward |
+| fan-average rectifier | $1/3$ | $2/3$ | $4/3$ | 算术-fan 对称折中 |
+
+若一个教学型网络连续 6 次将宽度加倍，且每层都使用第三行，则标量近似给出
+
+$$
+\prod_{\ell=1}^6\chi_f^{(\ell)}
+=\left(\frac23\right)^6
+=\frac{64}{729}
+\approx0.087791,
+$$
+
+$$
+\prod_{\ell=1}^6\chi_b^{(\ell)}
+=\left(\frac43\right)^6
+=\frac{4096}{729}
+\approx5.618656.
+$$
+
+“每层只是 $2/3$ 和 $4/3$”在深度乘积中并不小。这个算例是尺度假说，不是对真实有限网络的精确预测：宽度、mask、权重与 gradient 相关性都会产生偏离。
+
+## 核心公式七问：$\chi_f=n_{\mathrm{in}}vc,\qquad\chi_b=n_{\mathrm{out}}vd$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 用两个标量显式区分前向与反向的单层平均平方增益 |
+| 对象 | 坐标级 second moment，不是总 norm、极端方向或 parameter gradient |
+| 来路 | $W$ 行求和的 fan-in、$W^T$ 行求和的 fan-out 与 activation 局部因子 |
+| 步骤 | 确认 shape→求 $c,d$→选 $v$→计算两个 $\chi$→沿深度连乘 |
+| 读法 | 小于 1 表示对应统计收缩，大于 1 表示放大；等于 1 仅是标量临界 |
+| 检查 | linear 取 $c=d=1$，ReLU 对称输入取 $c=d=1/2$；方阵对应 scale 应使两者同时为 1 |
+| 去路 | correlation fixed point、edge of chaos、正交初始化、dynamical isometry 与 residual Jacobian |
+
+### AI / 系统对应
+
+MLP expansion ratio、bottleneck projection、MoE expert width 和 attention output projection 都会让 fan-in/fan-out 不对称。运行时观测到的 gradient 还混入 token/batch reduction、loss scaling、all-reduce、clipping 与 optimizer preconditioning；因此诊断应同时保留网络 Jacobian ledger 与优化器 ledger，不能只看一个 global gradient norm。
 
 ## 一、从一层反向公式开始
 
@@ -269,4 +352,3 @@ $$
 
 - [[习题 - 反向梯度方差与 Fan-In_Fan-Out 权衡]]
 - [[解答 - 反向梯度方差与 Fan-In_Fan-Out 权衡]]
-

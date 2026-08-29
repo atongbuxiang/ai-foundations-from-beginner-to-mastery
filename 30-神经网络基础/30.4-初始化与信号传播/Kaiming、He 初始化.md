@@ -11,12 +11,89 @@ exercises: ["[[习题 - Kaiming、He 初始化]]"]
 solutions: ["[[解答 - Kaiming、He 初始化]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-kaiming-rectifier-moments-v2.svg]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 # Kaiming、He 初始化
 
 > [!abstract] 本章主问题
 > ReLU 会把 centered symmetric preactivation 的负半轴截成 0，所以二阶矩平均只保留一半。He 初始化把单权重 variance 从 $1/\text{fan}$ 提高到 $2/\text{fan}$；对负侧 slope 为 $a$ 的 rectifier，修正为 $2/[(1+a^2)\text{fan}]$。这里守住的是 second moment，而不是 activation variance、非零比例或全 Jacobian spectrum。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-26 的 Xavier 默认 linear/近线性增益；NN-17—20 则已算出 ReLU/Leaky 的输出与局部导数；
+- **本页解决什么：** 用正负半轴的平方质量推出 $(1+a^2)/2$，再得到 Kaiming normal/uniform 与 fan mode；
+- **后续为何需要：** NN-28 会说明为何在 $4\to8$ 扩宽层中，fan-in He 守住 forward 却把 backward 二阶矩放大两倍。
+
+**第一遍只追踪平方。** 把负侧 $az$ 平方成 $a^2z^2$，与正侧各占一半的二阶质量相加；这就解释了为何 gain 中是 $1+a^2$，而非 $1+a$。
+
+**第二遍再区分统计量。** 分别记录 output mean、second moment、variance、positive rate 和 derivative second moment，再审计 bias、PReLU slope drift、truncation 与最终 dtype。
+
+### 问题链
+
+1. 对称分布为什么让正负半轴各承担一半二阶矩？
+2. Leaky slope 为 $a$ 时，为什么负侧贡献是 $a^2/2$？
+3. ReLU 层为什么需要在 affine 阶段把 second moment 放大两倍？
+4. $“\mathbb E[h^2]=1”$ 为什么不能改写成 $“\operatorname{Var}(h)=1”$？
+5. 一个初始 slope $a_0$ 得到的 gain，为什么不能永久校准训练中的 PReLU？
+
+> [!check] 第一遍停靠线
+> 若你能在 $\mathcal I_\square$ 上从 $v=1/2$ 算出 affine second moment $2$、ReLU second moment $1$，同时算出 output variance $1-1/\pi\approx0.681690$，就已分清 He 推导的统计对象。
+
+## 符号与对象账本
+
+| 对象 | 数值/定义 | AI 实现角色 | 边界 |
+|---|---|---|---|
+| $a$ | rectifier 负侧 slope | Leaky ReLU/PReLU 参数 | 不是 negative probability |
+| $c_a=(1+a^2)/2$ | forward moment factor | activation gain 的逆量 | 要求对称 preactivation |
+| $d_a=(1+a^2)/2$ | derivative second moment | backward mask factor | kink 单点不影响连续分布期望 |
+| $v=2/[(1+a^2)\,\mathrm{fan}]$ | 单权重 variance | Kaiming initializer | fan mode 需显式声明 |
+| final stored $\widehat v$ | 采样/截断/转 dtype 后 variance | 真正进入模型的尺度 | 可偏离 nominal $v$ |
+
+### 贯穿算例 $\mathcal I_\square$：ReLU 把“两倍”变回“一倍”
+
+对 $4\to8$、$r_0=1$、zero bias 的层，ReLU fan-in He 给出
+
+$$
+v=\frac{2}{4}=\frac12,qquad
+\operatorname{std}(W)=\sqrt{\frac12}\approx0.707107.
+$$
+
+若用 uniform $[-b,b]$，则
+
+$$
+b=\sqrt{3v}=\sqrt{\frac32}\approx1.224745.
+$$
+
+affine 后 $q=4vr_0=2$；经 ReLU 后
+
+$$
+\mathbb E[h^2]=\frac q2=1,qquad
+\mathbb E[h]=\sqrt{\frac{q}{2\pi}}=\frac1{\sqrt\pi}\approx0.564190,
+$$
+
+$$
+\operatorname{Var}(h)
+=1-\frac1\pi
+\approx0.681690.
+$$
+
+因此 He 守住了 second moment $1$，却没有守住 variance $1$；positive rate $1/2$ 也是对称连续分布的 population 结论，不是每个 finite batch 的硬约束。
+
+## 核心公式七问：$v=2/[(1+a^2)\,\mathrm{fan}]$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 抵消 leaky rectifier 在正负半轴上造成的平均平方增益 |
+| 对象 | 单权重 variance，其平方根才是 normal standard deviation |
+| 来路 | 对称分布两半轴的 $1/2$ 与负侧平方因子 $a^2$ |
+| 步骤 | 求 $c_a$→选 fan-in/fan-out→令 $\mathrm{fan}\cdot v\cdot c_a=1$→转换采样参数 |
+| 读法 | $a=0$ 得 $2/\mathrm{fan}$；$a=1$ 退化为 linear 的 $1/\mathrm{fan}$ |
+| 检查 | 必须区分 mean/variance/second moment，并在最终 dtype 重测 $\widehat v$ |
+| 去路 | backward fan 冲突、PReLU drift、rectifier networks 与 dynamical isometry |
+
+### AI / 系统对应
+
+Kaiming 尺度直接出现在 CNN/MLP 权重、PReLU 参数化和自定义 fused layer 中。在 mixed precision 或 quantization 系统里，nominal variance 还要经过 truncation、cast 与 scale packing；只检查代码调用名字，不检查最终 stored moment，仍不算完成初始化审计。
 
 ## 一、从一般 Leaky Rectifier 开始
 

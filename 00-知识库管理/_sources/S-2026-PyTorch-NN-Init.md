@@ -9,10 +9,12 @@ year: 2026
 url: "https://docs.pytorch.org/docs/stable/nn.init"
 accessed: 2026-08-23
 source_tier: B
+scope_role: implementation-reference
+temporal_role: current-official-documentation
 venue: "PyTorch official documentation"
 related: ["[[Xavier、Glorot 初始化]]", "[[Kaiming、He 初始化]]", "[[反向梯度方差与 Fan-In_Fan-Out 权衡|反向梯度方差与 Fan-In/Fan-Out 权衡]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 # PyTorch 2026：torch.nn.init
 

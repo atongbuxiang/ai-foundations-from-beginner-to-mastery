@@ -9,10 +9,12 @@ year: 1998
 url: "https://leon.bottou.org/papers/lecun-98x"
 accessed: 2026-08-23
 source_tier: A
+scope_role: primary
+temporal_role: textbook-era-foundation
 venue: "Neural Networks: Tricks of the Trade, LNCS 1524:9–50"
 related: ["[[方差传播与宽层均值场近似]]", "[[Xavier、Glorot 初始化]]", "[[反向梯度方差与 Fan-In_Fan-Out 权衡|反向梯度方差与 Fan-In/Fan-Out 权衡]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 # LeCun et al. 1998：Efficient BackProp
 

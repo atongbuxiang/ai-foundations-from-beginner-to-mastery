@@ -5,7 +5,7 @@ area: [neural-networks/initialization]
 prerequisites: ["[[激活函数、门控与非线性 MOC]]", "[[期望、方差与矩]]"]
 related: ["[[神经网络基础完整课程地图与掌握标准]]", "[[归一化、尺度与统计量 MOC]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 # 初始化与信号传播 MOC
 | ID | 节点 | 出口 | 状态 |
@@ -19,4 +19,9 @@ updated: 2026-08-23
 | NN-31 | [[偏置、输出层与零初始化的对称性边界]] | symmetry breaking | draft + A–E 闭环 |
 | NN-32 | [[LSUV、Fixup 与现代初始化诊断]] | modern audit | draft + A–E 闭环 |
 
-当前为 **8/8 正文、8/8 A—E 题解闭环、0/8 真实验收**，NN-25—32 共 120 题与逐题详解已经形成完整静态课程闭环。下一卷进入 30.5 的 NN-33—36：归一化对象与轴、BatchNorm 前向统计、BatchNorm 反向传播，以及 LayerNorm 几何与反向传播。
+## 当前迁移与学习状态
+
+- [[neural_network_foundations_teaching_contract_audit.py]]已复核 NN-25—28 的两遍路线、问题链、对象账本、$\mathcal I_\square$ 共享 $4\to8$ fixture 与公式七问；
+- 共享链闭合 ReLU $q=2\to r=1$、Xavier $(\chi_f,\chi_b)=(2/3,4/3)$、He mean/second-moment/variance 分账与 fan 折中的六层乘积；
+- 当前为 **4/8 现行教学迁移、8/8 正文、8/8 A—E 题解、8/8 正式图**；30.4 仍为 `in-progress`；
+- 全章为 **28/64 已迁移、36/64 pending、分卷材料门 3/8**，个人仍为 **0/8 / `not-attempted`**；下一批 NN-29—32。

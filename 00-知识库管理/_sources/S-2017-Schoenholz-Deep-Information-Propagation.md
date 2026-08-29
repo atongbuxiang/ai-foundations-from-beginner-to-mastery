@@ -9,10 +9,12 @@ year: 2017
 url: "https://research.google/pubs/deep-information-propagation/"
 accessed: 2026-08-23
 source_tier: A
+scope_role: primary
+temporal_role: mean-field-foundation
 venue: "ICLR 2017"
 related: ["[[方差传播与宽层均值场近似]]", "[[反向梯度方差与 Fan-In_Fan-Out 权衡|反向梯度方差与 Fan-In/Fan-Out 权衡]]", "[[相关传播、Edge of Chaos 与临界初始化]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 # Schoenholz et al. 2017：Deep Information Propagation
 

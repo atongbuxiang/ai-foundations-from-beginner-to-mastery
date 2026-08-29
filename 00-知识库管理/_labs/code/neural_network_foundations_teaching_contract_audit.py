@@ -23,7 +23,7 @@ SOLUTIONS = LABS / "solutions"
 CODE = LABS / "code"
 FIGURE_AUDITOR = CODE / "audit-markdown-figure-units.mjs"
 ASSET_DIR = ROOT / "00-知识库管理" / "_assets" / "figures" / "neural-networks"
-MIGRATED_IDS = tuple(range(1, 25))
+MIGRATED_IDS = tuple(range(1, 29))
 
 STATE_SURFACES = (
     CHAPTER / "神经网络基础 MOC.md",
@@ -34,6 +34,7 @@ STATE_SURFACES = (
     CHAPTER / "30.1-前馈网络、感知机与表达能力" / "前馈网络、感知机与表达能力 MOC.md",
     CHAPTER / "30.2-计算图、反向传播与自动微分" / "计算图、反向传播与自动微分 MOC.md",
     CHAPTER / "30.3-激活函数、门控与非线性" / "激活函数、门控与非线性 MOC.md",
+    CHAPTER / "30.4-初始化与信号传播" / "初始化与信号传播 MOC.md",
 )
 
 EXPECTED_FIGURE_SCRIPTS = {
@@ -197,11 +198,17 @@ def audit_migrated_contract(nodes: list[tuple[int, Path, str]]) -> None:
         relative = path.relative_to(ROOT)
         for marker in markers:
             require(marker in content, f"{relative}: teaching-contract marker missing: {marker}")
-        fixture = "X_\\star" if node_id <= 4 else "X_\\oplus" if node_id <= 8 else "X_\\diamond" if node_id <= 16 else "s_\\triangle"
+        fixture = (
+            "X_\\star" if node_id <= 4 else
+            "X_\\oplus" if node_id <= 8 else
+            "X_\\diamond" if node_id <= 16 else
+            "s_\\triangle" if node_id <= 24 else
+            "\\mathcal I_\\square"
+        )
         require(fixture in content, f"{relative}: shared teaching fixture missing: {fixture}")
         require("AI" in content, f"{relative}: AI object mapping missing")
         require(len(content.splitlines()) >= 180, f"{relative}: derivation depth unexpectedly short")
-    print("PASS NN teaching migration waves A--F: NN-01--24 course position/two-pass/problem/object/formula contracts=24/24")
+    print("PASS NN teaching migration waves A--G: NN-01--28 course position/two-pass/problem/object/formula contracts=28/28")
 
 
 def audit_wave_c_fixture(nodes: list[tuple[int, Path, str]]) -> None:
@@ -368,6 +375,68 @@ def audit_wave_f_fixture(nodes: list[tuple[int, Path, str]]) -> None:
     print("PASS NN wave-F independent math: Softplus/GELU/SiLU; GLU/SwiGLU two-route VJP; Maxout winners; five-gate evidence closure")
 
 
+def audit_wave_g_fixture(nodes: list[tuple[int, Path, str]]) -> None:
+    """Recompute the NN-25--28 4-to-8 initialization and fan ledger."""
+    fan_in, fan_out = 4.0, 8.0
+    input_second_moment = 1.0
+    relu_forward_factor = relu_derivative_factor = 0.5
+
+    he_fan_in_variance = 2.0 / fan_in
+    preactivation_second_moment = fan_in * he_fan_in_variance * input_second_moment
+    activation_second_moment = relu_forward_factor * preactivation_second_moment
+    require(preactivation_second_moment == 2.0 and activation_second_moment == 1.0, "NN wave-G moment recursion drifted")
+
+    xavier_forward = 1.0 / fan_in
+    xavier_backward = 1.0 / fan_out
+    xavier_variance = 2.0 / (fan_in + fan_out)
+    xavier_forward_multiplier = fan_in * xavier_variance
+    xavier_backward_multiplier = fan_out * xavier_variance
+    xavier_std = math.sqrt(xavier_variance)
+    xavier_uniform_bound = math.sqrt(3.0 * xavier_variance)
+    require(xavier_forward == 0.25 and xavier_backward == 0.125 and xavier_variance == 1.0 / 6.0, "NN wave-G Xavier targets drifted")
+    require(xavier_forward_multiplier == 2.0 / 3.0 and xavier_backward_multiplier == 4.0 / 3.0, "NN wave-G Xavier multipliers drifted")
+    require(abs(xavier_std - 0.408248290463863) < 1e-15, "NN wave-G Xavier normal scale drifted")
+    require(abs(xavier_uniform_bound - 0.7071067811865476) < 1e-15, "NN wave-G Xavier uniform scale drifted")
+
+    he_std = math.sqrt(he_fan_in_variance)
+    he_uniform_bound = math.sqrt(3.0 * he_fan_in_variance)
+    relu_mean = 1.0 / math.sqrt(math.pi)
+    relu_variance = 1.0 - 1.0 / math.pi
+    require(abs(he_std - 0.7071067811865476) < 1e-15, "NN wave-G He normal scale drifted")
+    require(abs(he_uniform_bound - 1.224744871391589) < 1e-15, "NN wave-G He uniform scale drifted")
+    require(abs(relu_mean - 0.5641895835477563) < 1e-15 and abs(relu_variance - 0.6816901138162093) < 1e-15, "NN wave-G ReLU moment ledger drifted")
+
+    he_fan_out_variance = 2.0 / fan_out
+    fan_average_rectifier_variance = 2.0 / (
+        fan_in * relu_forward_factor + fan_out * relu_derivative_factor
+    )
+
+    def multipliers(variance: float) -> tuple[float, float]:
+        return (
+            fan_in * variance * relu_forward_factor,
+            fan_out * variance * relu_derivative_factor,
+        )
+
+    require(multipliers(he_fan_in_variance) == (1.0, 2.0), "NN wave-G fan-in He tradeoff drifted")
+    require(multipliers(he_fan_out_variance) == (0.5, 1.0), "NN wave-G fan-out He tradeoff drifted")
+    require(multipliers(fan_average_rectifier_variance) == (2.0 / 3.0, 4.0 / 3.0), "NN wave-G fan-average tradeoff drifted")
+    forward_depth_six = (2.0 / 3.0) ** 6
+    backward_depth_six = (4.0 / 3.0) ** 6
+    require(abs(forward_depth_six - 64.0 / 729.0) < 1e-15, "NN wave-G forward depth product drifted")
+    require(abs(backward_depth_six - 4096.0 / 729.0) < 1e-14, "NN wave-G backward depth product drifted")
+
+    wave = {node_id: content for node_id, _, content in nodes if 25 <= node_id <= 28}
+    expected = {
+        25: ("q_1=2", "r_1=1"),
+        26: ("0.408248", "0.707107", "\\chi_f=2/3"),
+        27: ("0.564190", "0.681690", "1.224745"),
+        28: ("(1,2)", "(2/3,4/3)", "5.618656"),
+    }
+    for node_id, markers in expected.items():
+        require(all(marker in wave[node_id] for marker in markers), f"NN-{node_id:02d}: wave-G numeric closure missing")
+    print("PASS NN wave-G independent math: 4-to-8 moment recursion; Xavier/He scales; fan-in/out tradeoff; six-layer products exact")
+
+
 def question_ids(content: str) -> list[str]:
     return re.findall(r"^###\s+([^\s]+-[A-E]\d{2})\s*$", content, re.M)
 
@@ -525,10 +594,10 @@ def audit_state_surfaces() -> None:
     for path in STATE_SURFACES:
         content = read(path)
         require(audit_name in content, f"state surface misses NN audit: {path.relative_to(ROOT)}")
-        require("24/64" in content or "24 / 64" in content, f"state surface misses NN migrated count: {path.relative_to(ROOT)}")
-        require("40/64" in content or "40 / 64" in content, f"state surface misses NN pending count: {path.relative_to(ROOT)}")
+        require("28/64" in content or "28 / 64" in content, f"state surface misses NN migrated count: {path.relative_to(ROOT)}")
+        require("36/64" in content or "36 / 64" in content, f"state surface misses NN pending count: {path.relative_to(ROOT)}")
         require("not-attempted" in content, f"state surface overclaims NN learner: {path.relative_to(ROOT)}")
-    print("PASS NN state surfaces: 5 global + 3 volume views agree on migrated=24/64, pending=40/64, learner=not-attempted")
+    print("PASS NN state surfaces: 5 global + 4 volume views agree on migrated=28/64, pending=36/64, learner=not-attempted")
 
 
 def main() -> None:
@@ -543,6 +612,7 @@ def main() -> None:
     audit_wave_d_fixture(nodes)
     audit_wave_e_fixture(nodes)
     audit_wave_f_fixture(nodes)
+    audit_wave_g_fixture(nodes)
     audit_exercises(nodes, index)
     audit_sources_and_links(nodes, index)
     audit_figures(nodes, index)
@@ -550,8 +620,8 @@ def main() -> None:
     audit_state_surfaces()
     if args.run_figures:
         audit_deterministic_figures()
-    print("NN-01--24 teaching migration regression: PASS; 30.1--30.3 material gates=3/8")
-    print("NN-25--64 teaching migration: pending (40/64)")
+    print("NN-01--28 teaching migration regression: PASS; 30.1--30.3 material gates=3/8; 30.4=4/8")
+    print("NN-29--64 teaching migration: pending (36/64)")
     print("PERSONAL LEARNING STATUS: not-attempted")
 
 

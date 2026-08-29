@@ -11,12 +11,83 @@ exercises: ["[[习题 - Xavier、Glorot 初始化]]"]
 solutions: ["[[解答 - Xavier、Glorot 初始化]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-xavier-fan-compromise-v2.svg]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 # Xavier、Glorot 初始化
 
 > [!abstract] 本章主问题
 > 对一个 $n_{\mathrm{in}}\to n_{\mathrm{out}}$ 的非方线性层，前向二阶矩希望单权重 variance 为 $1/n_{\mathrm{in}}$，反向梯度却希望它为 $1/n_{\mathrm{out}}$。Xavier/Glorot 用 $2/(n_{\mathrm{in}}+n_{\mathrm{out}})$ 做对称折中；它是带假设的尺度折中，不是让随机矩阵变成正交矩阵的定理。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-25 已证明 forward 单坐标的二阶矩乘数是 $n_{\mathrm{in}}v$；现在将同一个矩阵转置放入 reverse；
+- **本页解决什么：** 从 forward/backward 两个不同求和长度推出 fan-in、fan-out 与 Glorot 算术平均折中；
+- **后续为何需要：** NN-27 会加入 ReLU 的 $1/2$ 因子，NN-28 则把两条乘数放到深度乘积中。
+
+**第一遍只做三次代入。** 先算 $v_F=1/n_{\mathrm{in}}$，再算 $v_B=1/n_{\mathrm{out}}$，最后算 $v_X=2/(n_{\mathrm{in}}+n_{\mathrm{out}})$；每次都代回 $\chi_f=n_{\mathrm{in}}v$ 和 $\chi_b=n_{\mathrm{out}}v$。
+
+**第二遍再看实现边界。** 比较 normal/uniform 同方差不同高阶矩，审计 tensor layout、convolution/group fan、activation gain 与“期望 Gram 是单位阵”的谱论越级。
+
+### 问题链
+
+1. $W$ 在 forward 中一行求和，在 reverse 中为什么变成一列求和？
+2. 非方层中，为什么 $1/n_{\mathrm{in}}$ 与 $1/n_{\mathrm{out}}$ 不能同时成立？
+3. Xavier 的“同时考虑前后向”究竟是精确守恒还是对称折中？
+4. normal 的 standard deviation 与 uniform 的 bound 怎样由同一 variance 得到？
+5. 为什么 $\mathbb E[WW^T]=I$ 不等于一次抽样的所有 singular values 为 1？
+
+> [!check] 第一遍停靠线
+> 若你能在 $\mathcal I_\square$ 上算出 $v_X=1/6$、$\chi_f=2/3$、$\chi_b=4/3$，并解释它们为什么不是两个 1，就掌握了本页主干。
+
+## 符号与对象账本
+
+| 对象 | Shape/定义 | AI 实现角色 | 检查问题 |
+|---|---|---|---|
+| $W\in\mathbb R^{8\times4}$ | $z=Wh$ | Linear 权重的数学布局 | API 是否假设用 $xW^T$ |
+| $v_F=1/4$ | fan-in target | 优先守 forward 坐标 | reverse 会放大多少 |
+| $v_B=1/8$ | fan-out target | 优先守 backward 坐标 | forward 会收缩多少 |
+| $v_X=1/6$ | fan-average target | Xavier initializer | 折中是否适合当前 activation |
+| $\chi_f,\chi_b$ | 单层二阶矩乘数 | 尺度诊断指标 | 不能当成 Jacobian 极值 |
+
+### 贯穿算例 $\mathcal I_\square$：$4\to8$ 近线性层
+
+沿用 $n_{\mathrm{in}}=4,n_{\mathrm{out}}=8$，并在 linear 或 tanh 小信号近似中取 $c=d=1$。三个候选是
+
+$$
+v_F=\frac14,\qquad v_B=\frac18,\qquad
+v_X=\frac{2}{4+8}=\frac16.
+$$
+
+Xavier 代回两条路径后得
+
+$$
+\chi_f=4\times\frac16=\frac23,qquad
+\chi_b=8\times\frac16=\frac43.
+$$
+
+它没有同时守住两边，而是让两个 fan 共享 effective fan $6$。对 normal，$\operatorname{std}(W)=\sqrt{1/6}\approx0.408248$；对 uniform $[-a,a]$，
+
+$$
+a=\sqrt{3v_X}=\sqrt{\frac12}\approx0.707107.
+$$
+
+这两个分布只匹配前两阶 moment；有限宽的最大权重、tail 和 singular spectrum 仍会不同。
+
+## 核心公式七问：$v_X=2/(n_{\mathrm{in}}+n_{\mathrm{out}})$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 在非方层中对称折中 forward 与 backward 的坐标尺度 |
+| 对象 | 单个权重元素的 variance，不是 standard deviation |
+| 来路 | 把 fan-in 和 fan-out 的算术平均当作 effective fan |
+| 步骤 | 确认布局→计算两个 fan→求 variance→转成 normal std 或 uniform bound |
+| 读法 | 方阵时两向同为 1；扩宽时 forward 收缩、backward 放大 |
+| 检查 | $n_{\mathrm{in}}=n_{\mathrm{out}}=n$ 必须返回 $1/n$；单位与采样方式要匹配 |
+| 去路 | ReLU gain、fan mode、正交初始化与 dynamical isometry |
+
+### AI / 系统对应
+
+Transformer MLP 的扩宽/压窄 projection、attention 的 $Q/K/V/O$ 投影和 convolution channel change 都是非方层。真正的工程对象是“存储布局 + forward contraction + initializer API”三元组，不是一个脱离形状的 `xavier_uniform_` 名字。
 
 ## 一、Shape 与 Fan 的定义
 
