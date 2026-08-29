@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1040" viewBox="0 0 1500 1040">
+<rect width="1500" height="1040" fill="#F7F4EE"/>
+<rect x="54" y="44" width="1392" height="84" rx="20" fill="#172033"/>
+<text x="82.0" y="82.0" font-family="Inter,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF" text-anchor="start">DEEP-CUM-01 · three regimes, no universal slogan</text>
+<text x="82.0" y="110.0" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="500" fill="#CBD5E1" text-anchor="start">interpolation/selection · invariance/capacity · kernel/feature dynamics</text>
+<rect x="54" y="154" width="1392" height="242" rx="20" fill="#FFFFFF" stroke="#D7DCE5" stroke-width="2"/>
+<circle cx="92" cy="192" r="22" fill="#2563EB"/>
+<text x="92.0" y="199.0" font-family="Inter,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF" text-anchor="middle">A</text>
+<text x="130.0" y="199.0" font-family="Inter,Arial,sans-serif" font-size="22" font-weight="700" fill="#172033" text-anchor="start">interpolation risk + selected solution</text>
+<rect x="54" y="424" width="1392" height="242" rx="20" fill="#FFFFFF" stroke="#D7DCE5" stroke-width="2"/>
+<circle cx="92" cy="462" r="22" fill="#7C3AED"/>
+<text x="92.0" y="469.0" font-family="Inter,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF" text-anchor="middle">B</text>
+<text x="130.0" y="469.0" font-family="Inter,Arial,sans-serif" font-size="22" font-weight="700" fill="#172033" text-anchor="start">parameterization stress test + norm certificate</text>
+<rect x="54" y="694" width="1392" height="242" rx="20" fill="#FFFFFF" stroke="#D7DCE5" stroke-width="2"/>
+<circle cx="92" cy="732" r="22" fill="#059669"/>
+<text x="92.0" y="739.0" font-family="Inter,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF" text-anchor="middle">C</text>
+<text x="130.0" y="739.0" font-family="Inter,Arial,sans-serif" font-size="22" font-weight="700" fill="#172033" text-anchor="start">fixed-kernel modes + moving-feature diagnostic</text>
+<rect x="92" y="226" width="620" height="126" rx="12" fill="#EFF6FF"/>
+<polyline points="116.0,330.5 248.3,327.3 325.8,316.2 360.6,256.0 398.9,246.0 423.3,307.5 458.1,317.0 513.0,319.1 590.5,318.6 688.0,317.4" fill="none" stroke="#2563EB" stroke-width="4"/>
+<circle cx="116.0" cy="330.5" r="5" fill="#2563EB"/>
+<text x="116.0" y="319.5" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="500" fill="#1D4ED8" text-anchor="middle">p=5</text>
+<circle cx="248.3" cy="327.3" r="5" fill="#2563EB"/>
+<circle cx="325.8" cy="316.2" r="5" fill="#2563EB"/>
+<circle cx="360.6" cy="256.0" r="5" fill="#2563EB"/>
+<circle cx="398.9" cy="246.0" r="5" fill="#2563EB"/>
+<text x="398.9" y="235.0" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="500" fill="#1D4ED8" text-anchor="middle">p=22</text>
+<circle cx="423.3" cy="307.5" r="5" fill="#2563EB"/>
+<circle cx="458.1" cy="317.0" r="5" fill="#2563EB"/>
+<circle cx="513.0" cy="319.1" r="5" fill="#2563EB"/>
+<circle cx="590.5" cy="318.6" r="5" fill="#2563EB"/>
+<circle cx="688.0" cy="317.4" r="5" fill="#2563EB"/>
+<text x="688.0" y="306.4" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="500" fill="#1D4ED8" text-anchor="middle">p=100</text>
+<text x="754.0" y="233.0" font-family="Inter,Arial,sans-serif" font-size="19" font-weight="700" fill="#1D4ED8" text-anchor="start">peak risk = 5.091 at p=22</text>
+<text x="754.0" y="264.0" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="500" fill="#172033" text-anchor="start">tail risk = 0.863  (second descent != zero)</text>
+<text x="754.0" y="300.0" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="500" fill="#172033" text-anchor="start">min-norm w = (0.333333,0.333333,0.666667)</text>
+<text x="754.0" y="330.0" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="500" fill="#172033" text-anchor="start">same training fit, null test gap = 2.00</text>
+<text x="754.0" y="360.0" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="700" fill="#9A3412" text-anchor="start">interpolation != benign overfitting != algorithm choice</text>
+<rect x="92" y="496" width="620" height="126" rx="12" fill="#F5F3FF"/>
+<polyline points="122.0,514.0 262.0,578.7 402.0,591.0 542.0,578.7 682.0,514.0" fill="none" stroke="#7C3AED" stroke-width="4"/>
+<circle cx="122.0" cy="514.0" r="5" fill="#7C3AED"/>
+<text x="122.0" y="618.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="500" fill="#5B21B6" text-anchor="middle">c=0.25</text>
+<circle cx="262.0" cy="578.7" r="5" fill="#7C3AED"/>
+<text x="262.0" y="618.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="500" fill="#5B21B6" text-anchor="middle">c=0.5</text>
+<circle cx="402.0" cy="591.0" r="5" fill="#7C3AED"/>
+<text x="402.0" y="618.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="500" fill="#5B21B6" text-anchor="middle">c=1</text>
+<circle cx="542.0" cy="578.7" r="5" fill="#7C3AED"/>
+<text x="542.0" y="618.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="500" fill="#5B21B6" text-anchor="middle">c=2</text>
+<circle cx="682.0" cy="514.0" r="5" fill="#7C3AED"/>
+<text x="682.0" y="618.0" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="500" fill="#5B21B6" text-anchor="middle">c=4</text>
+<text x="754.0" y="503.0" font-family="Inter,Arial,sans-serif" font-size="19" font-weight="700" fill="#6D28D9" text-anchor="start">same f: ab=1; sharpness 2.000 -&gt; 16.062</text>
+<text x="754.0" y="537.0" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="500" fill="#172033" text-anchor="start">path quantity = 1.000 under reciprocal rescaling</text>
+<text x="754.0" y="571.0" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="500" fill="#172033" text-anchor="start">spectral complexity = 3.437</text>
+<text x="754.0" y="601.0" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="500" fill="#172033" text-anchor="start">margin/sqrt(n) certificate scale = 0.687</text>
+<text x="754.0" y="631.0" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="700" fill="#9A3412" text-anchor="start">raw sharpness correlation != invariant explanation</text>
+<rect x="92" y="766" width="620" height="126" rx="12" fill="#ECFDF5"/>
+<polyline points="118.0,784.0 212.7,830.3 307.3,851.0 402.0,860.4 496.7,864.6 591.3,866.5 686.0,867.3" fill="none" stroke="#059669" stroke-width="4"/>
+<text x="682.0" y="859.3" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="500" fill="#059669" text-anchor="end">fast λ+</text>
+<polyline points="118.0,784.0 212.7,799.2 307.3,811.7 402.0,821.9 496.7,830.3 591.3,837.1 686.0,842.7" fill="none" stroke="#D97706" stroke-width="4"/>
+<text x="682.0" y="834.7" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="500" fill="#D97706" text-anchor="end">slow λ−</text>
+<text x="754.0" y="773.0" font-family="Inter,Arial,sans-serif" font-size="19" font-weight="700" fill="#047857" text-anchor="start">K eigenvalues = (1.60, 0.40)</text>
+<text x="754.0" y="807.0" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="500" fill="#172033" text-anchor="start">||r(0)||=1.000 -&gt; ||r(t)||=0.213</text>
+<text x="754.0" y="841.0" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="500" fill="#172033" text-anchor="start">particle prediction 0.375 -&gt; 0.449</text>
+<text x="754.0" y="871.0" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="500" fill="#172033" text-anchor="start">feature drift=0.325; NTK drift=0.085; feature-moving</text>
+<text x="754.0" y="901.0" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="700" fill="#9A3412" text-anchor="start">training dynamics != population generalization</text>
+<rect x="54" y="956" width="1392" height="54" rx="16" fill="#172033"/>
+<text x="750.0" y="980.0" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="600" fill="#E2E8F0" text-anchor="middle">object · quantifier · invariance · regime · theorem · proxy · counterexample · open boundary</text>
+<text x="750.0" y="1001.0" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="500" fill="#94A3B8" text-anchor="middle">A curve is evidence about its fixture—not a universal law of deep learning.</text>
+</svg>

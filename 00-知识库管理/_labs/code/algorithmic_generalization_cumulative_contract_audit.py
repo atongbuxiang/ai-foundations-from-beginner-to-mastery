@@ -419,13 +419,13 @@ def audit_state_surfaces() -> None:
         require("ALG-CUM-01" in content, f"state surface misses ALG-CUM-01: {path.relative_to(ROOT)}")
         require("not-attempted" in content, f"state surface misses learner boundary: {path.relative_to(ROOT)}")
         require(
-            "9/10" in content or "9 / 10" in content or path == MOC,
-            f"state surface misses 9/10 material count: {path.relative_to(ROOT)}",
+            "10/10" in content or "10 / 10" in content or path == MOC,
+            f"state surface misses 10/10 material count: {path.relative_to(ROOT)}",
         )
     chapter_moc = read(MOC)
     require("regression-passed" in chapter_moc, "chapter MOC misses material state")
     require("0/8 经真实作答验收" in chapter_moc, "chapter learner count changed")
-    print("PASS state surfaces: ALG-CUM-01 synchronized, current material=9/10 and learner=not-attempted")
+    print("PASS state surfaces: ALG-CUM-01 synchronized, current material=10/10 and learner=not-attempted")
 
 
 def main() -> None:

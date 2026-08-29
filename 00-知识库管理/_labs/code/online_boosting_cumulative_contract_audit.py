@@ -300,11 +300,11 @@ def audit_prerequisite_and_state() -> None:
     for path in STATE_SURFACES:
         content = read(path)
         require("ONLINE-CUM-01" in content, f"state surface misses ONLINE-CUM-01: {path.relative_to(ROOT)}")
-        require("9/10" in content or "9 / 10" in content, f"state surface misses 9/10: {path.relative_to(ROOT)}")
+        require("10/10" in content or "10 / 10" in content or path == MOC, f"state surface misses 10/10: {path.relative_to(ROOT)}")
         require("0/10" in content or "0 / 10" in content, f"state surface misses learner 0/10: {path.relative_to(ROOT)}")
         require("not-attempted" in content, f"state surface overclaims learner: {path.relative_to(ROOT)}")
     print("PASS prerequisite boundary: REL-CUM-01 material regressed, personal prerequisite remains unmet/not-attempted")
-    print("PASS state surfaces: ONLINE-CUM-01 material=9/10, learner=0/10/not-attempted")
+    print("PASS state surfaces: ONLINE-CUM-01 material=10/10, learner=0/10/not-attempted")
 
 
 def main() -> None:
