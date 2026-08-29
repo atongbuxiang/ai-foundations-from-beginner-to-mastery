@@ -72,9 +72,10 @@ updated: 2026-08-29
 - 第九波 NN-33—36 以 $\mathcal N_\square$ 的 $3\times3$ activation tensor 贯通归一化轴、BatchNorm biased/unbiased 状态双链、train/eval 分叉与 BN/LN 同形 VJP 的跨样本/跨 feature 语义；
 - 第十波 NN-37—40 延伸 $\mathcal N_\square$：用 RMSNorm 的非零梯度和、IN/GN 的轴分组与 WeightNorm 切空间、Pre/Post-Norm 的 identity rail，以及跨设备 $M_2$ 合并与 prefix intervention 完成 30.5；
 - 第十一波 NN-41—44 以 $\mathcal R_\square$ 的二维线性系统贯通 residual state sum、$I+J_F$ 的方向干涉、固定 horizon 的 Euler 深度加密，以及 Lipschitz worst-case budget 与真实 gain 的差距；
-- 当前语义：现行迁移 **44/64**，材料门 **5/8**，30.6 前半卷 `in-progress`，NN-45—64 **20/64 pending**，个人 `not-attempted`；
+- 第十二波 NN-45—48 延伸 $\mathcal R_\square$：用 Pre/Post 放置的 rank-2→1 反例、add/Highway/concat 对象差异、ReZero 首步 gate 梯度、Fixup/DeepNorm 缩放账本，以及正权路径与符号抵消的双镜头完成 30.6；
+- 当前语义：现行迁移 **48/64**，材料门 **6/8**，30.1—30.6 `regression-passed`，NN-49—64 **16/64 pending**，个人 `not-attempted`；
 - 旧[[实验 - 神经网络基础累计复现门]]和 `NN-CUM-01` 保留为 `composed` 历史材料，待 64 节迁移与分卷证据门建成后重新升级；
-- 下一施工点：NN-45—48，完成 30.6 的放置、skip 谱系、超深缩放与证据地图。
+- 下一施工点：NN-49—52，开始 30.7 的 embedding lookup、稀疏更新、权重共享与输出参数化。
 
 ## 第四章确定性架构审计
 

@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, transformers, residual-scaling, initialization]
 source_type: paper
 title: "DeepNet: Scaling Transformers to 1,000 Layers"
@@ -9,14 +9,14 @@ year: 2022
 url: "https://arxiv.org/abs/2203.00555"
 doi: "https://doi.org/10.1109/TPAMI.2024.3386927"
 venue: "arXiv 2022；IEEE TPAMI 2024"
-accessed: 2026-08-23
+accessed: 2026-08-29
 source_tier: A
 license: "author preprint/final article metadata；本库仅保存独立摘要、必要公式与链接"
 scope_role: core
 temporal_role: modern-foundational
 related: ["[[ReZero、Fixup、DeepNorm 与深网缩放]]", "[[Pre-Norm、Post-Norm 与归一化放置]]", "[[残差缩放、Lipschitz 界与深度稳定性]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # Wang et al.：DeepNet 与 DeepNorm
@@ -58,4 +58,3 @@ decoder-only 的 $M$ 层同形；encoder–decoder 两侧使用不同公式，�
 ## 课程调用边界
 
 本卡支持复现论文参数化和说明“控制 parameter update”不同于“使 state Jacobian 为 $I$”。最终训练稳定与精度仍需模型、优化器、精度和系统证据。
-

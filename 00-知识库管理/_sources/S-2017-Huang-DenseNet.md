@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, dense-connectivity, convolutional-networks]
 source_type: paper
 title: "Densely Connected Convolutional Networks"
@@ -8,14 +8,14 @@ author: "Gao Huang; Zhuang Liu; Laurens van der Maaten; Kilian Q. Weinberger"
 year: 2017
 url: "https://openaccess.thecvf.com/content_cvpr_2017/html/Huang_Densely_Connected_Convolutional_CVPR_2017_paper.html"
 venue: "CVPR 2017"
-accessed: 2026-08-23
+accessed: 2026-08-29
 source_tier: A
 license: "CVF open-access paper；本库仅保存独立摘要、必要公式与链接"
 scope_role: core
 temporal_role: foundational
 related: ["[[Highway、Dense Connection 与 Skip 结构比较]]", "[[残差学习、恒等捷径与退化问题]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # Huang et al.：DenseNet
@@ -49,4 +49,3 @@ $$
 ## 本库使用边界
 
 “feature reuse”是结构动机与实验解释，不是每个旧坐标都被后层有效使用的定理。拼接保留坐标身份，但混合、压缩与舍弃仍由后续算子决定。
-

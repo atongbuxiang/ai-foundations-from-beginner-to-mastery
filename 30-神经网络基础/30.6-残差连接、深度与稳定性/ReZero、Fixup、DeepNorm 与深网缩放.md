@@ -11,13 +11,153 @@ exercises: ["[[习题 - ReZero、Fixup、DeepNorm 与深网缩放]]"]
 solutions: ["[[解答 - ReZero、Fixup、DeepNorm 与深网缩放]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-ultradeep-scaling-methods-v2.svg]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # ReZero、Fixup、DeepNorm 与深网缩放
 
 > [!abstract] 本章主问题
 > ReZero、Fixup 与 DeepNorm 都试图控制极深网络的初始化或更新，但作用对象不同：ReZero 用零初始化的运行时 gate 令状态映射从恒等开始；Fixup 在无归一化 residual network 中对 branch 权重做深度缩放并把末层置零；DeepNorm 在 Post-LN Transformer 中同时使用运行时 shortcut 系数 $\alpha$ 与指定权重的初始化系数 $\beta$。比较它们必须分开 state Jacobian、parameter gradient、parameter update 和 normalization 合同。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-44 给出 $\sum|\alpha_\ell|L_\ell$ 的一般尺度账，NN-45 固定了 placement，NN-32 已介绍 Fixup 的完整 recipe；
+- **本页解决什么：** 把 ReZero、Fixup 与 DeepNorm 分别放入 forward state、state Jacobian、parameter gradient、parameter update 四本账，防止仅凭“都有 depth scale”混搭；
+- **后续为何需要：** NN-48 将把这些方法的理论对象和实验结论放入统一证据梯，区分初始化证书与训练全程事实。
+
+**第一遍只问 scale 乘在哪里。** ReZero 乘 branch output 且从 0 学；Fixup 缩初始化权重并 zero-last；DeepNorm 在 Post-LN 中运行时缩 shortcut、初始化时缩指定 branch weights。
+
+**第二遍再追第一步学习。** 分别计算 state Jacobian、gate/末层/早层梯度、相对 update，并核对 normalization、架构位置与论文深度变量。
+
+### 问题链
+
+1. ReZero 为何在初始化时 state Jacobian 为 $I$，branch 参数梯度却为 0？
+2. zero-last Fixup 为什么末层能先学，而更早 branch 层暂时没有梯度？
+3. Fixup 的 $L^{-1/(2m-2)}$ 控制哪个链式幅度？
+4. DeepNorm 的运行时 $\alpha$ 与初始化 $\beta$ 为什么不能合成一个系数理解？
+5. 两种 recipe 偶然出现相同数值时，怎样证明它们仍是不同方法？
+
+> [!check] 第一遍停靠线
+> 若你能在 $\mathcal R_\square$ 上算出 ReZero 的 gate gradient $-9/5$、Fixup 的 $L=4,m=3$ 缩放 $1/\sqrt2$，并得到 encoder-only DeepNorm 的 $\alpha=2^{3/4},\beta=2^{-5/4}$，就已掌握本页主干。
+
+## 符号与对象账本
+
+| 方法/量 | 乘在哪里 | 初始化时是否仍在前向 | 第一时刻主要学习对象 |
+|---|---|---|---|
+| ReZero $\rho_\ell$ | branch output | $\rho_\ell=0$，stack 为 identity | gate 先学，branch 参数被 $\rho$ 阻断 |
+| Fixup $s_L$ | branch 内非末层 weights | 缩放后的特征存在，末层 output 为 0 | zero-last 先学 |
+| Fixup scalar bias/multiplier | branch 内指定位置 | 按 recipe 初始化 | 补平移/尺度自由度 |
+| DeepNorm $\alpha$ | Post-LN residual shortcut | 训练与推理始终存在 | 固定，不由 optimizer 学 |
+| DeepNorm $\beta$ | 指定 weights 的 initialization | 之后只是参数初值 | 参数正常学习 |
+
+### 贯穿算例 $\mathcal R_\square$：同一个数字可以来自三本不同的账
+
+仍取
+
+$$
+A=\operatorname{diag}\left(\frac15,-2\right),
+\qquad
+x=(1,-1)^{\mathsf T},
+\qquad
+g=(1,-1)^{\mathsf T}.
+$$
+
+#### ReZero：先开 gate
+
+令
+
+$$
+x^+=x+\rho Ax,
+\qquad
+\rho(0)=0.
+$$
+
+由于
+
+$$
+Ax=\left(\frac15,2\right)^{\mathsf T},
+$$
+
+初始化时
+
+$$
+x^+=x,
+\qquad
+J_x=I,
+\qquad
+\nabla_\theta L=0,
+$$
+
+但 gate gradient 为
+
+$$
+\boxed{
+\frac{\partial L}{\partial\rho}
+=g^{\mathsf T}Ax
+=\frac15-2
+=-\frac95
+}.
+$$
+
+无动量 SGD、$\eta=0.01$ 会给出 $\rho^+=0.018$；随后 branch parameters 才获得非零 scale。
+
+#### Fixup：缩初始化链并让末层先学
+
+取 $L=4$ 个 residual branches、每个 branch 有 $m=3$ 个 weight layers。非末层的附加 amplitude scale 是
+
+$$
+s_{\mathrm{Fixup}}
+=L^{-1/(2m-2)}
+=4^{-1/4}
+=\frac1{\sqrt2}.
+$$
+
+两个非末层相乘的 branch amplitude scale 为
+
+$$
+s_{\mathrm{Fixup}}^{m-1}=\frac12=L^{-1/2},
+$$
+
+平方尺度为 $1/4$。末层置零使 branch output 初始为 0，但末层对已有 hidden features 的梯度通常非零。
+
+#### DeepNorm：运行时 shortcut 与初始化 branch 分账
+
+对 encoder-only $N=4$：
+
+$$
+\alpha_{\mathrm{DN}}=(2N)^{1/4}=8^{1/4}=2^{3/4}\approx1.681793,
+$$
+
+$$
+\beta_{\mathrm{DN}}=(8N)^{-1/4}=32^{-1/4}=2^{-5/4}\approx0.420448.
+$$
+
+恰有
+
+$$
+\alpha_{\mathrm{DN}}\beta_{\mathrm{DN}}
+=2^{-1/2}
+=\frac1{\sqrt2}
+=s_{\mathrm{Fixup}}.
+$$
+
+这个数值巧合不表示方法等价：DeepNorm 的 $\alpha$ 运行时乘 shortcut，$\beta$ 只初始化指定 FFN/value/output weights，并且最外层仍有 Post-LN；Fixup 的 $1/\sqrt2$ 直接缩无 normalization branch 内的非末层 weights。
+
+## 核心公式七问：四本深度账
+
+| 问题 | 本页的回答 |
+|---|---|
+| 目的 | 比较超深方法究竟控制 state、state Jacobian、parameter gradient 还是 parameter update |
+| 对象 | 完整 recipe 加架构/normalization/optimizer 合同，不是孤立 scale 数字 |
+| 来路 | 对每种前向式分别求 state 与 parameter differentials，再读原论文深度参数化 |
+| 步骤 | 定 placement→定位 scale→算 step-0 map/Jacobian→算各参数梯度→追训练后变化 |
+| 读法 | 相同数值若乘在不同对象、存在于不同生命周期，就不具有相同语义 |
+| 检查 | step-0 identity、gate/末层/早层梯度、branch ratio、update ratio 与原 recipe 对照 |
+| 去路 | ultra-deep Transformer/CNN、初始化消融、mup/DeepNorm 与稳定性证据地图 |
+
+### AI / 系统对应
+
+复现实验必须报告 layer/branch count 定义、Pre/Post placement、norm 类型、哪些 weights 乘 scale、gate/zero-last 初始化、optimizer 与 warm-up。把 ReZero、Fixup、DeepNorm 任意叠加会同时改变多个机制；若要研究组合方法，应把它作为新参数化，重新建立 step-0 梯度和训练全程的消融证据。
 
 ## 一、学习目标
 

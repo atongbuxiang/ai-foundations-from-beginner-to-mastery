@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, residual-networks, effective-paths]
 source_type: paper
 title: "Residual Networks Behave Like Ensembles of Relatively Shallow Networks"
@@ -8,14 +8,14 @@ author: "Andreas Veit; Michael Wilber; Serge Belongie"
 year: 2016
 url: "https://proceedings.neurips.cc/paper_files/paper/2016/hash/37bc2f75bf1bcfe8450a1a41c200364c-Abstract.html"
 venue: "NeurIPS 2016"
-accessed: 2026-08-23
+accessed: 2026-08-29
 source_tier: A
 license: "NeurIPS paper；本库仅保存独立摘要、必要数字与链接"
 scope_role: core
 temporal_role: foundational
 related: ["[[深度、有效路径与稳定性证据地图]]", "[[残差块 Jacobian 与梯度直通]]", "[[Highway、Dense Connection 与 Skip 结构比较]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # Veit、Wilber、Belongie：Residual Paths
@@ -39,4 +39,3 @@ updated: 2026-08-23
 | VP-C2 | 所有路径都是独立训练的浅层网络 | 结构外推 | 参数、状态和输出聚合高度耦合 | 错误 |
 | VP-C3 | 论文删除实验支持 ensemble-like 鲁棒性解释 | 经验 | 指定 ResNet 与协议 | 有条件支持 |
 | VP-C4 | 有效路径长度是架构唯一常数 | 动态外推 | 参数、数据、损失、训练时间均会改变贡献 | 错误 |
-

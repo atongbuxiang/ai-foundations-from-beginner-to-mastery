@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, residual-networks, initialization, transformers]
 source_type: paper
 title: "ReZero is All You Need: Fast Convergence at Large Depth"
@@ -8,14 +8,14 @@ author: "Thomas Bachlechner; Bodhisattwa Prasad Majumder; Huanru Henry Mao; Garr
 year: 2021
 url: "https://proceedings.mlr.press/v161/bachlechner21a.html"
 venue: "UAI 2021, PMLR 161"
-accessed: 2026-08-23
+accessed: 2026-08-29
 source_tier: A
 license: "PMLR paper；本库仅保存独立摘要、必要公式与链接"
 scope_role: core
 temporal_role: modern-foundational
 related: ["[[ReZero、Fixup、DeepNorm 与深网缩放]]", "[[正交初始化与 Dynamical Isometry]]", "[[残差缩放、Lipschitz 界与深度稳定性]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # Bachlechner et al.：ReZero
@@ -59,4 +59,3 @@ $$
 ## 失败边界
 
 若 $F_\ell(x_\ell)$ 也被构造为精确零，则 $\partial\mathcal L/\partial\alpha_\ell$ 可能同时为零，形成第一步死锁。零初始化必须沿计算图逐参数审计。
-

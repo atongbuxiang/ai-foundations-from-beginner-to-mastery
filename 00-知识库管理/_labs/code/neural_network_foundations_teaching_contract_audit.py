@@ -23,7 +23,7 @@ SOLUTIONS = LABS / "solutions"
 CODE = LABS / "code"
 FIGURE_AUDITOR = CODE / "audit-markdown-figure-units.mjs"
 ASSET_DIR = ROOT / "00-知识库管理" / "_assets" / "figures" / "neural-networks"
-MIGRATED_IDS = tuple(range(1, 45))
+MIGRATED_IDS = tuple(range(1, 49))
 
 STATE_SURFACES = (
     CHAPTER / "神经网络基础 MOC.md",
@@ -212,7 +212,7 @@ def audit_migrated_contract(nodes: list[tuple[int, Path, str]]) -> None:
         require(fixture in content, f"{relative}: shared teaching fixture missing: {fixture}")
         require("AI" in content, f"{relative}: AI object mapping missing")
         require(len(content.splitlines()) >= 180, f"{relative}: derivation depth unexpectedly short")
-    print("PASS NN teaching migration waves A--K: NN-01--44 course position/two-pass/problem/object/formula contracts=44/44")
+    print("PASS NN teaching migration waves A--L: NN-01--48 course position/two-pass/problem/object/formula contracts=48/48")
 
 
 def audit_wave_c_fixture(nodes: list[tuple[int, Path, str]]) -> None:
@@ -719,6 +719,71 @@ def audit_wave_k_fixture(nodes: list[tuple[int, Path, str]]) -> None:
     print("PASS NN wave-K independent math: residual state sum; one/four-block VJP; Euler depth refinement; Lipschitz bound looseness exact")
 
 
+def audit_wave_l_fixture(nodes: list[tuple[int, Path, str]]) -> None:
+    """Recompute the NN-45--48 placement/skip/scaling/path evidence chain."""
+    branch = (1.0 / 20.0, -1.0 / 2.0)
+    multiplier = (21.0 / 20.0, 1.0 / 2.0)
+    probe = (1.0, -1.0)
+    branch_output = tuple(branch[i] * probe[i] for i in range(2))
+    pre_output = tuple(multiplier[i] * probe[i] for i in range(2))
+    post_output = (max(pre_output[0], 0.0), max(pre_output[1], 0.0))
+    post_jacobian = (multiplier[0], 0.0)
+    require(branch_output == (1.0 / 20.0, 1.0 / 2.0), f"NN wave-L branch probe drifted: {branch_output}")
+    require(pre_output == (21.0 / 20.0, -1.0 / 2.0) and post_output == (21.0 / 20.0, 0.0), "NN wave-L Pre/Post output contrast drifted")
+    require(sum(value != 0.0 for value in multiplier) == 2 and sum(value != 0.0 for value in post_jacobian) == 1, "NN wave-L placement rank contrast drifted")
+    upstream = (1.0, 1.0)
+    pre_vjp = tuple(multiplier[i] * upstream[i] for i in range(2))
+    post_vjp = tuple(post_jacobian[i] * upstream[i] for i in range(2))
+    require(pre_vjp == (21.0 / 20.0, 1.0 / 2.0) and post_vjp == (21.0 / 20.0, 0.0), "NN wave-L placement VJP drifted")
+
+    transform_gate = 1.0 / 4.0
+    highway_output = tuple(probe[i] + transform_gate * branch_output[i] for i in range(2))
+    highway_jacobian = tuple(1.0 + transform_gate * branch[i] for i in range(2))
+    concat_output = probe + branch_output
+    require(pre_output == (21.0 / 20.0, -1.0 / 2.0), "NN wave-L additive skip drifted")
+    require(highway_output == (81.0 / 80.0, -7.0 / 8.0), f"NN wave-L Highway output drifted: {highway_output}")
+    require(highway_jacobian == (81.0 / 80.0, 7.0 / 8.0), f"NN wave-L Highway Jacobian drifted: {highway_jacobian}")
+    require(concat_output == (1.0, -1.0, 1.0 / 20.0, 1.0 / 2.0) and len(concat_output) == 4, "NN wave-L concatenation object/shape drifted")
+
+    linear_map = (1.0 / 5.0, -2.0)
+    residual_direction = tuple(linear_map[i] * probe[i] for i in range(2))
+    loss_seed = (1.0, -1.0)
+    rezero_gate_gradient = sum(loss_seed[i] * residual_direction[i] for i in range(2))
+    rezero_after_sgd = -0.01 * rezero_gate_gradient
+    fixup_scale = 4.0 ** (-1.0 / 4.0)
+    fixup_branch_amplitude = fixup_scale ** 2
+    deepnorm_alpha = 8.0 ** (1.0 / 4.0)
+    deepnorm_beta = 32.0 ** (-1.0 / 4.0)
+    require(residual_direction == (1.0 / 5.0, 2.0), "NN wave-L ReZero residual direction drifted")
+    require(abs(rezero_gate_gradient + 9.0 / 5.0) < 1e-15 and abs(rezero_after_sgd - 0.018) < 1e-15, "NN wave-L ReZero gate update drifted")
+    require(abs(fixup_scale - 1.0 / math.sqrt(2.0)) < 1e-15 and abs(fixup_branch_amplitude - 1.0 / 2.0) < 1e-15, "NN wave-L Fixup scale drifted")
+    require(abs(deepnorm_alpha - 2.0 ** (3.0 / 4.0)) < 1e-15 and abs(deepnorm_beta - 2.0 ** (-5.0 / 4.0)) < 1e-15, "NN wave-L DeepNorm factors drifted")
+    require(abs(deepnorm_alpha * deepnorm_beta - fixup_scale) < 1e-15, "NN wave-L equal-number/different-role comparison drifted")
+
+    positive_terms = (1.0, 1.0 / 5.0, 3.0 / 200.0, 1.0 / 2000.0, 1.0 / 160000.0)
+    positive_sum = sum(positive_terms)
+    path_probability = 1.0 / 21.0
+    path_mean = 4.0 * path_probability
+    path_variance = 4.0 * path_probability * (1.0 - path_probability)
+    signed_terms = (1.0, -2.0, 3.0 / 2.0, -1.0 / 2.0, 1.0 / 16.0)
+    signed_sum = sum(signed_terms)
+    signed_absolute_sum = sum(abs(value) for value in signed_terms)
+    require(abs(positive_sum - 194481.0 / 160000.0) < 1e-15, "NN wave-L positive path expansion drifted")
+    require(abs(path_mean - 4.0 / 21.0) < 1e-15 and abs(path_variance - 80.0 / 441.0) < 1e-15, "NN wave-L normalized path moments drifted")
+    require(abs(signed_sum - 1.0 / 16.0) < 1e-15 and signed_absolute_sum == 5.0625, "NN wave-L cancellation witness drifted")
+
+    wave = {node_id: content for node_id, _, content in nodes if 45 <= node_id <= 48}
+    expected_markers = {
+        45: ("\\operatorname{rank}(J_{\\mathrm{post}})=1", "J_{\\mathrm{post}}=DM"),
+        46: ("\\frac{81}{80}", "\\mathbb R^{4\\times2}"),
+        47: ("-\\frac95", "\\alpha_{\\mathrm{DN}}\\beta_{\\mathrm{DN}}"),
+        48: ("\\frac{80}{441}", "5.0625"),
+    }
+    for node_id, markers in expected_markers.items():
+        require(all(marker in wave[node_id] for marker in markers), f"NN-{node_id:02d}: wave-L numeric/evidence closure missing")
+    print("PASS NN wave-L independent math: placement rank/VJP; add/Highway/concat objects; ReZero/Fixup/DeepNorm scales; positive and cancelling path sums exact")
+
+
 def question_ids(content: str) -> list[str]:
     return re.findall(r"^###\s+([^\s]+-[A-E]\d{2})\s*$", content, re.M)
 
@@ -876,12 +941,12 @@ def audit_state_surfaces() -> None:
     for path in STATE_SURFACES:
         content = read(path)
         require(audit_name in content, f"state surface misses NN audit: {path.relative_to(ROOT)}")
-        migrated_mentions = content.count("44/64") + content.count("44 / 64")
-        pending_mentions = content.count("20/64") + content.count("20 / 64")
+        migrated_mentions = content.count("48/64") + content.count("48 / 64")
+        pending_mentions = content.count("16/64") + content.count("16 / 64")
         require(migrated_mentions >= 1 and pending_mentions >= 1, f"state surface misses NN migrated/pending counts: {path.relative_to(ROOT)}")
-        require("5/8" in content or "5 / 8" in content, f"state surface misses NN material-gate count: {path.relative_to(ROOT)}")
+        require("6/8" in content or "6 / 8" in content, f"state surface misses NN material-gate count: {path.relative_to(ROOT)}")
         require("not-attempted" in content, f"state surface overclaims NN learner: {path.relative_to(ROOT)}")
-    print("PASS NN state surfaces: 5 global + 6 volume views agree on migrated=44/64, pending=20/64, material gates=5/8, learner=not-attempted")
+    print("PASS NN state surfaces: 5 global + 6 volume views agree on migrated=48/64, pending=16/64, material gates=6/8, learner=not-attempted")
 
 
 def main() -> None:
@@ -901,6 +966,7 @@ def main() -> None:
     audit_wave_i_fixture(nodes)
     audit_wave_j_fixture(nodes)
     audit_wave_k_fixture(nodes)
+    audit_wave_l_fixture(nodes)
     audit_exercises(nodes, index)
     audit_sources_and_links(nodes, index)
     audit_figures(nodes, index)
@@ -908,8 +974,8 @@ def main() -> None:
     audit_state_surfaces()
     if args.run_figures:
         audit_deterministic_figures()
-    print("NN-01--44 teaching migration regression: PASS; 30.1--30.5 material gates=5/8; 30.6 front half=in-progress")
-    print("NN-45--64 teaching migration: pending (20/64)")
+    print("NN-01--48 teaching migration regression: PASS; 30.1--30.6 material gates=6/8")
+    print("NN-49--64 teaching migration: pending (16/64)")
     print("PERSONAL LEARNING STATUS: not-attempted")
 
 

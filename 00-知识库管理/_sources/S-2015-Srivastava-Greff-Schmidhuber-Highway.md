@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, highway-networks, gating]
 source_type: paper
 title: "Highway Networks"
@@ -8,14 +8,14 @@ author: "Rupesh Kumar Srivastava; Klaus Greff; Jürgen Schmidhuber"
 year: 2015
 url: "https://arxiv.org/abs/1505.00387"
 venue: "arXiv:1505.00387"
-accessed: 2026-08-23
+accessed: 2026-08-29
 source_tier: A
 license: "author preprint；本库仅保存独立摘要、必要公式与链接"
 scope_role: core
 temporal_role: foundational
 related: ["[[Highway、Dense Connection 与 Skip 结构比较]]", "[[GLU、GeGLU、SwiGLU 与乘性门]]", "[[残差学习、恒等捷径与退化问题]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # Srivastava、Greff、Schmidhuber：Highway Networks

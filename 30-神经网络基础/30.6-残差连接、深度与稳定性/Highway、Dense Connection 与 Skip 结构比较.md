@@ -11,13 +11,131 @@ exercises: ["[[习题 - Highway、Dense Connection 与 Skip 结构比较]]"]
 solutions: ["[[解答 - Highway、Dense Connection 与 Skip 结构比较]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-skip-fusion-taxonomy-v2.svg]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # Highway、Dense Connection 与 Skip 结构比较
 
 > [!abstract] 本章主问题
 > “有一条跳连”不足以定义架构。加法 residual、Highway 门控、DenseNet 拼接和 encoder–decoder long skip 分别通过求和、逐坐标插值、状态扩张与跨尺度传输融合信息，因此具有不同的 shape 合同、Jacobian、参数/激活成本和失效方式。统一比较必须先写 source–transform–fusion–state 五元组。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-41—45 研究的 shortcut 主要是同 shape addition，并已说明 projection 与 postprocess 会改写 identity rail；
+- **本页解决什么：** 把 add、input-dependent interpolation、concatenation 与 cross-scale transfer 放入同一个五元组，比较它们保留坐标和支付成本的方式；
+- **后续为何需要：** effective path、超深 scaling 与系统 latency 都依赖 fusion topology，不能把所有视觉上的跨层边都叫作 residual path。
+
+**第一遍只比较 fusion。** 对同一个 $x$ 和 branch $Bx$，分别做 addition、常数 Highway gate 与 concatenation，写出输出 shape 和 Jacobian。
+
+**第二遍再加入真实成本。** 恢复 gate derivative、DenseNet growth/compression、U-Net resize/alignment，并分开参数量、activation memory、memory traffic 与 critical path。
+
+### 问题链
+
+1. addition 为什么要求坐标对齐并保持宽度？
+2. Highway gate 依赖输入时，为什么 Jacobian 不只是两支 Jacobian 的凸组合？
+3. concatenation 为什么保留两支坐标，却把宽度增长交给后层处理？
+4. long skip 的 resize/crop/projection 如何影响可逆性与梯度？
+5. 图上的路径数为何不等于独立模型数、有效梯度路径或并行加速？
+
+> [!check] 第一遍停靠线
+> 若你能在 $\mathcal R_\square$ 上算出 additive 输出 $(21/20,-1/2)$、$T=1/4$ Highway 输出 $(81/80,-7/8)$，以及 concat 输出 $(1,-1,1/20,1/2)$ 与其 shape，就已掌握本页主干。
+
+## 符号与对象账本
+
+| 对象 | 问题 | 典型选择 | 必须记录的成本 |
+|---|---|---|---|
+| source | 信息从哪里跨来 | same-scale / encoder stage / early feature | 保存多久、跨多远 |
+| transform | 跳连上做什么 | $I$、projection、gate、resize | 参数/FLOPs/数值损失 |
+| fusion | 怎样合并 | add、interpolate、concat、cross-attend | width 与 memory traffic |
+| state shape | 合并后状态是什么 | 固定、增长、压缩、多尺度 | 后续 layer contract |
+| cost | 系统真正支付什么 | activation、bandwidth、critical path | 不只参数量 |
+
+### 贯穿算例 $\mathcal R_\square$：同一 source 与 branch，三种融合不是同一函数
+
+取
+
+$$
+x=(1,-1)^{\mathsf T},
+\qquad
+Bx=\left(\frac1{20},\frac12\right)^{\mathsf T},
+\qquad
+H(x)=x+Bx=Mx.
+$$
+
+**Additive residual：**
+
+$$
+y_{\mathrm{add}}=x+Bx
+=\left(\frac{21}{20},-\frac12\right),
+\qquad
+J_{\mathrm{add}}=I+B.
+$$
+
+输出仍在 $\mathbb R^2$，两支坐标被强制相加。
+
+**Highway interpolation：** 暂取常数 gate $T=1/4$，以隔离 fusion 本身：
+
+$$
+\begin{aligned}
+y_{\mathrm{highway}}
+&=T H(x)+(1-T)x\\
+&=x+\frac14Bx
+=\left(\frac{81}{80},-\frac78\right),
+\end{aligned}
+$$
+
+$$
+J_{\mathrm{highway}}
+=I+\frac14B
+=\operatorname{diag}\left(\frac{81}{80},\frac78\right).
+$$
+
+若 $T=T(x)$，还必须加
+
+$$
+\operatorname{Diag}(H(x)-x)J_T(x);
+$$
+
+常数 gate 结果不能冒充完整 Highway Jacobian。
+
+**Dense concatenation：**
+
+$$
+y_{\mathrm{concat}}
+=\begin{bmatrix}x\\Bx\end{bmatrix}
+=\left(1,-1,\frac1{20},\frac12\right)^{\mathsf T}
+\in\mathbb R^4,
+$$
+
+$$
+J_{\mathrm{concat}}
+=\begin{bmatrix}I\\B\end{bmatrix}
+\in\mathbb R^{4\times2}.
+$$
+
+它没有把 source 与 branch 压进同一坐标，而是把宽度与 activation storage 增长交给后续层。三种方法虽都“保留旧信息”，但表示空间、Jacobian 和系统成本不同。
+
+## 核心公式七问：skip 五元组
+
+$$
+\boxed{
+(\text{source},\ \text{transform},\ \text{fusion},\ \text{state shape},\ \text{cost})
+}.
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 在推导或比较前完整定义一条 skip connection |
+| 对象 | 任意同尺度、跨层或跨尺度的信息路径 |
+| 来路 | 把“有连线”拆成数据来源、变换、合并、输出对象和系统代价 |
+| 步骤 | 标 source→写 transform→写 fusion 方程→核 shape→算参数/激活/流量/串行性 |
+| 读法 | fusion 决定 Jacobian 组合方式，state shape 决定后续网络所见坐标 |
+| 检查 | shape/unit test、gate derivative、alignment intervention、peak-memory 与 latency profile |
+| 去路 | DenseNet/U-Net/Highway、cross-scale features、effective paths 与 architecture search |
+
+### AI / 系统对应
+
+Dense/long skips 可能减少信息重构，却增加 activation residency 与 memory bandwidth；Highway gate 提供数据依赖 routing，却可能饱和或产生额外相消；addition 成本低但要求语义/尺度对齐。公平消融必须同时匹配参数、FLOPs、peak memory、resolution 与 wall time，而不是只匹配 block 数。
 
 ## 一、学习目标
 

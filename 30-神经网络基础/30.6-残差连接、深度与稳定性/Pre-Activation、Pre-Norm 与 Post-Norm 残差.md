@@ -11,13 +11,135 @@ exercises: ["[[习题 - Pre-Activation、Pre-Norm 与 Post-Norm 残差]]"]
 solutions: ["[[解答 - Pre-Activation、Pre-Norm 与 Post-Norm 残差]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-residual-placement-contract-v2.svg]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # Pre-Activation、Pre-Norm 与 Post-Norm 残差
 
 > [!abstract] 本章主问题
 > “把激活或归一化放在残差相加之前还是之后”会改变整块 Jacobian 的乘法顺序。full pre-activation CNN 与 Transformer Pre-Norm 都保留显式 $I$，而 post-activation/Post-Norm 会把残差和整体交给后置算子的 Jacobian；但两组术语的内部算子、归约轴、状态语义和训练—推理行为不同，不能因公式外壳相似就视为同一种架构。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-39 已比较 Transformer Pre/Post-Norm，NN-41—44 已建立无后置算子的 residual/Jacobian/ODE 主链；
+- **本页解决什么：** 用统一 $Q(S(x)+F(P(x)))$ 合同加入 activation、normalization 与 projection，判断 identity rail 是否在 block 出口前被过滤；
+- **后续为何需要：** skip 拓扑与超深缩放只有在 placement 固定后才可比较，否则相同 scale 会乘到不同 Jacobian 路径。
+
+**第一遍只找最外层算子。** 把完整前向括号写清楚；若 residual sum 外还有 ReLU/Norm，就让其 Jacobian 左乘整个 shortcut-plus-branch。
+
+**第二遍再比较架构。** 区分 CNN BatchNorm/ReLU 的 state/mode 与 Transformer token norm，加入 projection、dropout、双子层、final norm 和不可微点 convention。
+
+### 问题链
+
+1. pre-activation 与 post-activation 的 ReLU/Norm 分别位于哪条路径？
+2. 为什么相加点出现 $I$，仍不代表 block 输出 Jacobian 含未过滤的 identity rail？
+3. 后置 ReLU 怎样把完整 residual sum 的一个输出方向删掉？
+4. CNN full pre-activation 与 Transformer Pre-Norm 共享哪个代数外壳，又在哪些统计语义上不同？
+5. projection shortcut、final norm 与 dropout 应怎样进入精确 Jacobian？
+
+> [!check] 第一遍停靠线
+> 若你能在 $\mathcal R_\square$ 的 $x=(1,-1)$ 上算出 pre-activation Jacobian $\operatorname{diag}(21/20,1/2)$ 与 post-activation Jacobian $\operatorname{diag}(21/20,0)$，并解释 rank 从 2 降到 1 的步骤，就已掌握本页主干。
+
+## 符号与对象账本
+
+| 对象 | 定义 | 所在位置 | 对 identity rail 的影响 |
+|---|---|---|---|
+| $S$ | identity/projection shortcut | 与 branch 在 addition 相会 | $J_S=I$ 时才是裸 identity |
+| $P$ | branch-input preprocess | 只位于 $F$ 前 | 不过滤 shortcut differential |
+| $F$ | residual branch | 产生同形 increment | 与 shortcut 在 accumulator 相加 |
+| $Q$ | after-addition postprocess | residual sum 的最外层 | $J_Q$ 左乘全部路径 |
+| $J_\phi$ | activation local Jacobian | 由当前 mask/convention 决定 | 可删行、降 rank |
+| $J_N$ | normalization Jacobian | 依 axes/state/mode 而变 | 可投影 null directions 或跨样本耦合 |
+
+### 贯穿算例 $\mathcal R_\square$：一次后置 ReLU 删除一个方向
+
+沿用
+
+$$
+B=\operatorname{diag}\left(\frac1{20},-\frac12\right),
+\qquad
+M=I+B=\operatorname{diag}\left(\frac{21}{20},\frac12\right),
+$$
+
+但选择 probe
+
+$$
+x=(1,-1)^{\mathsf T}.
+$$
+
+若 block 出口没有 after-addition activation，可抽象为 full pre-activation 外壳：
+
+$$
+y_{\mathrm{pre}}=x+Bx=Mx
+=\left(\frac{21}{20},-\frac12\right)^{\mathsf T},
+$$
+
+$$
+J_{\mathrm{pre}}=M
+=\begin{bmatrix}21/20&0\\0&1/2\end{bmatrix},
+\qquad
+\operatorname{rank}(J_{\mathrm{pre}})=2.
+$$
+
+若相加后再过 ReLU：
+
+$$
+y_{\mathrm{post}}=\operatorname{ReLU}(Mx)
+=\left(\frac{21}{20},0\right)^{\mathsf T}.
+$$
+
+当前点的 ReLU mask 为
+
+$$
+D=\operatorname{diag}(1,0),
+$$
+
+所以
+
+$$
+\boxed{
+J_{\mathrm{post}}=DM
+=\begin{bmatrix}21/20&0\\0&0\end{bmatrix}
+},
+\qquad
+\operatorname{rank}(J_{\mathrm{post}})=1.
+$$
+
+对上游 $g=(1,1)$，两种 VJP 分别是
+
+$$
+J_{\mathrm{pre}}^{\mathsf T}g
+=\left(\frac{21}{20},\frac12\right),
+\qquad
+J_{\mathrm{post}}^{\mathsf T}g
+=\left(\frac{21}{20},0\right).
+$$
+
+后置 ReLU 不是只处理 branch；它把 shortcut 与 branch 已经相加的第二坐标整体删除。此例证明“可以发生 rank loss”，不证明所有 post-activation blocks 必然秩亏。
+
+## 核心公式七问：统一 placement Jacobian
+
+$$
+\boxed{
+x^+=Q\!\left(S(x)+F(P(x))\right),
+\qquad
+J_{x^+}=J_Q\left[J_S+J_FJ_P\right]
+}.
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 用一个合同定位 shortcut、branch preprocessing 与 after-addition filtering |
+| 对象 | 指定 mode/mask/state 下的单个 residual block |
+| 来路 | addition rule 与三次 chain rule，求值点按前向图确定 |
+| 步骤 | 写 $P,F,S,Q$→求局部 Jacobian→先合并 addition 内两支→最左乘 $J_Q$ |
+| 读法 | 裸 identity rail 要求 $J_S=I$ 且 $J_Q=I$；二者缺一不可 |
+| 检查 | 用 active-mask probe、train/eval 切换、projection shape 与 finite difference 验证 |
+| 去路 | Highway/Dense/long skip、DeepNorm Post-LN、CNN pre-activation 与 Transformer blocks |
+
+### AI / 系统对应
+
+CNN BatchNorm 的 train/eval 与 batch coupling、Transformer LN/RMSNorm 的逐 token axes、dropout realization 和 fused kernels 都会改变局部图。架构对比至少要冻结 shortcut/projection、norm 类型与位置、activation、final norm、残差 scale 和训练预算；只用“Pre-Norm”或“pre-activation”标签不足以复现模型。
 
 ## 一、学习目标
 

@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, residual-networks, gradient-correlation]
 source_type: paper
 title: "The Shattered Gradients Problem: If ResNets Are the Answer, Then What Is the Question?"
@@ -8,14 +8,14 @@ author: "David Balduzzi; Marcus Frean; Lennox Leary; J. P. Lewis; Kurt Wan-Duo M
 year: 2017
 url: "https://proceedings.mlr.press/v70/balduzzi17b.html"
 venue: "ICML 2017, PMLR 70"
-accessed: 2026-08-23
+accessed: 2026-08-29
 source_tier: A
 license: "PMLR paper；本库仅保存独立摘要、必要结论与链接"
 scope_role: core
 temporal_role: foundational
 related: ["[[深度、有效路径与稳定性证据地图]]", "[[残差块 Jacobian 与梯度直通]]", "[[相关传播、Edge of Chaos 与临界初始化]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # Balduzzi et al.：Shattered Gradients
@@ -45,4 +45,3 @@ $$
 ## 课程调用边界
 
 使用本卡时必须同时登记 forward signal、gradient norm、gradient correlation、parameter update 与任务性能，不能用其中一个代理全体。
-
