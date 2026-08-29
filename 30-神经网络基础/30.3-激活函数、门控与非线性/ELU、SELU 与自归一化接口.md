@@ -11,12 +11,66 @@ exercises: ["[[习题 - ELU、SELU 与自归一化接口]]"]
 solutions: ["[[解答 - ELU、SELU 与自归一化接口]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-elu-selu-self-normalizing-v2.svg]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 # ELU、SELU 与自归一化接口
 
 > [!abstract] 本章主问题
 > ELU 用负侧指数饱和换取负输出与连续过渡；SELU 再选择特定 $\alpha,\lambda$，使理想化前馈均值—方差映射在 $(0,1)$ 附近具有吸引固定点。自归一化是带独立性、初始化、架构和 dropout 合同的定理，不是“换一个激活就自动标准化任何深网”。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-19 在负半轴只能选择硬截断或固定线性泄漏；ELU 改用平滑指数支路，SELU 再把尺度调到矩传播目标；
+- **本页解决什么：** 分开局部函数性质、数值稳定实现和分布级 mean–variance contraction，不把“自归一化”误解为逐 batch 标准化；
+- **后续为何需要：** NN-21 将继续比较 smooth activations，NN-22 转向输入依赖的乘性 gate。
+
+**第一遍只比较 ELU 分段。** 在统一探针上计算值与斜率，观察负输出、负侧饱和、零点连续性和正侧 identity。
+
+**第二遍再研究 SELU 矩映射。** 从随机 pre-activation law 计算输出均值/方差，检查 fixed point、Jacobian contraction、LeCun initialization、independence 与 alpha dropout 条件。
+
+### 问题链
+
+1. 指数负支怎样同时提供负输出与远负区饱和？
+2. ELU 在零点何时连续、何时一阶光滑？
+3. SELU 的 $\alpha,\lambda$ 是经验装饰还是固定点校准常数？
+4. 三点 probe 为什么不能验证自归一化，必须换成随机变量矩账本？
+5. residual、normalization、convolution correlation 或普通 dropout 会怎样破坏理想合同？
+
+> [!check] 第一遍停靠线
+> 若你能在 $s_\triangle$ 上算出 ELU 的输出/VJP，并完整说出 SELU 自归一化所需的初始化、独立性、架构和 dropout 条件，就完成前半卷第一遍；矩积分与 contraction 留到第二遍。
+
+## 符号与对象账本
+
+| 对象 | 类型 | 在 AI 信号传播中的身份 | 不能偷换成 |
+|---|---|---|---|
+| $\alpha$ | ELU negative saturation scale | 负侧值域与零点左斜率 | SELU 的全部保证 |
+| $\lambda$ | global output scale | SELU moment-map 校准 | normalization layer |
+| $(\mu,q)$ | 输入均值/方差 | layerwise distribution state | 单个 batch 的精确统计 |
+| $\mathcal M(\mu,q)$ | moment map | 理想无限宽传播近似 | 任意有限深网动力学 |
+| alpha dropout | 特殊 affine-corrected dropout | 尽量保持 SELU fixed point | 普通 dropout |
+
+### 贯穿算例：局部指数支路与分布合同分账
+
+沿用 $s_\triangle=(-2,0,2)$。取 $\alpha=1$ 的 ELU，并在零点采用共同斜率 $1$：
+
+$$
+\operatorname{ELU}_1(s_\triangle)\approx(-0.864665,0,2),\qquad
+\operatorname{ELU}_1'(s_\triangle)\approx(0.135335,1,1).
+$$
+
+这说明负区仍有梯度且输出可为负，但远负区斜率仍会趋零。标准 SELU 使用约 $\alpha=1.67326,\lambda=1.05070$；将同三点代入只能检查局部数值，**不能**证明 $(\mu,q)=(0,1)$ 是吸引 fixed point。后者必须对声明输入分布计算 $\mathbb E[\phi(Z)]$、$\mathbb E[\phi(Z)^2]$ 并检查 moment-map Jacobian。
+
+## 核心公式七问：$(\mu_{\ell+1},q_{\ell+1})=\mathcal M(\mu_\ell,q_\ell)$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 把“层间信号是否回到零均值、单位方差”变成分布级动力系统 |
+| 对象 | $\mu,q$ 是理想 pre-activation moments，$\mathcal M$ 依 activation、weight law、width 与 independence 假设 |
+| 来路 | 对随机 affine sum 与 SELU 输出分别取一阶、二阶矩 |
+| 步骤 | 先找 fixed point $\mathcal M(0,1)=(0,1)$，再检查局部 Jacobian spectral radius 小于 1 |
+| 读法 | 小的均值/方差偏移经过一层后在理想条件下被拉回，而非逐样本强制标准化 |
+| 检查 | 改初始化、加入 residual/norm/相关性或普通 dropout 后必须重推 $\mathcal M$ |
+| 去路 | mean-field signal propagation、edge of chaos、normalization、alpha dropout 与深层初始化 |
 
 ## 一、ELU 的定义
 

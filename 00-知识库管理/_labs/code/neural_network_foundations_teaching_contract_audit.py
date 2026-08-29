@@ -23,7 +23,7 @@ SOLUTIONS = LABS / "solutions"
 CODE = LABS / "code"
 FIGURE_AUDITOR = CODE / "audit-markdown-figure-units.mjs"
 ASSET_DIR = ROOT / "00-知识库管理" / "_assets" / "figures" / "neural-networks"
-MIGRATED_IDS = tuple(range(1, 17))
+MIGRATED_IDS = tuple(range(1, 21))
 
 STATE_SURFACES = (
     CHAPTER / "神经网络基础 MOC.md",
@@ -33,6 +33,7 @@ STATE_SURFACES = (
     ROOT / "00-知识库管理" / "00-总览" / "全库教学重写审计与迁移台账.md",
     CHAPTER / "30.1-前馈网络、感知机与表达能力" / "前馈网络、感知机与表达能力 MOC.md",
     CHAPTER / "30.2-计算图、反向传播与自动微分" / "计算图、反向传播与自动微分 MOC.md",
+    CHAPTER / "30.3-激活函数、门控与非线性" / "激活函数、门控与非线性 MOC.md",
 )
 
 EXPECTED_FIGURE_SCRIPTS = {
@@ -196,11 +197,11 @@ def audit_migrated_contract(nodes: list[tuple[int, Path, str]]) -> None:
         relative = path.relative_to(ROOT)
         for marker in markers:
             require(marker in content, f"{relative}: teaching-contract marker missing: {marker}")
-        fixture = "X_\\star" if node_id <= 4 else "X_\\oplus" if node_id <= 8 else "X_\\diamond"
+        fixture = "X_\\star" if node_id <= 4 else "X_\\oplus" if node_id <= 8 else "X_\\diamond" if node_id <= 16 else "s_\\triangle"
         require(fixture in content, f"{relative}: shared teaching fixture missing: {fixture}")
         require("AI" in content, f"{relative}: AI object mapping missing")
         require(len(content.splitlines()) >= 180, f"{relative}: derivation depth unexpectedly short")
-    print("PASS NN teaching migration waves A--D: NN-01--16 course position/two-pass/problem/object/formula contracts=16/16")
+    print("PASS NN teaching migration waves A--E: NN-01--20 course position/two-pass/problem/object/formula contracts=20/20")
 
 
 def audit_wave_c_fixture(nodes: list[tuple[int, Path, str]]) -> None:
@@ -280,6 +281,34 @@ def audit_wave_d_fixture(nodes: list[tuple[int, Path, str]]) -> None:
     for node_id, markers in expected.items():
         require(all(marker in wave[node_id] for marker in markers), f"NN-{node_id:02d}: wave-D numeric closure missing")
     print("PASS NN wave-D independent math: residual/broadcast VJP; stable CE=0.0255315; JVP/VJP and HVP exact")
+
+
+def audit_wave_e_fixture(nodes: list[tuple[int, Path, str]]) -> None:
+    """Recompute the NN-17--20 three-point activation probe."""
+    points = (-2.0, 0.0, 2.0)
+    sigmoid = tuple(1.0 / (1.0 + math.exp(-value)) for value in points)
+    sigmoid_grad = tuple(value * (1.0 - value) for value in sigmoid)
+    tanh = tuple(math.tanh(value) for value in points)
+    tanh_grad = tuple(1.0 - value * value for value in tanh)
+    relu = tuple(max(0.0, value) for value in points)
+    relu_grad = (0.0, 0.0, 1.0)
+    leaky = tuple(value if value > 0.0 else 0.1 * value for value in points)
+    leaky_grad = (0.1, 0.1, 1.0)
+    elu = tuple(value if value > 0.0 else math.exp(value) - 1.0 for value in points)
+    elu_grad = (math.exp(-2.0), 1.0, 1.0)
+    require(all(abs(a - b) < 1e-6 for a, b in zip(sigmoid, (0.119203, 0.5, 0.880797))), "NN wave-E sigmoid values drifted")
+    require(all(abs(a - b) < 1e-6 for a, b in zip(sigmoid_grad, (0.104994, 0.25, 0.104994))), "NN wave-E sigmoid gradients drifted")
+    require(all(abs(a - b) < 1e-6 for a, b in zip(tanh, (-0.964028, 0.0, 0.964028))), "NN wave-E tanh values drifted")
+    require(all(abs(a - b) < 1e-6 for a, b in zip(tanh_grad, (0.070651, 1.0, 0.070651))), "NN wave-E tanh gradients drifted")
+    require(relu == (0.0, 0.0, 2.0) and relu_grad == (0.0, 0.0, 1.0), "NN wave-E ReLU convention drifted")
+    require(leaky == (-0.2, 0.0, 2.0) and leaky_grad == (0.1, 0.1, 1.0), "NN wave-E Leaky convention drifted")
+    require(all(abs(a - b) < 1e-6 for a, b in zip(elu, (-0.864665, 0.0, 2.0))), "NN wave-E ELU values drifted")
+    require(all(abs(a - b) < 1e-6 for a, b in zip(elu_grad, (0.135335, 1.0, 1.0))), "NN wave-E ELU gradients drifted")
+    wave = {node_id: content for node_id, _, content in nodes if 17 <= node_id <= 20}
+    expected = {17: ("s_\\triangle=(-2,0,2)",), 18: ("0.104994", "0.070651"), 19: ("0.1,0.1,1",), 20: ("0.864665", "0.135335")}
+    for node_id, markers in expected.items():
+        require(all(marker in wave[node_id] for marker in markers), f"NN-{node_id:02d}: wave-E numeric closure missing")
+    print("PASS NN wave-E independent math: sigmoid/tanh saturation; ReLU/Leaky conventions; ELU negative branch exact")
 
 
 def question_ids(content: str) -> list[str]:
@@ -439,10 +468,10 @@ def audit_state_surfaces() -> None:
     for path in STATE_SURFACES:
         content = read(path)
         require(audit_name in content, f"state surface misses NN audit: {path.relative_to(ROOT)}")
-        require("16/64" in content or "16 / 64" in content, f"state surface misses NN migrated count: {path.relative_to(ROOT)}")
-        require("48/64" in content or "48 / 64" in content, f"state surface misses NN pending count: {path.relative_to(ROOT)}")
+        require("20/64" in content or "20 / 64" in content, f"state surface misses NN migrated count: {path.relative_to(ROOT)}")
+        require("44/64" in content or "44 / 64" in content, f"state surface misses NN pending count: {path.relative_to(ROOT)}")
         require("not-attempted" in content, f"state surface overclaims NN learner: {path.relative_to(ROOT)}")
-    print("PASS NN state surfaces: 5 global + 2 volume views agree on migrated=16/64, pending=48/64, learner=not-attempted")
+    print("PASS NN state surfaces: 5 global + 3 volume views agree on migrated=20/64, pending=44/64, learner=not-attempted")
 
 
 def main() -> None:
@@ -455,6 +484,7 @@ def main() -> None:
     audit_migrated_contract(nodes)
     audit_wave_c_fixture(nodes)
     audit_wave_d_fixture(nodes)
+    audit_wave_e_fixture(nodes)
     audit_exercises(nodes, index)
     audit_sources_and_links(nodes, index)
     audit_figures(nodes, index)
@@ -462,8 +492,8 @@ def main() -> None:
     audit_state_surfaces()
     if args.run_figures:
         audit_deterministic_figures()
-    print("NN-01--16 teaching migration regression: PASS; 30.1--30.2 material gates=2/8")
-    print("NN-17--64 teaching migration: pending (48/64)")
+    print("NN-01--20 teaching migration regression: PASS; 30.1--30.2 material gates=2/8; 30.3=4/8")
+    print("NN-21--64 teaching migration: pending (44/64)")
     print("PERSONAL LEARNING STATUS: not-attempted")
 
 

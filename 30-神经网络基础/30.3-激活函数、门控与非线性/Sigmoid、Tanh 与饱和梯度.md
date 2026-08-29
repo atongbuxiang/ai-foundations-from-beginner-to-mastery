@@ -11,12 +11,71 @@ exercises: ["[[习题 - Sigmoid、Tanh 与饱和梯度]]"]
 solutions: ["[[解答 - Sigmoid、Tanh 与饱和梯度]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-sigmoid-tanh-saturation-v2.svg]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 # Sigmoid、Tanh 与饱和梯度
 
 > [!abstract] 本章主问题
 > sigmoid 与 tanh 都是平滑、有界、两端饱和的 S 形函数。它们的价值不应被“会梯度消失”一句话抹掉：sigmoid 是 Bernoulli 参数化与 gate 的核心，tanh 提供零中心 bounded state。真正需要推导的是斜率、均值、尺度和深层 Jacobian 怎样共同作用，以及何时应使用稳定的 log-domain 公式。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-17 给出了统一选择合同，现在先研究最典型的 bounded smooth activations；
+- **本页解决什么：** 精确量化 sigmoid/tanh 的值、最大斜率、饱和速度、中心性和稳定实现，而不是笼统说“梯度消失”；
+- **后续为何需要：** NN-19 将对比无上界 rectifier，NN-20 再用指数负支折中中心性与非饱和正侧。
+
+**第一遍只算函数值和斜率。** 在 $-2,0,2$ 三点手算，并观察 sigmoid 的输出偏正、tanh 的零中心以及两端斜率同时下降。
+
+**第二遍再看深度与语义。** 把权重 Jacobian、输入尺度、温度、log-domain 公式和 gate/output role 加回，区分局部饱和与整网梯度行为。
+
+### 问题链
+
+1. sigmoid 与 tanh 的代数关系如何连接它们的值域和导数？
+2. “饱和”应由输出接近边界还是导数接近零来定量？
+3. tanh 零中心为何改善均值，却不能自动保证深层梯度稳定？
+4. sigmoid hidden activation 常受限，为什么 Bernoulli head 和 gate 仍需要它？
+5. 极大正负输入下怎样避免指数 overflow 和 `log(0)`？
+
+> [!check] 第一遍停靠线
+> 若你能复算 sigmoid/tanh 在三点上的值与斜率，并解释 $0.25$ 或 $1$ 的局部上界为何不是整网保证，就可以进入 rectifier；稳定 log-domain 与深层乘积留到第二遍。
+
+## 符号与对象账本
+
+| 对象 | 值域/shape | 在 AI 中的典型角色 | 关键边界 |
+|---|---|---|---|
+| $\sigma(z)$ | $(0,1)$ | Bernoulli parameter、gate | 非零中心、两端饱和 |
+| $\tanh z$ | $(-1,1)$ | bounded recurrent state | 两端饱和 |
+| $\sigma'(z)$ | $(0,1/4]$ | local gate sensitivity | 不是整网 gradient norm |
+| $\tanh'(z)$ | $(0,1]$ | local state sensitivity | 仍与 weights 相乘 |
+| logit $z$ | unbounded score | stable BCE/log-sigmoid 输入 | 不应先转低精度概率再取 log |
+
+### 贯穿算例：三点上的饱和与中心
+
+沿用 $s_\triangle=(-2,0,2)$。数值为
+
+$$
+\sigma(s_\triangle)\approx(0.119203,0.5,0.880797),\qquad
+\sigma'(s_\triangle)\approx(0.104994,0.25,0.104994),
+$$
+
+$$
+\tanh(s_\triangle)\approx(-0.964028,0,0.964028),\qquad
+\tanh'(s_\triangle)\approx(0.070651,1,0.070651).
+$$
+
+在 upstream 全 1 时，这两行导数就是各自 VJP。tanh 在中心让信号保持、两端比 sigmoid 此处更小；sigmoid 输出均为正，但作为 gate 正好给出 $0$ 到 $1$ 的软开关。局部观察必须与输入分布和权重尺度一起解释。
+
+## 核心公式七问：$\sigma'(z)=\sigma(z)(1-\sigma(z)),\;\tanh'(z)=1-\tanh^2z$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 用 forward output 稳定、廉价地重建 local VJP slope |
+| 对象 | 导数与输入同 shape；两式分别依赖缓存的 probability/state |
+| 来路 | 对 logistic quotient 求导；tanh 由双曲函数恒等式或 sigmoid 关系得到 |
+| 步骤 | 先稳定算 output，再代入乘积；极端输入避免直接计算危险指数 |
+| 读法 | 越接近值域边界，局部可变化空间越小，斜率越接近零 |
+| 检查 | $z=0$ 时分别为 $1/4,1$；$|z|\to\infty$ 时均趋零 |
+| 去路 | LSTM/GRU gates、binary heads、temperature scaling、vanishing-gradient 与 stable fused losses |
 
 ## 一、定义、值域与关系
 

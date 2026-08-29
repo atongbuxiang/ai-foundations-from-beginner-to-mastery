@@ -65,9 +65,10 @@ updated: 2026-08-29
 - 第一波 NN-01—04 使用同一个四点方向 fixture 贯通 affine neuron、batch dense、perceptron update 与 paired-ReLU composition；第二波 NN-05—08 使用 XOR—triangular hat fixture 贯通非线性必要性、函数空间稠密、tent composition 与参数 quotient；八篇均补齐课程位置、两遍路线、问题链、对象账本、第一遍停靠线和核心公式七问；
 - 第三波 NN-09—12 以同一个 $X_\diamond$ 二样本 affine-regression 图贯通 forward trace、JVP/VJP、reverse fan-out accumulation 与 dense-layer backward；四页数值从 $L=5.25$ 到 directional derivative $2.5$ 和完整参数梯度闭合；
 - 第四波 NN-13—16 延续 $X_\diamond$ 图，贯通 ReLU residual/broadcast、stable softmax–CE、forward/reverse mode 与 gradient-check/checkpoint/HVP；独立重算 CE、方向导数和二阶作用；
-- 当前语义：现行教学迁移 **16/64 `regression-passed`**，30.1—30.2 分卷材料门 **2/8 `regression-passed`**，NN-17—64 **48/64 pending**，个人仍为 `not-attempted`；
+- 第五波 NN-17—20 以 $s_\triangle=(-2,0,2)$ 统一比较 activation 选择、sigmoid/tanh 饱和、ReLU/Leaky kink 与 ELU/SELU 分布接口；
+- 当前语义：现行迁移 **20/64**，材料门 **2/8**，30.3 为 4/8 in-progress，NN-21—64 **44/64 pending**，个人 `not-attempted`；
 - 旧[[实验 - 神经网络基础累计复现门]]和 `NN-CUM-01` 保留为 `composed` 历史材料，待 64 节迁移与分卷证据门建成后重新升级；
-- 下一施工点：NN-17—20，进入 30.3 激活函数、门控与非线性前半卷。
+- 下一施工点：NN-21—24，完成 30.3 后半卷。
 
 ## 第四章确定性架构审计
 

@@ -5,7 +5,7 @@ area: [neural-networks/activations]
 prerequisites: ["[[计算图、反向传播与自动微分 MOC]]"]
 related: ["[[神经网络基础完整课程地图与掌握标准]]", "[[初始化与信号传播 MOC]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 # 激活函数、门控与非线性 MOC
 | ID | 节点 | 出口 | 状态 |
@@ -19,4 +19,8 @@ updated: 2026-08-23
 | NN-23 | [[Maxout、分段线性区域与条件计算]] | max-affine regions | draft + A–E 闭环 |
 | NN-24 | [[激活函数的数值稳定、尺度与经验选择]] | fair comparison | draft + A–E 闭环 |
 
-当前为 **8/8 正文、8/8 A—E 题解闭环、0/8 真实验收**。NN-17—24 已完成正文、八张可复现教学图、120 题及逐题独立详解；下一批进入 30.4 的 NN-25—28。`not-attempted` 仍表示尚无学习者闭卷与迁移证据。
+## 当前迁移与学习状态
+
+- [[neural_network_foundations_teaching_contract_audit.py]]已复核 NN-17—20 的两遍路线、问题链、对象账本、$s_\triangle$ 共享探针与公式七问；
+- 当前为 **4/8 现行教学迁移、8/8 正文、8/8 A—E 题解、8/8 正式图**；30.3 仍为 `in-progress`；
+- 全章为 **20/64 已迁移、44/64 pending**，个人仍为 **0/8 / `not-attempted`**；下一批 NN-21—24。

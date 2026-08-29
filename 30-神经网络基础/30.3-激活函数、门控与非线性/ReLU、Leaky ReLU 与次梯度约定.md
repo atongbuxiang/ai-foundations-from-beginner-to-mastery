@@ -11,12 +11,71 @@ exercises: ["[[习题 - ReLU、Leaky ReLU 与次梯度约定]]"]
 solutions: ["[[解答 - ReLU、Leaky ReLU 与次梯度约定]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-relu-family-boundaries-v2.svg]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 # ReLU、Leaky ReLU 与次梯度约定
 
 > [!abstract] 本章主问题
 > ReLU 把正半轴保留为 identity、负半轴压为 0，由此得到廉价、稀疏、分段线性的网络，也引入 kink、死亡单元与正齐次重缩放。Leaky/PReLU 用负斜率修复“完全无梯度”，但同时改变稀疏性、方差传播和参数对称。必须把 classical derivative、convex subgradient 与 AD convention 分开。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-18 的 S 形函数平滑有界但两端饱和；本页研究保留正半轴线性传播的另一种取舍；
+- **本页解决什么：** 把 sparsity、positive homogeneity、kink convention、dying units 与 negative leak 放进同一推导；
+- **后续为何需要：** NN-20 会用平滑指数负支替代硬折线，并讨论从单点性质升级到均值—方差固定点需要哪些条件。
+
+**第一遍只做分段计算。** 对每个输入先判断所在区间，再写 output 与 slope；在零点单独标注 classical derivative 不存在和程序 convention。
+
+**第二遍再连接深层系统。** 推导正齐次重缩放、二阶矩增益、dying mechanism、PReLU 参数梯度及低精度/稀疏实现边界。
+
+### 问题链
+
+1. ReLU 为什么避免正侧饱和，又为何会永久关闭某些单元？
+2. kink 处的导数、凸次梯度集合和框架返回值有什么区别？
+3. Leaky slope $\alpha$ 修复了什么，又牺牲了什么？
+4. 正一阶齐次为何同时影响表达、初始化与参数对称性？
+5. “ReLU 更容易训练”需要哪些架构和分布条件才能成为可检验命题？
+
+> [!check] 第一遍停靠线
+> 若你能在 $s_\triangle$ 上分别算出 ReLU 和 $\alpha=0.1$ Leaky ReLU 的值/VJP，并对零点明确声明约定，就可以进入 ELU/SELU；方差增益和 dying dynamics 留到第二遍。
+
+## 符号与对象账本
+
+| 对象 | 数学身份 | 在 AI 网络中的身份 | 关键边界 |
+|---|---|---|---|
+| $z$ | pre-activation | gate 判定输入 | 分布漂移会改变 active fraction |
+| $\mathbf1_{z>0}$ | binary mask | ReLU backward cache | $z=0$ 需 convention |
+| $\alpha$ | negative slope | Leaky/PReLU 超参数或参数 | 改变稀疏性与增益 |
+| active fraction | 分布统计量 | signal/gradient throughput | 不是单点函数性质 |
+| $\phi(cz)=c\phi(z)$ | positive homogeneity | layer rescaling gauge | 只对 $c>0$ |
+
+### 贯穿算例：硬门、泄漏与零点约定
+
+沿用 $s_\triangle=(-2,0,2)$，声明 ReLU 在零点的程序导数为 $0$；对 Leaky ReLU 取 $\alpha=0.1$，并声明零点使用负侧斜率 $\alpha$。于是
+
+$$
+\operatorname{ReLU}(s_\triangle)=(0,0,2),\qquad
+\operatorname{ReLU}'_{\rm AD}(s_\triangle)=(0,0,1),
+$$
+
+$$
+\operatorname{LReLU}_{0.1}(s_\triangle)=(-0.2,0,2),\qquad
+\operatorname{LReLU}'_{\rm AD}(s_\triangle)=(0.1,0.1,1).
+$$
+
+upstream 全 1 时，后两组斜率就是 VJP。Leaky 让负区仍能收到信号，却不再产生 exact zero sparsity；零点数值是本页声明的程序规则，不是 classical derivative 定理，也不应假定所有框架相同。
+
+## 核心公式七问：$\operatorname{LReLU}_\alpha(z)=\max(z,\alpha z)$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 用可控负斜率避免 ReLU 负半轴完全零梯度 |
+| 对象 | $\alpha\in[0,1)$；固定时是超参数，可学习时成为 PReLU 参数 |
+| 来路 | 两个 affine branches 的 pointwise maximum/分段选择 |
+| 步骤 | $z>0$ 选 slope 1，$z<0$ 选 slope $\alpha$，$z=0$ 单独声明 convention |
+| 读法 | 正证据原样通过，负证据被缩小但不完全删除 |
+| 检查 | $\alpha=0$ 退化为 ReLU，$\alpha=1$ 退化为 identity；均为正齐次 |
+| 去路 | He gain、PReLU、piecewise-linear regions、parameter symmetry 与 dead-unit diagnostics |
 
 ## 一、定义与分段导数
 
