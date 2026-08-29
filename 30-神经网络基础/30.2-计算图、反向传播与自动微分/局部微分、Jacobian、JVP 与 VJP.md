@@ -11,12 +11,87 @@ exercises: ["[[习题 - 局部微分、Jacobian、JVP 与 VJP]]"]
 solutions: ["[[解答 - 局部微分、Jacobian、JVP 与 VJP]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-local-jacobian-jvp-vjp-v2.svg]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 # 局部微分、Jacobian、JVP 与 VJP
 
 > [!abstract] 本章主问题
 > 节点的真正一阶对象是局部线性算子 $Df(x)$。Jacobian 只是选定坐标后的完整表；JVP 把输入扰动向前推，VJP 把输出协向量向后拉。大网络通常不物化 Jacobian，而沿计算图组合这些线性作用。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-09 已得到一张可执行图和完整 forward trace，但每个节点还只有数值规则，没有一阶变化规则；
+- **本页解决什么：** 以 differential 为本体，统一 Jacobian、JVP 与 VJP，并用同一个矩阵任务验证前推和回拉的点积一致性；
+- **后续为何需要：** NN-11 会把局部 VJP 按逆拓扑序动态规划，NN-12 则给 affine primitive 写出不物化 Jacobian 的闭式 VJP。
+
+**第一遍只追踪方向与 shape。** 记住 $J:[m,n]$、$v:[n]$、$Jv:[m]$、$u:[m]$、$J^Tu:[n]$；把 JVP 看作输入扰动的前推，把 VJP 看作输出线性 functional 的回拉。
+
+**第二遍再进入算子视角。** 从 Fréchet 一阶模型重建局部微分，证明伴随点积恒等式，并检查 batch、broadcast、reduction 和不可微 primitive 的程序约定。
+
+### 问题链
+
+1. 为什么“偏导数表”不是导数最本质的定义？
+2. JVP 和 VJP 分别回答哪一种一阶问题？
+3. 为什么 VJP 是 transpose/adjoint action，而不是 Jacobian inverse？
+4. 一个 scalar loss 对海量参数为何只需要一个 reverse seed？
+5. 怎样不形成完整 Jacobian，也能检验局部前向与反向实现相互一致？
+
+> [!check] 第一遍停靠线
+> 若你能根据输入输出 shape 判断 JVP/VJP 方向，并在贯穿算例中得到 directional derivative $2.5$ 的两种算法，就可以进入反向递推；Fréchet 余项与复杂 primitive 留到第二遍。
+
+## 符号与对象账本
+
+| 对象 | shape | 几何身份 | AI 自动微分接口 |
+|---|---|---|---|
+| $Df(x)$ | 线性算子 $\mathbb R^n\to\mathbb R^m$ | 局部最佳一阶模型 | primitive linearization |
+| $J_f(x)$ | $m\times n$ | 选定坐标后的矩阵表示 | 通常不显式形成 |
+| $v$ | input-shaped | tangent/direction | JVP seed |
+| $u$ | output-shaped | cotangent/linear functional | VJP seed |
+| $Jv,J^Tu$ | output/input-shaped | pushforward/pullback | forward/reverse local result |
+
+### 贯穿算例：同一个方向导数的前推与回拉
+
+沿用 NN-09 的 $X_\diamond,W_\diamond,b_\diamond,Y_\diamond$，只扰动权重
+
+$$
+\dot W=\begin{bmatrix}1&0\\0&0\end{bmatrix},\qquad \dot X=0,\quad\dot b=0.
+$$
+
+JVP 前推得到
+
+$$
+\dot Z=X_\diamond\dot W=\begin{bmatrix}1&0\\-1&0\end{bmatrix},\qquad
+\dot L=\langle R,\dot Z\rangle_F+\lambda\langle W_\diamond,\dot W\rangle_F=2+0.5=2.5.
+$$
+
+若从 scalar seed $\bar L=1$ 做 VJP，权重 cotangent 将是 $\bar W=X_\diamond^TR+\lambda W_\diamond$；暂时只取其与 $\dot W$ 的配对，也得到 $\langle\bar W,\dot W\rangle_F=2.5$。这就是 $u^T(Jv)=(J^Tu)^Tv$ 在矩阵参数空间中的 Frobenius 版本。
+
+## 核心公式七问：$\langle u,Jv\rangle=\langle J^*u,v\rangle$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 用同一个 scalar pairing 连接 tangent 前推与 cotangent 回拉 |
+| 对象 | $J$ 是局部导数，$J^*$ 是由所选内积定义的 adjoint，不要求方阵或可逆 |
+| 来路 | 将 $\delta y=J\delta x$ 代入输出 functional $\langle u,\delta y\rangle$ |
+| 步骤 | 先做 JVP 再与 $u$ 配对，或先做 VJP 再与 $v$ 配对，结果必须一致 |
+| 读法 | reverse mode 把“输出变化的价值”拉回每个输入方向的价值 |
+| 检查 | 两侧都是 scalar；$J$ 矩形时仍成立；坐标 Euclidean 情形 $J^*=J^T$ |
+| 去路 | dot test、reverse accumulation、matrix-calculus VJP 与 implicit differentiation |
+
+### 贯穿图的局部规则卡
+
+下表只描述单个 primitive；NN-11 才负责按图组合。`dot` 表示 tangent，`bar` 表示 cotangent。
+
+| forward primitive | JVP | 给定输出 `bar` 的 VJP |
+|---|---|---|
+| $Z=XW$ | $\dot Z=\dot XW+X\dot W$ | $\bar X=\bar ZW^T,\ \bar W=X^T\bar Z$ |
+| $Z=A+\mathbf1b$ | $\dot Z=\dot A+\mathbf1\dot b$ | $\bar A=\bar Z,\ \bar b=\mathbf1^T\bar Z$ |
+| $R=Z-Y$ | $\dot R=\dot Z-\dot Y$ | $\bar Z=\bar R,\ \bar Y=-\bar R$ |
+| $s=\frac12\|R\|_F^2$ | $\dot s=\langle R,\dot R\rangle_F$ | $\bar R=\bar sR$ |
+| $r=\frac\lambda2\|W\|_F^2$ | $\dot r=\lambda\langle W,\dot W\rangle_F$ | $\bar W{+}=\bar r\lambda W$ |
+| $L=s+r$ | $\dot L=\dot s+\dot r$ | $\bar s{+}=\bar L,\ \bar r{+}=\bar L$ |
+
+逐行 shape 都闭合；最后两行的 `+=` 已预告 fan-out accumulation。它们是 AI 自动微分系统注册 primitive rule 时真正需要的接口，而不是完整 Jacobian 表。
 
 ## 一、对象与形状
 若 $f:\mathbb R^n\to\mathbb R^m$，则

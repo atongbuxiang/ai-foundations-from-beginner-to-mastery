@@ -63,9 +63,10 @@ updated: 2026-08-29
 
 - [[neural_network_foundations_teaching_contract_audit.py]]：固定 NN-01—64 八卷 scope，复核 64 组题—解双射、960 个 A—E ID、来源卡、范围内链接、64 个图文单元、16 个节点制图脚本与课程地图；
 - 第一波 NN-01—04 使用同一个四点方向 fixture 贯通 affine neuron、batch dense、perceptron update 与 paired-ReLU composition；第二波 NN-05—08 使用 XOR—triangular hat fixture 贯通非线性必要性、函数空间稠密、tent composition 与参数 quotient；八篇均补齐课程位置、两遍路线、问题链、对象账本、第一遍停靠线和核心公式七问；
-- 当前语义：现行教学迁移 **8/64 `regression-passed`**，30.1 分卷材料门 **1/8 `regression-passed`**，NN-09—64 **56/64 pending**，个人仍为 `not-attempted`；
+- 第三波 NN-09—12 以同一个 $X_\diamond$ 二样本 affine-regression 图贯通 forward trace、JVP/VJP、reverse fan-out accumulation 与 dense-layer backward；四页数值从 $L=5.25$ 到 directional derivative $2.5$ 和完整参数梯度闭合；
+- 当前语义：现行教学迁移 **12/64 `regression-passed`**，30.1 分卷材料门 **1/8 `regression-passed`**，30.2 为 4/8 in-progress，NN-13—64 **52/64 pending**，个人仍为 `not-attempted`；
 - 旧[[实验 - 神经网络基础累计复现门]]和 `NN-CUM-01` 保留为 `composed` 历史材料，待 64 节迁移与分卷证据门建成后重新升级；
-- 下一施工点：NN-09—12，进入 30.2 计算图与反向传播前半卷。
+- 下一施工点：NN-13—16，完成 30.2 后半卷并再决定分卷材料门。
 
 ## 第四章确定性架构审计
 

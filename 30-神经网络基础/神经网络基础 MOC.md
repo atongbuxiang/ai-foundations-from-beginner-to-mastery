@@ -59,14 +59,14 @@ locked scope: 64 / 64
 formal nodes: 64 / 64
 exercise sets: 64 / 64
 solutions: 64 / 64
-current-standard teaching migration: 8 / 64
-teaching migration pending: 56 / 64
+current-standard teaching migration: 12 / 64
+teaching migration pending: 52 / 64
 material-regression-passed volumes: 1 / 8
 legacy NN-CUM-01: composed / current-standard re-audit pending
 state: draft nodes / 30.1 material regression-passed / not-attempted learner
-next: migrate NN-09--12; personal 30.1 evidence remains unopened
+next: migrate NN-13--16 to close 30.2; personal evidence remains unopened
 ```
 
-NN-01—64 已全部形成正文—图—A–E 练习—独立详解的静态骨架，共 **64 / 64** 个节点、960 道节点题。[[neural_network_foundations_teaching_contract_audit.py]]现把“骨架齐全”和“按现行教授级合同完成教学迁移”分开：NN-01—08 已补齐课程位置、两遍路线、问题链、对象账本、贯穿算例与公式七问，达到 **8/64 `regression-passed`**；30.1 作为第一卷材料门达到 **1/8 `regression-passed`**，NN-09—64 共 **56/64** 仍待迁移。个人仍为 `not-attempted`，因此这里的 1/8 只计材料，不计学习者通过。
+NN-01—64 已全部形成正文—图—A–E 练习—独立详解的静态骨架，共 **64 / 64** 个节点、960 道节点题。[[neural_network_foundations_teaching_contract_audit.py]]现把“骨架齐全”和“按现行教授级合同完成教学迁移”分开：NN-01—12 已补齐课程位置、两遍路线、问题链、对象账本、贯穿算例与公式七问，达到 **12/64 `regression-passed`**；30.1 材料门保持 **1/8 `regression-passed`**，30.2 前半卷完成 4/8，NN-13—64 共 **52/64** 仍待迁移。个人仍为 `not-attempted`，材料建设不计作学习者通过。
 
 旧章节累计出口[[阶段测验 - 神经网络基础（第三章）]]、[[阶段测验解答 - 神经网络基础（第三章）]]与[[实验 - 神经网络基础累计复现门]]仍保留为 `composed` 材料，但不能在 64 节现行合同和分卷门升级前冒充已回归通过。`not-attempted` 仍表示尚无学习者闭卷、重做与迁移证据；材料建设不等于八卷已经通过。

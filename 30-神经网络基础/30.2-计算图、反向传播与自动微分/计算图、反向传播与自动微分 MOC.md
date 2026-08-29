@@ -5,7 +5,7 @@ area: [neural-networks/backprop-autodiff]
 prerequisites: ["[[前馈网络、感知机与表达能力 MOC]]", "[[多元链式法则与计算图]]"]
 related: ["[[神经网络基础完整课程地图与掌握标准]]", "[[激活函数、门控与非线性 MOC]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 # 计算图、反向传播与自动微分 MOC
 | ID | 节点 | 出口 | 状态 |
@@ -19,4 +19,10 @@ updated: 2026-08-23
 | NN-15 | [[Forward_Reverse AD、Tape 与复杂度|Forward/Reverse AD、Tape 与复杂度]] | AD mode selection | draft + A–E 闭环 |
 | NN-16 | [[Gradient Checking、Checkpointing 与高阶微分边界]] | verification/memory | draft + A–E 闭环 |
 
-当前为 **8/8 正文、8/8 A—E 题解闭环、0/8 真实验收**。NN-09—16 已完成正文、八张可复现教学图、120 题及逐题独立详解；下一批转入 30.3 的 NN-17—20。`not-attempted` 仍表示尚无学习者闭卷与迁移证据。
+## 当前迁移与学习状态
+
+- [[neural_network_foundations_teaching_contract_audit.py]] 已复核 NN-09—12 的课程位置、两遍路线、问题链、对象账本、共享 $X_\diamond$ fixture 与公式七问；
+- 同一个二样本 affine-regression 图已闭合 forward $L=5.25$、JVP/VJP directional derivative $2.5$、fan-out 两路参数累加和三路 affine VJP；
+- 当前为 **4/8 现行教学迁移、8/8 正文、8/8 A—E 题解、8/8 正式图**；30.2 尚为 `in-progress`，不能提前标为分卷材料通过；
+- 全章状态为 **12/64 已迁移、52/64 pending**；个人仍为 **0/8 / `not-attempted`**；
+- 下一材料施工点为 NN-13—16，完成 activation/broadcast、stable fused loss、AD mode 与 verification/memory。

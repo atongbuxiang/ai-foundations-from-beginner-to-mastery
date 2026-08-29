@@ -22,7 +22,7 @@ SOLUTIONS = LABS / "solutions"
 CODE = LABS / "code"
 FIGURE_AUDITOR = CODE / "audit-markdown-figure-units.mjs"
 ASSET_DIR = ROOT / "00-知识库管理" / "_assets" / "figures" / "neural-networks"
-MIGRATED_IDS = tuple(range(1, 9))
+MIGRATED_IDS = tuple(range(1, 13))
 
 STATE_SURFACES = (
     CHAPTER / "神经网络基础 MOC.md",
@@ -31,6 +31,7 @@ STATE_SURFACES = (
     LABS / "推导与实验 MOC.md",
     ROOT / "00-知识库管理" / "00-总览" / "全库教学重写审计与迁移台账.md",
     CHAPTER / "30.1-前馈网络、感知机与表达能力" / "前馈网络、感知机与表达能力 MOC.md",
+    CHAPTER / "30.2-计算图、反向传播与自动微分" / "计算图、反向传播与自动微分 MOC.md",
 )
 
 EXPECTED_FIGURE_SCRIPTS = {
@@ -194,11 +195,52 @@ def audit_migrated_contract(nodes: list[tuple[int, Path, str]]) -> None:
         relative = path.relative_to(ROOT)
         for marker in markers:
             require(marker in content, f"{relative}: teaching-contract marker missing: {marker}")
-        fixture = "X_\\star" if node_id <= 4 else "X_\\oplus"
-        require(fixture in content, f"{relative}: shared four-point fixture missing: {fixture}")
+        fixture = "X_\\star" if node_id <= 4 else "X_\\oplus" if node_id <= 8 else "X_\\diamond"
+        require(fixture in content, f"{relative}: shared teaching fixture missing: {fixture}")
         require("AI" in content, f"{relative}: AI object mapping missing")
         require(len(content.splitlines()) >= 180, f"{relative}: derivation depth unexpectedly short")
-    print("PASS NN teaching migration waves A--B: NN-01--08 course position/two-pass/problem/object/formula contracts=8/8")
+    print("PASS NN teaching migration waves A--C: NN-01--12 course position/two-pass/problem/object/formula contracts=12/12")
+
+
+def audit_wave_c_fixture(nodes: list[tuple[int, Path, str]]) -> None:
+    """Recompute the NN-09--12 affine-regression fixture without importing note code."""
+    x = ((1.0, 2.0), (-1.0, 1.0))
+    w = ((1.0, -1.0), (2.0, 1.0))
+    b = (0.0, 1.0)
+    y = ((4.0, 1.0), (2.0, 1.0))
+    lam = 0.5
+
+    def mm(a: tuple[tuple[float, ...], ...], c: tuple[tuple[float, ...], ...]) -> tuple[tuple[float, ...], ...]:
+        return tuple(tuple(sum(a[i][k] * c[k][j] for k in range(len(c))) for j in range(len(c[0]))) for i in range(len(a)))
+
+    def transpose(a: tuple[tuple[float, ...], ...]) -> tuple[tuple[float, ...], ...]:
+        return tuple(tuple(a[i][j] for i in range(len(a))) for j in range(len(a[0])))
+
+    z0 = mm(x, w)
+    z = tuple(tuple(z0[i][j] + b[j] for j in range(2)) for i in range(2))
+    residual = tuple(tuple(z[i][j] - y[i][j] for j in range(2)) for i in range(2))
+    loss = 0.5 * sum(value * value for row in residual for value in row) + 0.5 * lam * sum(value * value for row in w for value in row)
+    require(z == ((5.0, 2.0), (1.0, 3.0)) and residual == ((1.0, 1.0), (-1.0, 2.0)), "NN wave-C forward fixture drifted")
+    require(loss == 5.25, f"NN wave-C loss drifted: {loss}")
+
+    direction = ((1.0, 0.0), (0.0, 0.0))
+    dz = mm(x, direction)
+    directional = sum(residual[i][j] * dz[i][j] for i in range(2) for j in range(2)) + lam * sum(w[i][j] * direction[i][j] for i in range(2) for j in range(2))
+    data_w = mm(transpose(x), residual)
+    reg_w = tuple(tuple(lam * w[i][j] for j in range(2)) for i in range(2))
+    total_w = tuple(tuple(data_w[i][j] + reg_w[i][j] for j in range(2)) for i in range(2))
+    grad_x = mm(residual, transpose(w))
+    grad_b = tuple(sum(residual[i][j] for i in range(2)) for j in range(2))
+    require(dz == ((1.0, 0.0), (-1.0, 0.0)) and directional == 2.5, "NN wave-C JVP drifted")
+    require(data_w == ((2.0, -1.0), (1.0, 4.0)), f"NN wave-C data gradient drifted: {data_w}")
+    require(total_w == ((2.5, -1.5), (2.0, 4.5)), f"NN wave-C total gradient drifted: {total_w}")
+    require(grad_x == ((0.0, 3.0), (-3.0, 0.0)) and grad_b == (0.0, 3.0), "NN wave-C affine VJP drifted")
+
+    wave = {node_id: content for node_id, _, content in nodes if 9 <= node_id <= 12}
+    expected_markers = {9: ("L=5.25",), 10: ("2.5",), 11: ("L=5.25", "2.5"), 12: ("2.5",)}
+    for node_id, expected in expected_markers.items():
+        require(all(marker in wave[node_id] for marker in expected), f"NN-{node_id:02d}: shared numeric closure missing")
+    print("PASS NN wave-C independent math: forward loss=5.25; JVP/VJP=2.5; data/reg/affine gradients exact")
 
 
 def question_ids(content: str) -> list[str]:
@@ -346,10 +388,10 @@ def audit_state_surfaces() -> None:
     for path in STATE_SURFACES:
         content = read(path)
         require(audit_name in content, f"state surface misses NN audit: {path.relative_to(ROOT)}")
-        require("8/64" in content or "8 / 64" in content, f"state surface misses NN migrated count: {path.relative_to(ROOT)}")
-        require("56/64" in content or "56 / 64" in content, f"state surface misses NN pending count: {path.relative_to(ROOT)}")
+        require("12/64" in content or "12 / 64" in content, f"state surface misses NN migrated count: {path.relative_to(ROOT)}")
+        require("52/64" in content or "52 / 64" in content, f"state surface misses NN pending count: {path.relative_to(ROOT)}")
         require("not-attempted" in content, f"state surface overclaims NN learner: {path.relative_to(ROOT)}")
-    print("PASS NN state surfaces: 5 global + 1 volume views agree on migrated=8/64, pending=56/64, learner=not-attempted")
+    print("PASS NN state surfaces: 5 global + 2 volume views agree on migrated=12/64, pending=52/64, learner=not-attempted")
 
 
 def main() -> None:
@@ -360,6 +402,7 @@ def main() -> None:
     index = build_index()
     audit_scope(nodes)
     audit_migrated_contract(nodes)
+    audit_wave_c_fixture(nodes)
     audit_exercises(nodes, index)
     audit_sources_and_links(nodes, index)
     audit_figures(nodes, index)
@@ -367,8 +410,8 @@ def main() -> None:
     audit_state_surfaces()
     if args.run_figures:
         audit_deterministic_figures()
-    print("NN-01--08 / 30.1 teaching-material migration regression: PASS")
-    print("NN-09--64 teaching migration: pending (56/64)")
+    print("NN-01--12 teaching migration regression: PASS; 30.1 material gate retained")
+    print("NN-13--64 teaching migration: pending (52/64)")
     print("PERSONAL LEARNING STATUS: not-attempted")
 
 
