@@ -78,8 +78,8 @@ updated: 2026-08-29
 - 第十五波 NN-57—60 以 $\mathcal D_\square$ 的 $x=(2,1),q=1/2,W=\left[\begin{smallmatrix}1&2\\-1&1\end{smallmatrix}\right]$ 贯通 activation-mask moments/VJP、两个 scores 的 covariance 与精确平方风险、DropConnect 联合分布反例，以及 residual branch DropPath 的 state/Jacobian/active-depth 账；
 - 第十六波 NN-61—64 延伸 $\mathcal D_\square$：闭合三分类 smoothed target/gradient/有限 margin、Mixup 与固定先验 smoothing 的 target-level 可交换式、共享 $W$ 的谱/Frobenius/Hutchinson 导数账，以及 $2\times2$ factorial interaction；
 - 当前语义：现行迁移 **64/64**，待迁移 **0/64**，材料门 **8/8 `regression-passed`**，个人 `not-attempted`；
-- 旧[[实验 - 神经网络基础累计复现门]]和 `NN-CUM-01` 保留为 `composed` 历史材料，须单独按现行累计证据合同重审；
-- 下一施工点：重审 NN-CUM-01，建立口试、闭卷、盲参复现、48 小时重做与 14 天陌生 AI 迁移出口。
+- [[实验 - 神经网络基础累计复现门]]和 `NN-CUM-01` 已由[[neural_network_foundations_cumulative_contract_audit.py]]完成口试—闭卷—scorer nonce—三轨盲参—输出保护—48 小时—14 天的材料回归，累计材料为 `regression-passed`；
+- 下一执行点：按前置顺序产生个人口试、闭卷、盲参和延迟迁移证据；个人仍为 `not-attempted`。
 
 ## 第四章确定性架构审计
 

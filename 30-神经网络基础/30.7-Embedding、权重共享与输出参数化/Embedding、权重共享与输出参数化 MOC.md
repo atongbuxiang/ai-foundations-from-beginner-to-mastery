@@ -23,6 +23,6 @@ updated: 2026-08-29
 
 - [[neural_network_foundations_teaching_contract_audit.py]]已复核 NN-49—56 的两遍路线、问题链、对象账本、$\mathcal E_\square$ 四词二维参数表、lookup/scatter-add、几何谱、共享参数、Softmax 温度、rank bottleneck、采样偏差、mask 事务与压缩误差；
 - 当前为 **8/8 现行教学迁移、8/8 正文、8/8 A—E 题解、8/8 正式图，30.7 材料门 `regression-passed`**；
-- 全章为 **64/64 已迁移、0/64 pending、分卷材料门 8/8 `regression-passed`**，个人仍为 **0/8 / `not-attempted`**；下一材料施工点为 NN-CUM-01 现行合同重审。
+- 全章为 **64/64 已迁移、0/64 pending、分卷材料门 8/8 `regression-passed`**；NN-CUM-01 已由[[neural_network_foundations_cumulative_contract_audit.py]]回归为材料 `regression-passed`，个人仍为 **0/8 / `not-attempted`**；下一步执行个人证据链。
 
 NN-49—56 共 120 题与逐题独立详解已经形成全卷静态闭环：前半从 lookup/scatter-add 推进到表示几何、共享 Parameter 双路径 VJP 和 Softmax 概率参数化；后半进一步处理跨 context 的 centered log-ratio rank、采样/树/adaptive 大词表合同、padding/mask/词表事务，以及初始化—分解—量化的函数类与系统账。`draft` 只表示材料完备，学习者仍需闭卷、重做与迁移验收。

@@ -1259,7 +1259,7 @@ def main() -> None:
     if args.run_figures:
         audit_deterministic_figures()
     print("NN-01--64 teaching migration regression: PASS; 30.1--30.8 material gates=8/8")
-    print("NN-61--64 teaching migration: PASS; cumulative NN-CUM-01 remains legacy composed pending a separate re-audit")
+    print("NN-CUM-01 material is audited separately by neural_network_foundations_cumulative_contract_audit.py")
     print("PERSONAL LEARNING STATUS: not-attempted")
 
 

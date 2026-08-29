@@ -62,11 +62,22 @@ solutions: 64 / 64
 current-standard teaching migration: 64 / 64
 teaching migration pending: 0 / 64
 material-regression-passed volumes: 8 / 8
-legacy NN-CUM-01: composed / current-standard re-audit pending
-state: draft nodes / 30.1--30.8 material regression-passed / not-attempted learner
-next: separately re-audit NN-CUM-01 against the current standard; personal evidence remains unopened
+NN-CUM-01 material: regression-passed
+state: draft nodes / 30.1--30.8 material regression-passed / cumulative material regression-passed / not-attempted learner
+next: execute personal oral, closed-book, nonce-blind, 48 h and 14 d evidence; do not infer mastery from material
 ```
 
 NN-01—64 已形成 64/64 静态骨架与 960 道节点题。[[neural_network_foundations_teaching_contract_audit.py]]确认 NN-01—64 达到 **64/64 现行教学迁移**，待迁移为 **0/64**；30.1—30.8 静态材料门达到 **8/8 `regression-passed`**。个人仍为 `not-attempted`。
 
-旧章节累计出口[[阶段测验 - 神经网络基础（第三章）]]、[[阶段测验解答 - 神经网络基础（第三章）]]与[[实验 - 神经网络基础累计复现门]]仍保留为 `composed` 材料，须另行按现行累计证据合同回归，不能因节点与分卷材料补齐就冒充通过。`not-attempted` 仍表示尚无学习者闭卷、重做与迁移证据；材料建设不等于个人八卷已经通过。
+累计出口[[阶段测验 - 神经网络基础（第三章）]]、[[阶段测验解答 - 神经网络基础（第三章）]]与[[实验 - 神经网络基础累计复现门]]已由[[neural_network_foundations_cumulative_contract_audit.py]]按现行合同回归为 `regression-passed`：64 节范围、14/14 题解与 100 分、20 分钟口试、答案隔离、scorer nonce、三轨盲参数、canonical/固定盲参双跑、非法输入保护、48 小时换机制和 14 天陌生迁移均有静态与计算证书。个人仍为 `not-attempted`，材料建设不等于个人八卷或累计门已经通过。
+
+## NN-CUM-01：八卷累计证据出口
+
+| 阶段 | 直接证据 | 材料状态 | 个人状态 |
+|---|---|---|---|
+| 口试 | 十二层对象账本、VJP/尺度主链、陌生 block 审计 | regression-passed | not-attempted |
+| 闭卷 | 240 分钟、A—E 五区、14 题、100 分 | regression-passed | not-attempted |
+| 计算门 | nonce 指定轨、运行前预测、新 stdout/SVG/hash | regression-passed | not-attempted |
+| 延迟门 | 48 h 换机制、14 d 陌生 AI 模型迁移 | regression-passed | not-attempted |
+
+Canonical 图 hash 为 `aac6c5167ac56ff94b1f7b374d4fdc22deda5cb336b5fb6bdc94059dfdc8bb0e`；固定盲参 hash 为 `a36bc4dfb6dda830b0b4e5bd82f0962c2224f1e0e6b9f18dbc3ae6b5260d8c4f`。两者只认证工具，不可填入个人证据字段。
