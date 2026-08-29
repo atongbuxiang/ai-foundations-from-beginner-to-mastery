@@ -11,13 +11,118 @@ exercises: ["[[习题 - ResNet 的 ODE 与离散动力系统视角]]"]
 solutions: ["[[解答 - ResNet 的 ODE 与离散动力系统视角]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-resnet-euler-stability-v2.svg]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # ResNet 的 ODE 与离散动力系统视角
 
 > [!abstract] 本章主问题
 > $x_{k+1}=x_k+h f(x_k,t_k)$ 同时是显式 Euler 步和带 scale 的 residual block。这一同形关系能把 step size、稳定域、局部/全局误差和伴随方法引入架构分析；但只有在固定时间区间、残差为 $O(h)$、向量场族一致且满足正则/稳定条件时，“网络加深”才是一个 ODE 极限，而不是把任意 ResNet 改名为微分方程。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-41—42 已把 $\mathcal R_\square$ 写成四个 $I+hA$ 的 residual/Jacobian 乘积；
+- **本页解决什么：** 固定 horizon $T=1$，把 $h=T/N$ 恢复到公式中，比较离散状态、exact flow、局部 defect 与绝对稳定条件；
+- **后续为何需要：** NN-44 将把 Euler/variational product 改写成 depth-uniform Lipschitz 与 forcing 界，后续 Neural ODE/CNF 则需要区分离散反传和连续 adjoint。
+
+**第一遍只做深度加密表。** 对两个 eigen-directions 分别算 $N=1,2,4,10$ 的 Euler multiplier，并与 $e^{\lambda T}$ 比较；看清加深必须同时缩小 $h$。
+
+**第二遍再检查 ODE 极限。** 审计向量场族、固定 horizon、local/global error、zero/absolute stability、shape topology、自适应 solver 与 backward discretization。
+
+### 问题链
+
+1. residual branch $F_k$ 在什么条件下可写成 $h f(x_k,t_k)$？
+2. 深度翻倍但每层 update 不缩小，为什么通常不是同一 ODE 的网格加密？
+3. local $O(h^2)$ defect 怎样在 Lipschitz 条件下累积成 global $O(h)$ error？
+4. 连续系统 $\operatorname{Re}\lambda<0$ 为何仍可能被显式 Euler 离散得不稳定？
+5. discrete backprop 与 continuous adjoint 在什么极限/误差控制下才可比较？
+
+> [!check] 第一遍停靠线
+> 若你能在 $\mathcal R_\square$ 中算出 $N=4$ 的 Euler 值 $(1.21550625,0.0625)$，与 exact flow $(e^{1/5},e^{-2})$ 比较，并解释第二方向的 multiplier 为 $1-2/N$，就已掌握本页主干。
+
+## 符号与对象账本
+
+| 对象 | 定义 | 数值分析身份 | 常见偷换 |
+|---|---|---|---|
+| $T$ | 固定 depth-time horizon | 比较不同网格的共同区间 | 随网络深度一起增长 |
+| $N,h=T/N$ | steps 与 step size | 网格分辨率 | 把 $h$ 隐去并固定为 1 |
+| $f(x,t)$ | 连续向量场 | ODE 生成元 | 任意互不相关的 layer family |
+| $F_k=h f_k$ | residual increment | Euler 单步增量 | 未缩放的完整映射 |
+| $\tau_k$ | exact solution 代入一步所得 defect | local truncation error | global terminal error |
+| $1+h\lambda$ | Euler test-equation multiplier | 离散稳定判据 | continuous multiplier $e^{h\lambda}$ |
+
+### 贯穿算例 $\mathcal R_\square$：同一 horizon 上加密深度
+
+考虑线性 ODE
+
+$$
+\dot x=Ax,
+\qquad
+A=\operatorname{diag}\left(\frac15,-2\right),
+\qquad
+x(0)=(1,1)^{\mathsf T},
+\qquad
+T=1.
+$$
+
+exact flow 是
+
+$$
+x(1)=e^Ax(0)
+=\left(e^{1/5},e^{-2}\right)
+\approx(1.221403,0.135335).
+$$
+
+$N$ 层 Euler/ResNet 使用 $h=1/N$：
+
+$$
+x_N
+=\left(I+\frac AN\right)^N x_0
+=\left(\left(1+\frac1{5N}\right)^N,
+\left(1-\frac2N\right)^N\right).
+$$
+
+| $N$ | expanding direction | dissipative direction |
+|---:|---:|---:|
+| 1 | $1.2$ | $-1$ |
+| 2 | $1.21$ | $0$ |
+| 4 | $1.21550625$ | $0.0625$ |
+| 10 | $1.21899442$ | $0.10737418$ |
+| exact | $1.22140276$ | $0.13533528$ |
+
+$N=4$ 正是 NN-41—42 的 residual chain：每层 matrix 为 $I+A/4=\operatorname{diag}(21/20,1/2)$。两个方向都在趋向 exact flow，但速度和离散行为不同；耗散方向在粗网格上甚至出现翻转或被一步压成 0。
+
+若把 depth 从 4 增到 8，却仍让每层使用 $I+A/4$，得到的是
+
+$$
+\left(I+\frac A4\right)^8x_0,
+$$
+
+对应 horizon 约从 1 延长到 2，而不是在 $[0,1]$ 上把网格加密。因此“更多 residual layers”只有在 scale 与参数族同时受控时才支持 continuous-depth 解释。
+
+## 核心公式七问：Euler–ResNet 对应
+
+$$
+\boxed{
+x_{k+1}=x_k+h f(x_k,t_k),
+\qquad
+h=\frac TN
+}.
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 用离散 residual increments 近似固定时间区间上的连续 flow |
+| 对象 | 一族共享 horizon、step-aware、正则受控的 depth-indexed networks |
+| 来路 | 对 ODE 积分式在每个网格区间使用左端点矩形近似 |
+| 步骤 | 固定 $T$→选 $N,h$→在 $t_k$ 评估 vector field→加 $hf$→重复 |
+| 读法 | residual branch 是带单位的 increment $hf$；$f$ 本身不是直接相加的 state |
+| 检查 | 网格加密收敛、local defect、test-equation stability、discrete/continuous gradient 对比 |
+| 去路 | Neural ODE、continuous adjoint、CNF、stable architectures 与 depth-scaling laws |
+
+### AI / 系统对应
+
+把 ResNet 看成数值格式有助于设计 step scale、稳定 block 和 adaptive computation，但 wall-clock 并不按“函数评估次数”以外的理论量自动改善。Neural ODE 的 tolerance、rejected steps、event handling、adjoint重算和非确定 kernel 都应进入成本/误差账；任务 accuracy 也不能由 solver order 单独推出。
 
 ## 一、学习目标
 

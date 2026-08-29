@@ -24,4 +24,4 @@ updated: 2026-08-29
 - [[neural_network_foundations_teaching_contract_audit.py]]已复核 NN-17—24 的两遍路线、问题链、对象账本、$s_\triangle$ 共享探针与公式七问；
 - 前半卷闭合 sigmoid/tanh 饱和、ReLU/Leaky kink 与 ELU 负支；后半卷独立复算 Softplus/GELU/SiLU、GLU/SwiGLU 两路 VJP 与 Maxout winner，并将局部事实升级为五道证据门；
 - 当前为 **8/8 现行教学迁移、8/8 正文、8/8 A—E 题解、8/8 正式图，30.3 材料门 `regression-passed`**；
-- 全章为 **40/64 已迁移、24/64 pending、分卷材料门 5/8**，30.5 已 `regression-passed`，个人仍为 **0/8 / `not-attempted`**；下一批 NN-41—44。
+- 全章为 **44/64 已迁移、20/64 pending、分卷材料门 5/8**，30.6 前半卷 `in-progress`，个人仍为 **0/8 / `not-attempted`**；下一批 NN-45—48。

@@ -11,13 +11,143 @@ exercises: ["[[习题 - 残差块 Jacobian 与梯度直通]]"]
 solutions: ["[[解答 - 残差块 Jacobian 与梯度直通]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-residual-jacobian-rail-v2.svg]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # 残差块 Jacobian 与梯度直通
 
 > [!abstract] 本章主问题
 > 对 $x^+=x+F(x)$，局部 Jacobian 的确是 $I+J_F$，反向 VJP 的确包含一份未乘 branch 权重的上游梯度。但“含有 $I$”不等于总梯度必为 identity：branch 项可以增强、旋转或抵消直接项，跨层仍是多个 $I+J_F$ 的有序乘积。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-41 已在 $\mathcal R_\square$ 中逐层展开 residual state，并说明 identity baseline 是函数参数化事实；
+- **本页解决什么：** 对同一 block 求 JVP、VJP、singular gains 与四层有序乘积，精确定义“梯度直通”的强度；
+- **后续为何需要：** NN-43 的 Euler variational equation 和 NN-44 的 Lipschitz product bound 都直接复用 $I+J_F$。
+
+**第一遍只算一层和四层。** 先把上游 $g$ 分成 identity term 与 branch term，再乘四个 block Jacobians；亲手看到一个方向放大、另一个方向衰减。
+
+**第二遍再做谱与路径。** 比较 singular/eigen directions、non-normality、cancellation、projection 与 normalization，并把 path expansion 视为精确代数而非独立路径概率模型。
+
+### 问题链
+
+1. $I$ 从计算图的哪条边进入 Jacobian 和 VJP？
+2. 为什么 $g+J_F^{\mathsf T}g$ 可能比 $g$ 大、比 $g$ 小，甚至为零？
+3. 单层 $\|J_F\|<1$ 能给出哪些 singular-value 界，又不能给出什么？
+4. 多层 Jacobian 为什么必须按求值点有序相乘？
+5. path expansion 中不同长度项为何不能未经假设就当成独立随机贡献？
+
+> [!check] 第一遍停靠线
+> 若你能在 $\mathcal R_\square$ 中把 $g=(1,-1)$ 分成 identity term $(1,-1)$ 与 branch term $(1/20,1/2)$，得到一层 VJP $(21/20,-1/2)$ 和四层 VJP $(1.21550625,-1/16)$，就已掌握本页主干。
+
+## 符号与对象账本
+
+| 对象 | 定义 | 方向 | 不能混成 |
+|---|---|---|---|
+| $J_F(x_\ell)$ | branch 对 state 的局部 Jacobian | JVP 中向前作用 | 参数 Jacobian $J_\theta F$ |
+| $M_\ell=I+J_F(x_\ell)$ | 完整 residual block Jacobian | state perturbation map | identity 保证书 |
+| $v$ | JVP tangent | input→output | VJP cotangent $g$ |
+| $g$ | 输出端 VJP seed | output→input，经转置作用 | forward activation |
+| $\sigma_{\min},\sigma_{\max}$ | 最坏方向局部 gains | Euclidean norm | eigenvalue magnitudes |
+| $M_{L-1}\cdots M_0$ | 多层 forward Jacobian | 右侧先作用 | 可交换标量乘积 |
+
+### 贯穿算例 $\mathcal R_\square$：identity rail 与 branch 逐方向干涉
+
+共享线性 branch 的 Jacobian 为
+
+$$
+J_F=B=
+\begin{bmatrix}
+1/20&0\\
+0&-1/2
+\end{bmatrix},
+$$
+
+所以完整 block Jacobian
+
+$$
+M=I+B
+=\begin{bmatrix}
+21/20&0\\
+0&1/2
+\end{bmatrix}.
+$$
+
+对 JVP direction $v=(1,1)^{\mathsf T}$：
+
+$$
+Mv=v+Bv
+=(1,1)+\left(\frac1{20},-\frac12\right)
+=\left(\frac{21}{20},\frac12\right).
+$$
+
+第一坐标 branch 与 identity 同向，第二坐标反向；同一个 block 同时含 expansion 与 contraction。
+
+对上游 VJP seed $g=(1,-1)^{\mathsf T}$，因为本例矩阵对称，
+
+$$
+B^{\mathsf T}g
+=\left(\frac1{20},\frac12\right)^{\mathsf T},
+$$
+
+因此
+
+$$
+\boxed{
+g_x=g+B^{\mathsf T}g
+=\left(\frac{21}{20},-\frac12\right)^{\mathsf T}
+}.
+$$
+
+identity term 确实未经 branch weight 直接进入 accumulator，但第二坐标仍从 $-1$ 衰减到 $-1/2$；“有直达项”不等于“总梯度原样复制”。
+
+四层 Jacobian 为
+
+$$
+M^4
+=\begin{bmatrix}
+(21/20)^4&0\\
+0&(1/2)^4
+\end{bmatrix}
+=\begin{bmatrix}
+194481/160000&0\\
+0&1/16
+\end{bmatrix}.
+$$
+
+所以
+
+$$
+(M^4)^{\mathsf T}g
+=\left(\frac{194481}{160000},-\frac1{16}\right)
+=(1.21550625,-0.0625).
+$$
+
+单层 singular values 是 $(21/20,1/2)$，四层是 $((21/20)^4,1/16)$。直接项没有阻止一个方向逐层消失，也没有阻止另一方向逐层增长。
+
+## 核心公式七问：residual VJP
+
+$$
+\boxed{
+g_{x_\ell}
+=\left[I+J_F(x_\ell)\right]^{\mathsf T}g_{x_{\ell+1}}
+=g_{x_{\ell+1}}+J_F(x_\ell)^{\mathsf T}g_{x_{\ell+1}}
+}.
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 把上游 cotangent 沿 shortcut 与 branch 两条输入路径拉回并累加 |
+| 对象 | 固定 forward state 上的局部 VJP，不是期望梯度或训练后统计 |
+| 来路 | addition 的两条 differential 加 chain rule |
+| 步骤 | 保留一份 $g$→计算 branch VJP→在同一 input accumulator 相加 |
+| 读法 | identity term 直接存在；总结果由两项方向关系决定 |
+| 检查 | JVP/VJP 对偶 $g^TMv=(M^Tg)^Tv$；finite difference；singular-value scan |
+| 去路 | Euler variational step、深层 product、residual scaling 与 effective-path evidence |
+
+### AI / 系统对应
+
+训练日志若只报 gradient norm，会把方向性抵消、layerwise rotation 和某些 coordinates 的消失混在一起。更可靠的 residual 诊断包括随机 JVP/VJP 对偶、branch/identity cosine、局部 singular estimates、跨深度 gain，以及 normalization/dropout realization。mixed precision 中两条路径的加法顺序和尺度差还会造成可见 rounding loss。
 
 ## 一、学习目标
 

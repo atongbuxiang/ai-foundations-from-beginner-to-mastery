@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks/residual-stability, neural-ode]
 source_type: paper
 title: "Beyond Finite Layer Neural Networks: Bridging Deep Architectures and Numerical Differential Equations"
@@ -15,7 +15,7 @@ scope_role: core
 temporal_role: foundational
 related: ["[[ResNet 的 ODE 与离散动力系统视角]]", "[[Euler、Runge-Kutta 与离散化误差]]", "[[残差缩放、Lipschitz 界与深度稳定性]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # Lu et al.：深网与数值微分方程

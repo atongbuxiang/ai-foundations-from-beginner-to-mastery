@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks/residual-stability, identity-mapping]
 source_type: paper
 title: "Identity Mappings in Deep Residual Networks"
@@ -15,7 +15,7 @@ scope_role: core
 temporal_role: foundational
 related: ["[[残差学习、恒等捷径与退化问题]]", "[[残差块 Jacobian 与梯度直通]]", "[[Pre-Activation、Pre-Norm 与 Post-Norm 残差]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # He et al.：Identity Mappings
@@ -51,4 +51,3 @@ $$
 ## 课程调用边界
 
 本卡支持“存在 algebraic identity rail”，不支持“full Jacobian singular values 自动集中在 1”。后者还需要 branch Jacobian 的 norm、方向、相关性、非正规性和训练演化。
-

@@ -486,7 +486,7 @@ updated: 2026-08-29
 | CALC-CUM-01 | CALC-01—16：微积分、矩阵微分与自动微分卷末累计验收 | regression-passed：题卷、详解、[[实验 - 微积分、矩阵微分与自动微分累计复现门]]与[[calculus_ad_cumulative_contract_audit.py]]已通过独立静态/计算回归；个人仍为not-attempted |
 | NLA-CUM-01 | NUM-01—20：数值计算与数值线性代数卷末累计验收 | regression-passed：题卷、详解、[[实验 - 数值线性代数累计复现门]]与[[numerical_cumulative_contract_audit.py]]已通过独立静态/计算回归；个人仍为 not-attempted |
 | DYN-CUM-01 | DYN-01—12：ODE、动力系统与 SDE 卷末累计验收 | regression-passed：题卷、详解、[[实验 - ODE、动力系统与 SDE 累计复现门]]与[[dynamics_cumulative_contract_audit.py]]已通过解析、canonical/盲参静态与计算回归；个人仍为 not-attempted |
-| NN-CUM-01 | NN-01—64：神经网络基础第三章累计验收 | legacy composed：现行迁移 40/64、待迁移 24/64，材料门 5/8，30.5 `regression-passed`，个人 not-attempted；由[[neural_network_foundations_teaching_contract_audit.py]]复核 |
+| NN-CUM-01 | NN-01—64：神经网络基础第三章累计验收 | legacy composed：现行迁移 44/64、待迁移 20/64，材料门 5/8，30.6 前半卷 in-progress，个人 not-attempted；由[[neural_network_foundations_teaching_contract_audit.py]]复核 |
 | ARCH-CAP-01 | ARCH-01—64：表示与模型架构第四章跨卷累计验收 | composed：[[阶段测验 - 表示与模型架构（第四章）]]、[[阶段测验解答 - 表示与模型架构（第四章）]]和[[实验 - 表示与模型架构跨卷累计复现门]]已建立；等待真实独立作答 |
 | MATH-FND-CAP-01 | 十卷150节点的跨卷理论、AI系统审计与研究合同总出口 | regression-passed：题卷、详解、[[实验 - 数学基础十卷跨章累计复现门]]与[[math_foundations_capstone_contract_audit.py]]已通过十卷材料前置、答案/输出隔离、canonical/三轨盲参回归；个人仍为not-attempted |
 | `L2-A` | Gram–Schmidt、QR、消元/LU、trace/determinant、正定、Cholesky | incorporated：10.2部分已纳入LA-CUM-01，其余由10.3承接 |

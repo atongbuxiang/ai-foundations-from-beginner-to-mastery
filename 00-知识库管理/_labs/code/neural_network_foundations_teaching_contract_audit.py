@@ -23,7 +23,7 @@ SOLUTIONS = LABS / "solutions"
 CODE = LABS / "code"
 FIGURE_AUDITOR = CODE / "audit-markdown-figure-units.mjs"
 ASSET_DIR = ROOT / "00-知识库管理" / "_assets" / "figures" / "neural-networks"
-MIGRATED_IDS = tuple(range(1, 41))
+MIGRATED_IDS = tuple(range(1, 45))
 
 STATE_SURFACES = (
     CHAPTER / "神经网络基础 MOC.md",
@@ -36,6 +36,7 @@ STATE_SURFACES = (
     CHAPTER / "30.3-激活函数、门控与非线性" / "激活函数、门控与非线性 MOC.md",
     CHAPTER / "30.4-初始化与信号传播" / "初始化与信号传播 MOC.md",
     CHAPTER / "30.5-归一化、尺度与统计量" / "归一化、尺度与统计量 MOC.md",
+    CHAPTER / "30.6-残差连接、深度与稳定性" / "残差连接、深度与稳定性 MOC.md",
 )
 
 EXPECTED_FIGURE_SCRIPTS = {
@@ -205,12 +206,13 @@ def audit_migrated_contract(nodes: list[tuple[int, Path, str]]) -> None:
             "X_\\diamond" if node_id <= 16 else
             "s_\\triangle" if node_id <= 24 else
             "\\mathcal I_\\square" if node_id <= 32 else
-            "\\mathcal N_\\square"
+            "\\mathcal N_\\square" if node_id <= 40 else
+            "\\mathcal R_\\square"
         )
         require(fixture in content, f"{relative}: shared teaching fixture missing: {fixture}")
         require("AI" in content, f"{relative}: AI object mapping missing")
         require(len(content.splitlines()) >= 180, f"{relative}: derivation depth unexpectedly short")
-    print("PASS NN teaching migration waves A--J: NN-01--40 course position/two-pass/problem/object/formula contracts=40/40")
+    print("PASS NN teaching migration waves A--K: NN-01--44 course position/two-pass/problem/object/formula contracts=44/44")
 
 
 def audit_wave_c_fixture(nodes: list[tuple[int, Path, str]]) -> None:
@@ -651,6 +653,72 @@ def audit_wave_j_fixture(nodes: list[tuple[int, Path, str]]) -> None:
     print("PASS NN wave-J independent math: RMS VJP; IN/GN/WN objects; Pre/Post rails; distributed M2 and causal-axis contrast exact")
 
 
+def audit_wave_k_fixture(nodes: list[tuple[int, Path, str]]) -> None:
+    """Recompute the NN-41--44 residual/Jacobian/Euler/scaling chain."""
+    eigenvalues = (0.2, -2.0)
+    horizon = 1.0
+    depth = 4
+    step = horizon / depth
+    branch = tuple(step * value for value in eigenvalues)
+    multiplier = tuple(1.0 + value for value in branch)
+    require(branch == (0.05, -0.5) and multiplier == (1.05, 0.5), "NN wave-K residual block drifted")
+
+    states = [(1.0, 1.0)]
+    increments: list[tuple[float, float]] = []
+    for _ in range(depth):
+        current = states[-1]
+        increment = tuple(branch[i] * current[i] for i in range(2))
+        increments.append(increment)
+        states.append(tuple(current[i] + increment[i] for i in range(2)))
+    expected_states = (
+        (1.0, 1.0),
+        (21.0 / 20.0, 1.0 / 2.0),
+        (441.0 / 400.0, 1.0 / 4.0),
+        (9261.0 / 8000.0, 1.0 / 8.0),
+        (194481.0 / 160000.0, 1.0 / 16.0),
+    )
+    require(all(abs(states[k][i] - expected_states[k][i]) < 1e-15 for k in range(5) for i in range(2)), f"NN wave-K state trace drifted: {states}")
+    increment_sum = tuple(sum(increment[i] for increment in increments) for i in range(2))
+    require(all(abs(actual - expected) < 1e-15 for actual, expected in zip(increment_sum, (34481.0 / 160000.0, -15.0 / 16.0))), "NN wave-K residual sum drifted")
+
+    seed = (1.0, -1.0)
+    branch_vjp = tuple(branch[i] * seed[i] for i in range(2))
+    one_vjp = tuple(seed[i] + branch_vjp[i] for i in range(2))
+    four_vjp = tuple(multiplier[i] ** depth * seed[i] for i in range(2))
+    require(branch_vjp == (0.05, 0.5) and one_vjp == (1.05, -0.5), "NN wave-K one-block VJP drifted")
+    require(all(abs(actual - expected) < 1e-15 for actual, expected in zip(four_vjp, (194481.0 / 160000.0, -1.0 / 16.0))), "NN wave-K four-block VJP drifted")
+
+    euler: dict[int, tuple[float, float]] = {
+        count: tuple((1.0 + value / count) ** count for value in eigenvalues)
+        for count in (1, 2, 4, 10)
+    }
+    require(all(abs(actual - expected) < 1e-15 for actual, expected in zip(euler[1], (1.2, -1.0))), "NN wave-K N=1 Euler trace drifted")
+    require(all(abs(actual - expected) < 1e-15 for actual, expected in zip(euler[2], (1.21, 0.0))), "NN wave-K N=2 Euler trace drifted")
+    require(abs(euler[4][0] - 1.21550625) < 1e-15 and euler[4][1] == 0.0625, "NN wave-K N=4 Euler trace drifted")
+    require(abs(euler[10][0] - 1.2189944199947573) < 1e-15 and abs(euler[10][1] - 0.1073741824) < 1e-15, "NN wave-K N=10 Euler trace drifted")
+    exact = (math.exp(0.2), math.exp(-2.0))
+    require(abs(exact[0] - 1.2214027581601699) < 1e-15 and abs(exact[1] - 0.1353352832366127) < 1e-15, "NN wave-K exact flow drifted")
+
+    lipschitz = 2.0
+    depth_budget = depth * step * lipschitz
+    product_bound = (1.0 + step * lipschitz) ** depth
+    actual_gain = max(abs(value) ** depth for value in multiplier)
+    require(depth_budget == 2.0 and product_bound == 5.0625, "NN wave-K deterministic bound drifted")
+    require(abs(actual_gain - 1.21550625) < 1e-15 and actual_gain < product_bound < math.exp(depth_budget), "NN wave-K bound-looseness contrast drifted")
+    require(abs(2.0 * math.sqrt(16.0) - 8.0) < 1e-15, "NN wave-K sqrt-depth budget drifted")
+
+    wave = {node_id: content for node_id, _, content in nodes if 41 <= node_id <= 44}
+    expected_markers = {
+        41: ("194481}{160000", "34481}{160000"),
+        42: ("194481}{160000", "-\\frac1{16}"),
+        43: ("1.21899442", "e^{1/5}"),
+        44: ("5.0625", "S_N=2\\sqrt N"),
+    }
+    for node_id, markers in expected_markers.items():
+        require(all(marker in wave[node_id] for marker in markers), f"NN-{node_id:02d}: wave-K numeric/depth closure missing")
+    print("PASS NN wave-K independent math: residual state sum; one/four-block VJP; Euler depth refinement; Lipschitz bound looseness exact")
+
+
 def question_ids(content: str) -> list[str]:
     return re.findall(r"^###\s+([^\s]+-[A-E]\d{2})\s*$", content, re.M)
 
@@ -808,12 +876,12 @@ def audit_state_surfaces() -> None:
     for path in STATE_SURFACES:
         content = read(path)
         require(audit_name in content, f"state surface misses NN audit: {path.relative_to(ROOT)}")
-        migrated_mentions = content.count("40/64") + content.count("40 / 64")
-        pending_mentions = content.count("24/64") + content.count("24 / 64")
+        migrated_mentions = content.count("44/64") + content.count("44 / 64")
+        pending_mentions = content.count("20/64") + content.count("20 / 64")
         require(migrated_mentions >= 1 and pending_mentions >= 1, f"state surface misses NN migrated/pending counts: {path.relative_to(ROOT)}")
         require("5/8" in content or "5 / 8" in content, f"state surface misses NN material-gate count: {path.relative_to(ROOT)}")
         require("not-attempted" in content, f"state surface overclaims NN learner: {path.relative_to(ROOT)}")
-    print("PASS NN state surfaces: 5 global + 5 volume views agree on migrated=40/64, pending=24/64, material gates=5/8, learner=not-attempted")
+    print("PASS NN state surfaces: 5 global + 6 volume views agree on migrated=44/64, pending=20/64, material gates=5/8, learner=not-attempted")
 
 
 def main() -> None:
@@ -832,6 +900,7 @@ def main() -> None:
     audit_wave_h_fixture(nodes)
     audit_wave_i_fixture(nodes)
     audit_wave_j_fixture(nodes)
+    audit_wave_k_fixture(nodes)
     audit_exercises(nodes, index)
     audit_sources_and_links(nodes, index)
     audit_figures(nodes, index)
@@ -839,8 +908,8 @@ def main() -> None:
     audit_state_surfaces()
     if args.run_figures:
         audit_deterministic_figures()
-    print("NN-01--40 teaching migration regression: PASS; 30.1--30.5 material gates=5/8")
-    print("NN-41--64 teaching migration: pending (24/64)")
+    print("NN-01--44 teaching migration regression: PASS; 30.1--30.5 material gates=5/8; 30.6 front half=in-progress")
+    print("NN-45--64 teaching migration: pending (20/64)")
     print("PERSONAL LEARNING STATUS: not-attempted")
 
 

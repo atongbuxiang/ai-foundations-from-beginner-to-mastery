@@ -11,13 +11,128 @@ exercises: ["[[习题 - 残差缩放、Lipschitz 界与深度稳定性]]"]
 solutions: ["[[解答 - 残差缩放、Lipschitz 界与深度稳定性]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-residual-scaling-lipschitz-v2.svg]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # 残差缩放、Lipschitz 界与深度稳定性
 
 > [!abstract] 本章主问题
 > residual scale $\alpha_\ell$ 同时控制单层状态扰动、branch Jacobian、参数梯度和数值增量。确定性 worst-case 稳定的核心账本是 $\sum_\ell |\alpha_\ell|L_\ell$，而不是只看每层“很小”；$1/N$ 与 $1/\sqrt N$ 分别服务最坏乘积与随机二阶矩，不能互换。更重要的是，$F$ 小 Lipschitz 并不让 $I+\alpha F$ 自动收缩，收缩还需要方向性的耗散条件。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-42 给出精确 Jacobian product，NN-43 把每层 residual scale 解释为 Euler step size；
+- **本页解决什么：** 从两条 trajectories 的差递推推出 product/exponential/Gronwall bounds，并比较 worst-case 上界、实际方向增益与随机二阶矩账本；
+- **后续为何需要：** NN-45—48 的 norm placement、skip 结构、DeepNorm/Fixup/ReZero 与有效深度证据都要声明自己控制的是哪一个尺度账本。
+
+**第一遍只做确定性账。** 对每层写 $1+|\alpha_\ell|L_\ell$，累乘并用指数界；再在共享对角例子上比较上界 $e^2$ 与真实 gain。
+
+**第二遍再加入方向和随机性。** 用 one-sided Lipschitz 检查 contraction，把 $1/N$ 的 worst-case 累积与 $1/\sqrt N$ 的零均值方差累积分开，并加入 roundoff forcing。
+
+### 问题链
+
+1. 为什么每层 residual 很小仍不足以保证随深度 uniform stable？
+2. $\sum |\alpha_\ell|L_\ell$ 怎样控制 product bound？
+3. 普通 Lipschitz 常数只给幅度，收缩为何还需要方向性耗散？
+4. $1/N$ 与 $1/\sqrt N$ 分别让哪个量保持 $O(1)$？
+5. 合法的 worst-case bound 为什么可能比真实网络 gain 松很多？
+
+> [!check] 第一遍停靠线
+> 若你能对 $\mathcal R_\square$ 算出 $L=2$、$\sum_{\ell=0}^3hL=2$、worst-case bound $e^2$，再与真实最大 gain $(21/20)^4=1.21550625$ 比较，就已掌握本页主干。
+
+## 符号与对象账本
+
+| 对象 | 定义 | 控制对象 | 不等于 |
+|---|---|---|---|
+| $\alpha_\ell$ | residual branch scale | state/Jacobian/parameter-gradient amplitude | 单独的稳定证书 |
+| $L_\ell$ | $F_\ell$ 的 Lipschitz upper bound | branch 差分幅度 | block contraction rate |
+| $S_N=\sum|\alpha_\ell|L_\ell$ | deterministic depth budget | worst-case exponential bound | actual log gain |
+| $\mu$ | one-sided Lipschitz/dissipativity constant | branch 与 state difference 的夹角 | 普通非负 Lipschitz 常数 |
+| $\xi_\ell$ | 每层外加误差 | rounding/quantization/approximation forcing | 初值扰动 |
+| $N\alpha^2$ | 零均值不相关增量的方差账 | stochastic second moment | adversarial worst case |
+
+### 贯穿算例 $\mathcal R_\square$：同一个合法上界为何很松
+
+共享 branch 为 $F(x)=Ax$，其中
+
+$$
+A=\operatorname{diag}\left(\frac15,-2\right),
+\qquad
+\|A\|_2=L=2.
+$$
+
+四层都取 $\alpha_\ell=h=1/4$，所以确定性账本为
+
+$$
+S_4=\sum_{\ell=0}^3hL
+=4\times\frac14\times2
+=2.
+$$
+
+通用 product 与 exponential bounds 给出
+
+$$
+\|\delta_4\|
+\le\left(1+\frac12\right)^4\|\delta_0\|
+=5.0625\|\delta_0\|
+\le e^2\|\delta_0\|.
+$$
+
+但真实 block Jacobian 是
+
+$$
+M=I+hA=\operatorname{diag}\left(\frac{21}{20},\frac12\right),
+$$
+
+故四层真实最大 singular gain 只有
+
+$$
+\|M^4\|_2
+=\left(\frac{21}{20}\right)^4
+=1.21550625.
+$$
+
+上界之所以松，是因为它用 $\|I+hA\|\le1+h\|A\|=1.5$，把第二坐标的强耗散 $-2$ 当成最坏同向扩张。合法 upper bound 可以作为安全预算，却不是网络真实动力的估计量。
+
+按方向看得更清楚：
+
+- 第一坐标 $x^+=(1+h/5)x$，必然缓慢扩张；
+- 第二坐标 $x^+=(1-2h)x=x/2$，满足 $0<h\beta<2$ 的离散收缩条件；
+- 同一个全局 $L=2$ 无法表达这两个相反方向。
+
+若对任意深度 $N$ 都取 $h=1/N$，则 $S_N=2$，worst-case bound depth-uniform。若误把 $h=1/\sqrt N$ 当成同一证书，则
+
+$$
+S_N=2\sqrt N,
+$$
+
+确定性 bound 随深度恶化；只有在 branch increments 近似零均值、不相关等额外统计假设下，$N h^2=1$ 才控制二阶矩。
+
+## 核心公式七问：residual product bound
+
+$$
+\boxed{
+\|\delta_N\|
+\le
+\prod_{\ell=0}^{N-1}(1+|\alpha_\ell|L_\ell)\|\delta_0\|
+\le
+\exp\!\left(\sum_{\ell=0}^{N-1}|\alpha_\ell|L_\ell\right)\|\delta_0\|
+}.
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 给任意方向、任意允许 branch 的输入敏感性提供 deterministic upper certificate |
+| 对象 | 指定 domain/norm 上的两条 state trajectories |
+| 来路 | 单步 triangle inequality + Lipschitz bound，再递推并用 $1+z\le e^z$ |
+| 步骤 | 定 norm/domain→估每层 $L_\ell$→乘 scale→求和/乘积→与 empirical gain 对照 |
+| 读法 | depth-uniform 的充分条件是总 budget 有界，不是每个单项看起来小 |
+| 检查 | 对角/线性模型精算真实 gain；做方向扫描；报告 bound looseness 与 forcing tail |
+| 去路 | DeepNorm/Fixup/ReZero、spectral control、stochastic depth、quantization-error propagation |
+
+### AI / 系统对应
+
+实践中应同时记录 theoretical upper bound、empirical local JVP gain、branch/skip cosine、activation ratio 和 overflow/roundoff events。把 Lipschitz 上界直接叫作 robustness 或 generalization 会跨越 threat model、margin、loss 和数据分布；把 $1/\sqrt N$ 的初始化方差直觉直接叫作 worst-case stability 也会混淆两套量词。
 
 ## 一、学习目标
 

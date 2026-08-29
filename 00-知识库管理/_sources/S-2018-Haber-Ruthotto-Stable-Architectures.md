@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks/residual-stability, dynamical-systems]
 source_type: paper
 title: "Stable Architectures for Deep Neural Networks"
@@ -15,7 +15,7 @@ scope_role: core
 temporal_role: foundational
 related: ["[[ResNet 的 ODE 与离散动力系统视角]]", "[[残差缩放、Lipschitz 界与深度稳定性]]", "[[刚性系统、绝对稳定域与隐式方法]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # Haber–Ruthotto：Stable Architectures

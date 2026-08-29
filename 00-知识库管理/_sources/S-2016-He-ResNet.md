@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks/residual-stability, resnet]
 source_type: paper
 title: "Deep Residual Learning for Image Recognition"
@@ -16,7 +16,7 @@ scope_role: core
 temporal_role: foundational
 related: ["[[残差学习、恒等捷径与退化问题]]", "[[残差块 Jacobian 与梯度直通]]", "[[Pre-Activation、Pre-Norm 与 Post-Norm 残差]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # He et al.：Deep Residual Learning
@@ -56,4 +56,3 @@ $$
 - training degradation 与 overfitting 不同：前者在原论文中表现为训练误差也变差；
 - shortcut projection、stride 与 channel change 必须从 $I$ 改写成一般 $P$；
 - 原论文的 accuracy、depth 与硬件结果属于历史实验，不是现代任务的默认基线。
-
