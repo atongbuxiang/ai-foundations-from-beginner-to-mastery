@@ -23,7 +23,7 @@ SOLUTIONS = LABS / "solutions"
 CODE = LABS / "code"
 FIGURE_AUDITOR = CODE / "audit-markdown-figure-units.mjs"
 ASSET_DIR = ROOT / "00-知识库管理" / "_assets" / "figures" / "neural-networks"
-MIGRATED_IDS = tuple(range(1, 33))
+MIGRATED_IDS = tuple(range(1, 37))
 
 STATE_SURFACES = (
     CHAPTER / "神经网络基础 MOC.md",
@@ -35,6 +35,7 @@ STATE_SURFACES = (
     CHAPTER / "30.2-计算图、反向传播与自动微分" / "计算图、反向传播与自动微分 MOC.md",
     CHAPTER / "30.3-激活函数、门控与非线性" / "激活函数、门控与非线性 MOC.md",
     CHAPTER / "30.4-初始化与信号传播" / "初始化与信号传播 MOC.md",
+    CHAPTER / "30.5-归一化、尺度与统计量" / "归一化、尺度与统计量 MOC.md",
 )
 
 EXPECTED_FIGURE_SCRIPTS = {
@@ -203,12 +204,13 @@ def audit_migrated_contract(nodes: list[tuple[int, Path, str]]) -> None:
             "X_\\oplus" if node_id <= 8 else
             "X_\\diamond" if node_id <= 16 else
             "s_\\triangle" if node_id <= 24 else
-            "\\mathcal I_\\square"
+            "\\mathcal I_\\square" if node_id <= 32 else
+            "\\mathcal N_\\square"
         )
         require(fixture in content, f"{relative}: shared teaching fixture missing: {fixture}")
         require("AI" in content, f"{relative}: AI object mapping missing")
         require(len(content.splitlines()) >= 180, f"{relative}: derivation depth unexpectedly short")
-    print("PASS NN teaching migration waves A--H: NN-01--32 course position/two-pass/problem/object/formula contracts=32/32")
+    print("PASS NN teaching migration waves A--I: NN-01--36 course position/two-pass/problem/object/formula contracts=36/36")
 
 
 def audit_wave_c_fixture(nodes: list[tuple[int, Path, str]]) -> None:
@@ -499,6 +501,79 @@ def audit_wave_h_fixture(nodes: list[tuple[int, Path, str]]) -> None:
     print("PASS NN wave-H independent math: ReLU correlation; semi-orthogonal rank collapse; zero-head gradients; LSUV/Fixup scales exact")
 
 
+def audit_wave_i_fixture(nodes: list[tuple[int, Path, str]]) -> None:
+    """Recompute the NN-33--36 axis, state, and normalization-VJP chain."""
+    x = (
+        (1.0, 2.0, 3.0),
+        (2.0, 4.0, 6.0),
+        (3.0, 6.0, 9.0),
+    )
+
+    def normalize(groups: tuple[tuple[float, ...], ...]) -> tuple[tuple[float, ...], tuple[float, ...], tuple[tuple[float, ...], ...]]:
+        means = tuple(sum(group) / len(group) for group in groups)
+        variances = tuple(
+            sum((value - mean) ** 2 for value in group) / len(group)
+            for group, mean in zip(groups, means)
+        )
+        normalized = tuple(
+            tuple((value - mean) / math.sqrt(variance) for value in group)
+            for group, mean, variance in zip(groups, means, variances)
+        )
+        return means, variances, normalized
+
+    columns = tuple(tuple(x[row][column] for row in range(3)) for column in range(3))
+    bn_means, bn_variances, bn_columns = normalize(columns)
+    ln_means, ln_variances, ln_rows = normalize(x)
+    a = math.sqrt(3.0 / 2.0)
+    expected_stats = ((2.0, 4.0, 6.0), (2.0 / 3.0, 8.0 / 3.0, 6.0))
+    require(bn_means == ln_means == expected_stats[0], "NN wave-I means drifted")
+    require(all(abs(actual - expected) < 1e-15 for actual, expected in zip(bn_variances, expected_stats[1])), "NN wave-I BN variance drifted")
+    require(all(abs(actual - expected) < 1e-15 for actual, expected in zip(ln_variances, expected_stats[1])), "NN wave-I LN variance drifted")
+    bn = tuple(tuple(bn_columns[column][row] for column in range(3)) for row in range(3))
+    expected_bn = ((-a, -a, -a), (0.0, 0.0, 0.0), (a, a, a))
+    expected_ln = ((-a, 0.0, a), (-a, 0.0, a), (-a, 0.0, a))
+    require(all(abs(bn[i][j] - expected_bn[i][j]) < 1e-15 for i in range(3) for j in range(3)), "NN wave-I BN axes drifted")
+    require(all(abs(ln_rows[i][j] - expected_ln[i][j]) < 1e-15 for i in range(3) for j in range(3)), "NN wave-I LN axes drifted")
+
+    unbiased = tuple(1.5 * value for value in bn_variances)
+    running_mean = tuple(0.5 * value for value in bn_means)
+    running_variance = tuple(0.5 + 0.5 * value for value in unbiased)
+    require(unbiased == (1.0, 4.0, 9.0), f"NN wave-I unbiased observations drifted: {unbiased}")
+    require(running_mean == (1.0, 2.0, 3.0) and running_variance == (1.0, 2.5, 5.0), "NN wave-I running state drifted")
+    eval_output = tuple(
+        tuple((x[i][j] - running_mean[j]) / math.sqrt(running_variance[j]) for j in range(3))
+        for i in range(3)
+    )
+    expected_eval = (
+        (0.0, 0.0, 0.0),
+        (1.0, math.sqrt(8.0 / 5.0), 3.0 / math.sqrt(5.0)),
+        (2.0, math.sqrt(32.0 / 5.0), 6.0 / math.sqrt(5.0)),
+    )
+    require(all(abs(eval_output[i][j] - expected_eval[i][j]) < 1e-15 for i in range(3) for j in range(3)), "NN wave-I eval path drifted")
+
+    group = columns[0]
+    xhat = bn_columns[0]
+    seed = (1.0, 0.0, 0.0)
+    seed_mean = sum(seed) / 3.0
+    radial_mean = sum(g * value for g, value in zip(seed, xhat)) / 3.0
+    r = math.sqrt(2.0 / 3.0)
+    dx = tuple((g - seed_mean - value * radial_mean) / r for g, value in zip(seed, xhat))
+    expected_dx = (a / 6.0, -a / 3.0, a / 6.0)
+    require(all(abs(actual - expected) < 1e-15 for actual, expected in zip(dx, expected_dx)), f"NN wave-I VJP drifted: {dx}")
+    require(abs(sum(dx)) < 1e-15 and abs(sum(value * grad for value, grad in zip(xhat, dx))) < 1e-15, "NN wave-I VJP invariants drifted")
+
+    wave = {node_id: content for node_id, _, content in nodes if 33 <= node_id <= 36}
+    expected_markers = {
+        33: ("\\widehat X_{\\mathrm{BN}}", "\\widehat X_{\\mathrm{LN}}"),
+        34: ("\\sqrt{32/5}", "\\bar{\\boldsymbol q}'"),
+        35: ("0.204", "d\\gamma=-a"),
+        36: ("一个 token 的三个 features", "\\frac a6,-\\frac a3,\\frac a6"),
+    }
+    for node_id, markers in expected_markers.items():
+        require(all(marker in wave[node_id] for marker in markers), f"NN-{node_id:02d}: wave-I numeric/axis closure missing")
+    print("PASS NN wave-I independent math: BN/LN axes; biased/unbiased state; train/eval split; dense normalization VJP exact")
+
+
 def question_ids(content: str) -> list[str]:
     return re.findall(r"^###\s+([^\s]+-[A-E]\d{2})\s*$", content, re.M)
 
@@ -656,11 +731,12 @@ def audit_state_surfaces() -> None:
     for path in STATE_SURFACES:
         content = read(path)
         require(audit_name in content, f"state surface misses NN audit: {path.relative_to(ROOT)}")
-        equal_count_mentions = content.count("32/64") + content.count("32 / 64")
-        require(equal_count_mentions >= 2, f"state surface misses distinct NN migrated/pending counts: {path.relative_to(ROOT)}")
+        migrated_mentions = content.count("36/64") + content.count("36 / 64")
+        pending_mentions = content.count("28/64") + content.count("28 / 64")
+        require(migrated_mentions >= 1 and pending_mentions >= 1, f"state surface misses NN migrated/pending counts: {path.relative_to(ROOT)}")
         require("4/8" in content or "4 / 8" in content, f"state surface misses NN material-gate count: {path.relative_to(ROOT)}")
         require("not-attempted" in content, f"state surface overclaims NN learner: {path.relative_to(ROOT)}")
-    print("PASS NN state surfaces: 5 global + 4 volume views agree on migrated=32/64, pending=32/64, learner=not-attempted")
+    print("PASS NN state surfaces: 5 global + 5 volume views agree on migrated=36/64, pending=28/64, learner=not-attempted")
 
 
 def main() -> None:
@@ -677,6 +753,7 @@ def main() -> None:
     audit_wave_f_fixture(nodes)
     audit_wave_g_fixture(nodes)
     audit_wave_h_fixture(nodes)
+    audit_wave_i_fixture(nodes)
     audit_exercises(nodes, index)
     audit_sources_and_links(nodes, index)
     audit_figures(nodes, index)
@@ -684,8 +761,8 @@ def main() -> None:
     audit_state_surfaces()
     if args.run_figures:
         audit_deterministic_figures()
-    print("NN-01--32 teaching migration regression: PASS; 30.1--30.4 material gates=4/8")
-    print("NN-33--64 teaching migration: pending (32/64)")
+    print("NN-01--36 teaching migration regression: PASS; 30.1--30.4 material gates=4/8; 30.5 front half=in-progress")
+    print("NN-37--64 teaching migration: pending (28/64)")
     print("PERSONAL LEARNING STATUS: not-attempted")
 
 

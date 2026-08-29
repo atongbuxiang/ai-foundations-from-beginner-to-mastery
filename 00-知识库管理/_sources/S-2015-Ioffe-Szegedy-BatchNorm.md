@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks/normalization]
 source_type: paper
 title: "Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift"
@@ -16,7 +16,7 @@ scope_role: core
 temporal_role: foundational
 related: ["[[归一化的对象、轴与不变性]]", "[[BatchNorm 前向统计与训练—推理差异]]", "[[BatchNorm 反向传播、尺度不变性与噪声]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # Ioffe–Szegedy：Batch Normalization
@@ -77,4 +77,3 @@ $$
 - NN-34：Algorithm 1/2、卷积归约与 train/eval 双语义；
 - NN-35：batch coupling、尺度不变性与反向 Jacobian；
 - NN-40：small batch、SyncBN、distributed aggregation 与有限精度边界。
-

@@ -11,13 +11,116 @@ exercises: ["[[习题 - LayerNorm 的逐样本几何与反向传播]]"]
 solutions: ["[[解答 - LayerNorm 的逐样本几何与反向传播]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-layernorm-token-geometry-v2.svg]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # LayerNorm 的逐样本几何与反向传播
 
 > [!abstract] 本章主问题
 > 常见 Transformer LayerNorm 对每个 token 的 feature vector 独立执行“投影到共同平移方向的正交补，再按 centered RMS 归一半径，最后逐 feature affine”。它不依赖 batch size，也没有 running statistics；但同一 token 内所有 features 的前向与反向仍然密集耦合。$\varepsilon$、normalized shape 和低维退化决定了精确不变性与 Jacobian 谱。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-33 给出统一轴合同，NN-35 已推导一个 centered normalization group 的闭式 VJP；
+- **本页解决什么：** 把统计组从“一个 feature 的 batch entries”换成“一个 sample/token 的 feature coordinates”，并加入逐 feature gain；
+- **后续为何需要：** Transformer 的 Pre-Norm/Post-Norm、RMSNorm、残差流尺度与低精度训练都依赖这里的逐 token 几何。
+
+**第一遍只做换轴。** 对每个 token 独立算 feature mean/variance；记住别的 batch 样本和 token 不影响它，但同一 token 内 features 仍密集耦合。
+
+**第二遍再做几何。** 用 centering projector 与 radial normalization 推导 Jacobian eigenspaces，检查 vector gain、$D=1/2$ 退化、$\varepsilon$ 与 normalized-shape 边界。
+
+### 问题链
+
+1. LayerNorm 与 BatchNorm 共用哪段数学，又在哪个 axis contract 上分叉？
+2. “不依赖 batch”为什么不等于“逐元素独立”？
+3. centering projector 如何把 token vector 放入 $\boldsymbol1^\perp$？
+4. 为什么同一条 VJP 在 BN 中跨样本传播，在 LN 中却跨 features 传播？
+5. 逐 feature $\boldsymbol\gamma$ 如何改变上游 seed，却不改变 normalization Jacobian 本身？
+
+> [!check] 第一遍停靠线
+> 若你能对 $\mathcal N_\square$ 的三行分别做 LayerNorm，得到每行均为 $a(-1,0,1)$，并说明修改第二、三行不会改变第一行输出或其输入梯度，就已掌握本页主干。
+
+## 符号与对象账本
+
+| 对象 | 定义 | Transformer 中的身份 | 不与谁共享统计量 |
+|---|---|---|---|
+| $\boldsymbol x_{bt}=X_{b,t,:}$ | 固定 sample/token 的 feature vector | hidden state | 其他 batch 与 token |
+| $D$ | normalized feature count | hidden width 或 normalized-shape 元素数 | batch size |
+| $P=I-\boldsymbol1\boldsymbol1^{\mathsf T}/D$ | centering projector | 删除共同 feature offset | 不删除任意 feature pattern |
+| $\widehat{\boldsymbol x}$ | centered、按 RMS 缩放后的 token direction | normalized representation | 不保留原 centered radius |
+| $\boldsymbol\gamma,\boldsymbol\beta$ | 逐 feature affine 参数 | 跨 token 共享的可学习坐标尺度/偏移 | 不参与统计量估计 |
+| $\boldsymbol u=\boldsymbol\gamma\odot\boldsymbol g$ | 穿过 vector gain 的 VJP seed | token 内反向信号 | 不跨 token 聚合 |
+
+### 贯穿算例 $\mathcal N_\square$：同一闭式，耦合语义换了轴
+
+继续取
+
+$$
+X=
+\begin{bmatrix}
+1&2&3\\
+2&4&6\\
+3&6&9
+\end{bmatrix},
+\qquad
+a=\sqrt{\frac32},
+\qquad
+\gamma=1,\ \beta=0,\ \varepsilon=0.
+$$
+
+三行的 mean 分别为 $(2,4,6)$，biased variance 分别为 $(2/3,8/3,6)$。每行虽然原尺度不同，标准化后却都是同一方向：
+
+$$
+\widehat X_{\mathrm{LN}}
+=a
+\begin{bmatrix}
+-1&0&1\\
+-1&0&1\\
+-1&0&1
+\end{bmatrix}.
+$$
+
+只看第一行 $\boldsymbol x=(1,2,3)$，令该 token 的上游 seed 为 $\boldsymbol g=(1,0,0)$。由于 scalar gain 暂取 1，$\boldsymbol u=\boldsymbol g$，因此复用 centered-normalization VJP 可得
+
+$$
+\nabla_{\boldsymbol x}L
+=\left(\frac a6,-\frac a3,\frac a6\right).
+$$
+
+数值与 NN-35 的 BN 小例子完全相同，但索引含义完全不同：
+
+- 在 BN 中，这三个分量属于 **三个样本的同一个 feature**；
+- 在 LN 中，这三个分量属于 **一个 token 的三个 features**。
+
+所以修改 $X$ 的第二、三行不会改变第一行 LN 的前向或反向；修改第一行的第二、三个 features 却会改变第一 feature 的 normalized output。所谓“LN 无 batch coupling”只否定前一种依赖，没有否定 token 内 dense coupling。
+
+## 核心公式七问：vector-gain LayerNorm VJP
+
+$$
+\boxed{
+\nabla_{\boldsymbol x}L
+=\frac1r\left[
+\boldsymbol u-\overline u\,\boldsymbol1
+-\widehat{\boldsymbol x}\,\overline{u\widehat x}
+\right],
+\qquad
+\boldsymbol u=\boldsymbol\gamma\odot\boldsymbol g
+}.
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 把一个 token 输出上的 VJP seed 拉回该 token 的全部 normalized coordinates |
+| 对象 | 单个 normalized-shape group；不同 token 各自独立应用 |
+| 来路 | 与 BN 相同的 centering/radial differential，先额外穿过逐 feature gain |
+| 步骤 | 算 $u=\gamma\odot g$→组均值→径向投影→除以 $r$ |
+| 读法 | $\gamma$ 改变进入 projector 的 seed；统计组仍由 normalized shape 决定 |
+| 检查 | 每个 token 的 $dx$ 总和为 0；$\varepsilon=0$ 时与其 $\widehat x$ 正交 |
+| 去路 | RMSNorm、Pre/Post-Norm Transformer、residual-stream geometry 与 fused kernels |
+
+### AI / 系统对应
+
+Transformer 中的 `LayerNorm(D)` 通常对每个 token 的最后一维归约，所以不需要跨 data-parallel workers 同步统计量，也不会破坏自回归因果性；但若 normalized shape 错含 sequence axis，未来 token 就可能泄漏进统计量。fused kernel、mixed precision 与 tensor parallel 还必须在同一 normalized group 上实现一致的 reduction 和 accumulation dtype。
 
 ## 一、学习目标
 
@@ -580,4 +683,3 @@ $$
 - [[归一化、尺度与统计量 MOC]]
 - [[习题 - LayerNorm 的逐样本几何与反向传播]]
 - [[解答 - LayerNorm 的逐样本几何与反向传播]]
-

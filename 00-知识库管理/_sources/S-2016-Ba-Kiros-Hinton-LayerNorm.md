@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks/normalization]
 source_type: paper
 title: "Layer Normalization"
@@ -15,7 +15,7 @@ scope_role: core
 temporal_role: foundational
 related: ["[[归一化的对象、轴与不变性]]", "[[LayerNorm 的逐样本几何与反向传播]]", "[[RMSNorm、均值移除与缩放不变性]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # Ba–Kiros–Hinton：Layer Normalization
@@ -77,4 +77,3 @@ $$
 - $D=1$ 完全退化，$D=2$ 且 $\varepsilon=0$ 时局部 Jacobian 几乎处处为零；
 - Transformer 的 Pre/Post-Norm 放置属于残差 Jacobian 问题，在 NN-39 与 NN-45 单独处理；
 - RMSNorm 删除 centering 后改变的是几何和不变性，不是“更便宜的同一算子”。
-

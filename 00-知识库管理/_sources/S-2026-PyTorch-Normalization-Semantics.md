@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks/normalization, implementation]
 source_type: documentation
 title: "PyTorch BatchNorm2d and LayerNorm API Semantics"
@@ -14,7 +14,7 @@ scope_role: core
 temporal_role: implementation-aged
 related: ["[[归一化的对象、轴与不变性]]", "[[BatchNorm 前向统计与训练—推理差异]]", "[[LayerNorm 的逐样本几何与反向传播]]", "[[小批量、混合精度、分布式与因果归一化边界]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # PyTorch：BatchNorm 与 LayerNorm 实现语义
@@ -65,4 +65,3 @@ updated: 2026-08-23
 - fused inference kernel 可能把 BN 折叠进 convolution/linear；
 - autocast/accumulation dtype 不由数学公式自动决定；
 - 本卡支撑“PyTorch 2.13 怎样做”，不支撑“所有 BatchNorm/LayerNorm 必须这样做”。
-

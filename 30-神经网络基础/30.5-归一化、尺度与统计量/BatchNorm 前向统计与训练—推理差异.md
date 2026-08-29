@@ -11,13 +11,140 @@ exercises: ["[[习题 - BatchNorm 前向统计与训练—推理差异]]"]
 solutions: ["[[解答 - BatchNorm 前向统计与训练—推理差异]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-batchnorm-forward-state-v2.svg]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # BatchNorm 前向统计与训练—推理差异
 
 > [!abstract] 本章主问题
 > BatchNorm 在训练时用当前归约组的均值与方差标准化，同时更新 running buffers；常见推理模式改用固定 buffers，因此训练图和推理图不是同一个前向算子。真正的实现合同还包括卷积归约轴、biased/unbiased variance 的分工、momentum 方向、batch companions 与可折叠的 affine 变换。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-33 已给出 normalization 的轴合同，并在 $\mathcal N_\square$ 中确定 BN 是逐 feature、跨 batch 统计；
+- **本页解决什么：** 把“当前 batch 上算输出”和“跨 step 更新运行状态”分成两条数值链，再解释 eval 为何使用另一个函数；
+- **后续为何需要：** NN-35 的 dense backward coupling 只属于 train-mode current-statistics 图，模型部署、融合和分布漂移则依赖这里的 frozen-state 图。
+
+**第一遍只走一次完整前向。** 算 biased batch variance 得 training output，再用 unbiased observation 更新 buffer，最后拿更新后的 buffer 重算 eval output。
+
+**第二遍再审计实现语义。** 检查卷积 axes、momentum 方向、distributed aggregation、small batch、buffer dtype、checkpoint 与 affine folding。
+
+### 问题链
+
+1. 当前 batch 的 mean/variance 是模型参数、临时量，还是持久状态？
+2. 为什么 training forward 常用 denominator $m$，running variance update 却可能接收 denominator $m-1$ 的观测？
+3. 为什么一次 training forward 同时产生 activation output 与 state mutation 两种结果？
+4. 同一个 $X$ 在 train/eval 下为何能得到不同输出，且这不是浮点误差？
+5. 何时 BN 可以折叠进 Linear/Conv，何时绝对不能？
+
+> [!check] 第一遍停靠线
+> 若你能在 $\mathcal N_\square$ 中算出 training output、更新后的 running mean/variance，以及同一输入的 eval output，并指出两条路径分别使用哪组统计量，就已掌握本页主干。
+
+## 符号与对象账本
+
+| 对象 | 定义 | 生命周期 | 是否由反向传播学习 |
+|---|---|---|---|
+| $\mu_c^{(B)},q_c^{(B)}$ | 当前归约组的 batch mean/biased variance | 一次 training forward | 否，但位于 activation 计算图中 |
+| $s_c^{2(B)}$ | 常见 running update 使用的 unbiased variance observation | 一次状态更新 | 否 |
+| $\bar\mu_c,\bar q_c$ | running mean/variance buffers | 跨 training steps 持久化 | 否，由更新规则写入 |
+| $\gamma_c,\beta_c$ | per-channel affine parameters | 整个训练 | 是 |
+| $\alpha$ | 新观测在 running update 中的权重 | 配置超参数 | 否 |
+| mode | train 或 eval | 当前执行上下文 | 决定前向图与 state mutation |
+
+### 贯穿算例 $\mathcal N_\square$：一次调用其实有两条输出链
+
+继续使用
+
+$$
+X=
+\begin{bmatrix}
+1&2&3\\
+2&4&6\\
+3&6&9
+\end{bmatrix},
+\qquad
+\gamma=1, \beta=0, \varepsilon=0.
+$$
+
+训练前向的 batch mean 与 biased variance 为
+
+$$
+\boldsymbol\mu^{(B)}=(2,4,6),
+\qquad
+\boldsymbol q^{(B)}=\left(\frac23,\frac83,6\right),
+$$
+
+故 $a=\sqrt{3/2}$ 时
+
+$$
+Y_{\mathrm{train}}
+=a
+\begin{bmatrix}
+-1&-1&-1\\
+0&0&0\\
+1&1&1
+\end{bmatrix}.
+$$
+
+但 buffer update 观察到的 unbiased variance 是
+
+$$
+\boldsymbol s^{2(B)}
+=\frac{3}{2}\boldsymbol q^{(B)}
+=(1,4,9).
+$$
+
+设调用前 $\bar{\boldsymbol\mu}=(0,0,0)$、$\bar{\boldsymbol q}=(1,1,1)$，新观测权重 $\alpha=1/2$。则调用后的状态为
+
+$$
+\bar{\boldsymbol\mu}'=(1,2,3),
+\qquad
+\bar{\boldsymbol q}'=\left(1,\frac52,5\right).
+$$
+
+若立刻切到 eval，并把同一个 $X$ 再送入，固定 buffer 给出
+
+$$
+Y_{\mathrm{eval}}
+=
+\begin{bmatrix}
+0&0&0\\
+1&\sqrt{8/5}&3/\sqrt5\\
+2&\sqrt{32/5}&6/\sqrt5
+\end{bmatrix}
+\approx
+\begin{bmatrix}
+0&0&0\\
+1&1.265&1.342\\
+2&2.530&2.683
+\end{bmatrix}.
+$$
+
+这与 $Y_{\mathrm{train}}$ 明显不同。训练调用的直接 activation output 使用当前 biased statistics；同一次调用的副作用则用另一种 variance observation 慢慢更新持久 buffer。把这两条链混成“BN 的均值方差”会立即失去可复现性。
+
+## 核心公式七问：train activation 与 running-state update
+
+$$
+\widehat x_{ic}^{\mathrm{train}}
+=\frac{x_{ic}-\mu_c^{(B)}}{\sqrt{q_c^{(B)}+\varepsilon}},
+\qquad
+(\bar\mu_c',\bar q_c')
+=(1-\alpha)(\bar\mu_c,\bar q_c)+\alpha(\mu_c^{(B)},s_c^{2(B)}).
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 用当前组控制训练 activation，同时积累可供固定推理使用的统计状态 |
+| 对象 | 左式是计算图内 activation；右式是计算图外 buffers 的 state transition |
+| 来路 | batch estimate 提供即时标准化，exponential moving average 平滑跨 batch 观测 |
+| 步骤 | 算 biased $q_B$→输出 train activation→转成所需 observation $s_B^2$→更新 buffers |
+| 读法 | $\alpha$ 是“新数据权重”；不同库若把 momentum 定义成旧状态权重，公式会反向 |
+| 检查 | 固定 seed/input 后 train 与 eval 一般不等；eval 不应再修改 buffers |
+| 去路 | BN backward、distributed sync、calibration、Conv-BN folding 与 deployment drift |
+
+### AI / 系统对应
+
+小 batch 会让即时统计噪声变大，data parallel 若只在本卡归约会让每张卡执行不同函数，gradient accumulation 也不自动等于扩大 BN batch。部署时忘记 `eval`、buffer 未校准或 inference distribution 漂移，都可能在参数完全相同的情况下改变模型输出；这是一类 state/mode failure，不应误诊为权重加载失败。
 
 ## 一、学习目标
 

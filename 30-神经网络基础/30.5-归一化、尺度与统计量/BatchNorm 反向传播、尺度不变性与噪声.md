@@ -11,13 +11,139 @@ exercises: ["[[习题 - BatchNorm 反向传播、尺度不变性与噪声]]"]
 solutions: ["[[解答 - BatchNorm 反向传播、尺度不变性与噪声]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-batchnorm-backward-coupling-v2.svg]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # BatchNorm 反向传播、尺度不变性与噪声
 
 > [!abstract] 本章主问题
 > 训练态 BatchNorm 的每个输入既影响自己的标准化值，也影响全组 mean 与 variance，因此反向梯度不是逐元素乘一个 scale，而是“先乘 gain，再删除组均值方向，再删除标准化径向分量”。这产生 dense batch coupling、近似尺度不变性、方向—长度解耦和由 batch composition 驱动的相关噪声；eval 态固定 statistics 后，这些耦合全部消失。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-34 已把 BatchNorm 拆成 current-statistics training graph 与 frozen-statistics eval graph；
+- **本页解决什么：** 沿 training graph 对 mean、variance、inverse standard deviation 逐层反传，说明为什么一个位置的上游梯度会传到同组全部样本；
+- **后续为何需要：** LayerNorm、RMSNorm 与 GroupNorm 的 VJP 都复用这套“删均值方向、删径向分量”的投影结构，只是统计组不同。
+
+**第一遍抓住闭式 VJP。** 先把 $u_i=\gamma g_i$ 写出来，再从每个 $u_i$ 中减掉组均值与沿 $\widehat x$ 的分量；最后除以 $r$。
+
+**第二遍再研究几何后果。** 用 Jacobian eigenspaces 理解尺度不变性、weight-gradient orthogonality、batch-composition noise，以及 $\varepsilon>0$ 对零方向的解除。
+
+### 问题链
+
+1. 为什么把 BN 当成固定 affine scale 会漏掉两条反向路径？
+2. $\operatorname{mean}(u)$ 与 $\operatorname{mean}(u\widehat x)$ 分别删除什么方向？
+3. 上游梯度只落在一个样本时，为什么其余样本仍能收到输入梯度？
+4. $\sum_i dx_i=0$ 与 $\widehat x^{\mathsf T}dx=0$ 应怎样解释和验算？
+5. 为什么 train-mode Jacobian dense，而 eval-mode Jacobian diagonal？
+
+> [!check] 第一遍停靠线
+> 若你能从 $\mathcal N_\square$ 第一列与上游 $g=(1,0,0)$ 算出 $dx=(a/6,-a/3,a/6)$，并解释后两个非零分量来自统计量路径，就已掌握本页主干。
+
+## 符号与对象账本
+
+| 对象 | 定义 | 形状/作用域 | 反向角色 |
+|---|---|---|---|
+| $\boldsymbol x$ | 一个 channel 的 training statistics group | $m$ 个 batch/spatial entries | 所有 entries 经统计量密集耦合 |
+| $\boldsymbol g=\nabla_{\boldsymbol y}L$ | 输出端 VJP seed | 与 $\boldsymbol x$ 同形 | 来自后续网络 |
+| $\boldsymbol u=\gamma\boldsymbol g$ | 穿过 affine gain 后的 seed | 同组向量 | 进入 normalization Jacobian |
+| $\boldsymbol1$ | 常数/共同平移方向 | 组内一维子空间 | VJP 必须删除其分量 |
+| $\widehat{\boldsymbol x}$ | centered radial direction | 与 $\boldsymbol1$ 正交 | $\varepsilon=0$ 时再删除其分量 |
+| $r=\sqrt{q+\varepsilon}$ | 前向实际除数 | 正标量 | 缩放整个 VJP |
+
+### 贯穿算例 $\mathcal N_\square$：一个上游坐标，三个输入都有梯度
+
+取共享张量第一列构成的 BN 统计组
+
+$$
+\boldsymbol x=(1,2,3),
+\qquad
+\mu=2,
+\qquad
+q=\frac23,
+\qquad
+r=\sqrt{\frac23}=\frac1a,
+$$
+
+其中 $a=\sqrt{3/2}$，所以
+
+$$
+\widehat{\boldsymbol x}=(-a,0,a).
+$$
+
+暂取 $\gamma=1$，令损失只直接读取该 channel 第一个样本的 BN 输出，即
+
+$$
+\boldsymbol g=(1,0,0),
+\qquad
+\overline g=\frac13,
+\qquad
+\overline{g\widehat x}=-\frac a3.
+$$
+
+代入闭式 VJP：
+
+$$
+dx_i
+=\frac1r
+\left[g_i-\overline g-\widehat x_i\,\overline{g\widehat x}\right].
+$$
+
+逐项得到
+
+$$
+\begin{aligned}
+dx_1&=a\left(1-\frac13-\frac12\right)=\frac a6,\\
+dx_2&=a\left(0-\frac13-0\right)=-\frac a3,\\
+dx_3&=a\left(0-\frac13+\frac12\right)=\frac a6.
+\end{aligned}
+$$
+
+即
+
+$$
+\boxed{
+\nabla_{\boldsymbol x}L
+=\left(\frac a6,-\frac a3,\frac a6\right)
+\approx(0.204,-0.408,0.204)
+}.
+$$
+
+虽然 $g_2=g_3=0$，但 $x_2,x_3$ 会改变第一项所用的 mean 与 variance，所以其输入梯度不为零。两项验算为
+
+$$
+\boldsymbol1^{\mathsf T}d\boldsymbol x=0,
+\qquad
+\widehat{\boldsymbol x}^{\mathsf T}d\boldsymbol x=0.
+$$
+
+参数梯度也能直接读出：$d\beta=1$，$d\gamma=-a$。
+
+## 核心公式七问：BatchNorm training VJP
+
+$$
+\boxed{
+\frac{\partial L}{\partial x_i}
+=\frac1r\left[
+u_i-\overline u-\widehat x_i\,\overline{u\widehat x}
+\right],
+\qquad u_i=\gamma g_i
+}.
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 把输出端 seed 精确拉回共享统计量的所有输入 |
+| 对象 | 一个 training statistics group，而不是彼此独立的 scalar activations |
+| 来路 | affine、除法、variance、centering 与 mean 五条 differential 合并 |
+| 步骤 | 算 $u$→算 $\overline u$→算 $\overline{u\widehat x}$→删两分量→除以 $r$ |
+| 读法 | 第一项是直接路径，第二项来自 mean，第三项来自 variance/radial normalization |
+| 检查 | 总和应为 0；$\varepsilon=0$ 时还应与 $\widehat x$ 正交；gradcheck 应通过 |
+| 去路 | LN/RMSNorm VJP、scale-invariant parameterization、batch noise 与 distributed BN |
+
+### AI / 系统对应
+
+在 data-parallel BN 中，是否跨设备同步 statistics 不只改变前向数值，也改变 backward coupling graph：local BN 只在单卡 group 内传梯度，SyncBN 则跨卡归约。gradient accumulation 不会自动补上这种耦合。调试时应同时记录 group size、companion samples、mode 与通信边界；只比较最终 loss 无法定位差异来源。
 
 ## 一、学习目标
 

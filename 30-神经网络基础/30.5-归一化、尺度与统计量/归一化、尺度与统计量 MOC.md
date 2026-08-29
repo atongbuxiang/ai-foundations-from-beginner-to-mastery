@@ -5,7 +5,7 @@ area: [neural-networks/normalization]
 prerequisites: ["[[初始化与信号传播 MOC]]"]
 related: ["[[神经网络基础完整课程地图与掌握标准]]", "[[残差连接、深度与稳定性 MOC]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 # 归一化、尺度与统计量 MOC
 | ID | 节点 | 出口 | 状态 |
@@ -19,4 +19,10 @@ updated: 2026-08-23
 | NN-39 | [[Pre-Norm、Post-Norm 与归一化放置]] | placement Jacobian | draft + A–E 闭环 |
 | NN-40 | [[小批量、混合精度、分布式与因果归一化边界]] | systems boundary | draft + A–E 闭环 |
 
-当前为 **8/8 正文、8/8 A—E 题解闭环、0/8 真实验收**。NN-33—40 共 120 题与逐题详解已经形成静态课程闭环；其中后半从 RMSNorm 的几何与 VJP，推进到 Instance/Group/WeightNorm 的对象分类、Pre/Post-Norm 的精确 Jacobian，以及小批量、混合精度、分布式和因果统计边界。`draft` 只表示材料成稿，不表示学习者已经闭卷掌握。下一批进入 30.6 的 NN-41—44。
+## 当前迁移与学习状态
+
+- [[neural_network_foundations_teaching_contract_audit.py]]已复核 NN-33—36 的两遍路线、问题链、对象账本、$\mathcal N_\square$ 共享张量、BN/LN 轴与状态数值链及公式七问；
+- 当前为 **4/8 现行教学迁移、8/8 正文、8/8 A—E 题解、8/8 正式图，30.5 材料门 `in-progress`**；
+- 全章为 **36/64 已迁移、28/64 pending、分卷材料门 4/8**，个人仍为 **0/8 / `not-attempted`**；下一批 NN-37—40。
+
+NN-33—40 共 120 题与逐题详解已经形成静态课程闭环；其中后半从 RMSNorm 的几何与 VJP，推进到 Instance/Group/WeightNorm 的对象分类、Pre/Post-Norm 的精确 Jacobian，以及小批量、混合精度、分布式和因果统计边界。`draft` 只表示材料成稿，不表示学习者已经闭卷掌握。

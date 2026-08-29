@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks/normalization, optimization]
 source_type: paper
 title: "How Does Batch Normalization Help Optimization?"
@@ -16,7 +16,7 @@ scope_role: core
 temporal_role: foundational
 related: ["[[BatchNorm 反向传播、尺度不变性与噪声]]", "[[BatchNorm 前向统计与训练—推理差异]]", "[[Hessian、二阶微分与曲率|损失地形、曲率与重参数化边界]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # Santurkar et al.：BatchNorm 的优化机制
