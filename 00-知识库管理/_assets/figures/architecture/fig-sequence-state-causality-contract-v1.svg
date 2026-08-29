@@ -33,17 +33,17 @@
 <text x="45" y="340" font-size="18" font-weight="700" text-anchor="start" fill="#0F766E" class="math">h_t = F(h_(t-1), x_t)</text>
 <text x="45" y="385" font-size="18" font-weight="700" text-anchor="start" fill="#2563EB" class="math">y_t = G(h_t)</text>
 <text x="45" y="452" font-size="15" font-weight="700" text-anchor="start" fill="#C24135">因果：y_t 不应依赖 x_(t+1)。</text>
-<text x="45" y="485" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">共享 θ 让同一 cell 处理任意长度。</text>
+<text x="45" y="485" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">S□：x=(1,2,−1) → h=(1,5/2,1/4)。</text>
 <text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
 <text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">有限状态是一种等价类</text>
 <rect x="450" y="130" width="135" height="44" rx="6" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
-<text x="518" y="158" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">[a,b,c]</text>
+<text x="518" y="158" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">history (1,0)</text>
 <line x1="590" y1="152" x2="658" y2="250" stroke="#0F766E" stroke-width="2" marker-end="url(#a1)"/>
 <rect x="450" y="215" width="135" height="44" rx="6" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
-<text x="518" y="243" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">[u,v,w,…]</text>
+<text x="518" y="243" font-size="15" font-weight="650" text-anchor="middle" fill="#2563EB">history (0,1/2)</text>
 <line x1="590" y1="237" x2="658" y2="250" stroke="#0F766E" stroke-width="2" marker-end="url(#a1)"/>
 <circle cx="680" cy="250" r="42" fill="#ECFDF5" stroke="#0F766E" stroke-width="2.5"/>
-<text x="680" y="256" font-size="18" font-weight="700" text-anchor="middle" fill="#0F766E">h_t</text>
+<text x="680" y="256" font-size="15" font-weight="700" text-anchor="middle" fill="#0F766E">h₂=1/2</text>
 <text x="445" y="335" font-size="16" font-weight="650" text-anchor="start" fill="#1F2937">若两个历史映到同一 h_t，</text>
 <text x="445" y="372" font-size="16" font-weight="700" text-anchor="start" fill="#C24135">后续 readout 无法再区分它们。</text>
 <text x="445" y="445" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">充分状态是任务相关命题，</text>

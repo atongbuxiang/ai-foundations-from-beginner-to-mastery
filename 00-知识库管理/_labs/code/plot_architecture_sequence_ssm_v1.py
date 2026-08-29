@@ -35,13 +35,13 @@ def state_contract():
     out += [text(45, 340, "h_t = F(h_(t-1), x_t)", 18, 700, cls="math", fill=TEAL)]
     out += [text(45, 385, "y_t = G(h_t)", 18, 700, cls="math", fill=BLUE)]
     out += [text(45, 452, "因果：y_t 不应依赖 x_(t+1)。", 15, 700, fill=RED)]
-    out += [text(45, 485, "共享 θ 让同一 cell 处理任意长度。", 15, fill=MUTED)]
+    out += [text(45, 485, "S□：x=(1,2,−1) → h=(1,5/2,1/4)。", 15, fill=MUTED)]
 
     heading(out, 430, "B", "有限状态是一种等价类", TEAL)
-    for y, hist in ((130, "[a,b,c]"), (215, "[u,v,w,…]")):
+    for y, hist in ((130, "history (1,0)"), (215, "history (0,1/2)")):
         out += [rect(450, y, 135, 44, BLUE, "#EFF6FF", 6, 2), text(518, y + 28, hist, 14, 650, "middle", BLUE)]
         out += [line(590, y + 22, 658, 250, TEAL, 2, marker="a1")]
-    out += [circle(680, 250, 42, TEAL, "#ECFDF5", 2.5), text(680, 256, "h_t", 18, 700, "middle", TEAL)]
+    out += [circle(680, 250, 42, TEAL, "#ECFDF5", 2.5), text(680, 256, "h₂=1/2", 15, 700, "middle", TEAL)]
     out += [text(445, 335, "若两个历史映到同一 h_t，", 16, 650), text(445, 372, "后续 readout 无法再区分它们。", 16, 700, fill=RED)]
     out += [text(445, 445, "充分状态是任务相关命题，", 15, fill=MUTED), text(445, 477, "不是固定维向量的自动性质。", 15, fill=MUTED)]
 
@@ -61,15 +61,16 @@ def bptt_jacobian():
         (RED, BLUE, TEAL),
     )
     heading(out, 42, "A", "反向链条", RED)
+    states = ("h₀=0", "h₁=1", "h₂=5/2", "h₃=1/4")
     for i in range(4):
         x = 60 + i * 85
-        out += [rect(x, 180, 58, 48, BLUE, "#EFF6FF", 5, 2), text(x + 29, 210, f"h{i}", 14, 700, "middle", BLUE)]
+        out += [rect(x, 180, 64, 48, BLUE, "#EFF6FF", 5, 2), text(x + 32, 210, states[i], 12, 700, "middle", BLUE)]
         if i < 3:
-            out += [line(x + 60, 204, x + 81, 204, TEAL, 2.5, marker="a1")]
+            out += [line(x + 66, 204, x + 81, 204, TEAL, 2.5, marker="a1")]
     out += [path("M320 260 C250 330 135 330 65 260", RED, 3, fill="none", marker="a3")]
-    out += [text(192, 352, "J3^T J2^T J1^T g", 19, 700, "middle", RED, cls="math")]
+    out += [text(192, 352, "g: 1/4 → 1/8 → 1/16 → 1/32", 16, 700, "middle", RED, cls="math")]
     out += [text(45, 420, "J_t = d h_t / d h_(t-1)", 17, 700, cls="math")]
-    out += [text(45, 474, "顺序不能交换；每个 J_t 都依赖轨迹。", 15, fill=MUTED)]
+    out += [text(45, 474, "共享 w 梯度：1/8 + 5/8 = 3/4。", 15, fill=MUTED)]
 
     heading(out, 430, "B", "同一乘积的三种方向", BLUE)
     baselines = ((160, 0.55, "vanish", BLUE), (285, 1.0, "preserve", TEAL), (410, 1.55, "explode", RED))
@@ -107,14 +108,15 @@ def lstm_cell():
     out += [line(220, 254, 237, 180, RED, 2, marker="a0"), line(313, 254, 253, 180, RED, 2, marker="a0")]
     out += [text(45, 360, "c_t = f_t * c_(t-1) + i_t * c_new", 17, 700, cls="math", fill=TEAL)]
     out += [text(45, 420, "h_t = o_t * tanh(c_t)", 18, 700, cls="math", fill=BLUE)]
-    out += [text(45, 480, "门值在 (0,1)，但不是概率事件。", 15, fill=MUTED)]
+    out += [text(45, 480, "S□：c=(1,1/4,9/20)，h₃≈0.3375。", 15, fill=MUTED)]
 
     heading(out, 430, "B", "直接梯度路径", BLUE)
     for i, f in enumerate((0.99, 0.95, 0.8)):
         y = 132 + i * 115
         val = f ** 50
         out += [text(445, y, f"f={f:.2f}", 15, 700, fill=BLUE), rect(520, y - 20, 215 * val, 28, TEAL, "#ECFDF5", 3, 1.5), text(740, y, f"f⁵⁰≈{val:.3f}", 14, 650, "end")]
-    out += [text(445, 475, "product(f_k) 只是直接项；总导数还含门的依赖。", 14, fill=MUTED)]
+    out += [text(445, 455, "S□：f₁f₂f₃=(3/4)(1/2)(4/5)=3/10。", 14, 700, fill=BLUE)]
+    out += [text(445, 485, "这只是直接项；总导数还包含门的依赖。", 13, fill=MUTED)]
 
     heading(out, 830, "C", "能够缓解，不等于保证", RED)
     for y, s in ((118, "✓ 加法状态路径"), (180, "✓ 可学习时间尺度"), (260, "△ sigmoid 饱和"), (322, "△ 截断 BPTT"), (384, "△ cell 数值漂移"), (446, "△ 任务未必可识别")):
@@ -137,19 +139,21 @@ def gru_conventions():
     out += [text(45, 470, "有些资料交换 z 与 1−z；方程相容即可。", 14, fill=MUTED)]
 
     heading(out, 430, "B", "逐维插值，不是二选一开关", RED)
-    out += [rect(455, 142, 85, 52, BLUE, "#EFF6FF", 5, 2), text(498, 174, "h old", 15, 700, "middle", BLUE)]
-    out += [rect(650, 142, 85, 52, RED, "#FFF5F2", 5, 2), text(693, 174, "h new", 15, 700, "middle", RED)]
-    out += [line(540, 168, 592, 260, BLUE, 3, marker="a1"), line(650, 168, 608, 260, RED, 3, marker="a1")]
-    out += [circle(600, 280, 42, TEAL, "#ECFDF5", 2.5), text(600, 286, "h_t", 18, 700, "middle", TEAL)]
-    out += [text(445, 370, "z=[0.1,0.9,…] 可让不同维度", 15, 650), text(445, 405, "拥有不同更新速率。", 16, 700, fill=TEAL)]
-    out += [text(445, 475, "reset-before / reset-after 会改变数值图。", 14, fill=MUTED)]
+    out += [rect(455, 142, 105, 52, BLUE, "#EFF6FF", 5, 2), text(508, 174, "old (1,−2)", 13, 700, "middle", BLUE)]
+    out += [rect(630, 142, 105, 52, RED, "#FFF5F2", 5, 2), text(683, 174, "new (−1,2)", 13, 700, "middle", RED)]
+    out += [line(560, 168, 592, 260, BLUE, 3, marker="a1"), line(630, 168, 608, 260, RED, 3, marker="a1")]
+    out += [circle(600, 280, 44, TEAL, "#ECFDF5", 2.5), text(600, 286, "h=(1/2,1)", 14, 700, "middle", TEAL)]
+    out += [text(445, 370, "z=(1/4,3/4)：两维更新速率不同。", 14, 650)]
+    out += [text(445, 420, "reset-before  → (1,0)", 14, 700, fill=BLUE)]
+    out += [text(445, 455, "reset-after    → (2,0)", 14, 700, fill=RED)]
+    out += [text(445, 485, "矩阵混合与逐元素 gate 通常不可交换。", 13, fill=MUTED)]
 
     heading(out, 830, "C", "RNN / GRU / LSTM 合同比较", TEAL)
-    rows = ((125, "state", "h", "h", "(h,c)"), (225, "add path", "no", "yes", "cell"), (325, "gates", "0", "2", "3"), (425, "stream", "d", "d", "2d"))
+    rows = ((115, "state", "h", "h", "(h,c)"), (205, "params*", "32", "96", "128"), (295, "gates", "0", "2", "3"), (385, "direct path", "no", "1−z", "f"), (465, "stream*", "4", "4", "8"))
     out += [text(940, 82, "RNN", 14, 700, "middle", BLUE), text(1020, 82, "GRU", 14, 700, "middle", TEAL), text(1100, 82, "LSTM", 14, 700, "middle", RED)]
     for y, label, a, b, c in rows:
         out += [text(842, y, label, 14, 700), text(940, y, a, 14, 650, "middle"), text(1020, y, b, 14, 650, "middle"), text(1100, y, c, 14, 650, "middle"), line(840, y + 18, 1140, y + 18, GRID, 1)]
-    return finish(out, "比较门控 RNN 时先对齐方程和状态接口，再比较参数、速度与任务证据。")
+    return finish(out, "* d_x=3,d_h=4；比较门控 RNN 时先对齐方程和状态接口，再谈性能。")
 
 
 def continuous_discrete_ssm():

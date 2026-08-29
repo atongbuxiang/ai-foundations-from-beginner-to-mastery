@@ -11,13 +11,125 @@ exercises: ["[[习题 - Vanilla RNN、BPTT 与梯度消失爆炸]]"]
 solutions: ["[[解答 - Vanilla RNN、BPTT 与梯度消失爆炸]]"]
 figure: "[[00-知识库管理/_assets/figures/architecture/fig-rnn-bptt-jacobian-product-v1.svg]]"
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Vanilla RNN、BPTT 与梯度消失爆炸
 
 > [!abstract] 本节主问题
 > Vanilla RNN 在时间上重复同一个非线性映射。前向传播由递推产生，BPTT 则在展开计算图上应用链式法则。远距离信用必须穿过时间 Jacobian 的有序乘积，因此会按方向衰减、放大或旋转；用单个循环矩阵的谱半径不能完整概括一般非线性、时变轨迹。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** ARCH-09 已把状态写成 $h_t=F_\theta(h_{t-1},x_t)$；本页追问末端损失怎样把责任分配给更早的状态、输入与共享参数；
+- **本页解决什么：** 从展开计算图逐步推出 BPTT，区分状态伴随、局部 preactivation 梯度和参数梯度，并解释长 Jacobian 乘积的方向性；
+- **后续为何需要：** ARCH-11—12 的门控并不是“凭经验加开关”，而是在这条乘积路径中加入可学习的近恒等加法通道。
+
+**第一遍只手算一条反向链。** 沿用 $\mathcal S_\square$ 的线性递推，从 $h_3$ 向 $h_0$ 倒推四个伴随，再把共享权重在不同时间的贡献相加。
+
+**第二遍再处理矩阵动力学。** 把标量乘法推广为时变 Jacobian 的有序乘积，区分谱半径、奇异值、非正规瞬态放大和轨迹依赖，并审计 clipping 与 truncated BPTT 的边界。
+
+### 问题链
+
+1. “在时间上展开”为什么复制计算节点，却不复制参数？
+2. $h_t$ 同时影响当前损失和未来状态时，反向信号为何必须相加？
+3. 末端信用从 $T$ 回到 $t$ 要按什么顺序乘 Jacobian？
+4. 同一个 $W_{hh}$ 被使用 $T$ 次，参数梯度为什么是 $T$ 个使用点的和？
+5. 标量 $w^k$ 的指数效应怎样推广为矩阵的方向性放大与衰减？
+6. 为什么 $\rho(W_{hh})$ 不能单独裁决非线性 RNN 的有限时梯度？
+7. clipping、truncation、orthogonal initialization 与 gating 各自改了哪一个对象？
+
+> [!check] 第一遍停靠线
+> 若你能从 $g_3=1/4$ 倒推出 $g_0=1/32$，并把两个非零共享权重贡献 $1/8$ 与 $5/8$ 加成 $d\mathcal L/dw=3/4$，就可以进入 LSTM。矩阵范数和非正规反例留到第二遍。
+
+## 符号与对象账本
+
+| 对象 | 数学身份 | AI 中的身份 | 不能偷换成 |
+|---|---|---|---|
+| $a_t$ | affine preactivation | RNN cell 激活前缓存 | hidden state $h_t$ |
+| $D_t=\operatorname{diag}(\phi'(a_t))$ | 激活局部 Jacobian | 饱和程度记录 | 固定常数矩阵 |
+| $J_t=D_tW_{hh}$ | 时间一步状态 Jacobian | 信用跨过第 $t$ 步的线性化 | 参数梯度本身 |
+| $g_t=d\mathcal L/dh_t$ | 汇总所有未来路径的状态伴随 | hidden gradient | 仅当前 $\ell_t$ 的梯度 |
+| $\delta_t=d\mathcal L/da_t$ | preactivation 伴随 | fused cell backward 输入 | $g_t$ 未经过激活导数的版本 |
+| $d\mathcal L/dW_{hh}$ | 共享参数所有使用点的总和 | optimizer 接收的 weight gradient | 最后一步的局部贡献 |
+| $K$ | 截断窗口长度 | truncated BPTT horizon | forward 状态最多保存的步数 |
+
+### 贯穿算例 $\mathcal S_\square$：把前向链原样倒过来
+
+暂把激活设为恒等映射，令
+
+$$
+h_t=wh_{t-1}+x_t,\qquad
+w=\frac12,\quad h_0=0,\quad x=(1,2,-1),
+$$
+
+并只在末步使用平方损失
+
+$$
+\mathcal L=\frac12h_3^2.
+$$
+
+ARCH-09 已算出
+
+$$
+(h_1,h_2,h_3)=\left(1,\frac52,\frac14\right),
+\qquad \mathcal L=\frac1{32}.
+$$
+
+因为 $\partial h_t/\partial h_{t-1}=w=1/2$，末端伴随逐步倒推为
+
+$$
+g_3=\frac{d\mathcal L}{dh_3}=h_3=\frac14,
+$$
+
+$$
+g_2=wg_3=\frac18,\qquad
+g_1=wg_2=\frac1{16},\qquad
+g_0=wg_1=\frac1{32}.
+$$
+
+所以末端状态对初态的灵敏度是
+
+$$
+\frac{\partial h_3}{\partial h_0}=w^3=\frac18,
+$$
+
+而损失对初态还要再乘末端梯度 $h_3$，得到 $d\mathcal L/dh_0=1/32$。这两个量不能混写。
+
+共享参数 $w$ 在每一步都出现，故
+
+$$
+\frac{d\mathcal L}{dw}
+=\sum_{t=1}^{3}g_t h_{t-1}
+=\frac1{16}\cdot0+\frac18\cdot1+\frac14\cdot\frac52
+=\frac34.
+$$
+
+也可用前向灵敏度 $q_t=\partial h_t/\partial w$ 检查：
+
+$$
+q_t=h_{t-1}+wq_{t-1},\qquad
+(q_1,q_2,q_3)=(0,1,3),
+$$
+
+于是 $d\mathcal L/dw=h_3q_3=(1/4)\cdot3=3/4$。反向法与前向灵敏度给出同一答案，是一个很强的实现自检。
+
+## 核心公式七问：BPTT 伴随递推
+
+$$
+\boxed{g_t=\frac{\partial\ell_t}{\partial h_t}+J_{t+1}^{\mathsf T}g_{t+1},
+\qquad J_{t+1}=\frac{\partial h_{t+1}}{\partial h_t}.}
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 汇总 $h_t$ 对当前损失与全部未来损失的总影响 |
+| 对象 | 第一项来自本时刻监督，第二项把未来伴随经一步状态 Jacobian 拉回当前 |
+| 来路 | 展开计算图上同一节点分叉后的多元链式法则与梯度累加 |
+| 步骤 | 从 $t=T$ 向前递推 $g_t$，再算 $\delta_t=D_tg_t$，最后跨时间累加共享参数梯度 |
+| 读法 | 当前状态既要为“今天的误差”负责，也要为它改变的“所有明天”负责 |
+| 检查 | 线性标量例应得 $(g_3,g_2,g_1,g_0)=(1/4,1/8,1/16,1/32)$；finite difference 应逼近 $3/4$ |
+| 去路 | LSTM 把 cell 直接项改成 forget 连乘，GRU 把 hidden 直接项改成 $(1-z_t)$ 连乘 |
 
 ## 一、从完整形状开始
 

@@ -11,13 +11,128 @@ exercises: ["[[习题 - GRU、门控递推与 RNN 结构比较]]"]
 solutions: ["[[解答 - GRU、门控递推与 RNN 结构比较]]"]
 figure: "[[00-知识库管理/_assets/figures/architecture/fig-gru-gate-conventions-v1.svg]]"
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # GRU、门控递推与 RNN 结构比较
 
 > [!abstract] 本节主问题
 > GRU 用 update gate 在旧 hidden 与新候选之间逐维插值，用 reset gate 控制旧 hidden 怎样参与候选生成。它没有与 hidden 分离的 cell state，接口更紧凑；但不同资料的 update convention 和 reset 位置常不同，名称相同不保证数值图相同。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** LSTM 用 $(h_t,c_t)$ 和三类门拆开存储与暴露；本页研究能否用一个状态和两类门保留主要的加法更新优势；
+- **本页解决什么：** 从“保留旧 hidden 还是写入新候选”的逐维插值推导 GRU，给出 reset-before/after 的不可交换反例，并把 RNN、GRU、LSTM 放进同一参数—状态—梯度合同；
+- **后续为何需要：** ARCH-13 会把门控 retention 与离散状态转移并置，ARCH-16 的选择性 SSM 也会使用输入依赖的写入、保留与读出直觉。
+
+**第一遍只锁定本课程约定。** 牢记本页 $z_t=1$ 表示更偏向新候选，手算二维插值，并从 $(1-z_t)$ 读出一条显式近恒等路径。
+
+**第二遍审计实现差异。** 用矩阵不可交换反例区分 reset-before 与 reset-after，再核对 gate order、bias packing、状态轴和真实硬件 latency；模型名相同不是权重可直接互换的证据。
+
+### 问题链
+
+1. GRU 为什么能只保存一个 $h_t$，而 LSTM 通常要保存 $(h_t,c_t)$？
+2. 本课程的 $z_t=0$ 与 $z_t=1$ 分别退化成什么更新？
+3. update gate 为什么是逐维软插值，而不是整个状态共用的硬开关？
+4. reset gate 作用在候选生成的哪一个位置？
+5. 为什么 $U_h(r_t\odot h)$ 与 $r_t\odot(U_hh)$ 通常不相等？
+6. 参数更少、状态更小，为什么仍不能直接推出墙钟更快或任务更准？
+7. 跨框架迁移 GRU 权重时，哪些中间量必须逐项对齐？
+
+> [!check] 第一遍停靠线
+> 若你能按本页约定复算 $h_t=(1/2,1)$，写出显式直接系数 $(3/4,1/4)$，并用一个 $2\times2$ 矩阵证明 reset-before 与 reset-after 得到 $(1,0)$ 和 $(2,0)$，就完成了本卷前半段的首遍目标。
+
+## 符号与对象账本
+
+| 对象 | 数学身份 | AI 中的身份 | 不能偷换成 |
+|---|---|---|---|
+| $z_t$ | 候选写入比例 | update gate | 所有资料都同义的“保留门” |
+| $1-z_t$ | 旧 hidden 保留比例 | 直接 identity-path 系数 | 完整 recurrent Jacobian |
+| $r_t$ | 旧 hidden 进入候选的调制向量 | reset gate | 清零最终状态的 reset API |
+| $\tilde h_t$ | 输入与受控旧状态生成的候选 | candidate hidden | 已经更新完成的 $h_t$ |
+| $h_t$ | 单一递推状态 | GRU 流式缓存 | LSTM 的 cell state |
+| reset-before | $U_h(r_t\odot h)$ | 一类 GRU 实现 | reset-after 的改名版本 |
+| reset-after | $r_t\odot(U_hh+b)$ | 另一类 GRU 实现 | 与前者普遍数值等价 |
+
+### 贯穿算例 $\mathcal S_\square$：插值账与不可交换反例
+
+先只看最终更新。给定
+
+$$
+h_{t-1}=(1,-2),\qquad
+\tilde h_t=(-1,2),\qquad
+z_t=\left(\frac14,\frac34\right),
+$$
+
+按本课程“$z$ 是写入比例”的约定，
+
+$$
+\begin{aligned}
+h_t
+&=(1-z_t)\odot h_{t-1}+z_t\odot\tilde h_t\\
+&=\left(\frac34,\frac14\right)\odot(1,-2)
++\left(\frac14,\frac34\right)\odot(-1,2)\\
+&=\left(\frac12,1\right).
+\end{aligned}
+$$
+
+在候选与门暂时固定的局部视角中，旧状态的显式直接系数为
+
+$$
+1-z_t=\left(\frac34,\frac14\right).
+$$
+
+第一维慢更新，第二维快更新；这给出了“同一 hidden 的不同维可有不同时间尺度”的最小实例。
+
+再固定
+
+$$
+U_h=\begin{bmatrix}1&1\\0&1\end{bmatrix},\qquad
+r=(1,0),\qquad h=(1,1).
+$$
+
+reset-before 得
+
+$$
+U_h(r\odot h)
+=U_h(1,0)^{\mathsf T}
+=(1,0)^{\mathsf T},
+$$
+
+而 reset-after 得
+
+$$
+r\odot(U_hh)
+=(1,0)\odot(2,1)
+=(2,0)^{\mathsf T}.
+$$
+
+两者不等，因为一般矩阵混合通道与逐元素 gate 不可交换。只有 $U_h$ 为相容对角结构、$r$ 为共同标量或落入其他特殊情形时，结果才可能一致。
+
+沿用 ARCH-11 的 $d_x=3,d_h=4$，GRU 参数量为
+
+$$
+3d_h(d_x+d_h)+3d_h
+=3\cdot4\cdot7+12=96,
+$$
+
+流式只保存 $d_h=4$ 个状态标量；相同维度的现代 LSTM 对应 128 个参数和 8 个状态标量。这是结构账，不是准确率或墙钟排行榜。
+
+## 核心公式七问：GRU 的门控插值
+
+$$
+\boxed{h_t=(1-z_t)\odot h_{t-1}+z_t\odot\tilde h_t.}
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 用单一状态在旧信息和当前候选之间逐维选择更新速率 |
+| 对象 | $h_{t-1}$ 是旧状态，$\tilde h_t$ 是候选内容，$z_t$ 是本页约定下的写入比例 |
+| 来路 | 将 LSTM 的保留/写入直觉耦合成和为 1 的 hidden 插值，同时取消独立 cell/output gate |
+| 步骤 | 先由 $r_t$ 调制旧状态并生成候选，再由 $z_t$ 混合旧状态与候选 |
+| 读法 | 每个维度分别决定“保留多少旧值、换入多少新值” |
+| 检查 | $z=0$ 应精确保留，$z=1$ 应精确采用候选；换资料时必须检查它是否把 $z$ 定义成保留比例 |
+| 去路 | 固定小 $z$ 类似慢 leaky integrator；输入依赖 $z_t$ 为选择性状态更新提供直觉桥梁 |
 
 ## 一、本节先锁定方程约定
 

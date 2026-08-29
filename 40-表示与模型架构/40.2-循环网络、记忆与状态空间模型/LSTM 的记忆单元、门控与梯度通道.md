@@ -11,13 +11,116 @@ exercises: ["[[习题 - LSTM 的记忆单元、门控与梯度通道]]"]
 solutions: ["[[解答 - LSTM 的记忆单元、门控与梯度通道]]"]
 figure: "[[00-知识库管理/_assets/figures/architecture/fig-lstm-cell-gradient-highway-v1.svg]]"
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # LSTM 的记忆单元、门控与梯度通道
 
 > [!abstract] 本节主问题
 > LSTM 把对外 hidden state $h_t$ 与内部 cell state $c_t$ 分开，用 forget、input、output gates 控制保留、写入和读出。关键变化是 $c_t$ 的逐元素加法更新，为梯度提供一条可接近恒等的直接路径；它缓解而非无条件消除长期信用问题。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** ARCH-10 说明 vanilla RNN 的长期信用必须反复穿过循环矩阵与非线性；现在要有目的地重画这条计算路径；
+- **本页解决什么：** 分离内部 cell $c_t$ 与对外 hidden $h_t$，由保留、写入、读出三种动作推出现代 LSTM 方程，并精确限定“梯度高速路”只是总导数中的直接项；
+- **后续为何需要：** ARCH-12 会把双状态合同压缩成 GRU 的单状态插值，ARCH-13 以后会把 retention 看成状态空间中的离散动力学。
+
+**第一遍只追一条 cell 水平线。** 给定门值，逐步计算 $c_1,c_2,c_3$，再只沿显式保留边相乘 $f_1f_2f_3$；此时先不展开门网络的导数。
+
+**第二遍再恢复完整计算图。** 把门对 $h_{t-1}$ 的依赖、$h_{t-1}$ 对 $c_{t-1}$ 的依赖和 output readout 加回总 Jacobian，并审计参数量、流式状态、gate packing 与变体差异。
+
+### 问题链
+
+1. 为什么只保留一个 $h_t$ 难以同时承担长期存储与即时读出？
+2. forget、input、candidate、output 四个向量分别回答什么控制问题？
+3. 为什么 $f_t$ 与 $i_t$ 不必相加为 1，cell 更新也不一定是凸组合？
+4. 加法更新中的哪一条边为梯度提供了不经过新候选非线性的通道？
+5. $\prod f_k$ 为什么只是固定门时的直接项，而不是完整总导数？
+6. forget bias 怎样诱导初始时间尺度，又为什么不保证任务所需记忆？
+7. “LSTM”这个模型名为什么不足以完成跨论文或跨框架复现？
+
+> [!check] 第一遍停靠线
+> 若你能从给定门表复算 $c=(1,1/4,9/20)$、$h_3\approx0.3375$，并指出从 $c_0$ 到 $c_3$ 的显式直接项为 $3/10$，就具备进入 GRU 的必要基础。门网络总导数与变体审计留到第二遍。
+
+## 符号与对象账本
+
+| 对象 | 数学身份 | AI 中的身份 | 不能偷换成 |
+|---|---|---|---|
+| $c_t$ | 内部加法状态 | 长期 cell memory | 对外输出 $h_t$ |
+| $h_t$ | 门控后的暴露状态 | recurrent API 中的 hidden | cell 的无损副本 |
+| $f_t$ | 旧 cell 的逐维保留系数 | forget gate | 确定记忆时长 |
+| $i_t$ | 新候选的逐维写入系数 | input gate | 与 $f_t$ 互补的概率 |
+| $\tilde c_t$ | 有符号候选内容 | candidate update | 已写入的最终 cell |
+| $o_t$ | cell 的逐维暴露系数 | output gate | 删除内部 cell 的开关 |
+| $\prod f_k$ | 显式 cell 边的直接导数 | 一条长期信用通道 | 完整 recurrent Jacobian |
+
+### 贯穿算例 $\mathcal S_\square$：三步门控记忆账
+
+继续使用三个时间步，但现在不把门网络的 affine 细节混进第一次手算。令 $c_0=1$，门值表为
+
+| $t$ | $f_t$ | $i_t$ | $\tilde c_t$ | $o_t$ |
+|---:|---:|---:|---:|---:|
+| 1 | $3/4$ | $1/2$ | $1/2$ | $1$ |
+| 2 | $1/2$ | $1/4$ | $-1$ | $1/2$ |
+| 3 | $4/5$ | $1/2$ | $1/2$ | $4/5$ |
+
+逐行代入 cell 更新：
+
+$$
+c_1=\frac34\cdot1+\frac12\cdot\frac12=1,
+$$
+
+$$
+c_2=\frac12\cdot1+\frac14\cdot(-1)=\frac14,
+$$
+
+$$
+c_3=\frac45\cdot\frac14+\frac12\cdot\frac12
+=\frac15+\frac14=\frac9{20}.
+$$
+
+因此第三步对外状态为
+
+$$
+h_3=\frac45\tanh\left(\frac9{20}\right)\approx0.3375.
+$$
+
+只沿三条显式保留边、暂时固定所有门与候选时，
+
+$$
+\left.\frac{\partial c_3}{\partial c_0}\right|_{\text{gates fixed}}
+=f_1f_2f_3
+=\frac34\cdot\frac12\cdot\frac45
+=\frac3{10}.
+$$
+
+这正是需要严守的限定：$3/10$ 是 cell highway 的一条直接贡献。真实 LSTM 中，$f_t,i_t,o_t,\tilde c_t$ 还通过 $h_{t-1}$ 间接依赖 $c_{t-1}$，总导数会增加其他路径，可能同向也可能抵消。
+
+若设 $d_x=3,d_h=4$，现代四门 LSTM 的参数量为
+
+$$
+4d_h(d_x+d_h)+4d_h
+=4\cdot4\cdot7+16=128,
+$$
+
+而每层每个流式样本需保存 $2d_h=8$ 个状态标量。这是与 ARCH-12 比较时的统一预算基线。
+
+## 核心公式七问：LSTM 的加法 cell 更新
+
+$$
+\boxed{c_t=f_t\odot c_{t-1}+i_t\odot\tilde c_t,
+\qquad h_t=o_t\odot\tanh(c_t).}
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 把长期保留、当前写入和对外读出拆成可学习的逐维控制 |
+| 对象 | $c_t$ 是内部存储，$h_t$ 是暴露状态；$f,i,o$ 是系数，$\tilde c$ 是内容 |
+| 来路 | 在 vanilla RNN 的覆盖式非线性更新旁建立一条逐元素加法状态路径 |
+| 步骤 | 先算四组门/候选，再把旧 cell 与新候选相加，最后经 $o_t\tanh(\cdot)$ 读出 hidden |
+| 读法 | 忘记多少旧内容、写入多少新内容、向外展示多少内部内容 |
+| 检查 | $f\approx1,i\approx0$ 时应近似保留；$f\approx0,i\approx1$ 时应近似替换；流式 API 必须同时传递 $(h,c)$ |
+| 去路 | GRU 把保留与写入耦合成一次 hidden 插值；SSM 把 retention 写成离散状态转移系数 |
 
 ## 一、先声明采用哪个 LSTM
 

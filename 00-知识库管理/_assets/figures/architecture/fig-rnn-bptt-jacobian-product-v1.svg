@@ -7,21 +7,21 @@
 <line x1="800" y1="36" x2="800" y2="520" stroke="#D7DEE8" stroke-width="2"/>
 <text x="42" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#C24135">A</text>
 <text x="80" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">反向链条</text>
-<rect x="60" y="180" width="58" height="48" rx="5" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
-<text x="89" y="210" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">h0</text>
-<line x1="120" y1="204" x2="141" y2="204" stroke="#0F766E" stroke-width="2.5" marker-end="url(#a1)"/>
-<rect x="145" y="180" width="58" height="48" rx="5" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
-<text x="174" y="210" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">h1</text>
-<line x1="205" y1="204" x2="226" y2="204" stroke="#0F766E" stroke-width="2.5" marker-end="url(#a1)"/>
-<rect x="230" y="180" width="58" height="48" rx="5" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
-<text x="259" y="210" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">h2</text>
-<line x1="290" y1="204" x2="311" y2="204" stroke="#0F766E" stroke-width="2.5" marker-end="url(#a1)"/>
-<rect x="315" y="180" width="58" height="48" rx="5" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
-<text x="344" y="210" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">h3</text>
+<rect x="60" y="180" width="64" height="48" rx="5" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="92" y="210" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">h₀=0</text>
+<line x1="126" y1="204" x2="141" y2="204" stroke="#0F766E" stroke-width="2.5" marker-end="url(#a1)"/>
+<rect x="145" y="180" width="64" height="48" rx="5" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="177" y="210" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">h₁=1</text>
+<line x1="211" y1="204" x2="226" y2="204" stroke="#0F766E" stroke-width="2.5" marker-end="url(#a1)"/>
+<rect x="230" y="180" width="64" height="48" rx="5" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="262" y="210" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">h₂=5/2</text>
+<line x1="296" y1="204" x2="311" y2="204" stroke="#0F766E" stroke-width="2.5" marker-end="url(#a1)"/>
+<rect x="315" y="180" width="64" height="48" rx="5" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+<text x="347" y="210" font-size="15" font-weight="700" text-anchor="middle" fill="#2563EB">h₃=1/4</text>
 <path d="M320 260 C250 330 135 330 65 260" fill="none" stroke="#C24135" stroke-width="3" marker-end="url(#a3)"/>
-<text x="192" y="352" font-size="19" font-weight="700" text-anchor="middle" fill="#C24135" class="math">J3^T J2^T J1^T g</text>
+<text x="192" y="352" font-size="16" font-weight="700" text-anchor="middle" fill="#C24135" class="math">g: 1/4 → 1/8 → 1/16 → 1/32</text>
 <text x="45" y="420" font-size="17" font-weight="700" text-anchor="start" fill="#1F2937" class="math">J_t = d h_t / d h_(t-1)</text>
-<text x="45" y="474" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">顺序不能交换；每个 J_t 都依赖轨迹。</text>
+<text x="45" y="474" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">共享 w 梯度：1/8 + 5/8 = 3/4。</text>
 <text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#2563EB">B</text>
 <text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">同一乘积的三种方向</text>
 <line x1="455" y1="160" x2="745" y2="160" stroke="#D7DEE8" stroke-width="1.5"/>

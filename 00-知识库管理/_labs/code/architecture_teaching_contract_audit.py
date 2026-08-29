@@ -6,7 +6,7 @@ The audit keeps three claims separate:
 2. only the declared migration wave satisfies the current beginner-first contract;
 3. personal learning evidence remains not-attempted.
 
-Waves A--B (ARCH-01--08) are recomputed here without importing the figure generators.
+Waves A--C (ARCH-01--12) are recomputed here without importing the figure generators.
 """
 
 from __future__ import annotations
@@ -28,7 +28,7 @@ EXERCISES = LABS / "exercises"
 SOLUTIONS = LABS / "solutions"
 CODE = LABS / "code"
 ASSETS = ROOT / "00-知识库管理" / "_assets" / "figures" / "architecture"
-MIGRATED_IDS = tuple(range(1, 9))
+MIGRATED_IDS = tuple(range(1, 13))
 
 EXPECTED_FIGURES = {
     "fig-architecture-comparison-contract-v1.svg": "28f2e18521dc3e2c885b98bf528740b7010aad60b610e83990ab9cd6f234139e",
@@ -39,12 +39,17 @@ EXPECTED_FIGURES = {
     "fig-receptive-field-theoretical-effective-v1.svg": "e6222846a62b793743a015d5c934f6e75f234fdc739077bb9e556ff806579c9b",
     "fig-cnn-stage-block-budget-v1.svg": "f4f0a434aac7305c168c96ea3a1c6078a4e36ae9268ab0042425189853e80f09",
     "fig-group-equivariance-evidence-v1.svg": "d6842a9364d871a04f3266d3c62dfc4eb4328250dbe5482b14373f19cacfe2db",
+    "fig-sequence-state-causality-contract-v1.svg": "0b4edaf7140a9db9847ba9c92f2e9dc72b1b95294c36e114230c92aebdcfd73e",
+    "fig-rnn-bptt-jacobian-product-v1.svg": "23153b6004d623a0a4c135c9325a51df888971d581600ab703c09353d04ca5b1",
+    "fig-lstm-cell-gradient-highway-v1.svg": "6ee8c40bce570091442668677a74f98f508aced9796c91904425bd45a58bd759",
+    "fig-gru-gate-conventions-v1.svg": "903d535cf953eafd8db57aa7592a1fadc5dd7e860e0f208973ba0aa17749abb8",
 }
 
 STATE_SURFACES = (
     CHAPTER / "表示与模型架构 MOC.md",
     CHAPTER / "表示与模型架构完整课程地图与掌握标准.md",
     CHAPTER / "40.1-卷积、空间结构与等变性" / "卷积、空间结构与等变性 MOC.md",
+    CHAPTER / "40.2-循环网络、记忆与状态空间模型" / "循环网络、记忆与状态空间模型 MOC.md",
     EXERCISES / "练习与测验 MOC.md",
     LABS / "推导与实验 MOC.md",
     ROOT / "00-知识库管理" / "00-总览" / "全库教学重写审计与迁移台账.md",
@@ -183,11 +188,12 @@ def audit_migrated_contract(nodes: list[tuple[int, Path, str]]) -> None:
         relative = path.relative_to(ROOT)
         for marker in markers:
             require(marker in content, f"{relative}: teaching marker missing: {marker}")
-        require("\\mathcal C_\\square" in content, f"{relative}: shared fixture missing")
+        fixture = "\\mathcal C_\\square" if node_id <= 8 else "\\mathcal S_\\square"
+        require(fixture in content, f"{relative}: shared fixture missing: {fixture}")
         require("AI" in content, f"{relative}: AI object mapping missing")
         require(frontmatter_line(content, "updated") == "2026-08-29", f"{relative}: migration date mismatch")
         require(len(content.splitlines()) >= 230, f"{relative}: derivation depth unexpectedly short")
-    print("PASS ARCH waves A--B: ARCH-01--08 course/two-pass/problem/object/formula contracts=8/8")
+    print("PASS ARCH waves A--C: ARCH-01--12 course/two-pass/problem/object/formula contracts=12/12")
 
 
 def audit_exercises(nodes: list[tuple[int, Path, str]], index: dict[str, list[Path]]) -> None:
@@ -230,7 +236,7 @@ def audit_links_and_figures(nodes: list[tuple[int, Path, str]], index: dict[str,
         ET.parse(asset)
         digest = hashlib.sha256(asset.read_bytes()).hexdigest()
         require(digest == expected_hash, f"{filename}: hash changed: {digest}")
-    print(f"PASS ARCH waves A--B links/figures: Wiki links={link_count}; SVG/XML/hash=8/8")
+    print(f"PASS ARCH waves A--C links/figures: Wiki links={link_count}; SVG/XML/hash=12/12")
 
 
 def correlation_valid(x: list[float], w: list[float]) -> list[float]:
@@ -323,15 +329,79 @@ def audit_migrated_math(nodes: list[tuple[int, Path, str]]) -> None:
     require(rotated_feature == [group_feature[-1], *group_feature[:-1]], "C4 output action mismatch")
     require(sum(group_feature) == sum(rotated_feature) == 4.0, "group pooling invariance mismatch")
 
+    inputs = [1.0, 2.0, -1.0]
+    recurrent_weight = 0.5
+    states = [0.0]
+    for value in inputs:
+        states.append(recurrent_weight * states[-1] + value)
+    require(states == [0.0, 1.0, 2.5, 0.25], f"sequence recurrence mismatch: {states}")
+    collision_a = recurrent_weight * (recurrent_weight * 0.0 + 1.0) + 0.0
+    collision_b = recurrent_weight * (recurrent_weight * 0.0 + 0.0) + 0.5
+    require(collision_a == collision_b == 0.5, "state-compression collision mismatch")
+
+    adjoints = [0.0] * 4
+    adjoints[3] = states[3]
+    for step in range(2, -1, -1):
+        adjoints[step] = recurrent_weight * adjoints[step + 1]
+    require(adjoints == [0.03125, 0.0625, 0.125, 0.25], f"BPTT adjoint mismatch: {adjoints}")
+    recurrent_gradient = sum(adjoints[step] * states[step - 1] for step in range(1, 4))
+    require(math.isclose(recurrent_gradient, 0.75), f"shared recurrent gradient mismatch: {recurrent_gradient}")
+
+    def recurrent_loss(weight: float) -> float:
+        state = 0.0
+        for value in inputs:
+            state = weight * state + value
+        return 0.5 * state * state
+
+    epsilon = 1e-6
+    finite_difference = (
+        recurrent_loss(recurrent_weight + epsilon) - recurrent_loss(recurrent_weight - epsilon)
+    ) / (2.0 * epsilon)
+    require(math.isclose(finite_difference, recurrent_gradient, rel_tol=1e-9, abs_tol=1e-9), "BPTT finite difference mismatch")
+
+    forget = [0.75, 0.5, 0.8]
+    write = [0.5, 0.25, 0.5]
+    candidate = [0.5, -1.0, 0.5]
+    cell = 1.0
+    cell_trace: list[float] = []
+    for f_value, i_value, candidate_value in zip(forget, write, candidate):
+        cell = f_value * cell + i_value * candidate_value
+        cell_trace.append(cell)
+    require(cell_trace == [1.0, 0.25, 0.45], f"LSTM cell trace mismatch: {cell_trace}")
+    require(math.isclose(math.prod(forget), 0.3), "LSTM direct retention mismatch")
+    require(math.isclose(0.8 * math.tanh(cell_trace[-1]), 0.33751918, rel_tol=1e-7), "LSTM readout mismatch")
+    lstm_parameters = 4 * 4 * (3 + 4) + 4 * 4
+    require(lstm_parameters == 128 and 2 * 4 == 8, "LSTM parameter/state ledger mismatch")
+
+    old_hidden = [1.0, -2.0]
+    new_hidden = [-1.0, 2.0]
+    update = [0.25, 0.75]
+    gru_hidden = [
+        (1.0 - gate) * old + gate * new
+        for gate, old, new in zip(update, old_hidden, new_hidden)
+    ]
+    require(gru_hidden == [0.5, 1.0], f"GRU interpolation mismatch: {gru_hidden}")
+    matrix = [[1.0, 1.0], [0.0, 1.0]]
+    reset = [1.0, 0.0]
+    probe = [1.0, 1.0]
+    gated_probe = [gate * value for gate, value in zip(reset, probe)]
+    reset_before = [sum(row[j] * gated_probe[j] for j in range(2)) for row in matrix]
+    mixed_probe = [sum(row[j] * probe[j] for j in range(2)) for row in matrix]
+    reset_after = [gate * value for gate, value in zip(reset, mixed_probe)]
+    require(reset_before == [1.0, 0.0] and reset_after == [2.0, 0.0], "GRU reset placement mismatch")
+    gru_parameters = 3 * 4 * (3 + 4) + 3 * 4
+    require(gru_parameters == 96 and 4 == 4, "GRU parameter/state ledger mismatch")
+
     migrated_text = "\n".join(content for node_id, _, content in nodes if node_id in MIGRATED_IDS)
     for anchor in (
         "(-1,-1,2)", "(-1,-1,2,-2,2)", "14", "36",
         "(3,5,13)", "9,216", "7,225,344", "(1,1,4,-2)",
+        "(1,5/2,1/4)", "1/32", "3/4", "(1,1/4,9/20)", "3/10", "(1/2,1)", "128", "96",
     ):
         require(anchor in migrated_text, f"wave-A teaching anchor missing: {anchor}")
     print(
-        "PASS ARCH waves A--B independent math: convolution/equivariance, aliasing, RF, "
-        "CNN budget and C4 lifting exact"
+        "PASS ARCH waves A--C independent math: convolution/equivariance, aliasing, RF, "
+        "CNN budget, C4 lifting, recurrence/BPTT and LSTM/GRU gates exact"
     )
 
 
@@ -339,24 +409,25 @@ def audit_state_surfaces() -> None:
     for path in STATE_SURFACES:
         content = read(path)
         relative = path.relative_to(ROOT)
-        require("ARCH-01—08" in content, f"{relative}: migrated range missing")
-        require("8/64" in content, f"{relative}: migrated count missing")
+        require("ARCH-01—12" in content, f"{relative}: migrated range missing")
+        require("12/64" in content, f"{relative}: migrated count missing")
         require("1/8" in content, f"{relative}: material-gate count missing")
         require("not-attempted" in content, f"{relative}: personal state missing")
     print(
         f"PASS ARCH state surfaces: {len(STATE_SURFACES)} views agree on "
-        "migrated=8/64, material gates=1/8, personal=not-attempted"
+        "migrated=12/64, material gates=1/8, personal=not-attempted"
     )
 
 
 def audit_compute() -> None:
     before = {name: hashlib.sha256((ASSETS / name).read_bytes()).hexdigest() for name in EXPECTED_FIGURES}
     scripts = (
-        CODE / "plot_architecture_convolution_foundations_v1.py",
-        CODE / "plot_architecture_convolution_advanced_v1.py",
+        (CODE / "plot_architecture_convolution_foundations_v1.py", 4),
+        (CODE / "plot_architecture_convolution_advanced_v1.py", 4),
+        (CODE / "plot_architecture_sequence_ssm_v1.py", 8),
     )
     for _ in range(2):
-        for script in scripts:
+        for script, expected_count in scripts:
             result = subprocess.run(
                 [sys.executable, str(script)],
                 cwd=ROOT,
@@ -364,10 +435,10 @@ def audit_compute() -> None:
                 capture_output=True,
                 text=True,
             )
-            require(result.stdout.count("fig-") == 4, f"unexpected generator stdout: {result.stdout}")
+            require(result.stdout.count("fig-") == expected_count, f"unexpected generator stdout: {result.stdout}")
     after = {name: hashlib.sha256((ASSETS / name).read_bytes()).hexdigest() for name in EXPECTED_FIGURES}
     require(before == after == EXPECTED_FIGURES, f"deterministic figure replay changed assets: {after}")
-    print("PASS ARCH waves A--B deterministic figure replay: 8 SVGs, two runs, byte-identical")
+    print("PASS ARCH waves A--C deterministic figure replay: 12 migrated SVGs, two runs, byte-identical")
 
 
 def main() -> None:
@@ -384,7 +455,7 @@ def main() -> None:
     audit_state_surfaces()
     if args.run_compute:
         audit_compute()
-    print("ARCH-01--08 teaching migration regression: PASS; chapter material gates=1/8")
+    print("ARCH-01--12 teaching migration regression: PASS; chapter material gates=1/8")
     print("PERSONAL LEARNING STATUS: not-attempted")
 
 
