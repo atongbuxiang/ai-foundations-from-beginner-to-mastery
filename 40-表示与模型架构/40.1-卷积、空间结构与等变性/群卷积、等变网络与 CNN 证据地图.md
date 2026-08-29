@@ -11,13 +11,102 @@ exercises: ["[[习题 - 群卷积、等变网络与 CNN 证据地图]]"]
 solutions: ["[[解答 - 群卷积、等变网络与 CNN 证据地图]]"]
 figure: "[[00-知识库管理/_assets/figures/architecture/fig-group-equivariance-evidence-v1.svg]]"
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # 群卷积、等变网络与 CNN 证据地图
 
 > [!abstract] 本节主问题
 > 普通 convolution 把整数平移对称性写进参数共享；group convolution 把这一思想推广到选定群的作用。网络中间 feature 不必对旋转/反射保持不变，而应以已知方式变换。精确等变性是结构恒等式；样本效率、表达能力和任务性能则需要附加定理与实验，不能越级推断。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** ARCH-03 已在整数平移群上证明共享相关与作用可交换，ARCH-05—07 已暴露采样、边界与成本裂缝；
+- **本页解决什么：** 把“相对位移共享”推广为“沿群轨道共享”，用四次 90° 旋转手算 lifting feature 的重排，再建立整卷证据阶梯；
+- **后续为何需要：** 40.3 的节点置换、40.6 的位置编码/RoPE 和其他等变网络都需要相同的 group/action/output-action 合同。
+
+**第一遍只跟踪 orientation axis。** 旋转输入后，不要求 group feature 数值逐项不动，而要求它按确定方向循环重排；若最终任务不关心方向，才在 group axis 上做 invariant readout。
+
+**第二遍重建换元与证据。** 明确 left/right action、inverse 和 measure，再把结构恒等式 `I`、条件定理 `T`、实验 `E`、解释 `H` 与开放问题 `O` 分开。
+
+### 问题链
+
+1. 任务真正允许的变换怎样组成群作用与轨道？
+2. 普通卷积的相对位移共享怎样成为群卷积原型？
+3. Lifting feature 为什么多出 orientation/group 轴？
+4. 输入旋转后，这个轴应如何重排才能称为等变？
+5. 何时可以 pool group axis，何时会删除任务需要的姿态？
+6. 精确等变为什么不能自动推出样本效率、准确率或部署最优？
+
+> [!check] 第一遍停靠线
+> 若你能由 $F_x=(1,1,4,-2)$ 得到旋转输入后的 $F_{Rx}=(-2,1,1,4)$，并解释它是 orientation 轴的循环重排而非数值失败，就完成了 40.1 第一遍主线。
+
+## 符号与对象账本
+
+| 对象 | 数学身份 | AI 身份 | 必须声明 |
+|---|---|---|---|
+| $G$ | 变换群 | 离散平移/旋转/反射集合 | 元素、复合、是否有限/连续 |
+| $T_g$ | 输入空间上的表示 | 对图像/feature 的变换 | 插值、边界与坐标约定 |
+| $S_g$ 或 $L_g$ | 输出/group feature 上的表示 | 位置与 orientation 的重排 | left/right 与 inverse convention |
+| $\operatorname{Orb}(x)$ | $\{T_gx:g\in G\}$ | 一个样本的变换轨道 | 不等于标签一定不变 |
+| $F_x(g)$ | group-indexed feature | lifting response | invariant scalar |
+| $r(F)$ | group-axis readout | 分类等不关心姿态的输出 | 姿态估计 head |
+| `I/T/E/H/O` | 证据等级 | 恒等式到开放问题 | 可以相互越级的结论 |
+
+### 贯穿算例 $\mathcal C_\square$：$C_4$ lifting 的精确重排
+
+把局部对比模板提升到 $2\times2$ 网格，取
+
+$$
+x=\begin{bmatrix}2&-1\\0&3\end{bmatrix},
+\qquad
+\psi=\begin{bmatrix}2&0\\0&-1\end{bmatrix},
+$$
+
+并令 $R$ 表示逆时针 90° 的精确格点旋转。对 $G=C_4=\{I,R,R^2,R^3\}$ 定义
+
+$$
+F_x(R^k)=\langle x,R^k\psi\rangle_F.
+$$
+
+四个 orientation responses 为
+
+$$
+F_x=(1,1,4,-2).
+$$
+
+旋转输入后直接重算得到
+
+$$
+F_{Rx}=(-2,1,1,4).
+$$
+
+这正是 $F_x$ 循环右移一格，因为
+
+$$
+F_{Rx}(g)=F_x(R^{-1}g).
+$$
+
+同时 $\sum_gF_{Rx}(g)=\sum_gF_x(g)=4$，所以 group sum 是 invariant readout；但若任务要预测朝向，提前求和会把 orientation 信息删除。
+
+## 核心公式七问：lifting equivariance
+
+$$
+F_{T_hx}(g)
+=\langle T_hx,T_g\psi\rangle
+=\langle x,T_{h^{-1}g}\psi\rangle
+=F_x(h^{-1}g).
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 证明输入作用会在 group-indexed feature 上产生可预测重排 |
+| 对象 | $T_g$ 是保持内积的群作用，$F_x$ 是定义在 $G$ 上的函数；$h^{-1}g$ 来自左作用 convention |
+| 来路 | 将输入上的 $T_h$ 通过内积移到模板一侧，再用表示的复合律合并群元素 |
+| 步骤 | 用 $\langle T_hx,z\rangle=\langle x,T_{h^{-1}}z\rangle$，再令 $z=T_g\psi$ 得 $T_{h^{-1}}T_g=T_{h^{-1}g}$ |
+| 读法 | 旋转输入不会让 orientation response 消失，只会重新编号它出现在哪个群元素上 |
+| 检查 | $h=e$ 时不变；$C_4$ 手算应为循环移位；对 45° 插值若不再保持内积，精确等式可能出现数值缺陷 |
+| 去路 | 40.3 将 $g$ 换成节点 permutation，40.6 用 rotation representation 解释 RoPE 的相对位置内积 |
 
 ## 一、先确认任务对称性
 

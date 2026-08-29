@@ -19,7 +19,7 @@
 <text x="95" y="355" font-size="16" font-weight="700" text-anchor="start" fill="#0F766E">3×3,s2</text>
 <text x="235" y="355" font-size="15" font-weight="650" text-anchor="start" fill="#1F2937" class="math">r=5, j=2</text>
 <text x="45" y="430" font-size="16" font-weight="700" text-anchor="start" fill="#1F2937" class="math">j_l = j_(l−1) s_l</text>
-<text x="45" y="467" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937" class="math">r_l = r_(l−1) + (k_eff,l−1) j_(l−1)</text>
+<text x="45" y="467" font-size="15" font-weight="700" text-anchor="start" fill="#1F2937" class="math">r_l = r_(l−1) + (k_eff,l − 1) j_(l−1)</text>
 <text x="45" y="505" font-size="15" font-weight="400" text-anchor="start" fill="#64748B">support: can influence, not equal influence</text>
 <text x="430" y="58" font-size="24" font-weight="700" text-anchor="start" fill="#0F766E">B</text>
 <text x="468" y="58" font-size="22" font-weight="700" text-anchor="start" fill="#1F2937">路径数在中心更密集</text>

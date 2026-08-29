@@ -11,13 +11,96 @@ exercises: ["[[习题 - CNN 阶段、残差块与深度可分离卷积]]"]
 solutions: ["[[解答 - CNN 阶段、残差块与深度可分离卷积]]"]
 figure: "[[00-知识库管理/_assets/figures/architecture/fig-cnn-stage-block-budget-v1.svg]]"
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # CNN 阶段、残差块与深度可分离卷积
 
 > [!abstract] 本节主问题
 > 现代 CNN 常按 stage 组织：在同一分辨率重复 block，在 stage 边界下采样并增宽通道。Residual path 管理深度与恒等信息，bottleneck/depthwise-separable block 管理空间混合、通道混合和资源。架构比较应重建 stage 表与成本，而非只背 AlexNet、ResNet、MobileNet 的名字。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** ARCH-04 已建立单层 shape/parameter/MAC 账，ARCH-05—06 已解释 stage 边界的采样代价与深层覆盖；
+- **本页解决什么：** 把现代 CNN 写成可审计的 stage table，分开 shortcut、spatial mixing、channel mixing 与 depthwise factorization，并明确 AI 部署中的代数成本与设备成本；
+- **后续为何需要：** ARCH-08 将检验更一般的对称性；40.5 的 Transformer block 和 40.8 的 MoE block 仍使用同样的“主支—旁路—shape—成本”合同。
+
+**第一遍只画 block。** 对每条支路写输入/输出 shape，确认何时能 identity add、何时必须 projection；随后比较 standard 与 depthwise+pointwise 的参数和 MACs。
+
+**第二遍审计表达与系统。** 从 effective kernel 的因式分解读出单层表达限制，再把 algebraic MACs 与 layout、带宽、fusion、batch 和目标设备分开。
+
+### 问题链
+
+1. 为什么现代 CNN 更适合按 stage 而不是按层名阅读？
+2. Residual add 的两条支路必须满足什么 shape 合同？
+3. $1\times1$ 与 $K\times K$ 分别混合哪些轴？
+4. Depthwise+pointwise 为什么节省成本，又限制了哪类 kernel？
+5. 下采样增宽时，主支和 projection shortcut 各付出多少预算？
+6. 为什么更少参数/MACs 仍可能在真实设备上更慢？
+
+> [!check] 第一遍停靠线
+> 若你能对 $[1,32,28,28]$ 的 $3\times3$ 层算出 standard 的 9,216 参数与 7,225,344 MACs，以及 separable 的 1,312 参数与 1,028,608 MACs，就可以进入 ARCH-08。
+
+## 符号与对象账本
+
+| 对象 | Shape/类型 | Block 身份 | 审计问题 |
+|---|---|---|---|
+| $x$ | $[N,C,H,W]$ | stage 输入/shortcut 来源 | 两支 add 前 shape 是否相同 |
+| $F(x)$ | 主支输出 | spatial/channel mixing | stride、norm、activation 放在哪里 |
+| $P(x)$ | identity 或 projection | shortcut | 是否下采样、是否改变通道 |
+| $D[c,a,b]$ | depthwise kernel | 每个 input channel 的空间模式 | 不跨通道混合 |
+| $P[o,c]$ | pointwise matrix | 每个位置的通道混合 | 不扩大空间 RF |
+| $K_{\mathrm{eff}}[o,c,a,b]$ | 复合有效 kernel | 单层可表达空间—通道耦合 | 对固定 $c$ 的空间切片受比例约束 |
+| $C_{\mathrm{alg}},C_{\mathrm{device}}$ | 代数/设备成本 | MACs 与延迟、能耗 | 不可互相替代 |
+
+### 贯穿算例 $\mathcal C_\square$：同一个空间混合的两种成本
+
+把前三页的局部三点核提升为 $3\times3$ 空间核，并取
+
+$$
+X\in\mathbb R^{1\times32\times28\times28},
+\qquad C_{out}=32,\quad K=3,\quad S=1.
+$$
+
+忽略 bias，standard convolution 的账为
+
+$$
+\#\theta_{\mathrm{std}}=32\cdot32\cdot9=9{,}216,
+$$
+
+$$
+\mathrm{MACs}_{\mathrm{std}}=28^2\cdot9{,}216=7{,}225{,}344.
+$$
+
+Depthwise $3\times3$ 再接 pointwise $1\times1$ 的账为
+
+$$
+\#\theta_{\mathrm{sep}}=32\cdot9+32\cdot32=1{,}312,
+$$
+
+$$
+\mathrm{MACs}_{\mathrm{sep}}=28^2\cdot1{,}312=1{,}028{,}608.
+$$
+
+比例精确为 $1{,}312/9{,}216=41/288\approx14.24\%$。这是算术合同，不是 latency 结论。
+
+若 stage 边界改成 $32\to64$、stride 2，则主支 $3\times3$ 输出 $[1,64,14,14]$；shortcut 也必须用 stride-2 projection 得到同形状后才能相加。主支与 $1\times1$ projection 分别有 $18{,}432/2{,}048$ 个参数，不能把 projection 当作零成本图线。
+
+## 核心公式七问：可分离 kernel 的结构限制
+
+$$
+K_{\mathrm{eff}}[o,c,a,b]=P[o,c]D[c,a,b].
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 把空间 filtering 与通道 mixing 分解，以减少四维 kernel 的参数和算术 |
+| 对象 | $D[c,:,:]$ 是 input channel $c$ 的空间核，$P[o,c]$ 把该响应混合到 output channel $o$ |
+| 来路 | depthwise 先产生每通道空间响应，pointwise 再在每个位置乘通道矩阵；线性复合得到乘积形式 |
+| 步骤 | 固定 $c$ 时先应用 $D[c,:,:]$，随后每个 $o$ 只乘标量 $P[o,c]$；因此不同 $o$ 的空间切片共享同一方向 |
+| 读法 | 每个输入通道只学习一个基本空间模式，各输出通道只能重新缩放和组合这些模式 |
+| 检查 | $K=1$ 时 depthwise 退化为逐通道缩放；任意 standard kernel 若同一 $c$ 的两个 output 空间切片不成比例，就不能由单层此式精确表示 |
+| 去路 | inverted residual 用 expansion/nonlinearity 缓解限制；40.7 的低秩 Attention 与 40.8 的稀疏专家也需区分成本节省和函数类改变 |
 
 ## 一、从 Layer List 升级为 Stage Table
 

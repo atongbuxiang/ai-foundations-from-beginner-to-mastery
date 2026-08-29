@@ -83,7 +83,7 @@ updated: 2026-08-29
 
 ## 第四章确定性架构审计
 
-- [[00-知识库管理/_labs/code/architecture_teaching_contract_audit.py]]：现行教学迁移审计；当前覆盖 ARCH-01—04（4/64），独立复算 valid/reversed/circular correlation、平移交换与双通道 shape/parameter/MAC 账，并双跑四幅正式 SVG；个人状态保持 `not-attempted`；
+- [[00-知识库管理/_labs/code/architecture_teaching_contract_audit.py]]：现行教学迁移审计；当前覆盖 ARCH-01—08（8/64），独立复算 convolution/equivariance、aliasing/anti-alias、RF/jump、standard/separable budget 与 $C_4$ lifting，并双跑八幅正式 SVG；40.1 材料门为 1/8 `regression-passed`，个人状态保持 `not-attempted`；
 - [[00-知识库管理/_labs/code/architecture_sequence_ssm_audit.py]]：ARCH-09—16 的递推、BPTT、门控、ZOH、卷积/scan 与 selective retention；
 - [[00-知识库管理/_labs/code/architecture_gnn_audit.py]]：ARCH-17—24 的重标号等变、MPNN、GCN、聚合碰撞、谱平滑、GAT、readout 与 1-WL 反例；
 - [[00-知识库管理/_labs/code/architecture_attention_audit.py]]：ARCH-25—32 的 QKV/shape、缩放方差、稳定 softmax、mask、对称性、多头预算、核重排、分母敏感性与 rank 反例；
@@ -92,7 +92,7 @@ updated: 2026-08-29
 - [[00-知识库管理/_labs/code/architecture_efficient_attention_audit.py]]：ARCH-49—56 的阶段化成本、稀疏边与路径、序列低秩、kernel state、Performer 随机误差、online softmax、MHA/GQA/MQA cache 与 MLA 投影吸收；
 - [[00-知识库管理/_labs/code/architecture_moe_audit.py]]：ARCH-57—64 的容量/激活 MAC、路由合同、dispatch/capacity、辅助梯度、loss-free feedback/assignment、专家设计轴、EP payload 与门控证据边界；
 - [[00-知识库管理/_labs/code/architecture_capstone_audit.py]]：ARCH-01—64 跨卷复现门，连接图重标号、causal full/cache、RoPE 相对位移、Attention/cache/MoE 成本与尾负载；
-- 当前语义：ARCH-01—04 为 4/64 现行教学迁移，40.1 为 4/8 in-progress，材料门 0/8；脚本断言只验证确定性 toy constructions，不替代真实训练、学习验收或论文复现，个人仍为 `not-attempted`。
+- 当前语义：ARCH-01—08 为 8/64 现行教学迁移，40.1 为 8/8 `regression-passed`，材料门 1/8；脚本断言只验证确定性 toy constructions，不替代真实训练、学习验收或论文复现，个人仍为 `not-attempted`。
 
 第四章累计出口：[[阶段测验 - 表示与模型架构（第四章）]]、[[阶段测验解答 - 表示与模型架构（第四章）]]与[[实验 - 表示与模型架构跨卷累计复现门]]；当前为 `composed / not-attempted`。
 

@@ -58,7 +58,7 @@ def receptive_fields():
         out += [rect(60, y, 290, 58, BLUE if y == 100 else TEAL, "#EFF6FF" if y == 100 else "#ECFDF5", 5, 2), text(95, y + 35, lab, 16, 700, fill=BLUE if y == 100 else TEAL), text(235, y + 35, vals, 15, 650, cls="math")]
         if y < 300:
             out += [line(205, y + 60, 205, y + 98, INK, 2.5, marker="a3")]
-    out += [text(45, 430, "j_l = j_(l−1) s_l", 16, 700, cls="math"), text(45, 467, "r_l = r_(l−1) + (k_eff,l−1) j_(l−1)", 15, 700, cls="math"), text(45, 505, "support: can influence, not equal influence", 15, fill=MUTED)]
+    out += [text(45, 430, "j_l = j_(l−1) s_l", 16, 700, cls="math"), text(45, 467, "r_l = r_(l−1) + (k_eff,l − 1) j_(l−1)", 15, 700, cls="math"), text(45, 505, "support: can influence, not equal influence", 15, fill=MUTED)]
 
     heading(out, 430, "B", "路径数在中心更密集", TEAL)
     coeff = (1, 6, 15, 20, 15, 6, 1)

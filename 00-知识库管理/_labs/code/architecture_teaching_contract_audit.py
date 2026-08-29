@@ -6,7 +6,7 @@ The audit keeps three claims separate:
 2. only the declared migration wave satisfies the current beginner-first contract;
 3. personal learning evidence remains not-attempted.
 
-Wave A (ARCH-01--04) is recomputed here without importing the figure generator.
+Waves A--B (ARCH-01--08) are recomputed here without importing the figure generators.
 """
 
 from __future__ import annotations
@@ -28,13 +28,17 @@ EXERCISES = LABS / "exercises"
 SOLUTIONS = LABS / "solutions"
 CODE = LABS / "code"
 ASSETS = ROOT / "00-知识库管理" / "_assets" / "figures" / "architecture"
-MIGRATED_IDS = tuple(range(1, 5))
+MIGRATED_IDS = tuple(range(1, 9))
 
 EXPECTED_FIGURES = {
     "fig-architecture-comparison-contract-v1.svg": "28f2e18521dc3e2c885b98bf528740b7010aad60b610e83990ab9cd6f234139e",
     "fig-discrete-convolution-workbench-v1.svg": "40541302e5981e9de43f7481309442623013350f81ff3087df53d633ade9694a",
     "fig-translation-equivariance-commutation-v1.svg": "7865a6d6eb5253f098bb3d5e178c13807acd57e5dcaa2d8da248137d424e33bd",
     "fig-convolution-shape-ledger-v1.svg": "600e99b8703e3230df93642b8cc419236809afce57196cf56253d855b1041318",
+    "fig-pooling-sampling-aliasing-v1.svg": "3337ef790025679f998e8605f0918c21e006813d32878f00ed3421fc3fdd6647",
+    "fig-receptive-field-theoretical-effective-v1.svg": "e6222846a62b793743a015d5c934f6e75f234fdc739077bb9e556ff806579c9b",
+    "fig-cnn-stage-block-budget-v1.svg": "f4f0a434aac7305c168c96ea3a1c6078a4e36ae9268ab0042425189853e80f09",
+    "fig-group-equivariance-evidence-v1.svg": "d6842a9364d871a04f3266d3c62dfc4eb4328250dbe5482b14373f19cacfe2db",
 }
 
 STATE_SURFACES = (
@@ -183,7 +187,7 @@ def audit_migrated_contract(nodes: list[tuple[int, Path, str]]) -> None:
         require("AI" in content, f"{relative}: AI object mapping missing")
         require(frontmatter_line(content, "updated") == "2026-08-29", f"{relative}: migration date mismatch")
         require(len(content.splitlines()) >= 230, f"{relative}: derivation depth unexpectedly short")
-    print("PASS ARCH wave A: ARCH-01--04 course/two-pass/problem/object/formula contracts=4/4")
+    print("PASS ARCH waves A--B: ARCH-01--08 course/two-pass/problem/object/formula contracts=8/8")
 
 
 def audit_exercises(nodes: list[tuple[int, Path, str]], index: dict[str, list[Path]]) -> None:
@@ -226,7 +230,7 @@ def audit_links_and_figures(nodes: list[tuple[int, Path, str]], index: dict[str,
         ET.parse(asset)
         digest = hashlib.sha256(asset.read_bytes()).hexdigest()
         require(digest == expected_hash, f"{filename}: hash changed: {digest}")
-    print(f"PASS ARCH wave-A links/figures: Wiki links={link_count}; SVG/XML/hash=4/4")
+    print(f"PASS ARCH waves A--B links/figures: Wiki links={link_count}; SVG/XML/hash=8/8")
 
 
 def correlation_valid(x: list[float], w: list[float]) -> list[float]:
@@ -243,7 +247,15 @@ def shift(x: list[float], amount: int) -> list[float]:
     return [x[(i - amount) % n] for i in range(n)]
 
 
-def audit_wave_a_math(nodes: list[tuple[int, Path, str]]) -> None:
+def rotate_ccw(matrix: list[list[float]]) -> list[list[float]]:
+    return [list(row) for row in zip(*matrix)][::-1]
+
+
+def frobenius(a: list[list[float]], b: list[list[float]]) -> float:
+    return sum(x * y for row_a, row_b in zip(a, b) for x, y in zip(row_a, row_b))
+
+
+def audit_migrated_math(nodes: list[tuple[int, Path, str]]) -> None:
     x = [2.0, -1.0, 3.0, 0.0, 1.0]
     w = [1.0, 0.0, -1.0]
     valid = correlation_valid(x, w)
@@ -267,37 +279,95 @@ def audit_wave_a_math(nodes: list[tuple[int, Path, str]]) -> None:
     macs = 1 * 3 * 2 * 2 * 3
     require(parameters == 14 and macs == 36, "parameter/MAC ledger mismatch")
 
+    alternating = [1.0, -1.0] * 4
+    constant = [1.0] * 8
+    decimate = lambda values: values[::2]
+    box = lambda values: [(values[i] + values[(i + 1) % len(values)]) / 2.0 for i in range(len(values))]
+    require(decimate(alternating) == decimate(constant) == [1.0] * 4, "aliasing collision mismatch")
+    require(decimate(box(alternating)) == [0.0] * 4, "anti-alias high-frequency probe mismatch")
+    require(decimate(box(constant)) == [1.0] * 4, "anti-alias DC probe mismatch")
+
+    receptive_field, jump = 1, 1
+    rf_trace: list[tuple[int, int]] = []
+    for kernel, stride, dilation in ((3, 1, 1), (3, 2, 1), (3, 1, 2)):
+        effective_kernel = dilation * (kernel - 1) + 1
+        receptive_field += (effective_kernel - 1) * jump
+        jump *= stride
+        rf_trace.append((receptive_field, jump))
+    require(rf_trace == [(3, 1), (5, 2), (13, 2)], f"RF/jump trace mismatch: {rf_trace}")
+
+    standard_parameters = 32 * 32 * 3 * 3
+    separable_parameters = 32 * 3 * 3 + 32 * 32
+    standard_macs = 28 * 28 * standard_parameters
+    separable_macs = 28 * 28 * separable_parameters
+    require(
+        (standard_parameters, standard_macs, separable_parameters, separable_macs)
+        == (9216, 7_225_344, 1312, 1_028_608),
+        "CNN standard/separable ledger mismatch",
+    )
+    require(math.isclose(separable_parameters / standard_parameters, 41 / 288), "separable ratio mismatch")
+    require(64 * 32 * 3 * 3 == 18_432 and 64 * 32 == 2_048, "stage projection ledger mismatch")
+
+    image = [[2.0, -1.0], [0.0, 3.0]]
+    template = [[2.0, 0.0], [0.0, -1.0]]
+    templates: list[list[list[float]]] = []
+    current = template
+    for _ in range(4):
+        templates.append(current)
+        current = rotate_ccw(current)
+    group_feature = [frobenius(image, item) for item in templates]
+    rotated_image = rotate_ccw(image)
+    rotated_feature = [frobenius(rotated_image, item) for item in templates]
+    require(group_feature == [1.0, 1.0, 4.0, -2.0], f"C4 lift mismatch: {group_feature}")
+    require(rotated_feature == [-2.0, 1.0, 1.0, 4.0], f"C4 transformed lift mismatch: {rotated_feature}")
+    require(rotated_feature == [group_feature[-1], *group_feature[:-1]], "C4 output action mismatch")
+    require(sum(group_feature) == sum(rotated_feature) == 4.0, "group pooling invariance mismatch")
+
     migrated_text = "\n".join(content for node_id, _, content in nodes if node_id in MIGRATED_IDS)
-    for anchor in ("(-1,-1,2)", "(-1,-1,2,-2,2)", "14", "36"):
+    for anchor in (
+        "(-1,-1,2)", "(-1,-1,2,-2,2)", "14", "36",
+        "(3,5,13)", "9,216", "7,225,344", "(1,1,4,-2)",
+    ):
         require(anchor in migrated_text, f"wave-A teaching anchor missing: {anchor}")
-    print("PASS ARCH wave-A independent math: valid/reversed/circular correlation, equivariance and multi-channel ledger exact")
+    print(
+        "PASS ARCH waves A--B independent math: convolution/equivariance, aliasing, RF, "
+        "CNN budget and C4 lifting exact"
+    )
 
 
 def audit_state_surfaces() -> None:
     for path in STATE_SURFACES:
         content = read(path)
         relative = path.relative_to(ROOT)
-        require("ARCH-01—04" in content, f"{relative}: migrated range missing")
-        require("4/64" in content, f"{relative}: migrated count missing")
+        require("ARCH-01—08" in content, f"{relative}: migrated range missing")
+        require("8/64" in content, f"{relative}: migrated count missing")
+        require("1/8" in content, f"{relative}: material-gate count missing")
         require("not-attempted" in content, f"{relative}: personal state missing")
-    print(f"PASS ARCH state surfaces: {len(STATE_SURFACES)} views agree on migrated=4/64, personal=not-attempted")
+    print(
+        f"PASS ARCH state surfaces: {len(STATE_SURFACES)} views agree on "
+        "migrated=8/64, material gates=1/8, personal=not-attempted"
+    )
 
 
 def audit_compute() -> None:
-    script = CODE / "plot_architecture_convolution_foundations_v1.py"
     before = {name: hashlib.sha256((ASSETS / name).read_bytes()).hexdigest() for name in EXPECTED_FIGURES}
+    scripts = (
+        CODE / "plot_architecture_convolution_foundations_v1.py",
+        CODE / "plot_architecture_convolution_advanced_v1.py",
+    )
     for _ in range(2):
-        result = subprocess.run(
-            [sys.executable, str(script)],
-            cwd=ROOT,
-            check=True,
-            capture_output=True,
-            text=True,
-        )
-        require(result.stdout.count("fig-") == 4, f"unexpected generator stdout: {result.stdout}")
+        for script in scripts:
+            result = subprocess.run(
+                [sys.executable, str(script)],
+                cwd=ROOT,
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+            require(result.stdout.count("fig-") == 4, f"unexpected generator stdout: {result.stdout}")
     after = {name: hashlib.sha256((ASSETS / name).read_bytes()).hexdigest() for name in EXPECTED_FIGURES}
     require(before == after == EXPECTED_FIGURES, f"deterministic figure replay changed assets: {after}")
-    print("PASS ARCH wave-A deterministic figure replay: 4 SVGs, two runs, byte-identical")
+    print("PASS ARCH waves A--B deterministic figure replay: 8 SVGs, two runs, byte-identical")
 
 
 def main() -> None:
@@ -310,11 +380,11 @@ def main() -> None:
     audit_migrated_contract(nodes)
     audit_exercises(nodes, index)
     audit_links_and_figures(nodes, index)
-    audit_wave_a_math(nodes)
+    audit_migrated_math(nodes)
     audit_state_surfaces()
     if args.run_compute:
         audit_compute()
-    print("ARCH-01--04 teaching migration regression: PASS; chapter material gates=0/8")
+    print("ARCH-01--08 teaching migration regression: PASS; chapter material gates=1/8")
     print("PERSONAL LEARNING STATUS: not-attempted")
 
 
