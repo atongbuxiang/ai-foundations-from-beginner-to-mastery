@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, language-modeling, weight-tying]
 source_type: paper
 title: "Using the Output Embedding to Improve Language Models"
@@ -8,14 +8,14 @@ author: "Ofir Press; Lior Wolf"
 year: 2017
 url: "https://aclanthology.org/E17-2025/"
 venue: "EACL 2017"
-accessed: 2026-08-24
+accessed: 2026-08-29
 source_tier: A
 license: "ACL Anthology paper；本库仅保存独立摘要、必要公式与链接"
 scope_role: core
 temporal_role: foundational
 related: ["[[输入—输出权重共享与 Weight Tying]]", "[[Softmax 输出层、Logit 尺度与概率参数化]]"]
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Press、Wolf：Output Embedding 与 Weight Tying
@@ -41,4 +41,3 @@ $$
 | PW-C2 | tied update 同时受 input/output 使用影响 | 计算图 | 同一 Parameter 对象 | 精确 |
 | PW-C3 | tying 对所有语言模型都改善 perplexity | 经验外推 | 架构、tokenizer、scale 与调参依赖 | 原论文不足以支持 |
 | PW-C4 | tying 不改变函数类，只省内存 | 结构误读 | $U=E$ 是参数约束 | 错误 |
-

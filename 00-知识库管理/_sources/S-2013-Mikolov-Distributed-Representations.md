@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, word-embeddings, representation-learning]
 source_type: paper
 title: "Distributed Representations of Words and Phrases and their Compositionality"
@@ -8,14 +8,14 @@ author: "Tomas Mikolov; Ilya Sutskever; Kai Chen; Greg Corrado; Jeffrey Dean"
 year: 2013
 url: "https://proceedings.neurips.cc/paper/2013/hash/9aa42b31882ec039965f3c4923ce901b-Abstract.html"
 venue: "NeurIPS 2013"
-accessed: 2026-08-24
+accessed: 2026-08-29
 source_tier: A
 license: "NeurIPS paper；本库仅保存独立摘要、短公式与链接"
 scope_role: historical-core
 temporal_role: foundational
 related: ["[[Embedding 几何、相似度与各向异性]]", "[[Embedding Lookup、稀疏梯度与参数规模]]", "[[Sampled、Hierarchical 与 Adaptive Softmax]]"]
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Mikolov et al.：Distributed Word Representations
@@ -38,4 +38,3 @@ updated: 2026-08-24
 | W2V-C2 | 任意语义关系都等于固定向量平移 | 普遍外推 | 多义、频率、tokenization 与任务 | 不成立 |
 | W2V-C3 | negative sampling 等于精确 full softmax MLE | 目标混淆 | 采样目标不同 | 一般不等价 |
 | W2V-C4 | 高 cosine 必然表示人类语义相似 | 解释外推 | geometry、frequency 与 benchmark 相关 | 不成立 |
-

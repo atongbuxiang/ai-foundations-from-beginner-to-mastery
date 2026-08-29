@@ -23,6 +23,6 @@ updated: 2026-08-29
 
 - [[neural_network_foundations_teaching_contract_audit.py]]已复核 NN-33—40 的两遍路线、问题链、对象账本、$\mathcal N_\square$ 共享张量、BN/LN/RMSNorm 数值链、归一化族、残差放置与系统边界；
 - 当前为 **8/8 现行教学迁移、8/8 正文、8/8 A—E 题解、8/8 正式图，30.5 材料门 `regression-passed`**；
-- 全章为 **48/64 已迁移、16/64 pending、分卷材料门 6/8**，30.1—30.6 `regression-passed`，个人仍为 **0/8 / `not-attempted`**；下一批 NN-49—52。
+- 全章为 **52/64 已迁移、12/64 pending、分卷材料门 6/8**，30.7 前半卷 `in-progress`，个人仍为 **0/8 / `not-attempted`**；下一批 NN-53—56。
 
 NN-33—40 共 120 题与逐题详解已经形成静态课程闭环；其中后半从 RMSNorm 的几何与 VJP，推进到 Instance/Group/WeightNorm 的对象分类、Pre/Post-Norm 的精确 Jacobian，以及小批量、混合精度、分布式和因果统计边界。`draft` 只表示材料成稿，不表示学习者已经闭卷掌握。

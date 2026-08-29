@@ -1,20 +1,20 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, embedding, sparse-gradients, pytorch]
 source_type: official-docs
 title: "PyTorch Embedding"
 author: "PyTorch Contributors"
 year: 2026
 url: "https://docs.pytorch.org/docs/stable/generated/torch.nn.Embedding.html"
-accessed: 2026-08-24
+accessed: 2026-08-29
 source_tier: B
 license: "PyTorch official documentation；本库仅保存独立摘要、接口事实与链接"
 scope_role: implementation-contract
 temporal_role: current-api
 related: ["[[Embedding Lookup、稀疏梯度与参数规模]]", "[[Padding、Mask、特殊符号与词表边界]]", "[[Embedding 初始化、缩放、分解与量化接口]]"]
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # PyTorch：Embedding 实现合同
@@ -39,4 +39,3 @@ updated: 2026-08-24
 | PTE-C2 | `sparse=True` 让全部训练过程都为稀疏计算 | 系统外推 | optimizer、decay、通信可能 densify | 错误 |
 | PTE-C3 | `padding_idx` 行不由 lookup backward 更新 | API | 当前实现合同 | 版本内成立 |
 | PTE-C4 | `max_norm` 只是无状态读取 | API 误读 | forward 可原位修改 weight | 错误 |
-

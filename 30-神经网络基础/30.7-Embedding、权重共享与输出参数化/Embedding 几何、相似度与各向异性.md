@@ -11,13 +11,138 @@ exercises: ["[[习题 - Embedding 几何、相似度与各向异性]]"]
 solutions: ["[[解答 - Embedding 几何、相似度与各向异性]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-embedding-geometry-anisotropy-v2.svg]]"
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Embedding 几何、相似度与各向异性
 
 > [!abstract] 本章主问题
 > Embedding 的“相似”不是坐标表自动附带的语义，而是向量对象、预处理、metric 与任务共同定义的测量。内积混合 norm 与 angle，cosine 去掉正尺度但不对平移不变，欧氏距离对共同平移不变却保留尺度。所谓 anisotropy 也不是一个唯一数字：共同均值、pairwise cosine、centered covariance spectrum、有效秩、局部簇与下游风险必须分开。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-49 已把每个 token row 定义成 $E$ 中可被精确索引和更新的参数对象；
+- **本页解决什么：** 说明“row 是向量”之后仍须选择 inner product、cosine、distance、centering 与谱诊断，几何数字才有可解释含义；
+- **后续为何需要：** weight tying 会让同一 row 成为 output prototype，Softmax 则直接使用内积作为 logit，因此几何预处理会改变概率模型而不只是可视化。
+
+**第一遍只比较三种测量。** 对同一对 rows 算 dot、cosine 与 distance，并逐项检查 rotation、scale、translation 不变性。
+
+**第二遍再诊断整个空间。** 明确采样分布后计算 mean、centered covariance、spectrum 与 effective rank，再用 retrieval/classification/generation 风险验证干预是否有益。
+
+### 问题链
+
+1. token row、contextual state 与 output prototype 是不是同一个随机对象？
+2. dot、cosine 与 Euclidean distance 分别保留或删除了什么信息？
+3. 为什么减去共同均值可能大幅改变 cosine，却仍不保证 isotropy？
+4. covariance rank、participation ratio 与平均 pairwise cosine 会不会给出不同诊断？
+5. 移除 top PCs 后几何指标变好，为何下游任务仍可能变差？
+
+> [!check] 第一遍停靠线
+> 若你能在 $\mathcal E_\square$ 中算出 $e_1^{\mathsf T}e_2=-1$、$\cos(e_1,e_2)=-1/\sqrt5$、$\|e_1-e_2\|^2=8$，并解释三个数字为何回答不同问题，就已掌握本页主干。
+
+## 符号与对象账本
+
+| 对象 | 定义 | 是否依赖采样/预处理 | 主要风险 |
+|---|---|---|---|
+| $e_i$ | input/output table row | 依参数时刻 | norm 与频率混杂 |
+| $h(c,t,\ell)$ | contextual state | 强依 context/layer/mode | 把 token type 与 token occurrence 混写 |
+| $a^{\mathsf T}b$ | inner product | 不中心化、保留 norm | 大 norm 主导排序 |
+| $\cos(a,b)$ | 归一化 inner product | 不平移不变 | 共同均值制造窄锥 |
+| $C$ | centered covariance | 依样本权重与中心 | 小样本必然秩亏 |
+| $r_{\mathrm{PR}}$ | 谱 participation ratio | 依 covariance 定义 | 单标量隐藏局部结构 |
+
+### 贯穿算例 $\mathcal E_\square$：从一对 rows 到整表谱
+
+沿用 NN-49 的
+
+$$
+E=
+\begin{bmatrix}
+1&0\\0&1\\2&-1\\-1&3
+\end{bmatrix}.
+$$
+
+对 token 1 与 2，
+
+$$
+e_1=(0,1),\qquad e_2=(2,-1),
+$$
+
+所以
+
+$$
+e_1^{\mathsf T}e_2=-1,
+\qquad
+\cos(e_1,e_2)=-\frac1{\sqrt5},
+\qquad
+\|e_1-e_2\|_2^2=8.
+$$
+
+均匀看待四个 rows 时，均值为
+
+$$
+\mu=\left(\frac12,\frac34\right),
+$$
+
+population centered covariance 是
+
+$$
+C=\frac14\sum_{i=0}^3(e_i-\mu)(e_i-\mu)^{\mathsf T}
+=
+\begin{bmatrix}
+5/4&-13/8\\
+-13/8&35/16
+\end{bmatrix}.
+$$
+
+它的 trace、determinant 与 eigenvalues 为
+
+$$
+\operatorname{tr}C=\frac{55}{16},
+\qquad
+\det C=\frac3{32},
+$$
+
+$$
+\lambda_{\pm}=\frac{55\pm\sqrt{2929}}{32}
+\approx(3.410007,0.027493).
+$$
+
+因此
+
+$$
+\boxed{
+r_{\mathrm{PR}}
+=\frac{(\operatorname{tr}C)^2}{\operatorname{tr}(C^2)}
+=\frac{3025}{2977}
+\approx1.016124
+}.
+$$
+
+$C$ 虽然满秩，variation 却几乎集中在一个方向。这个结论来自整表谱，不能由某一对 token 的 cosine 单独推出。
+
+## 核心公式七问：任务绑定的几何诊断
+
+$$
+\boxed{
+\text{geometry report}
+=(\text{object},\text{sampling},\text{preprocess},\text{metric},\text{spectrum},\text{task risk})
+}.
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 防止把一个漂亮的 cosine/PCA 图误当成表示质量 |
+| 对象 | token rows、contextual states 或 output prototypes 必须三选一并注明 |
+| 来路 | 相似性是向量、采样、预处理和 metric 共同定义的测量 |
+| 步骤 | 固定对象与分布→算局部 metric→中心化谱→实施干预→测任务风险 |
+| 读法 | 几何指标描述坐标分布，task risk 才回答应用是否改善 |
+| 检查 | rotation/scale/shift intervention、频率分桶、bootstrap 与下游消融 |
+| 去路 | ANN 检索、cosine classifier、weight tying、representation collapse |
+
+### AI / 系统对应
+
+向量检索系统必须把训练 metric、索引 metric 和线上 reranking metric 对齐；否则离线 cosine 结论无法解释 inner-product ANN 的召回。中心化、whitening 或 top-PC removal 还会改变增量索引、量化范围和 output logits，必须同时记录质量、延迟与重建成本。
 
 ## 一、学习目标
 

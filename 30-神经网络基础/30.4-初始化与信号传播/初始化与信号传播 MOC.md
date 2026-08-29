@@ -24,4 +24,4 @@ updated: 2026-08-29
 - [[neural_network_foundations_teaching_contract_audit.py]]已复核 NN-25—32 的两遍路线、问题链、对象账本、$\mathcal I_\square$ 共享 $4\to8$ fixture 与公式七问；
 - 前半卷闭合 ReLU $q=2\to r=1$、Xavier/He 和 fan 乘积；后半卷闭合 $c_0=1/2\to0.608998$、半正交 ReLU 的 rank-2 反例、zero-head/skip 梯度与 LSUV/Fixup 两类校准；
 - 当前为 **8/8 现行教学迁移、8/8 正文、8/8 A—E 题解、8/8 正式图，30.4 材料门 `regression-passed`**；
-- 全章为 **48/64 已迁移、16/64 pending、分卷材料门 6/8**，30.1—30.6 `regression-passed`，个人仍为 **0/8 / `not-attempted`**；下一批 NN-49—52。
+- 全章为 **52/64 已迁移、12/64 pending、分卷材料门 6/8**，30.7 前半卷 `in-progress`，个人仍为 **0/8 / `not-attempted`**；下一批 NN-53—56。

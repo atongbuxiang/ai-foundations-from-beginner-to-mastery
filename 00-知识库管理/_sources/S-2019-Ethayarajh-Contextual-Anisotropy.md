@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, contextual-embeddings, anisotropy]
 source_type: paper
 title: "How Contextual are Contextualized Word Representations?"
@@ -9,14 +9,14 @@ year: 2019
 url: "https://aclanthology.org/D19-1006/"
 doi: "https://doi.org/10.18653/v1/D19-1006"
 venue: "EMNLP-IJCNLP 2019"
-accessed: 2026-08-24
+accessed: 2026-08-29
 source_tier: A
 license: "ACL Anthology paper（CC BY 4.0）；本库仅保存独立摘要、必要数字与链接"
 scope_role: core
 temporal_role: foundational-analysis
 related: ["[[Embedding 几何、相似度与各向异性]]", "[[表示学习的任务、表示与下游风险]]", "[[表示坍缩、非坍缩与可辨识边界]]"]
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Ethayarajh：Contextual Embedding Geometry
@@ -39,4 +39,3 @@ updated: 2026-08-24
 | ETH-C2 | mean cosine 足以定义所有 anisotropy | 定义外推 | centering、谱、局部簇可能不同 | 不成立 |
 | ETH-C3 | 去掉 top PC 必然改善任意任务 | 方法外推 | 任务、拟合数据与分布偏移依赖 | 不成立 |
 | ETH-C4 | token table row 与 contextual state 可直接混测 | 对象混淆 | 一个是参数，一个是输入依赖表示 | 错误 |
-

@@ -23,7 +23,7 @@ SOLUTIONS = LABS / "solutions"
 CODE = LABS / "code"
 FIGURE_AUDITOR = CODE / "audit-markdown-figure-units.mjs"
 ASSET_DIR = ROOT / "00-知识库管理" / "_assets" / "figures" / "neural-networks"
-MIGRATED_IDS = tuple(range(1, 49))
+MIGRATED_IDS = tuple(range(1, 53))
 
 STATE_SURFACES = (
     CHAPTER / "神经网络基础 MOC.md",
@@ -37,6 +37,7 @@ STATE_SURFACES = (
     CHAPTER / "30.4-初始化与信号传播" / "初始化与信号传播 MOC.md",
     CHAPTER / "30.5-归一化、尺度与统计量" / "归一化、尺度与统计量 MOC.md",
     CHAPTER / "30.6-残差连接、深度与稳定性" / "残差连接、深度与稳定性 MOC.md",
+    CHAPTER / "30.7-Embedding、权重共享与输出参数化" / "Embedding、权重共享与输出参数化 MOC.md",
 )
 
 EXPECTED_FIGURE_SCRIPTS = {
@@ -207,12 +208,13 @@ def audit_migrated_contract(nodes: list[tuple[int, Path, str]]) -> None:
             "s_\\triangle" if node_id <= 24 else
             "\\mathcal I_\\square" if node_id <= 32 else
             "\\mathcal N_\\square" if node_id <= 40 else
-            "\\mathcal R_\\square"
+            "\\mathcal R_\\square" if node_id <= 48 else
+            "\\mathcal E_\\square"
         )
         require(fixture in content, f"{relative}: shared teaching fixture missing: {fixture}")
         require("AI" in content, f"{relative}: AI object mapping missing")
         require(len(content.splitlines()) >= 180, f"{relative}: derivation depth unexpectedly short")
-    print("PASS NN teaching migration waves A--L: NN-01--48 course position/two-pass/problem/object/formula contracts=48/48")
+    print("PASS NN teaching migration waves A--M: NN-01--52 course position/two-pass/problem/object/formula contracts=52/52")
 
 
 def audit_wave_c_fixture(nodes: list[tuple[int, Path, str]]) -> None:
@@ -784,6 +786,82 @@ def audit_wave_l_fixture(nodes: list[tuple[int, Path, str]]) -> None:
     print("PASS NN wave-L independent math: placement rank/VJP; add/Highway/concat objects; ReZero/Fixup/DeepNorm scales; positive and cancelling path sums exact")
 
 
+def audit_wave_m_fixture(nodes: list[tuple[int, Path, str]]) -> None:
+    """Recompute the NN-49--52 lookup/geometry/tying/Softmax chain."""
+    embedding = (
+        (1.0, 0.0),
+        (0.0, 1.0),
+        (2.0, -1.0),
+        (-1.0, 3.0),
+    )
+    indices = (2, 1, 2)
+    upstream = ((1.0, 2.0), (-1.0, 0.5), (3.0, -1.0))
+    lookup = tuple(embedding[index] for index in indices)
+    require(lookup == ((2.0, -1.0), (0.0, 1.0), (2.0, -1.0)), f"NN wave-M lookup trace drifted: {lookup}")
+    lookup_gradient = [[0.0, 0.0] for _ in embedding]
+    for index, row_gradient in zip(indices, upstream):
+        for coordinate in range(2):
+            lookup_gradient[index][coordinate] += row_gradient[coordinate]
+    expected_lookup_gradient = ((0.0, 0.0), (-1.0, 0.5), (4.0, 1.0), (0.0, 0.0))
+    require(tuple(map(tuple, lookup_gradient)) == expected_lookup_gradient, f"NN wave-M scatter-add drifted: {lookup_gradient}")
+
+    first, second = embedding[1], embedding[2]
+    dot = sum(first[j] * second[j] for j in range(2))
+    cosine = dot / math.sqrt(sum(value * value for value in first) * sum(value * value for value in second))
+    distance_squared = sum((first[j] - second[j]) ** 2 for j in range(2))
+    require(dot == -1.0 and abs(cosine + 1.0 / math.sqrt(5.0)) < 1e-15 and distance_squared == 8.0, "NN wave-M pair geometry drifted")
+    mean = tuple(sum(row[j] for row in embedding) / 4.0 for j in range(2))
+    covariance = tuple(
+        tuple(sum((row[i] - mean[i]) * (row[j] - mean[j]) for row in embedding) / 4.0 for j in range(2))
+        for i in range(2)
+    )
+    require(mean == (0.5, 0.75) and covariance == ((5.0 / 4.0, -13.0 / 8.0), (-13.0 / 8.0, 35.0 / 16.0)), f"NN wave-M embedding covariance drifted: {mean}, {covariance}")
+    trace = covariance[0][0] + covariance[1][1]
+    determinant = covariance[0][0] * covariance[1][1] - covariance[0][1] * covariance[1][0]
+    discriminant = math.sqrt(trace * trace - 4.0 * determinant)
+    eigenvalues = ((trace + discriminant) / 2.0, (trace - discriminant) / 2.0)
+    participation_ratio = trace * trace / (trace * trace - 2.0 * determinant)
+    require(trace == 55.0 / 16.0 and determinant == 3.0 / 32.0, "NN wave-M covariance invariants drifted")
+    require(abs(eigenvalues[0] - 3.410007390966851) < 1e-15 and abs(eigenvalues[1] - 0.027492609033148874) < 1e-15, "NN wave-M covariance spectrum drifted")
+    require(abs(participation_ratio - 3025.0 / 2977.0) < 1e-15, "NN wave-M participation ratio drifted")
+
+    hidden = (1.0, 1.0)
+    logits = tuple(sum(row[j] * hidden[j] for j in range(2)) for row in embedding)
+    require(logits == (1.0, 1.0, 1.0, 2.0), f"NN wave-M tied logits drifted: {logits}")
+    denominator = 3.0 + math.e
+    probabilities = (1.0 / denominator, 1.0 / denominator, 1.0 / denominator, math.e / denominator)
+    logit_gradient = probabilities[:3] + (probabilities[3] - 1.0,)
+    require(abs(sum(probabilities) - 1.0) < 1e-15 and abs(sum(logit_gradient)) < 1e-15, "NN wave-M Softmax normalization/gauge drifted")
+    require(all(abs(actual - expected) < 1e-15 for actual, expected in zip(logit_gradient, (1.0 / denominator, 1.0 / denominator, 1.0 / denominator, -3.0 / denominator))), "NN wave-M logit gradient drifted")
+    output_gradient = tuple(tuple(value * coordinate for coordinate in hidden) for value in logit_gradient)
+    total_gradient = tuple(
+        tuple(expected_lookup_gradient[i][j] + output_gradient[i][j] for j in range(2))
+        for i in range(4)
+    )
+    require(all(abs(total_gradient[0][j] - 1.0 / denominator) < 1e-15 for j in range(2)), "NN wave-M tied unlooked row-0 gradient drifted")
+    require(all(abs(total_gradient[3][j] + 3.0 / denominator) < 1e-15 for j in range(2)), "NN wave-M tied unlooked row-3 gradient drifted")
+
+    nll_one = math.log(denominator) - 1.0
+    denominator_two = 3.0 + math.sqrt(math.e)
+    probabilities_two = (1.0 / denominator_two,) * 3 + (math.sqrt(math.e) / denominator_two,)
+    nll_two = math.log(denominator_two) - 0.5
+    gradient_two = tuple((probabilities_two[i] - (1.0 if i == 3 else 0.0)) / 2.0 for i in range(4))
+    require(abs(nll_one - 0.743668380628679) < 1e-15 and abs(nll_two - 1.0365921862326961) < 1e-15, "NN wave-M temperature NLL drifted")
+    require(probabilities_two[3] < probabilities[3] and abs(sum(gradient_two)) < 1e-15, "NN wave-M temperature/gauge contrast drifted")
+    require(all(abs(actual - expected) < 1e-15 for actual, expected in zip(gradient_two, (1.0 / (2.0 * denominator_two),) * 3 + (-3.0 / (2.0 * denominator_two),))), "NN wave-M tau=2 gradient drifted")
+
+    wave = {node_id: content for node_id, _, content in nodes if 49 <= node_id <= 52}
+    expected_markers = {
+        49: ("S^{\\mathsf T}G", "4&1"),
+        50: ("\\sqrt{2929}", "\\frac{3025}{2977}"),
+        51: ("\\frac1D(1,1,1,-3)", "-3D^{-1}"),
+        52: ("\\log D-1\\approx0.743668", "\\log D_2-\\frac12\\approx1.036592"),
+    }
+    for node_id, markers in expected_markers.items():
+        require(all(marker in wave[node_id] for marker in markers), f"NN-{node_id:02d}: wave-M numeric/probability closure missing")
+    print("PASS NN wave-M independent math: lookup/scatter-add; row geometry/covariance spectrum; tied use-site sum; temperature Softmax/NLL exact")
+
+
 def question_ids(content: str) -> list[str]:
     return re.findall(r"^###\s+([^\s]+-[A-E]\d{2})\s*$", content, re.M)
 
@@ -941,12 +1019,12 @@ def audit_state_surfaces() -> None:
     for path in STATE_SURFACES:
         content = read(path)
         require(audit_name in content, f"state surface misses NN audit: {path.relative_to(ROOT)}")
-        migrated_mentions = content.count("48/64") + content.count("48 / 64")
-        pending_mentions = content.count("16/64") + content.count("16 / 64")
+        migrated_mentions = content.count("52/64") + content.count("52 / 64")
+        pending_mentions = content.count("12/64") + content.count("12 / 64")
         require(migrated_mentions >= 1 and pending_mentions >= 1, f"state surface misses NN migrated/pending counts: {path.relative_to(ROOT)}")
         require("6/8" in content or "6 / 8" in content, f"state surface misses NN material-gate count: {path.relative_to(ROOT)}")
         require("not-attempted" in content, f"state surface overclaims NN learner: {path.relative_to(ROOT)}")
-    print("PASS NN state surfaces: 5 global + 6 volume views agree on migrated=48/64, pending=16/64, material gates=6/8, learner=not-attempted")
+    print("PASS NN state surfaces: 5 global + 7 volume views agree on migrated=52/64, pending=12/64, material gates=6/8, learner=not-attempted")
 
 
 def main() -> None:
@@ -967,6 +1045,7 @@ def main() -> None:
     audit_wave_j_fixture(nodes)
     audit_wave_k_fixture(nodes)
     audit_wave_l_fixture(nodes)
+    audit_wave_m_fixture(nodes)
     audit_exercises(nodes, index)
     audit_sources_and_links(nodes, index)
     audit_figures(nodes, index)
@@ -974,8 +1053,8 @@ def main() -> None:
     audit_state_surfaces()
     if args.run_figures:
         audit_deterministic_figures()
-    print("NN-01--48 teaching migration regression: PASS; 30.1--30.6 material gates=6/8")
-    print("NN-49--64 teaching migration: pending (16/64)")
+    print("NN-01--52 teaching migration regression: PASS; 30.1--30.6 material gates=6/8; 30.7 front half=in-progress")
+    print("NN-53--64 teaching migration: pending (12/64)")
     print("PERSONAL LEARNING STATUS: not-attempted")
 
 

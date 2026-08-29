@@ -11,13 +11,124 @@ exercises: ["[[习题 - Softmax 输出层、Logit 尺度与概率参数化]]"]
 solutions: ["[[解答 - Softmax 输出层、Logit 尺度与概率参数化]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-softmax-output-parameterization-v2.svg]]"
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Softmax 输出层、Logit 尺度与概率参数化
 
 > [!abstract] 本章主问题
 > 线性输出层先产生未归一化 logits，Softmax 再把 logit 的平移等价类映到 categorical simplex 内部。概率只由两两 logit differences 决定；正温度/尺度不改 argmax，却改变 entropy、NLL、梯度、曲率和校准。有限 logits 无法精确表示 $p_i=0$ 的边界分布，而大词表 full Softmax 仍需形成并归一化全部 $V$ 个类别。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-51 已由共享表产生 logits $z=Eh+b$，并通过 output use-site 得到 $\delta h^{\mathsf T}$；
+- **本页解决什么：** 把 logits 的平移等价类严格映射到 categorical simplex，推导 temperature 对 NLL、entropy、gradient 与 Hessian 的共同影响；
+- **后续为何需要：** Softmax bottleneck、sampled/hierarchical heads、padding mask 与量化都必须先声明自己保留还是改写了这份概率合同。
+
+**第一遍只看概率。** 从 stable logsumexp 计算 $p$ 与 NLL，验证 normalization、shift invariance 和 log-odds 等于 logit difference。
+
+**第二遍再看微分与系统。** 改变 temperature，追踪 entropy、gradient、Hessian、calibration 和 full-vocabulary memory；再区分 mask、bias、cosine head 与 sampled objective。
+
+### 问题链
+
+1. 为什么 logits 不是概率，而 common shift 又完全不可辨识？
+2. Softmax 为什么只覆盖 simplex interior，零概率需要什么极限？
+3. temperature 不改变 argmax，为什么仍会改变 NLL、entropy 和 calibration？
+4. $1/\tau$ 与 $1/\tau^2$ 分别从哪里进入 gradient 和 Hessian？
+5. 稳定减最大值为何不改变数学函数，却能避免 overflow？
+
+> [!check] 第一遍停靠线
+> 若你能在 $\mathcal E_\square$ 的 $z=(1,1,1,2)$ 上算出 $p_3=\mathrm e/(3+\mathrm e)$、$\ell=\log(3+\mathrm e)-1$，并证明 $z+100\mathbf1$ 给出同一概率，就已掌握本页主干。
+
+## 符号与对象账本
+
+| 对象 | 定义 | 可辨识性 / shape | 不能混同 |
+|---|---|---|---|
+| $z=Wh+b$ | logits | $\mathbb R^V/\operatorname{span}\{\mathbf1\}$ | 概率、能量绝对零点 |
+| $p^{(\tau)}$ | $\operatorname{softmax}(z/\tau)$ | simplex interior | one-hot 边界分布 |
+| $y$ | target distribution | $\Delta_{V-1}$ | 模型预测 |
+| $\ell_\tau$ | cross-entropy/NLL | 标量 proper loss | accuracy 或 calibration 本身 |
+| $\delta$ | $\nabla_z\ell_\tau$ | $\mathbf1^{\mathsf T}\delta=0$ | 参数梯度 $\nabla_W\ell$ |
+| $J_p$ | categorical covariance / $\tau$ | rank 至多 $V-1$ | 独立 Bernoulli covariance |
+
+### 贯穿算例 $\mathcal E_\square$：共享 logits 的概率、温度与梯度
+
+NN-51 已由同一张表和 $h=(1,1)$ 得到
+
+$$
+z=(1,1,1,2),
+\qquad y=q_3.
+$$
+
+减去最大 logit 后，指数权重是 $(\mathrm e^{-1},\mathrm e^{-1},\mathrm e^{-1},1)$；等价地记 $D=3+\mathrm e$，则
+
+$$
+\boxed{
+p^{(1)}=\frac1D(1,1,1,\mathrm e),
+\qquad
+\ell_1=-\log p_3=\log D-1\approx0.743668
+}.
+$$
+
+相对第三类，前三类的 log-odds 都是
+
+$$
+\log\frac{p_j}{p_3}=z_j-z_3=-1,
+\qquad j=0,1,2.
+$$
+
+当 $\tau=2$ 时，记 $D_2=3+\sqrt{\mathrm e}$，
+
+$$
+p^{(2)}
+=\frac1{D_2}(1,1,1,\sqrt{\mathrm e}),
+$$
+
+$$
+p_3^{(2)}\approx0.354661,
+\qquad
+\ell_2=\log D_2-\frac12\approx1.036592.
+$$
+
+目标类别仍是 argmax，但分布更平、这个正确样本的 NLL 更高。两种温度下的 logit gradients 为
+
+$$
+\nabla_z\ell_1
+=\frac1D(1,1,1,-3),
+$$
+
+$$
+\nabla_z\ell_2
+=\frac1{2D_2}(1,1,1,-3).
+$$
+
+它们都与 $\mathbf1$ 正交，正好对应 common-shift gauge 的 null direction。
+
+## 核心公式七问：Softmax–Cross-Entropy 概率合同
+
+$$
+\boxed{
+p_i^{(\tau)}=\frac{e^{z_i/\tau}}{\sum_j e^{z_j/\tau}},
+\quad
+\nabla_z\ell_\tau=\frac{p^{(\tau)}-y}{\tau},
+\quad
+\nabla_z^2\ell_\tau=\frac{\operatorname{Diag}(p)-pp^{\mathsf T}}{\tau^2}
+}.
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 将任意实 logits 变成 normalized categorical law 并给出可训练 loss |
+| 对象 | 每个样本/位置在一个明确 vocabulary axis 上的联合类别分布 |
+| 来路 | 指数族 normalization 与 categorical log-likelihood |
+| 步骤 | affine logits→除温度→减 max→logsumexp→概率/NLL→fused backward |
+| 读法 | $\tau$ 同时缩放差值、梯度和曲率，不只是可视化“软硬度” |
+| 检查 | 概率和、shift intervention、finite difference、极端 logits 与 mixed precision |
+| 去路 | 校准/蒸馏、Softmax bottleneck、大词表近似、masked decoding |
+
+### AI / 系统对应
+
+对大语言模型，$B\times T\times V$ logits 可能主导显存和通信。fused cross-entropy 可避免长期物化完整概率张量，却不自动消除读取全 vocabulary weights 的成本；temperature、logit clipping、mask 与采样方法还会改变统计对象，必须分开记录训练 objective、exact evaluation 和 decoding。
 
 ## 一、学习目标
 

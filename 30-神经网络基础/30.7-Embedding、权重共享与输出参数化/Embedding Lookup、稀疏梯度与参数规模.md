@@ -11,13 +11,128 @@ exercises: ["[[习题 - Embedding Lookup、稀疏梯度与参数规模]]"]
 solutions: ["[[解答 - Embedding Lookup、稀疏梯度与参数规模]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-embedding-lookup-sparse-gradient-v2.svg]]"
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Embedding Lookup、稀疏梯度与参数规模
 
 > [!abstract] 本章主问题
 > Embedding lookup 在代数上就是 one-hot 选择矩阵乘以参数表，在实现上却不应物化巨大 one-hot。反向传播是 scatter-add：同一 token 在一个 batch 中出现多次时，其各位置上游梯度必须累加到同一行。lookup 的 VJP 可稀疏，但 optimizer state、weight decay、分布式通信或共享输出层可能使整条训练链重新稠密。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** 线性层已经把连续向量写成矩阵乘法，计算图章节已经说明同一参数被多次使用时 VJP 必须累加；
+- **本页解决什么：** 把离散 token ID 严格翻译为 selection matrix、gather 与 scatter-add，建立词表参数规模和训练系统账；
+- **后续为何需要：** NN-50—52 会把同一张表依次当作几何点集、共享 output prototypes 和 Softmax 参数，若 lookup 对象不清楚，后面的“共享”和“相似”都会混乱。
+
+**第一遍只做代数。** 写出 $E$、索引 $I$、选择矩阵 $S$、前向 $X=SE$ 和反向 $S^{\mathsf T}G$，手算一次重复 token 的累加。
+
+**第二遍再做系统。** 区分数学 support、gradient storage、optimizer update 与通信四种“稀疏”，再加入 padding、frequency scaling、weight decay 和 sharding。
+
+### 问题链
+
+1. 一个整数 ID 怎样选择 $E$ 的一行，它为什么等价于 one-hot 乘法？
+2. 为什么实现应做 gather，而不应真的构造 $S$？
+3. 同一 token 出现两次时，两个 use-site 的梯度为什么必须相加而不能覆盖？
+4. row-sparse 数学梯度何时仍会触发 dense optimizer state 或通信？
+5. 参数量 $Vd$、单步访问量、显存和带宽为何是四本不同的账？
+
+> [!check] 第一遍停靠线
+> 若你能在 $\mathcal E_\square$ 中从 $I=(2,1,2)$ 得到三行输出，并把 token 2 的两个上游向量累加成 $(4,1)$，就已掌握本页主干。
+
+## 符号与对象账本
+
+| 对象 | shape / 类型 | 数学角色 | 实现动作 |
+|---|---|---|---|
+| $E$ | $V\times d$ Parameter | token 到连续坐标的表 | row-sharded / cached table |
+| $I=(i_1,\ldots,i_n)$ | integer IDs | 离散选择控制 | index tensor |
+| $S$ | $n\times V$ one-hot rows | lookup 的线性化表示 | 通常不物化 |
+| $X=SE$ | $n\times d$ activation | 被选中的 rows | gather |
+| $G=\nabla_X\mathcal L$ | $n\times d$ cotangent | 每个 use-site 的上游贡献 | backward input |
+| $S^{\mathsf T}G$ | $V\times d$ cotangent | 同 ID 按行求和 | scatter-add |
+
+### 贯穿算例 $\mathcal E_\square$：四词表、重复索引与精确反向
+
+固定本卷前半共用的小词表：
+
+$$
+E=
+\begin{bmatrix}
+1&0\\
+0&1\\
+2&-1\\
+-1&3
+\end{bmatrix}
+\in\mathbb R^{4\times2},
+\qquad
+I=(2,1,2).
+$$
+
+它对应的选择矩阵与前向为
+
+$$
+S=
+\begin{bmatrix}
+0&0&1&0\\
+0&1&0&0\\
+0&0&1&0
+\end{bmatrix},
+\qquad
+X=SE=
+\begin{bmatrix}
+2&-1\\
+0&1\\
+2&-1
+\end{bmatrix}.
+$$
+
+令
+
+$$
+G=
+\begin{bmatrix}
+1&2\\
+-1&1/2\\
+3&-1
+\end{bmatrix}.
+$$
+
+则
+
+$$
+\boxed{
+\nabla_E\mathcal L=S^{\mathsf T}G
+=
+\begin{bmatrix}
+0&0\\
+-1&1/2\\
+4&1\\
+0&0
+\end{bmatrix}
+}.
+$$
+
+第三行来自 $(1,2)+(3,-1)=(4,1)$。这里的“稀疏”只说明未访问 rows 的 lookup VJP 为零；它尚未说明 optimizer 或共享输出层是否稀疏。
+
+## 核心公式七问：Gather–Scatter 对偶
+
+$$
+\boxed{X=SE,\qquad \bar E=S^{\mathsf T}\bar X}.
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 用一个对象同时解释 lookup 前向与重复索引反向 |
+| 对象 | $S$ 是由整数 IDs 决定的选择算子，$E$ 是可学习表 |
+| 来路 | $X_{r:}=E_{i_r:}$ 写成批量矩阵形式 |
+| 步骤 | IDs→selection rows→gather；上游 cotangent→转置算子→scatter-add |
+| 读法 | 前向读哪些行，反向就向相同行累加哪些 use-site 贡献 |
+| 检查 | shape、重复 ID、未访问行、finite difference 与框架 sparse/dense 模式 |
+| 去路 | embedding 几何、weight tying、padding、分片参数表与推荐系统 |
+
+### AI / 系统对应
+
+语言模型、推荐系统和多模态离散码本都依赖 lookup。大表训练的瓶颈常不是乘法 FLOPs，而是 row routing、memory bandwidth、热点 ID、optimizer-state sharding 与跨设备一致性；因此“代数上是一层线性映射”并不等于“系统上应使用 dense GEMM”。
 
 ## 一、学习目标
 
