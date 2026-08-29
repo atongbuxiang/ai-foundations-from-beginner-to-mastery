@@ -22,7 +22,7 @@ SOLUTIONS = LABS / "solutions"
 CODE = LABS / "code"
 FIGURE_AUDITOR = CODE / "audit-markdown-figure-units.mjs"
 ASSET_DIR = ROOT / "00-知识库管理" / "_assets" / "figures" / "neural-networks"
-MIGRATED_IDS = tuple(range(1, 5))
+MIGRATED_IDS = tuple(range(1, 9))
 
 STATE_SURFACES = (
     CHAPTER / "神经网络基础 MOC.md",
@@ -30,6 +30,7 @@ STATE_SURFACES = (
     EXERCISES / "练习与测验 MOC.md",
     LABS / "推导与实验 MOC.md",
     ROOT / "00-知识库管理" / "00-总览" / "全库教学重写审计与迁移台账.md",
+    CHAPTER / "30.1-前馈网络、感知机与表达能力" / "前馈网络、感知机与表达能力 MOC.md",
 )
 
 EXPECTED_FIGURE_SCRIPTS = {
@@ -193,10 +194,11 @@ def audit_migrated_contract(nodes: list[tuple[int, Path, str]]) -> None:
         relative = path.relative_to(ROOT)
         for marker in markers:
             require(marker in content, f"{relative}: teaching-contract marker missing: {marker}")
-        require("X_\\star" in content, f"{relative}: shared four-point fixture missing")
+        fixture = "X_\\star" if node_id <= 4 else "X_\\oplus"
+        require(fixture in content, f"{relative}: shared four-point fixture missing: {fixture}")
         require("AI" in content, f"{relative}: AI object mapping missing")
         require(len(content.splitlines()) >= 180, f"{relative}: derivation depth unexpectedly short")
-    print("PASS NN teaching migration wave A: NN-01--04 course position/two-pass/problem/object/formula contracts=4/4")
+    print("PASS NN teaching migration waves A--B: NN-01--08 course position/two-pass/problem/object/formula contracts=8/8")
 
 
 def question_ids(content: str) -> list[str]:
@@ -344,10 +346,10 @@ def audit_state_surfaces() -> None:
     for path in STATE_SURFACES:
         content = read(path)
         require(audit_name in content, f"state surface misses NN audit: {path.relative_to(ROOT)}")
-        require("4/64" in content or "4 / 64" in content, f"state surface misses NN migrated count: {path.relative_to(ROOT)}")
-        require("60/64" in content or "60 / 64" in content, f"state surface misses NN pending count: {path.relative_to(ROOT)}")
+        require("8/64" in content or "8 / 64" in content, f"state surface misses NN migrated count: {path.relative_to(ROOT)}")
+        require("56/64" in content or "56 / 64" in content, f"state surface misses NN pending count: {path.relative_to(ROOT)}")
         require("not-attempted" in content, f"state surface overclaims NN learner: {path.relative_to(ROOT)}")
-    print("PASS NN state surfaces: 5 views agree on migrated=4/64, pending=60/64, learner=not-attempted")
+    print("PASS NN state surfaces: 5 global + 1 volume views agree on migrated=8/64, pending=56/64, learner=not-attempted")
 
 
 def main() -> None:
@@ -365,8 +367,8 @@ def main() -> None:
     audit_state_surfaces()
     if args.run_figures:
         audit_deterministic_figures()
-    print("NN-01--04 teaching migration regression: PASS")
-    print("NN-05--64 teaching migration: pending (60/64)")
+    print("NN-01--08 / 30.1 teaching-material migration regression: PASS")
+    print("NN-09--64 teaching migration: pending (56/64)")
     print("PERSONAL LEARNING STATUS: not-attempted")
 
 

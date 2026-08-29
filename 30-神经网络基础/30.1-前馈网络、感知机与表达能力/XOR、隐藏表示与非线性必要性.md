@@ -11,13 +11,77 @@ exercises: ["[[习题 - XOR、隐藏表示与非线性必要性]]"]
 solutions: ["[[解答 - XOR、隐藏表示与非线性必要性]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-xor-hidden-representation-v2.svg]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 
 # XOR、隐藏表示与非线性必要性
 
 > [!abstract] 本章主问题
 > XOR 是最小但不肤浅的反例：四个点无法由输入空间中的一个超平面分开，却能被一个很小的非线性网络精确表示。真正发生的不是“神经元变聪明”，而是隐藏层先把输入重编码，使原先不可线性分离的类别在新表示中可被线性读出。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-01—04 已说明 affine score、感知机更新和逐层前向计算，但贯穿算例本身仍可被一条直线分开；
+- **本页解决什么：** 用最小反例证明“更多 affine 层”无效，并亲手构造一个改变表示后可线性读出的网络；
+- **后续为何需要：** NN-06 会把一次精确构造提升为函数类稠密性问题，NN-07 再问 depth 是否能更高效地复用这种折叠。
+
+**第一遍只抓住失败—修复链。** 先画四点，确认两类 convex hull 在中心相交；再按 $s=x_1+x_2$ 手算三个 ReLU，看到 hidden representation 如何把不可分问题改造成线性读出。
+
+**第二遍再区分四个命题。** 分别审计有限样本拟合、声明域上的函数相等、指定 norm 下的逼近和 threshold 后分类一致；不要用其中一个替代另一个。
+
+### 问题链
+
+1. 为什么感知机在 XOR 上失败，不是因为学习率选得不好？
+2. 为什么任意多个 affine maps 复合后仍不能修复？
+3. 非线性层究竟改变了数据、坐标，还是可读出的函数类？
+4. 一个显式 ReLU 构造如何逐点验算，而不是靠图形猜测？
+5. 训练四点正确以后，连续区域和分布外输入上还剩哪些未知？
+
+> [!check] 第一遍停靠线
+> 若你能用 convex hull 相交证明不可分，并从 $s=0,1,2$ 三种情况算出 $0,1,0$，就可以进入 UAT；连续延拓、表示碰撞与 probe 边界留到第二遍。
+
+## 符号与对象账本
+
+| 对象 | 数学身份 | 在 AI 系统中的身份 | 不能偷换成 |
+|---|---|---|---|
+| $X_\oplus\in\mathbb R^{4\times2}$ | 四个 binary inputs | 最小训练集 fixture | 整个输入分布 |
+| $\boldsymbol y_\oplus=(0,1,1,0)^\top$ | 四个标签 | supervision | 连续目标函数的完整定义 |
+| $s=x_1+x_2$ | scalar projection | 人工选择的中间 feature | 已经足够的 linear classifier |
+| $h(x)\in\mathbb R^3$ | hidden representation | 可供 output head 读取的 features | 必然可逆的坐标变换 |
+| $q(s)$ | 分段线性函数 | predictor score | 自动校准的概率 |
+
+### 贯穿算例：从四点到三角帽
+
+本卷后四页共用
+
+$$
+X_\oplus=
+\begin{bmatrix}
+0&0\\0&1\\1&0\\1&1
+\end{bmatrix},\qquad
+\boldsymbol y_\oplus=
+\begin{bmatrix}0\\1\\1\\0\end{bmatrix},\qquad s=x_1+x_2.
+$$
+
+定义
+
+$$
+q(s)=\operatorname{ReLU}(s)-2\operatorname{ReLU}(s-1)+\operatorname{ReLU}(s-2).
+$$
+
+在四点上 $s=(0,1,1,2)$，故 $q(s)=\boldsymbol y_\oplus$。NN-06 会把 $q$ 看成 $C([0,2])$ 中的连续函数，NN-07 使用 $T(u)=q(2u)$ 反复折叠区间，NN-08 则对实现 $q$ 的三个 hidden units 做置换和正缩放而保持函数不变。
+
+## 核心公式七问：$q(s)=\operatorname{ReLU}(s)-2\operatorname{ReLU}(s-1)+\operatorname{ReLU}(s-2)$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 用三个 hinge 拼出在 $s=1$ 取峰值、在 $s=0,2$ 为零的 triangular hat |
+| 对象 | $s\in\mathbb R$；三个 pre-activations 为 $s,s-1,s-2$；输出权重为 $(1,-2,1)$ |
+| 来路 | 先让 slope 从 $0$ 变为 $1$，在 $s=1$ 减去 $2$，在 $s=2$ 再加回 $1$ |
+| 步骤 | 必须按 $s\le0$、$0<s\le1$、$1<s\le2$、$s>2$ 分段展开 |
+| 读法 | hidden layer 生成三个 hinge basis，output layer 对 basis 作线性组合 |
+| 检查 | $q(0)=0,q(1)=1,q(2)=0$；左右极限连续；区域外为零 |
+| 去路 | UAT 的函数空间、tent-map 复合、参数置换/缩放，以及 feature map 的任务相关性 |
 
 ## 一、学习目标
 
