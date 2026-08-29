@@ -9,10 +9,12 @@ year: 2020
 url: "https://arxiv.org/abs/2002.05202"
 accessed: 2026-08-23
 source_tier: A
+scope_role: primary
+temporal_role: architecture-era-paper
 venue: "arXiv:2002.05202"
 related: ["[[GLU、GeGLU、SwiGLU 与乘性门]]", "[[激活函数的数值稳定、尺度与经验选择]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 # Shazeer 2020：GLU Variants
 > [!abstract] 来源定位

@@ -11,12 +11,76 @@ exercises: ["[[习题 - Softplus、GELU、SiLU 与平滑门控]]"]
 solutions: ["[[解答 - Softplus、GELU、SiLU 与平滑门控]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-smooth-activation-operators-v2.svg]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 # Softplus、GELU、SiLU 与平滑门控
 
 > [!abstract] 本章主问题
 > Softplus 平滑 max，GELU 用 Gaussian CDF 门控，SiLU/Swish 用 sigmoid 自门控。它们都接近 ReLU，却在负侧、单调性、导数上界、二阶曲率与 kernel 代价上不同。“平滑”不是一个单指标，近似公式也必须携带误差、dtype 与 backward 一致性。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-17—20 已比较饱和、kink、泄漏和指数负支；本页进一步问“平滑 ReLU”究竟平滑了哪个对象；
+- **本页解决什么：** 区分 soft maximum、Gaussian probability gate 与 sigmoid self-gate，并同时比较函数、斜率、曲率和稳定实现；
+- **后续为何需要：** NN-22 会把 self-gate 扩展成两条 learned projections 的乘积，NN-24 再把 exact/approx kernel 纳入经验选择。
+
+**第一遍只复算统一三点。** 分别计算 Softplus、GELU、SiLU 的输出和一阶导，观察中心值、负侧符号和 slope 是否越过 $[0,1]$。
+
+**第二遍再审计曲率与实现。** 检查 convexity、非单调区、exact/approx 误差、dtype、fusion 和 double backward；“平滑”不能替代完整合同。
+
+### 问题链
+
+1. Softplus 平滑的是 max，GELU/SiLU 平滑的是 gate，这两种构造差在哪里？
+2. 为什么 GELU/SiLU 可以在负区输出负值且局部导数为负？
+3. 一阶光滑是否自动意味着全局 convex 或更容易优化？
+4. tanh/sigmoid 近似 GELU 时，forward 接近是否保证 derivative 也接近？
+5. AI kernel 中 exact、approximate、dtype 与 backward flag 为什么必须共同记录？
+
+> [!check] 第一遍停靠线
+> 若你能在 $s_\triangle$ 上复算三种输出和斜率，并解释 Softplus 为何 convex 而 GELU/SiLU 不是，就可以进入乘性门；曲率变号与实现误差留到第二遍。
+
+## 符号与对象账本
+
+| 对象 | 构造 | 在 AI 中的角色 | 关键边界 |
+|---|---|---|---|
+| $\operatorname{softplus}_\beta$ | temperature LSE | positive scale/smooth rectifier | 中心值非零、全局 convex |
+| $x\Phi(x)$ | Gaussian probability gate | GELU hidden activation | exact/approx 实现不同 |
+| $x\sigma(x)$ | sigmoid self-gate | SiLU/Swish hidden activation | 负侧非单调 |
+| $\phi'(x),\phi''(x)$ | local slope/curvature | VJP 与高阶 AD | 不等于整网稳定性 |
+| approximation flag | implementation contract | compiler/kernel 选择 | 训练推理不一致会改函数 |
+
+### 贯穿算例：同一三点上的三种平滑机制
+
+沿用 $s_\triangle=(-2,0,2)$，取 $\beta=1$。得到
+
+$$
+\operatorname{softplus}(s_\triangle)\approx(0.126928,0.693147,2.126928),\quad
+\operatorname{softplus}'(s_\triangle)\approx(0.119203,0.5,0.880797),
+$$
+
+$$
+\operatorname{GELU}(s_\triangle)\approx(-0.045500,0,1.954500),\quad
+\operatorname{GELU}'(s_\triangle)\approx(-0.085232,0.5,1.085232),
+$$
+
+$$
+\operatorname{SiLU}(s_\triangle)\approx(-0.238406,0,1.761594),\quad
+\operatorname{SiLU}'(s_\triangle)\approx(-0.090784,0.5,1.090784).
+$$
+
+三者中心 slope 都是 $1/2$，但 Softplus 中心值为 $\log2$ 且输出为正；GELU/SiLU 允许小负输出与负 slope。下一页将把 sigmoid/SiLU 作为 learned gate branch，而不是孤立 elementwise curve。
+
+## 核心公式七问：$\operatorname{SiLU}(x)=x\sigma(x)$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 让输入值按自身产生的 soft gate 连续调制 |
+| 对象 | value 与 gate 来自同一 scalar；输出、输入同 shape |
+| 来路 | 恒等 value branch $x$ 与 sigmoid gate $\sigma(x)$ 的乘积 |
+| 步骤 | derivative 必须用 product rule：$\sigma+x\sigma(1-\sigma)$ |
+| 读法 | 负输入被软抑制但可保留小负值，正大输入渐近 identity |
+| 检查 | $x=0$ 输出 0、斜率 $1/2$；两端分别趋 0 与 identity |
+| 去路 | SwiGLU、smooth FFN、fused activation 与 higher-order optimization |
 
 ## 一、Softplus：带温度的 Smooth Max
 

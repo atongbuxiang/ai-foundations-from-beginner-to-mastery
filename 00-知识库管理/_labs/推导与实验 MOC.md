@@ -66,9 +66,10 @@ updated: 2026-08-29
 - 第三波 NN-09—12 以同一个 $X_\diamond$ 二样本 affine-regression 图贯通 forward trace、JVP/VJP、reverse fan-out accumulation 与 dense-layer backward；四页数值从 $L=5.25$ 到 directional derivative $2.5$ 和完整参数梯度闭合；
 - 第四波 NN-13—16 延续 $X_\diamond$ 图，贯通 ReLU residual/broadcast、stable softmax–CE、forward/reverse mode 与 gradient-check/checkpoint/HVP；独立重算 CE、方向导数和二阶作用；
 - 第五波 NN-17—20 以 $s_\triangle=(-2,0,2)$ 统一比较 activation 选择、sigmoid/tanh 饱和、ReLU/Leaky kink 与 ELU/SELU 分布接口；
-- 当前语义：现行迁移 **20/64**，材料门 **2/8**，30.3 为 4/8 in-progress，NN-21—64 **44/64 pending**，个人 `not-attempted`；
+- 第六波 NN-21—24 沿用 $s_\triangle$，独立复算 Softplus/GELU/SiLU 一阶导、GLU/SwiGLU 两路 VJP、Maxout winner/tie，并建立激活选择的数学—浮点—传播—系统—统计五道门；
+- 当前语义：现行迁移 **24/64**，材料门 **3/8**，30.3 `regression-passed`，NN-25—64 **40/64 pending**，个人 `not-attempted`；
 - 旧[[实验 - 神经网络基础累计复现门]]和 `NN-CUM-01` 保留为 `composed` 历史材料，待 64 节迁移与分卷证据门建成后重新升级；
-- 下一施工点：NN-21—24，完成 30.3 后半卷。
+- 下一施工点：NN-25—28，开始 30.4 初始化与信号传播前半卷。
 
 ## 第四章确定性架构审计
 

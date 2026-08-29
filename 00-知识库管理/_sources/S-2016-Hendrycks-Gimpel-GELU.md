@@ -9,10 +9,12 @@ year: 2016
 url: "https://arxiv.org/abs/1606.08415"
 accessed: 2026-08-23
 source_tier: A
+scope_role: primary
+temporal_role: original-paper
 venue: "arXiv:1606.08415"
 related: ["[[Softplus、GELU、SiLU 与平滑门控]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 # Hendrycks–Gimpel 2016：GELU
 > [!abstract] 来源定位

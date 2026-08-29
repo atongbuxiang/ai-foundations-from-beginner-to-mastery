@@ -59,14 +59,14 @@ locked scope: 64 / 64
 formal nodes: 64 / 64
 exercise sets: 64 / 64
 solutions: 64 / 64
-current-standard teaching migration: 20 / 64
-teaching migration pending: 44 / 64
-material-regression-passed volumes: 2 / 8
+current-standard teaching migration: 24 / 64
+teaching migration pending: 40 / 64
+material-regression-passed volumes: 3 / 8
 legacy NN-CUM-01: composed / current-standard re-audit pending
-state: draft nodes / 30.1--30.2 material regression-passed / not-attempted learner
-next: migrate NN-21--24 to close 30.3; personal evidence remains unopened
+state: draft nodes / 30.1--30.3 material regression-passed / not-attempted learner
+next: migrate NN-25--28 to begin 30.4; personal evidence remains unopened
 ```
 
-NN-01—64 已形成 64/64 静态骨架与 960 道节点题。[[neural_network_foundations_teaching_contract_audit.py]]确认 NN-01—20 达到 **20/64 `regression-passed`**；30.1—30.2 材料门保持 **2/8**，30.3 前半卷为 4/8，NN-21—64 共 **44/64** 待迁移。个人仍为 `not-attempted`。
+NN-01—64 已形成 64/64 静态骨架与 960 道节点题。[[neural_network_foundations_teaching_contract_audit.py]]确认 NN-01—24 达到 **24/64 `regression-passed`**；30.1—30.3 材料门达到 **3/8**，NN-25—64 共 **40/64** 待迁移。个人仍为 `not-attempted`。
 
 旧章节累计出口[[阶段测验 - 神经网络基础（第三章）]]、[[阶段测验解答 - 神经网络基础（第三章）]]与[[实验 - 神经网络基础累计复现门]]仍保留为 `composed` 材料，但不能在 64 节现行合同和分卷门升级前冒充已回归通过。`not-attempted` 仍表示尚无学习者闭卷、重做与迁移证据；材料建设不等于八卷已经通过。

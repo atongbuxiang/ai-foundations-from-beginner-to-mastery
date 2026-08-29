@@ -23,7 +23,7 @@ SOLUTIONS = LABS / "solutions"
 CODE = LABS / "code"
 FIGURE_AUDITOR = CODE / "audit-markdown-figure-units.mjs"
 ASSET_DIR = ROOT / "00-知识库管理" / "_assets" / "figures" / "neural-networks"
-MIGRATED_IDS = tuple(range(1, 21))
+MIGRATED_IDS = tuple(range(1, 25))
 
 STATE_SURFACES = (
     CHAPTER / "神经网络基础 MOC.md",
@@ -201,7 +201,7 @@ def audit_migrated_contract(nodes: list[tuple[int, Path, str]]) -> None:
         require(fixture in content, f"{relative}: shared teaching fixture missing: {fixture}")
         require("AI" in content, f"{relative}: AI object mapping missing")
         require(len(content.splitlines()) >= 180, f"{relative}: derivation depth unexpectedly short")
-    print("PASS NN teaching migration waves A--E: NN-01--20 course position/two-pass/problem/object/formula contracts=20/20")
+    print("PASS NN teaching migration waves A--F: NN-01--24 course position/two-pass/problem/object/formula contracts=24/24")
 
 
 def audit_wave_c_fixture(nodes: list[tuple[int, Path, str]]) -> None:
@@ -309,6 +309,63 @@ def audit_wave_e_fixture(nodes: list[tuple[int, Path, str]]) -> None:
     for node_id, markers in expected.items():
         require(all(marker in wave[node_id] for marker in markers), f"NN-{node_id:02d}: wave-E numeric closure missing")
     print("PASS NN wave-E independent math: sigmoid/tanh saturation; ReLU/Leaky conventions; ELU negative branch exact")
+
+
+def audit_wave_f_fixture(nodes: list[tuple[int, Path, str]]) -> None:
+    """Recompute the NN-21--24 smooth/gated/maxout continuation independently."""
+    points = (-2.0, 0.0, 2.0)
+
+    sigmoid = tuple(1.0 / (1.0 + math.exp(-value)) for value in points)
+    softplus = tuple(math.log1p(math.exp(value)) for value in points)
+    normal_cdf = tuple(0.5 * (1.0 + math.erf(value / math.sqrt(2.0))) for value in points)
+    normal_pdf = tuple(math.exp(-0.5 * value * value) / math.sqrt(2.0 * math.pi) for value in points)
+    gelu = tuple(value * cdf for value, cdf in zip(points, normal_cdf))
+    gelu_grad = tuple(cdf + value * pdf for value, cdf, pdf in zip(points, normal_cdf, normal_pdf))
+    silu = tuple(value * gate for value, gate in zip(points, sigmoid))
+    silu_grad = tuple(gate + value * gate * (1.0 - gate) for value, gate in zip(points, sigmoid))
+
+    def close(actual: tuple[float, ...], expected: tuple[float, ...], label: str) -> None:
+        require(all(abs(a - b) < 1e-6 for a, b in zip(actual, expected)), f"NN wave-F {label} drifted: {actual}")
+
+    close(softplus, (0.126928, 0.693147, 2.126928), "Softplus values")
+    close(sigmoid, (0.119203, 0.5, 0.880797), "Softplus gradients")
+    close(gelu, (-0.045500, 0.0, 1.954500), "GELU values")
+    close(gelu_grad, (-0.085232, 0.5, 1.085232), "GELU gradients")
+    close(silu, (-0.238406, 0.0, 1.761594), "SiLU values")
+    close(silu_grad, (-0.090784, 0.5, 1.090784), "SiLU gradients")
+
+    values = (1.0, -1.0, 2.0)
+    upstream = (1.0, 1.0, 1.0)
+    glu = tuple(value * gate for value, gate in zip(values, sigmoid))
+    glu_value_grad = tuple(bar * gate for bar, gate in zip(upstream, sigmoid))
+    glu_gate_grad = tuple(bar * value * gate * (1.0 - gate) for bar, value, gate in zip(upstream, values, sigmoid))
+    swiglu = tuple(value * gate for value, gate in zip(values, silu))
+    swiglu_value_grad = tuple(bar * gate for bar, gate in zip(upstream, silu))
+    swiglu_gate_grad = tuple(bar * value * derivative for bar, value, derivative in zip(upstream, values, silu_grad))
+    close(glu, (0.119203, -0.5, 1.761594), "GLU outputs")
+    close(glu_value_grad, (0.119203, 0.5, 0.880797), "GLU value gradients")
+    close(glu_gate_grad, (0.104994, -0.25, 0.209987), "GLU gate gradients")
+    close(swiglu, (-0.238406, 0.0, 3.523188), "SwiGLU outputs")
+    close(swiglu_value_grad, (-0.238406, 0.0, 1.761594), "SwiGLU value gradients")
+    close(swiglu_gate_grad, (-0.090784, -0.5, 2.181568), "SwiGLU gate gradients")
+
+    candidates = tuple((value, -value, 0.5) for value in points)
+    outputs = tuple(max(row) for row in candidates)
+    winners = tuple(row.index(max(row)) + 1 for row in candidates)
+    slopes = tuple((1.0, -1.0, 0.0)[winner - 1] for winner in winners)
+    require(outputs == (2.0, 0.5, 2.0), f"NN wave-F maxout outputs drifted: {outputs}")
+    require(winners == (2, 3, 1) and slopes == (-1.0, 0.0, 1.0), "NN wave-F maxout routing drifted")
+
+    wave = {node_id: content for node_id, _, content in nodes if 21 <= node_id <= 24}
+    expected = {
+        21: ("0.126928", "1.085232", "1.090784"),
+        22: ("3.523188", "2.181568"),
+        23: ("(2,0.5,2)", "(-1,0,1)"),
+        24: ("数学门", "统计门", "\\text{claim}"),
+    }
+    for node_id, markers in expected.items():
+        require(all(marker in wave[node_id] for marker in markers), f"NN-{node_id:02d}: wave-F numeric/evidence closure missing")
+    print("PASS NN wave-F independent math: Softplus/GELU/SiLU; GLU/SwiGLU two-route VJP; Maxout winners; five-gate evidence closure")
 
 
 def question_ids(content: str) -> list[str]:
@@ -468,10 +525,10 @@ def audit_state_surfaces() -> None:
     for path in STATE_SURFACES:
         content = read(path)
         require(audit_name in content, f"state surface misses NN audit: {path.relative_to(ROOT)}")
-        require("20/64" in content or "20 / 64" in content, f"state surface misses NN migrated count: {path.relative_to(ROOT)}")
-        require("44/64" in content or "44 / 64" in content, f"state surface misses NN pending count: {path.relative_to(ROOT)}")
+        require("24/64" in content or "24 / 64" in content, f"state surface misses NN migrated count: {path.relative_to(ROOT)}")
+        require("40/64" in content or "40 / 64" in content, f"state surface misses NN pending count: {path.relative_to(ROOT)}")
         require("not-attempted" in content, f"state surface overclaims NN learner: {path.relative_to(ROOT)}")
-    print("PASS NN state surfaces: 5 global + 3 volume views agree on migrated=20/64, pending=44/64, learner=not-attempted")
+    print("PASS NN state surfaces: 5 global + 3 volume views agree on migrated=24/64, pending=40/64, learner=not-attempted")
 
 
 def main() -> None:
@@ -485,6 +542,7 @@ def main() -> None:
     audit_wave_c_fixture(nodes)
     audit_wave_d_fixture(nodes)
     audit_wave_e_fixture(nodes)
+    audit_wave_f_fixture(nodes)
     audit_exercises(nodes, index)
     audit_sources_and_links(nodes, index)
     audit_figures(nodes, index)
@@ -492,8 +550,8 @@ def main() -> None:
     audit_state_surfaces()
     if args.run_figures:
         audit_deterministic_figures()
-    print("NN-01--20 teaching migration regression: PASS; 30.1--30.2 material gates=2/8; 30.3=4/8")
-    print("NN-21--64 teaching migration: pending (44/64)")
+    print("NN-01--24 teaching migration regression: PASS; 30.1--30.3 material gates=3/8")
+    print("NN-25--64 teaching migration: pending (40/64)")
     print("PERSONAL LEARNING STATUS: not-attempted")
 
 

@@ -9,10 +9,12 @@ year: 2017
 url: "https://arxiv.org/abs/1710.05941"
 accessed: 2026-08-23
 source_tier: A
+scope_role: primary
+temporal_role: original-paper
 venue: "arXiv:1710.05941"
 related: ["[[Softplus、GELU、SiLU 与平滑门控]]", "[[激活函数的数值稳定、尺度与经验选择]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 # Ramachandran–Zoph–Le 2017：Swish
 > [!abstract] 来源定位

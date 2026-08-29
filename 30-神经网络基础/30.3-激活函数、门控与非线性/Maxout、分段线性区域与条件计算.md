@@ -11,12 +11,71 @@ exercises: ["[[习题 - Maxout、分段线性区域与条件计算]]"]
 solutions: ["[[解答 - Maxout、分段线性区域与条件计算]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-maxout-upper-envelope-v2.svg]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 # Maxout、分段线性区域与条件计算
 
 > [!abstract] 本章主问题
 > Maxout 单元从 $k$ 个 learned affine candidates 中取最大值，因此单个单元就是 convex piecewise-linear upper envelope。winner 决定局部梯度，tie 决定不可微边界。它扩大 region 与参数预算，但“只选一个输出”并不表示前向无需计算全部 candidates。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-22 用连续乘法让两条 branches 共同决定输出；Maxout 改为先计算多条 affine candidates，再由 hard winner 选择局部公式；
+- **本页解决什么：** 从 upper envelope 推出 convex PWA、winner gradient、tie subdifferential 与 dense-compute/conditional-routing 边界；
+- **后续为何需要：** NN-24 会把候选数 $k$ 的表达收益与参数、MAC、winner starvation 和统计证据共同审计。
+
+**第一遍只找 winner。** 对每个输入列出全部 candidates、最大值、winner 与局部 slope；遇到 tie 单独标记，不强行写唯一 gradient。
+
+**第二遍再看几何与系统。** 推导 polyhedral regions、subdifferential、candidate permutation invariance、dense candidate cost 与真正 sparse conditional compute 的差异。
+
+### 问题链
+
+1. pointwise maximum 为什么生成 convex piecewise-affine function？
+2. unique winner 时梯度为何等于该 affine candidate 的 slope？
+3. tie 点为何只有 directional derivative/subdifferential，而没有唯一 Fréchet derivative？
+4. 输出只保留 winner，为什么 forward 通常仍需计算全部 $k$ 个 candidates？
+5. candidate 长期不获胜时，参数学习会发生什么？
+
+> [!check] 第一遍停靠线
+> 若你能在 $s_\triangle$ 上找出三个 winner、输出 $(2,0.5,2)$ 与 slope $(-1,0,1)$，并解释这不等于跳过其他候选计算，就可以进入经验选择；tie 几何留到第二遍。
+
+## 符号与对象账本
+
+| 对象 | 类型 | 在 AI Maxout 单元中的身份 | 关键边界 |
+|---|---|---|---|
+| $a_r(x)=w_r^Tx+b_r$ | affine candidate | 候选局部专家 | 先计算才知道 winner |
+| $h(x)=\max_ra_r(x)$ | upper envelope | unit output | 单个 unit convex |
+| $r^*(x)$ | winner index | backward route/cache | 接近 tie 时不稳定 |
+| $A(x)$ | active/tied set | subgradient vertices | tie 时无唯一 gradient |
+| winner frequency/margin | empirical diagnostics | starvation 与稳定性证据 | 不等于部署加速 |
+
+### 贯穿算例：三个 affine candidates 的硬选择
+
+沿用 $s_\triangle=(-2,0,2)$，取
+
+$$
+a_1(s)=s,\qquad a_2(s)=-s,\qquad a_3(s)=0.5.
+$$
+
+逐点 candidate vectors 为 $(-2,2,0.5)$、$(0,0,0.5)$、$(2,-2,0.5)$，因此
+
+$$
+h(s_\triangle)=(2,0.5,2),\qquad r^*(s_\triangle)=(2,3,1),\qquad h'(s_\triangle)=(-1,0,1).
+$$
+
+三个 probe 都有 unique winner，故局部 slope 明确；但在 $s=\pm0.5$ 等边界会出现 tie，需要 subdifferential 或程序 convention。即使最终只保留三个 winner，dense forward 仍计算了九个 candidate scores。
+
+## 核心公式七问：$h(x)=\max_{1\le r\le k}(w_r^Tx+b_r)$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 从多个 learned affine pieces 中按输入选择局部响应 |
+| 对象 | $k$ 个 affine candidates、winner set 与 scalar/unit output |
+| 来路 | pointwise maximum/upper-envelope construction |
+| 步骤 | 先全部求值，再 reduce max 并缓存 winner；reverse 将 cotangent 路由给 active candidates |
+| 读法 | 输入空间被 candidate dominance inequalities 划成 polyhedral regions |
+| 检查 | $k=2$ 且 candidates 为 $0,x$ 时得到 ReLU；tie 时不得写唯一 slope |
+| 去路 | max-affine splines、mixture routing、winner starvation、region counts 与 conditional compute |
 
 ## 一、定义与 Shape
 
@@ -89,6 +148,31 @@ $k$ 增加候选 pieces 和局部选择能力，也把第一投影参数/MAC/act
 ## 八、Winner Starvation 与 Tie 稳定性
 
 长期不获胜的 candidate 接收零参数梯度，可能出现 winner starvation。接近 tie 时，小输入/舍入扰动可切换 winner，函数值连续但 gradient 跳变。应报告 winner frequency、margin（第一与第二 candidate 差值）和 dead-candidate rate。
+
+### 把 tie 算清：不可导不等于无法分析
+
+对贯穿算例，$a_1=a_3$ 发生在 $s=0.5$，$a_2=a_3$ 发生在 $s=-0.5$。以 $s=0.5$ 为例，active slopes 是 $\{1,0\}$，所以
+
+$$
+\partial h(0.5)=[0,1],
+\qquad
+h'(0.5;v)=\max(v,0).
+$$
+
+当 $v>0$ 时，向右移动会进入 $a_1$ 的区域，方向导数是 $v$；当 $v<0$ 时，向左移动仍由常数候选 $a_3$ 获胜，方向导数是 $0$。因为 $\max(v,0)$ 不是 $v$ 的线性函数，这里不存在唯一的 Fréchet derivative。
+
+> [!warning] 程序返回的一个数不是新定理
+> 若框架在 tie 时返回 slope $1$、$0$ 或平分值，它实现的是一条 backward convention。它可以是合法的 subgradient，却不会让原函数在 tie 点变得可导。
+
+### 一张最小 winner 审计表
+
+| probe | top-1 | top-2 | margin | 反向路由 |
+|---|---:|---:|---:|---|
+| $s=-2$ | $a_2=2$ | $a_3=0.5$ | $1.5$ | 只给 $a_2$ |
+| $s=0$ | $a_3=0.5$ | $a_1=a_2=0$ | $0.5$ | 只给 $a_3$ |
+| $s=2$ | $a_1=2$ | $a_3=0.5$ | $1.5$ | 只给 $a_1$ |
+
+margin 比 winner index 多回答一个问题：路由离切换边界有多远。训练时若大量样本 margin 接近零，即使各 candidate 的 winner frequency 看似均衡，gradient routing 仍可能对量化和微小扰动敏感。
 
 ## 九、图：Upper Envelope 与梯度路由
 

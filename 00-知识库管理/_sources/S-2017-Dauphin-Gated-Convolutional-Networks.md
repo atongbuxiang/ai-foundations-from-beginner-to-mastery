@@ -9,10 +9,12 @@ year: 2017
 url: "https://proceedings.mlr.press/v70/dauphin17a.html"
 accessed: 2026-08-23
 source_tier: A
+scope_role: primary
+temporal_role: original-paper
 venue: "ICML 2017, PMLR 70:933–941"
 related: ["[[GLU、GeGLU、SwiGLU 与乘性门]]"]
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 # Dauphin et al. 2017：Gated Linear Units
 > [!abstract] 来源定位
