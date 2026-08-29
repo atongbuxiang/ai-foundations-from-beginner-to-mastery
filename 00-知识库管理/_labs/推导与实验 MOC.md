@@ -31,7 +31,7 @@ updated: 2026-08-28
 ## 第二章学习理论静态材料审计
 
 - [[learning_theory_teaching_contract_audit.py]]：检查 LT-01—84 十卷 scope、84 组题—解双射、1260 个 A—E ID、实际调用来源卡、范围内链接、图文单元与课程地图映射；
-- `--run-compute`：将 18 个节点制图脚本运行两次，并要求当前 113 个已存学习理论 figure/plot 资产与仓库版本逐字节一致；
+- `--run-compute`：将 18 个节点制图脚本运行两次，并要求当前 114 个已存学习理论 figure/plot 资产与仓库版本逐字节一致；
 - 第一卷累计门：[[实验 - 学习问题、决策与风险累计复现门]]以 object-risk ERM 枚举、cost/reject Bayes decision 与 finite-candidate holdout feedback 组成三轨；配套[[阶段测验 - 学习问题、决策与风险（20.1）|LT-CUM-01]]和独立详解；
 - [[learning_problem_decision_cumulative_contract_audit.py]]：复核 8/8 scope、14/14 题解与 100 分、答案/输出隔离、解析锚点、canonical/盲参双跑、stdout/SVG/XML/hash、覆盖保护和状态面；
 - 第二卷累计门：[[实验 - PAC 学习与有限假设类累计复现门]]以 realizable survival/Union/exp、agnostic lexicographic ERM/uniform event 与 Occam/Kraft—Le Cam testing 组成三轨；配套[[阶段测验 - PAC 学习与有限假设类（20.2）|PAC-CUM-01]]和独立详解；
@@ -46,8 +46,10 @@ updated: 2026-08-28
 - [[learning_theory_qualification_01_contract_audit.py]]：不导入生成函数，独立复算 output law、ghost、stability、entropy/MI、finite/compression/PAC-Bayes canonical/盲参锚点，并复核双跑、SVG/XML/hash、非法合同、五卷前置和状态面；
 - 第六卷累计门：[[实验 - 经典模型与模型选择累计复现门]]以 spectral ridge/validation、logistic/SVM/tree/bootstrap/boosting、PCA/K-Means/mixture-EM/selection 组成三轨；配套[[阶段测验 - 经典模型与模型选择（20.6）|MODEL-CUM-01]]和独立详解；
 - [[classical_models_cumulative_contract_audit.py]]：独立复算 12/12 节点、14/14 题解、谱/边界/ensemble/latent 锚点、canonical/跨轨 blind、SVG/XML/hash、非法合同、资格考前置与六处状态面；
-- 当前语义：第 20 章静态材料为 `regression-passed`，卷级材料门 **6/10**、资格考材料门 **1/2**；个人分卷 **0/10**、个人资格 **0/2 / `not-attempted`**；`LT-QUAL-01 retained` 前置未满足；84 篇正文仍为 `draft`；
-- 下一施工点：进入 20.7 表示学习、度量学习与自监督的卷级证据门。
+- 第七卷累计门：[[实验 - 表示学习、度量学习与自监督累计复现门]]以 task-indexed risk/metric/dependent views、exact InfoNCE/batch/collision、spectrum/VICReg/EMA/masked target 组成三轨；配套[[阶段测验 - 表示学习、度量学习与自监督（20.7）|REPR-CUM-01]]和独立详解；
+- [[representation_selfsupervised_cumulative_contract_audit.py]]：独立复算 8/8 节点、14/14 题解、表示/候选/target 锚点、canonical/跨轨 blind、SVG/XML/hash、非法合同、20.6 前置与六处状态面；
+- 当前语义：第 20 章静态材料为 `regression-passed`，卷级材料门 **7/10**、资格考材料门 **1/2**；个人分卷 **0/10**、个人资格 **0/2 / `not-attempted`**；`MODEL-CUM-01 retained` 前置未满足；84 篇正文仍为 `draft`；
+- 下一施工点：进入 20.8 校准、不确定性与分布偏移的卷级证据门。
 
 ## 第四章确定性架构审计
 

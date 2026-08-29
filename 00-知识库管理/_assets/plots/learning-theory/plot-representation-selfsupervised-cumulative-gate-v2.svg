@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1540" height="1000" viewBox="0 0 1540 1000">
+<rect width="1540" height="1000" fill="#F5F8FC"/>
+<text x="70" y="60" font-family="Inter,Arial,sans-serif" font-size="27" fill="#172033" font-weight="650">Representation learning | task risk, candidate experiment, target dynamics</text>
+<text x="70" y="91" font-family="Inter,Arial,sans-serif" font-size="15" fill="#5E6B82" font-weight="500">task-indexed accessibility  -&gt;  contrastive batch law  -&gt;  non-collapse / self-generated targets</text>
+<rect x="70" y="130" width="450" height="600" rx="10" fill="#FFFFFF" stroke="#CBD7E6" stroke-width="1.2"/>
+<line x1="70" y1="132" x2="520" y2="132" stroke="#2F63E9" stroke-width="7"/>
+<rect x="545" y="130" width="450" height="600" rx="10" fill="#FFFFFF" stroke="#CBD7E6" stroke-width="1.2"/>
+<line x1="545" y1="132" x2="995" y2="132" stroke="#BE7812" stroke-width="7"/>
+<rect x="1020" y="130" width="450" height="600" rx="10" fill="#FFFFFF" stroke="#CBD7E6" stroke-width="1.2"/>
+<line x1="1020" y1="132" x2="1470" y2="132" stroke="#0A9D88" stroke-width="7"/>
+<text x="94" y="177" font-family="Inter,Arial,sans-serif" font-size="21" fill="#172033" font-weight="650">A | task-indexed representation</text>
+<text x="94" y="202" font-family="Inter,Arial,sans-serif" font-size="13" fill="#5E6B82" font-weight="500">affine accessibility + retrieval + view dependence</text>
+<text x="94" y="240" font-family="Inter,Arial,sans-serif" font-size="13" fill="#172033" font-weight="400">task weights S/N/XOR = (0.5, 0.3, 0.2)</text>
+<line x1="115" y1="490" x2="486" y2="490" stroke="#CBD7E6" stroke-width="1.0"/>
+<rect x="118" y="467.5" width="53" height="22.5" rx="3" fill="#2F63E9"/>
+<text x="123" y="459.5" font-family="Inter,Arial,sans-serif" font-size="12" fill="#2F63E9" font-weight="600">0.050</text>
+<text x="116" y="513" font-family="Inter,Arial,sans-serif" font-size="11" fill="#5E6B82" font-weight="500">id</text>
+<rect x="191" y="377.5" width="53" height="112.5" rx="3" fill="#2F63E9"/>
+<text x="196" y="369.5" font-family="Inter,Arial,sans-serif" font-size="12" fill="#2F63E9" font-weight="600">0.250</text>
+<text x="189" y="513" font-family="Inter,Arial,sans-serif" font-size="11" fill="#5E6B82" font-weight="500">inv-S</text>
+<rect x="264" y="332.5" width="53" height="157.49999999999997" rx="3" fill="#2F63E9"/>
+<text x="269" y="324.5" font-family="Inter,Arial,sans-serif" font-size="12" fill="#2F63E9" font-weight="600">0.350</text>
+<text x="262" y="513" font-family="Inter,Arial,sans-serif" font-size="11" fill="#5E6B82" font-weight="500">nuis-N</text>
+<rect x="337" y="310.0" width="53" height="180.0" rx="3" fill="#2F63E9"/>
+<text x="342" y="302.0" font-family="Inter,Arial,sans-serif" font-size="12" fill="#2F63E9" font-weight="600">0.400</text>
+<text x="335" y="513" font-family="Inter,Arial,sans-serif" font-size="11" fill="#5E6B82" font-weight="500">prod</text>
+<rect x="410" y="490.0" width="53" height="0.0" rx="3" fill="#0A9D88"/>
+<text x="415" y="482.0" font-family="Inter,Arial,sans-serif" font-size="12" fill="#0A9D88" font-weight="600">0.000</text>
+<text x="408" y="513" font-family="Inter,Arial,sans-serif" font-size="11" fill="#5E6B82" font-weight="500">enrich</text>
+<text x="94" y="545" font-family="Inter,Arial,sans-serif" font-size="14" fill="#0A9D88" font-weight="650">best task-family risk: enriched = 0.000</text>
+<rect x="94" y="572" width="402" height="112" rx="10" fill="#F7FAFF" stroke="#2F63E9" stroke-width="1.2"/>
+<text x="110" y="600" font-family="Inter,Arial,sans-serif" font-size="12" fill="#2F63E9" font-weight="600">triplet hinge = 0.200; AP = 0.833; Recall@2 = 0.500</text>
+<text x="110" y="628" font-family="Inter,Arial,sans-serif" font-size="12" fill="#172033" font-weight="400">augmented views: nominal 48, effective 17.143</text>
+<text x="110" y="656" font-family="Inter,Arial,sans-serif" font-size="12" fill="#C84032" font-weight="500">invariance is valid only relative to a declared task</text>
+<text x="94" y="714" font-family="Inter,Arial,sans-serif" font-size="11" fill="#5E6B82" font-weight="400">Same encoder; different task/head/protocol -&gt; different estimand.</text>
+<text x="569" y="177" font-family="Inter,Arial,sans-serif" font-size="21" fill="#172033" font-weight="650">B | candidate law and batch</text>
+<text x="569" y="202" font-family="Inter,Arial,sans-serif" font-size="13" fill="#5E6B82" font-weight="500">exact binary InfoNCE + finite softmax gradient</text>
+<rect x="569" y="228" width="402" height="92" rx="10" fill="#FFF9EF" stroke="#BE7812" stroke-width="1.2"/>
+<text x="585" y="257" font-family="Inter,Arial,sans-serif" font-size="13" fill="#BE7812" font-weight="650">q(match)=0.80; K=4; true MI=0.1927</text>
+<text x="585" y="285" font-family="Inter,Arial,sans-serif" font-size="13" fill="#172033" font-weight="400">Bayes loss=1.2405; bound=0.1458</text>
+<text x="585" y="307" font-family="Inter,Arial,sans-serif" font-size="12" fill="#C84032" font-weight="500">unclosed MI gap=0.0469</text>
+<text x="569" y="353" font-family="Inter,Arial,sans-serif" font-size="13" fill="#172033" font-weight="600">one anchor: raw similarities -&gt; softmax probabilities</text>
+<rect x="569" y="360" width="402" height="52" rx="10" fill="#FAFCFF" stroke="#CBD7E6" stroke-width="1.2"/>
+<text x="585" y="382" font-family="Inter,Arial,sans-serif" font-size="12" fill="#7656C7" font-weight="600">positive</text>
+<text x="695" y="382" font-family="Inter,Arial,sans-serif" font-size="12" fill="#172033" font-weight="400">u=2.000</text>
+<text x="780" y="382" font-family="Inter,Arial,sans-serif" font-size="12" fill="#172033" font-weight="400">p=0.6897</text>
+<text x="875" y="382" font-family="Inter,Arial,sans-serif" font-size="12" fill="#C84032" font-weight="400">dL/ds=-0.6207</text>
+<rect x="569" y="426" width="402" height="52" rx="10" fill="#FAFCFF" stroke="#CBD7E6" stroke-width="1.2"/>
+<text x="585" y="448" font-family="Inter,Arial,sans-serif" font-size="12" fill="#172033" font-weight="600">negative 1</text>
+<text x="695" y="448" font-family="Inter,Arial,sans-serif" font-size="12" fill="#172033" font-weight="400">u=1.000</text>
+<text x="780" y="448" font-family="Inter,Arial,sans-serif" font-size="12" fill="#172033" font-weight="400">p=0.2537</text>
+<text x="875" y="448" font-family="Inter,Arial,sans-serif" font-size="12" fill="#0A9D88" font-weight="400">dL/ds=0.5074</text>
+<rect x="569" y="492" width="402" height="52" rx="10" fill="#FAFCFF" stroke="#CBD7E6" stroke-width="1.2"/>
+<text x="585" y="514" font-family="Inter,Arial,sans-serif" font-size="12" fill="#172033" font-weight="600">negative 2</text>
+<text x="695" y="514" font-family="Inter,Arial,sans-serif" font-size="12" fill="#172033" font-weight="400">u=-0.500</text>
+<text x="780" y="514" font-family="Inter,Arial,sans-serif" font-size="12" fill="#172033" font-weight="400">p=0.0566</text>
+<text x="875" y="514" font-family="Inter,Arial,sans-serif" font-size="12" fill="#0A9D88" font-weight="400">dL/ds=0.1132</text>
+<text x="569" y="596" font-family="Inter,Arial,sans-serif" font-size="13" fill="#BE7812" font-weight="650">batch loss=0.3715</text>
+<text x="569" y="624" font-family="Inter,Arial,sans-serif" font-size="12" fill="#C84032" font-weight="500">latent-class collision with declared negatives=0.9294</text>
+<rect x="569" y="650" width="402" height="47" rx="10" fill="#FAFCFF" stroke="#CBD7E6" stroke-width="1.2"/>
+<text x="585" y="680" font-family="Inter,Arial,sans-serif" font-size="12" fill="#5E6B82" font-weight="500">Changing K/batch changes the objective—not only variance.</text>
+<text x="569" y="714" font-family="Inter,Arial,sans-serif" font-size="11" fill="#5E6B82" font-weight="400">A lower contrastive loss is not a task-free quality certificate.</text>
+<text x="1044" y="177" font-family="Inter,Arial,sans-serif" font-size="21" fill="#172033" font-weight="650">C | non-collapse and targets</text>
+<text x="1044" y="202" font-family="Inter,Arial,sans-serif" font-size="13" fill="#5E6B82" font-weight="500">covariance spectrum + VICReg + EMA + Bayes target</text>
+<rect x="1044" y="228" width="402" height="104" rx="10" fill="#F1FBF8" stroke="#0A9D88" stroke-width="1.2"/>
+<text x="1060" y="257" font-family="Inter,Arial,sans-serif" font-size="13" fill="#0A9D88" font-weight="650">spectrum=(9.0, 1.0, 0.0); stable rank=1.111</text>
+<text x="1060" y="285" font-family="Inter,Arial,sans-serif" font-size="13" fill="#172033" font-weight="400">participation ratio=1.220</text>
+<text x="1060" y="309" font-family="Inter,Arial,sans-serif" font-size="12" fill="#172033" font-weight="400">entropy effective rank=1.384</text>
+<rect x="1044" y="352" width="402" height="82" rx="10" fill="#F8F6FF" stroke="#7656C7" stroke-width="1.2"/>
+<text x="1060" y="381" font-family="Inter,Arial,sans-serif" font-size="13" fill="#7656C7" font-weight="600">VICReg variance penalty: spectral=0.667</text>
+<text x="1060" y="409" font-family="Inter,Arial,sans-serif" font-size="12" fill="#172033" font-weight="400">constant=2.000; agreement=0 for both</text>
+<rect x="1044" y="454" width="402" height="90" rx="10" fill="#FFF9EF" stroke="#BE7812" stroke-width="1.2"/>
+<text x="1060" y="483" font-family="Inter,Arial,sans-serif" font-size="13" fill="#BE7812" font-weight="650">EMA teacher final=0.8398</text>
+<text x="1060" y="511" font-family="Inter,Arial,sans-serif" font-size="12" fill="#172033" font-weight="400">masked Bayes log risk=0.5004</text>
+<text x="1060" y="533" font-family="Inter,Arial,sans-serif" font-size="12" fill="#172033" font-weight="400">masked Bayes square risk=0.1600</text>
+<rect x="1044" y="566" width="402" height="118" rx="10" fill="#FAFCFF" stroke="#CBD7E6" stroke-width="1.2"/>
+<text x="1060" y="596" font-family="Inter,Arial,sans-serif" font-size="13" fill="#C84032" font-weight="650">high-rank nuisance representation</text>
+<text x="1060" y="624" font-family="Inter,Arial,sans-serif" font-size="12" fill="#172033" font-weight="400">downstream 0-1 risk=0.500</text>
+<text x="1060" y="652" font-family="Inter,Arial,sans-serif" font-size="12" fill="#C84032" font-weight="500">non-collapse != task sufficiency != transfer</text>
+<text x="1044" y="714" font-family="Inter,Arial,sans-serif" font-size="11" fill="#5E6B82" font-weight="400">Stop-gradient and EMA define optimization, not semantic truth.</text>
+<rect x="70" y="760" width="1400" height="177" rx="16" fill="#FFFFFF" stroke="#CBD7E6" stroke-width="1.2"/>
+<text x="94" y="803" font-family="Inter,Arial,sans-serif" font-size="20" fill="#172033" font-weight="650">The seven-layer representation audit</text>
+<text x="94" y="840" font-family="Inter,Arial,sans-serif" font-size="13" fill="#2F63E9" font-weight="650">source unit</text>
+<text x="245" y="840" font-family="Inter,Arial,sans-serif" font-size="18" fill="#5E6B82" font-weight="600">-&gt;</text>
+<text x="285" y="840" font-family="Inter,Arial,sans-serif" font-size="13" fill="#BE7812" font-weight="650">view / target law</text>
+<text x="480" y="840" font-family="Inter,Arial,sans-serif" font-size="18" fill="#5E6B82" font-weight="600">-&gt;</text>
+<text x="520" y="840" font-family="Inter,Arial,sans-serif" font-size="13" fill="#7656C7" font-weight="650">encoder + head</text>
+<text x="700" y="840" font-family="Inter,Arial,sans-serif" font-size="18" fill="#5E6B82" font-weight="600">-&gt;</text>
+<text x="740" y="840" font-family="Inter,Arial,sans-serif" font-size="13" fill="#C84032" font-weight="650">selection</text>
+<text x="860" y="840" font-family="Inter,Arial,sans-serif" font-size="18" fill="#5E6B82" font-weight="600">-&gt;</text>
+<text x="900" y="840" font-family="Inter,Arial,sans-serif" font-size="13" fill="#0A9D88" font-weight="650">downstream protocol</text>
+<text x="1110" y="840" font-family="Inter,Arial,sans-serif" font-size="18" fill="#5E6B82" font-weight="600">-&gt;</text>
+<text x="1150" y="840" font-family="Inter,Arial,sans-serif" font-size="13" fill="#172033" font-weight="650">deployment task/shift</text>
+<line x1="94" y1="872" x2="1445" y2="872" stroke="#CBD7E6" stroke-width="1.0"/>
+<text x="94" y="911" font-family="Inter,Arial,sans-serif" font-size="13" fill="#C84032" font-weight="500">Evidence rule: low pretext loss != semantic recovery; non-collapse != usefulness; best probe score != unbiased deployment risk.</text>
+<text x="1235" y="979" font-family="Inter,Arial,sans-serif" font-size="11" fill="#5E6B82" font-weight="500">REPR-CUM-01 | deterministic finite fixtures</text>
+</svg>

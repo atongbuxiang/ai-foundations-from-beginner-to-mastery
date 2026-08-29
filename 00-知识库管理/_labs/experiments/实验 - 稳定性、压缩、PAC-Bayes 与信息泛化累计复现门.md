@@ -25,6 +25,8 @@ updated: 2026-08-28
 > [!figure] 实验图｜敏感度—描述长度—信息泄漏三种算法依赖视角
 > **对象与结论：** A 的红柱是 sample-mean learner 的 exact direct replace-one $\beta$，蓝柱是同一模型在 Bernoulli 分布下的 exact expected gap；RERM/SGD 两柱是另两个抽象算法接口的上界，不是 sample mean 的新估计。B 同时展示 consistent compression risk certificate、PAC-Bayes inverse-kl、Pinsker 松弛与五路线共同预算下的 PAC-Bayes 数值。C 展示学习通道的 exact MI 与 one-bit ceiling，并明确基础信息界只控制 expected signed gap。
 >
+> **生成脚本：** [[algorithmic_generalization_cumulative_gate.py]]；仅使用 Python 标准库确定性生成。
+>
 > **怎样读图：** 先在每一栏内部区分 exact quantity 与 theorem certificate，再读底部对象合同。只有 predictor、loss、sample、算法随机性与 probability event 全部对齐，跨栏比较才有意义。图中并列数值主要训练“不能直接取 minimum”，不是排行榜。
 >
 > **适用边界（图没有证明什么）：** Bernoulli、两 hypothesis posterior 和二元通道是 finite audit fixtures；RERM/SGD 数值来自其各自条件，不是深网实证；compression 假设 fixed scheme、realizability 与完整一致性；PAC-Bayes 控制 Gibbs risk 且 prior 合法；information 项不是 tail。图不证明现代 Transformer 的界非空洞，也不覆盖 distribution shift、dependent prompts 或未经计数的超参数搜索。

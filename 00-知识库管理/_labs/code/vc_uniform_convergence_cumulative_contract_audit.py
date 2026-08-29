@@ -318,9 +318,9 @@ def audit_state_surfaces() -> None:
     root_moc = read(ROOT / "20-学习理论" / "学习理论 MOC.md")
     curriculum = read(ROOT / "20-学习理论" / "学习理论完整课程地图与掌握标准.md")
     for content, label in ((root_moc, "root MOC"), (curriculum, "curriculum map")):
-        require(re.search(r"6\s*/\s*10", content) is not None, f"{label}: volume-gate count not synchronized")
+        require(re.search(r"7\s*/\s*10", content) is not None, f"{label}: volume-gate count not synchronized")
         require(re.search(r"0\s*/\s*10", content) is not None, f"{label}: personal count changed")
-    print(f"PASS state surfaces: {len(STATE_SURFACES)} views agree on 6/10 material gates and 0/10 personal passes")
+    print(f"PASS state surfaces: {len(STATE_SURFACES)} views agree on 7/10 material gates and 0/10 personal passes")
 
 
 def main() -> None:

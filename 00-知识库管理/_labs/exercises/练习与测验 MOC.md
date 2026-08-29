@@ -446,6 +446,8 @@ updated: 2026-08-28
 
 第六卷[[阶段测验 - 经典模型与模型选择（20.6）|MODEL-CUM-01]]、独立详解与[[实验 - 经典模型与模型选择累计复现门|三轨门]]也已由[[classical_models_cumulative_contract_audit.py]]回归。卷级材料现为 **6/10**，个人仍为 **0/10 / `not-attempted`**；正式认证前置为 `LT-QUAL-01 retained`，当前未满足。
 
+第七卷[[阶段测验 - 表示学习、度量学习与自监督（20.7）|REPR-CUM-01]]、独立详解与[[实验 - 表示学习、度量学习与自监督累计复现门|三轨门]]已由[[representation_selfsupervised_cumulative_contract_audit.py]]回归。卷级材料现为 **7/10**，个人仍为 **0/10 / `not-attempted`**；正式认证前置为 `MODEL-CUM-01 retained`，当前未满足。
+
 | 学习理论卷级测验 | 覆盖范围 | 状态 |
 |---|---|---|
 | LT-CUM-01 | LT-01—08：学习问题、决策与风险 | regression-passed material / not-attempted learner |
@@ -454,6 +456,7 @@ updated: 2026-08-28
 | RAD-CUM-01 | LT-25—32：数据依赖复杂度、间隔与快率 | regression-passed material / not-attempted learner |
 | ALG-CUM-01 | LT-33—40：稳定性、压缩、PAC-Bayes 与信息泛化 | regression-passed material / not-attempted learner |
 | MODEL-CUM-01 | LT-41—52：经典模型与模型选择 | regression-passed material（6/10）/ not-attempted learner（0/10；LT-QUAL-01 retained 前置未满足） |
+| REPR-CUM-01 | LT-53—60：表示学习、度量学习与自监督 | regression-passed material（7/10）/ not-attempted learner（0/10；MODEL-CUM-01 retained 前置未满足） |
 
 | 学习理论跨卷资格考 | 覆盖范围 | 状态 |
 |---|---|---|

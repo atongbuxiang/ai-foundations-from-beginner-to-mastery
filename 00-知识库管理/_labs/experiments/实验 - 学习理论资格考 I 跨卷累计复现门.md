@@ -24,7 +24,7 @@ updated: 2026-08-28
 ![[00-知识库管理/_assets/plots/learning-theory/plot-learning-theory-qualification-01-gate-v2.svg|920]]
 
 > [!figure] 实验图｜一个模型、五条证明路线、三本互不混账的账簿
-> A 轨枚举全部训练样本和全部替换，核对 exact learner、ghost identity、worst-case stability 与 output channel；B 轨在较大的 balanced certificate sample 上计算 finite-class、compression 与 PAC-Bayes 证书；C 轨不再画一个“谁最小谁最好”的排行榜，而是先列 predictor 与 statement type。图由 [[learning_theory_qualification_01_gate.py]] 确定性生成，无 Monte Carlo、无第三方依赖。
+> A 轨枚举全部训练样本和全部替换，核对 exact learner、ghost identity、worst-case stability 与 output channel；B 轨在较大的 balanced certificate sample 上计算 finite-class、compression 与 PAC-Bayes 证书；C 轨不再画一个“谁最小谁最好”的排行榜，而是先列 predictor 与 statement type。生成脚本：[[learning_theory_qualification_01_gate.py]]；确定性生成，无 Monte Carlo、无第三方依赖。
 
 **怎样读图。** 先横向读底部 proof spine，确认每条路线从同一个 observation/loss 起步；再纵向读三轨。A 的 `gap = ghost` 是恒等式校准，`beta=1` 是 worst-case 反例；B 的五根条形并不都控制同一 predictor；C 明示 expected gap 与 high-probability risk 不在同一坐标轴。
 

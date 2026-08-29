@@ -3,9 +3,12 @@ type: moc
 status: active
 area: [learning-theory/representation]
 prerequisites: ["[[学习问题、决策与风险 MOC]]", "[[互信息与依赖性]]"]
-related: ["[[学习理论完整课程地图与掌握标准]]", "[[深度泛化理论接口与开放边界 MOC]]"]
+assessment: "[[阶段测验 - 表示学习、度量学习与自监督（20.7）]]"
+solution: "[[阶段测验解答 - 表示学习、度量学习与自监督（20.7）]]"
+experiment: "[[实验 - 表示学习、度量学习与自监督累计复现门]]"
+related: ["[[学习理论完整课程地图与掌握标准]]", "[[深度泛化理论接口与开放边界 MOC]]", "[[经典模型与模型选择 MOC]]", "[[校准、不确定性与分布偏移 MOC]]"]
 created: 2026-08-20
-updated: 2026-08-23
+updated: 2026-08-28
 ---
 
 # 表示学习、度量学习与自监督 MOC
@@ -24,4 +27,12 @@ updated: 2026-08-23
 | LT-59 | [[遮蔽预测、Teacher–Student 与自监督目标]] | target-generation contract | draft + A–E 闭环 |
 | LT-60 | [[Linear Probe、Fine-Tuning 与迁移评估]] | probe inference boundary | draft + A–E 闭环 |
 
-当前为 **8/8 正文、8/8 A–E 题解闭环，0/8 经真实作答验收**。第七卷与 20.8 全卷 LT-61—68 已完成 draft 静态闭环；下一批为 LT-69—72。
+当前为 **8/8 正文、8/8 A–E 题解闭环，0/8 经真实作答验收**。
+
+## 卷级材料门：REPR-CUM-01
+
+本卷现已建立[[阶段测验 - 表示学习、度量学习与自监督（20.7）|REPR-CUM-01]]、[[阶段测验解答 - 表示学习、度量学习与自监督（20.7）|独立封存详解]]与[[实验 - 表示学习、度量学习与自监督累计复现门|三轨累计复现门]]。三轨分别以 task-indexed representation/metric/retrieval/dependent views、exact candidate-index InfoNCE/batch gradient/false negatives、covariance/VICReg/EMA/masked target 串起 LT-53—60；25 分钟口试、240 分钟闭卷、scorer nonce、跨轨 blind、非法合同、48 小时与 14 天迁移防止把方法名或 benchmark 排名当作理论掌握。
+
+[[representation_selfsupervised_cumulative_contract_audit.py]]不导入生成函数，独立复算 task risk、InfoNCE candidate law、softmax gradient、collision、谱秩、VICReg 与 teacher target 锚点，并检查 canonical/固定 blind 双跑、SVG/XML/hash、输入保护和状态面。
+
+本卷材料为 `regression-passed`，全章卷级材料门达到 **7/10**；个人通过仍为 **0/10 / `not-attempted`**。正式认证还要求 `MODEL-CUM-01 retained`，当前个人前置未满足。资格考材料仍为 **1/2**、个人资格 **0/2**。下一施工点进入 20.8。
