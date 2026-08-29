@@ -23,7 +23,7 @@ SOLUTIONS = LABS / "solutions"
 CODE = LABS / "code"
 FIGURE_AUDITOR = CODE / "audit-markdown-figure-units.mjs"
 ASSET_DIR = ROOT / "00-知识库管理" / "_assets" / "figures" / "neural-networks"
-MIGRATED_IDS = tuple(range(1, 57))
+MIGRATED_IDS = tuple(range(1, 61))
 
 STATE_SURFACES = (
     CHAPTER / "神经网络基础 MOC.md",
@@ -38,6 +38,7 @@ STATE_SURFACES = (
     CHAPTER / "30.5-归一化、尺度与统计量" / "归一化、尺度与统计量 MOC.md",
     CHAPTER / "30.6-残差连接、深度与稳定性" / "残差连接、深度与稳定性 MOC.md",
     CHAPTER / "30.7-Embedding、权重共享与输出参数化" / "Embedding、权重共享与输出参数化 MOC.md",
+    CHAPTER / "30.8-随机正则化与网络级泛化接口" / "随机正则化与网络级泛化接口 MOC.md",
 )
 
 EXPECTED_FIGURE_SCRIPTS = {
@@ -209,12 +210,13 @@ def audit_migrated_contract(nodes: list[tuple[int, Path, str]]) -> None:
             "\\mathcal I_\\square" if node_id <= 32 else
             "\\mathcal N_\\square" if node_id <= 40 else
             "\\mathcal R_\\square" if node_id <= 48 else
-            "\\mathcal E_\\square"
+            "\\mathcal E_\\square" if node_id <= 56 else
+            "\\mathcal D_\\square"
         )
         require(fixture in content, f"{relative}: shared teaching fixture missing: {fixture}")
         require("AI" in content, f"{relative}: AI object mapping missing")
         require(len(content.splitlines()) >= 180, f"{relative}: derivation depth unexpectedly short")
-    print("PASS NN teaching migration waves A--N: NN-01--56 course position/two-pass/problem/object/formula contracts=56/56")
+    print("PASS NN teaching migration waves A--O: NN-01--60 course position/two-pass/problem/object/formula contracts=60/60")
 
 
 def audit_wave_c_fixture(nodes: list[tuple[int, Path, str]]) -> None:
@@ -938,6 +940,67 @@ def audit_wave_n_fixture(nodes: list[tuple[int, Path, str]]) -> None:
     print("PASS NN wave-N independent math: centered rank obstruction; unbiased-Z/log bias; mask denominator/edges; rank-one and quantized-logit errors exact")
 
 
+def audit_wave_o_fixture(nodes: list[tuple[int, Path, str]]) -> None:
+    """Recompute the NN-57--60 activation/connection/path-noise chain."""
+    x = (2.0, 1.0)
+    keep = 0.5
+    masks = ((0, 0), (1, 0), (0, 1), (1, 1))
+    dropout_outputs = tuple(tuple(mask[j] / keep * x[j] for j in range(2)) for mask in masks)
+    require(dropout_outputs == ((0.0, 0.0), (4.0, 0.0), (0.0, 2.0), (4.0, 2.0)), f"NN wave-O dropout enumeration drifted: {dropout_outputs}")
+    mean = tuple(sum(output[j] for output in dropout_outputs) / 4.0 for j in range(2))
+    variance = tuple(sum((output[j] - mean[j]) ** 2 for output in dropout_outputs) / 4.0 for j in range(2))
+    expected_energy = sum(sum(value * value for value in output) for output in dropout_outputs) / 4.0
+    require(mean == x and variance == (4.0, 1.0) and expected_energy == 10.0, "NN wave-O dropout moment ledger drifted")
+    realization = (1.0, 0.0)
+    upstream = (1.0, -2.0)
+    vjp = tuple(realization[j] / keep * upstream[j] for j in range(2))
+    require(vjp == (2.0, 0.0), "NN wave-O fixed-realization VJP drifted")
+
+    weight = ((1.0, 2.0), (-1.0, 1.0))
+    scores = tuple(tuple(sum(weight[i][j] * output[j] for j in range(2)) for i in range(2)) for output in dropout_outputs)
+    score_mean = tuple(sum(score[i] for score in scores) / 4.0 for i in range(2))
+    score_covariance = tuple(
+        tuple(sum((score[i] - score_mean[i]) * (score[j] - score_mean[j]) for score in scores) / 4.0 for j in range(2))
+        for i in range(2)
+    )
+    require(score_mean == (4.0, -1.0) and score_covariance == ((8.0, -2.0), (-2.0, 5.0)), f"NN wave-O activation score covariance drifted: {score_mean}, {score_covariance}")
+    target = 3.0
+    expected_squared_loss = sum((target - score[0]) ** 2 for score in scores) / 4.0
+    require(expected_squared_loss == 9.0 and (target - score_mean[0]) ** 2 + score_covariance[0][0] == 9.0, "NN wave-O exact noisy square-risk identity drifted")
+
+    dropconnect_covariance = ((8.0, 0.0), (0.0, 5.0))
+    determinant_activation = score_covariance[0][0] * score_covariance[1][1] - score_covariance[0][1] * score_covariance[1][0]
+    determinant_dropconnect = dropconnect_covariance[0][0] * dropconnect_covariance[1][1]
+    require(determinant_activation == 36.0 and determinant_dropconnect == 40.0, "NN wave-O noise-location determinant contrast drifted")
+
+    branch = tuple(sum(weight[i][j] * x[j] for j in range(2)) for i in range(2))
+    dropped_state = x
+    kept_state = tuple(x[i] + branch[i] / keep for i in range(2))
+    expected_state = tuple(0.5 * dropped_state[i] + 0.5 * kept_state[i] for i in range(2))
+    require(branch == (4.0, -1.0) and kept_state == (10.0, -1.0) and expected_state == (6.0, 0.0), "NN wave-O DropPath state contrast drifted")
+    identity = ((1.0, 0.0), (0.0, 1.0))
+    kept_jacobian = tuple(tuple(identity[i][j] + weight[i][j] / keep for j in range(2)) for i in range(2))
+    expected_jacobian = tuple(tuple(0.5 * identity[i][j] + 0.5 * kept_jacobian[i][j] for j in range(2)) for i in range(2))
+    require(kept_jacobian == ((3.0, 4.0), (-2.0, 3.0)) and expected_jacobian == ((2.0, 2.0), (-1.0, 2.0)), "NN wave-O DropPath Jacobian expectation drifted")
+    branch_covariance = tuple(tuple(branch[i] * branch[j] for j in range(2)) for i in range(2))
+    require(branch_covariance == ((16.0, -4.0), (-4.0, 1.0)), "NN wave-O branch covariance drifted")
+    survival = (0.875, 0.75, 0.625, 0.5)
+    active_mean = sum(survival)
+    active_variance = sum(probability * (1.0 - probability) for probability in survival)
+    require(active_mean == 2.75 and active_variance == 0.78125, "NN wave-O active-depth moments drifted")
+
+    wave = {node_id: content for node_id, _, content in nodes if 57 <= node_id <= 60}
+    expected_markers = {
+        57: ("\\mathbb E\\|Y\\|_2^2=\\frac1q\\|x\\|_2^2=10", "\\bar x=\\frac mq\\odot g=(2,0)"),
+        58: ("\\operatorname{Cov}(u,v\\mid x)=-2", "1+8=9"),
+        59: ("\\det\\Sigma_{\\mathrm{act}}=36", "\\det\\Sigma_{\\mathrm{dc}}=40"),
+        60: ("x^+_{\\mathrm{keep}}", "0.78125"),
+    }
+    for node_id, markers in expected_markers.items():
+        require(all(marker in wave[node_id] for marker in markers), f"NN-{node_id:02d}: wave-O stochastic-location closure missing")
+    print("PASS NN wave-O independent math: Dropout moments/VJP; score covariance/risk; DropConnect joint-law contrast; DropPath state/Jacobian/depth exact")
+
+
 def question_ids(content: str) -> list[str]:
     return re.findall(r"^###\s+([^\s]+-[A-E]\d{2})\s*$", content, re.M)
 
@@ -1095,12 +1158,12 @@ def audit_state_surfaces() -> None:
     for path in STATE_SURFACES:
         content = read(path)
         require(audit_name in content, f"state surface misses NN audit: {path.relative_to(ROOT)}")
-        migrated_mentions = content.count("56/64") + content.count("56 / 64")
-        pending_mentions = content.count("8/64") + content.count("8 / 64")
+        migrated_mentions = content.count("60/64") + content.count("60 / 64")
+        pending_mentions = content.count("4/64") + content.count("4 / 64")
         require(migrated_mentions >= 1 and pending_mentions >= 1, f"state surface misses NN migrated/pending counts: {path.relative_to(ROOT)}")
         require("7/8" in content or "7 / 8" in content, f"state surface misses NN material-gate count: {path.relative_to(ROOT)}")
         require("not-attempted" in content, f"state surface overclaims NN learner: {path.relative_to(ROOT)}")
-    print("PASS NN state surfaces: 5 global + 7 volume views agree on migrated=56/64, pending=8/64, material gates=7/8, learner=not-attempted")
+    print("PASS NN state surfaces: 5 global + 8 volume views agree on migrated=60/64, pending=4/64, material gates=7/8, learner=not-attempted")
 
 
 def main() -> None:
@@ -1123,6 +1186,7 @@ def main() -> None:
     audit_wave_l_fixture(nodes)
     audit_wave_m_fixture(nodes)
     audit_wave_n_fixture(nodes)
+    audit_wave_o_fixture(nodes)
     audit_exercises(nodes, index)
     audit_sources_and_links(nodes, index)
     audit_figures(nodes, index)
@@ -1130,8 +1194,8 @@ def main() -> None:
     audit_state_surfaces()
     if args.run_figures:
         audit_deterministic_figures()
-    print("NN-01--56 teaching migration regression: PASS; 30.1--30.7 material gates=7/8")
-    print("NN-57--64 teaching migration: pending (8/64)")
+    print("NN-01--60 teaching migration regression: PASS; 30.1--30.7 material gates=7/8; 30.8 front half=in-progress")
+    print("NN-61--64 teaching migration: pending (4/64)")
     print("PERSONAL LEARNING STATUS: not-attempted")
 
 

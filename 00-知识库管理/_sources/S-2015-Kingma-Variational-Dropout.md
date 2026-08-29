@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, variational-dropout, local-reparameterization]
 source_type: paper
 title: "Variational Dropout and the Local Reparameterization Trick"
@@ -8,14 +8,14 @@ author: "Diederik P. Kingma; Tim Salimans; Max Welling"
 year: 2015
 url: "https://proceedings.neurips.cc/paper/2015/hash/bc7316929fe1545bf0b98d114ee3ecb8-Abstract.html"
 venue: "NeurIPS 2015"
-accessed: 2026-08-24
+accessed: 2026-08-29
 source_tier: A
 license: "NeurIPS proceedings paper；本库仅保存独立摘要、必要公式与链接"
 scope_role: variational-and-estimator
 temporal_role: foundational
 related: ["[[Dropout 的方差、共适应解释与 Bayesian 边界]]", "[[DropConnect、权重噪声与激活噪声]]"]
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Kingma、Salimans、Welling：Variational Dropout 与 Local Reparameterization

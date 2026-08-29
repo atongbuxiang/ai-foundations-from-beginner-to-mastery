@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, dropconnect, weight-noise]
 source_type: paper
 title: "Regularization of Neural Networks using DropConnect"
@@ -8,14 +8,14 @@ author: "Li Wan; Matthew Zeiler; Sixin Zhang; Yann LeCun; Rob Fergus"
 year: 2013
 url: "https://proceedings.mlr.press/v28/wan13.html"
 venue: "ICML 2013"
-accessed: 2026-08-24
+accessed: 2026-08-29
 source_tier: A
 license: "PMLR paper；本库仅保存独立摘要、必要公式与链接"
 scope_role: core
 temporal_role: foundational
 related: ["[[DropConnect、权重噪声与激活噪声]]"]
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Wan et al.：DropConnect

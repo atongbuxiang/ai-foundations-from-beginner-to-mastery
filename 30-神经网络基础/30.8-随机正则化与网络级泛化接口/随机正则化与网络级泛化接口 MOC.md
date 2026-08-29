@@ -5,7 +5,7 @@ area: [neural-networks/regularization]
 prerequisites: ["[[学习问题、决策与风险 MOC]]", "[[残差连接、深度与稳定性 MOC]]"]
 related: ["[[神经网络基础完整课程地图与掌握标准]]", "[[容量界、稳定性界与 PAC-Bayes 的比较]]"]
 created: 2026-08-23
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 # 随机正则化与网络级泛化接口 MOC
 | ID | 节点 | 出口 | 状态 |
@@ -19,4 +19,10 @@ updated: 2026-08-24
 | NN-63 | [[Jacobian、Gradient Penalty 与 Lipschitz 正则接口]] | local derivative penalty | draft + A–E 闭环 |
 | NN-64 | [[网络级正则化的交互、消融与证据地图]] | causal audit | draft + A–E 闭环 |
 
-当前为 **8/8 正文、8/8 A—E 题解闭环、0/8 真实验收**，共 120 道节点题及逐题独立详解。30.8 的静态材料已经闭合，并已纳入[[阶段测验 - 神经网络基础（第三章）|NN-CUM-01]]与[[实验 - 神经网络基础累计复现门]]；`draft` 只表示材料组成，不能替代学习者闭卷、重做与迁移证据。
+## 当前迁移与学习状态
+
+- [[neural_network_foundations_teaching_contract_audit.py]]已复核 NN-57—60 的两遍路线、问题链、对象账本、$\mathcal D_\square$ 共享输入/线性映射、Dropout moments、风险证据层、noise-location covariance 与 DropPath 深度账；
+- 当前为 **4/8 现行教学迁移、8/8 正文、8/8 A—E 题解、8/8 正式图，30.8 材料门 `in-progress`**；
+- 全章为 **60/64 已迁移、4/64 pending、分卷材料门 7/8**，个人仍为 **0/8 / `not-attempted`**；下一批 NN-61—64。
+
+NN-57—64 共 120 道节点题及逐题独立详解已经形成静态闭环，并已纳入[[阶段测验 - 神经网络基础（第三章）|NN-CUM-01]]与[[实验 - 神经网络基础累计复现门]]。`draft` 只表示材料组成，学习者仍需闭卷、重做与迁移验收。

@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, dropout, regularization]
 source_type: paper
 title: "Dropout: A Simple Way to Prevent Neural Networks from Overfitting"
@@ -8,14 +8,14 @@ author: "Nitish Srivastava; Geoffrey Hinton; Alex Krizhevsky; Ilya Sutskever; Ru
 year: 2014
 url: "https://www.jmlr.org/papers/v15/srivastava14a.html"
 venue: "JMLR 15"
-accessed: 2026-08-24
+accessed: 2026-08-29
 source_tier: A
 license: "JMLR open-access paper；本库仅保存独立摘要、必要公式与链接"
 scope_role: core
 temporal_role: foundational
 related: ["[[Dropout 的随机掩码、期望与 Inverted Scaling]]", "[[Dropout 的方差、共适应解释与 Bayesian 边界]]"]
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Srivastava et al.：Dropout

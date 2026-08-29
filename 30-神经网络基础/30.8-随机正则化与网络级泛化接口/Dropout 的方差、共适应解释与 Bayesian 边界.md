@@ -11,13 +11,126 @@ exercises: ["[[习题 - Dropout 的方差、共适应解释与 Bayesian 边界]]
 solutions: ["[[解答 - Dropout 的方差、共适应解释与 Bayesian 边界]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-dropout-variance-evidence-boundaries-v2.svg]]"
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Dropout 的方差、共适应解释与 Bayesian 边界
 
 > [!abstract] 本章主问题
 > Dropout 有多种互补解释：它给 activations 注入异方差乘性噪声；在某些线性/广义线性问题中，expected noisy risk 可化成数据依赖正则项；在指定 prior、variational family、likelihood 与训练目标下，又可与近似 Bayesian inference 建立联系。“减少共适应”和“隐式集成”是有用直觉，但不是无需条件的数学定理。必须标明自己站在哪一层证据上。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-57 已精确给出固定 activation 的条件均值、方差和同-mask VJP；
+- **本页解决什么：** 把这些局部矩提升为线性 score covariance、平方损失的精确 penalty，并建立从代数事实到 Bayesian 解释的证据阶梯；
+- **后续为何需要：** NN-59 会用相同边际矩构造不同联合 covariance，NN-64 会把机制解释与真正的泛化证据分开。
+
+**第一遍只做精确层。** 在共享 $x,W$ 上算两个 scores 的 mean/covariance，再把平方损失拆成无噪声风险加数据依赖二次项。
+
+**第二遍再进入解释层。** 区分 Taylor/GLM 近似、共适应机制假说、子网络集成直觉、指定 variational family 的 MC Dropout 与校准后的 posterior predictive。
+
+### 问题链
+
+1. 随机输入的总方差为什么同时含数据 variation 与 mask variation？
+2. 两个 output scores 共享 feature mask 时，为什么会相关？
+3. 在线性平方损失下，Dropout penalty 为什么是 feature-scale-dependent 而非统一 $L_2$？
+4. “减少共适应”怎样变成可证伪指标，而不是循环解释？
+5. MC samples 增多能降低哪类误差，又不能修复 variational bias、模型错设和校准误差中的哪些？
+
+> [!check] 第一遍停靠线
+> 若你能在 $\mathcal D_\square$ 上得到两个 scores 的均值 $(4,-1)$、方差 $(8,5)$、协方差 $-2$，并把 target $t=3$ 的 expected squared loss 分解成 $1+8=9$，就已掌握本页精确主干。
+
+## 符号与对象账本
+
+| 断言层级 | 对象 | 可用证据 | 禁止越级成 |
+|---|---|---|---|
+| exact moments | $Y,u,v$ 的条件矩 | 枚举/代数 | 泛化改善 |
+| exact risk identity | 线性平方损失 | bias–variance 分解 | 任意深网固定 $L_2$ |
+| local approximation | GLM/小噪声 Taylor | Hessian/Fisher 余项 | 全局等价 |
+| mechanism hypothesis | co-adaptation / redundancy | 预注册指标与干预 | 定理 |
+| variational interpretation | prior、family、likelihood、ELBO | 明确推导 | exact Bayes posterior |
+| deployment uncertainty | calibration/shift/selective risk | 独立测试协议 | mask variance 本身 |
+
+### 贯穿算例 $\mathcal D_\square$：相同 Mask 诱导跨 Score 协方差
+
+沿用 $x=(2,1)$、$q=1/2$，并固定
+
+$$
+W=
+\begin{bmatrix}
+1&2\\-1&1
+\end{bmatrix},
+\qquad
+w=(1,2),\quad a=(-1,1).
+$$
+
+令
+
+$$
+u=w^{\mathsf T}Y,
+\qquad
+v=a^{\mathsf T}Y.
+$$
+
+则
+
+$$
+\mathbb E(u,v)=(w^{\mathsf T}x,a^{\mathsf T}x)=(4,-1),
+$$
+
+$$
+\boxed{
+\operatorname{Var}(u\mid x)=8,
+\qquad
+\operatorname{Var}(v\mid x)=5,
+\qquad
+\operatorname{Cov}(u,v\mid x)=-2
+}.
+$$
+
+负协方差来自两个 scores 共享同一 feature masks，而非数据样本随机性。若以 $u$ 预测 target $t=3$，无噪声 squared loss 是
+
+$$
+(3-4)^2=1,
+$$
+
+Dropout expected loss 精确为
+
+$$
+\boxed{
+\mathbb E_M(3-u)^2
+=(3-w^{\mathsf T}x)^2+\frac{p}{q}\sum_iw_i^2x_i^2
+=1+8=9
+}.
+$$
+
+这里的 8 是可观测 feature scale 加权的 penalty；换数据分布或 loss 后，正则对象也会改变。
+
+## 核心公式七问：Dropout 证据阶梯
+
+$$
+\boxed{
+\text{exact moment}
+\Rightarrow\text{conditional risk identity}
+\Rightarrow\text{local mechanism}
+\Rightarrow\text{variational interpretation}
+\Rightarrow\text{deployment evidence}
+}.
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 给每个 Dropout 解释标出强度和缺失前提 |
+| 对象 | 随机函数、训练 objective、近似 posterior 与部署预测是不同对象 |
+| 来路 | 同一方法同时存在代数、优化、统计和经验叙事 |
+| 步骤 | 先证 moments/risk→写近似条件→注册机制指标→定义 posterior family→测校准/shift |
+| 读法 | 左侧事实不能自动推出右侧结论；每跨一级都需新假设或实验 |
+| 检查 | exact toy、matched variance、MC convergence、deep ensemble baseline、ECE/NLL/selective risk |
+| 去路 | variational dropout、Bayesian approximation、uncertainty quantification 与机制消融 |
+
+### AI / 系统对应
+
+线上 MC Dropout 的成本随 sample 数增长；降低 Monte Carlo standard error 不会自动提升校准。实际验收应同时报告 deterministic baseline、MC sample 数、predictive mean/variance、NLL/Brier/ECE、分布偏移与延迟，而不是只展示不确定性热图。
 
 ## 一、学习目标
 

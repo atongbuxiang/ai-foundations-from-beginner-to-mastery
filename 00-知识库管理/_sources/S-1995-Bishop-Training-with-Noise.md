@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, noise-injection, regularization]
 source_type: paper
 title: "Training with Noise is Equivalent to Tikhonov Regularization"
@@ -8,14 +8,14 @@ author: "Christopher M. Bishop"
 year: 1995
 url: "https://doi.org/10.1162/neco.1995.7.1.108"
 venue: "Neural Computation 7(1)"
-accessed: 2026-08-24
+accessed: 2026-08-29
 source_tier: A
 license: "MIT Press article；本库仅保存独立摘要、必要结论与链接"
 scope_role: noise-theory
 temporal_role: foundational
 related: ["[[DropConnect、权重噪声与激活噪声]]"]
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Bishop：Noise Injection 与 Tikhonov Regularization

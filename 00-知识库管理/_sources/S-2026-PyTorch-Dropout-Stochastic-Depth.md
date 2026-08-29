@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, pytorch, dropout, stochastic-depth]
 source_type: official-docs
 title: "PyTorch Dropout Functions and Torchvision Stochastic Depth"
@@ -8,14 +8,14 @@ author: "PyTorch Contributors"
 year: 2026
 url: "https://docs.pytorch.org/docs/stable/generated/torch.nn.Dropout.html"
 secondary_url: "https://docs.pytorch.org/vision/main/generated/torchvision.ops.stochastic_depth.html"
-accessed: 2026-08-24
+accessed: 2026-08-29
 source_tier: B
 license: "PyTorch official documentation；本库仅保存独立接口摘要与链接"
 scope_role: implementation-contract
 temporal_role: current-api
 related: ["[[Dropout 的随机掩码、期望与 Inverted Scaling]]", "[[Stochastic Depth、DropPath 与有效深度]]"]
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # PyTorch：Dropout 与 Stochastic-Depth 当前接口

@@ -11,13 +11,124 @@ exercises: ["[[习题 - Dropout 的随机掩码、期望与 Inverted Scaling]]"]
 solutions: ["[[解答 - Dropout 的随机掩码、期望与 Inverted Scaling]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-dropout-expectation-inverted-scaling-v2.svg]]"
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Dropout 的随机掩码、期望与 Inverted Scaling
 
 > [!abstract] 本章主问题
 > Dropout 不是一句“随机删神经元”，而是一份带概率空间、广播轴、缩放、训练—推理状态和随机数流的算子合同。Inverted Dropout 在训练时将保留项除以 keep probability，使被 mask 张量的条件均值保持不变；它同时放大二阶矩，而且只在后续映射为仿射时自动保持输出均值。经过一般非线性，一次 evaluation pass 不等于随机网络预测的精确平均。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** 概率章节给出 Bernoulli 变量与条件矩，计算图章节要求 backward 对应同一次 forward realization；
+- **本页解决什么：** 把 Dropout 写成训练态随机线性算子与评估态 identity 的双状态合同，精确区分一阶矩、二阶矩和非线性输出；
+- **后续为何需要：** NN-58—60 会分别研究风险解释、噪声位置与随机路径，所有结论都必须建立在 mask 轴、keep probability 和缩放约定已经固定的基础上。
+
+**第一遍只算固定输入的条件矩。** 对一个两维向量枚举四个 masks，核对输出均值、方差、平方范数和同-mask VJP。
+
+**第二遍再讨论网络语义。** 加入 element/channel/token/path mask、normalization placement、train/eval、checkpoint RNG、分布式随机流和非线性 Jensen gap。
+
+### 问题链
+
+1. drop probability $p$ 与 keep probability $q$ 怎样进入 sampling 与 scaling？
+2. 除以 $q$ 精确保住的是哪个条件期望，为什么不保住方差？
+3. backward 为什么必须复用 forward mask，而不能重新采一个？
+4. $\mathbb E[Y]=x$ 为什么不能推出 $\mathbb E[f(Y)]=f(x)$？
+5. element、channel、token 与 sample masks 的边际 keep rate 相同，为何联合随机函数仍不同？
+
+> [!check] 第一遍停靠线
+> 若你能在 $\mathcal D_\square$ 中从 $x=(2,1)$、$q=1/2$、$m=(1,0)$ 得到 $Y=(4,0)$，并算出 $\mathbb E Y=x$、$\operatorname{Var}(Y\mid x)=(4,1)$，就已掌握本页主干。
+
+## 符号与对象账本
+
+| 对象 | 定义 | 必须声明 | 不自动保证 |
+|---|---|---|---|
+| $p$ / $q=1-p$ | drop / keep probability | 训练或推理时是否启用 | 二阶矩保持 |
+| $M$ | Bernoulli mask tensor | shape、广播轴、相关结构 | 各 use-site 独立 |
+| $D_M$ | $\operatorname{Diag}(M/q)$ | inverted scaling | 非线性输出均值保持 |
+| $Y=D_Mx$ | stochastic activation | 固定输入下的随机变量 | 单次 realization 接近 $x$ |
+| RNG state | mask 的随机数身份 | seed、rank、checkpoint recompute | 可复现性 |
+| eval operator | identity / 显式 MC | mode 与 averaging object | posterior predictive |
+
+### 贯穿算例 $\mathcal D_\square$：两维 Activation Mask
+
+固定本卷共享对象
+
+$$
+x=(2,1)^{\mathsf T},
+\qquad
+q=\frac12,
+\qquad
+M_1,M_2\overset{\mathrm{iid}}\sim\operatorname{Bernoulli}(1/2).
+$$
+
+Inverted Dropout 为
+
+$$
+Y=\frac Mq\odot x=2M\odot x.
+$$
+
+四个等概率 outputs 是
+
+$$
+(0,0),\ (4,0),\ (0,2),\ (4,2).
+$$
+
+因此
+
+$$
+\boxed{
+\mathbb E[Y\mid x]=(2,1)=x,
+\qquad
+\operatorname{Cov}(Y\mid x)=
+\begin{bmatrix}4&0\\0&1\end{bmatrix}
+}.
+$$
+
+同时
+
+$$
+\|x\|_2^2=5,
+\qquad
+\mathbb E\|Y\|_2^2=\frac1q\|x\|_2^2=10.
+$$
+
+若本次 realization 是 $m=(1,0)$，则 $Y=(4,0)$；对上游 $g=(1,-2)$，同一 mask 给
+
+$$
+\boxed{
+\bar x=\frac mq\odot g=(2,0)
+}.
+$$
+
+重新采样 backward mask 会得到另一随机函数的导数，而不是同一次 forward 的 VJP。
+
+## 核心公式七问：Inverted Dropout 双状态合同
+
+$$
+\boxed{
+Y_{\mathrm{train}}=\frac Mq\odot x,
+\qquad
+Y_{\mathrm{eval}}=x,
+\qquad
+\mathbb E_M[Y_{\mathrm{train}}\mid x]=Y_{\mathrm{eval}}
+}.
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 训练时采样子函数，同时保持被 mask 张量的一阶条件均值 |
+| 对象 | 固定输入下、指定 mask 轴的随机 activation |
+| 来路 | Bernoulli keep event 乘 $1/q$ 的 importance-like 校正 |
+| 步骤 | sample mask→broadcast→scale/multiply→保存 RNG/mask→同 realization backward |
+| 读法 | 均值匹配只发生在 mask 所在局部张量，二阶矩与后续非线性会改变 |
+| 检查 | 四状态枚举、sample mean/variance、train/eval、checkpoint 与 rank reproducibility |
+| 去路 | MC Dropout、DropConnect、DropPath、attention dropout 与 structured pruning |
+
+### AI / 系统对应
+
+Transformer 中 attention-probability dropout、residual dropout、token dropout 与 DropPath 都可能使用相同 $p$，却作用在不同张量和广播轴上。高质量配置必须记录 layer、axis、RNG stream、fused kernel 和 evaluation mode；只记录一个全局 `dropout=0.1` 无法复现实验。
 
 ## 一、学习目标
 

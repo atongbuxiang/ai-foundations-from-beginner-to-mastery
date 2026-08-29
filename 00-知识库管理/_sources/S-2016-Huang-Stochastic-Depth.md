@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, stochastic-depth, residual-networks]
 source_type: paper
 title: "Deep Networks with Stochastic Depth"
@@ -9,14 +9,14 @@ year: 2016
 url: "https://arxiv.org/abs/1603.09382"
 doi: "https://doi.org/10.1007/978-3-319-46493-0_39"
 venue: "ECCV 2016"
-accessed: 2026-08-24
+accessed: 2026-08-29
 source_tier: A
 license: "Author preprint；本库仅保存独立摘要、必要公式与链接"
 scope_role: core
 temporal_role: foundational
 related: ["[[Stochastic Depth、DropPath 与有效深度]]"]
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Huang et al.：Stochastic Depth

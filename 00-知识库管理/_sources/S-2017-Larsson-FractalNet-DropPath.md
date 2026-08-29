@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, droppath, fractalnet]
 source_type: paper
 title: "FractalNet: Ultra-Deep Neural Networks without Residuals"
@@ -8,14 +8,14 @@ author: "Gustav Larsson; Michael Maire; Gregory Shakhnarovich"
 year: 2017
 url: "https://openreview.net/forum?id=S1VaB4cex"
 venue: "ICLR 2017"
-accessed: 2026-08-24
+accessed: 2026-08-29
 source_tier: A
 license: "OpenReview conference paper；本库仅保存独立摘要、必要结论与链接"
 scope_role: terminology-history
 temporal_role: foundational
 related: ["[[Stochastic Depth、DropPath 与有效深度]]"]
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Larsson、Maire、Shakhnarovich：FractalNet 与 Drop-Path

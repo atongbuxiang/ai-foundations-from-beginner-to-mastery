@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, dropout, adaptive-regularization]
 source_type: paper
 title: "Dropout Training as Adaptive Regularization"
@@ -8,14 +8,14 @@ author: "Stefan Wager; Sida Wang; Percy Liang"
 year: 2013
 url: "https://proceedings.neurips.cc/paper_files/paper/2013/hash/38db3aed920cf82ab059bfccbd02be6a-Abstract.html"
 venue: "NeurIPS 2013"
-accessed: 2026-08-24
+accessed: 2026-08-29
 source_tier: A
 license: "NeurIPS proceedings paper；本库仅保存独立摘要、必要结论与链接"
 scope_role: theory-boundary
 temporal_role: foundational
 related: ["[[Dropout 的方差、共适应解释与 Bayesian 边界]]"]
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Wager、Wang、Liang：Dropout 作为自适应正则

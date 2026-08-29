@@ -11,13 +11,126 @@ exercises: ["[[习题 - Stochastic Depth、DropPath 与有效深度]]"]
 solutions: ["[[解答 - Stochastic Depth、DropPath 与有效深度]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-stochastic-depth-effective-paths-v2.svg]]"
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Stochastic Depth、DropPath 与有效深度
 
 > [!abstract] 本章主问题
 > Residual block 的 identity rail 允许训练时随机删除整条 residual branch，而不破坏 state shape。现代 Inverted DropPath 常用 $x_{l+1}=x_l+b_lF_l(x_l)/q_l$，在固定 $x_l$ 下匹配完整 block 的条件均值；同时使 branch 二阶矩放大、活跃 block 数成为 Poisson-binomial 随机变量。实际 FLOP 是否下降取决于 branch 是否真正短路，而不是输出最后是否乘了零。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** 残差卷给出 identity rail 与 $I+J_F$，NN-57—59 说明 Bernoulli scaling 和 noise sharing axes；
+- **本页解决什么：** 把单坐标/connection mask 提升为整条 residual branch gate，推导状态、Jacobian、梯度与 active-depth distribution；
+- **后续为何需要：** Label Smoothing、Mixup 与 derivative penalties 作用在不同对象上，卷终证据地图需要先把 path-level randomness 的统计和实际算力合同固定。
+
+**第一遍只看一个 residual block。** 用同一 $x,W,q$ 比较 branch kept/dropped 两个 states，核对状态和 local Jacobian 的条件均值。
+
+**第二遍再看深度分布。** 对非同质 survival schedule 计算 Poisson-binomial 的均值、方差和极端路径概率，再加入 batch/sample gate、normalization state、RNG 与真实 branch short-circuit。
+
+### 问题链
+
+1. identity rail 为什么允许整条 branch 被删除而 shape 仍合法？
+2. inverted DropPath 匹配的是单块固定输入下的哪两个条件期望？
+3. branch 被删除时，参数梯度为零而输入梯度为什么仍沿 identity rail 传播？
+4. active depth 的期望为何不能替代随机深度分布本身？
+5. 先计算 $F(x)$ 再乘零与真正跳过 branch，在统计和系统账上各有什么差异？
+
+> [!check] 第一遍停靠线
+> 若你能在 $\mathcal D_\square$ 上算出 dropped state $(2,1)$、kept state $(10,-1)$、条件均值 $(6,0)$，并验证 expected Jacobian 为 $I+W$，就已掌握单块主干。
+
+## 符号与对象账本
+
+| 对象 | 定义 | 随机/确定 | 必须分开的账 |
+|---|---|---|---|
+| identity rail | $x_l$ 或 projection | 通常确定 | shape、Jacobian、compute |
+| branch | $F_l(x_l;\theta_l)$ | 参数函数 | activation/state |
+| gate $B_l$ | Bernoulli$(q_l)$ | path random variable | sample/batch/rank sharing |
+| inverted branch | $B_lF_l/q_l$ | mean-matched increment | variance放大 |
+| active depth $D$ | $\sum_lB_l$ | Poisson-binomial | 不等于 physical/effective depth |
+| branch compute | conditional execution | implementation | 乘零不等于省 FLOP |
+
+### 贯穿算例 $\mathcal D_\square$：把同一个线性映射升格为 Residual Branch
+
+沿用
+
+$$
+x=(2,1)^{\mathsf T},
+\qquad
+F(x)=Wx=(4,-1)^{\mathsf T},
+\qquad
+q=\frac12.
+$$
+
+Inverted DropPath block 为
+
+$$
+x^+=x+\frac BqF(x).
+$$
+
+当 $B=0$：
+
+$$
+x^+_{\mathrm{drop}}=(2,1),
+\qquad
+J_{\mathrm{drop}}=I.
+$$
+
+当 $B=1$：
+
+$$
+x^+_{\mathrm{keep}}
+=x+2Wx=(10,-1),
+\qquad
+J_{\mathrm{keep}}=I+2W.
+$$
+
+故
+
+$$
+\boxed{
+\mathbb E_B[x^+\mid x]=x+Wx=(6,0),
+\qquad
+\mathbb E_B[J\mid x]=I+W
+}.
+$$
+
+branch increment 的 conditional covariance 是
+
+$$
+\boxed{
+\operatorname{Cov}\!\left(\frac BqF(x)\middle|x\right)
+=F(x)F(x)^{\mathsf T}
+=\begin{bmatrix}16&-4\\-4&1\end{bmatrix}
+}.
+$$
+
+被 drop 时，$\bar\theta_F=0$，但 $\bar x$ 仍至少收到 identity VJP。这个单块期望不允许把多层随机 evaluation points 和 Jacobian products 直接替换成全深 deterministic chain。
+
+## 核心公式七问：Path-Level Bernoulli Contract
+
+$$
+\boxed{
+x_{l+1}=x_l+\frac{B_l}{q_l}F_l(x_l),
+\qquad
+D=\sum_{l=1}^L B_l
+}.
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 随机删除完整 residual transformations，同时保留 state rail |
+| 对象 | residual branch 与跨层 active-depth law |
+| 来路 | identity shortcut 使 $B_l=0$ 时 block 仍有合法输出 |
+| 步骤 | 定 survival schedule→sample gate→条件执行/缩放→保存 RNG→统计 $D$/compute |
+| 读法 | 单块均值匹配伴随 branch variance 放大；多层训练是路径混合 |
+| 检查 | kept/dropped truth table、Poisson-binomial、fixed-seed VJP、branch-call counter |
+| 去路 | stochastic depth、DropPath、Mixture-of-Depths、layer skipping 与 adaptive compute |
+
+### AI / 系统对应
+
+per-sample DropPath 易于向量化但通常先计算整批 branch，未必节省 FLOPs；batch-shared gate 才更容易真正 short-circuit，却减少一个 batch 内的路径多样性。报告应同时给 survival schedule、gate axis、实际 branch-call 数、tokens/s 与质量，而非用期望 active depth 代替 profiler。
 
 ## 一、学习目标
 

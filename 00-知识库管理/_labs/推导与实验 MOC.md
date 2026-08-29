@@ -75,9 +75,10 @@ updated: 2026-08-29
 - 第十二波 NN-45—48 延伸 $\mathcal R_\square$：用 Pre/Post 放置的 rank-2→1 反例、add/Highway/concat 对象差异、ReZero 首步 gate 梯度、Fixup/DeepNorm 缩放账本，以及正权路径与符号抵消的双镜头完成 30.6；
 - 第十三波 NN-49—52 以 $\mathcal E_\square$ 的四词二维参数表贯通重复 lookup/scatter-add、pair metric 与 centered covariance spectrum、共享 Parameter 的稀疏/稠密 use-site 求和，以及 $\tau=1,2$ 的 Softmax/NLL/梯度；
 - 第十四波 NN-53—56 延伸 $\mathcal E_\square$：用四 context 目标构造 rank-3 centered log-ratio 障碍，复算无偏 $\widehat Z$ 与有偏 $\log\widehat Z$，分离 PAD 的 lookup/attention/loss/output 合同，并对同一表闭合 rank-1 SVD 与量化 logit 误差；
-- 当前语义：现行迁移 **56/64**，材料门 **7/8**，30.1—30.7 `regression-passed`，NN-57—64 **8/64 pending**，个人 `not-attempted`；
+- 第十五波 NN-57—60 以 $\mathcal D_\square$ 的 $x=(2,1),q=1/2,W=\left[\begin{smallmatrix}1&2\\-1&1\end{smallmatrix}\right]$ 贯通 activation-mask moments/VJP、两个 scores 的 covariance 与精确平方风险、DropConnect 联合分布反例，以及 residual branch DropPath 的 state/Jacobian/active-depth 账；
+- 当前语义：现行迁移 **60/64**，材料门 **7/8**，30.8 前半卷 `in-progress`，NN-61—64 **4/64 pending**，个人 `not-attempted`；
 - 旧[[实验 - 神经网络基础累计复现门]]和 `NN-CUM-01` 保留为 `composed` 历史材料，待 64 节迁移与分卷证据门建成后重新升级；
-- 下一施工点：NN-57—60，开始 30.8 的 Dropout、随机深度、DropConnect 与 Label Smoothing。
+- 下一施工点：NN-61—64，完成 30.8 与全章 64 节现行教学迁移。
 
 ## 第四章确定性架构审计
 

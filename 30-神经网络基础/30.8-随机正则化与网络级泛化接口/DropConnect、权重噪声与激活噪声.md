@@ -11,13 +11,116 @@ exercises: ["[[习题 - DropConnect、权重噪声与激活噪声]]"]
 solutions: ["[[解答 - DropConnect、权重噪声与激活噪声]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-noise-location-output-covariance-v2.svg]]"
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # DropConnect、权重噪声与激活噪声
 
 > [!abstract] 本章主问题
 > 噪声“加在哪里”决定随机函数、联合分布、梯度、诱导正则项和系统成本。Activation Dropout 对输入 features 采 mask；DropConnect 对 weight entries 采 mask；additive/multiplicative weight noise、activation noise 和 gradient masking 又是不同合同。即使几种方法保持相同 preactivation 均值、甚至匹配每个输出的边际方差，它们的跨输出/跨样本 covariance 和优化轨迹仍可不同。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-57—58 已算出共享 feature mask 对两个 output scores 产生的均值、边际方差与 cross-output covariance；
+- **本页解决什么：** 把随机变量移到 activation、connection、weight 或 gradient，构造“边际矩相同但联合分布不同”的严格反例；
+- **后续为何需要：** DropPath 会把 gate 再提升到整个 residual branch，比较前必须掌握 noise location 与 sharing axes 决定 covariance 的原则。
+
+**第一遍只比较 Activation Dropout 与 DropConnect。** 使用同一 $x,W,q$，匹配每个 output 的均值和方差，再计算 cross-output covariance 找到差异。
+
+**第二遍再扩展噪声族。** 区分 additive/multiplicative、global/local、per-example/shared-batch、forward corruption/gradient masking，并检查 induced penalty 与 kernel 成本。
+
+### 问题链
+
+1. Activation Dropout 与 DropConnect 分别给哪些对象采样 Bernoulli mask？
+2. 两者为何能匹配每个 output 的均值与方差，却不匹配 joint covariance？
+3. global weight noise 与 local reparameterized activation noise 在单样本边际相同后，还改变了什么 batch-level joint law？
+4. forward noise 的 expected objective 与 gradient masking 的 update estimator 为什么不是同一对象？
+5. mask 中有很多零，为什么 dense kernel 的实际 FLOPs 未必减少？
+
+> [!check] 第一遍停靠线
+> 若你能在 $\mathcal D_\square$ 上算出 $\Sigma_{\mathrm{act}}=\left[\begin{smallmatrix}8&-2\\-2&5\end{smallmatrix}\right]$ 与 $\Sigma_{\mathrm{dc}}=\operatorname{diag}(8,5)$，并指出唯一改变的是 mask sharing structure，就已掌握本页主干。
+
+## 符号与对象账本
+
+| 方法 | 随机对象 | sharing axes | 典型梯度影响 |
+|---|---|---|---|
+| Activation Dropout | input/features $M\odot x/q$ | 同 feature mask 可被所有 output rows 共享 | gate input VJP 与 weight columns |
+| DropConnect | entries $M\odot W/q$ | 通常 connection 独立 | gate weight entries 与 input paths |
+| additive weight noise | $W+\varepsilon$ | global batch 或 local sample | noise-shaped parameter gradient |
+| multiplicative weight noise | $W\odot(1+\varepsilon)$ | scale 随 weight | 零/小 weight 的噪声不同 |
+| local reparameterization | preactivation samples | 常按 example 独立 | 保边际、改 batch joint law |
+| gradient masking | optimizer update | 坐标/sample/step | 未必对应 forward-corrupted risk |
+
+### 贯穿算例 $\mathcal D_\square$：相同边际矩，不同联合输出
+
+沿用
+
+$$
+x=(2,1)^{\mathsf T},
+\qquad
+W=\begin{bmatrix}1&2\\-1&1\end{bmatrix},
+\qquad q=\frac12.
+$$
+
+无噪声输出为
+
+$$
+Wx=(4,-1)^{\mathsf T}.
+$$
+
+Activation Dropout 在两个 output rows 间共享 feature masks，因此
+
+$$
+\boxed{
+\mathbb E z_{\mathrm{act}}=(4,-1),
+\qquad
+\Sigma_{\mathrm{act}}
+=\begin{bmatrix}8&-2\\-2&5\end{bmatrix}
+}.
+$$
+
+若 DropConnect 的四个 connection masks 独立，则每个 output 的 mean/variance 保持相同，但跨 row covariance 消失：
+
+$$
+\boxed{
+\mathbb E z_{\mathrm{dc}}=(4,-1),
+\qquad
+\Sigma_{\mathrm{dc}}
+=\begin{bmatrix}8&0\\0&5\end{bmatrix}
+}.
+$$
+
+二者 covariance determinants 也不同：
+
+$$
+\det\Sigma_{\mathrm{act}}=36,
+\qquad
+\det\Sigma_{\mathrm{dc}}=40.
+$$
+
+所以相同 coordinate-wise moments 不能推出经过 Softmax、normalization 或 nonlinear loss 后的分布相同。
+
+## 核心公式七问：Noise-Location Contract
+
+$$
+\boxed{
+(\text{location},\text{law},\text{sharing axes},\text{scaling},\text{gradient},\text{system})
+}.
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 定义一个可比较、可复现的 noise injection 方法 |
+| 对象 | activation、weight、connection、preactivation 或 update |
+| 来路 | 相同 noise magnitude 在计算图不同位置诱导不同随机函数 |
+| 步骤 | 标位置→写随机 law→写共享轴→匹配 moments→推 VJP→测 kernel/communication |
+| 读法 | variance 只是边际摘要，sharing axes 决定 covariance 和 batch coupling |
+| 检查 | exact enumeration、covariance、fixed-seed VJP、local/global ablation 与 profiler |
+| 去路 | variational dropout、parameter noise、quantization noise 与 stochastic optimizers |
+
+### AI / 系统对应
+
+分布式训练中，weight noise 若在 rank 间独立，会让 replicas 优化不同随机参数；若同步，又增加通信或 RNG 合同。Activation noise 通常不减少 GEMM，DropConnect 的零 entries 也只有在结构化稀疏 kernel 中才可能省算力。统计稀疏与系统加速必须分别验收。
 
 ## 一、学习目标
 
