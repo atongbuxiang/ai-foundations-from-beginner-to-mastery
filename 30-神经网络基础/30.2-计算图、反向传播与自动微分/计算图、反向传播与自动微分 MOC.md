@@ -19,10 +19,10 @@ updated: 2026-08-29
 | NN-15 | [[Forward_Reverse AD、Tape 与复杂度|Forward/Reverse AD、Tape 与复杂度]] | AD mode selection | draft + A–E 闭环 |
 | NN-16 | [[Gradient Checking、Checkpointing 与高阶微分边界]] | verification/memory | draft + A–E 闭环 |
 
-## 当前迁移与学习状态
+## 当前材料门与学习状态
 
-- [[neural_network_foundations_teaching_contract_audit.py]] 已复核 NN-09—12 的课程位置、两遍路线、问题链、对象账本、共享 $X_\diamond$ fixture 与公式七问；
-- 同一个二样本 affine-regression 图已闭合 forward $L=5.25$、JVP/VJP directional derivative $2.5$、fan-out 两路参数累加和三路 affine VJP；
-- 当前为 **4/8 现行教学迁移、8/8 正文、8/8 A—E 题解、8/8 正式图**；30.2 尚为 `in-progress`，不能提前标为分卷材料通过；
-- 全章状态为 **12/64 已迁移、52/64 pending**；个人仍为 **0/8 / `not-attempted`**；
-- 下一材料施工点为 NN-13—16，完成 activation/broadcast、stable fused loss、AD mode 与 verification/memory。
+- [[neural_network_foundations_teaching_contract_audit.py]] 已复核 NN-09—16 的课程位置、两遍路线、问题链、对象账本、共享 $X_\diamond$ fixture 与公式七问；
+- 前半卷闭合 affine-regression 的 forward $L=5.25$、JVP/VJP $2.5$ 与参数梯度；后半卷继续闭合 ReLU residual/broadcast VJP、stable CE $0.0255315$、logit directional derivative $-0.00123631$ 与 HVP $0.00123325$；
+- 当前为 **8/8 现行教学迁移、8/8 正文、8/8 A—E 题解、8/8 正式图，30.2 材料门 `regression-passed`**；
+- 全章状态为 **16/64 已迁移、48/64 pending、分卷材料门 2/8**；个人仍为 **0/8 / `not-attempted`**；
+- 下一材料施工点为 NN-17—20，进入 30.3 激活函数、门控与非线性前半卷。

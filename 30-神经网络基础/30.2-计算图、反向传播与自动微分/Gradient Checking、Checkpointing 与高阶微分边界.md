@@ -11,12 +11,77 @@ exercises: ["[[习题 - Gradient Checking、Checkpointing 与高阶微分边界]
 solutions: ["[[解答 - Gradient Checking、Checkpointing 与高阶微分边界]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-gradient-checkpoint-higher-order-v2.svg]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 # Gradient Checking、Checkpointing 与高阶微分边界
 
 > [!abstract] 本章主问题
 > 一阶 AD 返回一个数不等于梯度已经可信。梯度检查应用方向中心差分、Taylor residual、JVP/VJP 伴随测试和交叉模式建立证据，并识别截断误差与舍入误差的 U 形权衡。checkpointing 则在数学上不改变函数，通过重算 residuals 用 FLOPs 换激活内存；但 RNG、state、mutation 不能忠实回放时，它会直接改变求导程序。高阶 AD 还需对 kink、custom rule、隐式求解和 complex convention 设置更严格边界。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-15 已说明 AD 怎样组合 local rules，但“两个模式给出同一个数”仍可能共享同一实现错误；
+- **本页解决什么：** 用中心差分、Taylor slope、adjoint test 和解析 HVP 形成独立证据链，再把 checkpoint 的 time–memory 交换与高阶边界分开；
+- **后续为何需要：** 这一页是 30.2 的材料出口；后续激活、初始化和深层训练分析都默认你能判断 gradient 是数学错误、实现错误还是数值错误。
+
+**第一遍只完成验证漏斗。** 先在 FP64 光滑小例上比较 hand value、AD directional derivative 和多个 $h$ 的中心差分，再检查 Taylor residual 是否呈二阶斜率。
+
+**第二遍再处理系统与高阶。** 比较 checkpoint on/off 的 RNG/state/effect，推导 HVP 而不形成 Hessian，并审计 kink、custom rule、implicit solver、complex 和 mixed precision。
+
+### 问题链
+
+1. 为什么一次 `gradcheck=True` 不能证明整张训练图正确？
+2. 中心差分的截断误差与舍入误差为什么形成 U 形曲线？
+3. JVP/VJP dot test 能发现什么，又可能共同漏掉什么？
+4. checkpointing 在什么语义条件下只换时间与内存而不改 gradient？
+5. HVP 为什么无需显式 $n\times n$ Hessian，高阶结果又在哪些 primitive 上失去 classical 含义？
+
+> [!check] 第一遍停靠线
+> 若你能在贯穿方向上复现梯度约 $-0.00123631$，观察中心差分收敛，并算出 HVP 系数约 $0.00123325$，就完成 30.2 第一遍；checkpoint 调度和全部高阶边界留到第二遍。
+
+## 符号与对象账本
+
+| 对象 | 数学/系统身份 | 在 AI 验证中的作用 | 不能证明什么 |
+|---|---|---|---|
+| $h$ | finite-difference step | 控制 truncation/roundoff tradeoff | 单一 $h$ 不能给全尺度证据 |
+| $v$ | parameter/logit direction | 高维 directional probe | 有限方向不能覆盖全空间 |
+| $R(h)$ | Taylor residual | 检查一阶模型的 $O(h^2)$ 区间 | 不验证建模目标正确 |
+| checkpoint | 保存的 execution boundary | 用重算换 activation memory | RNG/state 不等价时不保梯度 |
+| $Hv$ | Hessian linear action | curvature、implicit/C-G 接口 | 不等于 full Hessian 或最优性证书 |
+
+### 贯穿算例：独立检查同一方向并进入二阶
+
+沿用 $X_\diamond$ 路径的 $F(Q)$ 与 $V=E_{11}$。解析一阶值为
+
+$$
+g_V=\langle\nabla F,V\rangle_F=\frac{P_{11}-1}{2}\approx-0.00123631.
+$$
+
+中心差分
+
+$$
+D_h=\frac{F(Q+hV)-F(Q-hV)}{2h}
+$$
+
+应在合适的 FP64 区间趋近 $g_V$；一阶 Taylor residual $|F(Q+hV)-F(Q)-hg_V|$ 应先按 $h^2$ 下降。沿同一方向的 HVP 为第一样本 softmax covariance 的对应作用：
+
+$$
+(HV)_{1,:}=\frac{P_{11}P_{12}}2(1,-1)\approx0.00123325(1,-1),\qquad (HV)_{2,:}=0.
+$$
+
+这给出与一阶 VJP 不同的独立二阶目标。若 checkpoint 重放 NN-13/14 的图，还必须恢复相同 ReLU-zero convention、reduction、RNG/state 与有效样本计数。
+
+## 核心公式七问：$E(h)\approx C_1h^2+C_2u/h$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 解释中心差分为何不能无限减小 step，并指导多尺度 sweep |
+| 对象 | $h$ 是 step，$u$ 是 unit roundoff，$C_1,C_2$ 依函数曲率和数值 scale |
+| 来路 | 对称 Taylor 展开消去偶次一阶外项，函数值相减再引入相对舍入放大 $1/h$ |
+| 步骤 | 从较大 $h$ 逐级减半，寻找二阶下降区、最低点与 roundoff 回升区 |
+| 读法 | 左侧由截断主导，右侧由消去/舍入主导，中间才是可信检查窗口 |
+| 检查 | 改 dtype/scale 后最低点应移动；kink、噪声或 stateful forward 可破坏模型 |
+| 去路 | custom-op gradcheck、Taylor test、checkpoint replay audit、HVP symmetry 与高阶 AD |
 
 ## 一、为什么不只看框架输出
 

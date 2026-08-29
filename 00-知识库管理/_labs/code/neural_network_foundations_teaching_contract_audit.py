@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import re
 import subprocess
 import sys
@@ -22,7 +23,7 @@ SOLUTIONS = LABS / "solutions"
 CODE = LABS / "code"
 FIGURE_AUDITOR = CODE / "audit-markdown-figure-units.mjs"
 ASSET_DIR = ROOT / "00-知识库管理" / "_assets" / "figures" / "neural-networks"
-MIGRATED_IDS = tuple(range(1, 13))
+MIGRATED_IDS = tuple(range(1, 17))
 
 STATE_SURFACES = (
     CHAPTER / "神经网络基础 MOC.md",
@@ -199,7 +200,7 @@ def audit_migrated_contract(nodes: list[tuple[int, Path, str]]) -> None:
         require(fixture in content, f"{relative}: shared teaching fixture missing: {fixture}")
         require("AI" in content, f"{relative}: AI object mapping missing")
         require(len(content.splitlines()) >= 180, f"{relative}: derivation depth unexpectedly short")
-    print("PASS NN teaching migration waves A--C: NN-01--12 course position/two-pass/problem/object/formula contracts=12/12")
+    print("PASS NN teaching migration waves A--D: NN-01--16 course position/two-pass/problem/object/formula contracts=16/16")
 
 
 def audit_wave_c_fixture(nodes: list[tuple[int, Path, str]]) -> None:
@@ -243,6 +244,44 @@ def audit_wave_c_fixture(nodes: list[tuple[int, Path, str]]) -> None:
     print("PASS NN wave-C independent math: forward loss=5.25; JVP/VJP=2.5; data/reg/affine gradients exact")
 
 
+def audit_wave_d_fixture(nodes: list[tuple[int, Path, str]]) -> None:
+    """Recompute the NN-13--16 residual-softmax fixture independently."""
+    z = ((5.0, 2.0), (1.0, 3.0))
+    c = (2.0, 2.0)
+    a = tuple(tuple(z[i][j] - c[j] for j in range(2)) for i in range(2))
+    h = tuple(tuple(max(0.0, a[i][j]) for j in range(2)) for i in range(2))
+    q = tuple(tuple(z[i][j] + h[i][j] for j in range(2)) for i in range(2))
+    require(a == ((3.0, 0.0), (-1.0, 1.0)) and h == ((3.0, 0.0), (0.0, 1.0)), "NN wave-D ReLU fixture drifted")
+    require(q == ((8.0, 2.0), (1.0, 4.0)), f"NN wave-D logits drifted: {q}")
+
+    upstream = ((1.0, -1.0), (2.0, 1.0))
+    mask = tuple(tuple(1.0 if a[i][j] > 0.0 else 0.0 for j in range(2)) for i in range(2))
+    grad_z = tuple(tuple(upstream[i][j] * (1.0 + mask[i][j]) for j in range(2)) for i in range(2))
+    grad_c = tuple(-sum(upstream[i][j] * mask[i][j] for i in range(2)) for j in range(2))
+    require(grad_z == ((2.0, -1.0), (2.0, 2.0)) and grad_c == (-1.0, -1.0), "NN wave-D branch/broadcast VJP drifted")
+
+    probs: list[tuple[float, float]] = []
+    for row in q:
+        maximum = max(row)
+        exps = tuple(math.exp(value - maximum) for value in row)
+        total = sum(exps)
+        probs.append((exps[0] / total, exps[1] / total))
+    loss = (-math.log(probs[0][0]) - math.log(probs[1][1])) / 2.0
+    logit_grad = (((probs[0][0] - 1.0) / 2.0, probs[0][1] / 2.0), (probs[1][0] / 2.0, (probs[1][1] - 1.0) / 2.0))
+    directional = logit_grad[0][0]
+    hvp_scale = probs[0][0] * probs[0][1] / 2.0
+    require(abs(loss - 0.02553151835573612) < 1e-15, f"NN wave-D CE loss drifted: {loss}")
+    require(abs(directional + 0.0012363115783173284) < 1e-15, f"NN wave-D JVP/VJP drifted: {directional}")
+    require(abs(hvp_scale - 0.0012332546456799655) < 1e-15, f"NN wave-D HVP drifted: {hvp_scale}")
+    require(all(abs(sum(row)) < 1e-15 for row in logit_grad), "NN wave-D softmax shift-null direction drifted")
+
+    wave = {node_id: content for node_id, _, content in nodes if 13 <= node_id <= 16}
+    expected = {13: ("Q=Z+H",), 14: ("0.0255315",), 15: ("-0.00123631",), 16: ("0.00123325",)}
+    for node_id, markers in expected.items():
+        require(all(marker in wave[node_id] for marker in markers), f"NN-{node_id:02d}: wave-D numeric closure missing")
+    print("PASS NN wave-D independent math: residual/broadcast VJP; stable CE=0.0255315; JVP/VJP and HVP exact")
+
+
 def question_ids(content: str) -> list[str]:
     return re.findall(r"^###\s+([^\s]+-[A-E]\d{2})\s*$", content, re.M)
 
@@ -282,6 +321,7 @@ def audit_sources_and_links(nodes: list[tuple[int, Path, str]], index: dict[str,
     migrated_source_targets = {target for node_id, _, content in nodes if node_id in MIGRATED_IDS for target in frontmatter_targets(content, "sources")}
     status_counts: Counter[str] = Counter()
     legacy_metadata_gaps: list[str] = []
+    migrated_tiers: dict[str, str] = {}
     for target in source_targets:
         paths = resolve(target, index)
         require(len(paths) == 1 and paths[0].parent.name == "_sources", f"source missing/ambiguous/not a card: {target}")
@@ -292,10 +332,21 @@ def audit_sources_and_links(nodes: list[tuple[int, Path, str]], index: dict[str,
         missing_keys = [key for key in SOURCE_KEYS if not frontmatter_line(source, key)]
         if target in migrated_source_targets:
             require(not missing_keys, f"migrated-wave source metadata incomplete: {target} -> {missing_keys}")
-            require(frontmatter_line(source, "source_tier") in {"A", "B"}, f"migrated-wave source tier too weak: {target}")
-            require(status in {"active", "verified"}, f"migrated-wave source not active/verified: {target}")
+            tier = frontmatter_line(source, "source_tier")
+            require(tier in {"A", "B", "C"}, f"migrated-wave source tier unsupported: {target} -> {tier}")
+            migrated_tiers[target] = tier
+            if tier in {"A", "B"}:
+                require(status in {"active", "verified"}, f"migrated-wave A/B source not active/verified: {target}")
+            else:
+                require(status in {"draft", "active", "verified"}, f"migrated-wave C source status unsupported: {target}")
         elif missing_keys:
             legacy_metadata_gaps.extend(f"{target}:{key}" for key in missing_keys)
+
+    for node_id, _, content in nodes:
+        if node_id not in MIGRATED_IDS:
+            continue
+        tiers = {migrated_tiers[target] for target in frontmatter_targets(content, "sources")}
+        require(tiers & {"A", "B"}, f"NN-{node_id:02d}: migrated node lacks an A/B source anchor")
 
     missing: list[str] = []
     ambiguous: list[str] = []
@@ -312,7 +363,7 @@ def audit_sources_and_links(nodes: list[tuple[int, Path, str]], index: dict[str,
     require(not ambiguous, f"ambiguous NN Wiki links: {ambiguous[:20]}")
     print(
         f"PASS NN sources/links: cards={len(source_targets)} {dict(sorted(status_counts.items()))}; "
-        f"migrated-wave metadata complete; legacy metadata fields pending={len(legacy_metadata_gaps)}; scoped Wiki links={link_count}"
+        f"migrated-wave metadata complete with per-node A/B anchors; legacy metadata fields pending={len(legacy_metadata_gaps)}; scoped Wiki links={link_count}"
     )
 
 
@@ -388,10 +439,10 @@ def audit_state_surfaces() -> None:
     for path in STATE_SURFACES:
         content = read(path)
         require(audit_name in content, f"state surface misses NN audit: {path.relative_to(ROOT)}")
-        require("12/64" in content or "12 / 64" in content, f"state surface misses NN migrated count: {path.relative_to(ROOT)}")
-        require("52/64" in content or "52 / 64" in content, f"state surface misses NN pending count: {path.relative_to(ROOT)}")
+        require("16/64" in content or "16 / 64" in content, f"state surface misses NN migrated count: {path.relative_to(ROOT)}")
+        require("48/64" in content or "48 / 64" in content, f"state surface misses NN pending count: {path.relative_to(ROOT)}")
         require("not-attempted" in content, f"state surface overclaims NN learner: {path.relative_to(ROOT)}")
-    print("PASS NN state surfaces: 5 global + 2 volume views agree on migrated=12/64, pending=52/64, learner=not-attempted")
+    print("PASS NN state surfaces: 5 global + 2 volume views agree on migrated=16/64, pending=48/64, learner=not-attempted")
 
 
 def main() -> None:
@@ -403,6 +454,7 @@ def main() -> None:
     audit_scope(nodes)
     audit_migrated_contract(nodes)
     audit_wave_c_fixture(nodes)
+    audit_wave_d_fixture(nodes)
     audit_exercises(nodes, index)
     audit_sources_and_links(nodes, index)
     audit_figures(nodes, index)
@@ -410,8 +462,8 @@ def main() -> None:
     audit_state_surfaces()
     if args.run_figures:
         audit_deterministic_figures()
-    print("NN-01--12 teaching migration regression: PASS; 30.1 material gate retained")
-    print("NN-13--64 teaching migration: pending (52/64)")
+    print("NN-01--16 teaching migration regression: PASS; 30.1--30.2 material gates=2/8")
+    print("NN-17--64 teaching migration: pending (48/64)")
     print("PERSONAL LEARNING STATUS: not-attempted")
 
 

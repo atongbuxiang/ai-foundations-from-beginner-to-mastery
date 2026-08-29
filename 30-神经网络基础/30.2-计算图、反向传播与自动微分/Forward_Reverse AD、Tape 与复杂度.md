@@ -11,12 +11,77 @@ exercises: ["[[习题 - Forward_Reverse AD、Tape 与复杂度]]"]
 solutions: ["[[解答 - Forward_Reverse AD、Tape 与复杂度]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-forward-reverse-ad-tape-v2.svg]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 # Forward/Reverse AD、Tape 与复杂度
 
 > [!abstract] 本章主问题
 > 自动微分不是把函数值近似成导数，而是把已执行程序分解为有局部导数规则的 primitives，再精确应用链式法则到工作精度。forward mode 随 primal 推进 tangent 得 $Jv$；reverse mode 先记录 tape/residuals，再回拉 cotangent 得 $J^Tu$。选择标准是所需方向数、输入/输出维数、内存和程序语义，不是“神经网络一律反向”。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-09—14 已手工写出同一图的 local rules 与 scalar cross-entropy，但尚未比较自动组合这些规则的两种扫描方向；
+- **本页解决什么：** 用一个 logit direction 对照 JVP 与 VJP，并把 seed 数、tape residual、重算和结构化参数树放进成本账；
+- **后续为何需要：** NN-16 会用不依赖同一反向实现的数值证据检查结果，并讨论 tape 丢弃后的 checkpoint replay 与高阶组合。
+
+**第一遍只按输出目标选模式。** 少数 input directions 选 JVP，少数 output cotangents 选 VJP；scalar loss 对大量参数通常 reverse 一次，不要先形成 full Jacobian。
+
+**第二遍再审计真实成本。** 把 residual bytes、recompute FLOPs、vectorized seeds、control flow、RNG/state、compiler 和 hardware constants 加回理论扫描数。
+
+### 问题链
+
+1. AD 与 finite difference 的“精确”含义为什么不同？
+2. forward mode 随 primal 携带什么，reverse mode 为什么需要 tape？
+3. full Jacobian 的扫描数为什么分别受输入维数 $n$ 和输出维数 $m$ 控制？
+4. scalar loss 对亿级参数为何是 reverse 的典型优势情形？
+5. custom VJP、随机控制流或 mutation 会怎样改变“对哪个程序求导”？
+
+> [!check] 第一遍停靠线
+> 若你能用一次 JVP 与一次 scalar-loss VJP 都得到方向导数约 $-0.00123631$，并解释 full logit gradient 为何 reverse 只需一个 seed，就可以进入验证；tape implementation 与结构化变换留到第二遍。
+
+## 符号与对象账本
+
+| 对象 | shape/规模 | 在 AI 自动微分中的身份 | 主要成本 |
+|---|---|---|---|
+| primal $Q$ | $2\times2$ fixture，实际可为巨大参数树 | 被求导程序的输入 | forward compute |
+| tangent $V$ | 与输入同结构 | forward-mode direction seed | 每个方向一趟传播 |
+| cotangent $u$ | 与输出同结构 | reverse-mode output seed | 每个输出方向一趟回拉 |
+| tape/residuals | 依执行图而定 | local VJP 所需 forward 证据 | activation memory 或重算 |
+| $Jv,J^Tu$ | output/input-shaped | derivative actions | 不需要 full $J$ |
+
+### 贯穿算例：同一 logit 方向的两种扫描
+
+沿用 $X_\diamond$ 路径得到的 mean cross-entropy $F(Q)$，取
+
+$$
+V=E_{11}=\begin{bmatrix}1&0\\0&0\end{bmatrix}.
+$$
+
+forward mode 把 $\dot Q=V$ 推过第一行 shifted-LSE 与 target term，得到
+
+$$
+J_F(Q)V=\frac{P_{11}-1}{2}\approx-0.00123631.
+$$
+
+reverse mode 以 scalar seed $\bar F=1$ 一次产生 NN-14 的完整 $\bar Q=(P-Y_c)/2$；再配对
+
+$$
+\langle\bar Q,V\rangle_F=\bar Q_{11}\approx-0.00123631.
+$$
+
+对这个 $4\to1$ map，full gradient 用 reverse 只需一个 output seed；若只关心一个方向响应，forward 也只需一个 input seed。实际大模型中应依据“需要多少方向”，而不是依据函数叫不叫神经网络来选模式。
+
+## 核心公式七问：$\operatorname{JVP}(f,x;v)=J_f(x)v,\;\operatorname{VJP}(f,x;u)=J_f(x)^Tu$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 在不形成 full Jacobian 时计算所需的一阶线性作用 |
+| 对象 | $v$ 与 input 同结构，$u$ 与 output 同结构；结果形状相反对应 |
+| 来路 | 对每个 primitive 的 differential/adjoint 按正序或逆序组合 |
+| 步骤 | forward 同时推进 primal+tangent；reverse 先 forward 记录 residual，再从 $u$ 回拉 |
+| 读法 | JVP 问输入某方向怎样影响输出，VJP 问输出某评价怎样归因到输入 |
+| 检查 | full $J$ 约需 $n$ 个 forward seeds 或 $m$ 个 reverse seeds；scalar output 时 $m=1$ |
+| 去路 | per-example gradients、HVP、implicit differentiation、checkpointing 与 compiler AD transforms |
 
 ## 一、AD 与两种相似方法
 

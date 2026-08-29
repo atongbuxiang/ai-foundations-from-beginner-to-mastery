@@ -11,12 +11,80 @@ exercises: ["[[习题 - Softmax–Cross-Entropy 的稳定融合反向]]"]
 solutions: ["[[解答 - Softmax–Cross-Entropy 的稳定融合反向]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-softmax-cross-entropy-fused-v2.svg]]"
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-29
 ---
 # Softmax–Cross-Entropy 的稳定融合反向
 
 > [!abstract] 本章主问题
 > 对 logits $z$ 和归一化 target $y$，softmax cross-entropy 可重写为 $\operatorname{LSE}(z)-y^Tz$，因而梯度是 $p-y$。这个简洁结果同时依赖归一化、损失定义与 reduction scale。实现上应从 shifted log-sum-exp 直接计算 log-probability 与融合 backward，避免先形成极端概率再取对数。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-13 已产生二维 logits $Q$，但 logits 既不是概率，也还没有定义训练目标；
+- **本页解决什么：** 用 shifted log-sum-exp 把 logits、normalized target、cross-entropy、mean reduction 与 $P-Y$ 反向写成一个稳定合同；
+- **后续为何需要：** NN-15 将比较对该 scalar loss 求导的 forward/reverse 成本，NN-16 用差分和 HVP 独立检查一阶、二阶作用。
+
+**第一遍只记住稳定三步。** 每行减最大值、用 log-sum-exp 计算 NLL、直接用 $P-Y$ 回传；同时明确 sum 还是 mean。
+
+**第二遍再推导边界。** 从 LSE differential 与 softmax Jacobian 两条路线交叉验证，并检查 soft target 归一化、temperature、mask、label smoothing、shift zero-direction 和有限精度。
+
+### 问题链
+
+1. 为什么 logits 不能直接解释为概率？
+2. 减去每行最大值为什么是恒等变换，不是数值近似？
+3. $P-Y$ 的简洁形式依赖 target 的哪个归一化条件？
+4. mean reduction 为什么会把整个 batch gradient 再除以有效样本数？
+5. 为什么稳定 fused operator 比“先 softmax、再 log、再链式相乘”更可靠？
+
+> [!check] 第一遍停靠线
+> 若你能从 $Q$ 算出 mean loss 约 $0.0255315$，并写出每行和为零的 $\bar Q=(P-Y)/2$，就可以进入 AD mode；Hessian、temperature 与非标准 target 留到第二遍。
+
+## 符号与对象账本
+
+| 对象 | shape | 在 AI 分类头中的身份 | 不能偷换成 |
+|---|---|---|---|
+| $Q$ | $2\times2$ | raw logits | 已归一化 probability |
+| $Y_c$ | $2\times2$ | one-hot target distributions | model prediction |
+| $P=\operatorname{softmax}(Q)$ | $2\times2$ | categorical probabilities | 独立 Bernoulli outputs |
+| $\ell_1,\ell_2$ | scalar per sample | NLL contributions | 已经 mean 的 batch loss |
+| $L_{\rm ce}$ | scalar | mean training objective | calibration/deployment risk 的全部 |
+
+### 贯穿算例：同一 logits 的稳定前向与融合反向
+
+沿用 $X_\diamond$ 路径在 NN-13 得到
+
+$$
+Q=\begin{bmatrix}8&2\\1&4\end{bmatrix},\qquad
+Y_c=\begin{bmatrix}1&0\\0&1\end{bmatrix}.
+$$
+
+逐行减最大值后，logit gaps 分别为 $6$ 与 $3$。因此
+
+$$
+P\approx\begin{bmatrix}0.997527&0.002473\\0.047426&0.952574\end{bmatrix},qquad
+L_{\rm ce}=\frac{-\log P_{11}-\log P_{22}}2\approx0.0255315.
+$$
+
+mean reduction 的融合反向为
+
+$$
+\bar Q=\frac{P-Y_c}{2}
+\approx\begin{bmatrix}-0.001236&0.001236\\0.023713&-0.023713\end{bmatrix}.
+$$
+
+每行梯度和为零，对应 softmax 对 $Q+\alpha\mathbf1$ 的 shift invariance。下一页将用方向 $V=E_{11}$ 同时做 JVP 与 VJP。
+
+## 核心公式七问：$\ell(q,y)=\operatorname{LSE}(q)-y^Tq,\;\nabla_q\ell=p-y$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 在不形成 softmax Jacobian 和 $-y/p$ 中间大数时得到稳定 loss 与 logit gradient |
+| 对象 | $q$ 是 logits，$y$ 是和为 1 的 target distribution，$p=\nabla\operatorname{LSE}(q)$ |
+| 来路 | 展开 $-\sum_i y_i\log p_i$ 并使用 $\sum_i y_i=1$ |
+| 步骤 | shifted LSE 算值；反向直接计算 $p-y$；batch mean 最后除有效样本数 |
+| 读法 | 提高真类 logit、压低其余 logits，但共同平移方向没有梯度 |
+| 检查 | 梯度分量和为零；非归一化 target 时应为 $(\sum y_i)p-y$ |
+| 去路 | language-model token loss、label smoothing、distillation temperature、fused kernels 与 curvature |
 
 ## 一、对象合同
 
