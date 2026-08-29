@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, language-modeling, softmax-bottleneck]
 source_type: paper
 title: "Breaking the Softmax Bottleneck: A High-Rank RNN Language Model"
@@ -8,14 +8,14 @@ author: "Zhilin Yang; Zihang Dai; Ruslan Salakhutdinov; William W. Cohen"
 year: 2018
 url: "https://openreview.net/forum?id=HkwZSG-CZ"
 venue: "ICLR 2018"
-accessed: 2026-08-24
+accessed: 2026-08-29
 source_tier: A
 license: "OpenReview conference paper；本库仅保存独立摘要、必要公式与链接"
 scope_role: core
 temporal_role: foundational
 related: ["[[Softmax Bottleneck 与低秩限制]]", "[[Softmax 输出层、Logit 尺度与概率参数化]]"]
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Yang et al.：Softmax Bottleneck 与 Mixture of Softmaxes

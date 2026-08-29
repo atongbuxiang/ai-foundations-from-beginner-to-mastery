@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, language-modeling, adaptive-input, embeddings]
 source_type: paper
 title: "Adaptive Input Representations for Neural Language Modeling"
@@ -8,14 +8,14 @@ author: "Alexei Baevski; Michael Auli"
 year: 2019
 url: "https://openreview.net/forum?id=ByxZX20qFQ"
 venue: "ICLR 2019"
-accessed: 2026-08-24
+accessed: 2026-08-29
 source_tier: A
 license: "OpenReview conference paper；本库仅保存独立摘要、必要公式与链接"
 scope_role: adaptive-dimension-core
 temporal_role: foundational
 related: ["[[Embedding 初始化、缩放、分解与量化接口]]", "[[Sampled、Hierarchical 与 Adaptive Softmax]]"]
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Baevski、Auli：Adaptive Input Representations

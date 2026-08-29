@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, pytorch, adaptive-softmax, cross-entropy]
 source_type: official-docs
 title: "PyTorch AdaptiveLogSoftmaxWithLoss and CrossEntropyLoss"
@@ -8,14 +8,14 @@ author: "PyTorch Contributors"
 year: 2026
 url: "https://docs.pytorch.org/docs/stable/generated/torch.nn.AdaptiveLogSoftmaxWithLoss.html"
 secondary_url: "https://docs.pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html"
-accessed: 2026-08-24
+accessed: 2026-08-29
 source_tier: B
 license: "PyTorch official documentation；本库仅保存独立摘要、接口事实与链接"
 scope_role: implementation-contract
 temporal_role: current-api
 related: ["[[Sampled、Hierarchical 与 Adaptive Softmax]]", "[[Padding、Mask、特殊符号与词表边界]]"]
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # PyTorch：大词表损失与 Ignore-Index 合同

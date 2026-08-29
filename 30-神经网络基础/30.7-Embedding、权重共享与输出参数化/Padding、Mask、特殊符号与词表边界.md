@@ -11,13 +11,125 @@ exercises: ["[[习题 - Padding、Mask、特殊符号与词表边界]]"]
 solutions: ["[[解答 - Padding、Mask、特殊符号与词表边界]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-padding-mask-special-token-contracts-v2.svg]]"
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Padding、Mask、特殊符号与词表边界
 
 > [!abstract] 本章主问题
 > PAD、BOS、EOS、UNK、MASK 等都是词表中的整数 ID，但它们在 tokenizer、embedding、attention、loss 和 generation 中扮演不同角色。`padding_idx`、attention mask、`ignore_index` 与 stop token 是四份独立合同；只设置其中一个，不会自动补齐另外三个。词表一旦变化，embedding、output head、bias、weight tying、optimizer state 与 checkpoint 也必须原子同步。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-49 已说明 token ID 控制 lookup，NN-51 说明 tied output 可更新未被 lookup 的 rows，NN-52/54 固定了 normalization axis；
+- **本页解决什么：** 把同一个 special-token ID 在 embedding、attention、loss 与 decoding 四个子系统中的职责拆开，并建立词表变更的原子事务；
+- **后续为何需要：** embedding 分解/量化与任何 checkpoint 部署都必须保持 token-to-row 映射，否则 shape 正确也会发生静默语义错位。
+
+**第一遍只跟踪一个 PAD。** 在具体输入—目标序列上分别写 lookup padding、query–key visibility、valid-loss support 和 generation stop，不让一个布尔 mask 代替四份合同。
+
+**第二遍再扩展生命周期。** 加入 BOS/EOS/UNK/MASK、left/right padding、all-masked rows、packing/segment reset、词表扩容与 optimizer/checkpoint 原子迁移。
+
+### 问题链
+
+1. `padding_idx=0` 为什么只约束 lookup backward，不能自动屏蔽 attention、loss 或 tied output？
+2. causal mask、key padding mask 与 query-valid mask 如何组合成一张 edge matrix？
+3. `ignore_index` 的 mean reduction 分母为什么必须是有效 target 数而非张量长度？
+4. all-masked attention row 为什么可能产生 NaN，它应由数据合同还是 kernel convention 处理？
+5. tokenizer 只改 token-to-ID 顺序但 $V$ 不变，为什么仍会静默损坏模型？
+
+> [!check] 第一遍停靠线
+> 若你能在 $\mathcal E_\square$ 的四位置序列中写出 3 个有效 target、组合后的三角 attention edges，并解释 PAD row 的 lookup 梯度为零但 tied-output 梯度仍可非零，就已掌握本页主干。
+
+## 符号与对象账本
+
+| 合同 | 作用对象 | PAD 时的典型动作 | 不会自动完成 |
+|---|---|---|---|
+| tokenizer role | integer ID / sequence assembly | 插入 PAD、BOS、EOS | 模型 mask 与参数 resize |
+| embedding padding | $E_{p:}$ 的 lookup use-site | 不累加 lookup VJP | weight decay / tied output freeze |
+| attention mask | query–key edges | 删除无效 key/query edges | loss exclusion |
+| loss mask | target positions | 从 numerator 与 denominator 排除 | hidden-state computation |
+| decoding contract | generated IDs | EOS stop、PAD 禁止/允许 | 训练时 attention/loss mask |
+| vocabulary transaction | 所有 vocabulary axes | 同步 reorder/resize/state | 自动语义对齐 |
+
+### 贯穿算例 $\mathcal E_\square$：同一个 PAD ID 的四份职责
+
+把原四词表的 rows 解释为
+
+$$
+0=\mathrm{PAD},\quad1=A,\quad2=B,\quad3=\mathrm{EOS}.
+$$
+
+取 causal-LM 输入、目标与有效标记
+
+$$
+x=(2,1,2,0),
+\qquad
+y=(1,2,3,0),
+\qquad
+m=(1,1,1,0).
+$$
+
+若逐位置未约简 loss 为
+
+$$
+\ell=(0.2,0.4,0.6,9.0),
+$$
+
+则正确的 ignored-token mean 是
+
+$$
+\boxed{
+\mathcal L
+=\frac{\sum_t m_t\ell_t}{\sum_t m_t}
+=\frac{0.2+0.4+0.6}{3}
+=0.4
+}.
+$$
+
+分母不是 4，PAD 位置的 9.0 也不进入 numerator。若同时屏蔽无效 query/key，合法 attention edge matrix 可写成
+
+$$
+A_{ts}=\mathbf1\{t<3\}\mathbf1\{s<3\}\mathbf1\{s\le t\}
+=
+\begin{bmatrix}
+1&0&0&0\\
+1&1&0&0\\
+1&1&1&0\\
+0&0&0&0
+\end{bmatrix}.
+$$
+
+最后一行是 all-masked query，必须由上层跳过或由 kernel 明确返回零并阻断梯度，不能把 $\operatorname{softmax}(-\infty,\ldots,-\infty)$ 当作普通概率。
+
+若设置 `padding_idx=0`，位置 3 不向 $E_{0:}$ 写 lookup gradient；但 direct tying 时，NN-51 已算出 output use-site 对第 0 行仍有
+
+$$
+\bar E_{0:,\mathrm{out}}=D^{-1}(1,1)\ne0.
+$$
+
+因此“padding row 冻结”还需处理 weight decay、output mask 或参数拆分，不能只设置 lookup API 参数。
+
+## 核心公式七问：离散序列四层 Mask Contract
+
+$$
+\boxed{
+(\text{ID role},\text{lookup update},\text{attention edges},\text{loss support},\text{decode rule})
+}.
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 防止一个 special-token 配置被误认为端到端语义 |
+| 对象 | token IDs、参数 rows、query–key edges、targets 与生成状态机 |
+| 来路 | 同一整数在多个子系统中承担不同控制职责 |
+| 步骤 | 固定词表 hash→声明 roles→逐层生成 masks→核 denominator→测试 decode/restore |
+| 读法 | 每层只约束自己的对象，层间必须显式组合 |
+| 检查 | tiny-sequence truth table、all-masked row、PAD=EOS、left/right padding 与 vocab permutation |
+| 去路 | packed sequence、KV cache、multimodal special tokens 与 tokenizer migration |
+
+### AI / 系统对应
+
+生产系统中的词表更新应像数据库 schema migration：tokenizer 文件、input/output weights、bias、optimizer states、quantization scales、serving config 与 cache version 必须作为一个不可分割版本发布。只做 `resize_token_embeddings` 而不验证 row mapping，可能得到 shape 全部合法却语义完全错位的模型。
 
 ## 一、学习目标
 

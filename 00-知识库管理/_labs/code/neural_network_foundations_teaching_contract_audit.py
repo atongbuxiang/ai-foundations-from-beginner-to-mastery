@@ -23,7 +23,7 @@ SOLUTIONS = LABS / "solutions"
 CODE = LABS / "code"
 FIGURE_AUDITOR = CODE / "audit-markdown-figure-units.mjs"
 ASSET_DIR = ROOT / "00-知识库管理" / "_assets" / "figures" / "neural-networks"
-MIGRATED_IDS = tuple(range(1, 53))
+MIGRATED_IDS = tuple(range(1, 57))
 
 STATE_SURFACES = (
     CHAPTER / "神经网络基础 MOC.md",
@@ -214,7 +214,7 @@ def audit_migrated_contract(nodes: list[tuple[int, Path, str]]) -> None:
         require(fixture in content, f"{relative}: shared teaching fixture missing: {fixture}")
         require("AI" in content, f"{relative}: AI object mapping missing")
         require(len(content.splitlines()) >= 180, f"{relative}: derivation depth unexpectedly short")
-    print("PASS NN teaching migration waves A--M: NN-01--52 course position/two-pass/problem/object/formula contracts=52/52")
+    print("PASS NN teaching migration waves A--N: NN-01--56 course position/two-pass/problem/object/formula contracts=56/56")
 
 
 def audit_wave_c_fixture(nodes: list[tuple[int, Path, str]]) -> None:
@@ -862,6 +862,82 @@ def audit_wave_m_fixture(nodes: list[tuple[int, Path, str]]) -> None:
     print("PASS NN wave-M independent math: lookup/scatter-add; row geometry/covariance spectrum; tied use-site sum; temperature Softmax/NLL exact")
 
 
+def audit_wave_n_fixture(nodes: list[tuple[int, Path, str]]) -> None:
+    """Recompute the NN-53--56 rank/sampling/mask/compression chain."""
+    vocabulary = 4
+    log_ratio = math.log(7.0)
+    centering = tuple(
+        tuple((1.0 if i == j else 0.0) - 1.0 / vocabulary for j in range(vocabulary))
+        for i in range(vocabulary)
+    )
+    target_log_probability = tuple(
+        tuple(math.log(0.7 if i == j else 0.1) for j in range(vocabulary))
+        for i in range(vocabulary)
+    )
+
+    def mm(left: tuple[tuple[float, ...], ...], right: tuple[tuple[float, ...], ...]) -> tuple[tuple[float, ...], ...]:
+        return tuple(
+            tuple(sum(left[i][k] * right[k][j] for k in range(len(right))) for j in range(len(right[0])))
+            for i in range(len(left))
+        )
+
+    centered_target = mm(mm(centering, target_log_probability), centering)
+    require(all(abs(centered_target[i][j] - log_ratio * centering[i][j]) < 1e-15 for i in range(4) for j in range(4)), "NN wave-N centered log-ratio target drifted")
+    require(all(abs(sum(row)) < 1e-15 for row in centered_target), "NN wave-N vocabulary gauge did not cancel")
+    require(abs(sum(centered_target[i][i] for i in range(4)) - 3.0 * log_ratio) < 1e-15, "NN wave-N rank-three trace drifted")
+    best_rank_two_error_squared = log_ratio ** 2
+    require(abs(best_rank_two_error_squared - 3.7865663081964716) < 1e-15, "NN wave-N rank-two residual drifted")
+
+    partition = 3.0 * math.e + math.e ** 2
+    estimator_common = 4.0 * math.e
+    estimator_target = 4.0 * math.e ** 2
+    expected_partition = 0.75 * estimator_common + 0.25 * estimator_target
+    expected_log_partition = 0.75 * math.log(estimator_common) + 0.25 * math.log(estimator_target)
+    exact_log_partition = math.log(partition)
+    jensen_gap = exact_log_partition - expected_log_partition
+    require(abs(expected_partition - partition) < 1e-15, "NN wave-N importance partition unbiasedness drifted")
+    require(abs(expected_log_partition - (math.log(4.0) + 1.25)) < 1e-15, "NN wave-N expected log partition drifted")
+    require(abs(jensen_gap - 0.10737401950878844) < 1e-15 and jensen_gap > 0.0, "NN wave-N Jensen gap drifted")
+    require(abs((expected_log_partition - 2.0) - 0.6362943611198906) < 1e-15, "NN wave-N sampled plug-in NLL drifted")
+
+    loss = (0.2, 0.4, 0.6, 9.0)
+    valid = (1.0, 1.0, 1.0, 0.0)
+    masked_mean = sum(m * value for m, value in zip(valid, loss)) / sum(valid)
+    require(abs(masked_mean - 0.4) < 1e-15, "NN wave-N ignored-token denominator drifted")
+    attention = tuple(
+        tuple(int(t < 3 and s < 3 and s <= t) for s in range(4))
+        for t in range(4)
+    )
+    require(attention == ((1, 0, 0, 0), (1, 1, 0, 0), (1, 1, 1, 0), (0, 0, 0, 0)), f"NN wave-N mask edge matrix drifted: {attention}")
+    tied_pad_output_gradient = 1.0 / (3.0 + math.e)
+    require(tied_pad_output_gradient > 0.0, "NN wave-N tied PAD output gradient vanished")
+
+    gram = ((6.0, -5.0), (-5.0, 11.0))
+    discriminant = math.sqrt((gram[0][0] + gram[1][1]) ** 2 - 4.0 * (gram[0][0] * gram[1][1] - gram[0][1] * gram[1][0]))
+    squared_singular_values = ((17.0 + discriminant) / 2.0, (17.0 - discriminant) / 2.0)
+    require(abs(discriminant - 5.0 * math.sqrt(5.0)) < 1e-15, "NN wave-N embedding Gram discriminant drifted")
+    require(abs(squared_singular_values[1] - 2.9098300562505255) < 1e-15, "NN wave-N rank-one residual drifted")
+    require(4 * 2 == 8 and 4 * 1 + 1 * 2 == 6, "NN wave-N factorized parameter count drifted")
+    original_row = (2.0, -1.0)
+    quantized_row = (9.0 / 4.0, -3.0 / 4.0)
+    quantization_error = tuple(quantized_row[j] - original_row[j] for j in range(2))
+    hidden = (1.0, 1.0)
+    logit_error = abs(sum(quantization_error[j] * hidden[j] for j in range(2)))
+    cauchy_bound = math.sqrt(sum(value * value for value in quantization_error)) * math.sqrt(2.0)
+    require(quantization_error == (0.25, 0.25) and logit_error == 0.5 and abs(cauchy_bound - 0.5) < 1e-15, "NN wave-N quantized tied-logit bound drifted")
+
+    wave = {node_id: content for node_id, _, content in nodes if 53 <= node_id <= 56}
+    expected_markers = {
+        53: ("(\\log7)C_4", "(\\log7)^2"),
+        54: ("\\log4+\\frac54", "0.107374"),
+        55: ("\\frac{0.2+0.4+0.6}{3}", "D^{-1}(1,1)\\ne0"),
+        56: ("\\frac{17-5\\sqrt5}{2}", "\\frac{\\sqrt2}{4}\\sqrt2"),
+    }
+    for node_id, markers in expected_markers.items():
+        require(all(marker in wave[node_id] for marker in markers), f"NN-{node_id:02d}: wave-N rank/sampling/mask/compression closure missing")
+    print("PASS NN wave-N independent math: centered rank obstruction; unbiased-Z/log bias; mask denominator/edges; rank-one and quantized-logit errors exact")
+
+
 def question_ids(content: str) -> list[str]:
     return re.findall(r"^###\s+([^\s]+-[A-E]\d{2})\s*$", content, re.M)
 
@@ -1019,12 +1095,12 @@ def audit_state_surfaces() -> None:
     for path in STATE_SURFACES:
         content = read(path)
         require(audit_name in content, f"state surface misses NN audit: {path.relative_to(ROOT)}")
-        migrated_mentions = content.count("52/64") + content.count("52 / 64")
-        pending_mentions = content.count("12/64") + content.count("12 / 64")
+        migrated_mentions = content.count("56/64") + content.count("56 / 64")
+        pending_mentions = content.count("8/64") + content.count("8 / 64")
         require(migrated_mentions >= 1 and pending_mentions >= 1, f"state surface misses NN migrated/pending counts: {path.relative_to(ROOT)}")
-        require("6/8" in content or "6 / 8" in content, f"state surface misses NN material-gate count: {path.relative_to(ROOT)}")
+        require("7/8" in content or "7 / 8" in content, f"state surface misses NN material-gate count: {path.relative_to(ROOT)}")
         require("not-attempted" in content, f"state surface overclaims NN learner: {path.relative_to(ROOT)}")
-    print("PASS NN state surfaces: 5 global + 7 volume views agree on migrated=52/64, pending=12/64, material gates=6/8, learner=not-attempted")
+    print("PASS NN state surfaces: 5 global + 7 volume views agree on migrated=56/64, pending=8/64, material gates=7/8, learner=not-attempted")
 
 
 def main() -> None:
@@ -1046,6 +1122,7 @@ def main() -> None:
     audit_wave_k_fixture(nodes)
     audit_wave_l_fixture(nodes)
     audit_wave_m_fixture(nodes)
+    audit_wave_n_fixture(nodes)
     audit_exercises(nodes, index)
     audit_sources_and_links(nodes, index)
     audit_figures(nodes, index)
@@ -1053,8 +1130,8 @@ def main() -> None:
     audit_state_surfaces()
     if args.run_figures:
         audit_deterministic_figures()
-    print("NN-01--52 teaching migration regression: PASS; 30.1--30.6 material gates=6/8; 30.7 front half=in-progress")
-    print("NN-53--64 teaching migration: pending (12/64)")
+    print("NN-01--56 teaching migration regression: PASS; 30.1--30.7 material gates=7/8")
+    print("NN-57--64 teaching migration: pending (8/64)")
     print("PERSONAL LEARNING STATUS: not-attempted")
 
 

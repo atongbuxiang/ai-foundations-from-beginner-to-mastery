@@ -11,13 +11,119 @@ exercises: ["[[习题 - Sampled、Hierarchical 与 Adaptive Softmax]]"]
 solutions: ["[[解答 - Sampled、Hierarchical 与 Adaptive Softmax]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-large-vocabulary-output-methods-v2.svg]]"
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Sampled、Hierarchical 与 Adaptive Softmax
 
 > [!abstract] 本章主问题
 > 大词表方法并不是同一种“近似 Softmax”。Full softmax 精确计算 flat categorical model；sampled methods 只看候选子集并近似训练目标或梯度；hierarchical softmax 对一个树模型做精确归一化；adaptive softmax 利用长尾频率改变层次与维度，使期望成本下降。必须先问“近似了什么”，再比较速度和质量。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-52 固定了 exact flat Softmax 的概率与 NLL，NN-53 区分了 output head 的表达限制；
+- **本页解决什么：** 把 sampling estimator、binary noise objective、tree factorization 与 frequency-adaptive factorization 分成四种不同统计对象；
+- **后续为何需要：** padding/词表事务和 embedding 压缩都会影响 class IDs、分桶与参数布局，大词表方案不能脱离 tokenizer 和部署合同讨论。
+
+**第一遍只问“概率对象是否相同”。** 对每个方法写出 normalization domain、训练 loss、exact evaluation 与 decoding 所需工作。
+
+**第二遍再比较成本。** 记录 target-dependent candidate count、matrix shape、sampling/routing、GPU occupancy、通信和 full-vocabulary evaluation，而不是只比较 $O(V)$ 与 $O(\log V)$。
+
+### 问题链
+
+1. importance estimator 对 $Z$ 无偏，为什么对 $\log Z$ 和 NLL 仍可能有偏？
+2. sampled softmax、negative sampling 与 NCE 的优化对象分别是什么？
+3. hierarchical softmax 为什么是新树模型的 exact probability，而非原 flat head 的无损加速？
+4. adaptive softmax 节省的是最坏成本还是按 token frequency 加权的期望成本？
+5. 训练时只看目标子集，为什么 exact perplexity 与 global top-$k$ 仍可能恢复全词表成本？
+
+> [!check] 第一遍停靠线
+> 若你能在 $\mathcal E_\square$ 中证明单样本 importance estimator 满足 $\mathbb E\widehat Z=Z$，却得到 $\mathbb E\log\widehat Z=\log4+5/4<\log Z$，就已掌握本页最关键的对象边界。
+
+## 符号与对象账本
+
+| 方法 | normalization / loss 对象 | exact 性质 | 主要成本变量 |
+|---|---|---|---|
+| full Softmax | flat $V$ 类 categorical NLL | 对 flat head exact | $Vd$、$BTV$ |
+| sampled method | proposal 下的 loss/gradient estimator | 依具体修正，常有 bias/variance | $K$、proposal、去重/路由 |
+| negative sampling | data-vs-noise binary losses | 不是 normalized $V$ 类 NLL | negatives 与 noise law |
+| hierarchical Softmax | root-to-leaf conditional product | 对树模型 exact | path length、branching/kernel |
+| adaptive Softmax | head gate × target-tail conditional | 对 adaptive model exact | cutoff、frequency mass、tail width |
+
+### 贯穿算例 $\mathcal E_\square$：无偏 Partition 估计仍产生有偏 NLL
+
+沿用 NN-52 的
+
+$$
+z=(1,1,1,2),
+\qquad
+Z=3\mathrm e+\mathrm e^2=\mathrm e(3+\mathrm e).
+$$
+
+从四类中均匀采一个 $s$，即 $q(s)=1/4$，并令
+
+$$
+\widehat Z=\frac{e^{z_s}}{q(s)}=4e^{z_s}.
+$$
+
+前三类各给 $4\mathrm e$，目标类给 $4\mathrm e^2$，所以
+
+$$
+\mathbb E\widehat Z
+=\frac34(4\mathrm e)+\frac14(4\mathrm e^2)
+=Z.
+$$
+
+但
+
+$$
+\boxed{
+\mathbb E\log\widehat Z
+=\frac34\log(4\mathrm e)+\frac14\log(4\mathrm e^2)
+=\log4+\frac54
+\approx2.636294
+},
+$$
+
+而
+
+$$
+\log Z=1+\log(3+\mathrm e)\approx2.743668.
+$$
+
+Jensen gap 为
+
+$$
+\boxed{
+\log Z-\mathbb E\log\widehat Z
+=\log\frac{3+\mathrm e}{4}-\frac14
+\approx0.107374>0
+}.
+$$
+
+对目标 $y=3$，把 $\log\widehat Z$ 直接代入 NLL 会得到期望 $\log4-3/4\approx0.636294$，低于 exact NLL $0.743668$。这不是“采样更好”，而是优化/估计对象已经有偏。
+
+## 核心公式七问：大词表方法的概率—成本合同
+
+$$
+\boxed{
+(\text{model law},\text{training estimator},\text{exact eval},\text{decoding},\text{system cost})
+}.
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 在声称加速前确认统计对象是否仍与 full Softmax 相同 |
+| 对象 | flat、sampled、binary、tree 或 adaptive categorical parameterization |
+| 来路 | 大词表 projection/normalization 的计算与内存压力 |
+| 步骤 | 写模型 law→写训练 estimator→判 bias/variance→定义 exact eval→测 decoding/system |
+| 读法 | 候选数下降不自动保留目标，也不自动转化为 wall time |
+| 检查 | 小词表 exact enumeration、proposal coverage、leaf-sum、frequency reorder 与 full-log-prob |
+| 去路 | sampled training、retrieval-augmented vocab、hierarchical classifier 与 adaptive head |
+
+### AI / 系统对应
+
+LLM 训练可以用 fused full cross-entropy、vocabulary parallelism 或 sampling；检索系统则可能先召回候选再局部归一化。二者都必须说明局部分母是否用于训练概率、候选选择是否依赖 target，以及部署时如何计算全局 top-$k$。缺少这些信息的“Softmax 加速”不可复现。
 
 ## 一、学习目标
 

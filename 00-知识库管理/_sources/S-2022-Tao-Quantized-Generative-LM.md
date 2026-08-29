@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, language-modeling, quantization, embedding-compression]
 source_type: paper
 title: "Compression of Generative Pre-trained Language Models via Quantization"
@@ -9,14 +9,14 @@ year: 2022
 url: "https://aclanthology.org/2022.acl-long.331/"
 doi: "https://doi.org/10.18653/v1/2022.acl-long.331"
 venue: "ACL 2022"
-accessed: 2026-08-24
+accessed: 2026-08-29
 source_tier: A
 license: "ACL Anthology paper（CC BY 4.0）；本库仅保存独立摘要、必要数字与链接"
 scope_role: quantization-evidence
 temporal_role: modern
 related: ["[[Embedding 初始化、缩放、分解与量化接口]]"]
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Tao et al.：生成式语言模型量化与 Embedding 边界

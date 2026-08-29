@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, language-modeling, adaptive-softmax]
 source_type: paper
 title: "Efficient Softmax Approximation for GPUs"
@@ -8,14 +8,14 @@ author: "Édouard Grave; Armand Joulin; Moustapha Cissé; David Grangier; Hervé
 year: 2017
 url: "https://proceedings.mlr.press/v70/grave17a.html"
 venue: "ICML 2017"
-accessed: 2026-08-24
+accessed: 2026-08-29
 source_tier: A
 license: "PMLR paper；本库仅保存独立摘要、必要公式与链接"
 scope_role: core
 temporal_role: foundational
 related: ["[[Sampled、Hierarchical 与 Adaptive Softmax]]", "[[Embedding 初始化、缩放、分解与量化接口]]"]
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Grave et al.：Adaptive Softmax

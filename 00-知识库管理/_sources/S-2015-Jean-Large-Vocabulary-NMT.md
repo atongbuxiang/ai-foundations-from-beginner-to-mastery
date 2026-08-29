@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, machine-translation, sampled-softmax, importance-sampling]
 source_type: paper
 title: "On Using Very Large Target Vocabulary for Neural Machine Translation"
@@ -9,14 +9,14 @@ year: 2015
 url: "https://aclanthology.org/P15-1001/"
 doi: "https://doi.org/10.3115/v1/P15-1001"
 venue: "ACL-IJCNLP 2015"
-accessed: 2026-08-24
+accessed: 2026-08-29
 source_tier: A
 license: "ACL Anthology paper；本库仅保存独立摘要、必要公式与链接"
 scope_role: sampled-training-evidence
 temporal_role: foundational
 related: ["[[Sampled、Hierarchical 与 Adaptive Softmax]]"]
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Jean et al.：Very Large Target Vocabulary 与采样训练

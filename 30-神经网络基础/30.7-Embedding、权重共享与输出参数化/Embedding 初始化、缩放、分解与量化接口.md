@@ -11,13 +11,135 @@ exercises: ["[[习题 - Embedding 初始化、缩放、分解与量化接口]]"]
 solutions: ["[[解答 - Embedding 初始化、缩放、分解与量化接口]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-embedding-scale-compression-v2.svg]]"
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Embedding 初始化、缩放、分解与量化接口
 
 > [!abstract] 本章主问题
 > Embedding table 常是大词表模型的主要参数之一。初始化必须同时校准 lookup row norm 与 tied output logits；低秩分解、自适应维度和量化可减少参数或字节，却分别引入 rank constraint、frequency-dependent capacity 与 reconstruction error。完整比较要同时记函数类、训练状态、访问计算、kernel 和端到端质量。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-49—55 已建立表的 lookup、几何、共享输出、概率 rank、近似输出和离散词表合同；
+- **本页解决什么：** 比较初始化、运行时 scaling、低秩分解、自适应维度与量化分别改写哪个对象，并把参数、字节、误差、计算和质量分账；
+- **后续为何需要：** 30.8 的正则化与泛化接口会继续改变训练函数和证据对象，必须先理解“压缩”不是一种不改变模型的免费存储操作。
+
+**第一遍只做两个最小变换。** 对 $\mathcal E_\square$ 做最佳 rank-1 近似与一个标量量化，算清参数节省、Frobenius 残差和 tied-logit 误差。
+
+**第二遍再进入真实部署。** 加入初始化方差、factorized gradients/gauge、frequency buckets、PTQ/QAT、scale/zero-point metadata、master weights、optimizer state 与 kernel latency。
+
+### 问题链
+
+1. 初始化 scale、每次 forward 的 runtime scale 与 normalization 为什么是三种不同函数？
+2. $E=AB$ 何时节省参数，它同时施加了什么 rank constraint？
+3. 最佳 SVD reconstruction error 如何传播到 lookup activation 和 tied output logits？
+4. raw INT4 code bytes 为什么不是完整模型、训练状态或 wall-time 压缩率？
+5. 量化误差界通过 Cauchy–Schwarz 成立，为什么仍不能推出 NLL/生成质量界？
+
+> [!check] 第一遍停靠线
+> 若你能在 $\mathcal E_\square$ 上算出最佳 rank-1 的残差平方 $(17-5\sqrt5)/2$，再证明量化 row 2 的 logit error $1/2$ 达到 Cauchy 上界，就已掌握本页主干。
+
+## 符号与对象账本
+
+| 变换 | 改写对象 | 主要收益 | 必须支付/检查 |
+|---|---|---|---|
+| initialization scale | step-0 Parameter | 初始 row/logit 二阶矩 | 训练后不保持 |
+| runtime scale / norm | 每次 forward 函数 | activation/logit 校准 | 梯度与函数改变 |
+| $E=AB$ | 参数化与 rank | 参数/状态减少 | projection MAC、gauge、rank bias |
+| adaptive dimension | 按频率分组的容量 | 期望参数/计算下降 | token reorder、tail quality |
+| quantization | 连续值到有限 code | 参数带宽/存储下降 | scale metadata、重建误差、kernel |
+| PTQ / QAT | 训练流程 | 部署简化 / 误差适应 | calibration data / fake-quant dynamics |
+
+### 贯穿算例 $\mathcal E_\square$：Rank-1 与量化分别损失什么
+
+沿用
+
+$$
+E=
+\begin{bmatrix}
+1&0\\0&1\\2&-1\\-1&3
+\end{bmatrix}.
+$$
+
+其 Gram matrix 为
+
+$$
+E^{\mathsf T}E=
+\begin{bmatrix}
+6&-5\\-5&11
+\end{bmatrix},
+$$
+
+eigenvalues，也就是 squared singular values，为
+
+$$
+\lambda_\pm=\frac{17\pm5\sqrt5}{2}.
+$$
+
+因此最佳 rank-1 近似 $E_1$ 满足
+
+$$
+\boxed{
+\|E-E_1\|_F^2
+=\lambda_-
+=\frac{17-5\sqrt5}{2}
+\approx2.909830
+}.
+$$
+
+原表有 $Vd=8$ 个标量参数；写成 $A\in\mathbb R^{4\times1},B\in\mathbb R^{1\times2}$ 只有 $4+2=6$ 个，但整个表被限制在一个 row direction 上，而且 $A\mapsto cA,B\mapsto B/c$ 仍有 gauge。
+
+再看 row 2：
+
+$$
+e_2=(2,-1).
+$$
+
+用步长 $\Delta=3/4$ 的对称 round-to-nearest 标量量化：
+
+$$
+Q_\Delta(e_2)=\left(\frac94,-\frac34\right),
+\qquad
+\varepsilon=Q_\Delta(e_2)-e_2
+=\left(\frac14,\frac14\right).
+$$
+
+对 NN-51 的 $h=(1,1)$，原 logit 是 1，量化后是 $3/2$，于是
+
+$$
+\boxed{
+|\Delta z_2|=\frac12
+=|\varepsilon^{\mathsf T}h|
+\le\|\varepsilon\|_2\|h\|_2
+=\frac{\sqrt2}{4}\sqrt2
+=\frac12
+}.
+$$
+
+本例恰好取等，说明 row reconstruction error 可直接放大为 tied output logit error；但它仍未给出 Softmax NLL 或 autoregressive sequence risk 的充分界。
+
+## 核心公式七问：压缩 Pareto Contract
+
+$$
+\boxed{
+(\text{function class},\text{parameter/state bytes},\text{access compute},\text{error},\text{task quality},\text{latency})
+}.
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 防止把参数减少单独包装成“模型等价且更快” |
+| 对象 | initialization、factorized/quantized Parameters、optimizer state 与部署 kernel |
+| 来路 | 大词表的存储、带宽、状态和输出投影压力 |
+| 步骤 | 固定 baseline→写变换→算 rank/bytes/error→恢复训练/推理状态→测质量与 latency |
+| 读法 | 不同方案优化 Pareto 面的不同坐标，不存在脱离任务的唯一压缩率 |
+| 检查 | SVD residual、dequant round-trip、logit intervention、PTQ/QAT、cold/warm latency |
+| 去路 | ALBERT/adaptive input、低比特 LLM、product quantization 与 embedding serving |
+
+### AI / 系统对应
+
+推荐与语言模型常让 embedding 参数量最大，却未必让其 FLOPs 最大。低秩分解可能省带宽但增加 per-token projection；INT4 可能省 raw bytes 却因解量化或不规则 lookup kernel不加速。报告应同时给 Parameter、master weights、optimizer state、scale metadata、峰值显存、tokens/s 与质量曲线。
 
 ## 一、学习目标
 

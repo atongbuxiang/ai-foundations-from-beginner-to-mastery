@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, language-modeling, embedding-factorization, parameter-sharing]
 source_type: paper
 title: "ALBERT: A Lite BERT for Self-supervised Learning of Language Representations"
@@ -9,14 +9,14 @@ year: 2020
 url: "https://openreview.net/forum?id=H1eA7AEtvS"
 arxiv: "https://arxiv.org/abs/1909.11942"
 venue: "ICLR 2020"
-accessed: 2026-08-24
+accessed: 2026-08-29
 source_tier: A
 license: "OpenReview/arXiv paper；本库仅保存独立摘要、必要公式与链接"
 scope_role: factorization-core
 temporal_role: foundational
 related: ["[[Embedding 初始化、缩放、分解与量化接口]]"]
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Lan et al.：ALBERT 的 Factorized Embedding Parameterization

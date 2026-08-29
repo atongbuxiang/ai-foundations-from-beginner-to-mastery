@@ -1,6 +1,6 @@
 ---
 type: source
-status: draft
+status: active
 area: [sources, neural-networks, language-modeling, hierarchical-softmax]
 source_type: paper
 title: "Hierarchical Probabilistic Neural Network Language Model"
@@ -8,14 +8,14 @@ author: "Frederic Morin; Yoshua Bengio"
 year: 2005
 url: "https://proceedings.mlr.press/r5/morin05a.html"
 venue: "AISTATS 2005"
-accessed: 2026-08-24
+accessed: 2026-08-29
 source_tier: A
 license: "PMLR paper；本库仅保存独立摘要、必要公式与链接"
 scope_role: historical-core
 temporal_role: foundational
 related: ["[[Sampled、Hierarchical 与 Adaptive Softmax]]"]
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Morin、Bengio：Hierarchical Probabilistic Language Model

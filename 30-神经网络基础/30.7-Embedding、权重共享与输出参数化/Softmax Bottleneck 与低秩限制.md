@@ -11,13 +11,126 @@ exercises: ["[[习题 - Softmax Bottleneck 与低秩限制]]"]
 solutions: ["[[解答 - Softmax Bottleneck 与低秩限制]]"]
 figure: "[[00-知识库管理/_assets/figures/neural-networks/fig-softmax-bottleneck-rank-v2.svg]]"
 created: 2026-08-24
-updated: 2026-08-24
+updated: 2026-08-29
 ---
 
 # Softmax Bottleneck 与低秩限制
 
 > [!abstract] 本章主问题
 > 单独看一个 context，自由 logits 可以表示任意严格正 categorical distribution；Softmax bottleneck 说的不是这件事。它说：当很多 contexts 必须共用同一个低维线性 output head 时，所有 centered log-probability vectors 只能落在一个低维仿射子空间。若目标条件分布跨 contexts 的可辨识 log-ratio matrix 秩更高，模型无论怎样训练都不能精确表示它。
+
+## 课程位置与两遍学习路线
+
+- **承接什么：** NN-52 证明一个 context 的自由 logits 可表示任意严格正 categorical distribution，并指出 common shift 是 gauge；
+- **本页解决什么：** 把多个 contexts 的条件分布堆成矩阵，双重中心化后识别共享低维 output head 的 rank 上限；
+- **后续为何需要：** 大词表近似、weight tying 与 embedding factorization 都可能改变 rank budget，必须先分清“计算近似”和“表达族限制”。
+
+**第一遍只做中心化与秩。** 将 $P^*$ 逐元素取 log，先消去每个 context 的 Softmax row shift，再消去跨 context 共享的 output bias，比较目标 rank 与 hidden width。
+
+**第二遍再讨论风险。** 检查零频率平滑、context sampling、经验谱噪声、encoder 可达性，以及 Frobenius 低秩误差能否转成 KL/NLL 下界。
+
+### 问题链
+
+1. 一个 context 上的 Softmax 满射为什么不排除跨 contexts 的 bottleneck？
+2. vocabulary centering 消除了哪个 gauge，context centering又消除了哪个参数方向？
+3. 为什么标准线性 head 满足 $\operatorname{rank}(J_N\log P_\theta C_V)\le d$？
+4. target rank 大于 $d$ 时，结论是优化失败还是函数类不包含目标？
+5. tail singular energy 为何只是 log-ratio 几何误差，不能直接冒充 perplexity 下界？
+
+> [!check] 第一遍停靠线
+> 若你能在 $\mathcal E_\square$ 的四 context 目标上得到 $D^*=(\log7)C_4$、$\operatorname{rank}(D^*)=3$，并据此说明 $d=2$ 线性 head 无法精确表示它，就已掌握本页主干。
+
+## 符号与对象账本
+
+| 对象 | shape | 被消除的冗余 / 保留的信息 |
+|---|---:|---|
+| $P^*$ | $N\times V$ | 目标条件概率表 |
+| $L^*=\log P^*$ | $N\times V$ | log-probability；要求严格正或先声明平滑 |
+| $C_V$ | $V\times V$ | 消去每个 context 的 common logit shift |
+| $J_N$ | $N\times N$ | 消去 context-independent output bias |
+| $D^*=J_NL^*C_V$ | $N\times V$ | 可辨识的跨 context log-ratio 变化 |
+| $H W^{\mathsf T}$ | $N\times V$ | 标准线性 head 的 rank-$d$ 因子化 |
+
+### 贯穿算例 $\mathcal E_\square$：四词目标需要三个可辨识方向
+
+保持 $V=4,d=2$，并取四个 contexts，使每个 context 分别偏好一个 token：
+
+$$
+P^*_{ij}=
+\begin{cases}
+0.7,&i=j,\\
+0.1,&i\ne j.
+\end{cases}
+$$
+
+令
+
+$$
+C_4=I_4-\frac14\mathbf1\mathbf1^{\mathsf T}.
+$$
+
+因为
+
+$$
+L^*=\log P^*
+=(\log0.1)\mathbf1\mathbf1^{\mathsf T}+(\log7)I_4,
+$$
+
+左右中心化会删除常数项：
+
+$$
+\boxed{
+D^*=C_4L^*C_4=(\log7)C_4
+}.
+$$
+
+$C_4$ 的 eigenvalues 是 $1,1,1,0$，所以
+
+$$
+\operatorname{rank}(D^*)=3,
+$$
+
+而 $d=2$ 的标准线性 head 必有
+
+$$
+\operatorname{rank}(J_NL_\theta C_V)\le2.
+$$
+
+因此不存在任何 $H\in\mathbb R^{4\times2}$ 与共享 $W\in\mathbb R^{4\times2}$ 能精确重现这张目标概率表。若仅按 Frobenius norm 做最佳 rank-2 近似，三个非零 singular values 都是 $\log7$，故至少留下
+
+$$
+\boxed{
+\min_{\operatorname{rank}(M)\le2}\|D^*-M\|_F^2
+=(\log7)^2
+}.
+$$
+
+这是可辨识 log-ratio 空间的误差地板；转成 NLL/KL 仍需概率下界、context 权重与 Softmax 曲率条件。
+
+## 核心公式七问：双重中心化 Rank Contract
+
+$$
+\boxed{
+D_\theta=J_N(\log P_\theta)C_V
+=J_NHW^{\mathsf T}C_V,
+\qquad
+\operatorname{rank}(D_\theta)\le d
+}.
+$$
+
+| 问题 | 本式的回答 |
+|---|---|
+| 目的 | 测量跨 contexts 可辨识条件分布变化的线性维数 |
+| 对象 | 严格正的 context-by-vocabulary 概率表 |
+| 来路 | Softmax row gauge、output bias 与 low-dimensional shared head |
+| 步骤 | 概率取 log→右乘 $C_V$→左乘 $J_N$→算 rank/spectrum→与 $d$ 比较 |
+| 读法 | target rank 超预算是表达障碍，不是训练轮数不足 |
+| 检查 | smoothing、SVD tolerance、context resampling、untied/tied 与 nonlinear-head ablation |
+| 去路 | Mixture of Softmaxes、nonlinear heads、adaptive vocabularies 与输出分解 |
+
+### AI / 系统对应
+
+真实语言模型的 context 数远大于可直接成表的规模，通常只能在采样 contexts 上估计谱。经验高 rank 可能来自有限样本噪声和零频率处理；经验低 rank 也可能只是采样覆盖不足。可信报告应给 tokenizer、context distribution、平滑常数、奇异值区间和下游 NLL，而不是只展示一张谱图。
 
 ## 一、学习目标
 
