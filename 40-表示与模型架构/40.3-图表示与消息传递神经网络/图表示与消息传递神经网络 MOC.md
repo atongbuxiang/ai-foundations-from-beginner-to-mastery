@@ -4,7 +4,7 @@ status: active
 area: [architecture, graph-neural-networks]
 related: ["[[表示与模型架构完整课程地图与掌握标准]]"]
 created: 2026-08-24
-updated: 2026-08-29
+updated: 2026-09-03
 ---
 
 # 图表示与消息传递神经网络 MOC
@@ -13,7 +13,7 @@ updated: 2026-08-29
 > 从“图是节点重标号等价类”出发，能推导等变 MPNN、谱—空间 GCN、GIN/GAT 与 invariant readout；能严格区分 over-smoothing、over-squashing 和 1-WL 表达边界，并把模型定义、构图、split、实验和系统证据分层。
 
 > [!info] 当前教学迁移
-> ARCH-17—20 已以三节点路径 $\mathcal G_\square$ 完成第一半迁移：从重标号矩阵、同步消息传递，走到归一化 GCN 与多重集聚合碰撞。本卷为 **4/8 迁移中**，尚未达到分卷材料门；全章为 **ARCH-01—20（20/64）**、材料门 **2/8**，个人仍为 `not-attempted`。
+> ARCH-17—24 已以三节点路径 $\mathcal G_\square$ 和六环反例完成整卷迁移：从重标号矩阵、同步消息传递，走到过平滑/过挤压、GAT、图级 readout 与 1-WL 边界。本卷为 **8/8 `regression-passed` material**；全章为 **ARCH-01—24（24/64）**、材料门 **3/8**，个人仍为 `not-attempted`。
 
 | ID | 节点 | 学习出口 | 状态 |
 |---|---|---|---|
@@ -21,10 +21,10 @@ updated: 2026-08-29
 | ARCH-18 | [[消息传递神经网络的统一形式]] | message-passing derivation | `regression-passed` material / learner `not-attempted` |
 | ARCH-19 | [[谱图卷积、空间图卷积与归一化邻接]] | spectral/spatial bridge | `regression-passed` material / learner `not-attempted` |
 | ARCH-20 | [[聚合器、可辨识性与 Graph Isomorphism Network]] | multiset injectivity | `regression-passed` material / learner `not-attempted` |
-| ARCH-21 | [[图网络深度、过平滑与过挤压]] | depth failure audit | draft + A–E 闭环 |
-| ARCH-22 | [[图注意力与结构偏置]] | graph attention | draft + A–E 闭环 |
-| ARCH-23 | [[图级读出、异构图与任务接口]] | invariant readout | draft + A–E 闭环 |
-| ARCH-24 | [[WL 表达界、反例与 GNN 证据地图]] | expressivity evidence | draft + A–E 闭环 |
+| ARCH-21 | [[图网络深度、过平滑与过挤压]] | depth failure audit | `regression-passed` material / learner `not-attempted` |
+| ARCH-22 | [[图注意力与结构偏置]] | graph attention | `regression-passed` material / learner `not-attempted` |
+| ARCH-23 | [[图级读出、异构图与任务接口]] | invariant readout | `regression-passed` material / learner `not-attempted` |
+| ARCH-24 | [[WL 表达界、反例与 GNN 证据地图]] | expressivity evidence | `regression-passed` material / learner `not-attempted` |
 
 ## 科学空间的使用边界
 
@@ -43,6 +43,6 @@ updated: 2026-08-29
 
 ## 当前施工边界
 
-- 已迁移：ARCH-17—20，4/8；
-- 待迁移：ARCH-21—24，将用同一 $\mathcal G_\square$ 与必要的反例图贯通过平滑、过挤压、GAT、readout 与 1-WL；
-- 分卷材料门：完成 ARCH-21—24 并通过八图、精确算例和链接回归后，才能从“4/8 迁移中”升级。
+- 已迁移：ARCH-17—24，8/8；
+- 本卷主线已闭合：用同一 $\mathcal G_\square$ 与六环/三角形反例贯通过平滑、过挤压、GAT、readout 与 1-WL；
+- 分卷材料门：已通过八图、精确算例、链接与确定性回归，升级为 `regression-passed`；下一施工点为 ARCH-25—32。

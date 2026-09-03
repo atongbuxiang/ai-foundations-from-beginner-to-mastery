@@ -6,7 +6,7 @@ The audit keeps three claims separate:
 2. only the declared migration wave satisfies the current beginner-first contract;
 3. personal learning evidence remains not-attempted.
 
-Waves A--E (ARCH-01--20) are recomputed here without importing the figure generators.
+Waves A--F (ARCH-01--24) are recomputed here without importing the figure generators.
 """
 
 from __future__ import annotations
@@ -28,7 +28,7 @@ EXERCISES = LABS / "exercises"
 SOLUTIONS = LABS / "solutions"
 CODE = LABS / "code"
 ASSETS = ROOT / "00-知识库管理" / "_assets" / "figures" / "architecture"
-MIGRATED_IDS = tuple(range(1, 21))
+MIGRATED_IDS = tuple(range(1, 25))
 
 EXPECTED_FIGURES = {
     "fig-architecture-comparison-contract-v1.svg": "28f2e18521dc3e2c885b98bf528740b7010aad60b610e83990ab9cd6f234139e",
@@ -51,6 +51,10 @@ EXPECTED_FIGURES = {
     "fig-mpnn-message-aggregate-update-v1.svg": "ae83d1c4c8951078cb29a597867aff2971690320e4ffb45d93056233ec27e448",
     "fig-spectral-spatial-gcn-bridge-v1.svg": "144d67aa127db39546c2cadc561f2de9955f0b6f1e598faff468f39dbd367cc6",
     "fig-multiset-aggregation-gin-v1.svg": "856ced2098187018130498bd778fcb5bc2c4347de78ac8140fec94819e559d76",
+    "fig-gnn-oversmoothing-oversquashing-v1.svg": "58cddbdb8fe2ee6ee210750d2db9c4e28b9d31f495bbebdef9bef832d91b7f94",
+    "fig-graph-attention-neighborhood-v1.svg": "2c2e9bb73f7e85a6d9669df02c8ed2a01ce66ea6f51fc68f1aaadc62b7336f17",
+    "fig-graph-task-readout-heterogeneous-v1.svg": "a3ddfd8ba1407ff1c60ec24034f99476ab761c8439bcba869455241db35cd352",
+    "fig-wl-refinement-evidence-v1.svg": "e565322a0d84ffe3ea204249f0363d835748619fb54f02dc11f0725b081d45a8",
 }
 
 STATE_SURFACES = (
@@ -209,7 +213,7 @@ def audit_migrated_contract(nodes: list[tuple[int, Path, str]]) -> None:
         expected_updated = "2026-09-03"
         require(frontmatter_line(content, "updated") == expected_updated, f"{relative}: migration date mismatch")
         require(len(content.splitlines()) >= 230, f"{relative}: derivation depth unexpectedly short")
-    print("PASS ARCH waves A--E: ARCH-01--20 narrative/course/two-pass/problem/object/formula contracts=20/20")
+    print("PASS ARCH waves A--F: ARCH-01--24 narrative/course/two-pass/problem/object/formula contracts=24/24")
 
 
 def audit_exercises(nodes: list[tuple[int, Path, str]], index: dict[str, list[Path]]) -> None:
@@ -252,7 +256,7 @@ def audit_links_and_figures(nodes: list[tuple[int, Path, str]], index: dict[str,
         ET.parse(asset)
         digest = hashlib.sha256(asset.read_bytes()).hexdigest()
         require(digest == expected_hash, f"{filename}: hash changed: {digest}")
-    print(f"PASS ARCH waves A--E links/figures: Wiki links={link_count}; SVG/XML/hash=20/20")
+    print(f"PASS ARCH waves A--F links/figures: Wiki links={link_count}; SVG/XML/hash=24/24")
 
 
 def correlation_valid(x: list[float], w: list[float]) -> list[float]:
@@ -577,7 +581,7 @@ def audit_migrated_math(nodes: list[tuple[int, Path, str]]) -> None:
     ):
         require(anchor in migrated_text, f"migrated teaching anchor missing: {anchor}")
     print(
-        "PASS ARCH waves A--E independent math: convolution/equivariance, aliasing, RF, "
+        "PASS ARCH waves A--F independent math: convolution/equivariance, aliasing, RF, "
         "CNN budget, C4 lifting, recurrence/BPTT, LSTM/GRU, ZOH/scan, projection/DPLR "
         "selective paths, graph relabeling/MPNN/GCN and multiset aggregation exact"
     )
@@ -587,13 +591,13 @@ def audit_state_surfaces() -> None:
     for path in STATE_SURFACES:
         content = read(path)
         relative = path.relative_to(ROOT)
-        require("ARCH-01—20" in content, f"{relative}: migrated range missing")
-        require("20/64" in content, f"{relative}: migrated count missing")
-        require("2/8" in content, f"{relative}: material-gate count missing")
+        require("ARCH-01—24" in content, f"{relative}: migrated range missing")
+        require("24/64" in content, f"{relative}: migrated count missing")
+        require("3/8" in content, f"{relative}: material-gate count missing")
         require("not-attempted" in content, f"{relative}: personal state missing")
     print(
         f"PASS ARCH state surfaces: {len(STATE_SURFACES)} views agree on "
-        "migrated=20/64, material gates=2/8, personal=not-attempted"
+        "migrated=24/64, material gates=3/8, personal=not-attempted"
     )
 
 
@@ -617,7 +621,7 @@ def audit_compute() -> None:
             require(result.stdout.count("fig-") == expected_count, f"unexpected generator stdout: {result.stdout}")
     after = {name: hashlib.sha256((ASSETS / name).read_bytes()).hexdigest() for name in EXPECTED_FIGURES}
     require(before == after == EXPECTED_FIGURES, f"deterministic figure replay changed assets: {after}")
-    print("PASS ARCH waves A--E deterministic figure replay: 20 migrated SVGs, two runs, byte-identical")
+    print("PASS ARCH waves A--F deterministic figure replay: 24 migrated SVGs, two runs, byte-identical")
 
 
 def main() -> None:
@@ -634,7 +638,7 @@ def main() -> None:
     audit_state_surfaces()
     if args.run_compute:
         audit_compute()
-    print("ARCH-01--20 teaching migration regression: PASS; chapter material gates=2/8")
+    print("ARCH-01--24 teaching migration regression: PASS; chapter material gates=3/8")
     print("PERSONAL LEARNING STATUS: not-attempted")
 
 
