@@ -5,7 +5,7 @@ area: [architecture, cnn, equivariance]
 prerequisites: ["[[多线性映射、张量与缩并]]", "[[数列、极限与完备性的直觉]]", "[[残差连接、深度与稳定性 MOC]]"]
 related: ["[[表示与模型架构完整课程地图与掌握标准]]", "[[循环网络、记忆与状态空间模型 MOC]]"]
 created: 2026-08-24
-updated: 2026-08-29
+updated: 2026-09-03
 ---
 
 # 卷积、空间结构与等变性 MOC

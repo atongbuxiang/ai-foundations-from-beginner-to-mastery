@@ -4,7 +4,7 @@ status: active
 area: [labs]
 related: ["[[数学基础完整课程地图与掌握标准]]", "[[练习与测验 MOC]]", "[[数学基础 MOC]]"]
 created: 2026-08-14
-updated: 2026-08-29
+updated: 2026-09-03
 ---
 
 # 推导与实验 MOC

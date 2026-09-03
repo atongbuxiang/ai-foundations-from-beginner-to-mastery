@@ -205,7 +205,8 @@ def audit_migrated_contract(nodes: list[tuple[int, Path, str]]) -> None:
             fixture = "\\mathcal G_\\square"
         require(fixture in content, f"{relative}: shared fixture missing: {fixture}")
         require("AI" in content, f"{relative}: AI object mapping missing")
-        require(frontmatter_line(content, "updated") == "2026-08-29", f"{relative}: migration date mismatch")
+        expected_updated = "2026-09-03" if node_id <= 4 or node_id >= 17 else "2026-08-29"
+        require(frontmatter_line(content, "updated") == expected_updated, f"{relative}: migration date mismatch")
         require(len(content.splitlines()) >= 230, f"{relative}: derivation depth unexpectedly short")
     print("PASS ARCH waves A--E: ARCH-01--20 course/two-pass/problem/object/formula contracts=20/20")
 

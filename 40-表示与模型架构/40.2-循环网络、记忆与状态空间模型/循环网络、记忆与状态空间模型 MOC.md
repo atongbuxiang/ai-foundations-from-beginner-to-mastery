@@ -4,7 +4,7 @@ status: active
 area: [architecture, sequence-models, ssm]
 related: ["[[表示与模型架构完整课程地图与掌握标准]]", "[[科学空间 - 第四章专题来源地图]]"]
 created: 2026-08-24
-updated: 2026-08-29
+updated: 2026-09-03
 ---
 
 # 循环网络、记忆与状态空间模型 MOC
