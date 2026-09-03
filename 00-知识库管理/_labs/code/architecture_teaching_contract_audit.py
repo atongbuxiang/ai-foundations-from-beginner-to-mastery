@@ -184,6 +184,7 @@ def audit_scope(nodes: list[tuple[int, Path, str]]) -> None:
 
 def audit_migrated_contract(nodes: list[tuple[int, Path, str]]) -> None:
     markers = (
+        "## 导读：",
         "课程位置与两遍学习路线",
         "问题链",
         "第一遍停靠线",
@@ -205,10 +206,10 @@ def audit_migrated_contract(nodes: list[tuple[int, Path, str]]) -> None:
             fixture = "\\mathcal G_\\square"
         require(fixture in content, f"{relative}: shared fixture missing: {fixture}")
         require("AI" in content, f"{relative}: AI object mapping missing")
-        expected_updated = "2026-09-03" if node_id <= 4 or node_id >= 17 else "2026-08-29"
+        expected_updated = "2026-09-03"
         require(frontmatter_line(content, "updated") == expected_updated, f"{relative}: migration date mismatch")
         require(len(content.splitlines()) >= 230, f"{relative}: derivation depth unexpectedly short")
-    print("PASS ARCH waves A--E: ARCH-01--20 course/two-pass/problem/object/formula contracts=20/20")
+    print("PASS ARCH waves A--E: ARCH-01--20 narrative/course/two-pass/problem/object/formula contracts=20/20")
 
 
 def audit_exercises(nodes: list[tuple[int, Path, str]], index: dict[str, list[Path]]) -> None:

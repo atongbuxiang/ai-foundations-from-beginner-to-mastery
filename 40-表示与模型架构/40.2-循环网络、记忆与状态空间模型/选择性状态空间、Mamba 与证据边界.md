@@ -11,13 +11,21 @@ exercises: ["[[习题 - 选择性状态空间、Mamba 与证据边界]]"]
 solutions: ["[[解答 - 选择性状态空间、Mamba 与证据边界]]"]
 figure: "[[00-知识库管理/_assets/figures/architecture/fig-mamba-selectivity-evidence-v1.svg]]"
 created: 2026-08-24
-updated: 2026-08-29
+updated: 2026-09-03
 ---
 
 # 选择性状态空间、Mamba 与证据边界
 
 > [!abstract] 本节主问题
 > 固定 LTI SSM 对所有 token 使用同一动力学，缺少显式的内容条件化。Mamba 让离散步长及输入/读出相关参数依赖当前输入，使状态能按内容选择传播、写入或读出；固定 convolution kernel 因而消失，论文以 hardware-aware selective scan 恢复高效整段计算。线性序列复杂度不等于无限记忆，也不等于所有设备上恒胜 Attention。
+
+## 导读：如果重要性取决于内容，固定卷积核为什么不够
+
+固定 LTI 状态空间模型有一个非常清楚的优点：某个输入经过 $j$ 步传播后的系数只由距离 $j$ 决定，因此整段映射可以变成固定卷积。可是语言和事件序列中的 token 并不都同样重要。遇到边界、关键词或强干扰时，我们可能希望状态改变保留速度、写入强度或读出方式；只按距离衰减无法显式表达这种选择。
+
+选择性 SSM 的做法，是让当前 token 生成部分状态参数。步长 $\Delta_t$ 可以改变旧状态的 retention，$B_t$ 控制怎样写入，$C_t$ 控制怎样读取。这样早期同一个内容即使距离最终位置同样远，也可能因为中间经过了不同 token 而得到不同传播系数。固定 impulse-response kernel 随之失效，因为系数不再只是 lag 的函数。
+
+但这里不要从“固定卷积失效”直接跳到“无法并行”。每一步对旧状态仍然可能是仿射映射，所以 ARCH-14 的 pair composition 仍然具有结合律，parallel scan 仍可改变计算括号。Mamba 的系统贡献还包括针对内存层次和融合实现的 hardware-aware kernel；模型选择性、scan 代数与设备效率是三层不同主张，必须分别取证。
 
 ## 课程位置与两遍学习路线
 
@@ -141,6 +149,8 @@ $$
 | 读法 | 不同 token 可以让同一记忆方向慢衰减、快遗忘、强写入或弱读出 |
 | 检查 | 改变中间 token 应能改变早期输入系数；相同参数冻结后应退化为 LTI；full 与 chunked state passing 应数值对齐 |
 | 去路 | 40.4 用显式内容寻址比较状态压缩，40.7 再比较 selective state 与 KV cache 的推理资源 |
+
+这条选择性方程最值得记住的不是某个模型名，而是它准确改变了哪项假设：从固定 LTI 变成 input-dependent state-affine dynamics。下面先把固定 LTI 的内容无关边界说清楚，再逐项加入 $\Delta_t,B_t,C_t$；这样你会看见哪些计算接口失去、哪些代数结构仍然保留。
 
 ## 一、固定 LTI 的内容无关边界
 

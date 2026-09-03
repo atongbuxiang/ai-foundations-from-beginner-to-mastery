@@ -11,13 +11,21 @@ exercises: ["[[习题 - CNN 阶段、残差块与深度可分离卷积]]"]
 solutions: ["[[解答 - CNN 阶段、残差块与深度可分离卷积]]"]
 figure: "[[00-知识库管理/_assets/figures/architecture/fig-cnn-stage-block-budget-v1.svg]]"
 created: 2026-08-24
-updated: 2026-08-29
+updated: 2026-09-03
 ---
 
 # CNN 阶段、残差块与深度可分离卷积
 
 > [!abstract] 本节主问题
 > 现代 CNN 常按 stage 组织：在同一分辨率重复 block，在 stage 边界下采样并增宽通道。Residual path 管理深度与恒等信息，bottleneck/depthwise-separable block 管理空间混合、通道混合和资源。架构比较应重建 stage 表与成本，而非只背 AlexNet、ResNet、MobileNet 的名字。
+
+## 导读：不要再把 CNN 读成一长串层名
+
+当网络只有两三层时，逐层阅读还勉强可行。现代 CNN 往往有几十甚至上百层，如果仍从 `conv–norm–activation` 一行一行往下数，你会很快失去主线。更有用的读法是先找 stage：哪些 block 在同一分辨率重复，哪里发生下采样，哪里增加通道，哪一条 shortcut 负责把旧表示送到更深处。
+
+这时 residual block 也不该只被记成“加一个 skip connection”。两条支路最终要相加，就必须落在完全相同的 shape；如果主支下采样或改变通道，旁路也要通过 projection 付出参数和算术。把旁路画成一条没有成本的细线，会掩盖 stage 边界真正发生的结构变化。
+
+同样，depthwise-separable convolution 不只是“更便宜的卷积”。它先限定每个输入通道只有自己的空间模式，再用 pointwise matrix 做通道混合，所以减少成本的同时也改变了单层可表达的四维 kernel。我们会先精确算出 standard 与 separable 的参数/MAC 比，再问这种代数节省是否真的能转化为设备上的延迟收益。
 
 ## 课程位置与两遍学习路线
 
@@ -101,6 +109,8 @@ $$
 | 读法 | 每个输入通道只学习一个基本空间模式，各输出通道只能重新缩放和组合这些模式 |
 | 检查 | $K=1$ 时 depthwise 退化为逐通道缩放；任意 standard kernel 若同一 $c$ 的两个 output 空间切片不成比例，就不能由单层此式精确表示 |
 | 去路 | inverted residual 用 expansion/nonlinearity 缓解限制；40.7 的低秩 Attention 与 40.8 的稀疏专家也需区分成本节省和函数类改变 |
+
+这一公式提醒我们：效率技巧从来不只是删掉乘法，它往往同时重写函数类。下面开始画 stage table 时，请始终把四个问题放在一起：shape 是否相容、信息从哪条支路流动、空间与通道分别在哪里混合，以及账面节省是否适配目标硬件。
 
 ## 一、从 Layer List 升级为 Stage Table
 
